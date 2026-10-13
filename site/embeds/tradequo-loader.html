@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TradeQuo — page transition</title>
+<!--
+  TradeQuo glass loader · rotating glass logo that fills with black ink and drains back to white.
+  Needs internet (three.js from CDN). Works on desktop and mobile.
+
+  1) Include once on the page:
+       <script type="module" src="tradequo-loader.js"></script>          (or copy the <script type="module"> below)
+       <div id="tq-transition" style="position:fixed;inset:0;z-index:9999;display:none"></div>
+
+  2) Show on navigation:
+       const el = document.getElementById('tq-transition');
+       el.style.display = 'block';
+       const loader = TQLoader.mount(el, { theme: 'light' });   // 'light' = #F2F2F3 ground, 'dark' = #0E0E10
+       // optional: drive the fill from real loading progress instead of the loop
+       loader.setProgress(0.4);  …  loader.setProgress(1);
+       // when the next page is ready:
+       await loader.fadeOut(480); el.style.display = 'none';
+
+  In a Claude Design landing (.dc.html): put <script type="module" src="./tradequo-loader.js"></script> in <helmet>,
+  the <div> in the template with ref="{{ hostRef }}", and call TQLoader.mount(this.hostRef.current, {...}) in componentDidMount.
+-->
+<style>html,body{margin:0;height:100%;background:#F2F2F3;overflow:hidden} #tq-transition{position:fixed;inset:0}</style>
+</head>
+<body>
+<div id="tq-transition" style="position:fixed;inset:0"></div>
+<script type="module">
+// TradeQuo glass logo loader — rotating glass mark that fills with black ink and drains back to white.
+// Usage:  const l = TQLoader.mount(el, { theme: 'light' | 'dark', speed: 1, mode: 'loop' | 'progress' | 'demo' });
+//         l.setProgress(0.6);   // mode 'progress' — drive the fill from real loading
+//         l.setTheme('dark');   l.fadeOut(500);   l.destroy();
+import * as THREE from 'https://unpkg.com/three@0.184.0/build/three.module.js';
+
+const TAN = Math.tan(13 * Math.PI / 180);
+const THEMES = { light: { bg: '#F2F2F3' }, dark: { bg: '#0E0E10' } };
+const INK = { black: '#050506', white: '#FFFFFF' };
+const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+class TQLoader {
+  static mount(host, opts) { return new TQLoader(host, opts); }
+
+  constructor(host, opts = {}) {
+    const T = THREE;
+    this.host = host;
+    this.o = Object.assign({ theme: 'light', speed: 1, mode: 'loop', fill: 1.7, hold: 0.55 }, opts);
+    this.t = 0; this.level = 0; this.target = 0; this.last = null; this.raf = null;
+    host.style.position = host.style.position || 'relative';
+    host.style.overflow = 'hidden';
+    const R = new T.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    R.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    R.outputColorSpace = T.SRGBColorSpace; R.toneMapping = T.NoToneMapping; R.localClippingEnabled = true;
+    R.domElement.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
+    host.appendChild(R.domElement);
+    this.R = R;
+    this.scene = new T.Scene();
+    this.scene.background = new T.Color(THEMES[this.o.theme].bg);
+    this.bgTarget = this.scene.background.clone();
+    this.cam = new T.PerspectiveCamera(26, 1, 0.1, 200);
+    this.pivot = new T.Group(); this.scene.add(this.pivot);
+    this.logo = new T.Group(); this.pivot.add(this.logo);
+    this.body = new T.Group(); this.body.position.x = 0.51; this.logo.add(this.body);
+
+    const s = 1 / 20, cx = 100.75, cy = 100;
+    const P = (x, y) => [(x - cx) * s, (cy - y) * s];
+    const shapes = () => {
+      const tab = new T.Shape(); const [ax, ay] = P(48, 58.5);
+      tab.moveTo(ax, ay); tab.lineTo(...P(68.5, 58.5)); tab.absarc(ax, ay, 20.5 * s, 0, -Math.PI / 2, true); tab.lineTo(ax, ay);
+      const tt = new T.Shape();
+      tt.moveTo(...P(104.5, 58.5)); tt.lineTo(...P(153.5, 58.5)); tt.lineTo(...P(133, 79)); tt.lineTo(...P(110, 79));
+      tt.lineTo(...P(110, 120)); tt.lineTo(...P(89.5, 140.5)); tt.lineTo(...P(89.5, 77)); tt.quadraticCurveTo(...P(93, 61), ...P(104.5, 58.5));
+      return [tab, tt];
+    };
+    const depth = 0.72;
+    const shellGeo = new T.ExtrudeGeometry(shapes(), { depth, bevelEnabled: true, bevelThickness: 0.13, bevelSize: 0.075, bevelOffset: -0.075, bevelSegments: 10, curveSegments: 64 });
+    shellGeo.translate(0, 0, -depth / 2);
+    const coreDepth = 0.4;
+    const coreGeo = new T.ExtrudeGeometry(shapes(), { depth: coreDepth, bevelEnabled: true, bevelThickness: 0.07, bevelSize: 0.04, bevelOffset: -0.17, bevelSegments: 5, curveSegments: 64 });
+    coreGeo.translate(0, 0, -coreDepth / 2);
+
+    const glass = new T.MeshPhysicalMaterial({
+      color: 0xffffff, metalness: 0, roughness: 0.03, transmission: 1, thickness: 0.5, ior: 1.45, dispersion: 0.25,
+      specularIntensity: 1, clearcoat: 1, clearcoatRoughness: 0.03, attenuationColor: new T.Color('#ffffff'), attenuationDistance: Infinity, envMapIntensity: 1.5,
+    });
+    this.body.add(new T.Mesh(shellGeo, glass));
+
+    this.planeUp = new T.Plane(new T.Vector3(0, 1, 0), 0);
+    this.planeDn = new T.Plane(new T.Vector3(0, -1, 0), 0);
+    const ink = (hex, planes, em) => new T.MeshStandardMaterial({ color: new T.Color(hex), emissive: new T.Color(hex), emissiveIntensity: em, roughness: 0.6, metalness: 0, side: T.DoubleSide, clippingPlanes: planes, envMapIntensity: 0.5 });
+    this.inkB = new T.Mesh(coreGeo, ink(INK.black, [this.planeDn], 0));
+    this.inkW = new T.Mesh(coreGeo, ink(INK.white, [this.planeUp], 0.45));
+    this.body.add(this.inkB, this.inkW);
+
+    const red = new T.MeshPhysicalMaterial({
+      color: new T.Color('#E42320'), metalness: 0, roughness: 0.05, transmission: 0.7, thickness: 1.05, ior: 1.5,
+      attenuationColor: new T.Color('#FF2A22'), attenuationDistance: 0.5, clearcoat: 1, clearcoatRoughness: 0.03,
+      emissive: new T.Color('#E42320'), emissiveIntensity: 0.35, envMapIntensity: 1.2,
+    });
+    const dot = new T.Mesh(new T.SphereGeometry(10.5 * s, 96, 64), red);
+    const [dx, dy] = P(141, 130.5); dot.position.set(dx, dy, 0);
+    this.body.add(dot);
+
+    this.env = { dark: this.makeEnv('dark'), light: this.makeEnv('light') };
+    this.scene.environment = this.env[this.o.theme];
+
+    this.ro = new ResizeObserver(() => this.resize()); this.ro.observe(host);
+    this.resize();
+    this.frame = this.frame.bind(this);
+    this.onVis = () => { if (document.hidden) this.stop(); else this.start(); };
+    document.addEventListener('visibilitychange', this.onVis);
+    this.start();
+  }
+
+  makeEnv(theme) {
+    const T = THREE, es = new T.Scene(), dark = theme === 'dark';
+    es.background = new T.Color(dark ? 0x000000 : 0x8a8a8e);
+    const box = (w, h, x, y, z, k, col = '#ffffff') => {
+      const m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({ color: new T.Color(col).multiplyScalar(k), side: T.DoubleSide }));
+      m.position.set(x, y, z); m.lookAt(0, 0, 0); es.add(m);
+    };
+    if (dark) {
+      box(16, 3, 0, 9, 2, 3.2); box(1.3, 14, -9, 0, 3, 2.4); box(1, 14, 9, 1, -2, 1.6); box(12, 0.7, 0, -1.5, -10, 1.5);
+      box(5, 5, 6, 4, 9, 1.1); box(10, 6, 0, -9, 4, 0.35, '#9aa0a6'); box(12, 7, 0, 3, 11, 0.45); box(3, 9, -6, 2, 9, 2.2);
+    } else {
+      box(16, 3, 0, 9, 2, 2.6); box(3, 9, -6, 2, 9, 2.2); box(12, 7, 0, 3, 11, 1.4);
+      box(14, 5, 0, -9, 3, 0.04); box(1.6, 14, 9, 0, -2, 0.08); box(1.2, 14, -9, -1, -4, 0.12); box(10, 2, 0, -2, -10, 0.1);
+    }
+    const pm = new T.PMREMGenerator(this.R);
+    const tex = pm.fromScene(es, 0.015).texture; pm.dispose();
+    return tex;
+  }
+
+  resize() {
+    const w = Math.max(1, this.host.clientWidth), h = Math.max(1, this.host.clientHeight);
+    this.R.setSize(w, h, false);
+    const a = w / h; this.cam.aspect = a; this.cam.updateProjectionMatrix();
+    this.cam.position.set(0, 0, a >= 1 ? 13 : Math.max(13, 3.6 / (TAN * a)));
+    this.cam.lookAt(0, 0, 0);
+    this.render();
+  }
+
+  set(opts) {
+    if (opts.theme && opts.theme !== this.o.theme) this.setTheme(opts.theme);
+    Object.assign(this.o, opts);
+  }
+  setTheme(theme) { this.o.theme = theme; this.bgTarget.set(THEMES[theme].bg); this.scene.environment = this.env[theme]; }
+  setProgress(p) { this.o.mode = 'progress'; this.target = Math.max(0, Math.min(1, p)); this.start(); }
+  fadeOut(ms = 480) {
+    this.host.style.transition = 'opacity ' + ms + 'ms ease';
+    this.host.style.opacity = '0';
+    return new Promise((res) => setTimeout(() => { this.destroy(); res(); }, ms));
+  }
+
+  start() { if (!this.raf) { this.last = null; this.raf = requestAnimationFrame(this.frame); } }
+  stop() { if (this.raf) cancelAnimationFrame(this.raf); this.raf = null; }
+  destroy() {
+    this.stop(); this.ro.disconnect(); document.removeEventListener('visibilitychange', this.onVis);
+    this.R.dispose(); this.R.domElement.remove();
+  }
+
+  frame(now) {
+    this.raf = null;
+    const dt = this.last == null ? 0 : Math.min(0.1, (now - this.last) / 1000);
+    this.last = now; this.t += dt * this.o.speed;
+    const { mode, fill: F, hold: H } = this.o;
+    if (mode === 'loop') {
+      const u = this.t % (2 * (F + H));
+      this.level = u < F ? ease(u / F) : u < F + H ? 1 : u < 2 * F + H ? 1 - ease((u - F - H) / F) : 0;
+    } else if (mode === 'demo') {
+      const u = this.t % 4.6;
+      this.target = u < 3.2 ? 1 - Math.pow(1 - u / 3.2, 2.4) : u < 4.0 ? 1 : 1 - ease((u - 4.0) / 0.6);
+      this.level += (this.target - this.level) * Math.min(1, dt * 7);
+    } else {
+      this.level += (this.target - this.level) * Math.min(1, dt * 6);
+    }
+    this.scene.background.lerp(this.bgTarget, Math.min(1, dt * 4));
+    this.render();
+    this.raf = requestAnimationFrame(this.frame);
+  }
+
+  render() {
+    const t = this.t, y = -2.5 + this.level * 5.0;
+    this.logo.rotation.y = t * 0.85;
+    this.pivot.rotation.x = 0.07 * Math.sin(t * 0.7);
+    this.pivot.rotation.z = 0.04 * Math.sin(t * 0.9 + 1);
+    const n = new THREE.Vector3(0.09 * Math.sin(t * 2.3), 1, 0.07 * Math.cos(t * 1.7)).normalize();
+    const p = new THREE.Vector3(0, y, 0);
+    this.planeUp.setFromNormalAndCoplanarPoint(n, p);
+    this.planeDn.setFromNormalAndCoplanarPoint(n.clone().negate(), p);
+    this.inkB.visible = this.level > 0.002;
+    this.inkW.visible = this.level < 0.998;
+    this.R.render(this.scene, this.cam);
+  }
+}
+
+window.TQLoader = TQLoader;
+window.dispatchEvent(new Event('tqloader-ready'));
+
+TQLoader.mount(document.getElementById('tq-transition'), { theme: new URLSearchParams(location.search).get('theme') === 'dark' ? 'dark' : 'light', mode: 'loop' });
+</script>
+</body>
+</html>

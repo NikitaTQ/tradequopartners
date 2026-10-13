@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TradeQuo Crystals — embed</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT",
+    "https://unpkg.com/three@0.184.0/examples/jsm/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "https://unpkg.com/three@0.184.0/examples/jsm/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; background: #fff; }
+  three-d-stage:not(:defined) { visibility: hidden; }
+  three-d-stage { display: block; width: 100%; height: 100%; }
+  html, body { width: 100%; overflow: hidden; }
+  .switch { position: fixed; left: 20px; top: 20px; z-index: 2; display: flex; gap: 2px; padding: 3px; background: #fff; border: 1px solid #e4e4e4; border-radius: 999px; font: 500 12px/1 'Archivo', sans-serif; }
+  .switch button { appearance: none; border: 0; background: transparent; color: #0a0a0a; font: inherit; letter-spacing: .04em; padding: 9px 15px; border-radius: 999px; cursor: pointer; }
+  .switch button[aria-pressed="true"] { background: #0a0a0a; color: #fff; }
+  body.embed .switch { display: none; }
+  body.embed three-d-stage { pointer-events: none; }
+</style>
+</head>
+<body>
+<img id="tq-logo-src" src="logo.png" alt="" hidden>
+
+
+<div class="switch" role="group" aria-label="Crystal">
+  <button type="button" data-v="clear">Clear</button>
+  <button type="button" data-v="smoked">Smoked</button>
+</div>
+
+<three-d-stage name="tradequo-crystals" background="#ffffff"></three-d-stage>
+<script src="crystals-stage.js"></script>
+<script type="module">
+const P = new URLSearchParams(location.search);
+const EMBED = !P.has('ui');
+let variant = P.get('variant') === 'smoked' ? 'smoked' : 'clear';
+if (EMBED) document.body.classList.add('embed');
+
+const stage = document.querySelector('three-d-stage');
+const { THREE } = await stage.ready;
+await Promise.all([document.fonts.load('800 200px Archivo'), document.fonts.load('700 40px Archivo')]).catch(() => {});
+
+const RED = '#E7131B';
+const R = stage._renderer, scene = stage._scene;
+R.shadowMap.enabled = false;
+R.toneMapping = THREE.NoToneMapping;
+// Six transmissive stones resolve against the transmission buffer every frame;
+// at full DPR that buffer is the whole cost of the piece. Half-res is invisible
+// here (the stones are near-colourless) and roughly triples the frame rate.
+R.transmissionResolutionScale = innerWidth <= 640 ? 0.3 : 0.5;
+R.setPixelRatio(innerWidth <= 640 ? Math.min(window.devicePixelRatio || 1, 2) : Math.min(Math.max(window.devicePixelRatio || 1, 2), 2.5));
+scene.background = new THREE.Color(0xffffff);
+const old = []; scene.traverse(o => { if (o.isLight) old.push(o); }); old.forEach(l => l.parent.remove(l));
+stage._ground.visible = false;
+if (EMBED) {
+  stage.shadowRoot.querySelector('.toolbar').style.display = 'none';
+  stage.shadowRoot.querySelector('.note').style.display = 'none';
+  stage._controls.enabled = false;
+}
+
+/* ---------------- Metrics ---------------- */
+const METRICS = [
+  { id: 'partners', num: [['30K', 0], ['+', 1]],  cap: 'SATISFIED PARTNERS' },
+  { id: 'payouts',  num: [['$9M', 0], ['+', 1]],  cap: 'MONTHLY PAYOUTS TO PARTNERS' },
+  { id: 'revshare', num: [['87', 0], ['%', 1]],   cap: 'REV SHARE RATE' },
+  { id: 'rating',   num: [['4.9', 0]],            cap: 'TRUSTPILOT RATING' },
+  { id: 'traders',  num: [['800K', 0], ['+', 1]], cap: 'SATISFIED CLIENT TRADERS' },
+  { id: 'trips',    num: [['400', 0], ['+', 1]],  cap: 'SPONSORED INCENTIVE TRIPS' },
+];
+const N = METRICS.length;
+const HR = 0.64;                        // hexagon circumradius (vertex left/right)
+const HW = HR * 2, HH = HR * Math.sqrt(3);   // across corners / across flats
+const DW = HR * 1.44, DH = HR * 0.66;   // metric plate, inside the faceted dome
+const TX = 2048, TY = Math.round(TX * DH / DW);
+const INK = { clear: '#0A0A0A', smoked: '#FFFFFF' };
+const SUB = { clear: '#0A0A0A', smoked: '#FFFFFF' };
+const HALO = { clear: 'rgba(255,255,255,0.6)', smoked: 'rgba(0,0,0,0.45)' };
+
+const logoImg = await new Promise(res => {
+  const el = document.getElementById('tq-logo-src');
+  if (el && el.complete && el.naturalWidth) return res(el);
+  const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null);
+  i.src = (el && (el.currentSrc || el.src)) || 'logo.png';
+});
+const logoMasks = !logoImg ? null : (() => {
+  const S = 1024, c = document.createElement('canvas'); c.width = c.height = S;
+  const x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(logoImg, 0, 0, S, S);
+  const d = x.getImageData(0, 0, S, S).data;
+  const ss = (a, b, t) => { t = Math.min(1, Math.max(0, (t - a) / (b - a))); return t * t * (3 - 2 * t); };
+  const mono = new Float32Array(S * S), dot = new Float32Array(S * S);
+  let x0 = S, y0 = S, x1 = 0, y1 = 0;
+  for (let p = 0; p < S * S; p++) {
+    const r = d[p * 4], g = d[p * 4 + 1];
+    mono[p] = ss(0.38, 0.62, g / 255); dot[p] = ss(0.38, 0.62, Math.max(0, r - g) / 200);
+    if (mono[p] > 0.5 || dot[p] > 0.5) { const px = p % S, py = (p / S) | 0; x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py); }
+  }
+  return { S, mono, dot, box: [x0, y0, x1 + 1, y1 + 1] };
+})();
+const logoCache = {};
+function logoCanvas(v) {
+  if (logoCache[v]) return logoCache[v];
+  const { S, mono, dot, box } = logoMasks;
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const ink = hex(INK[v]), red = hex(RED), w = box[2] - box[0], h = box[3] - box[1];
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const x = c.getContext('2d'), out = x.createImageData(w, h);
+  for (let yy = 0; yy < h; yy++) for (let xx = 0; xx < w; xx++) {
+    const p = (yy + box[1]) * S + (xx + box[0]), o = (yy * w + xx) * 4, m = mono[p], dd = dot[p];
+    const col = dd > m ? red : ink;
+    out.data[o] = col[0]; out.data[o + 1] = col[1]; out.data[o + 2] = col[2]; out.data[o + 3] = Math.min(1, m + dd) * 255;
+  }
+  x.putImageData(out, 0, 0);
+  return (logoCache[v] = c);
+}
+
+function drawMetric(ctx, f, v) {
+  if (f.logo && !logoMasks) f = Object.assign({}, f, { logo: false, num: [['TQ', false]] });
+  ctx.clearRect(0, 0, TX, TY);
+  const capSize = TY * 0.155, capLS = capSize * 0.13;
+  ctx.font = `700 ${capSize}px Archivo`; ctx.letterSpacing = `${capLS}px`;
+  const capH = ctx.measureText('H').actualBoundingBoxAscent, gap = TY * 0.15;
+  let numSize = TY * 0.49, numH, total, widths;
+  const setNum = () => { ctx.font = `800 ${numSize}px Archivo`; ctx.letterSpacing = `${-numSize * 0.02}px`; };
+  const measure = () => { widths = f.num.map(([t]) => ctx.measureText(t).width); total = widths.reduce((a, b) => a + b, 0); };
+  if (f.logo) numH = TY * 0.40;
+  else {
+    setNum(); measure();
+    const maxW = TX * 0.92;
+    if (total > maxW) { numSize *= maxW / total; setNum(); measure(); }
+    numH = ctx.measureText('H').actualBoundingBoxAscent;
+  }
+  // Long captions wrap to a second line rather than shrinking into illegibility.
+  ctx.font = `700 ${capSize}px Archivo`; ctx.letterSpacing = `${capLS}px`;
+  const capW = s => ctx.measureText(s).width - capLS, MAXW = TX * 0.93;
+  let lines = [f.cap];
+  if (capW(f.cap) > MAXW) {
+    const words = f.cap.split(' ');
+    let best = null;
+    for (let i = 1; i < words.length; i++) {
+      const a = words.slice(0, i).join(' '), b = words.slice(i).join(' ');
+      const wide = Math.max(capW(a), capW(b));
+      if (!best || wide < best.wide) best = { a, b, wide };
+    }
+    if (best) lines = [best.a, best.b];
+  }
+  const lineGap = capSize * 1.42;
+  const capBlock = capH + (lines.length - 1) * lineGap;
+  if (lines.length > 1 && !f.logo) numSize *= 0.92;
+  if (!f.logo) { setNum(); measure(); numH = ctx.measureText('H').actualBoundingBoxAscent; }
+  const top = (TY - (numH + gap + capBlock)) / 2, baseN = top + numH, baseC = baseN + gap + capH;
+  // Facets behind the type run light-to-mid, so every glyph carries a soft halo
+  // of the opposite value — keeps contrast as the crystal tilts.
+  ctx.shadowColor = HALO[v]; ctx.shadowBlur = innerWidth <= 640 ? TY * 0.006 : TY * 0.012;
+  if (f.logo) { const lc = logoCanvas(v), w = lc.width * numH / lc.height; ctx.drawImage(lc, (TX - w) / 2, top, w, numH); }
+  else { let x = (TX - total) / 2; f.num.forEach(([t, red], i) => { ctx.fillStyle = red ? RED : INK[v]; ctx.fillText(t, x, baseN); x += widths[i]; }); }
+  ctx.font = `700 ${capSize}px Archivo`; ctx.letterSpacing = `${capLS}px`;
+  ctx.fillStyle = SUB[v];
+  lines.forEach((ln, i) => {
+    let cs = capSize, cls = capLS, cw = capW(ln);
+    if (cw > MAXW) { const k = MAXW / cw; cs *= k; cls *= k; ctx.font = `700 ${cs}px Archivo`; ctx.letterSpacing = `${cls}px`; cw = ctx.measureText(ln).width - cls; }
+    ctx.fillText(ln, (TX - cw) / 2, baseC + i * lineGap);
+    ctx.font = `700 ${capSize}px Archivo`; ctx.letterSpacing = `${capLS}px`;
+  });
+  ctx.shadowBlur = 0;
+}
+
+/* ---------------- Rose-cut hexagon crystal ----------------
+   Flat-top hexagon: girdle at the widest point, a wide bevel band up to the
+   crown, then an antiprism band of triangular facets converging on the apex.
+   The back repeats it shallower, so the piece reads as a cut stone, not a tile.
+   Non-indexed + flatShading: every facet gets its own normal and its own flash. */
+function crystalGeometry(r) {
+  const ring = (rad, z, rot = 0) => Array.from({ length: 6 }, (_, i) => {
+    const a = rot + i * Math.PI / 3;
+    return [Math.cos(a) * rad * r, Math.sin(a) * rad * r, z * r];
+  });
+  const G  = ring(1.00, 0);
+  const Cb = ring(0.800, 0.135);
+  const A  = ring(0.620, 0.205, Math.PI / 6);
+  const M  = ring(0.350, 0.262);
+  const Pb = ring(0.845, -0.090);
+  const apex = [0, 0, 0.295 * r], back = [0, 0, -0.165 * r];
+  const pos = [];
+  const tri = (a, b, c) => pos.push(...a, ...b, ...c);
+  const nx = i => (i + 1) % 6;
+  for (let i = 0; i < 6; i++) {
+    const j = nx(i);
+    tri(G[i], G[j], Cb[j]); tri(G[i], Cb[j], Cb[i]);            // front bevel
+    tri(Cb[i], Cb[j], A[i]); tri(A[i], Cb[j], A[j]);             // crown band 1
+    tri(A[i], A[j], M[j]); tri(M[j], A[j], M[nx(j)]);            // crown band 2
+    tri(M[i], M[j], apex);                                       // star facet
+    tri(G[j], G[i], Pb[i]); tri(Pb[i], G[i], Pb[(i + 5) % 6]);   // back bevel
+    tri(Pb[nx(i)], Pb[i], back);                                 // pavilion
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.computeVertexNormals();
+  return g;
+}
+
+/* ---------------- Glass ---------------- */
+const GLASS = {
+  clear:  { attenuationColor: 0xf4faf9, attenuationDistance: 3.2, thickness: 0.16, env: 1.0, trans: 0.95, envInt: 3.4, shadow: 0.11 },
+  smoked: { attenuationColor: 0x0b0d10, attenuationDistance: 0.26, thickness: 0.46, env: 1.0, trans: 0.92, envInt: 1.9, shadow: 0.19 },
+};
+const glass = new THREE.MeshPhysicalMaterial({
+  name: 'crystal', metalness: 0, roughness: 0.008, transmission: 0.95, ior: 1.54,
+  specularIntensity: 1, clearcoat: 1, clearcoatRoughness: 0.01, dispersion: 0.35,
+  envMapIntensity: 3.1, depthWrite: false, flatShading: true, side: THREE.DoubleSide,
+});
+
+/* ---------------- Build ---------------- */
+const root = new THREE.Group(); root.name = 'TradeQuo_Crystals';
+const gemGeo = crystalGeometry(HR);
+const maxAniso = R.capabilities.getMaxAnisotropy();
+
+const gems = METRICS.map((f, k) => {
+  const id = `${String(k + 1).padStart(2, '0')}_${f.id}`;
+  const slot = new THREE.Group(); slot.name = `slot_${id}`;
+  const bob = new THREE.Group(); bob.name = `bob_${id}`;
+  const tilt = new THREE.Group(); tilt.name = `tilt_${id}`;
+  slot.add(bob); bob.add(tilt); root.add(slot);
+
+  const mat3d = glass.clone(); mat3d.name = `crystal_${id}`;
+  const gem = new THREE.Mesh(gemGeo, mat3d);
+  gem.name = `crystal_${id}`;
+  tilt.add(gem);
+
+  const cv = document.createElement('canvas'); cv.width = TX; cv.height = TY;
+  const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = maxAniso; tex.minFilter = THREE.LinearMipmapLinearFilter; tex.magFilter = THREE.LinearFilter; tex.generateMipmaps = true;
+  // Drawn after the glass (which writes no depth) so the type stays razor-sharp
+  // instead of passing through the low-res transmission buffer.
+  const mat = new THREE.MeshBasicMaterial({ name: `metric_${id}`, map: tex, transparent: true, depthWrite: false });
+  const plate = new THREE.Mesh(new THREE.PlaneGeometry(DW, DH), mat);
+  plate.name = mat.name; plate.renderOrder = 2; plate.position.z = 0.01;
+  bob.add(plate);
+
+  return { f, slot, bob, tilt, gem, mat3d, plate, ctx: cv.getContext('2d'), tex, mat };
+});
+stage.setObject(root);
+root.traverse(o => { if (o.isMesh) o.castShadow = o.receiveShadow = false; });
+
+/* ---------------- Layout: one row when wide, 3×2 then 2×3 as it narrows ---------------- */
+const GAPX = HW + 0.24, GAPY = HH + 0.26;
+let layout = { cols: N, w: 0, h: 0, rows: 1 };
+function relayout(cols) {
+  const rows = Math.ceil(N / cols);
+  gems.forEach((b, k) => {
+    const r = Math.floor(k / cols), c = k % cols;
+    const inRow = Math.min(cols, N - r * cols);
+    b.slot.position.set((c - (inRow - 1) / 2) * GAPX, ((rows - 1) / 2 - r) * GAPY, 0);
+    b.shadowY = -HH / 2 - 0.06;
+  });
+  layout = { cols, rows, w: (cols - 1) * GAPX + HW, h: (rows - 1) * GAPY + HH };
+}
+
+/* ---------------- Studio ---------------- */
+function envTexture(v) {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
+  const g = c.getContext('2d');
+  const blob = (cx, cy, rx, ry, col, a) => {
+    g.save(); g.translate(cx, cy); g.scale(rx, ry);
+    const r = g.createRadialGradient(0, 0, 0, 0, 0, 1);
+    r.addColorStop(0, `rgba(${col},${a})`); r.addColorStop(0.7, `rgba(${col},${a * 0.9})`); r.addColorStop(1, `rgba(${col},0)`);
+    g.fillStyle = r; g.beginPath(); g.arc(0, 0, 1, 0, Math.PI * 2); g.fill(); g.restore();
+  };
+  const flag = (cx, w, a, top, h) => {
+    const fg = g.createLinearGradient(cx - w / 2, 0, cx + w / 2, 0);
+    fg.addColorStop(0, 'rgba(8,8,8,0)'); fg.addColorStop(0.5, `rgba(8,8,8,${a})`); fg.addColorStop(1, 'rgba(8,8,8,0)');
+    g.fillStyle = fg; g.fillRect(cx - w / 2, top, w, h);
+  };
+  const lin = g.createLinearGradient(0, 0, 0, 512);
+  if (v === 'smoked') {
+    lin.addColorStop(0, '#1b1b1d'); lin.addColorStop(0.5, '#0c0c0d'); lin.addColorStop(1, '#030303');
+    g.fillStyle = lin; g.fillRect(0, 0, 1024, 512);
+    blob(762, 44, 30, 20, '255,255,255', 1);
+    blob(768, 10, 340, 26, '255,255,255', 0.55);
+    blob(512, 232, 26, 170, '255,255,255', 0.40);
+    blob(0, 232, 26, 170, '255,255,255', 0.40); blob(1024, 232, 26, 170, '255,255,255', 0.40);
+    blob(768, 440, 190, 60, '255,255,255', 0.16);
+    blob(404, 296, 62, 98, '231,19,27', 0.42);
+  } else {
+    // Bright silver room: the facets need high-contrast neighbours to separate,
+    // so a light upper field is cut by narrow black flags — the dark edges in
+    // the reference are reflections, not tint.
+    lin.addColorStop(0, '#ffffff'); lin.addColorStop(0.34, '#dcdcdc');
+    lin.addColorStop(0.44, '#565656'); lin.addColorStop(1, '#141414');
+    g.fillStyle = lin; g.fillRect(0, 0, 1024, 512);
+    flag(512, 300, 1, 0, 480); flag(0, 260, 1, 0, 480); flag(1024, 260, 1, 0, 480);
+    flag(238, 150, 0.9, 20, 430); flag(880, 150, 0.8, 20, 430);
+    blob(768, 230, 120, 104, '255,255,255', 1);
+    blob(760, 44, 44, 30, '255,255,255', 1);
+    blob(768, 10, 330, 20, '255,255,255', 0.95);
+    blob(404, 300, 44, 80, '231,19,27', 0.45);
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.mapping = THREE.EquirectangularReflectionMapping; t.colorSpace = THREE.SRGBColorSpace;
+  const pm = new THREE.PMREMGenerator(R); const out = pm.fromEquirectangular(t).texture; t.dispose(); pm.dispose();
+  return out;
+}
+const ENV = { clear: envTexture('clear'), smoked: envTexture('smoked') };
+const key = new THREE.DirectionalLight(0xffffff, 1.0); key.name = 'softbox_key'; key.position.set(-3, 6, 4);
+const rim = new THREE.DirectionalLight(0xE7131B, 0.40); rim.name = 'red_rim'; rim.position.set(4, 1, -4);
+scene.add(key, rim);
+
+/* ---------------- Contact shadows ---------------- */
+const shCv = document.createElement('canvas'); shCv.width = 256; shCv.height = 256;
+(() => {
+  const g = shCv.getContext('2d'); g.save(); g.translate(128, 128); g.scale(120, 120);
+  const r = g.createRadialGradient(0, 0, 0, 0, 0, 1);
+  r.addColorStop(0, 'rgba(0,0,0,1)'); r.addColorStop(0.34, 'rgba(0,0,0,.42)'); r.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = r; g.beginPath(); g.arc(0, 0, 1, 0, Math.PI * 2); g.fill(); g.restore();
+})();
+const shTex = new THREE.CanvasTexture(shCv);
+gems.forEach((b, k) => {
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(HW * 0.95, HW * 0.95),
+    new THREE.MeshBasicMaterial({ map: shTex, transparent: true, depthWrite: false, opacity: 0.14 }));
+  m.name = `shadow_${String(k + 1).padStart(2, '0')}`;
+  m.renderOrder = -1;
+  b.slot.add(m); b.shadow = m;
+});
+
+/* ---------------- Sheen sweep ----------------
+   The stones are near-colourless, so a rotated envMap alone barely registers on
+   a white page. The visible part of the glint is a specular bar drawn into a
+   hexagon-shaped overlay: a bright core with soft grey flanks, which reads as
+   light sliding across the facets. One shared canvas — only one stone glints. */
+const SH = 256;
+const shnCv = document.createElement('canvas'); shnCv.width = shnCv.height = SH;
+const shnCtx = shnCv.getContext('2d');
+const shnTex = new THREE.CanvasTexture(shnCv); shnTex.colorSpace = THREE.SRGBColorSpace;
+const shnMat = new THREE.MeshBasicMaterial({ name: 'sheen', map: shnTex, transparent: true, depthWrite: false, depthTest: false });
+function hexPath(c) {
+  c.beginPath();
+  for (let i = 0; i < 6; i++) {
+    const a = i * Math.PI / 3;
+    c.lineTo((0.5 + 0.5 * Math.cos(a)) * SH, (0.5 - 0.5 * Math.sin(a) / (Math.sqrt(3) / 2) * (Math.sqrt(3) / 2)) * SH);
+  }
+  c.closePath();
+}
+let shnBlank = false;
+function drawSheen(p) {
+  const x = shnCtx, a = Math.sin(Math.PI * Math.min(1, Math.max(0, p)));
+  if (a <= 0.001) {
+    if (!shnBlank) { x.clearRect(0, 0, SH, SH); shnTex.needsUpdate = true; shnBlank = true; }
+    return;
+  }
+  shnBlank = false;
+  x.clearRect(0, 0, SH, SH);
+  x.save(); hexPath(x); x.clip();
+  x.translate(SH / 2, SH / 2); x.rotate(-0.42);
+  const cx = (p * 1.9 - 0.45) * SH - SH / 2;
+  const g = x.createLinearGradient(cx - SH * 0.40, 0, cx + SH * 0.40, 0);
+  g.addColorStop(0.00, 'rgba(126,138,148,0)');
+  g.addColorStop(0.28, `rgba(118,130,140,${0.17 * a})`);
+  g.addColorStop(0.46, `rgba(255,255,255,${0.92 * a})`);
+  g.addColorStop(0.54, `rgba(255,255,255,${0.92 * a})`);
+  g.addColorStop(0.72, `rgba(118,130,140,${0.17 * a})`);
+  g.addColorStop(1.00, 'rgba(126,138,148,0)');
+  x.fillStyle = g; x.fillRect(-SH, -SH, SH * 2, SH * 2);
+  x.restore();
+  shnTex.needsUpdate = true;
+}
+const sheenGeo = (() => {
+  const pos = [], uv = [], hy = HR * Math.sqrt(3) / 2;
+  for (let i = 0; i < 6; i++) {
+    const a1 = i * Math.PI / 3, a2 = (i + 1) * Math.PI / 3;
+    const p1 = [Math.cos(a1) * HR, Math.sin(a1) * HR], p2 = [Math.cos(a2) * HR, Math.sin(a2) * HR];
+    pos.push(0, 0, 0, ...p1, 0, ...p2, 0);
+    uv.push(0.5, 0.5, 0.5 + p1[0] / HR / 2, 0.5 + p1[1] / hy / 2, 0.5 + p2[0] / HR / 2, 0.5 + p2[1] / hy / 2);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  return g;
+})();
+gems.forEach((b, k) => {
+  const m = new THREE.Mesh(sheenGeo, shnMat);
+  m.name = `sheen_${String(k + 1).padStart(2, '0')}`;
+  m.position.z = HR * 0.30; m.renderOrder = 1; m.visible = false;
+  b.bob.add(m); b.sheen = m;
+});
+
+/* ---------------- Variant ---------------- */
+const buttons = [...document.querySelectorAll('.switch button')];
+function applyVariant(v) {
+  variant = v;
+  const s = GLASS[v];
+  glass.attenuationColor.set(s.attenuationColor);
+  glass.attenuationDistance = s.attenuationDistance;
+  glass.thickness = s.thickness;
+  glass.transmission = s.trans;
+  glass.envMapIntensity = s.envInt;
+  glass.envMap = ENV[v];
+  gems.forEach(b => {
+    const m = b.mat3d;
+    m.attenuationColor.copy(glass.attenuationColor);
+    m.attenuationDistance = s.attenuationDistance;
+    m.thickness = s.thickness;
+    m.transmission = s.trans;
+    m.envMap = ENV[v];
+    m.envMapIntensity = s.envInt;
+    m.needsUpdate = true;
+    drawMetric(b.ctx, b.f, v); b.tex.needsUpdate = true;
+  });
+  // Reflections come from each crystal's own envMap, not the scene one, so a
+  // single stone can turn its reflection without disturbing its neighbours.
+  scene.environment = null;
+  gems.forEach(b => { b.shadow.material.opacity = s.shadow; });
+  buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
+  if (!EMBED) { const u = new URL(location.href); u.searchParams.set('variant', v); history.replaceState(null, '', u); }
+}
+buttons.forEach(b => b.addEventListener('click', () => applyVariant(b.dataset.v)));
+relayout(N);
+applyVariant(variant);
+
+/* ---------------- Glint: one stone at a time turns its reflection ----------------
+   The crystals never move. Instead the active stone rotates only its envMap by a
+   few degrees and lifts its env intensity, so the facets catch the strip light in
+   sequence — a flash that passes through the row rather than a bobbing grid. */
+const ORDER = [0, 3, 1, 5, 2, 4];
+const PERIOD = 2.1, SWEEP = 1.5, SWING = 0.34, LIFT = 0.28;
+
+/* ---------------- Camera ---------------- */
+const cam = stage._camera, controls = stage._controls;
+cam.fov = 22;
+const target = new THREE.Vector3(0, 0, 0), ELEV = THREE.MathUtils.degToRad(4);
+function frame() {
+  const w = stage.clientWidth || 1, h = stage.clientHeight || 1;
+  const asp = w / h;
+  const cols = asp >= 1.25 ? 3 : 2;
+  if (cols !== layout.cols) relayout(cols);
+  cam.aspect = asp;
+  const vt = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)), ht = vt * cam.aspect;
+  const fillW = 0.94;
+  const d = Math.max((layout.w / fillW) / (2 * ht) + HR, ((layout.h + 0.25) / 0.9) / (2 * vt));
+  target.set(0, -0.01, 0);
+  cam.position.set(0, target.y + d * Math.sin(ELEV), d * Math.cos(ELEV));
+  cam.near = 0.05; cam.far = 200; cam.updateProjectionMatrix();
+  controls.target.copy(target); controls.update();
+}
+frame(); new ResizeObserver(frame).observe(stage);
+
+/* ---------------- Loop ---------------- */
+const clock = new THREE.Clock(), origLoop = stage._loop;
+gems.forEach(b => { b.shadow.position.set(0, b.shadowY, -0.02); b.shadow.scale.set(1, 0.28, 1); });
+stage._loop = () => {
+  if (window.__tqPaused) { clock.getDelta(); return; }
+  const t = clock.getElapsedTime();
+  const active = ORDER[Math.floor(t / PERIOD) % N];
+  const p = (t % PERIOD) / SWEEP;
+  const base = GLASS[variant].envInt;
+  gems.forEach((b, i) => {
+    let rot = 0, lift = 0;
+    if (i === active && p <= 1) {
+      rot = SWING * Math.sin(Math.PI * 2 * p);
+      lift = LIFT * Math.sin(Math.PI * p);
+    }
+    b.mat3d.envMapRotation.set(rot * 0.3, rot, rot * 0.18);
+    b.mat3d.envMapIntensity = base * (1 + lift);
+    b.sheen.visible = i === active && p <= 1;
+  });
+  if (p <= 1) drawSheen(p); else drawSheen(0);
+  origLoop();
+};
+R.setAnimationLoop(stage._loop);
+
+/* ---------------- GLB with the embedded float clip ---------------- */
+stage._exportGlb = async function () {
+  const mod = await import('three/addons/exporters/GLTFExporter.js');
+  this._nameParts();
+  root.updateMatrixWorld(true);
+  const buf = await new mod.GLTFExporter().parseAsync(root, { binary: true, maxTextureSize: 1024 });
+  const url = URL.createObjectURL(new Blob([buf], { type: 'model/gltf-binary' }));
+  const a = Object.assign(document.createElement('a'), { href: url, download: `tradequo-crystals-${variant}.glb` });
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000);
+};
+window.__crystals = { applyVariant, relayout, gems };
+</script>
+
+
+</body></html>

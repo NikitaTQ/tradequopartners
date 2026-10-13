@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TradeQuo — Infinite Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; overflow: hidden; scrollbar-width: none; }
+  html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+  .if { background: #FFFFFF; color: #0A0A0A; font-family: 'DM Sans', sans-serif; padding: clamp(40px,6vw,96px) clamp(20px,5vw,80px); display: flex; flex-direction: column; gap: clamp(20px,3vw,36px); box-sizing: border-box; }
+  .if-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; }
+  .if-title { margin: 0; font-weight: 700; font-size: clamp(44px,7vw,104px); line-height: .9; letter-spacing: -.025em; text-transform: uppercase; }
+  .if-title span { color: #E7131B; }
+  .if-sub { margin: 14px 0 0; font-size: clamp(16px,1.5vw,20px); line-height: 1.4; color: #5B5B5B; max-width: 30ch; }
+  .if-live { display: flex; flex-direction: column; gap: 8px; padding-bottom: 4px; }
+  .if-mono { font-family: 'Fragment Mono', monospace; font-size: 11px; line-height: 1.4; letter-spacing: .14em; text-transform: uppercase; color: #5F5F63; }
+  .if-live-row { display: flex; align-items: center; gap: 8px; }
+  .if-dot { width: 6px; height: 6px; border-radius: 50%; background: #E7131B; flex: none; }
+  .if-live .if-dot { animation: ifLive 2.4s ease-in-out infinite; }
+  .if-total { font-weight: 700; font-size: clamp(30px,3.6vw,52px); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .if-scene { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #FFFFFF; overflow: hidden; }
+  .if-metrics { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 16px; border-top: 1px solid #ECECEE; padding-top: 20px; letter-spacing: .12em; white-space: nowrap; }
+  .if-metrics > div { display: flex; align-items: center; gap: 8px; }
+  @media (max-width: 640px) { .if-scene { aspect-ratio: 1 / 1; } }
+  .if-cta { display: flex; justify-content: center; margin-top: calc(-1 * clamp(28px, 5vw, 76px)); position: relative; z-index: 2; }
+
+  @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
+  @property --tqd { syntax: '<number>'; inherits: true; initial-value: 0; }
+  @property --tqx { syntax: '<length>'; inherits: true; initial-value: 0px; }
+  @property --tqy { syntax: '<length>'; inherits: true; initial-value: 0px; }
+  
+  .tq-conv {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    height: 60px;
+    box-sizing: border-box;
+    padding: 0 7px 0 28px;
+    border-radius: 999px;
+    background: #0B0B0B;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.07), 0 1px 2px rgba(0,0,0,.18), 0 10px 22px -14px rgba(0,0,0,.45);
+    text-decoration: none;
+    color: #FFFFFF;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.03));
+    transition:
+      --tqh .4s ease-out,
+      --tqx .45s cubic-bezier(.2, .9, .25, 1),
+      --tqy .45s cubic-bezier(.2, .9, .25, 1),
+      --tqd .12s ease-out;
+  }
+  .tq-conv:hover, .tq-conv:focus-visible { --tqh: 1; }
+  .tq-conv:active { --tqd: 1; }
+  .tq-conv:focus-visible { outline: 2px solid #E7131B; outline-offset: 4px; }
+  
+  .tq-conv__mech { display: flex; align-items: center; }
+  
+  .tq-conv__belt {
+    position: relative;
+    width: 124px;
+    height: 34px;
+    margin-right: -26px;
+    border-radius: 999px 0 0 999px;
+    overflow: hidden;
+    background: #151515;
+    box-shadow: inset 0 0 0 1px #242424;
+  }
+  .tq-conv__fade {
+    position: absolute;
+    inset: 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 30px);
+            mask-image: linear-gradient(90deg, transparent 0, #000 30px);
+  }
+  /* 12 монет × 27px = 324px; две одинаковые половины → бесшовная петля */
+  .tq-conv__track {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    display: flex;
+    transform: translateX(calc(-50% + var(--tqm, 0) * 50%));
+    background:
+      linear-gradient(#2C2C2C, #2C2C2C) 0 24px / 100% 1px no-repeat,
+      repeating-linear-gradient(90deg, #3A3A3A 0 1px, transparent 1px 9px) 0 25px / 100% 4px no-repeat;
+  }
+  .tq-conv__ticks {
+    position: absolute;
+    left: 0; right: 0; top: 25px;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #E7131B 0 1px, transparent 1px 9px);
+    opacity: calc(var(--tqh) * 0.9);
+  }
+  .tq-conv__slot {
+    position: relative;
+    flex: none;
+    width: 27px;
+    box-sizing: border-box;
+    padding-top: 6px;
+    display: flex;
+    justify-content: center;
+  }
+  .tq-conv__coin {
+    width: 17.2px;
+    height: 17.2px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+    background: #D2D2D2;
+    color: #6E6E6E;
+    box-shadow: inset 0 0 0 1.5px #D2D2D2, inset 0 0 0 2.5px #8E8E8E;
+  }
+  .tq-conv__coin--red {
+    background: #E7131B;
+    color: #FFFFFF;
+    box-shadow: inset 0 0 0 1.5px #E7131B, inset 0 0 0 2.5px #9C0C12;
+  }
+  
+  .tq-conv__pulley {
+    position: relative;
+    z-index: 1;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #E7131B;
+    box-shadow: 0 0 0 4px #0B0B0B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tq-conv__teeth {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: repeating-conic-gradient(rgba(0,0,0,.34) 0deg 7deg, transparent 7deg 30deg);
+    -webkit-mask: radial-gradient(circle, transparent 19px, #000 19.5px);
+            mask: radial-gradient(circle, transparent 19px, #000 19.5px);
+    transform: rotate(calc(var(--tqr, 0) * 1deg));
+  }
+  .tq-conv__pulley svg { position: relative; flex: none; transform: translateX(calc(var(--tqh) * 2px)); }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .tq-conv { transition-duration: .01s; }
+  }
+  
+  .tq-conv:hover { color: #fff; }
+  @media (max-width: 420px) { .tq-conv { height: 54px; gap: 12px; padding-left: 22px; font-size: 15px; } .tq-conv__belt { width: 92px; } .if-cta { margin-top: -12px; } }
+  @keyframes ifLive { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(231,19,27,.55); } 50% { opacity: .55; box-shadow: 0 0 0 5px rgba(231,19,27,0); } }
+</style>
+</head>
+<body>
+<section class="if" aria-label="Infinite Flow">
+  <header class="if-head">
+    <div>
+      <h2 class="if-title">Infinite <span>Flow</span></h2>
+      <p class="if-sub">Continuous commissions. Paid daily.</p>
+    </div>
+    <div class="if-live">
+      <div class="if-live-row if-mono"><span class="if-dot"></span><span>Live</span><span style="color:#C8C8CC">/</span><span>Paid to partners this month</span></div>
+      <div class="if-total" id="if-total">$9,184,620</div>
+    </div>
+  </header>
+  <div class="if-scene" id="if-scene"></div>
+  <div class="if-cta">
+    <a class="tq-conv" href="#signup" target="_top" aria-label="Become a partner">
+  <span>Become a partner</span>
+  <span class="tq-conv__mech" aria-hidden="true">
+    <span class="tq-conv__belt">
+      <span class="tq-conv__fade">
+        <span class="tq-conv__track">
+          <span class="tq-conv__ticks"></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin">$</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin tq-conv__coin--red">€</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin">£</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin">¥</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin tq-conv__coin--red">$</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin">€</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin">$</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin tq-conv__coin--red">€</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin">£</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin">¥</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin tq-conv__coin--red">$</span></span>
+          <span class="tq-conv__slot"><span class="tq-conv__coin">€</span></span>
+        </span>
+      </span>
+    </span>
+    <span class="tq-conv__pulley">
+      <span class="tq-conv__teeth"></span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </span>
+</a>
+  </div>
+  <div class="if-metrics if-mono">
+    <div><span class="if-dot"></span>Daily payouts</div>
+    <div><span class="if-dot"></span>4 currencies</div>
+    <div><span class="if-dot"></span>No caps</div>
+  </div>
+</section>
+<script type="module">
+// TradeQuo — "Infinite Flow" 3D block.
+// Usage:  import { mount } from './infinite-flow-scene.js';
+//         const api = mount(containerEl, { cursorTilt: true });
+//         api.downloadGLB(); api.destroy();
+import * as THREE from 'https://esm.sh/three@0.184.0';
+import { Reflector } from 'https://esm.sh/three@0.184.0/examples/jsm/objects/Reflector.js';
+
+/* ======================= PARAMETERS ======================= */
+const PARAMS = {
+  colors: {
+    red: '#E7131B',
+    bg: '#0A0A0A',
+    logo: '#B5B5B5',
+    glass: '#3A3A3F',          // faint grey tint
+    pedestal: '#060607',
+    pedestalTop: '#050506',
+    counterValue: '#F4F4F4',
+  },
+  timing: {
+    cycle: 12,                 // s, everything below divides into it
+    flowRevPerSec: 0.125,      // trips round the ∞ per second
+    coinSpinPeriod: 12,        // s per full turn of a coin about its own axis
+    coinWobblePeriod: 6,
+    coinWobble: 0.12,          // rad
+    threadPulsePeriod: 6,
+    waves: 1,                  // bright waves riding the thread
+    ejectEvery: 6,
+    ejectOffset: 1.8,          // s into the cycle of the first ejection
+    flight: 1.7,               // coin in the air
+    dissolve: 0.7,             // red glow on the pedestal
+    labelLife: 1.9,
+    labelRisePx: 40,
+    camSwayDeg: 0,
+    camSwayPeriod: 24,
+    tiltDeg: 0,
+  },
+  geometry: {
+    loopW: 2.2,                // world units
+    loopAspect: 2.2,           // width / height
+    tubeFrac: 0.065,           // tube diameter / loop width
+    crossGapDiam: 1,           // clear gap at the crossing, in tube diameters
+    pedestalW: 1.1,            // × loop width
+    pedestalD: 0.92,
+    pedestalH: 0.2,
+    chamfer: 0.03,
+    supportH: 0.14,
+    camElevDeg: 15,
+    loopFillDesktop: 0.56,     // loop width / frame width
+    loopFillMobile: 0.9,
+  },
+  coins: { desktop: 20, mobile: 12, radius: 0.054, thickness: 0.013 },
+  reflection: { floor: 0.62, floorFade: [1.5, 4.4], top: 0.4, resScale: 0.75 },
+  payouts: [
+    { cur: 'USD', sym: '$', text: '$1,240',   usd: 1240 },
+    { cur: 'EUR', sym: '€', text: '€1,080',   usd: 1170 },
+    { cur: 'GBP', sym: '£', text: '£960',     usd: 1215 },
+    { cur: 'JPY', sym: '¥', text: '¥186,000', usd: 1240 },
+  ],
+  mobileBreakpoint: 640,
+  maxDPR: 2,
+  logoUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAIAAAAiOjnJAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjQ5OGY5MWUzLTc3YmMtNDgyOS04NDI2LTQ4OGMwZGI3YTkwZQAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNoYnevXQEcmhwJeg2ZwyKVpgAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6YTRhYTgwYWItMWQwOC00NzRhLWE4NTYtZTZmNzBjZDJiMmZhbHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaOOaqCbP1RVDni4b42l5hx0AAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIB90snbVT2F9ngygvR6pa6w2ymtF7HyD6h6U20Ts82FqpGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2gCx5morjx94Zop7609ks7DAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggY3FC+n2zKqRfVHMAyLWETIE2s4hPBQF94+S5Tm4yWEtkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTo0OThmOTFlMy03N2JjLTQ4MjktODQyNi00ODhjMGRiN2E5MGUvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDphMDc1NjFmNy1mYWUyLTQyODQtYTIwNS1jZWNmNThhMTUyZWJyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggH3SydtVPYX2eDKC9HqlrrDbKa0XsfIPqHpTbROzzYWqiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIMApzUdxTGrdGAiGQDyoX51nmDwIs2FZCN8SPoCE58NvomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIAFBKD5Id70qtRU53w4D3pKB2ExDwHiaMVIVfsZenJ2vdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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',
+};
+
+/* ======================= helpers ======================= */
+const DEG = Math.PI / 180, TAU = Math.PI * 2;
+const fract = x => x - Math.floor(x);
+const clamp01 = x => Math.min(1, Math.max(0, x));
+const smooth = x => { x = clamp01(x); return x * x * (3 - 2 * x); };
+const easeOut = x => 1 - Math.pow(1 - clamp01(x), 3);
+const cnv = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+const ctex = (c, srgb = true) => { const t = new THREE.CanvasTexture(c); if (srgb) t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
+const fmtUSD = n => '$' + Math.round(n).toLocaleString('en-US');
+
+function ensureFonts() {
+  if (!document.querySelector('link[href*="Fragment+Mono"]')) {
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Fragment+Mono&display=swap';
+    document.head.appendChild(l);
+  }
+  return Promise.all([
+    document.fonts.load('400 64px "Fragment Mono"'),
+    document.fonts.load('700 64px "DM Sans"'),
+  ]).catch(() => {});
+}
+
+class Lemniscate extends THREE.Curve {
+  // Bernoulli lemniscate, horizontal; z = d·sinθ lifts one branch over the other.
+  constructor(a, ys, d) { super(); this.a = a; this.ys = ys; this.d = d; this.arcLengthDivisions = 1200; }
+  getPoint(t, target = new THREE.Vector3()) {
+    const th = t * TAU, s = Math.sin(th), c = Math.cos(th), k = 1 / (1 + s * s);
+    return target.set(this.a * c * k, this.ys * this.a * s * c * k, this.d * s);
+  }
+}
+
+// Reflector shader with strength, radial fade and a soft fresnel.
+const FadeReflectorShader = {
+  name: 'FadeReflector',
+  uniforms: {
+    color: { value: null }, tDiffuse: { value: null }, textureMatrix: { value: null },
+    strength: { value: 0.6 }, fade: { value: new THREE.Vector2(1, 4) }, fresnel: { value: 0 },
+  },
+  vertexShader: /* glsl */`
+    uniform mat4 textureMatrix; varying vec4 vUv; varying vec3 vW;
+    void main() {
+      vUv = textureMatrix * vec4(position, 1.0);
+      vW = (modelMatrix * vec4(position, 1.0)).xyz;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }`,
+  fragmentShader: /* glsl */`
+    uniform vec3 color; uniform sampler2D tDiffuse; uniform float strength; uniform vec2 fade; uniform float fresnel;
+    varying vec4 vUv; varying vec3 vW;
+    void main() {
+      vec3 base = texture2DProj(tDiffuse, vUv).rgb;
+      float f = 1.0 - smoothstep(fade.x, fade.y, length(vW.xz));
+      vec3 V = normalize(cameraPosition - vW);
+      float fr = mix(1.0, 0.45 + 0.55 * pow(1.0 - clamp(V.y, 0.0, 1.0), 2.0), fresnel);
+      gl_FragColor = vec4(color + base * strength * f * fr, 1.0);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+    }`,
+};
+
+// Glowing thread: base glow + waves travelling with the flow.
+function threadMaterial(red, { halo = false } = {}) {
+  return new THREE.ShaderMaterial({
+    name: halo ? 'glow_thread_halo' : 'glow_thread_core',
+    uniforms: {
+      uColor: { value: new THREE.Color(red) }, uFlow: { value: 0 }, uPulse: { value: 0 },
+      uWaves: { value: PARAMS.timing.waves }, uGain: { value: halo ? 0.38 : 1 }, uSoft: { value: halo ? 1 : 0 },
+    },
+    vertexShader: /* glsl */`
+      varying float vU; varying vec3 vN; varying vec3 vV;
+      void main() {
+        vU = uv.x;
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: /* glsl */`
+      uniform vec3 uColor; uniform float uFlow, uPulse, uWaves, uGain, uSoft;
+      varying float vU; varying vec3 vN; varying vec3 vV;
+      void main() {
+        float d = fract((uFlow - vU) * uWaves);           // 0 at a wave head, grows behind it
+        float wave = exp(-d * 5.0);
+        float b = (0.6 + 0.1 * uPulse) + wave * 1.1;
+        vec3 col = uColor * b + vec3(1.0) * pow(wave, 4.0) * 0.28;
+        float a = mix(1.0, pow(abs(dot(normalize(vN), normalize(vV))), 1.6) * clamp(b * 0.5, 0.0, 1.0), uSoft);
+        gl_FragColor = vec4(col * uGain, a);
+        #include <colorspace_fragment>
+      }`,
+    // Transparent on purpose: the transmission pass only samples opaque objects,
+    // so the thread is drawn crisp on top instead of being lensed by the thick
+    // tube into a red fill across its whole width.
+    transparent: true, depthWrite: false,
+    blending: halo ? THREE.AdditiveBlending : THREE.NormalBlending,
+  });
+}
+
+function radialSprite(stops) {
+  const S = 128, c = cnv(S, S), g = c.getContext('2d');
+  const r = g.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
+  stops.forEach(([o, col]) => r.addColorStop(o, col));
+  g.fillStyle = r; g.fillRect(0, 0, S, S);
+  return ctex(c);
+}
+
+/* ======================= MOUNT ======================= */
+function mount(el, opts = {}) {
+  const P = PARAMS, C = P.colors, T = P.timing, G = P.geometry;
+  let cursorTilt = opts.cursorTilt ?? true;
+  const onPayout = opts.onPayout;           // ({cur, sym, text, usd}) on every landing
+  let dead = false, raf = 0;
+  const flipState = { flip: 0, fill: 0, zoom: 0 };
+
+  if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+  el.style.overflow = 'hidden';
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' });
+  const SMALL = window.innerWidth <= 640;
+  renderer.setPixelRatio(SMALL ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(Math.max(window.devicePixelRatio || 1, 1.5), P.maxDPR));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.NeutralToneMapping;
+  renderer.transmissionResolutionScale = SMALL ? 0.5 : 1;
+  renderer.setClearColor(0x000000, 0);
+  Object.assign(renderer.domElement.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block' });
+  el.appendChild(renderer.domElement);
+
+  const vignette = document.createElement('div');
+  Object.assign(vignette.style, {
+    position: 'absolute', inset: '0', pointerEvents: 'none',
+    background: 'radial-gradient(ellipse 75% 70% at 50% 46%, rgba(10,10,10,0) 55%, rgba(0,0,0,0.6) 100%)',
+  });
+  vignette.style.display = 'none'; el.appendChild(vignette);
+  const labelLayer = document.createElement('div');
+  Object.assign(labelLayer.style, { position: 'absolute', inset: '0', pointerEvents: 'none' });
+  el.appendChild(labelLayer);
+
+  const scene = new THREE.Scene();
+  scene.background = null;
+  const camera = new THREE.PerspectiveCamera(26, 16 / 9, 0.05, 100);
+
+  const api = {
+    ready: null,
+    setOptions(o) { if ('cursorTilt' in o) cursorTilt = !!o.cursorTilt; },
+    getFaceRect() { return flipState.rect || null; },
+    setFlip(o) { if (o && isFinite(o.flip)) flipState.flip = Math.max(0, Math.min(1, o.flip)); if (o && isFinite(o.fill)) flipState.fill = Math.max(0, Math.min(1, o.fill)); if (o && isFinite(o.zoom)) flipState.zoom = Math.max(0, Math.min(1, o.zoom)); },
+    destroy() {},
+    exportGLB: async () => { await api.ready; return exportGLB(); },
+    async downloadGLB() {
+      const blob = await api.exportGLB();
+      const url = URL.createObjectURL(blob);
+      const a = Object.assign(document.createElement('a'), { href: url, download: 'tradequo-infinite-flow.glb' });
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000);
+    },
+  };
+
+  let exportGLB = async () => { throw new Error('scene not ready'); };
+
+  api.ready = (async () => {
+    await ensureFonts();
+    const logoImg = await new Promise(res => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = () => res(null); i.src = P.logoUrl; });
+    if (dead) return;
+
+    /* ---------- studio environment ---------- */
+    const env = (() => {
+      const c = cnv(1024, 512), g = c.getContext('2d');
+      const base = g.createLinearGradient(0, 0, 0, 512);
+      base.addColorStop(0, '#151517'); base.addColorStop(0.5, '#0b0b0c'); base.addColorStop(1, '#040404');
+      g.fillStyle = base; g.fillRect(0, 0, 1024, 512);
+      g.filter = 'blur(10px)';
+      g.fillStyle = 'rgba(255,255,255,0.95)'; g.fillRect(800, 60, 170, 70);        // key softbox, upper-left-front
+      g.filter = 'blur(4px)';
+      g.fillStyle = 'rgba(255,255,255,0.9)'; g.fillRect(600, 150, 360, 9);         // strip, front — highlights on the bends
+      g.fillStyle = 'rgba(255,255,255,0.55)'; g.fillRect(90, 196, 330, 7);         // strip, back
+      g.fillStyle = 'rgba(255,255,255,0.35)'; g.fillRect(0, 0, 1024, 18);          // broad overhead
+      g.fillStyle = 'rgba(255,255,255,0.4)'; g.fillRect(560, 26, 464, 34);         // overhead panel — catches the pedestal chamfer
+      g.filter = 'blur(40px)';
+      g.fillStyle = 'rgba(231,19,27,0.32)'; g.beginPath(); g.ellipse(256, 220, 110, 60, 0, 0, TAU); g.fill();   // red, behind
+      g.filter = 'none';
+      const t = ctex(c); t.mapping = THREE.EquirectangularReflectionMapping;
+      const pm = new THREE.PMREMGenerator(renderer);
+      const out = pm.fromEquirectangular(t).texture; t.dispose(); pm.dispose();
+      return out;
+    })();
+    scene.environment = env;
+
+    /* ---------- dimensions ---------- */
+    const W = G.loopW, H = W / G.loopAspect, a = W / 2;
+    const ys = H / (0.70711 * a);
+    const tubeR = W * G.tubeFrac / 2;
+    const D = tubeR * (1 + G.crossGapDiam);
+    const PW = W * G.pedestalW, PD = G.pedestalD, PH = G.pedestalH, CH = G.chamfer;
+    const Y0 = PH + G.supportH + tubeR + H / 2;
+    const curve = new Lemniscate(a, ys, D);
+
+    const root = new THREE.Group(); root.name = 'TradeQuo_InfiniteFlow';
+    const pivot = new THREE.Group(); pivot.name = 'flip_pivot'; pivot.position.set(0, PH / 2, 0);
+    scene.add(pivot); pivot.add(root); root.position.y = -PH / 2;
+
+    /* ---------- materials ---------- */
+    const glass = new THREE.MeshPhysicalMaterial({
+      name: 'loop_glass', color: C.glass, metalness: 0, roughness: 0.02, transmission: 1, thickness: 0.018,
+      ior: 1.4, attenuationColor: new THREE.Color('#141416'), attenuationDistance: 0.12,
+      specularIntensity: 1, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 1.8,
+      side: THREE.DoubleSide, depthWrite: false,
+    });
+    // Reflections never see the transmissive glass (that would add a transmission
+    // pass inside every mirror render) — they get this cheap stand-in.
+    const glassCheap = new THREE.MeshPhysicalMaterial({
+      name: 'loop_glass_reflection', color: '#1c1c1f', roughness: 0.05, transparent: true, opacity: 0.5,
+      envMapIntensity: 2, depthWrite: false,
+    });
+    const lacquer = new THREE.MeshPhysicalMaterial({
+      name: 'pedestal_lacquer', color: C.pedestal, roughness: 0.16, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 2.2,
+    });
+
+    /* ---------- loop ---------- */
+    const loop = new THREE.Group(); loop.name = 'loop'; loop.position.y = Y0; root.add(loop);
+    const tubeGeo = new THREE.TubeGeometry(curve, 600, tubeR, 28, true);
+    const tube = new THREE.Mesh(tubeGeo, glass); tube.name = 'loop_glass_tube'; loop.add(tube);
+    const threadCoreMat = threadMaterial(C.red), threadHaloMat = threadMaterial(C.red, { halo: true });
+    const threadGeo = new THREE.TubeGeometry(curve, 600, 0.0075, 8, true);
+    const thread = new THREE.Mesh(threadGeo, threadCoreMat); thread.name = 'loop_glow_thread'; thread.renderOrder = 2; loop.add(thread);
+    const halo = new THREE.Mesh(new THREE.TubeGeometry(curve, 600, 0.021, 12, true), threadHaloMat);
+    halo.name = 'loop_glow_halo'; halo.renderOrder = 3; loop.add(halo);
+
+    // supports at the two lowest points
+    const lows = [null, null];
+    for (let i = 0; i <= 2000; i++) {
+      const p = curve.getPoint(i / 2000), side = p.x > 0 ? 0 : 1;
+      if (!lows[side] || p.y < lows[side].y) lows[side] = p.clone();
+    }
+    const glassMeshes = [tube];
+    const supports = lows.map((lp, i) => {
+      const g = new THREE.Group(); g.name = `loop_support_${i ? 'L' : 'R'}`;
+      const h = G.supportH + tubeR * 0.4;
+      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.022, h, 20), glass);
+      post.name = `${g.name}_post`; post.position.set(lp.x, PH + h / 2, lp.z);
+      const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.056, 0.06, 0.012, 32), glass);
+      foot.name = `${g.name}_foot`; foot.position.set(lp.x, PH + 0.006, lp.z);
+      g.add(post, foot); root.add(g); glassMeshes.push(post, foot);
+      return g;
+    });
+
+    /* ---------- pedestal ---------- */
+    const pedestal = new THREE.Group(); pedestal.name = 'pedestal'; root.add(pedestal);
+    const rect = new THREE.Shape();
+    rect.moveTo(-PW / 2 + CH, -PD / 2 + CH); rect.lineTo(PW / 2 - CH, -PD / 2 + CH);
+    rect.lineTo(PW / 2 - CH, PD / 2 - CH); rect.lineTo(-PW / 2 + CH, PD / 2 - CH); rect.closePath();
+    const bodyGeo = new THREE.ExtrudeGeometry(rect, { depth: PH - 2 * CH, bevelEnabled: true, bevelThickness: CH, bevelSize: CH, bevelSegments: 1, steps: 1 });
+    bodyGeo.rotateX(-Math.PI / 2); bodyGeo.translate(0, CH, 0);
+    const body = new THREE.Mesh(bodyGeo, lacquer); body.name = 'pedestal_body'; pedestal.add(body);
+
+    const dpr = renderer.getPixelRatio();
+    const rs = window.innerWidth <= 640 ? 0.4 : P.reflection.resScale;
+    const rtSize = () => [Math.max(64, el.clientWidth * dpr * rs | 0), Math.max(64, el.clientHeight * dpr * rs | 0)];
+    const [rw, rh] = rtSize();
+    const topGeo = new THREE.PlaneGeometry(PW - 2 * CH, PD - 2 * CH);
+    const top = new Reflector(topGeo, { color: new THREE.Color(C.pedestalTop), textureWidth: rw, textureHeight: rh, clipBias: 0.002, shader: FadeReflectorShader, multisample: 0 });
+    top.name = 'pedestal_top'; top.rotation.x = -Math.PI / 2; top.position.y = PH + 0.0006;
+    top.material.uniforms.strength.value = P.reflection.top;
+    top.material.uniforms.fade.value.set(50, 60);
+    top.material.uniforms.fresnel.value = 1;
+    pedestal.add(top);
+
+    // engraved logo on the front face
+    const logoTex = (() => {
+      const c = cnv(1024, 160), g = c.getContext('2d');
+      let mark = null;
+      if (logoImg) {
+        const S = 200, m = cnv(S, S), mg = m.getContext('2d', { willReadFrequently: true });
+        mg.drawImage(logoImg, 0, 0, S, S);
+        const d = mg.getImageData(0, 0, S, S); let x0 = S, y0 = S, x1 = 0, y1 = 0;
+        for (let p = 0; p < S * S; p++) {
+          const r = d.data[p * 4], gg = d.data[p * 4 + 1];
+          const al = Math.max(clamp01((gg - 90) / 90), clamp01((r - gg - 60) / 90));
+          d.data[p * 4] = d.data[p * 4 + 1] = d.data[p * 4 + 2] = 255; d.data[p * 4 + 3] = al * 255;
+          if (al > 0.5) { const x = p % S, y = p / S | 0; x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+        }
+        mg.putImageData(d, 0, 0);
+        mark = { c: m, sx: x0, sy: y0, sw: x1 - x0 + 1, sh: y1 - y0 + 1 };
+      }
+      const draw = (col, dy) => {
+        g.save();
+        g.font = '700 92px "DM Sans", sans-serif'; g.letterSpacing = '14px';
+        const tw = g.measureText('TRADEQUO').width - 14;
+        const mh = 104, mw = mark ? mark.sw * mh / mark.sh : 0, gap = mark ? 36 : 0;
+        const x = (1024 - (mw + gap + tw)) / 2, base = 80 + mh / 2 - 6 + dy;
+        if (mark) {
+          const t = cnv(Math.ceil(mw), mh), tg = t.getContext('2d');
+          tg.drawImage(mark.c, mark.sx, mark.sy, mark.sw, mark.sh, 0, 0, mw, mh);
+          tg.globalCompositeOperation = 'source-in'; tg.fillStyle = col; tg.fillRect(0, 0, mw, mh);
+          g.drawImage(t, x, 80 - mh / 2 + dy);
+        }
+        g.fillStyle = col; g.fillText('TRADEQUO', x + mw + gap, base);
+        g.restore();
+      };
+      draw('rgba(0,0,0,0.9)', -3);            // engraved: shadow on the upper lip
+      draw('rgba(255,255,255,0.22)', 3);      // light catching the lower lip
+      draw(C.logo, 0);
+      return ctex(c);
+    })();
+    const logoH = 0.085;
+    const logo = new THREE.Mesh(new THREE.PlaneGeometry(logoH * 6.4, logoH), new THREE.MeshBasicMaterial({ name: 'pedestal_logo_engraving', map: logoTex, transparent: true, toneMapped: false, depthWrite: false }));
+    logo.name = 'pedestal_logo'; logo.position.set(0, PH / 2, PD / 2 + 0.0008); pedestal.add(logo);
+
+    // soft contact shadow under the pedestal
+    const shadowTex = (() => {
+      const c = cnv(256, 128), g = c.getContext('2d');
+      g.filter = 'blur(14px)'; g.fillStyle = 'rgba(0,0,0,0.85)'; g.fillRect(34, 30, 188, 68);
+      return ctex(c);
+    })();
+    const contact = new THREE.Mesh(new THREE.PlaneGeometry(PW * 1.25, PD * 1.6), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
+    contact.name = 'pedestal_contact_shadow'; contact.rotation.x = -Math.PI / 2; contact.position.y = 0.001; root.add(contact);
+
+    /* ---------- floor ---------- */
+    const floor = new Reflector(new THREE.PlaneGeometry(40, 40), { color: new THREE.Color(C.bg), textureWidth: rw, textureHeight: rh, clipBias: 0.003, shader: FadeReflectorShader, multisample: 0 });
+    floor.name = 'floor_mirror'; floor.rotation.x = -Math.PI / 2;
+    floor.material.uniforms.strength.value = P.reflection.floor;
+    floor.material.uniforms.fade.value.set(...P.reflection.floorFade);
+    floor.visible = false; scene.add(floor);
+
+    // One mirror update per frame, from the main camera only, with cheap glass.
+    let frameId = 0;
+    [floor, top].forEach(r => {
+      const orig = r.onBeforeRender.bind(r);
+      r.onBeforeRender = (rnd, scn, cam) => {
+        if (cam !== camera || r._f === frameId) return;
+        r._f = frameId;
+        glassMeshes.forEach(m => { m.material = glassCheap; });
+        halo.visible = false;
+        orig(rnd, scn, cam);
+        halo.visible = true;
+        glassMeshes.forEach(m => { m.material = glass; });
+      };
+    });
+
+    /* ---------- coins ---------- */
+    const JACKETS = [
+      { id: 'red',      f0: '#ff3a41', f1: '#a20b11', ring: '#ff7a7f', glyph: '#ffd9da', side: '#c81018', metal: 0.55, rough: 0.28 },
+      { id: 'white',    f0: '#ffffff', f1: '#b8babd', ring: '#e2e3e5', glyph: '#8d9095', side: '#d8d9db', metal: 0.65, rough: 0.24 },
+      { id: 'graphite', f0: '#4a4d54', f1: '#1b1d21', ring: '#6b6f77', glyph: '#a7abb3', side: '#2b2d31', metal: 0.85, rough: 0.3 },
+    ];
+    const SYMS = P.payouts.map(p => p.sym);
+    const faceMats = JACKETS.map(j => SYMS.map(sym => {
+      const S = 256, c = cnv(S, S), g = c.getContext('2d'), b = cnv(S, S), bg = b.getContext('2d');
+      const rg = g.createRadialGradient(S * 0.42, S * 0.38, 0, S / 2, S / 2, S / 2);
+      rg.addColorStop(0, j.f0); rg.addColorStop(1, j.f1);
+      g.fillStyle = rg; g.fillRect(0, 0, S, S);
+      bg.fillStyle = '#404040'; bg.fillRect(0, 0, S, S);
+      [[g, j.ring], [bg, '#ffffff']].forEach(([x, col]) => { x.strokeStyle = col; x.lineWidth = 9; x.beginPath(); x.arc(S / 2, S / 2, S * 0.41, 0, TAU); x.stroke(); });
+      [[g, j.glyph], [bg, '#ffffff']].forEach(([x, col]) => {
+        x.font = '700 150px "DM Sans", sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
+        x.fillStyle = col; x.fillText(sym, S / 2, S / 2 + 6);
+      });
+      bg.filter = 'blur(2px)'; bg.drawImage(b, 0, 0);
+      // Coins render in the transparent pass (after the glass), so they stay crisp
+      // instead of being resampled through the half-res transmission buffer.
+      return new THREE.MeshStandardMaterial({ name: `coin_face_${j.id}_${sym}`, map: ctex(c), bumpMap: ctex(b, false), bumpScale: 2.2, metalness: j.metal, roughness: j.rough, envMapIntensity: 1.8, transparent: true });
+    }));
+    const sideMats = JACKETS.map(j => new THREE.MeshStandardMaterial({ name: `coin_edge_${j.id}`, color: j.side, metalness: 0.9, roughness: 0.22, envMapIntensity: 1.6, transparent: true }));
+    const coinGeo = new THREE.CylinderGeometry(P.coins.radius, P.coins.radius, P.coins.thickness, 32);
+    const makeCoin = (j, s) => new THREE.Mesh(coinGeo, [sideMats[j], faceMats[j][s], faceMats[j][s]]);
+
+    let coins = [], N = 0, mobile = null;
+    function buildCoins(n) {
+      coins.forEach(c => loop.remove(c.mesh));
+      N = n;
+      coins = Array.from({ length: n }, (_, k) => {
+        const j = k % 3, s = Math.floor(k / 3) % 4;
+        const mesh = makeCoin(j, s);
+        mesh.name = `coin_${String(k + 1).padStart(2, '0')}_${JACKETS[j].id}_${P.payouts[s].cur.toLowerCase()}`;
+        loop.add(mesh);
+        return { mesh, j, s, ph: (k * 2.399) % TAU };
+      });
+    }
+
+    /* ---------- ejection + flashes ---------- */
+    const flier = makeCoin(0, 0); flier.name = 'coin_ejected'; flier.visible = false; root.add(flier);
+    const flashTex = radialSprite([[0, 'rgba(255,255,255,1)'], [0.18, 'rgba(255,120,120,0.9)'], [0.45, 'rgba(231,19,27,0.45)'], [1, 'rgba(231,19,27,0)']]);
+    const mkSprite = name => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: flashTex, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true })); s.name = name; s.renderOrder = 4; return s; };
+    const crossFlash = mkSprite('cross_flash'); crossFlash.position.set(0, Y0, 0); root.add(crossFlash);
+    const landFlash = mkSprite('land_flash'); landFlash.visible = false; root.add(landFlash);
+    const ringTex = (() => { const S = 256, c = cnv(S, S), g = c.getContext('2d'); g.strokeStyle = 'rgba(231,19,27,1)'; g.lineWidth = 10; g.filter = 'blur(3px)'; g.beginPath(); g.arc(S / 2, S / 2, S * 0.4, 0, TAU); g.stroke(); return ctex(c); })();
+    const ring = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: ringTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
+    ring.name = 'land_ring'; ring.rotation.x = -Math.PI / 2; ring.visible = false; root.add(ring);
+
+    /* ---------- lights ---------- */
+    const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(-3, 5, 3.5);
+    const rim = new THREE.DirectionalLight(C.red, 1.4); rim.position.set(0.5, 1.6, -4);
+    const fill = new THREE.HemisphereLight(0x8a8a90, 0x050505, 0.25);
+    const crossLight = new THREE.PointLight(C.red, 0.4, 1.8, 2); crossLight.position.set(0, Y0, 0);
+    const landLight = new THREE.PointLight(C.red, 0, 1.3, 2);
+    scene.add(key, rim, fill, crossLight, landLight);
+
+    /* ---------- sizing ---------- */
+    let cw = 0, ch = 0;
+    function checkSize() {
+      const w = el.clientWidth, h = el.clientHeight;
+      if (!w || !h || (w === cw && h === ch)) return;
+      cw = w; ch = h;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+      const [a2, b2] = rtSize();
+      floor.getRenderTarget().setSize(a2, b2); top.getRenderTarget().setSize(a2, b2);
+      const m = w <= P.mobileBreakpoint || window.innerWidth <= P.mobileBreakpoint;
+      if (m !== mobile) {
+        mobile = m;
+        buildCoins(m ? P.coins.mobile : P.coins.desktop);
+      }
+    }
+
+    /* ---------- pointer tilt ---------- */
+    const ptr = { x: 0, y: 0 }, tilt = { x: 0, y: 0 };
+    const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    const onMove = e => {
+      const r = el.getBoundingClientRect();
+      ptr.x = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+      ptr.y = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+
+    /* ---------- labels ---------- */
+    const labels = [];
+    function spawnLabel(text, at, t0) {
+      const d = document.createElement('div');
+      Object.assign(d.style, {
+        position: 'absolute', left: '0', top: '0', whiteSpace: 'nowrap', willChange: 'transform,opacity',
+        font: `400 ${mobile ? 28 : 30}px "Fragment Mono", monospace`, color: '#0A0A0A',
+        textShadow: '0 0 14px rgba(231,19,27,0.25)', opacity: '0',
+      });
+      d.innerHTML = `<span style="color:${C.red}">+</span>${text}`;
+      labelLayer.appendChild(d);
+      labels.push({ d, at: at.clone(), t0 });
+    }
+    const vtmp = new THREE.Vector3();
+    function updateLabels(t) {
+      for (let i = labels.length - 1; i >= 0; i--) {
+        const L = labels[i], p = (t - L.t0) / T.labelLife;
+        if (p >= 1) { L.d.remove(); labels.splice(i, 1); continue; }
+        vtmp.copy(L.at).project(camera);
+        const x = (vtmp.x + 1) / 2 * cw, y = (1 - vtmp.y) / 2 * ch - easeOut(p) * T.labelRisePx;
+        L.d.style.transform = `translate(${x}px, ${y}px) translate(-50%, -100%)`;
+        L.d.style.opacity = String(p < 0.12 ? p / 0.12 : 1 - smooth((p - 0.45) / 0.55));
+      }
+    }
+
+    /* ---------- animation ---------- */
+    const U_CROSS = 0.25;                                     // front branch crossing, arc-length param
+    const u0 = U_CROSS - T.flowRevPerSec * T.ejectOffset;     // a coin sits on the crossing at each ejection
+    const crossFront = new THREE.Vector3(0, Y0, D);
+    const target = new THREE.Vector3(0, 0.78, 0);
+    let lastEject = -1;
+
+    function update(t) {
+      const flow = fract(u0 + T.flowRevPerSec * t);
+      for (let k = 0; k < N; k++) {
+        const c = coins[k];
+        curve.getPointAt(fract(flow + k / N), c.mesh.position);
+        c.mesh.rotation.set(Math.PI / 2 + T.coinWobble * Math.sin(TAU * t / T.coinWobblePeriod + c.ph), c.ph + TAU * t / T.coinSpinPeriod, 0);
+      }
+
+      const pulse = 0.5 + 0.5 * Math.sin(TAU * t / T.threadPulsePeriod);
+      [threadCoreMat, threadHaloMat].forEach(m => { m.uniforms.uFlow.value = flow; m.uniforms.uPulse.value = pulse; });
+      const xw = fract((flow - U_CROSS) * 2);         // a wave head reaches the crossing twice per lap
+      const waveFlash = Math.max(Math.exp(-xw * 3.5), Math.exp(-(1 - xw) * 9)) * (T.waves > 0 ? 1 : 0);
+
+      // ejection
+      let boost = 0;
+      const te = t - T.ejectOffset;
+      flier.visible = false; landFlash.visible = false; ring.visible = false; landLight.intensity = 0;
+      if (te >= 0) {
+        const n = Math.floor(te / T.ejectEvery), tau = te - n * T.ejectEvery;
+        const pay = P.payouts[n % P.payouts.length], side = n % 2 ? -1 : 1;
+        const land = new THREE.Vector3(side * 0.82, PH + P.coins.thickness / 2 + 0.002, 0.22);
+        boost = smooth(1 - tau / 0.9);
+        if (tau < T.flight) {
+          const p = tau / T.flight, j = n % 3;
+          flier.material = [sideMats[j], faceMats[j][n % 4], faceMats[j][n % 4]];
+          flier.visible = true;
+          flier.position.set(
+            THREE.MathUtils.lerp(0, land.x, smooth(p)),
+            crossFront.y + (land.y - crossFront.y) * p + 0.7 * 4 * p * (1 - p),
+            THREE.MathUtils.lerp(crossFront.z, land.z, p) + 0.28 * Math.sin(Math.PI * p),
+          );
+          flier.rotation.set(Math.PI / 2 + 3.5 * Math.PI * easeOut(p), TAU * t / T.coinSpinPeriod, 0);
+          flier.scale.setScalar(1 + 0.5 * Math.sin(Math.PI * Math.min(1, p * 1.25)) + 0.25 * p);
+        } else if (tau < T.flight + T.dissolve) {
+          const q = (tau - T.flight) / T.dissolve;
+          flier.visible = true; flier.position.copy(land); flier.rotation.set(0, 0, 0);
+          flier.scale.setScalar(1.25 * (1 - smooth(q)));
+          landFlash.visible = true; landFlash.position.set(land.x, land.y + 0.05, land.z);
+          landFlash.scale.setScalar(0.16 + 0.34 * easeOut(q)); landFlash.material.opacity = 0.6 * (1 - smooth(q));
+          ring.visible = true; ring.position.set(land.x, PH + 0.003, land.z);
+          ring.scale.setScalar(0.1 + 0.45 * easeOut(q)); ring.material.opacity = 0.5 * (1 - smooth(q));
+          landLight.position.set(land.x, land.y + 0.12, land.z); landLight.intensity = 1.4 * (1 - smooth(q));
+        }
+        if (tau >= T.flight && lastEject < n) {
+          lastEject = n;
+          spawnLabel(pay.text, new THREE.Vector3(land.x, land.y + 0.16, land.z), t);
+          if (onPayout) try { onPayout({ ...pay }); } catch (e) { console.error(e); }
+        }
+      }
+      crossLight.intensity = 0.25 + waveFlash * 0.5 + boost * 1.3;
+      const cf = Math.min(1, waveFlash * 0.4 + boost * 0.6);
+      crossFlash.scale.setScalar(0.22 + cf * 0.18);
+      crossFlash.material.opacity = 0.14 + cf * 0.42;
+
+      // camera
+      const allowTilt = cursorTilt && !mobile && !coarse;
+      tilt.x += ((allowTilt ? ptr.x : 0) * T.tiltDeg * DEG - tilt.x) * 0.06;
+      tilt.y += ((allowTilt ? ptr.y : 0) * T.tiltDeg * DEG - tilt.y) * 0.06;
+      const fF = flipState.flip, fG = flipState.fill, lerp = (x, y, k) => x + (y - x) * k;
+      pivot.rotation.x = -Math.PI / 2 * fF;
+      contact.visible = fF < 0.02;
+      const keep = 1 - Math.min(1, fF * 2.5);
+      crossLight.intensity *= keep; landLight.intensity *= keep;
+      crossFlash.material.opacity *= keep; crossFlash.visible = keep > 0;
+      if (keep < 1) { flier.visible = flier.visible && keep > 0.6; landFlash.visible = landFlash.visible && keep > 0.6; ring.visible = ring.visible && keep > 0.6; }
+      labelLayer.style.opacity = String(Math.max(0, 1 - fF * 3));
+      const az = (T.camSwayDeg * DEG * Math.sin(TAU * t / T.camSwayPeriod) + tilt.x) * (1 - fF);
+      const elv = lerp(G.camElevDeg * DEG + tilt.y, 0, fF);
+      const vt = Math.tan(camera.fov * DEG / 2), ht = vt * camera.aspect;
+      const fillW = mobile ? G.loopFillMobile : G.loopFillDesktop;
+      const dist0 = Math.max((W / fillW) / 2 / ht + PD * 0.3, 2.05 / 2 / vt);
+      const distFill = Math.max(PW / 2 / (ht * 0.62), PD / 2 / (vt * 0.8));
+      const fZ = flipState.zoom;
+      const distZ = dist0 / (1 + 0.7 * fZ);
+      const dist = lerp(distZ, distFill, fG);
+      const ty0 = lerp(target.y, lerp(target.y, Y0, 0.6), fZ * (1 - fF));
+      const tg = new THREE.Vector3(0, lerp(ty0, PH / 2, fF), lerp(target.z, PH / 2, fF));
+      camera.position.set(tg.x + dist * Math.sin(az) * Math.cos(elv), tg.y + dist * Math.sin(elv), tg.z + dist * Math.cos(az) * Math.cos(elv));
+      camera.lookAt(tg);
+      if (fF > 0.5) {
+        pivot.updateMatrixWorld(true); camera.updateMatrixWorld();
+        const cr = renderer.domElement.getBoundingClientRect();
+        let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+        for (const [cx, cz] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+          const v = root.localToWorld(new THREE.Vector3(cx * PW / 2, 0, cz * PD / 2)).project(camera);
+          const sx = cr.left + (v.x + 1) / 2 * cr.width, sy = cr.top + (1 - v.y) / 2 * cr.height;
+          x0 = Math.min(x0, sx); x1 = Math.max(x1, sx); y0 = Math.min(y0, sy); y1 = Math.max(y1, sy);
+        }
+        flipState.rect = { left: x0, top: y0, width: x1 - x0, height: y1 - y0 };
+      } else flipState.rect = null;
+      updateLabels(t);
+    }
+
+    /* ---------- loop (pauses off-screen; checked every frame) ---------- */
+    let last = performance.now(), simT = 0;
+    function frame(now) {
+      if (dead) return;
+      raf = requestAnimationFrame(frame);
+      const dt = Math.min(0.1, (now - last) / 1000); last = now;
+      if (window.__tqPaused) return;
+      const r = el.getBoundingClientRect();
+      if (!(r.width > 0 && r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth)) return;
+      simT += dt; frameId++;
+      checkSize();
+      update(simT);
+      renderer.render(scene, camera);
+    }
+    checkSize();
+    raf = requestAnimationFrame(frame);
+
+    /* ---------- GLB ---------- */
+    exportGLB = async () => {
+      const { GLTFExporter } = await import('https://esm.sh/three@0.184.0/examples/jsm/exporters/GLTFExporter.js');
+      const out = new THREE.Group(); out.name = 'TradeQuo_InfiniteFlow';
+      const L = new THREE.Group(); L.name = 'loop'; L.position.copy(loop.position); out.add(L);
+      const tm = new THREE.Mesh(tubeGeo, glass); tm.name = 'loop_glass_tube'; L.add(tm);
+      const th = new THREE.Mesh(threadGeo, new THREE.MeshStandardMaterial({ name: 'loop_glow_thread', color: C.red, emissive: C.red, emissiveIntensity: 2 }));
+      th.name = 'loop_glow_thread'; L.add(th);
+      supports.forEach(s => out.add(s.clone()));
+      const Pd = new THREE.Group(); Pd.name = 'pedestal'; out.add(Pd);
+      Pd.add(body.clone());
+      const tp = new THREE.Mesh(topGeo, new THREE.MeshPhysicalMaterial({ name: 'pedestal_top_lacquer', color: C.pedestalTop, roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.02 }));
+      tp.name = 'pedestal_top'; tp.rotation.copy(top.rotation); tp.position.copy(top.position); Pd.add(tp);
+      Pd.add(logo.clone());
+      const Cg = new THREE.Group(); Cg.name = 'coins'; Cg.position.copy(loop.position); out.add(Cg);
+      coins.forEach(c => { const m = c.mesh.clone(); m.name = c.mesh.name; Cg.add(m); });
+      out.updateMatrixWorld(true);
+      const buf = await new GLTFExporter().parseAsync(out, { binary: true, maxTextureSize: 1024 });
+      return new Blob([buf], { type: 'model/gltf-binary' });
+    };
+
+    api.destroy = () => {
+      dead = true; cancelAnimationFrame(raf);
+      window.removeEventListener('pointermove', onMove);
+      labels.forEach(l => l.d.remove());
+      scene.traverse(o => {
+        if (o.geometry) o.geometry.dispose();
+        const ms = Array.isArray(o.material) ? o.material : o.material ? [o.material] : [];
+        ms.forEach(m => { Object.values(m).forEach(v => v && v.isTexture && v.dispose()); m.dispose(); });
+      });
+      floor.dispose(); top.dispose(); env.dispose();
+      renderer.dispose(); renderer.forceContextLoss();
+      [renderer.domElement, vignette, labelLayer].forEach(n => n.remove());
+    };
+  })();
+
+  api.destroy = () => { dead = true; cancelAnimationFrame(raf); renderer.dispose(); [renderer.domElement, vignette, labelLayer].forEach(n => n.remove()); };
+  const realReady = api.ready;
+  api.ready = realReady.catch(e => { console.error('[infinite-flow]', e); });
+  return api;
+}
+
+
+/* ---------- page wiring ---------- */
+const MONTH_START = 9184620;
+const totalEl = document.getElementById('if-total');
+let shown = MONTH_START, target = MONTH_START, tw = 0;
+function addPayout(usd) {
+  usd = Number(usd); if (!isFinite(usd) || usd <= 0) return;
+  target += usd;
+  const from = Math.max(shown, MONTH_START), to = target, t0 = performance.now();
+  cancelAnimationFrame(tw);
+  const step = () => {
+    const p = Math.max(0, Math.min(1, (performance.now() - t0) / 1000)), e = 1 - Math.pow(1 - p, 3);
+    shown = from + (to - from) * e;
+    totalEl.textContent = '$' + Math.round(shown).toLocaleString('en-US');
+    if (p < 1) tw = requestAnimationFrame(step);
+  };
+  tw = requestAnimationFrame(step);
+}
+const q = new URLSearchParams(location.search);
+window.infiniteFlow = mount(document.getElementById('if-scene'), {
+  cursorTilt: false,
+  onPayout: p => addPayout(p.usd),
+});
+</script>
+<script>
+(function(){ const fit=()=>{ const h=document.querySelector('.if').getBoundingClientRect().height; try{ if(window.frameElement){ window.frameElement.style.height=h+'px'; window.frameElement.style.aspectRatio='auto'; } }catch(e){} try{ parent.postMessage({ tqFrameH: h }, '*'); }catch(e){} };
+new ResizeObserver(fit).observe(document.querySelector('.if')); window.addEventListener('load',fit); fit(); })();
+</script>
+<script>
+(function () {
+  var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = !window.matchMedia || matchMedia('(hover: hover)').matches;
+  var HALF = 162, PULLEY_R = 23, BASE = 20, BOOST = 3; // px, px, px/s, ×
+
+  document.querySelectorAll('.tq-conv').forEach(function (el) {
+    var speed = 1, dist = 0, last = 0, raf = 0, visible = true, hot = false;
+
+    function frame(now) {
+      raf = 0;
+      if (!visible || document.hidden) return;
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      speed += ((hot ? BOOST : 1) - speed) * Math.min(1, dt * 2.2);
+      dist += dt * BASE * speed;
+      el.style.setProperty('--tqm', ((dist / HALF) % 1).toFixed(4));
+      el.style.setProperty('--tqr', ((dist / PULLEY_R) * 57.2958 % 360).toFixed(1));
+      raf = requestAnimationFrame(frame);
+    }
+    function kick() {
+      if (raf || reduced) return;
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    }
+
+    el.addEventListener('pointerenter', function () { hot = true; });
+    el.addEventListener('pointerleave', function () { hot = false; });
+    el.addEventListener('focus', function () { hot = true; });
+    el.addEventListener('blur', function () { hot = false; });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }).observe(el);
+    }
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
+    kick();
+
+    if (reduced || !canHover) return;
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--tqx', ((e.clientX - r.left - r.width / 2) * 0.08).toFixed(1) + 'px');
+      el.style.setProperty('--tqy', ((e.clientY - r.top - r.height / 2) * 0.22).toFixed(1) + 'px');
+    });
+    el.addEventListener('pointerleave', function () {
+      el.style.setProperty('--tqx', '0px');
+      el.style.setProperty('--tqy', '0px');
+    });
+  });
+})();
+
+document.querySelectorAll('.tq-conv').forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    try { var t = parent.document.getElementById('signup'); if (t) { parent.scrollTo({ top: t.getBoundingClientRect().top + parent.scrollY, behavior: 'smooth' }); return; } } catch (err) {}
+    try { parent.postMessage({ tqGo: 'signup' }, '*'); } catch (err) {}
+  });
+});
+</script>
+</body>
+</html>

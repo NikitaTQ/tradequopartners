@@ -1,0 +1,22 @@
+# Netlify: publish the static site in site/ as-is (no build step).
+[build]
+  publish = "site"
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/embeds/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    X-Robots-Tag = "noindex"
