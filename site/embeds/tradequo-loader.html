@@ -33,7 +33,7 @@
 // Usage:  const l = TQLoader.mount(el, { theme: 'light' | 'dark', speed: 1, mode: 'loop' | 'progress' | 'demo' });
 //         l.setProgress(0.6);   // mode 'progress' — drive the fill from real loading
 //         l.setTheme('dark');   l.fadeOut(500);   l.destroy();
-import * as THREE from 'https://unpkg.com/three@0.184.0/build/three.module.js';
+import * as THREE from '../vendor/three/three.module.min.js';
 
 const TAN = Math.tan(13 * Math.PI / 180);
 const THEMES = { light: { bg: '#F2F2F3' }, dark: { bg: '#0E0E10' } };

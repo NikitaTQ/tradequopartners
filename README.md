@@ -7,7 +7,8 @@ site/
   index.html                 лендинг (Partner Program v2)
   commission-plans/ dashboard/ marketing-hub/ academy/ success-stories/
                              концепт-страницы, у каждой свой URL
-  embeds/                    3D-блоки и ролики (подгружаются в iframe лениво)
+  embeds/                    3D-блоки и ролики (iframe, грузятся при подходе к экрану)
+  vendor/                    three.js и React — свои копии, без внешних CDN
   assets/css/site.css        стили (перенесены из дизайна один в один)
   assets/js/landing.js       логика лендинга: калькулятор, форма с подписью, FAQ, флип, звёзды…
   assets/js/transition.js    переход между страницами через лоадер
@@ -48,8 +49,17 @@ HTTPS (Let's Encrypt) Netlify включит сам.
 - **Куда приходят заявки.** Сейчас форма отправляет их в Netlify Forms. Чтобы слать в CRM, поменяйте `data-endpoint="/"` у формы в `site/index.html` на адрес вебхука. Поля уходят POST-запросом: `name`, `email`, `phone`.
 - **Ссылки Privacy Policy и Partner Terms** пока ведут на `#`.
 - **Концепт-страницы** закрыты от индексации (`noindex`), потому что тексты на них черновые. Кнопки на них, как и в дизайне, пока никуда не ведут. Когда тексты будут готовы, уберите строку `robots` в `tools/build-pages.py`, запустите `python3 tools/build-pages.py` и добавьте страницы в `site/sitemap.xml`.
-- **Внешние зависимости встроенных блоков.** Ролики, кристаллы и Infinite Flow грузят three.js, React и Babel с unpkg.com и esm.sh, как и в дизайне. Если какой-то CDN недоступен, соответствующий блок останется пустым, а остальная страница продолжит работать.
 
 ## Правка концепт-страниц
 
 Отредактируйте `tools/pages.json` и запустите `python3 tools/build-pages.py`.
+
+## Новая версия ролика или 3D-блока из Claude Design
+
+1. Положите новый HTML-файл в `site/embeds/` под тем же именем, например `tradequo-film.html`.
+2. Запустите:
+   ```
+   cd tools && npm install && npm run optimize-embeds
+   ```
+   Скрипт переведёт файл на локальные three.js и React из `site/vendor/` и заранее скомпилирует JSX в `<имя>.app.js`. Без этого шага блок будет грузить Babel (~3 МБ) и компилировать код прямо в браузере, а страница начнёт тормозить.
+3. Закоммитьте изменения: Netlify выкатит их сам.

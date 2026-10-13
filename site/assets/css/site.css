@@ -607,3 +607,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   [data-page-bar] nav { order: 3; flex: 0 0 calc(100% + 32px); margin: 0 -16px; padding: 0 12px; flex-wrap: nowrap !important; justify-content: flex-start !important; overflow-x: auto; scrollbar-width: none; }
   [data-page-bar] nav::-webkit-scrollbar { display: none; }
 }
+
+/* ---- performance: infinite animations idle while their section is off-screen
+   (landing.js toggles data-offscreen) ---------------------------------------- */
+[data-offscreen], [data-offscreen] *, [data-offscreen] *::before, [data-offscreen] *::after { animation-play-state: paused !important; }

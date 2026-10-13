@@ -43,23 +43,45 @@
     });
   }
 
-  /* Embeds stop rendering while off-screen (they poll window.__tqPaused). */
-  function startIframePause() {
-    const check = () => {
-      const vh = innerHeight;
-      $$('iframe').forEach((f) => {
-        const r = f.getBoundingClientRect();
-        let hidden = r.bottom < -80 || r.top > vh + 80 || r.width === 0;
-        if (!hidden) {
-          for (let n = f; n && n !== document.body; n = n.parentElement) {
-            if (n.style && n.style.visibility === 'hidden') { hidden = true; break; }
-          }
-        }
-        try { if (f.contentWindow) f.contentWindow.__tqPaused = hidden; } catch (e) {}
+  /* ---- embeds: load on approach, pause off-screen ----------------------------
+   * The embeds are same-origin, so they share the page's main thread: anything
+   * they do while out of view costs scroll smoothness. They only load about a
+   * screen before they are reached (a display:none embed — the other film
+   * layout — never loads), and stop rendering once out of view: they poll
+   * window.__tqPaused. `data-covered` marks an embed hidden under other content. */
+  function setEmbedPaused(f) {
+    try { if (f.contentWindow) f.contentWindow.__tqPaused = f.dataset.inview !== '1' || f.hasAttribute('data-covered'); } catch (e) {}
+  }
+  function startEmbeds() {
+    const frames = $$('iframe[data-embed]');
+    const load = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        en.target.src = en.target.dataset.src;
+        load.unobserve(en.target);
       });
-    };
-    check();
-    setInterval(check, 200);
+    }, { rootMargin: '120% 0px' });
+    const view = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { en.target.dataset.inview = en.isIntersecting ? '1' : '0'; setEmbedPaused(en.target); });
+    }, { rootMargin: '80px 0px' });
+    frames.forEach((f) => {
+      f.addEventListener('load', () => setEmbedPaused(f));
+      load.observe(f);
+      view.observe(f);
+    });
+  }
+
+  /* Run `start`/`stop` as `el` enters/leaves the viewport (± margin). */
+  function whileVisible(el, margin, start, stop) {
+    new IntersectionObserver((en) => { (en[en.length - 1].isIntersecting ? start : stop)(); }, { rootMargin: margin }).observe(el);
+  }
+
+  /* Infinite CSS animations (breathing CTAs, pulses, marquee) idle off-screen. */
+  function startAnimationGate() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => en.target.toggleAttribute('data-offscreen', !en.isIntersecting));
+    }, { rootMargin: '100px 0px' });
+    $$('#signup, #how, #calculator, #reviews, #film, #payouts, [data-flip-track], #faq, #reach').forEach((el) => io.observe(el));
   }
 
   /* ---- mobile: tap an offer card to lift it -------------------------------- */
@@ -120,10 +142,9 @@
       st.style.transform = on ? 'translateY(0)' : 'translateY(6px)';
       const ic = $('[data-how-icon]', st); if (ic) ic.style.background = on ? '#fdecec' : 'transparent';
     };
+    let raf = 0;
     const tick = (now) => {
-      requestAnimationFrame(tick);
-      const r = sec.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > innerHeight) { t0 = now - Math.min(now - t0, RUN * 0.02); return; }
+      raf = requestAnimationFrame(tick);
       if (!line || line.offsetParent === null) {
         /* mobile: vertical arrows between stacked steps */
         const k = (now - t0) % CYCLE, T = k / RUN;
@@ -145,14 +166,16 @@
       else if (k < RUN + HOLD) w = W;
       else { w = W; op = 1 - (k - RUN - HOLD) / FADE; }
       if (k < 40) state = [];
+      /* all layout reads first, then writes — no forced re-layout per dot */
+      const reached = dots.map((d) => { const dr = d.getBoundingClientRect(); return w >= dr.left - lr.left; });
       if (fill) { fill.style.width = w + 'px'; fill.style.opacity = op; }
-      dots.forEach((d, i) => {
-        const dr = d.getBoundingClientRect();
-        const cx = dr.left - lr.left + dr.width / 2;
-        set(i, op > .5 && w >= cx - dr.width / 2);
-      });
+      reached.forEach((on, i) => set(i, op > .5 && on));
     };
-    requestAnimationFrame(tick);
+    /* animate only while the section is on screen; resume the cycle near where it was */
+    let pausedAt = 0;
+    whileVisible(sec, '0px',
+      () => { if (raf) return; if (pausedAt) t0 += performance.now() - pausedAt; pausedAt = 0; raf = requestAnimationFrame(tick); },
+      () => { if (!raf) return; cancelAnimationFrame(raf); raf = 0; pausedAt = performance.now(); });
   }
 
   /* ---- Infinite Flow → "What we offer": scroll-driven flip (desktop) -------- */
@@ -168,9 +191,9 @@
     const io4 = (x) => { x = clamp(x); return x < .5 ? 8 * x * x * x * x : 1 - Math.pow(-2 * x + 2, 4) / 2; };
     const out3 = (x) => 1 - Math.pow(1 - clamp(x), 3);
     const kids = () => panel ? [...panel.children] : [];
-    let pS = -1, hd = null, Rf = null, apiReset = false;
+    let pS = -1, hd = null, Rf = null, apiReset = false, raf = 0;
     const tick = () => {
-      requestAnimationFrame(tick);
+      raf = requestAnimationFrame(tick);
       let api = null, doc = null;
       try { api = ifr && ifr.contentWindow && ifr.contentWindow.infiniteFlow; doc = ifr && ifr.contentDocument; } catch (e) {}
       const vh = innerHeight;
@@ -189,6 +212,8 @@
       }
       if (pS === -2) pS = -1;
       const r = track.getBoundingClientRect();
+      const fh = front.offsetHeight;
+      const ir = ifr.getBoundingClientRect(), iw = ifr.offsetWidth, br = back.getBoundingClientRect();
       if (r.bottom < -50 || r.top > vh + 50) { pS = -1; return; }
       const pT = clamp(-r.top / Math.max(1, r.height - vh));
       pS = pS < 0 ? pT : pS + (pT - pS) * 0.06;
@@ -198,7 +223,7 @@
       const fl = io3((p - 0.22) / 0.36), fi = io3((p - 0.3) / 0.34);
       const ov = ss((p - 0.52) / 0.08), pn = io4((p - 0.56) / 0.3);
       const c1 = out3((p - 0.76) / 0.18), c2 = out3((p - 0.82) / 0.18);
-      const s0 = Math.min(1, (vh - 40) / Math.max(1, front.offsetHeight));
+      const s0 = Math.min(1, (vh - 40) / Math.max(1, fh));
       front.style.transform = 'scale(' + s0 + ')';
       if (shade) shade.style.opacity = '0';
       if (api && api.setFlip) api.setFlip({ flip: fl, fill: fi, zoom });
@@ -211,7 +236,7 @@
       back.style.transform = 'none';
       if (ov > 0 && fr) {
         /* the dark panel grows out of the 3D card face */
-        const ir = ifr.getBoundingClientRect(), k = ir.width / Math.max(1, ifr.offsetWidth), br = back.getBoundingClientRect();
+        const k = ir.width / Math.max(1, iw);
         const c = (v) => Math.max(0, v);
         const L = c(ir.left + fr.left * k - br.left), T = c(ir.top + fr.top * k - br.top);
         const Rr = c(br.right - (ir.left + (fr.left + fr.width) * k)), B = c(br.bottom - (ir.top + (fr.top + fr.height) * k));
@@ -229,8 +254,16 @@
         n.style.transform = i === 0 ? 'translateX(' + ((1 - v) * -24).toFixed(1) + 'px)' : 'translateY(' + ((1 - v) * 36).toFixed(1) + 'px) scale(' + (0.96 + 0.04 * v).toFixed(4) + ')';
       });
       front.style.visibility = pn >= 1 ? 'hidden' : 'visible';
+      if ((pn >= 1) !== ifr.hasAttribute('data-covered')) { ifr.toggleAttribute('data-covered', pn >= 1); setEmbedPaused(ifr); }
     };
-    requestAnimationFrame(tick);
+    whileVisible(track, '50px 0px',
+      () => { if (!raf) raf = requestAnimationFrame(tick); },
+      () => { if (raf) { cancelAnimationFrame(raf); raf = 0; pS = -1; } });
+    /* crossing the mobile breakpoint while the track is off-screen still resets it */
+    window.addEventListener('resize', () => {
+      if (raf || innerWidth > 640 || pS === -2) return;
+      tick(); cancelAnimationFrame(raf); raf = 0;
+    }, { passive: true });
   }
 
   /* ---- starfield behind the FAQ ---------------------------------------------- */
@@ -580,7 +613,8 @@
   startDock();
   startIframeFit();
   startFanTap();
-  startIframePause();
+  startEmbeds();
+  startAnimationGate();
   startFlip();
   startHowLine();
   startStars();
