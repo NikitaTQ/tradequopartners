@@ -9,7 +9,7 @@
  *   cd tools && npm install && node optimize-embeds.mjs
  * It is idempotent: already-optimized files are left as they are.
  */
-import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, copyFileSync, rmSync } from 'node:fs';
 import { dirname, join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -21,17 +21,21 @@ const embeds = join(site, 'embeds');
 const vendor = join(site, 'vendor');
 const nm = join(here, 'node_modules');
 
-/* ---- vendor copies -------------------------------------------------------- */
+/* ---- vendor copies -------------------------------------------------------- *
+ * Folder names carry the library version, so /vendor/* can be cached forever. */
+const ver = (pkg) => JSON.parse(readFileSync(join(nm, pkg, 'package.json'), 'utf8')).version;
+const T = `three@${ver('three')}`, RE = `react@${ver('react')}`;
 const vendorFiles = {
-  'three/build/three.module.min.js': 'three/three.module.min.js',
-  'three/build/three.core.min.js': 'three/three.core.min.js',
-  'three/examples/jsm/controls/OrbitControls.js': 'three/addons/controls/OrbitControls.js',
-  'three/examples/jsm/exporters/OBJExporter.js': 'three/addons/exporters/OBJExporter.js',
-  'three/examples/jsm/exporters/GLTFExporter.js': 'three/addons/exporters/GLTFExporter.js',
-  'three/examples/jsm/objects/Reflector.js': 'three/addons/objects/Reflector.js',
-  'react/umd/react.production.min.js': 'react/react.production.min.js',
-  'react-dom/umd/react-dom.production.min.js': 'react/react-dom.production.min.js',
+  'three/build/three.module.min.js': `${T}/three.module.min.js`,
+  'three/build/three.core.min.js': `${T}/three.core.min.js`,
+  'three/examples/jsm/controls/OrbitControls.js': `${T}/addons/controls/OrbitControls.js`,
+  'three/examples/jsm/exporters/OBJExporter.js': `${T}/addons/exporters/OBJExporter.js`,
+  'three/examples/jsm/exporters/GLTFExporter.js': `${T}/addons/exporters/GLTFExporter.js`,
+  'three/examples/jsm/objects/Reflector.js': `${T}/addons/objects/Reflector.js`,
+  'react/umd/react.production.min.js': `${RE}/react.production.min.js`,
+  'react-dom/umd/react-dom.production.min.js': `${RE}/react-dom.production.min.js`,
 };
+rmSync(vendor, { recursive: true, force: true });
 for (const [from, to] of Object.entries(vendorFiles)) {
   mkdirSync(dirname(join(vendor, to)), { recursive: true });
   copyFileSync(join(nm, from), join(vendor, to));
@@ -40,13 +44,17 @@ for (const [from, to] of Object.entries(vendorFiles)) {
 /* ---- rewrite embeds --------------------------------------------------------- */
 const V = '../vendor';
 const rewrites = [
-  [/https:\/\/unpkg\.com\/three@[\d.]+\/build\/three\.(module|core)\.js/g, `${V}/three/three.$1.min.js`],
-  [/\.\.\/vendor\/three\/three\.(module|core)\.js/g, `${V}/three/three.$1.min.js`],
-  [/https:\/\/unpkg\.com\/three@[\d.]+\/examples\/jsm\//g, `${V}/three/addons/`],
-  [/https:\/\/esm\.sh\/three@[\d.]+\/examples\/jsm\//g, `${V}/three/addons/`],
-  [/https:\/\/esm\.sh\/three@[\d.]+(?=['"])/g, `${V}/three/three.module.min.js`],
-  [/https:\/\/unpkg\.com\/react@[\d.]+\/umd\/react\.production\.min\.js/g, `${V}/react/react.production.min.js`],
-  [/https:\/\/unpkg\.com\/react-dom@[\d.]+\/umd\/react-dom\.production\.min\.js/g, `${V}/react/react-dom.production.min.js`],
+  /* CDN links from Claude Design */
+  [/https:\/\/unpkg\.com\/three@[\d.]+\/build\/three\.(module|core)\.js/g, `${V}/${T}/three.$1.min.js`],
+  [/https:\/\/unpkg\.com\/three@[\d.]+\/examples\/jsm\//g, `${V}/${T}/addons/`],
+  [/https:\/\/esm\.sh\/three@[\d.]+\/examples\/jsm\//g, `${V}/${T}/addons/`],
+  [/https:\/\/esm\.sh\/three@[\d.]+(?=['"])/g, `${V}/${T}/three.module.min.js`],
+  [/https:\/\/unpkg\.com\/react@[\d.]+\/umd\/react\.production\.min\.js/g, `${V}/${RE}/react.production.min.js`],
+  [/https:\/\/unpkg\.com\/react-dom@[\d.]+\/umd\/react-dom\.production\.min\.js/g, `${V}/${RE}/react-dom.production.min.js`],
+  /* earlier self-hosted layouts (unversioned / older version) */
+  [/\.\.\/vendor\/three(?:@[\d.]+)?\/three\.(module|core)(?:\.min)?\.js/g, `${V}/${T}/three.$1.min.js`],
+  [/\.\.\/vendor\/three(?:@[\d.]+)?\/addons\//g, `${V}/${T}/addons/`],
+  [/\.\.\/vendor\/react(?:@[\d.]+)?\//g, `${V}/${RE}/`],
 ];
 
 for (const file of readdirSync(embeds).filter((f) => f.endsWith('.html'))) {
@@ -68,15 +76,15 @@ for (const file of readdirSync(embeds).filter((f) => f.endsWith('.html'))) {
   }
 
   /* Addons import the bare specifier "three": give pages without an import map one. */
-  if (html.includes(`${V}/three/addons/`) && !html.includes('type="importmap"')) {
-    html = html.replace(/<head>/i, `<head>\n<script type="importmap">{"imports":{"three":"${V}/three/three.module.min.js"}}</script>`);
+  if (html.includes(`${V}/${T}/addons/`) && !html.includes('type="importmap"')) {
+    html = html.replace(/<head>/i, `<head>\n<script type="importmap">{"imports":{"three":"${V}/${T}/three.module.min.js"}}</script>`);
   }
 
   /* Import-map integrity hashes must match the self-hosted files. */
   html = html.replace(/(<script type="importmap">)([\s\S]*?)(<\/script>)/, (all, open, json, close) => {
     const map = JSON.parse(json);
     if (!map.integrity) return all;
-    const urls = new Set([...Object.values(map.imports), `${V}/three/three.core.min.js`].filter((u) => u.startsWith(V)));
+    const urls = new Set([...Object.values(map.imports), `${V}/${T}/three.core.min.js`].filter((u) => u.startsWith(V)));
     map.integrity = Object.fromEntries([...urls].map((u) => [u, 'sha384-' + createHash('sha384').update(readFileSync(join(embeds, u))).digest('base64')]));
     return open + '\n' + JSON.stringify(map, null, 2) + '\n' + close;
   });

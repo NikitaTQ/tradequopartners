@@ -44,8 +44,8 @@
 </head>
 <body>
 <div id="tq-film" role="img" aria-label="TradeQuo Partner Program — up to 87% revenue share, paid daily"></div>
-<script src="../vendor/react/react.production.min.js" crossorigin></script>
-<script src="../vendor/react/react-dom.production.min.js" crossorigin></script>
+<script src="../vendor/react@18.3.1/react.production.min.js?v=aa77ae4c49" crossorigin></script>
+<script src="../vendor/react@18.3.1/react-dom.production.min.js?v=feb8ddc9d0" crossorigin></script>
 <script>
 window.TQ_SCENES = [{"name":"Phone","dur":2.2},{"name":"Story","dur":8.9},{"name":"Reveal","dur":2},{"name":"Drop","dur":3},{"name":"Perks","dur":5.2},{"name":"Sign","dur":2.9}];
 window.TQ_RENDER_W = Math.round(Math.min(1600, Math.max(720, (window.innerWidth || 1280) * Math.min(2, window.devicePixelRatio || 1))));
@@ -73,7 +73,7 @@ window.TQ_ASSETS = {"film/mark-black.png":"data:image/png;base64,iVBORw0KGgoAAAA
 </script>
 <script type="module">
 // TradeQuo glass logo — offscreen renderer driven frame-by-frame by the film clock.
-import * as THREE from '../vendor/three/three.module.min.js';
+import * as THREE from '../vendor/three@0.184.0/three.module.min.js';
 
 class TQGlassRenderer {
   constructor(w = 1600) {
@@ -190,7 +190,7 @@ window.TQGlassRenderer = TQGlassRenderer;
 window.dispatchEvent(new Event('tqglass-ready'));
 
 </script>
-<script defer src="tradequo-film.app.js"></script>
+<script defer src="tradequo-film.app.js?v=be17fce612"></script>
 
 </body>
 </html>

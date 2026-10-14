@@ -63,15 +63,13 @@ def render(i, p):
 <meta property="og:url" content="{domain}/{slug}/">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{blurb}">
-<meta property="og:image" content="{domain}/assets/og.png">
+<meta property="og:image" content="{domain}/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <script>try{{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}}catch(e){{}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,400&amp;family=Fragment+Mono:ital@0;1&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/site.css">
 </head>
 <body>

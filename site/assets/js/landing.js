@@ -63,10 +63,12 @@
     };
     const load = new IntersectionObserver((entries) => {
       entries.forEach((en) => { if (en.isIntersecting) start(en.target); });
-    }, { rootMargin: '120% 0px' });
-    /* Warm the rest up one by one while the browser is idle, so their start-up
-     * (shaders, React mount) doesn't land in the middle of a scroll. Skips the
-     * film layout that is display:none, and data-saver connections. */
+    }, { rootMargin: '50% 0px' });
+    /* Nothing heavy starts before the visitor does something: the first screen
+     * paints and becomes interactive with the main thread to itself. After the
+     * first scroll/touch/key, the rest warm up one by one in idle time, so their
+     * start-up (shaders, React mount) doesn't land mid-scroll. Skips the film
+     * layout that is display:none, and data-saver connections. */
     const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
     const warm = () => {
       const next = [...pending].find((f) => f.getClientRects().length);
@@ -75,16 +77,22 @@
       next.addEventListener('load', () => setTimeout(() => idle(warm, { timeout: 3000 }), 600), { once: true });
     };
     const saveData = navigator.connection && navigator.connection.saveData;
-    if (!saveData) {
-      const kick = () => setTimeout(() => idle(warm, { timeout: 3000 }), 1500);
-      if (document.readyState === 'complete') kick(); else window.addEventListener('load', kick, { once: true });
-    }
+    const events = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'];
+    let started = false;
+    const first = () => {
+      if (started) return;
+      started = true;
+      events.forEach((ev) => window.removeEventListener(ev, first, { passive: true }));
+      frames.forEach((f) => load.observe(f));
+      if (!saveData) idle(warm, { timeout: 2000 });
+    };
+    events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
+    if (scrollY > 0) first(); /* reload half-way down the page */
     const view = new IntersectionObserver((entries) => {
       entries.forEach((en) => { en.target.dataset.inview = en.isIntersecting ? '1' : '0'; setEmbedPaused(en.target); });
     }, { rootMargin: '80px 0px' });
     frames.forEach((f) => {
       f.addEventListener('load', () => setEmbedPaused(f));
-      load.observe(f);
       view.observe(f);
     });
   }
@@ -482,10 +490,12 @@
     const envTxt = envBtn && $('.tq-env__txt', envBtn);
     let submitted = false;
 
-    if (date) {
+    /* The handwritten date (Caveat, 75 KB) is only needed once the pen signs. */
+    const writeDate = () => {
+      if (!date || date.textContent) return;
       const d = new Date();
       date.textContent = pad(d.getDate()) + ' / ' + pad(d.getMonth() + 1) + ' / ' + d.getFullYear();
-    }
+    };
 
     const penTransform = (x, y, deg) => 'translate(' + (x - 24).toFixed(1) + 'px, ' + (y - 245).toFixed(1) + 'px) rotate(' + deg + 'deg)';
     const poses = () => {
@@ -604,6 +614,7 @@
           .catch(() => showError('We couldn’t send your request. Please reload the page and try again.'));
       }
       submitted = true;
+      writeDate();
       if (envBtn) envBtn.classList.add('is-sealed');
       sign();
     });

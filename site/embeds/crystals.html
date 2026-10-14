@@ -6,17 +6,17 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "../vendor/three/three.module.min.js",
-    "three/addons/controls/OrbitControls.js": "../vendor/three/addons/controls/OrbitControls.js",
-    "three/addons/exporters/OBJExporter.js": "../vendor/three/addons/exporters/OBJExporter.js",
-    "three/addons/exporters/GLTFExporter.js": "../vendor/three/addons/exporters/GLTFExporter.js"
+    "three": "../vendor/three@0.184.0/three.module.min.js",
+    "three/addons/controls/OrbitControls.js": "../vendor/three@0.184.0/addons/controls/OrbitControls.js",
+    "three/addons/exporters/OBJExporter.js": "../vendor/three@0.184.0/addons/exporters/OBJExporter.js",
+    "three/addons/exporters/GLTFExporter.js": "../vendor/three@0.184.0/addons/exporters/GLTFExporter.js"
   },
   "integrity": {
-    "../vendor/three/three.module.min.js": "sha384-35WaVqXNGvw49+RCXk67Ci9ebo55/5+CfirDbAVSG21KV8/7gO4xwIkhA5ZRcUHc",
-    "../vendor/three/addons/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
-    "../vendor/three/addons/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
-    "../vendor/three/addons/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ",
-    "../vendor/three/three.core.min.js": "sha384-/2vXInuUL2LKgd3n86c5RIzG+YC7vk3zYPTknaEkF2H2sauHtaOrS8swZ+MURxU6"
+    "../vendor/three@0.184.0/three.module.min.js": "sha384-35WaVqXNGvw49+RCXk67Ci9ebo55/5+CfirDbAVSG21KV8/7gO4xwIkhA5ZRcUHc",
+    "../vendor/three@0.184.0/addons/controls/OrbitControls.js": "sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9",
+    "../vendor/three@0.184.0/addons/exporters/OBJExporter.js": "sha384-nbwtoZENJD3Vq+ACK0CuGQdPMuDWHkamC2KJD70EV5nfg6jQjfppKOea07YJN+N3",
+    "../vendor/three@0.184.0/addons/exporters/GLTFExporter.js": "sha384-VofkvpG6HERhFCYbsUOHeNXBCqID2nfqkQqnVzE1jc/oPcz+qJ13ADdXH08hE+cQ",
+    "../vendor/three@0.184.0/three.core.min.js": "sha384-/2vXInuUL2LKgd3n86c5RIzG+YC7vk3zYPTknaEkF2H2sauHtaOrS8swZ+MURxU6"
   }
 }
 </script>
@@ -36,7 +36,7 @@
 </style>
 </head>
 <body>
-<img id="tq-logo-src" src="logo.png" alt="" hidden>
+<img id="tq-logo-src" src="logo.png?v=852b09be50" alt="" hidden>
 
 
 <div class="switch" role="group" aria-label="Crystal">
@@ -45,7 +45,7 @@
 </div>
 
 <three-d-stage name="tradequo-crystals" background="#ffffff"></three-d-stage>
-<script src="crystals-stage.js"></script>
+<script src="crystals-stage.js?v=432dd675f4"></script>
 <script type="module">
 const P = new URLSearchParams(location.search);
 const EMBED = !P.has('ui');
@@ -53,6 +53,8 @@ let variant = P.get('variant') === 'smoked' ? 'smoked' : 'clear';
 if (EMBED) document.body.classList.add('embed');
 
 const stage = document.querySelector('three-d-stage');
+/* Hide the editor chrome before anything awaits, or it flashes while three.js loads. */
+if (EMBED) ['.toolbar', '.note'].forEach((sel) => { const el = stage.shadowRoot && stage.shadowRoot.querySelector(sel); if (el) el.style.display = 'none'; });
 const { THREE } = await stage.ready;
 await Promise.all([document.fonts.load('800 200px Archivo'), document.fonts.load('700 40px Archivo')]).catch(() => {});
 

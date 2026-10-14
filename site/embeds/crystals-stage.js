@@ -173,6 +173,8 @@
       this._toolbar.appendChild(this._objBtn);
       this._toolbar.appendChild(this._glbBtn);
       root.appendChild(this._toolbar);
+      /* On the site (no ?ui) the stage is decoration: no editor chrome, ever. */
+      if (!new URLSearchParams(location.search).has('ui')) { note.style.display = 'none'; this._toolbar.style.display = 'none'; }
       this._setButtonsEnabled(false);
       /** Resolves with { THREE } once the scene is live — build the model
        *  in `await stage.ready` so nothing races the library load. */

@@ -9,7 +9,8 @@ site/
                              концепт-страницы, у каждой свой URL
   embeds/                    3D-блоки и ролики (iframe, грузятся при подходе к экрану)
   vendor/                    three.js и React — свои копии, без внешних CDN
-  assets/css/site.css        стили (перенесены из дизайна один в один)
+  assets/css/site.css        стили (перенесены из дизайна один в один; в index.html встроены автоматически)
+  assets/fonts/              шрифты (свои копии Google Fonts, без запросов к Google)
   assets/js/landing.js       логика лендинга: калькулятор, форма с подписью, FAQ, флип, звёзды…
   assets/js/transition.js    переход между страницами через лоадер
 tools/
@@ -65,4 +66,4 @@ HTTPS (Let's Encrypt) Netlify включит сам.
 3. Запустите `python3 tools/stamp-assets.py`: он обновит метки версий `?v=…` в ссылках на файлы, чтобы браузеры не показывали старую версию из кэша.
 4. Закоммитьте изменения: Netlify выкатит их сам.
 
-После любой правки в `site/assets/` или `site/embeds/` тоже запускайте `python3 tools/stamp-assets.py`. `build-pages.py` делает это сам.
+После любой правки в `site/assets/` или `site/embeds/` тоже запускайте `python3 tools/stamp-assets.py`. Он проставит метки версий и заново встроит `site.css` в `index.html`. `build-pages.py` делает это сам. Файлы в `assets/`, `embeds/` и `vendor/` браузеры кэшируют на год, поэтому без этого шага посетители могут не увидеть правку.
