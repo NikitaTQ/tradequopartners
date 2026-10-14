@@ -10,18 +10,10 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "SAMEORIGIN"
 
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/vendor/*"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000"
-
+# No long-lived Cache-Control: Netlify's default (revalidate with ETag) keeps
+# browsers from mixing an old landing.js with a new index.html. Pages also link
+# assets with ?v=<hash> (tools/stamp-assets.py).
 [[headers]]
   for = "/embeds/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
     X-Robots-Tag = "noindex"

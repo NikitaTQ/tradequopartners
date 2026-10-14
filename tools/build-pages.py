@@ -160,3 +160,7 @@ for i, p in enumerate(pages):
     with open(os.path.join(out, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(render(i, p))
     print('wrote', os.path.relpath(os.path.join(out, 'index.html'), ROOT))
+
+# Pages link CSS/JS with a content hash; re-stamp after regenerating them.
+import runpy
+runpy.run_path(os.path.join(ROOT, 'tools', 'stamp-assets.py'))

@@ -62,4 +62,7 @@ HTTPS (Let's Encrypt) Netlify включит сам.
    cd tools && npm install && npm run optimize-embeds
    ```
    Скрипт переведёт файл на локальные three.js и React из `site/vendor/` и заранее скомпилирует JSX в `<имя>.app.js`. Без этого шага блок будет грузить Babel (~3 МБ) и компилировать код прямо в браузере, а страница начнёт тормозить.
-3. Закоммитьте изменения: Netlify выкатит их сам.
+3. Запустите `python3 tools/stamp-assets.py`: он обновит метки версий `?v=…` в ссылках на файлы, чтобы браузеры не показывали старую версию из кэша.
+4. Закоммитьте изменения: Netlify выкатит их сам.
+
+После любой правки в `site/assets/` или `site/embeds/` тоже запускайте `python3 tools/stamp-assets.py`. `build-pages.py` делает это сам.

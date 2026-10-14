@@ -54,13 +54,31 @@
   }
   function startEmbeds() {
     const frames = $$('iframe[data-embed]');
+    const pending = new Set(frames);
+    const start = (f) => {
+      if (!pending.has(f)) return;
+      pending.delete(f);
+      load.unobserve(f);
+      f.src = f.dataset.src;
+    };
     const load = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (!en.isIntersecting) return;
-        en.target.src = en.target.dataset.src;
-        load.unobserve(en.target);
-      });
+      entries.forEach((en) => { if (en.isIntersecting) start(en.target); });
     }, { rootMargin: '120% 0px' });
+    /* Warm the rest up one by one while the browser is idle, so their start-up
+     * (shaders, React mount) doesn't land in the middle of a scroll. Skips the
+     * film layout that is display:none, and data-saver connections. */
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
+    const warm = () => {
+      const next = [...pending].find((f) => f.getClientRects().length);
+      if (!next) return;
+      start(next);
+      next.addEventListener('load', () => setTimeout(() => idle(warm, { timeout: 3000 }), 600), { once: true });
+    };
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (!saveData) {
+      const kick = () => setTimeout(() => idle(warm, { timeout: 3000 }), 1500);
+      if (document.readyState === 'complete') kick(); else window.addEventListener('load', kick, { once: true });
+    }
     const view = new IntersectionObserver((entries) => {
       entries.forEach((en) => { en.target.dataset.inview = en.isIntersecting ? '1' : '0'; setEmbedPaused(en.target); });
     }, { rootMargin: '80px 0px' });

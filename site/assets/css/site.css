@@ -434,7 +434,7 @@ html { scroll-snap-type: y proximity; }
   [data-crystals] iframe { aspect-ratio: 0.72 / 1 !important; }
   #film { padding: 18px 14px 28px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   [data-film-desk] { display: none !important; }
-  [data-film-mob] { display: block !important; width: min(85%, calc(61svh * 0.78)) !important; aspect-ratio: 0.78 / 1 !important; }
+  [data-film-mob] { display: block !important; width: min(97.75%, calc(70.15svh * 0.78)) !important; aspect-ratio: 0.78 / 1 !important; }
   [data-how-steps] { grid-template-columns: 1fr !important; row-gap: 14px !important; }
   [data-how-arrow] { display: flex !important; }
   [data-how-line] { display: none !important; }
