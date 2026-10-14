@@ -18,7 +18,7 @@ from urllib.parse import urlsplit, parse_qsl, urlencode
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, 'site')
-ATTR = re.compile(r'''((?:href|src|data-src)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg)(?:\?[^"#]*)?)(")''')
+ATTR = re.compile(r'''((?:href|src|data-src|srcset)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg)(?:\?[^"#]*)?)(")''')
 
 
 def digest(path):

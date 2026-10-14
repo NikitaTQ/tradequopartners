@@ -36,6 +36,11 @@
         if (t) window.scrollTo({ top: t.getBoundingClientRect().top + scrollY, behavior: 'smooth' });
         return;
       }
+      if (d && d.tqReady) {
+        /* an embed drew its first frame: fade it in over its poster */
+        $$('iframe').forEach((f) => { if (f.contentWindow === e.source) f.style.opacity = '1'; });
+        return;
+      }
       if (!d || typeof d.tqFrameH !== 'number' || d.tqFrameH < 50) return;
       $$('iframe').forEach((f) => {
         if (f.contentWindow === e.source) { f.style.height = Math.ceil(d.tqFrameH) + 'px'; f.style.aspectRatio = 'auto'; }

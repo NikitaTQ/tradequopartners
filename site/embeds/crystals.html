@@ -49,6 +49,7 @@
 <script type="module">
 const P = new URLSearchParams(location.search);
 const EMBED = !P.has('ui');
+const STILL = P.has('still'); /* freeze on the first frame (used to render the page's poster) */
 let variant = P.get('variant') === 'smoked' ? 'smoked' : 'clear';
 if (EMBED) document.body.classList.add('embed');
 
@@ -461,10 +462,11 @@ frame(); new ResizeObserver(frame).observe(stage);
 
 /* ---------------- Loop ---------------- */
 const clock = new THREE.Clock(), origLoop = stage._loop;
+let shown = false;
 gems.forEach(b => { b.shadow.position.set(0, b.shadowY, -0.02); b.shadow.scale.set(1, 0.28, 1); });
 stage._loop = () => {
   if (window.__tqPaused) { clock.getDelta(); return; }
-  const t = clock.getElapsedTime();
+  const t = STILL ? 0 : clock.getElapsedTime();
   const active = ORDER[Math.floor(t / PERIOD) % N];
   const p = (t % PERIOD) / SWEEP;
   const base = GLASS[variant].envInt;
@@ -480,6 +482,8 @@ stage._loop = () => {
   });
   if (p <= 1) drawSheen(p); else drawSheen(0);
   origLoop();
+  /* Tell the page once a real frame is on screen, so it can swap its poster for the live scene. */
+  if (!shown) { shown = true; requestAnimationFrame(() => { try { parent.postMessage({ tqReady: true }, location.origin); } catch (e) {} }); }
 };
 R.setAnimationLoop(stage._loop);
 
