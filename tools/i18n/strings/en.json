@@ -3,17 +3,15 @@
   "meta.description": "Refer traders to TradeQuo and earn up to 87% of the spread on every lot they trade. Commissions settle every day, with no payout fees.",
   "meta.ogDescription": "Earn up to 87% of the spread on every lot your clients trade. Paid daily.",
   "lang.label": "Language",
+  "lang.translate": "Auto-translate",
   "loader": "LOADING",
-
   "nav.how": "How it works",
   "nav.calc": "Calculator",
   "nav.perks": "Perks",
   "nav.faq": "FAQ",
   "nav.cta": "Become a partner",
-
   "hero.h1": "Up to 87% of spread. Paid <red>daily.</red>",
   "hero.sub": "Refer traders to TradeQuo and earn on every lot they trade. Commissions settle every day, tracked in real time, with no payout fees.",
-
   "form.honeypot": "Leave this empty",
   "form.tag": "TradeQuo Partner Program",
   "form.title": "BECOME A <red>PARTNER</red>",
@@ -35,12 +33,10 @@
   "form.sent": "Request sent",
   "form.errEmail": "Please enter a valid email address.",
   "form.errSend": "We couldn’t send your request. Please reload the page and try again.",
-
   "stats.title": "The program in numbers",
   "stats.alt": "30K+ partners, $9M+ paid to partners monthly, up to 87% revenue share, 4.9 Trustpilot rating, 800K+ client traders, 400+ incentive trips",
   "stats.frame": "TradeQuo in numbers",
   "stats.cta": "Estimate your earnings",
-
   "how.kicker": "HOW IT WORKS",
   "how.title": "From sign-up to first payout<br/><red>in three steps</red>",
   "how.s1.t": "Open your account",
@@ -50,7 +46,6 @@
   "how.s3.t": "Share your link and earn",
   "how.s3.d": "Get your referral link, share it with your audience and earn on every lot your clients trade.",
   "how.cta": "Become a partner",
-
   "calc.kicker": "EARNINGS CALCULATOR",
   "calc.title": "Estimate your<br/><red>monthly payout</red>",
   "calc.sub": "Set your number of traders and their monthly volume — the payout statement updates instantly. Based on our lowest spreads.",
@@ -79,18 +74,15 @@
   "rcpt.row": "1 × PARTNERSHIP",
   "rcpt.big": "Welcome!",
   "rcpt.thanks": "THANK YOU ✓",
-
   "reviews.kicker": "INDEPENDENT REVIEWS",
   "reviews.title": "Rated where traders talk",
   "reviews.verdict": "EDITOR’S VERDICT",
   "reviews.of5": "5 out of 5",
   "reviews.of4": "4 out of 5",
-
   "film.frame": "TradeQuo Partner Program film",
   "payouts.kicker": "DAILY PAYOUTS",
   "payouts.title": "Your clients trade every day.<brd/> You get paid every day.",
   "flow.frame": "Infinite Flow — commissions settled every day",
-
   "offer.pill": "Partner perks",
   "offer.title": "Everything you need <red>to grow</red>",
   "offer.sub": "Tools, content and support to help you win clients and keep them trading.",
@@ -109,7 +101,6 @@
   "dock.l": "Become a",
   "dock.r": "partner",
   "dock.aria": "Become a partner",
-
   "faq.pill": "FAQ",
   "faq.title": "Questions, <red>answered</red>",
   "faq.sub": "Everything you need to know about becoming a TradeQuo IB.",
@@ -124,16 +115,20 @@
   "faq.5.q": "Do I need experience or capital?",
   "faq.5.a": "No. There’s no joining fee, and you don’t need capital or trading experience. A verified TradeQuo account is all it takes.",
   "faq.frame": "TradeQuo glass logo",
-
   "reach.title": "You bring the audience.<brd/> We make it pay.",
   "reach.sub": "Up to 87% of spread, daily payouts, live tracking and a manager who picks up the phone. Applications are reviewed within 24 hours.",
   "reach.cta1": "Become a partner",
   "reach.cta2": "Estimate your earnings",
-
   "fab.aria": "Menu",
   "fan.aria": "Site map",
+  "fan.home": "Partner Program",
+  "fan.programs": "Partner Programs",
+  "fan.commission": "Commission Plan",
+  "fan.dashboard": "Partner Dashboard",
+  "fan.marketing": "Marketing Hub",
+  "fan.academy": "Partner Academy",
+  "fan.stories": "Success Stories",
   "footer.risk": "CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. 72.6% of retail investor accounts lose money when trading CFDs with this provider.",
-
   "embed.crys.partners": "PARTNERS",
   "embed.crys.payouts": "PAID TO PARTNERS MONTHLY",
   "embed.crys.revshare": "MAX REVENUE SHARE",

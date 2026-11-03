@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{cp.meta.title}}</title>
+<meta name="description" content="{{@cp.meta.description}}">
+<link rel="canonical" href="{{canonical}}">
+{{hreflang}}
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TradeQuo Partners">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:title" content="{{@cp.meta.title}}">
+<meta property="og:description" content="{{@cp.meta.ogDescription}}">
+<meta property="og:image" content="https://tradequopartners.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{@cp.meta.title}}">
+<meta name="twitter:description" content="{{@cp.meta.ogDescription}}">
+<meta name="twitter:image" content="https://tradequopartners.com/og.png">
+{{> head}}
+</head>
+<body>
+{{> loader}}
+<div class="tp">
+
+  {{> page-header-start}}
+        <a class="hv-red" href="#calculator" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.calc}}</a>
+        <a class="hv-red" href="#structure" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{cp.nav.structure}}</a>
+        <a class="hv-red" href="#payouts" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{cp.nav.payouts}}</a>
+        <a class="hv-red" href="#questions" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.faq}}</a>
+  {{> page-header-end}}
+
+  <main>
+    <!-- Calculator -->
+    <section id="calculator" class="tp-sec tp-hero" data-screen-label="Commission calculator">
+      <div class="tp-head">
+        <span class="tp-kicker">{{cp.hero.kicker}}</span>
+        <h1 class="tp-h1" style="max-width: 13ch;">{{cp.hero.h1}}</h1>
+        <p class="tp-sub">{{cp.hero.sub}}</p>
+      </div>
+
+      <div class="tp-stage">
+        <div class="tp-calc" data-plan>
+          <div class="tp-glass tp-glass--thick tp-controls">
+            <div class="tp-field">
+              <div class="tp-field__head">
+                <span class="tp-field__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"></path><path d="M16 5.6a3.2 3.2 0 0 1 0 6.1"></path><path d="M17.6 14.9c2 .6 3.4 2.4 3.4 4.6"></path></svg></span>
+                <span class="tp-field__label"><b id="plan-clients">{{cp.calc.clients}}</b><span>{{cp.calc.clientsHint}}</span></span>
+              </div>
+              <label class="tp-num"><input type="number" inputmode="numeric" min="1" max="400" step="1" value="100" data-plan-input="clients" aria-labelledby="plan-clients"><span>{{cp.calc.clientsUnit}}</span></label>
+              <div>
+                <div class="tp-range" style="--p: 24.81%;"><input type="range" min="1" max="400" step="1" value="100" data-plan-range="clients" aria-labelledby="plan-clients"><div class="tp-range__marks" aria-hidden="true"><span class="tp-range__mark" style="left: calc(11px + (100% - 22px) * .1228);"></span><span class="tp-range__mark" style="left: calc(11px + (100% - 22px) * .4987);"></span></div></div>
+                <div class="tp-scale" aria-hidden="true"><span>1</span><span>100</span><span>200</span><span>300</span><span>400</span></div>
+              </div>
+            </div>
+
+            <div class="tp-field">
+              <div class="tp-field__head">
+                <span class="tp-field__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3 3 7.5l9 4.5 9-4.5L12 3z"></path><path d="m3 12 9 4.5 9-4.5"></path><path d="m3 16.5 9 4.5 9-4.5"></path></svg></span>
+                <span class="tp-field__label"><b id="plan-lots">{{cp.calc.lots}}</b><span>{{cp.calc.lotsHint}}</span></span>
+              </div>
+              <label class="tp-num"><input type="number" inputmode="numeric" min="1" max="100" step="1" value="10" data-plan-input="lots" aria-labelledby="plan-lots"><span>{{calc.lotsUnit}}</span></label>
+              <div>
+                <div class="tp-range" style="--p: 9.09%;"><input type="range" min="1" max="100" step="1" value="10" data-plan-range="lots" aria-labelledby="plan-lots"></div>
+                <div class="tp-scale" aria-hidden="true"><span>1</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+              </div>
+            </div>
+
+            <div class="tp-tiers" aria-label="{{@cp.str.tiers}}">
+              <div class="tp-tier" data-plan-tier-seg="0"><b>Starter</b><span>$5.00</span></div>
+              <div class="tp-tier" data-plan-tier-seg="1" aria-current="true"><b>Gold</b><span>$7.50</span></div>
+              <div class="tp-tier" data-plan-tier-seg="2"><b>Elite</b><span>$10.00</span></div>
+            </div>
+          </div>
+
+          <div class="tp-dark tp-result">
+            <div class="tp-result__top">
+              <span class="tp-mono">{{cp.calc.tier}}</span>
+              <span class="tp-badge"><span data-plan-tier>Gold</span><i><span data-plan-rate>$7.50</span> {{cp.calc.perLot}}</i></span>
+            </div>
+            <div>
+              <p class="tp-result__label">{{cp.calc.income}}</p>
+              <p class="tp-result__big" data-plan-total aria-live="polite">$7,500</p>
+            </div>
+            <div class="tp-result__rows">
+              <div><b><span data-plan-volume>1,000</span><small>{{calc.lotsUnit}}</small></b><span>{{cp.calc.volume}}</span></div>
+              <div><b data-plan-day>$250</b><span>{{cp.calc.perDay}}</span></div>
+              <div><b data-plan-year>$90,000</b><span>{{cp.calc.perYear}}</span></div>
+            </div>
+            <div class="tp-next">
+              <div class="tp-next__bar" aria-hidden="true"><span data-plan-bar style="width: 50%;"></span></div>
+              <span class="tp-next__text" data-plan-next data-next="{{@cp.calc.next}}" data-top="{{@cp.calc.top}}"></span>
+            </div>
+            <ul class="tp-perks"><li>{{cp.calc.p1}}</li><li>{{cp.calc.p2}}</li><li>{{cp.calc.p3}}</li></ul>
+            <a class="tp-btn tp-btn--red tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          </div>
+        </div>
+      </div>
+      <p class="tp-note">{{cp.calc.note}}</p>
+    </section>
+
+    <!-- How the calculator works -->
+    <section id="steps" class="tp-sec" data-screen-label="How the calculator works" style="padding-top: clamp(16px, 3vw, 40px);">
+      <div class="tp-wrap">
+        <div class="tp-head">
+          <span class="tp-kicker">{{cp.how.kicker}}</span>
+          <h2 class="tp-h2">{{cp.how.title}}</h2>
+        </div>
+        <div class="tp-steps">
+          <div class="tp-glass tp-glass--hover tp-step"><div class="tp-step__top"><span class="tp-step__n">01</span><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"></path><path d="M16 5.6a3.2 3.2 0 0 1 0 6.1" stroke="#e7131b"></path><path d="M17.6 14.9c2 .6 3.4 2.4 3.4 4.6" stroke="#e7131b"></path></svg></div><h3>{{cp.how.s1.t}}</h3><p>{{cp.how.s1.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-step"><div class="tp-step__top"><span class="tp-step__n">02</span><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 7.5l9 4.5 9-4.5L12 3z"></path><path d="m3 12 9 4.5 9-4.5" stroke="#e7131b"></path><path d="m3 16.5 9 4.5 9-4.5" stroke="#e7131b"></path></svg></div><h3>{{cp.how.s2.t}}</h3><p>{{cp.how.s2.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-step"><div class="tp-step__top"><span class="tp-step__n">03</span><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5h17"></path><path d="m3.5 16.5 5-5 4 3.5 7.5-8" stroke="#e7131b"></path><path d="M15.5 7h4.5v4.5" stroke="#e7131b"></path></svg></div><h3>{{cp.how.s3.t}}</h3><p>{{cp.how.s3.d}}</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commission structure -->
+    <section id="structure" class="tp-sec" data-screen-label="Commission structure" style="padding-top: clamp(24px, 4vw, 56px);">
+      <div class="tp-wrap">
+        <div class="tp-head">
+          <span class="tp-kicker">{{cp.str.kicker}}</span>
+          <h2 class="tp-h2">{{cp.str.title}}</h2>
+          <p class="tp-sub">{{cp.str.sub}}</p>
+        </div>
+        <div class="tp-structure">
+          <div class="tp-glass tp-glass--thick tp-explain">
+            <h3>{{cp.str.how}}</h3>
+            <ol class="tp-numlist"><li>{{cp.str.l1}}</li><li>{{cp.str.l2}}</li><li>{{cp.str.l3}}</li></ol>
+            <div class="tp-example">
+              <span class="tp-mono">{{cp.str.example}}</span>
+              <div><b>$1,000</b><span>{{cp.str.exampleFrom}}</span></div>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e7131b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              <div><b>$870</b><span>{{cp.str.exampleTo}}</span></div>
+            </div>
+          </div>
+          <div class="tp-tiercol">
+            <h3>{{cp.str.tiers}}</h3>
+            <div class="tp-glass tp-glass--hover tp-tiercard"><span class="tp-tiercard__name"><i></i>Starter</span><span class="tp-tiercard__rate"><b>$5.00</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r1}}</span><span class="tp-tiercard__daily">{{cp.tier.daily}}</span></div>
+            <div class="tp-glass tp-glass--hover tp-tiercard tp-tiercard--gold"><span class="tp-tiercard__name"><i></i>Gold</span><span class="tp-tiercard__rate"><b>$7.50</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r2}}</span><span class="tp-tiercard__daily">{{cp.tier.daily}}</span></div>
+            <div class="tp-glass tp-glass--red tp-glass--hover tp-tiercard tp-tiercard--elite"><span class="tp-tiercard__name"><i></i>Elite</span><span class="tp-tiercard__rate"><b>$10.00</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r3}}</span><span class="tp-tiercard__daily">{{cp.tier.daily}}</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily payouts -->
+    <section id="payouts" class="tp-night-sec" data-screen-label="Daily payouts">
+      <div class="tp-night">
+        <div class="tp-head">
+          <span class="tp-kicker">{{cp.pay.kicker}}</span>
+          <h2 class="tp-h2">{{cp.pay.title}}</h2>
+          <p class="tp-sub">{{cp.pay.sub}}</p>
+        </div>
+        <div class="tp-timeline">
+          <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>{{cp.pay.t1}}</h3><p>{{cp.pay.d1}}</p></div>
+          <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path></svg></span><h3>{{cp.pay.t2}}</h3><p>{{cp.pay.d2}}</p></div>
+          <div class="tp-tl tp-tl--hot"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3.2 2"></path></svg></span><h3>{{cp.pay.t3}}</h3><p>{{cp.pay.d3}}</p></div>
+          <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v4"></path><path d="M4 7.5v10A2.5 2.5 0 0 0 6.5 20H20V9H6.5A2.5 2.5 0 0 1 4 6.5"></path><circle cx="16" cy="14.5" r="1.2" fill="currentColor"></circle></svg></span><h3>{{cp.pay.t4}}</h3><p>{{cp.pay.d4}}</p></div>
+        </div>
+        <div class="tp-chips"><span class="tp-chip">{{embed.flow.f1}}</span><span class="tp-chip">{{embed.flow.f2}}</span><span class="tp-chip">{{embed.flow.f3}}</span></div>
+      </div>
+    </section>
+
+    <!-- Perks -->
+    <section id="perks" class="tp-sec" data-screen-label="Partner perks">
+      <div class="tp-wrap">
+        <div class="tp-head">
+          <span class="tp-kicker">{{cp.perks.kicker}}</span>
+          <h2 class="tp-h2">{{cp.perks.title}}</h2>
+          <p class="tp-sub">{{offer.sub}}</p>
+        </div>
+        <div class="tp-perkgrid">
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-trip.webp" alt="" width="290" height="340"><div><h3>{{offer.6.t}}</h3><p>{{offer.6.d}}</p></div></div>
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-tv.webp" alt="" width="360" height="344"><div><h3>{{offer.1.t}}</h3><p>{{offer.1.d}}</p></div></div>
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-sig.webp" alt="" width="330" height="280"><div><h3>{{offer.2.t}}</h3><p>{{offer.2.d}}</p></div></div>
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-cre.webp" alt="" width="280" height="350"><div><h3>{{offer.3.t}}</h3><p>{{offer.3.d}}</p></div></div>
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-aca.webp" alt="" width="310" height="330"><div><h3>{{offer.4.t}}</h3><p>{{offer.4.d}}</p></div></div>
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-bro.webp" alt="" width="330" height="320"><div><h3>{{offer.5.t}}</h3><p>{{offer.5.d}}</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="questions" class="tp-sec" data-screen-label="Commission FAQ" style="padding-top: clamp(16px, 3vw, 40px);">
+      <div class="tp-wrap tp-faq">
+        <div class="tp-faq__side">
+          <span class="tp-pill">{{faq.pill}}</span>
+          <h2 class="tp-h2" style="font-size: clamp(36px, 4.4vw, 56px);">{{cp.faq.title}}</h2>
+          <p class="tp-sub" style="max-width: 30ch;">{{cp.faq.sub}}</p>
+        </div>
+        <div class="tp-faq__list">
+{{faq:cp.faq:7}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final call -->
+    <section class="tp-night-sec" data-screen-label="Join the program">
+      <div class="tp-night">
+        <div class="tp-head">
+          <h2 class="tp-h2">{{cp.end.title}}</h2>
+          <p class="tp-sub">{{cp.end.sub}}</p>
+          <div class="tp-actions" style="margin-top: 12px;">
+            <a class="tp-btn tp-btn--red" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <a class="tp-btn tp-btn--ghost" href="{{home}}programs/" data-page-link data-label="{{@loader}} · {{@fan.programs}}">{{cp.end.cta2}}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-fab="" style="position: fixed; right: 16px; bottom: 16px; z-index: 60; display: none; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+      <a class="tq-fab-link" href="{{home}}" data-page-link data-label="{{@loader}} · {{@fan.home}}" style="--i: 0;">{{fan.home}}</a>
+      <a class="tq-fab-link tq-fab-link--page" href="{{home}}programs/" data-page-link data-label="{{@loader}} · {{@fan.programs}}" style="--i: 1;">{{fan.programs}}</a>
+      <a class="tq-fab-link tq-fab-link--page" href="#calculator" aria-current="page" style="--i: 2;">{{fan.commission}}</a>
+      <a class="tq-fab-link" href="#questions" style="--i: 3;">{{nav.faq}}</a>
+    </div>
+    {{> fab-button}}
+  </div>
+
+  {{fanMenu}}
+
+{{> footer}}
+</div>
+
+<script src="{{root}}assets/js/transition.js" defer></script>
+<script src="{{root}}assets/js/landing.js" defer></script>
+<script src="{{root}}assets/js/plan.js" defer></script>
+</body>
+</html>

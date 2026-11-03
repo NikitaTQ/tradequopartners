@@ -378,4 +378,12 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/"/>
     <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/"/>
   </url>
+  <url>
+    <loc>https://tradequopartners.com/programs/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/programs/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/commission-plan/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/commission-plan/"/>
+  </url>
 </urlset>
