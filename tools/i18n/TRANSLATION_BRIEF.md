@@ -67,7 +67,7 @@ with exactly the same keys. Same tone, rules, glossary and address form as above
 Also new in the landing master `tools/i18n/strings/en.json` (add them to `<code>.json`, same position):
 `lang.translate` (label of an on/off switch in the language menu that allows the browser to auto-translate
 the page — short, max ~20 characters), `fan.home` (= link to the landing page, "Home"),
-`fan.programs`, `fan.commission`, `fan.dashboard`, `fan.marketing`, `fan.academy`, `fan.stories`
+`fan.programs`, `fan.commission`
 (page names in the bottom-right site-map menu; title case where the language uses it; max ~22 characters).
 
 ## Page context

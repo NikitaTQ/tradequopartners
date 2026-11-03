@@ -698,7 +698,7 @@ html { scroll-snap-type: y proximity; }
   transition: transform .6s cubic-bezier(.2,.85,.2,1) calc(var(--ri) * 28ms), opacity .35s ease calc(var(--ri) * 28ms);
 }
 [data-fanmenu][data-open] .tq-fan-item {
-  transform: rotate(calc(35deg + var(--i) * -7deg));
+  transform: rotate(calc((var(--fan-n, 6) - 1) * 7deg + var(--i) * -7deg));
   opacity: 1; pointer-events: auto;
   transition-delay: calc(var(--i) * 45ms);
 }

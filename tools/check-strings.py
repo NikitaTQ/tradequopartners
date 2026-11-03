@@ -4,7 +4,7 @@
 import json, os, re, sys, unicodedata
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = os.path.join(ROOT, 'tools', 'i18n', 'strings')
-TIGHT = re.compile(r'^(lang\.translate$|fan\.(home|programs|commission|dashboard|marketing|academy|stories)$|pp\.nav\.|cp\.nav\.|pp\.p\d\.(tag|value|valueNote)$|pp\.card\.|cp\.calc\.(clientsUnit|tier|perLot|perDay|perYear|p\d)$|cp\.str\.example$|cp\.tier\.|cp\.pay\.t\d$|pp\.join\.cta2$|cp\.end\.cta2$|pp\.why\.cta$|nav\.|form\.(name|email|phone|commit\d|section|auth|sign|date|submit|sent)$|calc\.(lotsUnit|tradersUnit)$|inv\.|rcpt\.|dock\.|stats\.cta$|reach\.cta|offer\.\d\.t$|embed\.crys\.|embed\.flow\.(f\d|live)$)')
+TIGHT = re.compile(r'^(lang\.translate$|fan\.(home|programs|commission)$|pp\.nav\.|cp\.nav\.|pp\.p\d\.(tag|value|valueNote)$|pp\.card\.|cp\.calc\.(clientsUnit|tier|perLot|perDay|perYear|p\d)$|cp\.str\.example$|cp\.tier\.|cp\.pay\.t\d$|pp\.join\.cta2$|cp\.end\.cta2$|pp\.why\.cta$|nav\.|form\.(name|email|phone|commit\d|section|auth|sign|date|submit|sent)$|calc\.(lotsUnit|tradersUnit)$|inv\.|rcpt\.|dock\.|stats\.cta$|reach\.cta|offer\.\d\.t$|embed\.crys\.|embed\.flow\.(f\d|live)$)')
 TOK = re.compile(r'</?[a-z]+/?>')
 PH = re.compile(r'\{[a-z]+\}')
 NUM = re.compile(r'\$?\d[\d,.:]*\+?%?')
