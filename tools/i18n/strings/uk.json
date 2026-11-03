@@ -62,7 +62,7 @@
   "inv.desc": "ОПИС",
   "inv.amount": "СУМА",
   "inv.rebate": "Ребейт з обсягу клієнтів",
-  "inv.rebateCalc": "<lots>7,800</lots> лотів × $7.5 / лот",
+  "inv.rebateCalc": "<lots>7,800</lots> лотів × <rate>$7.50</rate> / лот",
   "inv.fees": "Збори за обробку й виведення",
   "inv.feesNote": "Покриває TradeQuo",
   "inv.total": "РАЗОМ ЗА МІСЯЦЬ",

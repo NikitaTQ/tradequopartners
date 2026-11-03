@@ -798,6 +798,20 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 /* ---- form status (shown only if the request fails to send) --------------- */
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 
+/* ---- phones: headings, their buttons and the footer sit on the centre line -- */
+@media (max-width: 640px) {
+  [data-fan-head] { align-items: center !important; text-align: center; }
+  [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
+  [data-fan-head] p { max-width: 34ch !important; }
+  [data-fan-cta] { justify-self: center !important; align-self: center; }
+  [data-faq-side] { align-items: center !important; text-align: center; }
+  [data-faq-side] > * { align-self: center !important; }
+  [data-faq-side] > p { max-width: 34ch !important; }
+  footer > div { justify-items: center; text-align: center; }
+  footer > div > img { justify-self: center !important; }
+}
+
+
 /* ---- keyboard focus for links/buttons the design styles inline ----------- */
 a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
 
@@ -884,6 +898,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (max-width: 640px) {
   [dir="rtl"] #signup form label > span:first-child { padding-right: 0; }
   [dir="rtl"] [data-faq-panel] p { padding-right: 20px !important; }
+}
+
+/* narrow phones (360 px; after the 640 px header rules so these win): logo, language globe and the CTA share one row */
+@media (max-width: 380px) {
+  header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
+  header img[alt] { height: 15px !important; }
+  header nav { gap: 6px !important; }
+  header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 </style>
 <style id="i18n-fonts">
@@ -1105,13 +1127,13 @@ html:lang(ko) * { word-break: keep-all; }
             </span>
           </div>
           <div style="display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 20px; position: relative; border-radius: 14px; background: linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%); border: 1px solid #dfe2e6; box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(10,10,10,.03), 0 1px 0 rgba(255,255,255,.9), 0 3px 8px -4px rgba(10,10,10,.14);">
-            <input type="number" inputmode="numeric" min="10" max="5000" aria-label="每位交易者每月手數" data-calc-input="lots" value="600" style="flex: 1; min-width: 0; border: none; outline: none; background: transparent; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -.02em; -moz-appearance: textfield;">
+            <input type="number" inputmode="numeric" min="10" max="5000" aria-label="每位交易者每月手數" data-calc-input="lots" value="130" style="flex: 1; min-width: 0; border: none; outline: none; background: transparent; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -.02em; -moz-appearance: textfield;">
             <span style="font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #8a8a8e; white-space: nowrap;">手</span>
           </div>
           <div data-calc-slider="lots" style="position: relative; z-index: 1; height: 24px; display: flex; align-items: center; cursor: pointer; touch-action: none;">
             <span style="position: absolute; left: 0; right: 0; height: 4px; border-radius: 99px; background: rgba(10,10,10,.09); box-shadow: inset 0 1px 1px rgba(10,10,10,.06);"></span>
-            <span data-calc-fill style="position: absolute; left: 0; height: 4px; border-radius: 99px; background: #e7131b; width: 11.82%;"></span>
-            <span data-calc-knob style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-sizing: border-box; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transform: translateX(-10px); left: 11.82%;"></span>
+            <span data-calc-fill style="position: absolute; left: 0; height: 4px; border-radius: 99px; background: #e7131b; width: 2.40%;"></span>
+            <span data-calc-knob style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-sizing: border-box; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transform: translateX(-10px); left: 2.40%;"></span>
           </div>
           <div style="display: flex; justify-content: space-between; font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #6a6a6e; position: relative;"><span>10</span><span>5,000</span></div>
         </div>
@@ -1124,13 +1146,13 @@ html:lang(ko) * { word-break: keep-all; }
             </span>
           </div>
           <div style="display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 20px; position: relative; border-radius: 14px; background: linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%); border: 1px solid #dfe2e6; box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(10,10,10,.03), 0 1px 0 rgba(255,255,255,.9), 0 3px 8px -4px rgba(10,10,10,.14);">
-            <input type="number" inputmode="numeric" min="1" max="300" aria-label="活躍交易者" data-calc-input="traders" value="13" style="flex: 1; min-width: 0; border: none; outline: none; background: transparent; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -.02em; -moz-appearance: textfield;">
+            <input type="number" inputmode="numeric" min="1" max="300" aria-label="活躍交易者" data-calc-input="traders" value="60" style="flex: 1; min-width: 0; border: none; outline: none; background: transparent; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -.02em; -moz-appearance: textfield;">
             <span style="font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #8a8a8e; white-space: nowrap;">人</span>
           </div>
           <div data-calc-slider="traders" style="position: relative; z-index: 1; height: 24px; display: flex; align-items: center; cursor: pointer; touch-action: none;">
             <span style="position: absolute; left: 0; right: 0; height: 4px; border-radius: 99px; background: rgba(10,10,10,.09); box-shadow: inset 0 1px 1px rgba(10,10,10,.06);"></span>
-            <span data-calc-fill style="position: absolute; left: 0; height: 4px; border-radius: 99px; background: #e7131b; width: 4.01%;"></span>
-            <span data-calc-knob style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-sizing: border-box; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transform: translateX(-10px); left: 4.01%;"></span>
+            <span data-calc-fill style="position: absolute; left: 0; height: 4px; border-radius: 99px; background: #e7131b; width: 19.73%;"></span>
+            <span data-calc-knob style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-sizing: border-box; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transform: translateX(-10px); left: 19.73%;"></span>
           </div>
           <div style="display: flex; justify-content: space-between; font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #6a6a6e; position: relative;"><span>1</span><span>300</span></div>
         </div>
@@ -1156,7 +1178,7 @@ html:lang(ko) * { word-break: keep-all; }
           <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 14px 0; border-bottom: 1px dashed #e0e0dc;">
             <span style="display: flex; flex-direction: column; gap: 5px; min-width: 0;">
               <span style="font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: #0a0a0a;">客戶交易量返佣</span>
-              <span style="font-family: 'Fragment Mono', monospace; font-size: 11.5px; color: #6a6a6e;"><span data-inv-lots>7,800</span> 手 × $7.5 / 手</span>
+              <span style="font-family: 'Fragment Mono', monospace; font-size: 11.5px; color: #6a6a6e;"><span data-inv-lots>7,800</span> 手 × <span data-inv-rate>$7.50</span> / 手</span>
             </span>
             <span data-inv-money="" data-mul="1" style="font-family: 'Fragment Mono', monospace; font-size: 12.5px; color: #0a0a0a; font-size: 14px; white-space: nowrap;"></span>
           </div>
@@ -1324,7 +1346,7 @@ html:lang(ko) * { word-break: keep-all; }
     <span id="dashboard" data-flip-anchor="" aria-hidden="true" style="position: absolute; left: 0; top: calc(100% - 100vh); width: 1px; height: 1px; pointer-events: none; scroll-snap-align: start;"></span>
     <div data-flip-sticky="" style="position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; perspective: 1800px; padding: 0 clamp(16px, 4vw, 56px); box-sizing: border-box; background: #fff;">
       <div data-flip-front="" style="position: relative; width: 100%; max-width: 1240px; transform-origin: 50% 64%; will-change: transform; border-radius: clamp(20px, 3vw, 36px); overflow: hidden; background: #fff;">
-        <iframe data-embed data-src="../embeds/infinite-flow.html?lang=zh-hant&v=f1a00ed413" title="Infinite Flow：佣金每日結算" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
+        <iframe data-embed data-src="../embeds/infinite-flow.html?lang=zh-hant&v=9fc940649c" title="Infinite Flow：佣金每日結算" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
         <div data-flip-shade="" style="position: absolute; inset: 0; background: #0a0a0a; opacity: 0; pointer-events: none;"></div>
       </div>
       <div data-flip-back="" style="position: absolute; inset: clamp(8px, 1.4vw, 20px) clamp(8px, 1.4vw, 20px) 0; opacity: 0; transform: scale(.9); transform-origin: 50% 50%; visibility: hidden; will-change: transform, opacity;">
@@ -1550,6 +1572,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../assets/js/transition.js?v=ca838a522c" defer></script>
-<script src="../assets/js/landing.js?v=d96becf6eb" defer></script>
+<script src="../assets/js/landing.js?v=0740d41fbf" defer></script>
 </body>
 </html>

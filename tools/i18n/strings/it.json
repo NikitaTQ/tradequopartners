@@ -62,7 +62,7 @@
   "inv.desc": "DESCRIZIONE",
   "inv.amount": "IMPORTO",
   "inv.rebate": "Rebate sul volume clienti",
-  "inv.rebateCalc": "<lots>7,800</lots> lotti × $7.5 / lotto",
+  "inv.rebateCalc": "<lots>7,800</lots> lotti × <rate>$7.50</rate> / lotto",
   "inv.fees": "Costi di elaborazione e prelievo",
   "inv.feesNote": "A carico di TradeQuo",
   "inv.total": "TOTALE PAGATO / MESE",

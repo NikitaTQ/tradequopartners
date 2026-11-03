@@ -68,7 +68,7 @@
   "inv.desc": "รายการ",
   "inv.amount": "จำนวนเงิน",
   "inv.rebate": "รีเบทจากการเทรดของลูกค้า",
-  "inv.rebateCalc": "<lots>7,800</lots> ล็อต × $7.5 / ล็อต",
+  "inv.rebateCalc": "<lots>7,800</lots> ล็อต × <rate>$7.50</rate> / ล็อต",
   "inv.fees": "ค่าดำเนินการและค่าถอนเงิน",
   "inv.feesNote": "TradeQuo ออกให้",
   "inv.total": "ยอดจ่ายรวม / เดือน",

@@ -798,6 +798,20 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 /* ---- form status (shown only if the request fails to send) --------------- */
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 
+/* ---- phones: headings, their buttons and the footer sit on the centre line -- */
+@media (max-width: 640px) {
+  [data-fan-head] { align-items: center !important; text-align: center; }
+  [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
+  [data-fan-head] p { max-width: 34ch !important; }
+  [data-fan-cta] { justify-self: center !important; align-self: center; }
+  [data-faq-side] { align-items: center !important; text-align: center; }
+  [data-faq-side] > * { align-self: center !important; }
+  [data-faq-side] > p { max-width: 34ch !important; }
+  footer > div { justify-items: center; text-align: center; }
+  footer > div > img { justify-self: center !important; }
+}
+
+
 /* ---- keyboard focus for links/buttons the design styles inline ----------- */
 a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
 
@@ -884,6 +898,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (max-width: 640px) {
   [dir="rtl"] #signup form label > span:first-child { padding-right: 0; }
   [dir="rtl"] [data-faq-panel] p { padding-right: 20px !important; }
+}
+
+/* narrow phones (360 px; after the 640 px header rules so these win): logo, language globe and the CTA share one row */
+@media (max-width: 380px) {
+  header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
+  header img[alt] { height: 15px !important; }
+  header nav { gap: 6px !important; }
+  header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 </style>
 <style id="partner-css" data-prefix="../../">
@@ -1212,11 +1234,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
   .tp-perk img { width: 88px; height: 88px; }
   .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
+  .tp-head--left { align-items: center; text-align: center; }
+  .tp-faq__side { align-items: center; text-align: center; }
+  .tp-faq__side .tp-pill { align-self: center; }
+  .tp-faq__side .tp-sub { max-width: 34ch !important; }
+  .tp-ben { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; padding: 20px 18px; }
+  .tp-ben .tp-hex { grid-row: span 2; margin: 0; }
+  .tp-ben h3 { align-self: end; }
+  .tp-explain h3, .tp-tiercol h3 { text-align: center; }
   .tp-example { grid-template-columns: minmax(0, 1fr); }
   .tp-example > svg { transform: rotate(90deg); }
   [dir="rtl"] .tp-example > svg { transform: rotate(90deg); }
   .tp-night { border-radius: 26px; }
-  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; }
+  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
+  .tp-night .tp-actions { align-items: stretch; }
+  .tp-join .tp-actions { align-items: center; }
+  .tp-stat b { font-size: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-next__bar span { transition: none; }
@@ -1262,7 +1295,7 @@ html:lang(ko) * { word-break: keep-all; }
       <div class="tp-head">
         <span class="tp-kicker">파트너 프로그램</span>
         <h1 class="tp-h1">하나의 파트너 프로그램. <span style="color: #e7131b;">세 가지 수익 모델.</span></h1>
-        <p class="tp-sub">트레이더를 추천하거나, 파트너 네트워크를 구축하거나, 자체 브랜드를 런칭하세요. 어떤 방식이든 실제 고객 거래를 기반으로 수익이 발생하고, 매일 정산되며, 전담 파트너 매니저가 함께합니다.</p>
+        <p class="tp-sub">트레이더를 추천하거나, 파트너 네트워크를 구축하거나, 자체 브랜드를 런칭하세요. 어떤 방식을 선택하든 전담 파트너 매니저가 함께합니다.</p>
       </div>
 
       <div class="tp-stage">
@@ -1316,7 +1349,7 @@ html:lang(ko) * { word-break: keep-all; }
         <div class="tp-head">
           <span class="tp-kicker">주요 혜택</span>
           <h2 class="tp-h2">파트너가 <span style="color: #e7131b;">TradeQuo를 선택하는</span> 이유</h2>
-          <p class="tp-sub">모든 프로그램에 동일하게 적용되는 탄탄한 조건과, 이를 최대한 활용할 수 있는 도구를 제공합니다.</p>
+          <p class="tp-sub">탄탄한 조건과 매일 지급, 그리고 이를 최대한 활용할 수 있는 도구를 제공합니다.</p>
         </div>
         <div class="tp-benefits">
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18.5 5.5 5.5 18.5"></path><circle cx="7.5" cy="7.5" r="2.5"></circle><circle cx="16.5" cy="16.5" r="2.5"></circle></svg></span><h3>스프레드 최대 87%</h3><p>고객이 활동하는 동안 거래하는 모든 랏에서 수익을 얻을 수 있습니다.</p></div>
@@ -1325,7 +1358,7 @@ html:lang(ko) * { word-break: keep-all; }
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path><path d="M3.5 20.5h17"></path></svg></span><h3>실시간 트래킹</h3><p>가입, 거래 활동, 수익을 실시간으로 확인하세요.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13v-1a7.5 7.5 0 0 1 15 0v1"></path><rect x="3.5" y="13" width="4" height="6" rx="1.5"></rect><rect x="16.5" y="13" width="4" height="6" rx="1.5"></rect><path d="M18.5 19c0 1.4-1.9 2.3-5 2.3"></path></svg></span><h3>전담 매니저</h3><p>내 비즈니스를 잘 이해하고 전화를 직접 받는 파트너 매니저가 함께합니다.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"></rect><circle cx="9" cy="10" r="1.8"></circle><path d="m20.5 15.5-4.5-4.5-8.5 8.5"></path></svg></span><h3>바로 쓰는 마케팅 소재</h3><p>전환을 위해 제작된 배너, 랜딩 페이지, 동영상.</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>오디언스를 위한 무료 도구</h3><p>TradingView 차트와 실시간 트레이딩 시그널을 무료로 제공합니다.</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>무료 TradingView와 시그널</h3><p>내 분석에 활용할 수 있는 고급 차트와, 오디언스와 공유할 수 있는 실시간 시그널을 무료로 제공합니다.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12.5" rx="2.5"></rect><path d="M9.5 7V5.2c0-.7.5-1.2 1.2-1.2h2.6c.7 0 1.2.5 1.2 1.2V7"></path><path d="M9 11v5M15 11v5"></path><path d="M8 19.5v1M16 19.5v1"></path></svg></span><h3>인센티브 여행</h3><p>목표를 달성하고 저희와 함께 인기 여행지로 떠나세요.</p></div>
         </div>
       </div>
@@ -1337,7 +1370,7 @@ html:lang(ko) * { word-break: keep-all; }
         <div class="tp-why">
           <div class="tp-head tp-head--left">
             <span class="tp-kicker">왜 TradeQuo인가</span>
-            <h2 class="tp-h2">고객이 <span style="color: #e7131b;">오래 머무는</span> 브로커</h2>
+            <h2 class="tp-h2">트레이더가 <span style="color: #e7131b;">신뢰하는</span> 브로커</h2>
             <p class="tp-sub">고객이 거래를 계속하는 한 수익도 계속되기에, 내 링크로 연결되는 브로커가 중요합니다. TradeQuo는 트레이더와 독립 리뷰어의 평가를 받고 있으며, 파트너에게 매일 수익을 지급합니다.</p>
             <a class="tp-btn tp-btn--line" href="../#reviews" data-page-link data-label="로딩 중 · 홈" style="margin-top: 8px;">리뷰 보기<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
           </div>
@@ -1355,7 +1388,7 @@ html:lang(ko) * { word-break: keep-all; }
     <section class="tp-sec" data-screen-label="Join partners" style="padding-top: clamp(24px, 4vw, 48px);">
       <div class="tp-join">
         <h2 class="tp-h2">전 세계 <span style="color: #e7131b;">30,000+ 파트너</span>와 함께하세요</h2>
-        <p class="tp-sub">몇 분이면 신청할 수 있습니다. 모든 신청은 24시간 이내에 검토합니다.</p>
+        <p class="tp-sub">고객 포털에서 신청서를 제출하세요. 모든 신청은 24시간 이내에 검토합니다.</p>
         <div class="tp-actions">
           <a class="tq-logo" href="../#signup" data-page-link data-label="로딩 중 · 홈" aria-label="파트너 되기"><span>파트너 되기</span><span class="tq-logo__coin" aria-hidden="true"><span class="tq-logo__face"></span><span class="tq-logo__rim"></span><svg class="tq-logo__flag" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__t" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__dot" width="56" height="56" viewBox="20.75 19.75 160 160"><circle cx="141" cy="130.5" r="10.5" fill="#E7131B"></circle></svg><span class="tq-logo__flash"></span></span></a>
           <a class="tq-crys" style="align-self: center;" href="../commission-plan/" data-page-link data-label="로딩 중 · 커미션 플랜" aria-label="커미션 플랜 보기"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">커미션 플랜 보기</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
@@ -1428,7 +1461,7 @@ html:lang(ko) * { word-break: keep-all; }
             </button>
             <div data-faq-panel id="pp-faq-4-a" role="region" aria-labelledby="pp-faq-4-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">바로 쓸 수 있는 배너, 랜딩 페이지, 동영상, 오디언스를 위한 무료 TradingView 차트와 트레이딩 시그널, 화이트 라벨 아카데미, 그리고 전담 파트너 매니저를 제공합니다.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">바로 쓸 수 있는 배너, 랜딩 페이지, 동영상, 무료 TradingView 차트, 오디언스와 공유할 수 있는 실시간 트레이딩 시그널, 화이트 라벨 아카데미, 그리고 전담 파트너 매니저를 제공합니다.</p>
               </div>
             </div>
           </div>
@@ -1443,7 +1476,7 @@ html:lang(ko) * { word-break: keep-all; }
             </button>
             <div data-faq-panel id="pp-faq-5-a" role="region" aria-labelledby="pp-faq-5-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">TradeQuo 계좌를 개설하고 인증을 완료한 뒤, 고객 포털에서 파트너 프로그램을 신청하세요. 가입비는 없으며, 모든 신청은 24시간 이내에 검토합니다.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">TradeQuo 계좌를 개설하고 인증을 완료한 뒤, 고객 포털에서 IB 프로그램을 신청하세요. 가입비는 없으며, 모든 신청은 24시간 이내에 검토합니다.</p>
               </div>
             </div>
           </div>
@@ -1524,6 +1557,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=ca838a522c" defer></script>
-<script src="../../assets/js/landing.js?v=d96becf6eb" defer></script>
+<script src="../../assets/js/landing.js?v=0740d41fbf" defer></script>
 </body>
 </html>

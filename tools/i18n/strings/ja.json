@@ -68,7 +68,7 @@
   "inv.desc": "内容",
   "inv.amount": "金額",
   "inv.rebate": "顧客取引量に応じたリベート",
-  "inv.rebateCalc": "<lots>7,800</lots> ロット × $7.5 / ロット",
+  "inv.rebateCalc": "<lots>7,800</lots> ロット × <rate>$7.50</rate> / ロット",
   "inv.fees": "処理・出金手数料",
   "inv.feesNote": "TradeQuoが負担",
   "inv.total": "月間支払総額",

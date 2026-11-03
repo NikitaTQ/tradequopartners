@@ -68,7 +68,7 @@
   "inv.desc": "MÔ TẢ",
   "inv.amount": "SỐ TIỀN",
   "inv.rebate": "Hoa hồng theo khối lượng",
-  "inv.rebateCalc": "<lots>7,800</lots> lot × $7.5 / lot",
+  "inv.rebateCalc": "<lots>7,800</lots> lot × <rate>$7.50</rate> / lot",
   "inv.fees": "Phí xử lý & phí rút tiền",
   "inv.feesNote": "Do TradeQuo chi trả",
   "inv.total": "TỔNG CHI TRẢ / THÁNG",

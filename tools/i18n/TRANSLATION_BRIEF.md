@@ -16,7 +16,7 @@ language would: natural phrasing for that market, not word-for-word.
    `$7.5`, `7,800`, `24`, `00:00`, `0–50`, `51–200`, `200+`, `30K+`, `$9M+`, `4.9`, `72.6%`, `4`.
 2. **Keep the inline tokens and their order of meaning**: `<red>…</red>` (red accent words — wrap the
    words that carry the same emphasis in your language), `<privacy>…</privacy>`, `<terms>…</terms>`,
-   `<lots>7,800</lots>`, and the self-closing `<br/>`, `<brd/>`, `<year/>`, `<day/>`. Do not add other markup.
+   `<lots>7,800</lots>`, `<rate>$7.50</rate>`, and the self-closing `<br/>`, `<brd/>`, `<year/>`, `<day/>`. Do not add other markup.
    Write `&` and quotes as plain characters.
 3. **Brand and product names stay in Latin script**: TradeQuo, TradingView, Trustpilot, Client Portal
    may be translated if the market normally does (e.g. "Kundenportal"), IB / Sub-IB may stay as "IB".

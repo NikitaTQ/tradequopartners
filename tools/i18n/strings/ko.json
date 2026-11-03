@@ -68,7 +68,7 @@
   "inv.desc": "항목",
   "inv.amount": "금액",
   "inv.rebate": "고객 거래량 리베이트",
-  "inv.rebateCalc": "<lots>7,800</lots> 랏 × $7.5 / 랏",
+  "inv.rebateCalc": "<lots>7,800</lots> 랏 × <rate>$7.50</rate> / 랏",
   "inv.fees": "처리 및 출금 수수료",
   "inv.feesNote": "TradeQuo 부담",
   "inv.total": "월 총 지급액",

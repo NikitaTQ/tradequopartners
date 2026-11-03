@@ -68,7 +68,7 @@
   "inv.desc": "الوصف",
   "inv.amount": "المبلغ",
   "inv.rebate": "عمولة على تداول العملاء",
-  "inv.rebateCalc": "<lots>7,800</lots> لوت × $7.5 / لوت",
+  "inv.rebateCalc": "<lots>7,800</lots> لوت × <rate>$7.50</rate> / لوت",
   "inv.fees": "رسوم المعالجة والسحب",
   "inv.feesNote": "تتحمّلها TradeQuo",
   "inv.total": "إجمالي الدفعة الشهرية",

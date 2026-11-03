@@ -62,7 +62,7 @@
   "inv.desc": "AÇIKLAMA",
   "inv.amount": "TUTAR",
   "inv.rebate": "Müşteri hacmi komisyonu",
-  "inv.rebateCalc": "<lots>7,800</lots> lot × $7.5 / lot",
+  "inv.rebateCalc": "<lots>7,800</lots> lot × <rate>$7.50</rate> / lot",
   "inv.fees": "İşleme ve çekim ücretleri",
   "inv.feesNote": "TradeQuo karşılar",
   "inv.total": "TOPLAM ÖDEME / AY",

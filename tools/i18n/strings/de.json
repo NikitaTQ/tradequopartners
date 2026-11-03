@@ -62,7 +62,7 @@
   "inv.desc": "POSITION",
   "inv.amount": "BETRAG",
   "inv.rebate": "Rebate auf Kundenvolumen",
-  "inv.rebateCalc": "<lots>7,800</lots> Lots × $7.5 / Lot",
+  "inv.rebateCalc": "<lots>7,800</lots> Lots × <rate>$7.50</rate> / Lot",
   "inv.fees": "Bearbeitungs- & Abhebungsgebühren",
   "inv.feesNote": "Übernimmt TradeQuo",
   "inv.total": "AUSZAHLUNG / MONAT",

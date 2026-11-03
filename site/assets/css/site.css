@@ -749,6 +749,20 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 /* ---- form status (shown only if the request fails to send) --------------- */
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 
+/* ---- phones: headings, their buttons and the footer sit on the centre line -- */
+@media (max-width: 640px) {
+  [data-fan-head] { align-items: center !important; text-align: center; }
+  [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
+  [data-fan-head] p { max-width: 34ch !important; }
+  [data-fan-cta] { justify-self: center !important; align-self: center; }
+  [data-faq-side] { align-items: center !important; text-align: center; }
+  [data-faq-side] > * { align-self: center !important; }
+  [data-faq-side] > p { max-width: 34ch !important; }
+  footer > div { justify-items: center; text-align: center; }
+  footer > div > img { justify-self: center !important; }
+}
+
+
 /* ---- keyboard focus for links/buttons the design styles inline ----------- */
 a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
 
@@ -835,4 +849,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (max-width: 640px) {
   [dir="rtl"] #signup form label > span:first-child { padding-right: 0; }
   [dir="rtl"] [data-faq-panel] p { padding-right: 20px !important; }
+}
+
+/* narrow phones (360 px; after the 640 px header rules so these win): logo, language globe and the CTA share one row */
+@media (max-width: 380px) {
+  header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
+  header img[alt] { height: 15px !important; }
+  header nav { gap: 6px !important; }
+  header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }

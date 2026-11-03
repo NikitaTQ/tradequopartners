@@ -26,6 +26,8 @@
   .if-metrics { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 16px; border-top: 1px solid #ECECEE; padding-top: 20px; letter-spacing: .12em; white-space: nowrap; }
   .if-metrics > div { display: flex; align-items: center; gap: 8px; }
   @media (max-width: 640px) { .if-scene { aspect-ratio: 1 / 1; } }
+  /* phones: the head block centres like the rest of the landing */
+  @media (max-width: 640px) { .if-head { flex-direction: column; align-items: center; text-align: center; gap: 18px; } .if-sub { margin-inline: auto; } .if-live { align-items: center; } .if-metrics { justify-content: center; gap: 10px 22px; } }
   .if-cta { display: flex; justify-content: center; margin-top: calc(-1 * clamp(28px, 5vw, 76px)); position: relative; z-index: 2; }
 
   @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }

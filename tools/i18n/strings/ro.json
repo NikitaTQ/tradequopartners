@@ -68,7 +68,7 @@
   "inv.desc": "DESCRIERE",
   "inv.amount": "SUMĂ",
   "inv.rebate": "Comision pe volumul clienților",
-  "inv.rebateCalc": "<lots>7,800</lots> loturi × $7.5 / lot",
+  "inv.rebateCalc": "<lots>7,800</lots> loturi × <rate>$7.50</rate> / lot",
   "inv.fees": "Taxe de procesare și retragere",
   "inv.feesNote": "Suportate de TradeQuo",
   "inv.total": "TOTAL PLATĂ / LUNĂ",

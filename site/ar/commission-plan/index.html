@@ -800,6 +800,20 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 /* ---- form status (shown only if the request fails to send) --------------- */
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 
+/* ---- phones: headings, their buttons and the footer sit on the centre line -- */
+@media (max-width: 640px) {
+  [data-fan-head] { align-items: center !important; text-align: center; }
+  [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
+  [data-fan-head] p { max-width: 34ch !important; }
+  [data-fan-cta] { justify-self: center !important; align-self: center; }
+  [data-faq-side] { align-items: center !important; text-align: center; }
+  [data-faq-side] > * { align-self: center !important; }
+  [data-faq-side] > p { max-width: 34ch !important; }
+  footer > div { justify-items: center; text-align: center; }
+  footer > div > img { justify-self: center !important; }
+}
+
+
 /* ---- keyboard focus for links/buttons the design styles inline ----------- */
 a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
 
@@ -886,6 +900,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (max-width: 640px) {
   [dir="rtl"] #signup form label > span:first-child { padding-right: 0; }
   [dir="rtl"] [data-faq-panel] p { padding-right: 20px !important; }
+}
+
+/* narrow phones (360 px; after the 640 px header rules so these win): logo, language globe and the CTA share one row */
+@media (max-width: 380px) {
+  header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
+  header img[alt] { height: 15px !important; }
+  header nav { gap: 6px !important; }
+  header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 </style>
 <style id="partner-css" data-prefix="../../">
@@ -1214,11 +1236,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
   .tp-perk img { width: 88px; height: 88px; }
   .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
+  .tp-head--left { align-items: center; text-align: center; }
+  .tp-faq__side { align-items: center; text-align: center; }
+  .tp-faq__side .tp-pill { align-self: center; }
+  .tp-faq__side .tp-sub { max-width: 34ch !important; }
+  .tp-ben { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; padding: 20px 18px; }
+  .tp-ben .tp-hex { grid-row: span 2; margin: 0; }
+  .tp-ben h3 { align-self: end; }
+  .tp-explain h3, .tp-tiercol h3 { text-align: center; }
   .tp-example { grid-template-columns: minmax(0, 1fr); }
   .tp-example > svg { transform: rotate(90deg); }
   [dir="rtl"] .tp-example > svg { transform: rotate(90deg); }
   .tp-night { border-radius: 26px; }
-  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; }
+  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
+  .tp-night .tp-actions { align-items: stretch; }
+  .tp-join .tp-actions { align-items: center; }
+  .tp-stat b { font-size: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-next__bar span { transition: none; }
@@ -1385,7 +1418,7 @@ h1, h2 { line-height: 1.2 !important; }
         </div>
         <div class="tp-timeline">
           <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>عملاؤك يتداولون</h3><p>يفتح العملاء الذين أحلتهم صفقاتهم ويغلقونها.</p></div>
-          <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path></svg></span><h3>تتراكم العمولة</h3><p>يُضاف كل لوت إلى رصيدك، مع تتبّع لحظي.</p></div>
+          <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path></svg></span><h3>تتراكم العمولة</h3><p>يجري تتبّع كل لوت يتداوله عملاؤك لحظة بلحظة.</p></div>
           <div class="tp-tl tp-tl--hot"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3.2 2"></path></svg></span><h3>التسوية عند 00:00</h3><p>تُسوّى عمولات اليوم في حسابك.</p></div>
           <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v4"></path><path d="M4 7.5v10A2.5 2.5 0 0 0 6.5 20H20V9H6.5A2.5 2.5 0 0 1 4 6.5"></path><circle cx="16" cy="14.5" r="1.2" fill="currentColor"></circle></svg></span><h3>اسحب أرباحك</h3><p>اسحب أموالك دون أي رسوم صرف.</p></div>
         </div>
@@ -1492,7 +1525,7 @@ h1, h2 { line-height: 1.2 !important; }
             </button>
             <div data-faq-panel id="cp-faq-5-a" role="region" aria-labelledby="cp-faq-5-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">زِد عدد العملاء النشطين في شبكتك. يرتفع معدّلك لكل لوت من $5.00 في مستوى Starter إلى $7.50 في مستوى Gold بدءًا من 51 عميلًا، ثم إلى $10.00 في مستوى Elite عند تجاوز 200 عميل.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">زِد عدد العملاء النشطين في شبكتك. يرتفع معدّلك لكل لوت من $5.00 في مستوى Starter (0–50 عميلًا) إلى $7.50 في مستوى Gold (51–200)، ثم إلى $10.00 في مستوى Elite (200+).</p>
               </div>
             </div>
           </div>
@@ -1603,7 +1636,7 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../../assets/js/transition.js?v=ca838a522c" defer></script>
-<script src="../../assets/js/landing.js?v=d96becf6eb" defer></script>
+<script src="../../assets/js/landing.js?v=0740d41fbf" defer></script>
 <script src="../../assets/js/plan.js?v=37b963427b" defer></script>
 </body>
 </html>

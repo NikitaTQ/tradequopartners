@@ -798,6 +798,20 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 /* ---- form status (shown only if the request fails to send) --------------- */
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 
+/* ---- phones: headings, their buttons and the footer sit on the centre line -- */
+@media (max-width: 640px) {
+  [data-fan-head] { align-items: center !important; text-align: center; }
+  [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
+  [data-fan-head] p { max-width: 34ch !important; }
+  [data-fan-cta] { justify-self: center !important; align-self: center; }
+  [data-faq-side] { align-items: center !important; text-align: center; }
+  [data-faq-side] > * { align-self: center !important; }
+  [data-faq-side] > p { max-width: 34ch !important; }
+  footer > div { justify-items: center; text-align: center; }
+  footer > div > img { justify-self: center !important; }
+}
+
+
 /* ---- keyboard focus for links/buttons the design styles inline ----------- */
 a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
 
@@ -884,6 +898,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (max-width: 640px) {
   [dir="rtl"] #signup form label > span:first-child { padding-right: 0; }
   [dir="rtl"] [data-faq-panel] p { padding-right: 20px !important; }
+}
+
+/* narrow phones (360 px; after the 640 px header rules so these win): logo, language globe and the CTA share one row */
+@media (max-width: 380px) {
+  header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
+  header img[alt] { height: 15px !important; }
+  header nav { gap: 6px !important; }
+  header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 </style>
 <style id="partner-css" data-prefix="../../">
@@ -1212,11 +1234,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
   .tp-perk img { width: 88px; height: 88px; }
   .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
+  .tp-head--left { align-items: center; text-align: center; }
+  .tp-faq__side { align-items: center; text-align: center; }
+  .tp-faq__side .tp-pill { align-self: center; }
+  .tp-faq__side .tp-sub { max-width: 34ch !important; }
+  .tp-ben { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; padding: 20px 18px; }
+  .tp-ben .tp-hex { grid-row: span 2; margin: 0; }
+  .tp-ben h3 { align-self: end; }
+  .tp-explain h3, .tp-tiercol h3 { text-align: center; }
   .tp-example { grid-template-columns: minmax(0, 1fr); }
   .tp-example > svg { transform: rotate(90deg); }
   [dir="rtl"] .tp-example > svg { transform: rotate(90deg); }
   .tp-night { border-radius: 26px; }
-  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; }
+  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
+  .tp-night .tp-actions { align-items: stretch; }
+  .tp-join .tp-actions { align-items: center; }
+  .tp-stat b { font-size: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-next__bar span { transition: none; }
@@ -1256,7 +1289,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
       <div class="tp-head">
         <span class="tp-kicker">PROGRAMAS DE SOCIOS</span>
         <h1 class="tp-h1">Un programa de socios. <span style="color: #e7131b;">Tres formas de ganar.</span></h1>
-        <p class="tp-sub">Recomienda traders, crea una red de socios o lanza tu propia marca. Todas las modalidades pagan por las operaciones reales de los clientes, se liquidan cada día e incluyen un gestor de cuenta dedicado.</p>
+        <p class="tp-sub">Recomienda traders, crea una red de socios o lanza tu propia marca. Sea cual sea la modalidad que elijas, un gestor de cuenta dedicado trabajará contigo.</p>
       </div>
 
       <div class="tp-stage">
@@ -1310,7 +1343,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
         <div class="tp-head">
           <span class="tp-kicker">VENTAJAS CLAVE</span>
           <h2 class="tp-h2">Por qué los socios <span style="color: #e7131b;">eligen TradeQuo</span></h2>
-          <p class="tp-sub">Las mismas condiciones sólidas en todos los programas y las herramientas para aprovecharlas al máximo.</p>
+          <p class="tp-sub">Condiciones sólidas, pagos diarios y las herramientas para aprovecharlos al máximo.</p>
         </div>
         <div class="tp-benefits">
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18.5 5.5 5.5 18.5"></path><circle cx="7.5" cy="7.5" r="2.5"></circle><circle cx="16.5" cy="16.5" r="2.5"></circle></svg></span><h3>Hasta el 87% del spread</h3><p>Gana con cada lote que operen tus clientes, mientras sigan activos.</p></div>
@@ -1319,7 +1352,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path><path d="M3.5 20.5h17"></path></svg></span><h3>Seguimiento en tiempo real</h3><p>Consulta registros, actividad de trading y ganancias en tiempo real.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13v-1a7.5 7.5 0 0 1 15 0v1"></path><rect x="3.5" y="13" width="4" height="6" rx="1.5"></rect><rect x="16.5" y="13" width="4" height="6" rx="1.5"></rect><path d="M18.5 19c0 1.4-1.9 2.3-5 2.3"></path></svg></span><h3>Un gestor dedicado</h3><p>Un gestor de cuenta que conoce tu negocio y contesta el teléfono.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"></rect><circle cx="9" cy="10" r="1.8"></circle><path d="m20.5 15.5-4.5-4.5-8.5 8.5"></path></svg></span><h3>Creatividades listas para usar</h3><p>Banners, landing pages y videos diseñados para convertir.</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>Herramientas gratis para tu audiencia</h3><p>Gráficos de TradingView y señales de trading en tiempo real, sin cargo.</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>TradingView y señales gratis</h3><p>Gráficos avanzados para tu análisis y señales en tiempo real para compartir con tu audiencia, sin cargo.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12.5" rx="2.5"></rect><path d="M9.5 7V5.2c0-.7.5-1.2 1.2-1.2h2.6c.7 0 1.2.5 1.2 1.2V7"></path><path d="M9 11v5M15 11v5"></path><path d="M8 19.5v1M16 19.5v1"></path></svg></span><h3>Viajes de incentivo</h3><p>Alcanza tus objetivos y viaja con nosotros a destinos de primer nivel.</p></div>
         </div>
       </div>
@@ -1331,7 +1364,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
         <div class="tp-why">
           <div class="tp-head tp-head--left">
             <span class="tp-kicker">POR QUÉ TRADEQUO</span>
-            <h2 class="tp-h2">Un bróker que <span style="color: #e7131b;">fideliza</span> a tus clientes</h2>
+            <h2 class="tp-h2">Un bróker en el que los traders <span style="color: #e7131b;">confían</span></h2>
             <p class="tp-sub">Ganas mientras tus clientes sigan operando, así que el bróker que hay detrás de tu enlace importa. TradeQuo está valorado por traders y analistas independientes, y paga a sus socios cada día.</p>
             <a class="tp-btn tp-btn--line" href="../#reviews" data-page-link data-label="CARGANDO · Inicio" style="margin-top: 8px;">Lee las reseñas<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
           </div>
@@ -1349,7 +1382,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
     <section class="tp-sec" data-screen-label="Join partners" style="padding-top: clamp(24px, 4vw, 48px);">
       <div class="tp-join">
         <h2 class="tp-h2">Únete a <span style="color: #e7131b;">más de 30.000 socios</span> en todo el mundo</h2>
-        <p class="tp-sub">Envía tu solicitud en minutos. Revisamos cada una en un plazo de 24 horas.</p>
+        <p class="tp-sub">Envía tu solicitud desde tu Portal del Cliente. Revisamos cada una en un plazo de 24 horas.</p>
         <div class="tp-actions">
           <a class="tq-logo" href="../#signup" data-page-link data-label="CARGANDO · Inicio" aria-label="Hazte socio"><span>Hazte socio</span><span class="tq-logo__coin" aria-hidden="true"><span class="tq-logo__face"></span><span class="tq-logo__rim"></span><svg class="tq-logo__flag" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__t" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__dot" width="56" height="56" viewBox="20.75 19.75 160 160"><circle cx="141" cy="130.5" r="10.5" fill="#E7131B"></circle></svg><span class="tq-logo__flash"></span></span></a>
           <a class="tq-crys" style="align-self: center;" href="../commission-plan/" data-page-link data-label="CARGANDO · Plan de comisiones" aria-label="Ver el plan de comisiones"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">Ver el plan de comisiones</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
@@ -1422,7 +1455,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             </button>
             <div data-faq-panel id="pp-faq-4-a" role="region" aria-labelledby="pp-faq-4-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Banners, landing pages y videos listos para usar, gráficos de TradingView y señales de trading gratis para tu audiencia, la Academia de marca blanca y un gestor de cuenta dedicado.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Banners, landing pages y videos listos para usar, gráficos de TradingView gratis, señales de trading en tiempo real para compartir con tu audiencia, la Academia de marca blanca y un gestor de cuenta dedicado.</p>
               </div>
             </div>
           </div>
@@ -1437,7 +1470,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             </button>
             <div data-faq-panel id="pp-faq-5-a" role="region" aria-labelledby="pp-faq-5-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Abre y verifica una cuenta de TradeQuo y luego solicita unirte al programa de socios desde tu Portal del Cliente. No hay cuota de inscripción y revisamos cada solicitud en un plazo de 24 horas.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Abre y verifica una cuenta de TradeQuo y luego solicita unirte al programa IB desde tu Portal del Cliente. No hay cuota de inscripción y revisamos cada solicitud en un plazo de 24 horas.</p>
               </div>
             </div>
           </div>
@@ -1518,6 +1551,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="../../assets/js/transition.js?v=ca838a522c" defer></script>
-<script src="../../assets/js/landing.js?v=d96becf6eb" defer></script>
+<script src="../../assets/js/landing.js?v=0740d41fbf" defer></script>
 </body>
 </html>

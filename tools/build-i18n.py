@@ -64,6 +64,7 @@ PAIRED = {
     'privacy': ('<a href="#" style="color:#c8141b;">', '</a>'),
     'terms': ('<a href="#" style="color:#c8141b;">', '</a>'),
     'lots': ('<span data-inv-lots>', '</span>'),
+    'rate': ('<span data-inv-rate>', '</span>'),
 }
 SINGLE = {
     'br': '<br>',

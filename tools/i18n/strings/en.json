@@ -62,7 +62,7 @@
   "inv.desc": "DESCRIPTION",
   "inv.amount": "AMOUNT",
   "inv.rebate": "Rebate on client volume",
-  "inv.rebateCalc": "<lots>7,800</lots> lots × $7.5 / lot",
+  "inv.rebateCalc": "<lots>7,800</lots> lots × <rate>$7.50</rate> / lot",
   "inv.fees": "Processing & withdrawal fees",
   "inv.feesNote": "Covered by TradeQuo",
   "inv.total": "TOTAL PAYOUT / MONTH",

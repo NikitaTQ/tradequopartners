@@ -798,6 +798,20 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 /* ---- form status (shown only if the request fails to send) --------------- */
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 
+/* ---- phones: headings, their buttons and the footer sit on the centre line -- */
+@media (max-width: 640px) {
+  [data-fan-head] { align-items: center !important; text-align: center; }
+  [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
+  [data-fan-head] p { max-width: 34ch !important; }
+  [data-fan-cta] { justify-self: center !important; align-self: center; }
+  [data-faq-side] { align-items: center !important; text-align: center; }
+  [data-faq-side] > * { align-self: center !important; }
+  [data-faq-side] > p { max-width: 34ch !important; }
+  footer > div { justify-items: center; text-align: center; }
+  footer > div > img { justify-self: center !important; }
+}
+
+
 /* ---- keyboard focus for links/buttons the design styles inline ----------- */
 a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
 
@@ -884,6 +898,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (max-width: 640px) {
   [dir="rtl"] #signup form label > span:first-child { padding-right: 0; }
   [dir="rtl"] [data-faq-panel] p { padding-right: 20px !important; }
+}
+
+/* narrow phones (360 px; after the 640 px header rules so these win): logo, language globe and the CTA share one row */
+@media (max-width: 380px) {
+  header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
+  header img[alt] { height: 15px !important; }
+  header nav { gap: 6px !important; }
+  header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 </style>
 <style id="partner-css" data-prefix="../../">
@@ -1212,11 +1234,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
   .tp-perk img { width: 88px; height: 88px; }
   .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
+  .tp-head--left { align-items: center; text-align: center; }
+  .tp-faq__side { align-items: center; text-align: center; }
+  .tp-faq__side .tp-pill { align-self: center; }
+  .tp-faq__side .tp-sub { max-width: 34ch !important; }
+  .tp-ben { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; padding: 20px 18px; }
+  .tp-ben .tp-hex { grid-row: span 2; margin: 0; }
+  .tp-ben h3 { align-self: end; }
+  .tp-explain h3, .tp-tiercol h3 { text-align: center; }
   .tp-example { grid-template-columns: minmax(0, 1fr); }
   .tp-example > svg { transform: rotate(90deg); }
   [dir="rtl"] .tp-example > svg { transform: rotate(90deg); }
   .tp-night { border-radius: 26px; }
-  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; }
+  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
+  .tp-night .tp-actions { align-items: stretch; }
+  .tp-join .tp-actions { align-items: center; }
+  .tp-stat b { font-size: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-next__bar span { transition: none; }
@@ -1262,7 +1295,7 @@ html:lang(ko) * { word-break: keep-all; }
       <div class="tp-head">
         <span class="tp-kicker">パートナープログラム</span>
         <h1 class="tp-h1">ひとつのプログラム、<span style="color: #e7131b;">3つの収益モデル。</span></h1>
-        <p class="tp-sub">トレーダーの紹介、パートナーネットワークの構築、自社ブランドの立ち上げ。どの形でも、顧客の実際の取引に基づいて報酬が発生し、毎日精算され、専任のパートナーマネージャーが担当します。</p>
+        <p class="tp-sub">トレーダーの紹介、パートナーネットワークの構築、自社ブランドの立ち上げ。どの形を選んでも、専任のパートナーマネージャーが伴走します。</p>
       </div>
 
       <div class="tp-stage">
@@ -1316,7 +1349,7 @@ html:lang(ko) * { word-break: keep-all; }
         <div class="tp-head">
           <span class="tp-kicker">主なメリット</span>
           <h2 class="tp-h2">パートナーが<span style="color: #e7131b;">TradeQuoを選ぶ理由</span></h2>
-          <p class="tp-sub">どのプログラムでも同じ好条件をご提供。その条件を最大限に活かせるツールもご用意しています。</p>
+          <p class="tp-sub">好条件、毎日のお支払い、そしてそれを最大限に活かせるツールをご用意しています。</p>
         </div>
         <div class="tp-benefits">
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18.5 5.5 5.5 18.5"></path><circle cx="7.5" cy="7.5" r="2.5"></circle><circle cx="16.5" cy="16.5" r="2.5"></circle></svg></span><h3>スプレッドの最大87%</h3><p>顧客がアクティブである限り、取引される1ロットごとに報酬を獲得できます。</p></div>
@@ -1325,7 +1358,7 @@ html:lang(ko) * { word-break: keep-all; }
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path><path d="M3.5 20.5h17"></path></svg></span><h3>リアルタイム・トラッキング</h3><p>新規登録、取引状況、報酬をリアルタイムで確認できます。</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13v-1a7.5 7.5 0 0 1 15 0v1"></path><rect x="3.5" y="13" width="4" height="6" rx="1.5"></rect><rect x="16.5" y="13" width="4" height="6" rx="1.5"></rect><path d="M18.5 19c0 1.4-1.9 2.3-5 2.3"></path></svg></span><h3>専任マネージャー</h3><p>ビジネスを理解し、電話がつながるパートナーマネージャーが担当します。</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"></rect><circle cx="9" cy="10" r="1.8"></circle><path d="m20.5 15.5-4.5-4.5-8.5 8.5"></path></svg></span><h3>すぐに使える広告素材</h3><p>成約につながるよう設計されたバナー、ランディングページ、動画。</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>オーディエンス向け無料ツール</h3><p>TradingViewチャートとリアルタイムのトレードシグナルを無料で提供。</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>無料のTradingViewとシグナル</h3><p>ご自身の分析に役立つ高度なチャートと、オーディエンスと共有できるリアルタイムのシグナルを無料でご利用いただけます。</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12.5" rx="2.5"></rect><path d="M9.5 7V5.2c0-.7.5-1.2 1.2-1.2h2.6c.7 0 1.2.5 1.2 1.2V7"></path><path d="M9 11v5M15 11v5"></path><path d="M8 19.5v1M16 19.5v1"></path></svg></span><h3>インセンティブ旅行</h3><p>目標を達成して、私たちと一緒に人気の旅行先へ。</p></div>
         </div>
       </div>
@@ -1337,7 +1370,7 @@ html:lang(ko) * { word-break: keep-all; }
         <div class="tp-why">
           <div class="tp-head tp-head--left">
             <span class="tp-kicker">選ばれる理由</span>
-            <h2 class="tp-h2">顧客が<span style="color: #e7131b;">使い続ける</span>ブローカー</h2>
+            <h2 class="tp-h2">トレーダーに<span style="color: #e7131b;">信頼される</span>ブローカー</h2>
             <p class="tp-sub">報酬は顧客が取引を続ける限り発生するため、リンク先のブローカー選びが重要です。TradeQuoはトレーダーや第三者レビューで評価されており、パートナーへの報酬を毎日お支払いしています。</p>
             <a class="tp-btn tp-btn--line" href="../#reviews" data-page-link data-label="読み込み中 · ホーム" style="margin-top: 8px;">レビューを見る<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
           </div>
@@ -1355,7 +1388,7 @@ html:lang(ko) * { word-break: keep-all; }
     <section class="tp-sec" data-screen-label="Join partners" style="padding-top: clamp(24px, 4vw, 48px);">
       <div class="tp-join">
         <h2 class="tp-h2">世界<span style="color: #e7131b;">30,000+のパートナー</span>の一員に</h2>
-        <p class="tp-sub">お申し込みは数分で完了。すべての申請を24時間以内に審査します。</p>
+        <p class="tp-sub">クライアントポータルから申請してください。すべての申請を24時間以内に審査します。</p>
         <div class="tp-actions">
           <a class="tq-logo" href="../#signup" data-page-link data-label="読み込み中 · ホーム" aria-label="パートナー登録"><span>パートナー登録</span><span class="tq-logo__coin" aria-hidden="true"><span class="tq-logo__face"></span><span class="tq-logo__rim"></span><svg class="tq-logo__flag" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__t" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__dot" width="56" height="56" viewBox="20.75 19.75 160 160"><circle cx="141" cy="130.5" r="10.5" fill="#E7131B"></circle></svg><span class="tq-logo__flash"></span></span></a>
           <a class="tq-crys" style="align-self: center;" href="../commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン" aria-label="報酬プランを見る"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">報酬プランを見る</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
@@ -1428,7 +1461,7 @@ html:lang(ko) * { word-break: keep-all; }
             </button>
             <div data-faq-panel id="pp-faq-4-a" role="region" aria-labelledby="pp-faq-4-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">すぐに使えるバナー、ランディングページ、動画、オーディエンス向けの無料TradingViewチャートとトレードシグナル、ホワイトラベル・アカデミー、そして専任のパートナーマネージャーをご用意しています。</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">すぐに使えるバナー、ランディングページ、動画、無料のTradingViewチャート、オーディエンスと共有できるリアルタイムのトレードシグナル、ホワイトラベル・アカデミー、そして専任のパートナーマネージャーをご用意しています。</p>
               </div>
             </div>
           </div>
@@ -1443,7 +1476,7 @@ html:lang(ko) * { word-break: keep-all; }
             </button>
             <div data-faq-panel id="pp-faq-5-a" role="region" aria-labelledby="pp-faq-5-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">TradeQuo口座を開設して本人確認を済ませ、クライアントポータルからパートナープログラムに申し込んでください。参加費は不要で、すべての申請を24時間以内に審査します。</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">TradeQuo口座を開設して本人確認を済ませ、クライアントポータルからIBプログラムに申し込んでください。参加費は不要で、すべての申請を24時間以内に審査します。</p>
               </div>
             </div>
           </div>
@@ -1524,6 +1557,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=ca838a522c" defer></script>
-<script src="../../assets/js/landing.js?v=d96becf6eb" defer></script>
+<script src="../../assets/js/landing.js?v=0740d41fbf" defer></script>
 </body>
 </html>

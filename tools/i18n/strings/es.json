@@ -68,7 +68,7 @@
   "inv.desc": "CONCEPTO",
   "inv.amount": "IMPORTE",
   "inv.rebate": "Comisión por volumen de clientes",
-  "inv.rebateCalc": "<lots>7,800</lots> lotes × $7.5 / lote",
+  "inv.rebateCalc": "<lots>7,800</lots> lotes × <rate>$7.50</rate> / lote",
   "inv.fees": "Cargos de procesamiento y retiro",
   "inv.feesNote": "A cargo de TradeQuo",
   "inv.total": "PAGO TOTAL / MES",

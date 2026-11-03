@@ -68,7 +68,7 @@
   "inv.desc": "項目",
   "inv.amount": "金額",
   "inv.rebate": "客戶交易量返佣",
-  "inv.rebateCalc": "<lots>7,800</lots> 手 × $7.5 / 手",
+  "inv.rebateCalc": "<lots>7,800</lots> 手 × <rate>$7.50</rate> / 手",
   "inv.fees": "處理及提款手續費",
   "inv.feesNote": "由TradeQuo負擔",
   "inv.total": "每月發放總額",

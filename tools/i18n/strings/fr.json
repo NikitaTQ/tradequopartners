@@ -62,7 +62,7 @@
   "inv.desc": "DÉSIGNATION",
   "inv.amount": "MONTANT",
   "inv.rebate": "Commission sur volume clients",
-  "inv.rebateCalc": "<lots>7,800</lots> lots × $7.5 / lot",
+  "inv.rebateCalc": "<lots>7,800</lots> lots × <rate>$7.50</rate> / lot",
   "inv.fees": "Frais de traitement et de retrait",
   "inv.feesNote": "Payés par TradeQuo",
   "inv.total": "TOTAL VERSÉ / MOIS",
