@@ -3,6 +3,7 @@
   "meta.description": "트레이더를 TradeQuo에 추천하고, 추천 고객이 거래하는 모든 랏에서 스프레드의 최대 87%를 받으세요. IB 커미션은 매일 정산되며 지급 수수료가 없습니다.",
   "meta.ogDescription": "고객이 거래하는 모든 랏에서 스프레드의 최대 87%를 받으세요. 매일 지급됩니다.",
   "lang.label": "언어",
+  "lang.translate": "자동 번역",
   "loader": "로딩 중",
 
   "nav.how": "이용 방법",
@@ -132,6 +133,13 @@
 
   "fab.aria": "메뉴",
   "fan.aria": "사이트맵",
+  "fan.home": "홈",
+  "fan.programs": "프로그램 종류",
+  "fan.commission": "커미션 플랜",
+  "fan.dashboard": "파트너 대시보드",
+  "fan.marketing": "마케팅 허브",
+  "fan.academy": "파트너 아카데미",
+  "fan.stories": "성공 사례",
   "footer.risk": "차액결제거래(CFD)는 복잡한 금융상품으로, 레버리지로 인해 빠르게 자금을 잃을 위험이 높습니다. 본 제공업체에서 CFD를 거래하는 개인 투자자 계좌의 72.6%가 손실을 봅니다.",
 
   "embed.crys.partners": "파트너",

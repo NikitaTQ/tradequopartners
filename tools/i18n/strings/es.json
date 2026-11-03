@@ -3,6 +3,7 @@
   "meta.description": "Recomienda traders a TradeQuo y gana hasta el 87% del spread en cada lote que operen. Las comisiones se liquidan cada día, sin cargos por pago.",
   "meta.ogDescription": "Gana hasta el 87% del spread en cada lote que operen tus clientes. Pagos diarios.",
   "lang.label": "Idioma",
+  "lang.translate": "Traductor automático",
   "loader": "CARGANDO",
 
   "nav.how": "Cómo funciona",
@@ -132,6 +133,13 @@
 
   "fab.aria": "Menú",
   "fan.aria": "Mapa del sitio",
+  "fan.home": "Inicio",
+  "fan.programs": "Programas de socios",
+  "fan.commission": "Plan de comisiones",
+  "fan.dashboard": "Panel de socios",
+  "fan.marketing": "Centro de marketing",
+  "fan.academy": "Academia de socios",
+  "fan.stories": "Casos de éxito",
   "footer.risk": "Los CFD son instrumentos complejos y conllevan un alto riesgo de perder dinero rápidamente debido al apalancamiento. El 72,6 % de las cuentas de inversores minoristas pierden dinero en la negociación de CFD con este proveedor.",
 
   "embed.crys.partners": "SOCIOS",

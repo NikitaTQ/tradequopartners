@@ -3,6 +3,7 @@
   "meta.description": "Recomandă traderi către TradeQuo și câștigă până la 87% din spread pentru fiecare lot tranzacționat de aceștia. Comisioanele se decontează zilnic, fără taxe de plată.",
   "meta.ogDescription": "Câștigă până la 87% din spread pentru fiecare lot tranzacționat de clienții tăi. Plăți zilnice.",
   "lang.label": "Limbă",
+  "lang.translate": "Traducere automată",
   "loader": "SE ÎNCARCĂ",
 
   "nav.how": "Cum funcționează",
@@ -132,6 +133,13 @@
 
   "fab.aria": "Meniu",
   "fan.aria": "Harta site-ului",
+  "fan.home": "Acasă",
+  "fan.programs": "Programe de parteneriat",
+  "fan.commission": "Plan de comisioane",
+  "fan.dashboard": "Panoul partenerului",
+  "fan.marketing": "Centru de marketing",
+  "fan.academy": "Academia partenerilor",
+  "fan.stories": "Povești de succes",
   "footer.risk": "CFD-urile sunt instrumente complexe și prezintă un risc ridicat de a pierde rapid bani din cauza efectului de levier. 72,6% din conturile investitorilor de retail pierd bani atunci când tranzacționează CFD-uri cu acest furnizor.",
 
   "embed.crys.partners": "PARTENERI",

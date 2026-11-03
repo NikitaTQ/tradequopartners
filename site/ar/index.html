@@ -42,7 +42,9 @@
 <link rel="icon" href="../favicon.svg?v=ff199c552e" type="image/svg+xml">
 <link rel="icon" href="../favicon-32.png?v=08736b4127" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=83caa1ad63">
-<script>try{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}catch(e){}</script>
+<script>/* loader veil on arrival; visitor's "no auto-translate" choice (set in the language menu) */
+try{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}catch(e){}
+try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=document.createElement('meta');d.setAttribute('translate','no');d.classList.add('notranslate');m.name='google';m.content='notranslate';document.head.appendChild(m)}}catch(e){}</script>
 <link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/intl/ibm-plex-sans-arabic-400-arabic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/intl/ibm-plex-sans-arabic-700-arabic.woff2" as="font" type="font/woff2" crossorigin>
@@ -747,7 +749,7 @@ html { scroll-snap-type: y proximity; }
   transition: transform .6s cubic-bezier(.2,.85,.2,1) calc(var(--ri) * 28ms), opacity .35s ease calc(var(--ri) * 28ms);
 }
 [data-fanmenu][data-open] .tq-fan-item {
-  transform: rotate(calc(28deg + var(--i) * -7deg));
+  transform: rotate(calc(35deg + var(--i) * -7deg));
   opacity: 1; pointer-events: auto;
   transition-delay: calc(var(--i) * 45ms);
 }
@@ -758,6 +760,7 @@ html { scroll-snap-type: y proximity; }
 .tq-fan-ico--open, [data-fanmenu][data-open] .tq-fan-ico--closed { transform: rotate(90deg) scale(.5); opacity: 0; }
 [data-fanmenu][data-open] .tq-fan-ico--open { transform: none; opacity: 1; }
 .hv-fan-blade, .hv-fan-blade:hover { color: #0a0a0a; }
+.hv-fan-blade[aria-current="page"] .tq-fan-num { background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b30e14 100%) !important; }
 
 /* ---- mobile quick menu --------------------------------------------------- */
 .tq-fab-link {
@@ -770,6 +773,9 @@ html { scroll-snap-type: y proximity; }
   transition: opacity .28s cubic-bezier(.34,1.3,.5,1) calc((3 - var(--i)) * .03s), transform .32s cubic-bezier(.34,1.3,.5,1) calc((3 - var(--i)) * .03s);
 }
 .tq-fab-link:hover { color: #0a0a0a; }
+.tq-fab-link--page::before { content: ''; width: 6px; height: 6px; margin-inline-end: 9px; border-radius: 50%; background: #e7131b; }
+.tq-fab-link[aria-current="page"] { background: #0a0a0a; color: #fff; }
+.tq-fab-link[aria-current="page"]:hover { color: #fff; }
 [data-fab][data-open] .tq-fab-link { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; transition-delay: calc(var(--i) * .04s); }
 [data-fab][data-open] [data-ref="fabIcon"] { transform: rotate(90deg); }
 
@@ -787,6 +793,7 @@ html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
 .tq-loader__label {
   position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%);
   font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .2em; color: #9a9da3; white-space: nowrap;
+  text-transform: uppercase;
 }
 html.tq-arriving, html.tq-locked { overflow: hidden; }
 
@@ -836,6 +843,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 }
 .tq-lang__menu a:hover, .tq-lang__menu a:focus-visible { color: #fff; background: rgba(255,255,255,.07); outline: none; }
 .tq-lang__menu a[aria-current="true"] { color: #e7131b; }
+/* "Auto-translate" switch at the foot of the menu (landing.js startLang) */
+.tq-lang__opt { margin: 8px 0 -4px; padding: 8px 0 0; border-top: 1px solid rgba(255,255,255,.1); }
+.tq-lang__opt button {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; padding: 10px 26px;
+  border: 0; background: transparent; color: #a7a9ae; font: 600 13.5px/1.3 'DM Sans', system-ui, sans-serif; text-align: start; cursor: pointer;
+}
+.tq-lang__opt button:hover, .tq-lang__opt button:focus-visible { color: #fff; background: rgba(255,255,255,.07); outline: none; }
+.tq-lang__switch { position: relative; flex-shrink: 0; width: 34px; height: 20px; border-radius: 999px; background: rgba(255,255,255,.18); transition: background .2s ease; }
+.tq-lang__switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.4); transition: transform .2s cubic-bezier(.2,.8,.2,1); }
+.tq-lang__opt [aria-checked="true"] .tq-lang__switch { background: #e7131b; }
+.tq-lang__opt [aria-checked="true"] .tq-lang__switch::after { transform: translateX(14px); }
+[dir="rtl"] .tq-lang__opt [aria-checked="true"] .tq-lang__switch::after { transform: translateX(-14px); }
+[dir="rtl"] .tq-lang__switch::after { left: auto; right: 3px; }
 @media (max-width: 640px) {
   .tq-lang__btn { width: 40px; height: 40px; padding: 0; justify-content: center; }
   .tq-lang__code, .tq-lang__chev { display: none; }
@@ -895,7 +915,7 @@ h1, h2 { line-height: 1.2 !important; }
         <a class="hv-red" href="#dashboard" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">المزايا</a>
         <a class="hv-red" href="#faq" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">الأسئلة الشائعة</a>
       </span>
-      <div class="tq-lang" data-lang><button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="اللغة: العربية"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg><span class="tq-lang__code">AR</span><svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="tq-lang__menu" hidden><li><a href="../" hreflang="en" lang="en">English</a></li><li><a href="../ar/" hreflang="ar" lang="ar" aria-current="true">العربية</a></li><li><a href="../zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li><li><a href="../zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li><li><a href="../fr/" hreflang="fr" lang="fr">Français</a></li><li><a href="../de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li><li><a href="../it/" hreflang="it" lang="it">Italiano</a></li><li><a href="../ja/" hreflang="ja" lang="ja">日本語</a></li><li><a href="../ko/" hreflang="ko" lang="ko">한국어</a></li><li><a href="../pl/" hreflang="pl" lang="pl">Polski</a></li><li><a href="../pt/" hreflang="pt" lang="pt">Português</a></li><li><a href="../ro/" hreflang="ro" lang="ro">Română</a></li><li><a href="../es/" hreflang="es" lang="es">Español</a></li><li><a href="../th/" hreflang="th" lang="th">ไทย</a></li><li><a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="../uk/" hreflang="uk" lang="uk">Українська</a></li><li><a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a></li></ul></div>
+      <div class="tq-lang" data-lang><button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="اللغة: العربية"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg><span class="tq-lang__code">AR</span><svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="tq-lang__menu" hidden><li><a href="../" hreflang="en" lang="en">English</a></li><li><a href="../ar/" hreflang="ar" lang="ar" aria-current="true">العربية</a></li><li><a href="../zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li><li><a href="../zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li><li><a href="../fr/" hreflang="fr" lang="fr">Français</a></li><li><a href="../de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li><li><a href="../it/" hreflang="it" lang="it">Italiano</a></li><li><a href="../ja/" hreflang="ja" lang="ja">日本語</a></li><li><a href="../ko/" hreflang="ko" lang="ko">한국어</a></li><li><a href="../pl/" hreflang="pl" lang="pl">Polski</a></li><li><a href="../pt/" hreflang="pt" lang="pt">Português</a></li><li><a href="../ro/" hreflang="ro" lang="ro">Română</a></li><li><a href="../es/" hreflang="es" lang="es">Español</a></li><li><a href="../th/" hreflang="th" lang="th">ไทย</a></li><li><a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="../uk/" hreflang="uk" lang="uk">Українська</a></li><li><a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a></li><li class="tq-lang__opt"><button type="button" role="switch" aria-checked="true" data-translate-toggle><span>الترجمة التلقائية</span><span class="tq-lang__switch" aria-hidden="true"></span></button></li></ul></div>
       <a class="hv-red-bg" href="#signup" style="display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap; height: 44px; padding: 0 24px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 15px; font-weight: 600; letter-spacing: -.01em;">كن شريكًا</a>
     </nav>
   </header>
@@ -1483,6 +1503,8 @@ h1, h2 { line-height: 1.2 !important; }
       <a class="tq-fab-link" href="#calculator" style="--i: 1;">الحاسبة</a>
       <a class="tq-fab-link" href="#dashboard" style="--i: 2;">المزايا</a>
       <a class="tq-fab-link" href="#faq" style="--i: 3;">الأسئلة الشائعة</a>
+      <a class="tq-fab-link tq-fab-link--page" href="programs/" data-page-link data-label="جارٍ التحميل · برامج الشركاء" style="--i: 4;">برامج الشركاء</a>
+      <a class="tq-fab-link tq-fab-link--page" href="commission-plan/" data-page-link data-label="جارٍ التحميل · خطة العمولات" style="--i: 5;">خطة العمولات</a>
     </div>
     <button type="button" data-fab-toggle aria-label="القائمة" aria-expanded="false" style="width: 56px; height: 56px; border: none; border-radius: 50%; background: #e7131b; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 28px -8px rgba(231,19,27,.7), inset 0 1px 0 rgba(255,255,255,.25);">
       <span data-ref="fabIcon" style="display: flex; align-items: center; justify-content: center; transition: transform .35s cubic-bezier(.34,1.3,.5,1);">
@@ -1491,59 +1513,70 @@ h1, h2 { line-height: 1.2 !important; }
     </button>
   </div>
 
-  <div data-fanveil="" hidden style="position: fixed; inset: 0; z-index: 68; background: rgba(255,255,255,.42); animation: tqFanVeil .3s ease both; cursor: pointer;"></div>
+    <div data-fanveil="" hidden style="position: fixed; inset: 0; z-index: 68; background: rgba(255,255,255,.42); animation: tqFanVeil .3s ease both; cursor: pointer;"></div>
   <div data-fanmenu="" style="position: fixed; right: 28px; bottom: 28px; z-index: 78; width: 60px; height: 60px;">
-      <div class="tq-fan-item" style="--i: 0; --ri: 4;">
-        <a class="hv-fan-blade" href="../commission-plans/" data-page-link data-label="LOADING · COMMISSION PLANS" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+      <div class="tq-fan-item" style="--i: 0; --ri: 5;">
+        <a class="hv-fan-blade" href="programs/" data-page-link data-label="جارٍ التحميل · برامج الشركاء" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">02</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Commission Plans</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">02</span>
+            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">برامج الشركاء</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 1; --ri: 3;">
-        <a class="hv-fan-blade" href="../dashboard/" data-page-link data-label="LOADING · PARTNER DASHBOARD" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+      <div class="tq-fan-item" style="--i: 1; --ri: 4;">
+        <a class="hv-fan-blade" href="commission-plan/" data-page-link data-label="جارٍ التحميل · خطة العمولات" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">03</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Partner Dashboard</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">03</span>
+            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">خطة العمولات</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 2; --ri: 2;">
-        <a class="hv-fan-blade" href="../marketing-hub/" data-page-link data-label="LOADING · MARKETING HUB" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+      <div class="tq-fan-item" style="--i: 2; --ri: 3;">
+        <a class="hv-fan-blade" href="../dashboard/" data-page-link data-label="جارٍ التحميل · لوحة تحكم الشريك" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Marketing Hub</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
+            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">لوحة تحكم الشريك</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 3; --ri: 1;">
-        <a class="hv-fan-blade" href="../academy/" data-page-link data-label="LOADING · PARTNER ACADEMY" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+      <div class="tq-fan-item" style="--i: 3; --ri: 2;">
+        <a class="hv-fan-blade" href="../marketing-hub/" data-page-link data-label="جارٍ التحميل · مركز التسويق" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">05</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Partner Academy</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">05</span>
+            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">مركز التسويق</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 4; --ri: 0;">
-        <a class="hv-fan-blade" href="../success-stories/" data-page-link data-label="LOADING · SUCCESS STORIES" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+      <div class="tq-fan-item" style="--i: 4; --ri: 1;">
+        <a class="hv-fan-blade" href="../academy/" data-page-link data-label="جارٍ التحميل · أكاديمية الشركاء" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">06</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Success Stories</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">06</span>
+            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">أكاديمية الشركاء</span>
+          </span>
+          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
+        </a>
+      </div>
+      <div class="tq-fan-item" style="--i: 5; --ri: 0;">
+        <a class="hv-fan-blade" href="../success-stories/" data-page-link data-label="جارٍ التحميل · قصص النجاح" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
+          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">07</span>
+            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">قصص النجاح</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
@@ -1553,10 +1586,10 @@ h1, h2 { line-height: 1.2 !important; }
       <span aria-hidden="true" style="position: absolute; inset: 3px; z-index: -1; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 -10px 16px -12px rgba(10,10,10,.2);"></span>
       <span class="tq-fan-ico tq-fan-ico--closed" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.6" stroke-linejoin="round"><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)"></rect><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)" transform="rotate(-28 12 19.5)"></rect><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)" transform="rotate(28 12 19.5)"></rect><circle cx="12" cy="19.5" r="1.6" fill="#e7131b" stroke="none"></circle></svg></span>
       <span class="tq-fan-ico tq-fan-ico--open" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></span>
-      <span aria-hidden="true" style="position: absolute; top: -3px; right: -3px; width: 21px; height: 21px; border-radius: 50%; background: #e7131b; color: #fff; border: 2px solid #fff; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1;">5</span>
+      <span aria-hidden="true" style="position: absolute; top: -3px; right: -3px; width: 21px; height: 21px; border-radius: 50%; background: #e7131b; color: #fff; border: 2px solid #fff; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1;">6</span>
     </button>
   </div>
-  
+
 
   <footer style="padding: clamp(28px, 4vw, 48px) clamp(16px, 4vw, 56px); background: #fff; border-top: 1px solid #ececee;">
     <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: center;">
@@ -1567,6 +1600,6 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../assets/js/transition.js?v=ca838a522c" defer></script>
-<script src="../assets/js/landing.js?v=c5fb9a96bf" defer></script>
+<script src="../assets/js/landing.js?v=d96becf6eb" defer></script>
 </body>
 </html>

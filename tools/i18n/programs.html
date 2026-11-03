@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{pp.meta.title}}</title>
+<meta name="description" content="{{@pp.meta.description}}">
+<link rel="canonical" href="{{canonical}}">
+{{hreflang}}
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TradeQuo Partners">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:title" content="{{@pp.meta.title}}">
+<meta property="og:description" content="{{@pp.meta.ogDescription}}">
+<meta property="og:image" content="https://tradequopartners.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{@pp.meta.title}}">
+<meta name="twitter:description" content="{{@pp.meta.ogDescription}}">
+<meta name="twitter:image" content="https://tradequopartners.com/og.png">
+{{> head}}
+</head>
+<body>
+{{> loader}}
+<div class="tp">
+
+  {{> page-header-start}}
+        <a class="hv-red" href="#programs" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{pp.nav.programs}}</a>
+        <a class="hv-red" href="#benefits" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{pp.nav.benefits}}</a>
+        <a class="hv-red" href="#why" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{pp.nav.why}}</a>
+        <a class="hv-red" href="#questions" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.faq}}</a>
+  {{> page-header-end}}
+
+  <main>
+    <!-- Hero + the three programs -->
+    <section id="programs" class="tp-sec tp-hero" data-screen-label="Partner programs — hero">
+      <div class="tp-head">
+        <span class="tp-kicker">{{pp.hero.kicker}}</span>
+        <h1 class="tp-h1">{{pp.hero.h1}}</h1>
+        <p class="tp-sub">{{pp.hero.sub}}</p>
+      </div>
+
+      <div class="tp-stage">
+        <div class="tp-programs">
+          <article class="tp-dark tp-dark--hover tp-prog">
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-obj" src="{{root}}assets/offer-tv.webp" alt="" width="360" height="344" decoding="async"></div>
+            <span class="tp-prog__tag">01 · {{pp.p1.tag}}</span>
+            <h2 class="tp-prog__title">{{pp.p1.title}}</h2>
+            <p class="tp-prog__desc">{{pp.p1.desc}}</p>
+            <div class="tp-prog__value"><b>{{pp.p1.value}}</b><span>{{pp.p1.valueNote}}</span></div>
+            <ul class="tp-ticks"><li>{{pp.p1.b1}}</li><li>{{pp.p1.b2}}</li><li>{{pp.p1.b3}}</li></ul>
+            <p class="tp-prog__for">{{pp.p1.for}}</p>
+            <div class="tp-prog__cta">
+              <a class="tp-btn tp-btn--red tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              <a class="tp-link" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}">{{pp.card.plan}}</a>
+            </div>
+          </article>
+          <article class="tp-dark tp-dark--hover tp-prog">
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-obj" src="{{root}}assets/offer-sig.webp" alt="" width="330" height="280" decoding="async"></div>
+            <span class="tp-prog__tag">02 · {{pp.p2.tag}}</span>
+            <h2 class="tp-prog__title">{{pp.p2.title}}</h2>
+            <p class="tp-prog__desc">{{pp.p2.desc}}</p>
+            <div class="tp-prog__value"><b>{{pp.p2.value}}</b><span>{{pp.p2.valueNote}}</span></div>
+            <ul class="tp-ticks"><li>{{pp.p2.b1}}</li><li>{{pp.p2.b2}}</li><li>{{pp.p2.b3}}</li></ul>
+            <p class="tp-prog__for">{{pp.p2.for}}</p>
+            <div class="tp-prog__cta">
+              <a class="tp-btn tp-btn--red tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              <a class="tp-link" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}">{{pp.card.plan}}</a>
+            </div>
+          </article>
+          <article class="tp-dark tp-dark--hover tp-prog">
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-obj" src="{{root}}assets/offer-bro.webp" alt="" width="330" height="320" decoding="async"></div>
+            <span class="tp-prog__tag">03 · {{pp.p3.tag}}</span>
+            <h2 class="tp-prog__title">{{pp.p3.title}}</h2>
+            <p class="tp-prog__desc">{{pp.p3.desc}}</p>
+            <div class="tp-prog__value"><b>{{pp.p3.value}}</b><span>{{pp.p3.valueNote}}</span></div>
+            <ul class="tp-ticks"><li>{{pp.p3.b1}}</li><li>{{pp.p3.b2}}</li><li>{{pp.p3.b3}}</li></ul>
+            <p class="tp-prog__for">{{pp.p3.for}}</p>
+            <div class="tp-prog__cta">
+              <a class="tp-btn tp-btn--red tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              <a class="tp-link" href="{{home}}#dashboard" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{offer.pill}}</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key benefits -->
+    <section id="benefits" class="tp-sec" data-screen-label="Key benefits">
+      <div class="tp-wrap">
+        <div class="tp-head">
+          <span class="tp-kicker">{{pp.ben.kicker}}</span>
+          <h2 class="tp-h2">{{pp.ben.title}}</h2>
+          <p class="tp-sub">{{pp.ben.sub}}</p>
+        </div>
+        <div class="tp-benefits">
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18.5 5.5 5.5 18.5"></path><circle cx="7.5" cy="7.5" r="2.5"></circle><circle cx="16.5" cy="16.5" r="2.5"></circle></svg></span><h3>{{pp.ben.1.t}}</h3><p>{{pp.ben.1.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><path d="m9 14.5 2 2 4-4"></path></svg></span><h3>{{pp.ben.2.t}}</h3><p>{{pp.ben.2.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v4"></path><path d="M4 7.5v10A2.5 2.5 0 0 0 6.5 20H20V9H6.5A2.5 2.5 0 0 1 4 6.5"></path><circle cx="16" cy="14.5" r="1.2" fill="currentColor"></circle></svg></span><h3>{{pp.ben.3.t}}</h3><p>{{pp.ben.3.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path><path d="M3.5 20.5h17"></path></svg></span><h3>{{pp.ben.4.t}}</h3><p>{{pp.ben.4.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13v-1a7.5 7.5 0 0 1 15 0v1"></path><rect x="3.5" y="13" width="4" height="6" rx="1.5"></rect><rect x="16.5" y="13" width="4" height="6" rx="1.5"></rect><path d="M18.5 19c0 1.4-1.9 2.3-5 2.3"></path></svg></span><h3>{{pp.ben.5.t}}</h3><p>{{pp.ben.5.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"></rect><circle cx="9" cy="10" r="1.8"></circle><path d="m20.5 15.5-4.5-4.5-8.5 8.5"></path></svg></span><h3>{{pp.ben.6.t}}</h3><p>{{pp.ben.6.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>{{pp.ben.7.t}}</h3><p>{{pp.ben.7.d}}</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12.5" rx="2.5"></rect><path d="M9.5 7V5.2c0-.7.5-1.2 1.2-1.2h2.6c.7 0 1.2.5 1.2 1.2V7"></path><path d="M9 11v5M15 11v5"></path><path d="M8 19.5v1M16 19.5v1"></path></svg></span><h3>{{pp.ben.8.t}}</h3><p>{{pp.ben.8.d}}</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why TradeQuo -->
+    <section id="why" class="tp-sec" data-screen-label="Why TradeQuo" style="padding-top: 0;">
+      <div class="tp-stage" style="margin-top: 0; padding: clamp(28px, 5vw, 72px);">
+        <div class="tp-why">
+          <div class="tp-head tp-head--left">
+            <span class="tp-kicker">{{pp.why.kicker}}</span>
+            <h2 class="tp-h2">{{pp.why.title}}</h2>
+            <p class="tp-sub">{{pp.why.sub}}</p>
+            <a class="tp-btn tp-btn--line" href="{{home}}#reviews" data-page-link data-label="{{@loader}} · {{@fan.home}}" style="margin-top: 8px;">{{pp.why.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          </div>
+          <div class="tp-stats">
+            <div class="tp-glass tp-stat"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e7131b" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"></path><path d="M16 5.6a3.2 3.2 0 0 1 0 6.1"></path><path d="M17.6 14.9c2 .6 3.4 2.4 3.4 4.6"></path></svg><b>800K<i>+</i></b><span>{{embed.crys.traders}}</span></div>
+            <div class="tp-glass tp-stat"><svg width="22" height="22" viewBox="0 0 24 24" fill="#e7131b" aria-hidden="true"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z"></path></svg><b>4.9</b><span>{{embed.crys.rating}}</span></div>
+            <div class="tp-glass tp-stat"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e7131b" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.5 12h17"></path><path d="M12 3.5c2.3 2.3 3.5 5.1 3.5 8.5s-1.2 6.2-3.5 8.5c-2.3-2.3-3.5-5.1-3.5-8.5s1.2-6.2 3.5-8.5z"></path></svg><b>30K<i>+</i></b><span>{{embed.crys.partners}}</span></div>
+            <div class="tp-glass tp-stat"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e7131b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v17"></path><path d="M16.5 7.5c-.8-1.4-2.5-2.2-4.5-2.2-2.5 0-4.3 1.3-4.3 3.2 0 4.4 9 2.3 9 6.8 0 2-1.9 3.4-4.7 3.4-2.1 0-3.9-.9-4.8-2.4"></path></svg><b>$9M<i>+</i></b><span>{{embed.crys.payouts}}</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section class="tp-sec" data-screen-label="Join partners" style="padding-top: clamp(24px, 4vw, 48px);">
+      <div class="tp-join">
+        <h2 class="tp-h2">{{pp.join.title}}</h2>
+        <p class="tp-sub">{{pp.join.sub}}</p>
+        <div class="tp-actions">
+          <a class="tq-logo" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}" aria-label="{{@nav.cta}}"><span>{{nav.cta}}</span><span class="tq-logo__coin" aria-hidden="true"><span class="tq-logo__face"></span><span class="tq-logo__rim"></span><svg class="tq-logo__flag" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__t" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__dot" width="56" height="56" viewBox="20.75 19.75 160 160"><circle cx="141" cy="130.5" r="10.5" fill="#E7131B"></circle></svg><span class="tq-logo__flash"></span></span></a>
+          <a class="tq-crys" style="align-self: center;" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}" aria-label="{{@pp.join.cta2}}"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">{{pp.join.cta2}}</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="questions" class="tp-sec" data-screen-label="Programs FAQ" style="padding-top: clamp(24px, 4vw, 48px);">
+      <div class="tp-wrap tp-faq">
+        <div class="tp-faq__side">
+          <span class="tp-pill">{{faq.pill}}</span>
+          <h2 class="tp-h2" style="font-size: clamp(36px, 4.4vw, 56px);">{{pp.faq.title}}</h2>
+          <p class="tp-sub" style="max-width: 30ch;">{{pp.faq.sub}}</p>
+        </div>
+        <div class="tp-faq__list">
+{{faq:pp.faq:5}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final call -->
+    <section class="tp-night-sec" data-screen-label="Start earning">
+      <div class="tp-night">
+        <div class="tp-head">
+          <h2 class="tp-h2">{{pp.end.title}}</h2>
+          <p class="tp-sub">{{pp.end.sub}}</p>
+          <div class="tp-actions" style="margin-top: 12px;">
+            <a class="tp-btn tp-btn--red" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <a class="tp-btn tp-btn--ghost" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}">{{reach.cta2}}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-fab="" style="position: fixed; right: 16px; bottom: 16px; z-index: 60; display: none; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+      <a class="tq-fab-link" href="{{home}}" data-page-link data-label="{{@loader}} · {{@fan.home}}" style="--i: 0;">{{fan.home}}</a>
+      <a class="tq-fab-link tq-fab-link--page" href="#programs" aria-current="page" style="--i: 1;">{{fan.programs}}</a>
+      <a class="tq-fab-link tq-fab-link--page" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}" style="--i: 2;">{{fan.commission}}</a>
+      <a class="tq-fab-link" href="#questions" style="--i: 3;">{{nav.faq}}</a>
+    </div>
+    {{> fab-button}}
+  </div>
+
+  {{fanMenu}}
+
+{{> footer}}
+</div>
+
+<script src="{{root}}assets/js/transition.js" defer></script>
+<script src="{{root}}assets/js/landing.js" defer></script>
+</body>
+</html>

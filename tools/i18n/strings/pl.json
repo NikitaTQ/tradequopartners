@@ -3,6 +3,7 @@
   "meta.description": "Polecaj TradeQuo traderom i zarabiaj do 87% spreadu od każdego lota w ich obrocie. Prowizje rozliczane codziennie, bez opłat za wypłatę.",
   "meta.ogDescription": "Zarabiaj do 87% spreadu od każdego lota w obrocie Twoich klientów. Wypłaty codziennie.",
   "lang.label": "Język",
+  "lang.translate": "Autotłumaczenie",
   "loader": "ŁADOWANIE",
 
   "nav.how": "Jak to działa",
@@ -132,6 +133,13 @@
 
   "fab.aria": "Menu",
   "fan.aria": "Mapa strony",
+  "fan.home": "Strona główna",
+  "fan.programs": "Programy partnerskie",
+  "fan.commission": "Plan prowizyjny",
+  "fan.dashboard": "Panel partnera",
+  "fan.marketing": "Centrum marketingu",
+  "fan.academy": "Akademia partnerska",
+  "fan.stories": "Historie sukcesu",
   "footer.risk": "Kontrakty CFD są złożonymi instrumentami i wiążą się z dużym ryzykiem szybkiej utraty środków pieniężnych z powodu dźwigni finansowej. 72,6% rachunków inwestorów detalicznych odnotowuje straty pieniężne w wyniku handlu kontraktami CFD u niniejszego dostawcy.",
 
   "embed.crys.partners": "PARTNERÓW",

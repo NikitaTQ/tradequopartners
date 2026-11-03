@@ -1,55 +1,7 @@
 [
   {
-    "slug": "commission-plans",
-    "num": "02",
-    "kicker": "Earnings",
-    "short": "Commissions",
-    "title": "Commission Plans",
-    "blurb": "Start at $5.00 per lot and move up to $10.00 as your client base grows. Every tier is paid daily.",
-    "h1": "Earn more per lot as your network grows",
-    "sub": "Start at $5.00 per lot and move up to $10.00 as your client base grows. Every tier is paid daily.",
-    "cta": "Compare plans",
-    "cta2": "Open calculator",
-    "cardTitle": "Rate per lot",
-    "rows": [
-      {
-        "label": "Starter",
-        "value": "$5.00",
-        "note": "0–50 clients"
-      },
-      {
-        "label": "Gold",
-        "value": "$7.50",
-        "note": "51–200 clients"
-      },
-      {
-        "label": "Elite",
-        "value": "$10.00",
-        "note": "200+ clients"
-      }
-    ],
-    "sections": [
-      {
-        "title": "Move up the tiers",
-        "desc": "Find out what counts as an active client and how each upgrade is applied."
-      },
-      {
-        "title": "Know when you’re paid",
-        "desc": "See exactly when money lands, the minimum thresholds and the supported payout methods."
-      },
-      {
-        "title": "Earn from your own team",
-        "desc": "Bring in other partners and earn second-level commissions on their results. Transparent split, no cap."
-      },
-      {
-        "title": "See how we compare",
-        "desc": "Spreads, rebate per lot and payout speed next to the market, all on one table."
-      }
-    ]
-  },
-  {
     "slug": "dashboard",
-    "num": "03",
+    "num": "04",
     "kicker": "Tracking",
     "short": "Dashboard",
     "title": "Partner Dashboard",
@@ -97,7 +49,7 @@
   },
   {
     "slug": "marketing-hub",
-    "num": "04",
+    "num": "05",
     "kicker": "Growth",
     "short": "Marketing",
     "title": "Marketing Hub",
@@ -145,7 +97,7 @@
   },
   {
     "slug": "academy",
-    "num": "05",
+    "num": "06",
     "kicker": "Education",
     "short": "Academy",
     "title": "Partner Academy",
@@ -193,7 +145,7 @@
   },
   {
     "slug": "success-stories",
-    "num": "06",
+    "num": "07",
     "kicker": "Proof",
     "short": "Stories",
     "title": "Success Stories",

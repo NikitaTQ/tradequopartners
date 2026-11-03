@@ -3,6 +3,7 @@
   "meta.description": "Chương trình đối tác IB của TradeQuo: giới thiệu nhà giao dịch và nhận lên đến 87% spread trên mỗi lot họ giao dịch. Hoa hồng thanh toán mỗi ngày, không mất phí chi trả.",
   "meta.ogDescription": "Nhận lên đến 87% spread trên mỗi lot khách hàng của bạn giao dịch. Chi trả mỗi ngày.",
   "lang.label": "Ngôn ngữ",
+  "lang.translate": "Tự động dịch",
   "loader": "ĐANG TẢI",
 
   "nav.how": "Cách hoạt động",
@@ -132,6 +133,13 @@
 
   "fab.aria": "Menu",
   "fan.aria": "Sơ đồ trang",
+  "fan.home": "Trang chủ",
+  "fan.programs": "Các chương trình",
+  "fan.commission": "Chính sách hoa hồng",
+  "fan.dashboard": "Bảng điều khiển đối tác",
+  "fan.marketing": "Trung tâm tiếp thị",
+  "fan.academy": "Học viện đối tác",
+  "fan.stories": "Câu chuyện thành công",
   "footer.risk": "Hợp đồng chênh lệch (CFD) là công cụ phức tạp và có rủi ro cao bị mất tiền nhanh chóng do đòn bẩy. 72.6% tài khoản nhà đầu tư nhỏ lẻ bị mất tiền khi giao dịch CFD với nhà cung cấp này.",
 
   "embed.crys.partners": "ĐỐI TÁC",

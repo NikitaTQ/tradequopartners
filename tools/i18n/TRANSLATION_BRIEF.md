@@ -55,3 +55,41 @@ business Japanese · ko 합니다/하세요 · zh-hans Simplified Chinese (mainl
 
 ## Output
 Valid JSON (UTF-8, no comments), same key order as en.json, 2-space indent.
+
+---
+
+# Partner Programs + Commission Plan pages (added Nov 2026)
+
+**Sources:** `tools/i18n/strings/programs/en.json` (keys `pp.*`) and `tools/i18n/strings/commission/en.json`
+(keys `cp.*`). Produce `tools/i18n/strings/programs/<code>.json` and `tools/i18n/strings/commission/<code>.json`
+with exactly the same keys. Same tone, rules, glossary and address form as above.
+
+Also new in the landing master `tools/i18n/strings/en.json` (add them to `<code>.json`, same position):
+`lang.translate` (label of an on/off switch in the language menu that allows the browser to auto-translate
+the page — short, max ~20 characters), `fan.home` (= link to the landing page, "Home"),
+`fan.programs`, `fan.commission`, `fan.dashboard`, `fan.marketing`, `fan.academy`, `fan.stories`
+(page names in the bottom-right site-map menu; title case where the language uses it; max ~22 characters).
+
+## Page context
+- **Partner Programs** (`pp.*`): three ways to partner with TradeQuo — Introducing Broker (refer traders),
+  Partner network (Sub-IB: earn on partners you bring in), White Label (own brokerage / academy brand).
+- **Commission Plan** (`cp.*`): an earnings calculator (active clients × lots per client × rate per lot of the
+  tier), the commission structure (up to 87% of spread; tiers Starter $5.00 / Gold $7.50 / Elite $10.00 per lot),
+  daily payouts, perks, FAQ.
+
+## Extra rules for these pages
+1. `cp.calc.next` contains the placeholders `{tier}` (an English tier name: Starter/Gold/Elite) and `{n}`
+   (a number of clients): keep both exactly, move them where your grammar needs them. Example de:
+   `{tier} ab {n} Kunden`.
+2. Tight slots (as short as English or shorter): `pp.nav.*`, `cp.nav.*`, `pp.p1-3.tag`, `pp.p1-3.value`,
+   `pp.p1-3.valueNote`, `pp.card.plan`, `cp.calc.clientsUnit`, `cp.calc.tier`, `cp.calc.perLot`, `cp.calc.perDay`,
+   `cp.calc.perYear`, `cp.calc.p1-3`, `cp.str.example`, `cp.tier.*`, `cp.pay.t1-4`, `pp.join.cta2`, `cp.end.cta2`,
+   `pp.why.cta`. Keys in UPPERCASE in English (`*.kicker`, `*.tag`, `cp.calc.clientsUnit`, `cp.calc.tier`,
+   `cp.str.example`) stay uppercase in scripts with case.
+3. `pp.p2.value` "Sub-IB" may stay as is (or the market's usual term). `pp.p3.value` "Your brand" is a big
+   headline value — keep it short.
+4. `cp.str.l1`…`l3`, `cp.str.exampleFrom/To` explain spread-based commission: "spread" = the bid/ask difference,
+   use your market's standard trading term.
+5. Dollar amounts stay exactly as written (`$5.00–$10.00`, `$1,000`, `$870`), like on the landing. Other numbers
+   keep their digits (`87%`, `00:00`, `24`, `0–50`, `51–200`, `200+`, `51`, `200`); the count `30,000+` may use
+   your language's thousands separator (`30.000+`, `30 000+`) or a natural local form (`3万+`).

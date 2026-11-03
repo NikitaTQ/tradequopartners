@@ -28,3 +28,9 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
     X-Robots-Tag = "noindex"
+
+# The Commission Plans concept page became the translated commission plan page.
+[[redirects]]
+  from = "/commission-plans/*"
+  to = "/commission-plan/"
+  status = 301

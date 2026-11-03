@@ -652,6 +652,25 @@
     btn.addEventListener('click', (e) => { e.stopPropagation(); set(menu.hidden); });
     document.addEventListener('click', (e) => { if (!menu.hidden && !box.contains(e.target)) set(false); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); } });
+
+    /* Browser auto-translate is allowed by default; a visitor who reads the page in its own
+     * language can switch it off. The <head> script applies the choice (translate="no",
+     * <meta name="google" content="notranslate">) before the browser looks at the page,
+     * so changing it reloads: that also undoes a translation already on screen. */
+    const tr = $('[data-translate-toggle]', box);
+    if (tr) {
+      let off = false;
+      try { off = !!localStorage.getItem('tqNoTranslate'); } catch (e) {}
+      tr.setAttribute('aria-checked', String(!off));
+      tr.addEventListener('click', () => {
+        try {
+          if (off) localStorage.removeItem('tqNoTranslate');
+          else localStorage.setItem('tqNoTranslate', '1');
+        } catch (e) { return; }
+        tr.setAttribute('aria-checked', String(off));
+        setTimeout(() => location.reload(), 180);
+      });
+    }
   }
 
   function startFaq() {

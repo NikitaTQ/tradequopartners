@@ -14,7 +14,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, 'site')
 DOMAIN = 'https://tradequopartners.com'
 pages = json.load(open(os.path.join(ROOT, 'tools', 'pages.json'), encoding='utf-8'))
-TOTAL = len(pages) + 1  # the landing counts as page 01
+# Numbering follows the site-map fan: 01 landing, 02 Partner Programs, 03 Commission Plan
+# (translated pages, tools/build-i18n.py), then these concept pages.
+LIVE = [{'slug': 'programs', 'short': 'Programs', 'title': 'Partner Programs'},
+        {'slug': 'commission-plan', 'short': 'Commission Plan', 'title': 'Commission Plan'}]
+TOTAL = len(pages) + 1 + len(LIVE)
 
 e = lambda s: html.escape(s, quote=False)
 a = lambda s: html.escape(s, quote=True)
@@ -33,7 +37,7 @@ def nav_link(p, current):
 
 def render(i, p):
     nxt = pages[(i + 1) % len(pages)]
-    nav = '\n          '.join(nav_link(q, p['slug']) for q in pages)
+    nav = '\n          '.join(nav_link(q, p['slug']) for q in LIVE + pages)
     rows = '\n'.join('''            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 15px 0; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);">
               <span style="font-size: 14px; color: #5b5b5b;">{label}</span>
               <span style="display: flex; align-items: baseline; gap: 10px;"><span style="font-size: 24px; font-weight: 700; letter-spacing: -.035em; color: #0a0a0a;">{value}</span><span style="font-family: 'Fragment Mono', monospace; font-size: 10.5px; color: #9a9da3; white-space: nowrap;">{note}</span></span>

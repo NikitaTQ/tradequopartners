@@ -3,6 +3,7 @@
   "meta.description": "推荐交易者加入TradeQuo，从其交易的每一手中赚取高达87%的点差返佣。佣金每日结算，出款零手续费。",
   "meta.ogDescription": "您的客户每交易一手，您即可获得高达87%的点差分成。每日支付。",
   "lang.label": "语言",
+  "lang.translate": "自动翻译",
   "loader": "加载中",
 
   "nav.how": "运作方式",
@@ -132,6 +133,13 @@
 
   "fab.aria": "菜单",
   "fan.aria": "网站地图",
+  "fan.home": "首页",
+  "fan.programs": "合作伙伴方案",
+  "fan.commission": "佣金方案",
+  "fan.dashboard": "合作伙伴后台",
+  "fan.marketing": "营销中心",
+  "fan.academy": "合作伙伴学院",
+  "fan.stories": "成功案例",
   "footer.risk": "差价合约是复杂的金融工具，由于杠杆作用，存在快速亏损资金的高风险。72.6%的散户投资者账户在与本服务商进行差价合约交易时出现亏损。",
 
   "embed.crys.partners": "合作伙伴",
