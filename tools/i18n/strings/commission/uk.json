@@ -13,6 +13,8 @@
   "cp.calc.lots": "Лоти на клієнта",
   "cp.calc.lotsHint": "Середній місячний обсяг на клієнта",
   "cp.calc.tier": "ВАШ РІВЕНЬ",
+  "cp.calc.est": "РОЗРАХУНОК",
+  "cp.calc.rate": "СТАВКА ЗА ЛОТ",
   "cp.calc.perLot": "за лот",
   "cp.calc.income": "Ваш потенційний дохід за місяць",
   "cp.calc.volume": "Обсяг за місяць",

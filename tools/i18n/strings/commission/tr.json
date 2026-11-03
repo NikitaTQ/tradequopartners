@@ -13,6 +13,8 @@
   "cp.calc.lots": "Müşteri başına lot",
   "cp.calc.lotsHint": "Müşteri başına ortalama aylık hacim",
   "cp.calc.tier": "SEVİYENİZ",
+  "cp.calc.est": "TAHMİN",
+  "cp.calc.rate": "LOT BAŞINA ORAN",
   "cp.calc.perLot": "lot başına",
   "cp.calc.income": "Aylık potansiyel kazancınız",
   "cp.calc.volume": "Aylık hacim",

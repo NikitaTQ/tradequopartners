@@ -13,6 +13,8 @@
   "cp.calc.lots": "Số lot mỗi khách hàng",
   "cp.calc.lotsHint": "Khối lượng trung bình mỗi tháng của một khách hàng",
   "cp.calc.tier": "HẠNG CỦA BẠN",
+  "cp.calc.est": "ƯỚC TÍNH",
+  "cp.calc.rate": "HOA HỒNG MỖI LOT",
   "cp.calc.perLot": "mỗi lot",
   "cp.calc.income": "Thu nhập tiềm năng mỗi tháng",
   "cp.calc.volume": "Khối lượng hằng tháng",

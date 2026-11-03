@@ -13,6 +13,8 @@
   "cp.calc.lots": "고객당 랏 수",
   "cp.calc.lotsHint": "고객 1인당 월평균 거래량",
   "cp.calc.tier": "내 등급",
+  "cp.calc.est": "수익 추정",
+  "cp.calc.rate": "랏당 지급액",
   "cp.calc.perLot": "/ 랏",
   "cp.calc.income": "월 예상 수익",
   "cp.calc.volume": "월 거래량",

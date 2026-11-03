@@ -13,6 +13,8 @@
   "cp.calc.lots": "Lotes por cliente",
   "cp.calc.lotsHint": "Volumen mensual promedio por cliente",
   "cp.calc.tier": "TU NIVEL",
+  "cp.calc.est": "ESTIMACIÓN",
+  "cp.calc.rate": "TARIFA POR LOTE",
   "cp.calc.perLot": "por lote",
   "cp.calc.income": "Tus ingresos potenciales al mes",
   "cp.calc.volume": "Volumen mensual",

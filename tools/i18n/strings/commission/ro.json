@@ -13,6 +13,8 @@
   "cp.calc.lots": "Loturi per client",
   "cp.calc.lotsHint": "Volumul lunar mediu per client",
   "cp.calc.tier": "NIVELUL TĂU",
+  "cp.calc.est": "ESTIMARE",
+  "cp.calc.rate": "TARIF PE LOT",
   "cp.calc.perLot": "pe lot",
   "cp.calc.income": "Venitul tău lunar potențial",
   "cp.calc.volume": "Volum lunar",
