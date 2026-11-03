@@ -168,17 +168,17 @@
   <header class="if-head">
     <div>
       <h2 class="if-title">Infinite <span>Flow</span></h2>
-      <p class="if-sub">A steady flow of income, not a monthly wait.</p>
+      <p class="if-sub" data-i18n="flow.sub">Commissions that keep coming. Settled every day.</p>
     </div>
     <div class="if-live">
-      <div class="if-live-row if-mono"><span class="if-dot"></span><span>Live</span><span style="color:#C8C8CC">/</span><span>Paid to partners this month</span></div>
+      <div class="if-live-row if-mono"><span class="if-dot"></span><span data-i18n="flow.live">Live</span><span style="color:#C8C8CC">/</span><span data-i18n="flow.paid">Paid to partners this month</span></div>
       <div class="if-total" id="if-total">$9,184,620</div>
     </div>
   </header>
   <div class="if-scene" id="if-scene"></div>
   <div class="if-cta">
-    <a class="tq-conv" href="#signup" target="_top" aria-label="Become a partner">
-  <span>Become a partner</span>
+    <a class="tq-conv" href="#signup" target="_top" aria-label="Become a partner" data-i18n-aria="flow.cta">
+  <span data-i18n="flow.cta">Become a partner</span>
   <span class="tq-conv__mech" aria-hidden="true">
     <span class="tq-conv__belt">
       <span class="tq-conv__fade">
@@ -207,9 +207,9 @@
 </a>
   </div>
   <div class="if-metrics if-mono">
-    <div><span class="if-dot"></span>Daily payouts</div>
-    <div><span class="if-dot"></span>4 currencies</div>
-    <div><span class="if-dot"></span>No caps</div>
+    <div><span class="if-dot"></span><span data-i18n="flow.f1">Daily payouts</span></div>
+    <div><span class="if-dot"></span><span data-i18n="flow.f2">4 currencies</span></div>
+    <div><span class="if-dot"></span><span data-i18n="flow.f3">No caps</span></div>
   </div>
 </section>
 <script type="module">
@@ -964,6 +964,22 @@ document.querySelectorAll('.tq-conv').forEach(function (el) {
     try { parent.postMessage({ tqGo: 'signup' }, '*'); } catch (err) {}
   });
 });
+</script>
+<script src="i18n.js?v=d4895c0901"></script>
+<script>
+/* Labels in the page language (?lang=…; strings from i18n.js, built by tools/build-i18n.py). */
+(function () {
+  var code = new URLSearchParams(location.search).get('lang');
+  var T = (window.TQ_I18N || {})[code];
+  if (!T) return;
+  document.documentElement.lang = code;
+  document.querySelectorAll('[data-i18n]').forEach(function (el) { var v = T[el.getAttribute('data-i18n')]; if (v) el.textContent = v; });
+  document.querySelectorAll('[data-i18n-aria]').forEach(function (el) { var v = T[el.getAttribute('data-i18n-aria')]; if (v) el.setAttribute('aria-label', v); });
+  var css = T._fonts || '';
+  if (/arabic|thai|cjk/.test(T._script)) css += '.if-sub, .if-live, .if-metrics, .tq-conv { letter-spacing: 0 !important; }';
+  if (T._dir === 'rtl') document.querySelectorAll('.if-sub, .if-live-row, .if-metrics > div').forEach(function (el) { el.dir = 'rtl'; });
+  if (css) { var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st); }
+})();
 </script>
 </body>
 </html>

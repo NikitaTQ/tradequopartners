@@ -45,6 +45,7 @@
 </div>
 
 <three-d-stage name="tradequo-crystals" background="#ffffff"></three-d-stage>
+<script src="i18n.js?v=d4895c0901"></script>
 <script src="crystals-stage.js?v=432dd675f4"></script>
 <script type="module">
 const P = new URLSearchParams(location.search);
@@ -56,8 +57,19 @@ if (EMBED) document.body.classList.add('embed');
 const stage = document.querySelector('three-d-stage');
 /* Hide the editor chrome before anything awaits, or it flashes while three.js loads. */
 if (EMBED) ['.toolbar', '.note'].forEach((sel) => { const el = stage.shadowRoot && stage.shadowRoot.querySelector(sel); if (el) el.style.display = 'none'; });
+/* Captions in the page language (?lang=…, strings from i18n.js, built by tools/build-i18n.py).
+ * Scripts Archivo lacks fall back to the site's faces for them, declared as 'DM Sans'. */
+const LANG = (window.TQ_I18N || {})[P.get('lang')] ? P.get('lang') : 'en';
+const T = Object.assign({ 'crys.partners': 'PARTNERS', 'crys.payouts': 'PAID TO PARTNERS MONTHLY', 'crys.revshare': 'MAX REVENUE SHARE',
+  'crys.rating': 'TRUSTPILOT RATING', 'crys.traders': 'CLIENT TRADERS', 'crys.trips': 'INCENTIVE TRIPS', _script: 'latin' },
+  (window.TQ_I18N || {})[LANG] || {});
+if (T._fonts) { const st = document.createElement('style'); st.textContent = T._fonts; document.head.appendChild(st); }
+const CAP_FONT = "Archivo, 'DM Sans', 'TQ CJK', sans-serif";
+const CAP_TRACK = /arabic|thai|cjk/.test(T._script) ? 0 : 1; /* tracking breaks Arabic joining, crowds Thai/CJK */
 const { THREE } = await stage.ready;
-await Promise.all([document.fonts.load('800 200px Archivo'), document.fonts.load('700 40px Archivo')]).catch(() => {});
+const CAP_TEXT = ['partners', 'payouts', 'revshare', 'rating', 'traders', 'trips'].map((k) => T['crys.' + k]).join(' ');
+await Promise.all([document.fonts.load('800 200px Archivo'), document.fonts.load('700 40px Archivo'),
+  document.fonts.load('700 40px ' + CAP_FONT, CAP_TEXT)]).catch(() => {});
 
 const RED = '#E7131B';
 const R = stage._renderer, scene = stage._scene;
@@ -79,12 +91,12 @@ if (EMBED) {
 
 /* ---------------- Metrics ---------------- */
 const METRICS = [
-  { id: 'partners', num: [['30K', 0], ['+', 1]],  cap: 'SATISFIED PARTNERS' },
-  { id: 'payouts',  num: [['$9M', 0], ['+', 1]],  cap: 'MONTHLY PAYOUTS TO PARTNERS' },
-  { id: 'revshare', num: [['87', 0], ['%', 1]],   cap: 'REV SHARE RATE' },
-  { id: 'rating',   num: [['4.9', 0]],            cap: 'TRUSTPILOT RATING' },
-  { id: 'traders',  num: [['800K', 0], ['+', 1]], cap: 'SATISFIED CLIENT TRADERS' },
-  { id: 'trips',    num: [['400', 0], ['+', 1]],  cap: 'SPONSORED INCENTIVE TRIPS' },
+  { id: 'partners', num: [['30K', 0], ['+', 1]],  cap: T['crys.partners'] },
+  { id: 'payouts',  num: [['$9M', 0], ['+', 1]],  cap: T['crys.payouts'] },
+  { id: 'revshare', num: [['87', 0], ['%', 1]],   cap: T['crys.revshare'] },
+  { id: 'rating',   num: [['4.9', 0]],            cap: T['crys.rating'] },
+  { id: 'traders',  num: [['800K', 0], ['+', 1]], cap: T['crys.traders'] },
+  { id: 'trips',    num: [['400', 0], ['+', 1]],  cap: T['crys.trips'] },
 ];
 const N = METRICS.length;
 const HR = 0.64;                        // hexagon circumradius (vertex left/right)
@@ -135,8 +147,8 @@ function logoCanvas(v) {
 function drawMetric(ctx, f, v) {
   if (f.logo && !logoMasks) f = Object.assign({}, f, { logo: false, num: [['TQ', false]] });
   ctx.clearRect(0, 0, TX, TY);
-  const capSize = TY * 0.155, capLS = capSize * 0.13;
-  ctx.font = `700 ${capSize}px Archivo`; ctx.letterSpacing = `${capLS}px`;
+  const capSize = TY * 0.155 * (CAP_TRACK ? 1 : 1.18), capLS = capSize * 0.13 * CAP_TRACK; /* caseless scripts read small at cap height */
+  ctx.font = `700 ${capSize}px ${CAP_FONT}`; ctx.letterSpacing = `${capLS}px`;
   const capH = ctx.measureText('H').actualBoundingBoxAscent, gap = TY * 0.15;
   let numSize = TY * 0.49, numH, total, widths;
   const setNum = () => { ctx.font = `800 ${numSize}px Archivo`; ctx.letterSpacing = `${-numSize * 0.02}px`; };
@@ -149,7 +161,7 @@ function drawMetric(ctx, f, v) {
     numH = ctx.measureText('H').actualBoundingBoxAscent;
   }
   // Long captions wrap to a second line rather than shrinking into illegibility.
-  ctx.font = `700 ${capSize}px Archivo`; ctx.letterSpacing = `${capLS}px`;
+  ctx.font = `700 ${capSize}px ${CAP_FONT}`; ctx.letterSpacing = `${capLS}px`;
   const capW = s => ctx.measureText(s).width - capLS, MAXW = TX * 0.93;
   let lines = [f.cap];
   if (capW(f.cap) > MAXW) {
@@ -172,13 +184,13 @@ function drawMetric(ctx, f, v) {
   ctx.shadowColor = HALO[v]; ctx.shadowBlur = innerWidth <= 640 ? TY * 0.006 : TY * 0.012;
   if (f.logo) { const lc = logoCanvas(v), w = lc.width * numH / lc.height; ctx.drawImage(lc, (TX - w) / 2, top, w, numH); }
   else { let x = (TX - total) / 2; f.num.forEach(([t, red], i) => { ctx.fillStyle = red ? RED : INK[v]; ctx.fillText(t, x, baseN); x += widths[i]; }); }
-  ctx.font = `700 ${capSize}px Archivo`; ctx.letterSpacing = `${capLS}px`;
+  ctx.font = `700 ${capSize}px ${CAP_FONT}`; ctx.letterSpacing = `${capLS}px`;
   ctx.fillStyle = SUB[v];
   lines.forEach((ln, i) => {
     let cs = capSize, cls = capLS, cw = capW(ln);
-    if (cw > MAXW) { const k = MAXW / cw; cs *= k; cls *= k; ctx.font = `700 ${cs}px Archivo`; ctx.letterSpacing = `${cls}px`; cw = ctx.measureText(ln).width - cls; }
+    if (cw > MAXW) { const k = MAXW / cw; cs *= k; cls *= k; ctx.font = `700 ${cs}px ${CAP_FONT}`; ctx.letterSpacing = `${cls}px`; cw = ctx.measureText(ln).width - cls; }
     ctx.fillText(ln, (TX - cw) / 2, baseC + i * lineGap);
-    ctx.font = `700 ${capSize}px Archivo`; ctx.letterSpacing = `${capLS}px`;
+    ctx.font = `700 ${capSize}px ${CAP_FONT}`; ctx.letterSpacing = `${capLS}px`;
   });
   ctx.shadowBlur = 0;
 }

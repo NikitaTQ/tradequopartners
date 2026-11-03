@@ -198,7 +198,8 @@
       else { w = W; op = 1 - (k - RUN - HOLD) / FADE; }
       if (k < 40) state = [];
       /* all layout reads first, then writes — no forced re-layout per dot */
-      const reached = dots.map((d) => { const dr = d.getBoundingClientRect(); return w >= dr.left - lr.left; });
+      const rtl = document.documentElement.dir === 'rtl';   /* step 1 sits on the right, the fill grows from there */
+      const reached = dots.map((d) => { const dr = d.getBoundingClientRect(); return w >= (rtl ? lr.right - dr.right : dr.left - lr.left); });
       if (fill) { fill.style.width = w + 'px'; fill.style.opacity = op; }
       reached.forEach((on, i) => set(i, op > .5 && on));
     };
@@ -411,9 +412,15 @@
     $$('[data-calc-slider]').forEach((el) => { sliders[el.dataset.calcSlider] = el; });
 
     const d = new Date();
+    let numLocale = 'en-US';
+    try { numLocale = Intl.NumberFormat.supportedLocalesOf([document.documentElement.lang + '-u-nu-latn'])[0] || 'en-US'; } catch (e) {}
     const setText = (sel, v) => { const el = $(sel, inv); if (el) el.textContent = v; };
     setText('[data-inv-issued]', pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear());
-    setText('[data-inv-period]', d.toLocaleString('en-US', { month: 'short' }) + ' ' + d.getFullYear());
+    /* period in the page language, Western digits (amounts stay $ / en-US everywhere) */
+    let period;
+    try { period = new Intl.DateTimeFormat(document.documentElement.lang + '-u-nu-latn', { month: 'short', year: 'numeric' }).format(d); }
+    catch (e) { period = d.toLocaleString('en-US', { month: 'short' }) + ' ' + d.getFullYear(); }
+    setText('[data-inv-period]', period);
 
     /* money figures count up/down to the new total */
     const tot = $('[data-inv-total]', inv);
@@ -445,7 +452,7 @@
         $('[data-calc-fill]', s).style.width = pct;
         $('[data-calc-knob]', s).style.left = pct;
       }
-      setText('[data-inv-lots]', (lots * traders).toLocaleString('en-US'));
+      setText('[data-inv-lots]', (lots * traders).toLocaleString(numLocale));   /* lot count in local style; $ amounts stay en-US */
       setText('[data-inv-no]', 'TQ-' + String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + '-' + String(traders).padStart(3, '0'));
       tween(lots * traders * RATE);
     };
@@ -492,6 +499,12 @@
     const name = ref('name'), date = ref('date'), datePlace = ref('datePlace'), dateBox = ref('dateBox');
     if (!form || !stage) return;
     const envBtn = $('.tq-env', form);
+    /* copy comes from the page so every language build carries its own */
+    const msg = {
+      sent: form.dataset.msgSent || 'Request sent',
+      email: form.dataset.msgEmail || 'Please enter a valid email address.',
+      error: form.dataset.msgError || 'We couldn’t send your request. Please reload the page and try again.',
+    };
     const envTxt = envBtn && $('.tq-env__txt', envBtn);
     let submitted = false;
 
@@ -539,8 +552,8 @@
         if (envBtn) { envBtn.classList.remove('is-sealed', 'is-sent'); envBtn.classList.add('is-done'); }
         if (envTxt) envTxt.style.opacity = '0';
         setTimeout(() => {
-          if (envTxt) envTxt.textContent = 'Request sent';
-          if (envBtn) envBtn.setAttribute('aria-label', 'Request sent');
+          if (envTxt) envTxt.textContent = msg.sent;
+          if (envBtn) envBtn.setAttribute('aria-label', msg.sent);
           requestAnimationFrame(() => { center(); if (envTxt) envTxt.style.opacity = '1'; });
         }, 220);
         window.addEventListener('resize', () => {
@@ -612,11 +625,11 @@
       if (submitted) return;
       if (endpoint) {
         const email = form.elements.email;
-        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { email.focus(); showError('Please enter a valid email address.'); return; }
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { email.focus(); showError(msg.email); return; }
         const prev = $('.tq-form-error', form); if (prev) prev.remove();
         fetch(endpoint, { method: 'POST', body: new URLSearchParams(new FormData(form)), headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } })
           .then((r) => { if (!r.ok) throw new Error(r.status); })
-          .catch(() => showError('We couldn’t send your request. Please reload the page and try again.'));
+          .catch(() => showError(msg.error));
       }
       submitted = true;
       writeDate();
@@ -626,6 +639,21 @@
   }
 
   /* ---- FAQ accordion (one open at a time) ------------------------------------- */
+  /* ---- language switcher ------------------------------------------------------ */
+  function startLang() {
+    const box = $('[data-lang]');
+    if (!box) return;
+    const btn = $('.tq-lang__btn', box), menu = $('.tq-lang__menu', box);
+    const set = (open) => {
+      menu.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      if (open) { const cur = $('[aria-current="true"]', menu); if (cur) cur.scrollIntoView({ block: 'nearest' }); }
+    };
+    btn.addEventListener('click', (e) => { e.stopPropagation(); set(menu.hidden); });
+    document.addEventListener('click', (e) => { if (!menu.hidden && !box.contains(e.target)) set(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); } });
+  }
+
   function startFaq() {
     const cards = $$('[data-faq-card]');
     const set = (card, open) => {
@@ -655,4 +683,5 @@
   startCalculator();
   startForm();
   startFaq();
+  startLang();
 })();

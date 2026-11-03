@@ -1,0 +1,20 @@
+[
+  {"code": "en", "path": "", "hreflang": "en", "name": "English", "ogLocale": "en_US"},
+  {"code": "ar", "path": "ar", "hreflang": "ar", "name": "العربية", "ogLocale": "ar_AR", "dir": "rtl", "script": "arabic"},
+  {"code": "zh-hans", "path": "zh-hans", "hreflang": "zh-Hans", "html": "zh-Hans", "name": "简体中文", "ogLocale": "zh_CN", "script": "cjk"},
+  {"code": "zh-hant", "path": "zh-hant", "hreflang": "zh-Hant", "html": "zh-Hant", "name": "繁體中文", "ogLocale": "zh_TW", "script": "cjk"},
+  {"code": "fr", "path": "fr", "hreflang": "fr", "name": "Français", "ogLocale": "fr_FR"},
+  {"code": "de", "path": "de", "hreflang": "de", "name": "Deutsch", "ogLocale": "de_DE"},
+  {"code": "id", "path": "id", "hreflang": "id", "name": "Bahasa Indonesia", "ogLocale": "id_ID"},
+  {"code": "it", "path": "it", "hreflang": "it", "name": "Italiano", "ogLocale": "it_IT"},
+  {"code": "ja", "path": "ja", "hreflang": "ja", "name": "日本語", "ogLocale": "ja_JP", "script": "cjk"},
+  {"code": "ko", "path": "ko", "hreflang": "ko", "name": "한국어", "ogLocale": "ko_KR", "script": "cjk"},
+  {"code": "pl", "path": "pl", "hreflang": "pl", "name": "Polski", "ogLocale": "pl_PL"},
+  {"code": "pt", "path": "pt", "hreflang": "pt", "name": "Português", "ogLocale": "pt_BR"},
+  {"code": "ro", "path": "ro", "hreflang": "ro", "name": "Română", "ogLocale": "ro_RO"},
+  {"code": "es", "path": "es", "hreflang": "es", "name": "Español", "ogLocale": "es_ES"},
+  {"code": "th", "path": "th", "hreflang": "th", "name": "ไทย", "ogLocale": "th_TH", "script": "thai"},
+  {"code": "tr", "path": "tr", "hreflang": "tr", "name": "Türkçe", "ogLocale": "tr_TR"},
+  {"code": "uk", "path": "uk", "hreflang": "uk", "name": "Українська", "ogLocale": "uk_UA", "script": "cyrillic"},
+  {"code": "vi", "path": "vi", "hreflang": "vi", "name": "Tiếng Việt", "ogLocale": "vi_VN", "script": "vietnamese"}
+]
