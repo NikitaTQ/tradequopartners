@@ -5,9 +5,9 @@
     "kicker": "Earnings",
     "short": "Commissions",
     "title": "Commission Plans",
-    "blurb": "Tiers, rates and daily payout rules in one place.",
-    "h1": "Three tiers. One rule: paid daily.",
-    "sub": "Starter, Gold and Elite — compare rates per lot, see how tiers unlock as your network grows, and know exactly when money lands.",
+    "blurb": "Start at $5.00 per lot and move up to $10.00 as your client base grows. Every tier is paid daily.",
+    "h1": "Earn more per lot as your network grows",
+    "sub": "Start at $5.00 per lot and move up to $10.00 as your client base grows. Every tier is paid daily.",
     "cta": "Compare plans",
     "cta2": "Open calculator",
     "cardTitle": "Rate per lot",
@@ -30,20 +30,20 @@
     ],
     "sections": [
       {
-        "title": "Tier ladder",
-        "desc": "How you move from Starter to Elite, what counts as an active client and how upgrades apply retroactively."
+        "title": "Move up the tiers",
+        "desc": "Find out what counts as an active client and how each upgrade is applied."
       },
       {
-        "title": "Payout calendar",
-        "desc": "Daily settlement at 00:00 server time, minimum thresholds, supported methods — and zero fees."
+        "title": "Know when you’re paid",
+        "desc": "See exactly when money lands, the minimum thresholds and the supported payout methods."
       },
       {
-        "title": "Sub‑IB network",
-        "desc": "Second‑level commissions for partners who bring partners. Transparent split, no cap."
+        "title": "Earn from your own team",
+        "desc": "Bring in other partners and earn second-level commissions on their results. Transparent split, no cap."
       },
       {
-        "title": "Side by side",
-        "desc": "TradeQuo against the market: spreads, rebate per lot and payout speed on one table."
+        "title": "See how we compare",
+        "desc": "Spreads, rebate per lot and payout speed next to the market, all on one table."
       }
     ]
   },
@@ -53,9 +53,9 @@
     "kicker": "Tracking",
     "short": "Dashboard",
     "title": "Partner Dashboard",
-    "blurb": "Clicks, sign‑ups, lots and payouts — live, to the second.",
-    "h1": "Every click, every lot. In real time.",
-    "sub": "A single screen for your whole network: who signed up, who traded, what you earned — and tonight’s payout before it lands.",
+    "blurb": "One live screen shows who signed up, who traded and what you’ve earned.",
+    "h1": "Know exactly what your network is doing",
+    "sub": "One live screen shows who signed up, who traded and what you’ve earned.",
     "cta": "See a live demo",
     "cta2": "API docs",
     "cardTitle": "Today, live",
@@ -78,20 +78,20 @@
     ],
     "sections": [
       {
-        "title": "Referral funnel",
-        "desc": "Click → registration → deposit → first trade, per link and per campaign."
+        "title": "Follow the full journey",
+        "desc": "From click to registration, deposit and first trade, per link and per campaign."
       },
       {
-        "title": "Client activity",
-        "desc": "Volume, instruments and sessions for each referred account, refreshed every few seconds."
+        "title": "Watch client activity",
+        "desc": "Volume, instruments and sessions for every referred account, refreshed every few seconds."
       },
       {
-        "title": "Invoices & history",
-        "desc": "Every payout with a downloadable statement. Export to CSV or straight to your accountant."
+        "title": "Keep clean records",
+        "desc": "Download a statement for every payout, as a CSV or ready to send to your accountant."
       },
       {
-        "title": "API & postbacks",
-        "desc": "Push events into your own CRM or ad platform. REST API, webhooks, S2S postbacks."
+        "title": "Connect your own tools",
+        "desc": "Send events to your CRM or ad platform with the REST API, webhooks and S2S postbacks."
       }
     ]
   },
@@ -101,9 +101,9 @@
     "kicker": "Growth",
     "short": "Marketing",
     "title": "Marketing Hub",
-    "blurb": "Banners, landing pages and tracking links, ready to ship.",
-    "h1": "Creatives that convert. Ready in a click.",
-    "sub": "A library of banners, landing pages and video built by our team — localised, A/B‑tested and already wired to your tracking link.",
+    "blurb": "Banners, landing pages and video made by our team. Localised, A/B-tested and ready to use.",
+    "h1": "Skip the design work. Start promoting.",
+    "sub": "Banners, landing pages and video made by our team. Localised, A/B-tested and ready to use.",
     "cta": "Browse the library",
     "cta2": "Request custom creative",
     "cardTitle": "In the library",
@@ -126,20 +126,20 @@
     ],
     "sections": [
       {
-        "title": "Banner library",
-        "desc": "Static and animated sets in every IAB size, in your language, with your link baked in."
+        "title": "Banners for every placement",
+        "desc": "Static and animated sets in every IAB size and in your language."
       },
       {
-        "title": "Landing pages",
-        "desc": "Hosted pages for every campaign angle — bonuses, education, platforms — with live conversion data."
+        "title": "Landing pages for every angle",
+        "desc": "Hosted pages for bonuses, education and platforms, with live conversion data."
       },
       {
-        "title": "Links & QR",
-        "desc": "Unlimited tracking links with sub‑IDs, deep links to the app and printable QR codes for offline."
+        "title": "Links you can track",
+        "desc": "Unlimited tracking links with sub-IDs, app deep links and printable QR codes for offline use."
       },
       {
-        "title": "Brand kit",
-        "desc": "Logos, colours, type and the rules for using them, so every creative looks like TradeQuo."
+        "title": "A brand kit",
+        "desc": "Logos, colours, type and usage rules, so everything you publish looks like TradeQuo."
       }
     ]
   },
@@ -149,9 +149,9 @@
     "kicker": "Education",
     "short": "Academy",
     "title": "Partner Academy",
-    "blurb": "Courses, webinars and playbooks for growing a network.",
-    "h1": "Learn to grow a network like a pro.",
-    "sub": "From your first referral to a team of sub‑IBs — short courses, monthly webinars and playbooks written by partners who did it.",
+    "blurb": "Short courses, monthly webinars and guides written by partners who have done it, from your first referral to your first team.",
+    "h1": "Grow faster with proven playbooks",
+    "sub": "Short courses, monthly webinars and guides written by partners who have done it, from your first referral to your first team.",
     "cta": "Start the course",
     "cta2": "Webinar schedule",
     "cardTitle": "Curriculum",
@@ -174,20 +174,20 @@
     ],
     "sections": [
       {
-        "title": "Onboarding course",
-        "desc": "Set up tracking, pick your first creatives and land your first client in under a week."
+        "title": "Start strong",
+        "desc": "Set up tracking, choose your first creatives and aim for your first client within a week."
       },
       {
-        "title": "Webinars",
-        "desc": "Market updates and growth tactics with our account managers and top partners."
+        "title": "Learn live",
+        "desc": "Join monthly webinars with account managers and top partners on market updates and growth tactics."
       },
       {
-        "title": "Playbooks",
-        "desc": "Step‑by‑step guides by channel: Telegram, YouTube, signal groups, offline events."
+        "title": "Copy what works",
+        "desc": "Step-by-step guides for Telegram, YouTube, signal groups and offline events."
       },
       {
-        "title": "Certification",
-        "desc": "Pass the IB Pro exam and unlock a badge, creative priority and a dedicated manager."
+        "title": "Get certified",
+        "desc": "Pass the free IB Pro exam to unlock a badge, creative priority and a dedicated manager."
       }
     ]
   },
@@ -197,9 +197,9 @@
     "kicker": "Proof",
     "short": "Stories",
     "title": "Success Stories",
-    "blurb": "Real partners, real numbers — from first referral to $40K a month.",
-    "h1": "From a first referral to $40K a month.",
-    "sub": "Case studies and interviews with partners across 87 countries — what they did, what worked and what they’d do differently.",
+    "blurb": "Case studies and interviews from partners in 87 countries: what they did, what worked and what they’d change.",
+    "h1": "See how partners built their income",
+    "sub": "Case studies and interviews from partners in 87 countries: what they did, what worked and what they’d change.",
     "cta": "Read the stories",
     "cta2": "Partner leaderboard",
     "cardTitle": "Across the network",
@@ -223,20 +223,21 @@
     "sections": [
       {
         "title": "Case studies",
-        "desc": "Long‑form breakdowns: channel, creatives, timeline and monthly earnings, verified by us."
+        "desc": "Long-form breakdowns of channel, creatives, timeline and monthly earnings, verified by us."
       },
       {
-        "title": "Regional leaders",
-        "desc": "Who is growing fastest in MENA, LATAM, SEA and CIS — and how."
+        "title": "Regional Leaders",
+        "desc": "The fastest-growing partners in MENA, LATAM, SEA and CIS, and how they did it."
       },
       {
         "title": "Interviews",
-        "desc": "Short video conversations with partners about their first 90 days."
+        "desc": "Short video interviews with partners about their first 90 days."
       },
       {
         "title": "Leaderboard",
-        "desc": "Monthly top‑20 by referred volume, with prizes and a spotlight on the homepage."
+        "desc": "A monthly leaderboard by referred volume, with prizes and a homepage spotlight."
       }
-    ]
+    ],
+    "disclaimer": "Earnings shown are from top-performing partners and are not typical. Partner earnings are not guaranteed and depend on client trading activity."
   }
 ]

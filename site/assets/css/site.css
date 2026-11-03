@@ -758,3 +758,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 /* ---- performance: infinite animations idle while their section is off-screen
    (landing.js toggles data-offscreen) ---------------------------------------- */
 [data-offscreen], [data-offscreen] *, [data-offscreen] *::before, [data-offscreen] *::after { animation-play-state: paused !important; }
+
+/* line break that only applies above the phone breakpoint */
+@media (max-width: 640px) { .br-desk { display: none; } }

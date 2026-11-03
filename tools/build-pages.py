@@ -46,6 +46,10 @@ def render(i, p):
             <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">{desc}</p>
           </div>'''.format(n='%02d' % (k + 1), title=e(s['title']), desc=e(s['desc'])) for k, s in enumerate(p['sections']))
 
+    disclaimer = ''
+    if p.get('disclaimer'):
+        disclaimer = ('\n      <p style="max-width: 1240px; margin: 20px auto 0; font-size: 12.5px; line-height: 1.55; color: #8a8a8e; text-wrap: pretty;">{}</p>'
+                      .format(e(p['disclaimer'])))
     title = '{} — TradeQuo Partner Program'.format(p['title'])
     return '''<!DOCTYPE html>
 <html lang="en">
@@ -122,7 +126,7 @@ def render(i, p):
     <section style="padding: 0 clamp(16px, 4vw, 56px) clamp(56px, 7vw, 96px);">
       <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
 {sections}
-      </div>
+      </div>{disclaimer}
     </section>
   </main>
 
@@ -148,7 +152,7 @@ def render(i, p):
 </html>
 '''.format(title=a(title), blurb=a(p['blurb']), domain=DOMAIN, slug=p['slug'], nav=nav, num=p['num'], total=TOTAL,
            kicker=e(p['kicker'].upper()), h1=e(p['h1']), sub=e(p['sub']), cta=e(p['cta']), cta2=e(p['cta2']),
-           card_title=e(p['cardTitle']), rows=rows, sections=sections, next_slug=nxt['slug'],
+           card_title=e(p['cardTitle']), rows=rows, sections=sections, disclaimer=disclaimer, next_slug=nxt['slug'],
            next_label=a(nxt['title'].upper()), next_title=e(nxt['title']))
 
 
