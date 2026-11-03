@@ -5,13 +5,16 @@
   "lang.label": "Limbă",
   "lang.translate": "Traducere automată",
   "loader": "SE ÎNCARCĂ",
+
   "nav.how": "Cum funcționează",
   "nav.calc": "Calculator",
   "nav.perks": "Avantaje",
   "nav.faq": "FAQ",
   "nav.cta": "Devino partener",
+
   "hero.h1": "Până la 87% din spread. Plăți <red>zilnice.</red>",
   "hero.sub": "Recomandă traderi către TradeQuo și câștigă din fiecare lot tranzacționat de aceștia. Comisioanele se decontează zilnic, cu urmărire în timp real și fără taxe de plată.",
+
   "form.honeypot": "Lasă acest câmp gol",
   "form.tag": "Program de parteneriat TradeQuo",
   "form.title": "DEVINO <red>PARTENER</red>",
@@ -33,10 +36,12 @@
   "form.sent": "Cerere trimisă",
   "form.errEmail": "Introdu o adresă de email validă.",
   "form.errSend": "Nu am putut trimite cererea. Reîncarcă pagina și încearcă din nou.",
+
   "stats.title": "Programul în cifre",
   "stats.alt": "30K+ parteneri, $9M+ plătiți lunar partenerilor, cotă din venituri de până la 87%, rating 4.9 pe Trustpilot, 800K+ traderi clienți, 400+ călătorii-premiu",
   "stats.frame": "TradeQuo în cifre",
   "stats.cta": "Estimează câștigurile",
+
   "how.kicker": "CUM FUNCȚIONEAZĂ",
   "how.title": "De la înregistrare la prima plată<br/><red>în trei pași</red>",
   "how.s1.t": "Deschide-ți contul",
@@ -46,6 +51,7 @@
   "how.s3.t": "Distribuie linkul și câștigă",
   "how.s3.d": "Primește linkul de recomandare, distribuie-l publicului tău și câștigă din fiecare lot tranzacționat de clienții tăi.",
   "how.cta": "Devino partener",
+
   "calc.kicker": "CALCULATOR DE CÂȘTIGURI",
   "calc.title": "Estimează-ți<br/><red>plata lunară</red>",
   "calc.sub": "Setează numărul de traderi și volumul lor lunar — extrasul de plată se actualizează instantaneu. Calculat pe baza celor mai mici spread-uri ale noastre.",
@@ -74,15 +80,18 @@
   "rcpt.row": "1 × PARTENERIAT",
   "rcpt.big": "Bun venit!",
   "rcpt.thanks": "MULȚUMIM ✓",
+
   "reviews.kicker": "RECENZII INDEPENDENTE",
   "reviews.title": "Recenzii acolo unde discută traderii",
   "reviews.verdict": "VERDICTUL EDITORULUI",
   "reviews.of5": "5 din 5",
   "reviews.of4": "4 din 5",
+
   "film.frame": "Film despre Programul de parteneriat TradeQuo",
   "payouts.kicker": "PLĂȚI ZILNICE",
   "payouts.title": "Clienții tăi tranzacționează în fiecare zi.<brd/> Tu încasezi în fiecare zi.",
   "flow.frame": "Infinite Flow — comisioane decontate zilnic",
+
   "offer.pill": "Avantaje pentru parteneri",
   "offer.title": "Tot ce îți trebuie <red>ca să crești</red>",
   "offer.sub": "Instrumente, conținut și suport care te ajută să atragi clienți și să-i menții activi în tranzacționare.",
@@ -101,6 +110,7 @@
   "dock.l": "Devino",
   "dock.r": "partener",
   "dock.aria": "Devino partener",
+
   "faq.pill": "FAQ",
   "faq.title": "Întrebări și <red>răspunsuri</red>",
   "faq.sub": "Tot ce trebuie să știi pentru a deveni IB TradeQuo.",
@@ -115,10 +125,12 @@
   "faq.5.q": "Am nevoie de experiență sau capital?",
   "faq.5.a": "Nu. Nu există taxă de înscriere și nu ai nevoie de capital sau de experiență în tranzacționare. Este suficient un cont TradeQuo verificat.",
   "faq.frame": "Logo TradeQuo din sticlă",
+
   "reach.title": "Tu aduci publicul.<brd/> Noi îl transformăm în venit.",
   "reach.sub": "Până la 87% din spread, plăți zilnice, urmărire în timp real și un manager care răspunde la telefon. Cererile sunt analizate în cel mult 24 de ore.",
   "reach.cta1": "Devino partener",
   "reach.cta2": "Estimează câștigurile",
+
   "fab.aria": "Meniu",
   "fan.aria": "Harta site-ului",
   "fan.home": "Program de parteneriat",
@@ -129,6 +141,7 @@
   "fan.academy": "Academia partenerilor",
   "fan.stories": "Povești de succes",
   "footer.risk": "CFD-urile sunt instrumente complexe și prezintă un risc ridicat de a pierde rapid bani din cauza efectului de levier. 72,6% din conturile investitorilor de retail pierd bani atunci când tranzacționează CFD-uri cu acest furnizor.",
+
   "embed.crys.partners": "PARTENERI",
   "embed.crys.payouts": "LUNAR CĂTRE PARTENERI",
   "embed.crys.revshare": "COTĂ MAXIMĂ DIN VENIT",

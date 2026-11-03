@@ -5,13 +5,16 @@
   "lang.label": "Idioma",
   "lang.translate": "Tradução automática",
   "loader": "CARREGANDO",
+
   "nav.how": "Como funciona",
   "nav.calc": "Calculadora",
   "nav.perks": "Vantagens",
   "nav.faq": "FAQ",
   "nav.cta": "Seja parceiro",
+
   "hero.h1": "Até 87% do spread. Pago <red>todo dia.</red>",
   "hero.sub": "Indique traders para a TradeQuo e ganhe em cada lote que eles negociarem. Comissões liquidadas todos os dias, acompanhadas em tempo real e sem taxas de pagamento.",
+
   "form.honeypot": "Deixe este campo em branco",
   "form.tag": "Programa de Parceiros TradeQuo",
   "form.title": "SEJA <red>PARCEIRO</red>",
@@ -33,10 +36,12 @@
   "form.sent": "Solicitação enviada",
   "form.errEmail": "Informe um endereço de e-mail válido.",
   "form.errSend": "Não foi possível enviar sua solicitação. Recarregue a página e tente novamente.",
+
   "stats.title": "O programa em números",
   "stats.alt": "30K+ parceiros, $9M+ pagos a parceiros por mês, até 87% de revenue share, nota 4.9 no Trustpilot, 800K+ traders clientes, 400+ viagens de incentivo",
   "stats.frame": "A TradeQuo em números",
   "stats.cta": "Calcule seus ganhos",
+
   "how.kicker": "COMO FUNCIONA",
   "how.title": "Do cadastro ao primeiro pagamento<br/><red>em três passos</red>",
   "how.s1.t": "Abra sua conta",
@@ -46,6 +51,7 @@
   "how.s3.t": "Compartilhe seu link e ganhe",
   "how.s3.d": "Receba seu link de indicação, compartilhe com seu público e ganhe em cada lote que seus clientes negociarem.",
   "how.cta": "Seja parceiro",
+
   "calc.kicker": "CALCULADORA DE GANHOS",
   "calc.title": "Calcule seu<br/><red>pagamento mensal</red>",
   "calc.sub": "Defina o número de traders e o volume mensal deles — o extrato de pagamento é atualizado na hora. Com base nos nossos spreads mais baixos.",
@@ -74,15 +80,18 @@
   "rcpt.row": "1 × PARCERIA",
   "rcpt.big": "Bem-vindo!",
   "rcpt.thanks": "OBRIGADO ✓",
+
   "reviews.kicker": "AVALIAÇÕES INDEPENDENTES",
   "reviews.title": "Avaliada onde os traders conversam",
   "reviews.verdict": "VEREDITO DO EDITOR",
   "reviews.of5": "5 de 5",
   "reviews.of4": "4 de 5",
+
   "film.frame": "Vídeo do Programa de Parceiros TradeQuo",
   "payouts.kicker": "PAGAMENTOS DIÁRIOS",
   "payouts.title": "Seus clientes operam todo dia.<brd/> Você recebe todo dia.",
   "flow.frame": "Infinite Flow — comissões liquidadas todos os dias",
+
   "offer.pill": "Vantagens para parceiros",
   "offer.title": "Tudo o que você precisa <red>para crescer</red>",
   "offer.sub": "Ferramentas, conteúdo e suporte para você conquistar clientes e mantê-los operando.",
@@ -101,6 +110,7 @@
   "dock.l": "Seja",
   "dock.r": "parceiro",
   "dock.aria": "Seja parceiro",
+
   "faq.pill": "FAQ",
   "faq.title": "Dúvidas, <red>respondidas</red>",
   "faq.sub": "Tudo o que você precisa saber para se tornar IB da TradeQuo.",
@@ -115,10 +125,12 @@
   "faq.5.q": "Preciso de experiência ou capital?",
   "faq.5.a": "Não. Não há taxa de adesão, e você não precisa de capital nem de experiência em trading. Basta uma conta TradeQuo verificada.",
   "faq.frame": "Logo de vidro da TradeQuo",
+
   "reach.title": "Você traz o público.<brd/> Nós transformamos em receita.",
   "reach.sub": "Até 87% do spread, pagamentos diários, acompanhamento em tempo real e um gerente que atende o telefone. As solicitações são analisadas em até 24 horas.",
   "reach.cta1": "Seja parceiro",
   "reach.cta2": "Calcule seus ganhos",
+
   "fab.aria": "Menu",
   "fan.aria": "Mapa do site",
   "fan.home": "Programa de Parceiros",
@@ -129,6 +141,7 @@
   "fan.academy": "Academia de parceiros",
   "fan.stories": "Histórias de sucesso",
   "footer.risk": "Os CFDs são instrumentos complexos e apresentam um alto risco de perda rápida de dinheiro devido à alavancagem. 72,6% das contas de investidores de varejo perdem dinheiro ao negociar CFDs com este provedor.",
+
   "embed.crys.partners": "PARCEIROS",
   "embed.crys.payouts": "PAGOS POR MÊS",
   "embed.crys.revshare": "REVENUE SHARE MÁXIMO",

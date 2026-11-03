@@ -50,7 +50,7 @@
   "cp.pay.kicker": "NE ZAMAN ÖDEME ALIRSINIZ",
   "cp.pay.title": "Her gün ödeme. <red>Ücret yok.</red>",
   "cp.pay.sub": "Komisyonlar her gün sunucu saatiyle 00:00’da hesaba geçer; işleme ve çekim ücretlerini biz karşılarız.",
-  "cp.pay.t1": "Müşteriler işlem yapar",
+  "cp.pay.t1": "Müşteri işlem yapar",
   "cp.pay.d1": "Yönlendirdiğiniz müşteriler işlem açar ve kapatır.",
   "cp.pay.t2": "Komisyon birikir",
   "cp.pay.d2": "Her lot bakiyenize eklenir ve gerçek zamanlı takip edilir.",
