@@ -323,11 +323,22 @@
   .tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
   .tp-perk img { width: 88px; height: 88px; }
   .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
+  .tp-head--left { align-items: center; text-align: center; }
+  .tp-faq__side { align-items: center; text-align: center; }
+  .tp-faq__side .tp-pill { align-self: center; }
+  .tp-faq__side .tp-sub { max-width: 34ch !important; }
+  .tp-ben { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; padding: 20px 18px; }
+  .tp-ben .tp-hex { grid-row: span 2; margin: 0; }
+  .tp-ben h3 { align-self: end; }
+  .tp-explain h3, .tp-tiercol h3 { text-align: center; }
   .tp-example { grid-template-columns: minmax(0, 1fr); }
   .tp-example > svg { transform: rotate(90deg); }
   [dir="rtl"] .tp-example > svg { transform: rotate(90deg); }
   .tp-night { border-radius: 26px; }
-  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; }
+  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
+  .tp-night .tp-actions { align-items: stretch; }
+  .tp-join .tp-actions { align-items: center; }
+  .tp-stat b { font-size: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-next__bar span { transition: none; }

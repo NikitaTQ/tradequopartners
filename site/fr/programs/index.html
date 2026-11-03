@@ -747,7 +747,7 @@ html { scroll-snap-type: y proximity; }
   transition: transform .6s cubic-bezier(.2,.85,.2,1) calc(var(--ri) * 28ms), opacity .35s ease calc(var(--ri) * 28ms);
 }
 [data-fanmenu][data-open] .tq-fan-item {
-  transform: rotate(calc(35deg + var(--i) * -7deg));
+  transform: rotate(calc((var(--fan-n, 6) - 1) * 7deg + var(--i) * -7deg));
   opacity: 1; pointer-events: auto;
   transition-delay: calc(var(--i) * 45ms);
 }
@@ -797,6 +797,20 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 
 /* ---- form status (shown only if the request fails to send) --------------- */
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
+
+/* ---- phones: headings, their buttons and the footer sit on the centre line -- */
+@media (max-width: 640px) {
+  [data-fan-head] { align-items: center !important; text-align: center; }
+  [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
+  [data-fan-head] p { max-width: 34ch !important; }
+  [data-fan-cta] { justify-self: center !important; align-self: center; }
+  [data-faq-side] { align-items: center !important; text-align: center; }
+  [data-faq-side] > * { align-self: center !important; }
+  [data-faq-side] > p { max-width: 34ch !important; }
+  footer > div { justify-items: center; text-align: center; }
+  footer > div > img { justify-self: center !important; }
+}
+
 
 /* ---- keyboard focus for links/buttons the design styles inline ----------- */
 a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
@@ -884,6 +898,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (max-width: 640px) {
   [dir="rtl"] #signup form label > span:first-child { padding-right: 0; }
   [dir="rtl"] [data-faq-panel] p { padding-right: 20px !important; }
+}
+
+/* narrow phones (360 px; after the 640 px header rules so these win): logo, language globe and the CTA share one row */
+@media (max-width: 380px) {
+  header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
+  header img[alt] { height: 15px !important; }
+  header nav { gap: 6px !important; }
+  header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 </style>
 <style id="partner-css" data-prefix="../../">
@@ -1212,11 +1234,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
   .tp-perk img { width: 88px; height: 88px; }
   .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
+  .tp-head--left { align-items: center; text-align: center; }
+  .tp-faq__side { align-items: center; text-align: center; }
+  .tp-faq__side .tp-pill { align-self: center; }
+  .tp-faq__side .tp-sub { max-width: 34ch !important; }
+  .tp-ben { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; padding: 20px 18px; }
+  .tp-ben .tp-hex { grid-row: span 2; margin: 0; }
+  .tp-ben h3 { align-self: end; }
+  .tp-explain h3, .tp-tiercol h3 { text-align: center; }
   .tp-example { grid-template-columns: minmax(0, 1fr); }
   .tp-example > svg { transform: rotate(90deg); }
   [dir="rtl"] .tp-example > svg { transform: rotate(90deg); }
   .tp-night { border-radius: 26px; }
-  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; }
+  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
+  .tp-night .tp-actions { align-items: stretch; }
+  .tp-join .tp-actions { align-items: center; }
+  .tp-stat b { font-size: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-next__bar span { transition: none; }
@@ -1256,7 +1289,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
       <div class="tp-head">
         <span class="tp-kicker">PROGRAMMES PARTENAIRES</span>
         <h1 class="tp-h1">Un seul programme partenaires. <span style="color: #e7131b;">Trois façons de gagner.</span></h1>
-        <p class="tp-sub">Recommandez des traders, développez un réseau de partenaires ou lancez votre propre marque. Chaque formule vous rémunère sur l’activité de trading réelle de vos clients, avec un règlement quotidien et un gestionnaire de compte dédié.</p>
+        <p class="tp-sub">Recommandez des traders, développez un réseau de partenaires ou lancez votre propre marque. Quelle que soit la formule choisie, un gestionnaire de compte dédié vous accompagne.</p>
       </div>
 
       <div class="tp-stage">
@@ -1310,7 +1343,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
         <div class="tp-head">
           <span class="tp-kicker">AVANTAGES CLÉS</span>
           <h2 class="tp-h2">Pourquoi les partenaires <span style="color: #e7131b;">choisissent TradeQuo</span></h2>
-          <p class="tp-sub">Les mêmes conditions avantageuses pour chaque programme, et les outils pour en tirer le meilleur parti.</p>
+          <p class="tp-sub">Des conditions avantageuses, des versements quotidiens et les outils pour en tirer le meilleur parti.</p>
         </div>
         <div class="tp-benefits">
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18.5 5.5 5.5 18.5"></path><circle cx="7.5" cy="7.5" r="2.5"></circle><circle cx="16.5" cy="16.5" r="2.5"></circle></svg></span><h3>Jusqu’à 87% du spread</h3><p>Gagnez sur chaque lot négocié par vos clients, tant qu’ils restent actifs.</p></div>
@@ -1319,7 +1352,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path><path d="M3.5 20.5h17"></path></svg></span><h3>Suivi en temps réel</h3><p>Suivez les inscriptions, l’activité de trading et vos gains en temps réel.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13v-1a7.5 7.5 0 0 1 15 0v1"></path><rect x="3.5" y="13" width="4" height="6" rx="1.5"></rect><rect x="16.5" y="13" width="4" height="6" rx="1.5"></rect><path d="M18.5 19c0 1.4-1.9 2.3-5 2.3"></path></svg></span><h3>Un gestionnaire dédié</h3><p>Un gestionnaire de compte qui connaît votre activité et décroche le téléphone.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"></rect><circle cx="9" cy="10" r="1.8"></circle><path d="m20.5 15.5-4.5-4.5-8.5 8.5"></path></svg></span><h3>Supports marketing prêts à l’emploi</h3><p>Bannières, landing pages et vidéos conçues pour convertir.</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>Outils gratuits pour votre audience</h3><p>Graphiques TradingView et signaux de trading en temps réel, sans frais.</p></div>
+          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>TradingView et signaux offerts</h3><p>Des graphiques avancés pour vos analyses et des signaux en temps réel à partager avec votre audience, sans frais.</p></div>
           <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12.5" rx="2.5"></rect><path d="M9.5 7V5.2c0-.7.5-1.2 1.2-1.2h2.6c.7 0 1.2.5 1.2 1.2V7"></path><path d="M9 11v5M15 11v5"></path><path d="M8 19.5v1M16 19.5v1"></path></svg></span><h3>Voyages incentive</h3><p>Atteignez vos objectifs et partez avec nous vers des destinations d’exception.</p></div>
         </div>
       </div>
@@ -1331,7 +1364,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
         <div class="tp-why">
           <div class="tp-head tp-head--left">
             <span class="tp-kicker">POURQUOI TRADEQUO</span>
-            <h2 class="tp-h2">Un courtier auquel vos clients <span style="color: #e7131b;">restent fidèles</span></h2>
+            <h2 class="tp-h2">Un courtier auquel les traders <span style="color: #e7131b;">font confiance</span></h2>
             <p class="tp-sub">Vous gagnez tant que vos clients continuent de trader : le courtier derrière votre lien a donc toute son importance. TradeQuo est noté par les traders comme par des évaluateurs indépendants, et paie ses partenaires chaque jour.</p>
             <a class="tp-btn tp-btn--line" href="../#reviews" data-page-link data-label="CHARGEMENT · Accueil" style="margin-top: 8px;">Lire les avis<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
           </div>
@@ -1349,7 +1382,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
     <section class="tp-sec" data-screen-label="Join partners" style="padding-top: clamp(24px, 4vw, 48px);">
       <div class="tp-join">
         <h2 class="tp-h2">Rejoignez <span style="color: #e7131b;">plus de 30 000 partenaires</span> dans le monde</h2>
-        <p class="tp-sub">Postulez en quelques minutes. Nous examinons chaque candidature sous 24 heures.</p>
+        <p class="tp-sub">Postulez depuis votre Espace client. Nous examinons chaque candidature sous 24 heures.</p>
         <div class="tp-actions">
           <a class="tq-logo" href="../#signup" data-page-link data-label="CHARGEMENT · Accueil" aria-label="Devenir partenaire"><span>Devenir partenaire</span><span class="tq-logo__coin" aria-hidden="true"><span class="tq-logo__face"></span><span class="tq-logo__rim"></span><svg class="tq-logo__flag" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__t" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__dot" width="56" height="56" viewBox="20.75 19.75 160 160"><circle cx="141" cy="130.5" r="10.5" fill="#E7131B"></circle></svg><span class="tq-logo__flash"></span></span></a>
           <a class="tq-crys" style="align-self: center;" href="../commission-plan/" data-page-link data-label="CHARGEMENT · Plan de commissions" aria-label="Voir le plan de commissions"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">Voir le plan de commissions</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
@@ -1422,7 +1455,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             </button>
             <div data-faq-panel id="pp-faq-4-a" role="region" aria-labelledby="pp-faq-4-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Des bannières, landing pages et vidéos prêtes à l’emploi, des graphiques TradingView et des signaux de trading gratuits pour votre audience, l’Académie marque blanche et un gestionnaire de compte dédié.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Des bannières, landing pages et vidéos prêtes à l’emploi, des graphiques TradingView gratuits, des signaux de trading en temps réel à partager avec votre audience, l’Académie marque blanche et un gestionnaire de compte dédié.</p>
               </div>
             </div>
           </div>
@@ -1437,7 +1470,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             </button>
             <div data-faq-panel id="pp-faq-5-a" role="region" aria-labelledby="pp-faq-5-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Ouvrez et vérifiez un compte TradeQuo, puis postulez au programme partenaires depuis votre Espace client. L’adhésion est gratuite et nous examinons chaque candidature sous 24 heures.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Ouvrez et vérifiez un compte TradeQuo, puis postulez au programme IB depuis votre Espace client. L’adhésion est gratuite et nous examinons chaque candidature sous 24 heures.</p>
               </div>
             </div>
           </div>
@@ -1476,8 +1509,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   </div>
 
     <div data-fanveil="" hidden style="position: fixed; inset: 0; z-index: 68; background: rgba(255,255,255,.42); animation: tqFanVeil .3s ease both; cursor: pointer;"></div>
-  <div data-fanmenu="" style="position: fixed; right: 28px; bottom: 28px; z-index: 78; width: 60px; height: 60px;">
-      <div class="tq-fan-item" style="--i: 0; --ri: 5;">
+  <div data-fanmenu="" style="--fan-n: 2; position: fixed; right: 28px; bottom: 28px; z-index: 78; width: 60px; height: 60px;">
+      <div class="tq-fan-item" style="--i: 0; --ri: 1;">
         <a class="hv-fan-blade" href="../programs/" data-page-link data-label="CHARGEMENT · Programmes partenaires" aria-current="page" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
@@ -1488,7 +1521,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 1; --ri: 4;">
+      <div class="tq-fan-item" style="--i: 1; --ri: 0;">
         <a class="hv-fan-blade" href="../commission-plan/" data-page-link data-label="CHARGEMENT · Plan de commissions" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
@@ -1499,56 +1532,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 2; --ri: 3;">
-        <a class="hv-fan-blade" href="../../dashboard/" data-page-link data-label="CHARGEMENT · Tableau de bord" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
-          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
-          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
-          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Tableau de bord</span>
-          </span>
-          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
-        </a>
-      </div>
-      <div class="tq-fan-item" style="--i: 3; --ri: 2;">
-        <a class="hv-fan-blade" href="../../marketing-hub/" data-page-link data-label="CHARGEMENT · Espace marketing" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
-          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
-          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
-          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">05</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Espace marketing</span>
-          </span>
-          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
-        </a>
-      </div>
-      <div class="tq-fan-item" style="--i: 4; --ri: 1;">
-        <a class="hv-fan-blade" href="../../academy/" data-page-link data-label="CHARGEMENT · Académie partenaires" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
-          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
-          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
-          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">06</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Académie partenaires</span>
-          </span>
-          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
-        </a>
-      </div>
-      <div class="tq-fan-item" style="--i: 5; --ri: 0;">
-        <a class="hv-fan-blade" href="../../success-stories/" data-page-link data-label="CHARGEMENT · Success stories" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
-          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
-          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
-          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">07</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Success stories</span>
-          </span>
-          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
-        </a>
-      </div>
     <button class="hv-fan-knob" type="button" data-fan-toggle aria-label="Plan du site" aria-expanded="false" style="position: absolute; inset: 0; width: 60px; height: 60px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; isolation: isolate; color: #0a0a0a; background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 45%), linear-gradient(180deg, #ffffff 0%, #eceef1 100%); box-shadow: 0 1px 2px rgba(10,10,10,.08), 0 22px 36px -20px rgba(10,10,10,.45); transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;">
       <span aria-hidden="true" style="position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;"></span>
       <span aria-hidden="true" style="position: absolute; inset: 3px; z-index: -1; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 -10px 16px -12px rgba(10,10,10,.2);"></span>
       <span class="tq-fan-ico tq-fan-ico--closed" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.6" stroke-linejoin="round"><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)"></rect><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)" transform="rotate(-28 12 19.5)"></rect><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)" transform="rotate(28 12 19.5)"></rect><circle cx="12" cy="19.5" r="1.6" fill="#e7131b" stroke="none"></circle></svg></span>
       <span class="tq-fan-ico tq-fan-ico--open" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></span>
-      <span aria-hidden="true" style="position: absolute; top: -3px; right: -3px; width: 21px; height: 21px; border-radius: 50%; background: #e7131b; color: #fff; border: 2px solid #fff; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1;">6</span>
+      <span aria-hidden="true" style="position: absolute; top: -3px; right: -3px; width: 21px; height: 21px; border-radius: 50%; background: #e7131b; color: #fff; border: 2px solid #fff; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1;">2</span>
     </button>
   </div>
 
@@ -1562,6 +1551,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="../../assets/js/transition.js?v=ca838a522c" defer></script>
-<script src="../../assets/js/landing.js?v=d96becf6eb" defer></script>
+<script src="../../assets/js/landing.js?v=0740d41fbf" defer></script>
 </body>
 </html>

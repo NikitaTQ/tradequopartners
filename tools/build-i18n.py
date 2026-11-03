@@ -33,14 +33,10 @@ PAGES = [
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
     {'id': 'commission', 'template': 'commission.html', 'slug': 'commission-plan', 'css': 'partner'},
 ]
-# The site-map fan (bottom right): translated pages first, then the English concept pages.
+# The site-map fan (bottom right): the two translated partner pages.
 FAN = [
     ('programs', 'home', 'programs/', 'fan.programs'),
     ('commission', 'home', 'commission-plan/', 'fan.commission'),
-    ('dashboard', 'root', 'dashboard/', 'fan.dashboard'),
-    ('marketing', 'root', 'marketing-hub/', 'fan.marketing'),
-    ('academy', 'root', 'academy/', 'fan.academy'),
-    ('stories', 'root', 'success-stories/', 'fan.stories'),
 ]
 languages = json.load(open(os.path.join(I18N, 'languages.json'), encoding='utf-8'))
 fonts = json.load(open(os.path.join(I18N, 'font-files.json'), encoding='utf-8'))
@@ -68,6 +64,7 @@ PAIRED = {
     'privacy': ('<a href="#" style="color:#c8141b;">', '</a>'),
     'terms': ('<a href="#" style="color:#c8141b;">', '</a>'),
     'lots': ('<span data-inv-lots>', '</span>'),
+    'rate': ('<span data-inv-rate>', '</span>'),
 }
 SINGLE = {
     'br': '<br>',
