@@ -3,17 +3,15 @@
   "meta.description": "Vermitteln Sie Trader an TradeQuo und verdienen Sie bis zu 87% des Spreads auf jedes Lot, das sie handeln. Provisionen werden täglich abgerechnet – ohne Auszahlungsgebühren.",
   "meta.ogDescription": "Verdienen Sie bis zu 87% des Spreads auf jedes Lot, das Ihre Kunden handeln. Täglich ausgezahlt.",
   "lang.label": "Sprache",
+  "lang.translate": "Auto-Übersetzung",
   "loader": "WIRD GELADEN",
-
   "nav.how": "Ablauf",
   "nav.calc": "Rechner",
   "nav.perks": "Vorteile",
   "nav.faq": "FAQ",
   "nav.cta": "Partner werden",
-
   "hero.h1": "Bis zu 87% des Spreads. <red>Täglich</red> ausgezahlt.",
   "hero.sub": "Vermitteln Sie Trader an TradeQuo und verdienen Sie an jedem Lot, das sie handeln. Provisionen werden täglich abgerechnet und in Echtzeit erfasst – ohne Auszahlungsgebühren.",
-
   "form.honeypot": "Dieses Feld bitte leer lassen",
   "form.tag": "TradeQuo-Partnerprogramm",
   "form.title": "<red>PARTNER</red> WERDEN",
@@ -35,12 +33,10 @@
   "form.sent": "Anfrage gesendet",
   "form.errEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
   "form.errSend": "Ihre Anfrage konnte nicht gesendet werden. Bitte laden Sie die Seite neu und versuchen Sie es erneut.",
-
   "stats.title": "Das Programm in Zahlen",
   "stats.alt": "30K+ Partner, $9M+ monatlich an Partner ausgezahlt, bis zu 87% Revenue Share, Trustpilot-Bewertung 4.9, 800K+ handelnde Kunden, 400+ Incentive-Reisen",
   "stats.frame": "TradeQuo in Zahlen",
   "stats.cta": "Einnahmen berechnen",
-
   "how.kicker": "SO FUNKTIONIERT ES",
   "how.title": "<red>In drei Schritten</red><br/>zur ersten Auszahlung",
   "how.s1.t": "Konto eröffnen",
@@ -50,7 +46,6 @@
   "how.s3.t": "Link teilen und verdienen",
   "how.s3.d": "Erhalten Sie Ihren Empfehlungslink, teilen Sie ihn mit Ihrem Publikum und verdienen Sie an jedem Lot, das Ihre Kunden handeln.",
   "how.cta": "Partner werden",
-
   "calc.kicker": "EINNAHMENRECHNER",
   "calc.title": "Berechnen Sie Ihre<br/><red>monatliche Auszahlung</red>",
   "calc.sub": "Legen Sie die Anzahl Ihrer Trader und deren monatliches Volumen fest – die Auszahlungsübersicht aktualisiert sich sofort. Basierend auf unseren niedrigsten Spreads.",
@@ -79,18 +74,15 @@
   "rcpt.row": "1 × PARTNERSCHAFT",
   "rcpt.big": "Willkommen!",
   "rcpt.thanks": "DANKE ✓",
-
   "reviews.kicker": "UNABHÄNGIGE BEWERTUNGEN",
   "reviews.title": "Bewertet, wo Trader diskutieren",
   "reviews.verdict": "REDAKTIONSURTEIL",
   "reviews.of5": "5 von 5",
   "reviews.of4": "4 von 5",
-
   "film.frame": "Film zum TradeQuo-Partnerprogramm",
   "payouts.kicker": "TÄGLICHE AUSZAHLUNGEN",
   "payouts.title": "Ihre Kunden handeln jeden Tag.<brd/> Sie werden jeden Tag bezahlt.",
   "flow.frame": "Infinite Flow – täglich abgerechnete Provisionen",
-
   "offer.pill": "Partnervorteile",
   "offer.title": "Alles für Ihr <red>Wachstum</red>",
   "offer.sub": "Tools, Inhalte und Support, mit denen Sie Kunden gewinnen und langfristig aktiv halten.",
@@ -109,7 +101,6 @@
   "dock.l": "Partner",
   "dock.r": "werden",
   "dock.aria": "Partner werden",
-
   "faq.pill": "FAQ",
   "faq.title": "Fragen & <red>Antworten</red>",
   "faq.sub": "Alles, was Sie wissen müssen, um TradeQuo-IB zu werden.",
@@ -124,16 +115,20 @@
   "faq.5.q": "Brauche ich Erfahrung oder Kapital?",
   "faq.5.a": "Nein. Es gibt keine Aufnahmegebühr, und Sie benötigen weder Kapital noch Trading-Erfahrung. Ein verifiziertes TradeQuo-Konto genügt.",
   "faq.frame": "TradeQuo-Logo aus Glas",
-
   "reach.title": "Sie bringen die Reichweite.<brd/> Wir machen daraus Einnahmen.",
   "reach.sub": "Bis zu 87% des Spreads, tägliche Auszahlungen, Live-Tracking und ein Manager, der ans Telefon geht. Bewerbungen werden innerhalb von 24 Stunden geprüft.",
   "reach.cta1": "Partner werden",
   "reach.cta2": "Einnahmen berechnen",
-
   "fab.aria": "Menü",
   "fan.aria": "Seitenübersicht",
+  "fan.home": "Partnerprogramm",
+  "fan.programs": "Partnerprogramme",
+  "fan.commission": "Provisionsplan",
+  "fan.dashboard": "Partner-Dashboard",
+  "fan.marketing": "Marketing-Hub",
+  "fan.academy": "Partner-Akademie",
+  "fan.stories": "Erfolgsgeschichten",
   "footer.risk": "CFDs sind komplexe Instrumente und gehen wegen der Hebelwirkung mit dem hohen Risiko einher, schnell Geld zu verlieren. 72,6 % der Kleinanlegerkonten verlieren Geld beim CFD-Handel mit diesem Anbieter.",
-
   "embed.crys.partners": "PARTNER",
   "embed.crys.payouts": "MONATLICH AUSGEZAHLT",
   "embed.crys.revshare": "MAX. REVENUE SHARE",

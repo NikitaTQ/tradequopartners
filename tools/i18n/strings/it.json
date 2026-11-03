@@ -3,17 +3,15 @@
   "meta.description": "Presenta trader a TradeQuo e guadagna fino all’87% dello spread su ogni lotto che negoziano. Commissioni liquidate ogni giorno, senza costi di pagamento.",
   "meta.ogDescription": "Guadagna fino all’87% dello spread su ogni lotto negoziato dai tuoi clienti. Pagamenti giornalieri.",
   "lang.label": "Lingua",
+  "lang.translate": "Traduzione auto",
   "loader": "CARICAMENTO",
-
   "nav.how": "Come funziona",
   "nav.calc": "Calcolatore",
   "nav.perks": "Vantaggi",
   "nav.faq": "FAQ",
   "nav.cta": "Diventa partner",
-
   "hero.h1": "Fino all’87% dello spread. Pagato <red>ogni giorno.</red>",
   "hero.sub": "Presenta trader a TradeQuo e guadagna su ogni lotto che negoziano. Commissioni liquidate ogni giorno, monitorate in tempo reale, senza costi di pagamento.",
-
   "form.honeypot": "Lascia vuoto questo campo",
   "form.tag": "Programma Partner TradeQuo",
   "form.title": "DIVENTA <red>PARTNER</red>",
@@ -35,12 +33,10 @@
   "form.sent": "Richiesta inviata",
   "form.errEmail": "Inserisci un indirizzo email valido.",
   "form.errSend": "Non è stato possibile inviare la tua richiesta. Ricarica la pagina e riprova.",
-
   "stats.title": "Il programma in numeri",
   "stats.alt": "30K+ partner, $9M+ pagati ai partner ogni mese, fino all’87% di revenue share, valutazione 4.9 su Trustpilot, 800K+ trader clienti, 400+ viaggi incentive",
   "stats.frame": "TradeQuo in numeri",
   "stats.cta": "Stima i tuoi guadagni",
-
   "how.kicker": "COME FUNZIONA",
   "how.title": "Dall’iscrizione al primo pagamento<br/><red>in tre passaggi</red>",
   "how.s1.t": "Apri il tuo conto",
@@ -50,7 +46,6 @@
   "how.s3.t": "Condividi il link e guadagna",
   "how.s3.d": "Ottieni il tuo link di affiliazione, condividilo con il tuo pubblico e guadagna su ogni lotto negoziato dai tuoi clienti.",
   "how.cta": "Diventa partner",
-
   "calc.kicker": "CALCOLATORE DEI GUADAGNI",
   "calc.title": "Calcola il tuo<br/><red>pagamento mensile</red>",
   "calc.sub": "Imposta il numero di trader e il loro volume mensile: il riepilogo dei pagamenti si aggiorna all’istante. Basato sui nostri spread più bassi.",
@@ -79,18 +74,15 @@
   "rcpt.row": "1 × PARTNERSHIP",
   "rcpt.big": "Benvenuto!",
   "rcpt.thanks": "GRAZIE ✓",
-
   "reviews.kicker": "RECENSIONI INDIPENDENTI",
   "reviews.title": "Valutati dove parlano i trader",
   "reviews.verdict": "GIUDIZIO DELLA REDAZIONE",
   "reviews.of5": "5 su 5",
   "reviews.of4": "4 su 5",
-
   "film.frame": "Video del Programma Partner TradeQuo",
   "payouts.kicker": "PAGAMENTI GIORNALIERI",
   "payouts.title": "I tuoi clienti operano ogni giorno.<brd/> Tu incassi ogni giorno.",
   "flow.frame": "Infinite Flow – commissioni liquidate ogni giorno",
-
   "offer.pill": "Vantaggi partner",
   "offer.title": "Tutto ciò che serve <red>per crescere</red>",
   "offer.sub": "Strumenti, contenuti e supporto per acquisire clienti e mantenerli attivi.",
@@ -109,7 +101,6 @@
   "dock.l": "Diventa",
   "dock.r": "partner",
   "dock.aria": "Diventa partner",
-
   "faq.pill": "FAQ",
   "faq.title": "Domande e <red>risposte</red>",
   "faq.sub": "Tutto quello che devi sapere per diventare IB di TradeQuo.",
@@ -124,16 +115,20 @@
   "faq.5.q": "Servono esperienza o capitale?",
   "faq.5.a": "No. Non c’è alcuna quota di adesione e non servono capitale né esperienza di trading. Basta un conto TradeQuo verificato.",
   "faq.frame": "Logo TradeQuo in vetro",
-
   "reach.title": "Tu porti il pubblico.<brd/> Noi lo rendiamo redditizio.",
   "reach.sub": "Fino all’87% dello spread, pagamenti giornalieri, monitoraggio in tempo reale e un manager che risponde al telefono. Le candidature vengono esaminate entro 24 ore.",
   "reach.cta1": "Diventa partner",
   "reach.cta2": "Stima i tuoi guadagni",
-
   "fab.aria": "Menu",
   "fan.aria": "Mappa del sito",
+  "fan.home": "Programma Partner",
+  "fan.programs": "Programmi Partner",
+  "fan.commission": "Piano commissioni",
+  "fan.dashboard": "Dashboard partner",
+  "fan.marketing": "Area marketing",
+  "fan.academy": "Academy partner",
+  "fan.stories": "Storie di successo",
   "footer.risk": "I CFD sono strumenti complessi e comportano un rischio elevato di perdere denaro rapidamente a causa della leva finanziaria. Il 72,6% dei conti di investitori al dettaglio perde denaro a causa delle negoziazioni in CFD con questo fornitore.",
-
   "embed.crys.partners": "PARTNER",
   "embed.crys.payouts": "PAGATI OGNI MESE",
   "embed.crys.revshare": "REVENUE SHARE MAX",

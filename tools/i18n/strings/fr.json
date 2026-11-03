@@ -3,17 +3,15 @@
   "meta.description": "Recommandez TradeQuo à des traders et gagnez jusqu’à 87% du spread sur chaque lot qu’ils négocient. Commissions réglées chaque jour, sans frais de versement.",
   "meta.ogDescription": "Gagnez jusqu’à 87% du spread sur chaque lot négocié par vos clients. Versement quotidien.",
   "lang.label": "Langue",
+  "lang.translate": "Traduction auto",
   "loader": "CHARGEMENT",
-
   "nav.how": "Fonctionnement",
   "nav.calc": "Simulateur",
   "nav.perks": "Avantages",
   "nav.faq": "FAQ",
   "nav.cta": "Devenir partenaire",
-
   "hero.h1": "Jusqu’à 87% du spread. Versé <red>chaque jour.</red>",
   "hero.sub": "Recommandez TradeQuo à des traders et gagnez sur chaque lot qu’ils négocient. Commissions réglées chaque jour, suivies en temps réel, sans frais de versement.",
-
   "form.honeypot": "Laissez ce champ vide",
   "form.tag": "Programme partenaires TradeQuo",
   "form.title": "DEVENIR <red>PARTENAIRE</red>",
@@ -35,12 +33,10 @@
   "form.sent": "Demande envoyée",
   "form.errEmail": "Veuillez saisir une adresse e-mail valide.",
   "form.errSend": "Votre demande n’a pas pu être envoyée. Veuillez recharger la page et réessayer.",
-
   "stats.title": "Le programme en chiffres",
   "stats.alt": "30K+ partenaires, $9M+ versés aux partenaires chaque mois, jusqu’à 87% de partage de revenus, note Trustpilot de 4.9, 800K+ traders clients, 400+ voyages incentive",
   "stats.frame": "TradeQuo en chiffres",
   "stats.cta": "Estimez vos gains",
-
   "how.kicker": "COMMENT ÇA MARCHE",
   "how.title": "De l’inscription au premier versement<br/><red>en trois étapes</red>",
   "how.s1.t": "Ouvrez votre compte",
@@ -50,7 +46,6 @@
   "how.s3.t": "Partagez votre lien et gagnez",
   "how.s3.d": "Obtenez votre lien de parrainage, partagez-le avec votre audience et gagnez sur chaque lot négocié par vos clients.",
   "how.cta": "Devenir partenaire",
-
   "calc.kicker": "SIMULATEUR DE GAINS",
   "calc.title": "Estimez votre<br/><red>versement mensuel</red>",
   "calc.sub": "Indiquez le nombre de traders et leur volume mensuel : le relevé de versement se met à jour instantanément. Calcul basé sur nos spreads les plus bas.",
@@ -79,18 +74,15 @@
   "rcpt.row": "1 × PARTENARIAT",
   "rcpt.big": "Bienvenue !",
   "rcpt.thanks": "MERCI ✓",
-
   "reviews.kicker": "AVIS INDÉPENDANTS",
   "reviews.title": "Noté là où les traders échangent",
   "reviews.verdict": "AVIS DE LA RÉDACTION",
   "reviews.of5": "5 sur 5",
   "reviews.of4": "4 sur 5",
-
   "film.frame": "Film du programme partenaires TradeQuo",
   "payouts.kicker": "VERSEMENTS QUOTIDIENS",
   "payouts.title": "Vos clients tradent chaque jour.<brd/> Vous encaissez chaque jour.",
   "flow.frame": "Infinite Flow – commissions réglées chaque jour",
-
   "offer.pill": "Avantages partenaires",
   "offer.title": "Tout ce qu’il faut <red>pour grandir</red>",
   "offer.sub": "Outils, contenus et accompagnement pour attirer des clients et les garder actifs.",
@@ -109,7 +101,6 @@
   "dock.l": "Devenir",
   "dock.r": "partenaire",
   "dock.aria": "Devenir partenaire",
-
   "faq.pill": "FAQ",
   "faq.title": "Vos questions, <red>nos réponses</red>",
   "faq.sub": "Tout ce qu’il faut savoir pour devenir IB TradeQuo.",
@@ -124,16 +115,20 @@
   "faq.5.q": "Faut-il de l’expérience ou un capital ?",
   "faq.5.a": "Non. Pas de frais d’adhésion, et vous n’avez besoin ni de capital ni d’expérience en trading. Un compte TradeQuo vérifié suffit.",
   "faq.frame": "Logo TradeQuo en verre",
-
   "reach.title": "Vous apportez l’audience.<brd/> Nous la rendons rentable.",
   "reach.sub": "Jusqu’à 87% du spread, versements quotidiens, suivi en temps réel et un gestionnaire qui décroche le téléphone. Candidatures examinées sous 24 heures.",
   "reach.cta1": "Devenir partenaire",
   "reach.cta2": "Estimez vos gains",
-
   "fab.aria": "Menu",
   "fan.aria": "Plan du site",
+  "fan.home": "Programme partenaires",
+  "fan.programs": "Programmes partenaires",
+  "fan.commission": "Plan de commissions",
+  "fan.dashboard": "Tableau de bord",
+  "fan.marketing": "Espace marketing",
+  "fan.academy": "Académie partenaires",
+  "fan.stories": "Success stories",
   "footer.risk": "Les CFD sont des instruments complexes et présentent un risque élevé de perte rapide en capital en raison de l’effet de levier. 72,6 % des comptes d’investisseurs particuliers perdent de l’argent lors de la négociation de CFD avec ce fournisseur.",
-
   "embed.crys.partners": "PARTENAIRES",
   "embed.crys.payouts": "VERSÉS CHAQUE MOIS",
   "embed.crys.revshare": "PARTAGE DE REVENUS MAX",

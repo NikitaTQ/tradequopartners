@@ -3,17 +3,15 @@
   "meta.description": "Recomienda traders a TradeQuo y gana hasta el 87% del spread en cada lote que operen. Las comisiones se liquidan cada día, sin cargos por pago.",
   "meta.ogDescription": "Gana hasta el 87% del spread en cada lote que operen tus clientes. Pagos diarios.",
   "lang.label": "Idioma",
+  "lang.translate": "Traductor automático",
   "loader": "CARGANDO",
-
   "nav.how": "Cómo funciona",
   "nav.calc": "Calculadora",
   "nav.perks": "Ventajas",
   "nav.faq": "FAQ",
   "nav.cta": "Hazte socio",
-
   "hero.h1": "Hasta el 87% del spread. Pagos <red>diarios.</red>",
   "hero.sub": "Recomienda traders a TradeQuo y gana con cada lote que operen. Comisiones liquidadas cada día, con seguimiento en tiempo real y sin cargos por pago.",
-
   "form.honeypot": "Deja este campo vacío",
   "form.tag": "Programa de Socios de TradeQuo",
   "form.title": "HAZTE <red>SOCIO</red>",
@@ -35,12 +33,10 @@
   "form.sent": "Solicitud enviada",
   "form.errEmail": "Escribe una dirección de email válida.",
   "form.errSend": "No se pudo enviar tu solicitud. Recarga la página e inténtalo de nuevo.",
-
   "stats.title": "El programa en cifras",
   "stats.alt": "30K+ socios, $9M+ pagados a socios cada mes, hasta el 87% de revenue share, puntuación de 4.9 en Trustpilot, 800K+ traders clientes, 400+ viajes de incentivo",
   "stats.frame": "TradeQuo en cifras",
   "stats.cta": "Calcula tus ganancias",
-
   "how.kicker": "CÓMO FUNCIONA",
   "how.title": "Del registro al primer pago<br/><red>en tres pasos</red>",
   "how.s1.t": "Abre tu cuenta",
@@ -50,7 +46,6 @@
   "how.s3.t": "Comparte tu enlace y gana",
   "how.s3.d": "Obtén tu enlace de referido, compártelo con tu audiencia y gana con cada lote que operen tus clientes.",
   "how.cta": "Hazte socio",
-
   "calc.kicker": "CALCULADORA DE GANANCIAS",
   "calc.title": "Calcula tu<br/><red>pago mensual</red>",
   "calc.sub": "Indica el número de traders y su volumen mensual: el extracto de pago se actualiza al instante. Basado en nuestros spreads más bajos.",
@@ -79,18 +74,15 @@
   "rcpt.row": "1 × ALIANZA",
   "rcpt.big": "¡Bienvenido!",
   "rcpt.thanks": "GRACIAS ✓",
-
   "reviews.kicker": "RESEÑAS INDEPENDIENTES",
   "reviews.title": "Valorados donde hablan los traders",
   "reviews.verdict": "VEREDICTO DEL EDITOR",
   "reviews.of5": "5 de 5",
   "reviews.of4": "4 de 5",
-
   "film.frame": "Video del Programa de Socios de TradeQuo",
   "payouts.kicker": "PAGOS DIARIOS",
   "payouts.title": "Tus clientes operan cada día.<brd/> Tú cobras cada día.",
   "flow.frame": "Infinite Flow — comisiones liquidadas cada día",
-
   "offer.pill": "Ventajas para socios",
   "offer.title": "Todo lo que necesitas <red>para crecer</red>",
   "offer.sub": "Herramientas, contenido y soporte para captar clientes y mantenerlos operando.",
@@ -109,7 +101,6 @@
   "dock.l": "Hazte",
   "dock.r": "socio",
   "dock.aria": "Hazte socio",
-
   "faq.pill": "FAQ",
   "faq.title": "Preguntas y <red>respuestas</red>",
   "faq.sub": "Todo lo que necesitas saber para convertirte en IB de TradeQuo.",
@@ -124,16 +115,20 @@
   "faq.5.q": "¿Necesito experiencia o capital?",
   "faq.5.a": "No. No hay cuota de inscripción, y no necesitas capital ni experiencia en trading. Basta con una cuenta de TradeQuo verificada.",
   "faq.frame": "Logotipo de TradeQuo en cristal",
-
   "reach.title": "Tú pones la audiencia.<brd/> Nosotros la hacemos rentable.",
   "reach.sub": "Hasta el 87% del spread, pagos diarios, seguimiento en tiempo real y un gestor que contesta el teléfono. Revisamos las solicitudes en un plazo de 24 horas.",
   "reach.cta1": "Hazte socio",
   "reach.cta2": "Calcula tus ganancias",
-
   "fab.aria": "Menú",
   "fan.aria": "Mapa del sitio",
+  "fan.home": "Programa de Socios",
+  "fan.programs": "Programas de socios",
+  "fan.commission": "Plan de comisiones",
+  "fan.dashboard": "Panel de socios",
+  "fan.marketing": "Centro de marketing",
+  "fan.academy": "Academia de socios",
+  "fan.stories": "Casos de éxito",
   "footer.risk": "Los CFD son instrumentos complejos y conllevan un alto riesgo de perder dinero rápidamente debido al apalancamiento. El 72,6 % de las cuentas de inversores minoristas pierden dinero en la negociación de CFD con este proveedor.",
-
   "embed.crys.partners": "SOCIOS",
   "embed.crys.payouts": "PAGADOS CADA MES",
   "embed.crys.revshare": "REVENUE SHARE MÁXIMO",
