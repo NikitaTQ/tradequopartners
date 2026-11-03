@@ -778,16 +778,32 @@ html { scroll-snap-type: y proximity; }
 [data-fab][data-open] [data-ref="fabIcon"] { transform: rotate(90deg); }
 
 /* ---- page-transition veil ------------------------------------------------ */
+/* Page transition veil (transition.js). Leaving: the veil fades in and black ink pours into the
+   TradeQuo mark; arriving: the full mark drains and the veil fades. Inline SVG, no WebGL. */
 .tq-loader {
   position: fixed; inset: 0; z-index: 120;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   background: #F2F2F3; pointer-events: all;
-  animation: tqLoaderIn .32s ease both;
+  animation: tqLoaderIn .18s ease both;
 }
 .tq-loader[hidden] { display: none; }
 html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
-.tq-loader.is-out { animation: tqLoaderOut .48s ease both; }
-.tq-loader iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: #F2F2F3; }
+.tq-loader__mark { width: clamp(96px, 12vw, 132px); height: auto; overflow: visible; filter: drop-shadow(0 18px 22px rgba(10,10,10,.12)); }
+.tq-loader__level { transform: translateY(146px); }
+.tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
+.tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
+.tq-loader.is-in .tq-loader__level { animation: tqLoaderFill .46s cubic-bezier(.55,.05,.35,1) both; }
+.tq-loader.is-in .tq-loader__dot { animation: tqLoaderDot .3s cubic-bezier(.3,1.6,.5,1) .3s both; }
+html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
+html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
+.tq-loader.is-out { animation: tqLoaderOut .26s ease .3s both; }
+.tq-loader.is-out .tq-loader__level { animation: tqLoaderDrain .4s cubic-bezier(.55,0,.45,1) both; }
+.tq-loader.is-out .tq-loader__dot { animation: tqLoaderDot .22s ease reverse both; }
+@keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
+@keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
+@keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
+@keyframes tqLoaderDot { from { transform: scale(0); } to { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .tq-loader__wave { animation: none; } }
 .tq-loader__label {
   position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%);
   font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .2em; color: #9a9da3; white-space: nowrap;
@@ -911,7 +927,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </head>
 <body>
 <div class="tq-loader" data-loader hidden>
-  <iframe data-src="../embeds/tradequo-loader.html?theme=light&v=37493651a6" title="" aria-hidden="true" tabindex="-1"></iframe>
+  <svg class="tq-loader__mark" viewBox="36 46 130 106" aria-hidden="true">
+    <defs>
+      <clipPath id="tqLoaderInk"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></clipPath>
+      <linearGradient id="tqLoaderGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"></stop><stop offset="1" stop-color="#e3e4e7"></stop></linearGradient>
+    </defs>
+    <g class="tq-loader__glass" fill="url(#tqLoaderGlass)" stroke="#0a0a0a" stroke-width="1.5" stroke-linejoin="round"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></g>
+    <g clip-path="url(#tqLoaderInk)"><g class="tq-loader__level"><path class="tq-loader__wave" d="M0 0q10-5 20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0V120H0Z" fill="#0a0a0a"></path></g></g>
+    <circle class="tq-loader__dot" cx="141" cy="130.5" r="10.5" fill="#e7131b"></circle>
+  </svg>
   <span class="tq-loader__label" data-loader-label>YÜKLENİYOR</span>
 </div>
 <div style="font-family: 'DM Sans', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased;">
@@ -1565,7 +1589,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   </footer>
 </div>
 
-<script src="../assets/js/transition.js?v=ca838a522c" defer></script>
+<script src="../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../assets/js/landing.js?v=0740d41fbf" defer></script>
 </body>
 </html>

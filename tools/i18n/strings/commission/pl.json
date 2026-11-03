@@ -13,6 +13,8 @@
   "cp.calc.lots": "Loty na klienta",
   "cp.calc.lotsHint": "Średni miesięczny wolumen na klienta",
   "cp.calc.tier": "TWÓJ POZIOM",
+  "cp.calc.est": "SZACUNEK",
+  "cp.calc.rate": "STAWKA ZA LOT",
   "cp.calc.perLot": "za lot",
   "cp.calc.income": "Twój potencjalny dochód miesięczny",
   "cp.calc.volume": "Wolumen miesięczny",

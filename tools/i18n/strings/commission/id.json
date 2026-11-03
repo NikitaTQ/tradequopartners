@@ -13,6 +13,8 @@
   "cp.calc.lots": "Lot per klien",
   "cp.calc.lotsHint": "Rata-rata volume bulanan per klien",
   "cp.calc.tier": "LEVEL ANDA",
+  "cp.calc.est": "ESTIMASI",
+  "cp.calc.rate": "TARIF PER LOT",
   "cp.calc.perLot": "per lot",
   "cp.calc.income": "Potensi penghasilan Anda per bulan",
   "cp.calc.volume": "Volume bulanan",

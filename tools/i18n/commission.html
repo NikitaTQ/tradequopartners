@@ -70,33 +70,54 @@
               </div>
             </div>
 
-            <div class="tp-tiers" aria-label="{{@cp.str.tiers}}">
-              <div class="tp-tier" data-plan-tier-seg="0"><b>Starter</b><span>$5.00</span></div>
-              <div class="tp-tier" data-plan-tier-seg="1" aria-current="true"><b>Gold</b><span>$7.50</span></div>
-              <div class="tp-tier" data-plan-tier-seg="2"><b>Elite</b><span>$10.00</span></div>
+            <div class="tp-tiers" role="group" aria-label="{{@cp.str.tiers}}" style="--t: 1;">
+              <span class="tp-tiers__thumb" aria-hidden="true"></span>
+              <button type="button" class="tp-tier" data-plan-goto="0" aria-pressed="false"><b>Starter</b><span>$5.00</span></button>
+              <button type="button" class="tp-tier" data-plan-goto="1" aria-pressed="true"><b>Gold</b><span>$7.50</span></button>
+              <button type="button" class="tp-tier" data-plan-goto="2" aria-pressed="false"><b>Elite</b><span>$10.00</span></button>
             </div>
           </div>
 
-          <div class="tp-dark tp-result">
-            <div class="tp-result__top">
-              <span class="tp-mono">{{cp.calc.tier}}</span>
-              <span class="tp-badge"><span data-plan-tier>Gold</span><i><span data-plan-rate>$7.50</span> {{cp.calc.perLot}}</i></span>
+          <div class="tp-sheet" data-plan-sheet>
+            <span class="tp-sheet__bar" aria-hidden="true"></span>
+            <div class="tp-sheet__head">
+              <span class="tp-sheet__brand"><img src="{{root}}assets/logo-mark.png" alt="" width="24" height="24"><span>TradeQuo<i>.</i></span></span>
+              <span class="tp-sheet__title">{{cp.calc.est}}</span>
             </div>
-            <div>
-              <p class="tp-result__label">{{cp.calc.income}}</p>
-              <p class="tp-result__big" data-plan-total aria-live="polite">$7,500</p>
+            <div class="tp-sheet__meta">
+              <div><span>{{cp.calc.tier}}</span><b data-plan-tier>Gold</b></div>
+              <div><span>{{cp.calc.rate}}</span><b data-plan-rate>$7.50</b></div>
+              <div><span>{{cp.calc.clientsUnit}}</span><b data-plan-clients>100</b></div>
             </div>
-            <div class="tp-result__rows">
-              <div><b><span data-plan-volume>1,000</span><small>{{calc.lotsUnit}}</small></b><span>{{cp.calc.volume}}</span></div>
+            <div class="tp-ladder" aria-hidden="true">
+              <div class="tp-ladder__step" data-plan-step="0"><em>$5.00</em><span class="tp-ladder__col"><i></i></span><small>Starter</small></div>
+              <div class="tp-ladder__step is-on" data-plan-step="1"><em>$7.50</em><span class="tp-ladder__col"><i></i></span><small>Gold</small></div>
+              <div class="tp-ladder__step" data-plan-step="2"><em>$10.00</em><span class="tp-ladder__col"><i></i></span><small>Elite</small></div>
+            </div>
+            <div class="tp-sheet__next">
+              <span class="tp-sheet__track" aria-hidden="true"><span data-plan-bar style="width: 33%;"></span></span>
+              <span data-plan-next data-next="{{@cp.calc.next}}" data-top="{{@cp.calc.top}}"></span>
+            </div>
+            <div class="tp-sheet__total">
+              <div class="tp-sheet__sum">
+                <span class="tp-sheet__label">{{cp.calc.income}}</span>
+                <b data-plan-total aria-live="polite">$7,500</b>
+              </div>
+              <svg class="tp-sheet__stamp" data-plan-stamp aria-hidden="true" width="104" height="104" viewBox="0 0 120 120">
+                <defs><path id="planArc" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"></path></defs>
+                <circle cx="60" cy="60" r="56" fill="none" stroke="#e7131b" stroke-width="2.4"></circle>
+                <circle cx="60" cy="60" r="31" fill="none" stroke="#e7131b" stroke-width="1.2"></circle>
+                <text font-family="DM Sans, sans-serif" font-size="9.6" font-weight="700" letter-spacing="2" fill="#e7131b"><textPath href="#planArc">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text>
+                <text data-plan-stamp-tier x="60" y="66" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="15" font-weight="800" letter-spacing="1.5" fill="#e7131b">GOLD</text>
+              </svg>
+            </div>
+            <div class="tp-sheet__ledger">
+              <div><b><span data-plan-volume>1,000</span></b><span>{{cp.calc.volume}} · {{calc.lotsUnit}}</span></div>
               <div><b data-plan-day>$250</b><span>{{cp.calc.perDay}}</span></div>
               <div><b data-plan-year>$90,000</b><span>{{cp.calc.perYear}}</span></div>
             </div>
-            <div class="tp-next">
-              <div class="tp-next__bar" aria-hidden="true"><span data-plan-bar style="width: 50%;"></span></div>
-              <span class="tp-next__text" data-plan-next data-next="{{@cp.calc.next}}" data-top="{{@cp.calc.top}}"></span>
-            </div>
-            <ul class="tp-perks"><li>{{cp.calc.p1}}</li><li>{{cp.calc.p2}}</li><li>{{cp.calc.p3}}</li></ul>
-            <a class="tp-btn tp-btn--red tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <ul class="tp-sheet__perks"><li>{{cp.calc.p1}}</li><li>{{cp.calc.p2}}</li><li>{{cp.calc.p3}}</li></ul>
+            <a class="tp-btn tp-btn--ink tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="#e7131b" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
           </div>
         </div>
       </div>
@@ -139,9 +160,9 @@
           </div>
           <div class="tp-tiercol">
             <h3>{{cp.str.tiers}}</h3>
-            <div class="tp-glass tp-glass--hover tp-tiercard"><span class="tp-tiercard__name"><i></i>Starter</span><span class="tp-tiercard__rate"><b>$5.00</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r1}}</span><span class="tp-tiercard__daily">{{cp.tier.daily}}</span></div>
-            <div class="tp-glass tp-glass--hover tp-tiercard tp-tiercard--gold"><span class="tp-tiercard__name"><i></i>Gold</span><span class="tp-tiercard__rate"><b>$7.50</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r2}}</span><span class="tp-tiercard__daily">{{cp.tier.daily}}</span></div>
-            <div class="tp-glass tp-glass--red tp-glass--hover tp-tiercard tp-tiercard--elite"><span class="tp-tiercard__name"><i></i>Elite</span><span class="tp-tiercard__rate"><b>$10.00</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r3}}</span><span class="tp-tiercard__daily">{{cp.tier.daily}}</span></div>
+            <a class="tp-glass tp-tiercard" href="#calculator" data-plan-goto="0"><span class="tp-tiercard__name"><i></i>Starter</span><span class="tp-tiercard__rate"><b>$5.00</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r1}}</span><span class="tp-tiercard__foot"><span class="tp-tiercard__daily">{{cp.tier.daily}}</span><span class="tp-tiercard__go">{{nav.calc}}<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></a>
+            <a class="tp-glass tp-tiercard tp-tiercard--gold" href="#calculator" data-plan-goto="1"><span class="tp-tiercard__name"><i></i>Gold</span><span class="tp-tiercard__rate"><b>$7.50</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r2}}</span><span class="tp-tiercard__foot"><span class="tp-tiercard__daily">{{cp.tier.daily}}</span><span class="tp-tiercard__go">{{nav.calc}}<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></a>
+            <a class="tp-glass tp-tiercard tp-tiercard--elite" href="#calculator" data-plan-goto="2"><span class="tp-tiercard__name"><i></i>Elite</span><span class="tp-tiercard__rate"><b>$10.00</b><span>{{cp.calc.perLot}}</span></span><span class="tp-tiercard__range">{{cp.tier.r3}}</span><span class="tp-tiercard__foot"><span class="tp-tiercard__daily">{{cp.tier.daily}}</span><span class="tp-tiercard__go">{{nav.calc}}<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></a>
           </div>
         </div>
       </div>

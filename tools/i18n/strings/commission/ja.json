@@ -13,6 +13,8 @@
   "cp.calc.lots": "顧客1人あたりのロット数",
   "cp.calc.lotsHint": "顧客1人あたりの平均月間取引量",
   "cp.calc.tier": "適用ランク",
+  "cp.calc.est": "収益試算",
+  "cp.calc.rate": "1ロットあたり単価",
   "cp.calc.perLot": "/ ロット",
   "cp.calc.income": "月間の見込み報酬",
   "cp.calc.volume": "月間取引量",

@@ -13,6 +13,8 @@
   "cp.calc.lots": "عدد اللوتات لكل عميل",
   "cp.calc.lotsHint": "متوسط حجم التداول الشهري لكل عميل",
   "cp.calc.tier": "مستواك",
+  "cp.calc.est": "تقدير",
+  "cp.calc.rate": "المعدّل لكل لوت",
   "cp.calc.perLot": "لكل لوت",
   "cp.calc.income": "دخلك المحتمل شهريًا",
   "cp.calc.volume": "حجم التداول الشهري",

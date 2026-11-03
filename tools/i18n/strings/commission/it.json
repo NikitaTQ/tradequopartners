@@ -13,6 +13,8 @@
   "cp.calc.lots": "Lotti per cliente",
   "cp.calc.lotsHint": "Volume mensile medio per cliente",
   "cp.calc.tier": "IL TUO LIVELLO",
+  "cp.calc.est": "STIMA",
+  "cp.calc.rate": "TARIFFA PER LOTTO",
   "cp.calc.perLot": "per lotto",
   "cp.calc.income": "Il tuo guadagno potenziale al mese",
   "cp.calc.volume": "Volume mensile",

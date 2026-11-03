@@ -13,6 +13,8 @@
   "cp.calc.lots": "每位客户交易手数",
   "cp.calc.lotsHint": "每位客户的平均月交易量",
   "cp.calc.tier": "您的等级",
+  "cp.calc.est": "收益估算",
+  "cp.calc.rate": "每手返佣",
   "cp.calc.perLot": "/ 手",
   "cp.calc.income": "您每月的潜在收益",
   "cp.calc.volume": "月交易量",

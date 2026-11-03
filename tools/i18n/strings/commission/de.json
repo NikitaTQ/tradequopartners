@@ -13,6 +13,8 @@
   "cp.calc.lots": "Lots pro Kunde",
   "cp.calc.lotsHint": "Durchschnittliches Monatsvolumen pro Kunde",
   "cp.calc.tier": "IHRE STUFE",
+  "cp.calc.est": "SCHÄTZUNG",
+  "cp.calc.rate": "SATZ PRO LOT",
   "cp.calc.perLot": "pro Lot",
   "cp.calc.income": "Ihre potenziellen Einnahmen pro Monat",
   "cp.calc.volume": "Monatsvolumen",
