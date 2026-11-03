@@ -412,6 +412,8 @@
     $$('[data-calc-slider]').forEach((el) => { sliders[el.dataset.calcSlider] = el; });
 
     const d = new Date();
+    let numLocale = 'en-US';
+    try { numLocale = Intl.NumberFormat.supportedLocalesOf([document.documentElement.lang + '-u-nu-latn'])[0] || 'en-US'; } catch (e) {}
     const setText = (sel, v) => { const el = $(sel, inv); if (el) el.textContent = v; };
     setText('[data-inv-issued]', pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear());
     /* period in the page language, Western digits (amounts stay $ / en-US everywhere) */
@@ -450,7 +452,7 @@
         $('[data-calc-fill]', s).style.width = pct;
         $('[data-calc-knob]', s).style.left = pct;
       }
-      setText('[data-inv-lots]', (lots * traders).toLocaleString('en-US'));
+      setText('[data-inv-lots]', (lots * traders).toLocaleString(numLocale));   /* lot count in local style; $ amounts stay en-US */
       setText('[data-inv-no]', 'TQ-' + String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + '-' + String(traders).padStart(3, '0'));
       tween(lots * traders * RATE);
     };

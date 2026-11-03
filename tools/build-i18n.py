@@ -52,6 +52,20 @@ SINGLE = {
 TOKEN = re.compile(r'<(/?)([a-z]+)(/?)>')
 
 
+# Thai has no spaces; the browser breaks lines with a dictionary that doesn't know
+# trading loanwords, so it can split them (ของส|เปรด). A word joiner between their
+# base letters keeps them whole (never before a combining vowel/tone mark).
+THAI_KEEP = ['คอมมิชชั่น', 'พาร์ทเนอร์', 'เทรดเดอร์', 'สเปรด', 'รีเบท', 'ล็อต', 'ทริป', 'เทรด']
+
+
+def keep_thai(text):
+    import unicodedata
+    for w in THAI_KEEP:
+        joined = ''.join(('\u2060' + c) if i and unicodedata.category(c) != 'Mn' else c for i, c in enumerate(w))
+        text = text.replace(w, joined)
+    return text
+
+
 def render_text(value):
     out, pos = [], 0
     for m in TOKEN.finditer(value):
@@ -108,6 +122,7 @@ def font_css(script, root):
         rules.append('h1, h2 { line-height: 1.2 !important; }')
     if script == 'cjk':
         rules.append('h1, h2, h3, p { line-break: strict; }')
+        rules.append('html:lang(ko) * { word-break: keep-all; }')   # Korean wraps between words, not syllables
     if not rules:
         return '', ''
     css = '\n<style id="i18n-fonts">\n' + '\n'.join(rules) + '\n</style>'
@@ -182,7 +197,10 @@ for lang in languages:
         attr, key = m.group(1) == '@', m.group(2)
         if key in system:
             return system[key]
-        return render_attr(s(key)) if attr else render_text(s(key))
+        if attr:
+            return render_attr(s(key))
+        text = s(key)
+        return render_text(keep_thai(text) if lang.get('script') == 'thai' else text)
 
     page = re.sub(r'\{\{(@?)([A-Za-z0-9_.-]+)\}\}', fill, template)
     assert '{{' not in page, page[page.index('{{'):][:80]

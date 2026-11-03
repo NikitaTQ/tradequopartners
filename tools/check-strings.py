@@ -21,7 +21,8 @@ for f in sorted(os.listdir(D)):
         if sorted(TOK.findall(v)) != sorted(TOK.findall(t[k])): problems.append('tokens %s: %s' % (k, TOK.findall(t[k])))
         if k != 'footer.risk' and k != 'form.datePh':
             for n in NUM.findall(TOK.sub('', v)):
-                if n.strip('.,') and n.strip('.,') not in t[k]: problems.append('number %s missing in %s' % (n, k))
+                core = n.strip('.,$%+')   # local forms like %87 (Turkish) keep the digits
+                if core and core not in t[k]: problems.append('number %s missing in %s' % (n, k))
         if TIGHT.match(k) and width(t[k]) > max(width(v) * 1.45, width(v) + 6):
             problems.append('long %s: %r (%d vs %d)' % (k, t[k], width(t[k]), width(v)))
     print('%-8s %s' % (code, 'ok' if not problems else '\n  ' + '\n  '.join(problems)))
