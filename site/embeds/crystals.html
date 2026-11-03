@@ -147,7 +147,7 @@ function logoCanvas(v) {
 function drawMetric(ctx, f, v) {
   if (f.logo && !logoMasks) f = Object.assign({}, f, { logo: false, num: [['TQ', false]] });
   ctx.clearRect(0, 0, TX, TY);
-  const capSize = TY * 0.155, capLS = capSize * 0.13 * CAP_TRACK;
+  const capSize = TY * 0.155 * (CAP_TRACK ? 1 : 1.18), capLS = capSize * 0.13 * CAP_TRACK; /* caseless scripts read small at cap height */
   ctx.font = `700 ${capSize}px ${CAP_FONT}`; ctx.letterSpacing = `${capLS}px`;
   const capH = ctx.measureText('H').actualBoundingBoxAscent, gap = TY * 0.15;
   let numSize = TY * 0.49, numH, total, widths;
