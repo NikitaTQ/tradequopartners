@@ -332,3 +332,9 @@
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-next__bar span { transition: none; }
 }
+
+/* ---- right-to-left ---------------------------------------------------------------- */
+/* tier strip reads like the slider above it: low to high, left to right */
+[dir="rtl"] .tp-tiers { direction: ltr; }
+/* the red stretch of the payout line sits under "settled at 00:00" (third step from the right) */
+[dir="rtl"] .tp-timeline::before { background: linear-gradient(270deg, rgba(255,255,255,.14), rgba(231,19,27,.9) 66%, rgba(255,255,255,.14)); }

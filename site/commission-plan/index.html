@@ -7,6 +7,23 @@
 <meta name="description" content="Estimate your monthly earnings as a TradeQuo partner. Earn up to 87% of spread — from $5.00 to $10.00 per lot as your network grows — paid daily with no payout fees.">
 <link rel="canonical" href="https://tradequopartners.com/commission-plan/">
 <link rel="alternate" hreflang="en" href="https://tradequopartners.com/commission-plan/">
+<link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/commission-plan/">
+<link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/commission-plan/">
+<link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/commission-plan/">
+<link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/commission-plan/">
+<link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/commission-plan/">
+<link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/commission-plan/">
+<link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/commission-plan/">
+<link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/commission-plan/">
+<link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/commission-plan/">
+<link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/commission-plan/">
+<link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/commission-plan/">
+<link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/commission-plan/">
+<link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/commission-plan/">
+<link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/commission-plan/">
+<link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/commission-plan/">
+<link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/commission-plan/">
+<link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/commission-plan/">
 <link rel="alternate" hreflang="x-default" href="https://tradequopartners.com/commission-plan/">
 <meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
@@ -1204,6 +1221,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-next__bar span { transition: none; }
 }
+
+/* ---- right-to-left ---------------------------------------------------------------- */
+/* tier strip reads like the slider above it: low to high, left to right */
+[dir="rtl"] .tp-tiers { direction: ltr; }
+/* the red stretch of the payout line sits under "settled at 00:00" (third step from the right) */
+[dir="rtl"] .tp-timeline::before { background: linear-gradient(270deg, rgba(255,255,255,.14), rgba(231,19,27,.9) 66%, rgba(255,255,255,.14)); }
 </style>
 </head>
 <body>
@@ -1214,7 +1237,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 <div class="tp">
 
   <header style="position: relative; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px clamp(16px, 4vw, 56px); max-width: 1440px; margin: 0 auto;">
-    <a href="../" data-page-link data-label="LOADING · Partner Program" style="display: inline-flex; flex-shrink: 0;"><img src="../assets/logo-wordmark-dark.png?v=be9b8240ee" alt="TradeQuo" style="height: 23px; width: auto;"></a>
+    <a href="../" data-page-link data-label="LOADING · Home" style="display: inline-flex; flex-shrink: 0;"><img src="../assets/logo-wordmark-dark.png?v=be9b8240ee" alt="TradeQuo" style="height: 23px; width: auto;"></a>
     <nav style="display: flex; align-items: center; gap: clamp(14px, 2vw, 32px); flex-wrap: wrap; justify-content: flex-end;">
       <span data-navlinks="" style="display: contents;">
         <a class="hv-red" href="#calculator" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">Calculator</a>
@@ -1223,7 +1246,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
         <a class="hv-red" href="#questions" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">FAQ</a>
         </span>
       <div class="tq-lang" data-lang><button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="Language: English"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg><span class="tq-lang__code">EN</span><svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="tq-lang__menu" hidden><li><a href="../commission-plan/" hreflang="en" lang="en" aria-current="true">English</a></li><li><a href="../ar/commission-plan/" hreflang="ar" lang="ar">العربية</a></li><li><a href="../zh-hans/commission-plan/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li><li><a href="../zh-hant/commission-plan/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li><li><a href="../fr/commission-plan/" hreflang="fr" lang="fr">Français</a></li><li><a href="../de/commission-plan/" hreflang="de" lang="de">Deutsch</a></li><li><a href="../id/commission-plan/" hreflang="id" lang="id">Bahasa Indonesia</a></li><li><a href="../it/commission-plan/" hreflang="it" lang="it">Italiano</a></li><li><a href="../ja/commission-plan/" hreflang="ja" lang="ja">日本語</a></li><li><a href="../ko/commission-plan/" hreflang="ko" lang="ko">한국어</a></li><li><a href="../pl/commission-plan/" hreflang="pl" lang="pl">Polski</a></li><li><a href="../pt/commission-plan/" hreflang="pt" lang="pt">Português</a></li><li><a href="../ro/commission-plan/" hreflang="ro" lang="ro">Română</a></li><li><a href="../es/commission-plan/" hreflang="es" lang="es">Español</a></li><li><a href="../th/commission-plan/" hreflang="th" lang="th">ไทย</a></li><li><a href="../tr/commission-plan/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="../uk/commission-plan/" hreflang="uk" lang="uk">Українська</a></li><li><a href="../vi/commission-plan/" hreflang="vi" lang="vi">Tiếng Việt</a></li><li class="tq-lang__opt"><button type="button" role="switch" aria-checked="true" data-translate-toggle><span>Auto-translate</span><span class="tq-lang__switch" aria-hidden="true"></span></button></li></ul></div>
-      <a class="hv-red-bg" href="../#signup" data-page-link data-label="LOADING · Partner Program" style="display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap; height: 44px; padding: 0 24px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 15px; font-weight: 600; letter-spacing: -.01em;">Become a partner</a>
+      <a class="hv-red-bg" href="../#signup" data-page-link data-label="LOADING · Home" style="display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap; height: 44px; padding: 0 24px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 15px; font-weight: 600; letter-spacing: -.01em;">Become a partner</a>
     </nav>
   </header>
 
@@ -1289,7 +1312,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
               <span class="tp-next__text" data-plan-next data-next="{tier} from {n} clients" data-top="Top tier reached"></span>
             </div>
             <ul class="tp-perks"><li>Paid daily</li><li>No payout fees</li><li>No earnings cap</li></ul>
-            <a class="tp-btn tp-btn--red tp-btn--block" href="../#signup" data-page-link data-label="LOADING · Partner Program">Become a partner<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <a class="tp-btn tp-btn--red tp-btn--block" href="../#signup" data-page-link data-label="LOADING · Home">Become a partner<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
           </div>
         </div>
       </div>
@@ -1503,7 +1526,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <h2 class="tp-h2">Join the TradeQuo <span style="color: #e7131b;">Partner Program</span></h2>
           <p class="tp-sub">Up to 87% of spread, paid every day. Applications are reviewed within 24 hours.</p>
           <div class="tp-actions" style="margin-top: 12px;">
-            <a class="tp-btn tp-btn--red" href="../#signup" data-page-link data-label="LOADING · Partner Program">Become a partner<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <a class="tp-btn tp-btn--red" href="../#signup" data-page-link data-label="LOADING · Home">Become a partner<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
             <a class="tp-btn tp-btn--ghost" href="../programs/" data-page-link data-label="LOADING · Partner Programs">Compare partner programs</a>
           </div>
         </div>
@@ -1513,7 +1536,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 
   <div data-fab="" style="position: fixed; right: 16px; bottom: 16px; z-index: 60; display: none; flex-direction: column; align-items: flex-end; gap: 12px;">
     <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
-      <a class="tq-fab-link" href="../" data-page-link data-label="LOADING · Partner Program" style="--i: 0;">Partner Program</a>
+      <a class="tq-fab-link" href="../" data-page-link data-label="LOADING · Home" style="--i: 0;">Home</a>
       <a class="tq-fab-link tq-fab-link--page" href="../programs/" data-page-link data-label="LOADING · Partner Programs" style="--i: 1;">Partner Programs</a>
       <a class="tq-fab-link tq-fab-link--page" href="#calculator" aria-current="page" style="--i: 2;">Commission Plan</a>
       <a class="tq-fab-link" href="#questions" style="--i: 3;">FAQ</a>
@@ -1532,7 +1555,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">02</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">02</span>
             <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Partner Programs</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -1543,7 +1566,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">03</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">03</span>
             <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Commission Plan</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -1554,7 +1577,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
             <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Partner Dashboard</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -1565,7 +1588,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">05</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">05</span>
             <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Marketing Hub</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -1576,7 +1599,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">06</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">06</span>
             <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Partner Academy</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -1587,7 +1610,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">07</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">07</span>
             <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">Success Stories</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
