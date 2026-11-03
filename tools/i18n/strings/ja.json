@@ -3,6 +3,7 @@
   "meta.description": "トレーダーをTradeQuoに紹介し、取引される1ロットごとにスプレッドの最大87%を獲得できるIB・アフィリエイトプログラムです。報酬は毎日精算され、支払手数料はかかりません。",
   "meta.ogDescription": "紹介した顧客が取引する1ロットごとに、スプレッドの最大87%を獲得。毎日お支払いします。",
   "lang.label": "言語",
+  "lang.translate": "自動翻訳",
   "loader": "読み込み中",
 
   "nav.how": "仕組み",
@@ -132,6 +133,13 @@
 
   "fab.aria": "メニュー",
   "fan.aria": "サイトマップ",
+  "fan.home": "パートナープログラム",
+  "fan.programs": "プログラム一覧",
+  "fan.commission": "報酬プラン",
+  "fan.dashboard": "パートナーダッシュボード",
+  "fan.marketing": "マーケティングハブ",
+  "fan.academy": "パートナーアカデミー",
+  "fan.stories": "成功事例",
   "footer.risk": "CFDは複雑な金融商品であり、レバレッジにより急速に資金を失う高いリスクを伴います。本プロバイダーでCFD取引を行う個人投資家口座の72.6%が損失を被っています。",
 
   "embed.crys.partners": "パートナー",
