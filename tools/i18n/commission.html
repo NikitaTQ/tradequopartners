@@ -116,8 +116,16 @@
               <div><b data-plan-day>$250</b><span>{{cp.calc.perDay}}</span></div>
               <div><b data-plan-year>$90,000</b><span>{{cp.calc.perYear}}</span></div>
             </div>
-            <ul class="tp-sheet__perks"><li>{{cp.calc.p1}}</li><li>{{cp.calc.p2}}</li><li>{{cp.calc.p3}}</li></ul>
-            <a class="tp-btn tp-btn--ink tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="#e7131b" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <ul class="tp-sheet__perks">
+              <li><span class="tp-sheet__badge" aria-hidden="true">24h</span>{{cp.calc.p1}}</li>
+              <li><span class="tp-sheet__badge" aria-hidden="true">0%</span>{{cp.calc.p2}}</li>
+              <li><span class="tp-sheet__badge tp-sheet__badge--inf" aria-hidden="true">∞</span>{{cp.calc.p3}}</li>
+            </ul>
+            <a class="tp-slide" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">
+              <span class="tp-slide__fill" aria-hidden="true"></span>
+              <span class="tp-slide__label">{{nav.cta}}</span>
+              <span class="tp-slide__knob" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            </a>
           </div>
         </div>
       </div>
