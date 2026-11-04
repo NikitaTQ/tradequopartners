@@ -1039,7 +1039,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-prog__art { position: relative; aspect-ratio: 16 / 9; margin: 0 calc(-1 * clamp(20px, 2.2vw, 28px)); display: flex; align-items: center; justify-content: center; }
 /* 3D art (embeds/program-art.html) fades in over a poster of its first frame */
 .tp-prog__poster, .tp-prog__3d { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-.tp-prog__poster { object-fit: cover; }
+.tp-prog__poster { object-fit: cover; transition: opacity .6s ease; }
 .tp-prog__3d { background: transparent; opacity: 0; transition: opacity .6s ease; pointer-events: none; }
 .tp-prog__art::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); }
 
@@ -1490,7 +1490,7 @@ html:lang(ko) * { word-break: keep-all; }
       <div class="tp-stage">
         <div class="tp-programs">
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-link.webp?v=3fee1d367d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=link&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" data-poster src="../../assets/posters/program-link.webp?v=3fee1d367d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=link&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">01 · 介绍经纪商（IB）</span>
             <h2 class="tp-prog__title">推荐交易者</h2>
             <p class="tp-prog__desc">向您的受众分享推荐链接，客户每交易一手，您都能获得收益。</p>
@@ -1508,7 +1508,7 @@ html:lang(ko) * { word-break: keep-all; }
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-network.webp?v=67426b2358" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=network&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" data-poster src="../../assets/posters/program-network.webp?v=67426b2358" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=network&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">02 · 合作伙伴网络</span>
             <h2 class="tp-prog__title">建立合作网络</h2>
             <p class="tp-prog__desc">引荐其他合作伙伴加入TradeQuo，在自有客户之外，还能从他们带来的业务中获得收益。</p>
@@ -1521,7 +1521,7 @@ html:lang(ko) * { word-break: keep-all; }
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-flag.webp?v=7fd9e3a14d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=flag&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" data-poster src="../../assets/posters/program-flag.webp?v=7fd9e3a14d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=flag&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">03 · 白标方案</span>
             <h2 class="tp-prog__title">推出自有品牌</h2>
             <p class="tp-prog__desc">依托TradeQuo的基础设施，以您自己的名义经营经纪业务或交易学院。</p>
@@ -1760,6 +1760,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=7884dbe811" defer></script>
+<script src="../../assets/js/landing.js?v=c0cdb74a68" defer></script>
 </body>
 </html>

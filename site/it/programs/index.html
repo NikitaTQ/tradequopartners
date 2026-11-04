@@ -1039,7 +1039,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-prog__art { position: relative; aspect-ratio: 16 / 9; margin: 0 calc(-1 * clamp(20px, 2.2vw, 28px)); display: flex; align-items: center; justify-content: center; }
 /* 3D art (embeds/program-art.html) fades in over a poster of its first frame */
 .tp-prog__poster, .tp-prog__3d { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-.tp-prog__poster { object-fit: cover; }
+.tp-prog__poster { object-fit: cover; transition: opacity .6s ease; }
 .tp-prog__3d { background: transparent; opacity: 0; transition: opacity .6s ease; pointer-events: none; }
 .tp-prog__art::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); }
 
@@ -1484,7 +1484,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
       <div class="tp-stage">
         <div class="tp-programs">
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-link.webp?v=3fee1d367d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=link&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" data-poster src="../../assets/posters/program-link.webp?v=3fee1d367d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=link&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">01 · INTRODUCING BROKER</span>
             <h2 class="tp-prog__title">Presenta trader</h2>
             <p class="tp-prog__desc">Condividi il tuo link di affiliazione con il tuo pubblico e guadagna su ogni lotto negoziato dai tuoi clienti.</p>
@@ -1502,7 +1502,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-network.webp?v=67426b2358" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=network&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" data-poster src="../../assets/posters/program-network.webp?v=67426b2358" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=network&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">02 · RETE DI PARTNER</span>
             <h2 class="tp-prog__title">Costruisci la tua rete</h2>
             <p class="tp-prog__desc">Porta altri partner su TradeQuo e guadagna sull’attività che generano, oltre che sui tuoi clienti.</p>
@@ -1515,7 +1515,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-flag.webp?v=7fd9e3a14d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=flag&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" data-poster src="../../assets/posters/program-flag.webp?v=7fd9e3a14d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=flag&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">03 · WHITE LABEL</span>
             <h2 class="tp-prog__title">Lancia il tuo brand</h2>
             <p class="tp-prog__desc">Gestisci un broker o un’academy di trading con il tuo nome, sull’infrastruttura di TradeQuo.</p>
@@ -1754,6 +1754,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=7884dbe811" defer></script>
+<script src="../../assets/js/landing.js?v=c0cdb74a68" defer></script>
 </body>
 </html>
