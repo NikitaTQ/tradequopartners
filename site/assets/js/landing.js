@@ -38,7 +38,13 @@
       }
       if (d && d.tqReady) {
         /* an embed drew its first frame: fade it in over its poster */
-        $$('iframe').forEach((f) => { if (f.contentWindow === e.source) f.style.opacity = '1'; });
+        $$('iframe').forEach((f) => {
+          if (f.contentWindow !== e.source) return;
+          f.style.opacity = '1';
+          /* a transparent scene must not show its still underneath: hide the poster */
+          const poster = f.parentNode && f.parentNode.querySelector('[data-poster]');
+          if (poster) poster.style.opacity = '0';
+        });
         return;
       }
       if (!d || typeof d.tqFrameH !== 'number' || d.tqFrameH < 50) return;
