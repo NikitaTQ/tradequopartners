@@ -155,16 +155,25 @@
       </div>
     </section>
 
-    <!-- Final call -->
+    <!-- Final call (Final CTA Glint Teaser design) -->
     <section class="tp-night-sec" data-screen-label="Start earning">
-      <div class="tp-night">
-        <div class="tp-head">
-          <h2 class="tp-h2">{{pp.end.title}}</h2>
-          <p class="tp-sub">{{pp.end.sub}}</p>
-          <div class="tp-actions" style="margin-top: 12px;">
-            <a class="tp-btn tp-btn--red" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-            <a class="tp-btn tp-btn--ghost" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}">{{reach.cta2}}</a>
-          </div>
+      <div class="tp-night tp-final">
+        <h2 class="tp-final__title">{{pp.end.title}}</h2>
+        <p class="tp-final__sub">{{pp.end.sub}}</p>
+        <div class="tp-final__actions">
+          <a class="tp-glint" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">
+            <span class="tp-glint__sweep" aria-hidden="true"></span>
+            <span class="tp-glint__label">{{nav.cta}}</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+          <a class="tp-roll" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}" aria-label="{{@reach.cta2}}">
+            <span class="tp-roll__window" aria-hidden="true">
+              <span class="tp-roll__track">
+                <span class="tp-roll__a">{{reach.cta2}}</span>
+                <span class="tp-roll__b">{{pp.end.teaser}} →</span>
+              </span>
+            </span>
+          </a>
         </div>
       </div>
     </section>
