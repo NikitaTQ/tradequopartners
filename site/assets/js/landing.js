@@ -93,6 +93,13 @@
     };
     events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
     if (scrollY > 0) first(); /* reload half-way down the page */
+    /* frames marked data-eager sit in the first screen (the program cards' 3D art, which
+       shows a matching poster meanwhile): they also start on the first mouse movement */
+    const eager = frames.filter((f) => f.hasAttribute('data-eager'));
+    if (eager.length && !saveData) {
+      const go = () => { window.removeEventListener('pointermove', go); idle(() => eager.forEach((f) => { if (f.getClientRects().length) start(f); }), { timeout: 600 }); };
+      window.addEventListener('pointermove', go, { passive: true });
+    }
     const view = new IntersectionObserver((entries) => {
       entries.forEach((en) => { en.target.dataset.inview = en.isIntersecting ? '1' : '0'; setEmbedPaused(en.target); });
     }, { rootMargin: '80px 0px' });
