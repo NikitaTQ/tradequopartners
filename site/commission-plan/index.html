@@ -1198,9 +1198,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-sheet__ledger div + div { border-inline-start: 1px solid #e4e4e1; }
 .tp-sheet__ledger b { font-family: 'Fragment Mono', monospace; font-size: 14.5px; font-weight: 400; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .tp-sheet__ledger div > span { font-size: 12px; color: #6a6a6e; }
-.tp-sheet__perks { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: 0; padding: 12px 16px; list-style: none; border-radius: 10px; background: #fff; border: 1px dashed #e7a7a9; }
+.tp-sheet__perks { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: 0; padding: 12px 16px; list-style: none; border-radius: 10px; background: #f4fbf7; border: 1px dashed #8fd6ad; }
 .tp-sheet__perks li { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
-.tp-sheet__perks li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
+.tp-sheet__perks li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #16b364; box-shadow: 0 0 8px rgba(22,179,100,.55); }
+.tp-sheet__perks li { color: #0b5d34; }   /* payout terms read green, like the landing statement */
 .tp-sheet__perks li:first-child::before { animation: tqPulse 2.4s ease-in-out infinite; }
 .tp-sheet .tp-btn { margin-top: auto; }
 
@@ -1797,7 +1798,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=0740d41fbf" defer></script>
+<script src="../assets/js/landing.js?v=52e6eb6177" defer></script>
 <script src="../assets/js/plan.js?v=41de946c31" defer></script>
 </body>
 </html>

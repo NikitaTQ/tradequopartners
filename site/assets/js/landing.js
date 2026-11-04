@@ -433,7 +433,7 @@
       if (to === target) return;
       to = target;
       const from = live, t0 = performance.now(), DUR = 650;
-      if (tot) tot.style.color = target >= from ? '#e7131b' : '#0a0a0a';
+      if (tot) tot.style.color = target >= from ? '#0f9a52' : '#0a0a0a';   /* money up: green */
       cancelAnimationFrame(raf);
       const step = (now) => {
         const p = Math.min(1, (now - t0) / DUR), e = 1 - Math.pow(1 - p, 3);
