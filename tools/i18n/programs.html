@@ -54,8 +54,13 @@
             <ul class="tp-ticks"><li>{{pp.p1.b1}}</li><li>{{pp.p1.b2}}</li><li>{{pp.p1.b3}}</li></ul>
             <p class="tp-prog__for">{{pp.p1.for}}</p>
             <div class="tp-prog__cta">
-              <a class="tp-btn tp-btn--red tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-              <a class="tp-link" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}">{{pp.card.plan}}</a>
+              <a class="tp-pcta" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}" aria-label="{{@nav.cta}}">
+                <span class="tp-pcta__win" aria-hidden="true"><span class="tp-pcta__track">
+                  <span class="tp-pcta__line">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.6 9.4l2.8-2.8M7.3 4.6l1.1-1.1a2.6 2.6 0 0 1 3.7 3.7L11 8.3M8.7 11.4l-1.1 1.1a2.6 2.6 0 0 1-3.7-3.7L5 7.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span>
+                  <span class="tp-pcta__line tp-pcta__line--mono">tradequo.com/ref/<mark>you</mark></span>
+                </span></span>
+              </a>
+              <a class="tp-scta" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}"><span class="tp-scta__pct" aria-hidden="true">%</span>{{pp.card.plan}}</a>
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
@@ -67,8 +72,8 @@
             <ul class="tp-ticks"><li>{{pp.p2.b1}}</li><li>{{pp.p2.b2}}</li><li>{{pp.p2.b3}}</li></ul>
             <p class="tp-prog__for">{{pp.p2.for}}</p>
             <div class="tp-prog__cta">
-              <a class="tp-btn tp-btn--red tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-              <a class="tp-link" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}">{{pp.card.plan}}</a>
+              <a class="tp-pcta" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg class="tp-pcta__net" width="38" height="20" viewBox="0 0 38 20" fill="none" aria-hidden="true"><path d="M5 10L19 4L33 10L19 16Z M19 4V16" pathLength="1" stroke="#fff" stroke-width="1.4" stroke-dasharray="1"></path><circle cx="5" cy="10" r="3" fill="#fff"></circle><circle cx="19" cy="4" r="2.4" fill="#fff"></circle><circle cx="33" cy="10" r="2.4" fill="#fff"></circle><circle cx="19" cy="16" r="2.4" fill="#fff"></circle></svg></a>
+              <a class="tp-scta tp-scta--line" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}">{{pp.card.plan}}<span class="tp-scta__under" aria-hidden="true"></span></a>
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
@@ -80,8 +85,8 @@
             <ul class="tp-ticks"><li>{{pp.p3.b1}}</li><li>{{pp.p3.b2}}</li><li>{{pp.p3.b3}}</li></ul>
             <p class="tp-prog__for">{{pp.p3.for}}</p>
             <div class="tp-prog__cta">
-              <a class="tp-btn tp-btn--red tp-btn--block" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-              <a class="tp-link" href="{{home}}#dashboard" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{offer.pill}}</a>
+              <a class="tp-pcta" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}"><span class="tp-pcta__tmwrap">{{nav.cta}}<span class="tp-pcta__tm" aria-hidden="true">™</span></span><svg class="tp-pcta__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              <a class="tp-scta" href="{{home}}#dashboard" data-page-link data-label="{{@loader}} · {{@fan.home}}"><span class="tp-scta__plus" aria-hidden="true">+</span>{{offer.pill}}</a>
             </div>
           </article>
         </div>
