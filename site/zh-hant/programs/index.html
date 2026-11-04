@@ -1036,9 +1036,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 /* ---- program cards ------------------------------------------------------------- */
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
 .tp-prog { display: flex; flex-direction: column; padding: 0 clamp(20px, 2.2vw, 28px) clamp(22px, 2.4vw, 28px); overflow: hidden; }
-.tp-prog__art { position: relative; height: clamp(150px, 15vw, 196px); margin: 0 calc(-1 * clamp(20px, 2.2vw, 28px)); display: flex; align-items: center; justify-content: center; }
+.tp-prog__art { position: relative; aspect-ratio: 16 / 9; margin: 0 calc(-1 * clamp(20px, 2.2vw, 28px)); display: flex; align-items: center; justify-content: center; }
+/* 3D art (embeds/program-art.html) fades in over a poster of its first frame */
+.tp-prog__poster, .tp-prog__3d { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.tp-prog__poster { object-fit: cover; }
+.tp-prog__3d { background: transparent; opacity: 0; transition: opacity .6s ease; pointer-events: none; }
 .tp-prog__art::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); }
-.tp-prog__art img { height: 92%; width: auto; max-width: 70%; object-fit: contain; }
+
 .tp-prog__glow { position: absolute; left: 50%; bottom: -30%; width: 70%; height: 70%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.32), rgba(231,19,27,0)); filter: blur(10px); pointer-events: none; }
 .tp-prog__tag { margin-top: 22px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #ff4d53; }
 .tp-prog__title { margin: 10px 0 0; font-size: clamp(24px, 2.3vw, 30px); line-height: 1.08; letter-spacing: -.035em; font-weight: 700; }
@@ -1486,7 +1490,7 @@ html:lang(ko) * { word-break: keep-all; }
       <div class="tp-stage">
         <div class="tp-programs">
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-obj" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344" decoding="async"></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-link.webp?v=3fee1d367d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=link&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">01 · 介紹經紀商（IB）</span>
             <h2 class="tp-prog__title">推薦交易者</h2>
             <p class="tp-prog__desc">與您的受眾分享推薦連結，客戶每交易一手，您都能賺取收益。</p>
@@ -1504,7 +1508,7 @@ html:lang(ko) * { word-break: keep-all; }
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-obj" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="330" height="280" decoding="async"></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-network.webp?v=67426b2358" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=network&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">02 · 合作夥伴網絡</span>
             <h2 class="tp-prog__title">建立合作網絡</h2>
             <p class="tp-prog__desc">引薦其他合作夥伴加入TradeQuo，除了自有客戶之外，還能從他們帶來的業務中賺取收益。</p>
@@ -1517,7 +1521,7 @@ html:lang(ko) * { word-break: keep-all; }
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
-            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-obj" src="../../assets/offer-bro.webp?v=dc3ab59778" alt="" width="330" height="320" decoding="async"></div>
+            <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" src="../../assets/posters/program-flag.webp?v=7fd9e3a14d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../../embeds/program-art.html?obj=flag&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">03 · 白標方案</span>
             <h2 class="tp-prog__title">推出自有品牌</h2>
             <p class="tp-prog__desc">以TradeQuo的基礎架構為後盾，用您自己的名義經營經紀業務或交易學院。</p>
@@ -1756,6 +1760,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=52e6eb6177" defer></script>
+<script src="../../assets/js/landing.js?v=7884dbe811" defer></script>
 </body>
 </html>
