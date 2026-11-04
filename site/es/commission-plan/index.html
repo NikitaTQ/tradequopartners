@@ -1198,12 +1198,17 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-sheet__ledger div + div { border-inline-start: 1px solid #e4e4e1; }
 .tp-sheet__ledger b { font-family: 'Fragment Mono', monospace; font-size: 14.5px; font-weight: 400; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .tp-sheet__ledger div > span { font-size: 12px; color: #6a6a6e; }
-.tp-sheet__perks { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: 0; padding: 12px 16px; list-style: none; border-radius: 10px; background: #f4fbf7; border: 1px dashed #8fd6ad; }
-.tp-sheet__perks li { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
-.tp-sheet__perks li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #16b364; box-shadow: 0 0 8px rgba(22,179,100,.55); }
-.tp-sheet__perks li { color: #0b5d34; }   /* payout terms read green, like the landing statement */
-.tp-sheet__perks li:first-child::before { animation: tqPulse 2.4s ease-in-out infinite; }
-.tp-sheet .tp-btn { margin-top: auto; }
+/* end of the estimate: payout terms as pills, then the slide-to-join CTA */
+.tp-sheet__perks { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 2px 0 0; padding: 0; list-style: none; }
+.tp-sheet__perks li { display: inline-flex; align-items: center; gap: 9px; height: 38px; padding: 0 14px 0 5px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1px #e3e1d9, 0 2px 0 #e3e1d9; font-size: 13.5px; font-weight: 600; white-space: nowrap; }
+.tp-sheet__badge { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: #fdecec; color: #e7131b; font-family: 'Fragment Mono', monospace; font-size: 9.5px; letter-spacing: 0; }
+.tp-sheet__badge--inf { font-family: 'DM Sans', sans-serif; font-size: 16px; }
+.tp-slide { --h: 0; position: relative; display: flex; align-items: center; justify-content: center; height: 60px; margin-top: auto; border-radius: 999px; background: #0b0b0e; color: #fff; text-decoration: none; overflow: hidden; direction: ltr; box-shadow: inset 0 2px 6px rgba(0,0,0,.6), 0 16px 30px -16px rgba(14,14,22,.8); }
+.tp-slide:hover, .tp-slide:focus-visible, .tp-slide:active { --h: 1; color: #fff; }
+.tp-slide:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tp-slide__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(60px + var(--h) * (100% - 60px)); border-radius: 999px; background: linear-gradient(90deg, rgba(231,19,27,.15), #b30b12); transition: width .55s cubic-bezier(.6,0,.2,1); }
+.tp-slide__label { position: relative; padding: 0 62px; font-size: 16px; font-weight: 700; letter-spacing: -.01em; text-align: center; line-height: 1.15; }
+.tp-slide__knob { position: absolute; top: 6px; left: calc(6px + var(--h) * (100% - 60px)); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #ff3e45 0%, #e7131b 55%, #b30b12 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 0 0 3px #f8f8f4, 0 6px 14px -4px rgba(0,0,0,.6); transition: left .55s cubic-bezier(.6,0,.2,1); }
 
 /* steps */
 .tp-steps { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 4.5vw, 60px); }
@@ -1376,7 +1381,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-stat b { font-size: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-tiers__thumb, .tp-ladder__col i, .tp-ladder__col::after, .tp-sheet__track span, .tp-tl-fill, .tp-tl__dot, .tp-proof { transition: none; }
+  .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-tiers__thumb, .tp-ladder__col i, .tp-ladder__col::after, .tp-sheet__track span, .tp-tl-fill, .tp-tl__dot, .tp-proof, .tp-slide__fill, .tp-slide__knob { transition: none; }
   .tp-sheet__stamp.is-stamped { animation: none; }
 }
 
@@ -1497,8 +1502,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
               <div><b data-plan-day>$250</b><span>al día</span></div>
               <div><b data-plan-year>$90,000</b><span>al año</span></div>
             </div>
-            <ul class="tp-sheet__perks"><li>Pagos diarios</li><li>Sin cargos por pago</li><li>Ganancias sin límite</li></ul>
-            <a class="tp-btn tp-btn--ink tp-btn--block" href="../#signup" data-page-link data-label="CARGANDO · Inicio">Hazte socio<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="#e7131b" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <ul class="tp-sheet__perks">
+              <li><span class="tp-sheet__badge" aria-hidden="true">24h</span>Pagos diarios</li>
+              <li><span class="tp-sheet__badge" aria-hidden="true">0%</span>Sin cargos por pago</li>
+              <li><span class="tp-sheet__badge tp-sheet__badge--inf" aria-hidden="true">∞</span>Ganancias sin límite</li>
+            </ul>
+            <a class="tp-slide" href="../#signup" data-page-link data-label="CARGANDO · Inicio">
+              <span class="tp-slide__fill" aria-hidden="true"></span>
+              <span class="tp-slide__label">Hazte socio</span>
+              <span class="tp-slide__knob" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            </a>
           </div>
         </div>
       </div>
