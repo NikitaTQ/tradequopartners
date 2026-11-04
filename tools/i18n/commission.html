@@ -51,10 +51,10 @@
                 <span class="tp-field__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"></path><path d="M16 5.6a3.2 3.2 0 0 1 0 6.1"></path><path d="M17.6 14.9c2 .6 3.4 2.4 3.4 4.6"></path></svg></span>
                 <span class="tp-field__label"><b id="plan-clients">{{cp.calc.clients}}</b><span>{{cp.calc.clientsHint}}</span></span>
               </div>
-              <label class="tp-num"><input type="number" inputmode="numeric" min="1" max="400" step="1" value="100" data-plan-input="clients" aria-labelledby="plan-clients"><span>{{cp.calc.clientsUnit}}</span></label>
+              <label class="tp-num"><input type="number" inputmode="numeric" min="1" max="1000000" step="1" value="100" data-plan-input="clients" aria-labelledby="plan-clients"><span>{{cp.calc.clientsUnit}}</span></label>
               <div>
-                <div class="tp-range" style="--p: 24.81%;"><input type="range" min="1" max="400" step="1" value="100" data-plan-range="clients" aria-labelledby="plan-clients"><div class="tp-range__marks" aria-hidden="true"><span class="tp-range__mark" style="left: calc(11px + (100% - 22px) * .1228);"></span><span class="tp-range__mark" style="left: calc(11px + (100% - 22px) * .4987);"></span></div></div>
-                <div class="tp-scale" aria-hidden="true"><span>1</span><span>100</span><span>200</span><span>300</span><span>400</span></div>
+                <div class="tp-range" style="--p: 22.25%;"><input type="range" min="0" max="1000" step="1" value="223" data-plan-range="clients" aria-labelledby="plan-clients"><div class="tp-range__marks" aria-hidden="true"><span class="tp-range__mark" style="left: calc(11px + (100% - 22px) * 0.1566);"></span><span class="tp-range__mark" style="left: calc(11px + (100% - 22px) * 0.3155);"></span></div></div>
+                <div class="tp-scale" aria-hidden="true"><span style="left: 0;">1</span><span style="left: calc(11px + (100% - 22px) * 0.2225);">100</span><span style="left: calc(11px + (100% - 22px) * 0.4996);">500</span><span style="left: calc(11px + (100% - 22px) * 0.7069);">1,000</span><span style="left: 100%;">2,000+</span></div>
               </div>
             </div>
 
@@ -63,10 +63,10 @@
                 <span class="tp-field__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3 3 7.5l9 4.5 9-4.5L12 3z"></path><path d="m3 12 9 4.5 9-4.5"></path><path d="m3 16.5 9 4.5 9-4.5"></path></svg></span>
                 <span class="tp-field__label"><b id="plan-lots">{{cp.calc.lots}}</b><span>{{cp.calc.lotsHint}}</span></span>
               </div>
-              <label class="tp-num"><input type="number" inputmode="numeric" min="1" max="100" step="1" value="10" data-plan-input="lots" aria-labelledby="plan-lots"><span>{{calc.lotsUnit}}</span></label>
+              <label class="tp-num"><input type="number" inputmode="numeric" min="1" max="100000" step="1" value="10" data-plan-input="lots" aria-labelledby="plan-lots"><span>{{calc.lotsUnit}}</span></label>
               <div>
-                <div class="tp-range" style="--p: 9.09%;"><input type="range" min="1" max="100" step="1" value="10" data-plan-range="lots" aria-labelledby="plan-lots"></div>
-                <div class="tp-scale" aria-hidden="true"><span>1</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+                <div class="tp-range" style="--p: 9.49%;"><input type="range" min="0" max="1000" step="1" value="95" data-plan-range="lots" aria-labelledby="plan-lots"></div>
+                <div class="tp-scale" aria-hidden="true"><span style="left: 0;">1</span><span style="left: calc(11px + (100% - 22px) * 0.2215);">50</span><span style="left: calc(11px + (100% - 22px) * 0.4992);">250</span><span style="left: calc(11px + (100% - 22px) * 0.7068);">500</span><span style="left: 100%;">1,000+</span></div>
               </div>
             </div>
 
@@ -176,13 +176,34 @@
           <h2 class="tp-h2">{{cp.pay.title}}</h2>
           <p class="tp-sub">{{cp.pay.sub}}</p>
         </div>
-        <div class="tp-timeline">
-          <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>{{cp.pay.t1}}</h3><p>{{cp.pay.d1}}</p></div>
-          <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path></svg></span><h3>{{cp.pay.t2}}</h3><p>{{cp.pay.d2}}</p></div>
-          <div class="tp-tl tp-tl--hot"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3.2 2"></path></svg></span><h3>{{cp.pay.t3}}</h3><p>{{cp.pay.d3}}</p></div>
-          <div class="tp-tl"><span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v4"></path><path d="M4 7.5v10A2.5 2.5 0 0 0 6.5 20H20V9H6.5A2.5 2.5 0 0 1 4 6.5"></path><circle cx="16" cy="14.5" r="1.2" fill="currentColor"></circle></svg></span><h3>{{cp.pay.t4}}</h3><p>{{cp.pay.d4}}</p></div>
+        <div class="tp-timeline" data-flow style="--p: 0;">
+          <span class="tp-tl-track" aria-hidden="true"><span class="tp-tl-fill"></span></span>
+          <div class="tp-tl" data-flow-step>
+            <span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 3.5v17M17 3.5v17"></path><rect class="tp-tl__candle" x="5" y="7.5" width="4" height="8" rx="1"></rect><rect class="tp-tl__candle tp-tl__candle--b" x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span>
+            <span class="tp-tl__n" aria-hidden="true">01</span>
+            <h3>{{cp.pay.t1}}</h3><p>{{cp.pay.d1}}</p>
+          </div>
+          <div class="tp-tl" data-flow-step>
+            <span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path></svg><span class="tp-tl__float"><i>+$7.50</i><i>+$7.50</i><i>+$7.50</i></span></span>
+            <span class="tp-tl__n" aria-hidden="true">02</span>
+            <h3>{{cp.pay.t2}}</h3><p>{{cp.pay.d2}}</p>
+          </div>
+          <div class="tp-tl" data-flow-step>
+            <span class="tp-tl__dot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><path class="tp-tl__hand tp-tl__hand--h" d="M12 12V7.6"></path><path class="tp-tl__hand tp-tl__hand--m" d="M12 12h3.6"></path></svg></span>
+            <span class="tp-tl__n" aria-hidden="true">00:00</span>
+            <h3>{{cp.pay.t3}}</h3><p>{{cp.pay.d3}}</p>
+          </div>
+          <div class="tp-tl" data-flow-step>
+            <span class="tp-tl__dot" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v4"></path><path d="M4 7.5v10A2.5 2.5 0 0 0 6.5 20H20V9H6.5A2.5 2.5 0 0 1 4 6.5"></path><circle class="tp-tl__coin" cx="16" cy="14.5" r="1.4" fill="currentColor"></circle></svg></span>
+            <span class="tp-tl__n" aria-hidden="true">04</span>
+            <h3>{{cp.pay.t4}}</h3><p>{{cp.pay.d4}}</p>
+          </div>
         </div>
-        <div class="tp-chips"><span class="tp-chip">{{embed.flow.f1}}</span><span class="tp-chip">{{embed.flow.f2}}</span><span class="tp-chip">{{embed.flow.f3}}</span></div>
+        <div class="tp-proofs">
+          <div class="tp-proof"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><path d="m9 14.5 2 2 4-4"></path></svg></span><b>{{embed.flow.f1}}</b></div>
+          <div class="tp-proof"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="5.5"></circle><path d="M14.7 10.2a5.5 5.5 0 1 1-4.5 4.5"></path><path d="M9 6.8v4.4M7.2 8.2h2.6"></path></svg></span><b>{{embed.flow.f2}}</b></div>
+          <div class="tp-proof"><span class="tp-hex" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 8.4C4.6 8.4 3 10 3 12s1.6 3.6 3.6 3.6c3.6 0 7.2-7.2 10.8-7.2 2 0 3.6 1.6 3.6 3.6s-1.6 3.6-3.6 3.6c-3.6 0-7.2-7.2-10.8-7.2z"></path></svg></span><b>{{embed.flow.f3}}</b></div>
+        </div>
       </div>
     </section>
 
