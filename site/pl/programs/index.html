@@ -1055,8 +1055,28 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 }
 .tp-prog__for { margin: 22px 0 0; font-size: 13px; line-height: 1.45; color: #8d9096; }
 .tp-prog__cta { display: flex; flex-direction: column; gap: 14px; margin-top: auto; padding-top: 24px; }
-.tp-prog__cta .tp-link { justify-content: center; color: #d5d6d9; }
-.tp-prog__cta .tp-link:hover { color: #fff; }
+/* card CTAs (Refer_CTA_Link, Network_CTA_Nodes, Brand_CTA_Trademark): each reacts to its own hover */
+.tp-prog__cta { align-items: center; }
+.tp-pcta { --h: 0; width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; height: 56px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 15.5px; font-weight: 700; white-space: nowrap; text-decoration: none; box-shadow: 0 14px 30px -14px rgba(231,19,27,.7); transition: background .25s ease; }
+.tp-pcta:hover, .tp-pcta:focus-visible, .tp-pcta:active { --h: 1; color: #fff; }
+.tp-pcta:focus-visible, .tp-scta:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.tp-pcta__win { display: block; height: 22px; overflow: hidden; }
+.tp-pcta__track { display: flex; flex-direction: column; align-items: center; transform: translateY(calc(var(--h) * -22px)); transition: transform .4s cubic-bezier(.6,0,.2,1); }
+.tp-pcta__line { height: 22px; display: flex; align-items: center; gap: 10px; }
+.tp-pcta__line--mono { gap: 0; font-family: 'Fragment Mono', monospace; font-size: 14px; font-weight: 400; direction: ltr; }
+.tp-pcta__line--mono mark { margin-left: 1px; padding: 0 3px; border-radius: 3px; background: rgba(255,255,255,.22); color: inherit; }
+.tp-pcta__net { flex-shrink: 0; direction: ltr; }
+.tp-pcta__net path { stroke-dashoffset: calc(1 - var(--h)); transition: stroke-dashoffset .6s cubic-bezier(.6,0,.2,1); }
+.tp-pcta__tmwrap { display: flex; align-items: flex-start; }
+.tp-pcta__tm { display: block; overflow: hidden; max-width: calc(var(--h) * 18px); opacity: var(--h); font-size: 10px; line-height: 1; margin-top: 1px; padding-inline-start: calc(var(--h) * 2px); transform: translateY(calc((1 - var(--h)) * -6px)); transition: max-width .35s, opacity .3s .1s, transform .35s .1s; }
+[dir="rtl"] .tp-pcta__arrow { transform: scaleX(-1); }
+.tp-scta { --h: 0; position: relative; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; white-space: nowrap; color: #fff; text-decoration: none; }
+.tp-scta:hover, .tp-scta:focus-visible, .tp-scta:active { --h: 1; color: #fff; }
+.tp-scta__pct { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(255,65,72,calc(.4 + var(--h) * .6)); font-family: 'Fragment Mono', monospace; font-size: 10px; color: #ff4148; transform: rotate(calc(var(--h) * 360deg)); transition: transform .6s cubic-bezier(.4,0,.2,1), box-shadow .3s; }
+.tp-scta--line { padding: 2px 0 5px; }
+.tp-scta__under { position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: #e7131b; transform: scaleX(var(--h)); transition: transform .35s cubic-bezier(.6,0,.2,1); }
+.tp-scta__plus { font-size: 16px; line-height: 1; color: #ff4148; transform: rotate(calc(var(--h) * 135deg)); transition: transform .4s cubic-bezier(.3,1.4,.5,1); }
+@media (prefers-reduced-motion: reduce) { .tp-pcta__track, .tp-pcta__net path, .tp-pcta__tm, .tp-scta__pct, .tp-scta__under, .tp-scta__plus { transition: none; } }
 
 /* ---- benefits ------------------------------------------------------------------ */
 .tp-benefits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 4.5vw, 60px); }
@@ -1468,8 +1488,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             <ul class="tp-ticks"><li>$5.00–$10.00 prowizji za lot</li><li>Codzienne wypłaty bez opłat</li><li>Panel śledzenia wyników na żywo</li></ul>
             <p class="tp-prog__for">Dla edukatorów, grup sygnałowych i twórców treści</p>
             <div class="tp-prog__cta">
-              <a class="tp-btn tp-btn--red tp-btn--block" href="../#signup" data-page-link data-label="ŁADOWANIE · Strona główna">Zostań partnerem<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-              <a class="tp-link" href="../commission-plan/" data-page-link data-label="ŁADOWANIE · Plan prowizyjny">Zobacz plan prowizyjny</a>
+              <a class="tp-pcta" href="../#signup" data-page-link data-label="ŁADOWANIE · Strona główna" aria-label="Zostań partnerem">
+                <span class="tp-pcta__win" aria-hidden="true"><span class="tp-pcta__track">
+                  <span class="tp-pcta__line">Zostań partnerem<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.6 9.4l2.8-2.8M7.3 4.6l1.1-1.1a2.6 2.6 0 0 1 3.7 3.7L11 8.3M8.7 11.4l-1.1 1.1a2.6 2.6 0 0 1-3.7-3.7L5 7.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span>
+                  <span class="tp-pcta__line tp-pcta__line--mono">tradequo.com/ref/<mark>you</mark></span>
+                </span></span>
+              </a>
+              <a class="tp-scta" href="../commission-plan/" data-page-link data-label="ŁADOWANIE · Plan prowizyjny"><span class="tp-scta__pct" aria-hidden="true">%</span>Zobacz plan prowizyjny</a>
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
@@ -1481,8 +1506,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             <ul class="tp-ticks"><li>Zarabiaj na partnerach, których pozyskasz</li><li>Nadal zarabiaj na własnych klientach</li><li>Osobisty opiekun partnera</li></ul>
             <p class="tp-prog__for">Dla zespołów IB, społeczności i partnerów regionalnych</p>
             <div class="tp-prog__cta">
-              <a class="tp-btn tp-btn--red tp-btn--block" href="../#signup" data-page-link data-label="ŁADOWANIE · Strona główna">Zostań partnerem<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-              <a class="tp-link" href="../commission-plan/" data-page-link data-label="ŁADOWANIE · Plan prowizyjny">Zobacz plan prowizyjny</a>
+              <a class="tp-pcta" href="../#signup" data-page-link data-label="ŁADOWANIE · Strona główna">Zostań partnerem<svg class="tp-pcta__net" width="38" height="20" viewBox="0 0 38 20" fill="none" aria-hidden="true"><path d="M5 10L19 4L33 10L19 16Z M19 4V16" pathLength="1" stroke="#fff" stroke-width="1.4" stroke-dasharray="1"></path><circle cx="5" cy="10" r="3" fill="#fff"></circle><circle cx="19" cy="4" r="2.4" fill="#fff"></circle><circle cx="33" cy="10" r="2.4" fill="#fff"></circle><circle cx="19" cy="16" r="2.4" fill="#fff"></circle></svg></a>
+              <a class="tp-scta tp-scta--line" href="../commission-plan/" data-page-link data-label="ŁADOWANIE · Plan prowizyjny">Zobacz plan prowizyjny<span class="tp-scta__under" aria-hidden="true"></span></a>
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
@@ -1494,8 +1519,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             <ul class="tp-ticks"><li>Broker White-Label</li><li>Akademia White-Label</li><li>Osobisty opiekun partnera</li></ul>
             <p class="tp-prog__for">Dla firm o ugruntowanej pozycji i marek edukacyjnych</p>
             <div class="tp-prog__cta">
-              <a class="tp-btn tp-btn--red tp-btn--block" href="../#signup" data-page-link data-label="ŁADOWANIE · Strona główna">Zostań partnerem<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-              <a class="tp-link" href="../#dashboard" data-page-link data-label="ŁADOWANIE · Strona główna">Korzyści dla partnerów</a>
+              <a class="tp-pcta" href="../#signup" data-page-link data-label="ŁADOWANIE · Strona główna"><span class="tp-pcta__tmwrap">Zostań partnerem<span class="tp-pcta__tm" aria-hidden="true">™</span></span><svg class="tp-pcta__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              <a class="tp-scta" href="../#dashboard" data-page-link data-label="ŁADOWANIE · Strona główna"><span class="tp-scta__plus" aria-hidden="true">+</span>Korzyści dla partnerów</a>
             </div>
           </article>
         </div>
