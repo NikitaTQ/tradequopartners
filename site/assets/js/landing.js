@@ -639,7 +639,10 @@
       submitted = true;
       writeDate();
       if (envBtn) envBtn.classList.add('is-sealed');
-      sign();
+      /* the signature cell only appears now: let it unfold beside the date, then the pen signs */
+      const auth = $('[data-form-auth]', form);
+      if (auth) { auth.classList.add('is-signing'); setTimeout(sign, reducedMotion() ? 0 : 520); }
+      else sign();
     });
   }
 

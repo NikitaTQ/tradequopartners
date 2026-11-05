@@ -516,6 +516,15 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 @media (prefers-reduced-motion: reduce) {
   .tq-rcpt { transition-duration: .01s; }
 }
+/* Sign-up form: before sending only the (pre-filled) date shows; on send the signature cell
+   unfolds beside it and the pen signs there (startForm in landing.js adds .is-signing). */
+[data-form-auth] { display: grid; grid-template-columns: minmax(0, 1fr) 0px minmax(0, 0fr); column-gap: 0px;
+  transition: grid-template-columns .5s cubic-bezier(.2, .7, .2, 1), column-gap .5s cubic-bezier(.2, .7, .2, 1); }
+[data-form-auth] > [data-ref="sigBox"], [data-form-auth] > [data-auth-rule] { min-width: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: opacity .3s ease .2s, visibility 0s .5s; }
+[data-form-auth] > [data-ref="sigBox"] > span:first-child { white-space: nowrap; }
+[data-form-auth].is-signing { grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1.1fr); column-gap: 18px; }
+[data-form-auth].is-signing > [data-ref="sigBox"], [data-form-auth].is-signing > [data-auth-rule] { opacity: 1; visibility: visible; transition: opacity .3s ease .2s, visibility 0s; }
+@media (prefers-reduced-motion: reduce) { [data-form-auth], [data-form-auth] > * { transition: none !important; } }
 .tq-env { border: 0; margin: 0; }
 .tq-env--fill { display: flex; width: 100%; height: 56px; font-size: 15px; padding: 0 66px 0 22px; overflow: visible; }
 .tq-env--fill .tq-env__mail { right: 2px; bottom: 5px; scale: .62; }
@@ -587,7 +596,8 @@ html { scroll-snap-type: y proximity; }
   #signup form[data-agreement] > div:first-of-type { padding-right: 40px !important; }
   #signup form[data-agreement] label { font-size: 11px !important; letter-spacing: .14em !important; }
   #signup form[data-agreement] label > span + span { border-radius: 12px !important; }
-  #signup [data-form-auth] { border-radius: 12px !important; padding: 12px 14px 8px !important; gap: 12px !important; background: #fff !important; }
+  #signup [data-form-auth] { border-radius: 12px !important; padding: 12px 14px 8px !important; background: #fff !important; }
+  #signup [data-form-auth].is-signing { column-gap: 12px; }
   #signup [data-form-auth] span { font-size: 10px !important; letter-spacing: .12em !important; }
   #signup [data-form-auth] [data-ref="date"] { font-size: 14px !important; letter-spacing: .04em !important; }
   [data-calc-grid] { gap: 14px !important; margin-top: 22px !important; }
@@ -1046,14 +1056,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
             </div>
 
             <div style="position:relative; display:flex; flex-direction:column; gap:10px; margin-top:10px;">
-              <div data-form-auth="" style="display:grid; grid-template-columns:minmax(0,1fr) 1px minmax(0,1.1fr); gap:18px; align-items:stretch; padding:8px 16px 6px; border:1px solid #dededa; border-radius:2px; background:rgba(255,255,255,.5);">
+              <div data-form-auth="" style="align-items:stretch; padding:8px 16px 6px; border:1px solid #dededa; border-radius:2px; background:rgba(255,255,255,.5);">
                 <div data-ref="dateBox" style="position:relative; display:flex; flex-direction:column; gap:2px;">
                   <span style="font-family:'DM Sans',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e; font-size:9px;">DATE</span>
-                  <div style="position:relative; height:24px;">
-                    <span data-ref="date" style="position:absolute; inset-inline-start:0; bottom:3px; direction:ltr; unicode-bidi:isolate; font-size:14px; font-weight:500; letter-spacing:.06em; color:#8e8e92; white-space:nowrap; font-variant-numeric:tabular-nums;">DD / MM / YYYY</span>
+                  <div style="position:relative; display:flex; align-items:flex-end; height:24px; padding-bottom:3px; box-sizing:border-box;">
+                    <span data-ref="date" style="direction:ltr; unicode-bidi:isolate; line-height:1.2; font-size:14px; font-weight:500; letter-spacing:.06em; color:#8e8e92; white-space:nowrap; font-variant-numeric:tabular-nums;">DD / MM / YYYY</span>
                   </div>
                 </div>
-                <span style="background:#e2e2df;"></span>
+                <span data-auth-rule="" style="background:#e2e2df;"></span>
                 <div data-ref="sigBox" style="position:relative; display:flex; flex-direction:column; gap:2px;">
                   <span style="font-family:'DM Sans',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e; font-size:9px;">SIGNATURE</span>
                   <div style="position:relative; height:24px;">
@@ -1618,6 +1628,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="assets/js/transition.js?v=602a71328d" defer></script>
-<script src="assets/js/landing.js?v=45d3bd2d92" defer></script>
+<script src="assets/js/landing.js?v=00c63b7f2a" defer></script>
 </body>
 </html>
