@@ -1088,6 +1088,9 @@ html:lang(ko) * { word-break: keep-all; }
     </div>
   </section>
 
+  <!-- How it works: sign-up to first payout in three steps (landing.js startHowLine drives the line).
+     Shared by the landing, Partner Programs and Commission Plan: the button scrolls to the form on the
+     landing and goes to it from the other pages (signupHref and signupNav in build-i18n.py). -->
   <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(50px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(30px, 4vw, 56px); background: #fff; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
       <div style="display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #e7131b;"></span>运作方式</div>
@@ -1133,6 +1136,7 @@ html:lang(ko) * { word-break: keep-all; }
       <a class="tq-launch" href="#signup" aria-label="成为合作伙伴"><span class="tq-launch__btn">成为合作伙伴<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="tq-launch__cover" aria-hidden="true"><span class="tq-launch__label">▲ LIFT</span></span><span class="tq-launch__hinge tq-launch__hinge--l" aria-hidden="true"></span><span class="tq-launch__hinge tq-launch__hinge--r" aria-hidden="true"></span></a>
     </div>
   </section>
+
 
   <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: clamp(56px, 8vw, 104px) clamp(16px, 4vw, 56px) clamp(60px, 8vw, 110px); background: #fff; color: #0a0a0a;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
