@@ -104,6 +104,7 @@
           <p class="tp-who__sub">{{pp.who.sub}}</p>
         </div>
         <div class="tp-who__body">
+          <div class="tp-who__col">
           <ol class="tp-who__list">
             <li class="tp-who__row is-on" data-who-item>
               <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b1" aria-controls="who-p1" aria-expanded="true"><span class="tp-who__num">01</span><span class="tp-who__name">{{pp.who.1.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
@@ -126,6 +127,43 @@
               <div class="tp-who__panel" id="who-p5" role="region" aria-labelledby="who-b5"><div class="tp-who__inner"><p>{{pp.who.5.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p3.title}}</span></div></div></div>
             </li>
           </ol>
+          <div class="tp-who__cta">
+            <a class="tp-c3d tp-ionic" data-c3d data-ionic href="{{signupHref}}"{{signupNav}}>
+              <span class="tp-ionic__body">
+                <span class="tp-ionic__shadow" aria-hidden="true"></span>
+                <span class="tp-ionic__glow" aria-hidden="true"></span>
+                <span class="tp-ionic__frame"><span class="tp-ionic__face"><span class="tp-ionic__sheen" aria-hidden="true"></span><span class="tp-ionic__label">{{pp.cta.apply}}</span></span></span>
+                <svg class="tp-ionic__scroll" width="210" height="58" viewBox="0 0 210 58" aria-hidden="true" focusable="false">
+                  <defs>
+                    <filter id="tpIonEmb" x="-10%" y="-15%" width="120%" height="135%" color-interpolation-filters="sRGB">
+                      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="b"></feGaussianBlur>
+                      <feDiffuseLighting in="b" surfaceScale="3.2" diffuseConstant="1.05" lighting-color="#ECEEF1" result="d"><feDistantLight azimuth="240" elevation="58"></feDistantLight></feDiffuseLighting>
+                      <feComposite in="d" in2="SourceAlpha" operator="in" result="d2"></feComposite>
+                      <feSpecularLighting in="b" surfaceScale="3.2" specularConstant="1.15" specularExponent="26" lighting-color="#FFFFFF" result="s"><feDistantLight azimuth="240" elevation="40"></feDistantLight></feSpecularLighting>
+                      <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"></feComposite>
+                      <feComposite in="d2" in2="s2" operator="arithmetic" k1="0" k2="1" k3="0.85" k4="0" result="m"></feComposite>
+                      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="sb"></feGaussianBlur>
+                      <feOffset in="sb" dx="0.5" dy="2.5" result="so"></feOffset>
+                      <feFlood flood-color="#12161E" flood-opacity="0.3"></feFlood>
+                      <feComposite in2="so" operator="in" result="sh"></feComposite>
+                      <feMerge><feMergeNode in="sh"></feMergeNode><feMergeNode in="m"></feMergeNode></feMerge>
+                    </filter>
+                    <radialGradient id="tpIonJw" cx="0.38" cy="0.32" r="0.75"><stop offset="0" stop-color="#FF7A80"></stop><stop offset="0.5" stop-color="#E7131B"></stop><stop offset="1" stop-color="#8E0A10"></stop></radialGradient>
+                  </defs>
+                  <g filter="url(#tpIonEmb)">
+                    <path class="tp-ionic__curl" data-ionic-curl d="M105 -6 H-9 A18 18 0 0 0 -27 12 A15 15 0 0 0 -12 27 A12 12 0 0 0 0 15 A9 9 0 0 0 -9 6 A6 6 0 0 0 -15 12 A4 4 0 0 0 -11 16" pathLength="100" fill="none" stroke="#000" stroke-width="4.2" stroke-linecap="round"></path>
+                    <circle class="tp-ionic__eye" cx="-11" cy="12" r="2.6" fill="#000"></circle>
+                    <g data-ionic-mirror transform="translate(210 0) scale(-1 1)">
+                      <path class="tp-ionic__curl" data-ionic-curl d="M105 -6 H-9 A18 18 0 0 0 -27 12 A15 15 0 0 0 -12 27 A12 12 0 0 0 0 15 A9 9 0 0 0 -9 6 A6 6 0 0 0 -15 12 A4 4 0 0 0 -11 16" pathLength="100" fill="none" stroke="#000" stroke-width="4.2" stroke-linecap="round"></path>
+                      <circle class="tp-ionic__eye" cx="-11" cy="12" r="2.6" fill="#000"></circle>
+                    </g>
+                  </g>
+                  <circle class="tp-ionic__jewel" data-ionic-jewel cx="105" cy="-6" r="3.4" fill="url(#tpIonJw)"></circle>
+                </svg>
+              </span>
+            </a>
+          </div>
+          </div>
           <div class="tp-who__stage">
             <img class="tp-who__poster" data-poster src="{{root}}assets/posters/who-cards.webp" alt="" width="1000" height="900" loading="lazy" decoding="async">
             <iframe class="tp-who__3d" data-embed data-src="{{root}}embeds/who-cards.html" title="{{@pp.who.kicker}}" aria-hidden="true" tabindex="-1"></iframe>
@@ -171,6 +209,12 @@
           <picture class="tp-kbo__poster" data-poster aria-hidden="true"><source media="(min-width: 641px)" srcset="{{root}}assets/posters/benefits-objects-wide.webp" width="1240" height="797"><img src="{{root}}assets/posters/benefits-objects.webp" alt="" width="360" height="580" loading="lazy" decoding="async"></picture>
           <iframe class="tp-kbo__3d" data-embed data-src="{{root}}embeds/benefit-objects.html{{embedQuery}}" title="{{@pp.ben.kicker}}" aria-hidden="true" tabindex="-1"></iframe>
         </div>
+        <div class="tp-kbo__cta">
+          <a class="tp-c3d tp-ped" data-c3d href="{{signupHref}}"{{signupNav}}>
+            <span class="tp-pill3"><span class="tp-pill3__face"><span class="tp-pill3__sheen" aria-hidden="true"></span><span class="tp-pill3__label">{{pp.cta.start}}</span><span class="tp-pill3__go"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></span></span>
+            <span class="tp-ped__base" aria-hidden="true"><span class="tp-ped__side"></span><span class="tp-ped__top"></span><span class="tp-ped__ring"></span><span class="tp-ped__shadow"></span></span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -181,7 +225,18 @@
           <span class="tp-kicker">{{pp.why.kicker}}</span>
           <h2 class="tp-h2">{{pp.why.title}}</h2>
           <p class="tp-dome-copy__sub">{{pp.why.sub}}</p>
-          <a class="tp-dome-btn" href="{{home}}#reviews" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{pp.why.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          <div class="tp-dome-actions">
+            <a class="tp-c3d tp-tdome" data-c3d href="{{signupHref}}"{{signupNav}}>
+              <span class="tp-tdome__glass" aria-hidden="true">
+                <svg class="tp-tdome__hex" width="100%" height="100%" focusable="false"><defs><pattern id="tpDomeHex" width="18" height="31.2" patternUnits="userSpaceOnUse"><path d="M9 0 L18 5.2 L18 15.6 L9 20.8 L0 15.6 L0 5.2 Z M9 20.8 L9 31.2" fill="none" stroke="#7E838C" stroke-width="0.8"></path></pattern></defs><rect width="100%" height="100%" fill="url(#tpDomeHex)"></rect></svg>
+                <span class="tp-tdome__sweep"></span>
+                <span class="tp-tdome__dot"></span>
+              </span>
+              <span class="tp-pill3"><span class="tp-pill3__face"><span class="tp-pill3__label">{{pp.cta.join}}</span><span class="tp-pill3__go"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></span></span>
+              <span class="tp-tdome__base" aria-hidden="true"></span>
+            </a>
+            <a class="tp-dome-btn" href="{{home}}#reviews" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{pp.why.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          </div>
         </div>
         <div class="tp-dome" data-dome>
           <div class="tp-dome__stage">

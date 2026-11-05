@@ -798,6 +798,47 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit); else refit();
   }
 
+  /* 3D call-to-action buttons on /programs/ (CTA_Ionic_Capital, CTA_Pedestal, CTA_Trust_Dome):
+   * hover or keyboard focus eases --ch to 1, the button leans toward the pointer
+   * (--ctx/--cty) and dips on press (--cd); the CSS does the rest. The Ionic volutes are
+   * drawn in the button's own coordinates, so they are refitted to the label's width. */
+  function startCta3d() {
+    $$('[data-c3d]').forEach((el) => {
+      const set = (k, v) => el.style.setProperty(k, v);
+      const rest = () => { set('--ch', '0'); set('--ctx', '0px'); set('--cty', '0px'); set('--cd', '0'); };
+      el.addEventListener('pointerenter', () => set('--ch', '1'));
+      el.addEventListener('pointerleave', rest);
+      el.addEventListener('pointermove', (e) => {
+        const b = el.getBoundingClientRect();
+        set('--ctx', (((e.clientX - b.left) / b.width - 0.5) * 10).toFixed(1) + 'px');
+        set('--cty', (((e.clientY - b.top) / b.height - 0.5) * 6).toFixed(1) + 'px');
+      });
+      el.addEventListener('pointerdown', () => { set('--ch', '1'); set('--cd', '1'); });
+      el.addEventListener('pointerup', () => set('--cd', '0'));
+      el.addEventListener('pointercancel', rest);
+      el.addEventListener('focus', () => { if (el.matches(':focus-visible')) set('--ch', '1'); });
+      el.addEventListener('blur', rest);
+    });
+    $$('[data-ionic]').forEach((el) => {
+      const frame = $('.tp-ionic__frame', el), svg = $('svg', el);
+      if (!frame || !svg) return;
+      let last = '';
+      const fit = () => {
+        const w = Math.round(frame.offsetWidth), h = Math.round(frame.offsetHeight);
+        if (!w || !h || last === w + 'x' + h) return;
+        last = w + 'x' + h;
+        const c = w / 2;
+        svg.setAttribute('width', w); svg.setAttribute('height', h); svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+        $$('[data-ionic-curl]', svg).forEach((p) => p.setAttribute('d', 'M' + c + ' -6 H-9 A18 18 0 0 0 -27 12 A15 15 0 0 0 -12 27 A12 12 0 0 0 0 15 A9 9 0 0 0 -9 6 A6 6 0 0 0 -15 12 A4 4 0 0 0 -11 16'));
+        $('[data-ionic-mirror]', svg).setAttribute('transform', 'translate(' + w + ' 0) scale(-1 1)');
+        $('[data-ionic-jewel]', svg).setAttribute('cx', c);
+      };
+      fit();
+      if ('ResizeObserver' in window) new ResizeObserver(fit).observe(frame);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    });
+  }
+
   startFanMenu();
   startFab();
   startDock();
@@ -813,5 +854,6 @@
   startFaq();
   startKeyBenefits();
   startWho();
+  startCta3d();
   startLang();
 })();
