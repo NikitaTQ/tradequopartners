@@ -752,6 +752,54 @@
     new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; schedule(STEP); }, { threshold: 0.35 }).observe(root);
   }
 
+  /* ---- Who it's for (Partner Programs): persona list + 3D card carousel -------
+   * The page owns the open row: it moves on every 6 s while the block is on
+   * screen (not under reduced motion, not while the list is hovered or focused),
+   * tells the carousel embed {tqWho: i}, and holds a clicked row for 9 s. The
+   * list keeps room for its longest story, so nothing below jumps as rows change. */
+  function startWho() {
+    const root = $('[data-who]');
+    if (!root) return;
+    const rows = $$('[data-who-item]', root), list = $('.tp-who__list', root), frame = $('iframe', root);
+    const N = rows.length, STEP = 6000, HOLD = 9000;
+    let cur = 0, timer = 0, onScreen = false, hover = false;
+    const tell = () => { try { if (frame && frame.contentWindow) frame.contentWindow.postMessage({ tqWho: cur }, location.origin); } catch (e) {} };
+    const show = (i) => {
+      cur = (i + N) % N;
+      rows.forEach((r, j) => { r.classList.toggle('is-on', j === cur); $('button', r).setAttribute('aria-expanded', String(j === cur)); });
+      tell();
+    };
+    const schedule = (ms) => {
+      clearTimeout(timer);
+      if (!onScreen || hover || document.hidden || reducedMotion()) return;
+      timer = setTimeout(() => { show(cur + 1); schedule(STEP); }, ms);
+    };
+    rows.forEach((r, j) => $('button', r).addEventListener('click', () => { show(j); schedule(HOLD); }));
+    window.addEventListener('message', (e) => {
+      if (e.origin !== location.origin || !frame || e.source !== frame.contentWindow || !e.data) return;
+      if (e.data.tqReady) tell();
+    });
+    if (frame) frame.addEventListener('load', tell);
+    list.addEventListener('pointerenter', () => { hover = true; schedule(0); });
+    list.addEventListener('pointerleave', () => { hover = false; schedule(STEP); });
+    root.addEventListener('focusin', () => { hover = true; schedule(0); });
+    root.addEventListener('focusout', () => { hover = false; schedule(STEP); });
+    document.addEventListener('visibilitychange', () => schedule(STEP));
+    new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; schedule(STEP); }, { threshold: 0.35 }).observe(root);
+    /* reserve the height of the longest open row */
+    const fit = () => {
+      list.style.minHeight = '';
+      const inners = rows.map((r) => $('.tp-who__inner', r));
+      const open = inners[cur].getBoundingClientRect().height;
+      const most = Math.max(...inners.map((x) => x.scrollHeight));
+      list.style.minHeight = Math.ceil(list.getBoundingClientRect().height - open + most) + 'px';
+    };
+    let fitT = 0;
+    const refit = () => { clearTimeout(fitT); fitT = setTimeout(fit, 500); };   // after the row transition
+    window.addEventListener('resize', refit, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit); else refit();
+  }
+
   startFanMenu();
   startFab();
   startDock();
@@ -766,5 +814,6 @@
   startForm();
   startFaq();
   startKeyBenefits();
+  startWho();
   startLang();
 })();

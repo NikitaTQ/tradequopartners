@@ -93,6 +93,47 @@
       </div>
     </section>
 
+    <!-- Who it's for: persona list + 3D card carousel (embed); the page owns the active card -->
+    <section id="who" class="tp-sec tp-who-sec" data-screen-label="Who it's for">
+      <div class="tp-who" data-who>
+        <div class="tp-who__head">
+          <div class="tp-who__title">
+            <span class="tp-kicker">{{pp.who.kicker}}</span>
+            <h2 class="tp-h2">{{pp.who.title}}</h2>
+          </div>
+          <p class="tp-who__sub">{{pp.who.sub}}</p>
+        </div>
+        <div class="tp-who__body">
+          <ol class="tp-who__list">
+            <li class="tp-who__row is-on" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b1" aria-controls="who-p1" aria-expanded="true"><span class="tp-who__num">01</span><span class="tp-who__name">{{pp.who.1.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p1" role="region" aria-labelledby="who-b1"><div class="tp-who__inner"><p>{{pp.who.1.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p1.title}}</span></div></div></div>
+            </li>
+            <li class="tp-who__row" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b2" aria-controls="who-p2" aria-expanded="false"><span class="tp-who__num">02</span><span class="tp-who__name">{{pp.who.2.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p2" role="region" aria-labelledby="who-b2"><div class="tp-who__inner"><p>{{pp.who.2.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p1.title}}</span></div></div></div>
+            </li>
+            <li class="tp-who__row" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b3" aria-controls="who-p3" aria-expanded="false"><span class="tp-who__num">03</span><span class="tp-who__name">{{pp.who.3.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p3" role="region" aria-labelledby="who-b3"><div class="tp-who__inner"><p>{{pp.who.3.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p1.title}}</span></div></div></div>
+            </li>
+            <li class="tp-who__row" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b4" aria-controls="who-p4" aria-expanded="false"><span class="tp-who__num">04</span><span class="tp-who__name">{{pp.who.4.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p4" role="region" aria-labelledby="who-b4"><div class="tp-who__inner"><p>{{pp.who.4.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p2.title}}</span></div></div></div>
+            </li>
+            <li class="tp-who__row" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b5" aria-controls="who-p5" aria-expanded="false"><span class="tp-who__num">05</span><span class="tp-who__name">{{pp.who.5.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p5" role="region" aria-labelledby="who-b5"><div class="tp-who__inner"><p>{{pp.who.5.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p3.title}}</span></div></div></div>
+            </li>
+          </ol>
+          <div class="tp-who__stage">
+            <img class="tp-who__poster" data-poster src="{{root}}assets/posters/who-cards.webp" alt="" width="1000" height="900" loading="lazy" decoding="async">
+            <iframe class="tp-who__3d" data-embed data-src="{{root}}embeds/who-cards.html" title="{{@pp.who.kicker}}" aria-hidden="true" tabindex="-1"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- one soft grey band behind Key benefits and Why TradeQuo -->
     <div class="tp-band">
     <!-- Key benefits: eight 3D objects on glass pedestals (embed) + glass card; the page owns the active item -->

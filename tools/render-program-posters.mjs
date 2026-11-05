@@ -5,6 +5,7 @@
  *   benefits-objects-wide.webp   key benefits objects (embeds/benefit-objects.html), 4×2 stage 1120:720
  *   benefits-objects.webp        the same as the phone's 2×4 stage (360:580, under 641px)
  *   trust-dome.webp              why TradeQuo dome, first frame: flat field (embeds/trust-dome.html), 600:520
+ *   who-cards.webp               who it's for carousel, card 1 settled (embeds/who-cards.html), 1:0.9
  * The page shows a poster until its live scene has drawn the first frame, so re-run after
  * changing a scene (an optional argument renders only the posters whose name contains it):
  *
@@ -40,6 +41,7 @@ const JOBS = [
   { name: 'benefits-objects-wide', url: 'benefit-objects.html?still', w: 1240, h: 797, dpr: 1.25 },
   { name: 'benefits-objects', url: 'benefit-objects.html?still', w: 360, h: 580, dpr: 2 },
   { name: 'trust-dome', url: 'trust-dome.html?still', w: 600, h: 520, dpr: 1.5 },
+  { name: 'who-cards', url: 'who-cards.html?still', w: 600, h: 540, dpr: 1.667 },
 ].filter((j) => !process.argv[2] || j.name.includes(process.argv[2]));
 for (const job of JOBS) {
   const page = await browser.newPage({ viewport: { width: job.w, height: job.h }, deviceScaleFactor: job.dpr });

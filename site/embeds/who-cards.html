@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TradeQuo who it's for — embed</title>
+<!--
+  "Built for people who move traders" on Partner Programs (from the Who_Its_For_Showcase design):
+  five glass cards on chrome plinths stand on an arc, one emblem per kind of partner (educators,
+  signal groups, content creators, communities & IB teams, businesses & brands). The carousel turns
+  to the active card, which lifts and glows red; the others sit slightly out of focus (each card is
+  drawn as its own pass and blurred by how far it is from focus).
+  The page owns the active card and posts {tqWho: i}. Opened on its own, the scene cycles itself.
+  ?still     the first frame (card 1 active and settled) — the poster (tools/render-program-posters.mjs)
+  The page sets window.__tqPaused while the block is off screen; the first drawn frame posts
+  {tqReady:true} so the page fades this frame in over its poster.
+-->
+<script type="importmap">
+{
+  "imports": { "three": "../vendor/three@0.184.0/three.module.min.js" },
+  "integrity": {
+    "../vendor/three@0.184.0/three.module.min.js": "sha384-35WaVqXNGvw49+RCXk67Ci9ebo55/5+CfirDbAVSG21KV8/7gO4xwIkhA5ZRcUHc",
+    "../vendor/three@0.184.0/three.core.min.js": "sha384-/2vXInuUL2LKgd3n86c5RIzG+YC7vk3zYPTknaEkF2H2sauHtaOrS8swZ+MURxU6"
+  }
+}
+</script>
+<style>
+html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; }
+#art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+<canvas id="art"></canvas>
+<script type="module">
+import * as THREE from 'three';
+
+const V = THREE.Vector3;
+const P = new URLSearchParams(location.search);
+const STILL = P.has('still');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ease = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const damp = (a, b, dt, k) => a + (b - a) * (1 - Math.exp(-dt * k));
+
+function makeEnv(renderer) {
+  const env = new THREE.Scene();
+  env.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0x060607, side: THREE.BackSide })));
+  const box = (w, h, pos, rgb) => {
+    const m = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }); m.color.setRGB(...rgb);
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m); p.position.set(...pos); p.lookAt(0, 0, 0); env.add(p);
+  };
+  box(6, 2.2, [0, 7, 0.5], [8, 8, 8]); box(7, 2.5, [0, 3, 7], [3.4, 3.4, 3.5]); box(8, 1.2, [0, 2, -7], [5, 5, 5]);
+  box(0.8, 9, [-7, 0.5, 2.5], [4.4, 4.4, 4.6]); box(0.5, 9, [7, 0.5, -1.5], [2.6, 2.6, 2.7]); box(12, 1.2, [0, -6.5, 2], [0.32, 0.02, 0.025]);
+  const pm = new THREE.PMREMGenerator(renderer); const tex = pm.fromScene(env, 0.02).texture; pm.dispose();
+  return tex;
+}
+function rig(scene) {
+  const key = new THREE.DirectionalLight(0xffffff, 2.6); key.position.set(-3, 5, 4); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.9); fill.position.set(4, 1.5, 3); scene.add(fill);
+  const back = new THREE.DirectionalLight(0xffffff, 3.2); back.position.set(0.5, 3, -5); scene.add(back);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x222226, 0.6));
+  scene.traverse((o) => { if (o.isLight) o.layers.enableAll(); });
+}
+const radTex = (stops) => {
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  stops.forEach(([o, col]) => gr.addColorStop(o, col)); g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  return new THREE.CanvasTexture(c);
+};
+function roundedRect(w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+const _up = new V(0, 1, 0);
+function rod(a, b, r, mat) {
+  const d = new V().subVectors(b, a), len = d.length();
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, len, 16), mat);
+  m.position.copy(a).addScaledVector(d, 0.5); m.quaternion.setFromUnitVectors(_up, d.normalize());
+  return m;
+}
+
+/* ---- renderer: WebGL off screen, each card composited into the visible 2D canvas ---- */
+const canvas = document.getElementById('art');
+const ctx = canvas.getContext('2d');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true, powerPreference: 'low-power' });
+const PR = Math.min(devicePixelRatio || 1, STILL ? 2 : 1.5);
+renderer.setPixelRatio(PR);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.45;
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.setClearColor(0x000000, 0);
+const scene = new THREE.Scene(); scene.environment = makeEnv(renderer);
+const camera = new THREE.PerspectiveCamera(24, 1, 0.1, 60);
+let W = 0, H = 0;
+const toScreen = (() => { const v = new V(); return (p) => { v.copy(p).project(camera); return [(v.x + 1) / 2 * W, (1 - v.y) / 2 * H]; }; })();
+
+/* ---- the cards (Who_Its_For_Showcase, default carousel) ---------------------------------- */
+const gB = new THREE.MeshPhysicalMaterial({ color: 0xBFC4D0, roughness: 0.14, transparent: true, opacity: 0.32, side: THREE.BackSide, depthWrite: false, envMapIntensity: 1.7 });
+const gF = new THREE.MeshPhysicalMaterial({ color: 0xF8F9FC, emissive: 0x7e808a, roughness: 0.04, transparent: true, opacity: 0.34, clearcoat: 1, clearcoatRoughness: 0.02, specularIntensity: 1, iridescence: 0.65, iridescenceIOR: 1.32, iridescenceThicknessRange: [220, 620], depthWrite: false, envMapIntensity: 3 });
+const chrome = new THREE.MeshStandardMaterial({ color: 0xF6F6FA, emissive: 0x5e5e66, metalness: 1, roughness: 0.1 });
+const brushed = new THREE.MeshStandardMaterial({ color: 0xE6E6EC, emissive: 0x4e4e56, metalness: 1, roughness: 0.34 });
+const frameM = new THREE.MeshStandardMaterial({ color: 0xFAFAFD, emissive: 0x9a9aa4, metalness: 1, roughness: 0.16 });
+const dark = new THREE.MeshStandardMaterial({ color: 0x5A5A62, emissive: 0x1c1c20, metalness: 1, roughness: 0.24 });
+const ruby = new THREE.MeshPhysicalMaterial({ color: 0xD8101A, emissive: 0x3a0004, metalness: 0.2, roughness: 0.08, clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 1.6 });
+const glass = (geo, p) => { const b = new THREE.Mesh(geo, gB); b.renderOrder = 2; const f = new THREE.Mesh(geo, gF); f.renderOrder = 4; p.add(b, f); };
+const add = (geo, mat, p, x = 0, y = 0, z = 0) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); p.add(m); return m; };
+
+const CW = 0.86, CH = 1.22, D = 0.16, Y0 = 0.16;
+const slab = new THREE.ExtrudeGeometry(roundedRect(CW, CH, 0.1), { depth: D - 0.04, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 4, curveSegments: 16 });
+slab.translate(0, CH / 2 + Y0, -(D - 0.04) / 2);
+const plinthGeo = new THREE.ExtrudeGeometry(roundedRect(CW + 0.12, 0.3, 0.06), { depth: 0.1, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.012, bevelSegments: 3, curveSegments: 10 });
+plinthGeo.rotateX(-Math.PI / 2); plinthGeo.translate(0, 0.012, 0);
+const lipGeo = new THREE.BoxGeometry(CW + 0.02, 0.05, 0.035);
+const fr = roundedRect(CW + 0.03, CH + 0.03, 0.115); fr.holes.push(roundedRect(CW + 0.004, CH + 0.004, 0.103));
+const frameGeo = new THREE.ExtrudeGeometry(fr, { depth: 0.012, bevelEnabled: true, bevelThickness: 0.004, bevelSize: 0.003, bevelSegments: 2, curveSegments: 18 });
+frameGeo.translate(0, CH / 2 + Y0, -0.006);
+const glowTex = radTex([[0, 'rgba(231,19,27,0.42)'], [0.4, 'rgba(231,19,27,0.12)'], [1, 'rgba(231,19,27,0)']]);
+const shTex = radTex([[0, 'rgba(0,0,0,0.6)'], [0.55, 'rgba(0,0,0,0.2)'], [1, 'rgba(0,0,0,0)']]);
+const ringS = roundedRect(CW - 0.08, CH - 0.08, 0.08); ringS.holes.push(roundedRect(CW - 0.094, CH - 0.094, 0.074));
+const ringGeo = new THREE.ExtrudeGeometry(ringS, { depth: 0.004, bevelEnabled: false, curveSegments: 14 }); ringGeo.translate(0, CH / 2 + Y0, D / 2 - 0.006);
+const sheenGeo = (() => {
+  const sw = CW - 0.05, shh = CH - 0.05, g = new THREE.ShapeGeometry(roundedRect(sw, shh, 0.085), 14), p = g.attributes.position, uv = g.attributes.uv;
+  for (let k = 0; k < p.count; k++) uv.setXY(k, p.getX(k) / sw + 0.5, p.getY(k) / shh + 0.5);
+  g.translate(0, CH / 2 + Y0, D / 2 + 0.003); return g;
+})();
+const sheenTex = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 256; const x = c.getContext('2d');
+  const gr = x.createLinearGradient(0, 0, 256, 256);
+  [[0, 'rgba(255,255,255,0.10)'], [0.3, 'rgba(255,255,255,0)'], [0.4, 'rgba(255,255,255,0.20)'], [0.47, 'rgba(255,255,255,0.05)'], [0.58, 'rgba(255,255,255,0)'], [1, 'rgba(255,255,255,0)']].forEach(([o, v]) => gr.addColorStop(o, v));
+  x.fillStyle = gr; x.fillRect(0, 0, 256, 256);
+  const tg = x.createLinearGradient(0, 0, 0, 40); tg.addColorStop(0, 'rgba(255,255,255,0.22)'); tg.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = tg; x.fillRect(0, 0, 256, 40);
+  return new THREE.CanvasTexture(c);
+})();
+const sheenM = new THREE.MeshBasicMaterial({ map: sheenTex, transparent: true, depthWrite: false });
+
+const EMB = [
+  // educators: mortarboard with ruby tassel
+  (g) => {
+    const cap = new THREE.CylinderGeometry(0.13, 0.15, 0.1, 48, 1, true); add(cap, chrome, g, 0, -0.04, 0);
+    add(new THREE.CylinderGeometry(0.13, 0.13, 0.01, 48), brushed, g, 0, 0.01, 0);
+    const board = new THREE.ExtrudeGeometry(roundedRect(0.4, 0.4, 0.02), { depth: 0.02, bevelEnabled: true, bevelThickness: 0.005, bevelSize: 0.005, bevelSegments: 2 });
+    board.rotateX(-Math.PI / 2); const b = add(board, chrome, g, 0, 0.02, 0); b.rotation.y = Math.PI / 4;
+    add(new THREE.SphereGeometry(0.02, 20, 14), brushed, g, 0, 0.05, 0);
+    g.add(rod(new V(0, 0.05, 0), new V(0.2, 0.03, 0.02), 0.004, brushed));
+    g.add(rod(new V(0.2, 0.03, 0.02), new V(0.2, -0.13, 0.02), 0.004, brushed));
+    add(new THREE.SphereGeometry(0.032, 24, 16), ruby, g, 0.2, -0.15, 0.02);
+    g.rotation.x = 0.5;
+  },
+  // signal groups: antenna broadcasting
+  (g) => {
+    g.add(rod(new V(0, -0.22, 0), new V(0, 0.08, 0), 0.012, chrome));
+    add(new THREE.CylinderGeometry(0.07, 0.09, 0.03, 40), brushed, g, 0, -0.225, 0);
+    add(new THREE.SphereGeometry(0.04, 28, 18), ruby, g, 0, 0.11, 0);
+    [0.11, 0.18, 0.25].forEach((r) => [-1, 1].forEach((sx) => {
+      const a = add(new THREE.TorusGeometry(r, 0.013, 14, 48, 1.2), chrome, g, 0, 0.11, 0);
+      a.rotation.z = sx > 0 ? -0.6 : Math.PI - 0.6;
+    }));
+  },
+  // content creators: lens / play
+  (g) => {
+    add(new THREE.TorusGeometry(0.21, 0.028, 20, 80), chrome, g);
+    add(new THREE.TorusGeometry(0.165, 0.009, 12, 80), brushed, g);
+    const ds = new THREE.CylinderGeometry(0.16, 0.16, 0.02, 64); ds.rotateX(Math.PI / 2); add(ds, dark, g, 0, 0, -0.012);
+    const tri = new THREE.Shape(); tri.moveTo(-0.045, -0.07); tri.lineTo(0.08, 0); tri.lineTo(-0.045, 0.07); tri.closePath();
+    const tg = new THREE.ExtrudeGeometry(tri, { depth: 0.03, bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.01, bevelSegments: 3 });
+    add(tg, ruby, g, 0.005, 0, -0.005);
+  },
+  // communities & IB teams: three linked nodes around a ruby core
+  (g) => {
+    const Pn = [0, 1, 2].map((k) => { const a = Math.PI / 2 + k * Math.PI * 2 / 3; return new V(Math.cos(a) * 0.19, Math.sin(a) * 0.19, 0); });
+    Pn.forEach((p, k) => { add(new THREE.SphereGeometry(0.055, 32, 20), chrome, g, p.x, p.y, p.z); g.add(rod(p, Pn[(k + 1) % 3], 0.009, brushed)); g.add(rod(p, new V(), 0.006, brushed)); });
+    add(new THREE.SphereGeometry(0.045, 28, 18), ruby, g);
+    add(new THREE.TorusGeometry(0.27, 0.005, 10, 96), brushed, g);
+  },
+  // established businesses & brands: tower with a ruby flag
+  (g) => {
+    const t = new THREE.ExtrudeGeometry(roundedRect(0.14, 0.3, 0.015), { depth: 0.1, bevelEnabled: true, bevelThickness: 0.006, bevelSize: 0.006, bevelSegments: 2 });
+    add(t, dark, g, -0.03, -0.09, -0.05);
+    for (let k = 0; k < 4; k++) add(new THREE.BoxGeometry(0.16, 0.006, 0.006), chrome, g, -0.03, -0.2 + k * 0.075, 0.058);
+    add(new THREE.BoxGeometry(0.2, 0.02, 0.14), brushed, g, -0.03, -0.245, 0);
+    g.add(rod(new V(-0.03, 0.06, 0), new V(-0.03, 0.28, 0), 0.009, dark));
+    add(new THREE.SphereGeometry(0.012, 16, 12), chrome, g, -0.03, 0.275, 0);
+    const fs = new THREE.Shape(); fs.moveTo(0, 0); fs.bezierCurveTo(0.05, 0.02, 0.09, -0.02, 0.15, 0.0); fs.lineTo(0.15, -0.08); fs.bezierCurveTo(0.09, -0.1, 0.05, -0.06, 0, -0.08); fs.closePath();
+    add(new THREE.ExtrudeGeometry(fs, { depth: 0.01, bevelEnabled: true, bevelThickness: 0.003, bevelSize: 0.003, bevelSegments: 2 }), ruby, g, -0.024, 0.265, -0.005);
+  },
+];
+
+const R = 3.2, STEP = 0.36;
+const items = EMB.map((fn, i) => {
+  const g = new THREE.Group(); scene.add(g);
+  glass(slab, g);
+  add(ringGeo, frameM, g);
+  const sh0 = new THREE.Mesh(sheenGeo, sheenM); sh0.renderOrder = 5; g.add(sh0);
+  add(plinthGeo, brushed, g, 0, 0, 0);
+  add(lipGeo, chrome, g, 0, Y0 - 0.005, D / 2 + 0.005);
+  add(lipGeo, chrome, g, 0, Y0 - 0.005, -D / 2 - 0.005);
+  add(frameGeo, frameM, g, 0, 0, D / 2 + 0.004);
+  add(frameGeo, frameM, g, 0, 0, -D / 2 - 0.004);
+  const em = new THREE.Group(); em.position.set(0, Y0 + CH * 0.56, 0); em.scale.setScalar(1.25); g.add(em); fn(em);
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, opacity: 0 }));
+  halo.position.set(0, Y0 + CH * 0.56, -0.25); halo.scale.set(1.5, 1.5, 1); halo.renderOrder = 1; g.add(halo);
+  const sh = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 0.8), new THREE.MeshBasicMaterial({ map: shTex, transparent: true, depthWrite: false, opacity: 0.55 }));
+  sh.rotation.x = -Math.PI / 2; sh.position.y = 0.001; g.add(sh);
+  g.traverse((o) => o.layers.set(i + 1));
+  return { g, em, halo, k: 0 };
+});
+const floor = new THREE.Mesh(new THREE.CircleGeometry(4.2, 96), new THREE.MeshBasicMaterial({ map: radTex([[0, 'rgba(255,255,255,0.7)'], [0.6, 'rgba(255,255,255,0.25)'], [1, 'rgba(255,255,255,0)']]), transparent: true, depthWrite: false }));
+floor.rotation.x = -Math.PI / 2; floor.position.set(0, -0.002, -0.6); floor.layers.set(9); scene.add(floor);
+rig(scene);
+
+/* active card: from the page, or self-cycling when opened alone (6 s, like the design) */
+const embedded = window.parent !== window;
+let cur = 0, car = 0, clock = 0, next = 6;
+items[0].k = 1;   // the first frame is card 1 settled — the same as the poster
+addEventListener('message', (e) => {
+  if (e.origin !== location.origin || !e.data || typeof e.data.tqWho !== 'number') return;
+  cur = Math.max(0, Math.min(items.length - 1, e.data.tqWho | 0));
+});
+
+const tick = (t, dt) => {
+  if (!embedded && !STILL && t >= next) { cur = (cur + 1) % items.length; next = t + 6; }
+  car = damp(car, cur, dt, reduce ? 20 : 3.2);
+  const k = Math.max(1, 1.15 / Math.max(0.5, W / H || 1.11));
+  camera.position.set(Math.sin(t * 0.12) * 0.12, 1.15 + 0.3 * (k - 1), 5.6 * k); camera.lookAt(0, 0.5, -0.5); camera.updateMatrixWorld();
+  items.forEach((it, i) => {
+    const a = (i - car) * STEP;
+    it.g.position.set(Math.sin(a) * R, 0, Math.cos(a) * R - R);
+    it.g.rotation.y = -a * 0.85;
+    it.k = damp(it.k, i === cur ? 1 : 0, dt, 4);
+    const e = ease(clamp01(it.k));
+    it.g.position.y = 0.05 * e;
+    it.em.rotation.y = i === cur ? Math.sin(t * 0.6) * 0.35 : damp(it.em.rotation.y, 0, dt, 2);
+    it.halo.material.opacity = 0.85 * e;
+  });
+  scene.updateMatrixWorld();
+};
+
+/* Each card covers part of the stage: render, blur and copy only its own rectangle (the
+   projected box around card, plinth, glow and shadow). The floor glow is one sharp pass. */
+const canBlur = 'filter' in CanvasRenderingContext2D.prototype;
+const corner = new V(), wp = new V();
+const rectOf = (it, pad) => {
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (let q = 0; q < 8; q++) {
+    corner.set(q & 1 ? 0.8 : -0.8, q & 2 ? 1.62 : -0.05, q & 4 ? 0.45 : -0.45); it.g.localToWorld(corner);
+    const [x, y] = toScreen(corner);
+    x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+  }
+  x0 = Math.max(0, Math.floor(x0 - pad)); y0 = Math.max(0, Math.floor(y0 - pad));
+  x1 = Math.min(W, Math.ceil(x1 + pad)); y1 = Math.min(H, Math.ceil(y1 + pad));
+  return x1 > x0 && y1 > y0 ? [x0, y0, x1 - x0, y1 - y0] : null;
+};
+const drawPasses = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  renderer.setScissorTest(false);
+  camera.layers.set(9); renderer.render(scene, camera);
+  ctx.filter = 'none'; ctx.globalAlpha = 1; ctx.drawImage(renderer.domElement, 0, 0, canvas.width, canvas.height);
+  renderer.setScissorTest(true);
+  items.map((it, i) => ({ i, d: it.g.getWorldPosition(wp).distanceToSquared(camera.position) })).sort((a, b) => b.d - a.d).forEach(({ i }) => {
+    const it = items[i], f = it.k, blur = canBlur && f < 0.98 ? (1 - f) * 2.6 * Math.min(1, Math.max(0.5, W / 600)) : 0;
+    const r = rectOf(it, 4 + blur * 3); if (!r) return;
+    const [x, y, w, h] = r;
+    renderer.setScissor(x, H - y - h, w, h);
+    camera.layers.set(i + 1); renderer.render(scene, camera);
+    ctx.filter = blur ? 'blur(' + (blur * PR).toFixed(2) + 'px)' : 'none';
+    ctx.globalAlpha = 0.7 + 0.3 * f;
+    const sx = Math.round(x * PR), sy = Math.round(y * PR), sw = Math.round(w * PR), sh = Math.round(h * PR);
+    ctx.drawImage(renderer.domElement, sx, sy, sw, sh, sx, sy, sw, sh);
+  });
+  renderer.setScissorTest(false);
+  ctx.filter = 'none'; ctx.globalAlpha = 1; camera.layers.set(0);
+};
+
+let shown = false, last = performance.now();
+const draw = (dt) => {
+  tick(clock, dt); drawPasses();
+  if (!shown) {
+    shown = true; window.__tqArt = true;
+    requestAnimationFrame(() => { if (embedded) { try { parent.postMessage({ tqReady: true }, location.origin); } catch (e) {} } });
+  }
+};
+const resize = () => {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (!w || !h || (w === W && h === H)) return;   // resizing a canvas clears it
+  W = w; H = h;
+  canvas.width = Math.round(w * PR); canvas.height = Math.round(h * PR);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+  if (STILL && shown) draw(0);
+};
+new ResizeObserver(resize).observe(canvas); resize();
+const frame = (now) => {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  if (W && (!shown || (!window.__tqPaused && !document.hidden))) { if (shown) clock += dt; draw(shown ? dt : 0); }
+  requestAnimationFrame(frame);
+};
+if (STILL) draw(0); else requestAnimationFrame(frame);
+</script>
+</body></html>

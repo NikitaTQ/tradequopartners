@@ -1088,6 +1088,63 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-scta__plus { font-size: 16px; line-height: 1; color: #ff4148; transform: rotate(calc(var(--h) * 135deg)); transition: transform .4s cubic-bezier(.3,1.4,.5,1); }
 @media (prefers-reduced-motion: reduce) { .tp-pcta__track, .tp-pcta__net path, .tp-pcta__tm, .tp-scta__pct, .tp-scta__under, .tp-scta__plus { transition: none; } }
 
+/* ---- who it's for: persona list + glass card carousel (embeds/who-cards.html) ----------
+   From the Who_Its_For_Showcase design. The open row tells the story and the best-fit program;
+   the page cycles rows every 6 s on screen and the carousel turns to the same card. */
+.tp-who-sec { padding-top: 0; }
+.tp-who { max-width: 1240px; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 48px; padding: clamp(28px, 6vw, 80px); border-radius: 32px;
+  background: radial-gradient(60% 70% at 70% 0%, #fff 0%, rgba(255,255,255,0) 70%), radial-gradient(40% 50% at 70% 100%, rgba(231,19,27,.05), rgba(231,19,27,0) 70%), #f2f2f5; }
+.tp-who__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 48px; }
+.tp-who__title { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.tp-who__title .tp-h2 { max-width: 20ch; }
+.tp-who__sub { margin: 0; max-width: 340px; padding-bottom: 4px; font-size: 17px; line-height: 1.55; color: #5e5e66; text-wrap: pretty; }
+.tp-who__body { display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 40px; }
+.tp-who__list { flex: 1 1 360px; max-width: 460px; display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.tp-who__row { border-radius: 20px; border: 1px solid transparent; transition: background .35s, box-shadow .35s, border-color .35s; }
+.tp-who__row:not(.is-on):hover { background: rgba(255,255,255,.42); }
+.tp-who__row.is-on { background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.66)); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border-color: rgba(255,255,255,.95); box-shadow: 0 0 0 1px rgba(14,14,22,.06), 0 30px 60px -36px rgba(14,14,22,.35); }
+.tp-who__h { margin: 0; font: inherit; }
+.tp-who__toggle { display: flex; align-items: center; gap: 14px; width: 100%; margin: 0; padding: 20px 22px; border: 0; background: none; font: inherit; color: inherit; text-align: start; cursor: pointer; border-radius: 20px; }
+.tp-who__toggle:focus-visible { outline: 2px solid #e7131b; outline-offset: -2px; }
+.tp-who__num { flex: none; font-family: 'Fragment Mono', monospace; font-size: 12px; color: #a0a0a8; transition: color .35s; direction: ltr; }
+.tp-who__name { flex: 1; font-size: 20px; line-height: 1.15; font-weight: 800; letter-spacing: -.03em; color: #6b6b73; transition: color .35s; }
+.tp-who__dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: rgba(14,14,22,.12); transition: background .35s; }
+.tp-who__row.is-on .tp-who__num { color: #e7131b; }
+.tp-who__row.is-on .tp-who__name { color: #0e0e10; }
+.tp-who__row.is-on .tp-who__dot { background: #e7131b; }
+.tp-who__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.2, .7, .2, 1); }
+.tp-who__row.is-on .tp-who__panel { grid-template-rows: 1fr; }
+.tp-who__inner { min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 14px; padding-inline-start: 56px; padding-inline-end: 22px; }
+.tp-who__inner > :last-child { margin-bottom: 20px; }
+.tp-who__inner p { margin: -6px 0 0; font-size: 15px; line-height: 1.6; color: #4a4a52; text-wrap: pretty; }
+.tp-who__fit { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.tp-who__fitlabel { font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .18em; color: #8a8a92; text-transform: uppercase; }
+.tp-who__pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: #0e0e10; color: #fff; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.tp-who__pill i { width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
+.tp-who__stage { position: relative; flex: 999 1 480px; min-width: min(100%, 480px); aspect-ratio: 1 / .9;
+  /* fade the sides (the design) and the bottom, where the floor glow would end in a hard edge */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(180deg, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%), linear-gradient(180deg, #000 78%, transparent 100%);
+  mask-composite: intersect; }
+.tp-who__poster, .tp-who__3d { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.tp-who__poster { object-fit: contain; transition: opacity .6s ease; }
+.tp-who__3d { background: transparent; opacity: 0; transition: opacity .6s ease; pointer-events: none; }
+@media (max-width: 640px) {
+  .tp-who { gap: 20px; padding: 32px 14px 18px; border-radius: 26px; }
+  .tp-who__head { flex-direction: column; align-items: center; text-align: center; }
+  .tp-who__title { align-items: center; gap: 14px; }
+  .tp-who__sub { max-width: 34ch; font-size: 15px; padding: 0; }
+  .tp-who__body { gap: 4px; }
+  .tp-who__list { max-width: none; }
+  .tp-who__toggle { padding: 16px; gap: 12px; }
+  .tp-who__name { font-size: 18px; }
+  .tp-who__inner { padding-inline-start: 46px; padding-inline-end: 16px; }
+  .tp-who__inner > :last-child { margin-bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .tp-who__panel, .tp-who__row { transition: none; } }
+
 /* ---- key benefits: eight objects (embeds/benefit-objects.html, Key_Benefits_Objects design)
    Wide: heading left, glass card right, the 4×2 shelf of pedestals under both. Under 820px the
    card moves under the scene; on phones the scene turns into a 2×4 shelf. */
@@ -1604,6 +1661,47 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
       </div>
     </section>
 
+    <!-- Who it's for: persona list + 3D card carousel (embed); the page owns the active card -->
+    <section id="who" class="tp-sec tp-who-sec" data-screen-label="Who it's for">
+      <div class="tp-who" data-who>
+        <div class="tp-who__head">
+          <div class="tp-who__title">
+            <span class="tp-kicker">DLA KOGO</span>
+            <h2 class="tp-h2">Dla tych, za którymi <span style="color: #e7131b;">idą traderzy</span></h2>
+          </div>
+          <p class="tp-who__sub">Znajdź siebie poniżej i zobacz, jak TradeQuo wpisuje się w Twój dotychczasowy sposób pracy.</p>
+        </div>
+        <div class="tp-who__body">
+          <ol class="tp-who__list">
+            <li class="tp-who__row is-on" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b1" aria-controls="who-p1" aria-expanded="true"><span class="tp-who__num">01</span><span class="tp-who__name">Edukatorzy tradingu</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p1" role="region" aria-labelledby="who-b1"><div class="tp-who__inner"><p>Uczysz tradingu na kursach, webinarach lub w ramach mentoringu, a Twoi kursanci potrzebują brokera, u którego mogą otworzyć konto już dziś. Wyślij im swój link i zarabiaj do 87% spreadu od każdego lota w ich obrocie — tak długo, jak pozostają aktywni.</p><div class="tp-who__fit"><span class="tp-who__fitlabel">NAJLEPSZY WYBÓR</span><span class="tp-who__pill"><i aria-hidden="true"></i>Polecaj traderów</span></div></div></div>
+            </li>
+            <li class="tp-who__row" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b2" aria-controls="who-p2" aria-expanded="false"><span class="tp-who__num">02</span><span class="tp-who__name">Grupy sygnałowe</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p2" role="region" aria-labelledby="who-b2"><div class="tp-who__inner"><p>Prowadzisz kanał, na którym członkowie śledzą Twoje pomysły tradingowe. Skieruj ich do TradeQuo, daj im darmowe wykresy TradingView i sygnały w czasie rzeczywistym, a prowizję odbieraj codziennie o 00:00 czasu serwera.</p><div class="tp-who__fit"><span class="tp-who__fitlabel">NAJLEPSZY WYBÓR</span><span class="tp-who__pill"><i aria-hidden="true"></i>Polecaj traderów</span></div></div></div>
+            </li>
+            <li class="tp-who__row" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b3" aria-controls="who-p3" aria-expanded="false"><span class="tp-who__num">03</span><span class="tp-who__name">Twórcy treści</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p3" role="region" aria-labelledby="who-b3"><div class="tp-who__inner"><p>Tworzysz filmy, posty lub transmisje na żywo o rynkach. Korzystaj z naszych gotowych banerów, stron docelowych i filmów, a każdą rejestrację i transakcję śledź na żywo w swoim panelu.</p><div class="tp-who__fit"><span class="tp-who__fitlabel">NAJLEPSZY WYBÓR</span><span class="tp-who__pill"><i aria-hidden="true"></i>Polecaj traderów</span></div></div></div>
+            </li>
+            <li class="tp-who__row" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b4" aria-controls="who-p4" aria-expanded="false"><span class="tp-who__num">04</span><span class="tp-who__name">Społeczności i zespoły IB</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p4" role="region" aria-labelledby="who-b4"><div class="tp-who__inner"><p>Kierujesz społecznością traderów lub zespołem partnerów w swoim regionie. Pozyskuj dla TradeQuo kolejnych partnerów i zarabiaj na obrocie, który generują, oprócz zarobków z własnych klientów — z osobistym opiekunem partnera u boku.</p><div class="tp-who__fit"><span class="tp-who__fitlabel">NAJLEPSZY WYBÓR</span><span class="tp-who__pill"><i aria-hidden="true"></i>Zbuduj sieć</span></div></div></div>
+            </li>
+            <li class="tp-who__row" data-who-item>
+              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b5" aria-controls="who-p5" aria-expanded="false"><span class="tp-who__num">05</span><span class="tp-who__name">Firmy i marki edukacyjne</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
+              <div class="tp-who__panel" id="who-p5" role="region" aria-labelledby="who-b5"><div class="tp-who__inner"><p>Prowadzisz firmę o ugruntowanej pozycji lub akademię tradingu i chcesz działać pod własną nazwą. Uruchom Broker White-Label lub Akademię White-Label na infrastrukturze TradeQuo.</p><div class="tp-who__fit"><span class="tp-who__fitlabel">NAJLEPSZY WYBÓR</span><span class="tp-who__pill"><i aria-hidden="true"></i>Uruchom swoją markę</span></div></div></div>
+            </li>
+          </ol>
+          <div class="tp-who__stage">
+            <img class="tp-who__poster" data-poster src="../../assets/posters/who-cards.webp?v=eb590cc6ec" alt="" width="1000" height="900" loading="lazy" decoding="async">
+            <iframe class="tp-who__3d" data-embed data-src="../../embeds/who-cards.html?v=cff254d5a5" title="DLA KOGO" aria-hidden="true" tabindex="-1"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- one soft grey band behind Key benefits and Why TradeQuo -->
     <div class="tp-band">
     <!-- Key benefits: eight 3D objects on glass pedestals (embed) + glass card; the page owns the active item -->
@@ -1849,6 +1947,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=c33efb191f" defer></script>
+<script src="../../assets/js/landing.js?v=8e33af974e" defer></script>
 </body>
 </html>
