@@ -558,7 +558,7 @@ html { scroll-snap-type: y proximity; }
   [data-rep-card] { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background-color: rgba(255,255,255,.5) !important; }
   #signup { padding-top: 10px !important; }
   #signup [data-hero-intro] { gap: 8px !important; }
-  #signup [data-hero-intro] h1 { font-size: 30px !important; }
+  #signup [data-hero-intro] h1 { font-size: 24px !important; }
   #signup [data-hero-intro] p { display: none !important; }
   #signup [data-hero-panel] { margin-top: 12px !important; padding: 8px 0 0 !important; background: transparent !important; border-radius: 0 !important; }
   #signup [data-hero-panel] > div[aria-hidden] { display: none !important; }
@@ -937,7 +937,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-head--left { align-items: flex-start; text-align: start; margin: 0; }
 .tp-kicker { display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b; text-transform: uppercase; }
 .tp-kicker::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-.tp-h1 { margin: 0; max-width: 15ch; font-size: clamp(42px, 7.2vw, 80px); line-height: .94; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
+.tp-h1 { margin: 0; max-width: 24ch; font-size: clamp(24px, 3.4vw, 40px); line-height: 1; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
 .tp-h2 { margin: 0; max-width: 22ch; font-size: clamp(32px, 4.6vw, 56px); line-height: 1.02; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(15px, 1.5vw, 19px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
 .tp-note { max-width: 980px; margin: 18px auto 0; font-size: 12.5px; line-height: 1.55; color: #77787d; text-align: center; text-wrap: pretty; }
@@ -1030,8 +1030,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-stage > * { position: relative; }   /* content above the light streaks */
 
 /* ---- hero ---------------------------------------------------------------------- */
-.tp-hero { padding-top: clamp(24px, 4vw, 56px); padding-bottom: clamp(48px, 6vw, 88px); }
-.tp-hero .tp-head { gap: 18px; }
+.tp-hero { padding-top: clamp(10px, 1.6vw, 22px); padding-bottom: clamp(48px, 6vw, 88px); }
+.tp-hero .tp-head { gap: 10px; }
+.tp-hero .tp-head .tp-sub { max-width: 64ch; font-size: 14px; }
+.tp-hero .tp-stage { margin-top: clamp(16px, 2vw, 26px); }
 
 /* ---- program cards ------------------------------------------------------------- */
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
@@ -1391,7 +1393,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 }
 @media (max-width: 640px) {
   .tp-sec { padding-top: 56px; padding-bottom: 56px; }
-  .tp-hero { padding-top: 20px; }
+  .tp-hero { padding-top: 8px; }
   .tp-stage { padding: 12px; border-radius: 26px; }
   .tp-benefits, .tp-perkgrid, .tp-stats { grid-template-columns: minmax(0, 1fr); }
   .tp-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -1477,7 +1479,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
     <section id="calculator" class="tp-sec tp-hero" data-screen-label="Commission calculator">
       <div class="tp-head">
         <span class="tp-kicker">PLAN PROWIZYJNY DLA PARTNERÓW</span>
-        <h1 class="tp-h1" style="max-width: 13ch;">Oszacuj swoje <span style="color: #e7131b;">miesięczne zarobki</span></h1>
+        <h1 class="tp-h1" style="max-width: 20ch;">Oszacuj swoje <span style="color: #e7131b;">miesięczne zarobki</span></h1>
         <p class="tp-sub">Przesuń suwaki i sprawdź, ile plan prowizyjny dla partnerów TradeQuo mógłby Ci wypłacać co miesiąc.</p>
       </div>
 

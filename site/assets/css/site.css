@@ -509,7 +509,7 @@ html { scroll-snap-type: y proximity; }
   [data-rep-card] { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background-color: rgba(255,255,255,.5) !important; }
   #signup { padding-top: 10px !important; }
   #signup [data-hero-intro] { gap: 8px !important; }
-  #signup [data-hero-intro] h1 { font-size: 30px !important; }
+  #signup [data-hero-intro] h1 { font-size: 24px !important; }
   #signup [data-hero-intro] p { display: none !important; }
   #signup [data-hero-panel] { margin-top: 12px !important; padding: 8px 0 0 !important; background: transparent !important; border-radius: 0 !important; }
   #signup [data-hero-panel] > div[aria-hidden] { display: none !important; }
