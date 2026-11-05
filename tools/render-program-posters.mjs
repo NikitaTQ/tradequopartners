@@ -4,7 +4,7 @@
  *   program-<obj>.webp           the cards' art (embeds/program-art.html), 16:9
  *   benefits-candles-wide.webp   key benefits candles (embeds/benefit-candles.html), 2:1 stage
  *   benefits-candles.webp        the same for the 4:3 stage under 820px
- *   trust-dome.webp              why TradeQuo dome, finished (embeds/trust-dome.html), 600:520
+ *   trust-dome.webp              why TradeQuo dome, first frame: flat field (embeds/trust-dome.html), 600:520
  * The page shows a poster until its live scene has drawn the first frame, so re-run after
  * changing a scene (an optional argument renders only the posters whose name contains it):
  *
