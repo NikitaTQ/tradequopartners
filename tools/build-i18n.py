@@ -261,6 +261,9 @@ for page in PAGES:
             'canonical': url_of(lang, slug), 'hreflang': hreflang, 'ogLocale': lang['ogLocale'],
             'fontFaces': faces, 'fontPreload': preload, 'langSwitcher': switcher(lang, s, slug),
             'embedQuery': '' if code == 'en' else '?lang=' + code,
+            # "become a partner" links in shared blocks: scroll to the form on the landing, go to it elsewhere
+            'signupHref': (home + '#signup') if slug else '#signup',
+            'signupNav': (' data-page-link data-label="%s"' % render_attr(s('loader') + ' · ' + s('fan.home'))) if slug else '',
             'pageCss': ('\n<link rel="stylesheet" href="%sassets/css/%s.css" data-inline>' % (root, page['css'])) if page.get('css') else '',
         }
 
