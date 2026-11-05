@@ -511,7 +511,7 @@
   function startForm() {
     const form = $('form[data-agreement]');
     const stage = ref('stage'), pen = ref('pen'), path = ref('sigPath'), sigBox = ref('sigBox');
-    const name = ref('name'), date = ref('date'), datePlace = ref('datePlace'), dateBox = ref('dateBox');
+    const name = ref('name'), date = ref('date');
     if (!form || !stage) return;
     const envBtn = $('.tq-env', form);
     /* copy comes from the page so every language build carries its own */
@@ -523,12 +523,15 @@
     const envTxt = envBtn && $('.tq-env__txt', envBtn);
     let submitted = false;
 
-    /* The handwritten date (Caveat, 75 KB) is only needed once the pen signs. */
+    /* The date is filled in for the visitor: today's, kept current if the tab stays open past midnight. */
     const writeDate = () => {
-      if (!date || date.textContent) return;
+      if (!date) return;
       const d = new Date();
       date.textContent = pad(d.getDate()) + ' / ' + pad(d.getMonth() + 1) + ' / ' + d.getFullYear();
+      date.style.color = '#0a0a0a';
     };
+    writeDate();
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && !submitted) writeDate(); });
 
     const penTransform = (x, y, deg) => 'translate(' + (x - 24).toFixed(1) + 'px, ' + (y - 245).toFixed(1) + 'px) rotate(' + deg + 'deg)';
     const poses = () => {
@@ -538,10 +541,6 @@
       if (sigBox) {
         const o = rel(sigBox.getBoundingClientRect());
         P.writeY = o.y + o.h * 0.62; P.x0 = o.x + o.w * 0.04; P.x1 = o.x + o.w * 0.94;
-      }
-      if (dateBox) {
-        const o = rel(dateBox.getBoundingClientRect());
-        P.date = { x: o.x + o.w * 0.3, y: o.y + o.h * 0.78, deg: -30 };
       }
       return P;
     };
@@ -581,20 +580,11 @@
       setTimeout(done, 1000);
     };
     const afterSign = (P) => {
-      if (pen && P.date) {
-        pen.style.transition = 'transform 364ms cubic-bezier(.4,0,.2,1)';
-        pen.style.transform = penTransform(P.date.x, P.date.y, P.date.deg);
-      }
-      setTimeout(() => {
-        if (datePlace) datePlace.style.opacity = '0';
-        if (date) { date.style.opacity = '1'; date.style.transform = 'translateY(0)'; }
-      }, 266);
-      setTimeout(() => {
-        if (!pen) return;
+      if (pen) {
         pen.style.transition = 'transform 448ms cubic-bezier(.4,0,.2,1)';
         pen.style.transform = penTransform(P.rest.x, P.rest.y, P.rest.deg);
-      }, 532);
-      setTimeout(() => setTimeout(sendEnvelope, 500), 630);
+      }
+      setTimeout(sendEnvelope, 600);
     };
     const sign = () => {
       if (!pen || !path) return sendEnvelope();
