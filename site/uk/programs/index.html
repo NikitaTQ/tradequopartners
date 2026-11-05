@@ -199,6 +199,10 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 
 
 html, body { margin: 0; padding: 0; background: #ffffff; }
+/* Nothing on the site scrolls sideways. The page wrappers clip with overflow: clip, which
+   Safari < 16 ignores; on the root this reaches the viewport in every browser (sticky still
+   works) and stops the sideways rubber-band on trackpads. */
+html { overflow-x: hidden; overscroll-behavior-x: none; }
 * { box-sizing: border-box; }
 @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --tqfm { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
@@ -1089,7 +1093,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 /* ---- key benefits: glass candles (embeds/benefit-candles.html) + glass card -------
    From the Key_Benefits_Silver_Candles design. The card sits over the scene's empty
    top-left on wide screens and drops under it below 820px. */
-.tp-kb-sec { background: radial-gradient(50% 60% at 85% 100%, rgba(231,19,27,.06), rgba(231,19,27,0) 70%), #f6f6f8; }
+/* Key benefits and Why TradeQuo share one band: it fades in from white and back out, so
+   there is no hard edge between the sections; the red glow sits wholly inside it */
+.tp-band { position: relative; background:
+  radial-gradient(40% 26% at 84% 40%, rgba(231,19,27,.06), rgba(231,19,27,0) 70%),
+  linear-gradient(180deg, #fff 0, #f6f6f8 200px, #f6f6f8 calc(100% - 240px), #fff 100%); }
 .tp-kb-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 48px; }
 .tp-kb-head__title { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
 .tp-kb-head .tp-h2 { max-width: none; }
@@ -1617,6 +1625,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
       </div>
     </section>
 
+    <!-- one soft grey band behind Key benefits and Why TradeQuo -->
+    <div class="tp-band">
     <!-- Key benefits: glass candles (3D embed) + glass card; the page owns the active item -->
     <section id="benefits" class="tp-sec tp-kb-sec" data-screen-label="Key benefits">
       <div class="tp-wrap">
@@ -1680,6 +1690,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
         </div>
       </div>
     </section>
+    </div>
 
     <!-- Community -->
     <section class="tp-sec" data-screen-label="Join partners" style="padding-top: clamp(24px, 4vw, 48px);">

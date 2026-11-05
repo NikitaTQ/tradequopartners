@@ -198,6 +198,10 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 
 
 html, body { margin: 0; padding: 0; background: #ffffff; }
+/* Nothing on the site scrolls sideways. The page wrappers clip with overflow: clip, which
+   Safari < 16 ignores; on the root this reaches the viewport in every browser (sticky still
+   works) and stops the sideways rubber-band on trackpads. */
+html { overflow-x: hidden; overscroll-behavior-x: none; }
 * { box-sizing: border-box; }
 @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --tqfm { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
