@@ -706,17 +706,17 @@
     });
   }
 
-  /* ---- Key benefits (Partner Programs): glass card + 3D candles ----------------
-   * The page owns the active benefit: it cycles every 2.6 s while the block is on
+  /* ---- Key benefits (Partner Programs): glass card + 3D objects ----------------
+   * The page owns the active benefit: it cycles every 2.5 s while the block is on
    * screen (not under reduced motion, not while hovered or focused), tells the
-   * candles embed {tqKb: i}, and holds a picked item for 7 s — a click on a bar
-   * here, or on a candle's chip in the embed ({tqKbPick: i}). */
+   * objects embed {tqKb: i}, and holds a picked item for 7 s — a click on a bar
+   * here, or on a pedestal's chip in the embed ({tqKbPick: i}). */
   function startKeyBenefits() {
     const root = $('[data-kb]');
     if (!root) return;
     const items = $$('[data-kb-item]', root), bars = $$('[data-kb-bar]', root);
     const num = $('[data-kb-num]', root), group = $('[data-kb-group]', root), frame = $('iframe', root);
-    const N = items.length, STEP = 2600, HOLD = 7000;
+    const N = items.length, STEP = 2500, HOLD = 7000;
     let cur = 0, timer = 0, onScreen = false, hover = false;
     const tell = () => { try { if (frame.contentWindow) frame.contentWindow.postMessage({ tqKb: cur }, location.origin); } catch (e) {} };
     const show = (i) => {
