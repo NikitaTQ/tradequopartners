@@ -24,7 +24,7 @@ language would: natural phrasing for that market, not word-for-word.
 4. **Keys ending in `.title`/`hero.h1` are big headlines**: keep them about as short as the English.
 5. **Tight UI slots** (keep as short as the English or shorter):
    `nav.*`, `nav.cta`, `form.name`, `form.email`, `form.phone`, `form.commit1-3`,
-   `form.sign`, `form.date`, `form.submit`, `form.sent`, `calc.lotsUnit`, `calc.tradersUnit`, all `inv.*`,
+   `form.date`, `form.submit`, `form.sent`, `calc.lotsUnit`, `calc.tradersUnit`, all `inv.*`,
    `rcpt.*`, `dock.l` + `dock.r` (one button split in two halves: "Become a" | "partner" — split your
    phrase naturally into a left and right part; both parts non-empty), `stats.cta`, `reach.cta1`, `reach.cta2`,
    `offer.N.t`, `embed.crys.*` (caption under a big number inside a small hexagon, max ~22 characters,

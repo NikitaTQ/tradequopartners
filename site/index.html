@@ -49,39 +49,30 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 <style id="site-css" data-prefix="">
 /* TradeQuo Partner Program — ported from the Claude Design handoff (Partner Program v2). */
 
-/* Self-hosted Google Fonts (latin + latin-ext): no render-blocking third-party CSS. */
-/* Caveat latin-ext */
+/* Self-hosted Google Fonts: no render-blocking third-party CSS. */
+/* Caveat cyrillic (variable 400–700) */
 @font-face {
   font-family: 'Caveat';
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(assets/fonts/caveat-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* Caveat latin-ext (variable 400–700) */
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 400 700;
   font-display: swap;
   src: url(assets/fonts/caveat-latin-ext.woff2) format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* Caveat latin */
+/* Caveat latin (variable 400–700) */
 @font-face {
   font-family: 'Caveat';
   font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(assets/fonts/caveat-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* Caveat latin-ext */
-@font-face {
-  font-family: 'Caveat';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(assets/fonts/caveat-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* Caveat latin */
-@font-face {
-  font-family: 'Caveat';
-  font-style: normal;
-  font-weight: 700;
+  font-weight: 400 700;
   font-display: swap;
   src: url(assets/fonts/caveat-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -516,15 +507,92 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 @media (prefers-reduced-motion: reduce) {
   .tq-rcpt { transition-duration: .01s; }
 }
-/* Sign-up form: before sending only the (pre-filled) date shows; on send the signature cell
-   unfolds beside it and the pen signs there (startForm in landing.js adds .is-signing). */
-[data-form-auth] { display: grid; grid-template-columns: minmax(0, 1fr) 0px minmax(0, 0fr); column-gap: 0px;
-  transition: grid-template-columns .5s cubic-bezier(.2, .7, .2, 1), column-gap .5s cubic-bezier(.2, .7, .2, 1); }
-[data-form-auth] > [data-ref="sigBox"], [data-form-auth] > [data-auth-rule] { min-width: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: opacity .3s ease .2s, visibility 0s .5s; }
-[data-form-auth] > [data-ref="sigBox"] > span:first-child { white-space: nowrap; }
-[data-form-auth].is-signing { grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1.1fr); column-gap: 18px; }
-[data-form-auth].is-signing > [data-ref="sigBox"], [data-form-auth].is-signing > [data-auth-rule] { opacity: 1; visibility: visible; transition: opacity .3s ease .2s, visibility 0s; }
-@media (prefers-reduced-motion: reduce) { [data-form-auth], [data-form-auth] > * { transition: none !important; } }
+/* Sign-up form: the date cell is filled in for the visitor (startForm in landing.js). */
+[data-form-auth] { display: grid; grid-template-columns: minmax(0, 1fr); }
+
+/* ---- Sign-up success screen (Partner_Form_Success design) --------------------------------
+   The form and the screen share one grid cell. Once the envelope has flown off the button and
+   the server has taken the request, startForm adds .is-done to the stage: the form sinks back
+   and fades, and the screen builds up in its place (--in 0 → 1 with staggered delays). The form
+   fades with filter/translate/scale because its entrance animation (tqRise) holds opacity and
+   transform. Inside the envelope scene 1em = 1/44 of its width (10px at the design's 440px). */
+[data-hero-stage] { display: grid; }
+[data-hero-stage] > form[data-agreement], .tq-done { grid-area: 1 / 1; }
+[data-hero-stage] > form[data-agreement] { align-self: start; }
+[data-hero-stage].is-done > form[data-agreement] { filter: opacity(0); translate: 0 24px; scale: .96; visibility: hidden; pointer-events: none;
+  transition: filter .45s ease .2s, translate .6s cubic-bezier(.4, 0, .2, 1) .2s, scale .6s cubic-bezier(.4, 0, .2, 1) .2s, visibility 0s .8s; }
+.tq-done { --in: 0; position: relative; z-index: 3; align-self: start; display: flex; flex-direction: column; align-items: center; padding: 72px 0 40px; text-align: center; color: #0e0e10; font-family: 'DM Sans', system-ui, sans-serif; }
+.tq-done[hidden] { display: none; }
+.is-done > .tq-done { --in: 1; }
+.tq-done__title { margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 46px; line-height: 1; letter-spacing: .01em; outline: none;
+  opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px)); transition: opacity .45s ease .5s, transform .6s cubic-bezier(.2, .8, .2, 1) .5s; }
+.tq-done__title span { color: #e7131b; }
+.tq-done__art { width: min(440px, 100%); margin-top: 40px; container-type: inline-size; }
+/* the note sits in the flow under the envelope's top, so a longer translation pushes the steps down instead of covering them */
+.tq-done__scene { position: relative; display: flex; flex-direction: column; align-items: flex-end; box-sizing: border-box; font-size: calc(100cqw / 44); width: 44em; min-height: 42em; padding: 21.2em 0 1.8em; text-align: start; }
+.tq-done__env { position: absolute; left: 0; top: 0; width: 44em; height: 26.8em; opacity: var(--in);
+  transform: translateY(calc((1 - var(--in)) * -7em)) rotate(calc(-4deg + (1 - var(--in)) * -8deg));
+  transition: opacity .3s ease .35s, transform .8s cubic-bezier(.3, 1.3, .5, 1) .35s; }
+.tq-done__env-body, .tq-done__env-l, .tq-done__env-r, .tq-done__env-b, .tq-done__env-flap { position: absolute; inset: 0; border-radius: .4em; }
+.tq-done__env-body { background: linear-gradient(180deg, #f4f2ec, #e7e4dc); box-shadow: 0 .1em .1em rgba(0,0,0,.08), 0 2.8em 4.4em -2.2em rgba(14,14,22,.45); }
+.tq-done__env-l { background: #e9e6de; clip-path: polygon(0 0, 52% 56%, 0 100%); }
+.tq-done__env-r { background: #e6e3da; clip-path: polygon(100% 0, 48% 56%, 100% 100%); }
+.tq-done__env-b { background: linear-gradient(180deg, #efece5, #e9e6de); clip-path: polygon(0 100%, 50% 46%, 100% 100%); filter: drop-shadow(0 -1px 0 rgba(0,0,0,.06)); }
+.tq-done__env-flap { border-radius: 0; filter: drop-shadow(0 .3em .3em rgba(0,0,0,.14)); }
+.tq-done__env-flap span { position: absolute; inset: 0; border-radius: .4em .4em 0 0; background: linear-gradient(180deg, #f8f6f1, #ece9e2); clip-path: polygon(0 0, 100% 0, 50% 60%); }
+.tq-done__postmark { position: absolute; right: 1.4em; top: 1.2em; width: 15em; height: 9em; transform: rotate(9deg); opacity: calc(var(--in) * .62); transition: opacity .2s linear 1.05s; }
+.tq-done__wax { position: absolute; left: 50%; top: 60%; width: 6.6em; height: 6.4em; margin: -3.2em 0 0 -3.3em;
+  border-radius: 48% 52% 46% 54% / 53% 47% 55% 45%; background: radial-gradient(circle at 38% 32%, #f23b42 0%, #d3121a 55%, #8e0a10 100%);
+  box-shadow: 0 .4em .8em -.2em rgba(0,0,0,.4), inset 0 -.4em .8em rgba(0,0,0,.25), inset 0 .2em .2em rgba(255,255,255,.25);
+  transform: scale(calc(1.25 - var(--in) * .25)); transition: transform .4s cubic-bezier(.3, 1.6, .5, 1) .9s; }
+.tq-done__wax span { position: absolute; inset: 1.1em; display: flex; align-items: center; justify-content: center; border-radius: 50%;
+  box-shadow: inset 0 0 0 .2em rgba(0,0,0,.18), inset 0 .2em 0 rgba(255,255,255,.18), 0 .1em 0 rgba(255,255,255,.15); }
+.tq-done__wax img { width: 2.2em; height: 2.2em; filter: invert(1); opacity: .55; }
+.tq-done__note { position: relative; inset-inline-end: -.6em; width: 30em; box-sizing: border-box; padding: 3em 2.8em 2.4em; background: #fff;
+  box-shadow: 0 .1em .1em rgba(0,0,0,.06), 0 1.8em 3em -1.6em rgba(14,14,22,.35); opacity: var(--in);
+  transform: translateY(calc((1 - var(--in)) * 2.4em)) rotate(3deg); transition: opacity .4s ease 1.15s, transform .6s cubic-bezier(.2, .8, .2, 1) 1.15s; }
+.tq-done__tape { position: absolute; left: 50%; top: -1.2em; width: 9.2em; height: 2.6em; margin-left: -4.6em; background: rgba(236,232,220,.75); box-shadow: 0 .1em .2em rgba(0,0,0,.08); transform: rotate(-5deg); }
+.tq-done__hand, .tq-done__sign { margin: 0; font-family: 'Caveat', 'DM Sans', cursive; font-weight: 600; color: #1f2d4d; }
+.tq-done__hand { font-size: 2.8em; font-weight: 500; line-height: 1.12; }
+.tq-done__sign { margin-top: .55em; font-size: 2.2em; line-height: 1.1; }
+.tq-done__steps { position: relative; width: min(448px, 100%); margin-top: 6px; opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px));
+  transition: opacity .45s ease 1.3s, transform .6s cubic-bezier(.2, .8, .2, 1) 1.3s; }
+.tq-done__steps ol { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+.tq-done__steps li { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; padding: 0 4px; }
+.tq-done__steps b { font-size: 14px; font-weight: 700; line-height: 1.2; text-wrap: balance; }
+.tq-done__steps small { margin-top: -8px; font-size: 12.5px; line-height: 1.3; color: #8a8a92; text-wrap: balance; }
+.tq-done__dot { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px #0e0e10, 0 0 0 5px #ededf0; }
+.tq-done__steps li.is-on .tq-done__dot { background: #e7131b; box-shadow: 0 0 0 5px #ededf0; }
+.tq-done__flow { position: absolute; top: 6px; height: 12px; opacity: var(--in); transition: opacity .4s ease 1.5s;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='12' viewBox='0 0 14 12'%3E%3Cpath d='M4 2l4 4-4 4' fill='none' stroke='%23E7131B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") repeat-x 0 0 / 14px 12px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); }
+.is-done .tq-done__flow { animation: tqDoneFlow .9s linear infinite; }
+.tq-done__flow:first-child { left: calc(16.67% + 22px); right: calc(50% + 22px); }
+.tq-done__flow:nth-child(2) { left: calc(50% + 22px); right: calc(16.67% + 22px); transition-delay: 1.65s; }
+[dir="rtl"] .tq-done__flow { transform: scaleX(-1); }
+@keyframes tqDoneFlow { from { background-position: 0 0; } to { background-position: 14px 0; } }
+.tq-done__cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 24px; margin-top: 64px; opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px));
+  transition: opacity .45s ease 1.45s, transform .6s cubic-bezier(.2, .8, .2, 1) 1.45s; }
+.tq-done__go { display: inline-flex; align-items: center; gap: 14px; height: 52px; padding-inline: 22px 8px; border-radius: 999px; white-space: nowrap;
+  background: linear-gradient(180deg, #2a2a2e, #0a0a0b); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 14px 24px -14px rgba(14,14,22,.6);
+  color: #fff; font-weight: 700; font-size: 15px; letter-spacing: -.01em; text-decoration: none; transition: transform .25s, box-shadow .25s; }
+.tq-done__go:hover { color: #fff; transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 18px 28px -14px rgba(14,14,22,.7); }
+.tq-done__go span { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #0e0e10; }
+[dir="rtl"] .tq-done__go svg { transform: scaleX(-1); }
+.tq-done__link { padding-bottom: 2px; border-bottom: 1px solid rgba(14,14,22,.35); color: #0e0e10; font-weight: 600; font-size: 15px; white-space: nowrap; text-decoration: none; }
+.tq-done__link:hover { color: #e7131b; border-color: currentColor; }
+.tq-done__go:focus-visible, .tq-done__link:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; }
+@media (max-width: 640px) {
+  .tq-done { padding: 36px 0 28px; }
+  .tq-done__title { font-size: 36px; }
+  .tq-done__art { margin-top: 26px; }
+  .tq-done__cta { margin-top: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tq-done *, [data-hero-stage].is-done > form[data-agreement] { transition-duration: .01s !important; transition-delay: 0s !important; }
+  .is-done .tq-done__flow { animation: none; }
+}
+
 .tq-env { border: 0; margin: 0; }
 .tq-env--fill { display: flex; width: 100%; height: 56px; font-size: 15px; padding: 0 66px 0 22px; overflow: visible; }
 .tq-env--fill .tq-env__mail { right: 2px; bottom: 5px; scale: .62; }
@@ -597,7 +665,6 @@ html { scroll-snap-type: y proximity; }
   #signup form[data-agreement] label { font-size: 11px !important; letter-spacing: .14em !important; }
   #signup form[data-agreement] label > span + span { border-radius: 12px !important; }
   #signup [data-form-auth] { border-radius: 12px !important; padding: 12px 14px 8px !important; background: #fff !important; }
-  #signup [data-form-auth].is-signing { column-gap: 12px; }
   #signup [data-form-auth] span { font-size: 10px !important; letter-spacing: .12em !important; }
   #signup [data-form-auth] [data-ref="date"] { font-size: 14px !important; letter-spacing: .04em !important; }
   [data-calc-grid] { gap: 14px !important; margin-top: 22px !important; }
@@ -1063,14 +1130,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
                     <span data-ref="date" style="direction:ltr; unicode-bidi:isolate; line-height:1.2; font-size:14px; font-weight:500; letter-spacing:.06em; color:#8e8e92; white-space:nowrap; font-variant-numeric:tabular-nums;">DD / MM / YYYY</span>
                   </div>
                 </div>
-                <span data-auth-rule="" style="background:#e2e2df;"></span>
-                <div data-ref="sigBox" style="position:relative; display:flex; flex-direction:column; gap:2px;">
-                  <span style="font-family:'DM Sans',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e; font-size:9px;">SIGNATURE</span>
-                  <div style="position:relative; height:24px;">
-                    <svg viewBox="0 0 300 70" preserveAspectRatio="none" style="position:absolute; left:0; bottom:2px; width:100%; height:22px; overflow:visible;"><path data-ref="sigPath" d="M4,50 C12,20 24,18 30,46 C34,66 44,66 48,44 C52,20 64,18 70,48 C75,70 90,68 98,42 C106,16 128,18 134,52 C138,74 160,76 176,42 C186,22 210,28 220,50 C250,46 274,54 298,40 M6,62 C90,56 210,58 294,62" fill="none" stroke="#14161c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" style="stroke-dasharray:2000; stroke-dashoffset:2000;"></path></svg>
-                  </div>
-                  <span data-ref="name" style="display:none; font-family:'DM Sans',sans-serif; font-size:9px; letter-spacing:.04em; color:#8a8a8e; opacity:0; transition:opacity .4s;">New TradeQuo Partner</span>
-                </div>
               </div>
             </div>
 
@@ -1082,21 +1141,51 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
               <button type="submit" class="tq-env tq-env--fill" aria-label="Send request"><span class="tq-env__txt">Send request</span><span class="tq-env__mail" aria-hidden="true"><span class="tq-env__back"></span><span class="tq-env__flap-open"></span><span class="tq-env__bill">$</span><span class="tq-env__front"></span><span class="tq-env__flap"></span><span class="tq-env__seal"></span></span></button>
             </div>
           </form>
+          <!-- Success screen after the form is sent (Partner_Form_Success design). Hidden until the
+               envelope has left the button and the server has taken the request (startForm in landing.js);
+               it then takes the form's place and builds up piece by piece. -->
+          <div class="tq-done" data-form-done data-fallback="partner" hidden>
+            <h2 class="tq-done__title" tabindex="-1">Request sent<span>.</span></h2>
+            <div class="tq-done__art">
+              <div class="tq-done__scene">
+                <div class="tq-done__env" aria-hidden="true">
+                  <span class="tq-done__env-body"></span>
+                  <span class="tq-done__env-l"></span>
+                  <span class="tq-done__env-r"></span>
+                  <span class="tq-done__env-b"></span>
+                  <span class="tq-done__env-flap"><span></span></span>
+                  <svg class="tq-done__postmark" viewBox="0 0 150 90" width="150" height="90" focusable="false">
+                    <defs><path id="doneArc" d="M100,45 m-31,0 a31,31 0 1,1 62,0 a31,31 0 1,1 -62,0"></path></defs>
+                    <g fill="none" stroke="#2B2F3A" stroke-width="1.4"><circle cx="100" cy="45" r="38"></circle><circle cx="100" cy="45" r="24"></circle><path d="M2 30 q8 -6 16 0 t16 0 t16 0 t16 0"></path><path d="M2 42 q8 -6 16 0 t16 0 t16 0 t16 0"></path><path d="M2 54 q8 -6 16 0 t16 0 t16 0 t16 0"></path></g>
+                    <text font-family="DM Sans, sans-serif" font-weight="700" font-size="7.5" fill="#2B2F3A" direction="ltr" unicode-bidi="embed"><textPath href="#doneArc" textLength="190" lengthAdjust="spacing">TRADEQUO · PARTNER DESK · </textPath></text>
+                    <text x="100" y="43" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="8" fill="#2B2F3A">RECEIVED</text>
+                    <text x="100" y="54" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="7.5" fill="#2B2F3A" direction="ltr" data-done-date></text>
+                  </svg>
+                  <span class="tq-done__wax"><span><img src="assets/logo-mark.png?v=c5fbd9796c" alt="" width="22" height="22"></span></span>
+                </div>
+                <div class="tq-done__note">
+                  <span class="tq-done__tape" aria-hidden="true"></span>
+                  <p class="tq-done__hand"><span data-done-thanks>Thanks, {name}!</span><br>We’ll call you within 24 hours.</p>
+                  <p class="tq-done__sign">— TradeQuo partner team</p>
+                </div>
+              </div>
+            </div>
+            <div class="tq-done__steps">
+              <span class="tq-done__flow" aria-hidden="true"></span>
+              <span class="tq-done__flow" aria-hidden="true"></span>
+              <ol>
+                <li class="is-on"><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><b>Sent</b><small>Today</small></li>
+                <li><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0e0e10" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 005 5L15 12l5 2v4a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z"></path></svg></span><b>Call</b><small>Within 24h</small></li>
+                <li><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0e0e10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg></span><b>Start earning</b><small>Get paid daily</small></li>
+              </ol>
+            </div>
+            <div class="tq-done__cta">
+              <a class="tq-done__go" href="programs/" data-page-link data-label="LOADING · Partner Programs">Partner Programs<span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></a>
+              <a class="tq-done__link" href="commission-plan/" data-page-link data-label="LOADING · Commission Plan">Commission calculator</a>
+            </div>
+          </div>
 
-          <svg data-ref="pen" width="48" height="251" viewBox="0 0 34 178" aria-hidden="true" style="position:absolute; left:0; top:0; z-index:5; opacity:0; transform-origin:24px 245px; filter:drop-shadow(10px 16px 14px rgba(0,0,0,.28)); pointer-events:none; will-change:transform;">
-            <defs>
-              <linearGradient id="penBody" x1="0" x2="1"><stop offset="0" stop-color="#050506"></stop><stop offset=".35" stop-color="#2c2c30"></stop><stop offset=".55" stop-color="#0c0c0e"></stop><stop offset="1" stop-color="#000"></stop></linearGradient>
-              <linearGradient id="penChrome" x1="0" x2="1"><stop offset="0" stop-color="#8e939a"></stop><stop offset=".4" stop-color="#f4f5f7"></stop><stop offset=".7" stop-color="#b9bdc3"></stop><stop offset="1" stop-color="#6d7279"></stop></linearGradient>
-            </defs>
-            <polygon points="12.5,150 21.5,150 17,175" fill="url(#penChrome)"></polygon>
-            <rect x="10.5" y="142" width="13" height="9" rx="2" fill="url(#penChrome)"></rect>
-            <rect x="9" y="70" width="16" height="74" rx="4" fill="url(#penBody)"></rect>
-            <rect x="8.6" y="64" width="16.8" height="6" rx="1.4" fill="url(#penChrome)"></rect>
-            <rect x="9" y="12" width="16" height="53" rx="5" fill="url(#penBody)"></rect>
-            <rect x="10" y="3" width="14" height="11" rx="4" fill="url(#penChrome)"></rect>
-            <rect x="22.4" y="10" width="2.6" height="34" rx="1.3" fill="url(#penChrome)"></rect>
-            <image href="assets/logo-mark-white.png?v=852b09be50" x="11" y="30" width="12" height="12"></image>
-          </svg>
+
         </div>
       </div>
     </div>
@@ -1628,6 +1717,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="assets/js/transition.js?v=602a71328d" defer></script>
-<script src="assets/js/landing.js?v=00c63b7f2a" defer></script>
+<script src="assets/js/landing.js?v=2f24f5c872" defer></script>
 </body>
 </html>

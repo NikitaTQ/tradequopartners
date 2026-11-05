@@ -507,20 +507,18 @@
     render();
   }
 
-  /* ---- sign-up form: the pen signs, dates, then the envelope flies --------- */
+  /* ---- sign-up form: the envelope flies off the button, then the success screen --- */
   function startForm() {
     const form = $('form[data-agreement]');
-    const stage = ref('stage'), pen = ref('pen'), path = ref('sigPath'), sigBox = ref('sigBox');
-    const name = ref('name'), date = ref('date');
+    const stage = ref('stage'), date = ref('date');
     if (!form || !stage) return;
+    const done = $('[data-form-done]', stage);
     const envBtn = $('.tq-env', form);
     /* copy comes from the page so every language build carries its own */
     const msg = {
-      sent: form.dataset.msgSent || 'Request sent',
       email: form.dataset.msgEmail || 'Please enter a valid email address.',
       error: form.dataset.msgError || 'We couldn’t send your request. Please reload the page and try again.',
     };
-    const envTxt = envBtn && $('.tq-env__txt', envBtn);
     let submitted = false;
 
     /* The date is filled in for the visitor: today's, kept current if the tab stays open past midnight. */
@@ -533,116 +531,69 @@
     writeDate();
     document.addEventListener('visibilitychange', () => { if (!document.hidden && !submitted) writeDate(); });
 
-    const penTransform = (x, y, deg) => 'translate(' + (x - 24).toFixed(1) + 'px, ' + (y - 245).toFixed(1) + 'px) rotate(' + deg + 'deg)';
-    const poses = () => {
-      const S = stage.getBoundingClientRect();
-      const rel = (b) => ({ x: b.left - S.left, y: b.top - S.top, w: b.width, h: b.height });
-      const P = { rest: { x: S.width + 70, y: S.height * 0.97, deg: 4 } };
-      if (sigBox) {
-        const o = rel(sigBox.getBoundingClientRect());
-        P.writeY = o.y + o.h * 0.62; P.x0 = o.x + o.w * 0.04; P.x1 = o.x + o.w * 0.94;
-      }
-      return P;
-    };
-    const placePenRest = () => {
-      if (!pen) return;
-      const P = poses();
-      pen.style.transition = 'none';
-      pen.style.transform = penTransform(P.rest.x, P.rest.y, P.rest.deg);
-      pen.style.opacity = '1';
-    };
-    requestAnimationFrame(() => requestAnimationFrame(placePenRest));
-    window.addEventListener('resize', () => { if (!submitted) placePenRest(); });
-
-    /* "Request sent": the label slides to the centre once the envelope is gone */
-    const center = () => {
-      if (!envTxt) return;
-      const br = envBtn.getBoundingClientRect(), tr = envTxt.getBoundingClientRect();
-      const cur = new DOMMatrixReadOnly(getComputedStyle(envTxt).transform).m41 || 0;
-      envTxt.style.transform = 'translateX(' + ((br.left + br.width / 2) - (tr.left - cur + tr.width / 2)).toFixed(1) + 'px)';
-    };
-    const sendEnvelope = () => {
-      const done = () => {
-        if (envBtn) { envBtn.classList.remove('is-sealed', 'is-sent'); envBtn.classList.add('is-done'); }
-        if (envTxt) envTxt.style.opacity = '0';
-        setTimeout(() => {
-          if (envTxt) envTxt.textContent = msg.sent;
-          if (envBtn) envBtn.setAttribute('aria-label', msg.sent);
-          requestAnimationFrame(() => { center(); if (envTxt) envTxt.style.opacity = '1'; });
-        }, 220);
-        window.addEventListener('resize', () => {
-          if (!envTxt) return;
-          envTxt.style.transition = 'none'; center(); void envTxt.offsetWidth; envTxt.style.transition = '';
-        });
-      };
-      if (!envBtn || reducedMotion()) return done();
-      envBtn.classList.add('is-sent');
-      setTimeout(done, 1000);
-    };
-    const afterSign = (P) => {
-      if (pen) {
-        pen.style.transition = 'transform 448ms cubic-bezier(.4,0,.2,1)';
-        pen.style.transform = penTransform(P.rest.x, P.rest.y, P.rest.deg);
-      }
-      setTimeout(sendEnvelope, 600);
-    };
-    const sign = () => {
-      if (!pen || !path) return sendEnvelope();
-      requestAnimationFrame(() => {
-        const P = poses();
-        const len = path.getTotalLength();
-        path.style.transition = 'none';
-        path.style.strokeDasharray = len + ' ' + len;
-        path.style.strokeDashoffset = len;
-        void path.getBoundingClientRect();
-        pen.style.opacity = '1';
-        pen.style.transition = 'transform 322ms cubic-bezier(.4,0,.2,1)';
-        pen.style.transform = penTransform(P.x0, P.writeY, -46);
-        const DUR = 1050;
-        setTimeout(() => {
-          const t0 = performance.now();
-          const draw = (t) => {
-            const k = clamp01((t - t0) / DUR);
-            const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
-            path.style.strokeDashoffset = (len * (1 - e)).toFixed(1);
-            pen.style.transition = 'none';
-            pen.style.transform = penTransform(P.x0 + (P.x1 - P.x0) * e, P.writeY - Math.sin(e * Math.PI * 3) * 4, -46);
-            if (name) name.style.opacity = String(Math.min(1, e * 1.5));
-            if (k < 1) requestAnimationFrame(draw);
-            else afterSign(P);
-          };
-          requestAnimationFrame(draw);
-        }, 329);
-      });
+    /* Success screen (Partner_Form_Success design): personalised, unhidden, then .is-done on the
+     * stage fades the form back and builds the screen up in its place (CSS does the timing). */
+    const showSuccess = () => {
+      if (!done) return;
+      const typed = form.elements.name ? form.elements.name.value.trim() : '';
+      const first = typed.split(/\s+/)[0] || done.dataset.fallback || '';
+      const thanks = $('[data-done-thanks]', done);
+      if (thanks) thanks.textContent = thanks.textContent.replace('{name}', first);
+      const d = new Date();
+      $$('[data-done-date]', done).forEach((n) => { n.textContent = pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + '.' + d.getFullYear(); });
+      done.hidden = false;
+      void done.offsetWidth;   // start the transitions from the hidden state
+      stage.classList.add('is-done');
+      const title = $('.tq-done__title', done);
+      setTimeout(() => { if (title) title.focus({ preventScroll: true }); }, 700);
+      /* on a short screen the screen may start above the fold: bring its top into view */
+      const top = stage.getBoundingClientRect().top;
+      if (top < 0) window.scrollBy({ top: top - 24, behavior: reducedMotion() ? 'auto' : 'smooth' });
     };
 
-    /* Delivery: the fields are POSTed to data-endpoint while the animation plays.
-     * "/" = Netlify Forms (form name "partner-request"); any form backend that
-     * accepts urlencoded POSTs (Formspree, a CRM webhook) works the same way. */
-    const endpoint = form.dataset.endpoint;
-    const showError = (msg) => {
+    const showError = (text) => {
       let p = $('.tq-form-error', form);
       if (!p) { p = document.createElement('p'); p.className = 'tq-form-error'; p.setAttribute('role', 'alert'); form.appendChild(p); }
-      p.textContent = msg;
+      p.textContent = text;
     };
+    /* the request didn't go through: say so and give the button back, so the visitor can retry */
+    const fail = () => {
+      showError(msg.error);
+      if (envBtn) { envBtn.classList.remove('is-sealed', 'is-sent', 'is-done'); envBtn.removeAttribute('aria-busy'); }
+      submitted = false;
+    };
+
+    /* Delivery: the fields are POSTed to data-endpoint while the envelope flies.
+     * "/" = Netlify Forms (form name "partner-request"); any form backend that
+     * accepts urlencoded POSTs (Formspree, a CRM webhook) works the same way.
+     * The success screen waits for both the envelope and the server's answer.
+     * ?preview=sent skips the POST, to look at the success screen without sending anything. */
+    const endpoint = form.dataset.endpoint;
+    const preview = /[?&]preview=sent(&|$)/.test(location.search);
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (submitted) return;
-      if (endpoint) {
-        const email = form.elements.email;
-        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { email.focus(); showError(msg.email); return; }
-        const prev = $('.tq-form-error', form); if (prev) prev.remove();
-        fetch(endpoint, { method: 'POST', body: new URLSearchParams(new FormData(form)), headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } })
-          .then((r) => { if (!r.ok) throw new Error(r.status); })
-          .catch(() => showError(msg.error));
-      }
+      const email = form.elements.email;
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { email.focus(); showError(msg.email); return; }
+      const prev = $('.tq-form-error', form); if (prev) prev.remove();
       submitted = true;
       writeDate();
-      if (envBtn) envBtn.classList.add('is-sealed');
-      /* the signature cell only appears now: let it unfold beside the date, then the pen signs */
-      const auth = $('[data-form-auth]', form);
-      if (auth) { auth.classList.add('is-signing'); setTimeout(sign, reducedMotion() ? 0 : 520); }
-      else sign();
+
+      let flown = false, ok = null;
+      const settle = () => { if (flown && ok !== null) (ok ? showSuccess : fail)(); };
+      const request = (!endpoint || preview) ? Promise.resolve()
+        : fetch(endpoint, { method: 'POST', body: new URLSearchParams(new FormData(form)), headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } })
+          .then((r) => { if (!r.ok) throw new Error(r.status); });
+      request.then(() => { ok = true; settle(); }, () => { ok = false; settle(); });
+
+      if (envBtn) { envBtn.classList.add('is-sealed'); envBtn.setAttribute('aria-busy', 'true'); }
+      const still = !envBtn || reducedMotion();
+      if (!still) envBtn.classList.add('is-sent');   // the letter flies off the button (1 s)
+      setTimeout(() => {
+        flown = true;
+        if (envBtn) { envBtn.classList.remove('is-sent'); envBtn.classList.add('is-done'); }
+        settle();
+      }, still ? 0 : 1000);
     });
   }
 
