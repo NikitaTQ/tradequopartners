@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TradeQuo key benefits — embed</title>
+<!--
+  "Why partners choose TradeQuo" on Partner Programs (from the Key_Benefits_Silver_Candles
+  design): eight glass candles with silver cores; the active one grows and fills with silver.
+  The page owns the active benefit: it posts {tqKb: i}; a tap on a candle's chip posts
+  {tqKbPick: i} back. Opened on its own, the scene cycles by itself.
+  ?lang=xx   chip labels from i18n.js (embed.kb.1 … embed.kb.8)
+  ?still     one frame, no chips, nothing active — the posters (tools/render-benefit-posters.mjs)
+  The page sets window.__tqPaused while the block is off screen; the first drawn frame posts
+  {tqReady:true} so the page fades this frame in over its poster.
+-->
+<script type="importmap">
+{
+  "imports": { "three": "../vendor/three@0.184.0/three.module.min.js" },
+  "integrity": {
+    "../vendor/three@0.184.0/three.module.min.js": "sha384-35WaVqXNGvw49+RCXk67Ci9ebo55/5+CfirDbAVSG21KV8/7gO4xwIkhA5ZRcUHc",
+    "../vendor/three@0.184.0/three.core.min.js": "sha384-/2vXInuUL2LKgd3n86c5RIzG+YC7vk3zYPTknaEkF2H2sauHtaOrS8swZ+MURxU6"
+  }
+}
+</script>
+<style>
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 300 900; font-display: swap; src: url(../assets/fonts/dm-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 300 900; font-display: swap; src: url(../assets/fonts/dm-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(../assets/fonts/fragment-mono-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; -webkit-font-smoothing: antialiased; }
+#art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#chips { position: absolute; inset: 0; pointer-events: none; }
+.chip { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 8px; margin: 0; padding: 8px 12px; border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.64)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.95); box-shadow: 0 0 0 1px rgba(14,14,22,.06), 0 14px 28px -16px rgba(14,14,22,.35);
+  font: 700 13px/1.25 'DM Sans', system-ui, sans-serif; letter-spacing: -.01em; color: #0E0E10; white-space: nowrap;
+  pointer-events: auto; cursor: pointer; will-change: transform; opacity: 0;
+  transition: background .35s, color .35s, border-color .35s, opacity .5s; -webkit-tap-highlight-color: transparent; }
+.chip b { font: 400 11px/1 'Fragment Mono', monospace; color: #E7131B; padding-top: 1px; }
+.chip.is-on { background: #0E0E10; color: #fff; border-color: rgba(255,255,255,.14); }
+.ready .chip { opacity: 1; }
+/* narrow stages: numbers only — the card under the scene carries the words */
+.compact .chip { padding: 6px 8px; border-radius: 10px; }
+.compact .chip span { display: none; }
+.compact .chip b { font-size: 11px; }
+.compact .chip.is-on b { color: #ff4148; }
+.lsp0 .chip { letter-spacing: 0; }
+</style>
+</head>
+<body>
+<canvas id="art"></canvas>
+<div id="chips"></div>
+<script src="i18n.js?v=a9fafc899d"></script>
+<script type="module">
+import * as THREE from 'three';
+
+const P = new URLSearchParams(location.search);
+const STILL = P.has('still');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SPEED = reduce ? 0.35 : 1;
+const ease = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const damp = (a, b, dt, k = 7) => a + (b - a) * (1 - Math.exp(-dt * k));
+
+/* chip labels in the page language */
+const LABELS = ['Up to 87%', 'Paid daily', '$0 payout fees', 'Live tracking', 'Personal manager', 'Creatives', 'TradingView + signals', 'Incentive trips'];
+const T = (window.TQ_I18N || {})[P.get('lang')];
+if (T) {
+  document.documentElement.lang = P.get('lang');
+  for (let i = 0; i < 8; i++) if (T['kb.' + (i + 1)]) LABELS[i] = T['kb.' + (i + 1)];
+  if (T._fonts) { const st = document.createElement('style'); st.textContent = T._fonts; document.head.appendChild(st); }
+  if (/arabic|thai|cjk/.test(T._script)) document.body.classList.add('lsp0');
+  if (T._dir === 'rtl') document.getElementById('chips').dir = 'rtl';
+}
+
+function makeEnv(renderer) {
+  const env = new THREE.Scene();
+  env.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0x060607, side: THREE.BackSide })));
+  const box = (w, h, pos, rgb) => {
+    const m = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide });
+    m.color.setRGB(...rgb);
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m);
+    p.position.set(...pos); p.lookAt(0, 0, 0); env.add(p);
+  };
+  box(6, 2.2, [0, 7, 0.5], [8, 8, 8]);
+  box(7, 2.5, [0, 3, 7], [3.2, 3.2, 3.3]);
+  box(8, 1.2, [0, 2, -7], [5, 5, 5]);
+  box(0.8, 9, [-7, 0.5, 2.5], [4, 4, 4.2]);
+  box(0.5, 9, [7, 0.5, -1.5], [2.4, 2.4, 2.5]);
+  box(12, 1.2, [0, -6.5, 2], [0.32, 0.02, 0.025]);
+  const pm = new THREE.PMREMGenerator(renderer);
+  const tex = pm.fromScene(env, 0.02).texture;
+  pm.dispose();
+  return tex;
+}
+
+function rig(scene) {
+  const key = new THREE.DirectionalLight(0xffffff, 2.6); key.position.set(-3, 5, 4); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.9); fill.position.set(4, 1.5, 3); scene.add(fill);
+  const back = new THREE.DirectionalLight(0xffffff, 3.2); back.position.set(0.5, 3, -5); scene.add(back);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x222226, 0.6));
+}
+
+function shadowTex() {
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  gr.addColorStop(0, 'rgba(0,0,0,0.7)'); gr.addColorStop(0.55, 'rgba(0,0,0,0.22)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  return new THREE.CanvasTexture(c);
+}
+function roundedRect(w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+/* rounded prism standing on y=0, height h */
+function prism(w, d, h, r, bevel = 0.008) {
+  const g = new THREE.ExtrudeGeometry(roundedRect(w, d, r), { depth: h - bevel * 2, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 3, curveSegments: 8 });
+  g.rotateX(-Math.PI / 2); g.translate(0, bevel, 0);
+  return g;
+}
+
+/* ---- the scene ---------------------------------------------------------------------- */
+const canvas = document.getElementById('art');
+const chipBox = document.getElementById('chips');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.45;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setClearColor(0x000000, 0);
+const scene = new THREE.Scene();
+scene.environment = makeEnv(renderer);
+rig(scene);
+const camera = new THREE.PerspectiveCamera(24, 1, 0.1, 60);
+const silver = new THREE.MeshStandardMaterial({ color: 0xD8D8DC, metalness: 1, roughness: 0.2 });
+
+const root = new THREE.Group(); scene.add(root);
+const B = [0, 0.18, 0.12, 0.42, 0.36, 0.7, 0.62, 0.98], H = [0.55, 0.5, 0.72, 0.56, 0.76, 0.6, 0.86, 0.82];
+const glassBack = new THREE.MeshPhysicalMaterial({ color: 0xD6D6DC, metalness: 0, roughness: 0.1, transparent: true, opacity: 0.14, side: THREE.BackSide, depthWrite: false, envMapIntensity: 1.6 });
+const glassFront = new THREE.MeshPhysicalMaterial({ color: 0xFFFFFF, metalness: 0, roughness: 0.02, transparent: true, opacity: 0.16, clearcoat: 1, clearcoatRoughness: 0.02, specularIntensity: 1, iridescence: 0.25, iridescenceIOR: 1.3, depthWrite: false, envMapIntensity: 2.4 });
+const fillMat = new THREE.MeshPhysicalMaterial({ color: 0xCFCFD6, emissive: 0x44444c, metalness: 0.8, roughness: 0.1, transparent: true, opacity: 0.8, iridescence: 0.35, iridescenceIOR: 1.25, clearcoat: 1, clearcoatRoughness: 0.04, depthWrite: false, envMapIntensity: 1.8 });
+const surfMat = new THREE.MeshPhysicalMaterial({ color: 0xFFFFFF, emissive: 0x9a9aa2, metalness: 0.7, roughness: 0.06, transparent: true, opacity: 0.95, depthWrite: false });
+const capGeo = prism(0.3, 0.3, 0.022, 0.065, 0.006);
+const fillGeo = new THREE.ExtrudeGeometry(roundedRect(0.25, 0.25, 0.05), { depth: 1, bevelEnabled: false, curveSegments: 8 }); fillGeo.rotateX(-Math.PI / 2);
+const surfGeo = new THREE.ExtrudeGeometry(roundedRect(0.25, 0.25, 0.05), { depth: 0.006, bevelEnabled: false, curveSegments: 8 }); surfGeo.rotateX(-Math.PI / 2);
+const rodGeo = new THREE.CylinderGeometry(0.007, 0.007, 1, 10); rodGeo.translate(0, 0.5, 0);
+const wickGeo = new THREE.CylinderGeometry(0.016, 0.016, 1, 12);
+const ballGeo = new THREE.SphereGeometry(0.026, 16, 12);
+const cs = B.map((b, i) => {
+  const g = new THREE.Group(); g.position.x = (i - 3.5) * 0.56; root.add(g);
+  const shellGeo = prism(0.28, 0.28, H[i], 0.06, 0.012);
+  const body = new THREE.Group(); body.position.y = b; g.add(body);
+  const back = new THREE.Mesh(shellGeo, glassBack); back.renderOrder = 2; body.add(back);
+  const front = new THREE.Mesh(shellGeo, glassFront); front.renderOrder = 3; body.add(front);
+  const fill = new THREE.Mesh(fillGeo, fillMat.clone()); fill.renderOrder = 2.5; fill.position.y = 0.012; fill.scale.y = 0.0001; body.add(fill);
+  const surf = new THREE.Mesh(surfGeo, surfMat); surf.renderOrder = 2.6; body.add(surf);
+  [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => { const r = new THREE.Mesh(rodGeo, silver); r.position.set(sx * 0.122, 0, sz * 0.122); r.scale.y = H[i]; body.add(r); });
+  const cb = new THREE.Mesh(capGeo, silver); cb.position.y = b - 0.011; g.add(cb);
+  const ct = new THREE.Mesh(capGeo, silver); g.add(ct);
+  const wick = new THREE.Mesh(wickGeo, silver); g.add(wick);
+  const wick2 = new THREE.Mesh(wickGeo, silver); g.add(wick2);
+  const capT = new THREE.Mesh(ballGeo, silver); g.add(capT);
+  const capB = new THREE.Mesh(ballGeo, silver); g.add(capB);
+  return { g, body, fill, surf, wick, wick2, capT, capB, ct, b, h: H[i], k: 0 };
+});
+{
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(5.4, 1.5), new THREE.MeshBasicMaterial({ map: shadowTex(), transparent: true, depthWrite: false, opacity: 0.45 }));
+  m.rotation.x = -Math.PI / 2; m.position.y = -0.34; root.add(m);
+}
+
+/* chips: glass labels that ride above / below each candle */
+let active = STILL ? -1 : 0;
+const embedded = window.parent !== window;
+const chips = STILL ? [] : LABELS.map((txt, i) => {
+  const d = document.createElement('button');
+  d.type = 'button'; d.className = 'chip'; d.tabIndex = -1;
+  const n = document.createElement('b'); n.textContent = String(i + 1).padStart(2, '0');
+  const s = document.createElement('span'); s.textContent = txt;
+  d.append(n, s);
+  d.addEventListener('click', () => {
+    active = i; holdUntil = clock + 7;
+    if (embedded) { try { parent.postMessage({ tqKbPick: i }, location.origin); } catch (e) {} }
+  });
+  chipBox.appendChild(d);
+  return d;
+});
+addEventListener('message', (e) => {
+  if (e.origin !== location.origin || !e.data || typeof e.data.tqKb !== 'number') return;
+  active = Math.max(0, Math.min(7, e.data.tqKb | 0));
+});
+
+/* framing: the design's camera for a ~1.8:1 stage; narrower stages (the 4:3 one under
+   820px) pull back along the same line of sight so the whole row stays in shot. Framing
+   depends on the aspect only, so one poster per aspect matches the live scene. */
+const LOOK = new THREE.Vector3(0.15, 1.1, 0);
+let W = 0, Hh = 0, compact = false;
+const placeCamera = (t) => {
+  const asp = W / Hh || 1.8, tall = asp < 1.6;
+  const f = Math.max(1, (tall ? 1.42 : 1.8) / asp);
+  const look = tall ? 1.04 : LOOK.y;
+  camera.position.set(LOOK.x + (1.35 + Math.sin(t * 0.2) * 0.25) * f, look + 0.65 * f, 7.6 * f);
+  camera.lookAt(LOOK.x, look, 0);
+  camera.updateMatrixWorld();
+};
+const resize = () => {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (!w || !h) return;
+  W = w; Hh = h;
+  compact = w < 560;
+  document.body.classList.toggle('compact', compact);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+};
+new ResizeObserver(resize).observe(canvas); resize();
+
+const v = new THREE.Vector3();
+const toScreen = (p) => { v.copy(p).project(camera); return [(v.x + 1) / 2 * W, (1 - v.y) / 2 * Hh]; };
+const tick = (t, dt) => {
+  placeCamera(t);
+  root.rotation.y = -0.16 + Math.sin(t * 0.35) * 0.07;
+  cs.forEach((c, i) => {
+    c.k = damp(c.k, i === active ? 1 : 0, dt, 3.2);
+    const e = ease(clamp01(c.k)), s = 1 + 0.22 * e;
+    c.body.scale.y = s;
+    c.g.position.y = Math.sin(t * 1.1 + i * 0.7) * 0.015;
+    c.ct.position.y = c.b + c.h * s - 0.011;
+    const lvl = Math.max(0.0001, (c.h - 0.03) * clamp01(c.k));
+    c.fill.scale.y = lvl; c.fill.visible = c.k > 0.01;
+    c.surf.visible = c.k > 0.02; c.surf.position.y = 0.012 + lvl;
+    c.surf.rotation.x = Math.sin(t * 3.1 + i) * 0.05 * (1 - c.k * 0.6); c.surf.rotation.z = Math.cos(t * 2.7 + i) * 0.05 * (1 - c.k * 0.6);
+    const lo = c.b - 0.14, hi = c.b + c.h * s + 0.16, top = c.b + c.h * s;
+    c.wick.scale.y = hi - top; c.wick.position.y = (hi + top) / 2;
+    c.wick2.scale.y = c.b - lo; c.wick2.position.y = (c.b + lo) / 2;
+    c.capT.position.y = hi; c.capB.position.y = lo;
+  });
+  scene.updateMatrixWorld();
+  chips.forEach((d, i) => {
+    const c = cs[i], up = i % 2 === 0;
+    v.set(0, up ? c.capT.position.y + 0.1 : c.capB.position.y - 0.1, 0); c.g.localToWorld(v);
+    const [x, y] = toScreen(v);
+    d.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,${up ? '-100%' : '0'})`;
+    d.classList.toggle('is-on', i === active);
+  });
+};
+
+/* on its own (no page around it) the scene cycles itself, like the design */
+let clock = 0, holdUntil = 0, nextStep = 2.6;
+const selfCycle = () => {
+  if (embedded || STILL) return;
+  if (clock >= Math.max(nextStep, holdUntil)) { active = (active + 1) % 8; nextStep = clock + 2.6; }
+};
+
+let shown = false, last = performance.now();
+const draw = (dt) => {
+  tick(clock, dt); renderer.render(scene, camera);
+  if (!shown) {
+    shown = true; window.__tqArt = true;
+    requestAnimationFrame(() => {
+      document.body.classList.add('ready');
+      if (embedded) { try { parent.postMessage({ tqReady: true }, location.origin); } catch (e) {} }
+    });
+  }
+};
+const frame = (now) => {
+  const dt = Math.min(0.05, (now - last) / 1000) * SPEED; last = now;
+  if (!window.__tqPaused && !document.hidden && W) { clock += dt; selfCycle(); draw(dt); }
+  requestAnimationFrame(frame);
+};
+if (STILL) draw(0); else requestAnimationFrame(frame);
+</script>
+</body></html>

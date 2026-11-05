@@ -93,23 +93,44 @@
       </div>
     </section>
 
-    <!-- Key benefits -->
-    <section id="benefits" class="tp-sec" data-screen-label="Key benefits">
+    <!-- Key benefits: glass candles (3D embed) + glass card; the page owns the active item -->
+    <section id="benefits" class="tp-sec tp-kb-sec" data-screen-label="Key benefits">
       <div class="tp-wrap">
-        <div class="tp-head">
-          <span class="tp-kicker">{{pp.ben.kicker}}</span>
-          <h2 class="tp-h2">{{pp.ben.title}}</h2>
-          <p class="tp-sub">{{pp.ben.sub}}</p>
+        <div class="tp-kb-head">
+          <div class="tp-kb-head__title">
+            <span class="tp-kicker">{{pp.ben.kicker}}</span>
+            <h2 class="tp-h2">{{pp.ben.title}}</h2>
+          </div>
+          <p class="tp-kb-head__sub">{{pp.ben.sub}}</p>
         </div>
-        <div class="tp-benefits">
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18.5 5.5 5.5 18.5"></path><circle cx="7.5" cy="7.5" r="2.5"></circle><circle cx="16.5" cy="16.5" r="2.5"></circle></svg></span><h3>{{pp.ben.1.t}}</h3><p>{{pp.ben.1.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><path d="m9 14.5 2 2 4-4"></path></svg></span><h3>{{pp.ben.2.t}}</h3><p>{{pp.ben.2.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v4"></path><path d="M4 7.5v10A2.5 2.5 0 0 0 6.5 20H20V9H6.5A2.5 2.5 0 0 1 4 6.5"></path><circle cx="16" cy="14.5" r="1.2" fill="currentColor"></circle></svg></span><h3>{{pp.ben.3.t}}</h3><p>{{pp.ben.3.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 16.5 5-5 4 3.5 7.5-8"></path><path d="M15.5 7h4.5v4.5"></path><path d="M3.5 20.5h17"></path></svg></span><h3>{{pp.ben.4.t}}</h3><p>{{pp.ben.4.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 13v-1a7.5 7.5 0 0 1 15 0v1"></path><rect x="3.5" y="13" width="4" height="6" rx="1.5"></rect><rect x="16.5" y="13" width="4" height="6" rx="1.5"></rect><path d="M18.5 19c0 1.4-1.9 2.3-5 2.3"></path></svg></span><h3>{{pp.ben.5.t}}</h3><p>{{pp.ben.5.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"></rect><circle cx="9" cy="10" r="1.8"></circle><path d="m20.5 15.5-4.5-4.5-8.5 8.5"></path></svg></span><h3>{{pp.ben.6.t}}</h3><p>{{pp.ben.6.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v17M17 3.5v17"></path><rect x="5" y="7.5" width="4" height="8" rx="1"></rect><rect x="15" y="5.5" width="4" height="10" rx="1"></rect></svg></span><h3>{{pp.ben.7.t}}</h3><p>{{pp.ben.7.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-ben"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12.5" rx="2.5"></rect><path d="M9.5 7V5.2c0-.7.5-1.2 1.2-1.2h2.6c.7 0 1.2.5 1.2 1.2V7"></path><path d="M9 11v5M15 11v5"></path><path d="M8 19.5v1M16 19.5v1"></path></svg></span><h3>{{pp.ben.8.t}}</h3><p>{{pp.ben.8.d}}</p></div>
+        <div class="tp-kb" data-kb>
+          <div class="tp-kb__stage">
+            <picture class="tp-kb__poster" data-poster aria-hidden="true"><source media="(min-width: 821px)" srcset="{{root}}assets/posters/benefits-candles-wide.webp" width="1240" height="620"><img src="{{root}}assets/posters/benefits-candles.webp" alt="" width="720" height="480" loading="lazy" decoding="async"></picture>
+            <iframe class="tp-kb__3d" data-embed data-src="{{root}}embeds/benefit-candles.html{{embedQuery}}" title="{{@pp.ben.kicker}}" aria-hidden="true" tabindex="-1"></iframe>
+          </div>
+          <div class="tp-kb__card">
+            <div class="tp-kb__meta"><span class="tp-kb__num" data-kb-num>01 / 08</span><span class="tp-kb__group" data-kb-group>{{pp.ben.g1}}</span></div>
+            <ol class="tp-kb__items">
+            <li class="tp-kb__item is-on" data-kb-item data-group="{{@pp.ben.g1}}"><h3>{{pp.ben.1.t}}</h3><p>{{pp.ben.1.d}}</p></li>
+            <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g1}}"><h3>{{pp.ben.2.t}}</h3><p>{{pp.ben.2.d}}</p></li>
+            <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g1}}"><h3>{{pp.ben.3.t}}</h3><p>{{pp.ben.3.d}}</p></li>
+            <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g1}}"><h3>{{pp.ben.4.t}}</h3><p>{{pp.ben.4.d}}</p></li>
+            <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g2}}"><h3>{{pp.ben.5.t}}</h3><p>{{pp.ben.5.d}}</p></li>
+            <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g2}}"><h3>{{pp.ben.6.t}}</h3><p>{{pp.ben.6.d}}</p></li>
+            <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g2}}"><h3>{{pp.ben.7.t}}</h3><p>{{pp.ben.7.d}}</p></li>
+            <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g2}}"><h3>{{pp.ben.8.t}}</h3><p>{{pp.ben.8.d}}</p></li>
+            </ol>
+            <div class="tp-kb__bars">
+            <button type="button" class="tp-kb__bar is-on" data-kb-bar aria-label="{{@pp.ben.1.t}}" aria-pressed="true"></button>
+            <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.2.t}}" aria-pressed="false"></button>
+            <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.3.t}}" aria-pressed="false"></button>
+            <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.4.t}}" aria-pressed="false"></button>
+            <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.5.t}}" aria-pressed="false"></button>
+            <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.6.t}}" aria-pressed="false"></button>
+            <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.7.t}}" aria-pressed="false"></button>
+            <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.8.t}}" aria-pressed="false"></button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -151,7 +172,7 @@
       <div class="tp-wrap tp-faq">
         <div class="tp-faq__side">
           <span class="tp-pill">{{faq.pill}}</span>
-          <h2 class="tp-h2" style="font-size: clamp(36px, 4.4vw, 56px);">{{pp.faq.title}}</h2>
+          <h2 class="tp-h2">{{pp.faq.title}}</h2>
           <p class="tp-sub" style="max-width: 30ch;">{{pp.faq.sub}}</p>
         </div>
         <div class="tp-faq__list">

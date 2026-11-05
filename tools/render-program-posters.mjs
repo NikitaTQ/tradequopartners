@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 /*
- * Posters for the 3D art on the Partner Programs cards (site/embeds/program-art.html):
- * site/assets/posters/program-<obj>.webp, transparent, 16:9. The card shows the poster until
- * the live scene has drawn its first frame, so re-run after changing the scene:
+ * Posters for the 3D on the Partner Programs page, all transparent webp in site/assets/posters/:
+ *   program-<obj>.webp           the cards' art (embeds/program-art.html), 16:9
+ *   benefits-candles-wide.webp   key benefits candles (embeds/benefit-candles.html), 2:1 stage
+ *   benefits-candles.webp        the same for the 4:3 stage under 820px
+ * The page shows a poster until its live scene has drawn the first frame, so re-run after
+ * changing a scene (an optional argument renders only the posters whose name contains it):
  *
- *   cd tools && node render-program-posters.mjs
+ *   cd tools && node render-program-posters.mjs [benefits]
  *
  * Needs WebGL in headless Chromium (swiftshader) and python3 with Pillow.
  */
@@ -31,15 +34,20 @@ rmSync(tmp, { recursive: true, force: true });
 mkdirSync(tmp, { recursive: true });
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined,
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
-for (const obj of ['link', 'network', 'flag']) {
-  const page = await browser.newPage({ viewport: { width: 384, height: 216 }, deviceScaleFactor: 2 });
-  page.on('pageerror', (e) => console.error(obj, String(e)));
-  await page.goto(`http://127.0.0.1:${port}/embeds/program-art.html?still&obj=${obj}`, { waitUntil: 'load' });
+const JOBS = [
+  ...['link', 'network', 'flag'].map((obj) => ({ name: `program-${obj}`, url: `program-art.html?still&obj=${obj}`, w: 384, h: 216, dpr: 2 })),
+  { name: 'benefits-candles-wide', url: 'benefit-candles.html?still', w: 1240, h: 620, dpr: 1.5 },
+  { name: 'benefits-candles', url: 'benefit-candles.html?still', w: 720, h: 540, dpr: 1.5 },
+].filter((j) => !process.argv[2] || j.name.includes(process.argv[2]));
+for (const job of JOBS) {
+  const page = await browser.newPage({ viewport: { width: job.w, height: job.h }, deviceScaleFactor: job.dpr });
+  page.on('pageerror', (e) => console.error(job.name, String(e)));
+  await page.goto(`http://127.0.0.1:${port}/embeds/${job.url}`, { waitUntil: 'load' });
   await page.waitForFunction(() => window.__tqArt, null, { timeout: 120000 });
   await page.waitForTimeout(500);
-  await page.screenshot({ path: join(tmp, `program-${obj}.png`), omitBackground: true });
+  await page.screenshot({ path: join(tmp, `${job.name}.png`), omitBackground: true });
   await page.close();
-  console.log('rendered', obj);
+  console.log('rendered', job.name);
 }
 await browser.close();
 server.close();
