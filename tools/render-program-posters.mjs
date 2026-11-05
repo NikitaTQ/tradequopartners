@@ -2,8 +2,8 @@
 /*
  * Posters for the 3D on the Partner Programs page, all transparent webp in site/assets/posters/:
  *   program-<obj>.webp           the cards' art (embeds/program-art.html), 16:9
- *   benefits-candles-wide.webp   key benefits candles (embeds/benefit-candles.html), 2:1 stage
- *   benefits-candles.webp        the same for the 4:3 stage under 820px
+ *   benefits-objects-wide.webp   key benefits objects (embeds/benefit-objects.html), 4×2 stage 1120:720
+ *   benefits-objects.webp        the same as the phone's 2×4 stage (360:580, under 641px)
  *   trust-dome.webp              why TradeQuo dome, first frame: flat field (embeds/trust-dome.html), 600:520
  * The page shows a poster until its live scene has drawn the first frame, so re-run after
  * changing a scene (an optional argument renders only the posters whose name contains it):
@@ -37,8 +37,8 @@ const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH 
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const JOBS = [
   ...['link', 'network', 'flag'].map((obj) => ({ name: `program-${obj}`, url: `program-art.html?still&obj=${obj}`, w: 384, h: 216, dpr: 2 })),
-  { name: 'benefits-candles-wide', url: 'benefit-candles.html?still', w: 1240, h: 620, dpr: 1.5 },
-  { name: 'benefits-candles', url: 'benefit-candles.html?still', w: 720, h: 540, dpr: 1.5 },
+  { name: 'benefits-objects-wide', url: 'benefit-objects.html?still', w: 1240, h: 797, dpr: 1.25 },
+  { name: 'benefits-objects', url: 'benefit-objects.html?still', w: 360, h: 580, dpr: 2 },
   { name: 'trust-dome', url: 'trust-dome.html?still', w: 600, h: 520, dpr: 1.5 },
 ].filter((j) => !process.argv[2] || j.name.includes(process.argv[2]));
 for (const job of JOBS) {

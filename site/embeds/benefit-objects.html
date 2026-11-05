@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TradeQuo key benefits — embed</title>
+<!--
+  "Why partners choose TradeQuo" on Partner Programs (from the Key_Benefits_Objects design):
+  eight 3D objects on glass pedestals, one per benefit. The active one rises, its rim turns red,
+  a red glow lights behind it and it plays its own animation; the rest sit slightly out of focus
+  (each pedestal is drawn as its own pass and blurred by how far it is from focus).
+  The page owns the active benefit: it posts {tqKb: i}; a tap on a chip posts {tqKbPick: i}
+  back. Opened on its own, the scene cycles by itself.
+  Layout follows the stage: 4×2 on wide stages, 2×4 on tall ones (phones), where the chips show
+  the number and icon only — the card under the scene carries the words.
+  ?lang=xx   chip labels from i18n.js (embed.kb.1 … embed.kb.8)
+  ?still     every object in focus, nothing active, no chips — the posters
+             (tools/render-program-posters.mjs); the live scene opens on this frame and then
+             lets the inactive pedestals drift out of focus
+  The page sets window.__tqPaused while the block is off screen; the first drawn frame posts
+  {tqReady:true} so the page fades this frame in over its poster.
+-->
+<script type="importmap">
+{
+  "imports": { "three": "../vendor/three@0.184.0/three.module.min.js" },
+  "integrity": {
+    "../vendor/three@0.184.0/three.module.min.js": "sha384-35WaVqXNGvw49+RCXk67Ci9ebo55/5+CfirDbAVSG21KV8/7gO4xwIkhA5ZRcUHc",
+    "../vendor/three@0.184.0/three.core.min.js": "sha384-/2vXInuUL2LKgd3n86c5RIzG+YC7vk3zYPTknaEkF2H2sauHtaOrS8swZ+MURxU6"
+  }
+}
+</script>
+<style>
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 300 900; font-display: swap; src: url(../assets/fonts/dm-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 300 900; font-display: swap; src: url(../assets/fonts/dm-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(../assets/fonts/fragment-mono-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; -webkit-font-smoothing: antialiased; }
+#art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#chips { position: absolute; inset: 0; pointer-events: none; }
+.chip { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 10px; margin: 0; padding: 9px 14px; border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.64)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.95); box-shadow: 0 0 0 1px rgba(14,14,22,.06), 0 14px 28px -16px rgba(14,14,22,.35);
+  font: 700 15px/1.25 'DM Sans', system-ui, sans-serif; letter-spacing: -.015em; color: #0E0E10; white-space: nowrap;
+  pointer-events: auto; cursor: pointer; will-change: transform; transform-origin: 50% 0; opacity: 0;
+  transition: color .35s, border-color .35s, background .35s, box-shadow .35s; -webkit-tap-highlight-color: transparent; }
+.chip b { font: 400 13px/1 'Fragment Mono', monospace; color: #E7131B; padding-top: 1px; }
+.chip svg { flex: none; opacity: .85; }
+.chip.is-on { background: #0E0E10; color: #fff; border-color: rgba(255,255,255,.14);
+  box-shadow: 0 0 0 1px rgba(14,14,22,.2), 0 18px 36px -14px rgba(14,14,22,.55), 0 0 0 6px rgba(231,19,27,.12); }
+/* phones: number + icon — the card under the scene carries the words */
+.compact .chip { gap: 6px; padding: 6px 9px; border-radius: 11px; }
+.compact .chip span { display: none; }
+.compact .chip b { font-size: 11px; }
+.compact .chip svg { width: 14px; height: 14px; }
+.compact .chip.is-on b { color: #ff4148; }
+.lsp0 .chip { letter-spacing: 0; }
+</style>
+</head>
+<body>
+<canvas id="art"></canvas>
+<div id="chips"></div>
+<script src="i18n.js?v=bc3bd4c555"></script>
+<script type="module">
+import * as THREE from 'three';
+
+const V = THREE.Vector3;
+const P = new URLSearchParams(location.search);
+const STILL = P.has('still');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SPEED = reduce ? 0.35 : 1;
+const ease = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const damp = (a, b, dt, k = 7) => a + (b - a) * (1 - Math.exp(-dt * k));
+
+/* chip labels in the page language; icons from the design */
+const LABELS = ['Up to 87%', 'Paid daily', '$0 payout fees', 'Live tracking', 'Personal manager', 'Creatives', 'TradingView + signals', 'Incentive trips'];
+const ICONS = [
+  '<line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
+  '<rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 15l2 2 4-4"/>',
+  '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><line x1="4" y1="20" x2="20" y2="4"/>',
+  '<polyline points="22 12 18 12 15 20 9 4 6 12 2 12"/>',
+  '<path d="M3 14v-2a9 9 0 0 1 18 0v2"/><rect x="2" y="14" width="4" height="6" rx="1.5"/><rect x="18" y="14" width="4" height="6" rx="1.5"/><path d="M20 20a3 3 0 0 1-3 2h-3"/>',
+  '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/>',
+  '<line x1="7" y1="3" x2="7" y2="21"/><rect x="4.5" y="7" width="5" height="9" rx="1"/><line x1="17" y1="3" x2="17" y2="21"/><rect x="14.5" y="5" width="5" height="7" rx="1"/>',
+  '<path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
+];
+const T = (window.TQ_I18N || {})[P.get('lang')];
+if (T) {
+  document.documentElement.lang = P.get('lang');
+  for (let i = 0; i < 8; i++) if (T['kb.' + (i + 1)]) LABELS[i] = T['kb.' + (i + 1)];
+  if (T._fonts) { const st = document.createElement('style'); st.textContent = T._fonts; document.head.appendChild(st); }
+  if (/arabic|thai|cjk/.test(T._script)) document.body.classList.add('lsp0');
+  if (T._dir === 'rtl') document.getElementById('chips').dir = 'rtl';
+}
+
+function makeEnv(renderer) {
+  const env = new THREE.Scene();
+  env.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0x060607, side: THREE.BackSide })));
+  const box = (w, h, pos, rgb) => {
+    const m = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide });
+    m.color.setRGB(...rgb);
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m);
+    p.position.set(...pos); p.lookAt(0, 0, 0); env.add(p);
+  };
+  box(6, 2.2, [0, 7, 0.5], [8, 8, 8]);
+  box(7, 2.5, [0, 3, 7], [3.2, 3.2, 3.3]);
+  box(8, 1.2, [0, 2, -7], [5, 5, 5]);
+  box(0.8, 9, [-7, 0.5, 2.5], [4, 4, 4.2]);
+  box(0.5, 9, [7, 0.5, -1.5], [2.4, 2.4, 2.5]);
+  box(12, 1.2, [0, -6.5, 2], [0.32, 0.02, 0.025]);
+  const pm = new THREE.PMREMGenerator(renderer);
+  const tex = pm.fromScene(env, 0.02).texture;
+  pm.dispose();
+  return tex;
+}
+function rig(scene) {
+  const key = new THREE.DirectionalLight(0xffffff, 2.6); key.position.set(-3, 5, 4); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.9); fill.position.set(4, 1.5, 3); scene.add(fill);
+  const back = new THREE.DirectionalLight(0xffffff, 3.2); back.position.set(0.5, 3, -5); scene.add(back);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x222226, 0.6));
+}
+let _sh;
+function shadowTex() {
+  if (_sh) return _sh;
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  gr.addColorStop(0, 'rgba(0,0,0,0.7)'); gr.addColorStop(0.55, 'rgba(0,0,0,0.22)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  return (_sh = new THREE.CanvasTexture(c));
+}
+function blob(parent, w, d, y, op = 1) {
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), new THREE.MeshBasicMaterial({ map: shadowTex(), transparent: true, depthWrite: false, opacity: op }));
+  m.rotation.x = -Math.PI / 2; m.position.y = y; parent.add(m);
+  return m;
+}
+function roundedRect(w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+/* rounded prism standing on y=0, height h */
+function prism(w, d, h, r, bevel = 0.008) {
+  const g = new THREE.ExtrudeGeometry(roundedRect(w, d, r), { depth: h - bevel * 2, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 3, curveSegments: 8 });
+  g.rotateX(-Math.PI / 2); g.translate(0, bevel, 0);
+  return g;
+}
+
+/* ---- renderer: WebGL off screen, each pedestal composited into the visible 2D canvas ---- */
+const canvas = document.getElementById('art');
+const ctx = canvas.getContext('2d');
+const chipBox = document.getElementById('chips');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true, powerPreference: 'low-power' });
+const PR = Math.min(devicePixelRatio || 1, STILL ? 2 : 1.5);
+renderer.setPixelRatio(PR);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.45;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setClearColor(0x000000, 0);
+const scene = new THREE.Scene();
+scene.environment = makeEnv(renderer);
+rig(scene);
+const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 80);
+let W = 0, H = 0, tall = false, compact = false;
+const toScreen = (() => { const v = new V(); return (p) => { v.copy(p).project(camera); return [(v.x + 1) / 2 * W, (1 - v.y) / 2 * H]; }; })();
+
+/* ---- the eight objects (B · Objects) --------------------------------------------------- */
+const root = new THREE.Group(); scene.add(root);
+const gB = new THREE.MeshPhysicalMaterial({ color: 0xBFC4D0, roughness: 0.18, transparent: true, opacity: 0.36, side: THREE.BackSide, depthWrite: false, envMapIntensity: 1.6 });
+const gF = new THREE.MeshPhysicalMaterial({ color: 0xF8F9FC, emissive: 0x8e909a, roughness: 0.06, transparent: true, opacity: 0.5, clearcoat: 1, clearcoatRoughness: 0.02, specularIntensity: 1, iridescence: 0.6, iridescenceIOR: 1.32, iridescenceThicknessRange: [200, 600], depthWrite: false, envMapIntensity: 2.8 });
+const chrome = new THREE.MeshStandardMaterial({ color: 0xF6F6FA, emissive: 0x6a6a72, metalness: 1, roughness: 0.12 });
+const brushed = new THREE.MeshStandardMaterial({ color: 0xE8E8EE, emissive: 0x55555c, metalness: 1, roughness: 0.36 });
+const ruby = new THREE.MeshPhysicalMaterial({ color: 0xD8101A, emissive: 0x3a0004, metalness: 0.2, roughness: 0.1, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.5 });
+const glass = (geo, p) => { const b = new THREE.Mesh(geo, gB); b.renderOrder = 2; const f = new THREE.Mesh(geo, gF); f.renderOrder = 3; p.add(b, f); return f; };
+const mesh = (geo, mat, p, x = 0, y = 0, z = 0) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); p.add(m); return m; };
+const grp = (p, y = 0) => { const g = new THREE.Group(); g.position.y = y; p.add(g); return g; };
+const curveOf = (f) => { const c = new THREE.Curve(); c.getPoint = (u, out = new V()) => f(u, out); return c; };
+const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'), gr = g.createRadialGradient(64, 64, 0, 64, 64, 64); gr.addColorStop(0, 'rgba(231,19,27,0.5)'); gr.addColorStop(0.35, 'rgba(231,19,27,0.16)'); gr.addColorStop(1, 'rgba(231,19,27,0)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })();
+const cRim = new THREE.Color(0xE8E8EE), cRimEm = new THREE.Color(0x55555c), cRed = new THREE.Color(0xD0121B), cRedEm = new THREE.Color(0x8a0008);
+const pedGeo = new THREE.CylinderGeometry(0.44, 0.46, 0.08, 72); pedGeo.translate(0, 0.04, 0);
+const rimGeo = new THREE.TorusGeometry(0.45, 0.011, 10, 96); rimGeo.rotateX(Math.PI / 2);
+const footRim = new THREE.TorusGeometry(0.462, 0.012, 10, 96); footRim.rotateX(Math.PI / 2);
+const footPlate = new THREE.CylinderGeometry(0.47, 0.47, 0.014, 72);
+
+const BUILDERS = [
+  // 01 · 87% gauge: glass ring, chrome arc sweeps to 87%, ruby tip
+  (o) => {
+    const g = grp(o, 0.4), R = 0.26, TS = 140, RS = 14;
+    glass(new THREE.TorusGeometry(R, 0.052, 20, 96), g);
+    const cv = curveOf((u, out) => { const a = Math.PI / 2 - u * Math.PI * 2 * 0.87; return out.set(Math.cos(a) * R, Math.sin(a) * R, 0); });
+    const ag = new THREE.TubeGeometry(cv, TS, 0.03, RS, false); mesh(ag, chrome, g);
+    const tip = mesh(new THREE.SphereGeometry(0.045, 24, 16), ruby, g);
+    mesh(new THREE.CylinderGeometry(0.05, 0.07, 0.03, 32), brushed, o, 0, 0.015, 0);
+    const p = new V();
+    return (t, dt, e, S) => {
+      const q = S.on ? easeOut(clamp01((t - S.since) / 1.3)) : 1;
+      ag.setDrawRange(0, Math.max(1, Math.floor(q * TS)) * RS * 6);
+      tip.position.copy(cv.getPoint(Math.max(0.001, q), p));
+    };
+  },
+  // 02 · paid daily: chrome clock, hands sweep to 00:00
+  (o) => {
+    const g = grp(o, 0.42);
+    const d = new THREE.CylinderGeometry(0.29, 0.29, 0.05, 72); d.rotateX(Math.PI / 2); glass(d, g);
+    mesh(new THREE.TorusGeometry(0.3, 0.026, 14, 96), chrome, g);
+    for (let k = 0; k < 12; k++) {
+      const a = k / 12 * Math.PI * 2, big = k % 3 === 0;
+      const m = mesh(new THREE.BoxGeometry(big ? 0.02 : 0.01, big ? 0.06 : 0.035, 0.01), brushed, g, Math.sin(a) * 0.235, Math.cos(a) * 0.235, 0.03); m.rotation.z = -a;
+    }
+    const hp = grp(g), mp = grp(g);
+    const hg = new THREE.BoxGeometry(0.024, 0.13, 0.012); hg.translate(0, 0.055, 0.036); mesh(hg, chrome, hp);
+    const mg = new THREE.BoxGeometry(0.014, 0.2, 0.012); mg.translate(0, 0.09, 0.048); mesh(mg, chrome, mp);
+    mesh(new THREE.SphereGeometry(0.028, 20, 14), ruby, g, 0, 0, 0.055);
+    mesh(new THREE.CylinderGeometry(0.016, 0.016, 0.1, 12), chrome, o, 0, 0.05, 0);
+    mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.02, 32), brushed, o, 0, 0.01, 0);
+    return (t, dt, e) => { mp.rotation.z = -(1 - e) * Math.PI * 2 * 0.17 - (1 - e) * Math.PI * 2; hp.rotation.z = -(1 - e) * Math.PI * 2 * 0.84; };
+  },
+  // 03 · $0 fees: glass coin with a chrome zero, flips on activation
+  (o) => {
+    const g = grp(o, 0.4);
+    const c = new THREE.CylinderGeometry(0.32, 0.32, 0.07, 72); c.rotateX(Math.PI / 2); glass(c, g);
+    mesh(new THREE.TorusGeometry(0.325, 0.02, 12, 96), chrome, g);
+    const z = mesh(new THREE.TorusGeometry(0.12, 0.042, 24, 72), chrome, g); z.scale.set(0.8, 1.22, 1);
+    const sl = mesh(new THREE.CylinderGeometry(0.014, 0.014, 0.5, 12), ruby, g, 0, 0, 0.05); sl.rotation.z = 0.78;
+    return (t, dt, e, S) => { g.rotation.y = S.on ? easeOut(clamp01((t - S.since) / 1.1)) * Math.PI * 2 : 0; sl.scale.y = 0.2 + 0.8 * e; sl.visible = e > 0.02; };
+  },
+  // 04 · live tracking: glass panel, chrome pulse line draws itself, ruby cursor rides it
+  (o) => {
+    const g = grp(o, 0.38);
+    const pg = new THREE.ExtrudeGeometry(roundedRect(0.78, 0.5, 0.06), { depth: 0.035, bevelEnabled: true, bevelThickness: 0.006, bevelSize: 0.006, bevelSegments: 2, curveSegments: 10 }); pg.translate(0, 0, -0.018); glass(pg, g);
+    const fs = roundedRect(0.8, 0.52, 0.065); fs.holes.push(roundedRect(0.76, 0.48, 0.05));
+    const fg = new THREE.ExtrudeGeometry(fs, { depth: 0.045, bevelEnabled: false, curveSegments: 10 }); fg.translate(0, 0, -0.022); mesh(fg, chrome, g);
+    [-0.12, 0, 0.12].forEach((y) => mesh(new THREE.BoxGeometry(0.66, 0.003, 0.003), brushed, g, 0, y, 0.022));
+    const cv = new THREE.CatmullRomCurve3([[-0.33, -0.06], [-0.22, -0.06], [-0.16, 0.08], [-0.1, -0.15], [-0.03, 0.12], [0.05, -0.05], [0.13, 0.0], [0.21, 0.1], [0.33, 0.15]].map(([x, y]) => new V(x, y, 0.03)), false, 'centripetal');
+    const TS = 160, RS = 8, tg = new THREE.TubeGeometry(cv, TS, 0.011, RS, false); mesh(tg, chrome, g);
+    const dot = mesh(new THREE.SphereGeometry(0.026, 20, 14), ruby, g);
+    mesh(new THREE.CylinderGeometry(0.016, 0.016, 0.14, 12), chrome, o, 0, 0.07, 0);
+    mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.02, 32), brushed, o, 0, 0.01, 0);
+    return (t, dt, e, S) => {
+      let q = 1;
+      if (S.on) { const r = ((t - S.since) % 1.9) / 1.4; q = Math.min(1, r); }
+      tg.setDrawRange(0, Math.max(1, Math.floor(q * TS)) * RS * 6);
+      dot.position.copy(cv.getPoint(Math.max(0.001, q)));
+    };
+  },
+  // 05 · personal manager: chrome headset with glass cups and a ruby mic
+  (o) => {
+    const g = grp(o, 0.4);
+    mesh(new THREE.TorusGeometry(0.22, 0.022, 16, 72, Math.PI), chrome, g);
+    [-1, 1].forEach((sx) => {
+      const cup = new THREE.CylinderGeometry(0.085, 0.085, 0.075, 40); cup.rotateZ(Math.PI / 2);
+      const cg = grp(g); cg.position.set(sx * 0.225, -0.03, 0); glass(cup, cg);
+      const cap = mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.014, 40), chrome, cg, sx * 0.042, 0, 0); cap.rotation.z = Math.PI / 2;
+      const cu = mesh(new THREE.TorusGeometry(0.072, 0.016, 12, 40), brushed, cg, -sx * 0.04, 0, 0); cu.rotation.y = Math.PI / 2;
+    });
+    const cv = new THREE.CatmullRomCurve3([new V(-0.235, -0.08, 0.03), new V(-0.2, -0.17, 0.1), new V(-0.09, -0.2, 0.15)]);
+    mesh(new THREE.TubeGeometry(cv, 30, 0.009, 8, false), chrome, g);
+    const mic = mesh(new THREE.SphereGeometry(0.026, 20, 14), ruby, g, -0.085, -0.2, 0.152);
+    return (t, dt, e) => { mic.scale.setScalar(1 + 0.25 * e * (0.5 + 0.5 * Math.sin(t * 6))); };
+  },
+  // 06 · creatives: fanned stack of glass artboards, top one carries a ruby sun and chrome hills
+  (o) => {
+    const g = grp(o, 0.36);
+    const cgeo = new THREE.ExtrudeGeometry(roundedRect(0.44, 0.32, 0.03), { depth: 0.016, bevelEnabled: true, bevelThickness: 0.004, bevelSize: 0.004, bevelSegments: 2, curveSegments: 8 });
+    const cards = [0, 1, 2].map(() => { const c = grp(g); glass(cgeo, c); return c; });
+    const top = cards[2];
+    mesh(new THREE.SphereGeometry(0.04, 20, 14), ruby, top, 0.11, 0.07, 0.03);
+    const hs = new THREE.Shape(); hs.moveTo(-0.19, -0.13); hs.lineTo(-0.07, 0.03); hs.lineTo(0.0, -0.05); hs.lineTo(0.07, 0.0); hs.lineTo(0.19, -0.13); hs.closePath();
+    mesh(new THREE.ExtrudeGeometry(hs, { depth: 0.012, bevelEnabled: false }), chrome, top, 0, 0, 0.022);
+    mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.02, 32), brushed, o, 0, 0.01, 0);
+    mesh(new THREE.CylinderGeometry(0.014, 0.014, 0.18, 12), chrome, o, 0, 0.09, -0.03);
+    return (t, dt, e) => {
+      const sp = 0.1 + 0.16 * e;
+      cards.forEach((c, k) => { const d = k - 1; c.rotation.z = -d * sp; c.position.set(d * (0.05 + 0.08 * e), Math.abs(d) * -0.01, k * 0.03); });
+    };
+  },
+  // 07 · TradingView + signals: mini glass candles, ruby signal arcs broadcast from the tallest
+  (o) => {
+    const g = grp(o, 0);
+    const Hs = [0.2, 0.28, 0.4], Bs = [0.1, 0.16, 0.2];
+    Hs.forEach((h, k) => {
+      const x = (k - 1) * 0.17, c = grp(g); c.position.x = x;
+      const body = prism(0.11, 0.11, h, 0.025, 0.006); body.translate(0, Bs[k], 0); glass(body, c);
+      const core = prism(0.035, 0.035, h - 0.04, 0.012, 0.004); core.translate(0, Bs[k] + 0.02, 0); mesh(core, chrome, c);
+      mesh(new THREE.CylinderGeometry(0.007, 0.007, Bs[k] + h + 0.08, 10), chrome, c, 0, (Bs[k] + h + 0.08) / 2, 0);
+    });
+    mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.012, 48), brushed, o, 0, 0.006, 0);
+    const top = new V(0.17, 0.66, 0);
+    const arcs = [0.07, 0.12, 0.17].map((r) => {
+      const m = new THREE.Mesh(new THREE.TorusGeometry(r, 0.009, 8, 48, 1.5), new THREE.MeshBasicMaterial({ color: 0xE7131B, transparent: true, opacity: 0, depthWrite: false }));
+      m.rotation.z = Math.PI / 2 - 0.75; m.position.copy(top).y -= 0.06; m.renderOrder = 4; g.add(m); return m;
+    });
+    return (t, dt, e) => {
+      arcs.forEach((m, k) => { const ph = ((t * (0.8 + 0.8 * e) - k * 0.22) % 1 + 1) % 1; m.material.opacity = (0.18 + 0.7 * e) * Math.sin(ph * Math.PI); });
+    };
+  },
+  // 08 · incentive trips: glass globe with chrome meridians, ruby dot circling on an orbit
+  (o) => {
+    const g = grp(o, 0.44); g.rotation.z = 0.35;
+    glass(new THREE.SphereGeometry(0.25, 48, 32), g);
+    const mer = new THREE.TorusGeometry(0.252, 0.005, 8, 96);
+    mesh(mer, brushed, g); mesh(mer, brushed, g).rotation.y = Math.PI / 2; mesh(mer, brushed, g).rotation.x = Math.PI / 2;
+    [0.12, -0.12].forEach((y) => { const r = Math.sqrt(0.252 * 0.252 - y * y); const m = mesh(new THREE.TorusGeometry(r, 0.004, 8, 80), brushed, g, 0, y, 0); m.rotation.x = Math.PI / 2; });
+    const orb = grp(g); orb.rotation.set(1.15, 0, -0.5);
+    mesh(new THREE.TorusGeometry(0.36, 0.005, 8, 120), chrome, orb);
+    const dot = mesh(new THREE.SphereGeometry(0.03, 20, 14), ruby, orb);
+    mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.02, 32), brushed, o, 0, 0.01, 0);
+    mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.18, 12), chrome, o, 0, 0.1, 0);
+    let ph = 0;
+    return (t, dt, e) => { ph += dt * (0.7 + 2.2 * e); dot.position.set(Math.cos(ph) * 0.36, Math.sin(ph) * 0.36, 0); g.rotation.y = t * 0.15; };
+  },
+];
+
+const slots = BUILDERS.map((b, i) => {
+  const g = new THREE.Group(); root.add(g);
+  glass(pedGeo, g);
+  const rimM = brushed.clone(); mesh(rimGeo, rimM, g, 0, 0.08, 0);
+  mesh(footRim, chrome, g, 0, 0.002, 0);
+  mesh(footPlate, brushed, g, 0, -0.008, 0);
+  const o = grp(g, 0.1);
+  const upd = b(o);
+  const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, opacity: 0 })); halo.position.set(0, 0.48, -0.3); halo.scale.set(1.15, 1.0, 1); halo.renderOrder = 1; g.add(halo);
+  const spot = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 1.4), new THREE.MeshBasicMaterial({ map: glowTex, transparent: true, depthWrite: false, opacity: 0 })); spot.rotation.x = -Math.PI / 2; spot.position.y = 0.002; spot.renderOrder = 1; g.add(spot);
+  blob(g, 1.4, 1.4, -0.002, 0.3);
+  g.traverse((x) => x.layers.set(i + 1));
+  return { g, o, rimM, upd, halo, spot, k: 0, on: false, since: -9 };
+});
+scene.traverse((x) => { if (x.isLight) x.layers.enableAll(); });
+
+/* layout: the design's 4×2 shelf, or 2×4 on tall (phone) stages */
+const place = () => slots.forEach((s, i) => {
+  if (tall) { const col = i % 2, row = Math.floor(i / 2); s.g.position.set((col - 0.5) * 1.3, (3 - row) * 1.34, 0); }
+  else { const col = i % 4, row = Math.floor(i / 4); s.g.position.set((col - 1.5) * 1.3, row ? 0 : 1.42, 0); }
+});
+const placeCamera = (t) => {
+  const asp = W / H || 1.555;
+  if (tall) {
+    const d = Math.max(11.2, 1.75 / (Math.tan(13 * Math.PI / 180) * asp));
+    camera.position.set(0.1 + Math.sin(t * 0.18) * 0.12, 2.1 + d * 0.2, d); camera.lookAt(0.02, 2.1, 0);
+  } else {
+    const k = Math.max(1, (1120 / 720) / Math.max(0.6, asp));
+    camera.position.set((0.15 + Math.sin(t * 0.18) * 0.2) * k, 2.6 + 0.9 * (k - 1), 7.7 * k); camera.lookAt(0.05, 1.0, 0);
+  }
+  camera.updateMatrixWorld();
+};
+
+/* chips */
+const embedded = window.parent !== window;
+let active = 0, holdUntil = 0, nextStep = 2.5, clock = 0;
+const chips = STILL ? [] : LABELS.map((txt, i) => {
+  const d = document.createElement('button');
+  d.type = 'button'; d.className = 'chip'; d.tabIndex = -1;
+  d.innerHTML = '<b></b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + ICONS[i] + '</svg><span></span>';
+  d.querySelector('b').textContent = String(i + 1).padStart(2, '0');
+  d.querySelector('span').textContent = txt;
+  d.addEventListener('click', () => {
+    active = i; holdUntil = clock + 7;
+    if (embedded) { try { parent.postMessage({ tqKbPick: i }, location.origin); } catch (e) {} }
+  });
+  chipBox.appendChild(d);
+  return d;
+});
+addEventListener('message', (e) => {
+  if (e.origin !== location.origin || !e.data || typeof e.data.tqKb !== 'number') return;
+  active = Math.max(0, Math.min(7, e.data.tqKb | 0));
+});
+/* opened on its own (no page around it), the scene cycles itself like the design */
+const selfCycle = () => {
+  if (embedded || STILL) return;
+  if (clock >= Math.max(nextStep, holdUntil)) { active = (active + 1) % 8; nextStep = clock + 2.5; }
+};
+
+/* the first frame has every object in focus (= the poster); the inactive ones then drift out */
+let wake = 1;
+const focus = new Array(8).fill(1);
+const tmp = new V(), wp = new V();
+const tick = (t, dt) => {
+  placeCamera(t);
+  slots.forEach((s, i) => {
+    const on = !STILL && i === active;
+    if (on && !s.on) s.since = t;
+    s.on = on;
+    s.k = damp(s.k, on ? 1 : 0, dt, 4.5);
+    const e = ease(clamp01(s.k));
+    s.o.position.y = 0.1 + 0.1 * e + Math.sin(t * 1.2 + i) * 0.012;
+    s.o.rotation.y = Math.sin(t * 0.5 + i * 0.9) * 0.3 * (1 - 0.6 * e);
+    s.rimM.color.lerpColors(cRim, cRed, e * 0.7); s.rimM.emissive.lerpColors(cRimEm, cRedEm, e * 0.6);
+    s.halo.material.opacity = 0.7 * e; s.spot.material.opacity = 0.85 * e;
+    s.upd(t, dt, e, s);
+    focus[i] = Math.max(ease(clamp01(s.k)), wake);
+  });
+  scene.updateMatrixWorld();
+  const cs = compact ? 1 : Math.min(1, W / 1060);
+  chips.forEach((c, i) => {
+    const s = slots[i], fe = focus[i];
+    tmp.set(0, 0, 0.5); s.g.localToWorld(tmp);
+    const [x, y] = toScreen(tmp);
+    c.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,${compact ? 2 : 6}px) scale(${(cs * (1 + 0.08 * fe)).toFixed(3)})`;
+    c.style.filter = fe > 0.98 ? 'none' : `blur(${((1 - fe) * 1.2).toFixed(2)}px)`;
+    c.style.opacity = shown ? (0.62 + 0.38 * fe).toFixed(3) : 0;
+    c.style.zIndex = fe > 0.5 ? 2 : 1;
+    c.classList.toggle('is-on', i === active);
+  });
+};
+const canBlur = 'filter' in CanvasRenderingContext2D.prototype;
+/* Each pedestal covers about an eighth of the stage: render, blur and copy only its own
+   rectangle (the projected box around pedestal, object, glow and shadow), not the whole canvas. */
+const corner = new V();
+const rectOf = (s, pad) => {
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (let k = 0; k < 8; k++) {
+    corner.set(k & 1 ? 0.76 : -0.76, k & 2 ? 1.2 : -0.08, k & 4 ? 0.76 : -0.76); s.g.localToWorld(corner);
+    const [x, y] = toScreen(corner);
+    x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+  }
+  x0 = Math.max(0, Math.floor(x0 - pad)); y0 = Math.max(0, Math.floor(y0 - pad));
+  x1 = Math.min(W, Math.ceil(x1 + pad)); y1 = Math.min(H, Math.ceil(y1 + pad));
+  return x1 > x0 && y1 > y0 ? [x0, y0, x1 - x0, y1 - y0] : null;
+};
+const drawPasses = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (focus.every((f) => f > 0.98)) {   // all sharp (the poster frame): one pass
+    renderer.setScissorTest(false);
+    camera.layers.enableAll(); renderer.render(scene, camera); camera.layers.set(0);
+    ctx.drawImage(renderer.domElement, 0, 0, canvas.width, canvas.height);
+    return;
+  }
+  renderer.setScissorTest(true);
+  slots.map((s, i) => ({ i, d: s.g.getWorldPosition(wp).distanceToSquared(camera.position) })).sort((a, b) => b.d - a.d).forEach(({ i }) => {
+    const f = focus[i], blur = canBlur && f < 0.98 ? (1 - f) * 2.2 * Math.min(1, Math.max(0.45, W / 1060)) : 0;   // smaller stage, softer blur
+    const r = rectOf(slots[i], 4 + blur * 3); if (!r) return;
+    const [x, y, w, h] = r;
+    renderer.setScissor(x, H - y - h, w, h);
+    camera.layers.set(i + 1); renderer.render(scene, camera);
+    ctx.filter = blur ? 'blur(' + (blur * PR).toFixed(2) + 'px)' : 'none';
+    ctx.globalAlpha = canBlur ? 0.82 + 0.18 * f : 0.55 + 0.45 * f;
+    const sx = Math.round(x * PR), sy = Math.round(y * PR), sw = Math.round(w * PR), sh = Math.round(h * PR);
+    ctx.drawImage(renderer.domElement, sx, sy, sw, sh, sx, sy, sw, sh);
+  });
+  renderer.setScissorTest(false);
+  ctx.filter = 'none'; ctx.globalAlpha = 1; camera.layers.set(0);
+};
+
+let shown = false, last = performance.now();
+const resize = () => {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (!w || !h || (w === W && h === H)) return;   // resizing a canvas clears it
+  W = w; H = h;
+  tall = w / h < 1; compact = w < 560;
+  document.body.classList.toggle('compact', compact);
+  canvas.width = Math.round(w * PR); canvas.height = Math.round(h * PR);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+  place();
+  if (STILL && shown) draw(0);
+};
+new ResizeObserver(resize).observe(canvas); resize();
+
+const draw = (dt) => {
+  tick(clock, dt); drawPasses();
+  if (!shown) {
+    shown = true; window.__tqArt = true;
+    requestAnimationFrame(() => { if (embedded) { try { parent.postMessage({ tqReady: true }, location.origin); } catch (e) {} } });
+  }
+};
+const frame = (now) => {
+  const dt = Math.min(0.05, (now - last) / 1000) * SPEED; last = now;
+  if (W && (!shown || (!window.__tqPaused && !document.hidden))) {
+    if (shown) { clock += dt; wake = Math.max(0, wake - dt / 0.8); }
+    selfCycle(); draw(shown ? dt : 0);
+  }
+  requestAnimationFrame(frame);
+};
+if (STILL) draw(0); else requestAnimationFrame(frame);
+</script>
+</body></html>
