@@ -10,10 +10,10 @@
   The four stats are page text next to this frame (siblings with [data-stat]); while they sit in
   the stage corners this frame fades them in and draws their leader lines to the dome. On phones
   they sit under the stage and are left alone.
-  Loaded off screen, the scene starts from the flat field and builds when scrolled to; loaded in
-  view (or under reduced motion), it starts finished, matching the poster. A click replays it.
+  The scene holds its first frame (the flat field, like the poster) and plays the build from the
+  start once half the stage is on screen; reduced motion shows the finished dome. A click replays it.
   ?lang=xx   risk labels from i18n.js (embed.dome.r1 … r4)
-  ?still     the finished dome, no overlay — the poster (tools/render-program-posters.mjs)
+  ?still     the first frame (flat field), no overlay — the poster (tools/render-program-posters.mjs)
   The page sets window.__tqPaused while the block is off screen; the first drawn frame posts
   {tqReady:true} so the page fades this frame in over its poster.
 -->
@@ -215,7 +215,7 @@ const calls = STILL ? [] : stats.slice(0, 4).map((st) => ({
   e: mk('circle', { r: 3.5, fill: '#E7131B' }),
 }));
 /* stats in the stage corners (absolutely placed) get callouts; stacked under the stage (phones) they don't */
-let callouts = false;
+let callouts = false, keepStats = false;
 const measure = () => {
   callouts = calls.length === 4 && calls.every((c) => getComputedStyle(c.st).position === 'absolute');
   svg.style.display = callouts ? '' : 'none';
@@ -238,7 +238,7 @@ const callout = (k, wp, op, t) => {
   c.e.style.opacity = on; c.ring.style.opacity = on;
   c.ring.setAttribute('r', 7 + 3 * Math.sin(t * 3 + k));
   const o = Math.round(clamp01(op) * 100) / 100;
-  if (o !== c.op) { c.op = o; c.st.style.opacity = o; c.st.style.transform = o < 1 ? `translateY(${((1 - easeOut(o)) * 10).toFixed(1)}px)` : ''; }
+  if (o !== c.op && !keepStats) { c.op = o; c.st.style.opacity = o; c.st.style.transform = o < 1 ? `translateY(${((1 - easeOut(o)) * 10).toFixed(1)}px)` : ''; }
 };
 
 /* ---- the scene: hex field → dome, partners inside, risks bouncing off ---------------------- */
@@ -382,13 +382,26 @@ const resize = () => {
 new ResizeObserver(resize).observe(canvas); resize();
 try { parent.document.fonts.ready.then(measure); } catch (e) {}
 
-const inView = () => {
-  try { const r = window.frameElement.getBoundingClientRect(); return r.top < parent.innerHeight && r.bottom > 0; } catch (e) { return true; }
+/* How much of the stage is on screen (0…1). */
+const shownPart = () => {
+  try {
+    const r = window.frameElement.getBoundingClientRect(), vh = parent.innerHeight;
+    return Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0)) / (r.height || 1);
+  } catch (e) { return 1; }
 };
-/* finished when it shows up in view (or for reduced motion): no flash of the stats */
-let clock = STILL || reduce || inView() ? FINISHED : 0;
-const paused = () => (window.__tqPaused === undefined ? !inView() : window.__tqPaused) || document.hidden;
-const replay = () => { clock = 0; };
+/* The build waits on its first frame (the flat field, same as the poster) and starts when
+   half the stage is on screen, so the visitor always sees the dome assemble. Reduced
+   motion skips straight to the finished dome. */
+const START_AT = 0.5;
+let clock = 0, started = STILL || reduce;
+if (reduce && !STILL) clock = FINISHED;
+/* stats already on screen when the scene first draws keep showing (no flash); otherwise
+   they appear one by one as their tiles light up */
+const statOnScreen = () => {
+  try { const vh = parent.innerHeight; return stats.some((st) => { const r = st.getBoundingClientRect(); return r.bottom > 0 && r.top < vh; }); } catch (e) { return false; }
+};
+const paused = () => (window.__tqPaused === undefined ? shownPart() === 0 : window.__tqPaused) || document.hidden;
+const replay = () => { clock = 0; started = true; keepStats = false; };
 if (!STILL) {
   document.addEventListener('click', replay);
   if (host) host.addEventListener('click', (e) => { if (e.target.closest('[data-stat]')) replay(); });
@@ -397,6 +410,7 @@ if (!STILL) {
 let shown = false, last = performance.now(), sinceMeasure = 0;
 const draw = (dt) => {
   tick(clock, dt); renderer.render(scene, camera);
+  window.__tqDomeT = clock;   /* scene time, for tools/tests */
   if (!shown) {
     shown = true; window.__tqArt = true;
     requestAnimationFrame(() => { if (window.parent !== window) { try { parent.postMessage({ tqReady: true }, location.origin); } catch (e) {} } });
@@ -404,10 +418,14 @@ const draw = (dt) => {
 };
 const frame = (now) => {
   const dt = Math.min(0.05, (now - last) / 1000) * SPEED; last = now;
-  if (W && (!shown || !paused())) {
-    if (shown) clock += dt;
-    if ((sinceMeasure += dt) > 1) { sinceMeasure = 0; measure(); }
-    draw(shown ? dt : 0);
+  if (W && !shown) { keepStats = statOnScreen(); draw(0); }
+  else if (W && !paused()) {
+    if (!started && shownPart() >= START_AT) started = true;
+    if (started) {
+      clock += dt;
+      if ((sinceMeasure += dt) > 1) { sinceMeasure = 0; measure(); }
+      draw(dt);
+    }
   }
   requestAnimationFrame(frame);
 };
