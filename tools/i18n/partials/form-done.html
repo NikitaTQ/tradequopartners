@@ -1,0 +1,43 @@
+          <!-- Success screen after the form is sent (Partner_Form_Success design). Hidden until the
+               envelope has left the button and the server has taken the request (startForm in landing.js);
+               it then takes the form's place and builds up piece by piece. -->
+          <div class="tq-done" data-form-done data-fallback="{{@done.fallback}}" hidden>
+            <h2 class="tq-done__title" tabindex="-1">{{form.sent}}<span>.</span></h2>
+            <div class="tq-done__art">
+              <div class="tq-done__scene">
+                <div class="tq-done__env" aria-hidden="true">
+                  <span class="tq-done__env-body"></span>
+                  <span class="tq-done__env-l"></span>
+                  <span class="tq-done__env-r"></span>
+                  <span class="tq-done__env-b"></span>
+                  <span class="tq-done__env-flap"><span></span></span>
+                  <svg class="tq-done__postmark" viewBox="0 0 150 90" width="150" height="90" focusable="false">
+                    <defs><path id="doneArc" d="M100,45 m-31,0 a31,31 0 1,1 62,0 a31,31 0 1,1 -62,0"></path></defs>
+                    <g fill="none" stroke="#2B2F3A" stroke-width="1.4"><circle cx="100" cy="45" r="38"></circle><circle cx="100" cy="45" r="24"></circle><path d="M2 30 q8 -6 16 0 t16 0 t16 0 t16 0"></path><path d="M2 42 q8 -6 16 0 t16 0 t16 0 t16 0"></path><path d="M2 54 q8 -6 16 0 t16 0 t16 0 t16 0"></path></g>
+                    <text font-family="DM Sans, sans-serif" font-weight="700" font-size="7.5" fill="#2B2F3A" direction="ltr" unicode-bidi="embed"><textPath href="#doneArc" textLength="190" lengthAdjust="spacing">TRADEQUO · PARTNER DESK · </textPath></text>
+                    <text x="100" y="43" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="8" fill="#2B2F3A">RECEIVED</text>
+                    <text x="100" y="54" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="7.5" fill="#2B2F3A" direction="ltr" data-done-date></text>
+                  </svg>
+                  <span class="tq-done__wax"><span><img src="{{root}}assets/logo-mark.png" alt="" width="22" height="22"></span></span>
+                </div>
+                <div class="tq-done__note">
+                  <span class="tq-done__tape" aria-hidden="true"></span>
+                  <p class="tq-done__hand"><span data-done-thanks>{{done.thanks}}</span><br>{{done.call}}</p>
+                  <p class="tq-done__sign">{{done.team}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="tq-done__steps">
+              <span class="tq-done__flow" aria-hidden="true"></span>
+              <span class="tq-done__flow" aria-hidden="true"></span>
+              <ol>
+                <li class="is-on"><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><b>{{done.s1}}</b><small>{{done.s1d}}</small></li>
+                <li><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0e0e10" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 005 5L15 12l5 2v4a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z"></path></svg></span><b>{{done.s2}}</b><small>{{done.s2d}}</small></li>
+                <li><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0e0e10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg></span><b>{{done.s3}}</b><small>{{done.s3d}}</small></li>
+              </ol>
+            </div>
+            <div class="tq-done__cta">
+              <a class="tq-done__go" href="{{root}}programs/" data-page-link data-label="{{@loader}} · {{@fan.programs}}">{{fan.programs}}<span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></a>
+              <a class="tq-done__link" href="{{root}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}">{{done.calc}}</a>
+            </div>
+          </div>
