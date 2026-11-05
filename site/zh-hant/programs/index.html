@@ -1319,24 +1319,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-range input::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -9px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transition: transform .2s ease; }
 .tp-range input::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); }
 .tp-range input:active::-webkit-slider-thumb { transform: scale(1.12); }
-.tp-range__marks { position: relative; height: 0; }
-.tp-range__mark { position: absolute; top: -17px; width: 2px; height: 10px; margin-left: -1px; border-radius: 1px; background: #fff; box-shadow: 0 0 0 1px rgba(10,10,10,.12); pointer-events: none; }
 .tp-scale span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
 .tp-scale span:first-child { transform: none; }
 .tp-scale span:last-child { transform: translateX(-100%); }
 .tp-scale { position: relative; height: 14px; direction: ltr; margin-top: 8px; font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #6a6a6e; }
-
-/* tier switch: three buttons over a sliding red thumb (--t = 0 | 1 | 2) */
-.tp-tiers { --t: 1; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 6px; border-radius: 16px; background: rgba(10,10,10,.05); box-shadow: inset 0 1px 2px rgba(10,10,10,.08); direction: ltr; }
-.tp-tiers__thumb { position: absolute; top: 6px; bottom: 6px; left: 6px; width: calc((100% - 24px) / 3); border-radius: 11px; background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #c70f16 100%); box-shadow: 0 8px 18px -8px rgba(231,19,27,.8), inset 0 1px 0 rgba(255,255,255,.3); transform: translateX(calc(var(--t) * (100% + 6px))); transition: transform .55s cubic-bezier(.65,0,.35,1); pointer-events: none; }
-.tp-tier { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 6px; border: 0; border-radius: 11px; background: transparent; color: #6a6a6e; font: inherit; text-align: center; cursor: pointer; transition: color .35s ease, background .25s ease; }
-.tp-tier:hover { background: rgba(255,255,255,.55); }
-.tp-tier[aria-pressed="true"]:hover { background: transparent; }
-.tp-tier b { font-size: 13px; font-weight: 700; letter-spacing: .01em; color: #0a0a0a; transition: color .35s ease; }
-.tp-tier span { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .06em; }
-.tp-tier[aria-pressed="true"] { color: rgba(255,255,255,.85); }
-.tp-tier[aria-pressed="true"] b { color: #fff; }
-.tp-tier:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 2px; }
 
 /* the estimate: a printed sheet, like the payout statement on the landing */
 .tp-sheet { position: relative; display: flex; flex-direction: column; gap: 18px; padding: clamp(28px, 3.2vw, 40px) clamp(22px, 3vw, 38px) clamp(24px, 3vw, 34px); border-radius: 4px; background: linear-gradient(180deg, #fdfdfb 0%, #f6f6f3 100%); box-shadow: 0 1px 0 #e9e9e5, 0 44px 80px -42px rgba(10,10,10,.34), 0 2px 8px rgba(10,10,10,.06); color: #0a0a0a; }
@@ -1354,34 +1340,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-sheet__meta span, .tp-sheet__label { font-size: 9.5px; font-weight: 600; letter-spacing: .2em; color: #8a8a8e; text-transform: uppercase; }
 .tp-sheet__meta b { font-family: 'Fragment Mono', monospace; font-size: 14px; font-weight: 400; color: #0a0a0a; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-/* tier ladder: three columns stepping up; the reached ones fill with ink, the current one wears the red cap */
-.tp-ladder { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; gap: 18px; height: 112px; margin-top: 4px; padding: 0 2px; border-bottom: 1px solid #0a0a0a; direction: ltr; }
-.tp-ladder__step { display: flex; flex-direction: column; align-items: stretch; gap: 7px; height: 100%; justify-content: flex-end; }
-.tp-ladder__step em { font-style: normal; font-family: 'Fragment Mono', monospace; font-size: 11.5px; color: #8a8a8e; text-align: center; transition: color .4s ease; }
-.tp-ladder__col { position: relative; display: block; border: 1px solid #d3d3d0; border-bottom: 0; background: repeating-linear-gradient(135deg, rgba(10,10,10,.05) 0 1px, transparent 1px 7px); overflow: hidden; }
-.tp-ladder__step:nth-child(1) .tp-ladder__col { height: 34%; }
-.tp-ladder__step:nth-child(2) .tp-ladder__col { height: 58%; }
-.tp-ladder__step:nth-child(3) .tp-ladder__col { height: 82%; }
-.tp-ladder__col i { position: absolute; inset: 0; background: linear-gradient(180deg, #2a2a2d 0%, #0a0a0a 100%); transform: translateY(101%); transition: transform .6s cubic-bezier(.65,0,.35,1); }
-.tp-ladder__col::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: #e7131b; transform: scaleX(0); transition: transform .45s cubic-bezier(.65,0,.35,1) .15s; }
-.tp-ladder__step.is-reached .tp-ladder__col i { transform: none; }
-.tp-ladder__step.is-reached em { color: #0a0a0a; }
-.tp-ladder__step.is-on em { color: #e7131b; }
-.tp-ladder__step.is-on .tp-ladder__col::after { transform: none; }
-.tp-ladder__step:nth-child(2) .tp-ladder__col i { transition-delay: .08s; }
-.tp-ladder__step:nth-child(3) .tp-ladder__col i { transition-delay: .16s; }
-.tp-ladder__step small { order: 3; margin: 0 0 -24px; font-size: 9.5px; font-weight: 600; letter-spacing: .2em; color: #8a8a8e; text-align: center; text-transform: uppercase; }
-.tp-sheet__next { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-family: 'Fragment Mono', monospace; font-size: 11.5px; color: #6a6a6e; }
-.tp-sheet__track { position: relative; flex: 0 0 92px; height: 3px; background: #e4e4e1; overflow: hidden; }
-.tp-sheet__track span { position: absolute; inset-block: 0; inset-inline-start: 0; width: 0; background: #e7131b; transition: width .5s cubic-bezier(.2,.8,.2,1); }
-
 .tp-sheet__total { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 18px; border-top: 1px solid #e4e4e1; }
 .tp-sheet__sum { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .tp-sheet__sum b { --k: 1; font-size: calc(clamp(48px, 5.6vw, 72px) * var(--k)); line-height: .92; letter-spacing: -.05em; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; direction: ltr; text-align: start; transition: color .4s ease; }
 [dir="rtl"] .tp-sheet__sum b { text-align: right; }
 .tp-sheet__stamp { flex-shrink: 0; margin: -12px -6px -8px 0; transform: rotate(-14deg); opacity: .82; mix-blend-mode: multiply; }
-.tp-sheet__stamp.is-stamped { animation: tpStamp .5s cubic-bezier(.2,.9,.3,1.2); }
-@keyframes tpStamp { 0% { transform: rotate(-24deg) scale(1.35); opacity: 0; } 60% { opacity: .9; } 100% { transform: rotate(-14deg) scale(1); opacity: .82; } }
 
 .tp-sheet__ledger { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px dashed #dcdcd8; border-bottom: 1px solid #e4e4e1; }
 .tp-sheet__ledger div { display: flex; flex-direction: column; gap: 5px; padding: 13px 14px 12px; min-width: 0; }
@@ -1408,43 +1371,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-step h3 { margin: 0; font-size: clamp(20px, 1.9vw, 24px); line-height: 1.12; letter-spacing: -.03em; font-weight: 700; }
 .tp-step p { margin: 0; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty; }
 .tp-step__top { display: flex; align-items: center; justify-content: space-between; }
-
-/* commission structure */
-.tp-structure { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(16px, 2.4vw, 28px); margin-top: clamp(32px, 4.5vw, 60px); align-items: stretch; }
-.tp-explain { display: flex; flex-direction: column; gap: 20px; padding: clamp(26px, 3vw, 40px); }
-.tp-explain h3, .tp-tiercol h3 { margin: 0; font-size: 22px; letter-spacing: -.03em; font-weight: 700; }
-.tp-numlist { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: tp; }
-.tp-numlist li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; font-size: 15.5px; line-height: 1.5; color: #2b2d31; counter-increment: tp; }
-.tp-numlist li::before { content: counter(tp, decimal-leading-zero); display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: #0a0a0a; color: #fff; font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .04em; }
-.tp-example { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 14px; margin-top: auto; padding: 20px 22px; border-radius: 16px; background: #0b0c0f; color: #fff; overflow: hidden; }
-.tp-example::after { content: ''; position: absolute; inset: auto 0 0 0; height: 2px; background: linear-gradient(90deg, transparent, #e7131b, transparent); }
-.tp-example .tp-mono { grid-column: 1 / -1; color: #ff4d53; }
-.tp-example div { display: flex; flex-direction: column; gap: 6px; }
-.tp-example b { font-size: clamp(26px, 2.8vw, 36px); line-height: 1; letter-spacing: -.04em; font-weight: 700; direction: ltr; text-align: start; }
-.tp-example div:last-child b { color: #ff3a40; }
-.tp-example span { font-size: 12.5px; color: #a7a9ae; }
-[dir="rtl"] .tp-example > svg { transform: scaleX(-1); }
-.tp-tiercol { display: flex; flex-direction: column; gap: 14px; }
-.tp-tiercol h3 { padding: 6px 4px 2px; }
-.tp-tiercard { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 16px; padding: 22px 24px 18px; color: #0a0a0a; text-decoration: none; cursor: pointer; transition: box-shadow .45s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
-.tp-tiercard:hover { color: #0a0a0a; transform: translateY(-3px); box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 0 0 1px rgba(231,19,27,.18), 0 22px 40px -24px rgba(231,19,27,.35); }
-.tp-tiercard.is-current { box-shadow: 0 0 0 2px #e7131b, 0 22px 44px -26px rgba(231,19,27,.55); }
-.tp-tiercard__name { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
-.tp-tiercard__name i { width: 10px; height: 10px; border-radius: 50%; background: #c4c7cd; box-shadow: inset 0 1px 1px rgba(0,0,0,.15); transition: background .4s ease, box-shadow .4s ease; }
-.tp-tiercard.is-current .tp-tiercard__name i { background: #e7131b; box-shadow: 0 0 10px rgba(231,19,27,.8); }
-.tp-tiercard__range { grid-column: 1; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .1em; color: #6a6a6e; }
-.tp-tiercard__rate { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-.tp-tiercard__rate b { font-size: clamp(30px, 3vw, 40px); line-height: 1; letter-spacing: -.045em; font-weight: 700; transition: color .4s ease; }
-.tp-tiercard.is-current .tp-tiercard__rate b { color: #e7131b; }
-.tp-tiercard__rate span { font-size: 12.5px; color: #6a6a6e; }
-.tp-tiercard__foot { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; padding-top: 12px; border-top: 1px solid rgba(150,156,165,.22); }
-.tp-tiercard__daily { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: #5b5b5b; }
-.tp-tiercard__daily::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
-.tp-tiercard__go { display: inline-flex; align-items: center; gap: 7px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #8a8a8e; transition: color .3s ease; }
-.tp-tiercard__go svg { transition: transform .35s cubic-bezier(.2,.8,.2,1); }
-.tp-tiercard:hover .tp-tiercard__go, .tp-tiercard.is-current .tp-tiercard__go { color: #e7131b; }
-.tp-tiercard__go svg { transform: rotate(-90deg); }   /* points up, to the calculator */
-.tp-tiercard:hover .tp-tiercard__go svg { transform: translateY(-3px) rotate(-90deg); }
 
 /* payout timeline */
 /* payout process: a red pulse runs step to step (plan.js startFlow sets --p and .is-on / .is-done) */
@@ -1520,7 +1446,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 }
 @media (max-width: 960px) {
   .tp-programs { grid-template-columns: minmax(0, 1fr); max-width: 560px; margin: 0 auto; }
-  .tp-faq, .tp-calc, .tp-structure { grid-template-columns: minmax(0, 1fr); }
+  .tp-faq, .tp-calc { grid-template-columns: minmax(0, 1fr); }
   .tp-faq__side { position: static; }
   .tp-steps { grid-template-columns: minmax(0, 1fr); }
   .tp-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 34px; }
@@ -1535,7 +1461,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-sheet__meta div, .tp-sheet__ledger div { padding-left: 10px; padding-right: 10px; }
   .tp-sheet__meta b, .tp-sheet__ledger b { font-size: 12.5px; }
   .tp-sheet__stamp { width: 84px; height: 84px; }
-  .tp-ladder { height: 116px; }
   .tp-sheet__title { font-size: 22px; letter-spacing: .03em; }
   .tp-sheet__brand { font-size: 16px; }
   .tp-sheet__brand img { height: 20px; }
@@ -1553,18 +1478,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-faq__side { align-items: center; text-align: center; }
   .tp-faq__side .tp-pill { align-self: center; }
   .tp-faq__side .tp-sub { max-width: 34ch !important; }
-  .tp-explain h3, .tp-tiercol h3 { text-align: center; }
-  .tp-example { grid-template-columns: minmax(0, 1fr); }
-  .tp-example > svg { transform: rotate(90deg); }
-  [dir="rtl"] .tp-example > svg { transform: rotate(90deg); }
   .tp-night { border-radius: 26px; }
   .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
   .tp-night .tp-actions { align-items: stretch; }
   .tp-join .tp-actions { align-items: center; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tier, .tp-tiers__thumb, .tp-ladder__col i, .tp-ladder__col::after, .tp-sheet__track span, .tp-tl-fill, .tp-tl__dot, .tp-proof, .tp-slide__fill, .tp-slide__knob { transition: none; }
-  .tp-sheet__stamp.is-stamped { animation: none; }
+  .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tl-fill, .tp-tl__dot, .tp-proof, .tp-slide__fill, .tp-slide__knob { transition: none; }
 }
 
 /* ---- right-to-left ---------------------------------------------------------------- */
@@ -1625,7 +1545,7 @@ html:lang(ko) * { word-break: keep-all; }
             <h2 class="tp-prog__title">推薦交易者</h2>
             <p class="tp-prog__desc">與您的受眾分享推薦連結，客戶每交易一手，您都能賺取收益。</p>
             <div class="tp-prog__value"><b>高達87%</b><span>點差分成</span></div>
-            <ul class="tp-ticks"><li>每手返佣$5.00–$10.00</li><li>每日發放，出款免手續費</li><li>即時追蹤儀表板</li></ul>
+            <ul class="tp-ticks"><li>收益無上限</li><li>每日發放，出款免手續費</li><li>即時追蹤儀表板</li></ul>
             <p class="tp-prog__for">適合交易講師、訊號群組及內容創作者</p>
             <div class="tp-prog__cta">
               <a class="tp-pcta" href="../#signup" data-page-link data-label="載入中 · 首頁" aria-label="成為合作夥伴">
@@ -1818,7 +1738,7 @@ html:lang(ko) * { word-break: keep-all; }
             </button>
             <div data-faq-panel id="pp-faq-2-a" role="region" aria-labelledby="pp-faq-2-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">您推薦的客戶每交易一手，您最高可獲得點差的87%。每手返佣隨您旗下客戶數增加而提高：Starter（0–50位客戶）為$5.00、Gold（51–200位）為$7.50、Elite（200+）為$10.00。客戶數與交易量均無上限。</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">您推薦的客戶每交易一手，您最高可獲得點差的87%。客戶數與交易量均無上限。</p>
               </div>
             </div>
           </div>
@@ -1953,6 +1873,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=8e33af974e" defer></script>
+<script src="../../assets/js/landing.js?v=c553678a37" defer></script>
 </body>
 </html>

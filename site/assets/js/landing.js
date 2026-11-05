@@ -417,9 +417,8 @@
   function startCalculator() {
     const inv = ref('inv');
     if (!inv) return;
-    /* rate per lot follows the tier set by the number of active clients (FAQ: Starter 0–50 $5.00,
-       Gold 51–200 $7.50, Elite 200+ $10.00); the same rule as commission-plan/ (plan.js) */
-    const rateFor = (traders) => (traders <= 50 ? 5 : traders <= 200 ? 7.5 : 10);
+    /* one rate per lot, $7.50, as in the original design; the same as commission-plan/ (plan.js) */
+    const RATE = 7.5;
     const cfg = { lots: { min: 10, max: 5000, step: 10 }, traders: { min: 1, max: 300, step: 1 } };
     const state = { lots: 130, traders: 60 };
     const inputs = {}, sliders = {};
@@ -469,9 +468,8 @@
       }
       setText('[data-inv-lots]', (lots * traders).toLocaleString(numLocale));   /* lot count in local style; $ amounts stay en-US */
       setText('[data-inv-no]', 'TQ-' + String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + '-' + String(traders).padStart(3, '0'));
-      const rate = rateFor(traders);
-      setText('[data-inv-rate]', '$' + rate.toFixed(2));
-      tween(lots * traders * rate);
+      setText('[data-inv-rate]', '$' + RATE.toFixed(2));
+      tween(lots * traders * RATE);
     };
 
     for (const key of ['lots', 'traders']) {
