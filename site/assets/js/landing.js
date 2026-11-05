@@ -706,6 +706,52 @@
     });
   }
 
+  /* ---- Key benefits (Partner Programs): glass card + 3D candles ----------------
+   * The page owns the active benefit: it cycles every 2.6 s while the block is on
+   * screen (not under reduced motion, not while hovered or focused), tells the
+   * candles embed {tqKb: i}, and holds a picked item for 7 s — a click on a bar
+   * here, or on a candle's chip in the embed ({tqKbPick: i}). */
+  function startKeyBenefits() {
+    const root = $('[data-kb]');
+    if (!root) return;
+    const items = $$('[data-kb-item]', root), bars = $$('[data-kb-bar]', root);
+    const num = $('[data-kb-num]', root), group = $('[data-kb-group]', root), frame = $('iframe', root);
+    const N = items.length, STEP = 2600, HOLD = 7000;
+    let cur = 0, timer = 0, onScreen = false, hover = false;
+    const tell = () => { try { if (frame.contentWindow) frame.contentWindow.postMessage({ tqKb: cur }, location.origin); } catch (e) {} };
+    const show = (i) => {
+      cur = (i + N) % N;
+      items.forEach((el, j) => el.classList.toggle('is-on', j === cur));
+      bars.forEach((b, j) => {
+        b.classList.toggle('is-on', j === cur); b.classList.toggle('is-past', j < cur);
+        b.setAttribute('aria-pressed', String(j === cur));
+      });
+      num.textContent = pad(cur + 1) + ' / ' + pad(N);
+      group.textContent = items[cur].dataset.group;
+      tell();
+    };
+    const schedule = (ms) => {
+      clearTimeout(timer);
+      if (!onScreen || hover || document.hidden || reducedMotion()) return;
+      timer = setTimeout(() => { show(cur + 1); schedule(STEP); }, ms);
+    };
+    const pick = (i) => { show(i); schedule(HOLD); };
+    bars.forEach((b, j) => b.addEventListener('click', () => pick(j)));
+    window.addEventListener('message', (e) => {
+      if (e.origin !== location.origin || !frame || e.source !== frame.contentWindow || !e.data) return;
+      if (typeof e.data.tqKbPick === 'number') pick(e.data.tqKbPick | 0);
+      if (e.data.tqReady) tell();
+    });
+    if (frame) frame.addEventListener('load', tell);
+    const card = $('.tp-kb__card', root);
+    card.addEventListener('pointerenter', () => { hover = true; schedule(0); });
+    card.addEventListener('pointerleave', () => { hover = false; schedule(STEP); });
+    root.addEventListener('focusin', () => { hover = true; schedule(0); });
+    root.addEventListener('focusout', () => { hover = false; schedule(STEP); });
+    document.addEventListener('visibilitychange', () => schedule(STEP));
+    new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; schedule(STEP); }, { threshold: 0.35 }).observe(root);
+  }
+
   startFanMenu();
   startFab();
   startDock();
@@ -719,5 +765,6 @@
   startCalculator();
   startForm();
   startFaq();
+  startKeyBenefits();
   startLang();
 })();

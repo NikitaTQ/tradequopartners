@@ -23,7 +23,7 @@ for sub in ('', 'programs', 'commission'):
           if k not in t: continue
           if sorted(TOK.findall(v)) != sorted(TOK.findall(t[k])): problems.append('tokens %s: %s' % (k, TOK.findall(t[k])))
           if sorted(PH.findall(v)) != sorted(PH.findall(t[k])): problems.append('placeholders %s: %s' % (k, PH.findall(t[k])))
-          if k != 'footer.risk' and k != 'form.datePh':
+          if k not in ('footer.risk', 'form.datePh', 'embed.kb.3'):   # kb.3: '$0 payout fees' reads 'no payout fees' in translation
               for n in NUM.findall(TOK.sub('', v)):
                   core = n.strip('.,$%+')   # local forms like %87 (Turkish) keep the digits
                   if core and core not in t[k] and re.sub(r'\D', '', core) not in re.sub(r'\D', '', t[k]):

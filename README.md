@@ -85,6 +85,10 @@ HTTPS (Let's Encrypt) Netlify включит сам.
 3. Соберите страницы: `python3 tools/build-i18n.py`. Скрипт перезаписывает `site/[<язык>/][<страница>/]index.html`, поэтому правьте шаблоны и JSON, а не готовые страницы.
 4. Если менялись подписи кристаллов (`embed.crys.*`), запустите `python3 tools/make-caption-fonts.py` (шрифты для CJK) и `cd tools && npm run posters` (кадры-заглушки).
 
+### Блок «Why partners choose TradeQuo» на /programs/
+
+Восемь стеклянных свечей (`site/embeds/benefit-candles.html`, по макету Key_Benefits_Silver_Candles) и стеклянная карточка с текстом. Карточка, заголовки и переводы — в шаблоне `programs.html` (ключи `pp.ben.*`, группы `pp.ben.g1`/`g2`). Короткие подписи на чипах над свечами — `embed.kb.1`…`embed.kb.8` в `strings/<язык>.json`. Активный пункт задаёт страница (`startKeyBenefits` в `landing.js`): каждые 2,6 с, пока блок на экране, с паузой при наведении и без автосмены при «уменьшении движения». Клик по полоске в карточке или по чипу в сцене открывает пункт и держит его 7 с. Пока сцена не загрузилась, виден кадр-заглушка: `site/assets/posters/benefits-candles-wide.webp` (сцена 2:1) и `benefits-candles.webp` (4:3, до 820px). После правки сцены перерисуйте их: `cd tools && node render-program-posters.mjs benefits`.
+
 ### Автоперевод браузера
 
 Автоперевод (например, в Chrome) разрешён по умолчанию. В конце меню языков есть переключатель «Auto-translate»: если посетитель его выключит, выбор запоминается в браузере (`localStorage`), страница перезагружается и больше не переводится автоматически (`translate="no"` и `<meta name="google" content="notranslate">` ставит скрипт в `partials/head.html`).
