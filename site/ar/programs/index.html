@@ -1569,7 +1569,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-sans-arabic-700-arabic.woff2) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC7, U+10EC9-10EEE, U+10EF0-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1; }
 @font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-sans-arabic-400-arabic.woff2) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC7, U+10EC9-10EEE, U+10EF0-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1; }
 @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500 600; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-sans-arabic-500-arabic.woff2) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC7, U+10EC9-10EEE, U+10EF0-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1; }
-* { letter-spacing: 0 !important; }
+*:not(svg *) { letter-spacing: 0 !important; }
 h1, h2 { line-height: 1.2 !important; }
 </style>
 </head>
@@ -1775,7 +1775,7 @@ h1, h2 { line-height: 1.2 !important; }
         </div>
         <div class="tp-kbo__stage">
           <picture class="tp-kbo__poster" data-poster aria-hidden="true"><source media="(min-width: 641px)" srcset="../../assets/posters/benefits-objects-wide.webp?v=3f4ced1586" width="1240" height="797"><img src="../../assets/posters/benefits-objects.webp?v=3370ec2a52" alt="" width="360" height="580" loading="lazy" decoding="async"></picture>
-          <iframe class="tp-kbo__3d" data-embed data-src="../../embeds/benefit-objects.html?lang=ar&v=06bfc8437e" title="المزايا الرئيسية" aria-hidden="true" tabindex="-1"></iframe>
+          <iframe class="tp-kbo__3d" data-embed data-src="../../embeds/benefit-objects.html?lang=ar&v=e7a5a0bd99" title="المزايا الرئيسية" aria-hidden="true" tabindex="-1"></iframe>
         </div>
         <div class="tp-kbo__cta">
           <a class="tp-c3d tp-ped" data-c3d href="../#signup" data-page-link data-label="جارٍ التحميل · الرئيسية">
@@ -1809,7 +1809,7 @@ h1, h2 { line-height: 1.2 !important; }
         <div class="tp-dome" data-dome>
           <div class="tp-dome__stage">
             <img class="tp-dome__poster" data-poster src="../../assets/posters/trust-dome.webp?v=cd64cd2f23" alt="" width="900" height="780" loading="lazy" decoding="async">
-            <iframe class="tp-dome__3d" data-embed data-src="../../embeds/trust-dome.html?lang=ar&v=bcf729ca13" title="لماذا TradeQuo" aria-hidden="true" tabindex="-1"></iframe>
+            <iframe class="tp-dome__3d" data-embed data-src="../../embeds/trust-dome.html?lang=ar&v=59890ef037" title="لماذا TradeQuo" aria-hidden="true" tabindex="-1"></iframe>
           </div>
           <div class="tp-dome__stat" data-stat="tl"><b>800K<i>+</i></b><span>عميل متداول</span></div>
           <div class="tp-dome__stat" data-stat="tr"><b>4.9<i>★</i></b><span>تقييم Trustpilot</span></div>

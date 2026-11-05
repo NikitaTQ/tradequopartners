@@ -140,8 +140,9 @@ def font_css(script, root):
         rules += [face('DM Sans', thai, root), face('Fragment Mono', thai, root), face('Cormorant Garamond', thai, root)]
         preload = [thai['file']]
     if script in ('arabic', 'thai', 'cjk'):
-        # tracking breaks Arabic joining and crowds CJK/Thai; tight Latin leading clips their glyphs
-        rules.append('* { letter-spacing: 0 !important; }')
+        # tracking breaks Arabic joining and crowds CJK/Thai; tight Latin leading clips their glyphs.
+        # SVG text is left alone: it is only the fixed Latin lettering round the stamps.
+        rules.append('*:not(svg *) { letter-spacing: 0 !important; }')
         rules.append('h1, h2 { line-height: 1.2 !important; }')
     if script == 'cjk':
         rules.append('h1, h2, h3, p { line-break: strict; }')
