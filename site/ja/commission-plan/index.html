@@ -1561,7 +1561,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (prefers-reduced-motion: reduce) { .tp-c3d, .tp-ped, .tp-ionic { transition: --ch .2s linear, --cd .1s linear; } }
 </style>
 <style id="i18n-fonts">
-* { letter-spacing: 0 !important; }
+*:not(svg *) { letter-spacing: 0 !important; }
 h1, h2 { line-height: 1.2 !important; }
 h1, h2, h3, p { line-break: strict; }
 html:lang(ko) * { word-break: keep-all; }
@@ -1653,7 +1653,7 @@ html:lang(ko) * { word-break: keep-all; }
                 <defs><path id="planArc" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"></path></defs>
                 <circle cx="60" cy="60" r="56" fill="none" stroke="#e7131b" stroke-width="2.4"></circle>
                 <circle cx="60" cy="60" r="31" fill="none" stroke="#e7131b" stroke-width="1.2"></circle>
-                <text font-family="DM Sans, sans-serif" font-size="9.6" font-weight="700" letter-spacing="2" fill="#e7131b"><textPath href="#planArc">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text>
+                <text font-family="DM Sans, sans-serif" font-size="9.6" font-weight="700" letter-spacing="2" fill="#e7131b" direction="ltr" unicode-bidi="embed"><textPath href="#planArc">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text>
                 <text x="60" y="67" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="18" font-weight="800" letter-spacing="1" fill="#e7131b">TQ</text>
               </svg>
             </div>
