@@ -747,6 +747,22 @@
    * hover or keyboard focus eases --ch to 1, the button leans toward the pointer
    * (--ctx/--cty) and dips on press (--cd); the CSS does the rest. The Ionic volutes are
    * drawn in the button's own coordinates, so they are refitted to the label's width. */
+  /* Frosted glass (Glass_Card_Grid design): the light and the iridescent rim follow the pointer.
+   * Mouse only; on touch the glass simply rests. */
+  function startGlass() {
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    $$('.tq-glass, .tp-glass').forEach((el) => {
+      const set = (k, v) => el.style.setProperty(k, v);
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        set('--tqgx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        set('--tqgy', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+        set('--tqgh', '1');
+      });
+      el.addEventListener('pointerleave', () => { set('--tqgx', '30%'); set('--tqgy', '0%'); set('--tqgh', '0'); });
+    });
+  }
+
   function startCta3d() {
     $$('[data-c3d]').forEach((el) => {
       const set = (k, v) => el.style.setProperty(k, v);
@@ -800,5 +816,6 @@
   startKeyBenefits();
   startWho();
   startCta3d();
+  startGlass();
   startLang();
 })();

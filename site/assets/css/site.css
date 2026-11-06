@@ -658,8 +658,6 @@ html { scroll-snap-type: y proximity; }
   [data-fan-stage] > [data-fan-card]:nth-child(5) { transform-origin: 28% 82% !important; }
   [data-fan-stage] > [data-fan-card]:nth-child(6) { transform-origin: 72% 82% !important; }
   [data-fan-stage] > [data-fan-card][data-fan-card][data-sel], [data-fan-stage] > [data-fan-card][data-fan-card][data-sel]:hover { transform: scale(1.27) !important; z-index: 6 !important; border-color: rgba(231,19,27,.8) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.35), 0 0 26px rgba(231,19,27,.42), 0 18px 34px rgba(0,0,0,.6) !important; }
-  [data-calc-controls] > span[aria-hidden]:first-child { padding: 6px !important; }
-  [data-calc-controls] > span[aria-hidden]:nth-child(2) { inset: 6px !important; border-radius: 20px !important; }
   [data-crystals] iframe { aspect-ratio: 0.72 / 1 !important; }
   #film { padding: 18px 14px 28px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   [data-film-desk] { display: none !important; }
@@ -762,7 +760,6 @@ html { scroll-snap-type: y proximity; }
 .hv-fan-card-4:hover { transform: rotate(4.2deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
 .hv-fan-card-5:hover { transform: rotate(12.6deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
 .hv-fan-card-6:hover { transform: rotate(21deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
-.hv-glass-glow:hover { box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 0 0 1px rgba(231,19,27,.16), 0 20px 38px -24px rgba(231,19,27,.3) !important; }
 .hv-fan-blade:hover { transform: translateX(-18px) scale(1.04) !important; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 20px 18px rgba(231,19,27,.2)) !important; }
 .hv-fan-knob:hover { transform: scale(1.06) !important; box-shadow: 0 1px 2px rgba(10,10,10,.08), 0 0 0 1px rgba(231,19,27,.2), 0 26px 40px -20px rgba(231,19,27,.38) !important; }
 .hv-ink-border:hover { border-color: #0a0a0a !important; }
@@ -956,3 +953,40 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   header nav { gap: 6px !important; }
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
+
+/* ---- Frosted glass (Glass_Card_Grid design) ----------------------------------------------
+   Milky glass over whatever sits behind it: blur, a little grain, a soft light that follows the
+   pointer (--tqgx/--tqgy), and on hover (--tqgh 0 → 1) an iridescent rim, chromatic inner edges
+   and a small lift. startGlass in landing.js drives the variables; without it the cards just rest.
+   .tp-glass (partner pages) is the same glass.
+     --panel  big panels with controls inside (calculators): larger radius, no lift
+     --flat   no backdrop blur (the reviews marquee moves every frame; the blur would cost frames)
+     --row    FAQ rows: tighter radius */
+@property --tqgx { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
+@property --tqgy { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
+@property --tqgh { syntax: '<number>'; inherits: true; initial-value: 0; }
+.tq-glass, .tp-glass {
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 22px;
+  background: radial-gradient(260px 200px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.25 + var(--tqgh) * .45)), rgba(255,255,255,0) 70%), rgba(248,248,250,.58);
+  -webkit-backdrop-filter: blur(30px) saturate(130%); backdrop-filter: blur(30px) saturate(130%);
+  border: 1px solid rgba(255,255,255,.85);
+  box-shadow: 0 0 0 1px rgba(18,22,30,.05), 0 22px 40px -30px rgba(18,22,30,.3),
+    inset 1px 1px 0 rgba(255,140,146,calc(var(--tqgh) * .35)), inset -1px -1px 0 rgba(140,170,255,calc(var(--tqgh) * .35));
+  transform: translateY(calc(var(--tqgh) * -4px));
+  transition: --tqgx .35s ease, --tqgy .35s ease, --tqgh .45s ease, transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+/* grain */
+.tq-glass::before, .tp-glass::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* iridescent rim, lit from the pointer */
+.tq-glass::after, .tp-glass::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: var(--tqgh);
+  background: conic-gradient(from calc(200deg + var(--tqgh) * 60deg) at var(--tqgx) var(--tqgy), #ffffff, #ffd3d5, #f7a8ac, #ffffff, #d9e2ff, #c9f2e6, #ffffff, #e2e4e8, #ffffff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.tq-glass--panel, .tp-glass--thick { border-radius: 26px; transform: none; }
+.tq-glass--flat { -webkit-backdrop-filter: none; backdrop-filter: none; background-color: rgba(250,250,251,.82); }
+.tq-glass--row { border-radius: 18px; }
+@media (prefers-reduced-motion: reduce) { .tq-glass, .tp-glass { transform: none; transition: none; } }
