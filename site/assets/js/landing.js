@@ -430,21 +430,40 @@
     try { numLocale = Intl.NumberFormat.supportedLocalesOf([document.documentElement.lang + '-u-nu-latn'])[0] || 'en-US'; } catch (e) {}
     const setText = (sel, v) => { const el = $(sel, inv); if (el) el.textContent = v; };
     setText('[data-inv-issued]', pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear());
+    /* the statement covers a day, a month or a year (the Day / Month / Year toggle): the amounts, the lot
+       count and the PERIOD field follow it. A day is a thirtieth of the month, a year twelve months. */
+    const PER = { day: 1 / 30, month: 1, year: 12 };
+    let per = 'month';
     /* period in the page language, Western digits (amounts stay $ / en-US everywhere) */
-    let period;
-    try { period = new Intl.DateTimeFormat(document.documentElement.lang + '-u-nu-latn', { month: 'short', year: 'numeric' }).format(d); }
-    catch (e) { period = d.toLocaleString('en-US', { month: 'short' }) + ' ' + d.getFullYear(); }
-    setText('[data-inv-period]', period);
+    const PERIOD_FMT = { day: { day: 'numeric', month: 'short', year: 'numeric' }, month: { month: 'short', year: 'numeric' }, year: { year: 'numeric' } };
+    const periodText = () => {
+      try { return new Intl.DateTimeFormat(document.documentElement.lang + '-u-nu-latn', PERIOD_FMT[per]).format(d); }
+      catch (e) { return d.toLocaleString('en-US', PERIOD_FMT[per]); }
+    };
+    setText('[data-inv-period]', periodText());
 
     /* money figures count up/down to the new total */
     const tot = $('[data-inv-total]', inv);
+    const totals = tot && tot.closest('[data-inv-totals]');
+    const baseSize = tot ? tot.style.fontSize : '';   /* the size the markup gives it */
+    /* the big total shrinks to fit when a long figure (a year of a big network) would run past the statement */
+    const fit = (v) => {
+      if (!tot || !totals) return;
+      tot.style.setProperty('font-size', baseSize);
+      const keep = tot.textContent;
+      tot.textContent = money(v);
+      const room = totals.clientWidth, need = tot.scrollWidth;
+      if (room && need > room) tot.style.setProperty('font-size', Math.floor(parseFloat(getComputedStyle(tot).fontSize) * room / need * 0.98) + 'px', 'important');
+      tot.textContent = keep;
+    };
     let live = null, to = null, raf = 0, colT = 0;
-    const write = (v) => $$('[data-inv-money]', inv).forEach((el) => { el.textContent = money(v * parseFloat(el.dataset.mul || '1')); });
+    const write = (v) => $$('[data-inv-money]', inv).forEach((el) => { el.textContent = money(v); });
     const tween = (target) => {
-      if (live == null) { live = to = target; write(target); return; }
+      if (live == null) { live = to = target; fit(target); write(target); return; }
       if (to === target) return;
       to = target;
       const from = live, t0 = performance.now(), DUR = 650;
+      fit(Math.max(from, target));
       if (tot) tot.style.color = target >= from ? '#0f9a52' : '#0a0a0a';   /* money up: green */
       cancelAnimationFrame(raf);
       const step = (now) => {
@@ -452,10 +471,12 @@
         live = from + (target - from) * e;
         write(live);
         if (p < 1) raf = requestAnimationFrame(step);
-        else { clearTimeout(colT); colT = setTimeout(() => { if (tot) tot.style.color = '#0a0a0a'; }, 260); }
+        else { fit(target); clearTimeout(colT); colT = setTimeout(() => { if (tot) tot.style.color = '#0a0a0a'; }, 260); }
       };
       raf = requestAnimationFrame(step);
     };
+    let fitT = 0;
+    addEventListener('resize', () => { clearTimeout(fitT); fitT = setTimeout(() => { if (to != null) fit(to); }, 120); });
 
     const render = () => {
       const { lots, traders } = state;
@@ -466,11 +487,25 @@
         $('[data-calc-fill]', s).style.width = pct;
         $('[data-calc-knob]', s).style.left = pct;
       }
-      setText('[data-inv-lots]', (lots * traders).toLocaleString(numLocale));   /* lot count in local style; $ amounts stay en-US */
+      /* lot count in local style (a day can be a fraction of a lot); $ amounts stay en-US */
+      setText('[data-inv-lots]', (lots * traders * PER[per]).toLocaleString(numLocale, { maximumFractionDigits: 1 }));
       setText('[data-inv-no]', 'TQ-' + String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + '-' + String(traders).padStart(3, '0'));
       setText('[data-inv-rate]', '$' + RATE.toFixed(2));
-      tween(lots * traders * RATE);
+      tween(lots * traders * RATE * PER[per]);
     };
+
+    const perBox = $('[data-inv-per]', inv);
+    if (perBox) {
+      const btns = $$('button[data-per]', perBox);
+      btns.forEach((b, i) => b.addEventListener('click', () => {
+        if (per === b.dataset.per) return;
+        per = b.dataset.per;
+        btns.forEach((o) => o.setAttribute('aria-pressed', String(o === b)));
+        perBox.style.setProperty('--i', String(i));
+        setText('[data-inv-period]', periodText());
+        render();
+      }));
+    }
 
     for (const key of ['lots', 'traders']) {
       const c = cfg[key], input = inputs[key], slider = sliders[key];

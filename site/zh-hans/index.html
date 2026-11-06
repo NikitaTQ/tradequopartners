@@ -674,12 +674,10 @@ html { scroll-snap-type: y proximity; }
   [data-calc-controls] > div > div:first-child > span:first-child { width: 30px !important; height: 30px !important; border-radius: 9px !important; }
   [data-calc-controls] > div > div:first-child > span:first-child svg { width: 15px; height: 15px; }
   [data-calc-controls] > div > div:first-child > span:last-child > span:first-child { font-size: 14.5px !important; }
-  [data-calc-controls] > div > div:first-child > span:last-child > span:last-child { display: none !important; }
   [data-calc-controls] > div > div:nth-child(2) { height: 44px !important; padding: 0 14px !important; border-radius: 11px !important; }
   [data-calc-controls] > div > div:nth-child(2) input { font-size: 18px !important; }
   [data-calc-controls] > div > div:nth-child(2) > span { font-size: 9.5px !important; }
   [data-calc-controls] > div > div:nth-child(3) { height: 20px !important; }
-  [data-calc-controls] > div > div:nth-child(4) { display: none !important; }
   [data-invoice] { padding: 22px 18px 18px !important; gap: 14px !important; }
   [data-invoice] > div:nth-child(2) img { height: 19px !important; }
   [data-invoice] > div:nth-child(2) > span:first-child > span { font-size: 16px !important; }
@@ -694,8 +692,7 @@ html { scroll-snap-type: y proximity; }
   [data-invoice] > div:nth-child(4) > div > span:last-child { font-size: 12.5px !important; }
   [data-inv-total] { font-size: 34px !important; }
   [data-inv-stamp] { width: 70px !important; height: 70px !important; }
-  [data-invoice] > div:last-child { padding: 10px 12px !important; }
-  [data-invoice] > div:last-child span { font-size: 12px !important; }
+  [data-inv-per] button { padding: 6px 8px; font-size: 12.5px; }
   [data-faq-art] iframe { pointer-events: none; }
   [data-fan-stage] > [data-fan-card][data-fan-card]:hover { transform: none !important; z-index: 1 !important; border-color: rgba(255,255,255,.13) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 10px 22px rgba(0,0,0,.5) !important; }
   [data-fan-stage] > [data-fan-card] { transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s ease, box-shadow .3s ease !important; -webkit-tap-highlight-color: transparent; cursor: pointer !important; }
@@ -982,7 +979,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 /* Reviews are quoted in English: the marquee stays left-to-right. */
 [dir="rtl"] [data-rep-stage] { direction: ltr; }
 /* Sliders grow left-to-right like the numbers on them. */
-[dir="rtl"] [data-calc-slider], [dir="rtl"] [data-calc-slider] + div { direction: ltr; }
+[dir="rtl"] [data-calc-slider] { direction: ltr; }
 [dir="rtl"] input[type="email"], [dir="rtl"] input[type="tel"] { direction: ltr; text-align: right; }
 [dir="rtl"] #signup form label > span:first-child { padding-left: 0 !important; padding-right: 70px; }
 /* How it works: the progress line fills from the right, where step 1 is. */
@@ -1002,6 +999,20 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   header nav { gap: 6px !important; }
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
+
+/* ---- Payout period toggle on the landing statement (Day / Month / Year) --------------------
+   The thumb slides under the pressed button; --i is its index (0 day, 1 month, 2 year), set by startCalculator. */
+[data-inv-per] { --i: 1; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(100%, 300px); padding: 3px; box-sizing: border-box;
+  border-radius: 999px; background: #efefeb; box-shadow: inset 0 0 0 1px #e2e2dd, inset 0 1px 2px rgba(10,10,10,.05); }
+[data-inv-per-thumb] { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc((100% - 6px) / 3); border-radius: 999px; background: #0a0a0a;
+  box-shadow: 0 3px 8px -3px rgba(10,10,10,.45); transform: translateX(calc(var(--i) * 100%)); transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+[dir="rtl"] [data-inv-per-thumb] { left: auto; right: 3px; transform: translateX(calc(var(--i) * -100%)); }
+[data-inv-per] button { position: relative; min-width: 0; padding: 7px 12px; border: 0; border-radius: 999px; background: transparent; cursor: pointer;
+  font: 600 13.5px/1.2 'DM Sans', sans-serif; letter-spacing: -.01em; color: #5b5b5b; white-space: nowrap; transition: color .3s ease; -webkit-tap-highlight-color: transparent; }
+[data-inv-per] button:hover { color: #0a0a0a; }
+[data-inv-per] button[aria-pressed="true"] { color: #fff; }
+[data-inv-per] button:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { [data-inv-per-thumb] { transition: none; } }
 
 /* ---- Liquid glass (Glass_Card_Grid_Liquid design) ----------------------------------------
    Clear glass that bends what sits behind it: a faint white tint, a strong saturate, a white rim
@@ -1296,7 +1307,7 @@ html:lang(ko) * { word-break: keep-all; }
   <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: clamp(56px, 8vw, 104px) clamp(16px, 4vw, 56px) clamp(60px, 8vw, 110px); background: #fff; color: #0a0a0a;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
       <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a;">估算您的<br><span style="color: #e7131b;">每月收益</span></h2>
-      <p style="margin: 2px 0 0; font-size: 15px; color: #5b5b5b;">设置交易者人数及其月交易量，结算单即时更新。按我们的最低点差计算。</p>
+      <p style="margin: 2px 0 0; font-size: 15px; color: #5b5b5b;">设置交易者人数及其月交易量，<br class="br-desk">结算单即时更新。按我们的最低点差计算。</p>
     </div>
 
     <div data-calc-grid="" style="max-width: 1240px; margin: clamp(26px, 4vw, 48px) auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(18px, 2.4vw, 32px); align-items: stretch;">
@@ -1307,7 +1318,6 @@ html:lang(ko) * { word-break: keep-all; }
             <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; position: relative; background: linear-gradient(145deg, #ffffff 0%, #eef0f2 55%, #dfe2e6 100%); border: 1px solid #d6d9de; box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(10,10,10,.16); color: #e7131b; flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3 3 7.5l9 4.5 9-4.5L12 3Z"></path><path d="m3 12.4 9 4.5 9-4.5"></path><path d="m3 17 9 4.5 9-4.5"></path></svg></span>
             <span style="position: relative; display: flex; flex-direction: column; gap: 2px;">
               <span style="font-size: 16px; font-weight: 700; color: #0a0a0a; letter-spacing: -.015em;">每位交易者月交易手数</span>
-              <span style="font-size: 12.5px; color: #6a6a6e;">每位客户的平均月交易量</span>
             </span>
           </div>
           <div style="display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 20px; position: relative; border-radius: 14px; background: linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%); border: 1px solid #dfe2e6; box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(10,10,10,.03), 0 1px 0 rgba(255,255,255,.9), 0 3px 8px -4px rgba(10,10,10,.14);">
@@ -1319,14 +1329,12 @@ html:lang(ko) * { word-break: keep-all; }
             <span data-calc-fill style="position: absolute; left: 0; height: 4px; border-radius: 99px; background: #e7131b; width: 2.40%;"></span>
             <span data-calc-knob style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-sizing: border-box; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transform: translateX(-10px); left: 2.40%;"></span>
           </div>
-          <div style="display: flex; justify-content: space-between; font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #6a6a6e; position: relative;"><span>10</span><span>5,000</span></div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div style="display: flex; align-items: center; gap: 12px;">
             <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; position: relative; background: linear-gradient(145deg, #ffffff 0%, #eef0f2 55%, #dfe2e6 100%); border: 1px solid #d6d9de; box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(10,10,10,.16); color: #e7131b; flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"></path><path d="M16 5.6a3.2 3.2 0 0 1 0 6.1"></path><path d="M17.6 14.9c2 .6 3.4 2.4 3.4 4.6"></path></svg></span>
             <span style="position: relative; display: flex; flex-direction: column; gap: 2px;">
               <span style="font-size: 16px; font-weight: 700; color: #0a0a0a; letter-spacing: -.015em;">活跃交易者</span>
-              <span style="font-size: 12.5px; color: #6a6a6e;">您旗下正在交易的客户</span>
             </span>
           </div>
           <div style="display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 20px; position: relative; border-radius: 14px; background: linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%); border: 1px solid #dfe2e6; box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(10,10,10,.03), 0 1px 0 rgba(255,255,255,.9), 0 3px 8px -4px rgba(10,10,10,.14);">
@@ -1338,7 +1346,6 @@ html:lang(ko) * { word-break: keep-all; }
             <span data-calc-fill style="position: absolute; left: 0; height: 4px; border-radius: 99px; background: #e7131b; width: 19.73%;"></span>
             <span data-calc-knob style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-sizing: border-box; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transform: translateX(-10px); left: 19.73%;"></span>
           </div>
-          <div style="display: flex; justify-content: space-between; font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #6a6a6e; position: relative;"><span>1</span><span>300</span></div>
         </div>
       </div>
 
@@ -1364,7 +1371,7 @@ html:lang(ko) * { word-break: keep-all; }
               <span style="font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: #0a0a0a;">客户交易量返佣</span>
               <span style="font-family: 'Fragment Mono', monospace; font-size: 11.5px; color: #6a6a6e;"><span data-inv-lots>7,800</span> 手 × <span data-inv-rate>$7.50</span> / 手</span>
             </span>
-            <span data-inv-money="" data-mul="1" style="font-family: 'Fragment Mono', monospace; font-size: 12.5px; color: #0a0a0a; font-size: 14px; white-space: nowrap;"></span>
+            <span data-inv-money="" style="font-family: 'Fragment Mono', monospace; font-size: 12.5px; color: #0a0a0a; font-size: 14px; white-space: nowrap;"></span>
           </div>
           <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 14px 0; border-bottom: 1px solid #e4e4e1;">
             <span style="display: flex; flex-direction: column; gap: 5px;">
@@ -1383,17 +1390,12 @@ html:lang(ko) * { word-break: keep-all; }
             <text font-family="DM Sans, sans-serif" font-size="9.6" font-weight="700" letter-spacing="2" fill="#e7131b" direction="ltr" unicode-bidi="embed"><textPath href="#invArc">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text>
             <text x="60" y="66" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="17" font-weight="800" letter-spacing="1.5" fill="#e7131b">PAID</text>
           </svg>
-          <div data-inv-totals="" style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 0;">
-            <span style="font-size: 9.5px; font-weight: 600; letter-spacing: .2em; color: #8a8a8e;">每月支付总额</span>
-            <span data-inv-money="" data-mul="1" data-inv-total="" style="font-family: 'DM Sans', sans-serif; font-size: clamp(38px, 4.6vw, 56px); line-height: 1; letter-spacing: -.04em; font-weight: 700; color: #0a0a0a; font-variant-numeric: tabular-nums; white-space: nowrap; transition: color .5s ease;"></span>
-            <span style="font-family: 'Fragment Mono', monospace; font-size: 11.5px; color: #6a6a6e; white-space: nowrap;"><span data-inv-money="" data-mul="12"></span> / 年</span>
+          <div data-inv-totals="" style="flex: 1 1 0; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; min-width: 0;">
+            <div data-inv-per="" role="group" aria-label="周期"><span data-inv-per-thumb="" aria-hidden="true"></span><button type="button" data-per="day" aria-pressed="false">按日</button><button type="button" data-per="month" aria-pressed="true">按月</button><button type="button" data-per="year" aria-pressed="false">按年</button></div>
+            <span data-inv-money="" data-inv-total="" style="font-family: 'DM Sans', sans-serif; font-size: clamp(38px, 4.6vw, 56px); line-height: 1; letter-spacing: -.04em; font-weight: 700; color: #0a0a0a; font-variant-numeric: tabular-nums; white-space: nowrap; transition: color .5s ease;"></span>
           </div>
         </div>
 
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 16px; border-radius: 10px; background: #f4fbf7; border: 1px dashed #8fd6ad;">
-          <span style="display: flex; align-items: center; gap: 10px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #16b364; box-shadow: 0 0 8px rgba(22,179,100,.6); animation: tqPulse 2.4s ease-in-out infinite;"></span><span style="font-size: 13.5px; font-weight: 600; color: #0a0a0a;">每日结算</span></span>
-          <span style="font-family: 'Fragment Mono', monospace; font-size: 13px; color: #0f9a52; white-space: nowrap;">≈ <span data-inv-money="" data-mul="0.0333333333"></span> / 天</span>
-        </div>
       </div>
     </div>
     <p data-calc-note style="max-width: 1240px; margin: clamp(16px, 2vw, 24px) auto 0; font-size: 12.5px; line-height: 1.55; color: #8a8a8e; text-align: center; text-wrap: pretty;">仅为示意性估算。实际收益取决于交易品种、交易时的点差及客户交易活跃度。</p>
@@ -1724,6 +1726,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=2e6c56e8e7" defer></script>
+<script src="../assets/js/landing.js?v=1dceaa3fcb" defer></script>
 </body>
 </html>
