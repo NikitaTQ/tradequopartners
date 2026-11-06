@@ -1047,7 +1047,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
-   Built on site.css: same type, chrome-glass cards, red accent, mono kickers. */
+   Built on site.css: same type, chrome-glass cards, red accent. */
 
 .tp { font-family: 'DM Sans', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
 .tp-sec { position: relative; padding: clamp(56px, 8vw, 112px) clamp(16px, 4vw, 56px); }
@@ -1056,8 +1056,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* ---- headings ---------------------------------------------------------------- */
 .tp-head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto; text-align: center; }
 .tp-head--left { align-items: flex-start; text-align: start; margin: 0; }
-.tp-kicker { display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b; text-transform: uppercase; }
-.tp-kicker::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .tp-h1 { margin: 0; max-width: 24ch; font-size: clamp(24px, 3.4vw, 40px); line-height: 1; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
 .tp-h2 { margin: 0; max-width: 30ch; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(15px, 1.5vw, 19px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
@@ -1347,7 +1345,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 .tp-night .tp-h2 { color: #fff; }
 .tp-night .tp-sub { color: #a7a9ae; }
-.tp-night .tp-kicker { color: #ff4d53; }
 .tp-night-sec { padding: clamp(24px, 4vw, 56px) clamp(8px, 2vw, 24px); }
 
 /* ---- final call on Partner Programs (Final CTA Glint Teaser) ----------------------- */
@@ -1792,7 +1789,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <!-- Hero + the three programs -->
     <section id="programs" class="tp-sec tp-hero" data-screen-label="Partner programs — hero">
       <div class="tp-head">
-        <span class="tp-kicker">CHƯƠNG TRÌNH ĐỐI TÁC</span>
         <h1 class="tp-h1">Một chương trình đối tác. <span style="color: #e7131b;">Ba cách kiếm tiền.</span></h1>
         <p class="tp-sub">Giới thiệu nhà giao dịch, xây dựng mạng lưới đối tác hoặc ra mắt thương hiệu của riêng bạn. Dù bạn chọn hình thức nào, luôn có một quản lý đối tác riêng đồng hành cùng bạn.</p>
       </div>
@@ -1852,7 +1848,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       <div class="tp-who" data-who>
         <div class="tp-who__head">
           <div class="tp-who__title">
-            <span class="tp-kicker">DÀNH CHO AI</span>
             <h2 class="tp-h2">Được thiết kế cho những người <span style="color: #e7131b;">dẫn dắt nhà giao dịch</span></h2>
           </div>
           <p class="tp-who__sub">Tìm hình mẫu của bạn bên dưới và xem TradeQuo phù hợp ra sao với cách bạn vẫn đang làm việc.</p>
@@ -1932,7 +1927,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <section id="benefits" class="tp-sec" data-screen-label="Key benefits">
       <div class="tp-wrap tp-kbo" data-kb>
         <div class="tp-kbo__head">
-          <span class="tp-kicker">LỢI ÍCH CHÍNH</span>
           <h2 class="tp-h2">Vì sao đối tác chọn <span style="color: #e7131b;">TradeQuo</span></h2>
           <p class="tp-kbo__sub">Điều kiện hấp dẫn, chi trả mỗi ngày cùng công cụ giúp bạn khai thác tối đa những lợi thế đó.</p>
         </div>
@@ -1976,7 +1970,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <section id="why" class="tp-sec" data-screen-label="Why TradeQuo" style="padding-top: 0;">
       <div class="tp-dome-panel">
         <div class="tp-dome-copy">
-          <span class="tp-kicker">VÌ SAO CHỌN TRADEQUO</span>
           <h2 class="tp-h2">Nhà môi giới được nhà giao dịch <span style="color: #e7131b;">tin tưởng</span></h2>
           <p class="tp-dome-copy__sub">Bạn nhận thu nhập chừng nào khách hàng còn giao dịch, vì vậy nhà môi giới đứng sau liên kết của bạn rất quan trọng. TradeQuo được nhà giao dịch và các bên đánh giá độc lập chấm điểm, đồng thời chi trả cho đối tác mỗi ngày.</p>
           <div class="tp-dome-actions">
@@ -2011,12 +2004,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
      landing and goes to it from the other pages (signupHref and signupNav in build-i18n.py). -->
   <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(50px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(30px, 4vw, 56px); background: #fff; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
-      <div style="display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #e7131b;"></span>CÁCH HOẠT ĐỘNG</div>
       <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Từ đăng ký đến nhận tiền lần đầu<br><span style="color: #e7131b;">qua ba bước</span></h2>
     </div>
     <div data-how-steps="" style="max-width: 1240px; margin: clamp(36px, 5vw, 64px) auto 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px) clamp(12px, 2vw, 28px);">
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="5" width="22" height="31" rx="3" stroke="#0a0a0a"></rect><circle cx="21" cy="15" r="4" stroke="#e7131b"></circle><path d="M14.5 26c1.2-3.4 3.6-5 6.5-5s5.3 1.6 6.5 5" stroke="#e7131b"></path><circle cx="32" cy="34" r="6" fill="#fff" stroke="#e7131b"></circle><path d="m29.6 34 1.7 1.7 3.2-3.4" stroke="#e7131b"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="5" width="22" height="31" rx="3" stroke="#0a0a0a"></rect><circle cx="21" cy="15" r="4" stroke="#e7131b"></circle><path d="M14.5 26c1.2-3.4 3.6-5 6.5-5s5.3 1.6 6.5 5" stroke="#e7131b"></path><circle cx="32" cy="34" r="6" fill="#fff" stroke="#e7131b"></circle><path d="m29.6 34 1.7 1.7 3.2-3.4" stroke="#e7131b"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Mở tài khoản</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">Đăng ký với TradeQuo và hoàn tất xác minh danh tính.</p>
         </div>
@@ -2025,7 +2017,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <svg width="12" height="8" viewBox="0 0 12 8" style="margin-top: -1px;"><path data-how-arrow-head="" d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="#d6d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: stroke .3s ease;"></path></svg>
         </div>
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="13" r="6" stroke="#0a0a0a"></circle><path d="M6 34c0-6 4.9-10 11-10 2.4 0 4.6.6 6.4 1.7" stroke="#0a0a0a"></path><rect x="25" y="25" width="13" height="11" rx="2.5" stroke="#e7131b"></rect><path d="M31.5 28v5M29 30.5h5" stroke="#e7131b"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="13" r="6" stroke="#0a0a0a"></circle><path d="M6 34c0-6 4.9-10 11-10 2.4 0 4.6.6 6.4 1.7" stroke="#0a0a0a"></path><rect x="25" y="25" width="13" height="11" rx="2.5" stroke="#e7131b"></rect><path d="M31.5 28v5M29 30.5h5" stroke="#e7131b"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Đăng ký chương trình IB</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">Gửi yêu cầu trong Client Portal. Chúng tôi xét duyệt mọi hồ sơ trong vòng 24 giờ.</p>
         </div>
@@ -2034,7 +2026,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <svg width="12" height="8" viewBox="0 0 12 8" style="margin-top: -1px;"><path data-how-arrow-head="" d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="#d6d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: stroke .3s ease;"></path></svg>
         </div>
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="5" height="16" rx="2.5" stroke="#e7131b"></rect><rect x="6" y="31" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="27" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="33" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="23" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="29" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="35" width="9" height="4" rx="2" stroke="#e7131b"></rect><path d="M31 13l7-7M33 6h5v5" stroke="#0a0a0a"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="5" height="16" rx="2.5" stroke="#e7131b"></rect><rect x="6" y="31" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="27" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="33" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="23" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="29" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="35" width="9" height="4" rx="2" stroke="#e7131b"></rect><path d="M31 13l7-7M33 6h5v5" stroke="#0a0a0a"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Chia sẻ liên kết, nhận thu nhập</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">Nhận liên kết giới thiệu, chia sẻ với cộng đồng của bạn và nhận thu nhập trên mỗi lot khách hàng giao dịch.</p>
         </div>

@@ -1045,7 +1045,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
-   Built on site.css: same type, chrome-glass cards, red accent, mono kickers. */
+   Built on site.css: same type, chrome-glass cards, red accent. */
 
 .tp { font-family: 'DM Sans', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
 .tp-sec { position: relative; padding: clamp(56px, 8vw, 112px) clamp(16px, 4vw, 56px); }
@@ -1054,8 +1054,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* ---- headings ---------------------------------------------------------------- */
 .tp-head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto; text-align: center; }
 .tp-head--left { align-items: flex-start; text-align: start; margin: 0; }
-.tp-kicker { display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b; text-transform: uppercase; }
-.tp-kicker::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .tp-h1 { margin: 0; max-width: 24ch; font-size: clamp(24px, 3.4vw, 40px); line-height: 1; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
 .tp-h2 { margin: 0; max-width: 30ch; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(15px, 1.5vw, 19px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
@@ -1345,7 +1343,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 .tp-night .tp-h2 { color: #fff; }
 .tp-night .tp-sub { color: #a7a9ae; }
-.tp-night .tp-kicker { color: #ff4d53; }
 .tp-night-sec { padding: clamp(24px, 4vw, 56px) clamp(8px, 2vw, 24px); }
 
 /* ---- final call on Partner Programs (Final CTA Glint Teaser) ----------------------- */
@@ -1783,7 +1780,6 @@ html:lang(ko) * { word-break: keep-all; }
     <!-- Hero + the three programs -->
     <section id="programs" class="tp-sec tp-hero" data-screen-label="Partner programs — hero">
       <div class="tp-head">
-        <span class="tp-kicker">파트너 프로그램</span>
         <h1 class="tp-h1">하나의 파트너 프로그램. <span style="color: #e7131b;">세 가지 수익 모델.</span></h1>
         <p class="tp-sub">트레이더를 추천하거나, 파트너 네트워크를 구축하거나, 자체 브랜드를 런칭하세요. 어떤 방식을 선택하든 전담 파트너 매니저가 함께합니다.</p>
       </div>
@@ -1843,7 +1839,6 @@ html:lang(ko) * { word-break: keep-all; }
       <div class="tp-who" data-who>
         <div class="tp-who__head">
           <div class="tp-who__title">
-            <span class="tp-kicker">추천 대상</span>
             <h2 class="tp-h2"><span style="color: #e7131b;">트레이더를 움직이는</span> 사람들을 위해</h2>
           </div>
           <p class="tp-who__sub">아래에서 나에게 맞는 유형을 찾고, TradeQuo가 지금의 업무 방식에 어떻게 맞는지 확인하세요.</p>
@@ -1923,7 +1918,6 @@ html:lang(ko) * { word-break: keep-all; }
     <section id="benefits" class="tp-sec" data-screen-label="Key benefits">
       <div class="tp-wrap tp-kbo" data-kb>
         <div class="tp-kbo__head">
-          <span class="tp-kicker">주요 혜택</span>
           <h2 class="tp-h2">파트너가 <span style="color: #e7131b;">TradeQuo</span>를 선택하는 이유</h2>
           <p class="tp-kbo__sub">탄탄한 조건과 매일 지급, 그리고 이를 최대한 활용할 수 있는 도구를 제공합니다.</p>
         </div>
@@ -1967,7 +1961,6 @@ html:lang(ko) * { word-break: keep-all; }
     <section id="why" class="tp-sec" data-screen-label="Why TradeQuo" style="padding-top: 0;">
       <div class="tp-dome-panel">
         <div class="tp-dome-copy">
-          <span class="tp-kicker">왜 TradeQuo인가</span>
           <h2 class="tp-h2">트레이더가 <span style="color: #e7131b;">신뢰하는</span> 브로커</h2>
           <p class="tp-dome-copy__sub">고객이 거래를 계속하는 한 수익도 계속되기에, 내 링크로 연결되는 브로커가 중요합니다. TradeQuo는 트레이더와 독립 리뷰어의 평가를 받고 있으며, 파트너에게 매일 수익을 지급합니다.</p>
           <div class="tp-dome-actions">
@@ -2002,12 +1995,11 @@ html:lang(ko) * { word-break: keep-all; }
      landing and goes to it from the other pages (signupHref and signupNav in build-i18n.py). -->
   <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(50px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(30px, 4vw, 56px); background: #fff; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
-      <div style="display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #e7131b;"></span>이용 방법</div>
       <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">가입부터 첫 지급까지<br><span style="color: #e7131b;">3단계로 완료</span></h2>
     </div>
     <div data-how-steps="" style="max-width: 1240px; margin: clamp(36px, 5vw, 64px) auto 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px) clamp(12px, 2vw, 28px);">
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="5" width="22" height="31" rx="3" stroke="#0a0a0a"></rect><circle cx="21" cy="15" r="4" stroke="#e7131b"></circle><path d="M14.5 26c1.2-3.4 3.6-5 6.5-5s5.3 1.6 6.5 5" stroke="#e7131b"></path><circle cx="32" cy="34" r="6" fill="#fff" stroke="#e7131b"></circle><path d="m29.6 34 1.7 1.7 3.2-3.4" stroke="#e7131b"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="5" width="22" height="31" rx="3" stroke="#0a0a0a"></rect><circle cx="21" cy="15" r="4" stroke="#e7131b"></circle><path d="M14.5 26c1.2-3.4 3.6-5 6.5-5s5.3 1.6 6.5 5" stroke="#e7131b"></path><circle cx="32" cy="34" r="6" fill="#fff" stroke="#e7131b"></circle><path d="m29.6 34 1.7 1.7 3.2-3.4" stroke="#e7131b"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">계좌 개설</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">TradeQuo에 가입하고 본인 인증을 완료하세요.</p>
         </div>
@@ -2016,7 +2008,7 @@ html:lang(ko) * { word-break: keep-all; }
           <svg width="12" height="8" viewBox="0 0 12 8" style="margin-top: -1px;"><path data-how-arrow-head="" d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="#d6d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: stroke .3s ease;"></path></svg>
         </div>
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="13" r="6" stroke="#0a0a0a"></circle><path d="M6 34c0-6 4.9-10 11-10 2.4 0 4.6.6 6.4 1.7" stroke="#0a0a0a"></path><rect x="25" y="25" width="13" height="11" rx="2.5" stroke="#e7131b"></rect><path d="M31.5 28v5M29 30.5h5" stroke="#e7131b"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="13" r="6" stroke="#0a0a0a"></circle><path d="M6 34c0-6 4.9-10 11-10 2.4 0 4.6.6 6.4 1.7" stroke="#0a0a0a"></path><rect x="25" y="25" width="13" height="11" rx="2.5" stroke="#e7131b"></rect><path d="M31.5 28v5M29 30.5h5" stroke="#e7131b"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">IB 프로그램 신청</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">고객 포털에서 신청서를 제출하세요. 모든 신청은 24시간 이내에 검토합니다.</p>
         </div>
@@ -2025,7 +2017,7 @@ html:lang(ko) * { word-break: keep-all; }
           <svg width="12" height="8" viewBox="0 0 12 8" style="margin-top: -1px;"><path data-how-arrow-head="" d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="#d6d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: stroke .3s ease;"></path></svg>
         </div>
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="5" height="16" rx="2.5" stroke="#e7131b"></rect><rect x="6" y="31" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="27" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="33" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="23" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="29" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="35" width="9" height="4" rx="2" stroke="#e7131b"></rect><path d="M31 13l7-7M33 6h5v5" stroke="#0a0a0a"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="5" height="16" rx="2.5" stroke="#e7131b"></rect><rect x="6" y="31" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="27" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="33" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="23" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="29" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="35" width="9" height="4" rx="2" stroke="#e7131b"></rect><path d="M31 13l7-7M33 6h5v5" stroke="#0a0a0a"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">링크 공유하고 수익 받기</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">추천 링크를 받아 오디언스와 공유하고, 고객이 거래하는 모든 랏에서 수익을 얻으세요.</p>
         </div>
