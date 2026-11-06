@@ -15,7 +15,7 @@
   .if-head { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .if-title { margin: 0; font-weight: 700; font-size: clamp(46px,8.6vw,124px); line-height: .9; letter-spacing: -.045em; text-transform: uppercase; text-wrap: balance; }
   .if-title span { color: #E7131B; }
-  .if-sub { margin: clamp(14px,1.6vw,22px) auto 0; font-size: clamp(16px,1.5vw,20px); line-height: 1.4; color: #5B5B5B; max-width: 52ch; text-wrap: balance; }
+  .if-sub { margin: clamp(14px,1.6vw,22px) auto 0; font-size: clamp(16px,1.5vw,20px); line-height: 1.4; color: #5B5B5B; max-width: 26ch; text-wrap: balance; }
   .if-scene { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #FFFFFF; overflow: hidden; }
   @media (max-width: 640px) { .if-scene { aspect-ratio: 1 / 1; } }
   .if-cta { display: flex; justify-content: center; margin-top: calc(-1 * clamp(28px, 5vw, 76px)); position: relative; z-index: 2; }
@@ -944,6 +944,26 @@ document.querySelectorAll('.tq-conv').forEach(function (el) {
   if (/arabic|thai|cjk/.test(T._script)) css += '.if-sub, .if-live, .if-metrics, .tq-conv { letter-spacing: 0 !important; }';
   if (T._dir === 'rtl') document.querySelectorAll('.if-sub, .if-live-row, .if-metrics > div').forEach(function (el) { el.dir = 'rtl'; });
   if (css) { var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st); }
+})();
+</script>
+<script>
+/* the caption under the title always breaks into two lines (the same rule as the landing's captions):
+   its box is narrowed to a little over half of its one-line width; runs after the captions are translated */
+(function () {
+  var el = document.querySelector('.if-sub'); if (!el) return;
+  function fit() {
+    var rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    el.style.whiteSpace = 'nowrap'; el.style.width = 'max-content'; el.style.maxWidth = 'none';
+    var one = el.offsetWidth;
+    el.style.whiteSpace = ''; el.style.width = '';
+    var w = one / 2 + 8, lh = parseFloat(getComputedStyle(el).lineHeight);
+    el.style.maxWidth = (w / rem).toFixed(2) + 'rem';
+    for (var i = 0; i < 12 && lh && Math.round(el.offsetHeight / lh) > 2 && el.offsetWidth >= Math.floor(w) - 1; i++) { w += one * 0.03; el.style.maxWidth = (w / rem).toFixed(2) + 'rem'; }
+  }
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  window.addEventListener('load', fit);
+  var t = 0; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(fit, 150); });
 })();
 </script>
 </body>
