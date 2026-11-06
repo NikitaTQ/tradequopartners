@@ -706,6 +706,11 @@ html { scroll-snap-type: y proximity; }
 @keyframes tqCrysFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
 @media (prefers-reduced-motion: reduce) { [data-rep-stage] img { animation: none !important; } }
 @media (prefers-reduced-motion: reduce) { [data-rep-track] { animation: none !important; } [data-rep-viewport] { overflow-x: auto !important; } }
+/* the marquee under JS (startReviewsDrag): grab it with the mouse, swipe it sideways on touch */
+[data-rep-viewport][data-rep-live] { cursor: grab; touch-action: pan-y; }
+[data-rep-viewport].is-drag { cursor: grabbing; }
+[data-rep-viewport].is-drag, [data-rep-viewport].is-drag * { -webkit-user-select: none; user-select: none; }
+[data-rep-viewport][data-rep-live] img { -webkit-user-drag: none; }
 @keyframes tq-crys-idle { from { --tqo: -1; } to { --tqo: 1; } }
 .tq-crys { position: relative; display: inline-flex; align-items: center; color: #0A0A0A; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; border-radius: 999px; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.03)); animation: tq-crys-idle 2.25s ease-in-out infinite alternate; transition: --tqh .65s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
 .tq-crys:hover, .tq-crys:focus-visible { --tqh: 1; animation: none; color: #0A0A0A; }
@@ -2043,6 +2048,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=0302a44496" defer></script>
+<script src="../assets/js/landing.js?v=4584f83dd9" defer></script>
 </body>
 </html>
