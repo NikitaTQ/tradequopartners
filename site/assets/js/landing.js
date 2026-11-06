@@ -584,7 +584,8 @@
       const request = (!endpoint || preview) ? Promise.resolve()
         : fetch(endpoint, { method: 'POST', body: new URLSearchParams(new FormData(form)), headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } })
           .then((r) => { if (!r.ok) throw new Error(r.status); });
-      request.then(() => { ok = true; settle(); }, () => { ok = false; settle(); });
+      /* a failed send names its cause in the console (e.g. 404 = the form isn't registered on Netlify) */
+      request.then(() => { ok = true; settle(); }, (err) => { ok = false; console.warn('[TradeQuo] form not sent:', (err && err.message) || err); settle(); });
 
       if (envBtn) { envBtn.classList.add('is-sealed'); envBtn.setAttribute('aria-busy', 'true'); }
       const still = !envBtn || reducedMotion();
