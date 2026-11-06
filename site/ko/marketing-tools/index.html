@@ -1670,6 +1670,95 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-mt-card { padding: 22px 20px; gap: 14px; }
   .tp-mt-card h3 { font-size: 18px; }
 }
+
+/* Tools for your channel: tabs (where the audience is) + glass panel (tools to start with, how to use them) */
+.tp-visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.tp-ch { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 20px; max-width: 1080px; margin: clamp(32px, 4.5vw, 56px) auto 0; align-items: stretch; }
+.tp-ch__tabs { display: flex; flex-direction: column; gap: 10px; }
+.tp-ch__tab { display: flex; align-items: center; gap: 14px; width: 100%; margin: 0; padding: 14px 18px 14px 14px; border-radius: 18px; border: 1px solid #e6e7ea; background: #fff;
+  font: 700 16px/1.2 'DM Sans', sans-serif; letter-spacing: -.015em; color: #45474d; text-align: start; cursor: pointer;
+  transition: background .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s cubic-bezier(.2, .8, .2, 1); }
+.tp-ch__tab:hover { border-color: #cfd1d6; color: #0a0a0a; transform: translateY(-1px); }
+.tp-ch__tab:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tp-ch__tab[aria-selected="true"] { color: #fff; border-color: rgba(231,19,27,.55); transform: none;
+  background: linear-gradient(180deg, rgba(44,44,47,.97) 0%, rgba(18,18,20,.98) 55%, #0c0c0d 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.6), 0 18px 36px -24px rgba(0,0,0,.6); }
+.tp-ch__ico { display: flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 12px; background: #f3f4f6; color: #0a0a0a; transition: background .3s, color .3s; }
+.tp-ch__tab[aria-selected="true"] .tp-ch__ico { background: rgba(255,255,255,.08); color: #ff4148; }
+.tp-ch__panels { --r: 26px; padding: clamp(22px, 3vw, 34px); }
+.tp-ch__panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(20px, 3vw, 36px); outline: none; animation: tpChIn .45s cubic-bezier(.2, .8, .2, 1) both; }
+.tp-ch__panel[hidden] { display: none; }
+@keyframes tpChIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.tp-ch__label { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #8a8a92; text-transform: uppercase; }
+.tp-ch__tools { display: flex; flex-direction: column; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
+.tp-ch__tool { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 4px 16px 4px 4px; border-radius: 16px; color: #fff; font-size: 15.5px; letter-spacing: -.015em;
+  background: linear-gradient(180deg, rgba(44,44,47,.97) 0%, rgba(18,18,20,.98) 55%, #0c0c0d 100%); border: 1px solid rgba(255,255,255,.12); box-shadow: inset 0 -2px 0 rgba(231,19,27,.45); }
+.tp-ch__tool img { flex: none; width: 60px; height: 60px; object-fit: contain; }
+.tp-ch__tool .tp-hex { width: 44px; height: 44px; margin: 0 8px; }
+.tp-ch__tool b { font-weight: 700; line-height: 1.2; }
+.tp-ch__tips { display: flex; flex-direction: column; gap: 16px; margin: 14px 0 0; padding: 0; list-style: none; counter-reset: tpch; }
+.tp-ch__tips li { position: relative; min-height: 32px; padding-inline-start: 46px; font-size: 16.5px; line-height: 1.55; color: #2c2d31; text-wrap: pretty; counter-increment: tpch; }
+.tp-ch__tips li::before { content: '0' counter(tpch); position: absolute; inset-inline-start: 0; top: 0; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;
+  border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 1px #e3e4e8; font: 11.5px 'Fragment Mono', monospace; color: #e7131b; }
+@media (max-width: 860px) {
+  .tp-ch { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .tp-ch__tabs { flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -16px; padding: 4px 16px 8px; }
+  .tp-ch__tabs::-webkit-scrollbar { display: none; }
+  .tp-ch__tab { flex: none; width: auto; scroll-snap-align: start; padding: 10px 16px 10px 10px; font-size: 15px; }
+  .tp-ch__ico { width: 36px; height: 36px; border-radius: 10px; }
+  .tp-ch__panel { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { .tp-ch__panel { animation: none; } }
+
+/* White-Label Academy preview: brand name + colour on a mock academy app */
+.tp-ac { --brand: #e7131b; display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; max-width: 1080px; }
+.tp-ac__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.tp-ac__copy .tp-sub { font-size: clamp(15px, 1.4vw, 17px); }
+.tp-ac__field { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 360px; margin-top: 10px; }
+.tp-ac__field > span, .tp-ac__colors legend { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #8a8a92; text-transform: uppercase; }
+.tp-ac__field input { box-sizing: border-box; width: 100%; height: 52px; padding: 0 18px; border: 1px solid #dcdcd8; border-radius: 14px; background: #fff; font: 600 16px 'DM Sans', sans-serif; color: #0a0a0a; outline: none; transition: border-color .2s, box-shadow .2s; }
+.tp-ac__field input::placeholder { color: #a0a1a8; font-weight: 500; }
+.tp-ac__field input:focus { border-color: #0a0a0a; box-shadow: 0 0 0 4px rgba(10,10,10,.06); }
+.tp-ac__colors { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 0; padding: 0; border: 0; }
+.tp-ac__colors legend { float: left; width: 100%; margin-bottom: 10px; padding: 0; }
+.tp-ac__swatch { position: relative; display: block; cursor: pointer; }
+.tp-ac__swatch input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.tp-ac__swatch span[aria-hidden] { display: block; width: 30px; height: 30px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); transition: box-shadow .2s, transform .2s; }
+.tp-ac__swatch:hover span[aria-hidden] { transform: scale(1.08); }
+.tp-ac__swatch input:checked + span { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--c); }
+.tp-ac__swatch input:focus-visible + span { box-shadow: 0 0 0 3px #fff, 0 0 0 5px #0a0a0a; }
+.tp-ac__window { --r: 22px; padding: 14px; }
+.tp-ac__bar { display: flex; align-items: center; gap: 6px; padding: 2px 6px 12px; }
+.tp-ac__bar i { width: 9px; height: 9px; border-radius: 50%; background: #d9dbe0; }
+.tp-ac__badge { margin-inline-start: auto; padding: 4px 10px; border-radius: 999px; background: rgba(10,10,10,.06); font: 10.5px 'Fragment Mono', monospace; letter-spacing: .14em; color: #6b6c72; text-transform: uppercase; }
+.tp-ac__app { padding: 18px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px #eceef1; }
+.tp-ac__head { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 15px; }
+.tp-ac__head b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tp-ac__mono { display: flex; align-items: center; justify-content: center; flex: none; width: 32px; height: 32px; border-radius: 10px; background: var(--brand); color: #fff; font-weight: 800; font-size: 15px; transition: background .3s; }
+.tp-ac__hero { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 14px; padding: clamp(18px, 2.4vw, 26px); border-radius: 12px; color: #fff;
+  background: radial-gradient(80% 120% at 100% 0%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%), linear-gradient(135deg, var(--brand), color-mix(in srgb, var(--brand) 55%, #000)); }
+.tp-ac__title { font-size: clamp(20px, 2.2vw, 26px); line-height: 1.1; letter-spacing: -.03em; overflow-wrap: anywhere; }
+.tp-ac__sub { font-size: 14px; line-height: 1.45; opacity: .86; }
+.tp-ac__btn { margin-top: 8px; padding: 9px 16px; border-radius: 999px; background: #fff; color: var(--brand); font-weight: 700; font-size: 13.5px; }
+.tp-ac__lessons { margin-top: 16px; }
+.tp-ac__label { font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .16em; color: #8a8a92; text-transform: uppercase; }
+.tp-ac__lessons ol { margin: 6px 0 0; padding: 0; list-style: none; }
+.tp-ac__row { display: grid; grid-template-columns: 28px auto minmax(0, 1fr) 64px; align-items: center; gap: 12px; padding: 11px 2px; border-top: 1px solid #f0f1f3; }
+.tp-ac__num { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: color-mix(in srgb, var(--brand) 12%, #fff); color: var(--brand); font-weight: 700; font-size: 12.5px; }
+.tp-ac__mod { font-size: 14px; font-weight: 700; white-space: nowrap; }
+.tp-ac__skel { display: flex; flex-direction: column; gap: 5px; }
+.tp-ac__skel i { display: block; height: 6px; border-radius: 3px; background: #eef0f3; }
+.tp-ac__skel i + i { width: 62%; }
+.tp-ac__prog { position: relative; height: 6px; border-radius: 3px; background: #eef0f3; overflow: hidden; }
+.tp-ac__prog::before { content: ''; position: absolute; inset-block: 0; inset-inline-start: 0; width: var(--p); border-radius: inherit; background: var(--brand); transition: background .3s; }
+@media (max-width: 860px) {
+  .tp-ac { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .tp-ac__copy { align-items: stretch; }
+  .tp-ac__field { max-width: none; }
+  .tp-ac__row { grid-template-columns: 28px auto minmax(0, 1fr) 44px; gap: 10px; }
+}
 </style>
 <style id="i18n-fonts">
 *:not(svg *) { letter-spacing: 0 !important; }
@@ -1732,6 +1821,109 @@ html:lang(ko) * { word-break: keep-all; }
             <img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330">
             <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">04</span><h2>화이트 라벨 아카데미</h2><p>자체 브랜드로 바로 공유할 수 있는 트레이딩 교육 콘텐츠.</p></div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools for your channel: pick where the audience is, see what to start with (startChannels in landing.js) -->
+    <section id="channels" class="tp-sec" data-screen-label="Tools for your channel">
+      <div class="tp-wrap">
+        <div class="tp-head">
+          <span class="tp-kicker">나에게 맞는 방법</span>
+          <h2 class="tp-h2"><span style="color: #e7131b;">내 채널</span>에 맞는 도구</h2>
+          <p class="tp-sub">오디언스가 있는 곳을 고르면 무엇부터 시작할지 알려 드립니다.</p>
+        </div>
+        <div class="tp-ch" data-ch>
+          <div class="tp-ch__tabs" role="tablist" aria-label="나에게 맞는 방법">
+            <button type="button" class="tp-ch__tab" role="tab" id="ch-t1" aria-controls="ch-p1" aria-selected="true" tabindex="0" data-ch-tab>
+              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m10.5 9.2 4.3 2.8-4.3 2.8z" fill="currentColor"></path></svg></span><span class="tp-ch__name">영상 및 라이브</span>
+            </button>
+            <button type="button" class="tp-ch__tab" role="tab" id="ch-t2" aria-controls="ch-p2" aria-selected="false" tabindex="-1" data-ch-tab>
+              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"></path><path d="M17 9h3a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1v3l-4-3h-3"></path></svg></span><span class="tp-ch__name">텔레그램 및 커뮤니티</span>
+            </button>
+            <button type="button" class="tp-ch__tab" role="tab" id="ch-t3" aria-controls="ch-p3" aria-selected="false" tabindex="-1" data-ch-tab>
+              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><path d="M3 9h18"></path><path d="M6.5 6.5h.01M9 6.5h.01"></path><path d="M7 13h6M7 16h10"></path></svg></span><span class="tp-ch__name">웹사이트 또는 블로그</span>
+            </button>
+            <button type="button" class="tp-ch__tab" role="tab" id="ch-t4" aria-controls="ch-p4" aria-selected="false" tabindex="-1" data-ch-tab>
+              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 9 9.5-4.5L21.5 9 12 13.5z"></path><path d="M6.5 11.2v4.3c0 1.4 2.5 2.8 5.5 2.8s5.5-1.4 5.5-2.8v-4.3"></path><path d="M21.5 9v5"></path></svg></span><span class="tp-ch__name">강의 및 코칭</span>
+            </button>
+          </div>
+          <div class="tp-ch__panels tp-glass tp-glass--thick">
+          <div class="tp-ch__panel" role="tabpanel" id="ch-p1" aria-labelledby="ch-t1" tabindex="0" data-ch-panel>
+            <div class="tp-ch__col">
+              <span class="tp-ch__label">추천 도구</span>
+              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="64" height="64" loading="lazy" decoding="async"><b>마케팅 소재</b></li><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="64" height="64" loading="lazy" decoding="async"><b>무료 TradingView</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"></path><path d="m5 15 4.5-4.5 3.5 3 6-6.5"></path><path d="M15 7h4v4"></path></svg></span><b>실시간 트래킹</b></li></ul>
+            </div>
+            <div class="tp-ch__col">
+              <span class="tp-ch__label">활용 방법</span>
+              <ol class="tp-ch__tips"><li>준비된 영상을 활용하고, TradingView 차트로 시장 분석의 설득력을 높이세요.</li><li>파트너 링크를 영상 설명란과 고정 댓글에 넣으세요.</li></ol>
+            </div>
+          </div>
+          <div class="tp-ch__panel" role="tabpanel" id="ch-p2" aria-labelledby="ch-t2" tabindex="0" data-ch-panel hidden>
+            <div class="tp-ch__col">
+              <span class="tp-ch__label">추천 도구</span>
+              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="64" height="64" loading="lazy" decoding="async"><b>무료 트레이딩 시그널</b></li><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="64" height="64" loading="lazy" decoding="async"><b>마케팅 소재</b></li><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="64" height="64" loading="lazy" decoding="async"><b>무료 TradingView</b></li></ul>
+            </div>
+            <div class="tp-ch__col">
+              <span class="tp-ch__label">활용 방법</span>
+              <ol class="tp-ch__tips"><li>실시간 트레이딩 시그널을 공유하고 멤버들과 함께 이야기하세요.</li><li>파트너 링크가 담긴 배너를 채팅방 상단에 고정하세요.</li></ol>
+            </div>
+          </div>
+          <div class="tp-ch__panel" role="tabpanel" id="ch-p3" aria-labelledby="ch-t3" tabindex="0" data-ch-panel hidden>
+            <div class="tp-ch__col">
+              <span class="tp-ch__label">추천 도구</span>
+              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="64" height="64" loading="lazy" decoding="async"><b>마케팅 소재</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"></path><path d="m5 15 4.5-4.5 3.5 3 6-6.5"></path><path d="M15 7h4v4"></path></svg></span><b>실시간 트래킹</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span><b>전담 매니저</b></li></ul>
+            </div>
+            <div class="tp-ch__col">
+              <span class="tp-ch__label">활용 방법</span>
+              <ol class="tp-ch__tips"><li>사이트에 배너를 배치하고 방문자를 랜딩 페이지로 안내하세요.</li><li>어떤 페이지가 가입으로 이어지는지 실시간 트래킹으로 확인하세요.</li></ol>
+            </div>
+          </div>
+          <div class="tp-ch__panel" role="tabpanel" id="ch-p4" aria-labelledby="ch-t4" tabindex="0" data-ch-panel hidden>
+            <div class="tp-ch__col">
+              <span class="tp-ch__label">추천 도구</span>
+              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="64" height="64" loading="lazy" decoding="async"><b>화이트 라벨 아카데미</b></li><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="64" height="64" loading="lazy" decoding="async"><b>무료 트레이딩 시그널</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span><b>전담 매니저</b></li></ul>
+            </div>
+            <div class="tp-ch__col">
+              <span class="tp-ch__label">활용 방법</span>
+              <ol class="tp-ch__tips"><li>자체 브랜드의 화이트 라벨 아카데미로 가르치세요.</li><li>전담 매니저와 함께 오픈을 계획하세요.</li></ol>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- White-Label Academy preview: the visitor's brand name and colour on a mock academy (startAcademy in landing.js) -->
+    <section id="academy" class="tp-sec" data-screen-label="Academy preview" style="padding-top: 0;">
+      <div class="tp-wrap tp-ac" data-academy data-name="{brand} 아카데미" data-default="내 브랜드">
+        <div class="tp-ac__copy">
+          <span class="tp-kicker">화이트 라벨 아카데미</span>
+          <h2 class="tp-h2"><span style="color: #e7131b;">내 브랜드</span>로 미리 보기</h2>
+          <p class="tp-sub">브랜드 이름을 입력하고 자체 브랜드의 트레이딩 교육을 미리 확인하세요.</p>
+          <label class="tp-ac__field"><span>브랜드 이름</span><input type="text" maxlength="24" placeholder="내 브랜드" autocomplete="organization" spellcheck="false" data-ac-input></label>
+          <fieldset class="tp-ac__colors"><legend>브랜드 색상</legend><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#e7131b" checked data-ac-color><span style="--c: #e7131b;" aria-hidden="true"></span><span class="tp-visually-hidden">#e7131b</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#1f5eff" data-ac-color><span style="--c: #1f5eff;" aria-hidden="true"></span><span class="tp-visually-hidden">#1f5eff</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#0f9d6b" data-ac-color><span style="--c: #0f9d6b;" aria-hidden="true"></span><span class="tp-visually-hidden">#0f9d6b</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#c58b10" data-ac-color><span style="--c: #c58b10;" aria-hidden="true"></span><span class="tp-visually-hidden">#c58b10</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#6d4aff" data-ac-color><span style="--c: #6d4aff;" aria-hidden="true"></span><span class="tp-visually-hidden">#6d4aff</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#0a0a0a" data-ac-color><span style="--c: #0a0a0a;" aria-hidden="true"></span><span class="tp-visually-hidden">#0a0a0a</span></label></fieldset>
+        </div>
+        <div class="tp-ac__preview" style="--brand: #e7131b;" data-ac-preview>
+          <div class="tp-ac__window tp-glass tp-glass--thick">
+            <div class="tp-ac__bar" aria-hidden="true"><i></i><i></i><i></i><span class="tp-ac__badge">미리 보기</span></div>
+            <div class="tp-ac__app" aria-live="polite">
+              <div class="tp-ac__head"><span class="tp-ac__mono" aria-hidden="true" data-ac-mono></span><b data-ac-name>{brand} 아카데미</b></div>
+              <div class="tp-ac__hero">
+                <b class="tp-ac__title" data-ac-name>{brand} 아카데미</b>
+                <span class="tp-ac__sub">자체 브랜드로 바로 공유할 수 있는 트레이딩 교육 콘텐츠.</span>
+                <span class="tp-ac__btn" aria-hidden="true">학습 시작</span>
+              </div>
+              <div class="tp-ac__lessons">
+                <span class="tp-ac__label">레슨</span>
+                <ol>
+                  <li class="tp-ac__row"><span class="tp-ac__num">1</span><span class="tp-ac__mod" data-ac-mod="1">모듈 {n}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 100%;" aria-hidden="true"></span></li>
+                  <li class="tp-ac__row"><span class="tp-ac__num">2</span><span class="tp-ac__mod" data-ac-mod="2">모듈 {n}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 64%;" aria-hidden="true"></span></li>
+                  <li class="tp-ac__row"><span class="tp-ac__num">3</span><span class="tp-ac__mod" data-ac-mod="3">모듈 {n}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 22%;" aria-hidden="true"></span></li>
+                </ol>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1974,6 +2166,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=d12da5b2ee" defer></script>
+<script src="../../assets/js/landing.js?v=5fdfbf9810" defer></script>
 </body>
 </html>

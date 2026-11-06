@@ -105,6 +105,8 @@ HTTPS (Let's Encrypt) Netlify включит сам.
 
 Собрана в стиле остальных партнёрских страниц, шаблон — `tools/i18n/marketing.html`:
 - hero: четыре инструмента на серой подложке, тёмные карточки с 3D-объектами из блока Partner perks главной (Creatives, Free TradingView, Free Trading Signals, White-Label Academy);
+- «Tools for your channel»: вкладки «Video and streams», «Telegram and communities», «Website or blog», «Courses and coaching». Для каждой показаны три инструмента, с которых начать, и два совета, как их использовать. Логика — `startChannels` в `landing.js`; работают клик и стрелки на клавиатуре, на телефоне вкладки идут лентой с прокруткой. Тексты — `mt.ch.*`;
+- превью White-Label Academy: посетитель вводит название бренда и выбирает цвет, и макет академии сразу показывает «{бренд} Academy» в этом цвете. Логика — `startAcademy` в `landing.js`. Тексты — `mt.ac.*`; в `mt.ac.name` и `mt.ac.module` порядок слов задаёт перевод: `{brand}` и `{n}`. Это иллюстрация, а не реальный интерфейс академии;
 - две стеклянные карточки: Live tracking и персональный менеджер;
 - How it works;
 - FAQ;
