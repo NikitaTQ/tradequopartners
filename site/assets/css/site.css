@@ -906,6 +906,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 
 /* ---- Captions under headings: two balanced lines (startTwoLine in landing.js sets the width) ---- */
 [data-sub2], .tp-sub, .tp-final__sub, .tp-dome-copy__sub { text-wrap: balance !important; }
+/* phones: every caption at 16px, like the Infinite Flow one; a caption that can't be two lines at
+   15px or more just takes more lines */
+@media (max-width: 640px) {
+  [data-sub2], .tp-sub, .tp-final__sub, .tp-dome-copy__sub { font-size: 16px !important; line-height: 1.45 !important; }
+}
 
 /* tablets: with the larger headings the FAQ side column and the perks head need the full width */
 @media (max-width: 1024px) {
