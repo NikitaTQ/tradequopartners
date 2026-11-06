@@ -63,106 +63,72 @@
       </div>
     </section>
 
-    <!-- Tools for your channel: pick where the audience is, see what to start with (startChannels in landing.js) -->
-    <section id="channels" class="tp-sec" data-screen-label="Tools for your channel">
+    <!-- Promo materials library: the formats partners get. Per-format counts live in mt.lib.N.n
+         (empty for now; the badge hides itself until a number is filled in) -->
+    <section id="library" class="tp-sec" data-screen-label="Promo materials">
       <div class="tp-wrap">
         <div class="tp-head">
-          <span class="tp-kicker">{{mt.ch.kicker}}</span>
-          <h2 class="tp-h2">{{mt.ch.title}}</h2>
-          <p class="tp-sub">{{mt.ch.sub}}</p>
+          <span class="tp-kicker">{{mt.lib.kicker}}</span>
+          <h2 class="tp-h2">{{mt.lib.title}}</h2>
+          <p class="tp-sub">{{mt.lib.sub}}</p>
         </div>
-        <div class="tp-ch" data-ch>
-          <div class="tp-ch__tabs" role="tablist" aria-label="{{@mt.ch.kicker}}">
-            <button type="button" class="tp-ch__tab" role="tab" id="ch-t1" aria-controls="ch-p1" aria-selected="true" tabindex="0" data-ch-tab>
-              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m10.5 9.2 4.3 2.8-4.3 2.8z" fill="currentColor"></path></svg></span><span class="tp-ch__name">{{mt.ch.1}}</span>
-            </button>
-            <button type="button" class="tp-ch__tab" role="tab" id="ch-t2" aria-controls="ch-p2" aria-selected="false" tabindex="-1" data-ch-tab>
-              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"></path><path d="M17 9h3a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1v3l-4-3h-3"></path></svg></span><span class="tp-ch__name">{{mt.ch.2}}</span>
-            </button>
-            <button type="button" class="tp-ch__tab" role="tab" id="ch-t3" aria-controls="ch-p3" aria-selected="false" tabindex="-1" data-ch-tab>
-              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><path d="M3 9h18"></path><path d="M6.5 6.5h.01M9 6.5h.01"></path><path d="M7 13h6M7 16h10"></path></svg></span><span class="tp-ch__name">{{mt.ch.3}}</span>
-            </button>
-            <button type="button" class="tp-ch__tab" role="tab" id="ch-t4" aria-controls="ch-p4" aria-selected="false" tabindex="-1" data-ch-tab>
-              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 9 9.5-4.5L21.5 9 12 13.5z"></path><path d="M6.5 11.2v4.3c0 1.4 2.5 2.8 5.5 2.8s5.5-1.4 5.5-2.8v-4.3"></path><path d="M21.5 9v5"></path></svg></span><span class="tp-ch__name">{{mt.ch.4}}</span>
-            </button>
-          </div>
-          <div class="tp-ch__panels tp-glass tp-glass--thick">
-          <div class="tp-ch__panel" role="tabpanel" id="ch-p1" aria-labelledby="ch-t1" tabindex="0" data-ch-panel>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">{{mt.ch.tools}}</span>
-              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="{{root}}assets/offer-cre.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><b>{{offer.3.t}}</b></li><li class="tp-ch__tool"><img class="tp-obj" src="{{root}}assets/offer-tv.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><b>{{offer.1.t}}</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"></path><path d="m5 15 4.5-4.5 3.5 3 6-6.5"></path><path d="M15 7h4v4"></path></svg></span><b>{{mt.track.t}}</b></li></ul>
-            </div>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">{{mt.ch.how}}</span>
-              <ol class="tp-ch__tips"><li>{{mt.ch.1.a}}</li><li>{{mt.ch.1.b}}</li></ol>
-            </div>
-          </div>
-          <div class="tp-ch__panel" role="tabpanel" id="ch-p2" aria-labelledby="ch-t2" tabindex="0" data-ch-panel hidden>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">{{mt.ch.tools}}</span>
-              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="{{root}}assets/offer-sig.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><b>{{offer.2.t}}</b></li><li class="tp-ch__tool"><img class="tp-obj" src="{{root}}assets/offer-cre.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><b>{{offer.3.t}}</b></li><li class="tp-ch__tool"><img class="tp-obj" src="{{root}}assets/offer-tv.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><b>{{offer.1.t}}</b></li></ul>
-            </div>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">{{mt.ch.how}}</span>
-              <ol class="tp-ch__tips"><li>{{mt.ch.2.a}}</li><li>{{mt.ch.2.b}}</li></ol>
-            </div>
-          </div>
-          <div class="tp-ch__panel" role="tabpanel" id="ch-p3" aria-labelledby="ch-t3" tabindex="0" data-ch-panel hidden>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">{{mt.ch.tools}}</span>
-              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="{{root}}assets/offer-cre.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><b>{{offer.3.t}}</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"></path><path d="m5 15 4.5-4.5 3.5 3 6-6.5"></path><path d="M15 7h4v4"></path></svg></span><b>{{mt.track.t}}</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span><b>{{mt.mgr.t}}</b></li></ul>
-            </div>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">{{mt.ch.how}}</span>
-              <ol class="tp-ch__tips"><li>{{mt.ch.3.a}}</li><li>{{mt.ch.3.b}}</li></ol>
-            </div>
-          </div>
-          <div class="tp-ch__panel" role="tabpanel" id="ch-p4" aria-labelledby="ch-t4" tabindex="0" data-ch-panel hidden>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">{{mt.ch.tools}}</span>
-              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="{{root}}assets/offer-aca.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><b>{{offer.4.t}}</b></li><li class="tp-ch__tool"><img class="tp-obj" src="{{root}}assets/offer-sig.webp" alt="" width="64" height="64" loading="lazy" decoding="async"><b>{{offer.2.t}}</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span><b>{{mt.mgr.t}}</b></li></ul>
-            </div>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">{{mt.ch.how}}</span>
-              <ol class="tp-ch__tips"><li>{{mt.ch.4.a}}</li><li>{{mt.ch.4.b}}</li></ol>
-            </div>
-          </div>
-          </div>
+        <div class="tp-lib">
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="10" y="12" width="140" height="22" rx="4" fill="#fff" stroke="#d5d7dc"/><rect x="17" y="19" width="56" height="8" rx="2" fill="#e3e5e9"/><rect x="117" y="18" width="26" height="10" rx="5" fill="#e7131b"/>
+<rect x="10" y="42" width="62" height="48" rx="4" fill="#fff" stroke="#d5d7dc"/><rect x="18" y="50" width="40" height="6" rx="2" fill="#e3e5e9"/><rect x="18" y="60" width="30" height="6" rx="2" fill="#e3e5e9"/><rect x="18" y="73" width="24" height="9" rx="4.5" fill="#e7131b"/>
+<rect x="80" y="42" width="70" height="48" rx="4" fill="#0e0e10"/><rect x="88" y="50" width="38" height="6" rx="2" fill="#3a3a40"/><rect x="88" y="60" width="26" height="6" rx="2" fill="#3a3a40"/><rect x="88" y="73" width="24" height="9" rx="4.5" fill="#e7131b"/></svg></div>
+            <div class="tp-lib__txt"><h3>{{mt.lib.1.t}}</h3><span class="tp-lib__n">{{mt.lib.1.n}}</span><p>{{mt.lib.1.d}}</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="16" y="10" width="128" height="82" rx="6" fill="#fff" stroke="#d5d7dc"/><path d="M16 22h128" stroke="#e3e5e9"/><circle cx="24" cy="16" r="2" fill="#d5d7dc"/><circle cx="31" cy="16" r="2" fill="#d5d7dc"/><circle cx="38" cy="16" r="2" fill="#d5d7dc"/>
+<rect x="26" y="32" width="62" height="8" rx="2" fill="#0e0e10"/><rect x="26" y="45" width="48" height="5" rx="2" fill="#e3e5e9"/><rect x="26" y="56" width="30" height="10" rx="5" fill="#e7131b"/>
+<rect x="98" y="30" width="36" height="38" rx="4" fill="#f1f2f4"/><path d="M104 61l8-10 6 6 6-9 6 13z" fill="#d5d7dc"/><rect x="26" y="76" width="108" height="8" rx="2" fill="#f1f2f4"/></svg></div>
+            <div class="tp-lib__txt"><h3>{{mt.lib.2.t}}</h3><span class="tp-lib__n">{{mt.lib.2.n}}</span><p>{{mt.lib.2.d}}</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="20" y="12" width="120" height="72" rx="6" fill="#0e0e10"/><circle cx="80" cy="45" r="14" fill="#e7131b"/><path d="M76 38v14l11-7z" fill="#fff"/>
+<rect x="30" y="72" width="100" height="3" rx="1.5" fill="#3a3a40"/><rect x="30" y="72" width="40" height="3" rx="1.5" fill="#e7131b"/><circle cx="70" cy="73.5" r="3" fill="#fff"/></svg></div>
+            <div class="tp-lib__txt"><h3>{{mt.lib.3.t}}</h3><span class="tp-lib__n">{{mt.lib.3.n}}</span><p>{{mt.lib.3.d}}</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="46" y="10" width="84" height="60" rx="6" fill="#e3e5e9"/><rect x="39" y="17" width="84" height="60" rx="6" fill="#f1f2f4" stroke="#d5d7dc"/><rect x="32" y="24" width="84" height="62" rx="6" fill="#fff" stroke="#d5d7dc"/>
+<text x="74" y="62" text-anchor="middle" direction="ltr" font-family="DM Sans, sans-serif" font-weight="800" font-size="21" fill="#0e0e10">GIF</text><circle cx="104" cy="35" r="4" fill="#e7131b"/><path d="M44 78h24" stroke="#e3e5e9" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <div class="tp-lib__txt"><h3>{{mt.lib.4.t}}</h3><span class="tp-lib__n">{{mt.lib.4.n}}</span><p>{{mt.lib.4.d}}</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="46" y="6" width="68" height="88" rx="8" fill="#fff" stroke="#d5d7dc"/><circle cx="57" cy="17" r="5" fill="#e3e5e9"/><rect x="66" y="14" width="30" height="5" rx="2" fill="#e3e5e9"/>
+<rect x="52" y="27" width="56" height="42" rx="4" fill="#0e0e10"/><path d="M58 62l12-14 9 9 8-8 15 13z" fill="#3a3a40"/>
+<path d="M57 80.5c0-3 4.2-4 5-1 .8-3 5-2 5 1 0 3.2-5 6.2-5 6.2s-5-3-5-6.2z" fill="#e7131b"/><rect x="73" y="79" width="28" height="4" rx="2" fill="#e3e5e9"/></svg></div>
+            <div class="tp-lib__txt"><h3>{{mt.lib.5.t}}</h3><span class="tp-lib__n">{{mt.lib.5.n}}</span><p>{{mt.lib.5.d}}</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="14" y="16" width="62" height="62" rx="12" fill="#fff" stroke="#d5d7dc"/>
+<g transform="translate(45 47) scale(.38) translate(-100.75 -99.75)"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#0e0e10"/><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#0e0e10"/><circle cx="141" cy="130.5" r="10.5" fill="#e7131b"/></g>
+<circle cx="96" cy="30" r="9" fill="#e7131b"/><circle cx="118" cy="30" r="9" fill="#0e0e10"/><circle cx="140" cy="30" r="9" fill="#d5d7dc"/>
+<text x="88" y="70" direction="ltr" font-family="DM Sans, sans-serif" font-weight="800" font-size="25" fill="#0e0e10">Aa</text><path d="M124 62h20M124 70h14" stroke="#e3e5e9" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <div class="tp-lib__txt"><h3>{{mt.lib.6.t}}</h3><span class="tp-lib__n">{{mt.lib.6.n}}</span><p>{{mt.lib.6.d}}</p></div>
+          </article>
+        </div>
+        <div class="tp-dark tp-lib__custom">
+          <span class="tp-hex" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span>
+          <p><b>{{mt.lib.custom.t}}</b> <span>{{mt.lib.custom.d}}</span></p>
         </div>
       </div>
     </section>
 
-    <!-- White-Label Academy preview: the visitor's brand name and colour on a mock academy (startAcademy in landing.js) -->
-    <section id="academy" class="tp-sec" data-screen-label="Academy preview" style="padding-top: 0;">
-      <div class="tp-wrap tp-ac" data-academy data-name="{{@mt.ac.name}}" data-default="{{@mt.ac.default}}">
-        <div class="tp-ac__copy">
-          <span class="tp-kicker">{{offer.4.t}}</span>
-          <h2 class="tp-h2">{{mt.ac.title}}</h2>
-          <p class="tp-sub">{{mt.ac.sub}}</p>
-          <label class="tp-ac__field"><span>{{mt.ac.label}}</span><input type="text" maxlength="24" placeholder="{{@mt.ac.default}}" autocomplete="organization" spellcheck="false" data-ac-input></label>
-          <fieldset class="tp-ac__colors"><legend>{{mt.ac.color}}</legend><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#e7131b" checked data-ac-color><span style="--c: #e7131b;" aria-hidden="true"></span><span class="tp-visually-hidden">#e7131b</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#1f5eff" data-ac-color><span style="--c: #1f5eff;" aria-hidden="true"></span><span class="tp-visually-hidden">#1f5eff</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#0f9d6b" data-ac-color><span style="--c: #0f9d6b;" aria-hidden="true"></span><span class="tp-visually-hidden">#0f9d6b</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#c58b10" data-ac-color><span style="--c: #c58b10;" aria-hidden="true"></span><span class="tp-visually-hidden">#c58b10</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#6d4aff" data-ac-color><span style="--c: #6d4aff;" aria-hidden="true"></span><span class="tp-visually-hidden">#6d4aff</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#0a0a0a" data-ac-color><span style="--c: #0a0a0a;" aria-hidden="true"></span><span class="tp-visually-hidden">#0a0a0a</span></label></fieldset>
+    <!-- How to get them: four steps from the Client Portal to the audience (step 1 reuses the How it works copy) -->
+    <section id="get" class="tp-sec" data-screen-label="How to get materials" style="padding-top: 0;">
+      <div class="tp-wrap">
+        <div class="tp-head">
+          <span class="tp-kicker">{{mt.get.kicker}}</span>
+          <h2 class="tp-h2">{{mt.get.title}}</h2>
         </div>
-        <div class="tp-ac__preview" style="--brand: #e7131b;" data-ac-preview>
-          <div class="tp-ac__window tp-glass tp-glass--thick">
-            <div class="tp-ac__bar" aria-hidden="true"><i></i><i></i><i></i><span class="tp-ac__badge">{{mt.ac.preview}}</span></div>
-            <div class="tp-ac__app" aria-live="polite">
-              <div class="tp-ac__head"><span class="tp-ac__mono" aria-hidden="true" data-ac-mono></span><b data-ac-name>{{mt.ac.name}}</b></div>
-              <div class="tp-ac__hero">
-                <b class="tp-ac__title" data-ac-name>{{mt.ac.name}}</b>
-                <span class="tp-ac__sub">{{offer.4.d}}</span>
-                <span class="tp-ac__btn" aria-hidden="true">{{mt.ac.start}}</span>
-              </div>
-              <div class="tp-ac__lessons">
-                <span class="tp-ac__label">{{mt.ac.lessons}}</span>
-                <ol>
-                  <li class="tp-ac__row"><span class="tp-ac__num">1</span><span class="tp-ac__mod" data-ac-mod="1">{{mt.ac.module}}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 100%;" aria-hidden="true"></span></li>
-                  <li class="tp-ac__row"><span class="tp-ac__num">2</span><span class="tp-ac__mod" data-ac-mod="2">{{mt.ac.module}}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 64%;" aria-hidden="true"></span></li>
-                  <li class="tp-ac__row"><span class="tp-ac__num">3</span><span class="tp-ac__mod" data-ac-mod="3">{{mt.ac.module}}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 22%;" aria-hidden="true"></span></li>
-                </ol>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ol class="tp-get">
+          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">01</span><h3>{{how.s2.t}}</h3><p>{{how.s2.d}}</p></li>
+          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">02</span><h3>{{mt.get.2.t}}</h3><p>{{mt.get.2.d}}</p></li>
+          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">03</span><h3>{{mt.get.3.t}}</h3><p>{{mt.get.3.d}}</p></li>
+          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">04</span><h3>{{mt.get.4.t}}</h3><p>{{mt.get.4.d}}</p></li>
+        </ol>
       </div>
     </section>
 
