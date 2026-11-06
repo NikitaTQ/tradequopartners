@@ -707,8 +707,6 @@ html { scroll-snap-type: y proximity; }
   [data-fan-stage] > [data-fan-card]:nth-child(5) { transform-origin: 28% 82% !important; }
   [data-fan-stage] > [data-fan-card]:nth-child(6) { transform-origin: 72% 82% !important; }
   [data-fan-stage] > [data-fan-card][data-fan-card][data-sel], [data-fan-stage] > [data-fan-card][data-fan-card][data-sel]:hover { transform: scale(1.27) !important; z-index: 6 !important; border-color: rgba(231,19,27,.8) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.35), 0 0 26px rgba(231,19,27,.42), 0 18px 34px rgba(0,0,0,.6) !important; }
-  [data-calc-controls] > span[aria-hidden]:first-child { padding: 6px !important; }
-  [data-calc-controls] > span[aria-hidden]:nth-child(2) { inset: 6px !important; border-radius: 20px !important; }
   [data-crystals] iframe { aspect-ratio: 0.72 / 1 !important; }
   #film { padding: 18px 14px 28px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   [data-film-desk] { display: none !important; }
@@ -811,7 +809,6 @@ html { scroll-snap-type: y proximity; }
 .hv-fan-card-4:hover { transform: rotate(4.2deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
 .hv-fan-card-5:hover { transform: rotate(12.6deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
 .hv-fan-card-6:hover { transform: rotate(21deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
-.hv-glass-glow:hover { box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 0 0 1px rgba(231,19,27,.16), 0 20px 38px -24px rgba(231,19,27,.3) !important; }
 .hv-fan-blade:hover { transform: translateX(-18px) scale(1.04) !important; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 20px 18px rgba(231,19,27,.2)) !important; }
 .hv-fan-knob:hover { transform: scale(1.06) !important; box-shadow: 0 1px 2px rgba(10,10,10,.08), 0 0 0 1px rgba(231,19,27,.2), 0 26px 40px -20px rgba(231,19,27,.38) !important; }
 .hv-ink-border:hover { border-color: #0a0a0a !important; }
@@ -1005,6 +1002,43 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   header nav { gap: 6px !important; }
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
+
+/* ---- Frosted glass (Glass_Card_Grid design) ----------------------------------------------
+   Milky glass over whatever sits behind it: blur, a little grain, a soft light that follows the
+   pointer (--tqgx/--tqgy), and on hover (--tqgh 0 → 1) an iridescent rim, chromatic inner edges
+   and a small lift. startGlass in landing.js drives the variables; without it the cards just rest.
+   .tp-glass (partner pages) is the same glass.
+     --panel  big panels with controls inside (calculators): larger radius, no lift
+     --flat   no backdrop blur (the reviews marquee moves every frame; the blur would cost frames)
+     --row    FAQ rows: tighter radius */
+@property --tqgx { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
+@property --tqgy { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
+@property --tqgh { syntax: '<number>'; inherits: true; initial-value: 0; }
+.tq-glass, .tp-glass {
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 22px;
+  background: radial-gradient(260px 200px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.25 + var(--tqgh) * .45)), rgba(255,255,255,0) 70%), rgba(248,248,250,.58);
+  -webkit-backdrop-filter: blur(30px) saturate(130%); backdrop-filter: blur(30px) saturate(130%);
+  border: 1px solid rgba(255,255,255,.85);
+  box-shadow: 0 0 0 1px rgba(18,22,30,.05), 0 22px 40px -30px rgba(18,22,30,.3),
+    inset 1px 1px 0 rgba(255,140,146,calc(var(--tqgh) * .35)), inset -1px -1px 0 rgba(140,170,255,calc(var(--tqgh) * .35));
+  transform: translateY(calc(var(--tqgh) * -4px));
+  transition: --tqgx .35s ease, --tqgy .35s ease, --tqgh .45s ease, transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+/* grain */
+.tq-glass::before, .tp-glass::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* iridescent rim, lit from the pointer */
+.tq-glass::after, .tp-glass::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: var(--tqgh);
+  background: conic-gradient(from calc(200deg + var(--tqgh) * 60deg) at var(--tqgx) var(--tqgy), #ffffff, #ffd3d5, #f7a8ac, #ffffff, #d9e2ff, #c9f2e6, #ffffff, #e2e4e8, #ffffff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.tq-glass--panel, .tp-glass--thick { border-radius: 26px; transform: none; }
+.tq-glass--flat { -webkit-backdrop-filter: none; backdrop-filter: none; background-color: rgba(250,250,251,.82); }
+.tq-glass--row { border-radius: 18px; }
+@media (prefers-reduced-motion: reduce) { .tq-glass, .tp-glass { transform: none; transition: none; } }
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -1048,33 +1082,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-link { display: inline-flex; align-items: center; gap: 8px; color: inherit; font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; text-decoration: none; }
 .tp-link:hover { color: #e7131b; }
 
-/* ---- chrome-rimmed glass card (the landing's card, as a class) --------------- */
-.tp-glass {
-  --r: 18px;
-  position: relative; isolation: isolate; border-radius: var(--r);
-  background: linear-gradient(200deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 40%),
-    linear-gradient(112deg, rgba(255,255,255,0) 54%, rgba(226,228,232,.42) 54.2%, rgba(238,240,243,.22) 76%, rgba(255,255,255,0) 76.2%),
-    linear-gradient(180deg, rgba(255,255,255,.6) 0%, rgba(244,245,247,.45) 100%);
-  box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 16px 32px -24px rgba(10,10,10,.24);
-  transition: box-shadow .3s ease, transform .4s cubic-bezier(.2,.8,.2,1);
-}
-.tp-glass::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 3px; pointer-events: none;
-  background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
-}
-.tp-glass::after {
-  content: ''; position: absolute; inset: 3px; z-index: -1; border-radius: calc(var(--r) - 3px); pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 6px 14px -10px rgba(10,10,10,.14);
-}
-.tp-glass--hover:hover { box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 0 0 1px rgba(231,19,27,.16), 0 20px 38px -24px rgba(231,19,27,.3); }
-/* heavy rim, as on the landing's calculator panel */
-.tp-glass--thick { --r: 26px; }
-.tp-glass--thick::before { padding: 9px; background: conic-gradient(from 200deg, #ffffff 0deg, #b8bcc3 28deg, #f4f5f7 52deg, #8e939b 86deg, #e9ebee 118deg, #ffffff 150deg, #a9adb4 190deg, #eef0f2 228deg, #7f848c 262deg, #dfe2e6 300deg, #ffffff 330deg, #ffffff 360deg); }
-.tp-glass--thick::after { inset: 9px; border-radius: calc(var(--r) - 9px); }
-/* red rim for the highlighted tier */
-.tp-glass--red::before { background: conic-gradient(from 200deg, #ff8a8e 0deg, #e7131b 40deg, #ffd0d2 80deg, #b30e14 130deg, #ff5d62 180deg, #e7131b 240deg, #ffc2c4 290deg, #9e0b11 330deg, #ff8a8e 360deg); }
-.tp-glass--red::after { box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(231,19,27,.35), inset 0 6px 14px -10px rgba(231,19,27,.2); }
+/* ---- glass cards: .tp-glass is the frosted glass defined in site.css (Glass_Card_Grid design) ---- */
 
 /* ---- dark card (the fan offer cards on the landing) ---------------------------- */
 .tp-dark {
@@ -1376,7 +1384,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
    Commission plan page
    ============================================================================= */
 .tp-calc { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(14px, 2vw, 26px); align-items: stretch; }
-.tp-controls { display: flex; flex-direction: column; justify-content: space-evenly; gap: 30px; padding: clamp(28px, 3.2vw, 44px); background: linear-gradient(200deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,0) 34%), linear-gradient(116deg, rgba(255,255,255,0) 48%, rgba(229,231,235,.62) 48.2%, rgba(241,242,245,.42) 66%, rgba(255,255,255,0) 66.2%), linear-gradient(180deg, #fbfbfc 0%, #eef0f2 100%); }
+.tp-controls { display: flex; flex-direction: column; justify-content: space-evenly; gap: 30px; padding: clamp(28px, 3.2vw, 44px); }
 .tp-field { display: flex; flex-direction: column; gap: 14px; }
 .tp-field__head { display: flex; align-items: center; gap: 12px; }
 .tp-field__ico { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(145deg, #ffffff 0%, #eef0f2 55%, #dfe2e6 100%); border: 1px solid #d6d9de; box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(10,10,10,.16); color: #e7131b; }
@@ -1672,18 +1680,26 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 }
 
 /* Promo materials library: one glass card per format (illustration, name, optional count, line) */
-.tp-lib { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 1080px; margin: clamp(32px, 4.5vw, 56px) auto 0; }
-.tp-lib__card { --r: 22px; display: flex; flex-direction: column; gap: 14px; padding: 12px 12px 22px; }
-.tp-lib__card:hover { transform: translateY(-3px); }
+/* the design's backdrop: red and silver spheres, a dark slab and fine lines behind the frosted cards */
+.tp-lib-stage { position: relative; max-width: 1080px; box-sizing: border-box; margin: clamp(32px, 4.5vw, 56px) auto 0; padding: clamp(16px, 3.6vw, 40px); border-radius: 28px; overflow: hidden; background: #eeeff1; }
+.tp-lib-stage__bg { position: absolute; inset: 0; pointer-events: none; }
+.tp-lib-stage__bg i { position: absolute; display: block; }
+.tp-lib-stage__ball { left: 6%; top: 8%; width: clamp(140px, 23vw, 240px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #ff5a60 0%, #e7131b 45%, #9e0a10 100%); }
+.tp-lib-stage__ball--2 { left: 12%; top: 58%; width: clamp(110px, 17vw, 180px); opacity: .85; }
+.tp-lib-stage__slab { left: 40%; top: 12%; width: clamp(180px, 29vw, 300px); height: clamp(90px, 14.5vw, 150px); border-radius: 28px; background: linear-gradient(160deg, #2a2d33, #0a0a0a); transform: rotate(-12deg); }
+.tp-lib-stage__silver { right: 5%; top: 46%; width: clamp(130px, 21vw, 220px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #ffffff 0%, #d4d7dc 38%, #8e939c 78%, #6b6f76 100%); }
+.tp-lib-stage__lines { left: 0; right: 0; top: 44%; height: 80px; background: repeating-linear-gradient(90deg, rgba(10,10,10,.14) 0 2px, transparent 2px 16px); }
+.tp-lib { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.tp-lib__card { display: flex; flex-direction: column; gap: 16px; padding: 12px 12px 20px; }
 .tp-lib__art { display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 9.5; border-radius: 14px;
-  background: radial-gradient(70% 90% at 30% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #f5f6f8 0%, #eceef1 100%); box-shadow: inset 0 0 0 1px rgba(14,14,22,.05); }
+  background: rgba(255,255,255,.5); box-shadow: inset 0 0 0 1px rgba(255,255,255,.9), inset 0 -18px 30px -24px rgba(18,22,30,.12); }
 .tp-lib__art svg { width: 78%; height: auto; overflow: visible; filter: drop-shadow(0 10px 14px rgba(14,14,22,.12)); transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
-.tp-lib__card:hover .tp-lib__art svg { transform: translateY(-3px) scale(1.03); }
+.tp-lib__card:hover .tp-lib__art svg { transform: translateY(-2px) scale(1.02); }
 .tp-lib__txt { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 6px 10px; padding: 0 10px; }
-.tp-lib__txt h3 { margin: 0; font-size: 19px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; }
+.tp-lib__txt h3 { margin: 0; font-size: 17px; line-height: 1.25; letter-spacing: -.01em; font-weight: 700; }
 .tp-lib__n { padding: 3px 10px; border-radius: 999px; background: rgba(231,19,27,.08); color: #c8141b; font: 600 12px 'Fragment Mono', monospace; letter-spacing: .04em; white-space: nowrap; direction: ltr; }
 .tp-lib__n:empty { display: none; }
-.tp-lib__txt p { grid-column: 1 / -1; margin: 0; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty; }
+.tp-lib__txt p { grid-column: 1 / -1; margin: 0; font-size: 13.5px; line-height: 1.45; color: #3e4248; text-wrap: pretty; }
 .tp-lib__custom { display: flex; align-items: center; gap: 16px; max-width: 1080px; box-sizing: border-box; margin: 16px auto 0; padding: 16px 24px 16px 16px; border-radius: 20px; }
 .tp-lib__custom .tp-hex { width: 44px; height: 44px; }
 .tp-lib__custom p { margin: 0; font-size: 15.5px; line-height: 1.5; color: #c9cacf; text-wrap: pretty; }
@@ -2042,9 +2058,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
           <p class="tp-sub" style="max-width: 30ch;">Hal yang ditanyakan mitra sebelum bergabung.</p>
         </div>
         <div class="tp-faq__list">
-          <div class="hv-glass-glow" data-faq-card="" style="position: relative; border-radius: 14px; background: linear-gradient(200deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 40%), linear-gradient(112deg, rgba(255,255,255,0) 54%, rgba(226,228,232,.42) 54.2%, rgba(238,240,243,.22) 76%, rgba(255,255,255,0) 76.2%), linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(244,245,247,.3) 100%); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 16px 32px -24px rgba(10,10,10,.24); overflow: hidden; transition: box-shadow .3s ease;">
-            <span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;"></span>
-            <span aria-hidden="true" style="position: absolute; inset: 3px; border-radius: 11px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 6px 14px -10px rgba(10,10,10,.14); pointer-events: none;"></span>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
             <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 1; transition: opacity .3s ease;"></span>
             <button type="button" data-faq-toggle aria-controls="pp-faq-1-a" id="pp-faq-1-q" aria-expanded="true" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
               <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">01</span>
@@ -2057,9 +2071,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
               </div>
             </div>
           </div>
-          <div class="hv-glass-glow" data-faq-card="" style="position: relative; border-radius: 14px; background: linear-gradient(200deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 40%), linear-gradient(112deg, rgba(255,255,255,0) 54%, rgba(226,228,232,.42) 54.2%, rgba(238,240,243,.22) 76%, rgba(255,255,255,0) 76.2%), linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(244,245,247,.3) 100%); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 16px 32px -24px rgba(10,10,10,.24); overflow: hidden; transition: box-shadow .3s ease;">
-            <span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;"></span>
-            <span aria-hidden="true" style="position: absolute; inset: 3px; border-radius: 11px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 6px 14px -10px rgba(10,10,10,.14); pointer-events: none;"></span>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
             <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 0; transition: opacity .3s ease;"></span>
             <button type="button" data-faq-toggle aria-controls="pp-faq-2-a" id="pp-faq-2-q" aria-expanded="false" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
               <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">02</span>
@@ -2072,9 +2084,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
               </div>
             </div>
           </div>
-          <div class="hv-glass-glow" data-faq-card="" style="position: relative; border-radius: 14px; background: linear-gradient(200deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 40%), linear-gradient(112deg, rgba(255,255,255,0) 54%, rgba(226,228,232,.42) 54.2%, rgba(238,240,243,.22) 76%, rgba(255,255,255,0) 76.2%), linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(244,245,247,.3) 100%); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 16px 32px -24px rgba(10,10,10,.24); overflow: hidden; transition: box-shadow .3s ease;">
-            <span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;"></span>
-            <span aria-hidden="true" style="position: absolute; inset: 3px; border-radius: 11px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 6px 14px -10px rgba(10,10,10,.14); pointer-events: none;"></span>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
             <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 0; transition: opacity .3s ease;"></span>
             <button type="button" data-faq-toggle aria-controls="pp-faq-3-a" id="pp-faq-3-q" aria-expanded="false" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
               <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">03</span>
@@ -2087,9 +2097,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
               </div>
             </div>
           </div>
-          <div class="hv-glass-glow" data-faq-card="" style="position: relative; border-radius: 14px; background: linear-gradient(200deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 40%), linear-gradient(112deg, rgba(255,255,255,0) 54%, rgba(226,228,232,.42) 54.2%, rgba(238,240,243,.22) 76%, rgba(255,255,255,0) 76.2%), linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(244,245,247,.3) 100%); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 16px 32px -24px rgba(10,10,10,.24); overflow: hidden; transition: box-shadow .3s ease;">
-            <span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;"></span>
-            <span aria-hidden="true" style="position: absolute; inset: 3px; border-radius: 11px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 6px 14px -10px rgba(10,10,10,.14); pointer-events: none;"></span>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
             <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 0; transition: opacity .3s ease;"></span>
             <button type="button" data-faq-toggle aria-controls="pp-faq-4-a" id="pp-faq-4-q" aria-expanded="false" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
               <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">04</span>
@@ -2102,9 +2110,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
               </div>
             </div>
           </div>
-          <div class="hv-glass-glow" data-faq-card="" style="position: relative; border-radius: 14px; background: linear-gradient(200deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 40%), linear-gradient(112deg, rgba(255,255,255,0) 54%, rgba(226,228,232,.42) 54.2%, rgba(238,240,243,.22) 76%, rgba(255,255,255,0) 76.2%), linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(244,245,247,.3) 100%); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 16px 32px -24px rgba(10,10,10,.24); overflow: hidden; transition: box-shadow .3s ease;">
-            <span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;"></span>
-            <span aria-hidden="true" style="position: absolute; inset: 3px; border-radius: 11px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 6px 14px -10px rgba(10,10,10,.14); pointer-events: none;"></span>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
             <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 0; transition: opacity .3s ease;"></span>
             <button type="button" data-faq-toggle aria-controls="pp-faq-5-a" id="pp-faq-5-q" aria-expanded="false" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
               <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">05</span>
@@ -2215,6 +2221,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=d12da5b2ee" defer></script>
+<script src="../../assets/js/landing.js?v=0c6cee29f8" defer></script>
 </body>
 </html>
