@@ -41,92 +41,7 @@
         <p class="tp-sub">{{cp.hero.sub}}</p>
       </div>
 
-      <div class="tp-stage">
-        <div class="tp-calc" data-plan>
-          <div class="tp-glass tp-glass--thick tp-controls">
-            <div class="tp-field">
-              <div class="tp-field__head">
-                <span class="tp-field__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"></path><path d="M16 5.6a3.2 3.2 0 0 1 0 6.1"></path><path d="M17.6 14.9c2 .6 3.4 2.4 3.4 4.6"></path></svg></span>
-                <span class="tp-field__label"><b id="plan-clients">{{cp.calc.clients}}</b><span>{{cp.calc.clientsHint}}</span></span>
-              </div>
-              <label class="tp-num"><input type="number" inputmode="numeric" min="1" max="1000000" step="1" value="100" data-plan-input="clients" aria-labelledby="plan-clients"><span>{{cp.calc.clientsUnit}}</span></label>
-              <div>
-                <div class="tp-range" style="--p: 22.25%;"><input type="range" min="0" max="1000" step="1" value="223" data-plan-range="clients" aria-labelledby="plan-clients"></div>
-                <div class="tp-scale" aria-hidden="true"><span style="left: 0;">1</span><span style="left: calc(11px + (100% - 22px) * 0.2225);">100</span><span style="left: calc(11px + (100% - 22px) * 0.4996);">500</span><span style="left: calc(11px + (100% - 22px) * 0.7069);">1,000</span><span style="left: 100%;">2,000+</span></div>
-              </div>
-            </div>
-
-            <div class="tp-field">
-              <div class="tp-field__head">
-                <span class="tp-field__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3 3 7.5l9 4.5 9-4.5L12 3z"></path><path d="m3 12 9 4.5 9-4.5"></path><path d="m3 16.5 9 4.5 9-4.5"></path></svg></span>
-                <span class="tp-field__label"><b id="plan-lots">{{cp.calc.lots}}</b><span>{{cp.calc.lotsHint}}</span></span>
-              </div>
-              <label class="tp-num"><input type="number" inputmode="numeric" min="1" max="100000" step="1" value="10" data-plan-input="lots" aria-labelledby="plan-lots"><span>{{calc.lotsUnit}}</span></label>
-              <div>
-                <div class="tp-range" style="--p: 9.49%;"><input type="range" min="0" max="1000" step="1" value="95" data-plan-range="lots" aria-labelledby="plan-lots"></div>
-                <div class="tp-scale" aria-hidden="true"><span style="left: 0;">1</span><span style="left: calc(11px + (100% - 22px) * 0.2215);">50</span><span style="left: calc(11px + (100% - 22px) * 0.4992);">250</span><span style="left: calc(11px + (100% - 22px) * 0.7068);">500</span><span style="left: 100%;">1,000+</span></div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="tp-sheet" data-plan-sheet>
-            <span class="tp-sheet__bar" aria-hidden="true"></span>
-            <div class="tp-sheet__head">
-              <span class="tp-sheet__brand"><img src="{{root}}assets/logo-mark.png" alt="" width="24" height="24"><span>TradeQuo<i>.</i></span></span>
-              <span class="tp-sheet__title">{{cp.calc.est}}</span>
-            </div>
-            <div class="tp-sheet__meta">
-              <div><span>{{cp.calc.rate}}</span><b data-plan-rate>$7.50</b></div>
-              <div><span>{{cp.calc.clients}}</span><b data-plan-clients>100</b></div>
-              <div><span>{{cp.calc.lots}}</span><b data-plan-lots>10</b></div>
-            </div>
-            <div class="tp-sheet__total">
-              <div class="tp-sheet__sum">
-                <span class="tp-sheet__label">{{cp.calc.income}}</span>
-                <b data-plan-total aria-live="polite">$7,500</b>
-              </div>
-              <svg class="tp-sheet__stamp" data-plan-stamp aria-hidden="true" width="104" height="104" viewBox="0 0 120 120">
-                <defs><path id="planArc" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"></path></defs>
-                <circle cx="60" cy="60" r="56" fill="none" stroke="#e7131b" stroke-width="2.4"></circle>
-                <circle cx="60" cy="60" r="31" fill="none" stroke="#e7131b" stroke-width="1.2"></circle>
-                <text font-family="DM Sans, sans-serif" font-size="9.6" font-weight="700" letter-spacing="2" fill="#e7131b" direction="ltr" unicode-bidi="embed"><textPath href="#planArc">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text>
-                <text x="60" y="67" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="18" font-weight="800" letter-spacing="1" fill="#e7131b">TQ</text>
-              </svg>
-            </div>
-            <div class="tp-sheet__ledger">
-              <div><b><span data-plan-volume>1,000</span></b><span>{{cp.calc.volume}} · {{calc.lotsUnit}}</span></div>
-              <div><b data-plan-day>$250</b><span>{{cp.calc.perDay}}</span></div>
-              <div><b data-plan-year>$90,000</b><span>{{cp.calc.perYear}}</span></div>
-            </div>
-            <ul class="tp-sheet__perks">
-              <li><span class="tp-sheet__badge" aria-hidden="true">24h</span>{{cp.calc.p1}}</li>
-              <li><span class="tp-sheet__badge" aria-hidden="true">0%</span>{{cp.calc.p2}}</li>
-              <li><span class="tp-sheet__badge tp-sheet__badge--inf" aria-hidden="true">∞</span>{{cp.calc.p3}}</li>
-            </ul>
-            <a class="tp-slide" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">
-              <span class="tp-slide__fill" aria-hidden="true"></span>
-              <span class="tp-slide__label">{{nav.cta}}</span>
-              <span class="tp-slide__knob" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <p class="tp-note">{{cp.calc.note}}</p>
-    </section>
-
-    <!-- How the calculator works -->
-    <section id="steps" class="tp-sec" data-screen-label="How the calculator works" style="padding-top: clamp(16px, 3vw, 40px);">
-      <div class="tp-wrap">
-        <div class="tp-head">
-          <h2 class="tp-h2">{{cp.how.title}}</h2>
-        </div>
-        <div class="tp-steps">
-          <div class="tp-glass tp-glass--hover tp-step"><div class="tp-step__top"><span class="tp-step__n">01</span><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"></path><path d="M16 5.6a3.2 3.2 0 0 1 0 6.1" stroke="#e7131b"></path><path d="M17.6 14.9c2 .6 3.4 2.4 3.4 4.6" stroke="#e7131b"></path></svg></div><h3>{{cp.how.s1.t}}</h3><p>{{cp.how.s1.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-step"><div class="tp-step__top"><span class="tp-step__n">02</span><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 7.5l9 4.5 9-4.5L12 3z"></path><path d="m3 12 9 4.5 9-4.5" stroke="#e7131b"></path><path d="m3 16.5 9 4.5 9-4.5" stroke="#e7131b"></path></svg></div><h3>{{cp.how.s2.t}}</h3><p>{{cp.how.s2.d}}</p></div>
-          <div class="tp-glass tp-glass--hover tp-step"><div class="tp-step__top"><span class="tp-step__n">03</span><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5h17"></path><path d="m3.5 16.5 5-5 4 3.5 7.5-8" stroke="#e7131b"></path><path d="M15.5 7h4.5v4.5" stroke="#e7131b"></path></svg></div><h3>{{cp.how.s3.t}}</h3><p>{{cp.how.s3.d}}</p></div>
-        </div>
-      </div>
+{{> calc-widget}}
     </section>
 
     <!-- Daily payouts -->
@@ -158,11 +73,6 @@
             <span class="tp-tl__n" aria-hidden="true">04</span>
             <h3>{{cp.pay.t4}}</h3><p>{{cp.pay.d4}}</p>
           </div>
-        </div>
-        <div class="tp-proofs">
-          <div class="tp-proof"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path><path d="m9 14.5 2 2 4-4"></path></svg></span><b>{{embed.flow.f1}}</b></div>
-          <div class="tp-proof"><span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="5.5"></circle><path d="M14.7 10.2a5.5 5.5 0 1 1-4.5 4.5"></path><path d="M9 6.8v4.4M7.2 8.2h2.6"></path></svg></span><b>{{embed.flow.f2}}</b></div>
-          <div class="tp-proof"><span class="tp-hex" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 8.4C4.6 8.4 3 10 3 12s1.6 3.6 3.6 3.6c3.6 0 7.2-7.2 10.8-7.2 2 0 3.6 1.6 3.6 3.6s-1.6 3.6-3.6 3.6c-3.6 0-7.2-7.2-10.8-7.2z"></path></svg></span><b>{{embed.flow.f3}}</b></div>
         </div>
       </div>
     </section>
