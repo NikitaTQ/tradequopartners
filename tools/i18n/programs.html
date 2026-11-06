@@ -92,128 +92,75 @@
       </div>
     </section>
 
-    <!-- Who it's for: persona list + 3D card carousel (embed); the page owns the active card -->
-    <section id="who" class="tp-sec tp-who-sec" data-screen-label="Who it's for">
-      <div class="tp-who" data-who>
-        <div class="tp-who__head">
-          <div class="tp-who__title">
-            <h2 class="tp-h2">{{pp.who.title}}</h2>
+    <!-- Who it's for → Why partners choose (TradeQuo_Partner_Flow design). A sticky scene over 280vh: the
+         persona block with its 3D platform (assets/js/partner-flow.js, loaded when the scene is near); on
+         scroll the platform stands up, its snapshot grows to fill the screen and becomes the dark perks
+         section, where six cards are dealt. Phones and reduced motion: the two blocks simply stack and the
+         perks scroll sideways. startWhoFlow in landing.js runs the scroll part and the persona rows. -->
+    <div class="pf" id="who">
+      <div id="pf-flow" data-pf-module="{{root}}assets/js/partner-flow.js">
+        <div id="pf-stick">
+          <div id="pf-who-wrap">
+            <section class="pf-who" id="pf-who" data-screen-label="Who it's for">
+              <h2 class="tp-h2 pf-who__title">{{pp.who.title}}</h2>
+              <div class="pf-who__pick">
+                <div class="pf-who__rows" role="group" aria-label="{{@pp.who.title}}">
+                  <button type="button" class="pf-row" data-pf-row aria-pressed="true"><span class="pf-row__n">01</span><span class="pf-row__t">{{pp.who.1.t}}</span><span class="pf-row__dot" aria-hidden="true"></span></button>
+                  <button type="button" class="pf-row" data-pf-row aria-pressed="false"><span class="pf-row__n">02</span><span class="pf-row__t">{{pp.who.2.t}}</span><span class="pf-row__dot" aria-hidden="true"></span></button>
+                  <button type="button" class="pf-row" data-pf-row aria-pressed="false"><span class="pf-row__n">03</span><span class="pf-row__t">{{pp.who.3.t}}</span><span class="pf-row__dot" aria-hidden="true"></span></button>
+                  <button type="button" class="pf-row" data-pf-row aria-pressed="false"><span class="pf-row__n">04</span><span class="pf-row__t">{{pp.who.4.t}}</span><span class="pf-row__dot" aria-hidden="true"></span></button>
+                  <button type="button" class="pf-row" data-pf-row aria-pressed="false"><span class="pf-row__n">05</span><span class="pf-row__t">{{pp.who.5.t}}</span><span class="pf-row__dot" aria-hidden="true"></span></button>
+                </div>
+                <div class="pf-who__story" aria-live="polite">
+                  <div class="pf-story" data-pf-story><p class="pf-story__txt">{{pp.who.1.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p1.title}}</span></span></div>
+                  <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">{{pp.who.2.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p1.title}}</span></span></div>
+                  <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">{{pp.who.3.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p1.title}}</span></span></div>
+                  <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">{{pp.who.4.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p2.title}}</span></span></div>
+                  <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">{{pp.who.5.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p3.title}}</span></span></div>
+                </div>
+              </div>
+              <div class="pf-who__stagebox">
+                <div class="pf-who__stage" id="pf-who-stage" data-prev="{{@pp.who.prev}}" data-next="{{@pp.who.next}}"></div>
+              </div>
+              <div class="pf-who__cta">
+                <a class="tq-liq tq-liq--sm" href="{{signupHref}}"{{signupNav}} aria-label="{{@pp.cta.apply}}"><span class="tq-liq__shadow" aria-hidden="true"></span><span class="tq-liq__body"><span class="tq-liq__well" aria-hidden="true"><span class="tq-liq__fluid"><span class="tq-liq__wave"><svg viewBox="0 0 400 20" preserveAspectRatio="none" width="100%" height="10" focusable="false"><path d="M0 12 Q 50 2 100 12 T 200 12 T 300 12 T 400 12 V 20 H 0 Z" fill="#FF6A70"></path></svg></span><span class="tq-liq__line"></span></span></span><span class="tq-liq__gloss" aria-hidden="true"></span><span class="tq-liq__label">{{pp.cta.apply}}<span class="tq-liq__arr">→</span></span><span class="tq-liq__label tq-liq__label--lit" aria-hidden="true">{{pp.cta.apply}}<span>→</span></span></span></a>
+              </div>
+            </section>
           </div>
-          <p class="tp-who__sub">{{pp.who.sub}}</p>
-        </div>
-        <div class="tp-who__body">
-          <div class="tp-who__col">
-          <ol class="tp-who__list">
-            <li class="tp-who__row is-on" data-who-item>
-              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b1" aria-controls="who-p1" aria-expanded="true"><span class="tp-who__num">01</span><span class="tp-who__name">{{pp.who.1.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
-              <div class="tp-who__panel" id="who-p1" role="region" aria-labelledby="who-b1"><div class="tp-who__inner"><p>{{pp.who.1.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p1.title}}</span></div></div></div>
-            </li>
-            <li class="tp-who__row" data-who-item>
-              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b2" aria-controls="who-p2" aria-expanded="false"><span class="tp-who__num">02</span><span class="tp-who__name">{{pp.who.2.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
-              <div class="tp-who__panel" id="who-p2" role="region" aria-labelledby="who-b2"><div class="tp-who__inner"><p>{{pp.who.2.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p1.title}}</span></div></div></div>
-            </li>
-            <li class="tp-who__row" data-who-item>
-              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b3" aria-controls="who-p3" aria-expanded="false"><span class="tp-who__num">03</span><span class="tp-who__name">{{pp.who.3.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
-              <div class="tp-who__panel" id="who-p3" role="region" aria-labelledby="who-b3"><div class="tp-who__inner"><p>{{pp.who.3.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p1.title}}</span></div></div></div>
-            </li>
-            <li class="tp-who__row" data-who-item>
-              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b4" aria-controls="who-p4" aria-expanded="false"><span class="tp-who__num">04</span><span class="tp-who__name">{{pp.who.4.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
-              <div class="tp-who__panel" id="who-p4" role="region" aria-labelledby="who-b4"><div class="tp-who__inner"><p>{{pp.who.4.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p2.title}}</span></div></div></div>
-            </li>
-            <li class="tp-who__row" data-who-item>
-              <h3 class="tp-who__h"><button type="button" class="tp-who__toggle" id="who-b5" aria-controls="who-p5" aria-expanded="false"><span class="tp-who__num">05</span><span class="tp-who__name">{{pp.who.5.t}}</span><span class="tp-who__dot" aria-hidden="true"></span></button></h3>
-              <div class="tp-who__panel" id="who-p5" role="region" aria-labelledby="who-b5"><div class="tp-who__inner"><p>{{pp.who.5.d}}</p><div class="tp-who__fit"><span class="tp-who__fitlabel">{{pp.who.fit}}</span><span class="tp-who__pill"><i aria-hidden="true"></i>{{pp.p3.title}}</span></div></div></div>
-            </li>
-          </ol>
-          <div class="tp-who__cta">
-            <a class="tp-c3d tp-ionic" data-c3d data-ionic href="{{signupHref}}"{{signupNav}}>
-              <span class="tp-ionic__body">
-                <span class="tp-ionic__shadow" aria-hidden="true"></span>
-                <span class="tp-ionic__glow" aria-hidden="true"></span>
-                <span class="tp-ionic__frame"><span class="tp-ionic__face"><span class="tp-ionic__sheen" aria-hidden="true"></span><span class="tp-ionic__label">{{pp.cta.apply}}</span></span></span>
-                <svg class="tp-ionic__scroll" width="210" height="58" viewBox="0 0 210 58" aria-hidden="true" focusable="false">
-                  <defs>
-                    <filter id="tpIonEmb" x="-10%" y="-15%" width="120%" height="135%" color-interpolation-filters="sRGB">
-                      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="b"></feGaussianBlur>
-                      <feDiffuseLighting in="b" surfaceScale="3.2" diffuseConstant="1.05" lighting-color="#ECEEF1" result="d"><feDistantLight azimuth="240" elevation="58"></feDistantLight></feDiffuseLighting>
-                      <feComposite in="d" in2="SourceAlpha" operator="in" result="d2"></feComposite>
-                      <feSpecularLighting in="b" surfaceScale="3.2" specularConstant="1.15" specularExponent="26" lighting-color="#FFFFFF" result="s"><feDistantLight azimuth="240" elevation="40"></feDistantLight></feSpecularLighting>
-                      <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"></feComposite>
-                      <feComposite in="d2" in2="s2" operator="arithmetic" k1="0" k2="1" k3="0.85" k4="0" result="m"></feComposite>
-                      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="sb"></feGaussianBlur>
-                      <feOffset in="sb" dx="0.5" dy="2.5" result="so"></feOffset>
-                      <feFlood flood-color="#12161E" flood-opacity="0.3"></feFlood>
-                      <feComposite in2="so" operator="in" result="sh"></feComposite>
-                      <feMerge><feMergeNode in="sh"></feMergeNode><feMergeNode in="m"></feMergeNode></feMerge>
-                    </filter>
-                    <radialGradient id="tpIonJw" cx="0.38" cy="0.32" r="0.75"><stop offset="0" stop-color="#FF7A80"></stop><stop offset="0.5" stop-color="#E7131B"></stop><stop offset="1" stop-color="#8E0A10"></stop></radialGradient>
-                  </defs>
-                  <g filter="url(#tpIonEmb)">
-                    <path class="tp-ionic__curl" data-ionic-curl d="M105 -6 H-9 A18 18 0 0 0 -27 12 A15 15 0 0 0 -12 27 A12 12 0 0 0 0 15 A9 9 0 0 0 -9 6 A6 6 0 0 0 -15 12 A4 4 0 0 0 -11 16" pathLength="100" fill="none" stroke="#000" stroke-width="4.2" stroke-linecap="round"></path>
-                    <circle class="tp-ionic__eye" cx="-11" cy="12" r="2.6" fill="#000"></circle>
-                    <g data-ionic-mirror transform="translate(210 0) scale(-1 1)">
-                      <path class="tp-ionic__curl" data-ionic-curl d="M105 -6 H-9 A18 18 0 0 0 -27 12 A15 15 0 0 0 -12 27 A12 12 0 0 0 0 15 A9 9 0 0 0 -9 6 A6 6 0 0 0 -15 12 A4 4 0 0 0 -11 16" pathLength="100" fill="none" stroke="#000" stroke-width="4.2" stroke-linecap="round"></path>
-                      <circle class="tp-ionic__eye" cx="-11" cy="12" r="2.6" fill="#000"></circle>
-                    </g>
-                  </g>
-                  <circle class="tp-ionic__jewel" data-ionic-jewel cx="105" cy="-6" r="3.4" fill="url(#tpIonJw)"></circle>
-                </svg>
-              </span>
-            </a>
-          </div>
-          </div>
-          <div class="tp-who__stage">
-            <img class="tp-who__poster" data-poster src="{{root}}assets/posters/who-cards.webp" alt="" width="1000" height="900" loading="lazy" decoding="async">
-            <iframe class="tp-who__3d" data-embed data-src="{{root}}embeds/who-cards.html" title="{{@pp.who.kicker}}" aria-hidden="true" tabindex="-1"></iframe>
+          <div id="pf-flip">
+            <div class="pf-glass" aria-hidden="true"></div>
+            <div class="pf-blk" id="pf-back">
+              <section class="pf-perks" id="pf-perks" data-screen-label="Why partners choose">
+                <div class="pf-perks__head">
+                  <div class="pf-perks__titles">
+                    <span class="pf-perks__pill"><i aria-hidden="true"></i>{{offer.pill}}</span>
+                    <h2 class="tp-h2 pf-perks__title">{{pp.ben.title}}</h2>
+                  </div>
+                  <p class="pf-perks__sub" data-sub2>{{pp.perks.sub}}</p>
+                </div>
+                <div class="pf-fan" id="pf-fan">
+                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">{{pp.perks.1.t}}</span><span class="pf-perk__d">{{pp.perks.1.d}}</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">{{pp.perks.2.t}}</span><span class="pf-perk__d">{{pp.perks.2.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span><span class="pf-pill-dk"><i></i>{{pp.perks.fees}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">{{pp.perks.3.t}}</span><span class="pf-perk__d">{{pp.perks.3.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><span class="pf-mono pf-live__lab"><i class="pf-pulse"></i>{{pp.perks.live}}</span><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">{{pp.perks.4.t}}</span><span class="pf-perk__d">{{pp.perks.4.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">{{pp.perks.mgr}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">{{pp.perks.5.t}}</span><span class="pf-perk__d">{{pp.perks.5.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">{{pp.perks.c1}}</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">{{pp.perks.c3}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">{{pp.perks.6.t}}</span><span class="pf-perk__d">{{pp.perks.6.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+                </div>
+                <div class="pf-perks__cta">
+                  <a href="{{signupHref}}"{{signupNav}} class="pf-puzzle" aria-label="{{@pp.cta.start}}"><span class="pf-pz-a">{{pp.perks.go1}}</span><span class="pf-pz-b">{{pp.perks.go2}} <span class="pf-pz-arr">→</span></span></a>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+      <span class="pf-anchor" id="benefits" aria-hidden="true"></span>
+      <div id="pf-perks-host"></div>
+      <div id="pf-tail" aria-hidden="true"></div>
+    </div>
 
-    <!-- one soft grey band behind Key benefits and Why TradeQuo -->
+    <!-- one soft grey band behind Why TradeQuo -->
     <div class="tp-band">
-    <!-- Key benefits: eight 3D objects on glass pedestals (embed) + glass card; the page owns the active item -->
-    <section id="benefits" class="tp-sec" data-screen-label="Key benefits">
-      <div class="tp-wrap tp-kbo" data-kb>
-        <div class="tp-kbo__head">
-          <h2 class="tp-h2">{{pp.ben.title}}</h2>
-          <p class="tp-kbo__sub">{{pp.ben.sub}}</p>
-        </div>
-        <div class="tp-kb__card">
-          <div class="tp-kb__meta"><span class="tp-kb__num" data-kb-num>01 / 08</span><span class="tp-kb__group" data-kb-group>{{pp.ben.g1}}</span></div>
-          <ol class="tp-kb__items">
-          <li class="tp-kb__item is-on" data-kb-item data-group="{{@pp.ben.g1}}"><h3>{{pp.ben.1.t}}</h3><p>{{pp.ben.1.d}}</p></li>
-          <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g1}}"><h3>{{pp.ben.2.t}}</h3><p>{{pp.ben.2.d}}</p></li>
-          <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g1}}"><h3>{{pp.ben.3.t}}</h3><p>{{pp.ben.3.d}}</p></li>
-          <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g1}}"><h3>{{pp.ben.4.t}}</h3><p>{{pp.ben.4.d}}</p></li>
-          <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g2}}"><h3>{{pp.ben.5.t}}</h3><p>{{pp.ben.5.d}}</p></li>
-          <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g2}}"><h3>{{pp.ben.6.t}}</h3><p>{{pp.ben.6.d}}</p></li>
-          <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g2}}"><h3>{{pp.ben.7.t}}</h3><p>{{pp.ben.7.d}}</p></li>
-          <li class="tp-kb__item" data-kb-item data-group="{{@pp.ben.g2}}"><h3>{{pp.ben.8.t}}</h3><p>{{pp.ben.8.d}}</p></li>
-          </ol>
-          <div class="tp-kb__bars">
-          <button type="button" class="tp-kb__bar is-on" data-kb-bar aria-label="{{@pp.ben.1.t}}" aria-pressed="true"></button>
-          <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.2.t}}" aria-pressed="false"></button>
-          <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.3.t}}" aria-pressed="false"></button>
-          <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.4.t}}" aria-pressed="false"></button>
-          <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.5.t}}" aria-pressed="false"></button>
-          <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.6.t}}" aria-pressed="false"></button>
-          <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.7.t}}" aria-pressed="false"></button>
-          <button type="button" class="tp-kb__bar" data-kb-bar aria-label="{{@pp.ben.8.t}}" aria-pressed="false"></button>
-          </div>
-        </div>
-        <div class="tp-kbo__stage">
-          <picture class="tp-kbo__poster" data-poster aria-hidden="true"><source media="(min-width: 641px)" srcset="{{root}}assets/posters/benefits-objects-wide.webp" width="1240" height="797"><img src="{{root}}assets/posters/benefits-objects.webp" alt="" width="360" height="580" loading="lazy" decoding="async"></picture>
-          <iframe class="tp-kbo__3d" data-embed data-src="{{root}}embeds/benefit-objects.html{{embedQuery}}" title="{{@pp.ben.kicker}}" aria-hidden="true" tabindex="-1"></iframe>
-        </div>
-        <div class="tp-kbo__cta">
-          <a class="tp-c3d tp-ped" data-c3d href="{{signupHref}}"{{signupNav}}>
-            <span class="tp-pill3"><span class="tp-pill3__face"><span class="tp-pill3__sheen" aria-hidden="true"></span><span class="tp-pill3__label">{{pp.cta.start}}</span><span class="tp-pill3__go"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></span></span>
-            <span class="tp-ped__base" aria-hidden="true"><span class="tp-ped__side"></span><span class="tp-ped__top"></span><span class="tp-ped__ring"></span><span class="tp-ped__shadow"></span></span>
-          </a>
-        </div>
-      </div>
-    </section>
 
     <!-- Why TradeQuo: trust dome (3D embed); the four stats are page text the embed calls out -->
     <section id="why" class="tp-sec" data-screen-label="Why TradeQuo" style="padding-top: 0;">
