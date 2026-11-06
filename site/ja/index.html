@@ -1672,6 +1672,7 @@ html:lang(ko) * { word-break: keep-all; }
       <a class="tq-fab-link" href="#faq" style="--i: 3;">FAQ</a>
       <a class="tq-fab-link tq-fab-link--page" href="programs/" data-page-link data-label="読み込み中 · プログラム一覧" style="--i: 4;">プログラム一覧</a>
       <a class="tq-fab-link tq-fab-link--page" href="commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン" style="--i: 5;">報酬プラン</a>
+      <a class="tq-fab-link tq-fab-link--page" href="marketing-tools/" data-page-link data-label="読み込み中 · 販促ツール" style="--i: 6;">販促ツール</a>
     </div>
     <button type="button" data-fab-toggle aria-label="メニュー" aria-expanded="false" style="width: 56px; height: 56px; border: none; border-radius: 50%; background: #e7131b; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 28px -8px rgba(231,19,27,.7), inset 0 1px 0 rgba(255,255,255,.25);">
       <span data-ref="fabIcon" style="display: flex; align-items: center; justify-content: center; transition: transform .35s cubic-bezier(.34,1.3,.5,1);">
@@ -1681,25 +1682,36 @@ html:lang(ko) * { word-break: keep-all; }
   </div>
 
     <div data-fanveil="" hidden style="position: fixed; inset: 0; z-index: 68; background: rgba(255,255,255,.42); animation: tqFanVeil .3s ease both; cursor: pointer;"></div>
-  <div data-fanmenu="" style="--fan-n: 2; position: fixed; right: 28px; bottom: 28px; z-index: 78; width: 60px; height: 60px;">
-      <div class="tq-fan-item" style="--i: 0; --ri: 1;">
+  <div data-fanmenu="" style="--fan-n: 3; position: fixed; right: 28px; bottom: 28px; z-index: 78; width: 60px; height: 60px;">
+      <div class="tq-fan-item" style="--i: 0; --ri: 2;">
         <a class="hv-fan-blade" href="programs/" data-page-link data-label="読み込み中 · プログラム一覧" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
             <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">02</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">プログラム一覧</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">プログラム一覧</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 1; --ri: 0;">
+      <div class="tq-fan-item" style="--i: 1; --ri: 1;">
         <a class="hv-fan-blade" href="commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
             <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">03</span>
-            <span style="font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1; white-space: nowrap;">報酬プラン</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">報酬プラン</span>
+          </span>
+          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
+        </a>
+      </div>
+      <div class="tq-fan-item" style="--i: 2; --ri: 0;">
+        <a class="hv-fan-blade" href="marketing-tools/" data-page-link data-label="読み込み中 · 販促ツール" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
+          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">販促ツール</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
@@ -1709,7 +1721,7 @@ html:lang(ko) * { word-break: keep-all; }
       <span aria-hidden="true" style="position: absolute; inset: 3px; z-index: -1; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 -10px 16px -12px rgba(10,10,10,.2);"></span>
       <span class="tq-fan-ico tq-fan-ico--closed" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.6" stroke-linejoin="round"><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)"></rect><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)" transform="rotate(-28 12 19.5)"></rect><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)" transform="rotate(28 12 19.5)"></rect><circle cx="12" cy="19.5" r="1.6" fill="#e7131b" stroke="none"></circle></svg></span>
       <span class="tq-fan-ico tq-fan-ico--open" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></span>
-      <span aria-hidden="true" style="position: absolute; top: -3px; right: -3px; width: 21px; height: 21px; border-radius: 50%; background: #e7131b; color: #fff; border: 2px solid #fff; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1;">2</span>
+      <span aria-hidden="true" style="position: absolute; top: -3px; right: -3px; width: 21px; height: 21px; border-radius: 50%; background: #e7131b; color: #fff; border: 2px solid #fff; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1;">3</span>
     </button>
   </div>
 
