@@ -195,33 +195,27 @@ function drawMetric(ctx, f, v) {
   ctx.shadowBlur = 0;
 }
 
-/* ---------------- Rose-cut hexagon crystal ----------------
-   Flat-top hexagon: girdle at the widest point, a wide bevel band up to the
-   crown, then an antiprism band of triangular facets converging on the apex.
-   The back repeats it shallower, so the piece reads as a cut stone, not a tile.
-   Non-indexed + flatShading: every facet gets its own normal and its own flash. */
+/* ---------------- Glass tile ----------------
+   One clear hexagonal plate: a flat face, a single narrow polished bevel round the
+   edge, straight sides and a flat back. Only the front faces render (FrontSide), so
+   the back edges never show through as a second outline: one layer of glass with one
+   crisp rim. Non-indexed + flatShading: each bevel facet catches its own light. */
+const FACE = 0.915, TOP = 0.08, BACK = -0.02;   // face edge (× r), face height, back depth
 function crystalGeometry(r) {
-  const ring = (rad, z, rot = 0) => Array.from({ length: 6 }, (_, i) => {
-    const a = rot + i * Math.PI / 3;
+  const ring = (rad, z) => Array.from({ length: 6 }, (_, i) => {
+    const a = i * Math.PI / 3;
     return [Math.cos(a) * rad * r, Math.sin(a) * rad * r, z * r];
   });
-  const G  = ring(1.00, 0);
-  const Cb = ring(0.800, 0.135);
-  const A  = ring(0.620, 0.205, Math.PI / 6);
-  const M  = ring(0.350, 0.262);
-  const Pb = ring(0.845, -0.090);
-  const apex = [0, 0, 0.295 * r], back = [0, 0, -0.165 * r];
+  const F = ring(FACE, TOP), G = ring(1, 0), B = ring(1, BACK);
+  const c = [0, 0, TOP * r], cb = [0, 0, BACK * r];
   const pos = [];
-  const tri = (a, b, c) => pos.push(...a, ...b, ...c);
-  const nx = i => (i + 1) % 6;
+  const tri = (a, b, d) => pos.push(...a, ...b, ...d);
   for (let i = 0; i < 6; i++) {
-    const j = nx(i);
-    tri(G[i], G[j], Cb[j]); tri(G[i], Cb[j], Cb[i]);            // front bevel
-    tri(Cb[i], Cb[j], A[i]); tri(A[i], Cb[j], A[j]);             // crown band 1
-    tri(A[i], A[j], M[j]); tri(M[j], A[j], M[nx(j)]);            // crown band 2
-    tri(M[i], M[j], apex);                                       // star facet
-    tri(G[j], G[i], Pb[i]); tri(Pb[i], G[i], Pb[(i + 5) % 6]);   // back bevel
-    tri(Pb[nx(i)], Pb[i], back);                                 // pavilion
+    const j = (i + 1) % 6;
+    tri(c, F[i], F[j]);                                   // face
+    tri(F[i], G[i], G[j]); tri(F[i], G[j], F[j]);         // bevel
+    tri(G[i], B[i], B[j]); tri(G[i], B[j], G[j]);         // side
+    tri(cb, B[j], B[i]);                                  // back
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
@@ -237,12 +231,26 @@ const GLASS = {
 const glass = new THREE.MeshPhysicalMaterial({
   name: 'crystal', metalness: 0, roughness: 0.008, transmission: 0.95, ior: 1.54,
   specularIntensity: 1, clearcoat: 1, clearcoatRoughness: 0.01, dispersion: 0.35,
-  envMapIntensity: 3.1, depthWrite: false, flatShading: true, side: THREE.DoubleSide,
+  envMapIntensity: 3.1, depthWrite: false, flatShading: true, side: THREE.FrontSide,
 });
 
 /* ---------------- Build ---------------- */
 const root = new THREE.Group(); root.name = 'TradeQuo_Crystals';
 const gemGeo = crystalGeometry(HR);
+/* A hairline round the edge, drawn over the glass: where a bevel facet reflects the white
+   studio it would melt into the page and break the outline; this keeps one clean contour. */
+const rimGeo = (() => {
+  const pos = [], o = HR, n = HR * 0.988;
+  const pt = (rad, i) => [Math.cos(i * Math.PI / 3) * rad, Math.sin(i * Math.PI / 3) * rad, 0.002];
+  for (let i = 0; i < 6; i++) {
+    const a1 = pt(o, i), a2 = pt(o, i + 1), b1 = pt(n, i), b2 = pt(n, i + 1);
+    pos.push(...b1, ...a1, ...a2, ...b1, ...a2, ...b2);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  return g;
+})();
+const rimMat = new THREE.MeshBasicMaterial({ name: 'rim', color: 0xc4c8ce, transparent: true, opacity: 0.85, depthWrite: false });
 const maxAniso = R.capabilities.getMaxAnisotropy();
 
 const gems = METRICS.map((f, k) => {
@@ -256,6 +264,9 @@ const gems = METRICS.map((f, k) => {
   const gem = new THREE.Mesh(gemGeo, mat3d);
   gem.name = `crystal_${id}`;
   tilt.add(gem);
+  const edge = new THREE.Mesh(rimGeo, rimMat);
+  edge.name = `rim_${id}`; edge.renderOrder = 2;
+  tilt.add(edge);
 
   const cv = document.createElement('canvas'); cv.width = TX; cv.height = TY;
   const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = maxAniso; tex.minFilter = THREE.LinearMipmapLinearFilter; tex.magFilter = THREE.LinearFilter; tex.generateMipmaps = true;
@@ -408,7 +419,7 @@ const sheenGeo = (() => {
 gems.forEach((b, k) => {
   const m = new THREE.Mesh(sheenGeo, shnMat);
   m.name = `sheen_${String(k + 1).padStart(2, '0')}`;
-  m.position.z = HR * 0.30; m.renderOrder = 1; m.visible = false;
+  m.position.z = HR * (TOP + 0.01); m.renderOrder = 1; m.visible = false;
   b.bob.add(m); b.sheen = m;
 });
 
