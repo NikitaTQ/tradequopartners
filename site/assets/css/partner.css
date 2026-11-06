@@ -1,5 +1,5 @@
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
-   Built on site.css: same type, chrome-glass cards, red accent, mono kickers. */
+   Built on site.css: same type, chrome-glass cards, red accent. */
 
 .tp { font-family: 'DM Sans', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
 .tp-sec { position: relative; padding: clamp(56px, 8vw, 112px) clamp(16px, 4vw, 56px); }
@@ -8,8 +8,6 @@
 /* ---- headings ---------------------------------------------------------------- */
 .tp-head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto; text-align: center; }
 .tp-head--left { align-items: flex-start; text-align: start; margin: 0; }
-.tp-kicker { display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b; text-transform: uppercase; }
-.tp-kicker::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .tp-h1 { margin: 0; max-width: 24ch; font-size: clamp(24px, 3.4vw, 40px); line-height: 1; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
 .tp-h2 { margin: 0; max-width: 30ch; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(15px, 1.5vw, 19px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
@@ -299,7 +297,6 @@
 }
 .tp-night .tp-h2 { color: #fff; }
 .tp-night .tp-sub { color: #a7a9ae; }
-.tp-night .tp-kicker { color: #ff4d53; }
 .tp-night-sec { padding: clamp(24px, 4vw, 56px) clamp(8px, 2vw, 24px); }
 
 /* ---- final call on Partner Programs (Final CTA Glint Teaser) ----------------------- */

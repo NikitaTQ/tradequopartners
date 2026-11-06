@@ -1045,7 +1045,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
-   Built on site.css: same type, chrome-glass cards, red accent, mono kickers. */
+   Built on site.css: same type, chrome-glass cards, red accent. */
 
 .tp { font-family: 'DM Sans', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
 .tp-sec { position: relative; padding: clamp(56px, 8vw, 112px) clamp(16px, 4vw, 56px); }
@@ -1054,8 +1054,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* ---- headings ---------------------------------------------------------------- */
 .tp-head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto; text-align: center; }
 .tp-head--left { align-items: flex-start; text-align: start; margin: 0; }
-.tp-kicker { display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b; text-transform: uppercase; }
-.tp-kicker::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .tp-h1 { margin: 0; max-width: 24ch; font-size: clamp(24px, 3.4vw, 40px); line-height: 1; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
 .tp-h2 { margin: 0; max-width: 30ch; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(15px, 1.5vw, 19px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
@@ -1345,7 +1343,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 .tp-night .tp-h2 { color: #fff; }
 .tp-night .tp-sub { color: #a7a9ae; }
-.tp-night .tp-kicker { color: #ff4d53; }
 .tp-night-sec { padding: clamp(24px, 4vw, 56px) clamp(8px, 2vw, 24px); }
 
 /* ---- final call on Partner Programs (Final CTA Glint Teaser) ----------------------- */
@@ -1776,7 +1773,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <!-- Calculator -->
     <section id="calculator" class="tp-sec tp-hero" data-screen-label="Commission calculator">
       <div class="tp-head">
-        <span class="tp-kicker">PARTNER KOMİSYON PLANI</span>
         <h1 class="tp-h1" style="max-width: 20ch;"><span style="color: #e7131b;">Aylık kazancınızı</span> hesaplayın</h1>
         <p class="tp-sub">TradeQuo partner komisyon planıyla her ay ne kadar kazanabileceğinizi görmek için kaydırıcıları hareket ettirin.</p>
       </div>
@@ -1859,7 +1855,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <section id="steps" class="tp-sec" data-screen-label="How the calculator works" style="padding-top: clamp(16px, 3vw, 40px);">
       <div class="tp-wrap">
         <div class="tp-head">
-          <span class="tp-kicker">NASIL ÇALIŞIR</span>
           <h2 class="tp-h2">İki kaydırıcı. <span style="color: #e7131b;">Tek net rakam.</span></h2>
         </div>
         <div class="tp-steps">
@@ -1874,7 +1869,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <section id="payouts" class="tp-night-sec" data-screen-label="Daily payouts">
       <div class="tp-night">
         <div class="tp-head">
-          <span class="tp-kicker">NE ZAMAN ÖDEME ALIRSINIZ</span>
           <h2 class="tp-h2">Her gün ödeme. <span style="color: #e7131b;">Ücret yok.</span></h2>
           <p class="tp-sub">Komisyonlar her gün sunucu saatiyle 00:00’da hesaba geçer; işleme ve çekim ücretlerini biz karşılarız.</p>
         </div>
@@ -1913,7 +1907,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <section id="perks" class="tp-sec" data-screen-label="Partner perks">
       <div class="tp-wrap">
         <div class="tp-head">
-          <span class="tp-kicker">PARTNER AVANTAJLARI</span>
           <h2 class="tp-h2"><span style="color: #e7131b;">Komisyondan</span> fazlası</h2>
           <p class="tp-sub">Müşteri kazanmanıza ve onları aktif tutmanıza yardımcı olacak araçlar, içerikler ve destek.</p>
         </div>
@@ -1933,12 +1926,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
      landing and goes to it from the other pages (signupHref and signupNav in build-i18n.py). -->
   <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(50px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(30px, 4vw, 56px); background: #fff; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
-      <div style="display: inline-flex; align-items: center; gap: 9px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #e7131b;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #e7131b;"></span>NASIL ÇALIŞIR</div>
       <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Kayıttan ilk ödemeye<br><span style="color: #e7131b;">üç adımda</span></h2>
     </div>
     <div data-how-steps="" style="max-width: 1240px; margin: clamp(36px, 5vw, 64px) auto 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px) clamp(12px, 2vw, 28px);">
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="5" width="22" height="31" rx="3" stroke="#0a0a0a"></rect><circle cx="21" cy="15" r="4" stroke="#e7131b"></circle><path d="M14.5 26c1.2-3.4 3.6-5 6.5-5s5.3 1.6 6.5 5" stroke="#e7131b"></path><circle cx="32" cy="34" r="6" fill="#fff" stroke="#e7131b"></circle><path d="m29.6 34 1.7 1.7 3.2-3.4" stroke="#e7131b"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="5" width="22" height="31" rx="3" stroke="#0a0a0a"></rect><circle cx="21" cy="15" r="4" stroke="#e7131b"></circle><path d="M14.5 26c1.2-3.4 3.6-5 6.5-5s5.3 1.6 6.5 5" stroke="#e7131b"></path><circle cx="32" cy="34" r="6" fill="#fff" stroke="#e7131b"></circle><path d="m29.6 34 1.7 1.7 3.2-3.4" stroke="#e7131b"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Hesabınızı açın</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">TradeQuo’ya kaydolun ve kimlik doğrulamasını tamamlayın.</p>
         </div>
@@ -1947,7 +1939,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <svg width="12" height="8" viewBox="0 0 12 8" style="margin-top: -1px;"><path data-how-arrow-head="" d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="#d6d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: stroke .3s ease;"></path></svg>
         </div>
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="13" r="6" stroke="#0a0a0a"></circle><path d="M6 34c0-6 4.9-10 11-10 2.4 0 4.6.6 6.4 1.7" stroke="#0a0a0a"></path><rect x="25" y="25" width="13" height="11" rx="2.5" stroke="#e7131b"></rect><path d="M31.5 28v5M29 30.5h5" stroke="#e7131b"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="13" r="6" stroke="#0a0a0a"></circle><path d="M6 34c0-6 4.9-10 11-10 2.4 0 4.6.6 6.4 1.7" stroke="#0a0a0a"></path><rect x="25" y="25" width="13" height="11" rx="2.5" stroke="#e7131b"></rect><path d="M31.5 28v5M29 30.5h5" stroke="#e7131b"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">IB programına başvurun</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">Talebinizi Müşteri Portalı üzerinden gönderin. Her başvuruyu 24 saat içinde inceliyoruz.</p>
         </div>
@@ -1956,7 +1948,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <svg width="12" height="8" viewBox="0 0 12 8" style="margin-top: -1px;"><path data-how-arrow-head="" d="M1.5 1.5 6 6l4.5-4.5" fill="none" stroke="#d6d6d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: stroke .3s ease;"></path></svg>
         </div>
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
-          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="5" height="16" rx="2.5" stroke="#e7131b"></rect><rect x="6" y="31" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="27" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="33" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="23" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="29" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="35" width="9" height="4" rx="2" stroke="#e7131b"></rect><path d="M31 13l7-7M33 6h5v5" stroke="#0a0a0a"></path></svg></div>
+          <div data-how-icon="" style="display: flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-bottom: 4px; border-radius: 50%; background: transparent; transition: background .5s ease;"><svg width="66" height="66" viewBox="0 0 44 44" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="5" height="16" rx="2.5" stroke="#e7131b"></rect><rect x="6" y="31" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="27" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="18" y="33" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="23" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="29" width="9" height="4" rx="2" stroke="#e7131b"></rect><rect x="30" y="35" width="9" height="4" rx="2" stroke="#e7131b"></rect><path d="M31 13l7-7M33 6h5v5" stroke="#0a0a0a"></path></svg></div>
           <h3 style="margin: 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.15; letter-spacing: -.03em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Linkinizi paylaşın ve kazanın</h3>
           <p style="margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">Referans linkinizi alın, kitlenizle paylaşın ve müşterilerinizin işlem yaptığı her lottan kazanın.</p>
         </div>
