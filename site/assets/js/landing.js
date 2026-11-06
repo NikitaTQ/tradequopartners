@@ -745,6 +745,7 @@
       put(el, 'max-width', 'none');
       const room = el.offsetWidth;                                      /* the widest the column lets it be */
       for (const k of [1, .95, .9, .85, .8, .75, .7, .65]) {
+        if (base * k < 15) break;                                       /* never under 15px: more lines instead */
         if (k < 1) put(el, 'font-size', (base * k).toFixed(1) + 'px');
         if (!split) {                                                   /* split by hand: the <br> makes the two lines */
           el.style.whiteSpace = 'nowrap'; el.style.width = 'max-content'; put(el, 'max-width', 'none');
