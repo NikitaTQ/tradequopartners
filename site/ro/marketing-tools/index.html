@@ -1671,93 +1671,56 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-mt-card h3 { font-size: 18px; }
 }
 
-/* Tools for your channel: tabs (where the audience is) + glass panel (tools to start with, how to use them) */
-.tp-visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.tp-ch { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 20px; max-width: 1080px; margin: clamp(32px, 4.5vw, 56px) auto 0; align-items: stretch; }
-.tp-ch__tabs { display: flex; flex-direction: column; gap: 10px; }
-.tp-ch__tab { display: flex; align-items: center; gap: 14px; width: 100%; margin: 0; padding: 14px 18px 14px 14px; border-radius: 18px; border: 1px solid #e6e7ea; background: #fff;
-  font: 700 16px/1.2 'DM Sans', sans-serif; letter-spacing: -.015em; color: #45474d; text-align: start; cursor: pointer;
-  transition: background .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s cubic-bezier(.2, .8, .2, 1); }
-.tp-ch__tab:hover { border-color: #cfd1d6; color: #0a0a0a; transform: translateY(-1px); }
-.tp-ch__tab:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
-.tp-ch__tab[aria-selected="true"] { color: #fff; border-color: rgba(231,19,27,.55); transform: none;
-  background: linear-gradient(180deg, rgba(44,44,47,.97) 0%, rgba(18,18,20,.98) 55%, #0c0c0d 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.6), 0 18px 36px -24px rgba(0,0,0,.6); }
-.tp-ch__ico { display: flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 12px; background: #f3f4f6; color: #0a0a0a; transition: background .3s, color .3s; }
-.tp-ch__tab[aria-selected="true"] .tp-ch__ico { background: rgba(255,255,255,.08); color: #ff4148; }
-.tp-ch__panels { --r: 26px; padding: clamp(22px, 3vw, 34px); }
-.tp-ch__panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(20px, 3vw, 36px); outline: none; animation: tpChIn .45s cubic-bezier(.2, .8, .2, 1) both; }
-.tp-ch__panel[hidden] { display: none; }
-@keyframes tpChIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.tp-ch__label { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #8a8a92; text-transform: uppercase; }
-.tp-ch__tools { display: flex; flex-direction: column; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
-.tp-ch__tool { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 4px 16px 4px 4px; border-radius: 16px; color: #fff; font-size: 15.5px; letter-spacing: -.015em;
-  background: linear-gradient(180deg, rgba(44,44,47,.97) 0%, rgba(18,18,20,.98) 55%, #0c0c0d 100%); border: 1px solid rgba(255,255,255,.12); box-shadow: inset 0 -2px 0 rgba(231,19,27,.45); }
-.tp-ch__tool img { flex: none; width: 60px; height: 60px; object-fit: contain; }
-.tp-ch__tool .tp-hex { width: 44px; height: 44px; margin: 0 8px; }
-.tp-ch__tool b { font-weight: 700; line-height: 1.2; }
-.tp-ch__tips { display: flex; flex-direction: column; gap: 16px; margin: 14px 0 0; padding: 0; list-style: none; counter-reset: tpch; }
-.tp-ch__tips li { position: relative; min-height: 32px; padding-inline-start: 46px; font-size: 16.5px; line-height: 1.55; color: #2c2d31; text-wrap: pretty; counter-increment: tpch; }
-.tp-ch__tips li::before { content: '0' counter(tpch); position: absolute; inset-inline-start: 0; top: 0; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;
-  border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 1px #e3e4e8; font: 11.5px 'Fragment Mono', monospace; color: #e7131b; }
-@media (max-width: 860px) {
-  .tp-ch { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .tp-ch__tabs { flex-direction: row; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -16px; padding: 4px 16px 8px; }
-  .tp-ch__tabs::-webkit-scrollbar { display: none; }
-  .tp-ch__tab { flex: none; width: auto; scroll-snap-align: start; padding: 10px 16px 10px 10px; font-size: 15px; }
-  .tp-ch__ico { width: 36px; height: 36px; border-radius: 10px; }
-  .tp-ch__panel { grid-template-columns: minmax(0, 1fr); }
-}
-@media (prefers-reduced-motion: reduce) { .tp-ch__panel { animation: none; } }
+/* Promo materials library: one glass card per format (illustration, name, optional count, line) */
+.tp-lib { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 1080px; margin: clamp(32px, 4.5vw, 56px) auto 0; }
+.tp-lib__card { --r: 22px; display: flex; flex-direction: column; gap: 14px; padding: 12px 12px 22px; }
+.tp-lib__card:hover { transform: translateY(-3px); }
+.tp-lib__art { display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 9.5; border-radius: 14px;
+  background: radial-gradient(70% 90% at 30% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #f5f6f8 0%, #eceef1 100%); box-shadow: inset 0 0 0 1px rgba(14,14,22,.05); }
+.tp-lib__art svg { width: 78%; height: auto; overflow: visible; filter: drop-shadow(0 10px 14px rgba(14,14,22,.12)); transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+.tp-lib__card:hover .tp-lib__art svg { transform: translateY(-3px) scale(1.03); }
+.tp-lib__txt { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 6px 10px; padding: 0 10px; }
+.tp-lib__txt h3 { margin: 0; font-size: 19px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; }
+.tp-lib__n { padding: 3px 10px; border-radius: 999px; background: rgba(231,19,27,.08); color: #c8141b; font: 600 12px 'Fragment Mono', monospace; letter-spacing: .04em; white-space: nowrap; direction: ltr; }
+.tp-lib__n:empty { display: none; }
+.tp-lib__txt p { grid-column: 1 / -1; margin: 0; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty; }
+.tp-lib__custom { display: flex; align-items: center; gap: 16px; max-width: 1080px; box-sizing: border-box; margin: 16px auto 0; padding: 16px 24px 16px 16px; border-radius: 20px; }
+.tp-lib__custom .tp-hex { width: 44px; height: 44px; }
+.tp-lib__custom p { margin: 0; font-size: 15.5px; line-height: 1.5; color: #c9cacf; text-wrap: pretty; }
+.tp-lib__custom b { color: #fff; font-weight: 700; }
 
-/* White-Label Academy preview: brand name + colour on a mock academy app */
-.tp-ac { --brand: #e7131b; display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; max-width: 1080px; }
-.tp-ac__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
-.tp-ac__copy .tp-sub { font-size: clamp(15px, 1.4vw, 17px); }
-.tp-ac__field { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 360px; margin-top: 10px; }
-.tp-ac__field > span, .tp-ac__colors legend { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #8a8a92; text-transform: uppercase; }
-.tp-ac__field input { box-sizing: border-box; width: 100%; height: 52px; padding: 0 18px; border: 1px solid #dcdcd8; border-radius: 14px; background: #fff; font: 600 16px 'DM Sans', sans-serif; color: #0a0a0a; outline: none; transition: border-color .2s, box-shadow .2s; }
-.tp-ac__field input::placeholder { color: #a0a1a8; font-weight: 500; }
-.tp-ac__field input:focus { border-color: #0a0a0a; box-shadow: 0 0 0 4px rgba(10,10,10,.06); }
-.tp-ac__colors { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 0; padding: 0; border: 0; }
-.tp-ac__colors legend { float: left; width: 100%; margin-bottom: 10px; padding: 0; }
-.tp-ac__swatch { position: relative; display: block; cursor: pointer; }
-.tp-ac__swatch input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
-.tp-ac__swatch span[aria-hidden] { display: block; width: 30px; height: 30px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); transition: box-shadow .2s, transform .2s; }
-.tp-ac__swatch:hover span[aria-hidden] { transform: scale(1.08); }
-.tp-ac__swatch input:checked + span { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--c); }
-.tp-ac__swatch input:focus-visible + span { box-shadow: 0 0 0 3px #fff, 0 0 0 5px #0a0a0a; }
-.tp-ac__window { --r: 22px; padding: 14px; }
-.tp-ac__bar { display: flex; align-items: center; gap: 6px; padding: 2px 6px 12px; }
-.tp-ac__bar i { width: 9px; height: 9px; border-radius: 50%; background: #d9dbe0; }
-.tp-ac__badge { margin-inline-start: auto; padding: 4px 10px; border-radius: 999px; background: rgba(10,10,10,.06); font: 10.5px 'Fragment Mono', monospace; letter-spacing: .14em; color: #6b6c72; text-transform: uppercase; }
-.tp-ac__app { padding: 18px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px #eceef1; }
-.tp-ac__head { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 15px; }
-.tp-ac__head b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tp-ac__mono { display: flex; align-items: center; justify-content: center; flex: none; width: 32px; height: 32px; border-radius: 10px; background: var(--brand); color: #fff; font-weight: 800; font-size: 15px; transition: background .3s; }
-.tp-ac__hero { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 14px; padding: clamp(18px, 2.4vw, 26px); border-radius: 12px; color: #fff;
-  background: radial-gradient(80% 120% at 100% 0%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%), linear-gradient(135deg, var(--brand), color-mix(in srgb, var(--brand) 55%, #000)); }
-.tp-ac__title { font-size: clamp(20px, 2.2vw, 26px); line-height: 1.1; letter-spacing: -.03em; overflow-wrap: anywhere; }
-.tp-ac__sub { font-size: 14px; line-height: 1.45; opacity: .86; }
-.tp-ac__btn { margin-top: 8px; padding: 9px 16px; border-radius: 999px; background: #fff; color: var(--brand); font-weight: 700; font-size: 13.5px; }
-.tp-ac__lessons { margin-top: 16px; }
-.tp-ac__label { font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .16em; color: #8a8a92; text-transform: uppercase; }
-.tp-ac__lessons ol { margin: 6px 0 0; padding: 0; list-style: none; }
-.tp-ac__row { display: grid; grid-template-columns: 28px auto minmax(0, 1fr) 64px; align-items: center; gap: 12px; padding: 11px 2px; border-top: 1px solid #f0f1f3; }
-.tp-ac__num { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: color-mix(in srgb, var(--brand) 12%, #fff); color: var(--brand); font-weight: 700; font-size: 12.5px; }
-.tp-ac__mod { font-size: 14px; font-weight: 700; white-space: nowrap; }
-.tp-ac__skel { display: flex; flex-direction: column; gap: 5px; }
-.tp-ac__skel i { display: block; height: 6px; border-radius: 3px; background: #eef0f3; }
-.tp-ac__skel i + i { width: 62%; }
-.tp-ac__prog { position: relative; height: 6px; border-radius: 3px; background: #eef0f3; overflow: hidden; }
-.tp-ac__prog::before { content: ''; position: absolute; inset-block: 0; inset-inline-start: 0; width: var(--p); border-radius: inherit; background: var(--brand); transition: background .3s; }
-@media (max-width: 860px) {
-  .tp-ac { grid-template-columns: minmax(0, 1fr); }
+/* How to get them: four numbered steps on one red-tinted line (vertical on phones) */
+.tp-get { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; max-width: 1080px; margin: clamp(32px, 4.5vw, 52px) auto 0; padding: 0; list-style: none; }
+.tp-get::before { content: ''; position: absolute; top: 22px; left: 12.5%; right: 12.5%; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, rgba(231,19,27,.15), #e7131b 50%, rgba(231,19,27,.15)); }
+.tp-get__step { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.tp-get__n { position: relative; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; margin-bottom: 8px; border-radius: 50%;
+  background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font: 13px 'Fragment Mono', monospace; letter-spacing: .06em;
+  box-shadow: 0 0 0 6px #fff, inset 0 1px 0 rgba(255,255,255,.14), 0 10px 20px -10px rgba(10,10,10,.6); }
+.tp-get__step:last-child .tp-get__n { background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b30e14 100%); }
+.tp-get__step h3 { margin: 0; font-size: 19px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; text-wrap: balance; }
+.tp-get__step p { margin: 0; max-width: 30ch; font-size: 14.5px; line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
+@media (max-width: 960px) {
+  .tp-lib { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tp-get { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 34px; }
+  .tp-get::before { display: none; }
 }
 @media (max-width: 560px) {
-  .tp-ac__copy { align-items: stretch; }
-  .tp-ac__field { max-width: none; }
-  .tp-ac__row { grid-template-columns: 28px auto minmax(0, 1fr) 44px; gap: 10px; }
+  .tp-lib { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .tp-lib__card { display: grid; grid-template-columns: 120px minmax(0, 1fr); align-items: center; gap: 14px; padding: 10px 14px 10px 10px; }
+  .tp-lib__art svg { width: 86%; }
+  .tp-lib__txt { padding: 0; }
+  .tp-lib__txt h3 { font-size: 17px; }
+  .tp-lib__txt p { font-size: 13.5px; }
+  .tp-lib__custom { align-items: flex-start; padding: 14px 16px 14px 12px; }
+  .tp-get { grid-template-columns: minmax(0, 1fr); row-gap: 22px; }
+  .tp-get::before { display: block; top: 23px; bottom: 23px; left: 22px; right: auto; width: 2px; height: auto;
+    background: linear-gradient(180deg, rgba(231,19,27,.15), #e7131b 50%, rgba(231,19,27,.15)); }
+  [dir="rtl"] .tp-get::before { left: auto; right: 22px; }
+  .tp-get__step { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; text-align: start; }
+  .tp-get__n { grid-row: 1 / span 2; margin: 0; }
+  .tp-get__step h3 { padding-top: 10px; font-size: 17.5px; }
+  .tp-get__step p { max-width: none; }
 }
 </style>
 </head>
@@ -1819,106 +1782,72 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
       </div>
     </section>
 
-    <!-- Tools for your channel: pick where the audience is, see what to start with (startChannels in landing.js) -->
-    <section id="channels" class="tp-sec" data-screen-label="Tools for your channel">
+    <!-- Promo materials library: the formats partners get. Per-format counts live in mt.lib.N.n
+         (empty for now; the badge hides itself until a number is filled in) -->
+    <section id="library" class="tp-sec" data-screen-label="Promo materials">
       <div class="tp-wrap">
         <div class="tp-head">
-          <span class="tp-kicker">Găsește ce ți se potrivește</span>
-          <h2 class="tp-h2">Instrumente pentru <span style="color: #e7131b;">canalul tău</span></h2>
-          <p class="tp-sub">Alege unde se află publicul tău și vezi cu ce să începi.</p>
+          <span class="tp-kicker">Materiale promoționale</span>
+          <h2 class="tp-h2">Materiale gata făcute <span style="color: #e7131b;">pentru fiecare canal</span></h2>
+          <p class="tp-sub">Bannere, landing page-uri, videoclipuri și altele, gata de folosit.</p>
         </div>
-        <div class="tp-ch" data-ch>
-          <div class="tp-ch__tabs" role="tablist" aria-label="Găsește ce ți se potrivește">
-            <button type="button" class="tp-ch__tab" role="tab" id="ch-t1" aria-controls="ch-p1" aria-selected="true" tabindex="0" data-ch-tab>
-              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m10.5 9.2 4.3 2.8-4.3 2.8z" fill="currentColor"></path></svg></span><span class="tp-ch__name">Video și live-uri</span>
-            </button>
-            <button type="button" class="tp-ch__tab" role="tab" id="ch-t2" aria-controls="ch-p2" aria-selected="false" tabindex="-1" data-ch-tab>
-              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"></path><path d="M17 9h3a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1v3l-4-3h-3"></path></svg></span><span class="tp-ch__name">Telegram și comunități</span>
-            </button>
-            <button type="button" class="tp-ch__tab" role="tab" id="ch-t3" aria-controls="ch-p3" aria-selected="false" tabindex="-1" data-ch-tab>
-              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><path d="M3 9h18"></path><path d="M6.5 6.5h.01M9 6.5h.01"></path><path d="M7 13h6M7 16h10"></path></svg></span><span class="tp-ch__name">Site sau blog</span>
-            </button>
-            <button type="button" class="tp-ch__tab" role="tab" id="ch-t4" aria-controls="ch-p4" aria-selected="false" tabindex="-1" data-ch-tab>
-              <span class="tp-ch__ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2.5 9 9.5-4.5L21.5 9 12 13.5z"></path><path d="M6.5 11.2v4.3c0 1.4 2.5 2.8 5.5 2.8s5.5-1.4 5.5-2.8v-4.3"></path><path d="M21.5 9v5"></path></svg></span><span class="tp-ch__name">Cursuri și coaching</span>
-            </button>
-          </div>
-          <div class="tp-ch__panels tp-glass tp-glass--thick">
-          <div class="tp-ch__panel" role="tabpanel" id="ch-p1" aria-labelledby="ch-t1" tabindex="0" data-ch-panel>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">Începe cu</span>
-              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="64" height="64" loading="lazy" decoding="async"><b>Creații</b></li><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="64" height="64" loading="lazy" decoding="async"><b>TradingView gratuit</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"></path><path d="m5 15 4.5-4.5 3.5 3 6-6.5"></path><path d="M15 7h4v4"></path></svg></span><b>Urmărire în timp real</b></li></ul>
-            </div>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">Cum le folosești</span>
-              <ol class="tp-ch__tips"><li>Folosește videoclipurile noastre gata făcute și susține-ți analizele de piață cu grafice TradingView.</li><li>Pune linkul tău de partener în descriere și într-un comentariu fixat.</li></ol>
-            </div>
-          </div>
-          <div class="tp-ch__panel" role="tabpanel" id="ch-p2" aria-labelledby="ch-t2" tabindex="0" data-ch-panel hidden>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">Începe cu</span>
-              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="64" height="64" loading="lazy" decoding="async"><b>Semnale gratuite</b></li><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="64" height="64" loading="lazy" decoding="async"><b>Creații</b></li><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="64" height="64" loading="lazy" decoding="async"><b>TradingView gratuit</b></li></ul>
-            </div>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">Cum le folosești</span>
-              <ol class="tp-ch__tips"><li>Distribuie semnale de trading în timp real și discută-le cu membrii tăi.</li><li>Fixează în partea de sus a chatului un banner cu linkul tău de partener.</li></ol>
-            </div>
-          </div>
-          <div class="tp-ch__panel" role="tabpanel" id="ch-p3" aria-labelledby="ch-t3" tabindex="0" data-ch-panel hidden>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">Începe cu</span>
-              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="64" height="64" loading="lazy" decoding="async"><b>Creații</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"></path><path d="m5 15 4.5-4.5 3.5 3 6-6.5"></path><path d="M15 7h4v4"></path></svg></span><b>Urmărire în timp real</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span><b>Un manager dedicat</b></li></ul>
-            </div>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">Cum le folosești</span>
-              <ol class="tp-ch__tips"><li>Pune bannerele noastre pe site și trimite vizitatorii pe landing page-urile noastre.</li><li>Vezi prin urmărirea în timp real ce pagini aduc înregistrări.</li></ol>
-            </div>
-          </div>
-          <div class="tp-ch__panel" role="tabpanel" id="ch-p4" aria-labelledby="ch-t4" tabindex="0" data-ch-panel hidden>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">Începe cu</span>
-              <ul class="tp-ch__tools"><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="64" height="64" loading="lazy" decoding="async"><b>Academie White-Label</b></li><li class="tp-ch__tool"><img class="tp-obj" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="64" height="64" loading="lazy" decoding="async"><b>Semnale gratuite</b></li><li class="tp-ch__tool"><span class="tp-hex" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span><b>Un manager dedicat</b></li></ul>
-            </div>
-            <div class="tp-ch__col">
-              <span class="tp-ch__label">Cum le folosești</span>
-              <ol class="tp-ch__tips"><li>Predă cu Academia White-Label sub propria ta marcă.</li><li>Planifică lansarea împreună cu managerul tău dedicat.</li></ol>
-            </div>
-          </div>
-          </div>
+        <div class="tp-lib">
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="10" y="12" width="140" height="22" rx="4" fill="#fff" stroke="#d5d7dc"/><rect x="17" y="19" width="56" height="8" rx="2" fill="#e3e5e9"/><rect x="117" y="18" width="26" height="10" rx="5" fill="#e7131b"/>
+<rect x="10" y="42" width="62" height="48" rx="4" fill="#fff" stroke="#d5d7dc"/><rect x="18" y="50" width="40" height="6" rx="2" fill="#e3e5e9"/><rect x="18" y="60" width="30" height="6" rx="2" fill="#e3e5e9"/><rect x="18" y="73" width="24" height="9" rx="4.5" fill="#e7131b"/>
+<rect x="80" y="42" width="70" height="48" rx="4" fill="#0e0e10"/><rect x="88" y="50" width="38" height="6" rx="2" fill="#3a3a40"/><rect x="88" y="60" width="26" height="6" rx="2" fill="#3a3a40"/><rect x="88" y="73" width="24" height="9" rx="4.5" fill="#e7131b"/></svg></div>
+            <div class="tp-lib__txt"><h3>Bannere</h3><span class="tp-lib__n"></span><p>Pentru site-uri, bloguri și spații publicitare.</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="16" y="10" width="128" height="82" rx="6" fill="#fff" stroke="#d5d7dc"/><path d="M16 22h128" stroke="#e3e5e9"/><circle cx="24" cy="16" r="2" fill="#d5d7dc"/><circle cx="31" cy="16" r="2" fill="#d5d7dc"/><circle cx="38" cy="16" r="2" fill="#d5d7dc"/>
+<rect x="26" y="32" width="62" height="8" rx="2" fill="#0e0e10"/><rect x="26" y="45" width="48" height="5" rx="2" fill="#e3e5e9"/><rect x="26" y="56" width="30" height="10" rx="5" fill="#e7131b"/>
+<rect x="98" y="30" width="36" height="38" rx="4" fill="#f1f2f4"/><path d="M104 61l8-10 6 6 6-9 6 13z" fill="#d5d7dc"/><rect x="26" y="76" width="108" height="8" rx="2" fill="#f1f2f4"/></svg></div>
+            <div class="tp-lib__txt"><h3>Landing page-uri</h3><span class="tp-lib__n"></span><p>Pagini gata făcute spre care să-ți trimiți traficul.</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="20" y="12" width="120" height="72" rx="6" fill="#0e0e10"/><circle cx="80" cy="45" r="14" fill="#e7131b"/><path d="M76 38v14l11-7z" fill="#fff"/>
+<rect x="30" y="72" width="100" height="3" rx="1.5" fill="#3a3a40"/><rect x="30" y="72" width="40" height="3" rx="1.5" fill="#e7131b"/><circle cx="70" cy="73.5" r="3" fill="#fff"/></svg></div>
+            <div class="tp-lib__txt"><h3>Videoclipuri</h3><span class="tp-lib__n"></span><p>Pentru canalele, live-urile și reclamele tale.</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="46" y="10" width="84" height="60" rx="6" fill="#e3e5e9"/><rect x="39" y="17" width="84" height="60" rx="6" fill="#f1f2f4" stroke="#d5d7dc"/><rect x="32" y="24" width="84" height="62" rx="6" fill="#fff" stroke="#d5d7dc"/>
+<text x="74" y="62" text-anchor="middle" direction="ltr" font-family="DM Sans, sans-serif" font-weight="800" font-size="21" fill="#0e0e10">GIF</text><circle cx="104" cy="35" r="4" fill="#e7131b"/><path d="M44 78h24" stroke="#e3e5e9" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <div class="tp-lib__txt"><h3>Animații GIF</h3><span class="tp-lib__n"></span><p>Bannere animate care atrag privirea.</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="46" y="6" width="68" height="88" rx="8" fill="#fff" stroke="#d5d7dc"/><circle cx="57" cy="17" r="5" fill="#e3e5e9"/><rect x="66" y="14" width="30" height="5" rx="2" fill="#e3e5e9"/>
+<rect x="52" y="27" width="56" height="42" rx="4" fill="#0e0e10"/><path d="M58 62l12-14 9 9 8-8 15 13z" fill="#3a3a40"/>
+<path d="M57 80.5c0-3 4.2-4 5-1 .8-3 5-2 5 1 0 3.2-5 6.2-5 6.2s-5-3-5-6.2z" fill="#e7131b"/><rect x="73" y="79" width="28" height="4" rx="2" fill="#e3e5e9"/></svg></div>
+            <div class="tp-lib__txt"><h3>Postări pentru social media</h3><span class="tp-lib__n"></span><p>Imagini și texte gata de publicat.</p></div>
+          </article>
+          <article class="tp-glass tp-glass--hover tp-lib__card">
+            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="14" y="16" width="62" height="62" rx="12" fill="#fff" stroke="#d5d7dc"/>
+<g transform="translate(45 47) scale(.38) translate(-100.75 -99.75)"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#0e0e10"/><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#0e0e10"/><circle cx="141" cy="130.5" r="10.5" fill="#e7131b"/></g>
+<circle cx="96" cy="30" r="9" fill="#e7131b"/><circle cx="118" cy="30" r="9" fill="#0e0e10"/><circle cx="140" cy="30" r="9" fill="#d5d7dc"/>
+<text x="88" y="70" direction="ltr" font-family="DM Sans, sans-serif" font-weight="800" font-size="25" fill="#0e0e10">Aa</text><path d="M124 62h20M124 70h14" stroke="#e3e5e9" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <div class="tp-lib__txt"><h3>Logo-uri și brand kit</h3><span class="tp-lib__n"></span><p>Logo-uri, culori și reguli de utilizare pentru materialele tale.</p></div>
+          </article>
+        </div>
+        <div class="tp-dark tp-lib__custom">
+          <span class="tp-hex" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span>
+          <p><b>Ai nevoie de ceva anume?</b> <span>Managerul tău dedicat poate pregăti materiale pentru publicul tău.</span></p>
         </div>
       </div>
     </section>
 
-    <!-- White-Label Academy preview: the visitor's brand name and colour on a mock academy (startAcademy in landing.js) -->
-    <section id="academy" class="tp-sec" data-screen-label="Academy preview" style="padding-top: 0;">
-      <div class="tp-wrap tp-ac" data-academy data-name="Academia {brand}" data-default="Marca ta">
-        <div class="tp-ac__copy">
-          <span class="tp-kicker">Academie White-Label</span>
-          <h2 class="tp-h2">Vezi-o <span style="color: #e7131b;">cu numele tău</span></h2>
-          <p class="tp-sub">Scrie numele mărcii tale și vezi educația de trading sub propriul tău nume.</p>
-          <label class="tp-ac__field"><span>Marca ta</span><input type="text" maxlength="24" placeholder="Marca ta" autocomplete="organization" spellcheck="false" data-ac-input></label>
-          <fieldset class="tp-ac__colors"><legend>Culoarea mărcii</legend><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#e7131b" checked data-ac-color><span style="--c: #e7131b;" aria-hidden="true"></span><span class="tp-visually-hidden">#e7131b</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#1f5eff" data-ac-color><span style="--c: #1f5eff;" aria-hidden="true"></span><span class="tp-visually-hidden">#1f5eff</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#0f9d6b" data-ac-color><span style="--c: #0f9d6b;" aria-hidden="true"></span><span class="tp-visually-hidden">#0f9d6b</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#c58b10" data-ac-color><span style="--c: #c58b10;" aria-hidden="true"></span><span class="tp-visually-hidden">#c58b10</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#6d4aff" data-ac-color><span style="--c: #6d4aff;" aria-hidden="true"></span><span class="tp-visually-hidden">#6d4aff</span></label><label class="tp-ac__swatch"><input type="radio" name="ac-color" value="#0a0a0a" data-ac-color><span style="--c: #0a0a0a;" aria-hidden="true"></span><span class="tp-visually-hidden">#0a0a0a</span></label></fieldset>
+    <!-- How to get them: four steps from the Client Portal to the audience (step 1 reuses the How it works copy) -->
+    <section id="get" class="tp-sec" data-screen-label="How to get materials" style="padding-top: 0;">
+      <div class="tp-wrap">
+        <div class="tp-head">
+          <span class="tp-kicker">Cum le obții</span>
+          <h2 class="tp-h2">Din Portalul clientului <span style="color: #e7131b;">la publicul tău</span></h2>
         </div>
-        <div class="tp-ac__preview" style="--brand: #e7131b;" data-ac-preview>
-          <div class="tp-ac__window tp-glass tp-glass--thick">
-            <div class="tp-ac__bar" aria-hidden="true"><i></i><i></i><i></i><span class="tp-ac__badge">Previzualizare</span></div>
-            <div class="tp-ac__app" aria-live="polite">
-              <div class="tp-ac__head"><span class="tp-ac__mono" aria-hidden="true" data-ac-mono></span><b data-ac-name>Academia {brand}</b></div>
-              <div class="tp-ac__hero">
-                <b class="tp-ac__title" data-ac-name>Academia {brand}</b>
-                <span class="tp-ac__sub">Educație de trading sub propriul tău brand, gata de distribuit.</span>
-                <span class="tp-ac__btn" aria-hidden="true">Începe să înveți</span>
-              </div>
-              <div class="tp-ac__lessons">
-                <span class="tp-ac__label">Lecții</span>
-                <ol>
-                  <li class="tp-ac__row"><span class="tp-ac__num">1</span><span class="tp-ac__mod" data-ac-mod="1">Modulul {n}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 100%;" aria-hidden="true"></span></li>
-                  <li class="tp-ac__row"><span class="tp-ac__num">2</span><span class="tp-ac__mod" data-ac-mod="2">Modulul {n}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 64%;" aria-hidden="true"></span></li>
-                  <li class="tp-ac__row"><span class="tp-ac__num">3</span><span class="tp-ac__mod" data-ac-mod="3">Modulul {n}</span><span class="tp-ac__skel" aria-hidden="true"><i></i><i></i></span><span class="tp-ac__prog" style="--p: 22%;" aria-hidden="true"></span></li>
-                </ol>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ol class="tp-get">
+          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">01</span><h3>Aplică la programul IB</h3><p>Trimite cererea din Portalul clientului. Analizăm fiecare cerere în cel mult 24 de ore.</p></li>
+          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">02</span><h3>Deschide materialele</h3><p>Găsește secțiunea de materiale promoționale în Portalul clientului.</p></li>
+          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">03</span><h3>Alege ce se potrivește</h3><p>Alege formatele potrivite pentru canalul și publicul tău.</p></li>
+          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">04</span><h3>Publică și urmărește</h3><p>Publică cu linkul tău de partener și urmărește rezultatele în timp real.</p></li>
+        </ol>
       </div>
     </section>
 
@@ -2160,6 +2089,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=5fdfbf9810" defer></script>
+<script src="../../assets/js/landing.js?v=d12da5b2ee" defer></script>
 </body>
 </html>
