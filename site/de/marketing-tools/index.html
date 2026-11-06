@@ -1480,34 +1480,38 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (prefers-reduced-motion: reduce) { .tp-c3d { transition: --ch .2s linear, --cd .1s linear; } }
 
 /* ---- Marketing Tools page (tools/i18n/marketing.html) ----------------------------------
-   Hero: the four promotion tools as the landing's dark object cards on the grey stage.
-   Then two glass cards (live tracking, partner manager), How it works, FAQ, final call. */
-.tp-mt-tools { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.tp-mt-tool { display: flex; flex-direction: column; gap: 6px; padding: 18px 22px 24px; min-height: 320px; }
-.tp-mt-tool img { align-self: center; width: 168px; height: 168px; object-fit: contain; margin: 4px 0 2px; }
-.tp-mt-tool__txt { display: flex; flex-direction: column; gap: 8px; }
-.tp-mt-tool__n { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #ff4148; direction: ltr; align-self: flex-start; }
-.tp-mt-tool h2 { margin: 0; font-size: 20px; line-height: 1.15; letter-spacing: -.025em; font-weight: 700; text-wrap: balance; }
-.tp-mt-tool p { margin: 0; font-size: 14.5px; line-height: 1.5; color: #a7a9ae; text-wrap: pretty; }
+   Hero: TradeQuo_Marketing_Tools_Hero — a dark full-width screen under the header with the four tools
+   as 3D objects (assets/js/mt-hero.js draws them into .tq-mth__stage), the title and the tools listed
+   at the bottom. Then two glass cards (live tracking, partner manager), How it works, FAQ, final call. */
+.tq-mth { position: relative; width: 100%; height: calc(100vh - 88px); height: calc(100svh - 88px); min-height: 600px; max-height: 980px; overflow: hidden; color: #fff;
+  background: radial-gradient(70% 45% at 50% 100%, rgba(170,10,18,.45) 0%, rgba(170,10,18,0) 70%), radial-gradient(75% 60% at 50% 32%, #18181c 0%, #0a0a0b 70%), #0a0a0b; }
+.tq-mth__stage { position: absolute; left: 0; right: 0; top: 0; height: 86%; }
+.tq-mth__fade { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; background: linear-gradient(180deg, rgba(10,10,11,0) 0%, rgba(10,10,11,.7) 45%, rgba(10,10,11,.92) 100%); pointer-events: none; }
+.tq-mth__top { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); top: clamp(28px, 6vh, 56px); display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #8a8a92; pointer-events: none; direction: ltr; }
+.tq-mth__top span:last-child { display: flex; align-items: center; gap: 8px; }
+.tq-mth__top i { width: 6px; height: 6px; border-radius: 50%; background: #e7131b; box-shadow: 0 0 10px #e7131b; }
+.tq-mth__foot { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); bottom: clamp(40px, 7vh, 60px); display: flex; flex-wrap: wrap; justify-content: space-between;
+  align-items: flex-end; gap: 22px 40px; pointer-events: none; }
+.tq-mth__h1 { margin: 0; font-size: clamp(56px, 8.4vw, 128px); line-height: .9; font-weight: 700; letter-spacing: -.058em; color: #fff; }
+.tq-mth__list { flex: 1 1 280px; max-width: 420px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; margin: 0; padding: 16px 0 0; list-style: none;
+  border-top: 1px solid rgba(255,255,255,.1); font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #8a8a92; text-transform: uppercase; }
+.tq-mth__list b { font-weight: 400; color: #e7131b; }
+@media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout; the top line moves up off the first objects */
+  .tq-mth__stage { height: 74%; }
+  .tq-mth__top { top: clamp(18px, 2.6vh, 40px); }
+}
+@media (max-width: 640px) { .tq-mth { height: calc(100vh - 84px); height: calc(100svh - 84px); } }
+@media (max-width: 400px) { .tq-mth__h1 { font-size: 14.2vw; } }   /* the longest title word (pl) still fits a 360px phone */
 .tp-mt-sup { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; margin: clamp(32px, 4.5vw, 56px) auto 0; }
 .tp-mt-card { display: flex; align-items: flex-start; gap: 18px; padding: 26px 28px; }
 .tp-mt-card .tp-hex { width: 50px; height: 50px; }
 .tp-mt-card h3 { margin: 4px 0 0; font-size: 20px; line-height: 1.15; letter-spacing: -.025em; font-weight: 700; }
 .tp-mt-card p { margin: 8px 0 0; font-size: 15px; line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
-@media (max-width: 1080px) {
-  .tp-mt-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .tp-mt-tool { min-height: 0; }
-}
 @media (max-width: 720px) {
   .tp-mt-sup { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 560px) {
-  /* phones: the landing's perk-card shape, object beside the text */
-  .tp-mt-tools { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .tp-mt-tool { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 14px; padding: 14px 18px 14px 10px; }
-  .tp-mt-tool img { width: 96px; height: 96px; margin: 0; }
-  .tp-mt-tool h2 { font-size: 18px; }
-  .tp-mt-tool p { font-size: 14px; }
   .tp-mt-card { padding: 22px 20px; gap: 14px; }
   .tp-mt-card h3 { font-size: 18px; }
 }
@@ -1862,31 +1866,21 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   </header>
 
   <main>
-    <!-- Hero: the four promotion tools on the grey stage (objects from the landing's partner perks) -->
-    <section id="tools" class="tp-sec tp-hero" data-screen-label="Marketing tools">
-      <div class="tp-head">
-        <h1 class="tp-h1" style="max-width: 20ch;">Alles, was Sie für Ihre <span style="color: #e7131b;">Werbung</span> brauchen</h1>
-        <p class="tp-sub">Fertige Werbemittel, kostenlose Charts und Signale und Trading-Schulungen unter Ihrer eigenen Marke. Damit gewinnen Sie Kunden und halten sie aktiv.</p>
-      </div>
-      <div class="tp-stage">
-        <div class="tp-mt-tools">
-          <article class="tp-dark tp-dark--hover tp-mt-tool">
-            <img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="280" height="350">
-            <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">01</span><h2>Werbemittel</h2><p>Banner, Landingpages und Videos – auf Conversion ausgelegt.</p></div>
-          </article>
-          <article class="tp-dark tp-dark--hover tp-mt-tool">
-            <img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344">
-            <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">02</span><h2>TradingView gratis</h2><p>Erweiterte Charts für präzisere Marktanalysen – kostenlos.</p></div>
-          </article>
-          <article class="tp-dark tp-dark--hover tp-mt-tool">
-            <img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="330" height="280">
-            <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">03</span><h2>Handelssignale gratis</h2><p>Markteinblicke in Echtzeit zum Teilen mit Ihrem Publikum.</p></div>
-          </article>
-          <article class="tp-dark tp-dark--hover tp-mt-tool">
-            <img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330">
-            <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">04</span><h2>White-Label-Akademie</h2><p>Trading-Ausbildung unter Ihrer eigenen Marke – bereit zum Teilen.</p></div>
-          </article>
-        </div>
+    <!-- Hero (TradeQuo_Marketing_Tools_Hero design): a dark full-width screen. The four tools float in it as
+         3D objects (assets/js/mt-hero.js; hovering or tapping one names it), the title and the four tools
+         listed sit at the bottom. "TRADEQUO · PARTNERS" on top is decorative and stays in English. -->
+    <section id="tools" class="tq-mth" data-screen-label="Marketing tools hero">
+      <div class="tq-mth__stage" data-mt-stage data-labels="Werbemittel|TradingView|Handelssignale|White-Label-Akademie"></div>
+      <div class="tq-mth__fade" aria-hidden="true"></div>
+      <div class="tq-mth__top" aria-hidden="true"><span>TRADEQUO</span><span><i></i>PARTNERS</span></div>
+      <div class="tq-mth__foot">
+        <h1 class="tq-mth__h1">Marketing-<span style="color: #e7131b;">Tools.</span></h1>
+        <ul class="tq-mth__list">
+          <li><b>01</b> Werbemittel</li>
+          <li><b>02</b> TradingView</li>
+          <li><b>03</b> Signale</li>
+          <li><b>04</b> Akademie</li>
+        </ul>
       </div>
     </section>
 
@@ -2189,5 +2183,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=e671ab61cf" defer></script>
+<script type="module" src="../../assets/js/mt-hero.js?v=2a0db6718b"></script>
 </body>
 </html>
