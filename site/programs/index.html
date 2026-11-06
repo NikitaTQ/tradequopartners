@@ -1191,6 +1191,19 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-prog__poster, .tp-prog__3d { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
 .tp-prog__poster { object-fit: cover; transition: opacity .6s ease; }
 .tp-prog__3d { background: transparent; opacity: 0; transition: opacity .6s ease; pointer-events: none; }
+.tp-progdots { display: none; }
+/* phones: one row that swipes sideways and snaps to a card; the next card peeks in at the edge */
+@media (max-width: 640px) {
+  .tp-stage > .tp-programs { display: flex; gap: 12px; max-width: none; margin: 0 -12px; padding: 4px 12px 50px; overflow-x: auto;   /* 50px: room for the cards' shadow to fade out */ overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .tp-programs::-webkit-scrollbar { display: none; }
+  .tp-prog { flex: 0 0 86%; scroll-snap-align: center; scroll-snap-stop: always; }
+  .tp-progdots { display: flex; justify-content: center; gap: 2px; margin-top: -32px; }
+  .tp-progdots button { width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+  .tp-progdots button::before { content: ''; width: 8px; height: 8px; border-radius: 999px; background: rgba(14,14,16,.2); transition: width .3s ease, background-color .3s ease; }
+  .tp-progdots button[aria-current="true"]::before { width: 24px; background: #e7131b; }
+  .tp-progdots button:focus-visible { outline: 2px solid #e7131b; outline-offset: -4px; border-radius: 999px; }
+}
 .tp-prog__art::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); }
 
 .tp-prog__glow { position: absolute; left: 50%; bottom: -30%; width: 70%; height: 70%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.32), rgba(231,19,27,0)); filter: blur(10px); pointer-events: none; }
@@ -1755,7 +1768,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       </div>
 
       <div class="tp-stage">
-        <div class="tp-programs">
+        <div class="tp-programs" data-progs>
           <article class="tp-dark tp-dark--hover tp-prog">
             <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" data-poster src="../assets/posters/program-link.webp?v=3fee1d367d" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="../embeds/program-art.html?obj=link&v=cd83efd0ce" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">01 · INTRODUCING BROKER</span>
@@ -1800,6 +1813,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
               <a class="tp-scta" href="../#dashboard" data-page-link data-label="LOADING · Home"><span class="tp-scta__plus" aria-hidden="true">+</span>Partner perks</a>
             </div>
           </article>
+        </div>
+        <!-- phones: the cards swipe sideways (startProgSwiper in landing.js); one dot per card -->
+        <div class="tp-progdots" data-progdots>
+          <button type="button" aria-label="Refer traders" aria-current="true"></button>
+          <button type="button" aria-label="Build a network"></button>
+          <button type="button" aria-label="Launch your brand"></button>
         </div>
       </div>
     </section>
@@ -2140,6 +2159,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=cc29240ffc" defer></script>
+<script src="../assets/js/landing.js?v=0a5e342056" defer></script>
 </body>
 </html>

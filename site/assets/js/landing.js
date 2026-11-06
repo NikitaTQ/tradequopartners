@@ -771,6 +771,29 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
   }
 
+  /* ---- /programs/ on phones: the three program cards swipe sideways -------------------------
+   * The row is a native scroller with snap points (partner.css); this only keeps the dots under it
+   * in step with the card in the middle and lets a dot bring its card in. */
+  function startProgSwiper() {
+    const rail = $('[data-progs]'), dots = $$('[data-progdots] button');
+    if (!rail || !dots.length) return;
+    const cards = [...rail.children];
+    const mid = (el) => { const r = el.getBoundingClientRect(); return r.left + r.width / 2; };
+    let raf = 0;
+    const sync = () => {
+      raf = 0;
+      const c = mid(rail);
+      let on = 0, best = Infinity;
+      cards.forEach((card, i) => { const d = Math.abs(mid(card) - c); if (d < best) { best = d; on = i; } });
+      dots.forEach((b, i) => { if (i === on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    };
+    rail.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(sync); }, { passive: true });
+    dots.forEach((b, i) => b.addEventListener('click', () => {
+      /* scrollTo, not scrollBy: a relative scroll stops at every card on the way */
+      rail.scrollTo({ left: rail.scrollLeft + mid(cards[i]) - mid(rail), behavior: reducedMotion() ? 'auto' : 'smooth' });
+    }));
+  }
+
   /* ---- liquid CTA under the calculator: the pill tilts toward the pointer ---------------- */
   function startLiquidCta() {
     if (!matchMedia('(hover: hover) and (pointer: fine)').matches || reducedMotion()) return;
@@ -1138,6 +1161,7 @@
   startFaq();
   startCta3d();
   startWhoFlow();
+  startProgSwiper();
   startGlass();
   startLiquidCta();
   startReviewsDrag();
