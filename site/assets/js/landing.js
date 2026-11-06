@@ -747,9 +747,24 @@
    * hover or keyboard focus eases --ch to 1, the button leans toward the pointer
    * (--ctx/--cty) and dips on press (--cd); the CSS does the rest. The Ionic volutes are
    * drawn in the button's own coordinates, so they are refitted to the label's width. */
-  /* Frosted glass (Glass_Card_Grid design): the light and the iridescent rim follow the pointer.
-   * Mouse only; on touch the glass simply rests. */
+  /* Liquid glass (Glass_Card_Grid_Liquid design). The refraction is an SVG filter used from
+   * backdrop-filter, which only Chromium draws: there the filter goes into the page and html gets
+   * .tq-liquid; other browsers keep the plain blur. The highlight follows the mouse; on touch the
+   * glass simply rests. */
   function startGlass() {
+    if (!$$('.tq-glass, .tp-glass').length) return;
+    if (navigator.userAgentData && !document.getElementById('tq-liquid')) {
+      const ns = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
+      svg.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
+      svg.innerHTML = '<filter id="tq-liquid" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">'
+        + '<feTurbulence type="fractalNoise" baseFrequency="0.006 0.009" numOctaves="2" seed="11" result="n"/>'
+        + '<feGaussianBlur in="n" stdDeviation="3" result="nb"/>'
+        + '<feDisplacementMap in="SourceGraphic" in2="nb" scale="46" xChannelSelector="R" yChannelSelector="G"/></filter>';
+      document.body.appendChild(svg);
+      document.documentElement.classList.add('tq-liquid');
+    }
     if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     $$('.tq-glass, .tp-glass').forEach((el) => {
       const set = (k, v) => el.style.setProperty(k, v);

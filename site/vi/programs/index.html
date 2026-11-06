@@ -1005,41 +1005,44 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 
-/* ---- Frosted glass (Glass_Card_Grid design) ----------------------------------------------
-   Milky glass over whatever sits behind it: blur, a little grain, a soft light that follows the
-   pointer (--tqgx/--tqgy), and on hover (--tqgh 0 → 1) an iridescent rim, chromatic inner edges
-   and a small lift. startGlass in landing.js drives the variables; without it the cards just rest.
+/* ---- Liquid glass (Glass_Card_Grid_Liquid design) ----------------------------------------
+   Clear glass that bends what sits behind it: a faint white tint, a strong saturate, a white rim
+   that is bright at two corners, soft inner light, and a highlight that follows the pointer
+   (--tqgx/--tqgy); on hover (--tqgh 0 → 1) the highlight brightens and the card lifts.
+   The refraction is the SVG filter #tq-liquid, which startGlass in landing.js adds to the page and
+   switches on (html.tq-liquid) only in Chromium browsers: elsewhere backdrop-filter cannot use an SVG
+   filter, so the glass is a plain blur there. Without JS the glass rests with the blur.
    .tp-glass (partner pages) is the same glass.
-     --panel  big panels with controls inside (calculators): larger radius, no lift
-     --flat   no backdrop blur (the reviews marquee moves every frame; the blur would cost frames)
+     --panel  big panels with controls inside (calculators): no lift
+     --flat   no backdrop filter (the reviews marquee moves every frame; the filter would cost frames)
      --row    FAQ rows: tighter radius */
 @property --tqgx { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
 @property --tqgy { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
 @property --tqgh { syntax: '<number>'; inherits: true; initial-value: 0; }
 .tq-glass, .tp-glass {
-  position: relative; isolation: isolate; overflow: hidden; border-radius: 22px;
-  background: radial-gradient(260px 200px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.25 + var(--tqgh) * .45)), rgba(255,255,255,0) 70%), rgba(248,248,250,.58);
-  -webkit-backdrop-filter: blur(30px) saturate(130%); backdrop-filter: blur(30px) saturate(130%);
-  border: 1px solid rgba(255,255,255,.85);
-  box-shadow: 0 0 0 1px rgba(18,22,30,.05), 0 22px 40px -30px rgba(18,22,30,.3),
-    inset 1px 1px 0 rgba(255,140,146,calc(var(--tqgh) * .35)), inset -1px -1px 0 rgba(140,170,255,calc(var(--tqgh) * .35));
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 30px;
+  background: rgba(255,255,255,.16);
+  -webkit-backdrop-filter: blur(10px) saturate(185%) brightness(1.08); backdrop-filter: blur(10px) saturate(185%) brightness(1.08);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.95), inset 0 -1px 1px rgba(255,255,255,.55), inset 0 0 0 1px rgba(255,255,255,.28),
+    inset 0 0 28px rgba(255,255,255,.28), 0 10px 24px -16px rgba(18,22,30,.18);
   transform: translateY(calc(var(--tqgh) * -4px));
-  transition: --tqgx .35s ease, --tqgy .35s ease, --tqgh .45s ease, transform .45s cubic-bezier(.2, .8, .2, 1);
+  transition: --tqgx .35s ease, --tqgy .35s ease, --tqgh .4s ease, transform .4s cubic-bezier(.2, .8, .2, 1);
 }
-/* grain */
+html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-liquid) blur(2px) saturate(185%) brightness(1.08); }
+/* the rim: bright at the top-left and bottom-right corners, almost gone between them */
 .tq-glass::before, .tp-glass::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-/* iridescent rim, lit from the pointer */
-.tq-glass::after, .tp-glass::after {
-  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: var(--tqgh);
-  background: conic-gradient(from calc(200deg + var(--tqgh) * 60deg) at var(--tqgx) var(--tqgy), #ffffff, #ffd3d5, #f7a8ac, #ffffff, #d9e2ff, #c9f2e6, #ffffff, #e2e4e8, #ffffff);
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,.15) 30%, rgba(255,255,255,.05) 60%, rgba(255,255,255,.85) 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
 }
-.tq-glass--panel, .tp-glass--thick { border-radius: 26px; transform: none; }
-.tq-glass--flat { -webkit-backdrop-filter: none; backdrop-filter: none; background-color: rgba(250,250,251,.82); }
-.tq-glass--row { border-radius: 18px; }
+/* the highlight under the pointer */
+.tq-glass::after, .tp-glass::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(180px 120px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.35 + var(--tqgh) * .3)), rgba(255,255,255,0) 70%);
+}
+.tq-glass--panel, .tp-glass--thick { transform: none; }
+.tq-glass--flat, html.tq-liquid .tq-glass--flat { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.tq-glass--row { border-radius: 20px; }
 @media (prefers-reduced-motion: reduce) { .tq-glass, .tp-glass { transform: none; transition: none; } }
 </style>
 <style id="partner-css" data-prefix="../../">
@@ -1693,15 +1696,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tp-lib-stage__lines { left: 0; right: 0; top: 44%; height: 80px; background: repeating-linear-gradient(90deg, rgba(10,10,10,.14) 0 2px, transparent 2px 16px); }
 .tp-lib { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 .tp-lib__card { display: flex; flex-direction: column; gap: 16px; padding: 12px 12px 20px; }
-.tp-lib__art { display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 9.5; border-radius: 14px;
-  background: rgba(255,255,255,.5); box-shadow: inset 0 0 0 1px rgba(255,255,255,.9), inset 0 -18px 30px -24px rgba(18,22,30,.12); }
+.tp-lib__art { position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 9.5; border-radius: 20px;
+  background: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.3); }
 .tp-lib__art svg { width: 78%; height: auto; overflow: visible; filter: drop-shadow(0 10px 14px rgba(14,14,22,.12)); transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
 .tp-lib__card:hover .tp-lib__art svg { transform: translateY(-2px) scale(1.02); }
-.tp-lib__txt { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 6px 10px; padding: 0 10px; }
+.tp-lib__txt { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 6px 10px; margin: -4px 0 -8px; padding: 12px; border-radius: 20px;
+  background: rgba(255,255,255,.66); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); box-shadow: inset 0 1px 0 rgba(255,255,255,.9); }
 .tp-lib__txt h3 { margin: 0; font-size: 17px; line-height: 1.25; letter-spacing: -.01em; font-weight: 700; }
 .tp-lib__n { padding: 3px 10px; border-radius: 999px; background: rgba(231,19,27,.08); color: #c8141b; font: 600 12px 'Fragment Mono', monospace; letter-spacing: .04em; white-space: nowrap; direction: ltr; }
 .tp-lib__n:empty { display: none; }
-.tp-lib__txt p { grid-column: 1 / -1; margin: 0; font-size: 13.5px; line-height: 1.45; color: #3e4248; text-wrap: pretty; }
+.tp-lib__txt p { grid-column: 1 / -1; margin: 0; font-size: 13px; line-height: 1.45; color: #3e4248; text-wrap: pretty; }
 .tp-lib__custom { display: flex; align-items: center; gap: 16px; max-width: 1080px; box-sizing: border-box; margin: 16px auto 0; padding: 16px 24px 16px 16px; border-radius: 20px; }
 .tp-lib__custom .tp-hex { width: 44px; height: 44px; }
 .tp-lib__custom p { margin: 0; font-size: 15.5px; line-height: 1.5; color: #c9cacf; text-wrap: pretty; }
@@ -1727,7 +1731,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tp-lib { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .tp-lib__card { display: grid; grid-template-columns: 120px minmax(0, 1fr); align-items: center; gap: 14px; padding: 10px 14px 10px 10px; }
   .tp-lib__art svg { width: 86%; }
-  .tp-lib__txt { padding: 0; }
+  .tp-lib__txt { margin: 0; padding: 10px 12px; }
   .tp-lib__txt h3 { font-size: 17px; }
   .tp-lib__txt p { font-size: 13.5px; }
   .tp-lib__custom { align-items: flex-start; padding: 14px 16px 14px 12px; }
@@ -2236,6 +2240,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=0c6cee29f8" defer></script>
+<script src="../../assets/js/landing.js?v=2e6c56e8e7" defer></script>
 </body>
 </html>
