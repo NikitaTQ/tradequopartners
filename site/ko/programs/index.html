@@ -668,16 +668,6 @@ html { scroll-snap-type: y proximity; }
   #signup [data-form-auth] span { font-size: 10px !important; letter-spacing: .12em !important; }
   #signup [data-form-auth] [data-ref="date"] { font-size: 14px !important; letter-spacing: .04em !important; }
   [data-calc-grid] { gap: 14px !important; margin-top: 22px !important; }
-  [data-calc-controls] { padding: 22px 20px !important; gap: 18px !important; border-radius: 22px !important; }
-  [data-calc-controls] > div { gap: 10px !important; }
-  [data-calc-controls] > div > div:first-child { gap: 10px !important; }
-  [data-calc-controls] > div > div:first-child > span:first-child { width: 30px !important; height: 30px !important; border-radius: 9px !important; }
-  [data-calc-controls] > div > div:first-child > span:first-child svg { width: 15px; height: 15px; }
-  [data-calc-controls] > div > div:first-child > span:last-child > span:first-child { font-size: 14.5px !important; }
-  [data-calc-controls] > div > div:nth-child(2) { height: 44px !important; padding: 0 14px !important; border-radius: 11px !important; }
-  [data-calc-controls] > div > div:nth-child(2) input { font-size: 18px !important; }
-  [data-calc-controls] > div > div:nth-child(2) > span { font-size: 9.5px !important; }
-  [data-calc-controls] > div > div:nth-child(3) { height: 20px !important; }
   [data-invoice] { padding: 22px 18px 18px !important; gap: 14px !important; }
   [data-invoice] > div:nth-child(2) img { height: 19px !important; }
   [data-invoice] > div:nth-child(2) > span:first-child > span { font-size: 16px !important; }
@@ -1000,6 +990,51 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 
+/* ---- Calculator controls (Partner_Calculator_Glass design) ----------------------------------
+   A white card; each field has a raised icon tile, a raised value box with a highlight that follows
+   the slider (data-calc-sheen, set by startCalculator), a sunken track, a glossy red fill and a glass knob. */
+.tq-calc { position: relative; flex: 1; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 40px;
+  padding: 44px clamp(24px, 3vw, 34px) 40px; border-radius: 28px; background: #fff; border: 1px solid #edeef0; box-shadow: 0 30px 60px -44px rgba(18,22,30,.22); }
+.tq-calc__field { position: relative; display: flex; flex-direction: column; gap: 16px; }
+.tq-calc__head { display: flex; align-items: center; gap: 12px; }
+.tq-calc__ico { width: 38px; height: 38px; flex: none; border-radius: 11px; display: flex; align-items: center; justify-content: center; color: #e7131b;
+  background: linear-gradient(160deg, #fff, #f2f4f4);
+  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.08), 0 1px 0 #dce3e1, 0 2px 0 #cfd8d6, 0 3px 0 #c3cecb, 0 8px 12px -8px rgba(60,90,84,.35); }
+.tq-calc__title { font-size: 16px; font-weight: 700; letter-spacing: -.015em; color: #0a0a0a; }
+.tq-calc__val { position: relative; height: 62px; box-sizing: border-box; padding: 0 22px; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; overflow: hidden; cursor: text;
+  background: linear-gradient(165deg, #fff 0%, #f6f8f8 55%, #eef3f2 100%);
+  box-shadow: inset 0 1px 0 #fff, inset 1px 0 0 rgba(255,255,255,.8), inset 0 -2px 6px rgba(255,255,255,.9), 0 0 0 1px rgba(18,22,30,.09),
+    0 1px 0 #dce3e1, 0 2px 0 #d2dbd9, 0 3px 0 #c8d3d0, 0 4px 0 #becac7, 0 14px 20px -14px rgba(60,90,84,.4);
+  transition: box-shadow .25s ease; }
+.tq-calc__val:focus-within { box-shadow: inset 0 1px 0 #fff, inset 1px 0 0 rgba(255,255,255,.8), inset 0 -2px 6px rgba(255,255,255,.9), 0 0 0 1.5px rgba(231,19,27,.55),
+    0 1px 0 #dce3e1, 0 2px 0 #d2dbd9, 0 3px 0 #c8d3d0, 0 4px 0 #becac7, 0 14px 20px -14px rgba(60,90,84,.4); }
+.tq-calc__sheen { position: absolute; top: 0; bottom: 0; width: 120px; transform: translateX(-50%); pointer-events: none; transition: left .4s cubic-bezier(.2, .8, .2, 1);
+  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.95) 45%, rgba(255,255,255,0) 60%, rgba(255,255,255,0) 72%, rgba(255,255,255,.6) 80%, rgba(255,255,255,0) 90%); }
+.tq-calc__input { position: relative; flex: 1; min-width: 0; margin: 0; padding: 0; border: 0; outline: 0; background: transparent; color: #0a0a0a;
+  font: 700 26px/1 'DM Sans', sans-serif; letter-spacing: -.02em; text-shadow: -.6px 0 0 rgba(231,19,27,.35), .6px 0 0 rgba(60,110,255,.3);
+  -moz-appearance: textfield; appearance: textfield; }
+.tq-calc__input::-webkit-outer-spin-button, .tq-calc__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.tq-calc__unit { position: relative; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #6b6f76; white-space: nowrap; }
+.tq-calc__slider { position: relative; z-index: 1; height: 30px; cursor: pointer; touch-action: none; }
+.tq-calc__track { position: absolute; left: 0; right: 0; top: 8px; height: 14px; border-radius: 999px; background: linear-gradient(180deg, #eef1f1, #fff);
+  box-shadow: inset 0 1px 2px rgba(60,90,84,.22), inset 0 -1px 0 #fff, 0 0 0 1px rgba(18,22,30,.08); }
+.tq-calc__fill { position: absolute; left: 2px; top: 10px; height: 10px; min-width: 10px; border-radius: 999px;
+  background: linear-gradient(180deg, #ff6a70 0%, #e7131b 55%, #b70e15 100%); box-shadow: inset 0 1.5px 0 rgba(255,255,255,.55), 0 2px 6px -2px rgba(231,19,27,.6); }
+.tq-calc__knob { position: absolute; top: 1px; width: 28px; height: 28px; margin-left: -14px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 34% 28%, #fff 0 18%, rgba(255,255,255,.7) 40%, rgba(236,242,241,.75) 75%, rgba(200,214,211,.9) 100%);
+  box-shadow: inset 0 -2px 4px rgba(60,90,84,.25), inset 0 1px 1px #fff, 0 0 0 1px rgba(18,22,30,.12), 0 6px 10px -4px rgba(60,90,84,.45); }
+@media (max-width: 640px) {
+  .tq-calc { padding: 26px 20px 24px; gap: 26px; border-radius: 22px; }
+  .tq-calc__field { gap: 12px; }
+  .tq-calc__ico { width: 32px; height: 32px; border-radius: 9px; }
+  .tq-calc__ico svg { width: 16px; height: 16px; }
+  .tq-calc__title { font-size: 15px; }
+  .tq-calc__val { height: 52px; padding: 0 16px; border-radius: 13px; }
+  .tq-calc__input { font-size: 22px; }
+  .tq-calc__unit { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .tq-calc__sheen { transition: none; } }
+
 /* ---- Payout period toggle on the landing statement (Day / Month / Year) --------------------
    The thumb slides under the pressed button; --i is its index (0 day, 1 month, 2 year), set by startCalculator. */
 [data-inv-per] { --i: 1; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(100%, 300px); padding: 3px; box-sizing: border-box;
@@ -1053,6 +1088,31 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-glass--flat, html.tq-liquid .tq-glass--flat { -webkit-backdrop-filter: none; backdrop-filter: none; }
 .tq-glass--row { border-radius: 20px; }
 @media (prefers-reduced-motion: reduce) { .tq-glass, .tp-glass { transform: none; transition: none; } }
+
+/* ---- Frosted glass (Glass_Card_Grid design), landing reviews only --------------------------
+   Milky glass with a little grain; the light follows the pointer (--tqgx/--tqgy, startGlass) and on
+   hover (--tqgh 0 → 1) an iridescent rim, chromatic inner edges and a small lift appear.
+   No backdrop blur here: the reviews marquee moves every frame and sits on white, where the blur
+   would cost frames and show nothing. */
+.tq-frost {
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 22px;
+  background: radial-gradient(260px 200px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.25 + var(--tqgh) * .45)), rgba(255,255,255,0) 70%), rgba(248,248,250,.58);
+  border: 1px solid rgba(255,255,255,.85);
+  box-shadow: 0 0 0 1px rgba(18,22,30,.05), 0 22px 40px -30px rgba(18,22,30,.3),
+    inset 1px 1px 0 rgba(255,140,146,calc(var(--tqgh) * .35)), inset -1px -1px 0 rgba(140,170,255,calc(var(--tqgh) * .35));
+  transform: translateY(calc(var(--tqgh) * -4px));
+  transition: --tqgx .35s ease, --tqgy .35s ease, --tqgh .45s ease, transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+.tq-frost::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.tq-frost::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: var(--tqgh);
+  background: conic-gradient(from calc(200deg + var(--tqgh) * 60deg) at var(--tqgx) var(--tqgy), #ffffff, #ffd3d5, #f7a8ac, #ffffff, #d9e2ff, #c9f2e6, #ffffff, #e2e4e8, #ffffff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+}
+@media (prefers-reduced-motion: reduce) { .tq-frost { transform: none; transition: none; } }
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -1957,7 +2017,7 @@ html:lang(ko) * { word-break: keep-all; }
         </div>
         <div class="tp-kbo__stage">
           <picture class="tp-kbo__poster" data-poster aria-hidden="true"><source media="(min-width: 641px)" srcset="../../assets/posters/benefits-objects-wide.webp?v=3f4ced1586" width="1240" height="797"><img src="../../assets/posters/benefits-objects.webp?v=3370ec2a52" alt="" width="360" height="580" loading="lazy" decoding="async"></picture>
-          <iframe class="tp-kbo__3d" data-embed data-src="../../embeds/benefit-objects.html?lang=ko&v=e7a5a0bd99" title="주요 혜택" aria-hidden="true" tabindex="-1"></iframe>
+          <iframe class="tp-kbo__3d" data-embed data-src="../../embeds/benefit-objects.html?lang=ko&v=11859252ea" title="주요 혜택" aria-hidden="true" tabindex="-1"></iframe>
         </div>
         <div class="tp-kbo__cta">
           <a class="tp-c3d tp-ped" data-c3d href="../#signup" data-page-link data-label="로딩 중 · 홈">
@@ -1990,7 +2050,7 @@ html:lang(ko) * { word-break: keep-all; }
         <div class="tp-dome" data-dome>
           <div class="tp-dome__stage">
             <img class="tp-dome__poster" data-poster src="../../assets/posters/trust-dome.webp?v=cd64cd2f23" alt="" width="900" height="780" loading="lazy" decoding="async">
-            <iframe class="tp-dome__3d" data-embed data-src="../../embeds/trust-dome.html?lang=ko&v=59890ef037" title="왜 TradeQuo인가" aria-hidden="true" tabindex="-1"></iframe>
+            <iframe class="tp-dome__3d" data-embed data-src="../../embeds/trust-dome.html?lang=ko&v=ca7957e339" title="왜 TradeQuo인가" aria-hidden="true" tabindex="-1"></iframe>
           </div>
           <div class="tp-dome__stat" data-stat="tl"><b>800K<i>+</i></b><span>고객 트레이더</span></div>
           <div class="tp-dome__stat" data-stat="tr"><b>4.9<i>★</i></b><span>Trustpilot 평점</span></div>
@@ -2234,6 +2294,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=1dceaa3fcb" defer></script>
+<script src="../../assets/js/landing.js?v=90e34cfc1e" defer></script>
 </body>
 </html>

@@ -125,7 +125,7 @@
     const io = new IntersectionObserver((entries) => {
       entries.forEach((en) => en.target.toggleAttribute('data-offscreen', !en.isIntersecting));
     }, { rootMargin: '100px 0px' });
-    $$('#signup, #how, #calculator, #reviews, #film, #payouts, [data-flip-track], #faq, #reach').forEach((el) => io.observe(el));
+    $$('#signup, #how, #calculator, #reviews, #film, [data-flip-track], #faq, #reach').forEach((el) => io.observe(el));
   }
 
   /* ---- mobile: tap an offer card to lift it -------------------------------- */
@@ -484,8 +484,11 @@
         const c = cfg[key], s = sliders[key];
         if (!s) continue;
         const pct = ((state[key] - c.min) / (c.max - c.min) * 100).toFixed(2) + '%';
-        $('[data-calc-fill]', s).style.width = pct;
+        $('[data-calc-fill]', s).style.width = 'calc(' + pct + ' - 2px)';
         $('[data-calc-knob]', s).style.left = pct;
+        /* the highlight on the value box rides along with the slider */
+        const sh = $('[data-calc-sheen]', s.closest('.tq-calc__field') || s.parentNode);
+        if (sh) sh.style.left = (10 + parseFloat(pct) * 0.8).toFixed(1) + '%';
       }
       /* lot count in local style (a day can be a fraction of a lot); $ amounts stay en-US */
       setText('[data-inv-lots]', (lots * traders * PER[per]).toLocaleString(numLocale, { maximumFractionDigits: 1 }));
@@ -782,13 +785,13 @@
    * hover or keyboard focus eases --ch to 1, the button leans toward the pointer
    * (--ctx/--cty) and dips on press (--cd); the CSS does the rest. The Ionic volutes are
    * drawn in the button's own coordinates, so they are refitted to the label's width. */
-  /* Liquid glass (Glass_Card_Grid_Liquid design). The refraction is an SVG filter used from
+  /* Liquid glass (Glass_Card_Grid_Liquid design); the frosted reviews (.tq-frost) share the pointer light. The refraction is an SVG filter used from
    * backdrop-filter, which only Chromium draws: there the filter goes into the page and html gets
    * .tq-liquid; other browsers keep the plain blur. The highlight follows the mouse; on touch the
    * glass simply rests. */
   function startGlass() {
-    if (!$$('.tq-glass, .tp-glass').length) return;
-    if (navigator.userAgentData && !document.getElementById('tq-liquid')) {
+    if (!$$('.tq-glass, .tp-glass, .tq-frost').length) return;
+    if (navigator.userAgentData && $$('.tq-glass, .tp-glass').length && !document.getElementById('tq-liquid')) {
       const ns = 'http://www.w3.org/2000/svg';
       const svg = document.createElementNS(ns, 'svg');
       svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
@@ -801,7 +804,7 @@
       document.documentElement.classList.add('tq-liquid');
     }
     if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    $$('.tq-glass, .tp-glass').forEach((el) => {
+    $$('.tq-glass, .tp-glass, .tq-frost').forEach((el) => {
       const set = (k, v) => el.style.setProperty(k, v);
       el.addEventListener('pointermove', (e) => {
         const r = el.getBoundingClientRect();
