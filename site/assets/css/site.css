@@ -911,6 +911,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   [data-sub2] .br-desk { display: none; }   /* a caption split by hand splits itself in half on tablets */
 }
 
+/* phones: one column, the payout statement on top and the controls under it, so the figures stay in
+   view while the sliders move */
+@media (max-width: 700px) {
+  [data-calc-grid] { grid-template-columns: minmax(0, 1fr) !important; }
+  [data-calc-grid] > [data-invoice] { order: -1; }
+}
+
 /* ---- Calculator controls (Partner_Calculator_Glass design) ----------------------------------
    A white card; each field has a raised icon tile, a raised value box with a highlight that follows
    the slider (data-calc-sheen, set by startCalculator), a sunken track, a glossy red fill and a glass knob. */
