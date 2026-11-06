@@ -747,6 +747,49 @@
    * hover or keyboard focus eases --ch to 1, the button leans toward the pointer
    * (--ctx/--cty) and dips on press (--cd); the CSS does the rest. The Ionic volutes are
    * drawn in the button's own coordinates, so they are refitted to the label's width. */
+  /* Marketing Tools · "Tools for your channel": an ARIA tab list (click, arrows, Home/End). */
+  function startChannels() {
+    const root = $('[data-ch]');
+    if (!root) return;
+    const tabs = $$('[data-ch-tab]', root), panels = $$('[data-ch-panel]', root);
+    const show = (i, focus) => {
+      tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === i)); t.tabIndex = j === i ? 0 : -1; });
+      panels.forEach((p, j) => { p.hidden = j !== i; });
+      if (focus) tabs[i].focus();
+      tabs[i].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion() ? 'auto' : 'smooth' });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(i, false));
+      t.addEventListener('keydown', (e) => {
+        const rtl = getComputedStyle(root).direction === 'rtl';
+        const step = { ArrowDown: 1, ArrowUp: -1, ArrowRight: rtl ? -1 : 1, ArrowLeft: rtl ? 1 : -1 }[e.key];
+        if (step) { e.preventDefault(); show((i + step + tabs.length) % tabs.length, true); }
+        else if (e.key === 'Home') { e.preventDefault(); show(0, true); }
+        else if (e.key === 'End') { e.preventDefault(); show(tabs.length - 1, true); }
+      });
+    });
+  }
+
+  /* Marketing Tools · White-Label Academy preview: the typed brand and the picked colour
+   * drive a mock academy. Names come from the page ("{brand} Academy", "Module {n}") so word
+   * order follows each language. */
+  function startAcademy() {
+    const root = $('[data-academy]');
+    if (!root) return;
+    const input = $('[data-ac-input]', root), preview = $('[data-ac-preview]', root);
+    const tpl = root.dataset.name || '{brand}', fallback = root.dataset.default || '';
+    const names = $$('[data-ac-name]', root), mono = $('[data-ac-mono]', root);
+    $$('[data-ac-mod]', root).forEach((el) => { el.textContent = el.textContent.replace('{n}', el.dataset.acMod); });
+    const render = () => {
+      const brand = (input.value.trim() || fallback).replace(/\s+/g, ' ');
+      names.forEach((el) => { el.textContent = tpl.replace('{brand}', brand); });
+      if (mono) mono.textContent = (Array.from(brand)[0] || '').toLocaleUpperCase();
+    };
+    input.addEventListener('input', render);
+    $$('[data-ac-color]', root).forEach((r) => r.addEventListener('change', () => { if (r.checked) preview.style.setProperty('--brand', r.value); }));
+    render();
+  }
+
   function startCta3d() {
     $$('[data-c3d]').forEach((el) => {
       const set = (k, v) => el.style.setProperty(k, v);
@@ -800,5 +843,7 @@
   startKeyBenefits();
   startWho();
   startCta3d();
+  startChannels();
+  startAcademy();
   startLang();
 })();
