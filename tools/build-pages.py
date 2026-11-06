@@ -17,7 +17,7 @@ pages = json.load(open(os.path.join(ROOT, 'tools', 'pages.json'), encoding='utf-
 # Numbering follows the site-map fan: 01 landing, 02 Partner Programs, 03 Commission Plan
 # (translated pages, tools/build-i18n.py), then these concept pages.
 LIVE = [{'slug': 'programs', 'short': 'Programs', 'title': 'Partner Programs'},
-        {'slug': 'commission-plan', 'short': 'Commission Plan', 'title': 'Commission Plan'}]
+        {'slug': 'partner-terms', 'short': 'Commission Plan', 'title': 'Commission Plan'}]
 TOTAL = len(pages) + 1 + len(LIVE)
 
 e = lambda s: html.escape(s, quote=False)

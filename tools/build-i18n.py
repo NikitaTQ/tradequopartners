@@ -31,13 +31,13 @@ DOMAIN = 'https://tradequopartners.com'
 PAGES = [
     {'id': 'landing', 'template': 'landing.html', 'slug': ''},
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
-    {'id': 'commission', 'template': 'commission.html', 'slug': 'commission-plan', 'css': 'partner'},
+    {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
     {'id': 'marketing', 'template': 'marketing.html', 'slug': 'marketing-tools', 'css': 'partner'},
 ]
 # The site-map fan (bottom right): the translated partner pages.
 FAN = [
     ('programs', 'home', 'programs/', 'fan.programs'),
-    ('commission', 'home', 'commission-plan/', 'fan.commission'),
+    ('commission', 'home', 'partner-terms/', 'fan.commission'),
     ('marketing', 'home', 'marketing-tools/', 'fan.marketing'),
 ]
 languages = json.load(open(os.path.join(I18N, 'languages.json'), encoding='utf-8'))
