@@ -36,14 +36,14 @@
   <main>
     <!-- Earnings hero (TradeQuo_Earnings_Hero design): three partner profiles with a starting estimate each
          ($7.50 per lot, the calculator's rate). A card tilts toward the mouse; a click selects it and dims
-         the others (plan.js). -->
+         the others; under 1040px the cards swipe sideways (plan.js). Under them the note and two CTAs. -->
     <section id="earnings" class="tq-earn" data-screen-label="Earnings hero">
       <div class="tq-earn__in">
         <div class="tq-earn__head">
           <h1 class="tq-earn__h1">{{cp.earn.h1}}</h1>
           <p class="tq-earn__sub">{{cp.earn.sub}}</p>
         </div>
-        <div class="tq-earn__grid">
+        <div class="tq-earn__grid" data-earn-grid>
           <div class="tq-ecard" role="button" tabindex="0" aria-pressed="false" data-earn-card style="--tint: #FFF2F3; --accent: #FF0033;" aria-label="{{@cp.earn.c1.label}} — $2,070 {{@cp.earn.month}}">
             <div class="tq-ecard__body">
               <span class="tq-ecard__glare" aria-hidden="true"></span>
@@ -132,9 +132,18 @@
             </div>
           </div>
         </div>
+        <!-- under 1040px the cards swipe sideways (plan.js); one dot per card -->
+        <div class="tq-earn__dots" data-earn-dots>
+          <button type="button" aria-label="{{@cp.earn.c1.label}}" aria-current="true"></button>
+          <button type="button" aria-label="{{@cp.earn.c2.label}}"></button>
+          <button type="button" aria-label="{{@cp.earn.c3.label}}"></button>
+        </div>
         <div class="tq-earn__foot">
           <p class="tq-earn__note">{{cp.earn.note}}</p>
-          <a class="tq-earn__cta" href="{{signupHref}}"{{signupNav}}>{{cp.earn.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          <div class="tq-earn__ctas">
+            <a class="tq-earn__cta" href="{{signupHref}}"{{signupNav}}>{{cp.earn.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <a class="tq-earn__cta tq-earn__cta--red" href="{{signupHref}}"{{signupNav}}>{{nav.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          </div>
         </div>
       </div>
     </section>

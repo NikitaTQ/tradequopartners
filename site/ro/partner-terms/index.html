@@ -1733,20 +1733,23 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    Three partner profiles, each a card with a starting estimate. The card tilts toward the mouse with a
    glare (.is-hov), a click selects it (.is-sel: red ring, SELECTED pill, the two inner cards lift) and
    dims the others (.is-dim); plan.js sets the classes and draws the candles on the back card. */
-.tq-earn { padding: clamp(28px, 4.4vw, 64px) clamp(16px, 4vw, 56px) clamp(56px, 6vw, 88px);
+.tq-earn { --pad: clamp(16px, 4vw, 56px); padding: clamp(28px, 4.4vw, 64px) var(--pad) clamp(56px, 6vw, 88px);
   background: radial-gradient(70% 55% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #f7f7f8 0, #f7f7f8 calc(100% - 140px), #fff 100%); }
 .tq-earn__in { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; }
 .tq-earn__head { display: flex; flex-direction: column; gap: 16px; }
 .tq-earn__h1 { margin: 0; font-size: clamp(38px, 4.2vw, 60px); line-height: 1.04; font-weight: 700; letter-spacing: -.045em; text-wrap: balance; }
 .tq-earn__sub { margin: 0; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.5; color: #5b5b5b; }
 .tq-earn__grid { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 28px; }
-.tq-earn__foot { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; }
-.tq-earn__note { margin: 0; max-width: 720px; font-family: 'Fragment Mono', monospace; font-size: 12.5px; line-height: 1.6; color: #5b5b5b; }
+.tq-earn__foot { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+.tq-earn__note { margin: 0; max-width: 720px; font-family: 'Fragment Mono', monospace; font-size: 12.5px; line-height: 1.6; color: #5b5b5b; text-wrap: balance; }
+.tq-earn__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; }
 .tq-earn__cta { flex: none; display: flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px; background: #0a0a0a; color: #fff;
   font-size: 15px; font-weight: 700; white-space: nowrap; text-decoration: none; box-shadow: 0 1px 0 #2b2b31, 0 2px 0 #1f1f24, 0 14px 24px -14px rgba(10,10,10,.6); transition: transform .25s cubic-bezier(.2,.8,.2,1); }
 .tq-earn__cta:hover, .tq-earn__cta:focus-visible { color: #fff; transform: translateY(-2px); }
 .tq-earn__cta:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
 .tq-earn__cta svg { flex: none; color: #ff4b52; }
+.tq-earn__cta--red { background: #e7131b; box-shadow: 0 1px 0 #c40f17, 0 2px 0 #a50d13, 0 14px 24px -14px rgba(231,19,27,.65); }
+.tq-earn__cta--red svg { color: #fff; }
 [dir="rtl"] .tq-earn__cta svg { transform: scaleX(-1); }
 
 .tq-ecard { --rx: 0; --ry: 0; --gx: 50%; --gy: 10%; position: relative; height: 100%; outline: none; cursor: pointer; perspective: 1200px; container-type: inline-size;
@@ -1808,6 +1811,25 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ecard__rows i { flex: 1; min-width: 8px; border-bottom: 1px dotted #d4d4d9; transform: translateY(-3px); }
 .tq-ecard__rows bdi { color: #0a0a0a; }
 .tq-ecard__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; padding-top: 10px; border-top: 1px solid rgba(10,10,10,.07); font-family: 'Fragment Mono', monospace; font-size: 11px; color: #5b5b5b; }
+/* under 1040px (three cards no longer fit a row): a swiper. The row runs edge to edge and snaps a card to
+   the middle; the cards beside it shrink toward it and fade (--off, --ox from plan.js); dots under it. */
+.tq-earn__dots { display: none; }
+@media (max-width: 1039px) {
+  .tq-earn__grid { --cw: clamp(280px, 78vw, 380px); display: flex; gap: 12px; margin: 34px calc(-1 * var(--pad)) 0; padding: 10px calc((100vw - var(--cw)) / 2) 40px;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .tq-earn__grid::-webkit-scrollbar { display: none; }
+  .tq-ecard { flex: 0 0 var(--cw); height: auto; scroll-snap-align: center; scroll-snap-stop: always; }
+  .tq-ecard__body { scale: calc(1 - var(--off, 0) * .08); opacity: calc(1 - var(--off, 0) * .45); transform-origin: var(--ox, 50%) 50%; }
+  .tq-earn__dots { display: flex; justify-content: center; gap: 2px; margin-top: -14px; }
+  .tq-earn__dots button { width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+  .tq-earn__dots button::before { content: ''; width: 8px; height: 8px; border-radius: 999px; background: rgba(14,14,16,.2); transition: width .3s ease, background-color .3s ease; }
+  .tq-earn__dots button[aria-current="true"]::before { width: 24px; background: #e7131b; }
+  .tq-earn__dots button:focus-visible { outline: 2px solid #e7131b; outline-offset: -4px; border-radius: 999px; }
+  .tq-earn__foot { margin-top: 22px; }
+}
+@media (max-width: 520px) {
+  .tq-earn__ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
+}
 @media (prefers-reduced-motion: reduce) { .tq-ecard, .tq-ecard__body, .tq-ecard__back, .tq-ecard__front, .tq-ecard__glare, .tq-earn__cta { transition: none; } }
 </style>
 </head>
@@ -1842,14 +1864,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   <main>
     <!-- Earnings hero (TradeQuo_Earnings_Hero design): three partner profiles with a starting estimate each
          ($7.50 per lot, the calculator's rate). A card tilts toward the mouse; a click selects it and dims
-         the others (plan.js). -->
+         the others; under 1040px the cards swipe sideways (plan.js). Under them the note and two CTAs. -->
     <section id="earnings" class="tq-earn" data-screen-label="Earnings hero">
       <div class="tq-earn__in">
         <div class="tq-earn__head">
           <h1 class="tq-earn__h1">Publicul tău. Influența ta. <span style="color: #e7131b;">Câștigurile tale.</span></h1>
           <p class="tq-earn__sub">Fiecare partener primește condiții individuale. Alege profilul cel mai apropiat de al tău pentru a vedea o estimare inițială.</p>
         </div>
-        <div class="tq-earn__grid">
+        <div class="tq-earn__grid" data-earn-grid>
           <div class="tq-ecard" role="button" tabindex="0" aria-pressed="false" data-earn-card style="--tint: #FFF2F3; --accent: #FF0033;" aria-label="Creator de conținut — $2,070 / lună">
             <div class="tq-ecard__body">
               <span class="tq-ecard__glare" aria-hidden="true"></span>
@@ -1938,9 +1960,18 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
             </div>
           </div>
         </div>
+        <!-- under 1040px the cards swipe sideways (plan.js); one dot per card -->
+        <div class="tq-earn__dots" data-earn-dots>
+          <button type="button" aria-label="Creator de conținut" aria-current="true"></button>
+          <button type="button" aria-label="Comunitate de trading"></button>
+          <button type="button" aria-label="Afacere educațională"></button>
+        </div>
         <div class="tq-earn__foot">
           <p class="tq-earn__note">Tarifele se stabilesc individual pentru fiecare partener. Cifrele folosesc un tarif inițial de $7.50 per lot; câștigurile reale depind de activitatea de tranzacționare a clienților tăi.</p>
-          <a class="tq-earn__cta" href="../#signup" data-page-link data-label="SE ÎNCARCĂ · Acasă">Discută condițiile tale<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          <div class="tq-earn__ctas">
+            <a class="tq-earn__cta" href="../#signup" data-page-link data-label="SE ÎNCARCĂ · Acasă">Discută condițiile tale<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <a class="tq-earn__cta tq-earn__cta--red" href="../#signup" data-page-link data-label="SE ÎNCARCĂ · Acasă">Devino partener<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+          </div>
         </div>
       </div>
     </section>
@@ -2335,6 +2366,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=e671ab61cf" defer></script>
-<script src="../../assets/js/plan.js?v=3361bcca87" defer></script>
+<script src="../../assets/js/plan.js?v=5c5b01428f" defer></script>
 </body>
 </html>
