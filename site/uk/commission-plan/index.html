@@ -676,12 +676,10 @@ html { scroll-snap-type: y proximity; }
   [data-calc-controls] > div > div:first-child > span:first-child { width: 30px !important; height: 30px !important; border-radius: 9px !important; }
   [data-calc-controls] > div > div:first-child > span:first-child svg { width: 15px; height: 15px; }
   [data-calc-controls] > div > div:first-child > span:last-child > span:first-child { font-size: 14.5px !important; }
-  [data-calc-controls] > div > div:first-child > span:last-child > span:last-child { display: none !important; }
   [data-calc-controls] > div > div:nth-child(2) { height: 44px !important; padding: 0 14px !important; border-radius: 11px !important; }
   [data-calc-controls] > div > div:nth-child(2) input { font-size: 18px !important; }
   [data-calc-controls] > div > div:nth-child(2) > span { font-size: 9.5px !important; }
   [data-calc-controls] > div > div:nth-child(3) { height: 20px !important; }
-  [data-calc-controls] > div > div:nth-child(4) { display: none !important; }
   [data-invoice] { padding: 22px 18px 18px !important; gap: 14px !important; }
   [data-invoice] > div:nth-child(2) img { height: 19px !important; }
   [data-invoice] > div:nth-child(2) > span:first-child > span { font-size: 16px !important; }
@@ -696,8 +694,7 @@ html { scroll-snap-type: y proximity; }
   [data-invoice] > div:nth-child(4) > div > span:last-child { font-size: 12.5px !important; }
   [data-inv-total] { font-size: 34px !important; }
   [data-inv-stamp] { width: 70px !important; height: 70px !important; }
-  [data-invoice] > div:last-child { padding: 10px 12px !important; }
-  [data-invoice] > div:last-child span { font-size: 12px !important; }
+  [data-inv-per] button { padding: 6px 8px; font-size: 12.5px; }
   [data-faq-art] iframe { pointer-events: none; }
   [data-fan-stage] > [data-fan-card][data-fan-card]:hover { transform: none !important; z-index: 1 !important; border-color: rgba(255,255,255,.13) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 10px 22px rgba(0,0,0,.5) !important; }
   [data-fan-stage] > [data-fan-card] { transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s ease, box-shadow .3s ease !important; -webkit-tap-highlight-color: transparent; cursor: pointer !important; }
@@ -984,7 +981,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 /* Reviews are quoted in English: the marquee stays left-to-right. */
 [dir="rtl"] [data-rep-stage] { direction: ltr; }
 /* Sliders grow left-to-right like the numbers on them. */
-[dir="rtl"] [data-calc-slider], [dir="rtl"] [data-calc-slider] + div { direction: ltr; }
+[dir="rtl"] [data-calc-slider] { direction: ltr; }
 [dir="rtl"] input[type="email"], [dir="rtl"] input[type="tel"] { direction: ltr; text-align: right; }
 [dir="rtl"] #signup form label > span:first-child { padding-left: 0 !important; padding-right: 70px; }
 /* How it works: the progress line fills from the right, where step 1 is. */
@@ -1004,6 +1001,20 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   header nav { gap: 6px !important; }
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
+
+/* ---- Payout period toggle on the landing statement (Day / Month / Year) --------------------
+   The thumb slides under the pressed button; --i is its index (0 day, 1 month, 2 year), set by startCalculator. */
+[data-inv-per] { --i: 1; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(100%, 300px); padding: 3px; box-sizing: border-box;
+  border-radius: 999px; background: #efefeb; box-shadow: inset 0 0 0 1px #e2e2dd, inset 0 1px 2px rgba(10,10,10,.05); }
+[data-inv-per-thumb] { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc((100% - 6px) / 3); border-radius: 999px; background: #0a0a0a;
+  box-shadow: 0 3px 8px -3px rgba(10,10,10,.45); transform: translateX(calc(var(--i) * 100%)); transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+[dir="rtl"] [data-inv-per-thumb] { left: auto; right: 3px; transform: translateX(calc(var(--i) * -100%)); }
+[data-inv-per] button { position: relative; min-width: 0; padding: 7px 12px; border: 0; border-radius: 999px; background: transparent; cursor: pointer;
+  font: 600 13.5px/1.2 'DM Sans', sans-serif; letter-spacing: -.01em; color: #5b5b5b; white-space: nowrap; transition: color .3s ease; -webkit-tap-highlight-color: transparent; }
+[data-inv-per] button:hover { color: #0a0a0a; }
+[data-inv-per] button[aria-pressed="true"] { color: #fff; }
+[data-inv-per] button:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { [data-inv-per-thumb] { transition: none; } }
 
 /* ---- Liquid glass (Glass_Card_Grid_Liquid design) ----------------------------------------
    Clear glass that bends what sits behind it: a faint white tint, a strong saturate, a white rim
@@ -2171,7 +2182,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=2e6c56e8e7" defer></script>
+<script src="../../assets/js/landing.js?v=1dceaa3fcb" defer></script>
 <script src="../../assets/js/plan.js?v=4723465df7" defer></script>
 </body>
 </html>
