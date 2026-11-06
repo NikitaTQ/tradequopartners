@@ -905,7 +905,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 [data-dial]:hover { background: #fafaf8; }
 
 /* ---- Captions under headings: two balanced lines (startTwoLine in landing.js sets the width) ---- */
-[data-sub2], .tp-sub, .tp-final__sub, .tp-who__sub, .tp-kbo__sub, .tp-dome-copy__sub { text-wrap: balance !important; }
+[data-sub2], .tp-sub, .tp-final__sub, .tp-dome-copy__sub { text-wrap: balance !important; }
 
 /* tablets: with the larger headings the FAQ side column and the perks head need the full width */
 @media (max-width: 1024px) {

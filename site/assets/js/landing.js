@@ -687,100 +687,6 @@
     });
   }
 
-  /* ---- Key benefits (Partner Programs): glass card + 3D objects ----------------
-   * The page owns the active benefit: it cycles every 2.5 s while the block is on
-   * screen (not under reduced motion, not while hovered or focused), tells the
-   * objects embed {tqKb: i}, and holds a picked item for 7 s — a click on a bar
-   * here, or on a pedestal's chip in the embed ({tqKbPick: i}). */
-  function startKeyBenefits() {
-    const root = $('[data-kb]');
-    if (!root) return;
-    const items = $$('[data-kb-item]', root), bars = $$('[data-kb-bar]', root);
-    const num = $('[data-kb-num]', root), group = $('[data-kb-group]', root), frame = $('iframe', root);
-    const N = items.length, STEP = 2500, HOLD = 7000;
-    let cur = 0, timer = 0, onScreen = false, hover = false;
-    const tell = () => { try { if (frame.contentWindow) frame.contentWindow.postMessage({ tqKb: cur }, location.origin); } catch (e) {} };
-    const show = (i) => {
-      cur = (i + N) % N;
-      items.forEach((el, j) => el.classList.toggle('is-on', j === cur));
-      bars.forEach((b, j) => {
-        b.classList.toggle('is-on', j === cur); b.classList.toggle('is-past', j < cur);
-        b.setAttribute('aria-pressed', String(j === cur));
-      });
-      num.textContent = pad(cur + 1) + ' / ' + pad(N);
-      group.textContent = items[cur].dataset.group;
-      tell();
-    };
-    const schedule = (ms) => {
-      clearTimeout(timer);
-      if (!onScreen || hover || document.hidden || reducedMotion()) return;
-      timer = setTimeout(() => { show(cur + 1); schedule(STEP); }, ms);
-    };
-    const pick = (i) => { show(i); schedule(HOLD); };
-    bars.forEach((b, j) => b.addEventListener('click', () => pick(j)));
-    window.addEventListener('message', (e) => {
-      if (e.origin !== location.origin || !frame || e.source !== frame.contentWindow || !e.data) return;
-      if (typeof e.data.tqKbPick === 'number') pick(e.data.tqKbPick | 0);
-      if (e.data.tqReady) tell();
-    });
-    if (frame) frame.addEventListener('load', tell);
-    const card = $('.tp-kb__card', root);
-    card.addEventListener('pointerenter', () => { hover = true; schedule(0); });
-    card.addEventListener('pointerleave', () => { hover = false; schedule(STEP); });
-    root.addEventListener('focusin', () => { hover = true; schedule(0); });
-    root.addEventListener('focusout', () => { hover = false; schedule(STEP); });
-    document.addEventListener('visibilitychange', () => schedule(STEP));
-    new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; schedule(STEP); }, { threshold: 0.35 }).observe(root);
-  }
-
-  /* ---- Who it's for (Partner Programs): persona list + 3D card carousel -------
-   * The page owns the open row: it moves on every 6 s while the block is on
-   * screen (not under reduced motion, not while the list is hovered or focused),
-   * tells the carousel embed {tqWho: i}, and holds a clicked row for 9 s. The
-   * list keeps room for its longest story, so nothing below jumps as rows change. */
-  function startWho() {
-    const root = $('[data-who]');
-    if (!root) return;
-    const rows = $$('[data-who-item]', root), list = $('.tp-who__list', root), frame = $('iframe', root);
-    const N = rows.length, STEP = 6000, HOLD = 9000;
-    let cur = 0, timer = 0, onScreen = false, hover = false;
-    const tell = () => { try { if (frame && frame.contentWindow) frame.contentWindow.postMessage({ tqWho: cur }, location.origin); } catch (e) {} };
-    const show = (i) => {
-      cur = (i + N) % N;
-      rows.forEach((r, j) => { r.classList.toggle('is-on', j === cur); $('button', r).setAttribute('aria-expanded', String(j === cur)); });
-      tell();
-    };
-    const schedule = (ms) => {
-      clearTimeout(timer);
-      if (!onScreen || hover || document.hidden || reducedMotion()) return;
-      timer = setTimeout(() => { show(cur + 1); schedule(STEP); }, ms);
-    };
-    rows.forEach((r, j) => $('button', r).addEventListener('click', () => { show(j); schedule(HOLD); }));
-    window.addEventListener('message', (e) => {
-      if (e.origin !== location.origin || !frame || e.source !== frame.contentWindow || !e.data) return;
-      if (e.data.tqReady) tell();
-    });
-    if (frame) frame.addEventListener('load', tell);
-    list.addEventListener('pointerenter', () => { hover = true; schedule(0); });
-    list.addEventListener('pointerleave', () => { hover = false; schedule(STEP); });
-    root.addEventListener('focusin', () => { hover = true; schedule(0); });
-    root.addEventListener('focusout', () => { hover = false; schedule(STEP); });
-    document.addEventListener('visibilitychange', () => schedule(STEP));
-    new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; schedule(STEP); }, { threshold: 0.35 }).observe(root);
-    /* reserve the height of the longest open row */
-    const fit = () => {
-      list.style.minHeight = '';
-      const inners = rows.map((r) => $('.tp-who__inner', r));
-      const open = inners[cur].getBoundingClientRect().height;
-      const most = Math.max(...inners.map((x) => x.scrollHeight));
-      list.style.minHeight = Math.ceil(list.getBoundingClientRect().height - open + most) + 'px';
-    };
-    let fitT = 0;
-    const refit = () => { clearTimeout(fitT); fitT = setTimeout(fit, 500); };   // after the row transition
-    window.addEventListener('resize', refit, { passive: true });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit); else refit();
-  }
-
   /* 3D call-to-action buttons on /programs/ (CTA_Ionic_Capital, CTA_Pedestal, CTA_Trust_Dome):
    * hover or keyboard focus eases --ch to 1, the button leans toward the pointer
    * (--ctx/--cty) and dips on press (--cd); the CSS does the rest. The Ionic volutes are
@@ -825,7 +731,7 @@
    * it keeps its size and wraps with the column. A caption split by hand (a visible <br>) keeps its
    * own break. Measured again on resize, since the caption sizes follow the viewport. */
   function startTwoLine() {
-    const els = $$('[data-sub2], .tp-sub, .tp-final__sub, .tp-who__sub, .tp-kbo__sub, .tp-dome-copy__sub');
+    const els = $$('[data-sub2], .tp-sub, .tp-final__sub, .tp-dome-copy__sub');
     if (!els.length) return;
     const lines = (el) => { const lh = parseFloat(getComputedStyle(el).lineHeight); return lh ? Math.round(el.offsetHeight / lh) : 0; };
     const put = (el, k, v) => { if (v) el.style.setProperty(k, v, 'important'); else el.style.removeProperty(k); };
@@ -1006,6 +912,190 @@
     addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { W = track.firstElementChild.offsetWidth; wrap(); put(); }, 120); });
   }
 
+  /* ---- programs/: Who it's for → Why partners choose (TradeQuo_Partner_Flow design) ---------------
+   * #pf-flow is a 280vh track; while #pf-stick is pinned, the scroll maps to q 0 → 1:
+   *   0–.36   the persona block fades away and its 3D platform stands up (partner-flow.js, setFlip)
+   *   .36     a snapshot of the platform takes over in #pf-flip (drawn 9-slice on a canvas)
+   *   .5–.76  it grows to the full screen; .52–.72 it turns into the black perks section
+   *   .74–.88 the perks heading and CTA come in; past .86 the six cards are dealt in a fan
+   * The persona rows and stories are page text; the 3D stage follows the active one and reports
+   * clicks on itself (window.__pfWhoSet). The module, and three.js with it, loads when the scene is
+   * within a screen and a half. Phones (<900px) and reduced motion: nothing is pinned, the perks
+   * section moves into #pf-perks-host and its cards scroll sideways. */
+  function startWhoFlow() {
+    const flow = document.getElementById('pf-flow');
+    if (!flow) return;
+    const stick = document.getElementById('pf-stick'), block = document.getElementById('pf-who'), flip = document.getElementById('pf-flip');
+    const stage = document.getElementById('pf-who-stage'), perks = document.getElementById('pf-perks');
+    const host = document.getElementById('pf-perks-host'), back = document.getElementById('pf-back'), fan = document.getElementById('pf-fan');
+    if (!stick || !block || !flip || !stage || !perks || !host || !back || !fan) return;
+    const cards = $$('[data-pf-perk]', fan), N = cards.length;
+
+    /* persona rows */
+    const rows = $$('[data-pf-row]', block), stories = $$('[data-pf-story]', block);
+    let active = 0;
+    const show = (i, fromStage) => {
+      if (i === active) return;
+      active = i;
+      window.__pfWhoActive = i;
+      rows.forEach((r, j) => r.setAttribute('aria-pressed', String(j === i)));
+      stories.forEach((s, j) => { s.hidden = j !== i; });
+      if (!fromStage && window.__whoApi) window.__whoApi.pick(i);
+    };
+    rows.forEach((r, i) => r.addEventListener('click', () => show(i, false)));
+    window.__pfWhoSet = (i) => show(i, true);
+
+    /* the 3D module loads when the scene is near */
+    const src = flow.dataset.pfModule;
+    if (src && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((en) => {
+        if (!en.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        import(new URL(src, document.baseURI).href).catch((e) => console.warn('[partner-flow]', e));
+      }, { rootMargin: '150% 0px' });
+      io.observe(flow);
+    }
+
+    const mq = matchMedia('(max-width: 899px), (prefers-reduced-motion: reduce)');
+    const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+    const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const head = perks.firstElementChild, cta = perks.lastElementChild, glass = $('.pf-glass', flip);
+    const kids = block.children;
+
+    /* the fan: six cards on an arc, dealt one after another */
+    let dealt = null, K = 1;
+    const place = (on) => cards.forEach((c, i) => {
+      const d = i - (N - 1) / 2, z = mq.matches ? 1 : K;
+      c.style.transitionDelay = (on ? i * 70 : 0) + 'ms';
+      c.style.opacity = on ? 1 : 0;
+      c.style.width = (220 * z) + 'px'; c.style.height = (340 * z) + 'px'; c.style.marginLeft = mq.matches ? '' : (-110 * z) + 'px';
+      c.firstElementChild.style.zoom = z;
+      c.style.transform = on
+        ? 'translate3d(' + Math.round(d * 192 * K) + 'px,' + Math.round(d * d * 11 * K) + 'px,0) rotate(' + (d * 8) + 'deg)'
+        : 'translate3d(0,60px,0) scale(0.86)';
+    });
+    const deal = (on) => { if (dealt === on) return; dealt = on; place(on); };
+    const sizeCards = () => {
+      const fh = fan.clientHeight || innerHeight * 0.5;
+      K = Math.max(0.45, Math.min(1.15, fh * 0.74 / 340, innerWidth * 0.84 / (192 * 5 + 320)));
+      if (dealt != null) place(dealt);
+    };
+    const mode = () => {
+      if (mq.matches) {
+        if (perks.parentNode !== host) host.appendChild(perks);
+        perks.style.opacity = ''; head.style.transform = ''; cta.style.transform = '';
+        block.style.transform = ''; block.style.background = '';
+        for (const k of kids) k.style.opacity = '';
+        $$('.pf-arrow', block).forEach((a) => { a.style.opacity = ''; a.style.pointerEvents = ''; });
+        deal(true);
+      } else if (perks.parentNode !== back) back.appendChild(perks);
+      sizeCards();
+    };
+    /* the persona block always fits the screen while pinned */
+    const fit = () => {
+      if (mq.matches) return;
+      block.style.transform = '';
+      const s = Math.min(1, (innerHeight - 24) / block.offsetHeight);
+      block.style.transformOrigin = '50% 50%';
+      block.style.transform = 'scale(' + s + ')';
+    };
+
+    let hidden = false, qCur = 0, qTgt = 0, raf = 0, snap = null;
+    const target = () => {
+      if (mq.matches) return 0;
+      const top = flow.getBoundingClientRect().top + scrollY;
+      const total = flow.offsetHeight - innerHeight;
+      return clamp((clamp((scrollY - top) / total) - 0.1) / 0.9);
+    };
+    const render = (q) => {
+      const vw = innerWidth, vh = innerHeight, api = window.__whoApi;
+      const sr = stage.getBoundingClientRect(), str = stick.getBoundingClientRect();
+      const p3 = ease(clamp((q - 0.02) / 0.34));           // the platform rises and stands up
+      const sw = q >= 0.36 ? 1 : 0;                        // hand-off to the 2D slab
+      const hold = clamp((q - 0.39) / 0.12);
+      const eX = ease(clamp((q - 0.5) / 0.26));            // grow to the full screen
+      const cIn = ease(clamp((q - 0.74) / 0.14));
+      if (api && api.setFlip) api.setFlip(p3);
+      if (sw <= 0) snap = null;
+      else if (!snap && api && api.snapshot) {
+        const s = api.snapshot();
+        if (s) {
+          snap = s; s.img = new Image(); s.img.src = s.url; s.k = s.r.w * sr.width / s.w;
+          if (!glass.firstChild) { const c = document.createElement('canvas'); c.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;'; glass.appendChild(c); }
+          glass.style.background = 'none';
+        }
+      }
+      const R = snap ? snap.r : api && api.rect ? api.rect() : null;
+      const w0 = R ? R.w * sr.width : sr.width * 0.3, h0 = R ? R.h * sr.height : w0 * 0.57;
+      const cx0 = sr.left + (R ? (R.x + R.w / 2) * sr.width : sr.width / 2) - str.left;
+      const cy0 = sr.top + (R ? (R.y + R.h / 2) * sr.height : sr.height / 2) - str.top;
+      const settle = 1 - 0.025 * Math.sin(hold * Math.PI);
+      const w = lerp(w0 * settle, vw, eX), hh = lerp(h0 * settle, vh, eX);
+      const cx = lerp(cx0, vw / 2, eX), cy = lerp(cy0, vh / 2, eX);
+      flip.style.visibility = sw > 0 ? 'visible' : 'hidden';
+      flip.style.opacity = sw;
+      flip.style.width = w + 'px'; flip.style.height = hh + 'px';
+      const cv = glass.firstChild;
+      if (snap && cv && snap.img.complete && snap.img.naturalWidth) {
+        /* the snapshot stretched 9-slice, so its rounded frame keeps its corners while it grows */
+        const dpr = Math.min(2, devicePixelRatio || 1), W = Math.round(w * dpr), H = Math.round(hh * dpr);
+        if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+        const x = cv.getContext('2d'), iw = snap.img.naturalWidth, ih = snap.img.naturalHeight, sl = Math.round(iw * 0.1), d = Math.round(sl * snap.k * dpr);
+        x.clearRect(0, 0, W, H); x.imageSmoothingQuality = 'high';
+        const sx = [0, sl, iw - sl, iw], sy = [0, sl, ih - sl, ih], dx = [0, d, W - d, W], dy = [0, d, H - d, H];
+        for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+          x.drawImage(snap.img, sx[i], sy[j], sx[i + 1] - sx[i], sy[j + 1] - sy[j], dx[i], dy[j], dx[i + 1] - dx[i] + (i < 2 ? 1 : 0), dy[j + 1] - dy[j] + (j < 2 ? 1 : 0));
+        }
+      } else if (snap && snap.img && !snap.img.complete) snap.img.onload = () => render(qCur);
+      flip.style.borderRadius = lerp(w0 * 0.085, 0, eX) + 'px';
+      flip.style.transform = 'translate(-50%,-50%) translate(' + (cx - vw / 2) + 'px,' + (cy - vh / 2) + 'px)';
+      const black = ease(clamp((q - 0.52) / 0.2));
+      glass.style.opacity = black >= 1 ? 0 : 1;
+      back.style.opacity = black;
+      perks.style.opacity = cIn;
+      head.style.transform = 'translateY(' + (1 - cIn) * 18 + 'px)';
+      cta.style.transform = 'translateY(' + (1 - cIn) * 18 + 'px)';
+      const fo = 1 - ease(clamp((q - 0.03) / 0.25));
+      kids[0].style.opacity = fo; kids[1].style.opacity = fo;
+      $$('.pf-arrow', block).forEach((a) => { a.style.opacity = fo; a.style.pointerEvents = fo < 0.5 ? 'none' : ''; });
+      block.style.background = fo < 1 ? 'transparent' : '';
+      kids[kids.length - 1].style.opacity = 1 - ease(clamp((q - 0.5) / 0.1));
+      const hide = sw >= 1;
+      if (hide !== hidden && api) { hidden = hide; api.hide(2, hide); }
+      flip.classList.toggle('done', eX > 0.98);
+      if (eX >= 1) { flip.style.transform = 'none'; flip.style.left = '0px'; flip.style.top = '0px'; flip.style.willChange = 'auto'; flip.style.borderRadius = '0px'; stick.style.perspective = 'none'; }
+      else { flip.style.willChange = ''; stick.style.perspective = ''; flip.style.left = ''; flip.style.top = ''; }
+      deal(q > 0.86);
+    };
+    /* q follows the scroll with a little lag (the design's 0.16 a frame at 60 fps), timed so a slow
+       device doesn't fall further behind */
+    let lastT = 0;
+    const loop = (t) => {
+      const dt = lastT ? Math.min(0.1, (t - lastT) / 1000) : 1 / 60;
+      lastT = t;
+      qCur += (qTgt - qCur) * (1 - Math.exp(-10.5 * dt));
+      if (Math.abs(qTgt - qCur) < 0.0004) qCur = qTgt;
+      render(qCur);
+      raf = qCur !== qTgt ? requestAnimationFrame(loop) : 0;
+      if (!raf) lastT = 0;
+    };
+    const tick = () => {
+      if (mq.matches) return;
+      qTgt = target();
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+    const all = () => { mode(); fit(); tick(); sizeCards(); };
+    addEventListener('scroll', tick, { passive: true });
+    addEventListener('resize', all);
+    if (mq.addEventListener) mq.addEventListener('change', all);
+    if ('ResizeObserver' in window) new ResizeObserver(() => { fit(); tick(); }).observe(block);
+    addEventListener('pf:ready', () => { hidden = !hidden; if (!mq.matches) render(qCur); });
+    deal(false);
+    all();
+    if (!mq.matches) render(qCur = qTgt = target());
+  }
+
   function startCta3d() {
     $$('[data-c3d]').forEach((el) => {
       const set = (k, v) => el.style.setProperty(k, v);
@@ -1023,24 +1113,6 @@
       el.addEventListener('focus', () => { if (el.matches(':focus-visible')) set('--ch', '1'); });
       el.addEventListener('blur', rest);
     });
-    $$('[data-ionic]').forEach((el) => {
-      const frame = $('.tp-ionic__frame', el), svg = $('svg', el);
-      if (!frame || !svg) return;
-      let last = '';
-      const fit = () => {
-        const w = Math.round(frame.offsetWidth), h = Math.round(frame.offsetHeight);
-        if (!w || !h || last === w + 'x' + h) return;
-        last = w + 'x' + h;
-        const c = w / 2;
-        svg.setAttribute('width', w); svg.setAttribute('height', h); svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-        $$('[data-ionic-curl]', svg).forEach((p) => p.setAttribute('d', 'M' + c + ' -6 H-9 A18 18 0 0 0 -27 12 A15 15 0 0 0 -12 27 A12 12 0 0 0 0 15 A9 9 0 0 0 -9 6 A6 6 0 0 0 -15 12 A4 4 0 0 0 -11 16'));
-        $('[data-ionic-mirror]', svg).setAttribute('transform', 'translate(' + w + ' 0) scale(-1 1)');
-        $('[data-ionic-jewel]', svg).setAttribute('cx', c);
-      };
-      fit();
-      if ('ResizeObserver' in window) new ResizeObserver(fit).observe(frame);
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-    });
   }
 
   startFanMenu();
@@ -1057,9 +1129,8 @@
   startDial();
   startForm();
   startFaq();
-  startKeyBenefits();
-  startWho();
   startCta3d();
+  startWhoFlow();
   startGlass();
   startLiquidCta();
   startReviewsDrag();
