@@ -926,6 +926,86 @@
     show();
   }
 
+  /* ---- reviews: a marquee you can grab ---------------------------------------------------------
+   * The track holds the cards twice; x wraps at one set's width, so it never runs out. It drifts left at
+   * the old CSS marquee's pace (one set per 64 s). A drag (mouse) or a sideways swipe (touch) moves it
+   * 1:1 either way, and on release the flick carries on and eases back into the drift. A sideways
+   * trackpad swipe moves it too. A mouse resting on it stops the drift, as before. Vertical swipes still
+   * scroll the page (touch-action: pan-y). Without JS the CSS marquee runs; with reduced motion the row
+   * is a plain scroller and this stays off. */
+  function startReviewsDrag() {
+    const view = $('[data-rep-viewport]'), track = $('[data-rep-track]');
+    if (!view || !track || !track.firstElementChild || reducedMotion()) return;
+    const SECS = 64, MAXV = 4000;
+    let W = track.firstElementChild.offsetWidth;
+    let x = 0, v = -W / SECS, last = 0, raf = 0, on = false, hover = false, drag = null, swallow = false;
+    const wrap = () => { if (W > 0) { x %= W; if (x > 0) x -= W; } };
+    const put = () => { track.style.transform = 'translate3d(' + x.toFixed(2) + 'px, 0, 0)'; };
+    track.style.animation = 'none';
+    view.setAttribute('data-rep-live', '');
+    put();
+    const frame = (t) => {
+      raf = 0;
+      if (!on) return;
+      const dt = last ? Math.min(0.05, (t - last) / 1000) : 0;
+      last = t;
+      if (!drag || !drag.live) {
+        const target = hover || drag ? 0 : -W / SECS;
+        v += (target - v) * (1 - Math.exp(-dt * 2.2));
+        x += v * dt; wrap(); put();
+      }
+      raf = requestAnimationFrame(frame);
+    };
+    whileVisible(view, '100px 0px', () => { if (!on) { on = true; last = 0; raf = requestAnimationFrame(frame); } },
+      () => { on = false; cancelAnimationFrame(raf); raf = 0; });
+
+    view.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+    view.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') hover = false; });
+    view.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      const mouse = e.pointerType === 'mouse';
+      drag = { id: e.pointerId, px: e.clientX, py: e.clientY, t: performance.now(), vx: 0, moved: 0, live: mouse };
+      if (mouse) { e.preventDefault(); view.setPointerCapture(e.pointerId); view.classList.add('is-drag'); }
+    });
+    view.addEventListener('pointermove', (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const dx = e.clientX - drag.px, dy = e.clientY - drag.py;
+      if (!drag.live) {                                   /* touch: only a sideways swipe takes the row */
+        if (Math.abs(dx) < 6 || Math.abs(dx) < Math.abs(dy)) return;
+        drag.live = true;
+        try { view.setPointerCapture(e.pointerId); } catch (err) {}
+        view.classList.add('is-drag');
+      }
+      const now = performance.now(), dt = Math.max(8, now - drag.t) / 1000;
+      drag.vx = drag.vx * 0.5 + (dx / dt) * 0.5;
+      drag.moved += Math.abs(dx);
+      drag.px = e.clientX; drag.py = e.clientY; drag.t = now;
+      x += dx; wrap(); put();
+    });
+    const end = (e, cancelled) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (drag.live && !cancelled) {
+        /* the flick's speed, unless the pointer stood still before letting go */
+        v = performance.now() - drag.t > 90 ? 0 : Math.max(-MAXV, Math.min(MAXV, drag.vx));
+      }
+      swallow = drag.moved > 6;
+      drag = null;
+      view.classList.remove('is-drag');
+    };
+    view.addEventListener('pointerup', (e) => end(e, false));
+    view.addEventListener('pointercancel', (e) => end(e, true));
+    view.addEventListener('click', (e) => { if (swallow) { e.preventDefault(); e.stopPropagation(); swallow = false; } }, true);
+    track.addEventListener('dragstart', (e) => e.preventDefault());
+    view.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;    /* vertical wheel: the page scrolls */
+      e.preventDefault();
+      x -= e.deltaX * (e.deltaMode === 1 ? 16 : 1); wrap(); put();
+      v = 0;
+    }, { passive: false });
+    let rt = 0;
+    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { W = track.firstElementChild.offsetWidth; wrap(); put(); }, 120); });
+  }
+
   function startCta3d() {
     $$('[data-c3d]').forEach((el) => {
       const set = (k, v) => el.style.setProperty(k, v);
@@ -982,6 +1062,7 @@
   startCta3d();
   startGlass();
   startLiquidCta();
+  startReviewsDrag();
   startTwoLine();
   startLang();
 })();
