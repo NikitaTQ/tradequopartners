@@ -523,6 +523,7 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 a { color: #e7131b; text-decoration: none; }
 a:hover { color: #ff3037; }
 input, button { font-family: inherit; }
+html { touch-action: manipulation; }   /* no double-tap zoom: taps land at once, quick second taps aren't eaten */
 html { scroll-snap-type: y proximity; }
 @media (max-width: 640px) { html { scroll-snap-type: none; } }
 @keyframes tqHubGlow { 0%, 100% { opacity: .35; transform: scale(.99); } 50% { opacity: .9; transform: scale(1.015); } }
@@ -737,6 +738,11 @@ html { scroll-snap-type: y proximity; }
 .tq-fab-link[aria-current="page"] { background: #0a0a0a; color: #fff; }
 .tq-fab-link[aria-current="page"]:hover { color: #fff; }
 [data-fab][data-open] .tq-fab-link { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; transition-delay: calc(var(--i) * .04s); }
+/* the menu's box spans the whole column of links above the button: closed, it must let taps through to
+   the page (it used to swallow every tap on the lower right half of the screen); only the button and,
+   when open, the links take them */
+[data-fab] { pointer-events: none; }
+[data-fab] [data-fab-toggle] { pointer-events: auto; }
 [data-fab][data-open] [data-ref="fabIcon"] { transform: rotate(90deg); }
 
 /* ---- page-transition veil ------------------------------------------------ */
