@@ -1728,6 +1728,87 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .pf-who__cta { margin-top: -40px; }
   .pf-perks__head { gap: 14px; }
 }
+
+/* ---- commission page hero: earnings examples (TradeQuo_Earnings_Hero design) -----------------
+   Three partner profiles, each a card with a starting estimate. The card tilts toward the mouse with a
+   glare (.is-hov), a click selects it (.is-sel: red ring, SELECTED pill, the two inner cards lift) and
+   dims the others (.is-dim); plan.js sets the classes and draws the candles on the back card. */
+.tq-earn { padding: clamp(28px, 4.4vw, 64px) clamp(16px, 4vw, 56px) clamp(56px, 6vw, 88px);
+  background: radial-gradient(70% 55% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #f7f7f8 0, #f7f7f8 calc(100% - 140px), #fff 100%); }
+.tq-earn__in { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; }
+.tq-earn__head { display: flex; flex-direction: column; gap: 16px; }
+.tq-earn__h1 { margin: 0; font-size: clamp(38px, 4.2vw, 60px); line-height: 1.04; font-weight: 700; letter-spacing: -.045em; text-wrap: balance; }
+.tq-earn__sub { margin: 0; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.5; color: #5b5b5b; }
+.tq-earn__grid { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 28px; }
+.tq-earn__foot { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; }
+.tq-earn__note { margin: 0; max-width: 720px; font-family: 'Fragment Mono', monospace; font-size: 12.5px; line-height: 1.6; color: #5b5b5b; }
+.tq-earn__cta { flex: none; display: flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px; background: #0a0a0a; color: #fff;
+  font-size: 15px; font-weight: 700; white-space: nowrap; text-decoration: none; box-shadow: 0 1px 0 #2b2b31, 0 2px 0 #1f1f24, 0 14px 24px -14px rgba(10,10,10,.6); transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+.tq-earn__cta:hover, .tq-earn__cta:focus-visible { color: #fff; transform: translateY(-2px); }
+.tq-earn__cta:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tq-earn__cta svg { flex: none; color: #ff4b52; }
+[dir="rtl"] .tq-earn__cta svg { transform: scaleX(-1); }
+
+.tq-ecard { --rx: 0; --ry: 0; --gx: 50%; --gy: 10%; position: relative; height: 100%; outline: none; cursor: pointer; perspective: 1200px; container-type: inline-size;
+  transition: opacity .4s ease, filter .4s ease; -webkit-tap-highlight-color: transparent; }
+.tq-ecard.is-dim { opacity: .6; filter: saturate(.5); }
+.tq-ecard:focus-visible::before { content: ''; position: absolute; inset: -7px; border-radius: 35px; box-shadow: 0 0 0 2px #0a0a0a; pointer-events: none; }
+.tq-ecard__body { position: relative; height: 100%; box-sizing: border-box; border-radius: 28px; background: linear-gradient(180deg, #fff 0%, #fdfdfd 60%, #f7f7f9 100%);
+  padding: clamp(16px, 5.5cqw, 20px); display: flex; flex-direction: column; gap: 14px; transform-style: preserve-3d; transform: rotateX(0deg) rotateY(0deg) translateY(0);
+  transition: transform .7s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease;
+  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(10,10,10,.06), 0 1px 0 #ececef, 0 2px 0 #e6e6ea, 0 3px 0 #e0e0e5, 0 4px 0 #dadae0, 0 5px 0 #d4d4db, 0 6px 0 #cfcfd6, 0 14px 20px -14px rgba(10,10,10,.18), 0 30px 46px -28px rgba(10,10,10,.28); }
+.tq-ecard.is-hov .tq-ecard__body { transform: rotateX(calc(var(--ry) * 1deg)) rotateY(calc(var(--rx) * 1deg)) translateY(-6px); transition-duration: .18s, .4s;
+  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(10,10,10,.07), 0 1px 0 #ececef, 0 2px 0 #e6e6ea, 0 3px 0 #e0e0e5, 0 4px 0 #dadae0, 0 5px 0 #d4d4db, 0 6px 0 #cfcfd6, 0 7px 0 #cacad1, 0 20px 26px -16px rgba(10,10,10,.22), 0 44px 60px -30px rgba(10,10,10,.34); }
+.tq-ecard__glare { position: absolute; inset: 0; border-radius: 28px; background: radial-gradient(circle at var(--gx) var(--gy), rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 42%); opacity: 0; transition: opacity .4s ease; pointer-events: none; }
+.tq-ecard.is-hov .tq-ecard__glare { opacity: .8; }
+.tq-ecard__ring { position: absolute; inset: 0; border-radius: 28px; box-shadow: inset 0 0 0 1.5px #e7131b; pointer-events: none; display: none; }
+.tq-ecard.is-sel .tq-ecard__ring { display: block; }
+
+.tq-ecard__top { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 4px 4px 0; }
+.tq-ecard__row { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 26px; }
+.tq-ecard__id { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.tq-ecard__emoji { flex: none; width: 30px; height: 30px; border-radius: 10px; background: var(--tint); box-shadow: inset 0 0 0 1px rgba(10,10,10,.04); display: flex; align-items: center; justify-content: center; font-size: 16px; line-height: 1; }
+.tq-ecard__label { font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .16em; color: #0a0a0a; text-transform: uppercase; }
+.tq-ecard__sel { display: none; flex: none; align-items: center; gap: 7px; height: 26px; padding: 0 11px; border-radius: 999px; background: #fdeded; color: #c40f17;
+  font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.tq-ecard__sel::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
+.tq-ecard.is-sel .tq-ecard__sel { display: flex; }
+.tq-ecard__who { font-size: 15px; line-height: 1.4; color: #5b5b5b; }
+
+.tq-ecard__scene { position: relative; height: clamp(274px, 76cqw, 292px); border-radius: 20px; background: var(--tint); transform-style: preserve-3d; }
+.tq-ecard__back { position: absolute; inset-inline-start: 6%; top: 16px; width: max(62%, 190px); box-sizing: border-box; padding: 12px 12px 10px; border-radius: 16px; background: #fff;
+  box-shadow: 0 0 0 1px rgba(10,10,10,.05), 0 12px 22px -16px rgba(10,10,10,.25); transform: translate3d(0,0,0) rotate(-2.5deg); transform-origin: 0 100%;
+  transition: transform .7s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; gap: 10px; }
+.tq-ecard.is-hov .tq-ecard__back, .tq-ecard.is-sel .tq-ecard__back { transform: translate3d(-4px,-4px,0) rotate(-5deg); }
+[dir="rtl"] .tq-ecard__back { transform-origin: 100% 100%; transform: translate3d(0,0,0) rotate(2.5deg); }
+[dir="rtl"] .tq-ecard.is-hov .tq-ecard__back, [dir="rtl"] .tq-ecard.is-sel .tq-ecard__back { transform: translate3d(4px,-4px,0) rotate(5deg); }
+.tq-ecard__ctx { display: flex; align-items: center; gap: 8px; }
+.tq-ecard__glyph { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; line-height: 1; }
+.tq-ecard__ctxt { display: flex; flex-direction: column; gap: 1px; min-width: 0; overflow: hidden; }
+.tq-ecard__ctxt b { font-size: 12px; font-weight: 700; color: #0a0a0a; white-space: nowrap; }
+.tq-ecard__ctxt span { display: flex; align-items: center; gap: 5px; font-family: 'Fragment Mono', monospace; font-size: 9.5px; color: #8a8a8f; white-space: nowrap; }
+.tq-ecard__ctxt span::before { content: ''; flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.tq-ecard__chart { position: relative; height: 70px; direction: ltr; }
+.tq-ecard__chart i { position: absolute; }
+
+.tq-ecard__front { position: absolute; inset-inline-end: 5%; bottom: 14px; width: max(66%, 226px); box-sizing: border-box; padding: 16px 16px 14px; border-radius: 18px; background: #fff;
+  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(10,10,10,.06), 0 1px 0 #e9e9ec, 0 2px 0 #e2e2e6, 0 3px 0 #dbdbe0, 0 14px 24px -18px rgba(10,10,10,.24);
+  transform: translate3d(0,0,0); transition: transform .7s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; display: flex; flex-direction: column; gap: 11px; }
+.tq-ecard.is-hov .tq-ecard__front, .tq-ecard.is-sel .tq-ecard__front { transform: translate3d(2px,-6px,30px);
+  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(10,10,10,.06), 0 1px 0 #e9e9ec, 0 2px 0 #e2e2e6, 0 3px 0 #dbdbe0, 0 22px 34px -20px rgba(10,10,10,.32); }
+.tq-ecard__fhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: 'Fragment Mono', monospace; font-size: 9.5px; letter-spacing: .14em; color: #8a8a8f; text-transform: uppercase; }
+.tq-ecard__ex { display: flex; align-items: center; gap: 6px; color: #c40f17; }
+.tq-ecard__ex::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #e7131b; }
+.tq-ecard__sum { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.tq-ecard__sum b { font-size: min(36px, 9.6cqw); line-height: 1; font-weight: 700; letter-spacing: -.045em; color: #0a0a0a; font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+.tq-ecard__sum span { font-size: 14px; color: #5b5b5b; }
+.tq-ecard__rows { display: flex; flex-direction: column; gap: 5px; font-family: 'Fragment Mono', monospace; font-size: 11px; line-height: 1.3; color: #5b5b5b; }
+.tq-ecard__rows > div { display: flex; align-items: baseline; gap: 6px; }
+.tq-ecard__rows > div > span:first-child { flex: none; width: 10px; color: #b5b5ba; }
+.tq-ecard__rows i { flex: 1; min-width: 8px; border-bottom: 1px dotted #d4d4d9; transform: translateY(-3px); }
+.tq-ecard__rows bdi { color: #0a0a0a; }
+.tq-ecard__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; padding-top: 10px; border-top: 1px solid rgba(10,10,10,.07); font-family: 'Fragment Mono', monospace; font-size: 11px; color: #5b5b5b; }
+@media (prefers-reduced-motion: reduce) { .tq-ecard, .tq-ecard__body, .tq-ecard__back, .tq-ecard__front, .tq-ecard__glare, .tq-earn__cta { transition: none; } }
 </style>
 <style id="i18n-fonts">
 *:not(svg *) { letter-spacing: 0 !important; }
@@ -1790,7 +1871,7 @@ html:lang(ko) * { word-break: keep-all; }
                   <span class="tp-pcta__line tp-pcta__line--mono">tradequo.com/ref/<mark>you</mark></span>
                 </span></span>
               </a>
-              <a class="tp-scta" href="../commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン"><span class="tp-scta__pct" aria-hidden="true">%</span>報酬プランを見る</a>
+              <a class="tp-scta" href="../partner-terms/" data-page-link data-label="読み込み中 · 報酬プラン"><span class="tp-scta__pct" aria-hidden="true">%</span>報酬プランを見る</a>
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
@@ -1803,7 +1884,7 @@ html:lang(ko) * { word-break: keep-all; }
             <p class="tp-prog__for">IBチーム、コミュニティ、地域パートナー向け</p>
             <div class="tp-prog__cta">
               <a class="tp-pcta" href="../#signup" data-page-link data-label="読み込み中 · ホーム">パートナー登録<svg class="tp-pcta__net" width="38" height="20" viewBox="0 0 38 20" fill="none" aria-hidden="true"><path d="M5 10L19 4L33 10L19 16Z M19 4V16" pathLength="1" stroke="#fff" stroke-width="1.4" stroke-dasharray="1"></path><circle cx="5" cy="10" r="3" fill="#fff"></circle><circle cx="19" cy="4" r="2.4" fill="#fff"></circle><circle cx="33" cy="10" r="2.4" fill="#fff"></circle><circle cx="19" cy="16" r="2.4" fill="#fff"></circle></svg></a>
-              <a class="tp-scta tp-scta--line" href="../commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン">報酬プランを見る<span class="tp-scta__under" aria-hidden="true"></span></a>
+              <a class="tp-scta tp-scta--line" href="../partner-terms/" data-page-link data-label="読み込み中 · 報酬プラン">報酬プランを見る<span class="tp-scta__under" aria-hidden="true"></span></a>
             </div>
           </article>
           <article class="tp-dark tp-dark--hover tp-prog">
@@ -1988,7 +2069,7 @@ html:lang(ko) * { word-break: keep-all; }
         <p class="tp-sub">クライアントポータルから申請してください。すべての申請を24時間以内に審査します。</p>
         <div class="tp-actions">
           <a class="tq-logo" href="../#signup" data-page-link data-label="読み込み中 · ホーム" aria-label="パートナー登録"><span>パートナー登録</span><span class="tq-logo__coin" aria-hidden="true"><span class="tq-logo__face"></span><span class="tq-logo__rim"></span><svg class="tq-logo__flag" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__t" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__dot" width="56" height="56" viewBox="20.75 19.75 160 160"><circle cx="141" cy="130.5" r="10.5" fill="#E7131B"></circle></svg><span class="tq-logo__flash"></span></span></a>
-          <a class="tq-crys" style="align-self: center;" href="../commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン" aria-label="報酬プランを見る"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">報酬プランを見る</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
+          <a class="tq-crys" style="align-self: center;" href="../partner-terms/" data-page-link data-label="読み込み中 · 報酬プラン" aria-label="報酬プランを見る"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">報酬プランを見る</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
         </div>
       </div>
     </section>
@@ -2083,7 +2164,7 @@ html:lang(ko) * { word-break: keep-all; }
             <span class="tp-glint__label">パートナー登録</span>
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </a>
-          <a class="tp-roll" href="../commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン" aria-label="報酬を試算する">
+          <a class="tp-roll" href="../partner-terms/" data-page-link data-label="読み込み中 · 報酬プラン" aria-label="報酬を試算する">
             <span class="tp-roll__window" aria-hidden="true">
               <span class="tp-roll__track">
                 <span class="tp-roll__a">報酬を試算する</span>
@@ -2100,7 +2181,7 @@ html:lang(ko) * { word-break: keep-all; }
     <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
       <a class="tq-fab-link" href="../" data-page-link data-label="読み込み中 · ホーム" style="--i: 0;">ホーム</a>
       <a class="tq-fab-link tq-fab-link--page" href="#programs" aria-current="page" style="--i: 1;">プログラム一覧</a>
-      <a class="tq-fab-link tq-fab-link--page" href="../commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン" style="--i: 2;">報酬プラン</a>
+      <a class="tq-fab-link tq-fab-link--page" href="../partner-terms/" data-page-link data-label="読み込み中 · 報酬プラン" style="--i: 2;">報酬プラン</a>
       <a class="tq-fab-link tq-fab-link--page" href="../marketing-tools/" data-page-link data-label="読み込み中 · 販促ツール" style="--i: 3;">販促ツール</a>
       <a class="tq-fab-link" href="#questions" style="--i: 4;">FAQ</a>
     </div>
@@ -2125,7 +2206,7 @@ html:lang(ko) * { word-break: keep-all; }
         </a>
       </div>
       <div class="tq-fan-item" style="--i: 1; --ri: 1;">
-        <a class="hv-fan-blade" href="../commission-plan/" data-page-link data-label="読み込み中 · 報酬プラン" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+        <a class="hv-fan-blade" href="../partner-terms/" data-page-link data-label="読み込み中 · 報酬プラン" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
@@ -2165,6 +2246,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=0a5e342056" defer></script>
+<script src="../../assets/js/landing.js?v=e671ab61cf" defer></script>
 </body>
 </html>

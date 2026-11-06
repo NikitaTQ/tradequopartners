@@ -417,7 +417,7 @@
   function startCalculator() {
     const inv = ref('inv');
     if (!inv) return;
-    /* one rate per lot, $7.50, as in the original design; the same as commission-plan/ (plan.js) */
+    /* one rate per lot, $7.50, as in the original design; the same as partner-terms/ (plan.js) */
     const RATE = 7.5;
     const cfg = { lots: { min: 10, max: 5000, step: 10 }, traders: { min: 1, max: 300, step: 1 } };
     const state = { lots: 130, traders: 60 };

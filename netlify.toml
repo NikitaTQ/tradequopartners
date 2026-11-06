@@ -32,5 +32,26 @@
 # The Commission Plans concept page became the translated commission plan page.
 [[redirects]]
   from = "/commission-plans/*"
-  to = "/commission-plan/"
+  to = "/partner-terms/"
+  status = 301
+
+# The commission plan page moved from /commission-plan/ to /partner-terms/ (every language).
+[[redirects]]
+  from = "/commission-plan"
+  to = "/partner-terms/"
+  status = 301
+
+[[redirects]]
+  from = "/commission-plan/*"
+  to = "/partner-terms/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/:lang/commission-plan"
+  to = "/:lang/partner-terms/"
+  status = 301
+
+[[redirects]]
+  from = "/:lang/commission-plan/*"
+  to = "/:lang/partner-terms/:splat"
   status = 301

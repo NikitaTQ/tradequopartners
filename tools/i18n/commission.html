@@ -34,10 +34,115 @@
   {{> page-header-end}}
 
   <main>
+    <!-- Earnings hero (TradeQuo_Earnings_Hero design): three partner profiles with a starting estimate each
+         ($7.50 per lot, the calculator's rate). A card tilts toward the mouse; a click selects it and dims
+         the others (plan.js). -->
+    <section id="earnings" class="tq-earn" data-screen-label="Earnings hero">
+      <div class="tq-earn__in">
+        <div class="tq-earn__head">
+          <h1 class="tq-earn__h1">{{cp.earn.h1}}</h1>
+          <p class="tq-earn__sub">{{cp.earn.sub}}</p>
+        </div>
+        <div class="tq-earn__grid">
+          <div class="tq-ecard" role="button" tabindex="0" aria-pressed="false" data-earn-card style="--tint: #FFF2F3; --accent: #FF0033;" aria-label="{{@cp.earn.c1.label}} — $2,070 {{@cp.earn.month}}">
+            <div class="tq-ecard__body">
+              <span class="tq-ecard__glare" aria-hidden="true"></span>
+              <span class="tq-ecard__ring" aria-hidden="true"></span>
+              <div class="tq-ecard__top">
+                <div class="tq-ecard__row">
+                  <span class="tq-ecard__id"><span class="tq-ecard__emoji" aria-hidden="true">🎬</span><span class="tq-ecard__label">{{cp.earn.c1.label}}</span></span>
+                  <span class="tq-ecard__sel">{{cp.earn.selected}}</span>
+                </div>
+                <span class="tq-ecard__who">{{cp.earn.c1.who}}</span>
+              </div>
+              <div class="tq-ecard__scene">
+                <div class="tq-ecard__back">
+                  <div class="tq-ecard__ctx"><span class="tq-ecard__glyph" aria-hidden="true">▶</span><span class="tq-ecard__ctxt"><b>{{cp.earn.c1.ctx}}</b><span>{{cp.earn.c1.ctxSub}}</span></span></div>
+                  <div class="tq-ecard__chart" data-earn-chart></div>
+                </div>
+                <div class="tq-ecard__front">
+                  <div class="tq-ecard__fhead"><span>{{cp.earn.estimate}}</span><span class="tq-ecard__ex">{{cp.earn.example}}</span></div>
+                  <div class="tq-ecard__sum"><b>$2,070</b><span>{{cp.earn.month}}</span></div>
+                  <div class="tq-ecard__rows">
+                    <div><span></span><span>{{cp.earn.traders}}</span><i></i><bdi>23</bdi></div>
+                    <div><span>×</span><span>{{cp.earn.lots}}</span><i></i><bdi>12</bdi></div>
+                    <div><span>×</span><span>{{cp.earn.rate}}</span><i></i><bdi>$7.50</bdi></div>
+                  </div>
+                  <div class="tq-ecard__foot"><span>≈ <bdi>$69</bdi> {{cp.earn.day}}</span><span><bdi>$24,840</bdi> {{cp.earn.year}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tq-ecard" role="button" tabindex="0" aria-pressed="false" data-earn-card style="--tint: #EEF7FD; --accent: #2AABEE;" aria-label="{{@cp.earn.c2.label}} — $18,900 {{@cp.earn.month}}">
+            <div class="tq-ecard__body">
+              <span class="tq-ecard__glare" aria-hidden="true"></span>
+              <span class="tq-ecard__ring" aria-hidden="true"></span>
+              <div class="tq-ecard__top">
+                <div class="tq-ecard__row">
+                  <span class="tq-ecard__id"><span class="tq-ecard__emoji" aria-hidden="true">💬</span><span class="tq-ecard__label">{{cp.earn.c2.label}}</span></span>
+                  <span class="tq-ecard__sel">{{cp.earn.selected}}</span>
+                </div>
+                <span class="tq-ecard__who">{{cp.earn.c2.who}}</span>
+              </div>
+              <div class="tq-ecard__scene">
+                <div class="tq-ecard__back">
+                  <div class="tq-ecard__ctx"><span class="tq-ecard__glyph" aria-hidden="true">✈</span><span class="tq-ecard__ctxt"><b>{{cp.earn.c2.ctx}}</b><span>{{cp.earn.c2.ctxSub}}</span></span></div>
+                  <div class="tq-ecard__chart" data-earn-chart></div>
+                </div>
+                <div class="tq-ecard__front">
+                  <div class="tq-ecard__fhead"><span>{{cp.earn.estimate}}</span><span class="tq-ecard__ex">{{cp.earn.example}}</span></div>
+                  <div class="tq-ecard__sum"><b>$18,900</b><span>{{cp.earn.month}}</span></div>
+                  <div class="tq-ecard__rows">
+                    <div><span></span><span>{{cp.earn.traders}}</span><i></i><bdi>140</bdi></div>
+                    <div><span>×</span><span>{{cp.earn.lots}}</span><i></i><bdi>18</bdi></div>
+                    <div><span>×</span><span>{{cp.earn.rate}}</span><i></i><bdi>$7.50</bdi></div>
+                  </div>
+                  <div class="tq-ecard__foot"><span>≈ <bdi>$630</bdi> {{cp.earn.day}}</span><span><bdi>$226,800</bdi> {{cp.earn.year}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tq-ecard" role="button" tabindex="0" aria-pressed="false" data-earn-card style="--tint: #FFF6E5; --accent: #F2A20C;" aria-label="{{@cp.earn.c3.label}} — $93,150 {{@cp.earn.month}}">
+            <div class="tq-ecard__body">
+              <span class="tq-ecard__glare" aria-hidden="true"></span>
+              <span class="tq-ecard__ring" aria-hidden="true"></span>
+              <div class="tq-ecard__top">
+                <div class="tq-ecard__row">
+                  <span class="tq-ecard__id"><span class="tq-ecard__emoji" aria-hidden="true">🎓</span><span class="tq-ecard__label">{{cp.earn.c3.label}}</span></span>
+                  <span class="tq-ecard__sel">{{cp.earn.selected}}</span>
+                </div>
+                <span class="tq-ecard__who">{{cp.earn.c3.who}}</span>
+              </div>
+              <div class="tq-ecard__scene">
+                <div class="tq-ecard__back">
+                  <div class="tq-ecard__ctx"><span class="tq-ecard__glyph" aria-hidden="true">🎓</span><span class="tq-ecard__ctxt"><b>{{cp.earn.c3.ctx}}</b><span>{{cp.earn.c3.ctxSub}}</span></span></div>
+                  <div class="tq-ecard__chart" data-earn-chart></div>
+                </div>
+                <div class="tq-ecard__front">
+                  <div class="tq-ecard__fhead"><span>{{cp.earn.estimate}}</span><span class="tq-ecard__ex">{{cp.earn.example}}</span></div>
+                  <div class="tq-ecard__sum"><b>$93,150</b><span>{{cp.earn.month}}</span></div>
+                  <div class="tq-ecard__rows">
+                    <div><span></span><span>{{cp.earn.traders}}</span><i></i><bdi>460</bdi></div>
+                    <div><span>×</span><span>{{cp.earn.lots}}</span><i></i><bdi>27</bdi></div>
+                    <div><span>×</span><span>{{cp.earn.rate}}</span><i></i><bdi>$7.50</bdi></div>
+                  </div>
+                  <div class="tq-ecard__foot"><span>≈ <bdi>$3,105</bdi> {{cp.earn.day}}</span><span><bdi>$1,117,800</bdi> {{cp.earn.year}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tq-earn__foot">
+          <p class="tq-earn__note">{{cp.earn.note}}</p>
+          <a class="tq-earn__cta" href="{{signupHref}}"{{signupNav}}>{{cp.earn.cta}}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+        </div>
+      </div>
+    </section>
+
     <!-- Calculator -->
-    <section id="calculator" class="tp-sec tp-hero" data-screen-label="Commission calculator">
+    <section id="calculator" class="tp-sec" data-screen-label="Commission calculator">
       <div class="tp-head">
-        <h1 class="tp-h1" style="max-width: 20ch;">{{cp.hero.h1}}</h1>
+        <h2 class="tp-h2" style="max-width: 20ch;">{{cp.hero.h1}}</h2>
         <p class="tp-sub">{{cp.hero.sub}}</p>
       </div>
 
