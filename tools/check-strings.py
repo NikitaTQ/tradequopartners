@@ -4,14 +4,14 @@
 import json, os, re, sys, unicodedata
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = os.path.join(ROOT, 'tools', 'i18n', 'strings')
-TIGHT = re.compile(r'^(lang\.translate$|fan\.(home|programs|commission)$|pp\.nav\.|cp\.nav\.|pp\.p\d\.(tag|value|valueNote)$|pp\.card\.|cp\.calc\.(clientsUnit|tier|perLot|perDay|perYear|p\d)$|cp\.str\.example$|cp\.tier\.|cp\.pay\.t\d$|pp\.join\.cta2$|cp\.end\.cta2$|pp\.why\.cta$|nav\.|form\.(name|email|phone|commit\d|section|auth|sign|date|submit|sent)$|calc\.(lotsUnit|tradersUnit)$|inv\.|rcpt\.|dock\.|stats\.cta$|reach\.cta|offer\.\d\.t$|embed\.crys\.|embed\.flow\.(f\d|live)$)')
+TIGHT = re.compile(r'^(lang\.translate$|fan\.(home|programs|commission|marketing)$|mt\.nav\.|pp\.nav\.|cp\.nav\.|pp\.p\d\.(tag|value|valueNote)$|pp\.card\.|cp\.calc\.(clientsUnit|tier|perLot|perDay|perYear|p\d)$|cp\.str\.example$|cp\.tier\.|cp\.pay\.t\d$|pp\.join\.cta2$|cp\.end\.cta2$|pp\.why\.cta$|nav\.|form\.(name|email|phone|commit\d|section|auth|sign|date|submit|sent)$|calc\.(lotsUnit|tradersUnit)$|inv\.|rcpt\.|dock\.|stats\.cta$|reach\.cta|offer\.\d\.t$|embed\.crys\.|embed\.flow\.(f\d|live)$)')
 TOK = re.compile(r'</?[a-z]+/?>')
 PH = re.compile(r'\{[a-z]+\}')
 NUM = re.compile(r'\$?\d[\d,.:]*\+?%?')
 def width(s):  # East-Asian wide chars count double
     return sum(2 if unicodedata.east_asian_width(c) in 'WF' else 1 for c in TOK.sub('', s))
 bad = 0
-for sub in ('', 'programs', 'commission'):
+for sub in ('', 'programs', 'commission', 'marketing'):
   D = os.path.join(BASE, sub)
   en = json.load(open(os.path.join(D, 'en.json'), encoding='utf-8'))
   for f in sorted(os.listdir(D)):

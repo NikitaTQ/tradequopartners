@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{mt.meta.title}}</title>
+<meta name="description" content="{{@mt.meta.description}}">
+<link rel="canonical" href="{{canonical}}">
+{{hreflang}}
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TradeQuo Partners">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:title" content="{{@mt.meta.title}}">
+<meta property="og:description" content="{{@mt.meta.ogDescription}}">
+<meta property="og:image" content="https://tradequopartners.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{@mt.meta.title}}">
+<meta name="twitter:description" content="{{@mt.meta.ogDescription}}">
+<meta name="twitter:image" content="https://tradequopartners.com/og.png">
+{{> head}}
+</head>
+<body>
+{{> loader}}
+<div class="tp">
+
+  {{> page-header-start}}
+        <a class="hv-red" href="#tools" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{mt.nav.tools}}</a>
+        <a class="hv-red" href="#how" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.how}}</a>
+        <a class="hv-red" href="#questions" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.faq}}</a>
+  {{> page-header-end}}
+
+  <main>
+    <!-- Hero: the four promotion tools on the grey stage (objects from the landing's partner perks) -->
+    <section id="tools" class="tp-sec tp-hero" data-screen-label="Marketing tools">
+      <div class="tp-head">
+        <span class="tp-kicker">{{mt.hero.kicker}}</span>
+        <h1 class="tp-h1" style="max-width: 20ch;">{{mt.hero.h1}}</h1>
+        <p class="tp-sub">{{mt.hero.sub}}</p>
+      </div>
+      <div class="tp-stage">
+        <div class="tp-mt-tools">
+          <article class="tp-dark tp-dark--hover tp-mt-tool">
+            <img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-cre.webp" alt="" width="280" height="350">
+            <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">01</span><h2>{{offer.3.t}}</h2><p>{{offer.3.d}}</p></div>
+          </article>
+          <article class="tp-dark tp-dark--hover tp-mt-tool">
+            <img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-tv.webp" alt="" width="360" height="344">
+            <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">02</span><h2>{{offer.1.t}}</h2><p>{{offer.1.d}}</p></div>
+          </article>
+          <article class="tp-dark tp-dark--hover tp-mt-tool">
+            <img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-sig.webp" alt="" width="330" height="280">
+            <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">03</span><h2>{{offer.2.t}}</h2><p>{{offer.2.d}}</p></div>
+          </article>
+          <article class="tp-dark tp-dark--hover tp-mt-tool">
+            <img class="tp-obj" loading="lazy" decoding="async" src="{{root}}assets/offer-aca.webp" alt="" width="310" height="330">
+            <div class="tp-mt-tool__txt"><span class="tp-mt-tool__n" aria-hidden="true">04</span><h2>{{offer.4.t}}</h2><p>{{offer.4.d}}</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support: live tracking and the partner manager -->
+    <section id="support" class="tp-sec" data-screen-label="Tracking and support">
+      <div class="tp-wrap">
+        <div class="tp-head">
+          <span class="tp-kicker">{{mt.sup.kicker}}</span>
+          <h2 class="tp-h2">{{mt.sup.title}}</h2>
+          <p class="tp-sub">{{mt.sup.sub}}</p>
+        </div>
+        <div class="tp-mt-sup">
+          <div class="tp-glass tp-glass--hover tp-mt-card">
+            <span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"></path><path d="m5 15 4.5-4.5 3.5 3 6-6.5"></path><path d="M15 7h4v4"></path></svg></span>
+            <div><h3>{{mt.track.t}}</h3><p>{{mt.track.d}}</p></div>
+          </div>
+          <div class="tp-glass tp-glass--hover tp-mt-card">
+            <span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span>
+            <div><h3>{{mt.mgr.t}}</h3><p>{{mt.mgr.d}}</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{{> how}}
+
+    <!-- FAQ -->
+    <section id="questions" class="tp-sec" data-screen-label="Marketing FAQ" style="padding-top: clamp(16px, 3vw, 40px);">
+      <div class="tp-wrap tp-faq">
+        <div class="tp-faq__side">
+          <span class="tp-pill">{{faq.pill}}</span>
+          <h2 class="tp-h2">{{mt.faq.title}}</h2>
+          <p class="tp-sub" style="max-width: 30ch;">{{mt.faq.sub}}</p>
+        </div>
+        <div class="tp-faq__list">
+{{faq:mt.faq:4}}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final call: same design as the other partner pages -->
+    <section class="tp-night-sec" data-screen-label="Join the program">
+      <div class="tp-night tp-final">
+        <h2 class="tp-final__title">{{mt.end.title}}</h2>
+        <p class="tp-final__sub">{{mt.end.sub}}</p>
+        <div class="tp-final__actions">
+          <a class="tp-glint" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">
+            <span class="tp-glint__sweep" aria-hidden="true"></span>
+            <span class="tp-glint__label">{{nav.cta}}</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+          <a class="tp-roll" href="{{home}}programs/" data-page-link data-label="{{@loader}} · {{@fan.programs}}" aria-label="{{@mt.end.cta2}}">
+            <span class="tp-roll__window" aria-hidden="true">
+              <span class="tp-roll__track">
+                <span class="tp-roll__a">{{mt.end.cta2}}</span>
+                <span class="tp-roll__b">{{mt.end.teaser}} →</span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-fab="" style="position: fixed; right: 16px; bottom: 16px; z-index: 60; display: none; flex-direction: column; align-items: flex-end; gap: 12px;">
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+      <a class="tq-fab-link" href="{{home}}" data-page-link data-label="{{@loader}} · {{@fan.home}}" style="--i: 0;">{{fan.home}}</a>
+      <a class="tq-fab-link tq-fab-link--page" href="{{home}}programs/" data-page-link data-label="{{@loader}} · {{@fan.programs}}" style="--i: 1;">{{fan.programs}}</a>
+      <a class="tq-fab-link tq-fab-link--page" href="{{home}}commission-plan/" data-page-link data-label="{{@loader}} · {{@fan.commission}}" style="--i: 2;">{{fan.commission}}</a>
+      <a class="tq-fab-link tq-fab-link--page" href="#tools" aria-current="page" style="--i: 3;">{{fan.marketing}}</a>
+      <a class="tq-fab-link" href="#questions" style="--i: 4;">{{nav.faq}}</a>
+    </div>
+    {{> fab-button}}
+  </div>
+
+  {{fanMenu}}
+
+{{> footer}}
+</div>
+
+<script src="{{root}}assets/js/transition.js" defer></script>
+<script src="{{root}}assets/js/landing.js" defer></script>
+</body>
+</html>

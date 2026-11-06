@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the translated pages (landing, partner programs, commission plan) in every language.
+"""Build the translated pages (landing, partner programs, commission plan, marketing tools) in every language.
 
     tools/i18n/<page>.html           templates ({{key}} = text, {{@key}} = attribute value,
                                      {{> name}} = tools/i18n/partials/name.html,
@@ -32,11 +32,13 @@ PAGES = [
     {'id': 'landing', 'template': 'landing.html', 'slug': ''},
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
     {'id': 'commission', 'template': 'commission.html', 'slug': 'commission-plan', 'css': 'partner'},
+    {'id': 'marketing', 'template': 'marketing.html', 'slug': 'marketing-tools', 'css': 'partner'},
 ]
-# The site-map fan (bottom right): the two translated partner pages.
+# The site-map fan (bottom right): the translated partner pages.
 FAN = [
     ('programs', 'home', 'programs/', 'fan.programs'),
     ('commission', 'home', 'commission-plan/', 'fan.commission'),
+    ('marketing', 'home', 'marketing-tools/', 'fan.marketing'),
 ]
 languages = json.load(open(os.path.join(I18N, 'languages.json'), encoding='utf-8'))
 fonts = json.load(open(os.path.join(I18N, 'font-files.json'), encoding='utf-8'))
