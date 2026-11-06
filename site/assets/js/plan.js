@@ -33,7 +33,10 @@
 
 /* The hero's earnings examples (TradeQuo_Earnings_Hero design). A card tilts toward the mouse with a
  * glare; a click, Enter or Space selects it and dims the others, again to clear. The candles on each
- * back card are drawn here (decorative). */
+ * back card are drawn here (decorative). Under 1040px the row is a swiper (partner.css): here the cards
+ * beside the middle one get --off (0 in the middle, 1 a card away) and --ox (the edge they shrink toward),
+ * the dots follow, a dot brings its card in, a tap on a side card brings it in instead of selecting, and
+ * moving to another card clears the choice. */
 (() => {
   const cards = [...document.querySelectorAll('[data-earn-card]')];
   if (!cards.length) return;
@@ -57,8 +60,38 @@
     c.setAttribute('aria-pressed', i === sel ? 'true' : 'false');
   });
   const pick = (i) => { sel = sel === i ? -1 : i; paint(); };
+
+  const grid = document.querySelector('[data-earn-grid]'), dots = [...document.querySelectorAll('[data-earn-dots] button')];
+  const swipe = matchMedia('(max-width: 1039px)');
+  const mid = (el) => { const r = el.getBoundingClientRect(); return r.left + r.width / 2; };
+  let on = 0, raf = 0;
+  const sync = () => {
+    raf = 0;
+    if (!swipe.matches) { cards.forEach((c) => { c.style.removeProperty('--off'); c.style.removeProperty('--ox'); }); return; }
+    const c0 = mid(grid), step = cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left || 1;
+    let best = Infinity;
+    cards.forEach((c, i) => {
+      const d = mid(c) - c0;
+      c.style.setProperty('--off', Math.min(1, Math.abs(d / step)).toFixed(3));
+      c.style.setProperty('--ox', d < 0 ? '100%' : '0%');
+      if (Math.abs(d) < best) { best = Math.abs(d); on = i; }
+    });
+    dots.forEach((b, i) => { if (i === on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    if (sel >= 0 && sel !== on) { sel = -1; paint(); }   /* swiped to another card: the choice goes, nothing stays dimmed in the middle */
+  };
+  const queue = () => { if (!raf) raf = requestAnimationFrame(sync); };
+  /* scrollTo, not scrollBy: a relative scroll stops at every card on the way */
+  const go = (i) => grid.scrollTo({ left: grid.scrollLeft + mid(cards[i]) - mid(grid), behavior: reduce ? 'auto' : 'smooth' });
+  if (grid) {
+    grid.addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', queue);
+    if (swipe.addEventListener) swipe.addEventListener('change', queue);
+    dots.forEach((b, i) => b.addEventListener('click', () => go(i)));
+    sync();
+  }
+
   cards.forEach((c, i) => {
-    c.addEventListener('click', () => pick(i));
+    c.addEventListener('click', () => { if (grid && swipe.matches && i !== on) go(i); else pick(i); });
     c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(i); } });
     if (reduce) return;
     c.addEventListener('pointermove', (e) => {
