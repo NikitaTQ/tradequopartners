@@ -43,7 +43,7 @@
       </div>
 
       <div class="tp-stage">
-        <div class="tp-programs">
+        <div class="tp-programs" data-progs>
           <article class="tp-dark tp-dark--hover tp-prog">
             <div class="tp-prog__art" aria-hidden="true"><span class="tp-prog__glow"></span><img class="tp-prog__poster" data-poster src="{{root}}assets/posters/program-link.webp" alt="" width="768" height="432" decoding="async"><iframe class="tp-prog__3d" data-embed data-eager data-src="{{root}}embeds/program-art.html?obj=link" title="" tabindex="-1" aria-hidden="true"></iframe></div>
             <span class="tp-prog__tag">01 · {{pp.p1.tag}}</span>
@@ -88,6 +88,12 @@
               <a class="tp-scta" href="{{home}}#dashboard" data-page-link data-label="{{@loader}} · {{@fan.home}}"><span class="tp-scta__plus" aria-hidden="true">+</span>{{offer.pill}}</a>
             </div>
           </article>
+        </div>
+        <!-- phones: the cards swipe sideways (startProgSwiper in landing.js); one dot per card -->
+        <div class="tp-progdots" data-progdots>
+          <button type="button" aria-label="{{@pp.p1.title}}" aria-current="true"></button>
+          <button type="button" aria-label="{{@pp.p2.title}}"></button>
+          <button type="button" aria-label="{{@pp.p3.title}}"></button>
         </div>
       </div>
     </section>
