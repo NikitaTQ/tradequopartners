@@ -12,22 +12,12 @@
   html, body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; overflow: hidden; scrollbar-width: none; }
   html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
   .if { background: #FFFFFF; color: #0A0A0A; font-family: 'DM Sans', sans-serif; padding: clamp(40px,6vw,96px) clamp(20px,5vw,80px); display: flex; flex-direction: column; gap: clamp(20px,3vw,36px); box-sizing: border-box; }
-  .if-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; }
-  .if-title { margin: 0; font-weight: 700; font-size: clamp(22px,2.6vw,32px); line-height: 1; letter-spacing: -.02em; text-transform: uppercase; }
+  .if-head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .if-title { margin: 0; font-weight: 700; font-size: clamp(46px,8.6vw,124px); line-height: .9; letter-spacing: -.045em; text-transform: uppercase; text-wrap: balance; }
   .if-title span { color: #E7131B; }
-  .if-sub { margin: 14px 0 0; font-size: clamp(16px,1.5vw,20px); line-height: 1.4; color: #5B5B5B; max-width: 30ch; }
-  .if-live { display: flex; flex-direction: column; gap: 8px; padding-bottom: 4px; }
-  .if-mono { font-family: 'Fragment Mono', monospace; font-size: 11px; line-height: 1.4; letter-spacing: .14em; text-transform: uppercase; color: #5F5F63; }
-  .if-live-row { display: flex; align-items: center; gap: 8px; }
-  .if-dot { width: 6px; height: 6px; border-radius: 50%; background: #E7131B; flex: none; }
-  .if-live .if-dot { animation: ifLive 2.4s ease-in-out infinite; }
-  .if-total { font-weight: 700; font-size: clamp(30px,3.6vw,52px); line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .if-sub { margin: clamp(14px,1.6vw,22px) auto 0; font-size: clamp(16px,1.5vw,20px); line-height: 1.4; color: #5B5B5B; max-width: 52ch; text-wrap: balance; }
   .if-scene { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #FFFFFF; overflow: hidden; }
-  .if-metrics { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 16px; border-top: 1px solid #ECECEE; padding-top: 20px; letter-spacing: .12em; white-space: nowrap; }
-  .if-metrics > div { display: flex; align-items: center; gap: 8px; }
   @media (max-width: 640px) { .if-scene { aspect-ratio: 1 / 1; } }
-  /* phones: the head block centres like the rest of the landing */
-  @media (max-width: 640px) { .if-head { flex-direction: column; align-items: center; text-align: center; gap: 18px; } .if-sub { margin-inline: auto; } .if-live { align-items: center; } .if-metrics { justify-content: center; gap: 10px 22px; } }
   .if-cta { display: flex; justify-content: center; margin-top: calc(-1 * clamp(28px, 5vw, 76px)); position: relative; z-index: 2; }
 
   @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -162,7 +152,6 @@
   
   .tq-conv:hover { color: #fff; }
   @media (max-width: 420px) { .tq-conv { height: 54px; gap: 12px; padding-left: 22px; font-size: 15px; } .tq-conv__belt { width: 92px; } .if-cta { margin-top: -12px; } }
-  @keyframes ifLive { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(231,19,27,.55); } 50% { opacity: .55; box-shadow: 0 0 0 5px rgba(231,19,27,0); } }
 </style>
 </head>
 <body>
@@ -171,10 +160,6 @@
     <div>
       <h2 class="if-title">Infinite <span>Flow</span></h2>
       <p class="if-sub" data-i18n="flow.sub">Commissions that keep coming. Settled every day.</p>
-    </div>
-    <div class="if-live">
-      <div class="if-live-row if-mono"><span class="if-dot"></span><span data-i18n="flow.live">Live</span><span style="color:#C8C8CC">/</span><span data-i18n="flow.paid">Paid to partners this month</span></div>
-      <div class="if-total" id="if-total">$9,184,620</div>
     </div>
   </header>
   <div class="if-scene" id="if-scene"></div>
@@ -207,11 +192,6 @@
     </span>
   </span>
 </a>
-  </div>
-  <div class="if-metrics if-mono">
-    <div><span class="if-dot"></span><span data-i18n="flow.f1">Daily payouts</span></div>
-    <div><span class="if-dot"></span><span data-i18n="flow.f2">4 currencies</span></div>
-    <div><span class="if-dot"></span><span data-i18n="flow.f3">No caps</span></div>
   </div>
 </section>
 <script type="module">
@@ -884,26 +864,9 @@ function mount(el, opts = {}) {
 
 
 /* ---------- page wiring ---------- */
-const MONTH_START = 9184620;
-const totalEl = document.getElementById('if-total');
-let shown = MONTH_START, target = MONTH_START, tw = 0;
-function addPayout(usd) {
-  usd = Number(usd); if (!isFinite(usd) || usd <= 0) return;
-  target += usd;
-  const from = Math.max(shown, MONTH_START), to = target, t0 = performance.now();
-  cancelAnimationFrame(tw);
-  const step = () => {
-    const p = Math.max(0, Math.min(1, (performance.now() - t0) / 1000)), e = 1 - Math.pow(1 - p, 3);
-    shown = from + (to - from) * e;
-    totalEl.textContent = '$' + Math.round(shown).toLocaleString('en-US');
-    if (p < 1) tw = requestAnimationFrame(step);
-  };
-  tw = requestAnimationFrame(step);
-}
 const q = new URLSearchParams(location.search);
 window.infiniteFlow = mount(document.getElementById('if-scene'), {
   cursorTilt: false,
-  onPayout: p => addPayout(p.usd),
 });
 </script>
 <script>
@@ -967,7 +930,7 @@ document.querySelectorAll('.tq-conv').forEach(function (el) {
   });
 });
 </script>
-<script src="i18n.js?v=dbb4f8911b"></script>
+<script src="i18n.js?v=ca3f669fc9"></script>
 <script>
 /* Labels in the page language (?lang=…; strings from i18n.js, built by tools/build-i18n.py). */
 (function () {

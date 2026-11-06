@@ -668,16 +668,6 @@ html { scroll-snap-type: y proximity; }
   #signup [data-form-auth] span { font-size: 10px !important; letter-spacing: .12em !important; }
   #signup [data-form-auth] [data-ref="date"] { font-size: 14px !important; letter-spacing: .04em !important; }
   [data-calc-grid] { gap: 14px !important; margin-top: 22px !important; }
-  [data-calc-controls] { padding: 22px 20px !important; gap: 18px !important; border-radius: 22px !important; }
-  [data-calc-controls] > div { gap: 10px !important; }
-  [data-calc-controls] > div > div:first-child { gap: 10px !important; }
-  [data-calc-controls] > div > div:first-child > span:first-child { width: 30px !important; height: 30px !important; border-radius: 9px !important; }
-  [data-calc-controls] > div > div:first-child > span:first-child svg { width: 15px; height: 15px; }
-  [data-calc-controls] > div > div:first-child > span:last-child > span:first-child { font-size: 14.5px !important; }
-  [data-calc-controls] > div > div:nth-child(2) { height: 44px !important; padding: 0 14px !important; border-radius: 11px !important; }
-  [data-calc-controls] > div > div:nth-child(2) input { font-size: 18px !important; }
-  [data-calc-controls] > div > div:nth-child(2) > span { font-size: 9.5px !important; }
-  [data-calc-controls] > div > div:nth-child(3) { height: 20px !important; }
   [data-invoice] { padding: 22px 18px 18px !important; gap: 14px !important; }
   [data-invoice] > div:nth-child(2) img { height: 19px !important; }
   [data-invoice] > div:nth-child(2) > span:first-child > span { font-size: 16px !important; }
@@ -1000,6 +990,51 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
 }
 
+/* ---- Calculator controls (Partner_Calculator_Glass design) ----------------------------------
+   A white card; each field has a raised icon tile, a raised value box with a highlight that follows
+   the slider (data-calc-sheen, set by startCalculator), a sunken track, a glossy red fill and a glass knob. */
+.tq-calc { position: relative; flex: 1; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 40px;
+  padding: 44px clamp(24px, 3vw, 34px) 40px; border-radius: 28px; background: #fff; border: 1px solid #edeef0; box-shadow: 0 30px 60px -44px rgba(18,22,30,.22); }
+.tq-calc__field { position: relative; display: flex; flex-direction: column; gap: 16px; }
+.tq-calc__head { display: flex; align-items: center; gap: 12px; }
+.tq-calc__ico { width: 38px; height: 38px; flex: none; border-radius: 11px; display: flex; align-items: center; justify-content: center; color: #e7131b;
+  background: linear-gradient(160deg, #fff, #f2f4f4);
+  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.08), 0 1px 0 #dce3e1, 0 2px 0 #cfd8d6, 0 3px 0 #c3cecb, 0 8px 12px -8px rgba(60,90,84,.35); }
+.tq-calc__title { font-size: 16px; font-weight: 700; letter-spacing: -.015em; color: #0a0a0a; }
+.tq-calc__val { position: relative; height: 62px; box-sizing: border-box; padding: 0 22px; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; overflow: hidden; cursor: text;
+  background: linear-gradient(165deg, #fff 0%, #f6f8f8 55%, #eef3f2 100%);
+  box-shadow: inset 0 1px 0 #fff, inset 1px 0 0 rgba(255,255,255,.8), inset 0 -2px 6px rgba(255,255,255,.9), 0 0 0 1px rgba(18,22,30,.09),
+    0 1px 0 #dce3e1, 0 2px 0 #d2dbd9, 0 3px 0 #c8d3d0, 0 4px 0 #becac7, 0 14px 20px -14px rgba(60,90,84,.4);
+  transition: box-shadow .25s ease; }
+.tq-calc__val:focus-within { box-shadow: inset 0 1px 0 #fff, inset 1px 0 0 rgba(255,255,255,.8), inset 0 -2px 6px rgba(255,255,255,.9), 0 0 0 1.5px rgba(231,19,27,.55),
+    0 1px 0 #dce3e1, 0 2px 0 #d2dbd9, 0 3px 0 #c8d3d0, 0 4px 0 #becac7, 0 14px 20px -14px rgba(60,90,84,.4); }
+.tq-calc__sheen { position: absolute; top: 0; bottom: 0; width: 120px; transform: translateX(-50%); pointer-events: none; transition: left .4s cubic-bezier(.2, .8, .2, 1);
+  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.95) 45%, rgba(255,255,255,0) 60%, rgba(255,255,255,0) 72%, rgba(255,255,255,.6) 80%, rgba(255,255,255,0) 90%); }
+.tq-calc__input { position: relative; flex: 1; min-width: 0; margin: 0; padding: 0; border: 0; outline: 0; background: transparent; color: #0a0a0a;
+  font: 700 26px/1 'DM Sans', sans-serif; letter-spacing: -.02em; text-shadow: -.6px 0 0 rgba(231,19,27,.35), .6px 0 0 rgba(60,110,255,.3);
+  -moz-appearance: textfield; appearance: textfield; }
+.tq-calc__input::-webkit-outer-spin-button, .tq-calc__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.tq-calc__unit { position: relative; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #6b6f76; white-space: nowrap; }
+.tq-calc__slider { position: relative; z-index: 1; height: 30px; cursor: pointer; touch-action: none; }
+.tq-calc__track { position: absolute; left: 0; right: 0; top: 8px; height: 14px; border-radius: 999px; background: linear-gradient(180deg, #eef1f1, #fff);
+  box-shadow: inset 0 1px 2px rgba(60,90,84,.22), inset 0 -1px 0 #fff, 0 0 0 1px rgba(18,22,30,.08); }
+.tq-calc__fill { position: absolute; left: 2px; top: 10px; height: 10px; min-width: 10px; border-radius: 999px;
+  background: linear-gradient(180deg, #ff6a70 0%, #e7131b 55%, #b70e15 100%); box-shadow: inset 0 1.5px 0 rgba(255,255,255,.55), 0 2px 6px -2px rgba(231,19,27,.6); }
+.tq-calc__knob { position: absolute; top: 1px; width: 28px; height: 28px; margin-left: -14px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 34% 28%, #fff 0 18%, rgba(255,255,255,.7) 40%, rgba(236,242,241,.75) 75%, rgba(200,214,211,.9) 100%);
+  box-shadow: inset 0 -2px 4px rgba(60,90,84,.25), inset 0 1px 1px #fff, 0 0 0 1px rgba(18,22,30,.12), 0 6px 10px -4px rgba(60,90,84,.45); }
+@media (max-width: 640px) {
+  .tq-calc { padding: 26px 20px 24px; gap: 26px; border-radius: 22px; }
+  .tq-calc__field { gap: 12px; }
+  .tq-calc__ico { width: 32px; height: 32px; border-radius: 9px; }
+  .tq-calc__ico svg { width: 16px; height: 16px; }
+  .tq-calc__title { font-size: 15px; }
+  .tq-calc__val { height: 52px; padding: 0 16px; border-radius: 13px; }
+  .tq-calc__input { font-size: 22px; }
+  .tq-calc__unit { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .tq-calc__sheen { transition: none; } }
+
 /* ---- Payout period toggle on the landing statement (Day / Month / Year) --------------------
    The thumb slides under the pressed button; --i is its index (0 day, 1 month, 2 year), set by startCalculator. */
 [data-inv-per] { --i: 1; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(100%, 300px); padding: 3px; box-sizing: border-box;
@@ -1053,6 +1088,31 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-glass--flat, html.tq-liquid .tq-glass--flat { -webkit-backdrop-filter: none; backdrop-filter: none; }
 .tq-glass--row { border-radius: 20px; }
 @media (prefers-reduced-motion: reduce) { .tq-glass, .tp-glass { transform: none; transition: none; } }
+
+/* ---- Frosted glass (Glass_Card_Grid design), landing reviews only --------------------------
+   Milky glass with a little grain; the light follows the pointer (--tqgx/--tqgy, startGlass) and on
+   hover (--tqgh 0 → 1) an iridescent rim, chromatic inner edges and a small lift appear.
+   No backdrop blur here: the reviews marquee moves every frame and sits on white, where the blur
+   would cost frames and show nothing. */
+.tq-frost {
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 22px;
+  background: radial-gradient(260px 200px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.25 + var(--tqgh) * .45)), rgba(255,255,255,0) 70%), rgba(248,248,250,.58);
+  border: 1px solid rgba(255,255,255,.85);
+  box-shadow: 0 0 0 1px rgba(18,22,30,.05), 0 22px 40px -30px rgba(18,22,30,.3),
+    inset 1px 1px 0 rgba(255,140,146,calc(var(--tqgh) * .35)), inset -1px -1px 0 rgba(140,170,255,calc(var(--tqgh) * .35));
+  transform: translateY(calc(var(--tqgh) * -4px));
+  transition: --tqgx .35s ease, --tqgy .35s ease, --tqgh .45s ease, transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+.tq-frost::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.tq-frost::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: var(--tqgh);
+  background: conic-gradient(from calc(200deg + var(--tqgh) * 60deg) at var(--tqgx) var(--tqgy), #ffffff, #ffd3d5, #f7a8ac, #ffffff, #d9e2ff, #c9f2e6, #ffffff, #e2e4e8, #ffffff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+}
+@media (prefers-reduced-motion: reduce) { .tq-frost { transform: none; transition: none; } }
 </style>
 </head>
 <body>
@@ -1242,7 +1302,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
         <h2 style="margin: clamp(20px, 3vw, 36px) 0 0; text-align: center; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">O programa em números</h2>
         <div data-crys-stage style="position: relative;">
           <picture><source media="(max-width: 640px)" srcset="../assets/posters/crystals-pt-mobile.webp?v=61021a2270"><img data-crys-poster fetchpriority="low" src="../assets/posters/crystals-pt-desktop.webp?v=6b97d3fc72" alt="30K+ parceiros, $9M+ pagos a parceiros por mês, até 87% de revenue share, nota 4.9 no Trustpilot, 800K+ traders clientes, 400+ viagens de incentivo" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;"></picture>
-          <iframe data-embed data-src="../embeds/crystals.html?lang=pt&v=8b6991c8f2" title="A TradeQuo em números" style="position: relative; display: block; width: 100%; aspect-ratio: 1.6 / 1; border: 0; background: #fff; pointer-events: none; opacity: 0; transition: opacity .5s ease;"></iframe>
+          <iframe data-embed data-src="../embeds/crystals.html?lang=pt&v=186779f48a" title="A TradeQuo em números" style="position: relative; display: block; width: 100%; aspect-ratio: 1.6 / 1; border: 0; background: #fff; pointer-events: none; opacity: 0; transition: opacity .5s ease;"></iframe>
         </div>
       
       <div data-crys-cta="" style="display: flex; justify-content: center; margin-top: clamp(18px, 2.6vw, 32px);"><a class="tq-crys" href="#calculator" aria-label="Calcule seus ganhos"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">Calcule seus ganhos</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a></div>
@@ -1306,39 +1366,37 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
     <div data-calc-grid="" style="max-width: 1240px; margin: clamp(26px, 4vw, 48px) auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(18px, 2.4vw, 32px); align-items: stretch;">
       <div data-calc-glass="" style="position: relative; display: flex; isolation: isolate;">
-      <div class="tq-glass tq-glass--panel" data-calc-controls="" style="position: relative; flex: 1; min-width: 0; padding: clamp(26px, 3vw, 40px); display: flex; flex-direction: column; justify-content: center; gap: 34px;">
-        <div style="display: flex; flex-direction: column; gap: 14px;">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; position: relative; background: linear-gradient(145deg, #ffffff 0%, #eef0f2 55%, #dfe2e6 100%); border: 1px solid #d6d9de; box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(10,10,10,.16); color: #e7131b; flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3 3 7.5l9 4.5 9-4.5L12 3Z"></path><path d="m3 12.4 9 4.5 9-4.5"></path><path d="m3 17 9 4.5 9-4.5"></path></svg></span>
-            <span style="position: relative; display: flex; flex-direction: column; gap: 2px;">
-              <span style="font-size: 16px; font-weight: 700; color: #0a0a0a; letter-spacing: -.015em;">Lotes por trader, por mês</span>
-            </span>
+      <div class="tq-calc" data-calc-controls="">
+        <div class="tq-calc__field">
+          <div class="tq-calc__head">
+            <span class="tq-calc__ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"></path><path d="m3 12 9 5 9-5"></path><path d="m3 16 9 5 9-5"></path></svg></span>
+            <span class="tq-calc__title">Lotes por trader, por mês</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 20px; position: relative; border-radius: 14px; background: linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%); border: 1px solid #dfe2e6; box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(10,10,10,.03), 0 1px 0 rgba(255,255,255,.9), 0 3px 8px -4px rgba(10,10,10,.14);">
-            <input type="number" inputmode="numeric" min="10" max="5000" aria-label="Lotes por trader, por mês" data-calc-input="lots" value="130" style="flex: 1; min-width: 0; border: none; outline: none; background: transparent; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -.02em; -moz-appearance: textfield;">
-            <span style="font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #8a8a8e; white-space: nowrap;">LOTES</span>
-          </div>
-          <div data-calc-slider="lots" style="position: relative; z-index: 1; height: 24px; display: flex; align-items: center; cursor: pointer; touch-action: none;">
-            <span style="position: absolute; left: 0; right: 0; height: 4px; border-radius: 99px; background: rgba(10,10,10,.09); box-shadow: inset 0 1px 1px rgba(10,10,10,.06);"></span>
-            <span data-calc-fill style="position: absolute; left: 0; height: 4px; border-radius: 99px; background: #e7131b; width: 2.40%;"></span>
-            <span data-calc-knob style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-sizing: border-box; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transform: translateX(-10px); left: 2.40%;"></span>
+          <label class="tq-calc__val">
+            <span class="tq-calc__sheen" data-calc-sheen="" aria-hidden="true" style="left: 11.9%;"></span>
+            <input class="tq-calc__input" type="number" inputmode="numeric" min="10" max="5000" aria-label="Lotes por trader, por mês" data-calc-input="lots" value="130">
+            <span class="tq-calc__unit">LOTES</span>
+          </label>
+          <div class="tq-calc__slider" data-calc-slider="lots">
+            <span class="tq-calc__track"></span>
+            <span class="tq-calc__fill" data-calc-fill="" style="width: calc(2.40% - 2px);"></span>
+            <span class="tq-calc__knob" data-calc-knob="" style="left: 2.40%;"></span>
           </div>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 14px;">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; position: relative; background: linear-gradient(145deg, #ffffff 0%, #eef0f2 55%, #dfe2e6 100%); border: 1px solid #d6d9de; box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(10,10,10,.16); color: #e7131b; flex-shrink: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"></path><path d="M16 5.6a3.2 3.2 0 0 1 0 6.1"></path><path d="M17.6 14.9c2 .6 3.4 2.4 3.4 4.6"></path></svg></span>
-            <span style="position: relative; display: flex; flex-direction: column; gap: 2px;">
-              <span style="font-size: 16px; font-weight: 700; color: #0a0a0a; letter-spacing: -.015em;">Traders ativos</span>
-            </span>
+        <div class="tq-calc__field">
+          <div class="tq-calc__head">
+            <span class="tq-calc__ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M15.5 4.8a3.5 3.5 0 0 1 0 6.4"></path><path d="M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg></span>
+            <span class="tq-calc__title">Traders ativos</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 12px; height: 60px; padding: 0 20px; position: relative; border-radius: 14px; background: linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%); border: 1px solid #dfe2e6; box-shadow: inset 0 1px 0 #fff, inset 0 -2px 0 rgba(10,10,10,.03), 0 1px 0 rgba(255,255,255,.9), 0 3px 8px -4px rgba(10,10,10,.14);">
-            <input type="number" inputmode="numeric" min="1" max="300" aria-label="Traders ativos" data-calc-input="traders" value="60" style="flex: 1; min-width: 0; border: none; outline: none; background: transparent; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -.02em; -moz-appearance: textfield;">
-            <span style="font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #8a8a8e; white-space: nowrap;">TRADERS</span>
-          </div>
-          <div data-calc-slider="traders" style="position: relative; z-index: 1; height: 24px; display: flex; align-items: center; cursor: pointer; touch-action: none;">
-            <span style="position: absolute; left: 0; right: 0; height: 4px; border-radius: 99px; background: rgba(10,10,10,.09); box-shadow: inset 0 1px 1px rgba(10,10,10,.06);"></span>
-            <span data-calc-fill style="position: absolute; left: 0; height: 4px; border-radius: 99px; background: #e7131b; width: 19.73%;"></span>
-            <span data-calc-knob style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid #e7131b; box-sizing: border-box; box-shadow: 0 3px 10px -2px rgba(231,19,27,.45); transform: translateX(-10px); left: 19.73%;"></span>
+          <label class="tq-calc__val">
+            <span class="tq-calc__sheen" data-calc-sheen="" aria-hidden="true" style="left: 25.8%;"></span>
+            <input class="tq-calc__input" type="number" inputmode="numeric" min="1" max="300" aria-label="Traders ativos" data-calc-input="traders" value="60">
+            <span class="tq-calc__unit">TRADERS</span>
+          </label>
+          <div class="tq-calc__slider" data-calc-slider="traders">
+            <span class="tq-calc__track"></span>
+            <span class="tq-calc__fill" data-calc-fill="" style="width: calc(19.73% - 2px);"></span>
+            <span class="tq-calc__knob" data-calc-knob="" style="left: 19.73%;"></span>
           </div>
         </div>
       </div>
@@ -1407,54 +1465,54 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <div data-rep-viewport="" style="position: relative; z-index: 1; overflow: hidden; padding: 10px 0 44px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);">
       <div class="hv-pause" data-rep-track="" style="display: flex; width: max-content; animation: tqMarquee 64s linear infinite; will-change: transform;">
           <div aria-hidden="false" style="display: flex; gap: 20px; padding-right: 20px; align-items: stretch;">
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><img decoding="async" fetchpriority="low" src="../assets/reviews/logo-myfxbook.webp?v=6f222927eb" alt="Myfxbook" style="display: block; flex: none; height: 36px; width: auto;"><span aria-label="5 de 5" style="font-size: 15px; letter-spacing: 2px; color: #e7131b;">★★★★★</span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“The best customer service I have ever experienced… Deposits and withdrawals are processed on time. Nothing to add, nothing to take away.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 15px; font-weight: 700; color: #0a0a0a;">F</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">fotooliw87</span><span style="font-size: 12px; color: #6a6a6e;">3–5 years with TradeQuo · Jul 16</span></span></div>
             </article>
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><span style="display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; letter-spacing: -.02em; color: #0a0a0a;"><img decoding="async" fetchpriority="low" src="../assets/reviews/dailyforex.webp?v=e2771de36f" alt="" style="display: block; flex: none; width: 34px; height: 34px; border-radius: 7px;">DailyForex</span><span style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: .14em; color: #e7131b; padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(231,19,27,.35); background: rgba(255,255,255,.6);">VEREDITO DO EDITOR</span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“On paper, the pricing is super competitive — spreads from 0 pip with a $3-per-side commission, and zero commission on Standard and Limitless accounts.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 13px; font-weight: 700; color: #0a0a0a;">DF</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">DailyForex Editorial</span><span style="font-size: 12px; color: #6a6a6e;">TradeQuo broker review</span></span></div>
             </article>
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><img decoding="async" fetchpriority="low" src="../assets/reviews/logo-fastbull.webp?v=f66b4f1916" alt="FastBull" style="display: block; flex: none; height: 28px; width: auto;"><span aria-label="4 de 5" style="font-size: 15px; letter-spacing: 2px; color: #e7131b;">★★★★<span style="color: #d4d4d8;">★</span></span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“Tested the broker for execution, withdrawals, and support. No major red flags. Operations appear regulated and consistent — suitable for cautious traders.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 15px; font-weight: 700; color: #0a0a0a;">J</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">Jimil Upadhyay</span><span style="font-size: 12px; color: #6a6a6e;">India · Standard Account · Jun 19, 2025</span></span></div>
             </article>
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><img decoding="async" fetchpriority="low" src="../assets/reviews/logo-wikifx.webp?v=c98ebf49e6" alt="WikiFX" style="display: block; flex: none; height: 36px; width: auto;"><span style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: .14em; color: #6a6a6e;">6–10 YRS TRADING</span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“It’s FSA regulated, means we are in for some secure trading… Toss it a shout on email or live chat, the customer support will swiftly catch it.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 15px; font-weight: 700; color: #0a0a0a;">K</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">Kikoyo</span><span style="font-size: 12px; color: #6a6a6e;">Australia · Nov 30, 2023</span></span></div>
             </article>
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><img decoding="async" fetchpriority="low" src="../assets/reviews/logo-trustpilot.webp?v=676175161d" alt="Trustpilot" style="display: block; flex: none; height: 34px; width: auto;"><span aria-label="5 de 5" style="font-size: 15px; letter-spacing: 2px; color: #e7131b;">★★★★★</span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“I had a lovely support. Her name was Adrianna and she was suuuper nice &amp; really helped me. It was also so fast.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 13px; font-weight: 700; color: #0a0a0a;">LH</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">Linda Hennemann</span><span style="font-size: 12px; color: #6a6a6e;">US · Aug 28, 2026</span></span></div>
             </article>
           </div>
           <div aria-hidden="true" style="display: flex; gap: 20px; padding-right: 20px; align-items: stretch;">
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><img decoding="async" fetchpriority="low" src="../assets/reviews/logo-myfxbook.webp?v=6f222927eb" alt="Myfxbook" style="display: block; flex: none; height: 36px; width: auto;"><span aria-label="5 de 5" style="font-size: 15px; letter-spacing: 2px; color: #e7131b;">★★★★★</span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“The best customer service I have ever experienced… Deposits and withdrawals are processed on time. Nothing to add, nothing to take away.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 15px; font-weight: 700; color: #0a0a0a;">F</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">fotooliw87</span><span style="font-size: 12px; color: #6a6a6e;">3–5 years with TradeQuo · Jul 16</span></span></div>
             </article>
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><span style="display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; letter-spacing: -.02em; color: #0a0a0a;"><img decoding="async" fetchpriority="low" src="../assets/reviews/dailyforex.webp?v=e2771de36f" alt="" style="display: block; flex: none; width: 34px; height: 34px; border-radius: 7px;">DailyForex</span><span style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: .14em; color: #e7131b; padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(231,19,27,.35); background: rgba(255,255,255,.6);">VEREDITO DO EDITOR</span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“On paper, the pricing is super competitive — spreads from 0 pip with a $3-per-side commission, and zero commission on Standard and Limitless accounts.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 13px; font-weight: 700; color: #0a0a0a;">DF</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">DailyForex Editorial</span><span style="font-size: 12px; color: #6a6a6e;">TradeQuo broker review</span></span></div>
             </article>
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><img decoding="async" fetchpriority="low" src="../assets/reviews/logo-fastbull.webp?v=f66b4f1916" alt="FastBull" style="display: block; flex: none; height: 28px; width: auto;"><span aria-label="4 de 5" style="font-size: 15px; letter-spacing: 2px; color: #e7131b;">★★★★<span style="color: #d4d4d8;">★</span></span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“Tested the broker for execution, withdrawals, and support. No major red flags. Operations appear regulated and consistent — suitable for cautious traders.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 15px; font-weight: 700; color: #0a0a0a;">J</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">Jimil Upadhyay</span><span style="font-size: 12px; color: #6a6a6e;">India · Standard Account · Jun 19, 2025</span></span></div>
             </article>
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><img decoding="async" fetchpriority="low" src="../assets/reviews/logo-wikifx.webp?v=c98ebf49e6" alt="WikiFX" style="display: block; flex: none; height: 36px; width: auto;"><span style="font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: .14em; color: #6a6a6e;">6–10 YRS TRADING</span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“It’s FSA regulated, means we are in for some secure trading… Toss it a shout on email or live chat, the customer support will swiftly catch it.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 15px; font-weight: 700; color: #0a0a0a;">K</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">Kikoyo</span><span style="font-size: 12px; color: #6a6a6e;">Australia · Nov 30, 2023</span></span></div>
             </article>
-            <article class="tq-glass tq-glass--flat" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
+            <article class="tq-frost" data-rep-card="" style="position: relative; flex: none; width: clamp(290px, 80vw, 390px); display: flex; flex-direction: column; gap: 18px; padding: 28px 28px 24px; text-align: left;">
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px;"><img decoding="async" fetchpriority="low" src="../assets/reviews/logo-trustpilot.webp?v=676175161d" alt="Trustpilot" style="display: block; flex: none; height: 34px; width: auto;"><span aria-label="5 de 5" style="font-size: 15px; letter-spacing: 2px; color: #e7131b;">★★★★★</span></div>
               <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty;">“I had a lovely support. Her name was Adrianna and she was suuuper nice &amp; really helped me. It was also so fast.”</p>
               <div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);"><span style="flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.08); font-size: 13px; font-weight: 700; color: #0a0a0a;">LH</span><span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 14px; font-weight: 700;">Linda Hennemann</span><span style="font-size: 12px; color: #6a6a6e;">US · Aug 28, 2026</span></span></div>
@@ -1479,20 +1537,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     </div>
   </section>
 
-  <section id="payouts" data-screen-label="Daily payouts — red drop" style="position: relative; padding: clamp(50px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(30px, 4vw, 56px); background: #fff; color: #0a0a0a;">
-    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;">
-      <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance;">Seus clientes operam todo dia.<br class="br-desk"> Você recebe todo dia.</h2>
-      
-    </div>
-
-    
-  </section>
-
   <div data-flip-track="" data-screen-label="Infinite Flow → What we offer (scroll flip)" style="position: relative; height: 340vh;">
     <span id="dashboard" data-flip-anchor="" aria-hidden="true" style="position: absolute; left: 0; top: calc(100% - 100vh); width: 1px; height: 1px; pointer-events: none; scroll-snap-align: start;"></span>
     <div data-flip-sticky="" style="position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; perspective: 1800px; padding: 0 clamp(16px, 4vw, 56px); box-sizing: border-box; background: #fff;">
       <div data-flip-front="" style="position: relative; width: 100%; max-width: 1240px; transform-origin: 50% 64%; will-change: transform; border-radius: clamp(20px, 3vw, 36px); overflow: hidden; background: #fff;">
-        <iframe data-embed data-src="../embeds/infinite-flow.html?lang=pt&v=3b165c60d2" title="Infinite Flow — comissões liquidadas todos os dias" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
+        <iframe data-embed data-src="../embeds/infinite-flow.html?lang=pt&v=bb5366f7e1" title="Infinite Flow — comissões liquidadas todos os dias" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
         <div data-flip-shade="" style="position: absolute; inset: 0; background: #0a0a0a; opacity: 0; pointer-events: none;"></div>
       </div>
       <div data-flip-back="" style="position: absolute; inset: clamp(8px, 1.4vw, 20px) clamp(8px, 1.4vw, 20px) 0; opacity: 0; transform: scale(.9); transform-origin: 50% 50%; visibility: hidden; will-change: transform, opacity;">
@@ -1720,6 +1769,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=1dceaa3fcb" defer></script>
+<script src="../assets/js/landing.js?v=90e34cfc1e" defer></script>
 </body>
 </html>
