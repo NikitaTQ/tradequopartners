@@ -16,7 +16,7 @@
     let cur = null;
     const reset = (el) => { el.style.setProperty('--tqx', '0px'); el.style.setProperty('--tqy', '0px'); };
     document.addEventListener('pointermove', (e) => {
-      const el = e.target.closest && e.target.closest('.tq-dock, .tq-env, .tq-launch, .tq-rcpt, .tq-logo, .tq-crys');
+      const el = e.target.closest && e.target.closest('.tq-dock, .tq-env, .tq-launch, .tq-logo, .tq-crys');
       if (cur && cur !== el) { reset(cur); cur = null; }
       if (!el) return;
       cur = el;
@@ -816,6 +816,67 @@
     });
   }
 
+  /* ---- captions under headings: always two lines -----------------------------------------
+   * Each caption's box is narrowed (in rem) to a little over half of its one-line width, so it breaks
+   * into two lines at any screen size and in any language; text-wrap: balance evens the two lines.
+   * Where the column is narrower than that half (tablets, side columns) the caption's type steps down,
+   * at most to 65% of its size (never below its size before the
+   * headings grew 1.6x), until two lines fit; if even that is not enough (phones, long copy)
+   * it keeps its size and wraps with the column. A caption split by hand (a visible <br>) keeps its
+   * own break. Measured again on resize, since the caption sizes follow the viewport. */
+  function startTwoLine() {
+    const els = $$('[data-sub2], .tp-sub, .tp-final__sub, .tp-who__sub, .tp-kbo__sub, .tp-dome-copy__sub');
+    if (!els.length) return;
+    const lines = (el) => { const lh = parseFloat(getComputedStyle(el).lineHeight); return lh ? Math.round(el.offsetHeight / lh) : 0; };
+    const put = (el, k, v) => { if (v) el.style.setProperty(k, v, 'important'); else el.style.removeProperty(k); };
+    const fitOne = (el, rem) => {
+      if (el.dataset.mw0 == null) el.dataset.mw0 = el.style.maxWidth || '';
+      if (el.dataset.fs0 == null) el.dataset.fs0 = el.style.fontSize || '';
+      el.style.maxWidth = el.dataset.mw0; el.style.fontSize = el.dataset.fs0;
+      if (!el.offsetParent) return;                                     /* hidden, e.g. the hero lead on phones */
+      const split = [...el.querySelectorAll('br')].some((b) => getComputedStyle(b).display !== 'none');
+      const base = parseFloat(getComputedStyle(el).fontSize);
+      put(el, 'max-width', 'none');
+      const room = el.offsetWidth;                                      /* the widest the column lets it be */
+      for (const k of [1, .95, .9, .85, .8, .75, .7, .65]) {
+        if (k < 1) put(el, 'font-size', (base * k).toFixed(1) + 'px');
+        if (!split) {                                                   /* split by hand: the <br> makes the two lines */
+          el.style.whiteSpace = 'nowrap'; el.style.width = 'max-content'; put(el, 'max-width', 'none');
+          const one = el.offsetWidth;                                   /* layout width: transforms don't count */
+          el.style.whiteSpace = ''; el.style.width = '';
+          let w = Math.min(one / 2 + 8, room);
+          put(el, 'max-width', (w / rem).toFixed(2) + 'rem');
+          /* a long word at the break can push a third line: widen a little while the column allows */
+          for (let i = 0; i < 12 && lines(el) > 2 && w < room; i++) { w = Math.min(room, w + one * 0.03); put(el, 'max-width', (w / rem).toFixed(2) + 'rem'); }
+        }
+        if (lines(el) <= 2) return;
+      }
+      el.style.removeProperty('font-size'); if (el.dataset.fs0) el.style.fontSize = el.dataset.fs0;   /* two lines can't be had here: keep the size */
+      el.style.removeProperty('max-width'); if (el.dataset.mw0) el.style.maxWidth = el.dataset.mw0;
+    };
+    const fit = () => {
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+      els.forEach((el) => fitOne(el, rem));
+    };
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    let t = 0;
+    addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
+  }
+
+  /* ---- liquid CTA under the calculator: the pill tilts toward the pointer ---------------- */
+  function startLiquidCta() {
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches || reducedMotion()) return;
+    $$('.tq-liq').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--lqx', (((e.clientX - r.left) / r.width - 0.5) * 22).toFixed(2));
+        el.style.setProperty('--lqy', ((0.5 - (e.clientY - r.top) / r.height) * 16).toFixed(2));
+      });
+      el.addEventListener('pointerleave', () => { el.style.setProperty('--lqx', '0'); el.style.setProperty('--lqy', '0'); });
+    });
+  }
+
   function startCta3d() {
     $$('[data-c3d]').forEach((el) => {
       const set = (k, v) => el.style.setProperty(k, v);
@@ -870,5 +931,7 @@
   startWho();
   startCta3d();
   startGlass();
+  startLiquidCta();
+  startTwoLine();
   startLang();
 })();

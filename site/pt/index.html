@@ -414,99 +414,43 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 }
 
 
-.tq-rcpt {
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
-  color: #FFFFFF;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  cursor: pointer;
-  border-radius: 999px;
+/* ---- Liquid CTA under the calculator (CTA_Glass_Liquid design) ------------------------------
+   A raised white pill with a sunken well; red liquid sits in the well and rises with a wave on hover,
+   the label turns white as it does, and the pill tilts toward the pointer (--lqx/--lqy, startLiquidCta).
+   The link has a little padding round the pill (taken back with a negative margin) so the tilt
+   doesn't lose the pointer at the edges. */
+@property --lqx { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --lqy { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --lqe { syntax: '<number>'; inherits: true; initial-value: 0; }
+@keyframes tqLiqWave { to { transform: translateX(-50%); } }
+.tq-liq { position: relative; display: inline-block; padding: 14px 18px 22px; margin: -14px -18px -22px; perspective: 900px; text-decoration: none; color: #0a0a0a;
   -webkit-tap-highlight-color: transparent;
-  transform: translate(var(--tqx), var(--tqy));
-  transition:
-    --tqh .9s cubic-bezier(.22, 1, .36, 1),
-    --tqx .45s cubic-bezier(.2, .9, .25, 1),
-    --tqy .45s cubic-bezier(.2, .9, .25, 1),
-    --tqd .14s ease-out;
-}
-.tq-rcpt:hover, .tq-rcpt:focus-visible { --tqh: 1; }
-.tq-rcpt:active { --tqd: 1; }
-.tq-rcpt:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 6px; }
+  transition: --lqx .6s cubic-bezier(.2, .8, .2, 1), --lqy .6s cubic-bezier(.2, .8, .2, 1), --lqe .7s cubic-bezier(.4, 0, .2, 1); }
+.tq-liq:hover, .tq-liq:focus-visible { --lqe: 1; }
+.tq-liq:focus-visible { outline: none; }
+.tq-liq:focus-visible .tq-liq__body { outline: 2px solid #e7131b; outline-offset: 5px; }
+.tq-liq__shadow { position: absolute; left: 50%; top: calc(14px + 44px + 52px); width: 300px; height: 30px; margin-left: -150px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(60,90,84,.28), rgba(60,90,84,0)); filter: blur(4px); transform: scale(calc(1 - var(--lqe) * .08)); }
+.tq-liq__body { position: relative; display: flex; align-items: center; justify-content: center; min-width: 330px; height: 88px; padding: 0 44px; box-sizing: border-box; border-radius: 26px;
+  background: linear-gradient(165deg, #fff 0%, #f6f8f8 55%, #eef3f2 100%);
+  box-shadow: inset 0 1px 0 #fff, inset 1px 0 0 rgba(255,255,255,.8), 0 0 0 1px rgba(18,22,30,.09), 0 1px 0 #dce3e1, 0 2px 0 #d2dbd9, 0 3px 0 #c8d3d0, 0 4px 0 #becac7,
+    0 5px 0 #b4c2be, 0 6px 0 #aabab6, 0 7px 0 #a0b2ae, 0 22px 30px -18px rgba(60,90,84,.5);
+  transform: rotateX(calc(var(--lqy) * 1deg)) rotateY(calc(var(--lqx) * 1deg)) translateY(calc(var(--lqe) * -4px)); }
+.tq-liq__well { position: absolute; inset: 7px; border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, #eef1f1, #fff); box-shadow: inset 0 2px 4px rgba(60,90,84,.25); }
+.tq-liq__fluid { position: absolute; left: -25%; right: -25%; bottom: -30px; height: calc(42% + 24px + var(--lqe) * 75%);   /* reaches well below the well so a tilt never bares a corner */
+  transform: rotate(calc(var(--lqx) * -1.1deg)); transform-origin: 50% 100%;
+  background: linear-gradient(180deg, #ff6a70 0%, #e7131b 30%, #b70e15 100%); }
+.tq-liq__wave { position: absolute; left: 0; top: -9px; width: 200%; height: 10px; animation: tqLiqWave 3.2s linear infinite; }
+.tq-liq__wave svg { display: block; }
+.tq-liq__line { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255,255,255,.45); }
+.tq-liq__gloss { position: absolute; left: 22px; right: 22px; top: 9px; height: 14px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,0)); pointer-events: none; }
+.tq-liq__label { position: relative; display: inline-flex; align-items: center; gap: 12px; font: 700 19px/1 'DM Sans', sans-serif; letter-spacing: -.01em; color: #0a0a0a; white-space: nowrap; opacity: calc(1 - var(--lqe)); }
+.tq-liq__arr { color: #e7131b; }
+.tq-liq__label--lit { position: absolute; inset: 0; justify-content: center; color: #fff; opacity: var(--lqe); text-shadow: 0 1px 2px rgba(120,10,14,.4); }
+[dir="rtl"] .tq-liq { direction: ltr; }
+@media (max-width: 420px) { .tq-liq__body { min-width: 0; width: min(330px, calc(100vw - 48px)); height: 76px; padding: 0 28px; border-radius: 22px; } .tq-liq__well { border-radius: 16px; } .tq-liq__label { font-size: 17px; } .tq-liq__shadow { top: calc(14px + 38px + 46px); } }
+@media (prefers-reduced-motion: reduce) { .tq-liq, .tq-liq * { transition: none !important; animation: none !important; } }
 
-/* окно, из которого выползает чек (под кнопкой, не влияет на layout) */
-.tq-rcpt__out {
-  position: absolute;
-  left: 50%;
-  top: 48px;
-  width: 180px;
-  height: 150px;
-  margin-left: -90px;
-  overflow: hidden;
-  pointer-events: none;
-}
-.tq-rcpt__paper {
-  position: absolute;
-  left: 14px; right: 14px; top: 0;
-  height: 132px;
-  box-sizing: border-box;
-  padding: 18px 14px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  background: linear-gradient(180deg, #D9D7D2 0%, #F6F5F1 16%);
-  color: #141414;
-  font-family: 'Fragment Mono', ui-monospace, monospace;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 1.2;
-  letter-spacing: .06em;
-  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 10px 100%;
-          mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 10px 100%;
-  transform: translateY(calc((var(--tqh) - 1) * 100%));
-}
-.tq-rcpt__row { display: flex; justify-content: space-between; }
-.tq-rcpt__muted { color: rgba(20,20,20,.6); }
-.tq-rcpt__rule { border-top: 1px dashed rgba(20,20,20,.35); }
-.tq-rcpt__big {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: -0.02em;
-  color: #E7131B;
-}
-
-.tq-rcpt__btn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  height: 56px;
-  box-sizing: border-box;
-  padding: 0 28px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #1E1E21 0%, #0F0F11 100%);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.08), 0 16px 34px -14px rgba(0,0,0,.9);
-  transform: scale(calc(1 - var(--tqd) * 0.04));
-}
-.tq-rcpt__btn svg { flex: none; transform: rotate(calc(var(--tqh) * 90deg)); }
-.tq-rcpt__slot {
-  position: absolute;
-  left: 30px; right: 30px; bottom: 7px;
-  height: 3px;
-  border-radius: 2px;
-  background: #000000;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.9), 0 1px 0 rgba(255,255,255,.08);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tq-rcpt { transition-duration: .01s; }
-}
 /* Sign-up form: the date cell is filled in for the visitor (startForm in landing.js). */
 [data-form-auth] { display: grid; grid-template-columns: minmax(0, 1fr); }
 
@@ -594,7 +538,8 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 }
 
 .tq-env { border: 0; margin: 0; }
-.tq-env--fill { display: flex; width: 100%; height: 56px; font-size: 15px; padding: 0 66px 0 22px; overflow: visible; }
+.tq-env--fill { display: flex; justify-content: center; width: 100%; height: 56px; font-size: 19.5px; padding: 0 66px; overflow: visible; }
+@media (max-width: 400px) { .tq-env--fill { font-size: 17px; padding: 0 50px; } }   /* the longest labels (fr) still fit a 360px phone */
 .tq-env--fill .tq-env__mail { right: 2px; bottom: 5px; scale: .62; }
 .tq-env.is-sealed { --tqh: 1; }
 .tq-env.is-sent .tq-env__mail, .tq-env.is-done .tq-env__mail { --c: 0; }
@@ -622,7 +567,7 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 .tq-env--fill::after { content: ''; position: absolute; right: 18px; top: 50%; width: 34px; height: 34px; margin-top: -17px; border-radius: 50%; border: 1.5px solid rgba(231,19,27,.85); box-shadow: 0 0 12px rgba(231,19,27,.45); opacity: 0; pointer-events: none; }
 .tq-env--fill.is-sent::after { animation: tq-env-ring .7s ease-out forwards; }
 .tq-env__txt { display: inline-block; transition: transform .7s cubic-bezier(.65, 0, .35, 1), opacity .25s ease; will-change: transform; }
-.tq-launch:hover, .tq-rcpt:hover, .tq-env:hover { color: #fff; }
+.tq-launch:hover, .tq-env:hover { color: #fff; }
 
 a { color: #e7131b; text-decoration: none; }
 a:hover { color: #ff3037; }
@@ -639,7 +584,7 @@ html { scroll-snap-type: y proximity; }
   [data-rep-card] { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background-color: rgba(255,255,255,.5) !important; }
   #signup { padding-top: 10px !important; }
   #signup [data-hero-intro] { gap: 8px !important; }
-  #signup [data-hero-intro] h1 { font-size: 24px !important; }
+  #signup [data-hero-intro] h1 { font-size: 38px !important; }
   #signup [data-hero-intro] p { display: none !important; }
   #signup [data-hero-panel] { margin-top: 12px !important; padding: 8px 0 0 !important; background: transparent !important; border-radius: 0 !important; }
   #signup [data-hero-panel] > div[aria-hidden] { display: none !important; }
@@ -964,7 +909,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 [dir="rtl"] .tq-lang__menu a { text-align: right; }
 /* Mechanical CTAs are built left-to-right (envelope, gem, coin, split dock): keep their layout,
    Arabic labels still shape and read correctly inside. */
-[dir="rtl"] .tq-dock, [dir="rtl"] .tq-env, [dir="rtl"] .tq-crys, [dir="rtl"] .tq-logo, [dir="rtl"] .tq-rcpt { direction: ltr; }
+[dir="rtl"] .tq-dock, [dir="rtl"] .tq-env, [dir="rtl"] .tq-crys, [dir="rtl"] .tq-logo { direction: ltr; }
 [dir="rtl"] .tq-launch__btn svg { transform: scaleX(-1); }
 /* Reviews are quoted in English: the marquee stays left-to-right. */
 [dir="rtl"] [data-rep-stage] { direction: ltr; }
@@ -988,6 +933,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   header img[alt] { height: 15px !important; }
   header nav { gap: 6px !important; }
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
+}
+
+/* ---- Captions under headings: two balanced lines (startTwoLine in landing.js sets the width) ---- */
+[data-sub2], .tp-sub, .tp-final__sub, .tp-who__sub, .tp-kbo__sub, .tp-dome-copy__sub { text-wrap: balance !important; }
+
+/* tablets: with the larger headings the FAQ side column and the perks head need the full width */
+@media (max-width: 1024px) {
+  [data-faq-grid] { grid-template-columns: minmax(0, 1fr) !important; }
+  [data-faq-side] { position: static !important; }
+  [data-fan-head] { grid-template-columns: minmax(0, 1fr) !important; }
+  [data-fan-head] > p { grid-column: 1 !important; grid-row: 3 !important; justify-self: start !important; }
+  [data-sub2] .br-desk { display: none; }   /* a caption split by hand splits itself in half on tablets */
 }
 
 /* ---- Calculator controls (Partner_Calculator_Glass design) ----------------------------------
@@ -1146,8 +1103,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
   <section id="signup" data-screen-label="Hero — sign up" style="position: relative; padding: clamp(10px, 1.6vw, 22px) clamp(16px, 4vw, 56px) 0;">
     <div data-hero-intro="" style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;">
-      <h1 style="margin: 0; max-width: 22ch; font-size: clamp(28px, 3.4vw, 40px); line-height: 1; letter-spacing: -.045em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Até 87% do spread. Pago <span style="color: #e7131b;">todo dia.</span></h1>
-      <p style="margin: 0; max-width: 60ch; font-size: 14px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">Indique traders para a TradeQuo e ganhe em cada lote que eles negociarem. Comissões liquidadas todos os dias, acompanhadas em tempo real e sem taxas de pagamento.</p>
+      <h1 style="margin: 0; max-width: 22ch; font-size: clamp(45px, 5.44vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Até 87% do spread. Pago <span style="color: #e7131b;">todo dia.</span></h1>
+      <p data-sub2="" style="margin: 0; max-width: 60ch; font-size: 22px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">Indique traders para a TradeQuo e ganhe em cada lote que eles negociarem. Comissões liquidadas todos os dias, acompanhadas em tempo real e sem taxas de pagamento.</p>
     </div>
 
     <div data-hero-panel="" style="position: relative; max-width: 1240px; margin: clamp(16px, 2vw, 26px) auto 0; padding: clamp(24px, 3.5vw, 48px) clamp(16px, 3vw, 40px) clamp(48px, 7vw, 96px); border-radius: clamp(28px, 4vw, 48px); background: linear-gradient(160deg, #f4f4f5 0%, #ececee 100%); overflow: hidden;">
@@ -1299,7 +1256,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     </div>
 
     <div data-crystals="" style="position: relative; max-width: 860px; margin: clamp(22px, 3vw, 36px) auto 0; border-top: 1px solid #ececee; padding-top: clamp(12px, 2vw, 24px);">
-        <h2 style="margin: clamp(20px, 3vw, 36px) 0 0; text-align: center; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">O programa em números</h2>
+        <h2 style="margin: clamp(20px, 3vw, 36px) 0 0; text-align: center; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">O programa em números</h2>
         <div data-crys-stage style="position: relative;">
           <picture><source media="(max-width: 640px)" srcset="../assets/posters/crystals-pt-mobile.webp?v=61021a2270"><img data-crys-poster fetchpriority="low" src="../assets/posters/crystals-pt-desktop.webp?v=6b97d3fc72" alt="30K+ parceiros, $9M+ pagos a parceiros por mês, até 87% de revenue share, nota 4.9 no Trustpilot, 800K+ traders clientes, 400+ viagens de incentivo" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;"></picture>
           <iframe data-embed data-src="../embeds/crystals.html?lang=pt&v=186779f48a" title="A TradeQuo em números" style="position: relative; display: block; width: 100%; aspect-ratio: 1.6 / 1; border: 0; background: #fff; pointer-events: none; opacity: 0; transition: opacity .5s ease;"></iframe>
@@ -1314,7 +1271,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
      landing and goes to it from the other pages (signupHref and signupNav in build-i18n.py). -->
   <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(50px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(30px, 4vw, 56px); background: #fff; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
-      <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Do cadastro ao primeiro pagamento<br><span style="color: #e7131b;">em três passos</span></h2>
+      <h2 style="margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Do cadastro ao primeiro pagamento<br><span style="color: #e7131b;">em três passos</span></h2>
     </div>
     <div data-how-steps="" style="max-width: 1240px; margin: clamp(36px, 5vw, 64px) auto 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px) clamp(12px, 2vw, 28px);">
         <div data-how-step="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 clamp(4px, 1vw, 16px); opacity: .38; transform: translateY(6px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);">
@@ -1360,8 +1317,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
   <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: clamp(56px, 8vw, 104px) clamp(16px, 4vw, 56px) clamp(60px, 8vw, 110px); background: #fff; color: #0a0a0a;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
-      <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a;">Calcule seu<br><span style="color: #e7131b;">pagamento mensal</span></h2>
-      <p style="margin: 2px 0 0; font-size: 15px; color: #5b5b5b;">Defina o número de traders e o volume mensal deles — <br class="br-desk">o extrato de pagamento é atualizado na hora. Com base nos nossos spreads mais baixos.</p>
+      <h2 style="margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a;">Calcule seu<br><span style="color: #e7131b;">pagamento mensal</span></h2>
+      <p data-sub2="" style="margin: 2px 0 0; font-size: 24px; line-height: 1.5; color: #5b5b5b;">Defina o número de traders e o volume mensal deles — <br class="br-desk">o extrato de pagamento é atualizado na hora. Com base nos nossos spreads mais baixos.</p>
     </div>
 
     <div data-calc-grid="" style="max-width: 1240px; margin: clamp(26px, 4vw, 48px) auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(18px, 2.4vw, 32px); align-items: stretch;">
@@ -1452,13 +1409,13 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     </div>
     <p data-calc-note style="max-width: 1240px; margin: clamp(16px, 2vw, 24px) auto 0; font-size: 12.5px; line-height: 1.55; color: #8a8a8e; text-align: center; text-wrap: pretty;">Estimativa apenas ilustrativa. Os ganhos reais dependem dos instrumentos negociados, dos spreads no momento da negociação e da atividade dos clientes.</p>
     <div data-calc-cta="" style="display: flex; justify-content: center; margin: clamp(34px, 4vw, 52px) 0 max(20px, calc(130px - 8vw));">
-      <a class="tq-rcpt" href="#signup" aria-label="Comece a ganhar"><span class="tq-rcpt__out" aria-hidden="true"><span class="tq-rcpt__paper"><span class="tq-rcpt__row"><span>TRADEQUO</span><span>IB</span></span><span class="tq-rcpt__rule"></span><span class="tq-rcpt__row tq-rcpt__muted"><span>1 × PARCERIA</span></span><span class="tq-rcpt__big">Bem-vindo!</span><span class="tq-rcpt__muted">OBRIGADO ✓</span></span></span><span class="tq-rcpt__btn">Comece a ganhar<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FF4148" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="tq-rcpt__slot"></span></span></a>
+      <a class="tq-liq" href="#signup" aria-label="Comece a ganhar"><span class="tq-liq__shadow" aria-hidden="true"></span><span class="tq-liq__body"><span class="tq-liq__well" aria-hidden="true"><span class="tq-liq__fluid"><span class="tq-liq__wave"><svg viewBox="0 0 400 20" preserveAspectRatio="none" width="100%" height="10" focusable="false"><path d="M0 12 Q 50 2 100 12 T 200 12 T 300 12 T 400 12 V 20 H 0 Z" fill="#FF6A70"></path></svg></span><span class="tq-liq__line"></span></span></span><span class="tq-liq__gloss" aria-hidden="true"></span><span class="tq-liq__label">Comece a ganhar<span class="tq-liq__arr">→</span></span><span class="tq-liq__label tq-liq__label--lit" aria-hidden="true">Comece a ganhar<span>→</span></span></span></a>
     </div>
   </section>
 
   <section id="reviews" data-screen-label="Reputation — reviews marquee" style="position: relative; padding: clamp(40px, 6vw, 80px) 0 clamp(24px, 4vw, 48px); background: #fff; color: #0a0a0a; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 56px); display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
-      <h2 style="margin: 0; max-width: 20ch; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance;">Avaliada onde os traders conversam</h2>
+      <h2 style="margin: 0; max-width: 20ch; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance;">Avaliada onde os traders conversam</h2>
     </div>
     <div data-rep-stage="" style="position: relative; margin-top: clamp(28px, 4vw, 48px);">
       
@@ -1541,19 +1498,19 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <span id="dashboard" data-flip-anchor="" aria-hidden="true" style="position: absolute; left: 0; top: calc(100% - 100vh); width: 1px; height: 1px; pointer-events: none; scroll-snap-align: start;"></span>
     <div data-flip-sticky="" style="position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; perspective: 1800px; padding: 0 clamp(16px, 4vw, 56px); box-sizing: border-box; background: #fff;">
       <div data-flip-front="" style="position: relative; width: 100%; max-width: 1240px; transform-origin: 50% 64%; will-change: transform; border-radius: clamp(20px, 3vw, 36px); overflow: hidden; background: #fff;">
-        <iframe data-embed data-src="../embeds/infinite-flow.html?lang=pt&v=bb5366f7e1" title="Infinite Flow — comissões liquidadas todos os dias" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
+        <iframe data-embed data-src="../embeds/infinite-flow.html?lang=pt&v=fbaa7c1079" title="Infinite Flow — comissões liquidadas todos os dias" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
         <div data-flip-shade="" style="position: absolute; inset: 0; background: #0a0a0a; opacity: 0; pointer-events: none;"></div>
       </div>
       <div data-flip-back="" style="position: absolute; inset: clamp(8px, 1.4vw, 20px) clamp(8px, 1.4vw, 20px) 0; opacity: 0; transform: scale(.9); transform-origin: 50% 50%; visibility: hidden; will-change: transform, opacity;">
       <div data-flip-panel="" style="position: relative; overflow: hidden; height: 100%; box-sizing: border-box; display: flex; align-items: center; border-radius: clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px) 0 0; background: #0a0a0a; color: #fff; padding: clamp(26px, 5vh, 56px) clamp(20px, 4vw, 56px) clamp(10px, 2vh, 24px);">
       <div data-panel-glow="" aria-hidden="true" style="position: absolute; left: 62%; bottom: -30%; width: 60%; height: 70%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.22), transparent); pointer-events: none;"></div>
       <div data-fan-grid="" style="position: relative; width: 100%; max-width: 1360px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(16px, 3vh, 36px); align-items: center;">
-        <div data-fan-head="" style="display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; column-gap: clamp(24px, 4vw, 64px); row-gap: 14px;">
+        <div data-fan-head="" style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; column-gap: clamp(24px, 4vw, 64px); row-gap: 14px;">
           <div style="display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border-radius: 999px; border: 1px solid #2a2a2c; font-size: 14px; color: #e6e6e6; grid-column: 1; grid-row: 1; justify-self: start;">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e7131b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>Vantagens para parceiros
           </div>
-          <h2 style="grid-column: 1; grid-row: 2; margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #fff; text-wrap: balance;">Tudo o que você precisa <span style="color: #e7131b;">para crescer</span></h2>
-          <p style="grid-column: 2; grid-row: 1 / 3; justify-self: end; margin: 0; max-width: 32ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.55; color: #b5b5b5; text-wrap: pretty;">Ferramentas, conteúdo e suporte para você conquistar clientes e mantê-los operando.</p>
+          <h2 style="grid-column: 1; grid-row: 2; margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #fff; text-wrap: balance;">Tudo o que você precisa <span style="color: #e7131b;">para crescer</span></h2>
+          <p data-sub2="" style="grid-column: 2; grid-row: 1 / 3; justify-self: end; margin: 0; max-width: 32ch; font-size: clamp(24px, 2.08vw, 27px); line-height: 1.55; color: #b5b5b5; text-wrap: pretty;">Ferramentas, conteúdo e suporte para você conquistar clientes e mantê-los operando.</p>
         </div>
         <div data-fan="" style="position: relative; width: 100%; max-width: min(91%, calc((100vh - 340px) * 2.17)); justify-self: center; margin: 0 auto; aspect-ratio: 100 / 46; container-type: inline-size;">
           <div data-fan-stage="" style="position: absolute; inset: 0;">
@@ -1602,11 +1559,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   <div data-tail-glow="" aria-hidden="true" style="position: absolute; left: 62%; top: calc(-40vh + clamp(8px, 1.4vw, 20px) * .4); width: 60%; height: calc(70vh - clamp(8px, 1.4vw, 20px) * .7); transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.22), transparent); pointer-events: none;"></div>
   <canvas data-ref="star" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 150px); mask-image: linear-gradient(180deg, transparent 0, #000 150px);"></canvas>
   <section id="faq" data-screen-label="Partner Program FAQ" style="position: relative; padding: 430px clamp(20px, 4vw, 56px) clamp(32px, 5vw, 64px);">
-    <div data-faq-grid="" style="position: relative; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr); gap: clamp(32px, 5vw, 72px); align-items: start;">
+    <div data-faq-grid="" style="position: relative; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(32px, 5vw, 72px); align-items: start;">
       <div data-faq-side="" style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: 20px;">
         <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 9px; height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #e4e4e1; background: #fff; font-size: 14px; font-weight: 500; color: #0a0a0a;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #e7131b;"></span>FAQ</div>
-        <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Dúvidas, <span style="color: #e7131b;">respondidas</span></h2>
-        <p style="margin: 0; max-width: 26ch; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty;">Tudo o que você precisa saber para se tornar IB da TradeQuo.</p>
+        <h2 style="margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Dúvidas, <span style="color: #e7131b;">respondidas</span></h2>
+        <p data-sub2="" style="margin: 0; max-width: 26ch; font-size: clamp(26px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty;">Tudo o que você precisa saber para se tornar IB da TradeQuo.</p>
         <div data-faq-art="" style="position: relative; width: 100%; max-width: 400px; aspect-ratio: 1 / .93; margin-top: clamp(8px, 2vw, 28px); border-radius: 28px; background: transparent; overflow: visible;">
           <iframe data-embed data-src="../embeds/tradequo-glass-logo.html?v=9550fd4615" title="Logo de vidro da TradeQuo" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: transparent;" allowtransparency="true"></iframe>
         </div>
@@ -1687,9 +1644,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
   <section id="reach" data-screen-label="Starfield — audience reach" style="position: relative; min-height: clamp(400px, 48vw, 600px); display: flex; align-items: center; justify-content: center; color: #0a0a0a;">
     <div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(10,10,10,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,10,.07) 1px, transparent 1px); background-size: 64px 64px; opacity: .35; mask-image: radial-gradient(ellipse 65% 55% at 50% 50%, #000 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 50%, #000 0%, transparent 75%);"></div>
-    <div style="position: relative; z-index: 2; width: 100%; max-width: 760px; padding: clamp(60px, 9vw, 110px) clamp(24px, 4vw, 40px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px;">
-      <h2 style="margin: 0; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Você traz o público.<br class="br-desk"> Nós transformamos em receita.</h2>
-      <p style="margin: 0; max-width: 42ch; font-size: clamp(15px, 1.6vw, 19px); line-height: 1.6; color: #5b5b5b;">Até 87% do spread, pagamentos diários, acompanhamento em tempo real e um gerente que atende o telefone. As solicitações são analisadas em até 24 horas.</p>
+    <div style="position: relative; z-index: 2; width: 100%; max-width: 1240px; padding: clamp(60px, 9vw, 110px) clamp(24px, 4vw, 40px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px;">
+      <h2 style="margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">Você traz o público.<br class="br-desk"> Nós transformamos em receita.</h2>
+      <p data-sub2="" style="margin: 0; max-width: 42ch; font-size: clamp(24px, 2.56vw, 30px); line-height: 1.6; color: #5b5b5b;">Até 87% do spread, pagamentos diários, acompanhamento em tempo real e um gerente que atende o telefone. As solicitações são analisadas em até 24 horas.</p>
       <div style="margin-top: 6px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
         <a class="tq-logo" href="#signup" aria-label="Seja parceiro"><span>Seja parceiro</span><span class="tq-logo__coin" aria-hidden="true"><span class="tq-logo__face"></span><span class="tq-logo__rim"></span><svg class="tq-logo__flag" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__t" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__dot" width="56" height="56" viewBox="20.75 19.75 160 160"><circle cx="141" cy="130.5" r="10.5" fill="#E7131B"></circle></svg><span class="tq-logo__flash"></span></span></a>
         <a class="tq-crys" style="align-self: center;" href="#calculator" aria-label="Calcule seus ganhos"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">Calcule seus ganhos</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
@@ -1769,6 +1726,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=90e34cfc1e" defer></script>
+<script src="../assets/js/landing.js?v=cb2b5950f5" defer></script>
 </body>
 </html>
