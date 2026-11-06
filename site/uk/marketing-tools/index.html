@@ -1672,6 +1672,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-pass__arr { color: #e7131b; font-size: 14px; }
 .pf-pass__foot { border-top: 1px dashed #c9c6be; padding-top: 6px; }
 .pf-perks__cta { display: flex; justify-content: center; }
+#pf-flip .pf-perks__cta { position: relative; top: -25px; }   /* a little higher than the design */
 .pf-puzzle { display: flex; align-items: stretch; height: 56px; border-radius: 999px; overflow: visible; font-weight: 700; font-size: 16px; color: #fff; text-decoration: none; }
 .pf-puzzle:hover { color: #fff; }
 .pf-pz-a { position: relative; display: flex; align-items: center; padding-inline: 32px 30px; border-start-start-radius: 999px; border-end-start-radius: 999px; background: #16171a; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
@@ -1681,7 +1682,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-puzzle:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 .pf-pz-arr { font-size: 15px; }
 [dir="rtl"] .pf-pz-arr, [dir="rtl"] .tq-liq--sm .tq-liq__arr { display: inline-block; transform: scaleX(-1); }
-#pf-tail { height: 30vh; background: #0a0a0b; border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); }
+/* after the scene: the perks' red glow carries on and the black eases into the white the next block
+   starts with (the same curve as the landing's dark tail); it tucks 1px under the scene so no seam shows */
+#pf-flow.is-dark #pf-stick { background: #0a0a0b; }
+#pf-tail { position: relative; height: clamp(360px, 50vh, 560px); margin-top: -1px;
+  background: radial-gradient(55% 34vh at 50% 0%, rgba(150,10,15,.42), rgba(150,10,15,0) 70%),
+    linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
+      #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
+      #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .pf-anchor { position: absolute; left: 0; top: 166vh; width: 1px; height: 1px; pointer-events: none; }   /* #benefits: where the perks are dealt */
 .pf { position: relative; }
 #pf-perks-host { display: none; }
@@ -2076,6 +2084,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=90c39c601d" defer></script>
+<script src="../../assets/js/landing.js?v=da64e8b02d" defer></script>
 </body>
 </html>

@@ -963,13 +963,16 @@
     const head = perks.firstElementChild, cta = perks.lastElementChild, glass = $('.pf-glass', flip);
     const kids = block.children;
 
-    /* the fan: six cards on an arc, dealt one after another */
-    let dealt = null, K = 1;
+    /* the fan: six cards on an arc, dealt one after another. B is the line the cards stand on (from the
+       fan's bottom): the design's 16% + 15px, raised 72px, but never so high that the cards come
+       closer than G to the heading */
+    let dealt = null, K = 1, B = 0;
     const place = (on) => cards.forEach((c, i) => {
       const d = i - (N - 1) / 2, z = mq.matches ? 1 : K;
       c.style.transitionDelay = (on ? i * 70 : 0) + 'ms';
       c.style.opacity = on ? 1 : 0;
       c.style.width = (220 * z) + 'px'; c.style.height = (340 * z) + 'px'; c.style.marginLeft = mq.matches ? '' : (-110 * z) + 'px';
+      c.style.bottom = mq.matches ? '' : B + 'px';
       c.firstElementChild.style.zoom = z;
       c.style.transform = on
         ? 'translate3d(' + Math.round(d * 192 * K) + 'px,' + Math.round(d * d * 11 * K) + 'px,0) rotate(' + (d * 8) + 'deg)'
@@ -978,7 +981,9 @@
     const deal = (on) => { if (dealt === on) return; dealt = on; place(on); };
     const sizeCards = () => {
       const fh = fan.clientHeight || innerHeight * 0.5;
+      const G = Math.max(36, Math.min(72, innerHeight * 0.065));
       K = Math.max(0.45, Math.min(1.15, fh * 0.74 / 340, innerWidth * 0.84 / (192 * 5 + 320)));
+      B = Math.min(fh * 0.16 + 15 + 72, Math.max(fh * 0.16 + 15, fh - G - 340 * K));
       if (dealt != null) place(dealt);
     };
     const mode = () => {
@@ -1064,6 +1069,7 @@
       const hide = sw >= 1;
       if (hide !== hidden && api) { hidden = hide; api.hide(2, hide); }
       flip.classList.toggle('done', eX > 0.98);
+      flow.classList.toggle('is-dark', eX >= 1);     /* the pinned stage goes dark under the full-screen section: no light seams */
       if (eX >= 1) { flip.style.transform = 'none'; flip.style.left = '0px'; flip.style.top = '0px'; flip.style.willChange = 'auto'; flip.style.borderRadius = '0px'; stick.style.perspective = 'none'; }
       else { flip.style.willChange = ''; stick.style.perspective = ''; flip.style.left = ''; flip.style.top = ''; }
       deal(q > 0.86);
