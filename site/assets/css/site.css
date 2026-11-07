@@ -600,7 +600,7 @@ html { scroll-snap-type: y proximity; }
   [data-how-line] { display: none !important; }
   [data-fan-grid] { grid-template-columns: 1fr !important; }
   [data-fan-head] { display: flex !important; flex-direction: column; align-items: flex-start; gap: 18px; order: 0; }
-  [data-fan-cta] { order: 1; justify-self: start !important; margin-top: -8px; }
+  [data-fan-cta] { order: 3; justify-self: start !important; margin-top: 4px; }   /* after the cards */
   [data-fan] { order: 2; }
   [data-fan] { aspect-ratio: auto !important; container-type: normal !important; max-width: none !important; }
   [data-fan-stage] { position: static !important; display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }

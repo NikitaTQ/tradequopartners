@@ -124,6 +124,22 @@
                   <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">{{pp.who.4.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p2.title}}</span></span></div>
                   <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">{{pp.who.5.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p3.title}}</span></span></div>
                 </div>
+                <!-- phones: the five types as a swiper, each card with its story and best fit; the 3D stage follows the
+                     card in the middle (startWhoFlow) -->
+                <div class="pf-cards" data-pf-cards>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">01</span><h3 class="pf-card__t">{{pp.who.1.t}}</h3><p class="pf-card__d">{{pp.who.1.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p1.title}}</span></span></article>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">02</span><h3 class="pf-card__t">{{pp.who.2.t}}</h3><p class="pf-card__d">{{pp.who.2.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p1.title}}</span></span></article>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">03</span><h3 class="pf-card__t">{{pp.who.3.t}}</h3><p class="pf-card__d">{{pp.who.3.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p1.title}}</span></span></article>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">04</span><h3 class="pf-card__t">{{pp.who.4.t}}</h3><p class="pf-card__d">{{pp.who.4.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p2.title}}</span></span></article>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">05</span><h3 class="pf-card__t">{{pp.who.5.t}}</h3><p class="pf-card__d">{{pp.who.5.d}}</p><span class="pf-story__fit"><span class="pf-story__lab">{{pp.who.fit}}</span><span class="pf-story__pill">{{pp.p3.title}}</span></span></article>
+                </div>
+                <div class="tp-progdots pf-dots" data-pf-dots>
+                  <button type="button" aria-label="{{@pp.who.1.t}}" aria-current="true"></button>
+                  <button type="button" aria-label="{{@pp.who.2.t}}"></button>
+                  <button type="button" aria-label="{{@pp.who.3.t}}"></button>
+                  <button type="button" aria-label="{{@pp.who.4.t}}"></button>
+                  <button type="button" aria-label="{{@pp.who.5.t}}"></button>
+                </div>
               </div>
               <div class="pf-who__stagebox">
                 <div class="pf-who__stage" id="pf-who-stage" data-prev="{{@pp.who.prev}}" data-next="{{@pp.who.next}}"></div>

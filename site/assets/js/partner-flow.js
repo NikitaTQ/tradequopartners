@@ -213,7 +213,7 @@ function build(A) {
   const backOut = x => { const c1 = 1.25, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
   const outC = x => 1 - Math.pow(1 - x, 3);
   return (t, dt) => {
-    if (!reduce && t >= next) { go(cur + 1); next = t + 6; }
+    if (!reduce && !A.held && t >= next) { go(cur + 1); next = t + 6; }
     const asp = Math.max(0.5, camera.aspect), d = Math.max(7, 9.4 / asp);
     px = damp(px, mx, dt, 2.5);
     const fe = fp;
@@ -315,7 +315,7 @@ export function mount(el, opts = {}) {
     const sx = Math.max(0, Math.floor(r.x * canvas.width)), sy = Math.max(0, Math.floor(r.y * canvas.height)), sw = Math.ceil(r.w * canvas.width), sh = Math.ceil(r.h * canvas.height);
     const c = document.createElement('canvas'); c.width = sw; c.height = sh; c.getContext('2d').drawImage(canvas, sx, sy, sw, sh, 0, 0, sw, sh);
     return { url: c.toDataURL('image/png'), w: sw, h: sh, r };
-  }, setFlip: p => A.setFlip && A.setFlip(p), rect: () => A.rect ? A.rect() : null, hide: (i, v) => { if (A.hideHero) A.hideHero(v); else if (A.items && A.items[i]) A.items[i].g.visible = !v; }, destroy: () => { cancelAnimationFrame(raf); clearInterval(iv); ro.disconnect(); io.disconnect(); el.innerHTML = ''; } };
+  }, hold: v => { A.held = !!v; }, setFlip: p => A.setFlip && A.setFlip(p), rect: () => A.rect ? A.rect() : null, hide: (i, v) => { if (A.hideHero) A.hideHero(v); else if (A.items && A.items[i]) A.items[i].g.visible = !v; }, destroy: () => { cancelAnimationFrame(raf); clearInterval(iv); ro.disconnect(); io.disconnect(); el.innerHTML = ''; } };
 }
 
 /* ---- page wiring ------------------------------------------------------------------------------- */

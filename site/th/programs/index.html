@@ -650,7 +650,7 @@ html { scroll-snap-type: y proximity; }
   [data-how-line] { display: none !important; }
   [data-fan-grid] { grid-template-columns: 1fr !important; }
   [data-fan-head] { display: flex !important; flex-direction: column; align-items: flex-start; gap: 18px; order: 0; }
-  [data-fan-cta] { order: 1; justify-self: start !important; margin-top: -8px; }
+  [data-fan-cta] { order: 3; justify-self: start !important; margin-top: 4px; }   /* after the cards */
   [data-fan] { order: 2; }
   [data-fan] { aspect-ratio: auto !important; container-type: normal !important; max-width: none !important; }
   [data-fan-stage] { position: static !important; display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -1276,14 +1276,19 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-dome-panel { grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 40px; padding: 44px 48px; }
 }
 @media (max-width: 1100px) {
-  .tp-dome-panel { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 40px; }
-  .tp-dome-copy { max-width: 600px; }
-  .tp-dome { margin: 0 auto; }
+  /* one column: title and caption, then the dome with its figures, then the two buttons */
+  .tp-dome-panel { display: flex; flex-direction: column; align-items: flex-start; gap: 0; padding: 40px; }
+  .tp-dome-copy { display: contents; }
+  .tp-dome-copy .tp-h2 { order: 0; }
+  .tp-dome-copy__sub { order: 1; max-width: 600px; margin-top: 16px; }
+  .tp-dome { order: 2; margin: 12px auto 0; }
+  .tp-dome-actions { order: 3; margin-top: 28px; }
 }
 @media (max-width: 640px) {
-  .tp-dome-panel { padding: 32px 18px 28px; border-radius: 26px; gap: 8px; }
-  .tp-dome-copy { align-items: center; text-align: center; gap: 16px; margin: 0 auto; }
-  .tp-dome { max-width: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
+  .tp-dome-panel { padding: 30px 18px 26px; border-radius: 26px; align-items: center; text-align: center; }
+  .tp-dome-copy__sub { margin-top: 12px; }
+  .tp-dome { margin-top: 0; }
+  .tp-dome { max-width: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
   .tp-dome__stage { grid-column: 1 / -1; margin-bottom: -26px; }   /* the stage's empty floor */
   .tp-dome__stat { position: static; max-width: none; align-items: center !important; text-align: center !important; gap: 6px; }
   .tp-dome__stat b { font-size: 34px; }
@@ -1610,6 +1615,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-who__story { min-height: 72px; }
 .pf-story { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; animation: pfFade .5s ease; }
 .pf-story[hidden] { display: none; }
+.pf-cards { display: none; }   /* the phones' swiper of types (≤640px) */
 .pf-story__txt { flex: 1 1 420px; max-width: 720px; margin: 0; font-size: 17px; line-height: 1.6; color: #4a4a52; text-wrap: pretty; }
 .pf-story__fit { display: flex; align-items: center; gap: 10px; }
 .pf-story__lab { font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .18em; color: #8a8a92; }
@@ -1721,17 +1727,45 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .pf-anchor { position: static; display: block; }
   #pf-perks-host { display: block; }
   #pf-perks-host .pf-perks { height: auto !important; min-height: 0; padding-bottom: 40px; border-radius: clamp(28px, 4vw, 48px); margin: 0 clamp(8px, 2vw, 16px); width: auto; }
-  .pf-fan { display: flex; gap: 14px; overflow-x: auto; padding: 32px 4px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-  .pf-perk { position: relative; left: auto; bottom: auto; margin: 0; flex: none; opacity: 1 !important; transform: none !important; scroll-snap-align: center; }
+  /* the landing's Partner perks on phones: heading on the centre line, the cards in a grid, the CTA last */
+  .pf-perks__head { flex-direction: column; align-items: center; text-align: center; }
+  .pf-perks__titles { align-items: center; }
+  .pf-perks__pill { align-self: center; }
+  .pf-perks__title { text-align: center; }
+  .pf-perks__sub { padding-bottom: 0; }
+  .pf-fan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; max-width: 760px; margin: 0 auto; padding: 28px 0; }
+  .pf-perk { position: relative; left: auto; bottom: auto; width: auto; height: auto; margin: 0; opacity: 1 !important; transform: none !important; }
+  .pf-perk__in { width: 100%; height: 100%; min-height: 290px; padding: 20px 12px 14px; gap: 6px; }
+  .pf-perk__t { font-size: 18px; }
+  .pf-perk__d { max-width: none; font-size: 13px; }
+  .pf-perk__v { height: 130px; flex: none; }
+  .pf-perk__v > * { transform: scale(.8); }
+  .pf-perk__v * { white-space: nowrap; }
 }
 @media (max-width: 640px) {
   .pf-who { gap: 24px; border-radius: 26px; padding: 28px 18px; }
-  .pf-who__rows { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-  .pf-row { padding: 12px 14px; border-radius: 14px; }
-  .pf-story__txt { font-size: 15px; flex-basis: 100%; }
+  /* the rows and the story give way to a swiper of cards, one per type, story and best fit on each */
+  .pf-who__rows, .pf-who__story { display: none; }
+  .pf-cards { display: flex; gap: 10px; margin: 0 -18px; padding: 2px 18px 8px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    scroll-padding-inline: 18px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .pf-cards::-webkit-scrollbar { display: none; }
+  .pf-card { flex: 0 0 86%; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px 18px 16px; border-radius: 18px;
+    scroll-snap-align: center; scroll-snap-stop: always; background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.7)); border: 1px solid rgba(255,255,255,.95);
+    box-shadow: 0 0 0 1px rgba(14,14,22,.06), 0 18px 34px -26px rgba(14,14,22,.4); }
+  .pf-card__n { font-family: 'Fragment Mono', monospace; font-size: 12px; color: #e7131b; }
+  .pf-card__t { margin: 0; font-size: 19px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; color: #0e0e10; text-wrap: balance; }
+  .pf-card__d { margin: 0; font-size: 15px; line-height: 1.55; color: #4a4a52; text-wrap: pretty; }
+  .pf-card .pf-story__fit { margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
+  .tp-progdots.pf-dots { margin-top: -8px; }
   .pf-who__stagebox { width: calc(100% + 36px); margin: -24px -18px 0; min-height: 240px; aspect-ratio: 1 / .78; }
   .pf-who__cta { margin-top: -40px; }
   .pf-perks__head { gap: 14px; }
+  .pf-fan { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 24px 0; }
+  .pf-perk__in { min-height: 262px; padding: 18px 10px 12px; }
+  .pf-perk__t { font-size: 16px; }
+  .pf-perk__d { font-size: 12.5px; }
+  .pf-perk__v { height: 112px; }
+  .pf-perk__v > * { transform: scale(.68); }
 }
 
 /* ---- commission page hero: earnings examples (TradeQuo_Earnings_Hero design) -----------------
@@ -1963,6 +1997,22 @@ h1, h2 { line-height: 1.2 !important; }
                   <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">คุณทำวิดีโอ โพสต์ หรือไลฟ์สตรีมเกี่ยวกับตลาด ใช้แบนเนอร์ แลนดิ้งเพจ และวิดีโอสำเร็จรูปของเรา แล้วดูทุกการสมัครและทุกการเ⁠ท⁠ร⁠ดได้ในแดชบอร์ดแบบเรียลไทม์ของคุณ</p><span class="pf-story__fit"><span class="pf-story__lab">เหมาะที่สุด</span><span class="pf-story__pill">แนะนำเ⁠ท⁠ร⁠ด⁠เ⁠ด⁠อ⁠ร์</span></span></div>
                   <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">คุณเป็นผู้นำคอมมูนิตี้การเ⁠ท⁠ร⁠ดหรือทีมพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ในภูมิภาคของคุณ ชวนพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์รายอื่นมาร่วมกับ TradeQuo และรับรายได้จากธุรกิจที่พวกเขานำเข้ามา เพิ่มเติมจากลูกค้าของคุณเอง โดยมีผู้จัดการพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ส่วนตัวดูแล</p><span class="pf-story__fit"><span class="pf-story__lab">เหมาะที่สุด</span><span class="pf-story__pill">สร้างเครือข่าย</span></span></div>
                   <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">คุณบริหารธุรกิจที่มีฐานมั่นคงหรืออะคาเดมีการเ⁠ท⁠ร⁠ด และต้องการดำเนินงานภายใต้ชื่อของคุณเอง เปิดตัวโบรกเกอร์หรืออะคาเดมี White-Label บนโครงสร้างพื้นฐานของ TradeQuo</p><span class="pf-story__fit"><span class="pf-story__lab">เหมาะที่สุด</span><span class="pf-story__pill">เปิดตัวแบรนด์ของคุณ</span></span></div>
+                </div>
+                <!-- phones: the five types as a swiper, each card with its story and best fit; the 3D stage follows the
+                     card in the middle (startWhoFlow) -->
+                <div class="pf-cards" data-pf-cards>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">01</span><h3 class="pf-card__t">ผู้สอนเ⁠ท⁠ร⁠ด</h3><p class="pf-card__d">คุณสอนเ⁠ท⁠ร⁠ดผ่านคอร์ส เว็บบินาร์ หรือการเป็นเมนเทอร์ และนักเรียนของคุณต้องการโบรกเกอร์ที่เปิดบัญชีได้ทันทีวันนี้ ส่งลิงก์ของคุณให้พวกเขา แล้วรับสูงสุด 87% ของส⁠เ⁠ป⁠ร⁠ดจากทุกล็⁠อ⁠ตที่พวกเขาเ⁠ท⁠ร⁠ด ตราบเท่าที่ยังมีการเ⁠ท⁠ร⁠ดอยู่</p><span class="pf-story__fit"><span class="pf-story__lab">เหมาะที่สุด</span><span class="pf-story__pill">แนะนำเ⁠ท⁠ร⁠ด⁠เ⁠ด⁠อ⁠ร์</span></span></article>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">02</span><h3 class="pf-card__t">กลุ่มสัญญาณเ⁠ท⁠ร⁠ด</h3><p class="pf-card__d">คุณดูแลช่องที่สมาชิกติดตามไอเดียการเ⁠ท⁠ร⁠ดของคุณ แนะนำพวกเขามาที่ TradeQuo มอบกราฟ TradingView และสัญญาณแบบเรียลไทม์ให้ฟรี แล้วรับค่าค⁠อ⁠ม⁠มิ⁠ช⁠ชั่⁠นทุกวันเวลา 00:00 น. ตามเวลาเซิร์ฟเวอร์</p><span class="pf-story__fit"><span class="pf-story__lab">เหมาะที่สุด</span><span class="pf-story__pill">แนะนำเ⁠ท⁠ร⁠ด⁠เ⁠ด⁠อ⁠ร์</span></span></article>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">03</span><h3 class="pf-card__t">คอนเทนต์ครีเอเตอร์</h3><p class="pf-card__d">คุณทำวิดีโอ โพสต์ หรือไลฟ์สตรีมเกี่ยวกับตลาด ใช้แบนเนอร์ แลนดิ้งเพจ และวิดีโอสำเร็จรูปของเรา แล้วดูทุกการสมัครและทุกการเ⁠ท⁠ร⁠ดได้ในแดชบอร์ดแบบเรียลไทม์ของคุณ</p><span class="pf-story__fit"><span class="pf-story__lab">เหมาะที่สุด</span><span class="pf-story__pill">แนะนำเ⁠ท⁠ร⁠ด⁠เ⁠ด⁠อ⁠ร์</span></span></article>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">04</span><h3 class="pf-card__t">คอมมูนิตี้และทีม IB</h3><p class="pf-card__d">คุณเป็นผู้นำคอมมูนิตี้การเ⁠ท⁠ร⁠ดหรือทีมพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ในภูมิภาคของคุณ ชวนพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์รายอื่นมาร่วมกับ TradeQuo และรับรายได้จากธุรกิจที่พวกเขานำเข้ามา เพิ่มเติมจากลูกค้าของคุณเอง โดยมีผู้จัดการพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ส่วนตัวดูแล</p><span class="pf-story__fit"><span class="pf-story__lab">เหมาะที่สุด</span><span class="pf-story__pill">สร้างเครือข่าย</span></span></article>
+                  <article class="pf-card" data-pf-card><span class="pf-card__n">05</span><h3 class="pf-card__t">ธุรกิจและแบรนด์ด้านการศึกษา</h3><p class="pf-card__d">คุณบริหารธุรกิจที่มีฐานมั่นคงหรืออะคาเดมีการเ⁠ท⁠ร⁠ด และต้องการดำเนินงานภายใต้ชื่อของคุณเอง เปิดตัวโบรกเกอร์หรืออะคาเดมี White-Label บนโครงสร้างพื้นฐานของ TradeQuo</p><span class="pf-story__fit"><span class="pf-story__lab">เหมาะที่สุด</span><span class="pf-story__pill">เปิดตัวแบรนด์ของคุณ</span></span></article>
+                </div>
+                <div class="tp-progdots pf-dots" data-pf-dots>
+                  <button type="button" aria-label="ผู้สอนเทรด" aria-current="true"></button>
+                  <button type="button" aria-label="กลุ่มสัญญาณเทรด"></button>
+                  <button type="button" aria-label="คอนเทนต์ครีเอเตอร์"></button>
+                  <button type="button" aria-label="คอมมูนิตี้และทีม IB"></button>
+                  <button type="button" aria-label="ธุรกิจและแบรนด์ด้านการศึกษา"></button>
                 </div>
               </div>
               <div class="pf-who__stagebox">
@@ -2274,6 +2324,6 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=e671ab61cf" defer></script>
+<script src="../../assets/js/landing.js?v=49b7cf4ef8" defer></script>
 </body>
 </html>
