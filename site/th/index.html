@@ -1173,6 +1173,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-ph { display: inline; }
   .tq-nph { display: none; }
 }
+
+/* RTL: the phone menu (button and links) stays at the right edge, where it is anchored */
+[dir="rtl"] [data-fab] { align-items: flex-start !important; }
 </style>
 <style id="i18n-fonts">
 @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../assets/fonts/intl/noto-sans-thai-400-800-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }

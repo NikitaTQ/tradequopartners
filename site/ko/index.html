@@ -1172,6 +1172,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-ph { display: inline; }
   .tq-nph { display: none; }
 }
+
+/* RTL: the phone menu (button and links) stays at the right edge, where it is anchored */
+[dir="rtl"] [data-fab] { align-items: flex-start !important; }
 </style>
 <style id="i18n-fonts">
 *:not(svg *) { letter-spacing: 0 !important; }
