@@ -1140,6 +1140,29 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-fvid__i-play { display: none; }
 .tq-fvid[data-paused] .tq-fvid__i-play { display: block; }
 .tq-fvid[data-paused] .tq-fvid__i-pause { display: none; }
+
+/* ---- Dark header (Marketing Tools: the page opens on a dark screen) ----------------------------------
+   The bar runs edge to edge in the hero's own black, so header and hero read as one dark screen;
+   the wordmark is the light one (build-i18n.py: page 'head': 'dark'). */
+.tq-head--dark { background: #0a0a0b; box-shadow: 0 0 0 100vmax #0a0a0b; clip-path: inset(0 -100vmax); }
+.tq-head--dark nav a.hv-red { color: rgba(255,255,255,.78) !important; }
+.tq-head--dark nav a.hv-red:hover { color: #fff !important; }
+.tq-head--dark .tq-lang__btn { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.18); color: #f2f2f4; }
+.tq-head--dark .tq-lang__btn:hover, .tq-head--dark .tq-lang__btn[aria-expanded="true"] { border-color: rgba(255,255,255,.6); color: #fff; }
+
+/* ---- The payout statement (calculator): a framed document ------------------------------------------
+   A hairline frame inside the paper with red corner marks, and two sheets peeking out underneath.
+   Pseudo-elements and shadows only: the statement's children are styled by position (nth-child). */
+[data-invoice] { --ck: 18px; --fi: 14px 10px 10px;
+  box-shadow: 0 1px 0 #e9e9e5, 0 0 0 1px rgba(10,10,10,.05), 0 7px 0 -3px #f1f1ed, 0 7px 0 -2px rgba(10,10,10,.08),
+    0 13px 0 -7px #e9e9e4, 0 13px 0 -6px rgba(10,10,10,.07), 0 44px 80px -42px rgba(10,10,10,.36), 0 2px 8px rgba(10,10,10,.06) !important; }
+[data-invoice]::before { content: ''; position: absolute; inset: var(--fi); border: 1px solid rgba(10,10,10,.1); border-radius: 2px; pointer-events: none; }
+[data-invoice]::after { content: ''; position: absolute; inset: var(--fi); pointer-events: none;
+  background: linear-gradient(#e7131b, #e7131b) left top / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) left top / 2px var(--ck) no-repeat,
+    linear-gradient(#e7131b, #e7131b) right top / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) right top / 2px var(--ck) no-repeat,
+    linear-gradient(#e7131b, #e7131b) left bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) left bottom / 2px var(--ck) no-repeat,
+    linear-gradient(#e7131b, #e7131b) right bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) right bottom / 2px var(--ck) no-repeat; }
+@media (max-width: 640px) { [data-invoice] { --ck: 14px; --fi: 12px 8px 8px; } }
 </style>
 </head>
 <body>

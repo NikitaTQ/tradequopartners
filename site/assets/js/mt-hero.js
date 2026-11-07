@@ -2,7 +2,7 @@
  * creative cards, a TradingView screen, signal candles on a base, the academy temple — over the dark
  * hero. They pop in, bob, follow the mouse (parallax); hovering or tapping one shows its name above it.
  * Phones and other tall screens (stage narrower than 0.95 of its height) get a 2×2 layout.
- * A name always sits above its object, never higher than opts.floor() px from the stage's top. Trading Signals and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
+ * A name always sits above its object, never higher than 8px from the stage's top (opts.floor() px if given). Trading Signals and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
  * the old one had). Loaded as a module by marketing.html; three.js is the site's own copy. The page's text stays as it is
  * when WebGL is missing. Labels come from the stage's data-labels (mt.top.l1–l4, joined by |). */
 import * as THREE from '../../vendor/three@0.184.0/three.module.min.js';
@@ -430,8 +430,7 @@ const stage = document.querySelector('[data-mt-stage]');
 if (stage) {
   try {
     const labels = (stage.dataset.labels || '').split('|').filter(Boolean);
-    /* names stay below the middle of the white-to-dark hand-off at the hero's top (.tq-mth::before) */
-    const opts = { floor: () => Math.max(8, (parseFloat(getComputedStyle(stage.parentElement, '::before').height) || 0) * 0.5) };
+    const opts = {};
     if (labels.length === 4) opts.labels = labels;
     stage.mtHero = mount(stage, opts);   /* show(i) names an object, as a hover would */
   } catch (e) { /* no WebGL: the hero keeps its background, title and list */ }

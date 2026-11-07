@@ -1140,6 +1140,29 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-fvid__i-play { display: none; }
 .tq-fvid[data-paused] .tq-fvid__i-play { display: block; }
 .tq-fvid[data-paused] .tq-fvid__i-pause { display: none; }
+
+/* ---- Dark header (Marketing Tools: the page opens on a dark screen) ----------------------------------
+   The bar runs edge to edge in the hero's own black, so header and hero read as one dark screen;
+   the wordmark is the light one (build-i18n.py: page 'head': 'dark'). */
+.tq-head--dark { background: #0a0a0b; box-shadow: 0 0 0 100vmax #0a0a0b; clip-path: inset(0 -100vmax); }
+.tq-head--dark nav a.hv-red { color: rgba(255,255,255,.78) !important; }
+.tq-head--dark nav a.hv-red:hover { color: #fff !important; }
+.tq-head--dark .tq-lang__btn { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.18); color: #f2f2f4; }
+.tq-head--dark .tq-lang__btn:hover, .tq-head--dark .tq-lang__btn[aria-expanded="true"] { border-color: rgba(255,255,255,.6); color: #fff; }
+
+/* ---- The payout statement (calculator): a framed document ------------------------------------------
+   A hairline frame inside the paper with red corner marks, and two sheets peeking out underneath.
+   Pseudo-elements and shadows only: the statement's children are styled by position (nth-child). */
+[data-invoice] { --ck: 18px; --fi: 14px 10px 10px;
+  box-shadow: 0 1px 0 #e9e9e5, 0 0 0 1px rgba(10,10,10,.05), 0 7px 0 -3px #f1f1ed, 0 7px 0 -2px rgba(10,10,10,.08),
+    0 13px 0 -7px #e9e9e4, 0 13px 0 -6px rgba(10,10,10,.07), 0 44px 80px -42px rgba(10,10,10,.36), 0 2px 8px rgba(10,10,10,.06) !important; }
+[data-invoice]::before { content: ''; position: absolute; inset: var(--fi); border: 1px solid rgba(10,10,10,.1); border-radius: 2px; pointer-events: none; }
+[data-invoice]::after { content: ''; position: absolute; inset: var(--fi); pointer-events: none;
+  background: linear-gradient(#e7131b, #e7131b) left top / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) left top / 2px var(--ck) no-repeat,
+    linear-gradient(#e7131b, #e7131b) right top / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) right top / 2px var(--ck) no-repeat,
+    linear-gradient(#e7131b, #e7131b) left bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) left bottom / 2px var(--ck) no-repeat,
+    linear-gradient(#e7131b, #e7131b) right bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) right bottom / 2px var(--ck) no-repeat; }
+@media (max-width: 640px) { [data-invoice] { --ck: 14px; --fi: 12px 8px 8px; } }
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -1530,10 +1553,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    at the bottom. Then two glass cards (live tracking, partner manager), How it works, FAQ, final call. */
 .tq-mth { position: relative; width: 100%; height: calc(100vh - 88px); height: calc(100svh - 88px); min-height: 600px; max-height: 980px; overflow: hidden; color: #fff;
   background: radial-gradient(70% 45% at 50% 100%, rgba(170,10,18,.45) 0%, rgba(170,10,18,0) 70%), radial-gradient(75% 60% at 50% 32%, #18181c 0%, #0a0a0b 70%), #0a0a0b; }
-/* from the white header into the dark hero: the site's hand-off curve (as .tq-mth-tail, reversed), short enough
-   to stay above the objects; it sits behind the scene, and mt-hero.js keeps the names below its middle */
-.tq-mth::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: clamp(72px, 11vh, 120px); pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 4.5%, rgba(255,255,255,0.992) 9.1%, rgba(255,255,255,0.98) 13.6%, rgba(255,255,255,0.955) 18.2%, rgba(255,255,255,0.918) 22.7%, rgba(255,255,255,0.869) 27.3%, rgba(255,255,255,0.812) 31.8%, rgba(255,255,255,0.743) 36.4%, rgba(255,255,255,0.665) 40.9%, rgba(255,255,255,0.584) 45.5%, rgba(255,255,255,0.502) 50%, rgba(255,255,255,0.416) 54.5%, rgba(255,255,255,0.335) 59.1%, rgba(255,255,255,0.257) 63.6%, rgba(255,255,255,0.188) 68.2%, rgba(255,255,255,0.131) 72.7%, rgba(255,255,255,0.082) 77.3%, rgba(255,255,255,0.045) 81.8%, rgba(255,255,255,0.02) 86.4%, rgba(255,255,255,0.008) 90.9%, rgba(255,255,255,0) 95.5%); }
+/* the hero's top in exactly the dark header's black, so the two meet without a line */
+.tq-mth::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 140px; pointer-events: none; background: linear-gradient(180deg, #0a0a0b 0%, rgba(10,10,11,0) 100%); }
 .tq-mth__stage { position: absolute; left: 0; right: 0; top: 0; height: 86%; }
 .tq-mth__fade { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; background: linear-gradient(180deg, rgba(10,10,11,0) 0%, rgba(10,10,11,.7) 45%, rgba(10,10,11,.92) 100%); pointer-events: none; }
 .tq-mth__foot { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); bottom: clamp(14px, 2.2vh, 22px); display: flex; flex-wrap: wrap; justify-content: space-between;
@@ -1548,9 +1569,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
     #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .tq-mth-tail + .tp-sec { padding-top: clamp(16px, 3vw, 40px); }
-@media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout; a shorter hand-off, the first names sit high */
+@media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout */
   .tq-mth__stage { height: 80%; }
-  .tq-mth::before { height: clamp(48px, 7vh, 72px); }
 }
 @media (max-width: 640px) { .tq-mth { height: calc(100vh - 84px); height: calc(100svh - 84px); } }
 .tp-mt-sup { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; margin: clamp(32px, 4.5vw, 56px) auto 0; }
@@ -1962,8 +1982,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 <div class="tp">
 
-  <header style="position: relative; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px clamp(16px, 4vw, 56px); max-width: 1440px; margin: 0 auto;">
-    <a href="../" data-page-link data-label="ŁADOWANIE · Strona główna" style="display: inline-flex; flex-shrink: 0;"><img src="../../assets/logo-wordmark-dark.png?v=be9b8240ee" alt="TradeQuo" style="height: 23px; width: auto;"></a>
+  <header class="tq-head tq-head--dark" style="position: relative; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px clamp(16px, 4vw, 56px); max-width: 1440px; margin: 0 auto;">
+    <a href="../" data-page-link data-label="ŁADOWANIE · Strona główna" style="display: inline-flex; flex-shrink: 0;"><img src="../../assets/logo-wordmark-light.png?v=3a415b95bb" alt="TradeQuo" style="height: 23px; width: auto;"></a>
     <nav style="display: flex; align-items: center; gap: clamp(14px, 2vw, 32px); flex-wrap: wrap; justify-content: flex-end;">
       <span data-navlinks="" style="display: contents;">
         <a class="hv-red" href="#tools" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">Narzędzia</a>
@@ -2293,6 +2313,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=f6d4d1ba46" defer></script>
-<script type="module" src="../../assets/js/mt-hero.js?v=5e6e366dd2"></script>
+<script type="module" src="../../assets/js/mt-hero.js?v=41f1221542"></script>
 </body>
 </html>
