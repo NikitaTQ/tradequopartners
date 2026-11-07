@@ -2,8 +2,9 @@
  * creative cards, a TradingView screen, signal candles on a base, the academy temple — over the dark
  * hero. They pop in, bob, follow the mouse (parallax); hovering or tapping one shows its name above it.
  * Phones and other tall screens (stage narrower than 0.95 of its height) get a 2×2 layout.
- * A name sits above its object, below the decorative line on top (opts.guard); where that leaves no
- * room it goes under the object. Loaded as a module by marketing.html; three.js is the site's own copy. The page's text stays as it is
+ * A name always sits above its object; the decorative line on top (opts.guard) steps aside while a name needs
+ * its room. Trading Signals and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
+ * the old one had). Loaded as a module by marketing.html; three.js is the site's own copy. The page's text stays as it is
  * when WebGL is missing. Labels come from the stage's data-labels (mt.top.l1–l4, joined by |). */
 import * as THREE from '../../vendor/three@0.184.0/three.module.min.js';
 
@@ -20,7 +21,7 @@ function rr(w, h, r) {
   s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
   return s;
 }
-function makeEnv(renderer) {
+function makeEnv(renderer, noRed) {
   const env = new THREE.Scene();
   env.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0x0c0c0e, side: THREE.BackSide })));
   const panel = (w, h, pos, rgb) => {
@@ -32,8 +33,7 @@ function makeEnv(renderer) {
   panel(1.0, 11, [7, 0, -1], [3, 3, 3.2]);
   panel(11, 4, [0, 1, 8], [0.9, 0.9, 0.95]);
   panel(4, 11, [-5, 0, -6], [1.6, 1.6, 1.7]);
-  panel(12, 1.4, [0, -6.5, 3], [1.2, 0.05, 0.07]);
-  panel(1.4, 5, [6.5, -1.5, 4], [0.9, 0.03, 0.05]);
+  if (!noRed) { panel(12, 1.4, [0, -6.5, 3], [1.2, 0.05, 0.07]); panel(1.4, 5, [6.5, -1.5, 4], [0.9, 0.03, 0.05]); }
   const pm = new THREE.PMREMGenerator(renderer); const t = pm.fromScene(env, 0.03).texture; pm.dispose();
   return t;
 }
@@ -55,12 +55,18 @@ function materials() {
   return {
     lacquer: new THREE.MeshPhysicalMaterial({ color: 0x09090b, metalness: 0.1, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 1.3 }),
     chrome: new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: 0.1, envMapIntensity: 1.5 }),
-    silver: new THREE.MeshStandardMaterial({ color: 0xdedee4, metalness: 1, roughness: 0.3, envMapIntensity: 1.4 }),
+    silver: new THREE.MeshStandardMaterial({ color: 0xe4e4ea, metalness: 0.92, roughness: 0.24, envMapIntensity: 1.45 }),
+    cellaGlow: new THREE.MeshStandardMaterial({ color: 0x220205, emissive: 0x9a0a12, emissiveIntensity: 0.9, roughness: 0.4 }),
     pearl: new THREE.MeshPhysicalMaterial({ color: 0xf4f4f7, metalness: 0.3, roughness: 0.25, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.2 }),
     sheen: new THREE.MeshBasicMaterial({ map: sheenTex(), transparent: true, depthWrite: false }),
     graphite: new THREE.MeshStandardMaterial({ color: 0x3a3a40, metalness: 1, roughness: 0.28, envMapIntensity: 1.1 }),
     ruby: new THREE.MeshPhysicalMaterial({ color: 0xd60f19, emissive: 0x5a0006, metalness: 0.15, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.4 }),
     red: new THREE.MeshBasicMaterial({ color: 0xff2a33 }),
+    /* Trading Signals and the temple (TradeQuo_Academy_Temple): their own pearl and ruby, the base's lacquer and chrome */
+    pearl2: new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0.12, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.25 }),
+    ruby2: new THREE.MeshPhysicalMaterial({ color: 0xd60f19, emissive: 0x380004, metalness: 0.15, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.4 }),
+    baseLacquer: new THREE.MeshPhysicalMaterial({ color: 0x060607, metalness: 0.1, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.2 }),
+    baseChrome: new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: 0.08, envMapIntensity: 1.7 }),
     white: new THREE.MeshBasicMaterial({ color: 0xf2f2f5 }),
     dim: new THREE.MeshBasicMaterial({ color: 0x55555c }),
   };
@@ -116,40 +122,173 @@ function buildSignals(M) {
   const g = new THREE.Group(), inner = new THREE.Group(); g.add(inner);
   const base = new THREE.ExtrudeGeometry(rr(1.3, 0.56, 0.1), { depth: 0.12, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.012, bevelSegments: 3, curveSegments: 14 });
   base.rotateX(-Math.PI / 2); base.translate(0, 0.012, 0);
-  inner.add(new THREE.Mesh(base, [M.lacquer, M.chrome]));
-  const H = [0.46, 0.7, 0.42, 0.9, 0.64, 1.06];
-  H.forEach((h, i) => {
-    const x = -0.45 + i * 0.18, mat = i % 2 ? M.pearl : M.ruby, y0 = 0.15 + (i % 3) * 0.04;
-    const b = new THREE.Mesh(new THREE.BoxGeometry(0.12, h * 0.7, 0.12), mat); b.position.set(x, y0 + h * 0.35 + 0.05, 0); inner.add(b);
-    const w = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, h + 0.1, 12), mat); w.position.set(x, y0 + h * 0.35 + 0.05, 0); inner.add(w);
+  inner.add(new THREE.Mesh(base, [M.baseLacquer, M.baseChrome]));
+  const top = 0.144;
+  const plate = new THREE.Mesh(new THREE.ShapeGeometry(rr(1.2, 0.46, 0.07), 12), M.chrome); plate.rotation.x = -Math.PI / 2; plate.position.y = top + 0.001; plate.scale.set(1, 1, 1); inner.add(plate);
+  const plate2 = new THREE.Mesh(new THREE.ShapeGeometry(rr(1.18, 0.44, 0.065), 12), M.lacquer); plate2.rotation.x = -Math.PI / 2; plate2.position.y = top + 0.002; inner.add(plate2);
+  const D = [[0.07, 0.3, 0.0, 0.47], [0.1, 0.46, 0.0, 0.72], [0.09, 0.28, 0.0, 0.49], [0.14, 0.56, 0.0, 0.86], [0.16, 0.4, 0.0, 0.7], [0.2, 0.66, 0.0, 1.04]];
+  D.forEach(([b, h, lo, hi], i) => {
+    const x = -0.45 + i * 0.18, mat = i % 2 ? M.pearl2 : M.ruby2;
+    const bg = new THREE.ExtrudeGeometry(rr(0.104, h - 0.016, 0.012), { depth: 0.084, bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.008, bevelSegments: 4, curveSegments: 6 });
+    bg.translate(0, 0, -0.042);
+    const body = new THREE.Mesh(bg, mat); body.position.set(x, top + b + h / 2, 0); inner.add(body);
+    const wk = new THREE.Mesh(new THREE.CylinderGeometry(0.0075, 0.0075, hi - lo, 16), mat); wk.position.set(x, top + (lo + hi) / 2, 0); inner.add(wk);
+    [hi].forEach(y => { const t = new THREE.Mesh(new THREE.SphereGeometry(0.0095, 16, 10), M.chrome); t.position.set(x, top + y, 0); inner.add(t); });
   });
   const strip = new THREE.Mesh(new THREE.BoxGeometry(1.12, 0.014, 0.01), M.red); strip.position.set(0, 0.075, 0.293); inner.add(strip);
   inner.position.y = -0.62;
-  g.rotation.set(0.32, -0.55, 0);
+  g.rotation.set(0.3, -0.55, 0);
   return g;
 }
 
-function buildTemple(M) {
-  const g = new THREE.Group(), inner = new THREE.Group(); g.add(inner);
-  const box = (w, h, d, y, mat = M.silver, z = 0) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(0, y, z); inner.add(m); return m; };
-  box(1.32, 0.08, 0.72, 0.04); box(1.2, 0.08, 0.62, 0.12); box(1.08, 0.08, 0.52, 0.2);
-  const colGeo = new THREE.CylinderGeometry(0.05, 0.056, 0.6, 28), capGeo = new THREE.BoxGeometry(0.13, 0.035, 0.13);
-  for (let i = 0; i < 5; i++) {
-    const x = -0.42 + i * 0.21;
-    [[0.16, M.silver], [-0.14, M.graphite]].forEach(([z, mat]) => {
-      const c = new THREE.Mesh(colGeo, mat); c.position.set(x, 0.54, z); inner.add(c);
-      const cap = new THREE.Mesh(capGeo, mat); cap.position.set(x, 0.855, z); inner.add(cap);
-      const ft = new THREE.Mesh(capGeo, mat); ft.position.set(x, 0.255, z); inner.add(ft);
+/* static parts merged into one mesh per material: positions, normals and indices copied in place
+   (the design's version expanded every part to a non-indexed copy first, ~170ms for the temple) */
+function mergeStatic(src) {
+  src.updateMatrixWorld(true);
+  const buckets = new Map(), keep = [];
+  src.traverse(o => {
+    if (o.isLight || (o.isMesh && Array.isArray(o.material))) { keep.push(o); return; }
+    if (!o.isMesh) return;
+    if (!buckets.has(o.material)) buckets.set(o.material, []); buckets.get(o.material).push(o);
+  });
+  const out = new THREE.Group(), nm = new THREE.Matrix3(), v = new THREE.Vector3();
+  buckets.forEach((ms, mat) => {
+    let nv = 0, ni = 0;
+    ms.forEach(o => { const g = o.geometry; if (!g.attributes.normal) g.computeVertexNormals(); nv += g.attributes.position.count; ni += g.index ? g.index.count : g.attributes.position.count; });
+    const P = new Float32Array(nv * 3), N = new Float32Array(nv * 3), I = nv > 65535 ? new Uint32Array(ni) : new Uint16Array(ni);
+    let ov = 0, oi = 0;
+    ms.forEach(o => {
+      const g = o.geometry, p = g.attributes.position, n = g.attributes.normal, mw = o.matrixWorld; nm.getNormalMatrix(mw);
+      for (let k = 0; k < p.count; k++) {
+        v.fromBufferAttribute(p, k).applyMatrix4(mw); P[(ov + k) * 3] = v.x; P[(ov + k) * 3 + 1] = v.y; P[(ov + k) * 3 + 2] = v.z;
+        v.fromBufferAttribute(n, k).applyMatrix3(nm).normalize(); N[(ov + k) * 3] = v.x; N[(ov + k) * 3 + 1] = v.y; N[(ov + k) * 3 + 2] = v.z;
+      }
+      if (g.index) { const a = g.index.array; for (let k = 0; k < a.length; k++) I[oi + k] = a[k] + ov; oi += a.length; }
+      else { for (let k = 0; k < p.count; k++) I[oi + k] = k + ov; oi += p.count; }
+      ov += p.count;
     });
+    const bg = new THREE.BufferGeometry(); bg.setAttribute('position', new THREE.BufferAttribute(P, 3)); bg.setAttribute('normal', new THREE.BufferAttribute(N, 3)); bg.setIndex(new THREE.BufferAttribute(I, 1));
+    bg.computeBoundingSphere(); bg.computeBoundingBox(); out.add(new THREE.Mesh(bg, mat));
+  });
+  keep.forEach(o => { o.matrixWorld.decompose(o.position, o.quaternion, o.scale); out.add(o); });
+  return out;
+}
+
+function ionicShaft(rb, rt, h, flutes, per = 10) {
+  const geo = new THREE.CylinderGeometry(1, 1, h, flutes * per, 8, true), p = geo.attributes.position;
+  for (let k = 0; k < p.count; k++) {
+    const x = p.getX(k), y = p.getY(k), z = p.getZ(k), yn = y / h + 0.5;
+    const u = ((flutes * Math.atan2(x, z) / (2 * Math.PI)) % 1 + 1) % 1;
+    let d = 0; if (u > 0.1 && u < 0.9) { const v = (u - 0.1) / 0.8 * 2 - 1; d = Math.sqrt(1 - v * v); }
+    const r = (rb + (rt - rb) * Math.pow(yn, 1.3) + 0.0018 * Math.sin(Math.PI * yn)) * (1 - 0.08 * d);
+    p.setXYZ(k, x * r, y, z * r);
   }
-  box(1.12, 0.1, 0.54, 0.92);
-  const tri = new THREE.Shape(); tri.moveTo(-0.6, 0); tri.lineTo(0.6, 0); tri.lineTo(0, 0.3); tri.closePath();
-  const pg = new THREE.ExtrudeGeometry(tri, { depth: 0.5, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.01, bevelSegments: 2 }); pg.translate(0, 0.97, -0.25);
-  inner.add(new THREE.Mesh(pg, M.silver));
-  const mark = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.075, 0.02), M.ruby); mark.position.set(0, 1.07, 0.262); mark.rotation.z = Math.PI / 4; inner.add(mark);
-  const inGlow = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.5, 0.02), new THREE.MeshBasicMaterial({ color: 0xff2a33, transparent: true, opacity: 0.55 })); inGlow.position.set(0, 0.55, -0.02); inner.add(inGlow);
-  const pl = new THREE.PointLight(0xff2030, 3.2, 1.6, 1.4); pl.position.set(0, 0.55, 0.02); inner.add(pl);
-  inner.position.y = -0.62;
+  geo.computeVertexNormals(); return geo;
+}
+
+function buildTemple(M, q = 1) {
+  /* segments of the round parts: q = 1 on wide stages (already about half the design's: the parts are a few
+     pixels big), 0.6 on tall ones (phones) */
+  const S = (n, min) => Math.max(min, Math.round(n * q));
+  const g = new THREE.Group(), inner = new THREE.Group();
+  const put = (geo, mat, x, y, z, parent = inner) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); parent.add(m); return m; };
+  const box = (w, h, d, x, y, z, mat = M.silver, parent) => put(new THREE.BoxGeometry(w, h, d), mat, x, y, z, parent);
+  // crepidoma
+  box(1.42, 0.02, 0.86, 0, -0.01, 0, M.graphite);
+  [[1.36, 0.8, 0], [1.25, 0.69, 0.07], [1.14, 0.58, 0.14]].forEach(([w, d, y]) => { box(w, 0.062, d, 0, y + 0.031, 0); box(w + 0.012, 0.008, d + 0.012, 0, y + 0.066, 0); });
+  // cella with ashlar courses, antae, door
+  const cella = new THREE.Mesh(new THREE.BoxGeometry(0.74, 0.6, 0.3), [M.graphite, M.graphite, M.graphite, M.graphite, M.cellaGlow, M.graphite]); cella.position.set(0, 0.52, -0.01); inner.add(cella);
+  for (let y = 0.27; y < 0.8; y += 0.045) box(0.66, 0.0028, 0.003, 0, y, 0.1415, M.graphite);
+  [-1, 1].forEach(sd => { box(0.05, 0.56, 0.03, sd * 0.345, 0.5, 0.15); box(0.062, 0.016, 0.04, sd * 0.345, 0.786, 0.15); box(0.062, 0.016, 0.04, sd * 0.345, 0.228, 0.15); });
+  box(0.2, 0.4, 0.004, 0, 0.42, 0.145, M.red);
+  box(0.016, 0.42, 0.012, -0.108, 0.43, 0.149, M.chrome); box(0.016, 0.42, 0.012, 0.108, 0.43, 0.149, M.chrome);
+  box(0.26, 0.018, 0.016, 0, 0.642, 0.149, M.chrome); box(0.29, 0.008, 0.026, 0, 0.655, 0.149, M.chrome);
+  // ionic columns
+  const shaft = ionicShaft(0.042, 0.035, 0.53, 24, S(6, 4));
+  const lathe = (pts, seg = 32) => new THREE.LatheGeometry(pts.map(([r, y]) => new THREE.Vector2(r, y)), S(seg, Math.min(seg, 10)));
+  const baseG = lathe([[0, 0], [0.056, 0], [0.058, 0.004], [0.056, 0.009], [0.049, 0.011], [0.046, 0.0155], [0.049, 0.019], [0.051, 0.022], [0.048, 0.026], [0.043, 0.028], [0, 0.028]]);
+  const plinth = new THREE.BoxGeometry(0.118, 0.01, 0.118);
+  const astragal = new THREE.TorusGeometry(0.0365, 0.0042, S(6, 4), S(32, 16)); astragal.rotateX(Math.PI / 2);
+  const echinus = lathe([[0, 0], [0.037, 0], [0.045, 0.006], [0.05, 0.013], [0.051, 0.016], [0, 0.016]]);
+  const block = new THREE.BoxGeometry(0.1, 0.022, 0.096), abacus = new THREE.BoxGeometry(0.122, 0.01, 0.122);
+  const pulv = lathe([[0.022, -0.048], [0.019, -0.03], [0.0155, -0.008], [0.0145, 0], [0.0155, 0.008], [0.019, 0.03], [0.022, 0.048]], 28); pulv.rotateX(Math.PI / 2);
+  const disc = new THREE.CylinderGeometry(0.0225, 0.0225, 0.004, S(20, 10)); disc.rotateX(Math.PI / 2);
+  const spiral = sx => { const pts = []; for (let k = 0; k <= 90; k++) { const t = k / 90, a = Math.PI / 2 + sx * t * 2.6 * Math.PI * 2, r = 0.0205 * (1 - t * 0.8); pts.push(new THREE.Vector3(Math.cos(a) * r, Math.sin(a) * r, 0)); } return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), S(64, 24), 0.0024, S(5, 4), false); };
+  const spR = spiral(1), spL = spiral(-1), eye = new THREE.SphereGeometry(0.0052, S(8, 6), S(6, 4)), channel = new THREE.BoxGeometry(0.056, 0.012, 0.005);
+  const col = (x, z) => {
+    put(plinth, M.silver, x, 0.215, z); put(baseG, M.silver, x, 0.22, z); put(shaft, M.silver, x, 0.513, z);
+    put(astragal, M.silver, x, 0.779, z); put(echinus, M.silver, x, 0.781, z); put(block, M.silver, x, 0.808, z); put(abacus, M.silver, x, 0.824, z);
+    [-1, 1].forEach(sx => {
+      put(pulv, M.silver, x + sx * 0.05, 0.799, z);
+      [-1, 1].forEach(sz => {
+        const fz = z + sz * 0.05;
+        put(disc, M.silver, x + sx * 0.05, 0.799, fz);
+        const sp = put(sx > 0 ? spR : spL, M.silver, x + sx * 0.05, 0.799, fz + sz * 0.003); if (sz < 0) sp.rotation.y = Math.PI;
+        put(eye, M.silver, x + sx * 0.05, 0.799, fz + sz * 0.003);
+      });
+    });
+    [-1, 1].forEach(sz => put(channel, M.silver, x, 0.811, z + sz * 0.049));
+  };
+  for (let k = 0; k < 6; k++) { const x = -0.45 + k * 0.18; col(x, 0.21); col(x, -0.21); }
+  col(-0.45, 0); col(0.45, 0);
+  // architrave: three fasciae + bead moulding
+  box(1.04, 0.016, 0.54, 0, 0.837, 0); box(1.048, 0.017, 0.548, 0, 0.8535, 0); box(1.056, 0.019, 0.556, 0, 0.8715, 0); box(1.066, 0.007, 0.566, 0, 0.8845, 0);
+  const bead = new THREE.SphereGeometry(0.0034, S(8, 6), S(6, 4));
+  for (let x = -0.52; x <= 0.521; x += 0.0145) put(bead, M.silver, x, 0.8915, 0.2735);
+  // frieze with meander relief
+  box(1.04, 0.056, 0.54, 0, 0.922, 0);
+  const seg = (o, x1, y1, x2, y2) => { const L = Math.hypot(x2 - x1, y2 - y1) + 0.0035, horiz = Math.abs(y2 - y1) < 1e-6; box(horiz ? L : 0.0035, horiz ? 0.0035 : L, 0.004, (x1 + x2) / 2, (y1 + y2) / 2, 0.002, M.silver, o); };
+  const meander = (cx, cz, len, rotY) => {
+    const o = new THREE.Object3D(); o.position.set(cx, 0.922, cz); o.rotation.y = rotY; inner.add(o);
+    const n = Math.round(len / 0.044), uw = len / n, H = 0.036, X = u => -len / 2 + u * uw, Y = v => -H / 2 + v * H;
+    seg(o, -len / 2, Y(0), len / 2, Y(0)); seg(o, -len / 2, Y(1), len / 2, Y(1));
+    for (let k = 0; k < n; k++) { const U = u => X(k + u); seg(o, U(0.08), Y(0), U(0.08), Y(0.78)); seg(o, U(0.08), Y(0.78), U(0.72), Y(0.78)); seg(o, U(0.72), Y(0.78), U(0.72), Y(0.3)); seg(o, U(0.72), Y(0.3), U(0.36), Y(0.3)); }
+  };
+  meander(0, 0.27, 1.0, 0); meander(0.52, 0, 0.5, Math.PI / 2); meander(-0.52, 0, 0.5, -Math.PI / 2);
+  // egg-and-dart + dentils
+  box(1.05, 0.012, 0.55, 0, 0.956, 0);
+  const egg = new THREE.SphereGeometry(1, S(8, 6), S(6, 4));
+  const eggAt = (x, z, ry) => { const m = put(egg, M.silver, x, 0.956, z); m.scale.set(0.0085, 0.0065, 0.0045); m.rotation.y = ry; };
+  for (let x = -0.51; x <= 0.511; x += 0.0204) eggAt(x, 0.275, 0);
+  for (let z = -0.255; z <= 0.256; z += 0.0204) { eggAt(0.525, z, Math.PI / 2); eggAt(-0.525, z, Math.PI / 2); }
+  box(1.06, 0.014, 0.56, 0, 0.969, 0);
+  const den = new THREE.BoxGeometry(0.012, 0.014, 0.012);
+  for (let x = -0.52; x <= 0.521; x += 0.022) put(den, M.silver, x, 0.969, 0.283);
+  for (let z = -0.264; z <= 0.265; z += 0.022) [-1, 1].forEach(sd => put(den, M.silver, sd * 0.533, 0.969, z));
+  box(1.16, 0.03, 0.66, 0, 0.991, 0); box(1.18, 0.01, 0.68, 0, 1.011, 0);
+  // antefixes along side eaves
+  const ante = lathe([[0, 0], [0.008, 0], [0.005, 0.008], [0.009, 0.018], [0.004, 0.028], [0, 0.031]], 16);
+  for (let z = -0.3; z <= 0.301; z += 0.06) [-1, 1].forEach(sd => { const m = put(ante, M.silver, sd * 0.585, 1.016, z); m.scale.set(1, 1, 0.45); m.rotation.y = Math.PI / 2; });
+  // pediment
+  const y0 = 1.016, run = 0.6, rise = 0.26, a = Math.atan2(rise, run), L = Math.hypot(run, rise);
+  const ts = new THREE.Shape(); ts.moveTo(-0.53, 0); ts.lineTo(0.53, 0); ts.lineTo(0, 0.23); ts.closePath();
+  const tg = new THREE.ExtrudeGeometry(ts, { depth: 0.54, bevelEnabled: false }); tg.translate(0, y0, -0.27); inner.add(new THREE.Mesh(tg, M.silver));
+  const rib = new THREE.CylinderGeometry(0.0058, 0.0058, L + 0.02, S(10, 6));
+  [-1, 1].forEach(sd => {
+    const nx = sd < 0 ? -Math.sin(a) : Math.sin(a), ny = Math.cos(a), dx = -sd * Math.cos(a), dy = Math.sin(a);
+    const at = (off, along) => [sd * run / 2 + nx * off + dx * along, y0 + rise / 2 + ny * off + dy * along];
+    const slab = (th, dp, off) => { const [x, y] = at(off, 0); const m = box(L + 0.03, th, dp, x, y, 0); m.rotation.z = -sd * a; };
+    slab(0.03, 0.68, 0.022); slab(0.012, 0.7, 0.001); slab(0.012, 0.6, -0.012);
+    for (let k = 1; k < 24; k++) { const [x, y] = at(-0.025, -L / 2 + k * L / 24); const d = put(den, M.silver, x, y, 0.286); d.rotation.z = -sd * a; }
+    for (let z = -0.32; z <= 0.321; z += 0.032) { const [x, y] = at(0.044, 0); const r = put(rib, M.silver, x, y, z); r.rotation.z = -sd * (a - Math.PI / 2); }
+  });
+  const ridge = new THREE.CylinderGeometry(0.012, 0.012, 0.7, S(16, 10)); ridge.rotateX(Math.PI / 2); put(ridge, M.silver, 0, y0 + rise + 0.045, 0);
+  // medallion + acroteria
+  const ring = new THREE.TorusGeometry(0.048, 0.006, S(10, 6), S(40, 24)); put(ring, M.silver, 0, y0 + 0.09, 0.272);
+  const mark = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, 0.02), M.ruby2); mark.position.set(0, y0 + 0.09, 0.275); mark.rotation.z = Math.PI / 4; inner.add(mark);
+  const urn = lathe([[0, 0], [0.024, 0], [0.024, 0.008], [0.012, 0.012], [0.02, 0.026], [0.024, 0.04], [0.014, 0.056], [0.018, 0.064], [0, 0.068]], 28);
+  put(urn, M.silver, 0, y0 + rise + 0.05, 0.31);
+  [-1, 1].forEach(sd => { box(0.044, 0.02, 0.044, sd * 0.575, y0 + 0.012, 0.31); const u = put(urn, M.silver, sd * 0.575, y0 + 0.022, 0.31); u.scale.setScalar(0.75); });
+  const pl = new THREE.PointLight(0xff2030, 1.3, 1.0, 1.6); pl.position.set(0, 0.48, 0.24); inner.add(pl);
+  inner.position.y = -0.64;
+  const body = mergeStatic(inner);
+  /* the old temple's size and place (the design's is about a tenth larger) */
+  body.scale.setScalar(0.9); body.position.y = -0.027;
+  /* hover tests a plain box instead of the 200k-triangle model */
+  body.children.forEach(m => { if (m.isMesh) m.raycast = () => {}; });
+  const bb = new THREE.Box3().setFromObject(inner), sz = new THREE.Vector3(), cc = new THREE.Vector3(); bb.getSize(sz); bb.getCenter(cc);
+  const hit = new THREE.Mesh(new THREE.BoxGeometry(sz.x, sz.y, sz.z), M.red); hit.position.copy(cc); hit.visible = false; body.add(hit);
+  g.add(body);
   g.rotation.set(0.12, -0.5, 0);
   return g;
 }
@@ -172,12 +311,13 @@ export function mount(el, opts = {}) {
   const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(-3, 5, 5); scene.add(key);
   const rim = new THREE.DirectionalLight(0xffffff, 2.6); rim.position.set(3, 2, -4); scene.add(rim);
   const under = new THREE.DirectionalLight(0xff2a33, 1.4); under.position.set(0, -4, 3); scene.add(under);
-  const M = materials();
+  const M = materials(); M.baseLacquer.envMap = M.baseChrome.envMap = makeEnv(renderer, true);
   const root = new THREE.Group(); scene.add(root);
   const glowTex = radTex([[0, 'rgba(255,42,51,0.55)'], [0.35, 'rgba(200,16,26,0.18)'], [1, 'rgba(200,16,26,0)']]);
+  const tall = (opts.layout === 'portrait' || (!opts.layout && el.clientWidth / Math.max(1, el.clientHeight) < 0.95));
   const items = [buildCards, buildScreen, buildSignals, buildTemple].map((fn, i) => {
     const holder = new THREE.Group(), bob = new THREE.Group(), spin = new THREE.Group();
-    holder.add(bob); bob.add(spin); spin.add(fn(M)); root.add(holder);
+    holder.add(bob); bob.add(spin); spin.add(fn(M, tall ? 0.6 : 1)); root.add(holder);
     const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.55 }));
     halo.position.set(0, -0.1, -0.7); halo.scale.set(2.6, 2.6, 1); holder.add(halo);
     return { holder, bob, spin, halo, i };
@@ -203,11 +343,11 @@ export function mount(el, opts = {}) {
   const tags = LABELS.map((txt, i) => {
     const d = document.createElement('div');
     d.style.cssText = 'position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;white-space:nowrap;will-change:transform,opacity;';
-    d.innerHTML = '<span style="font-family:\'Fragment Mono\',monospace;font-size:10.5px;letter-spacing:0.22em;color:#E7131B;">0' + (i + 1) + '</span>' +
-      '<span data-t style="font-family:\'DM Sans\',system-ui,sans-serif;font-weight:700;letter-spacing:-0.035em;line-height:1.05;background:linear-gradient(180deg,#FFFFFF 0%,#E4E4E9 34%,#8C8C94 58%,#C9C9CF 78%,#F4F4F7 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.75));">' + txt + '</span>' +
-      '<span data-stem style="width:1px;height:18px;background:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0));"></span>';
+    d.innerHTML = '<span style="font-family:\'Fragment Mono\',monospace;font-size:11px;letter-spacing:0.22em;color:#E7131B;">0' + (i + 1) + '</span>' +
+      '<span data-t style="font-family:\'DM Sans\',system-ui,sans-serif;font-weight:760;letter-spacing:-0.022em;line-height:1.05;background:linear-gradient(180deg,#FFFFFF 0%,#F3F3F6 36%,#BDBDC4 60%,#E2E2E7 80%,#FFFFFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.75));">' + txt + '</span>' +
+      '<span style="width:1px;height:18px;background:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0));"></span>';
     d.setAttribute('aria-hidden', 'true');
-    overlay.appendChild(d); return { d, t: d.querySelector('[data-t]'), k: 0, w: 0, h: 0, fs: 0, below: false };
+    overlay.appendChild(d); return { d, t: d.querySelector('[data-t]'), k: 0, w: 0, h: 0, fs: 0 };
   });
   const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), box = new THREE.Box3(), tv = new THREE.Vector3(), c0 = new THREE.Vector3();
   let hover = -1;
@@ -260,8 +400,9 @@ export function mount(el, opts = {}) {
     for (let i = 0; i < N; i++) { a.array[i * 3 + 1] += dt * 0.05 * wob; if (a.array[i * 3 + 1] > 4) a.array[i * 3 + 1] = -4; a.array[i * 3] += Math.sin(t * 0.4 + seeds[i]) * dt * 0.02 * wob; }
     a.needsUpdate = true;
     scene.updateMatrixWorld();
-    /* the name goes above its object; when the line on top leaves no room there, below it (stem up) */
+    /* the name goes above its object; where the line on top leaves no room for it, the line fades out meanwhile */
     const portrait = preset === PRESETS.portrait, fs = portrait ? 20 : 30;
+    let gHide = 0;
     items.forEach((it, i) => {
       const tg = tags[i];
       if (tg.k < 0.005) { if (tg.d.style.opacity !== '0') tg.d.style.opacity = '0'; return; }
@@ -270,16 +411,13 @@ export function mount(el, opts = {}) {
       box.setFromObject(it.spin); box.getCenter(c0);
       tv.copy(c0).setY(box.max.y).project(camera);
       const sx = (tv.x + 1) / 2 * w, top = (1 - tv.y) / 2 * h, e2 = tg.k * tg.k * (3 - 2 * tg.k);
-      tv.copy(c0).setY(box.min.y).project(camera);
-      const bot = (1 - tv.y) / 2 * h;
-      const below = top - 6 - tg.h < minY && bot + 6 + tg.h < h - 4;
-      if (below !== tg.below) { tg.below = below; const stem = tg.d.querySelector('[data-stem]'); stem.style.order = below ? '-1' : ''; stem.style.transform = below ? 'scaleY(-1)' : ''; }
+      const tight = top - 6 - tg.h < minY; if (tight) gHide = Math.max(gHide, e2);
       const half = Math.min(w / 2, tg.w / 2 + 12), x = Math.max(half, Math.min(w - half, sx)), drift = 10 * (1 - e2);
       tg.d.style.opacity = e2.toFixed(3);
-      tg.d.style.transform = below ? 'translate(' + x + 'px,' + (bot + 6 + drift) + 'px) translate(-50%,0)'
-        : 'translate(' + x + 'px,' + (Math.max(top, minY + tg.h + 6) - 6 - drift) + 'px) translate(-50%,-100%)';
+      tg.d.style.transform = 'translate(' + x + 'px,' + (Math.max(top, (tight ? 8 : minY) + tg.h + 6) - 6 - drift) + 'px) translate(-50%,-100%)';
       tg.d.style.filter = 'blur(' + ((1 - e2) * 4).toFixed(2) + 'px)';
     });
+    if (opts.guard) { const go = gHide > 0.005 ? (1 - gHide).toFixed(2) : ''; if (opts.guard.style.opacity !== go) opts.guard.style.opacity = go; }
     renderer.render(scene, camera);
   };
   const frame = now => {
