@@ -1532,12 +1532,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    at the bottom. Then two glass cards (live tracking, partner manager), How it works, FAQ, final call. */
 .tq-mth { position: relative; width: 100%; height: calc(100vh - 88px); height: calc(100svh - 88px); min-height: 600px; max-height: 980px; overflow: hidden; color: #fff;
   background: radial-gradient(70% 45% at 50% 100%, rgba(170,10,18,.45) 0%, rgba(170,10,18,0) 70%), radial-gradient(75% 60% at 50% 32%, #18181c 0%, #0a0a0b 70%), #0a0a0b; }
+/* from the white header into the dark hero: the site's hand-off curve (as .tq-mth-tail, reversed), short enough
+   to stay above the objects; it sits behind the scene, and mt-hero.js keeps the names below its middle */
+.tq-mth::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: clamp(72px, 11vh, 120px); pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 4.5%, rgba(255,255,255,0.992) 9.1%, rgba(255,255,255,0.98) 13.6%, rgba(255,255,255,0.955) 18.2%, rgba(255,255,255,0.918) 22.7%, rgba(255,255,255,0.869) 27.3%, rgba(255,255,255,0.812) 31.8%, rgba(255,255,255,0.743) 36.4%, rgba(255,255,255,0.665) 40.9%, rgba(255,255,255,0.584) 45.5%, rgba(255,255,255,0.502) 50%, rgba(255,255,255,0.416) 54.5%, rgba(255,255,255,0.335) 59.1%, rgba(255,255,255,0.257) 63.6%, rgba(255,255,255,0.188) 68.2%, rgba(255,255,255,0.131) 72.7%, rgba(255,255,255,0.082) 77.3%, rgba(255,255,255,0.045) 81.8%, rgba(255,255,255,0.02) 86.4%, rgba(255,255,255,0.008) 90.9%, rgba(255,255,255,0) 95.5%); }
 .tq-mth__stage { position: absolute; left: 0; right: 0; top: 0; height: 86%; }
 .tq-mth__fade { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; background: linear-gradient(180deg, rgba(10,10,11,0) 0%, rgba(10,10,11,.7) 45%, rgba(10,10,11,.92) 100%); pointer-events: none; }
-.tq-mth__top { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); top: clamp(28px, 6vh, 56px); display: flex; justify-content: space-between; align-items: center;
-  font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #8a8a92; pointer-events: none; direction: ltr; }
-.tq-mth__top span:last-child { display: flex; align-items: center; gap: 8px; }
-.tq-mth__top i { width: 6px; height: 6px; border-radius: 50%; background: #e7131b; box-shadow: 0 0 10px #e7131b; }
 .tq-mth__foot { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); bottom: clamp(14px, 2.2vh, 22px); display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: flex-end; gap: 22px 40px; pointer-events: none; }
 .tq-mth__h1 { margin: 0; font-size: clamp(44px, 5.8vw, 92px); line-height: .94; font-weight: 700; letter-spacing: -.048em; color: #fff; }
@@ -1550,9 +1550,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
     #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .tq-mth-tail + .tp-sec { padding-top: clamp(16px, 3vw, 40px); }
-@media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout; the top line moves up off the first objects */
+@media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout; a shorter hand-off, the first names sit high */
   .tq-mth__stage { height: 80%; }
-  .tq-mth__top { top: clamp(18px, 2.6vh, 40px); }
+  .tq-mth::before { height: clamp(48px, 7vh, 72px); }
 }
 @media (max-width: 640px) { .tq-mth { height: calc(100vh - 84px); height: calc(100svh - 84px); } }
 .tp-mt-sup { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; margin: clamp(32px, 4.5vw, 56px) auto 0; }
@@ -1832,7 +1832,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   background: radial-gradient(70% 55% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #fff 0, #f7f7f8 clamp(140px, 22vw, 260px), #f7f7f8 calc(100% - 140px), #fff 100%); }
 .tq-earn__in { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; }
 .tq-earn__head { display: flex; flex-direction: column; gap: 16px; }
-.tq-earn__pill { max-width: 100%; box-sizing: border-box; margin-bottom: 2px; color: #0e0e10; }   /* names whose earnings these are: TradeQuo partners */
 .tq-earn__h1 { margin: 0; font-size: clamp(38px, 4.2vw, 60px); line-height: 1.04; font-weight: 700; letter-spacing: -.045em; text-wrap: balance; }
 .tq-earn__sub { margin: 0; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.5; color: #5b5b5b; }
 .tq-earn__grid { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 28px; }
@@ -1981,7 +1980,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <section id="earnings" class="tq-earn" data-screen-label="Earnings hero">
       <div class="tq-earn__in">
         <div class="tq-earn__head">
-          <span class="tp-pill tq-earn__pill">Заробіток партнерів TradeQuo</span>
           <h1 class="tq-earn__h1">Ваша аудиторія. Ваш вплив. <span style="color: #e7131b;">Ваш дохід.</span></h1>
           <p class="tq-earn__sub">Кожен партнер отримує індивідуальні умови. Оберіть профіль, найближчий до вашого, щоб побачити стартову оцінку.</p>
         </div>
