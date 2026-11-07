@@ -344,7 +344,8 @@ if (api) {
     const W = stageEl.clientWidth, H = stageEl.clientHeight, gap = W < 560 ? 34 : 64;
     arrows.forEach(({ b, dir }) => {
       /* beside the platform, but never past the stage's edges (narrow screens) */
-      b.style.left = Math.max(34, Math.min(W - 34, (dir < 0 ? r.x : r.x + r.w) * W + dir * gap)) + 'px';
+      const m = (b.offsetWidth || 54) / 2 + 6;
+      b.style.left = Math.max(m, Math.min(W - m, (dir < 0 ? r.x : r.x + r.w) * W + dir * gap)) + 'px';
       b.style.top = ((r.y + r.h * 0.2) * H) + 'px';
       b.classList.add('is-placed');
     });
