@@ -661,7 +661,7 @@ html { scroll-snap-type: y proximity; }
   [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
   [data-fan-hub] { display: none !important; }
   [data-faq-grid] { grid-template-columns: 1fr !important; }
-  [data-dark-tail] { margin: 0 8px 16px !important; }
+  [data-dark-tail] { margin: 0 0 16px !important; }
   [data-tail-glow] { display: none !important; }
   [data-dark-tail] { background: linear-gradient(180deg, #0a0a0a 0px, #0b0b0b 23px, #0e0e0e 45px, #161616 68px, #232323 90px, #363636 113px, #4d4d4d 135px, #686868 158px, #858585 180px, #a1a1a1 203px, #bcbcbc 225px, #d3d3d3 248px, #e6e6e6 270px, #f3f3f3 293px, #fbfbfb 315px, #fefefe 338px, #ffffff 360px) !important; }
   #faq { padding-top: 284px !important; }
@@ -674,7 +674,7 @@ html { scroll-snap-type: y proximity; }
   [data-flip-sticky] { position: static !important; height: auto !important; display: flex !important; flex-direction: column !important; gap: 16px; overflow: visible !important; padding: 0 !important; perspective: none !important; }
   [data-flip-front] { margin: 0 8px; width: auto !important; align-self: stretch !important; max-width: none !important; transform: none !important; visibility: visible !important; }
   [data-flip-shade] { display: none !important; }
-  [data-flip-back] { position: relative !important; inset: auto !important; transform: none !important; visibility: visible !important; opacity: 1 !important; clip-path: none !important; margin: 0 8px; }
+  [data-flip-back] { position: relative !important; inset: auto !important; transform: none !important; visibility: visible !important; opacity: 1 !important; clip-path: none !important; margin: 0; }
   [data-flip-panel] { height: auto !important; }
   [data-navlinks] { display: none !important; }
   [data-fab] { display: flex !important; }
@@ -1143,7 +1143,7 @@ h1, h2 { line-height: 1.2 !important; }
     </nav>
   </header>
 
-  <section id="signup" data-screen-label="Hero — sign up" style="position: relative; padding: clamp(10px, 1.6vw, 22px) clamp(16px, 4vw, 56px) 0;">
+  <section id="signup" data-screen-label="Hero — sign up" style="position: relative; padding: clamp(10px, 1.6vw, 22px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px);">
     <div data-hero-intro="" style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;">
       <h1 style="margin: 0; max-width: 22ch; font-size: clamp(45px, 5.44vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">حتى 87% من السبريد. تُدفع <span style="color: #e7131b;">يوميًا.</span></h1>
       <p data-sub2="" style="margin: 0; max-width: 60ch; font-size: 22px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">أحِل المتداولين إلى TradeQuo واربح على كل لوت يتداولونه. تُسوّى العمولات يوميًا، مع تتبّع لحظي ودون أي رسوم على الدفعات.</p>
@@ -1297,7 +1297,7 @@ h1, h2 { line-height: 1.2 !important; }
       </div>
     </div>
 
-    <div data-crystals="" style="position: relative; max-width: 860px; margin: clamp(22px, 3vw, 36px) auto 0; border-top: 1px solid #ececee; padding-top: clamp(12px, 2vw, 24px);">
+    <div data-crystals="" style="position: relative; max-width: 860px; margin: clamp(48px, 6.1vw, 88px) auto 0; border-top: 1px solid #ececee; padding-top: clamp(40px, 5.6vw, 80px);">
         <h2 style="margin: clamp(20px, 3vw, 36px) 0 0; text-align: center; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">البرنامج بالأرقام</h2>
         <div data-crys-stage style="position: relative;">
           <picture><source media="(max-width: 640px)" srcset="../assets/posters/crystals-ar-mobile.webp?v=df6b5b8442"><img data-crys-poster fetchpriority="low" src="../assets/posters/crystals-ar-desktop.webp?v=7871239e06" alt="30K+ شريك، $9M+ تُدفع للشركاء شهريًا، حصة من الإيرادات تصل إلى 87%، تقييم 4.9 على Trustpilot، 800K+ عميل متداول، 400+ رحلة تحفيزية" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;"></picture>
@@ -1311,7 +1311,7 @@ h1, h2 { line-height: 1.2 !important; }
   <!-- How it works: sign-up to first payout in three steps (landing.js startHowLine drives the line).
      Shared by the landing, Partner Programs and Commission Plan: the button scrolls to the form on the
      landing and goes to it from the other pages (signupHref and signupNav in build-i18n.py). -->
-  <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(50px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(30px, 4vw, 56px); background: #fff; overflow: hidden;">
+  <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px); background: #fff; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
       <h2 style="margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">من التسجيل إلى أول دفعة<br><span style="color: #e7131b;">في ثلاث خطوات</span></h2>
     </div>
@@ -1357,7 +1357,7 @@ h1, h2 { line-height: 1.2 !important; }
   </section>
 
 
-  <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: clamp(56px, 8vw, 104px) clamp(16px, 4vw, 56px) clamp(60px, 8vw, 110px); background: #fff; color: #0a0a0a;">
+  <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px); background: #fff; color: #0a0a0a;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
       <h2 style="margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a;">احسب قيمة<br><span style="color: #e7131b;">دفعتك الشهرية</span></h2>
       <p data-sub2="" style="margin: 2px 0 0; font-size: 24px; line-height: 1.5; color: #5b5b5b;">حدّد عدد المتداولين وحجم تداولهم الشهري، <br class="br-desk">وسيتحدّث كشف الدفعة فورًا. الحساب مبنيّ على أدنى مستويات السبريد لدينا.</p>
@@ -1460,7 +1460,7 @@ h1, h2 { line-height: 1.2 !important; }
 
   </section>
 
-  <section id="reviews" data-screen-label="Reputation — reviews marquee" style="position: relative; padding: clamp(40px, 6vw, 80px) 0 clamp(24px, 4vw, 48px); background: #fff; color: #0a0a0a; overflow: hidden;">
+  <section id="reviews" data-screen-label="Reputation — reviews marquee" style="position: relative; padding: clamp(48px, 6.1vw, 88px) 0 clamp(48px, 6.1vw, 88px); background: #fff; color: #0a0a0a; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 56px); display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
       <h2 style="margin: 0; max-width: 20ch; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance;">تقييمات من مجتمع المتداولين</h2>
     </div>
@@ -1548,7 +1548,7 @@ h1, h2 { line-height: 1.2 !important; }
         <iframe data-embed data-src="../embeds/infinite-flow.html?lang=ar&v=b81306b2e1" title="Infinite Flow — عمولات تُسوّى كل يوم" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
         <div data-flip-shade="" style="position: absolute; inset: 0; background: #0a0a0a; opacity: 0; pointer-events: none;"></div>
       </div>
-      <div data-flip-back="" style="position: absolute; inset: clamp(8px, 1.4vw, 20px) clamp(8px, 1.4vw, 20px) 0; opacity: 0; transform: scale(.9); transform-origin: 50% 50%; visibility: hidden; will-change: transform, opacity;">
+      <div data-flip-back="" style="position: absolute; inset: clamp(8px, 1.4vw, 20px) 0 0; opacity: 0; transform: scale(.9); transform-origin: 50% 50%; visibility: hidden; will-change: transform, opacity;">
       <div data-flip-panel="" style="position: relative; overflow: hidden; height: 100%; box-sizing: border-box; display: flex; align-items: center; border-radius: clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px) 0 0; background: #0a0a0a; color: #fff; padding: clamp(26px, 5vh, 56px) clamp(20px, 4vw, 56px) clamp(10px, 2vh, 24px);">
       <div data-panel-glow="" aria-hidden="true" style="position: absolute; left: 62%; bottom: -30%; width: 60%; height: 70%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.22), transparent); pointer-events: none;"></div>
       <div data-fan-grid="" style="position: relative; width: 100%; max-width: 1360px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(16px, 3vh, 36px); align-items: center;">
@@ -1602,10 +1602,10 @@ h1, h2 { line-height: 1.2 !important; }
     </div>
   </div>
 
-  <div data-dark-tail="" style="position: relative; margin: 0 clamp(8px, 1.4vw, 20px) clamp(16px, 3vw, 32px); border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); background: linear-gradient(180deg, #0a0a0a 0px, #0a0a0a 25px, #0c0c0c 51px, #0f0f0f 76px, #151515 102px, #1e1e1e 127px, #2a2a2a 153px, #383838 178px, #494949 204px, #5c5c5c 229px, #707070 255px, #858585 280px, #999999 305px, #adadad 331px, #c0c0c0 356px, #d1d1d1 382px, #dfdfdf 407px, #ebebeb 433px, #f4f4f4 458px, #fafafa 484px, #fdfdfd 509px, #ffffff 535px, #ffffff 560px); color: #0a0a0a; overflow: clip;">
+  <div data-dark-tail="" style="position: relative; margin: 0 0 clamp(16px, 3vw, 32px); border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); background: linear-gradient(180deg, #0a0a0a 0px, #0a0a0a 25px, #0c0c0c 51px, #0f0f0f 76px, #151515 102px, #1e1e1e 127px, #2a2a2a 153px, #383838 178px, #494949 204px, #5c5c5c 229px, #707070 255px, #858585 280px, #999999 305px, #adadad 331px, #c0c0c0 356px, #d1d1d1 382px, #dfdfdf 407px, #ebebeb 433px, #f4f4f4 458px, #fafafa 484px, #fdfdfd 509px, #ffffff 535px, #ffffff 560px); color: #0a0a0a; overflow: clip;">
   <div data-tail-glow="" aria-hidden="true" style="position: absolute; left: 62%; top: calc(-40vh + clamp(8px, 1.4vw, 20px) * .4); width: 60%; height: calc(70vh - clamp(8px, 1.4vw, 20px) * .7); transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.22), transparent); pointer-events: none;"></div>
   <canvas data-ref="star" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 150px); mask-image: linear-gradient(180deg, transparent 0, #000 150px);"></canvas>
-  <section id="faq" data-screen-label="Partner Program FAQ" style="position: relative; padding: 430px clamp(20px, 4vw, 56px) clamp(32px, 5vw, 64px);">
+  <section id="faq" data-screen-label="Partner Program FAQ" style="position: relative; padding: 430px clamp(20px, 4vw, 56px) clamp(56px, 8vw, 112px);">
     <div data-faq-grid="" style="position: relative; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(32px, 5vw, 72px); align-items: start;">
       <div data-faq-side="" style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: 20px;">
         <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 9px; height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #e4e4e1; background: #fff; font-size: 14px; font-weight: 500; color: #0a0a0a;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #e7131b;"></span>الأسئلة الشائعة</div>
@@ -1773,6 +1773,6 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=49b7cf4ef8" defer></script>
+<script src="../assets/js/landing.js?v=558bf43e63" defer></script>
 </body>
 </html>

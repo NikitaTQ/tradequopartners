@@ -610,7 +610,7 @@ html { scroll-snap-type: y proximity; }
   [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
   [data-fan-hub] { display: none !important; }
   [data-faq-grid] { grid-template-columns: 1fr !important; }
-  [data-dark-tail] { margin: 0 8px 16px !important; }
+  [data-dark-tail] { margin: 0 0 16px !important; }
   [data-tail-glow] { display: none !important; }
   [data-dark-tail] { background: linear-gradient(180deg, #0a0a0a 0px, #0b0b0b 23px, #0e0e0e 45px, #161616 68px, #232323 90px, #363636 113px, #4d4d4d 135px, #686868 158px, #858585 180px, #a1a1a1 203px, #bcbcbc 225px, #d3d3d3 248px, #e6e6e6 270px, #f3f3f3 293px, #fbfbfb 315px, #fefefe 338px, #ffffff 360px) !important; }
   #faq { padding-top: 284px !important; }
@@ -623,7 +623,7 @@ html { scroll-snap-type: y proximity; }
   [data-flip-sticky] { position: static !important; height: auto !important; display: flex !important; flex-direction: column !important; gap: 16px; overflow: visible !important; padding: 0 !important; perspective: none !important; }
   [data-flip-front] { margin: 0 8px; width: auto !important; align-self: stretch !important; max-width: none !important; transform: none !important; visibility: visible !important; }
   [data-flip-shade] { display: none !important; }
-  [data-flip-back] { position: relative !important; inset: auto !important; transform: none !important; visibility: visible !important; opacity: 1 !important; clip-path: none !important; margin: 0 8px; }
+  [data-flip-back] { position: relative !important; inset: auto !important; transform: none !important; visibility: visible !important; opacity: 1 !important; clip-path: none !important; margin: 0; }
   [data-flip-panel] { height: auto !important; }
   [data-navlinks] { display: none !important; }
   [data-fab] { display: flex !important; }
