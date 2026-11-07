@@ -1926,6 +1926,24 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (max-width: 640px) {   /* phones: the cards' small print at 11px */
   .tq-ecard__fhead, .tq-ecard__ctxt span { font-size: 11px; }
 }
+/* desktops: the whole first screen — title, the three cards, the note and both CTAs — fits in the window
+   (down to 1280x720 and 1366x768 laptops) */
+@media (min-width: 1041px) {
+  .tq-earn { padding-top: clamp(20px, 3.2vh, 40px); }
+  .tq-earn__head { gap: 12px; }
+  .tq-earn__grid { margin-top: clamp(24px, 3.6vh, 40px); }
+  .tq-earn__foot { margin-top: clamp(18px, 2.8vh, 30px); gap: 14px; }
+  .tq-earn__note { max-width: 1000px; }
+}
+@media (min-width: 1041px) and (max-height: 820px) {   /* short windows: a smaller title, the cards' scene a little lower */
+  .tq-earn__h1 { font-size: clamp(38px, min(4.2vw, 6.6vh), 60px); }
+  .tq-earn__head { gap: 10px; }
+  .tq-earn__grid { margin-top: 18px; }
+  .tq-earn__foot { margin-top: 12px; gap: 12px; }
+  .tq-ecard__body { gap: 10px; }
+  .tq-ecard__scene { height: 274px; }
+  .tq-ecard__front { padding: 13px 14px 12px; gap: 7px; }   /* shorter, so it still clears the back card's caption */
+}
 @media (prefers-reduced-motion: reduce) { .tq-ecard, .tq-ecard__body, .tq-ecard__back, .tq-ecard__front, .tq-ecard__glare, .tq-earn__cta { transition: none; } }
 </style>
 </head>
