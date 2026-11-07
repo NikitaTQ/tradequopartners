@@ -943,7 +943,7 @@
    *   .5–.76  it grows to the full screen; .52–.72 it turns into the black perks section
    *   .74–.88 the perks heading and CTA come in; past .86 the six cards are dealt in a fan
    * The persona rows and stories are page text; the 3D stage follows the active one and reports
-   * clicks on itself (window.__pfWhoSet). The module, and three.js with it, loads when the scene is
+   * clicks on itself (window.__pfWhoSet). On phones the rows and stories are a swiper of cards instead. The module, and three.js with it, loads when the scene is
    * within a screen and a half. Phones (<900px) and reduced motion: nothing is pinned, the perks
    * section moves into #pf-perks-host and its cards scroll sideways. */
   function startWhoFlow() {
@@ -967,7 +967,37 @@
       if (!fromStage && window.__whoApi) window.__whoApi.pick(i);
     };
     rows.forEach((r, i) => r.addEventListener('click', () => show(i, false)));
-    window.__pfWhoSet = (i) => show(i, true);
+    window.__pfWhoSet = (i) => { show(i, true); if (!pSelf) swipeTo(i); };
+
+    /* phones: the types as a swiper of cards (partner.css). The card in the middle becomes the active type
+       and the 3D stage follows it; the stage's arrows and taps bring their card in. The stage doesn't cycle
+       on its own here, or the cards would move while being read. */
+    const pcards = $('[data-pf-cards]', block), pcs = pcards ? [...pcards.children] : [], pdots = $$('[data-pf-dots] button', block);
+    const swipeMq = matchMedia('(max-width: 640px)');
+    const pmid = (el) => { const r = el.getBoundingClientRect(); return r.left + r.width / 2; };
+    let pRaf = 0, pAuto = 0, pSelf = false;   /* pSelf: the swiper itself picked the type, the stage's echo moves nothing */
+    const pSync = () => {
+      pRaf = 0;
+      if (!pcards || !swipeMq.matches) return;
+      const c0 = pmid(pcards);
+      let on = 0, best = Infinity;
+      pcs.forEach((c, i) => { const d = Math.abs(pmid(c) - c0); if (d < best) { best = d; on = i; } });
+      pdots.forEach((b, i) => { if (i === on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+      if (!pAuto && on !== active) { pSelf = true; show(on, false); pSelf = false; }
+    };
+    function swipeTo(i, smooth = true) {
+      if (!pcards || !swipeMq.matches || !pcs[i]) return;
+      clearTimeout(pAuto);
+      pAuto = setTimeout(() => { pAuto = 0; pSync(); }, 700);   /* cards passed on the way don't become active */
+      pcards.scrollTo({ left: pcards.scrollLeft + pmid(pcs[i]) - pmid(pcards), behavior: smooth && !reducedMotion() ? 'smooth' : 'auto' });
+    }
+    const pHold = () => { if (window.__whoApi && window.__whoApi.hold) window.__whoApi.hold(swipeMq.matches); };
+    if (pcards) {
+      pcards.addEventListener('scroll', () => { if (!pRaf) pRaf = requestAnimationFrame(pSync); }, { passive: true });
+      pdots.forEach((b, i) => b.addEventListener('click', () => { swipeTo(i); show(i, false); }));
+      addEventListener('pf:ready', pHold); pHold();
+      if (swipeMq.addEventListener) swipeMq.addEventListener('change', pHold);
+    }
 
     /* the 3D module loads when the scene is near */
     const src = flow.dataset.pfModule;
@@ -995,9 +1025,10 @@
       const d = i - (N - 1) / 2, z = mq.matches ? 1 : K;
       c.style.transitionDelay = (on ? i * 70 : 0) + 'ms';
       c.style.opacity = on ? 1 : 0;
-      c.style.width = (220 * z) + 'px'; c.style.height = (340 * z) + 'px'; c.style.marginLeft = mq.matches ? '' : (-110 * z) + 'px';
+      /* in the phone grid the CSS sizes the cards */
+      c.style.width = mq.matches ? '' : (220 * z) + 'px'; c.style.height = mq.matches ? '' : (340 * z) + 'px'; c.style.marginLeft = mq.matches ? '' : (-110 * z) + 'px';
       c.style.bottom = mq.matches ? '' : B + 'px';
-      c.firstElementChild.style.zoom = z;
+      c.firstElementChild.style.zoom = mq.matches ? '' : z;
       c.style.transform = on
         ? 'translate3d(' + Math.round(d * 192 * K) + 'px,' + Math.round(d * d * 11 * K) + 'px,0) rotate(' + (d * 8) + 'deg)'
         : 'translate3d(0,60px,0) scale(0.86)';
