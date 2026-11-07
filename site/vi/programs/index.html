@@ -1114,6 +1114,34 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-progdots button, .tq-earn__dots button { width: 44px !important; height: 44px !important; }
   footer p { font-size: 12px !important; }
 }
+
+/* ---- Partner film on phones: an MP4 of embeds/tradequo-film-mobile.html ------------------------------
+   The live film (React + three.js, six 1080x1920 layers scaled down) ran iPhones out of memory: the film
+   stayed blank and Safari reloaded the page. The video is the same 22 s loop, recorded frame by frame
+   (720x1280, H.264). It plays muted inline while in view; a tap shows the film's own controls. */
+.tq-fvid { position: relative; width: 100%; height: 100%; }
+.tq-fvid video { display: block; width: 100%; height: 100%; object-fit: contain; background: transparent; }
+.tq-fvid__ctl { position: absolute; left: 50%; bottom: 17px; transform: translateX(-50%); display: flex; align-items: flex-start; gap: 10px; padding-top: 3px;
+  opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.tq-fvid[data-ctl] .tq-fvid__ctl { opacity: 1; pointer-events: auto; }
+@media (hover: hover) {
+  .tq-fvid__ctl { opacity: .55; pointer-events: auto; }
+  .tq-fvid:hover .tq-fvid__ctl, .tq-fvid[data-paused] .tq-fvid__ctl { opacity: 1; }
+}
+.tq-fvid__skip { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tq-fvid__btn { position: relative; width: 27px; height: 27px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(255,255,255,.24); background: rgba(12,12,14,.42); color: #fff; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 6px 18px -6px rgba(0,0,0,.45); transition: transform .15s ease, background .15s ease; -webkit-tap-highlight-color: transparent; }
+.tq-fvid__btn::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; }   /* 44px to tap */
+.tq-fvid__btn--main { width: 34px; height: 34px; margin-top: -3px; }
+.tq-fvid__btn--main::after { inset: -5px; }
+.tq-fvid__btn:active { transform: scale(.94); }
+.tq-fvid__btn:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tq-fvid__pill { font: 600 11px/1 'Fragment Mono', ui-monospace, monospace; letter-spacing: .04em; color: #fff; padding: 3px 7px; border-radius: 999px;
+  background: rgba(12,12,14,.42); border: 1px solid rgba(255,255,255,.24); }
+.tq-fvid__i-play { display: none; }
+.tq-fvid[data-paused] .tq-fvid__i-play { display: block; }
+.tq-fvid[data-paused] .tq-fvid__i-pause { display: none; }
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -2362,6 +2390,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=0ae1ddb3f2" defer></script>
+<script src="../../assets/js/landing.js?v=f6d4d1ba46" defer></script>
 </body>
 </html>
