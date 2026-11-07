@@ -2,7 +2,8 @@
  * creative cards, a TradingView screen, signal candles on a base, the academy temple — over the dark
  * hero. They pop in, bob, follow the mouse (parallax); hovering or tapping one shows its name above it.
  * Phones and other tall screens (stage narrower than 0.95 of its height) get a 2×2 layout.
- * Loaded as a module by marketing.html; three.js is the site's own copy. The page's text stays as it is
+ * A name sits above its object, below the decorative line on top (opts.guard); where that leaves no
+ * room it goes under the object. Loaded as a module by marketing.html; three.js is the site's own copy. The page's text stays as it is
  * when WebGL is missing. Labels come from the stage's data-labels (mt.top.l1–l4, joined by |). */
 import * as THREE from '../../vendor/three@0.184.0/three.module.min.js';
 
@@ -154,7 +155,7 @@ function buildTemple(M) {
 }
 
 const PRESETS = {
-  portrait: { fitW: 3.25, look: [0, -0.05, 0], scale: 0.98, pos: [[-0.72, 1.12, 0.1], [0.74, 0.62, -0.35], [-0.7, -0.62, 0.2], [0.72, -1.12, 0]] },
+  portrait: { fitW: 3.25, look: [0, -0.05, 0], scale: 0.84, pos: [[-0.72, 1.12, 0.1], [0.74, 0.62, -0.35], [-0.7, -0.62, 0.2], [0.72, -1.12, 0]] },
   landscape: { fitW: 8.7, look: [0, 0.05, 0], scale: 1.12, pos: [[-3.3, 0.35, 0], [-1.1, -0.1, -0.4], [1.12, 0.4, 0.1], [3.3, -0.12, 0]] },
 };
 
@@ -187,12 +188,13 @@ export function mount(el, opts = {}) {
   const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xffffff, size: 0.022, transparent: true, opacity: 0.45, depthWrite: false }));
   scene.add(dust);
 
-  let preset = PRESETS.landscape, w = 1, h = 1;
+  let preset = PRESETS.landscape, w = 1, h = 1, minY = 0;
   const resize = () => {
     w = opts.width || el.clientWidth; h = opts.height || el.clientHeight; if (!w || !h) return;
     renderer.setSize(w, h, false); camera.aspect = w / h;
     preset = (opts.layout === 'portrait' || (!opts.layout && w / h < 0.95)) ? PRESETS.portrait : PRESETS.landscape;
     camera.updateProjectionMatrix();
+    minY = opts.guard ? Math.max(0, opts.guard.getBoundingClientRect().bottom - el.getBoundingClientRect().top) + 10 : 0;
   };
   const ro = new ResizeObserver(resize); ro.observe(el); resize();
 
@@ -203,11 +205,11 @@ export function mount(el, opts = {}) {
     d.style.cssText = 'position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;white-space:nowrap;will-change:transform,opacity;';
     d.innerHTML = '<span style="font-family:\'Fragment Mono\',monospace;font-size:10.5px;letter-spacing:0.22em;color:#E7131B;">0' + (i + 1) + '</span>' +
       '<span data-t style="font-family:\'DM Sans\',system-ui,sans-serif;font-weight:700;letter-spacing:-0.035em;line-height:1.05;background:linear-gradient(180deg,#FFFFFF 0%,#E4E4E9 34%,#8C8C94 58%,#C9C9CF 78%,#F4F4F7 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.75));">' + txt + '</span>' +
-      '<span style="width:1px;height:18px;background:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0));"></span>';
+      '<span data-stem style="width:1px;height:18px;background:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0));"></span>';
     d.setAttribute('aria-hidden', 'true');
-    overlay.appendChild(d); return { d, t: d.querySelector('[data-t]'), k: 0, w: 0, fs: 0 };
+    overlay.appendChild(d); return { d, t: d.querySelector('[data-t]'), k: 0, w: 0, h: 0, fs: 0, below: false };
   });
-  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), box = new THREE.Box3(), tv = new THREE.Vector3();
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), box = new THREE.Box3(), tv = new THREE.Vector3(), c0 = new THREE.Vector3();
   let hover = -1;
   const pick = (cx, cy) => {
     const rc = el.getBoundingClientRect(); if (!rc.width) return -1;
@@ -258,17 +260,24 @@ export function mount(el, opts = {}) {
     for (let i = 0; i < N; i++) { a.array[i * 3 + 1] += dt * 0.05 * wob; if (a.array[i * 3 + 1] > 4) a.array[i * 3 + 1] = -4; a.array[i * 3] += Math.sin(t * 0.4 + seeds[i]) * dt * 0.02 * wob; }
     a.needsUpdate = true;
     scene.updateMatrixWorld();
-    const portrait = preset === PRESETS.portrait, fs = portrait ? 22 : 30;
+    /* the name goes above its object; when the line on top leaves no room there, below it (stem up) */
+    const portrait = preset === PRESETS.portrait, fs = portrait ? 20 : 30;
     items.forEach((it, i) => {
       const tg = tags[i];
       if (tg.k < 0.005) { if (tg.d.style.opacity !== '0') tg.d.style.opacity = '0'; return; }
-      box.setFromObject(it.spin); box.getCenter(tv); tv.y = box.max.y; tv.project(camera);
-      const sx = (tv.x + 1) / 2 * w, e2 = tg.k * tg.k * (3 - 2 * tg.k);
-      const sy = Math.max((1 - tv.y) / 2 * h, portrait ? 168 : 140);
-      const half = Math.min(w / 2, (tg.w || (tg.w = tg.d.offsetWidth)) / 2 + 12), x = Math.max(half, Math.min(w - half, sx));
       if (tg.fs !== fs) { tg.t.style.fontSize = fs + 'px'; tg.fs = fs; tg.w = 0; }
+      if (!tg.w) { tg.w = tg.d.offsetWidth; tg.h = tg.d.offsetHeight; }
+      box.setFromObject(it.spin); box.getCenter(c0);
+      tv.copy(c0).setY(box.max.y).project(camera);
+      const sx = (tv.x + 1) / 2 * w, top = (1 - tv.y) / 2 * h, e2 = tg.k * tg.k * (3 - 2 * tg.k);
+      tv.copy(c0).setY(box.min.y).project(camera);
+      const bot = (1 - tv.y) / 2 * h;
+      const below = top - 6 - tg.h < minY && bot + 6 + tg.h < h - 4;
+      if (below !== tg.below) { tg.below = below; const stem = tg.d.querySelector('[data-stem]'); stem.style.order = below ? '-1' : ''; stem.style.transform = below ? 'scaleY(-1)' : ''; }
+      const half = Math.min(w / 2, tg.w / 2 + 12), x = Math.max(half, Math.min(w - half, sx)), drift = 10 * (1 - e2);
       tg.d.style.opacity = e2.toFixed(3);
-      tg.d.style.transform = 'translate(' + x + 'px,' + (sy - 6 - 10 * (1 - e2)) + 'px) translate(-50%,-100%)';
+      tg.d.style.transform = below ? 'translate(' + x + 'px,' + (bot + 6 + drift) + 'px) translate(-50%,0)'
+        : 'translate(' + x + 'px,' + (Math.max(top, minY + tg.h + 6) - 6 - drift) + 'px) translate(-50%,-100%)';
       tg.d.style.filter = 'blur(' + ((1 - e2) * 4).toFixed(2) + 'px)';
     });
     renderer.render(scene, camera);
@@ -280,13 +289,15 @@ export function mount(el, opts = {}) {
     step(dt);
   };
   raf = requestAnimationFrame(frame);
-  return { snap(sec) { resize(); for (let k = 0; k < sec * 30; k++) step(1 / 30); return cv; }, destroy() { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); removeEventListener('pointerup', onUp); renderer.dispose(); cv.remove(); overlay.remove(); } };
+  return { show(i) { hover = i; }, snap(sec) { resize(); for (let k = 0; k < sec * 30; k++) step(1 / 30); return cv; }, destroy() { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); removeEventListener('pointerup', onUp); renderer.dispose(); cv.remove(); overlay.remove(); } };
 }
 
 const stage = document.querySelector('[data-mt-stage]');
 if (stage) {
   try {
     const labels = (stage.dataset.labels || '').split('|').filter(Boolean);
-    mount(stage, labels.length === 4 ? { labels } : {});
+    const opts = { guard: stage.parentElement.querySelector('.tq-mth__top') };
+    if (labels.length === 4) opts.labels = labels;
+    stage.mtHero = mount(stage, opts);   /* show(i) names an object, as a hover would */
   } catch (e) { /* no WebGL: the hero keeps its background, title and list */ }
 }
