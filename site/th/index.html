@@ -1164,6 +1164,15 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     linear-gradient(#e7131b, #e7131b) left bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) left bottom / 2px var(--ck) no-repeat,
     linear-gradient(#e7131b, #e7131b) right bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) right bottom / 2px var(--ck) no-repeat; }
 @media (max-width: 640px) { [data-invoice] { --ck: 14px; --fi: 12px 8px 8px; } }
+
+/* ---- Phones: the first CTA of /programs/ and /partner-terms/ in the first screen -------------------------
+   Short subtitles (.tq-ph / .tq-nph: one sentence of the full one), tighter spacing, a lower program art,
+   the earnings card's scene lower with a tighter front card, the programs' "for …" line under the CTAs. */
+.tq-ph { display: none; }
+@media (max-width: 640px) {
+  .tq-ph { display: inline; }
+  .tq-nph { display: none; }
+}
 </style>
 <style id="i18n-fonts">
 @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../assets/fonts/intl/noto-sans-thai-400-800-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }

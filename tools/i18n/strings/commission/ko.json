@@ -5,6 +5,7 @@
   "cp.nav.payouts": "지급 일정",
   "cp.earn.h1": "당신의 오디언스. 당신의 영향력. <red>당신의 수익.</red>",
   "cp.earn.sub": "모든 파트너에게 개별 조건이 적용됩니다. 가장 가까운 프로필을 선택해 예상 수익을 확인하세요.",
+  "cp.earn.subShort": "가장 가까운 프로필을 선택해 예상 수익을 확인하세요.",
   "cp.earn.c1.label": "콘텐츠 크리에이터",
   "cp.earn.c1.who": "YouTube, 블로그 또는 소셜 채널",
   "cp.earn.c1.ctx": "파트너 채널",

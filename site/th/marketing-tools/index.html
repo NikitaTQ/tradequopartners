@@ -1164,6 +1164,15 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     linear-gradient(#e7131b, #e7131b) left bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) left bottom / 2px var(--ck) no-repeat,
     linear-gradient(#e7131b, #e7131b) right bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) right bottom / 2px var(--ck) no-repeat; }
 @media (max-width: 640px) { [data-invoice] { --ck: 14px; --fi: 12px 8px 8px; } }
+
+/* ---- Phones: the first CTA of /programs/ and /partner-terms/ in the first screen -------------------------
+   Short subtitles (.tq-ph / .tq-nph: one sentence of the full one), tighter spacing, a lower program art,
+   the earnings card's scene lower with a tighter front card, the programs' "for …" line under the CTAs. */
+.tq-ph { display: none; }
+@media (max-width: 640px) {
+  .tq-ph { display: inline; }
+  .tq-nph { display: none; }
+}
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -1966,6 +1975,40 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-ecard__front { padding: 13px 14px 12px; gap: 7px; }   /* shorter, so it still clears the back card's caption */
 }
 @media (prefers-reduced-motion: reduce) { .tq-ecard, .tq-ecard__body, .tq-ecard__back, .tq-ecard__front, .tq-ecard__glare, .tq-earn__cta { transition: none; } }
+
+/* phones: the first CTA in the first screen (with the short subtitles, site.css .tq-ph) */
+@media (max-width: 640px) {
+  .tp-hero .tp-h1 { font-size: 34px; }
+  .tp-hero .tp-head { gap: 6px; }
+  .tp-hero .tp-stage { margin-top: 8px; }
+  .tp-stage > .tp-programs { padding-top: 0; }
+  .tp-prog__art { aspect-ratio: auto; height: 88px; }
+  .tp-prog__tag { margin-top: 12px; }
+  .tp-prog__title, .tp-prog__desc { margin-top: 6px; }
+  .tp-prog__value { margin-top: 12px; padding-top: 12px; }
+  .tp-prog__title { font-size: 22px; }
+  .tp-prog__desc { font-size: 14px; line-height: 1.45; }
+  .tp-prog__value b { font-size: 28px; }
+  .tp-ticks { margin-top: 10px; gap: 5px; }
+  .tp-ticks li { font-size: 14px; line-height: 1.35; }
+  .tp-prog__cta { margin-top: 0; padding-top: 14px; gap: 10px; }
+  .tp-prog__for { order: 1; margin-top: 10px; text-align: center; }   /* under the CTAs */
+  .tq-earn { padding-top: 8px; }
+  .tq-earn__head { gap: 6px; }
+  .tq-earn__h1 { font-size: 32px; }
+  .tq-earn__sub { font-size: 15px; line-height: 1.4; }
+  .tq-earn__grid { margin-top: 12px; padding-bottom: 26px; }
+  .tq-ecard__top { gap: 4px; }
+  .tq-ecard__body { gap: 10px; }
+  /* the channel mini-card behind the estimate repeats the card's own caption: phones show the estimate alone */
+  .tq-ecard__back { display: none; }
+  .tq-ecard__scene { height: auto; padding: 12px; }
+  .tq-ecard__front { position: relative; inset: auto; bottom: auto; width: auto; margin: 0 auto; max-width: 300px; padding: 13px 14px 12px; gap: 7px; }
+  .tq-earn__dots { margin-top: -31px; }
+  .tq-earn__foot { margin-top: 2px; gap: 10px; }
+  .tq-earn__note { font-size: 12px; line-height: 1.45; }
+  .tq-earn__cta { height: 48px; }
+}
 </style>
 <style id="i18n-fonts">
 @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../../assets/fonts/intl/noto-sans-thai-400-800-thai.woff2) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }

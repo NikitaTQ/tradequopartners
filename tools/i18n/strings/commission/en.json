@@ -5,6 +5,7 @@
   "cp.nav.payouts": "Payouts",
   "cp.earn.h1": "Your audience. Your influence. <red>Your earnings.</red>",
   "cp.earn.sub": "Every partner gets individual terms. Pick the profile closest to yours to see a starting estimate.",
+  "cp.earn.subShort": "Pick the profile closest to yours to see a starting estimate.",
   "cp.earn.c1.label": "Content creator",
   "cp.earn.c1.who": "YouTube, blog or social channel",
   "cp.earn.c1.ctx": "Partner channel",

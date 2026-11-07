@@ -5,6 +5,7 @@
   "cp.nav.payouts": "Versements",
   "cp.earn.h1": "Votre audience. Votre influence. <red>Vos gains.</red>",
   "cp.earn.sub": "Chaque partenaire bénéficie de conditions personnalisées. Choisissez le profil le plus proche du vôtre pour voir une estimation de départ.",
+  "cp.earn.subShort": "Choisissez le profil le plus proche du vôtre pour voir une estimation de départ.",
   "cp.earn.c1.label": "Créateur de contenu",
   "cp.earn.c1.who": "Chaîne YouTube, blog ou réseau social",
   "cp.earn.c1.ctx": "Chaîne partenaire",
