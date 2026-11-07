@@ -102,7 +102,7 @@ const N = METRICS.length;
 const HR = 0.64;                        // hexagon circumradius (vertex left/right)
 const HW = HR * 2, HH = HR * Math.sqrt(3);   // across corners / across flats
 const DW = HR * 1.44, DH = HR * 0.66;   // metric plate, inside the faceted dome
-const TX = 2048, TY = Math.round(TX * DH / DW);
+const TX = innerWidth <= 640 ? 1024 : 2048, TY = Math.round(TX * DH / DW);   /* phones: ~150px plates, a quarter of the memory */
 const INK = { clear: '#0A0A0A', smoked: '#FFFFFF' };
 const SUB = { clear: '#0A0A0A', smoked: '#FFFFFF' };
 const HALO = { clear: 'rgba(255,255,255,0.6)', smoked: 'rgba(0,0,0,0.45)' };

@@ -1112,6 +1112,34 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-progdots button, .tq-earn__dots button { width: 44px !important; height: 44px !important; }
   footer p { font-size: 12px !important; }
 }
+
+/* ---- Partner film on phones: an MP4 of embeds/tradequo-film-mobile.html ------------------------------
+   The live film (React + three.js, six 1080x1920 layers scaled down) ran iPhones out of memory: the film
+   stayed blank and Safari reloaded the page. The video is the same 22 s loop, recorded frame by frame
+   (720x1280, H.264). It plays muted inline while in view; a tap shows the film's own controls. */
+.tq-fvid { position: relative; width: 100%; height: 100%; }
+.tq-fvid video { display: block; width: 100%; height: 100%; object-fit: contain; background: transparent; }
+.tq-fvid__ctl { position: absolute; left: 50%; bottom: 17px; transform: translateX(-50%); display: flex; align-items: flex-start; gap: 10px; padding-top: 3px;
+  opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.tq-fvid[data-ctl] .tq-fvid__ctl { opacity: 1; pointer-events: auto; }
+@media (hover: hover) {
+  .tq-fvid__ctl { opacity: .55; pointer-events: auto; }
+  .tq-fvid:hover .tq-fvid__ctl, .tq-fvid[data-paused] .tq-fvid__ctl { opacity: 1; }
+}
+.tq-fvid__skip { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tq-fvid__btn { position: relative; width: 27px; height: 27px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(255,255,255,.24); background: rgba(12,12,14,.42); color: #fff; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 6px 18px -6px rgba(0,0,0,.45); transition: transform .15s ease, background .15s ease; -webkit-tap-highlight-color: transparent; }
+.tq-fvid__btn::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; }   /* 44px to tap */
+.tq-fvid__btn--main { width: 34px; height: 34px; margin-top: -3px; }
+.tq-fvid__btn--main::after { inset: -5px; }
+.tq-fvid__btn:active { transform: scale(.94); }
+.tq-fvid__btn:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tq-fvid__pill { font: 600 11px/1 'Fragment Mono', ui-monospace, monospace; letter-spacing: .04em; color: #fff; padding: 3px 7px; border-radius: 999px;
+  background: rgba(12,12,14,.42); border: 1px solid rgba(255,255,255,.24); }
+.tq-fvid__i-play { display: none; }
+.tq-fvid[data-paused] .tq-fvid__i-play { display: block; }
+.tq-fvid[data-paused] .tq-fvid__i-pause { display: none; }
 </style>
 </head>
 <body>
@@ -1301,7 +1329,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
         <h2 style="margin: clamp(20px, 3vw, 36px) 0 0; text-align: center; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">The program in numbers</h2>
         <div data-crys-stage style="position: relative;">
           <picture><source media="(max-width: 640px)" srcset="assets/posters/crystals-en-mobile.webp?v=e030b57492"><img data-crys-poster fetchpriority="low" src="assets/posters/crystals-en-desktop.webp?v=2e7080925d" alt="30K+ partners, $9M+ paid to partners monthly, up to 87% revenue share, 4.9 Trustpilot rating, 800K+ client traders, 400+ incentive trips" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;"></picture>
-          <iframe data-embed data-src="embeds/crystals.html?v=9a3251997f" title="TradeQuo in numbers" style="position: relative; display: block; width: 100%; aspect-ratio: 1.6 / 1; border: 0; background: #fff; pointer-events: none; opacity: 0; transition: opacity .5s ease;"></iframe>
+          <iframe data-embed data-src="embeds/crystals.html?v=f55d0cd06d" title="TradeQuo in numbers" style="position: relative; display: block; width: 100%; aspect-ratio: 1.6 / 1; border: 0; background: #fff; pointer-events: none; opacity: 0; transition: opacity .5s ease;"></iframe>
         </div>
       
       <div data-crys-cta="" style="display: flex; justify-content: center; margin-top: clamp(18px, 2.6vw, 32px);"><a class="tq-crys" href="#calculator" aria-label="Estimate your earnings"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">Estimate your earnings</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a></div>
@@ -1535,7 +1563,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       <span aria-hidden="true" style="position: absolute; inset: 3px; border-radius: 31px; border: 1px solid rgba(255,255,255,.75); pointer-events: none;"></span>
       <div style="position: relative; width: 100%; height: 100%; border-radius: 27px; overflow: hidden; background: linear-gradient(148deg, rgba(255,255,255,.92) 0%, rgba(228,232,238,.78) 38%, rgba(245,247,250,.9) 62%, rgba(214,219,226,.8) 100%); box-shadow: 0 0 0 1px rgba(16,17,20,.18), 0 10px 26px -14px rgba(10,12,16,.45) inset;">
         <span aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 46%; height: 60%; border-top-left-radius: 27px; background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,0) 72%); pointer-events: none;"></span>
-        <iframe data-embed data-src="embeds/tradequo-film-mobile.html?v=4af12ac751" title="TradeQuo Partner Program film" scrolling="no" style="position: relative; width: 100%; height: 100%; border: 0; display: block; border-radius: 27px; background: transparent;" allowtransparency="true"></iframe>
+        <div class="tq-fvid" data-film-video>
+          <video muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback poster="assets/video/film-mobile-poster.jpg?v=586b87f23d" aria-label="TradeQuo Partner Program film"><source src="assets/video/film-mobile.mp4?v=5457946588" type="video/mp4"></video>
+          <div class="tq-fvid__ctl">
+            <span class="tq-fvid__skip"><button type="button" class="tq-fvid__btn" data-fv-skip="-1.5" aria-label="Back 1.5 seconds"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 6.2v11.6c0 .6-.7 1-1.2.6L3.6 12.6a.8.8 0 0 1 0-1.2l6.7-5.8c.5-.4 1.2 0 1.2.6z" fill="#fff"/><path d="M21 6.2v11.6c0 .6-.7 1-1.2.6l-6.7-5.8a.8.8 0 0 1 0-1.2l6.7-5.8c.5-.4 1.2 0 1.2.6z" fill="#fff" opacity=".7"/></svg></button><span class="tq-fvid__pill" aria-hidden="true">−1.5s</span></span>
+            <button type="button" class="tq-fvid__btn tq-fvid__btn--main" data-fv-play aria-label="Play video"><svg class="tq-fvid__i-pause" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2.5" width="2.8" height="9" rx="1" fill="#fff"/><rect x="8.2" y="2.5" width="2.8" height="9" rx="1" fill="#fff"/></svg><svg class="tq-fvid__i-play" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.6v8.8c0 .5.5.8.9.5l6.6-4.4a.6.6 0 0 0 0-1L4.9 2.1c-.4-.3-.9 0-.9.5z" fill="#fff"/></svg></button>
+            <span class="tq-fvid__skip"><button type="button" class="tq-fvid__btn" data-fv-skip="1.5" aria-label="Forward 1.5 seconds"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 6.2v11.6c0 .6.7 1 1.2.6l6.7-5.8a.8.8 0 0 0 0-1.2l-6.7-5.8c-.5-.4-1.2 0-1.2.6z" fill="#fff"/><path d="M3 6.2v11.6c0 .6.7 1 1.2.6l6.7-5.8a.8.8 0 0 0 0-1.2L4.2 5.6C3.7 5.2 3 5.6 3 6.2z" fill="#fff" opacity=".7"/></svg></button><span class="tq-fvid__pill" aria-hidden="true">+1.5s</span></span>
+          </div>
+        </div>
         <span aria-hidden="true" style="position: absolute; inset: 0; border-radius: 27px; pointer-events: none; box-shadow: 0 1px 0 rgba(255,255,255,.14) inset;"></span>
       </div>
     </div>
@@ -1773,6 +1808,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="assets/js/transition.js?v=602a71328d" defer></script>
-<script src="assets/js/landing.js?v=0ae1ddb3f2" defer></script>
+<script src="assets/js/landing.js?v=f6d4d1ba46" defer></script>
 </body>
 </html>
