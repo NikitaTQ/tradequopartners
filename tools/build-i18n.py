@@ -32,7 +32,7 @@ PAGES = [
     {'id': 'landing', 'template': 'landing.html', 'slug': ''},
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
-    {'id': 'marketing', 'template': 'marketing.html', 'slug': 'marketing-tools', 'css': 'partner'},
+    {'id': 'marketing', 'template': 'marketing.html', 'slug': 'marketing-tools', 'css': 'partner', 'head': 'dark'},   # dark header over the dark hero
 ]
 # The site-map fan (bottom right): the translated partner pages.
 FAN = [
@@ -267,6 +267,9 @@ for page in PAGES:
             # "become a partner" links in shared blocks: scroll to the form on the landing, go to it elsewhere
             'signupHref': (home + '#signup') if slug else '#signup',
             'signupNav': (' data-page-link data-label="%s"' % render_attr(s('loader') + ' · ' + s('fan.home'))) if slug else '',
+            # the header: dark (light wordmark) on pages that start with a dark screen
+            'headClass': ' tq-head--dark' if page.get('head') == 'dark' else '',
+            'logoFile': 'logo-wordmark-light.png' if page.get('head') == 'dark' else 'logo-wordmark-dark.png',
             'pageCss': ('\n<link rel="stylesheet" href="%sassets/css/%s.css" data-inline>' % (root, page['css'])) if page.get('css') else '',
         }
 
