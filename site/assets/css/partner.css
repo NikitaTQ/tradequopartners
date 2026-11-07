@@ -94,7 +94,7 @@
     scroll-snap-type: x mandatory; scroll-padding-inline: 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .tp-programs::-webkit-scrollbar { display: none; }
   .tp-prog { flex: 0 0 86%; scroll-snap-align: center; scroll-snap-stop: always; }
-  .tp-progdots { display: flex; justify-content: center; gap: 2px; margin-top: -32px; }
+  .tp-progdots { display: flex; justify-content: center; gap: 2px; margin-top: -39px; }
   .tp-progdots button { width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
   .tp-progdots button::before { content: ''; width: 8px; height: 8px; border-radius: 999px; background: rgba(14,14,16,.2); transition: width .3s ease, background-color .3s ease; }
   .tp-progdots button[aria-current="true"]::before { width: 24px; background: #e7131b; }
@@ -518,7 +518,7 @@
 .pf-cards { display: none; }   /* the phones' swiper of types (≤640px) */
 .pf-story__txt { flex: 1 1 420px; max-width: 720px; margin: 0; font-size: 17px; line-height: 1.6; color: #4a4a52; text-wrap: pretty; }
 .pf-story__fit { display: flex; align-items: center; gap: 10px; }
-.pf-story__lab { font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .18em; color: #8a8a92; }
+.pf-story__lab { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #8a8a92; }
 .pf-story__pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #0e0e10; color: #fff; font-size: 14px; font-weight: 700; white-space: nowrap; }
 .pf-story__pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
 .pf-who__stagebox { position: relative; width: calc(100% + 2 * clamp(32px, 6vw, 80px)); margin: -85px calc(-1 * clamp(32px, 6vw, 80px)) 0; aspect-ratio: 1280 / 470; min-height: 280px; direction: ltr; }
@@ -658,7 +658,7 @@
   .pf-card__t { margin: 0; font-size: 19px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; color: #0e0e10; text-wrap: balance; }
   .pf-card__d { margin: 0; font-size: 15px; line-height: 1.55; color: #4a4a52; text-wrap: pretty; }
   .pf-card .pf-story__fit { margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
-  .tp-progdots.pf-dots { margin-top: -8px; }
+  .tp-progdots.pf-dots { margin-top: -15px; }
   .pf-who__stagebox { width: calc(100% + 36px); margin: -24px -18px 0; min-height: 240px; aspect-ratio: 1 / .78; }
   .pf-who__cta { margin-top: -40px; }
   .pf-perks__head { gap: 14px; }
@@ -761,7 +761,7 @@
   .tq-earn__grid::-webkit-scrollbar { display: none; }
   .tq-ecard { flex: 0 0 var(--cw); height: auto; scroll-snap-align: center; scroll-snap-stop: always; }
   .tq-ecard__body { scale: calc(1 - var(--off, 0) * .08); opacity: calc(1 - var(--off, 0) * .45); transform-origin: var(--ox, 50%) 50%; }
-  .tq-earn__dots { display: flex; justify-content: center; gap: 2px; margin-top: -14px; }
+  .tq-earn__dots { display: flex; justify-content: center; gap: 2px; margin-top: -21px; }
   .tq-earn__dots button { width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
   .tq-earn__dots button::before { content: ''; width: 8px; height: 8px; border-radius: 999px; background: rgba(14,14,16,.2); transition: width .3s ease, background-color .3s ease; }
   .tq-earn__dots button[aria-current="true"]::before { width: 24px; background: #e7131b; }
@@ -770,5 +770,8 @@
 }
 @media (max-width: 520px) {
   .tq-earn__ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
+}
+@media (max-width: 640px) {   /* phones: the cards' small print at 11px */
+  .tq-ecard__fhead, .tq-ecard__ctxt span { font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { .tq-ecard, .tq-ecard__body, .tq-ecard__back, .tq-ecard__front, .tq-ecard__glare, .tq-earn__cta { transition: none; } }

@@ -611,7 +611,7 @@ html { scroll-snap-type: y proximity; }
   #signup form[data-agreement] label { font-size: 11px !important; letter-spacing: .14em !important; }
   #signup form[data-agreement] label > span + span { border-radius: 12px !important; }
   #signup [data-form-auth] { border-radius: 12px !important; padding: 12px 14px 8px !important; background: #fff !important; }
-  #signup [data-form-auth] span { font-size: 10px !important; letter-spacing: .12em !important; }
+  #signup [data-form-auth] span { font-size: 11px !important; letter-spacing: .12em !important; }
   #signup [data-form-auth] [data-ref="date"] { font-size: 14px !important; letter-spacing: .04em !important; }
   [data-calc-grid] { gap: 14px !important; margin-top: 22px !important; }
   [data-invoice] { padding: 22px 18px 18px !important; gap: 14px !important; }
@@ -619,12 +619,12 @@ html { scroll-snap-type: y proximity; }
   [data-invoice] > div:nth-child(2) > span:first-child > span { font-size: 16px !important; }
   [data-invoice] > div:nth-child(2) > span:last-child { font-size: 26px !important; }
   [data-inv-meta] { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; padding: 10px 0 !important; gap: 8px !important; }
-  [data-inv-meta] span:first-child { font-size: 8.5px !important; letter-spacing: .14em !important; }
+  [data-inv-meta] span:first-child { font-size: 11px !important; letter-spacing: .08em !important; }
   [data-inv-meta] span:last-child { font-size: 11px !important; }
   [data-invoice] > div:nth-child(4) > div:first-child { display: none !important; }
   [data-invoice] > div:nth-child(4) > div { padding: 10px 0 !important; }
   [data-invoice] > div:nth-child(4) > div > span:first-child > span:first-child { font-size: 13.5px !important; }
-  [data-invoice] > div:nth-child(4) > div > span:first-child > span:last-child { font-size: 10.5px !important; }
+  [data-invoice] > div:nth-child(4) > div > span:first-child > span:last-child { font-size: 11.5px !important; }
   [data-invoice] > div:nth-child(4) > div > span:last-child { font-size: 12.5px !important; }
   [data-inv-total] { font-size: 34px !important; }
   [data-inv-stamp] { width: 70px !important; height: 70px !important; }
@@ -907,11 +907,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 [dir="rtl"] .tq-lang__opt [aria-checked="true"] .tq-lang__switch::after { transform: translateX(-14px); }
 [dir="rtl"] .tq-lang__switch::after { left: auto; right: 3px; }
 @media (max-width: 640px) {
-  .tq-lang__btn { width: 40px; height: 40px; padding: 0; justify-content: center; }
+  .tq-lang__btn { width: 44px; height: 44px; padding: 0; justify-content: center; }
   .tq-lang__code, .tq-lang__chev { display: none; }
   .tq-lang__menu { position: fixed; top: 72px; right: 16px; left: auto; min-width: 0; width: min(260px, calc(100vw - 32px)); max-height: calc(100vh - 96px); }
   header img[alt] { height: 19px !important; }
-  header nav > a.hv-red-bg { height: 40px !important; padding: 0 16px !important; font-size: 14px !important; }
+  header nav > a.hv-red-bg { height: 44px !important; padding: 0 16px !important; font-size: 14px !important; }
   header nav { gap: 10px !important; flex-wrap: nowrap !important; }
   header { gap: 12px !important; }
 }
@@ -1018,7 +1018,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tq-calc__title { font-size: 15px; }
   .tq-calc__val { height: 52px; padding: 0 16px; border-radius: 13px; }
   .tq-calc__input { font-size: 22px; }
-  .tq-calc__unit { font-size: 10px; }
+  .tq-calc__unit { font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { .tq-calc__sheen { transition: none; } }
 
@@ -1034,6 +1034,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 [data-inv-per] button:hover { color: #0a0a0a; }
 [data-inv-per] button[aria-pressed="true"] { color: #fff; }
 [data-inv-per] button:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+/* phones: the toggle looks the same, but each button takes taps 7px above and below it (44px in all) */
+@media (max-width: 640px) { [data-inv-per] button::after { content: ''; position: absolute; left: 0; right: 0; top: -7px; bottom: -7px; } }
 @media (prefers-reduced-motion: reduce) { [data-inv-per-thumb] { transition: none; } }
 
 /* ---- Liquid glass (Glass_Card_Grid_Liquid design) ----------------------------------------
@@ -1100,6 +1102,16 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
 }
 @media (prefers-reduced-motion: reduce) { .tq-frost { transform: none; transition: none; } }
+
+/* ---- Phones: tap areas of 44px and readable small print (Apple HIG / Material guidance) ----------------
+   Small controls keep their look and take taps over a larger invisible area; dots become 44px buttons. */
+@media (max-width: 640px) {
+  header a:has(> img:only-child) { padding: 13px 0; margin: -13px 0; }   /* the logo */
+  .tp-scta::after { content: ''; position: absolute; left: -8px; right: -8px; top: -12px; bottom: -12px; }
+  .tp-progdots, .tq-earn__dots { gap: 0 !important; }
+  .tp-progdots button, .tq-earn__dots button { width: 44px !important; height: 44px !important; }
+  footer p { font-size: 12px !important; }
+}
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -1198,7 +1210,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     scroll-snap-type: x mandatory; scroll-padding-inline: 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .tp-programs::-webkit-scrollbar { display: none; }
   .tp-prog { flex: 0 0 86%; scroll-snap-align: center; scroll-snap-stop: always; }
-  .tp-progdots { display: flex; justify-content: center; gap: 2px; margin-top: -32px; }
+  .tp-progdots { display: flex; justify-content: center; gap: 2px; margin-top: -39px; }
   .tp-progdots button { width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
   .tp-progdots button::before { content: ''; width: 8px; height: 8px; border-radius: 999px; background: rgba(14,14,16,.2); transition: width .3s ease, background-color .3s ease; }
   .tp-progdots button[aria-current="true"]::before { width: 24px; background: #e7131b; }
@@ -1622,7 +1634,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-cards { display: none; }   /* the phones' swiper of types (≤640px) */
 .pf-story__txt { flex: 1 1 420px; max-width: 720px; margin: 0; font-size: 17px; line-height: 1.6; color: #4a4a52; text-wrap: pretty; }
 .pf-story__fit { display: flex; align-items: center; gap: 10px; }
-.pf-story__lab { font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .18em; color: #8a8a92; }
+.pf-story__lab { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #8a8a92; }
 .pf-story__pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #0e0e10; color: #fff; font-size: 14px; font-weight: 700; white-space: nowrap; }
 .pf-story__pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
 .pf-who__stagebox { position: relative; width: calc(100% + 2 * clamp(32px, 6vw, 80px)); margin: -85px calc(-1 * clamp(32px, 6vw, 80px)) 0; aspect-ratio: 1280 / 470; min-height: 280px; direction: ltr; }
@@ -1762,7 +1774,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .pf-card__t { margin: 0; font-size: 19px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; color: #0e0e10; text-wrap: balance; }
   .pf-card__d { margin: 0; font-size: 15px; line-height: 1.55; color: #4a4a52; text-wrap: pretty; }
   .pf-card .pf-story__fit { margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
-  .tp-progdots.pf-dots { margin-top: -8px; }
+  .tp-progdots.pf-dots { margin-top: -15px; }
   .pf-who__stagebox { width: calc(100% + 36px); margin: -24px -18px 0; min-height: 240px; aspect-ratio: 1 / .78; }
   .pf-who__cta { margin-top: -40px; }
   .pf-perks__head { gap: 14px; }
@@ -1865,7 +1877,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-earn__grid::-webkit-scrollbar { display: none; }
   .tq-ecard { flex: 0 0 var(--cw); height: auto; scroll-snap-align: center; scroll-snap-stop: always; }
   .tq-ecard__body { scale: calc(1 - var(--off, 0) * .08); opacity: calc(1 - var(--off, 0) * .45); transform-origin: var(--ox, 50%) 50%; }
-  .tq-earn__dots { display: flex; justify-content: center; gap: 2px; margin-top: -14px; }
+  .tq-earn__dots { display: flex; justify-content: center; gap: 2px; margin-top: -21px; }
   .tq-earn__dots button { width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
   .tq-earn__dots button::before { content: ''; width: 8px; height: 8px; border-radius: 999px; background: rgba(14,14,16,.2); transition: width .3s ease, background-color .3s ease; }
   .tq-earn__dots button[aria-current="true"]::before { width: 24px; background: #e7131b; }
@@ -1874,6 +1886,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 @media (max-width: 520px) {
   .tq-earn__ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
+}
+@media (max-width: 640px) {   /* phones: the cards' small print at 11px */
+  .tq-ecard__fhead, .tq-ecard__ctxt span { font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { .tq-ecard, .tq-ecard__body, .tq-ecard__back, .tq-ecard__front, .tq-ecard__glare, .tq-earn__cta { transition: none; } }
 </style>
@@ -2410,13 +2425,13 @@ html:lang(ko) * { word-break: keep-all; }
   <footer style="padding: clamp(28px, 4vw, 48px) clamp(16px, 4vw, 56px); background: #fff; border-top: 1px solid #ececee;">
     <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: center;">
       <img loading="lazy" decoding="async" src="../../assets/logo-wordmark-dark.png?v=be9b8240ee" alt="TradeQuo" style="height: 20px; width: auto; justify-self: start;">
-      <p style="margin: 0; font-size: 11.5px; line-height: 1.6; color: #5f5f63;">差价合约是复杂的金融工具，由于杠杆作用，存在快速亏损资金的高风险。72.6%的散户投资者账户在与本服务商进行差价合约交易时出现亏损。 © 2026 Trade Quo.</p>
+      <p style="margin: 0; font-size: 12px; line-height: 1.6; color: #5f5f63;">差价合约是复杂的金融工具，由于杠杆作用，存在快速亏损资金的高风险。72.6%的散户投资者账户在与本服务商进行差价合约交易时出现亏损。 © 2026 Trade Quo.</p>
     </div>
   </footer>
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=558bf43e63" defer></script>
+<script src="../../assets/js/landing.js?v=0ae1ddb3f2" defer></script>
 <script src="../../assets/js/plan.js?v=5c5b01428f" defer></script>
 </body>
 </html>

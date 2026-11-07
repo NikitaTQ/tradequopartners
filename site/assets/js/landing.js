@@ -161,6 +161,9 @@
     const set = (open) => { fab.toggleAttribute('data-open', open); btn.setAttribute('aria-expanded', String(open)); };
     btn.addEventListener('click', () => set(!fab.hasAttribute('data-open')));
     $$('.tq-fab-link', fab).forEach((a) => a.addEventListener('click', () => set(false)));
+    /* a tap anywhere else, or Escape, closes it (Escape hands the focus back to the button) */
+    document.addEventListener('pointerdown', (e) => { if (fab.hasAttribute('data-open') && !fab.contains(e.target)) set(false); }, true);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && fab.hasAttribute('data-open')) { set(false); btn.focus(); } });
   }
 
   /* ---- How it works: progress line runs step to step ----------------------- */
