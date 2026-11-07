@@ -1798,9 +1798,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    glare (.is-hov), a click selects it (.is-sel: red ring, SELECTED pill, the two inner cards lift) and
    dims the others (.is-dim); plan.js sets the classes and draws the candles on the back card. */
 .tq-earn { --pad: clamp(16px, 4vw, 56px); padding: clamp(28px, 4.4vw, 64px) var(--pad) clamp(56px, 6vw, 88px);
-  background: radial-gradient(70% 55% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #f7f7f8 0, #f7f7f8 calc(100% - 140px), #fff 100%); }
+  /* white where the header ends, easing into the grey (no seam under the header), white again at the bottom */
+  background: radial-gradient(70% 55% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #fff 0, #f7f7f8 clamp(140px, 22vw, 260px), #f7f7f8 calc(100% - 140px), #fff 100%); }
 .tq-earn__in { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; }
 .tq-earn__head { display: flex; flex-direction: column; gap: 16px; }
+.tq-earn__pill { max-width: 100%; box-sizing: border-box; margin-bottom: 2px; color: #0e0e10; }   /* names whose earnings these are: TradeQuo partners */
 .tq-earn__h1 { margin: 0; font-size: clamp(38px, 4.2vw, 60px); line-height: 1.04; font-weight: 700; letter-spacing: -.045em; text-wrap: balance; }
 .tq-earn__sub { margin: 0; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.5; color: #5b5b5b; }
 .tq-earn__grid { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 28px; }
@@ -1935,6 +1937,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <section id="earnings" class="tq-earn" data-screen-label="Earnings hero">
       <div class="tq-earn__in">
         <div class="tq-earn__head">
+          <span class="tp-pill tq-earn__pill">Guadagni dei partner TradeQuo</span>
           <h1 class="tq-earn__h1">Il tuo pubblico. La tua influenza. <span style="color: #e7131b;">I tuoi guadagni.</span></h1>
           <p class="tq-earn__sub">Ogni partner ha condizioni personalizzate. Scegli il profilo più vicino al tuo per vedere una stima iniziale.</p>
         </div>
