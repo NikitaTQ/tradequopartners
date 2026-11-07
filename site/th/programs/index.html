@@ -1173,6 +1173,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-ph { display: inline; }
   .tq-nph { display: none; }
 }
+
+/* RTL: the phone menu (button and links) stays at the right edge, where it is anchored */
+[dir="rtl"] [data-fab] { align-items: flex-start !important; }
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -1866,14 +1869,22 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-earn__foot { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
 .tq-earn__note { margin: 0; max-width: 720px; font-family: 'Fragment Mono', monospace; font-size: 12.5px; line-height: 1.6; color: #5b5b5b; text-wrap: balance; }
 .tq-earn__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; }
-.tq-earn__cta { flex: none; display: flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px; background: #0a0a0a; color: #fff;
-  font-size: 15px; font-weight: 700; white-space: nowrap; text-decoration: none; box-shadow: 0 1px 0 #2b2b31, 0 2px 0 #1f1f24, 0 14px 24px -14px rgba(10,10,10,.6); transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+.tq-earn__cta { flex: none; display: flex; align-items: center; gap: 14px; height: 56px; padding: 0 30px 0 5px; box-sizing: border-box; border-radius: 999px; background: #0a0a0a; color: #fff;
+  font-size: 17px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 3px 0 #2b2d34, 0 16px 28px -16px rgba(10,10,10,.6); transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+/* the round arrow button at the start (the mock-ups): red on the black CTA, white on the red one */
+.tq-earn__dot { flex: none; width: 46px; height: 46px; border-radius: 50%; background: #e7131b; color: #fff; display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2); }
+.tq-earn__dot svg { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.tq-earn__cta:hover .tq-earn__dot svg, .tq-earn__cta:focus-visible .tq-earn__dot svg { transform: translateX(3px); }
+.tq-earn__ct { flex: 1; text-align: center; }
 .tq-earn__cta:hover, .tq-earn__cta:focus-visible { color: #fff; transform: translateY(-2px); }
 .tq-earn__cta:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
-.tq-earn__cta svg { flex: none; color: #ff4b52; }
-.tq-earn__cta--red { background: #e7131b; box-shadow: 0 1px 0 #c40f17, 0 2px 0 #a50d13, 0 14px 24px -14px rgba(231,19,27,.65); }
-.tq-earn__cta--red svg { color: #fff; }
-[dir="rtl"] .tq-earn__cta svg { transform: scaleX(-1); }
+.tq-earn__cta--red { background: #e7131b; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 3px 0 #b30d14, 0 16px 30px -14px rgba(231,19,27,.6); }
+.tq-earn__cta--red .tq-earn__dot { background: #fff; color: #e7131b; box-shadow: 0 1px 2px rgba(120,0,6,.25); }
+[dir="rtl"] .tq-earn__cta { padding: 0 6px 0 30px; }
+[dir="rtl"] .tq-earn__dot svg { transform: scaleX(-1); }
+[dir="rtl"] .tq-earn__cta:hover .tq-earn__dot svg, [dir="rtl"] .tq-earn__cta:focus-visible .tq-earn__dot svg { transform: scaleX(-1) translateX(3px); }
 
 .tq-ecard { --rx: 0; --ry: 0; --gx: 50%; --gy: 10%; position: relative; height: 100%; outline: none; cursor: pointer; perspective: 1200px; container-type: inline-size;
   transition: opacity .4s ease, filter .4s ease; -webkit-tap-highlight-color: transparent; }
@@ -1951,7 +1962,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-earn__foot { margin-top: 22px; }
 }
 @media (max-width: 520px) {
-  .tq-earn__ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
+  .tq-earn__ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; gap: 12px; }
 }
 @media (max-width: 640px) {   /* phones: the cards' small print at 11px */
   .tq-ecard__fhead, .tq-ecard__ctxt span { font-size: 11px; }
@@ -1969,7 +1980,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-earn__h1 { font-size: clamp(38px, min(4.2vw, 6.6vh), 60px); }
   .tq-earn__head { gap: 10px; }
   .tq-earn__grid { margin-top: 18px; }
-  .tq-earn__foot { margin-top: 12px; gap: 12px; }
+  .tq-earn__foot { margin-top: 8px; gap: 12px; }
   .tq-ecard__body { gap: 10px; }
   .tq-ecard__scene { height: 274px; }
   .tq-ecard__front { padding: 13px 14px 12px; gap: 7px; }   /* shorter, so it still clears the back card's caption */
@@ -1993,21 +2004,21 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-ticks li { font-size: 14px; line-height: 1.35; }
   .tp-prog__cta { margin-top: 0; padding-top: 14px; gap: 10px; }
   .tp-prog__for { order: 1; margin-top: 10px; text-align: center; }   /* under the CTAs */
-  .tq-earn { padding-top: 8px; }
+  .tq-earn { padding-top: 4px; }
   .tq-earn__head { gap: 6px; }
-  .tq-earn__h1 { font-size: 32px; }
-  .tq-earn__sub { font-size: 15px; line-height: 1.4; }
-  .tq-earn__grid { margin-top: 12px; padding-bottom: 26px; }
-  .tq-ecard__top { gap: 4px; }
-  .tq-ecard__body { gap: 10px; }
-  /* the channel mini-card behind the estimate repeats the card's own caption: phones show the estimate alone */
-  .tq-ecard__back { display: none; }
-  .tq-ecard__scene { height: auto; padding: 12px; }
-  .tq-ecard__front { position: relative; inset: auto; bottom: auto; width: auto; margin: 0 auto; max-width: 300px; padding: 13px 14px 12px; gap: 7px; }
-  .tq-earn__dots { margin-top: -31px; }
-  .tq-earn__foot { margin-top: 2px; gap: 10px; }
-  .tq-earn__note { font-size: 12px; line-height: 1.45; }
-  .tq-earn__cta { height: 48px; }
+  .tq-earn__h1 { font-size: 30px; }
+  .tq-earn__sub { font-size: 15px; line-height: 1.35; }
+  .tq-earn__grid { margin-top: 8px; padding-bottom: 26px; }
+  /* the scene 16px lower and the estimate 16px shorter: the cards keep their layout, the channel card stays in view */
+  .tq-ecard__scene { height: 258px; }
+  .tq-ecard__body { padding: 16px; }
+  .tq-ecard__front { padding: 13px 14px 12px; gap: 7px; }
+  .tq-earn__dots { margin-top: -35px; }
+  .tq-earn__foot { margin-top: 0; gap: 18px; }
+  .tq-earn__note { order: 1; font-size: 12px; line-height: 1.45; }   /* under the CTAs */
+  .tq-earn__ctas { gap: 10px; }
+  .tq-earn__cta { height: 52px; font-size: 16px; }
+  .tq-earn__dot { width: 40px; height: 40px; }
 }
 </style>
 <style id="i18n-fonts">
