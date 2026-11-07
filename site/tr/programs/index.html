@@ -1761,29 +1761,36 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .pf-perk__v * { white-space: nowrap; }
 }
 @media (max-width: 640px) {
-  .pf-who { gap: 24px; border-radius: 26px; padding: 28px 18px; }
-  /* the rows and the story give way to a swiper of cards, one per type, story and best fit on each */
+  .pf-who { gap: 0; border-radius: 26px; padding: 28px 18px; }
+  /* the rows and the story give way to a swiper of cards, one per type, story and best fit on each.
+     The 3D stage and the cards make one panel: the platform with its object on top, the type's text
+     under it (it slides inside the panel as you swipe), the dots and the CTA below the panel. */
   .pf-who__rows, .pf-who__story { display: none; }
-  .pf-cards { display: flex; gap: 10px; margin: 0 -18px; padding: 2px 18px 8px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
-    scroll-padding-inline: 18px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .pf-who__pick { display: contents; }
+  .pf-who__title { order: 0; margin-bottom: 20px; }
+  .pf-who__stagebox { order: 1; box-sizing: border-box; width: 100%; margin: 0; min-height: 0; aspect-ratio: 1 / .7; overflow: hidden; border-radius: 22px 22px 0 0;
+    background: radial-gradient(60% 55% at 50% 62%, rgba(231,19,27,.05), rgba(231,19,27,0) 70%), rgba(255,255,255,.9);
+    border: 1px solid rgba(14,14,22,.06); border-bottom: 0; }
+  .pf-cards { order: 2; display: flex; gap: 0; margin: 0; padding: 0; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch; border-radius: 0 0 22px 22px; background: rgba(255,255,255,.9);
+    border: 1px solid rgba(14,14,22,.06); border-top: 0; box-shadow: 0 30px 40px -32px rgba(14,14,22,.4); }
   .pf-cards::-webkit-scrollbar { display: none; }
-  .pf-card { flex: 0 0 86%; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 18px 18px 16px; border-radius: 18px;
-    scroll-snap-align: center; scroll-snap-stop: always; background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.7)); border: 1px solid rgba(255,255,255,.95);
-    box-shadow: 0 0 0 1px rgba(14,14,22,.06), 0 18px 34px -26px rgba(14,14,22,.4); }
+  .pf-card { flex: 0 0 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 2px 20px 20px;
+    scroll-snap-align: center; scroll-snap-stop: always; }
   .pf-card__n { font-family: 'Fragment Mono', monospace; font-size: 12px; color: #e7131b; }
   .pf-card__t { margin: 0; font-size: 19px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; color: #0e0e10; text-wrap: balance; }
   .pf-card__d { margin: 0; font-size: 15px; line-height: 1.55; color: #4a4a52; text-wrap: pretty; }
   .pf-card .pf-story__fit { margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
-  .tp-progdots.pf-dots { margin-top: -15px; }
-  .pf-who__stagebox { width: calc(100% + 36px); margin: -24px -18px 0; min-height: 240px; aspect-ratio: 1 / .78; }
-  .pf-who__cta { margin-top: -40px; }
+  .pf-arrow { width: 44px; height: 44px; }
+  .tp-progdots.pf-dots { order: 3; margin-top: 2px; }
+  .pf-who__cta { order: 4; margin-top: 6px; }
   .pf-perks__head { gap: 14px; }
   .pf-fan { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 24px 0; }
-  .pf-perk__in { min-height: 262px; padding: 18px 10px 12px; }
-  .pf-perk__t { font-size: 16px; }
-  .pf-perk__d { font-size: 12.5px; }
-  .pf-perk__v { height: 112px; }
-  .pf-perk__v > * { transform: scale(.68); }
+  .pf-perk__in { min-height: 214px; padding: 16px 10px 10px; gap: 5px; border-radius: 22px; }
+  .pf-perk__t { font-size: 15px; }
+  .pf-perk__d { font-size: 12px; line-height: 1.4; }
+  .pf-perk__v { height: 92px; }
+  .pf-perk__v > * { transform: scale(.6); }
 }
 
 /* ---- commission page hero: earnings examples (TradeQuo_Earnings_Hero design) -----------------
