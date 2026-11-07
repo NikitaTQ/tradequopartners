@@ -659,7 +659,7 @@ html { scroll-snap-type: y proximity; }
   [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
   [data-fan-hub] { display: none !important; }
   [data-faq-grid] { grid-template-columns: 1fr !important; }
-  [data-dark-tail] { margin: 0 8px 16px !important; }
+  [data-dark-tail] { margin: 0 0 16px !important; }
   [data-tail-glow] { display: none !important; }
   [data-dark-tail] { background: linear-gradient(180deg, #0a0a0a 0px, #0b0b0b 23px, #0e0e0e 45px, #161616 68px, #232323 90px, #363636 113px, #4d4d4d 135px, #686868 158px, #858585 180px, #a1a1a1 203px, #bcbcbc 225px, #d3d3d3 248px, #e6e6e6 270px, #f3f3f3 293px, #fbfbfb 315px, #fefefe 338px, #ffffff 360px) !important; }
   #faq { padding-top: 284px !important; }
@@ -672,7 +672,7 @@ html { scroll-snap-type: y proximity; }
   [data-flip-sticky] { position: static !important; height: auto !important; display: flex !important; flex-direction: column !important; gap: 16px; overflow: visible !important; padding: 0 !important; perspective: none !important; }
   [data-flip-front] { margin: 0 8px; width: auto !important; align-self: stretch !important; max-width: none !important; transform: none !important; visibility: visible !important; }
   [data-flip-shade] { display: none !important; }
-  [data-flip-back] { position: relative !important; inset: auto !important; transform: none !important; visibility: visible !important; opacity: 1 !important; clip-path: none !important; margin: 0 8px; }
+  [data-flip-back] { position: relative !important; inset: auto !important; transform: none !important; visibility: visible !important; opacity: 1 !important; clip-path: none !important; margin: 0; }
   [data-flip-panel] { height: auto !important; }
   [data-navlinks] { display: none !important; }
   [data-fab] { display: flex !important; }
@@ -1106,7 +1106,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    Built on site.css: same type, chrome-glass cards, red accent. */
 
 .tp { font-family: 'DM Sans', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
-.tp-sec { position: relative; padding: clamp(56px, 8vw, 112px) clamp(16px, 4vw, 56px); }
+.tp-sec { position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px); }   /* the site rhythm: 88 + 88px between blocks, 48 + 48 on phones */
 .tp-wrap { position: relative; max-width: 1240px; margin: 0 auto; }
 
 /* ---- headings ---------------------------------------------------------------- */
@@ -1309,7 +1309,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 .tp-night .tp-h2 { color: #fff; }
 .tp-night .tp-sub { color: #a7a9ae; }
-.tp-night-sec { padding: clamp(24px, 4vw, 56px) clamp(8px, 2vw, 24px); }
+.tp-night-sec { padding: clamp(48px, 6.1vw, 88px) clamp(8px, 2vw, 24px); }
 
 /* ---- final call on Partner Programs (Final CTA Glint Teaser) ----------------------- */
 .tp-final { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
@@ -1415,7 +1415,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-tl-track { display: none; }
 }
 @media (max-width: 640px) {
-  .tp-sec { padding-top: 56px; padding-bottom: 56px; }
+  .tp-sec { padding-top: 48px; padding-bottom: 48px; }
   .tp-hero { padding-top: 8px; }
   .tp-stage { padding: 12px; border-radius: 26px; }
   .tp-perkgrid { grid-template-columns: minmax(0, 1fr); }
@@ -1498,16 +1498,21 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-mth__top i { width: 6px; height: 6px; border-radius: 50%; background: #e7131b; box-shadow: 0 0 10px #e7131b; }
 .tq-mth__foot { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); bottom: clamp(14px, 2.2vh, 22px); display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: flex-end; gap: 22px 40px; pointer-events: none; }
-.tq-mth__h1 { margin: 0; font-size: clamp(56px, 8.4vw, 128px); line-height: .9; font-weight: 700; letter-spacing: -.058em; color: #fff; }
+.tq-mth__h1 { margin: 0; font-size: clamp(44px, 5.8vw, 92px); line-height: .94; font-weight: 700; letter-spacing: -.048em; color: #fff; }
 .tq-mth__list { flex: 1 1 280px; max-width: 420px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; margin: 0; padding: 16px 0 0; list-style: none;
   border-top: 1px solid rgba(255,255,255,.1); font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #8a8a92; text-transform: uppercase; }
 .tq-mth__list b { font-weight: 400; color: #e7131b; }
+/* under the hero: the site's dark-to-white hand-off (the same curve as #pf-tail on /programs/) */
+.tq-mth-tail { position: relative; height: clamp(300px, 42vh, 480px); margin-top: -1px;
+  background: linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
+    #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
+    #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
+.tq-mth-tail + .tp-sec { padding-top: clamp(16px, 3vw, 40px); }
 @media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout; the top line moves up off the first objects */
   .tq-mth__stage { height: 80%; }
   .tq-mth__top { top: clamp(18px, 2.6vh, 40px); }
 }
 @media (max-width: 640px) { .tq-mth { height: calc(100vh - 84px); height: calc(100svh - 84px); } }
-@media (max-width: 400px) { .tq-mth__h1 { font-size: 14.2vw; } }   /* the longest title word (pl) still fits a 360px phone */
 .tp-mt-sup { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; margin: clamp(32px, 4.5vw, 56px) auto 0; }
 .tp-mt-card { display: flex; align-items: flex-start; gap: 18px; padding: 26px 28px; }
 .tp-mt-card .tp-hex { width: 50px; height: 50px; }
@@ -1583,12 +1588,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 
 /* ---- Who it's for → Why partners choose (TradeQuo_Partner_Flow design) ------------------------------
-   #pf-flow is 280vh tall; #pf-stick holds the scene on screen while it plays (startWhoFlow in landing.js
+   #pf-flow is 340vh tall, like the landing's flip track; #pf-stick holds the scene on screen while it plays (startWhoFlow in landing.js
    maps the scroll to q 0 → 1). The persona block's 3D platform (assets/js/partner-flow.js) stands up;
    #pf-flip takes over with its snapshot, grows to the full screen and turns into the dark perks section,
    where the six .pf-perk cards are dealt in a fan. Below 900px and with reduced motion nothing is pinned:
    the persona block stays put and the perks section moves into #pf-perks-host, its cards in a sideways row. */
-#pf-flow { position: relative; height: 280vh; }
+#pf-flow { position: relative; height: 340vh; }
 #pf-stick { position: sticky; top: 0; height: 100vh; overflow: hidden; perspective: 1700px; display: flex; align-items: center; justify-content: center; }
 #pf-who-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; display: flex; justify-content: center; transform-origin: 50% 50%; }
 .pf-who { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; overflow: hidden;
@@ -1715,16 +1720,18 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
-.pf-anchor { position: absolute; left: 0; top: 166vh; width: 1px; height: 1px; pointer-events: none; }   /* #benefits: where the perks are dealt */
-.pf { position: relative; }
+.pf-anchor { position: absolute; left: 0; top: 228vh; width: 1px; height: 1px; pointer-events: none; }   /* #benefits: where the perks are dealt */
+.pf { position: relative; padding-top: clamp(24px, 5.5vw, 80px); }   /* room above the persona block, like the gap between blocks */
 #pf-perks-host { display: none; }
+#why { padding-top: 0; }   /* on wide screens the dark-to-white tail above is the gap */
 @media (max-width: 899px), (prefers-reduced-motion: reduce) {
   #pf-flow { height: auto; }
   #pf-stick { position: relative; height: auto; display: block; perspective: none; overflow: visible; }
   #pf-who-wrap { padding: 24px 16px; }
   #pf-flip, #pf-tail { display: none; }
   .pf-anchor { position: static; display: block; }
-  #pf-perks-host { display: block; }
+  #pf-perks-host { display: block; padding: 72px 0 48px; }   /* the usual gap from the persona card, then down to the dome */
+  #why { padding-top: clamp(48px, 6.1vw, 88px); }
   #pf-perks-host .pf-perks { height: auto !important; min-height: 0; padding-bottom: 40px; border-radius: clamp(28px, 4vw, 48px); margin: 0 clamp(8px, 2vw, 16px); width: auto; }
   /* the landing's Partner perks on phones: heading on the centre line, the cards in a grid, the CTA last */
   .pf-perks__head { flex-direction: column; align-items: center; text-align: center; }
@@ -1917,6 +1924,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
         </ul>
       </div>
     </section>
+    <div class="tq-mth-tail" aria-hidden="true"></div>
 
     <!-- Promo materials library: the formats partners get. Per-format counts live in mt.lib.N.n
          (empty for now; the badge hides itself until a number is filled in) -->
@@ -1974,7 +1982,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     </section>
 
     <!-- How to get them: four steps from the Client Portal to the audience (step 1 reuses the How it works copy) -->
-    <section id="get" class="tp-sec" data-screen-label="How to get materials" style="padding-top: 0;">
+    <section id="get" class="tp-sec" data-screen-label="How to get materials">
       <div class="tp-wrap">
         <div class="tp-head">
           <h2 class="tp-h2">De votre Espace client <span style="color: #e7131b;">à votre audience</span></h2>
@@ -2011,7 +2019,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 <!-- How it works: sign-up to first payout in three steps (landing.js startHowLine drives the line).
      Shared by the landing, Partner Programs and Commission Plan: the button scrolls to the form on the
      landing and goes to it from the other pages (signupHref and signupNav in build-i18n.py). -->
-  <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(50px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(30px, 4vw, 56px); background: #fff; overflow: hidden;">
+  <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px); background: #fff; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
       <h2 style="margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a; text-wrap: balance;">De l’inscription au premier versement<br><span style="color: #e7131b;">en trois étapes</span></h2>
     </div>
@@ -2058,7 +2066,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 
     <!-- FAQ -->
-    <section id="questions" class="tp-sec" data-screen-label="Marketing FAQ" style="padding-top: clamp(16px, 3vw, 40px);">
+    <section id="questions" class="tp-sec" data-screen-label="Marketing FAQ">
       <div class="tp-wrap tp-faq">
         <div class="tp-faq__side">
           <span class="tp-pill">FAQ</span>
@@ -2216,7 +2224,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=49b7cf4ef8" defer></script>
+<script src="../../assets/js/landing.js?v=558bf43e63" defer></script>
 <script type="module" src="../../assets/js/mt-hero.js?v=dc1cf165e0"></script>
 </body>
 </html>

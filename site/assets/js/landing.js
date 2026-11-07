@@ -937,11 +937,14 @@
   }
 
   /* ---- programs/: Who it's for → Why partners choose (TradeQuo_Partner_Flow design) ---------------
-   * #pf-flow is a 280vh track; while #pf-stick is pinned, the scroll maps to q 0 → 1:
-   *   0–.36   the persona block fades away and its 3D platform stands up (partner-flow.js, setFlip)
-   *   .36     a snapshot of the platform takes over in #pf-flip (drawn 9-slice on a canvas)
-   *   .5–.76  it grows to the full screen; .52–.72 it turns into the black perks section
-   *   .74–.88 the perks heading and CTA come in; past .86 the six cards are dealt in a fan
+   * The same scroll and the same stages as the landing's Infinite Flow → perks flip (startFlip): a 340vh
+   * track, so 240vh of scrolling while #pf-stick is pinned, mapped to q 0 → 1 and followed with the same lag:
+   *   0–.17   the persona text fades (the landing's heading, gone by .17)
+   *   0–.52   the 3D platform rises and stands up (partner-flow.js, setFlip; the landing's zoom and flip)
+   *   .52     a snapshot of the platform takes over in #pf-flip (drawn 9-slice on a canvas)
+   *   .56–.86 it grows to the full screen (the landing's panel); .56–.80 it turns into the black perks section
+   *   .76–.94 the perks heading comes in (the landing's heading row)
+   *   .82–1   the CTA rises and the six cards are dealt in a fan (the landing's fan and CTA)
    * The persona rows and stories are page text; the 3D stage follows the active one and reports
    * clicks on itself (window.__pfWhoSet). On phones the rows and stories are a swiper of cards instead. The module, and three.js with it, loads when the scene is
    * within a screen and a half. Phones (<900px) and reduced motion: nothing is pinned, the perks
@@ -1014,6 +1017,7 @@
     const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
     const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
     const lerp = (a, b, t) => a + (b - a) * t;
+    const out3 = (x) => 1 - Math.pow(1 - clamp(x), 3);
     const head = perks.firstElementChild, cta = perks.lastElementChild, glass = $('.pf-glass', flip);
     const kids = block.children;
 
@@ -1044,7 +1048,7 @@
     const mode = () => {
       if (mq.matches) {
         if (perks.parentNode !== host) host.appendChild(perks);
-        perks.style.opacity = ''; head.style.transform = ''; cta.style.transform = '';
+        perks.style.opacity = ''; head.style.transform = ''; cta.style.transform = ''; head.style.opacity = ''; cta.style.opacity = '';
         block.style.transform = ''; block.style.background = '';
         for (const k of kids) k.style.opacity = '';
         $$('.pf-arrow', block).forEach((a) => { a.style.opacity = ''; a.style.pointerEvents = ''; });
@@ -1066,16 +1070,16 @@
       if (mq.matches) return 0;
       const top = flow.getBoundingClientRect().top + scrollY;
       const total = flow.offsetHeight - innerHeight;
-      return clamp((clamp((scrollY - top) / total) - 0.1) / 0.9);
+      return clamp((scrollY - top) / total);
     };
     const render = (q) => {
       const vw = innerWidth, vh = innerHeight, api = window.__whoApi;
       const sr = stage.getBoundingClientRect(), str = stick.getBoundingClientRect();
-      const p3 = ease(clamp((q - 0.02) / 0.34));           // the platform rises and stands up
-      const sw = q >= 0.36 ? 1 : 0;                        // hand-off to the 2D slab
-      const hold = clamp((q - 0.39) / 0.12);
-      const eX = ease(clamp((q - 0.5) / 0.26));            // grow to the full screen
-      const cIn = ease(clamp((q - 0.74) / 0.14));
+      const p3 = ease(clamp(q / 0.52));                    // the platform rises and stands up
+      const sw = q >= 0.52 ? 1 : 0;                        // hand-off to the 2D slab
+      const hold = clamp((q - 0.52) / 0.04);
+      const eX = ease(clamp((q - 0.56) / 0.3));            // grow to the full screen
+      const c1 = out3((q - 0.76) / 0.18), c2 = out3((q - 0.82) / 0.18);   // heading, then CTA and cards
       if (api && api.setFlip) api.setFlip(p3);
       if (sw <= 0) snap = null;
       else if (!snap && api && api.snapshot) {
@@ -1110,32 +1114,31 @@
       } else if (snap && snap.img && !snap.img.complete) snap.img.onload = () => render(qCur);
       flip.style.borderRadius = lerp(w0 * 0.085, 0, eX) + 'px';
       flip.style.transform = 'translate(-50%,-50%) translate(' + (cx - vw / 2) + 'px,' + (cy - vh / 2) + 'px)';
-      const black = ease(clamp((q - 0.52) / 0.2));
+      const black = ease(clamp((q - 0.56) / 0.24));
       glass.style.opacity = black >= 1 ? 0 : 1;
       back.style.opacity = black;
-      perks.style.opacity = cIn;
-      head.style.transform = 'translateY(' + (1 - cIn) * 18 + 'px)';
-      cta.style.transform = 'translateY(' + (1 - cIn) * 18 + 'px)';
-      const fo = 1 - ease(clamp((q - 0.03) / 0.25));
+      head.style.opacity = c1; head.style.transform = 'translateY(' + (1 - c1) * 18 + 'px)';
+      cta.style.opacity = c2; cta.style.transform = 'translateY(' + (1 - c2) * 36 + 'px) scale(' + (0.96 + 0.04 * c2) + ')';
+      const fo = 1 - ease(clamp(q / 0.17));
       kids[0].style.opacity = fo; kids[1].style.opacity = fo;
       $$('.pf-arrow', block).forEach((a) => { a.style.opacity = fo; a.style.pointerEvents = fo < 0.5 ? 'none' : ''; });
       block.style.background = fo < 1 ? 'transparent' : '';
-      kids[kids.length - 1].style.opacity = 1 - ease(clamp((q - 0.5) / 0.1));
+      kids[kids.length - 1].style.opacity = 1 - ease(clamp((q - 0.42) / 0.1));
       const hide = sw >= 1;
       if (hide !== hidden && api) { hidden = hide; api.hide(2, hide); }
       flip.classList.toggle('done', eX > 0.98);
       flow.classList.toggle('is-dark', eX >= 1);     /* the pinned stage goes dark under the full-screen section: no light seams */
       if (eX >= 1) { flip.style.transform = 'none'; flip.style.left = '0px'; flip.style.top = '0px'; flip.style.willChange = 'auto'; flip.style.borderRadius = '0px'; stick.style.perspective = 'none'; }
       else { flip.style.willChange = ''; stick.style.perspective = ''; flip.style.left = ''; flip.style.top = ''; }
-      deal(q > 0.86);
+      deal(q > 0.82);
     };
-    /* q follows the scroll with a little lag (the design's 0.16 a frame at 60 fps), timed so a slow
-       device doesn't fall further behind */
+    /* q follows the scroll with the landing flip's lag (0.06 a frame at 60 fps), timed so a slow device
+       doesn't fall further behind */
     let lastT = 0;
     const loop = (t) => {
       const dt = lastT ? Math.min(0.1, (t - lastT) / 1000) : 1 / 60;
       lastT = t;
-      qCur += (qTgt - qCur) * (1 - Math.exp(-10.5 * dt));
+      qCur += (qTgt - qCur) * (1 - Math.exp(-3.7 * dt));
       if (Math.abs(qTgt - qCur) < 0.0004) qCur = qTgt;
       render(qCur);
       raf = qCur !== qTgt ? requestAnimationFrame(loop) : 0;
