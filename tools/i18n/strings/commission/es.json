@@ -5,6 +5,7 @@
   "cp.nav.payouts": "Pagos",
   "cp.earn.h1": "Tu audiencia. Tu influencia. <red>Tus ganancias.</red>",
   "cp.earn.sub": "Cada socio recibe condiciones individuales. Elige el perfil más parecido al tuyo para ver una estimación inicial.",
+  "cp.earn.subShort": "Elige el perfil más parecido al tuyo para ver una estimación inicial.",
   "cp.earn.c1.label": "Creador de contenido",
   "cp.earn.c1.who": "Canal de YouTube, blog o redes sociales",
   "cp.earn.c1.ctx": "Canal del socio",
