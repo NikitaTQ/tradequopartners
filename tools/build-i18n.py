@@ -260,7 +260,7 @@ for page in PAGES:
         hreflang = '\n'.join('<link rel="alternate" hreflang="%s" href="%s">' % (t['hreflang'], url_of(t, slug)) for t in page['built'])
         hreflang += '\n<link rel="alternate" hreflang="x-default" href="%s">' % url_of(languages[0], slug)
         system = {
-            'lang': lang.get('html', code), 'dir': lang.get('dir', 'ltr'), 'root': root, 'home': home or './',
+            'lang': lang.get('html', code), 'code': code, 'dir': lang.get('dir', 'ltr'), 'root': root, 'home': home or './',
             'canonical': url_of(lang, slug), 'hreflang': hreflang, 'ogLocale': lang['ogLocale'],
             'fontFaces': faces, 'fontPreload': preload, 'langSwitcher': switcher(lang, s, slug),
             'embedQuery': '' if code == 'en' else '?lang=' + code,

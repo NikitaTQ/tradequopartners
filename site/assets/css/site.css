@@ -562,7 +562,7 @@ html { scroll-snap-type: y proximity; }
   #signup form[data-agreement] label { font-size: 11px !important; letter-spacing: .14em !important; }
   #signup form[data-agreement] label > span + span { border-radius: 12px !important; }
   #signup [data-form-auth] { border-radius: 12px !important; padding: 12px 14px 8px !important; background: #fff !important; }
-  #signup [data-form-auth] span { font-size: 10px !important; letter-spacing: .12em !important; }
+  #signup [data-form-auth] span { font-size: 11px !important; letter-spacing: .12em !important; }
   #signup [data-form-auth] [data-ref="date"] { font-size: 14px !important; letter-spacing: .04em !important; }
   [data-calc-grid] { gap: 14px !important; margin-top: 22px !important; }
   [data-invoice] { padding: 22px 18px 18px !important; gap: 14px !important; }
@@ -570,12 +570,12 @@ html { scroll-snap-type: y proximity; }
   [data-invoice] > div:nth-child(2) > span:first-child > span { font-size: 16px !important; }
   [data-invoice] > div:nth-child(2) > span:last-child { font-size: 26px !important; }
   [data-inv-meta] { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; padding: 10px 0 !important; gap: 8px !important; }
-  [data-inv-meta] span:first-child { font-size: 8.5px !important; letter-spacing: .14em !important; }
+  [data-inv-meta] span:first-child { font-size: 11px !important; letter-spacing: .08em !important; }
   [data-inv-meta] span:last-child { font-size: 11px !important; }
   [data-invoice] > div:nth-child(4) > div:first-child { display: none !important; }
   [data-invoice] > div:nth-child(4) > div { padding: 10px 0 !important; }
   [data-invoice] > div:nth-child(4) > div > span:first-child > span:first-child { font-size: 13.5px !important; }
-  [data-invoice] > div:nth-child(4) > div > span:first-child > span:last-child { font-size: 10.5px !important; }
+  [data-invoice] > div:nth-child(4) > div > span:first-child > span:last-child { font-size: 11.5px !important; }
   [data-invoice] > div:nth-child(4) > div > span:last-child { font-size: 12.5px !important; }
   [data-inv-total] { font-size: 34px !important; }
   [data-inv-stamp] { width: 70px !important; height: 70px !important; }
@@ -858,11 +858,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 [dir="rtl"] .tq-lang__opt [aria-checked="true"] .tq-lang__switch::after { transform: translateX(-14px); }
 [dir="rtl"] .tq-lang__switch::after { left: auto; right: 3px; }
 @media (max-width: 640px) {
-  .tq-lang__btn { width: 40px; height: 40px; padding: 0; justify-content: center; }
+  .tq-lang__btn { width: 44px; height: 44px; padding: 0; justify-content: center; }
   .tq-lang__code, .tq-lang__chev { display: none; }
   .tq-lang__menu { position: fixed; top: 72px; right: 16px; left: auto; min-width: 0; width: min(260px, calc(100vw - 32px)); max-height: calc(100vh - 96px); }
   header img[alt] { height: 19px !important; }
-  header nav > a.hv-red-bg { height: 40px !important; padding: 0 16px !important; font-size: 14px !important; }
+  header nav > a.hv-red-bg { height: 44px !important; padding: 0 16px !important; font-size: 14px !important; }
   header nav { gap: 10px !important; flex-wrap: nowrap !important; }
   header { gap: 12px !important; }
 }
@@ -969,7 +969,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   .tq-calc__title { font-size: 15px; }
   .tq-calc__val { height: 52px; padding: 0 16px; border-radius: 13px; }
   .tq-calc__input { font-size: 22px; }
-  .tq-calc__unit { font-size: 10px; }
+  .tq-calc__unit { font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { .tq-calc__sheen { transition: none; } }
 
@@ -985,6 +985,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 [data-inv-per] button:hover { color: #0a0a0a; }
 [data-inv-per] button[aria-pressed="true"] { color: #fff; }
 [data-inv-per] button:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+/* phones: the toggle looks the same, but each button takes taps 7px above and below it (44px in all) */
+@media (max-width: 640px) { [data-inv-per] button::after { content: ''; position: absolute; left: 0; right: 0; top: -7px; bottom: -7px; } }
 @media (prefers-reduced-motion: reduce) { [data-inv-per-thumb] { transition: none; } }
 
 /* ---- Liquid glass (Glass_Card_Grid_Liquid design) ----------------------------------------
@@ -1051,3 +1053,13 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
 }
 @media (prefers-reduced-motion: reduce) { .tq-frost { transform: none; transition: none; } }
+
+/* ---- Phones: tap areas of 44px and readable small print (Apple HIG / Material guidance) ----------------
+   Small controls keep their look and take taps over a larger invisible area; dots become 44px buttons. */
+@media (max-width: 640px) {
+  header a:has(> img:only-child) { padding: 13px 0; margin: -13px 0; }   /* the logo */
+  .tp-scta::after { content: ''; position: absolute; left: -8px; right: -8px; top: -12px; bottom: -12px; }
+  .tp-progdots, .tq-earn__dots { gap: 0 !important; }
+  .tp-progdots button, .tq-earn__dots button { width: 44px !important; height: 44px !important; }
+  footer p { font-size: 12px !important; }
+}
