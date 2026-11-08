@@ -105,6 +105,13 @@
     if (eager.length && !saveData) {
       const go = () => { window.removeEventListener('pointermove', go); idle(() => eager.forEach((f) => { if (f.getClientRects().length) start(f); }), { timeout: 600 }); };
       window.addEventListener('pointermove', go, { passive: true });
+      /* touch screens have no pointer to move: the art in view starts once the page has loaded, so it moves
+         from the start instead of waiting on its still for the first touch */
+      if (matchMedia('(hover: none)').matches) {
+        const inView = (f) => { const r = f.getBoundingClientRect(); return r.width && r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth; };
+        const t = () => idle(() => eager.forEach((f) => { if (inView(f)) start(f); }), { timeout: 1200 });
+        if (document.readyState === 'complete') t(); else window.addEventListener('load', t, { once: true });
+      }
     }
     const view = new IntersectionObserver((entries) => {
       entries.forEach((en) => { en.target.dataset.inview = en.isIntersecting ? '1' : '0'; setEmbedPaused(en.target); });

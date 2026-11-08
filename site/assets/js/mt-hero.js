@@ -2,7 +2,7 @@
  * creative cards, a TradingView screen, signal candles on a base, the academy temple — over the dark
  * hero. They pop in, bob, follow the mouse (parallax); hovering or tapping one shows its name above it.
  * Phones and other tall screens (stage narrower than 0.95 of its height) get a 2×2 layout.
- * A name always sits above its object, never higher than 8px from the stage's top (opts.floor() px if given). Trading Signals and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
+ * A name always sits above its object, never higher than 8px from the stage's top (3px on tall stages; opts.floor() px if given). Trading Signals and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
  * the old one had). Loaded as a module by marketing.html; three.js is the site's own copy. The page's text stays as it is
  * when WebGL is missing. Labels come from the stage's data-labels (mt.top.l1–l4, joined by |). */
 import * as THREE from '../../vendor/three@0.184.0/three.module.min.js';
@@ -333,7 +333,7 @@ export function mount(el, opts = {}) {
     renderer.setSize(w, h, false); camera.aspect = w / h;
     preset = (opts.layout === 'portrait' || (!opts.layout && w / h < 0.95)) ? PRESETS.portrait : PRESETS.landscape;
     camera.updateProjectionMatrix();
-    minY = opts.floor ? opts.floor() : 8;
+    minY = opts.floor ? opts.floor() : (preset === PRESETS.portrait ? 3 : 8);   /* phones: 5px more room above the first row */
   };
   const ro = new ResizeObserver(resize); ro.observe(el); resize();
 
