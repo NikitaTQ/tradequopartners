@@ -1731,18 +1731,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-mth__stage { height: 80%; }
 }
 @media (max-width: 640px) { .tq-mth { height: calc(100vh - 84px); height: calc(100svh - 84px); } }
-.tp-mt-sup { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 980px; margin: clamp(32px, 4.5vw, 56px) auto 0; }
-.tp-mt-card { display: flex; align-items: flex-start; gap: 18px; padding: 26px 28px; }
-.tp-mt-card .tp-hex { width: 50px; height: 50px; }
-.tp-mt-card h3 { margin: 4px 0 0; font-size: 20px; line-height: 1.15; letter-spacing: -.025em; font-weight: 700; }
-.tp-mt-card p { margin: 8px 0 0; font-size: 15px; line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
-@media (max-width: 720px) {
-  .tp-mt-sup { grid-template-columns: minmax(0, 1fr); }
-}
-@media (max-width: 560px) {
-  .tp-mt-card { padding: 22px 20px; gap: 14px; }
-  .tp-mt-card h3 { font-size: 18px; }
-}
 
 /* Promo materials library: one glass card per format (illustration, name, optional count, line) */
 /* the design's backdrop: red and silver spheres, a dark slab and fine lines behind the frosted cards */
@@ -2223,6 +2211,77 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-bento__ic { width: 38px; height: 38px; border-radius: 10px; }
   .tp-bento__ask { gap: 6px; }
   .tp-bento__go { font-size: 13px; }
+}
+
+/* ---- Marketing Tools: Data and people on your side (Data_and_People_Section) -------------------------------
+   Two cards, each with an illustration over its text: a partner dashboard tilted in 3D, its figures and bars
+   ticking along live (startLiveDash in landing.js; only while on screen), and a glass chat card with the partner
+   manager on a dark stage with a red glow. The illustrations are decoration (aria-hidden). */
+.tp-dp { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 1112px; margin: clamp(32px, 4.5vw, 56px) auto 0; }
+.tp-dp__card { display: flex; flex-direction: column; gap: 28px; padding: 14px 14px 32px; border-radius: 26px; background: #f4f4f5; box-shadow: inset 0 0 0 1px rgba(18,22,30,.04); }
+.tp-dp__art { position: relative; height: 300px; border-radius: 18px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.tp-dp__art--light { background: radial-gradient(100% 80% at 50% 100%, #e4e5e8, #f7f7f8 70%); }
+.tp-dp__art--dark { background: linear-gradient(180deg, #141518, #0a0a0b); }
+.tp-dp__dash { width: 400px; max-width: calc(100% - 40px); box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; padding: 18px 20px; border-radius: 16px; background: #fff; color: #0a0a0a;
+  box-shadow: 0 0 0 1px rgba(18,22,30,.06), 0 30px 50px -28px rgba(18,22,30,.45); transform: perspective(1000px) rotateX(8deg) rotateY(-8deg); }
+[dir="rtl"] .tp-dp__dash { transform: perspective(1000px) rotateX(8deg) rotateY(8deg); }
+.tp-dp__dhead { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; }
+.tp-dp__live { display: flex; align-items: center; gap: 7px; font-family: 'Fragment Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .14em; color: #e7131b; }
+.tp-dp__live i { position: relative; width: 7px; height: 7px; border-radius: 50%; background: #e7131b; }
+.tp-dp__live i::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: #e7131b; animation: tpDpPulse 1.4s ease-out infinite; }
+@keyframes tpDpPulse { from { transform: scale(1); opacity: .7; } to { transform: scale(3); opacity: 0; } }
+.tp-dp__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.tp-dp__stats > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 10px 12px; border-radius: 10px; background: #f6f6f7; }
+.tp-dp__stats span { font-family: 'Fragment Mono', monospace; font-size: 9px; letter-spacing: .12em; color: #6b6f76; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tp-dp__stats b { font-weight: 700; font-size: 20px; letter-spacing: -.03em; white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; }
+.tp-dp__stats em { font-style: normal; font-family: 'Fragment Mono', monospace; font-size: 10px; color: #1f9d55; white-space: nowrap; overflow: hidden; }
+.tp-dp__bars { height: 86px; display: flex; align-items: flex-end; gap: 5px; padding-bottom: 6px; border-bottom: 1px solid #eeeff1; direction: ltr; }
+.tp-dp__bars i { flex: 1; height: 100%; border-radius: 2px 2px 0 0; background: #c9cbd0; transform-origin: 50% 100%; transition: transform .6s cubic-bezier(.2,.8,.2,1), background-color .3s; }
+.tp-dp__bars i.is-up { background: #0f1012; }
+.tp-dp__bars i.is-red { background: #e7131b; }
+.tp-dp__glow { position: absolute; left: 15%; right: 15%; bottom: -120px; height: 220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.45), rgba(231,19,27,0)); }
+.tp-dp__chat { position: relative; width: 340px; max-width: calc(100% - 40px); box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; padding: 20px; border-radius: 20px; color: #fff;
+  background: rgba(255,255,255,.06); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 0 1px rgba(255,255,255,.08), 0 30px 50px -24px rgba(0,0,0,.7); }
+.tp-dp__who { display: flex; align-items: center; gap: 14px; }
+.tp-dp__who > div:last-child { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tp-dp__who > div:last-child b { font-weight: 700; font-size: 17px; }
+.tp-dp__who > div:last-child span { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .1em; color: #22c55e; }
+.tp-dp__ava { position: relative; width: 60px; height: 60px; flex: none; }
+.tp-dp__ava > i { position: absolute; inset: 0; border-radius: 18px; transform: rotate(-8deg); background: linear-gradient(150deg, #ff5a60 0%, #e7131b 45%, #8e0a10 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 10px 20px -8px rgba(231,19,27,.8); }
+.tp-dp__ava > span { position: absolute; inset: 0; border-radius: 18px; overflow: hidden; display: flex; align-items: flex-end; justify-content: center;
+  background: linear-gradient(160deg, rgba(255,255,255,.22), rgba(255,255,255,.04)); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 0 0 1px rgba(255,255,255,.16); }
+.tp-dp__ava b { font-size: 44px; line-height: 1; font-weight: 400; transform: translateY(7px); filter: drop-shadow(0 4px 6px rgba(0,0,0,.45)); }
+.tp-dp__ava > em { position: absolute; right: -3px; bottom: -3px; width: 14px; height: 14px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px #1a1b1e, 0 0 10px rgba(34,197,94,.8); }
+[dir="rtl"] .tp-dp__ava > em { right: auto; left: -3px; }
+.tp-dp__msg { align-self: flex-start; max-width: 250px; padding: 10px 14px; border-radius: 14px 14px 14px 4px; background: #fff; color: #0a0a0a; font-size: 13.5px; line-height: 1.4; }
+[dir="rtl"] .tp-dp__msg { border-radius: 14px 14px 4px 14px; }
+.tp-dp__btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tp-dp__btns span { height: 42px; border-radius: 999px; display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255,255,255,.1); font-size: 14px; font-weight: 600; }
+.tp-dp__btns span.is-call { background: #e7131b; box-shadow: 0 8px 18px -8px rgba(231,19,27,.8); }
+.tp-dp__txt { display: flex; gap: 16px; padding: 0 18px; }
+.tp-dp__hex { flex: none; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 30%, #ff5a60, #e7131b 55%, #a50c12);
+  clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0 50%); }
+.tp-dp__txt > div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tp-dp__txt h3 { margin: 0; font-weight: 700; font-size: 24px; line-height: 1.2; letter-spacing: -.02em; }
+.tp-dp__txt p { margin: 0; font-size: 16px; line-height: 1.5; color: #4a4d54; text-wrap: pretty; }
+@media (prefers-reduced-motion: reduce) { .tp-dp__live i::after { animation: none; } .tp-dp__bars i { transition: none; } }
+@media (max-width: 900px) {
+  .tp-dp { grid-template-columns: minmax(0, 1fr); max-width: 560px; gap: 16px; }
+}
+@media (max-width: 640px) {
+  .tp-dp__card { gap: 20px; padding: 10px 10px 24px; border-radius: 22px; }
+  .tp-dp__art { height: auto; min-height: 250px; padding: 20px 0; box-sizing: border-box; border-radius: 15px; }
+  .tp-dp__dash { padding: 14px 14px; gap: 11px; }
+  .tp-dp__stats { gap: 6px; }
+  .tp-dp__stats > div { padding: 8px 8px; }
+  .tp-dp__stats b { font-size: 16px; }
+  .tp-dp__bars { height: 64px; gap: 3px; }
+  .tp-dp__chat { padding: 16px; gap: 14px; }
+  .tp-dp__msg { font-size: 13px; }
+  .tp-dp__txt { gap: 14px; padding: 0 12px; }
+  .tp-dp__hex { width: 46px; height: 46px; }
+  .tp-dp__txt h3 { font-size: 20px; }
+  .tp-dp__txt p { font-size: 15px; }
 }
 </style>
 <style id="i18n-fonts">
@@ -2739,7 +2798,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=b682c736d5" defer></script>
+<script src="../../assets/js/landing.js?v=2b0fecba28" defer></script>
 <script src="../../assets/js/plan.js?v=5c5b01428f" defer></script>
 </body>
 </html>
