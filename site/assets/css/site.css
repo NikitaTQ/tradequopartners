@@ -1126,3 +1126,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* RTL: the phone menu (button and links) stays at the right edge, where it is anchored */
 [dir="rtl"] [data-fab] { align-items: flex-start !important; }
+
+/* ---- Landing form on desktop: Send request in the first screen ----------------------------------------
+   The consent line and Send request come right after the phone field, then the date, then the three
+   points (UP TO 87% …). The form is a flex column; only the order changes (phones keep the markup's). */
+@media (min-width: 900px) {
+  #signup form > div:has(> [data-form-auth]) { order: 2; margin-top: 6px !important; }
+  #signup form > [data-commit] { order: 3; margin-top: 4px !important; }
+  #signup form > div:has(> button[type="submit"]) { margin-top: 6px !important; }
+}
