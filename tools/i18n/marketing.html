@@ -201,22 +201,42 @@
       </div>
     </section>
 
-    <!-- Support: live tracking and the partner manager -->
+    <!-- Support (Data_and_People_Section): a live partner dashboard and a chat with the partner manager, each over its card text -->
     <section id="support" class="tp-sec" data-screen-label="Tracking and support">
       <div class="tp-wrap">
         <div class="tp-head">
           <h2 class="tp-h2">{{mt.sup.title}}</h2>
           <p class="tp-sub">{{mt.sup.sub}}</p>
         </div>
-        <div class="tp-mt-sup">
-          <div class="tp-glass tp-glass--hover tp-mt-card">
-            <span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"></path><path d="m5 15 4.5-4.5 3.5 3 6-6.5"></path><path d="M15 7h4v4"></path></svg></span>
-            <div><h3>{{mt.track.t}}</h3><p>{{mt.track.d}}</p></div>
-          </div>
-          <div class="tp-glass tp-glass--hover tp-mt-card">
-            <span class="tp-hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span>
-            <div><h3>{{mt.mgr.t}}</h3><p>{{mt.mgr.d}}</p></div>
-          </div>
+        <div class="tp-dp">
+          <article class="tp-dp__card">
+            <div class="tp-dp__art tp-dp__art--light" aria-hidden="true">
+              <div class="tp-dp__dash" data-live-dash="" data-today="{{@mt.dp.today}}">
+                <div class="tp-dp__dhead"><span>{{mt.dp.dash}}</span><span class="tp-dp__live"><i></i>{{mt.dp.live}}</span></div>
+                <div class="tp-dp__stats">
+                  <div><span>{{mt.dp.k1}}</span><b data-ld="signups">184</b><em data-ld="signupsD"></em></div>
+                  <div><span>{{mt.dp.k2}}</span><b data-ld="lots">7,800</b><em data-ld="lotsD">&#x2066;+42&#x2069;</em></div>
+                  <div><span>{{mt.dp.k3}}</span><b data-ld="earned">$58,500</b><em data-ld="earnedD">&#x2066;+$1,950&#x2069;</em></div>
+                </div>
+                <div class="tp-dp__bars" data-ld-bars=""><i class="is-up" style="transform: scaleY(0.20);"></i><i class="is-up" style="transform: scaleY(0.32);"></i><i class="is-up" style="transform: scaleY(0.43);"></i><i class="is-up" style="transform: scaleY(0.52);"></i><i class="is-up" style="transform: scaleY(0.58);"></i><i class="is-up" style="transform: scaleY(0.61);"></i><i class="" style="transform: scaleY(0.60);"></i><i class="" style="transform: scaleY(0.57);"></i><i class="" style="transform: scaleY(0.51);"></i><i class="" style="transform: scaleY(0.44);"></i><i class="" style="transform: scaleY(0.36);"></i><i class="" style="transform: scaleY(0.29);"></i><i class="" style="transform: scaleY(0.24);"></i><i class="" style="transform: scaleY(0.21);"></i><i class="" style="transform: scaleY(0.21);"></i><i class="is-up" style="transform: scaleY(0.24);"></i><i class="is-up" style="transform: scaleY(0.31);"></i><i class="is-up" style="transform: scaleY(0.40);"></i><i class="is-up" style="transform: scaleY(0.51);"></i><i class="is-up" style="transform: scaleY(0.63);"></i><i class="is-up" style="transform: scaleY(0.75);"></i><i class="is-up" style="transform: scaleY(0.86);"></i><i class="is-up" style="transform: scaleY(0.94);"></i><i class="is-red" style="transform: scaleY(1.00);"></i></div>
+              </div>
+            </div>
+            <div class="tp-dp__txt"><span class="tp-dp__hex" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 15 9 10 13 13 20 6"></polyline><line x1="4" y1="19" x2="20" y2="19"></line></svg></span><div><h3>{{mt.track.t}}</h3><p>{{mt.track.d}}</p></div></div>
+          </article>
+          <article class="tp-dp__card">
+            <div class="tp-dp__art tp-dp__art--dark" aria-hidden="true">
+              <span class="tp-dp__glow"></span>
+              <div class="tp-dp__chat">
+                <div class="tp-dp__who">
+                  <div class="tp-dp__ava"><i></i><span><b>🧑‍💼</b></span><em></em></div>
+                  <div><b>{{mt.dp.mgr}}</b><span>{{mt.dp.online}}</span></div>
+                </div>
+                <div class="tp-dp__msg">{{mt.dp.msg}}</div>
+                <div class="tp-dp__btns"><span>{{mt.dp.message}}</span><span class="is-call"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>{{mt.dp.call}}</span></div>
+              </div>
+            </div>
+            <div class="tp-dp__txt"><span class="tp-dp__hex" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></span><div><h3>{{mt.mgr.t}}</h3><p>{{mt.mgr.d}}</p></div></div>
+          </article>
         </div>
       </div>
     </section>

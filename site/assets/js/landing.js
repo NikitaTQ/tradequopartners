@@ -759,6 +759,56 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
   }
 
+  /* ---- marketing-tools/: the partner dashboard in "Data and people" ticks along --------------------------
+   * Every 1.6 s, while it is on screen: the bars shift left and a new one comes in red on the right, sign-ups,
+   * lots and earnings creep up (the Data_and_People_Section design's numbers). Bars move by transform only.
+   * The figures are bidi-isolated (LRI…PDI) so "+46" stays "+46" in Arabic; a label or figure too wide for its
+   * box (long words on narrow phones) is shrunk to fit. Reduced motion: drawn once, then still. */
+  function startLiveDash() {
+    const dash = $('[data-live-dash]');
+    if (!dash) return;
+    const bars = $$('[data-ld-bars] i', dash);
+    let h = bars.map((b) => Math.round(parseFloat((/scaleY\(([\d.]+)\)/.exec(b.style.transform) || [0, 0.5])[1]) * 100));
+    let numLocale = 'en-US';
+    try { numLocale = Intl.NumberFormat.supportedLocalesOf([document.documentElement.lang + '-u-nu-latn'])[0] || 'en-US'; } catch (e) {}
+    const iso = (s) => '⁦' + s + '⁩';
+    const n = (v) => v.toLocaleString(numLocale), usd = (v) => '$' + Math.round(v).toLocaleString('en-US');
+    const set = (k, v) => { const el = $('[data-ld="' + k + '"]', dash); if (el) el.textContent = v; };
+    const today = dash.dataset.today || '+{n}';
+    const fitEls = $$('.tp-dp__stats span, .tp-dp__stats b, .tp-dp__stats em', dash);
+    const fit = () => fitEls.forEach((el) => {
+      el.style.fontSize = '';
+      const room = el.clientWidth, w = el.scrollWidth;
+      if (!room || w <= room + 1) return;
+      const fs = parseFloat(getComputedStyle(el).fontSize);
+      el.style.fontSize = Math.max(fs * 0.6, fs * room / w - 0.3).toFixed(1) + 'px';
+    });
+    let tick = 0, iv = 0;
+    const draw = () => {
+      bars.forEach((b, i) => {
+        b.style.transform = 'scaleY(' + (Math.min(100, h[i]) / 100).toFixed(2) + ')';
+        b.className = i === h.length - 1 ? 'is-red' : h[i] > (h[i - 1] || 0) ? 'is-up' : '';
+      });
+      set('signups', iso(n(184 + Math.floor(tick / 3))));
+      set('signupsD', today.replace('+{n}', iso('+' + n(3 + Math.floor(tick / 3)))));
+      set('lots', iso(n(7800 + tick * 2))); set('lotsD', iso('+' + n(42 + tick * 2)));
+      set('earned', iso(usd(58500 + tick * 15))); set('earnedD', iso('+' + usd(1950 + tick * 15)));
+      fit();
+    };
+    const step = () => {
+      tick++;
+      const last = h[h.length - 1];
+      h = h.slice(1).concat(Math.max(14, Math.min(100, last + Math.round((Math.random() - 0.4) * 18))));
+      draw();
+    };
+    draw();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    let rt = 0;
+    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 150); });
+    if (reducedMotion()) return;
+    whileVisible(dash, '0px', () => { if (!iv) iv = setInterval(step, 1600); }, () => { clearInterval(iv); iv = 0; });
+  }
+
   /* ---- /programs/: a program card's big figure ("87%", "∞ tiers", "Yours.") keeps one line ------
    * It is set large (partner.css .tp-pc__big); where a language's wording is wider than its card, the
    * type steps down to fit, at most to 40%. Measured again once the fonts are in and on resize. */
@@ -1222,6 +1272,7 @@
   startWhoFlow();
   startProgSwiper();
   startFitWide();
+  startLiveDash();
   startGlass();
   startLiquidCta();
   startReviewsDrag();
