@@ -813,7 +813,7 @@
   .tp-hero .tp-head { gap: 6px; }
   .tp-hero .tp-stage { margin-top: 8px; }
   .tp-stage > .tp-programs { padding-top: 0; }
-  .tp-prog__art { aspect-ratio: auto; height: 88px; }
+  .tp-prog__art { aspect-ratio: 16 / 9; width: 74%; margin: 0 auto; }   /* the 3D art's own 16:9 frame (its poster matches), narrower */
   .tp-prog__tag { margin-top: 12px; }
   .tp-prog__title, .tp-prog__desc { margin-top: 6px; }
   .tp-prog__value { margin-top: 12px; padding-top: 12px; }
