@@ -1177,6 +1177,15 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* RTL: the phone menu (button and links) stays at the right edge, where it is anchored */
 [dir="rtl"] [data-fab] { align-items: flex-start !important; }
+
+/* ---- Landing form on desktop: Send request in the first screen ----------------------------------------
+   The consent line and Send request come right after the phone field, then the date, then the three
+   points (UP TO 87% …). The form is a flex column; only the order changes (phones keep the markup's). */
+@media (min-width: 900px) {
+  #signup form > div:has(> [data-form-auth]) { order: 2; margin-top: 6px !important; }
+  #signup form > [data-commit] { order: 3; margin-top: 4px !important; }
+  #signup form > div:has(> button[type="submit"]) { margin-top: 6px !important; }
+}
 </style>
 <style id="i18n-fonts">
 @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url(../assets/fonts/intl/ibm-plex-sans-arabic-400-arabic.woff2) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC7, U+10EC9-10EEE, U+10EF0-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1; }

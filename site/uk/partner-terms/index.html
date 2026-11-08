@@ -1177,6 +1177,15 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* RTL: the phone menu (button and links) stays at the right edge, where it is anchored */
 [dir="rtl"] [data-fab] { align-items: flex-start !important; }
+
+/* ---- Landing form on desktop: Send request in the first screen ----------------------------------------
+   The consent line and Send request come right after the phone field, then the date, then the three
+   points (UP TO 87% …). The form is a flex column; only the order changes (phones keep the markup's). */
+@media (min-width: 900px) {
+  #signup form > div:has(> [data-form-auth]) { order: 2; margin-top: 6px !important; }
+  #signup form > [data-commit] { order: 3; margin-top: 4px !important; }
+  #signup form > div:has(> button[type="submit"]) { margin-top: 6px !important; }
+}
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -1574,9 +1583,50 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-mth__foot { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); bottom: clamp(14px, 2.2vh, 22px); display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: flex-end; gap: 22px 40px; pointer-events: none; }
 .tq-mth__h1 { margin: 0; font-size: clamp(44px, 5.8vw, 92px); line-height: .94; font-weight: 700; letter-spacing: -.048em; color: #fff; }
-.tq-mth__list { flex: 1 1 280px; max-width: 420px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; margin: 0; padding: 16px 0 0; list-style: none;
-  border-top: 1px solid rgba(255,255,255,.1); font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #8a8a92; text-transform: uppercase; }
-.tq-mth__list b { font-weight: 400; color: #e7131b; }
+/* Become a partner (TradeQuo_CTA_Candle_Window): a silver pill with a dark window; the red candle bobs, and on
+   hover it slides into the dip while four silver candles rise one by one; a sheen runs across now and then */
+.tq-cw { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 16px; height: 64px; padding-inline: 8px 30px; box-sizing: border-box; border-radius: 999px;
+  white-space: nowrap; text-decoration: none; pointer-events: auto; color: #0a0a0a; font-size: 18px; font-weight: 700; letter-spacing: -.01em; -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(180deg, #fff 0%, #e6e7ea 28%, #b3b5bb 52%, #dddee2 74%, #c3c5ca 100%);
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0,0,0,.25), 0 0 0 1px rgba(255,255,255,.18), 0 18px 40px -14px rgba(231,19,27,.6);
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
+.tq-cw:hover, .tq-cw:focus-visible { color: #0a0a0a; transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0,0,0,.25), 0 0 0 1px rgba(255,255,255,.3), 0 22px 48px -12px rgba(255,255,255,.35); }
+.tq-cw:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.tq-cw__sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(110deg, rgba(255,255,255,0) 42%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 58%);
+  background-size: 300% 100%; animation: tqCwSheen 4.2s ease-in-out infinite; }
+@keyframes tqCwSheen { 0% { background-position: 150% 0; } 55%, 100% { background-position: -50% 0; } }
+.tq-cw__win { position: relative; flex: none; display: flex; align-items: center; justify-content: center; width: 112px; height: 48px; border-radius: 999px; background: #0a0a0b;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.9), inset 0 -1px 0 rgba(255,255,255,.12); direction: ltr; }
+.tq-cw__chart { position: relative; width: 96px; height: 40px; }
+.tq-cw__label { position: relative; }
+.tq-cw__c { position: absolute; width: 8px; transform-origin: 50% 100%;
+  transition: transform .6s cubic-bezier(.2,.9,.25,1.12), opacity .3s, left .5s cubic-bezier(.2,.8,.2,1), bottom .5s cubic-bezier(.2,.8,.2,1); }
+.tq-cw__c i { position: absolute; left: 50%; margin-left: -1px; width: 2px; top: 0; bottom: 0; border-radius: 1px; }
+.tq-cw__c b { position: absolute; left: 0; right: 0; border-radius: 2px; }
+.tq-cw__red { left: 44px; bottom: 4px; height: 25px; animation: tqCwDrop 1.8s ease-in-out infinite; }
+.tq-cw__red i { background: #ff6b71; }
+.tq-cw__red b { bottom: 6px; height: 16px; background: linear-gradient(90deg, #8e0a10 0%, #ff5a60 38%, #e7131b 60%, #8e0a10 100%); box-shadow: 0 0 12px rgba(231,19,27,.75); }
+@keyframes tqCwDrop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+.tq-cw:hover .tq-cw__red, .tq-cw:focus-visible .tq-cw__red { left: 6px; bottom: 0; animation: none; }
+.tq-cw__s { opacity: 0; transform: translateY(6px) scaleY(.04); transition-delay: 0ms; }
+.tq-cw__s i { background: #c9cbd0; }
+.tq-cw__s b { bottom: 3px; background: linear-gradient(90deg, #7d7f86 0%, #f6f6f8 38%, #d4d6da 58%, #8e9097 100%); box-shadow: 0 0 10px rgba(255,255,255,.25); }
+.tq-cw__s1 { left: 24px; bottom: 7px; height: 16px; } .tq-cw__s1 b { height: 10px; }
+.tq-cw__s2 { left: 42px; bottom: 11px; height: 18px; } .tq-cw__s2 b { height: 12px; }
+.tq-cw__s3 { left: 60px; bottom: 15px; height: 19px; } .tq-cw__s3 b { height: 13px; }
+.tq-cw__s4 { left: 78px; bottom: 19px; height: 20px; } .tq-cw__s4 b { height: 14px; }
+.tq-cw:hover .tq-cw__s, .tq-cw:focus-visible .tq-cw__s { opacity: 1; transform: translateY(0) scaleY(1); }
+.tq-cw:hover .tq-cw__s1, .tq-cw:focus-visible .tq-cw__s1 { transition-delay: 80ms; }
+.tq-cw:hover .tq-cw__s2, .tq-cw:focus-visible .tq-cw__s2 { transition-delay: 155ms; }
+.tq-cw:hover .tq-cw__s3, .tq-cw:focus-visible .tq-cw__s3 { transition-delay: 230ms; }
+.tq-cw:hover .tq-cw__s4, .tq-cw:focus-visible .tq-cw__s4 { transition-delay: 305ms; }
+@media (max-width: 640px) {   /* phones: a little smaller, the window's chart scaled with it */
+  .tq-cw { height: 56px; gap: 12px; padding-inline: 7px 24px; font-size: 16px; }
+  .tq-cw__win { width: 96px; height: 42px; }
+  .tq-cw__chart { transform: scale(.86); }
+}
+@media (prefers-reduced-motion: reduce) { .tq-cw__sheen, .tq-cw__red { animation: none; } }
 /* under the hero: the site's dark-to-white hand-off (the same curve as #pf-tail on /programs/) */
 .tq-mth-tail { position: relative; height: clamp(300px, 42vh, 480px); margin-top: -1px;
   background: linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
