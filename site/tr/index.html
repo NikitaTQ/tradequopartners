@@ -1149,36 +1149,70 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-pc__paper { margin-inline: 16px; padding: 36px 26px 56px; }
   .tq-pc__glow { right: 40px; }
 }
-/* tablets and phones: one column, the receipt over the terminal, so the total stays in view while the sliders move */
+/* tablets and phones: one column, the receipt over the terminal, so the total stays in view while the sliders move;
+   the receipt ends at the total (no barcode or stamp), and in the terminal each label sits on one line with its
+   figure over the slider, so the pair fits one screen */
 @media (max-width: 900px) {
   .tq-pc__printer { order: -1; }
+  .tq-pc__foot { display: none; }
+  .tq-pc__total { border-bottom: 0; padding-bottom: 4px; }
+  .tq-pc__paper { padding-bottom: 40px; }
+  .tq-pc__term { padding: 28px; gap: 20px; }
+  .tq-pc__tag { display: none; }
+  .tq-pc__field { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 4px 12px; }
+  .tq-pc__slider { grid-column: 1 / -1; }
+  .tq-pc__val b { font-size: 38px; }
   .tq-pc { padding: 52px 28px 60px; gap: 36px; border-radius: 28px; }
   .tq-pc__head { flex-direction: column; align-items: flex-start; gap: 14px; }
   .tq-pc__title { font-size: 46px; }
   .tq-pc__sub { max-width: 520px; padding-bottom: 0; }
-  .tq-pc__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; max-width: 560px; margin: 0 auto; width: 100%; }
+  .tq-pc__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; max-width: 560px; margin: 0 auto; width: 100%; }
   .tq-pc__glow { top: auto; bottom: 120px; right: -80px; }
 }
+/* phones: tighter still, so the receipt and the terminal fit one phone screen together (the sliders keep a 44px
+   touch strip) */
 @media (max-width: 640px) {
   .tq-pc { padding: 40px 16px 44px; gap: 28px; border-radius: 24px; }
   .tq-pc__head { padding: 0 4px; }
   .tq-pc__title { font-size: 34px; letter-spacing: -.045em; }
   .tq-pc__sub { font-size: 16px; }
-  .tq-pc__term { padding: 24px 20px; gap: 26px; border-radius: 22px; }
-  .tq-pc__val b { font-size: 36px; }
-  .tq-pc__paper { margin: -12px 10px 0; padding: 32px 18px 50px; }
-  .tq-pc__brand { font-size: 17px; }
-  .tq-pc__doc { font-size: 30px; }
-  .tq-pc__meta { gap: 8px; }
-  .tq-pc__meta div > span:first-child { font-size: 9.5px; letter-spacing: .1em; }
-  .tq-pc__meta div > span:last-child { font-size: 11.5px; }
-  .tq-pc__row > div > span:first-child { font-size: 14.5px; }
-  .tq-pc__row > div > span:last-child { font-size: 11px; }
-  .tq-pc__row > span { font-size: 13px; }
-  .tq-pc__total [data-inv-total] { font-size: 60px; }
-  .tq-pc__bars { width: 150px; height: 36px; }
-  .tq-pc__code > span:last-child { font-size: 10px; letter-spacing: .18em; }
-  .tq-pc__stamp { width: 78px; height: 78px; margin: -10px 0 -6px; }
+  .tq-pc__grid { gap: 14px; }
+  .tq-pc__slot { height: 20px; border-radius: 10px; padding: 0 14px; }
+  .tq-pc__slot span { height: 3px; }
+  .tq-pc__paper { margin: -8px 10px 0; padding: 18px 16px 26px; }
+  .tq-pc__shade { height: 14px; }
+  .tq-pc__top { padding-bottom: 10px; }
+  .tq-pc__brand { font-size: 15px; gap: 7px; }
+  .tq-pc__brand img { width: 17px; height: 17px; }
+  .tq-pc__doc { font-size: 24px; }
+  .tq-pc__meta { gap: 8px; padding: 8px 0; }
+  .tq-pc__meta div { gap: 3px; }
+  .tq-pc__meta div > span:first-child { font-size: 8.5px; letter-spacing: .1em; }
+  .tq-pc__meta div > span:last-child { font-size: 11px; }
+  .tq-pc__row { gap: 12px; padding: 10px 0 4px; }
+  .tq-pc__row--last { padding: 4px 0 10px; }
+  .tq-pc__row > div { gap: 2px; }
+  .tq-pc__row > div > span:first-child { font-size: 14px; }
+  .tq-pc__row > div > span:last-child { font-size: 10.5px; }
+  .tq-pc__row > span { font-size: 12.5px; }
+  .tq-pc__total { gap: 6px; padding: 12px 0 0; }
+  .tq-pc__total [data-inv-cap] { font-size: 9px; }
+  .tq-pc__total [data-inv-total] { font-size: 46px; }
+  .tq-pc__term { padding: 16px 16px 18px; gap: 12px; border-radius: 20px; }
+  .tq-pc__field { row-gap: 0; }
+  .tq-pc__label { font-size: 14px; }
+  .tq-pc__val { gap: 6px; }
+  .tq-pc__val b { font-size: 28px; }
+  .tq-pc__val span { font-size: 10px; letter-spacing: .12em; }
+  .tq-pc__slider { height: 44px; }
+  .tq-pc__ticks { top: 10px; }
+  .tq-pc__base { top: 22px; }
+  .tq-pc__fill { top: 21px; }
+  .tq-pc__knob { top: 2px; width: 40px; height: 40px; margin-left: -20px; }
+  .tq-pc__knob i { height: 16px; }
+  .tq-pc__slider input { height: 44px; }
+  .tq-pc__per button { height: 38px; }
+  .tq-pc__go { height: 48px; font-size: 15px; }
 }
 </style>
 </head>
