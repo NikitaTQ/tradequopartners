@@ -606,7 +606,7 @@ html { scroll-snap-type: y proximity; }
   #signup [data-hero-panel] { padding: 8px 4px 28px !important; }
   #signup [data-hero-stage] { width: 100% !important; }
   #signup form[data-agreement] { padding: 30px 20px 22px !important; border-radius: 20px !important; border: 1px solid #ebebe7; box-shadow: 0 18px 36px -24px rgba(10,10,10,.32), 0 1px 3px rgba(10,10,10,.05) !important; }
-  #signup [data-form-frame], #signup [data-form-band], #signup [data-form-tag] { display: none !important; }
+  #signup [data-form-frame], #signup [data-form-band] { display: none !important; }
   #signup [data-form-corner] { width: 54px !important; height: 54px !important; }
   #signup [data-form-corner] img { width: 13px !important; right: 7px !important; top: 7px !important; }
   #signup form[data-agreement] > div:first-of-type { padding-right: 40px !important; }
@@ -1242,39 +1242,37 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* ---- program cards ------------------------------------------------------------- */
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
 .tp-progdots { display: none; }
-/* Program cards (Partner_Cards 3c "chrome plate"): a chrome plate with the number, the program's name and a
-   still of its 3D object (assets/programs/), over a black card with the figure, the points and the CTAs. */
-.tp-pc { position: relative; overflow: hidden; display: flex; flex-direction: column; border-radius: 28px; color: #fff;
-  background: linear-gradient(180deg, #19191c 0%, #0c0c0e 100%); box-shadow: inset 0 0 0 1px #26262b, 0 40px 70px -40px rgba(10,10,14,.75); }
-.tp-pc__plate { position: relative; padding: 26px 30px 100px; margin-bottom: -64px; color: #0a0a0a; box-shadow: inset 0 1px 0 #fff;
-  background: linear-gradient(180deg, #fff 0%, #f0f1f3 30%, #dadcdf 50%, #c3c5ca 60%, #9c9ea4 68%, #6e7076 75%, #46474c 82%, #2b2b2f 88%, #1d1d20 94%, #19191c 100%); }
-.tp-pc__art { position: absolute; top: 8px; inset-inline-end: 10px; width: 210px; height: 176px; display: block; pointer-events: none; user-select: none; }
-.tp-pc__art--link { inset-inline-end: -12px; }
-.tp-pc__art--temple { top: 4px; width: 200px; height: 184px; }
+/* Program cards (Partner_Cards 5a): a dark card with a red glow in its top corner, the number, the program's
+   name and a still of its silver 3D object (assets/programs/), then the figure, the points and the CTAs. */
+.tp-pc { position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 30px; border-radius: 28px; color: #fff;
+  background: radial-gradient(55% 40% at 100% 0%, rgba(231,19,27,.22) 0%, rgba(231,19,27,0) 70%), linear-gradient(180deg, #19191c 0%, #0c0c0e 100%);
+  box-shadow: inset 0 0 0 1px #26262b, inset 0 1px 0 rgba(255,255,255,.08), 0 40px 70px -40px rgba(10,10,14,.75); }
+[dir="rtl"] .tp-pc { background: radial-gradient(55% 40% at 0% 0%, rgba(231,19,27,.22) 0%, rgba(231,19,27,0) 70%), linear-gradient(180deg, #19191c 0%, #0c0c0e 100%); }
+.tp-pc__art { position: absolute; top: 14px; inset-inline-end: 16px; width: 180px; height: 150px; display: block; pointer-events: none; user-select: none; }
+.tp-pc__art--temple { top: 12px; inset-inline-end: 18px; width: 170px; height: 164px; }
 .tp-pc__head { position: relative; display: flex; flex-direction: column; gap: 14px; max-width: 230px; }
-.tp-pc__num { font-family: 'Fragment Mono', monospace; font-size: 44px; line-height: .8; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.2px #e7131b; }
-.tp-pc__name { --nf: 40px; margin: 0; min-height: 80px; font-size: var(--nf); line-height: .98; font-weight: 800; letter-spacing: -.05em; color: #0a0a0a; text-wrap: balance; }
-/* the name wraps before it reaches its card's object (each object sits at a different depth into the plate);
-   a single word wider than that steps the type down (landing.js, data-fitw; the widths follow --nf, not the stepped size); CJK breaks only where the string
+.tp-pc__num { font-family: 'Fragment Mono', monospace; font-size: 44px; line-height: .8; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.2px #ff4b52; }
+.tp-pc__name { --nf: 40px; margin: 0; min-height: 80px; font-size: var(--nf); line-height: .98; font-weight: 800; letter-spacing: -.05em; color: #fff; text-wrap: balance; }
+/* the name wraps before it reaches its card's object; a single word wider than that steps the type down
+   (landing.js, data-fitw; the widths follow --nf, not the stepped size); CJK breaks only where the string
    allows (a zero-width space) */
 .tp-pc__name { word-break: keep-all; }
 .tp-pc:nth-child(1) .tp-pc__name { max-width: calc(var(--nf) * 5); }
-.tp-pc:nth-child(2) .tp-pc__name { max-width: calc(var(--nf) * 3.9); }
+.tp-pc:nth-child(2) .tp-pc__name { max-width: calc(var(--nf) * 4.4); }
 .tp-pc:nth-child(3) .tp-pc__name { max-width: calc(var(--nf) * 5.1); }
-.tp-pc__title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: #c70f16; }
-.tp-pc__title i { flex: none; width: 22px; height: 3px; border-radius: 2px; background: #e7131b; box-shadow: 0 0 8px rgba(231,19,27,.6); }
-.tp-pc__body { position: relative; flex: 1; display: flex; flex-direction: column; padding: 28px 30px 30px; }
-.tp-pc__lead { margin: 0; display: flex; flex-direction: column; gap: 20px; }
-.tp-pc__eyebrow { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .22em; color: #ff4b52; }
-.tp-pc__big { display: block; font-size: 96px; line-height: .86; font-weight: 800; letter-spacing: -.065em; white-space: nowrap; }   /* landing.js steps it down to fit */
-.tp-pc__big span { padding: 0 .12em 0 .04em; margin: 0 -.12em 0 -.04em; color: transparent;
-  background: linear-gradient(180deg, #fff 0%, #f1f1f3 40%, #a9abb1 72%, #e6e7ea 100%); -webkit-background-clip: text; background-clip: text; }
+.tp-pc__title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: #ff4b52; }
+.tp-pc__title i { flex: none; width: 22px; height: 3px; border-radius: 2px; background: #e7131b; box-shadow: 0 0 10px rgba(231,19,27,.9); }
+.tp-pc__body { position: relative; flex: 1; display: flex; flex-direction: column; }
+.tp-pc__lead { margin: 26px 0 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); display: flex; flex-direction: column; gap: 20px; }
+.tp-pc__eyebrow { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .22em; color: #b9bbc1; }
+.tp-pc__big { display: block; font-size: 96px; line-height: .86; font-weight: 800; letter-spacing: -.065em; white-space: nowrap; color: #e7131b; }   /* landing.js steps it down to fit */
 .tp-pc__sub { margin-top: 8px; font-size: 17px; line-height: 1.35; font-weight: 500; color: #e6e7ea; text-wrap: pretty; }
 .tp-pc__pts { display: flex; flex-direction: column; gap: 11px; margin: 24px 0 0; padding: 0; list-style: none; }
 .tp-pc__pts li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; line-height: 1.35; color: #b9bbc1; }
 .tp-pc__pts li::before { content: ''; flex: none; width: 16px; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='7.25' stroke='%233A3A40' stroke-width='1.5'/%3E%3Cpath d='M4.8 8.2 7 10.3 11.2 5.8' stroke='%23FF4B52' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / 16px 16px; }
 .tp-pc__who { margin: 22px 0 0; font-family: 'Fragment Mono', monospace; font-size: 11px; line-height: 1.5; color: #76767c; }
-.tp-pc__cta { margin-top: auto; padding-top: 26px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 12px; }
+.tp-pc__cta { margin-top: auto; margin-inline-end: -12px; padding-top: 26px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 10px; }   /* the link may reach into the card's padding, as in the design */
+.tp-programs.is-stack .tp-pc__cta { flex-direction: column; align-items: flex-start; }   /* landing.js: when one card's link wraps */
 .tp-pc__go { display: flex; align-items: center; gap: 12px; height: 54px; padding-inline: 5px 22px; border-radius: 999px; background: rgba(231,19,27,.16); color: #fff;
   font-size: 15.5px; font-weight: 700; white-space: nowrap; text-decoration: none; box-shadow: inset 0 0 0 1.5px #e7131b, 0 14px 26px -18px rgba(231,19,27,.6); transition: background .25s, box-shadow .25s; }
 .tp-pc__go:hover, .tp-pc__go:focus-visible { background: #e7131b; color: #fff; box-shadow: inset 0 0 0 1.5px #e7131b, inset 0 1px 0 rgba(255,255,255,.25), 0 18px 30px -16px rgba(231,19,27,.8); }
@@ -1285,27 +1283,27 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-pc__link:hover, .tp-pc__link:focus-visible { color: #fff; border-color: #ff4b52; }
 .tp-pc__go:focus-visible, .tp-pc__link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .tp-pc__go, .tp-pc__link { transition: none; } }
-/* The CTAs in the first screen: the audience line goes under them, and the card is a little tighter than the
-   design's; on desktops up to 940px high it tightens further, and again up to 800px. */
-.tp-pc__art--temple { top: 6px; width: 176px; height: 162px; }   /* clear of a one-line name */
+/* the cards stand on the page itself: no grey stage under them */
+.tp-hero .tp-stage { max-width: 1240px; padding: 0; border-radius: 0; background: none; overflow: visible; }
+.tp-hero .tp-stage::before { content: none; }
+/* The CTAs in the first screen: the audience line goes under them; on desktops up to 940px high the card
+   tightens, and again up to 800px. */
 @media (min-width: 961px) {
-  .tp-hero .tp-stage { padding-top: 28px; padding-bottom: 28px; }
   .tp-pc__who { order: 1; margin-top: 14px; }
   .tp-pc__lead { gap: 16px; }
   .tp-pc__big { font-size: 84px; }
   .tp-pc__pts { margin-top: 20px; gap: 9px; }
   .tp-pc__cta { padding-top: 20px; }
-  .tp-pc__body { padding-bottom: 24px; }
+  .tp-pc { padding-bottom: 24px; }
 }
 @media (min-width: 961px) and (max-height: 940px) {
   .tp-hero .tp-h1 { font-size: clamp(40px, 6.4vh, 56px); }
-  .tp-hero .tp-stage { margin-top: 14px; padding-top: 20px; padding-bottom: 20px; }
-  .tp-pc__plate { padding-top: 20px; padding-bottom: 88px; margin-bottom: -58px; }
+  .tp-hero .tp-stage { margin-top: 18px; }
+  .tp-pc { padding-top: 24px; }
   .tp-pc__head { gap: 10px; }
   .tp-pc__num { font-size: 36px; }
   .tp-pc__name { min-height: 72px; --nf: 36px; }
-  .tp-pc__body { padding-top: 22px; }
-  .tp-pc__lead { gap: 12px; }
+  .tp-pc__lead { margin-top: 20px; padding-top: 16px; gap: 12px; }
   .tp-pc__big { font-size: 72px; }
   .tp-pc__sub { margin-top: 4px; font-size: 16px; }
   .tp-pc__pts { margin-top: 16px; gap: 7px; }
@@ -1313,30 +1311,27 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 @media (min-width: 961px) and (max-height: 800px) {
   .tp-hero { padding-top: 4px; }
-  .tp-pc__sub { font-size: 15px; }
-  .tp-pc__pts { gap: 5px; }
-  .tp-pc__lead { gap: 10px; }
-  .tp-hero .tp-stage { margin-top: 10px; padding-top: 14px; padding-bottom: 14px; }
-  .tp-pc__plate { padding-bottom: 80px; margin-bottom: -52px; }
+  .tp-hero .tp-stage { margin-top: 12px; }
+  .tp-pc { padding-top: 20px; }
   .tp-pc__name { min-height: 66px; --nf: 33px; }
   .tp-pc__head { max-width: 196px; }   /* the name keeps its two lines, clear of the art */
-  .tp-pc__art { width: 184px; height: 154px; }
-  .tp-pc__art--temple { width: 160px; height: 147px; }
+  .tp-pc__art { width: 160px; height: 133px; }
+  .tp-pc__art--temple { width: 150px; height: 145px; }
+  .tp-pc__lead { margin-top: 16px; padding-top: 14px; gap: 10px; }
   .tp-pc__big { font-size: 64px; }
+  .tp-pc__sub { font-size: 15px; }
+  .tp-pc__pts { gap: 5px; }
 }
 /* phones: the card scaled to the swiper, the CTAs in the first screen like before */
 @media (max-width: 640px) {
-  .tp-pc { border-radius: 24px; }
-  .tp-pc__plate { padding: 16px 20px 66px; margin-bottom: -48px; }
-  .tp-pc__art { top: 6px; width: 151px; height: 127px; }
-  .tp-pc__art--link { inset-inline-end: -10px; }
-  .tp-pc__art--temple { top: 6px; width: 132px; height: 122px; }
+  .tp-pc { padding: 18px 20px 20px; border-radius: 24px; }
+  .tp-pc__art { top: 10px; inset-inline-end: 12px; width: 130px; height: 108px; }
+  .tp-pc__art--temple { top: 8px; inset-inline-end: 12px; width: 122px; height: 118px; }
   .tp-pc__head { gap: 6px; max-width: 190px; }
   .tp-pc__num { font-size: 28px; }
   .tp-pc__name { min-height: 56px; --nf: 29px; }
   .tp-pc__title { font-size: 15px; }
-  .tp-pc__body { padding: 16px 20px 20px; }
-  .tp-pc__lead { gap: 8px; }
+  .tp-pc__lead { margin-top: 14px; padding-top: 12px; gap: 8px; }
   .tp-pc__big { font-size: 54px; }
   .tp-pc__sub { margin-top: 2px; font-size: 14.5px; line-height: 1.3; }
   .tp-pc__pts { margin-top: 12px; gap: 4px; }
@@ -1345,7 +1340,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pc__cta { padding-top: 14px; gap: 12px 10px; }
   .tp-pc__go { height: 50px; padding-inline: 4px 18px; font-size: 15px; }
   .tp-pc__dot { width: 42px; height: 42px; }
-}
 }
 /* the hero caption: above the cards on phones and tablets, under them where the cards stand in a row */
 .tp-hero__after { display: none; }
@@ -2494,7 +2488,7 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=f8de9a34eb" defer></script>
+<script src="../../assets/js/landing.js?v=d6026249a8" defer></script>
 <script type="module" src="../../assets/js/mt-hero.js?v=90cd907240"></script>
 </body>
 </html>
