@@ -158,12 +158,10 @@
   {{> how}}
 
   <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px); background: #fff; color: #0a0a0a;">
-    <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
-      <h2 style="margin: 0; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; color: #0a0a0a;">{{calc.title}}</h2>
-      <p data-sub2="" style="margin: 2px 0 0; font-size: 24px; line-height: 1.5; color: #5b5b5b;">{{calc.sub}}</p>
-    </div>
-
-{{> calc-widget}}
+{{> calc-open}}
+        <h2 class="tq-pc__title">{{calc.title}}</h2>
+        <p class="tq-pc__sub">{{calc.sub}}</p>
+{{> calc-body}}
   </section>
 
   <section id="reviews" data-screen-label="Reputation — reviews marquee" style="position: relative; padding: clamp(48px, 6.1vw, 88px) 0 clamp(48px, 6.1vw, 88px); background: #fff; color: #0a0a0a; overflow: hidden;">

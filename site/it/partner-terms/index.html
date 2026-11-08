@@ -606,29 +606,12 @@ html { scroll-snap-type: y proximity; }
   #signup form[data-agreement] { padding: 30px 20px 22px !important; border-radius: 20px !important; border: 1px solid #ebebe7; box-shadow: 0 18px 36px -24px rgba(10,10,10,.32), 0 1px 3px rgba(10,10,10,.05) !important; }
   #signup [data-form-frame], #signup [data-form-band] { display: none !important; }
   #signup [data-form-corner] { width: 54px !important; height: 54px !important; }
-  #signup [data-form-corner] img { width: 13px !important; right: 7px !important; top: 7px !important; }
   #signup form[data-agreement] > div:first-of-type { padding-right: 40px !important; }
   #signup form[data-agreement] label { font-size: 11px !important; letter-spacing: .14em !important; }
   #signup form[data-agreement] label > span + span { border-radius: 12px !important; }
   #signup [data-form-auth] { border-radius: 12px !important; padding: 12px 14px 8px !important; background: #fff !important; }
   #signup [data-form-auth] span { font-size: 11px !important; letter-spacing: .12em !important; }
   #signup [data-form-auth] [data-ref="date"] { font-size: 14px !important; letter-spacing: .04em !important; }
-  [data-calc-grid] { gap: 14px !important; margin-top: 22px !important; }
-  [data-invoice] { padding: 22px 18px 18px !important; gap: 14px !important; }
-  [data-invoice] > div:nth-child(2) img { height: 19px !important; }
-  [data-invoice] > div:nth-child(2) > span:first-child > span { font-size: 16px !important; }
-  [data-invoice] > div:nth-child(2) > span:last-child { font-size: 26px !important; }
-  [data-inv-meta] { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; padding: 10px 0 !important; gap: 8px !important; }
-  [data-inv-meta] span:first-child { font-size: 11px !important; letter-spacing: .08em !important; }
-  [data-inv-meta] span:last-child { font-size: 11px !important; }
-  [data-invoice] > div:nth-child(4) > div:first-child { display: none !important; }
-  [data-invoice] > div:nth-child(4) > div { padding: 10px 0 !important; }
-  [data-invoice] > div:nth-child(4) > div > span:first-child > span:first-child { font-size: 13.5px !important; }
-  [data-invoice] > div:nth-child(4) > div > span:first-child > span:last-child { font-size: 11.5px !important; }
-  [data-invoice] > div:nth-child(4) > div > span:last-child { font-size: 12.5px !important; }
-  [data-inv-total] { font-size: 34px !important; }
-  [data-inv-stamp] { width: 70px !important; height: 70px !important; }
-  [data-inv-per] button { padding: 6px 8px; font-size: 12.5px; }
   [data-faq-art] iframe { pointer-events: none; }
   [data-fan-stage] > [data-fan-card][data-fan-card]:hover { transform: none !important; z-index: 1 !important; border-color: rgba(255,255,255,.13) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 10px 22px rgba(0,0,0,.5) !important; }
   [data-fan-stage] > [data-fan-card] { transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s ease, box-shadow .3s ease !important; -webkit-tap-highlight-color: transparent; cursor: pointer !important; }
@@ -924,6 +907,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 [dir="rtl"] [data-rep-stage] { direction: ltr; }
 /* Sliders grow left-to-right like the numbers on them. */
 [dir="rtl"] [data-calc-slider] { direction: ltr; }
+[dir="rtl"] .tq-pc__go span { display: inline-block; transform: scaleX(-1); }
 [dir="rtl"] input[type="email"], [dir="rtl"] input[type="tel"] { direction: ltr; text-align: right; }
 [dir="rtl"] #signup form label > span:first-child { padding-left: 0 !important; padding-right: 70px; }
 /* How it works: the progress line fills from the right, where step 1 is. */
@@ -967,74 +951,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
   [data-fan-head] > p { grid-column: 1 !important; grid-row: 3 !important; justify-self: start !important; }
   [data-sub2] .br-desk { display: none; }   /* a caption split by hand splits itself in half on tablets */
 }
-
-/* phones: one column, the payout statement on top and the controls under it, so the figures stay in
-   view while the sliders move */
-@media (max-width: 700px) {
-  [data-calc-grid] { grid-template-columns: minmax(0, 1fr) !important; }
-  [data-calc-grid] > [data-invoice] { order: -1; }
-}
-
-/* ---- Calculator controls (Partner_Calculator_Glass design) ----------------------------------
-   A white card; each field has a raised icon tile, a raised value box with a highlight that follows
-   the slider (data-calc-sheen, set by startCalculator), a sunken track, a glossy red fill and a glass knob. */
-.tq-calc { position: relative; flex: 1; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 40px;
-  padding: 44px clamp(24px, 3vw, 34px) 40px; border-radius: 28px; background: #fff; border: 1px solid #edeef0; box-shadow: 0 30px 60px -44px rgba(18,22,30,.22); }
-.tq-calc__field { position: relative; display: flex; flex-direction: column; gap: 16px; }
-.tq-calc__head { display: flex; align-items: center; gap: 12px; }
-.tq-calc__ico { width: 38px; height: 38px; flex: none; border-radius: 11px; display: flex; align-items: center; justify-content: center; color: #e7131b;
-  background: linear-gradient(160deg, #fff, #f2f4f4);
-  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.08), 0 1px 0 #dce3e1, 0 2px 0 #cfd8d6, 0 3px 0 #c3cecb, 0 8px 12px -8px rgba(60,90,84,.35); }
-.tq-calc__title { font-size: 16px; font-weight: 700; letter-spacing: -.015em; color: #0a0a0a; }
-.tq-calc__val { position: relative; height: 62px; box-sizing: border-box; padding: 0 22px; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; overflow: hidden; cursor: text;
-  background: linear-gradient(165deg, #fff 0%, #f6f8f8 55%, #eef3f2 100%);
-  box-shadow: inset 0 1px 0 #fff, inset 1px 0 0 rgba(255,255,255,.8), inset 0 -2px 6px rgba(255,255,255,.9), 0 0 0 1px rgba(18,22,30,.09),
-    0 1px 0 #dce3e1, 0 2px 0 #d2dbd9, 0 3px 0 #c8d3d0, 0 4px 0 #becac7, 0 14px 20px -14px rgba(60,90,84,.4);
-  transition: box-shadow .25s ease; }
-.tq-calc__val:focus-within { box-shadow: inset 0 1px 0 #fff, inset 1px 0 0 rgba(255,255,255,.8), inset 0 -2px 6px rgba(255,255,255,.9), 0 0 0 1.5px rgba(231,19,27,.55),
-    0 1px 0 #dce3e1, 0 2px 0 #d2dbd9, 0 3px 0 #c8d3d0, 0 4px 0 #becac7, 0 14px 20px -14px rgba(60,90,84,.4); }
-.tq-calc__sheen { position: absolute; top: 0; bottom: 0; width: 120px; transform: translateX(-50%); pointer-events: none; transition: left .4s cubic-bezier(.2, .8, .2, 1);
-  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.95) 45%, rgba(255,255,255,0) 60%, rgba(255,255,255,0) 72%, rgba(255,255,255,.6) 80%, rgba(255,255,255,0) 90%); }
-.tq-calc__input { position: relative; flex: 1; min-width: 0; margin: 0; padding: 0; border: 0; outline: 0; background: transparent; color: #0a0a0a;
-  font: 700 26px/1 'DM Sans', sans-serif; letter-spacing: -.02em; text-shadow: -.6px 0 0 rgba(231,19,27,.35), .6px 0 0 rgba(60,110,255,.3);
-  -moz-appearance: textfield; appearance: textfield; }
-.tq-calc__input::-webkit-outer-spin-button, .tq-calc__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.tq-calc__unit { position: relative; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #6b6f76; white-space: nowrap; }
-.tq-calc__slider { position: relative; z-index: 1; height: 30px; cursor: pointer; touch-action: none; }
-.tq-calc__track { position: absolute; left: 0; right: 0; top: 8px; height: 14px; border-radius: 999px; background: linear-gradient(180deg, #eef1f1, #fff);
-  box-shadow: inset 0 1px 2px rgba(60,90,84,.22), inset 0 -1px 0 #fff, 0 0 0 1px rgba(18,22,30,.08); }
-.tq-calc__fill { position: absolute; left: 2px; top: 10px; height: 10px; min-width: 10px; border-radius: 999px;
-  background: linear-gradient(180deg, #ff6a70 0%, #e7131b 55%, #b70e15 100%); box-shadow: inset 0 1.5px 0 rgba(255,255,255,.55), 0 2px 6px -2px rgba(231,19,27,.6); }
-.tq-calc__knob { position: absolute; top: 1px; width: 28px; height: 28px; margin-left: -14px; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(circle at 34% 28%, #fff 0 18%, rgba(255,255,255,.7) 40%, rgba(236,242,241,.75) 75%, rgba(200,214,211,.9) 100%);
-  box-shadow: inset 0 -2px 4px rgba(60,90,84,.25), inset 0 1px 1px #fff, 0 0 0 1px rgba(18,22,30,.12), 0 6px 10px -4px rgba(60,90,84,.45); }
-@media (max-width: 640px) {
-  .tq-calc { padding: 26px 20px 24px; gap: 26px; border-radius: 22px; }
-  .tq-calc__field { gap: 12px; }
-  .tq-calc__ico { width: 32px; height: 32px; border-radius: 9px; }
-  .tq-calc__ico svg { width: 16px; height: 16px; }
-  .tq-calc__title { font-size: 15px; }
-  .tq-calc__val { height: 52px; padding: 0 16px; border-radius: 13px; }
-  .tq-calc__input { font-size: 22px; }
-  .tq-calc__unit { font-size: 11px; }
-}
-@media (prefers-reduced-motion: reduce) { .tq-calc__sheen { transition: none; } }
-
-/* ---- Payout period toggle on the landing statement (Day / Month / Year) --------------------
-   The thumb slides under the pressed button; --i is its index (0 day, 1 month, 2 year), set by startCalculator. */
-[data-inv-per] { --i: 1; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(100%, 300px); padding: 3px; box-sizing: border-box;
-  border-radius: 999px; background: #efefeb; box-shadow: inset 0 0 0 1px #e2e2dd, inset 0 1px 2px rgba(10,10,10,.05); }
-[data-inv-per-thumb] { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc((100% - 6px) / 3); border-radius: 999px; background: #0a0a0a;
-  box-shadow: 0 3px 8px -3px rgba(10,10,10,.45); transform: translateX(calc(var(--i) * 100%)); transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
-[dir="rtl"] [data-inv-per-thumb] { left: auto; right: 3px; transform: translateX(calc(var(--i) * -100%)); }
-[data-inv-per] button { position: relative; min-width: 0; padding: 7px 12px; border: 0; border-radius: 999px; background: transparent; cursor: pointer;
-  font: 600 13.5px/1.2 'DM Sans', sans-serif; letter-spacing: -.01em; color: #5b5b5b; white-space: nowrap; transition: color .3s ease; -webkit-tap-highlight-color: transparent; }
-[data-inv-per] button:hover { color: #0a0a0a; }
-[data-inv-per] button[aria-pressed="true"] { color: #fff; }
-[data-inv-per] button:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
-/* phones: the toggle looks the same, but each button takes taps 7px above and below it (44px in all) */
-@media (max-width: 640px) { [data-inv-per] button::after { content: ''; position: absolute; left: 0; right: 0; top: -7px; bottom: -7px; } }
-@media (prefers-reduced-motion: reduce) { [data-inv-per-thumb] { transition: none; } }
 
 /* ---- Liquid glass (Glass_Card_Grid_Liquid design) ----------------------------------------
    Clear glass that bends what sits behind it: a faint white tint, a strong saturate, a white rim
@@ -1120,20 +1036,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-head--dark .tq-lang__btn { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.18); color: #f2f2f4; }
 .tq-head--dark .tq-lang__btn:hover, .tq-head--dark .tq-lang__btn[aria-expanded="true"] { border-color: rgba(255,255,255,.6); color: #fff; }
 
-/* ---- The payout statement (calculator): a framed document ------------------------------------------
-   A hairline frame inside the paper with red corner marks, and two sheets peeking out underneath.
-   Pseudo-elements and shadows only: the statement's children are styled by position (nth-child). */
-[data-invoice] { --ck: 18px; --fi: 14px 10px 10px;
-  box-shadow: 0 1px 0 #e9e9e5, 0 0 0 1px rgba(10,10,10,.05), 0 7px 0 -3px #f1f1ed, 0 7px 0 -2px rgba(10,10,10,.08),
-    0 13px 0 -7px #e9e9e4, 0 13px 0 -6px rgba(10,10,10,.07), 0 44px 80px -42px rgba(10,10,10,.36), 0 2px 8px rgba(10,10,10,.06) !important; }
-[data-invoice]::before { content: ''; position: absolute; inset: var(--fi); border: 1px solid rgba(10,10,10,.1); border-radius: 2px; pointer-events: none; }
-[data-invoice]::after { content: ''; position: absolute; inset: var(--fi); pointer-events: none;
-  background: linear-gradient(#e7131b, #e7131b) left top / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) left top / 2px var(--ck) no-repeat,
-    linear-gradient(#e7131b, #e7131b) right top / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) right top / 2px var(--ck) no-repeat,
-    linear-gradient(#e7131b, #e7131b) left bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) left bottom / 2px var(--ck) no-repeat,
-    linear-gradient(#e7131b, #e7131b) right bottom / var(--ck) 2px no-repeat, linear-gradient(#e7131b, #e7131b) right bottom / 2px var(--ck) no-repeat; }
-@media (max-width: 640px) { [data-invoice] { --ck: 14px; --fi: 12px 8px 8px; } }
-
 /* ---- Phones: the first CTA of /programs/ and /partner-terms/ in the first screen -------------------------
    Short subtitles (.tq-ph / .tq-nph: one sentence of the full one), tighter spacing, a lower program art,
    the earnings card's scene lower with a tighter front card, the programs' "for …" line under the CTAs. */
@@ -1153,6 +1055,130 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   #signup form > div:has(> [data-form-auth]) { order: 2; margin-top: 6px !important; }
   #signup form > [data-commit] { order: 3; margin-top: 4px !important; }
   #signup form > div:has(> button[type="submit"]) { margin-top: 6px !important; }
+}
+
+/* ---- Payout calculator (Payout_Calculator_Receipt_Dark design) --------------------------------------------
+   partials/calc-open.html + calc-body.html, driven by startCalculator (landing.js). A dark panel: the page's
+   heading and caption, then a glass "terminal" (two sliders on a ruled scale, the Day / Month / Year switch,
+   the CTA) and a receipt printing out of a silver slot, its bottom edge torn in scallops. */
+.tq-pc { position: relative; overflow: hidden; box-sizing: border-box; max-width: 1240px; margin: 0 auto; padding: 88px 64px 100px; border-radius: 32px;
+  background: #0b0b0c; color: #fff; display: flex; flex-direction: column; gap: 64px; text-align: start; }
+.tq-pc__edge { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); }
+.tq-pc__glow { position: absolute; right: 120px; top: 250px; width: 560px; height: 220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.32), rgba(231,19,27,0)); pointer-events: none; }
+[dir="rtl"] .tq-pc__glow { right: auto; left: 120px; }
+.tq-pc__head { position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+.tq-pc__title { margin: 0; font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -.055em; color: #fff; text-wrap: balance; }
+.tq-pc__sub { margin: 0; max-width: 380px; padding-bottom: 6px; font-size: 18px; line-height: 1.5; color: #b4b7bd; text-wrap: pretty; }
+.tq-pc__sub br { display: none; }
+.tq-pc__grid { position: relative; display: grid; grid-template-columns: 500px minmax(0, 1fr); gap: 56px; align-items: start; }
+/* the terminal */
+.tq-pc__term { position: relative; display: flex; flex-direction: column; gap: 34px; padding: 36px; border-radius: 28px;
+  background: linear-gradient(160deg, rgba(255,255,255,.13), rgba(255,255,255,.03)); -webkit-backdrop-filter: blur(28px) saturate(150%); backdrop-filter: blur(28px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.32), inset 1px 0 0 rgba(255,255,255,.1), inset 0 0 0 1px rgba(255,255,255,.08), 0 2px 0 #1c1d21, 0 4px 0 #151619, 0 6px 0 #101113, 0 50px 70px -30px rgba(0,0,0,.9); }
+.tq-pc__tag { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #a3a6ad; }
+.tq-pc__field { display: flex; flex-direction: column; gap: 10px; }
+.tq-pc__label { font-weight: 600; font-size: 16px; color: #d4d6da; }
+.tq-pc__val { display: flex; align-items: baseline; gap: 10px; }
+.tq-pc__val b { font-weight: 800; font-size: 44px; letter-spacing: -.045em; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+.tq-pc__val span { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #8a8d94; }
+.tq-pc__slider { position: relative; height: 48px; }
+.tq-pc__ticks { position: absolute; left: 0; right: 0; top: 12px; height: 12px;
+  background: linear-gradient(90deg, rgba(255,255,255,.4) 0 1px, transparent 1px calc(25% - .5px), rgba(255,255,255,.4) calc(25% - .5px) calc(25% + .5px), transparent calc(25% + .5px) calc(50% - .5px), rgba(255,255,255,.4) calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px) calc(75% - .5px), rgba(255,255,255,.4) calc(75% - .5px) calc(75% + .5px), transparent calc(75% + .5px) calc(100% - 1px), rgba(255,255,255,.4) calc(100% - 1px) 100%); }
+.tq-pc__base { position: absolute; left: 0; right: 0; top: 24px; height: 1px; background: rgba(255,255,255,.35); }
+.tq-pc__fill { position: absolute; left: 0; top: 23px; height: 3px; background: #e7131b; box-shadow: 0 0 10px rgba(231,19,27,.8); }
+.tq-pc__knob { position: absolute; top: 0; width: 48px; height: 48px; margin-left: -24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none;
+  background: radial-gradient(circle at 32% 26%, rgba(255,255,255,.9) 0 10%, rgba(255,255,255,.22) 34%, rgba(255,255,255,.08) 70%, rgba(255,255,255,.28) 100%);
+  -webkit-backdrop-filter: blur(3px) saturate(160%); backdrop-filter: blur(3px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), inset 0 -3px 6px rgba(0,0,0,.35), 0 10px 16px -6px rgba(0,0,0,.8); transition: transform .2s ease; }
+.tq-pc__knob i { width: 2px; height: 20px; border-radius: 1px; background: #e7131b; }
+.tq-pc__slider input { position: absolute; left: 0; top: 0; width: 100%; height: 48px; margin: 0; opacity: 0; cursor: pointer; touch-action: pan-y; }
+.tq-pc__slider:hover .tq-pc__knob, .tq-pc__slider:focus-within .tq-pc__knob { transform: scale(1.06); }
+.tq-pc__slider:focus-within .tq-pc__knob { box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), inset 0 -3px 6px rgba(0,0,0,.35), 0 0 0 3px rgba(231,19,27,.55), 0 10px 16px -6px rgba(0,0,0,.8); }
+.tq-pc__per { --i: 1; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 4px; border-radius: 999px; background: rgba(255,255,255,.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.08); }
+.tq-pc__per [data-inv-per-thumb] { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / 3); border-radius: 999px; background: #fff;
+  transform: translateX(calc(var(--i) * 100%)); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+[dir="rtl"] .tq-pc__per [data-inv-per-thumb] { left: auto; right: 4px; transform: translateX(calc(var(--i) * -100%)); }
+.tq-pc__per button { position: relative; height: 40px; min-width: 0; padding: 0 8px; border: 0; border-radius: 999px; background: transparent; color: #b4b7bd; font: 600 14px/1 'DM Sans', sans-serif; cursor: pointer; transition: color .25s; }
+.tq-pc__per button:hover { color: #fff; }
+.tq-pc__per button[aria-pressed="true"] { color: #0a0a0a; }
+.tq-pc__per button:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+.tq-pc__go { display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 14px 28px -12px rgba(231,19,27,.9); transition: background .25s; }
+.tq-pc__go:hover, .tq-pc__go:focus-visible { background: #ff2a32; color: #fff; }
+.tq-pc__go:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+/* the printer and its receipt */
+.tq-pc__printer { position: relative; display: flex; flex-direction: column; }
+.tq-pc__slot { position: relative; z-index: 2; height: 28px; border-radius: 14px; display: flex; align-items: center; padding: 0 18px;
+  background: linear-gradient(180deg, #fff 0%, #d9dce0 30%, #8d929a 62%, #c9cdd3 100%); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(0,0,0,.5), 0 12px 20px -8px rgba(0,0,0,.9); }
+.tq-pc__slot span { flex: 1; height: 4px; border-radius: 2px; background: #000; box-shadow: inset 0 1px 2px #000; }
+.tq-pc__paper { position: relative; z-index: 1; margin: -12px 26px 0; padding: 44px 36px 64px; display: flex; flex-direction: column; background: #faf9f5; color: #0a0a0a;
+  -webkit-mask-image: radial-gradient(circle at 9px 100%, transparent 8px, #000 8.5px); mask-image: radial-gradient(circle at 9px 100%, transparent 8px, #000 8.5px);
+  -webkit-mask-size: 18px 100%; mask-size: 18px 100%; -webkit-mask-repeat: repeat-x; mask-repeat: repeat-x; box-shadow: 0 0 0 1px rgba(0,0,0,.05); }
+.tq-pc__shade { position: absolute; left: 0; right: 0; top: 0; height: 22px; background: linear-gradient(180deg, rgba(0,0,0,.16), rgba(0,0,0,0)); pointer-events: none; }
+.tq-pc__top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 18px; border-bottom: 1px dashed #c9c7bf; }
+.tq-pc__brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; letter-spacing: -.035em; }
+.tq-pc__brand img { width: 22px; height: 22px; object-fit: contain; }
+.tq-pc__doc { flex: 0 1 auto; min-width: 0; white-space: nowrap; font-family: 'Cormorant Garamond', serif; font-size: 42px; line-height: .9; letter-spacing: .06em; font-weight: 500; }   /* a long word (AUSZAHLUNG) steps down to fit: landing.js, data-fitw */
+.tq-pc__brand { flex: none; }
+.tq-pc__meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 16px 0; border-bottom: 1px dashed #c9c7bf; font-family: 'Fragment Mono', monospace; }
+.tq-pc__meta div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tq-pc__meta div > span:first-child { font-size: 10px; letter-spacing: .16em; color: #6a6a6e; }
+.tq-pc__meta div > span:last-child { font-size: 13px; white-space: nowrap; }
+.tq-pc__row { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding: 18px 0 10px; }
+.tq-pc__row--last { padding: 10px 0 18px; border-bottom: 1px dashed #c9c7bf; }
+.tq-pc__row > div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.tq-pc__row > div > span:first-child { font-weight: 600; font-size: 16px; }
+.tq-pc__row > div > span:last-child { font-family: 'Fragment Mono', monospace; font-size: 12px; color: #55555a; }
+.tq-pc__row > span { font-family: 'Fragment Mono', monospace; font-size: 15px; white-space: nowrap; }
+.tq-pc__total { position: relative; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; padding: 26px 0 24px; border-bottom: 1px dashed #c9c7bf; min-width: 0; }
+.tq-pc__total [data-inv-cap] { font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: .16em; color: #6a6a6e; }
+.tq-pc__total [data-inv-total] { font-weight: 800; font-size: 88px; letter-spacing: -.06em; line-height: .85; white-space: nowrap; color: #0a0a0a; font-variant-numeric: tabular-nums; transition: color .3s; }   /* startCalculator steps a long figure down to fit */
+.tq-pc__foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; }
+.tq-pc__code { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.tq-pc__bars { width: 220px; max-width: 100%; height: 44px; background: repeating-linear-gradient(90deg, #0a0a0a 0 2px, transparent 2px 4px, #0a0a0a 4px 5px, transparent 5px 8px, #0a0a0a 8px 11px, transparent 11px 13px); }
+.tq-pc__code > span:last-child { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .3em; color: #55555a; }
+.tq-pc__stamp { flex: none; transform: rotate(-12deg); opacity: .9; margin: -18px -6px -10px 0; mix-blend-mode: multiply; }
+.tq-pc__note { max-width: 1240px; margin: clamp(16px, 2vw, 24px) auto 0; font-size: 12.5px; line-height: 1.55; color: #8a8a8e; text-align: center; text-wrap: pretty; }
+@media (prefers-reduced-motion: reduce) { .tq-pc__per [data-inv-per-thumb], .tq-pc__knob, .tq-pc__total [data-inv-total] { transition: none; } }
+/* laptops: a narrower terminal */
+@media (max-width: 1180px) {
+  .tq-pc { padding: 64px 40px 72px; gap: 48px; }
+  .tq-pc__title { font-size: 54px; }
+  .tq-pc__grid { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 36px; }
+  .tq-pc__paper { margin-inline: 16px; padding: 36px 26px 56px; }
+  .tq-pc__glow { right: 40px; }
+}
+/* tablets and phones: one column, the receipt over the terminal, so the total stays in view while the sliders move */
+@media (max-width: 900px) {
+  .tq-pc__printer { order: -1; }
+  .tq-pc { padding: 52px 28px 60px; gap: 36px; border-radius: 28px; }
+  .tq-pc__head { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .tq-pc__title { font-size: 46px; }
+  .tq-pc__sub { max-width: 520px; padding-bottom: 0; }
+  .tq-pc__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; max-width: 560px; margin: 0 auto; width: 100%; }
+  .tq-pc__glow { top: auto; bottom: 120px; right: -80px; }
+}
+@media (max-width: 640px) {
+  .tq-pc { padding: 40px 16px 44px; gap: 28px; border-radius: 24px; }
+  .tq-pc__head { padding: 0 4px; }
+  .tq-pc__title { font-size: 34px; letter-spacing: -.045em; }
+  .tq-pc__sub { font-size: 16px; }
+  .tq-pc__term { padding: 24px 20px; gap: 26px; border-radius: 22px; }
+  .tq-pc__val b { font-size: 36px; }
+  .tq-pc__paper { margin: -12px 10px 0; padding: 32px 18px 50px; }
+  .tq-pc__brand { font-size: 17px; }
+  .tq-pc__doc { font-size: 30px; }
+  .tq-pc__meta { gap: 8px; }
+  .tq-pc__meta div > span:first-child { font-size: 9.5px; letter-spacing: .1em; }
+  .tq-pc__meta div > span:last-child { font-size: 11.5px; }
+  .tq-pc__row > div > span:first-child { font-size: 14.5px; }
+  .tq-pc__row > div > span:last-child { font-size: 11px; }
+  .tq-pc__row > span { font-size: 13px; }
+  .tq-pc__total [data-inv-total] { font-size: 60px; }
+  .tq-pc__bars { width: 150px; height: 36px; }
+  .tq-pc__code > span:last-child { font-size: 10px; letter-spacing: .18em; }
+  .tq-pc__stamp { width: 78px; height: 78px; margin: -10px 0 -6px; }
 }
 </style>
 <style id="partner-css" data-prefix="../../">
@@ -2343,105 +2369,72 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
     <!-- Calculator -->
     <section id="calculator" class="tp-sec" data-screen-label="Commission calculator">
-      <div class="tp-head">
-        <h2 class="tp-h2" style="max-width: 20ch;">Stima i tuoi <span style="color: #e7131b;">guadagni mensili</span></h2>
-        <p class="tp-sub">Sposta i cursori per vedere quanto potrebbe farti guadagnare ogni mese il piano commissioni partner di TradeQuo.</p>
+<!-- Payout calculator (Payout_Calculator_Receipt_Dark design): a dark panel with the page's heading, a glass
+     "terminal" with the two sliders, the Day / Month / Year switch and the CTA, and a receipt printing out of a
+     slot. Shared by the landing and partner-terms/: each page puts its own heading (.tq-pc__title,
+     .tq-pc__sub) between calc-open and calc-body. startCalculator in landing.js drives it. -->
+    <div class="tq-pc" data-calc="">
+      <span class="tq-pc__edge" aria-hidden="true"></span>
+      <span class="tq-pc__glow" aria-hidden="true"></span>
+      <div class="tq-pc__head">
+
+        <h2 class="tq-pc__title">Stima i tuoi <span style="color: #e7131b;">guadagni mensili</span></h2>
+        <p class="tq-pc__sub">Sposta i cursori per vedere quanto potrebbe farti guadagnare ogni mese il piano commissioni partner di TradeQuo.</p>
       </div>
-
-<!-- Revenue-share calculator: the two controls, the payout statement (Day / Month / Year), the note and the
-     liquid CTA. Shared by the landing (under its own heading) and partner-terms/ (under its h2, below the earnings hero);
-     startCalculator in landing.js drives it. The CTA goes to the form: on the landing it scrolls, from
-     partner-terms/ it opens the landing (signupHref / signupNav in build-i18n.py). -->
-    <div data-calc-grid="" style="max-width: 1240px; margin: clamp(26px, 4vw, 48px) auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(18px, 2.4vw, 32px); align-items: stretch;">
-      <div data-calc-glass="" style="position: relative; display: flex; isolation: isolate;">
-      <div class="tq-calc" data-calc-controls="">
-        <div class="tq-calc__field">
-          <div class="tq-calc__head">
-            <span class="tq-calc__ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"></path><path d="m3 12 9 5 9-5"></path><path d="m3 16 9 5 9-5"></path></svg></span>
-            <span class="tq-calc__title">Lotti per trader al mese</span>
+      <div class="tq-pc__grid">
+        <div class="tq-pc__term">
+          <span class="tq-pc__tag">TERMINALE · <span data-calc-tid="">TQ-0000</span></span>
+          <div class="tq-pc__field">
+            <span class="tq-pc__label" id="tq-calc-lots">Lotti per trader al mese</span>
+            <span class="tq-pc__val"><b data-calc-val="lots">130</b><span>LOTTI</span></span>
+            <div class="tq-pc__slider" data-calc-slider="lots">
+              <span class="tq-pc__ticks" aria-hidden="true"></span><span class="tq-pc__base" aria-hidden="true"></span>
+              <span class="tq-pc__fill" data-calc-fill="" aria-hidden="true" style="width: 12.12%;"></span>
+              <span class="tq-pc__knob" data-calc-knob="" aria-hidden="true" style="left: 12.12%;"><i></i></span>
+              <input type="range" min="10" max="1000" step="10" value="130" data-calc-range="lots" aria-labelledby="tq-calc-lots">
+            </div>
           </div>
-          <label class="tq-calc__val">
-            <span class="tq-calc__sheen" data-calc-sheen="" aria-hidden="true" style="left: 11.9%;"></span>
-            <input class="tq-calc__input" type="number" inputmode="numeric" min="10" max="5000" aria-label="Lotti per trader al mese" data-calc-input="lots" value="130">
-            <span class="tq-calc__unit">LOTTI</span>
-          </label>
-          <div class="tq-calc__slider" data-calc-slider="lots">
-            <span class="tq-calc__track"></span>
-            <span class="tq-calc__fill" data-calc-fill="" style="width: calc(2.40% - 2px);"></span>
-            <span class="tq-calc__knob" data-calc-knob="" style="left: 2.40%;"></span>
+          <div class="tq-pc__field">
+            <span class="tq-pc__label" id="tq-calc-traders">Trader attivi</span>
+            <span class="tq-pc__val"><b data-calc-val="traders">60</b><span>TRADER</span></span>
+            <div class="tq-pc__slider" data-calc-slider="traders">
+              <span class="tq-pc__ticks" aria-hidden="true"></span><span class="tq-pc__base" aria-hidden="true"></span>
+              <span class="tq-pc__fill" data-calc-fill="" aria-hidden="true" style="width: 19.73%;"></span>
+              <span class="tq-pc__knob" data-calc-knob="" aria-hidden="true" style="left: 19.73%;"><i></i></span>
+              <input type="range" min="1" max="300" step="1" value="60" data-calc-range="traders" aria-labelledby="tq-calc-traders">
+            </div>
+          </div>
+          <div class="tq-pc__per" data-inv-per="" role="group" aria-label="PERIODO"><span data-inv-per-thumb="" aria-hidden="true"></span><button type="button" data-per="day" aria-pressed="false">Giorno</button><button type="button" data-per="month" aria-pressed="true">Mese</button><button type="button" data-per="year" aria-pressed="false">Anno</button></div>
+          <a class="tq-pc__go" href="../#signup" data-page-link data-label="CARICAMENTO · Home">Diventa partner <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="tq-pc__printer">
+          <div class="tq-pc__slot" aria-hidden="true"><span></span></div>
+          <div class="tq-pc__paper" data-ref="inv" data-invoice="">
+            <span class="tq-pc__shade" aria-hidden="true"></span>
+            <div class="tq-pc__top">
+              <span class="tq-pc__brand"><img src="../../assets/logo-mark.png?v=c5fbd9796c" alt="" width="22" height="22"><span>TradeQuo<span style="color: #e7131b;">.</span></span></span>
+              <span class="tq-pc__doc" data-fitw="">PAGAMENTO</span>
+            </div>
+            <div class="tq-pc__meta">
+              <div><span>ESTRATTO N.</span><span data-inv-no=""></span></div>
+              <div><span>EMESSO</span><span data-inv-issued=""></span></div>
+              <div><span>PERIODO</span><span data-inv-period=""></span></div>
+            </div>
+            <div class="tq-pc__row"><div><span>Rebate sul volume clienti</span><span><span data-inv-lots>7,800</span> lotti × <span data-inv-rate>$7.50</span> / lotto</span></div><span data-inv-money=""></span></div>
+            <div class="tq-pc__row tq-pc__row--last"><div><span>Costi di elaborazione e prelievo</span><span>A carico di TradeQuo</span></div><span>$0.00</span></div>
+            <div class="tq-pc__total" data-inv-totals="">
+              <span data-inv-cap="" data-day="PAGAMENTO TOTALE / GIORNO" data-month="PAGAMENTO TOTALE / MESE" data-year="PAGAMENTO TOTALE / ANNO">PAGAMENTO TOTALE / MESE</span>
+              <span data-inv-money="" data-inv-total=""></span>
+            </div>
+            <div class="tq-pc__foot">
+              <div class="tq-pc__code"><span class="tq-pc__bars" aria-hidden="true"></span><span><span data-inv-code="">TQ 0000 060</span> · GRAZIE</span></div>
+              <svg class="tq-pc__stamp" data-inv-stamp="" aria-hidden="true" width="104" height="104" viewBox="0 0 132 132"><defs><path id="tqPcRing" d="M66,66 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"></path></defs><circle cx="66" cy="66" r="63" fill="none" stroke="#e7131b" stroke-width="2.5"></circle><circle cx="66" cy="66" r="38" fill="none" stroke="#e7131b" stroke-width="1.5"></circle><text font-family="Fragment Mono, monospace" font-size="10.5" letter-spacing="3.2" fill="#e7131b" direction="ltr" unicode-bidi="embed"><textPath href="#tqPcRing">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text><text x="66" y="73" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="21" fill="#e7131b" transform="rotate(-14 66 66)">PAID</text></svg>
+            </div>
           </div>
         </div>
-        <div class="tq-calc__field">
-          <div class="tq-calc__head">
-            <span class="tq-calc__ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M15.5 4.8a3.5 3.5 0 0 1 0 6.4"></path><path d="M18 14.8c1.8.8 3 2.6 3.5 5.2"></path></svg></span>
-            <span class="tq-calc__title">Trader attivi</span>
-          </div>
-          <label class="tq-calc__val">
-            <span class="tq-calc__sheen" data-calc-sheen="" aria-hidden="true" style="left: 25.8%;"></span>
-            <input class="tq-calc__input" type="number" inputmode="numeric" min="1" max="300" aria-label="Trader attivi" data-calc-input="traders" value="60">
-            <span class="tq-calc__unit">TRADER</span>
-          </label>
-          <div class="tq-calc__slider" data-calc-slider="traders">
-            <span class="tq-calc__track"></span>
-            <span class="tq-calc__fill" data-calc-fill="" style="width: calc(19.73% - 2px);"></span>
-            <span class="tq-calc__knob" data-calc-knob="" style="left: 19.73%;"></span>
-          </div>
-        </div>
-      </div>
-
-      </div>
-      <div data-ref="inv" data-invoice="" style="position: relative; padding: clamp(26px, 3.2vw, 42px) clamp(22px, 3.2vw, 42px) clamp(24px, 3vw, 36px); border-radius: 4px; background: linear-gradient(180deg, #fdfdfb 0%, #f7f7f4 100%); box-shadow: 0 1px 0 #e9e9e5, 0 44px 80px -42px rgba(10,10,10,.34), 0 2px 8px rgba(10,10,10,.06); display: flex; flex-direction: column; gap: 20px; overflow: hidden;">
-        <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 4px; background: #e7131b;"></div>
-
-        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;">
-          <span style="display: flex; align-items: center; gap: 9px;"><img src="../../assets/logo-mark.png?v=c5fbd9796c" alt="" style="height: 24px; width: auto;"><span style="font-size: 19px; font-weight: 600; letter-spacing: -.035em; color: #0a0a0a;">TradeQuo<span style="color: #e7131b;">.</span></span></span>
-          <span style="font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 3.4vw, 40px); line-height: .9; letter-spacing: .06em; font-weight: 500; color: #0a0a0a;">PAGAMENTO</span>
-        </div>
-
-        <div data-inv-meta="" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 14px 0; border-top: 1px solid #e4e4e1; border-bottom: 1px solid #e4e4e1;">
-          <div style="display: flex; flex-direction: column; gap: 5px;"><span style="font-size: 9.5px; font-weight: 600; letter-spacing: .2em; color: #8a8a8e;">ESTRATTO N.</span><span style="font-family: 'Fragment Mono', monospace; font-size: 12.5px; color: #0a0a0a;"><span data-inv-no></span></span></div>
-          <div style="display: flex; flex-direction: column; gap: 5px;"><span style="font-size: 9.5px; font-weight: 600; letter-spacing: .2em; color: #8a8a8e;">EMESSO</span><span style="font-family: 'Fragment Mono', monospace; font-size: 12.5px; color: #0a0a0a;"><span data-inv-issued></span></span></div>
-          <div style="display: flex; flex-direction: column; gap: 5px;"><span style="font-size: 9.5px; font-weight: 600; letter-spacing: .2em; color: #8a8a8e;">PERIODO</span><span style="font-family: 'Fragment Mono', monospace; font-size: 12.5px; color: #0a0a0a;"><span data-inv-period></span></span></div>
-        </div>
-
-        <div style="display: flex; flex-direction: column;">
-          <div style="display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid #e4e4e1;"><span style="font-size: 9.5px; font-weight: 600; letter-spacing: .2em; color: #8a8a8e;">DESCRIZIONE</span><span style="font-size: 9.5px; font-weight: 600; letter-spacing: .2em; color: #8a8a8e;">IMPORTO</span></div>
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 14px 0; border-bottom: 1px dashed #e0e0dc;">
-            <span style="display: flex; flex-direction: column; gap: 5px; min-width: 0;">
-              <span style="font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: #0a0a0a;">Rebate sul volume clienti</span>
-              <span style="font-family: 'Fragment Mono', monospace; font-size: 11.5px; color: #6a6a6e;"><span data-inv-lots>7,800</span> lotti × <span data-inv-rate>$7.50</span> / lotto</span>
-            </span>
-            <span data-inv-money="" style="font-family: 'Fragment Mono', monospace; font-size: 12.5px; color: #0a0a0a; font-size: 14px; white-space: nowrap;"></span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 14px 0; border-bottom: 1px solid #e4e4e1;">
-            <span style="display: flex; flex-direction: column; gap: 5px;">
-              <span style="font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: #0a0a0a;">Costi di elaborazione e prelievo</span>
-              <span style="font-family: 'Fragment Mono', monospace; font-size: 11.5px; color: #6a6a6e;">A carico di TradeQuo</span>
-            </span>
-            <span style="font-family: 'Fragment Mono', monospace; font-size: 12.5px; color: #0a0a0a; font-size: 14px; white-space: nowrap;">$0.00</span>
-          </div>
-        </div>
-
-        <div style="position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;">
-          <svg data-inv-stamp="" aria-hidden="true" width="118" height="118" viewBox="0 0 120 120" style="flex-shrink: 0; transform: rotate(-14deg); opacity: .8; mix-blend-mode: multiply; pointer-events: none; margin: -6px 0 -10px -4px;">
-            <defs><path id="invArc" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"></path></defs>
-            <circle cx="60" cy="60" r="56" fill="none" stroke="#e7131b" stroke-width="2.4"></circle>
-            <circle cx="60" cy="60" r="31" fill="none" stroke="#e7131b" stroke-width="1.2"></circle>
-            <text font-family="DM Sans, sans-serif" font-size="9.6" font-weight="700" letter-spacing="2" fill="#e7131b" direction="ltr" unicode-bidi="embed"><textPath href="#invArc">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text>
-            <text x="60" y="66" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="17" font-weight="800" letter-spacing="1.5" fill="#e7131b">PAID</text>
-          </svg>
-          <div data-inv-totals="" style="flex: 1 1 0; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; min-width: 0;">
-            <div data-inv-per="" role="group" aria-label="PERIODO"><span data-inv-per-thumb="" aria-hidden="true"></span><button type="button" data-per="day" aria-pressed="false">Giorno</button><button type="button" data-per="month" aria-pressed="true">Mese</button><button type="button" data-per="year" aria-pressed="false">Anno</button></div>
-            <span data-inv-money="" data-inv-total="" style="font-family: 'DM Sans', sans-serif; font-size: clamp(38px, 4.6vw, 56px); line-height: 1; letter-spacing: -.04em; font-weight: 700; color: #0a0a0a; font-variant-numeric: tabular-nums; white-space: nowrap; transition: color .5s ease;"></span>
-          </div>
-        </div>
-
       </div>
     </div>
-    <p data-calc-note style="max-width: 1240px; margin: clamp(16px, 2vw, 24px) auto 0; font-size: 12.5px; line-height: 1.55; color: #8a8a8e; text-align: center; text-wrap: pretty;">Stima puramente indicativa. I guadagni effettivi dipendono dagli strumenti negoziati, dagli spread al momento dell’operazione e dall’attività dei clienti.</p>
-    <div data-calc-cta="" style="display: flex; justify-content: center; margin: clamp(34px, 4vw, 52px) 0 max(20px, calc(130px - 8vw));">
-      <a class="tq-liq" href="../#signup" data-page-link data-label="CARICAMENTO · Home" aria-label="Inizia a guadagnare"><span class="tq-liq__shadow" aria-hidden="true"></span><span class="tq-liq__body"><span class="tq-liq__well" aria-hidden="true"><span class="tq-liq__fluid"><span class="tq-liq__wave"><svg viewBox="0 0 400 20" preserveAspectRatio="none" width="100%" height="10" focusable="false"><path d="M0 12 Q 50 2 100 12 T 200 12 T 300 12 T 400 12 V 20 H 0 Z" fill="#FF6A70"></path></svg></span><span class="tq-liq__line"></span></span></span><span class="tq-liq__gloss" aria-hidden="true"></span><span class="tq-liq__label">Inizia a guadagnare<span class="tq-liq__arr">→</span></span><span class="tq-liq__label tq-liq__label--lit" aria-hidden="true">Inizia a guadagnare<span>→</span></span></span></a>
-    </div>
+    <p class="tq-pc__note" data-calc-note="">Stima puramente indicativa. I guadagni effettivi dipendono dagli strumenti negoziati, dagli spread al momento dell’operazione e dall’attività dei clienti.</p>
 
     </section>
 
@@ -2730,7 +2723,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=303c5480a0" defer></script>
+<script src="../../assets/js/landing.js?v=b682c736d5" defer></script>
 <script src="../../assets/js/plan.js?v=5c5b01428f" defer></script>
 </body>
 </html>
