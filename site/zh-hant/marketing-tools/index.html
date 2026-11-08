@@ -1718,30 +1718,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* Promo materials library: one glass card per format (illustration, name, optional count, line) */
 /* the design's backdrop: red and silver spheres, a dark slab and fine lines behind the frosted cards */
-.tp-lib-stage { position: relative; max-width: 1080px; box-sizing: border-box; margin: clamp(32px, 4.5vw, 56px) auto 0; padding: clamp(16px, 3.6vw, 40px); border-radius: 28px; overflow: hidden; background: #eeeff1; }
-.tp-lib-stage__bg { position: absolute; inset: 0; pointer-events: none; }
-.tp-lib-stage__bg i { position: absolute; display: block; }
-.tp-lib-stage__ball { left: 6%; top: 8%; width: clamp(140px, 23vw, 240px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #ff5a60 0%, #e7131b 45%, #9e0a10 100%); }
-.tp-lib-stage__ball--2 { left: 12%; top: 58%; width: clamp(110px, 17vw, 180px); opacity: .85; }
-.tp-lib-stage__slab { left: 40%; top: 12%; width: clamp(180px, 29vw, 300px); height: clamp(90px, 14.5vw, 150px); border-radius: 28px; background: linear-gradient(160deg, #2a2d33, #0a0a0a); transform: rotate(-12deg); }
-.tp-lib-stage__silver { right: 5%; top: 46%; width: clamp(130px, 21vw, 220px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #ffffff 0%, #d4d7dc 38%, #8e939c 78%, #6b6f76 100%); }
-.tp-lib-stage__lines { left: 0; right: 0; top: 44%; height: 80px; background: repeating-linear-gradient(90deg, rgba(10,10,10,.14) 0 2px, transparent 2px 16px); }
-.tp-lib { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-.tp-lib__card { display: flex; flex-direction: column; gap: 16px; padding: 12px 12px 20px; }
-.tp-lib__art { position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 9.5; border-radius: 20px;
   background: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.3); }
-.tp-lib__art svg { width: 78%; height: auto; overflow: visible; filter: drop-shadow(0 10px 14px rgba(14,14,22,.12)); transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
-.tp-lib__card:hover .tp-lib__art svg { transform: translateY(-2px) scale(1.02); }
-.tp-lib__txt { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 6px 10px; margin: -4px 0 -8px; padding: 12px; border-radius: 20px;
   background: rgba(255,255,255,.66); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); box-shadow: inset 0 1px 0 rgba(255,255,255,.9); }
-.tp-lib__txt h3 { margin: 0; font-size: 17px; line-height: 1.25; letter-spacing: -.01em; font-weight: 700; }
-.tp-lib__n { padding: 3px 10px; border-radius: 999px; background: rgba(231,19,27,.08); color: #c8141b; font: 600 12px 'Fragment Mono', monospace; letter-spacing: .04em; white-space: nowrap; direction: ltr; }
-.tp-lib__n:empty { display: none; }
-.tp-lib__txt p { grid-column: 1 / -1; margin: 0; font-size: 13px; line-height: 1.45; color: #3e4248; text-wrap: pretty; }
-.tp-lib__custom { display: flex; align-items: center; gap: 16px; max-width: 1080px; box-sizing: border-box; margin: 16px auto 0; padding: 16px 24px 16px 16px; border-radius: 20px; }
-.tp-lib__custom .tp-hex { width: 44px; height: 44px; }
-.tp-lib__custom p { margin: 0; font-size: 15.5px; line-height: 1.5; color: #c9cacf; text-wrap: pretty; }
-.tp-lib__custom b { color: #fff; font-weight: 700; }
 
 /* How to get them: four numbered steps on one red-tinted line (vertical on phones) */
 .tp-get { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; max-width: 1080px; margin: clamp(32px, 4.5vw, 52px) auto 0; padding: 0; list-style: none; }
@@ -1755,18 +1733,10 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-get__step h3 { margin: 0; font-size: 19px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; text-wrap: balance; }
 .tp-get__step p { margin: 0; max-width: 30ch; font-size: 14.5px; line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
 @media (max-width: 960px) {
-  .tp-lib { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tp-get { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 34px; }
   .tp-get::before { display: none; }
 }
 @media (max-width: 560px) {
-  .tp-lib { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .tp-lib__card { display: grid; grid-template-columns: 120px minmax(0, 1fr); align-items: center; gap: 14px; padding: 10px 14px 10px 10px; }
-  .tp-lib__art svg { width: 86%; }
-  .tp-lib__txt { margin: 0; padding: 10px 12px; }
-  .tp-lib__txt h3 { font-size: 17px; }
-  .tp-lib__txt p { font-size: 13.5px; }
-  .tp-lib__custom { align-items: flex-start; padding: 14px 16px 14px 12px; }
   .tp-get { grid-template-columns: minmax(0, 1fr); row-gap: 22px; }
   .tp-get::before { display: block; top: 23px; bottom: 23px; left: 22px; right: auto; width: 2px; height: auto;
     background: linear-gradient(180deg, rgba(231,19,27,.15), #e7131b 50%, rgba(231,19,27,.15)); }
@@ -2128,6 +2098,104 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-earn__cta { height: 52px; font-size: 16px; }
   .tq-earn__dot { width: 40px; height: 40px; }
 }
+
+/* ---- Marketing Tools: promo materials (Marketing_Materials_Bento_Glass) --------------------------------------
+   A grey panel crossed by thin red, black and steel streaks; over it a bento of frosted glass tiles (two dark),
+   each with a mock-up of its format (.tp-bm, 260x180, placed per tile); the last tile asks the manager.
+   Desktops: 4 columns x 3 rows of 250px. Tablets and phones: 2 columns. */
+.tp-bento { position: relative; overflow: hidden; max-width: 1120px; box-sizing: border-box; margin: clamp(28px, 4vw, 48px) auto 0; padding: 24px; border-radius: 28px; background: #ecedef; }
+.tp-bento__ln { position: absolute; display: block; border-radius: 999px; pointer-events: none; }
+.tp-bento__ln--1 { left: -120px; top: 560px; width: 1300px; height: 10px; background: linear-gradient(90deg, rgba(231,19,27,0), #e7131b 25%, #ff4148 60%, rgba(231,19,27,0)); transform: rotate(-27deg); }
+.tp-bento__ln--2 { left: 520px; top: 120px; width: 760px; height: 3px; background: linear-gradient(90deg, rgba(10,10,10,0), #0a0a0a 40%, rgba(10,10,10,0)); transform: rotate(38deg); }
+.tp-bento__ln--3 { left: -80px; top: 180px; width: 820px; height: 2px; background: linear-gradient(90deg, rgba(231,19,27,0), #e7131b 45%, rgba(231,19,27,0)); transform: rotate(9deg); }
+.tp-bento__ln--4 { left: 180px; top: 420px; width: 1100px; height: 2px; background: linear-gradient(90deg, rgba(94,99,107,0), #5e636b 35%, #9aa0a8 70%, rgba(94,99,107,0)); transform: rotate(-6deg); }
+.tp-bento__ln--5 { left: 640px; top: 520px; width: 560px; height: 6px; background: linear-gradient(90deg, rgba(231,19,27,0), #e7131b 50%, rgba(231,19,27,0)); transform: rotate(62deg); }
+.tp-bento__ln--6 { left: -60px; top: 640px; width: 620px; height: 3px; background: linear-gradient(90deg, rgba(10,10,10,0), #0a0a0a 50%, rgba(10,10,10,0)); transform: rotate(-48deg); }
+.tp-bento__ln--7 { left: 760px; top: 40px; width: 420px; height: 2px; background: linear-gradient(90deg, rgba(94,99,107,0), #7a7f87 50%, rgba(94,99,107,0)); transform: rotate(-15deg); }
+.tp-bento__grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, 250px); gap: 16px; }
+.tp-bento__t { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding: 24px; border-radius: 22px; color: #0a0a0a; text-decoration: none;
+  background: linear-gradient(160deg, rgba(255,255,255,.78), rgba(255,255,255,.42)); -webkit-backdrop-filter: blur(26px) saturate(160%); backdrop-filter: blur(26px) saturate(160%);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.65), 0 0 0 1px rgba(18,22,30,.05), 0 28px 44px -32px rgba(18,22,30,.4); }
+.tp-bento__t--dark { color: #fff; background: linear-gradient(160deg, rgba(38,40,46,.8), rgba(10,10,12,.88)); -webkit-backdrop-filter: blur(26px) saturate(140%); backdrop-filter: blur(26px) saturate(140%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.24), inset 0 0 0 1px rgba(255,255,255,.08), 0 28px 44px -26px rgba(0,0,0,.55); }
+.tp-bento__t--dark::before { content: ''; position: absolute; left: 12%; right: 12%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); }
+.tp-bento__n { position: relative; font-family: 'Fragment Mono', monospace; font-size: 12px; color: #e7131b; }
+.tp-bento__t--dark .tp-bento__n { color: #ff4148; }
+.tp-bento__t h3 { position: relative; margin: 0; font-size: 20px; line-height: 1.15; font-weight: 700; letter-spacing: -.02em; }
+.tp-bento__t p { position: relative; margin: 0; font-size: 13px; line-height: 1.45; color: #4a4d54; text-wrap: pretty; }
+.tp-bento__t--dark p { color: #b4b7bd; }
+/* the three bigger tiles */
+.tp-bento__t--banner { grid-column: 1 / 3; grid-row: 1 / 3; padding: 30px; gap: 8px; }
+.tp-bento__t--banner h3 { font-size: 30px; line-height: 1; letter-spacing: -.03em; }
+.tp-bento__t--banner p { max-width: 260px; font-size: 15px; line-height: 1.5; }
+.tp-bento__t--landing { grid-column: 3 / 5; grid-row: 1; padding: 28px; gap: 8px; }
+.tp-bento__t--brand { grid-column: 2 / 4; grid-row: 3; padding: 28px; gap: 8px; }
+.tp-bento__t--landing h3, .tp-bento__t--brand h3 { font-size: 22px; }
+.tp-bento__t--landing p, .tp-bento__t--brand p { max-width: 200px; font-size: 14px; line-height: 1.5; }
+.tp-bento__t--video { grid-column: 3; grid-row: 2; }
+.tp-bento__t--gif { grid-column: 4; grid-row: 2; }
+.tp-bento__t--social { grid-column: 1; grid-row: 3; }
+.tp-bento__t--social p { max-width: 200px; }
+.tp-bento__ask { grid-column: 4; grid-row: 3; gap: 10px; cursor: pointer; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.tp-bento__ask:hover, .tp-bento__ask:focus-visible { color: #fff; transform: translateY(-4px); }
+.tp-bento__ask:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tp-bento__ic { width: 44px; height: 44px; flex: none; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #ff5a60, #e7131b 55%, #a50c12); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 8px 16px -6px rgba(231,19,27,.6); }
+.tp-bento__ask h3 { margin-top: auto; }
+.tp-bento__go { position: relative; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #ff4148; }
+.tp-bento__go span { font-size: 16px; }
+[dir="rtl"] .tp-bento__go span { transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) { .tp-bento__ask { transition: none; } }
+/* the mock-ups: drawn at 260x180 and placed per tile (the design's positions; mirrored in RTL) */
+.tp-bm { position: absolute; width: 260px; height: 180px; font-family: 'DM Sans', sans-serif; color: #0a0a0a; pointer-events: none; }
+.tp-bm > * { direction: ltr; text-align: left; }   /* the drawing itself is never mirrored; the box takes the page's side (RTL) */
+.tp-bm__shadow { position: absolute; left: 30px; right: 30px; bottom: -6px; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(18,22,30,.28), rgba(18,22,30,0)); }
+.tp-bm--banner { inset-inline-end: 44px; bottom: 44px; transform: scale(1.3); transform-origin: right bottom; }
+.tp-bm--landing { inset-inline-end: -20px; top: 40px; transform: perspective(900px) rotateY(-18deg) scale(1.2); transform-origin: right top; }
+.tp-bm--video { inset-inline-start: 24px; bottom: -34px; transform: scale(.92); transform-origin: left bottom; }
+.tp-bm--gif { inset-inline-start: -10px; bottom: -30px; transform: scale(.92); transform-origin: left bottom; }
+.tp-bm--social { inset-inline-start: 0; bottom: -96px; transform: scale(.9); transform-origin: left bottom; }
+.tp-bm--brand { inset-inline-end: 16px; bottom: 20px; transform: scale(1.05); transform-origin: right bottom; }   /* a touch smaller than the design: clear of a one-line title */
+[dir="rtl"] .tp-bm--banner, [dir="rtl"] .tp-bm--brand { transform-origin: left bottom; }
+[dir="rtl"] .tp-bm--landing { transform: perspective(900px) rotateY(18deg) scale(1.2); transform-origin: left top; }
+[dir="rtl"] .tp-bm--video, [dir="rtl"] .tp-bm--gif, [dir="rtl"] .tp-bm--social { transform-origin: right bottom; }
+/* tablets: two columns, the big tiles across both */
+@media (max-width: 1099px) {
+  .tp-bento { padding: 20px; }
+  .tp-bento__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: 250px; grid-auto-flow: dense; gap: 14px; }
+  .tp-bento__t--banner, .tp-bento__t--landing, .tp-bento__t--brand { grid-column: 1 / -1; grid-row: auto; }
+  .tp-bento__t--video, .tp-bento__t--gif, .tp-bento__t--social, .tp-bento__ask { grid-column: auto; grid-row: auto; }
+  .tp-bento__t--banner { grid-row: span 1; }
+  .tp-bm--banner { transform: scale(1.1); bottom: 30px; inset-inline-end: 30px; }
+  .tp-bm--landing { transform: perspective(900px) rotateY(-18deg) scale(1.1); }
+  [dir="rtl"] .tp-bm--landing { transform: perspective(900px) rotateY(18deg) scale(1.1); }
+  .tp-bm--brand { transform: scale(1.05); }
+}
+/* phones: two narrow columns; the mock-ups smaller */
+@media (max-width: 640px) {
+  .tp-bento { margin-top: 22px; padding: 10px; border-radius: 22px; }
+  .tp-bento__grid { grid-auto-rows: 214px; gap: 10px; }
+  .tp-bento__t { padding: 16px; gap: 4px; border-radius: 18px; }
+  .tp-bento__t h3 { font-size: 16.5px; }
+  .tp-bento__t p { font-size: 12.5px; line-height: 1.4; }
+  .tp-bento__t--banner, .tp-bento__t--landing, .tp-bento__t--brand { padding: 18px; gap: 6px; }
+  .tp-bento__t--banner h3 { font-size: 24px; }
+  .tp-bento__t--banner p, .tp-bento__t--landing p, .tp-bento__t--brand p { max-width: 150px; font-size: 13px; line-height: 1.45; }
+  .tp-bento__t--landing h3, .tp-bento__t--brand h3 { font-size: 19px; }
+  .tp-bm--banner { transform: scale(.62); bottom: 14px; inset-inline-end: 12px; }
+  .tp-bento__t--social, .tp-bento__ask { grid-column: 1 / -1; }   /* full width: room for the text */
+  .tp-bento__t--social p, .tp-bento__ask p { max-width: 170px; }
+  .tp-bm--landing { inset-inline-end: -36px; top: 52px; transform: perspective(900px) rotateY(-18deg) scale(.8); }
+  [dir="rtl"] .tp-bm--landing { transform: perspective(900px) rotateY(18deg) scale(.8); }
+  .tp-bm--video { inset-inline-start: 10px; bottom: -40px; transform: scale(.62); }
+  .tp-bm--gif { inset-inline-start: -12px; bottom: -26px; transform: scale(.62); }
+  .tp-bm--social { inset-inline-start: auto; inset-inline-end: 0; bottom: -60px; transform: scale(.72); transform-origin: right bottom; }
+  [dir="rtl"] .tp-bm--social { transform-origin: left bottom; }
+  .tp-bm--brand { inset-inline-end: 8px; bottom: 12px; transform: scale(.62); }
+  .tp-bento__ic { width: 38px; height: 38px; border-radius: 10px; }
+  .tp-bento__ask { gap: 6px; }
+  .tp-bento__go { font-size: 13px; }
+}
 </style>
 <style id="i18n-fonts">
 *:not(svg *) { letter-spacing: 0 !important; }
@@ -2188,57 +2256,131 @@ html:lang(ko) * { word-break: keep-all; }
     </section>
     <div class="tq-mth-tail" aria-hidden="true"></div>
 
-    <!-- Promo materials library: the formats partners get. Per-format counts live in mt.lib.N.n
-         (empty for now; the badge hides itself until a number is filled in) -->
+    <!-- Promo materials library (Marketing_Materials_Bento_Glass): the formats partners get, as glass tiles
+         with a mock-up each, and the "Need something specific?" tile -->
     <section id="library" class="tp-sec" data-screen-label="Promo materials">
       <div class="tp-wrap">
         <div class="tp-head">
           <h2 class="tp-h2">適用於<span style="color: #e7131b;">各種管道</span>的現成素材</h2>
           <p class="tp-sub">橫幅、到達頁、影片等，拿來即用。</p>
         </div>
-        <div class="tp-lib-stage">
-          <div class="tp-lib-stage__bg" aria-hidden="true"><i class="tp-lib-stage__ball"></i><i class="tp-lib-stage__slab"></i><i class="tp-lib-stage__silver"></i><i class="tp-lib-stage__ball tp-lib-stage__ball--2"></i><i class="tp-lib-stage__lines"></i></div>
-        <div class="tp-lib">
-          <article class="tp-glass tp-glass--hover tp-lib__card">
-            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="10" y="12" width="140" height="22" rx="4" fill="#fff" stroke="#d5d7dc"/><rect x="17" y="19" width="56" height="8" rx="2" fill="#e3e5e9"/><rect x="117" y="18" width="26" height="10" rx="5" fill="#e7131b"/>
-<rect x="10" y="42" width="62" height="48" rx="4" fill="#fff" stroke="#d5d7dc"/><rect x="18" y="50" width="40" height="6" rx="2" fill="#e3e5e9"/><rect x="18" y="60" width="30" height="6" rx="2" fill="#e3e5e9"/><rect x="18" y="73" width="24" height="9" rx="4.5" fill="#e7131b"/>
-<rect x="80" y="42" width="70" height="48" rx="4" fill="#0e0e10"/><rect x="88" y="50" width="38" height="6" rx="2" fill="#3a3a40"/><rect x="88" y="60" width="26" height="6" rx="2" fill="#3a3a40"/><rect x="88" y="73" width="24" height="9" rx="4.5" fill="#e7131b"/></svg></div>
-            <div class="tp-lib__txt"><h3>橫幅</h3><span class="tp-lib__n"></span><p>適用於網站、部落格和廣告位。</p></div>
-          </article>
-          <article class="tp-glass tp-glass--hover tp-lib__card">
-            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="16" y="10" width="128" height="82" rx="6" fill="#fff" stroke="#d5d7dc"/><path d="M16 22h128" stroke="#e3e5e9"/><circle cx="24" cy="16" r="2" fill="#d5d7dc"/><circle cx="31" cy="16" r="2" fill="#d5d7dc"/><circle cx="38" cy="16" r="2" fill="#d5d7dc"/>
-<rect x="26" y="32" width="62" height="8" rx="2" fill="#0e0e10"/><rect x="26" y="45" width="48" height="5" rx="2" fill="#e3e5e9"/><rect x="26" y="56" width="30" height="10" rx="5" fill="#e7131b"/>
-<rect x="98" y="30" width="36" height="38" rx="4" fill="#f1f2f4"/><path d="M104 61l8-10 6 6 6-9 6 13z" fill="#d5d7dc"/><rect x="26" y="76" width="108" height="8" rx="2" fill="#f1f2f4"/></svg></div>
-            <div class="tp-lib__txt"><h3>到達頁</h3><span class="tp-lib__n"></span><p>現成的頁面，用來承接您的流量。</p></div>
-          </article>
-          <article class="tp-glass tp-glass--hover tp-lib__card">
-            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="20" y="12" width="120" height="72" rx="6" fill="#0e0e10"/><circle cx="80" cy="45" r="14" fill="#e7131b"/><path d="M76 38v14l11-7z" fill="#fff"/>
-<rect x="30" y="72" width="100" height="3" rx="1.5" fill="#3a3a40"/><rect x="30" y="72" width="40" height="3" rx="1.5" fill="#e7131b"/><circle cx="70" cy="73.5" r="3" fill="#fff"/></svg></div>
-            <div class="tp-lib__txt"><h3>影片</h3><span class="tp-lib__n"></span><p>適用於您的頻道、直播和廣告。</p></div>
-          </article>
-          <article class="tp-glass tp-glass--hover tp-lib__card">
-            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="46" y="10" width="84" height="60" rx="6" fill="#e3e5e9"/><rect x="39" y="17" width="84" height="60" rx="6" fill="#f1f2f4" stroke="#d5d7dc"/><rect x="32" y="24" width="84" height="62" rx="6" fill="#fff" stroke="#d5d7dc"/>
-<text x="74" y="62" text-anchor="middle" direction="ltr" font-family="DM Sans, sans-serif" font-weight="800" font-size="21" fill="#0e0e10">GIF</text><circle cx="104" cy="35" r="4" fill="#e7131b"/><path d="M44 78h24" stroke="#e3e5e9" stroke-width="3" stroke-linecap="round"/></svg></div>
-            <div class="tp-lib__txt"><h3>GIF動圖</h3><span class="tp-lib__n"></span><p>吸引目光的動態橫幅。</p></div>
-          </article>
-          <article class="tp-glass tp-glass--hover tp-lib__card">
-            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="46" y="6" width="68" height="88" rx="8" fill="#fff" stroke="#d5d7dc"/><circle cx="57" cy="17" r="5" fill="#e3e5e9"/><rect x="66" y="14" width="30" height="5" rx="2" fill="#e3e5e9"/>
-<rect x="52" y="27" width="56" height="42" rx="4" fill="#0e0e10"/><path d="M58 62l12-14 9 9 8-8 15 13z" fill="#3a3a40"/>
-<path d="M57 80.5c0-3 4.2-4 5-1 .8-3 5-2 5 1 0 3.2-5 6.2-5 6.2s-5-3-5-6.2z" fill="#e7131b"/><rect x="73" y="79" width="28" height="4" rx="2" fill="#e3e5e9"/></svg></div>
-            <div class="tp-lib__txt"><h3>社群媒體貼文</h3><span class="tp-lib__n"></span><p>可直接發佈的圖片和文案。</p></div>
-          </article>
-          <article class="tp-glass tp-glass--hover tp-lib__card">
-            <div class="tp-lib__art" aria-hidden="true"><svg viewBox="0 0 160 100" width="160" height="100" focusable="false"><rect x="14" y="16" width="62" height="62" rx="12" fill="#fff" stroke="#d5d7dc"/>
-<g transform="translate(45 47) scale(.38) translate(-100.75 -99.75)"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#0e0e10"/><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#0e0e10"/><circle cx="141" cy="130.5" r="10.5" fill="#e7131b"/></g>
-<circle cx="96" cy="30" r="9" fill="#e7131b"/><circle cx="118" cy="30" r="9" fill="#0e0e10"/><circle cx="140" cy="30" r="9" fill="#d5d7dc"/>
-<text x="88" y="70" direction="ltr" font-family="DM Sans, sans-serif" font-weight="800" font-size="25" fill="#0e0e10">Aa</text><path d="M124 62h20M124 70h14" stroke="#e3e5e9" stroke-width="3" stroke-linecap="round"/></svg></div>
-            <div class="tp-lib__txt"><h3>標誌和品牌手冊</h3><span class="tp-lib__n"></span><p>標誌、顏色和使用規範，讓您的素材保持一致。</p></div>
-          </article>
-        </div>
-        </div>
-        <div class="tp-dark tp-lib__custom">
-          <span class="tp-hex" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg></span>
-          <p><b>需要特別的素材？</b> <span>您的專屬經理可以為您的受眾準備素材。</span></p>
+        <div class="tp-bento">
+          <span class="tp-bento__ln tp-bento__ln--1" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--2" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--3" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--4" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--5" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--6" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--7" aria-hidden="true"></span>
+          <div class="tp-bento__grid">
+            <article class="tp-bento__t tp-bento__t--banner">
+              <span class="tp-bento__n">01</span>
+              <h3>橫幅</h3>
+              <p>適用於網站、部落格和廣告位。</p>
+              <div class="tp-bm tp-bm--banner" aria-hidden="true">
+                <span class="tp-bm__shadow"></span>
+                <div style="position:absolute;left:14px;top:6px;width:232px;height:40px;border-radius:9px;background:#fff;box-shadow:0 0 0 1px rgba(18,22,30,.06),0 10px 18px -10px rgba(18,22,30,.35);display:flex;align-items:center;gap:8px;padding:0 8px 0 10px;box-sizing:border-box;">
+                  <span style="width:18px;height:18px;border-radius:5px;background:#0f1012;position:relative;flex:none;"><span style="position:absolute;right:3px;bottom:3px;width:4px;height:4px;border-radius:50%;background:#e7131b;"></span></span>
+                  <span style="display:flex;flex-direction:column;gap:4px;flex:1;"><span style="width:92px;height:6px;border-radius:3px;background:#1a1b1e;"></span><span style="width:60px;height:5px;border-radius:3px;background:#e3e4e7;"></span></span>
+                  <span style="height:20px;padding:0 9px;border-radius:999px;background:#e7131b;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;white-space:nowrap;">立即交易</span>
+                </div>
+                <div style="position:absolute;left:14px;top:58px;width:108px;height:112px;border-radius:9px;background:#fff;box-shadow:0 0 0 1px rgba(18,22,30,.06),0 12px 20px -12px rgba(18,22,30,.4);padding:10px;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;">
+                  <span style="width:62px;height:6px;border-radius:3px;background:#1a1b1e;"></span><span style="width:44px;height:5px;border-radius:3px;background:#e3e4e7;"></span>
+                  <div style="flex:1;display:flex;align-items:flex-end;gap:4px;padding:0 2px;"><span style="width:6px;height:14px;background:#c9cbd0;border-radius:1px;"></span><span style="width:6px;height:22px;background:#c9cbd0;border-radius:1px;"></span><span style="width:6px;height:16px;background:#e7131b;border-radius:1px;"></span><span style="width:6px;height:28px;background:#c9cbd0;border-radius:1px;"></span><span style="width:6px;height:34px;background:#1a1b1e;border-radius:1px;"></span><span style="width:6px;height:26px;background:#e7131b;border-radius:1px;"></span><span style="width:6px;height:38px;background:#1a1b1e;border-radius:1px;"></span></div>
+                  <span style="width:46px;height:14px;border-radius:999px;background:#e7131b;"></span>
+                </div>
+                <div style="position:absolute;left:132px;top:58px;width:114px;height:112px;border-radius:9px;background:linear-gradient(160deg,#1e1f23,#0a0a0b);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 22px -12px rgba(18,22,30,.55);padding:11px;box-sizing:border-box;display:flex;flex-direction:column;gap:5px;color:#fff;">
+                  <span style="font-family:'Fragment Mono',monospace;font-size:7px;letter-spacing:.14em;color:#9a9da4;">高達</span>
+                  <span style="font-weight:700;font-size:32px;letter-spacing:-.04em;line-height:.9;">87<span style="color: #e7131b;">%</span></span>
+                  <span style="width:58px;height:5px;border-radius:3px;background:#3a3d43;"></span>
+                  <span style="margin-top:auto;width:52px;height:14px;border-radius:999px;background:#e7131b;"></span>
+                </div>
+              </div>
+            </article>
+            <article class="tp-bento__t tp-bento__t--landing">
+              <span class="tp-bento__n">02</span>
+              <h3>到達頁</h3>
+              <p>現成的頁面，用來承接您的流量。</p>
+              <div class="tp-bm tp-bm--landing" aria-hidden="true">
+                <span class="tp-bm__shadow"></span>
+                <div style="position:absolute;left:50px;top:0;width:200px;height:146px;border-radius:11px;background:#e9eaec;box-shadow:inset 0 0 0 1px rgba(255,255,255,.8);"></div>
+                <div style="position:absolute;left:10px;top:16px;width:222px;height:156px;border-radius:11px;background:#fff;overflow:hidden;box-shadow:0 0 0 1px rgba(18,22,30,.06),0 16px 26px -14px rgba(18,22,30,.45);">
+                  <div style="height:18px;display:flex;align-items:center;gap:4px;padding:0 9px;border-bottom:1px solid #eeeff1;"><span style="width:5px;height:5px;border-radius:50%;background:#e7131b;"></span><span style="width:5px;height:5px;border-radius:50%;background:#c9cbd0;"></span><span style="width:5px;height:5px;border-radius:50%;background:#c9cbd0;"></span><span style="margin-left:10px;width:90px;height:7px;border-radius:4px;background:#f0f1f3;"></span></div>
+                  <div style="padding:14px 12px 10px;display:grid;grid-template-columns:1fr 78px;gap:10px;">
+                    <div style="display:flex;flex-direction:column;gap:6px;"><span style="width:100px;height:10px;border-radius:2px;background:#0f1012;"></span><span style="width:76px;height:10px;border-radius:2px;background:#0f1012;"></span><span style="width:84px;height:5px;border-radius:3px;background:#e3e4e7;margin-top:3px;"></span><span style="margin-top:6px;width:54px;height:16px;border-radius:999px;background:#e7131b;"></span></div>
+                    <div style="height:74px;border-radius:7px;background:#0f1012;display:flex;align-items:flex-end;justify-content:center;gap:4px;padding:10px 8px;box-sizing:border-box;"><span style="width:5px;height:16px;background:#3a3d43;"></span><span style="width:5px;height:26px;background:#3a3d43;"></span><span style="width:5px;height:20px;background:#e7131b;"></span><span style="width:5px;height:34px;background:#fff;"></span><span style="width:5px;height:42px;background:#fff;"></span><span style="width:5px;height:30px;background:#e7131b;"></span></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 12px;"><span style="height:22px;border-radius:5px;background:#f3f4f5;"></span><span style="height:22px;border-radius:5px;background:#f3f4f5;"></span><span style="height:22px;border-radius:5px;background:#f3f4f5;"></span></div>
+                </div>
+              </div>
+            </article>
+            <article class="tp-bento__t tp-bento__t--video tp-bento__t--dark">
+              <span class="tp-bento__n">03</span>
+              <h3>影片</h3>
+              <p>適用於您的頻道、直播和廣告。</p>
+              <div class="tp-bm tp-bm--video" aria-hidden="true">
+                <span class="tp-bm__shadow"></span>
+                <div style="position:absolute;left:176px;top:4px;width:72px;height:128px;border-radius:12px;background:linear-gradient(170deg,#2a2c31,#121315);transform:rotate(7deg);box-shadow:0 12px 20px -12px rgba(18,22,30,.5);overflow:hidden;"><span style="position:absolute;left:8px;right:8px;top:8px;height:3px;border-radius:2px;background:#4a4d54;"></span><span style="position:absolute;left:8px;top:8px;width:30px;height:3px;border-radius:2px;background:#fff;"></span></div>
+                <div style="position:absolute;left:8px;top:22px;width:210px;height:136px;border-radius:13px;background:linear-gradient(165deg,#1c1d21,#08080a);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 18px 28px -14px rgba(18,22,30,.6);">
+                  <div style="position:absolute;left:16px;right:16px;bottom:30px;height:60px;display:flex;align-items:flex-end;gap:7px;opacity:.5;"><span style="flex:1;height:18px;background:#3a3d43;"></span><span style="flex:1;height:30px;background:#3a3d43;"></span><span style="flex:1;height:22px;background:#3a3d43;"></span><span style="flex:1;height:40px;background:#3a3d43;"></span><span style="flex:1;height:34px;background:#3a3d43;"></span><span style="flex:1;height:52px;background:#3a3d43;"></span><span style="flex:1;height:46px;background:#3a3d43;"></span><span style="flex:1;height:60px;background:#3a3d43;"></span></div>
+                  <div style="position:absolute;left:50%;top:44%;width:46px;height:46px;margin:-23px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff5a60,#e7131b 55%,#a50c12);box-shadow:0 0 0 6px rgba(231,19,27,.18),0 8px 16px -6px rgba(231,19,27,.7);display:flex;align-items:center;justify-content:center;"><span style="width:13px;height:15px;margin-left:3px;background:#fff;clip-path:polygon(0 0,100% 50%,0 100%);"></span></div>
+                  <span style="position:absolute;left:12px;top:10px;font-family:'Fragment Mono',monospace;font-size:8px;letter-spacing:.1em;color:#c9cbd0;">0:42 / 2:10</span>
+                  <div style="position:absolute;left:12px;right:12px;bottom:12px;height:3px;border-radius:2px;background:#3a3d43;"><span style="position:absolute;left:0;top:0;bottom:0;width:36%;border-radius:2px;background:#e7131b;"></span><span style="position:absolute;left:36%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:#fff;"></span></div>
+                </div>
+              </div>
+            </article>
+            <article class="tp-bento__t tp-bento__t--gif">
+              <span class="tp-bento__n">04</span>
+              <h3>GIF動圖</h3>
+              <p>吸引目光的動態橫幅。</p>
+              <div class="tp-bm tp-bm--gif" aria-hidden="true">
+                <span class="tp-bm__shadow"></span>
+                <div style="position:absolute;left:78px;top:2px;width:150px;height:110px;border-radius:12px;background:#e4e5e8;transform:rotate(6deg);"></div>
+                <div style="position:absolute;left:58px;top:12px;width:150px;height:110px;border-radius:12px;background:#f2f3f4;transform:rotate(3deg);box-shadow:0 6px 12px -8px rgba(18,22,30,.25);"></div>
+                <div style="position:absolute;left:38px;top:26px;width:150px;height:116px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px rgba(18,22,30,.06),0 16px 26px -14px rgba(18,22,30,.45);padding:12px;box-sizing:border-box;display:flex;flex-direction:column;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-family:'Fragment Mono',monospace;font-size:8px;letter-spacing:.12em;color:#6b6f76;">FRAME 03/12</span><span style="width:8px;height:8px;border-radius:50%;background:#e7131b;box-shadow:0 0 0 3px rgba(231,19,27,.18);"></span></div>
+                  <span style="margin-top:auto;font-weight:700;font-size:40px;letter-spacing:-.04em;line-height:.9;">GIF</span>
+                  <div style="margin-top:10px;display:flex;gap:4px;"><span style="width:14px;height:4px;border-radius:2px;background:#0f1012;"></span><span style="width:14px;height:4px;border-radius:2px;background:#0f1012;"></span><span style="width:14px;height:4px;border-radius:2px;background:#e7131b;"></span><span style="width:14px;height:4px;border-radius:2px;background:#e3e4e7;"></span><span style="width:14px;height:4px;border-radius:2px;background:#e3e4e7;"></span></div>
+                </div>
+              </div>
+            </article>
+            <article class="tp-bento__t tp-bento__t--social">
+              <span class="tp-bento__n">05</span>
+              <h3>社群媒體貼文</h3>
+              <p>可直接發佈的圖片和文案。</p>
+              <div class="tp-bm tp-bm--social" aria-hidden="true">
+                <span class="tp-bm__shadow"></span>
+                <div style="position:absolute;left:142px;top:8px;width:92px;height:150px;border-radius:14px;background:linear-gradient(170deg,#f0262e,#b70e15);transform:rotate(8deg);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 14px 22px -12px rgba(183,14,21,.6);padding:12px 10px;box-sizing:border-box;display:flex;flex-direction:column;color:#fff;">
+                  <span style="height:3px;border-radius:2px;background:rgba(255,255,255,.45);"></span>
+                  <span style="margin-top:auto;font-size:9px;font-weight:500;">收益</span>
+                  <span style="font-weight:700;font-size:22px;letter-spacing:-.04em;line-height:.95;">高達87%</span>
+                </div>
+                <div style="position:absolute;left:30px;top:0;width:124px;height:172px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px rgba(18,22,30,.06),0 18px 28px -14px rgba(18,22,30,.45);padding:9px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;align-items:center;gap:6px;"><span style="width:16px;height:16px;border-radius:50%;background:#0f1012;position:relative;"><span style="position:absolute;right:3px;bottom:3px;width:4px;height:4px;border-radius:50%;background:#e7131b;"></span></span><span style="width:50px;height:5px;border-radius:3px;background:#1a1b1e;"></span></div>
+                  <div style="height:94px;border-radius:8px;background:#0f1012;display:flex;align-items:flex-end;gap:5px;padding:10px;box-sizing:border-box;"><span style="flex:1;height:20px;background:#3a3d43;"></span><span style="flex:1;height:32px;background:#3a3d43;"></span><span style="flex:1;height:26px;background:#e7131b;"></span><span style="flex:1;height:48px;background:#fff;"></span><span style="flex:1;height:60px;background:#fff;"></span><span style="flex:1;height:42px;background:#e7131b;"></span><span style="flex:1;height:70px;background:#fff;"></span></div>
+                  <div style="display:flex;align-items:center;gap:6px;"><span style="color:#e7131b;font-size:13px;line-height:1;">&#9829;</span><span style="width:44px;height:5px;border-radius:3px;background:#e3e4e7;"></span></div>
+                  <span style="width:80px;height:5px;border-radius:3px;background:#e3e4e7;"></span>
+                </div>
+              </div>
+            </article>
+            <article class="tp-bento__t tp-bento__t--brand">
+              <span class="tp-bento__n">06</span>
+              <h3>標誌和品牌手冊</h3>
+              <p>標誌、顏色和使用規範，讓您的素材保持一致。</p>
+              <div class="tp-bm tp-bm--brand" aria-hidden="true">
+                <span class="tp-bm__shadow"></span>
+                <div style="position:absolute;left:118px;top:14px;width:126px;height:76px;border-radius:10px;background:linear-gradient(160deg,#1e1f23,#0a0a0b);transform:rotate(-6deg);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 22px -12px rgba(18,22,30,.55);padding:12px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;">
+                  <span style="color:#fff;font-weight:600;font-size:12px;letter-spacing:-.03em;">TradeQuo<span style="color:#e7131b;">.</span></span>
+                  <span style="display:flex;flex-direction:column;gap:3px;"><span style="width:50px;height:4px;border-radius:2px;background:#4a4d54;"></span><span style="width:34px;height:4px;border-radius:2px;background:#4a4d54;"></span></span>
+                </div>
+                <div style="position:absolute;left:16px;top:30px;width:110px;height:110px;border-radius:22px;background:#fff;box-shadow:0 0 0 1px rgba(18,22,30,.06),0 18px 28px -14px rgba(18,22,30,.45);display:flex;align-items:center;justify-content:center;"><img src="../../assets/logo-mark.png?v=c5fbd9796c" alt="" style="width:58px;height:58px;object-fit:contain;"></div>
+                <div style="position:absolute;left:142px;top:104px;display:flex;flex-direction:column;gap:10px;">
+                  <div style="display:flex;gap:6px;"><span style="width:24px;height:24px;border-radius:50%;background:#e7131b;box-shadow:inset 0 -2px 3px rgba(0,0,0,.25);"></span><span style="width:24px;height:24px;border-radius:50%;background:#0f1012;box-shadow:inset 0 -2px 3px rgba(255,255,255,.12);"></span><span style="width:24px;height:24px;border-radius:50%;background:linear-gradient(150deg,#fff,#c9cbd0);box-shadow:inset 0 0 0 1px rgba(18,22,30,.08);"></span></div>
+                  <span style="font-weight:700;font-size:30px;letter-spacing:-.03em;line-height:.9;">Aa</span>
+                </div>
+              </div>
+            </article>
+            <a class="tp-bento__t tp-bento__t--dark tp-bento__ask" href="../#signup" data-page-link data-label="載入中 · 首頁">
+              <span class="tp-bento__ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></span>
+              <h3>需要特別的素材？</h3>
+              <p>您的專屬經理可以為您的受眾準備素材。</p>
+              <span class="tp-bento__go">諮詢專屬經理 <span aria-hidden="true">→</span></span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
