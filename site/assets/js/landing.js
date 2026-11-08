@@ -797,14 +797,18 @@
         el.style.fontSize = Math.max(fs0 * 0.4, fs * room / w - 0.5).toFixed(1) + 'px';
       }
     });
-    /* the cards' text links: beside the CTA where all three fit, under it in all three otherwise (so the
-       CTAs stay level) */
+    /* the cards' text links: beside the CTA where all three fit, under it in all three otherwise; and the
+       audience lines under the CTAs as tall as the tallest one (so the CTAs stay level) */
     const rail = $('[data-progs]');
     const level = () => {
       if (!rail) return;
       rail.classList.toggle('is-stack', false);
       const wraps = $$('.tp-pc__cta', rail).some((r) => { const a = r.children[0], b = r.children[1]; return a && b && b.offsetTop > a.offsetTop + a.offsetHeight / 2; });
       rail.classList.toggle('is-stack', wraps);
+      const who = $$('.tp-pc__who', rail);
+      who.forEach((w) => { w.style.minHeight = ''; });
+      const h = Math.max(...who.map((w) => w.offsetHeight));
+      who.forEach((w) => { w.style.minHeight = h + 'px'; });
     };
     const all = () => { fit(); level(); };
     all();
@@ -979,8 +983,9 @@
   }
 
   /* ---- programs/: Who it's for → Why partners choose (TradeQuo_Partner_Flow design) ---------------
-   * The same scroll and the same stages as the landing's Infinite Flow → perks flip (startFlip): a 340vh
-   * track, so 240vh of scrolling while #pf-stick is pinned, mapped to q 0 → 1 and followed with the same lag:
+   * The same stages as the landing's Infinite Flow → perks flip (startFlip), on a 326vh track (the landing's
+   * is 340vh: here the perks come in about a wheel step sooner), so 226vh of scrolling while #pf-stick is
+   * pinned, mapped to q 0 → 1 and followed with the same lag:
    *   0–.17   the persona text fades (the landing's heading, gone by .17)
    *   0–.52   the 3D platform rises and stands up (partner-flow.js, setFlip; the landing's zoom and flip)
    *   .52     a snapshot of the platform takes over in #pf-flip (drawn 9-slice on a canvas)
