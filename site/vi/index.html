@@ -642,7 +642,7 @@ html { scroll-snap-type: y proximity; }
   [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
   [data-fan-hub] { display: none !important; }
   [data-faq-grid] { grid-template-columns: 1fr !important; }
-  [data-dark-tail] { margin: 0 0 16px !important; }
+  [data-dark-tail] { margin: -2px 0 16px !important; }
   [data-tail-glow] { display: none !important; }
   [data-dark-tail] { background: linear-gradient(180deg, #0a0a0a 0px, #0b0b0b 23px, #0e0e0e 45px, #161616 68px, #232323 90px, #363636 113px, #4d4d4d 135px, #686868 158px, #858585 180px, #a1a1a1 203px, #bcbcbc 225px, #d3d3d3 248px, #e6e6e6 270px, #f3f3f3 293px, #fbfbfb 315px, #fefefe 338px, #ffffff 360px) !important; }
   #faq { padding-top: 284px !important; }
@@ -1670,7 +1670,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     </div>
   </div>
 
-  <div data-dark-tail="" style="position: relative; margin: 0 0 clamp(16px, 3vw, 32px); border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); background: linear-gradient(180deg, #0a0a0a 0px, #0a0a0a 25px, #0c0c0c 51px, #0f0f0f 76px, #151515 102px, #1e1e1e 127px, #2a2a2a 153px, #383838 178px, #494949 204px, #5c5c5c 229px, #707070 255px, #858585 280px, #999999 305px, #adadad 331px, #c0c0c0 356px, #d1d1d1 382px, #dfdfdf 407px, #ebebeb 433px, #f4f4f4 458px, #fafafa 484px, #fdfdfd 509px, #ffffff 535px, #ffffff 560px); color: #0a0a0a; overflow: clip;">
+  <!-- the dark tail tucks 2px under the "What we offer" panel above: where the two meet on a fractional pixel (125% / 150% screen scaling)
+       a hairline of the white page would show between them -->
+  <div data-dark-tail="" style="position: relative; margin: -2px 0 clamp(16px, 3vw, 32px); border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); background: linear-gradient(180deg, #0a0a0a 0px, #0a0a0a 25px, #0c0c0c 51px, #0f0f0f 76px, #151515 102px, #1e1e1e 127px, #2a2a2a 153px, #383838 178px, #494949 204px, #5c5c5c 229px, #707070 255px, #858585 280px, #999999 305px, #adadad 331px, #c0c0c0 356px, #d1d1d1 382px, #dfdfdf 407px, #ebebeb 433px, #f4f4f4 458px, #fafafa 484px, #fdfdfd 509px, #ffffff 535px, #ffffff 560px); color: #0a0a0a; overflow: clip;">
   <div data-tail-glow="" aria-hidden="true" style="position: absolute; left: 62%; top: calc(-40vh + clamp(8px, 1.4vw, 20px) * .4); width: 60%; height: calc(70vh - clamp(8px, 1.4vw, 20px) * .7); transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.22), transparent); pointer-events: none;"></div>
   <canvas data-ref="star" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 150px); mask-image: linear-gradient(180deg, transparent 0, #000 150px);"></canvas>
   <section id="faq" data-screen-label="Partner Program FAQ" style="position: relative; padding: 430px clamp(20px, 4vw, 56px) clamp(56px, 8vw, 112px);">
