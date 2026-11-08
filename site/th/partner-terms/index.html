@@ -1030,8 +1030,10 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* ---- Dark header (Marketing Tools: the page opens on a dark screen) ----------------------------------
    The bar runs edge to edge in the hero's own black, so header and hero read as one dark screen;
-   the wordmark is the light one (build-i18n.py: page 'head': 'dark'). */
-.tq-head--dark { background: #0a0a0b; box-shadow: 0 0 0 100vmax #0a0a0b; clip-path: inset(0 -100vmax); }
+   the wordmark is the light one (build-i18n.py: page 'head': 'dark'). The black is one plain band behind the bar,
+   edge to edge (.tp clips the overhang), reaching 2px under the hero: no clipped shadow, whose soft edge let a
+   hairline of the white page show under the bar at the sides on some screens. */
+.tq-head--dark::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: -2px; left: 50%; width: 100vw; margin-left: -50vw; background: #0a0a0b; pointer-events: none; }
 .tq-head--dark nav a.hv-red { color: rgba(255,255,255,.78) !important; }
 .tq-head--dark nav a.hv-red:hover { color: #fff !important; }
 .tq-head--dark .tq-lang__btn { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.18); color: #f2f2f4; }
