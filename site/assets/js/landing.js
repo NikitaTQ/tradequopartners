@@ -797,10 +797,20 @@
         el.style.fontSize = Math.max(fs0 * 0.4, fs * room / w - 0.5).toFixed(1) + 'px';
       }
     });
-    fit();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    /* the cards' text links: beside the CTA where all three fit, under it in all three otherwise (so the
+       CTAs stay level) */
+    const rail = $('[data-progs]');
+    const level = () => {
+      if (!rail) return;
+      rail.classList.toggle('is-stack', false);
+      const wraps = $$('.tp-pc__cta', rail).some((r) => { const a = r.children[0], b = r.children[1]; return a && b && b.offsetTop > a.offsetTop + a.offsetHeight / 2; });
+      rail.classList.toggle('is-stack', wraps);
+    };
+    const all = () => { fit(); level(); };
+    all();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
     let t = 0;
-    addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
+    addEventListener('resize', () => { clearTimeout(t); t = setTimeout(all, 150); });
   }
 
   /* ---- /programs/ on phones: the three program cards swipe sideways -------------------------
