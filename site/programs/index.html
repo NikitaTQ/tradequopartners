@@ -1357,8 +1357,10 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pc__cta { padding-top: 20px; }
   .tp-pc { padding-bottom: 24px; }
 }
-@media (min-width: 961px) and (max-height: 940px) {
-  .tp-hero .tp-h1 { font-size: clamp(40px, 6.4vh, 56px); }
+@media (min-width: 961px) and (max-height: 1000px) {
+  .tp-hero .tp-h1 { font-size: clamp(40px, 6vh, 56px); }
+  .tp-hero .tp-head { gap: 8px; }
+  .tp-hero .tp-head .tp-sub { font-size: 19px; line-height: 1.45; }
   .tp-hero .tp-stage { margin-top: 18px; }
   .tp-pc { padding-top: 24px; }
   .tp-pc__head { gap: 10px; }
@@ -1372,7 +1374,10 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 @media (min-width: 961px) and (max-height: 800px) {
   .tp-hero { padding-top: 4px; }
-  .tp-hero .tp-stage { margin-top: 12px; }
+  .tp-hero .tp-h1 { font-size: clamp(38px, 5.6vh, 56px); }
+  .tp-hero .tp-head { gap: 6px; }
+  .tp-hero .tp-head .tp-sub { font-size: 16px; line-height: 1.4; }
+  .tp-hero .tp-stage { margin-top: 10px; }
   .tp-pc { padding-top: 20px; }
   .tp-pc__name { min-height: 66px; --nf: 33px; }
   .tp-pc__head { max-width: 196px; }   /* the name keeps its two lines, clear of the art */
@@ -1383,6 +1388,13 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pc__big { font-size: 64px; }
   .tp-pc__sub { font-size: 15px; }
   .tp-pc__pts { margin-top: 12px; gap: 5px; }
+}
+/* very short laptop screens (a 1536×730 window): a little tighter still, so the CTAs stay in the first screen */
+@media (min-width: 961px) and (max-height: 760px) {
+  .tp-hero .tp-head .tp-sub { font-size: 15px; }
+  .tp-pc__lead { margin-top: 12px; padding-top: 10px; }
+  .tp-pc__big { font-size: 56px; }
+  .tp-pc__pts { margin-top: 10px; gap: 3px; }
 }
 /* phones: the card scaled to the swiper, the CTAs in the first screen like before */
 @media (max-width: 640px) {
@@ -1402,12 +1414,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pc__cta { padding-top: 14px; gap: 12px 10px; }
   .tp-pc__go { height: 50px; padding-inline: 4px 18px; font-size: 15px; }
   .tp-pc__dot { width: 42px; height: 42px; }
-}
-/* the hero caption: above the cards on phones and tablets, under them where the cards stand in a row */
-.tp-hero__after { display: none; }
-@media (min-width: 961px) {
-  .tp-hero__lead { display: none; }
-  .tp-hero .tp-hero__after { display: block; max-width: 64ch; margin: clamp(22px, 2.4vw, 32px) auto 0; font-size: 20px; text-align: center; }
 }
 /* phones: one row that swipes sideways and snaps to a card; the next card peeks in at the edge */
 @media (max-width: 640px) {
@@ -2415,7 +2421,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <button type="button" aria-label="Launch your brand"></button>
         </div>
       </div>
-      <p class="tp-sub tp-hero__after">Refer traders, build a network of partners or launch a brand of your own. Whichever path you choose, a dedicated partner manager works with you.</p>
     </section>
 
     <!-- Who it's for → Why partners choose (TradeQuo_Partner_Flow design). A sticky scene over 280vh: the
