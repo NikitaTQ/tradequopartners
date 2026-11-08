@@ -641,9 +641,7 @@ html { scroll-snap-type: y proximity; }
   [data-fan-stage] > [data-fan-card]:nth-child(6) { transform-origin: 72% 82% !important; }
   [data-fan-stage] > [data-fan-card][data-fan-card][data-sel], [data-fan-stage] > [data-fan-card][data-fan-card][data-sel]:hover { transform: scale(1.27) !important; z-index: 6 !important; border-color: rgba(231,19,27,.8) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.35), 0 0 26px rgba(231,19,27,.42), 0 18px 34px rgba(0,0,0,.6) !important; }
   [data-crystals] iframe { aspect-ratio: 0.72 / 1 !important; }
-  #film { padding: 18px 14px 28px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
-  [data-film-desk] { display: none !important; }
-  [data-film-mob] { display: block !important; width: min(97.75%, calc(70.15svh * 0.78)) !important; aspect-ratio: 0.78 / 1 !important; }
+  #film { display: none !important; }   /* phones: no partner film (its iframe never loads) */
   [data-how-steps] { grid-template-columns: 1fr !important; row-gap: 14px !important; }
   [data-how-arrow] { display: flex !important; }
   [data-how-line] { display: none !important; }
@@ -1113,34 +1111,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   footer p { font-size: 12px !important; }
 }
 
-/* ---- Partner film on phones: an MP4 of embeds/tradequo-film-mobile.html ------------------------------
-   The live film (React + three.js, six 1080x1920 layers scaled down) ran iPhones out of memory: the film
-   stayed blank and Safari reloaded the page. The video is the same 22 s loop, recorded frame by frame
-   (720x1280, H.264). It plays muted inline while in view; a tap shows the film's own controls. */
-.tq-fvid { position: relative; width: 100%; height: 100%; }
-.tq-fvid video { display: block; width: 100%; height: 100%; object-fit: contain; background: transparent; }
-.tq-fvid__ctl { position: absolute; left: 50%; bottom: 17px; transform: translateX(-50%); display: flex; align-items: flex-start; gap: 10px; padding-top: 3px;
-  opacity: 0; pointer-events: none; transition: opacity .3s ease; }
-.tq-fvid[data-ctl] .tq-fvid__ctl { opacity: 1; pointer-events: auto; }
-@media (hover: hover) {
-  .tq-fvid__ctl { opacity: .55; pointer-events: auto; }
-  .tq-fvid:hover .tq-fvid__ctl, .tq-fvid[data-paused] .tq-fvid__ctl { opacity: 1; }
-}
-.tq-fvid__skip { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.tq-fvid__btn { position: relative; width: 27px; height: 27px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer;
-  border: 1px solid rgba(255,255,255,.24); background: rgba(12,12,14,.42); color: #fff; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-  box-shadow: 0 6px 18px -6px rgba(0,0,0,.45); transition: transform .15s ease, background .15s ease; -webkit-tap-highlight-color: transparent; }
-.tq-fvid__btn::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; }   /* 44px to tap */
-.tq-fvid__btn--main { width: 34px; height: 34px; margin-top: -3px; }
-.tq-fvid__btn--main::after { inset: -5px; }
-.tq-fvid__btn:active { transform: scale(.94); }
-.tq-fvid__btn:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
-.tq-fvid__pill { font: 600 11px/1 'Fragment Mono', ui-monospace, monospace; letter-spacing: .04em; color: #fff; padding: 3px 7px; border-radius: 999px;
-  background: rgba(12,12,14,.42); border: 1px solid rgba(255,255,255,.24); }
-.tq-fvid__i-play { display: none; }
-.tq-fvid[data-paused] .tq-fvid__i-play { display: block; }
-.tq-fvid[data-paused] .tq-fvid__i-pause { display: none; }
-
 /* ---- Dark header (Marketing Tools: the page opens on a dark screen) ----------------------------------
    The bar runs edge to edge in the hero's own black, so header and hero read as one dark screen;
    the wordmark is the light one (build-i18n.py: page 'head': 'dark'). */
@@ -1609,21 +1579,6 @@ html:lang(ko) * { word-break: keep-all; }
     <div data-film-box="" data-film-desk="" style="width: 100%; max-width: 1240px; margin: 0 auto; aspect-ratio: 16 / 9; max-height: 100svh; border-radius: clamp(18px, 3vw, 40px); overflow: hidden; background: #FFFFFF;">
       <iframe data-embed data-src="../embeds/tradequo-film.html?v=f567140848" title="TradeQuo合作夥伴計劃宣傳影片" scrolling="no" style="width: 100%; height: 100%; border: 0; display: block;"></iframe>
     </div>
-    <div data-film-box="" data-film-mob="" style="display: none; position: relative; width: 100%; margin: 0 auto; aspect-ratio: 0.78 / 1; padding: 7px; box-sizing: border-box; border-radius: 34px; background: linear-gradient(152deg, #FFFFFF 0%, #E6E8EC 26%, #C9CDD4 48%, #FAFBFC 62%, #D2D6DC 82%, #F2F4F6 100%); box-shadow: 0 1px 0 rgba(255,255,255,.95) inset, 0 -1px 0 rgba(255,255,255,.55) inset, 0 22px 48px -18px rgba(10,10,12,.45), 0 2px 10px rgba(10,10,12,.12);">
-      <span aria-hidden="true" style="position: absolute; inset: 3px; border-radius: 31px; border: 1px solid rgba(255,255,255,.75); pointer-events: none;"></span>
-      <div style="position: relative; width: 100%; height: 100%; border-radius: 27px; overflow: hidden; background: linear-gradient(148deg, rgba(255,255,255,.92) 0%, rgba(228,232,238,.78) 38%, rgba(245,247,250,.9) 62%, rgba(214,219,226,.8) 100%); box-shadow: 0 0 0 1px rgba(16,17,20,.18), 0 10px 26px -14px rgba(10,12,16,.45) inset;">
-        <span aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 46%; height: 60%; border-top-left-radius: 27px; background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,0) 72%); pointer-events: none;"></span>
-        <div class="tq-fvid" data-film-video>
-          <video muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback poster="../assets/video/film-mobile-poster.jpg?v=586b87f23d" aria-label="TradeQuo合作夥伴計劃宣傳影片"><source src="../assets/video/film-mobile.mp4?v=5457946588" type="video/mp4"></video>
-          <div class="tq-fvid__ctl">
-            <span class="tq-fvid__skip"><button type="button" class="tq-fvid__btn" data-fv-skip="-1.5" aria-label="Back 1.5 seconds"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 6.2v11.6c0 .6-.7 1-1.2.6L3.6 12.6a.8.8 0 0 1 0-1.2l6.7-5.8c.5-.4 1.2 0 1.2.6z" fill="#fff"/><path d="M21 6.2v11.6c0 .6-.7 1-1.2.6l-6.7-5.8a.8.8 0 0 1 0-1.2l6.7-5.8c.5-.4 1.2 0 1.2.6z" fill="#fff" opacity=".7"/></svg></button><span class="tq-fvid__pill" aria-hidden="true">−1.5s</span></span>
-            <button type="button" class="tq-fvid__btn tq-fvid__btn--main" data-fv-play aria-label="Play video"><svg class="tq-fvid__i-pause" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2.5" width="2.8" height="9" rx="1" fill="#fff"/><rect x="8.2" y="2.5" width="2.8" height="9" rx="1" fill="#fff"/></svg><svg class="tq-fvid__i-play" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.6v8.8c0 .5.5.8.9.5l6.6-4.4a.6.6 0 0 0 0-1L4.9 2.1c-.4-.3-.9 0-.9.5z" fill="#fff"/></svg></button>
-            <span class="tq-fvid__skip"><button type="button" class="tq-fvid__btn" data-fv-skip="1.5" aria-label="Forward 1.5 seconds"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 6.2v11.6c0 .6.7 1 1.2.6l6.7-5.8a.8.8 0 0 0 0-1.2l-6.7-5.8c-.5-.4-1.2 0-1.2.6z" fill="#fff"/><path d="M3 6.2v11.6c0 .6.7 1 1.2.6l6.7-5.8a.8.8 0 0 0 0-1.2L4.2 5.6C3.7 5.2 3 5.6 3 6.2z" fill="#fff" opacity=".7"/></svg></button><span class="tq-fvid__pill" aria-hidden="true">+1.5s</span></span>
-          </div>
-        </div>
-        <span aria-hidden="true" style="position: absolute; inset: 0; border-radius: 27px; pointer-events: none; box-shadow: 0 1px 0 rgba(255,255,255,.14) inset;"></span>
-      </div>
-    </div>
   </section>
 
   <div data-flip-track="" data-screen-label="Infinite Flow → What we offer (scroll flip)" style="position: relative; height: 340vh;">
@@ -1858,6 +1813,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=a408a19f5f" defer></script>
+<script src="../assets/js/landing.js?v=1b2f8b8640" defer></script>
 </body>
 </html>
