@@ -1239,6 +1239,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* ---- program cards ------------------------------------------------------------- */
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
+@media (min-width: 961px) { .tp-programs { gap: clamp(28px, 3.6vw, 44px); } }   /* desktops: the cards twice as far apart */
 .tp-progdots { display: none; }
 /* Program cards (Partner_Cards 5a): a dark card with a red glow in its top corner, the number, the program's
    name and a still of its silver 3D object (assets/programs/), then the figure, the points and the CTAs. */
@@ -1287,6 +1288,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* The CTAs in the first screen: the audience line goes under them; on desktops up to 940px high the card
    tightens, and again up to 800px. */
 @media (min-width: 961px) {
+  .tp-pc__go { gap: 10px; padding-inline: 5px 18px; }   /* with the wider gap the link still fits beside it */
+  .tp-pc__cta { margin-inline-end: -16px; }
   .tp-pc__who { order: 1; margin-top: 14px; }
   .tp-pc__lead { gap: 16px; }
   .tp-pc__big { font-size: 84px; }
@@ -1315,10 +1318,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pc__head { max-width: 196px; }   /* the name keeps its two lines, clear of the art */
   .tp-pc__art { width: 160px; height: 133px; }
   .tp-pc__art--temple { width: 150px; height: 145px; }
-  .tp-pc__lead { margin-top: 16px; padding-top: 14px; gap: 10px; }
+  .tp-pc__lead { margin-top: 16px; padding-top: 12px; gap: 10px; }
+  .tp-pc__cta { padding-top: 12px; }
   .tp-pc__big { font-size: 64px; }
   .tp-pc__sub { font-size: 15px; }
-  .tp-pc__pts { gap: 5px; }
+  .tp-pc__pts { margin-top: 12px; gap: 5px; }
 }
 /* phones: the card scaled to the swiper, the CTAs in the first screen like before */
 @media (max-width: 640px) {
@@ -1774,12 +1778,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 
 /* ---- Who it's for → Why partners choose (TradeQuo_Partner_Flow design) ------------------------------
-   #pf-flow is 340vh tall, like the landing's flip track; #pf-stick holds the scene on screen while it plays (startWhoFlow in landing.js
+   #pf-flow is 326vh tall (the landing's flip track is 340vh: here the perks come in a wheel step sooner); #pf-stick holds the scene on screen while it plays (startWhoFlow in landing.js
    maps the scroll to q 0 → 1). The persona block's 3D platform (assets/js/partner-flow.js) stands up;
    #pf-flip takes over with its snapshot, grows to the full screen and turns into the dark perks section,
    where the six .pf-perk cards are dealt in a fan. Below 900px and with reduced motion nothing is pinned:
    the persona block stays put and the perks section moves into #pf-perks-host, its cards in a sideways row. */
-#pf-flow { position: relative; height: 340vh; }
+#pf-flow { position: relative; height: 326vh; }
 #pf-stick { position: sticky; top: 0; height: 100vh; overflow: hidden; perspective: 1700px; display: flex; align-items: center; justify-content: center; }
 #pf-who-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; display: flex; justify-content: center; transform-origin: 50% 50%; }
 .pf-who { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; overflow: hidden;
@@ -2658,7 +2662,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=d6026249a8" defer></script>
+<script src="../../assets/js/landing.js?v=303c5480a0" defer></script>
 <script src="../../assets/js/plan.js?v=5c5b01428f" defer></script>
 </body>
 </html>
