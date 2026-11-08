@@ -1540,53 +1540,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* =============================================================================
    Commission plan page
    ============================================================================= */
-/* payout timeline */
-/* payout process: a red pulse runs step to step (plan.js sets --p and .is-on / .is-done) */
-.tp-timeline { --p: 0; position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: clamp(44px, 5vw, 68px); }
-.tp-tl-track { position: absolute; top: 31px; left: 12.5%; right: 12.5%; height: 2px; border-radius: 2px; background: rgba(255,255,255,.12); }
-.tp-tl-fill { position: absolute; inset: 0 auto 0 0; width: calc(var(--p) * 100%); border-radius: inherit; background: linear-gradient(90deg, rgba(231,19,27,.25), #e7131b); box-shadow: 0 0 14px rgba(231,19,27,.7); transition: width .9s cubic-bezier(.65,0,.35,1); }
-.tp-tl-fill::after { content: ''; position: absolute; right: -5px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgba(231,19,27,.35), 0 0 18px 4px rgba(231,19,27,.9); opacity: calc(var(--p) * 40); }
-.tp-timeline.is-reset .tp-tl-fill { transition: width .45s ease, opacity .45s ease; opacity: 0; }
-.tp-tl { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
-.tp-tl__dot { position: relative; display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; color: rgba(255,255,255,.55); background: #141416; border: 1px solid rgba(255,255,255,.14); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 10px 24px -12px rgba(0,0,0,.8); transition: background .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease, transform .5s cubic-bezier(.3,1.4,.5,1); }
-.tp-tl__dot::after { content: ''; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid rgba(231,19,27,.7); opacity: 0; pointer-events: none; }
-.tp-tl__n { margin-top: 6px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: rgba(255,255,255,.35); transition: color .5s ease; }
-.tp-tl h3 { margin: 0; font-size: 18px; letter-spacing: -.02em; font-weight: 700; color: rgba(255,255,255,.6); transition: color .5s ease; }
-.tp-tl p { margin: 0; max-width: 24ch; font-size: 14px; line-height: 1.5; color: #77797f; transition: color .5s ease; }
-/* passed */
-.tp-tl.is-done .tp-tl__dot { color: #ff4d53; border-color: rgba(231,19,27,.55); }
-.tp-tl.is-done .tp-tl__n { color: rgba(231,19,27,.8); }
-.tp-tl.is-done h3 { color: rgba(255,255,255,.85); }
-.tp-tl.is-done p { color: #a7a9ae; }
-/* current */
-.tp-tl.is-on .tp-tl__dot { color: #fff; background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b30e14 100%); border-color: rgba(255,255,255,.35); box-shadow: 0 0 0 7px rgba(231,19,27,.16), 0 0 36px rgba(231,19,27,.65); transform: scale(1.08); }
-.tp-tl.is-on .tp-tl__dot::after { animation: tpRing 1.4s ease-out infinite; }
-.tp-tl.is-on .tp-tl__n { color: #ff4d53; }
-.tp-tl.is-on h3 { color: #fff; }
-.tp-tl.is-on p { color: #d5d6d9; }
-@keyframes tpRing { from { transform: scale(1); opacity: .9; } to { transform: scale(1.7); opacity: 0; } }
-/* step 1: candles breathe */
-.tp-tl__candle { transform-box: fill-box; transform-origin: center bottom; }
-.tp-tl.is-on .tp-tl__candle { animation: tpCandle .8s ease-in-out infinite alternate; }
-.tp-tl.is-on .tp-tl__candle--b { animation-delay: .4s; }
-@keyframes tpCandle { from { transform: scaleY(.6); } to { transform: scaleY(1.15); } }
-/* step 2: commission ticks float up */
-.tp-tl__float { position: absolute; left: 50%; bottom: 100%; width: 0; pointer-events: none; }
-.tp-tl__float i { position: absolute; left: 0; bottom: 0; transform: translateX(-50%); font-style: normal; font-family: 'Fragment Mono', monospace; font-size: 11px; color: #ff6b70; white-space: nowrap; opacity: 0; }
-.tp-tl.is-on .tp-tl__float i { animation: tpTick 1.2s ease-out infinite; }
-.tp-tl.is-on .tp-tl__float i:nth-child(2) { animation-delay: .4s; margin-left: -14px; }
-.tp-tl.is-on .tp-tl__float i:nth-child(3) { animation-delay: .8s; margin-left: 14px; }
-@keyframes tpTick { 0% { opacity: 0; transform: translate(-50%, 6px); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -30px); } }
-/* step 3: the clock runs to midnight */
-.tp-tl__hand { transform-box: view-box; transform-origin: 12px 12px; }
-.tp-tl.is-on .tp-tl__hand--m { animation: tpSpin .6s linear infinite; }
-.tp-tl.is-on .tp-tl__hand--h { animation: tpSpin 3.6s linear infinite; }
-@keyframes tpSpin { to { transform: rotate(360deg); } }
-/* step 4: the coin drops into the wallet */
-.tp-tl__coin { transform-box: fill-box; transform-origin: center; }
-.tp-tl.is-on .tp-tl__coin { animation: tpCoin .9s cubic-bezier(.3,1.5,.5,1) infinite; }
-@keyframes tpCoin { 0% { transform: translateY(-9px); opacity: 0; } 40% { opacity: 1; } 70%, 100% { transform: none; opacity: 1; } }
-
 /* perks */
 .tp-perkgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 4.5vw, 60px); }
 .tp-perk { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 18px; padding: 18px 22px 18px 14px; min-height: 148px; }
@@ -1602,20 +1555,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-programs { grid-template-columns: minmax(0, 1fr); max-width: 560px; margin: 0 auto; }
   .tp-faq { grid-template-columns: minmax(0, 1fr); }
   .tp-faq__side { position: static; }
-  .tp-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 34px; }
-  .tp-tl-track { display: none; }
 }
 @media (max-width: 640px) {
   .tp-sec { padding-top: 48px; padding-bottom: 48px; }
   .tp-hero { padding-top: 8px; }
   .tp-stage { padding: 12px; border-radius: 26px; }
   .tp-perkgrid { grid-template-columns: minmax(0, 1fr); }
-  .tp-timeline { grid-template-columns: minmax(0, 1fr); }
-  .tp-tl { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: center; text-align: start; }
-  .tp-tl__dot { grid-row: span 3; }
-  .tp-tl__n { margin: 0; }
-  .tp-tl h3 { margin: 0; }
-  .tp-tl p { max-width: none; }
   .tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
   .tp-perk img { width: 88px; height: 88px; }
   .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
@@ -1629,12 +1574,10 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-join .tp-actions { align-items: center; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tp-dark, .tp-glass, .tp-btn, .tp-btn svg, .tp-tl-fill, .tp-tl__dot { transition: none; }
+  .tp-dark, .tp-glass, .tp-btn, .tp-btn svg { transition: none; }
 }
 
 /* ---- right-to-left ---------------------------------------------------------------- */
-/* the red stretch of the payout line sits under "settled at 00:00" (third step from the right) */
-[dir="rtl"] .tp-tl-track { transform: scaleX(-1); }
 
 /* ---- 3D call-to-action button (CTA_Trust_Dome design) ----
    --ch eases 0→1 on hover, --cd on press, --ctx/--cty lean the button toward the pointer
@@ -1775,31 +1718,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   background: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.3); }
   background: rgba(255,255,255,.66); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); box-shadow: inset 0 1px 0 rgba(255,255,255,.9); }
 
-/* How to get them: four numbered steps on one red-tinted line (vertical on phones) */
-.tp-get { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; max-width: 1080px; margin: clamp(32px, 4.5vw, 52px) auto 0; padding: 0; list-style: none; }
-.tp-get::before { content: ''; position: absolute; top: 22px; left: 12.5%; right: 12.5%; height: 2px; border-radius: 2px;
-  background: linear-gradient(90deg, rgba(231,19,27,.15), #e7131b 50%, rgba(231,19,27,.15)); }
-.tp-get__step { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
-.tp-get__n { position: relative; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; margin-bottom: 8px; border-radius: 50%;
-  background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font: 13px 'Fragment Mono', monospace; letter-spacing: .06em;
-  box-shadow: 0 0 0 6px #fff, inset 0 1px 0 rgba(255,255,255,.14), 0 10px 20px -10px rgba(10,10,10,.6); }
-.tp-get__step:last-child .tp-get__n { background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b30e14 100%); }
-.tp-get__step h3 { margin: 0; font-size: 19px; line-height: 1.2; letter-spacing: -.025em; font-weight: 700; text-wrap: balance; }
-.tp-get__step p { margin: 0; max-width: 30ch; font-size: 14.5px; line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
-@media (max-width: 960px) {
-  .tp-get { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 34px; }
-  .tp-get::before { display: none; }
-}
-@media (max-width: 560px) {
-  .tp-get { grid-template-columns: minmax(0, 1fr); row-gap: 22px; }
-  .tp-get::before { display: block; top: 23px; bottom: 23px; left: 22px; right: auto; width: 2px; height: auto;
-    background: linear-gradient(180deg, rgba(231,19,27,.15), #e7131b 50%, rgba(231,19,27,.15)); }
-  [dir="rtl"] .tp-get::before { left: auto; right: 22px; }
-  .tp-get__step { display: grid; grid-template-columns: 46px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; text-align: start; }
-  .tp-get__n { grid-row: 1 / span 2; margin: 0; }
-  .tp-get__step h3 { padding-top: 10px; font-size: 17.5px; }
-  .tp-get__step p { max-width: none; }
-}
 
 /* ---- Who it's for → Why partners choose (TradeQuo_Partner_Flow design) ------------------------------
    #pf-flow is 326vh tall (the landing's flip track is 340vh: here the perks come in a wheel step sooner); #pf-stick holds the scene on screen while it plays (startWhoFlow in landing.js
@@ -2321,6 +2239,227 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-dp__txt h3 { font-size: 20px; }
   .tp-dp__txt p { font-size: 15px; }
 }
+
+/* ---- Marketing Tools: How to get them (Process_Ignition_Section) -------------------------------------------------
+   A dark panel. Over four glass cards runs a rail with a node per card; startSteppers (landing.js) lights one step
+   after another: the rail fills to its node (--k), the node turns white in a red ring, the ones passed turn red, and
+   the card lifts with a red rim and glow. The glow is a layer that fades in (opacity only). The drawings in the cards
+   are HTML (.tp-igm1–4), always left-to-right. */
+.tp-ig { position: relative; overflow: hidden; isolation: isolate; box-sizing: border-box; max-width: 1240px; margin: 0 auto;
+  padding: clamp(56px, 7.7vw, 96px) clamp(20px, 5.2vw, 64px) clamp(60px, 8.4vw, 104px); border-radius: 28px; background: #0b0b0c; color: #fff;
+  display: flex; flex-direction: column; align-items: center; gap: clamp(44px, 5.8vw, 72px); }
+.tp-ig__edge { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); }
+.tp-ig__glow { position: absolute; z-index: -1; left: 10%; right: 10%; bottom: -220px; height: 360px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.28), rgba(231,19,27,0)); pointer-events: none; }
+.tp-ig__title { color: #fff; text-align: center; }
+.tp-ig__body { position: relative; width: 100%; }
+/* the rail runs between the centres of the first and last columns (four columns, 16px gaps) */
+.tp-ig__base, .tp-ig__fill { position: absolute; inset-inline-start: calc(12.5% - 6px); }
+.tp-ig__base { top: 9px; width: calc(75% + 12px); height: 2px; border-radius: 1px; background: rgba(255,255,255,.12); }
+.tp-ig__fill { top: 8px; width: calc((75% + 12px) * var(--k, 0)); height: 4px; border-radius: 2px; background: linear-gradient(90deg, #b70e15, #e7131b 60%, #ff4148);
+  box-shadow: 0 0 14px rgba(231,19,27,.9), 0 0 3px rgba(255,120,124,.9); transition: width .9s cubic-bezier(.6,0,.3,1); }
+[dir="rtl"] .tp-ig__fill { background: linear-gradient(270deg, #b70e15, #e7131b 60%, #ff4148); }
+.tp-ig__steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.tp-ig__step { position: relative; isolation: isolate; display: flex; flex-direction: column; padding-top: 56px; }
+.tp-ig__node { position: absolute; left: 50%; top: 0; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: #1a1b1e; box-shadow: inset 0 0 0 2px rgba(255,255,255,.22);
+  transition: background-color .5s, box-shadow .5s; }
+.tp-ig__step.is-done .tp-ig__node { background: #e7131b; box-shadow: 0 0 0 4px rgba(231,19,27,.22); }
+.tp-ig__step.is-on .tp-ig__node { background: #fff; box-shadow: 0 0 0 4px #e7131b, 0 0 22px 6px rgba(231,19,27,.8); }
+/* the card's red shadow, under it, fades in with it */
+.tp-ig__step::after { content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: 56px; bottom: 0; border-radius: 22px; box-shadow: 0 30px 60px -20px rgba(231,19,27,.6);
+  opacity: 0; transition: opacity .7s, transform .7s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.tp-ig__card { position: relative; flex: 1; overflow: hidden; box-sizing: border-box; min-height: 300px; display: flex; flex-direction: column; gap: 20px; padding: 30px 28px 34px; border-radius: 22px;
+  background: linear-gradient(170deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(255,255,255,.06);
+  transition: transform .7s cubic-bezier(.2,.8,.2,1); }
+.tp-ig__card::before { content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity .7s; pointer-events: none;
+  background: linear-gradient(90deg, transparent, #ff4148, transparent) 50% 0 / 76% 1px no-repeat, radial-gradient(80% 110px at 50% calc(100% + 30px), rgba(231,19,27,.5), rgba(231,19,27,0)),
+    linear-gradient(170deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 0 0 1px rgba(231,19,27,.55); }
+.tp-ig__step.is-on .tp-ig__card { transform: translateY(-8px); }
+.tp-ig__step.is-on .tp-ig__card::before, .tp-ig__step.is-on::after { opacity: 1; }
+.tp-ig__step.is-on::after { transform: translateY(-8px); }
+.tp-ig__n { position: absolute; z-index: 1; top: 24px; inset-inline-end: 24px; font-family: 'Fragment Mono', monospace; font-size: 13px; letter-spacing: .1em; color: #8a8d94; transition: color .7s; }
+.tp-ig__step.is-on .tp-ig__n { color: #ff4148; }
+.tp-ig__art { position: relative; height: 150px; display: flex; align-items: center; justify-content: center; direction: ltr; opacity: .5; transition: opacity .7s; }
+.tp-ig__art > * { flex: none; }   /* keep the drawing's own size; a narrow card scales it (below) instead of squeezing it */
+.tp-ig__step.is-on .tp-ig__art, .tp-ig__step.is-done .tp-ig__art { opacity: 1; }
+.tp-ig__txt { position: relative; margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.tp-ig__txt h3 { margin: 0; font-weight: 700; font-size: 22px; line-height: 1.15; letter-spacing: -.02em; text-wrap: balance; }
+.tp-ig__txt p { margin: 0; font-size: 15px; line-height: 1.5; color: #b4b7bd; text-wrap: pretty; }
+/* the drawings */
+.tp-igm1 { position: relative; width: 184px; box-sizing: border-box; padding: 14px; display: flex; flex-direction: column; gap: 8px; border-radius: 14px; transform: rotate(-4deg);
+  background: linear-gradient(160deg, #fff, #e6e8eb); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(255,255,255,.4), 0 20px 30px -14px rgba(0,0,0,.85); }
+.tp-igm1__h { display: flex; align-items: center; gap: 8px; }
+.tp-igm1__h i:first-child { width: 18px; height: 18px; border-radius: 5px; background: #0f1012; }
+.tp-igm1__h i:last-child { width: 70px; height: 6px; border-radius: 3px; background: #0f1012; }
+.tp-igm1__f { height: 22px; box-sizing: border-box; display: flex; align-items: center; gap: 3px; padding: 0 8px; border-radius: 7px; background: #f4f5f6; box-shadow: inset 0 0 0 1px #dadce0; }
+.tp-igm1__f i { width: 62px; height: 5px; border-radius: 3px; background: #b4b7bd; }
+.tp-igm1__f.is-focus { background: #fff; box-shadow: inset 0 0 0 1.5px #e7131b; }
+.tp-igm1__f.is-focus i { width: 40px; background: #55585f; }
+.tp-igm1__f b { width: 1.5px; height: 12px; background: #e7131b; }
+.tp-igm1__btn { height: 24px; display: flex; align-items: center; justify-content: center; padding: 0 8px; border-radius: 999px; background: #e7131b; box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+  font-size: 11px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; }
+.tp-igm1__chip { position: absolute; left: -22px; top: -14px; height: 26px; display: flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; background: #0f1012; transform: rotate(4deg);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(255,255,255,.12), 0 8px 14px -6px rgba(0,0,0,.8); font-family: 'Fragment Mono', monospace; font-size: 10px; color: #fff; white-space: nowrap; unicode-bidi: plaintext; }
+.tp-igm1__chip em { font-style: normal; color: #ff4148; }
+.tp-igm2 { position: relative; width: 200px; height: 130px; }
+.tp-igm2__back { position: absolute; left: 0; top: 18px; width: 120px; height: 90px; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 6px; border-radius: 12px; transform: rotate(-10deg);
+  background: linear-gradient(160deg, #2a2c31, #0f1012); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 0 0 1px rgba(255,255,255,.08), 0 16px 24px -12px rgba(0,0,0,.8); }
+.tp-igm2__back i { height: 6px; border-radius: 3px; }
+.tp-igm2__back i:nth-child(1) { width: 50px; background: #5e636b; }
+.tp-igm2__back i:nth-child(2) { width: 34px; background: #3a3d43; }
+.tp-igm2__back i:nth-child(3) { margin-top: auto; width: 46px; height: 14px; border-radius: 999px; background: #e7131b; }
+.tp-igm2__front { position: absolute; left: 64px; top: 0; width: 132px; height: 112px; box-sizing: border-box; padding: 10px; display: flex; flex-direction: column; gap: 7px; border-radius: 12px; transform: rotate(5deg);
+  background: linear-gradient(160deg, #fff, #e6e8eb); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(255,255,255,.4), 0 20px 30px -14px rgba(0,0,0,.85); }
+.tp-igm2__img { position: relative; overflow: hidden; height: 46px; border-radius: 7px; background: linear-gradient(150deg, #0f1012, #3a3c42); }
+.tp-igm2__img::after { content: ''; position: absolute; right: -10px; bottom: -14px; width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #ff5a60, #e7131b 55%, #a50c12); }
+.tp-igm2__t { width: 76px; height: 6px; border-radius: 3px; background: #0f1012; }
+.tp-igm2__row { display: flex; justify-content: space-between; align-items: center; }
+.tp-igm2__row i:first-child { width: 40px; height: 5px; border-radius: 3px; background: #b4b7bd; }
+.tp-igm2__row i:last-child { width: 38px; height: 14px; border-radius: 999px; background: #e7131b; }
+.tp-igm3 { display: grid; grid-template-columns: repeat(2, 64px); gap: 10px; transform: rotate(-3deg); }
+.tp-igm3 > span { position: relative; height: 52px; box-sizing: border-box; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.tp-igm3__v { background: #0f1012; box-shadow: 0 0 0 2px #e7131b, 0 0 18px rgba(231,19,27,.55), 0 14px 20px -10px rgba(0,0,0,.8); }
+.tp-igm3__v::before { content: ''; margin-left: 3px; border-left: 13px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.tp-igm3__v b { position: absolute; right: -8px; top: -8px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #e7131b; box-shadow: 0 0 0 2px #0b0b0c;
+  font-size: 11px; font-weight: 700; color: #fff; }
+.tp-igm3__i, .tp-igm3__g { background: linear-gradient(160deg, #fff, #e6e8eb); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(255,255,255,.4), 0 20px 30px -14px rgba(0,0,0,.85); }
+.tp-igm3 > .tp-igm3__i { align-items: flex-end; gap: 3px; padding-bottom: 12px; }
+.tp-igm3__i::before { content: ''; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 16px solid #55585f; }
+.tp-igm3__i::after { content: ''; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 11px solid #8a8d94; }
+.tp-igm3__g { font-weight: 800; font-size: 16px; letter-spacing: -.02em; color: #0f1012; }
+.tp-igm3__a { background: linear-gradient(160deg, #2a2c31, #0f1012); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 0 0 1px rgba(255,255,255,.08); font-weight: 700; font-size: 18px; color: #fff; }
+.tp-igm4 { width: 196px; display: flex; flex-direction: column; gap: 12px; }
+.tp-igm4__link { height: 38px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 5px 0 14px; border-radius: 999px; color: #0f1012;
+  background: linear-gradient(160deg, #fff, #e6e8eb); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(255,255,255,.4), 0 20px 30px -14px rgba(0,0,0,.85); }
+.tp-igm4__link svg { flex: none; }
+.tp-igm4__link i { flex: 0 1 64px; min-width: 0; height: 5px; margin-inline-end: auto; border-radius: 3px; background: #b4b7bd; }
+.tp-igm4__link b { flex: none; height: 28px; display: flex; align-items: center; padding: 0 12px; border-radius: 999px; background: #e7131b; box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+  font-size: 11px; font-weight: 700; color: #fff; white-space: nowrap; }
+.tp-igm4__bars { height: 62px; display: flex; align-items: flex-end; gap: 6px; padding: 0 4px; }
+.tp-igm4__bars i { flex: 1; border-radius: 3px; }
+.tp-igm4__bars i:nth-child(1) { height: 26%; background: #3a3d43; }
+.tp-igm4__bars i:nth-child(2) { height: 38%; background: #3a3d43; }
+.tp-igm4__bars i:nth-child(3) { height: 34%; background: #5e636b; }
+.tp-igm4__bars i:nth-child(4) { height: 55%; background: #8a8d94; }
+.tp-igm4__bars i:nth-child(5) { height: 70%; background: #c9cbd0; }
+.tp-igm4__bars i:nth-child(6) { height: 100%; background: linear-gradient(180deg, #ff5a60, #e7131b); box-shadow: 0 0 14px rgba(231,19,27,.7); }
+@media (max-width: 1180px) {
+  .tp-ig__card { padding: 26px 20px 30px; }
+  .tp-ig__art > * { scale: .78; }
+  .tp-ig__txt h3 { font-size: 20px; }
+  .tp-ig__txt p { font-size: 14.5px; }
+}
+/* tablets: two by two, no rail */
+@media (max-width: 960px) {
+  .tp-ig__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .tp-ig__base, .tp-ig__fill, .tp-ig__node { display: none; }
+  .tp-ig__step { padding-top: 8px; }
+  .tp-ig__step::after { top: 8px; }
+  .tp-ig__card { min-height: 0; }
+  .tp-ig__art > * { scale: 1; }
+}
+/* phones: one card per row, the drawing small on the side of its text */
+@media (max-width: 560px) {
+  .tp-ig { border-radius: 24px; }
+  .tp-ig__steps { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .tp-ig__step { padding-top: 4px; }
+  .tp-ig__step::after { top: 4px; }
+  .tp-ig__step.is-on .tp-ig__card, .tp-ig__step.is-on::after { transform: translateY(-4px); }
+  .tp-ig__card { flex-direction: row; align-items: center; gap: 14px; padding: 16px 16px 16px 10px; border-radius: 18px; }
+  [dir="rtl"] .tp-ig__card { padding: 16px 10px 16px 16px; }
+  .tp-ig__step::after { border-radius: 18px; }
+  .tp-ig__n { top: 14px; inset-inline-end: 14px; font-size: 11px; }
+  .tp-ig__art { flex: none; width: 100px; height: 96px; }
+  .tp-ig__art > * { scale: .47; }
+  .tp-ig__txt { margin: 0; gap: 4px; padding-inline-end: 18px; }
+  .tp-ig__txt h3 { font-size: 17px; }
+  .tp-ig__txt p { font-size: 14px; line-height: 1.45; }
+}
+@media (prefers-reduced-motion: reduce) { .tp-ig__fill, .tp-ig__node, .tp-ig__card, .tp-ig__card::before, .tp-ig__step::after, .tp-ig__art, .tp-ig__n { transition: none; } }
+
+/* ---- partner-terms/: Paid every day (Paid_Daily_Silver) ------------------------------------------------------------
+   A silver panel with a white glow on top and fine vertical lines fading in at the bottom. startSteppers
+   (landing.js) lights one step after another: a silver rail with a moving sheen fills to it (--k), its ball swells
+   into a polished silver sphere, its icon turns red and plays once (candles, a pop, a clock hand), and a chip floats up
+   over it. The balls are solid (no backdrop blur, it would cost on every scroll for no visible difference here). */
+.tp-pds { position: relative; overflow: hidden; isolation: isolate; box-sizing: border-box; max-width: 1240px; margin: 0 auto;
+  padding: clamp(56px, 7.7vw, 96px) clamp(20px, 4.5vw, 56px) clamp(60px, 8vw, 100px); border-radius: 32px;
+  display: flex; flex-direction: column; align-items: center; gap: clamp(48px, 5.8vw, 72px);
+  background: linear-gradient(180deg, #fbfbfc 0%, #ecedef 45%, #dcdee2 100%); box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(18,22,30,.06), 0 40px 80px -50px rgba(18,22,30,.45); }
+.tp-pds__sky { position: absolute; z-index: -1; left: 50%; top: -260px; width: 900px; height: 480px; margin-left: -450px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.95), rgba(255,255,255,0)); pointer-events: none; }
+.tp-pds__lines { position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 45%; pointer-events: none; background: repeating-linear-gradient(90deg, rgba(255,255,255,.35) 0 1px, transparent 1px 3px);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000); mask-image: linear-gradient(180deg, transparent, #000); }
+.tp-pds .tp-sub { color: #4a4d54; }
+.tp-pds__track { position: relative; width: 100%; }
+/* the rail runs between the centres of the first and last columns (four columns, 24px gaps) */
+.tp-pds__base, .tp-pds__fill { position: absolute; inset-inline-start: calc(12.5% - 9px); }
+.tp-pds__base { top: 37px; width: calc(75% + 18px); height: 2px; border-radius: 1px; background: rgba(18,22,30,.12); box-shadow: 0 1px 0 #fff; }
+.tp-pds__fill { top: 35px; width: calc((75% + 18px) * var(--k, 0)); height: 6px; overflow: hidden; border-radius: 3px; background: linear-gradient(180deg, #fff 0%, #b9bdc4 45%, #6e737b 100%);
+  box-shadow: 0 2px 5px rgba(18,22,30,.3), inset 0 0 0 .5px rgba(18,22,30,.2); transition: width 1s cubic-bezier(.6,0,.3,1); }
+.tp-pds__fill::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 240px; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.95) 50%, rgba(255,255,255,0));
+  transform: translateX(-240px); animation: tpPdsSheen 2.4s linear infinite; }
+@keyframes tpPdsSheen { to { transform: translateX(1000px); } }
+.tp-pds:not(.is-live) .tp-pds__fill::after { animation-play-state: paused; }
+.tp-pds__steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.tp-pds__step { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.tp-pds__orb { position: relative; width: 76px; height: 76px; flex: none; }
+.tp-pds__ball { position: absolute; inset: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #8a8d94;
+  background: linear-gradient(160deg, #fff, #eef0f2); box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.9), 0 0 0 1px rgba(18,22,30,.08), 0 14px 24px -14px rgba(18,22,30,.35);
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .6s, color .6s; }
+/* the polished sphere of the lit step fades in over the glass */
+.tp-pds__ball::before { content: ''; position: absolute; inset: 0; border-radius: 50%; opacity: 0; transition: opacity .6s;
+  background: radial-gradient(circle at 34% 26%, #fff 0 14%, #e9ebee 40%, #a9aeb6 78%, #7a7f87 100%); box-shadow: inset 0 -3px 6px rgba(18,22,30,.25); }
+.tp-pds__ic { position: relative; display: flex; }
+.tp-pds__step.is-done .tp-pds__ball { color: #0f1012; box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.9), 0 0 0 4px rgba(255,255,255,.55), 0 0 0 5px rgba(18,22,30,.1), 0 14px 24px -14px rgba(18,22,30,.4); }
+.tp-pds__step.is-on .tp-pds__ball { color: #e7131b; transform: scale(1.14); box-shadow: 0 0 0 8px rgba(255,255,255,.6), 0 0 0 9px rgba(18,22,30,.08), 0 22px 36px -12px rgba(18,22,30,.55); }
+.tp-pds__step.is-on .tp-pds__ball::before { opacity: 1; }
+.tp-pds__step.is-on .tp-pds__ic { animation: tpPdsPop .6s cubic-bezier(.2,.8,.2,1); }
+.tp-pds__ca, .tp-pds__cb { transform-box: view-box; }
+.tp-pds__ca { transform-origin: 8px 12px; }
+.tp-pds__cb { transform-origin: 16px 12px; }
+.tp-pds__step.is-on .tp-pds__ca { animation: tpPdsCandle .9s ease-in-out 2; }
+.tp-pds__step.is-on .tp-pds__cb { animation: tpPdsCandle .9s ease-in-out .45s 2; }
+.tp-pds__hand { transform-box: view-box; transform-origin: 12px 12px; }
+.tp-pds__step.is-on .tp-pds__hand { animation: tpPdsSpin 1.2s cubic-bezier(.6,0,.3,1); }
+.tp-pds__chip { position: absolute; z-index: 1; left: 50%; top: -40px; height: 26px; display: flex; align-items: center; padding: 0 11px; border-radius: 999px; white-space: nowrap;
+  background: linear-gradient(160deg, rgba(255,255,255,.95), rgba(255,255,255,.75)); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.08), 0 8px 16px -8px rgba(18,22,30,.4);
+  font-family: 'Fragment Mono', monospace; font-size: 12px; color: #0f1012; opacity: 0; transform: translate(var(--cx, -50%), 10px); pointer-events: none; }
+.tp-pds__chip.is-red { color: #e7131b; }
+.tp-pds__step.is-on .tp-pds__chip { animation: tpPdsFloat 1.8s ease-out forwards; }
+@keyframes tpPdsFloat { 0% { opacity: 0; transform: translate(var(--cx, -50%), 10px); } 18% { opacity: 1; transform: translate(var(--cx, -50%), 0); } 75% { opacity: 1; transform: translate(var(--cx, -50%), -8px); } 100% { opacity: 0; transform: translate(var(--cx, -50%), -16px); } }
+@keyframes tpPdsPop { 0% { transform: scale(.7); } 55% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes tpPdsSpin { to { transform: rotate(360deg); } }
+@keyframes tpPdsCandle { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.55); } }
+.tp-pds__n { margin-top: 26px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .22em; color: #8a8d94; transition: color .6s; }
+.tp-pds__step h3 { margin: 10px 0 0; font-weight: 700; font-size: 21px; line-height: 1.2; letter-spacing: -.02em; color: #6a6d74; transition: color .6s; text-wrap: balance; }
+.tp-pds__step p { margin: 10px 0 0; max-width: 230px; font-size: 15px; line-height: 1.5; color: #8a8d94; transition: color .6s; text-wrap: pretty; }
+.tp-pds__step.is-on .tp-pds__n { color: #e7131b; }
+.tp-pds__step.is-on h3, .tp-pds__step.is-done h3 { color: #0a0a0a; }
+.tp-pds__step.is-on p, .tp-pds__step.is-done p { color: #4a4d54; }
+/* tablets: two by two (room over each ball for its chip), no rail */
+@media (max-width: 960px) {
+  .tp-pds__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 56px; }
+  .tp-pds__base, .tp-pds__fill { display: none; }
+  .tp-pds__track { padding-top: 34px; }
+}
+/* phones: one step per row, the ball beside its text; the chip floats up over the ball */
+@media (max-width: 560px) {
+  .tp-pds { border-radius: 24px; }
+  .tp-pds__track { padding-top: 30px; }
+  .tp-pds__steps { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
+  .tp-pds__step { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 18px; align-items: start; text-align: start; }
+  .tp-pds__orb { grid-row: 1 / span 3; width: 64px; height: 64px; }
+  .tp-pds__chip { --cx: 0%; top: -34px; left: -4px; }   /* from the ball's edge, not its centre: long chips stay inside the panel */
+  [dir="rtl"] .tp-pds__chip { left: auto; right: -4px; }
+  .tp-pds__n { margin-top: 2px; }
+  .tp-pds__step h3 { margin-top: 6px; font-size: 18px; }
+  .tp-pds__step p { margin-top: 6px; max-width: none; font-size: 14.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tp-pds__fill, .tp-pds__ball, .tp-pds__ball::before, .tp-pds__n, .tp-pds__step h3, .tp-pds__step p { transition: none; }
+  .tp-pds__fill::after, .tp-pds__step.is-on .tp-pds__ic, .tp-pds__step.is-on .tp-pds__ca, .tp-pds__step.is-on .tp-pds__cb, .tp-pds__step.is-on .tp-pds__hand { animation: none; }
+  .tp-pds__step.is-on .tp-pds__chip { animation: none; opacity: 1; transform: translate(var(--cx, -50%), 0); }
+}
 </style>
 </head>
 <body>
@@ -2504,18 +2643,50 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       </div>
     </section>
 
-    <!-- How to get them: four steps from the Client Portal to the audience (step 1 reuses the How it works copy) -->
+    <!-- How to get them (Process_Ignition_Section): a dark panel; a red rail runs node to node and the step it reaches
+         lifts and glows (startSteppers in landing.js, only while on screen). The drawings in the cards are decoration. -->
     <section id="get" class="tp-sec" data-screen-label="How to get materials">
-      <div class="tp-wrap">
-        <div class="tp-head">
-          <h2 class="tp-h2">Dalla tua Area clienti <span style="color: #e7131b;">al tuo pubblico</span></h2>
+      <div class="tp-ig" data-stepper="" data-every="1600">
+        <span class="tp-ig__edge" aria-hidden="true"></span>
+        <span class="tp-ig__glow" aria-hidden="true"></span>
+        <h2 class="tp-h2 tp-ig__title">Dalla tua Area clienti <span style="color: #e7131b;">al tuo pubblico</span></h2>
+        <div class="tp-ig__body">
+          <span class="tp-ig__base" aria-hidden="true"></span><span class="tp-ig__fill" aria-hidden="true"></span>
+          <ol class="tp-ig__steps">
+            <li class="tp-ig__step" data-step="">
+              <span class="tp-ig__node" aria-hidden="true"></span>
+              <div class="tp-ig__card">
+                <span class="tp-ig__n" aria-hidden="true">01</span>
+                <div class="tp-ig__art" aria-hidden="true"><div class="tp-igm1"><span class="tp-igm1__h"><i></i><i></i></span><span class="tp-igm1__f"><i></i></span><span class="tp-igm1__f is-focus"><i></i><b></b></span><span class="tp-igm1__btn">Candidati</span><span class="tp-igm1__chip"><em>✓</em>24 H</span></div></div>
+                <div class="tp-ig__txt"><h3>Candidati al programma IB</h3><p>Invia la richiesta dall’Area clienti. Esaminiamo ogni candidatura entro 24 ore.</p></div>
+              </div>
+            </li>
+            <li class="tp-ig__step" data-step="">
+              <span class="tp-ig__node" aria-hidden="true"></span>
+              <div class="tp-ig__card">
+                <span class="tp-ig__n" aria-hidden="true">02</span>
+                <div class="tp-ig__art" aria-hidden="true"><div class="tp-igm2"><span class="tp-igm2__back"><i></i><i></i><i></i></span><span class="tp-igm2__front"><span class="tp-igm2__img"></span><i class="tp-igm2__t"></i><span class="tp-igm2__row"><i></i><i></i></span></span></div></div>
+                <div class="tp-ig__txt"><h3>Apri i materiali</h3><p>Trova la sezione dei materiali promozionali nella tua Area clienti.</p></div>
+              </div>
+            </li>
+            <li class="tp-ig__step" data-step="">
+              <span class="tp-ig__node" aria-hidden="true"></span>
+              <div class="tp-ig__card">
+                <span class="tp-ig__n" aria-hidden="true">03</span>
+                <div class="tp-ig__art" aria-hidden="true"><div class="tp-igm3"><span class="tp-igm3__v"><b>✓</b></span><span class="tp-igm3__i"></span><span class="tp-igm3__g">GIF</span><span class="tp-igm3__a">Aa</span></div></div>
+                <div class="tp-ig__txt"><h3>Scegli quelli giusti</h3><p>Scegli i formati adatti al tuo canale e al tuo pubblico.</p></div>
+              </div>
+            </li>
+            <li class="tp-ig__step" data-step="">
+              <span class="tp-ig__node" aria-hidden="true"></span>
+              <div class="tp-ig__card">
+                <span class="tp-ig__n" aria-hidden="true">04</span>
+                <div class="tp-ig__art" aria-hidden="true"><div class="tp-igm4"><span class="tp-igm4__link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path></svg><i></i><b>Copia</b></span><span class="tp-igm4__bars"><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div>
+                <div class="tp-ig__txt"><h3>Pubblica e monitora</h3><p>Pubblica con il tuo link partner e segui i risultati in tempo reale.</p></div>
+              </div>
+            </li>
+          </ol>
         </div>
-        <ol class="tp-get">
-          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">01</span><h3>Candidati al programma IB</h3><p>Invia la richiesta dall’Area clienti. Esaminiamo ogni candidatura entro 24 ore.</p></li>
-          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">02</span><h3>Apri i materiali</h3><p>Trova la sezione dei materiali promozionali nella tua Area clienti.</p></li>
-          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">03</span><h3>Scegli quelli giusti</h3><p>Scegli i formati adatti al tuo canale e al tuo pubblico.</p></li>
-          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">04</span><h3>Pubblica e monitora</h3><p>Pubblica con il tuo link partner e segui i risultati in tempo reale.</p></li>
-        </ol>
       </div>
     </section>
 
@@ -2767,7 +2938,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=2b0fecba28" defer></script>
+<script src="../../assets/js/landing.js?v=fea2b38578" defer></script>
 <script type="module" src="../../assets/js/mt-hero.js?v=90cd907240"></script>
 </body>
 </html>

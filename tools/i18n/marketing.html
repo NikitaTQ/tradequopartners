@@ -186,18 +186,50 @@
       </div>
     </section>
 
-    <!-- How to get them: four steps from the Client Portal to the audience (step 1 reuses the How it works copy) -->
+    <!-- How to get them (Process_Ignition_Section): a dark panel; a red rail runs node to node and the step it reaches
+         lifts and glows (startSteppers in landing.js, only while on screen). The drawings in the cards are decoration. -->
     <section id="get" class="tp-sec" data-screen-label="How to get materials">
-      <div class="tp-wrap">
-        <div class="tp-head">
-          <h2 class="tp-h2">{{mt.get.title}}</h2>
+      <div class="tp-ig" data-stepper="" data-every="1600">
+        <span class="tp-ig__edge" aria-hidden="true"></span>
+        <span class="tp-ig__glow" aria-hidden="true"></span>
+        <h2 class="tp-h2 tp-ig__title">{{mt.get.title}}</h2>
+        <div class="tp-ig__body">
+          <span class="tp-ig__base" aria-hidden="true"></span><span class="tp-ig__fill" aria-hidden="true"></span>
+          <ol class="tp-ig__steps">
+            <li class="tp-ig__step" data-step="">
+              <span class="tp-ig__node" aria-hidden="true"></span>
+              <div class="tp-ig__card">
+                <span class="tp-ig__n" aria-hidden="true">01</span>
+                <div class="tp-ig__art" aria-hidden="true"><div class="tp-igm1"><span class="tp-igm1__h"><i></i><i></i></span><span class="tp-igm1__f"><i></i></span><span class="tp-igm1__f is-focus"><i></i><b></b></span><span class="tp-igm1__btn">{{mt.ig.apply}}</span><span class="tp-igm1__chip"><em>✓</em>{{mt.ig.h24}}</span></div></div>
+                <div class="tp-ig__txt"><h3>{{how.s2.t}}</h3><p>{{how.s2.d}}</p></div>
+              </div>
+            </li>
+            <li class="tp-ig__step" data-step="">
+              <span class="tp-ig__node" aria-hidden="true"></span>
+              <div class="tp-ig__card">
+                <span class="tp-ig__n" aria-hidden="true">02</span>
+                <div class="tp-ig__art" aria-hidden="true"><div class="tp-igm2"><span class="tp-igm2__back"><i></i><i></i><i></i></span><span class="tp-igm2__front"><span class="tp-igm2__img"></span><i class="tp-igm2__t"></i><span class="tp-igm2__row"><i></i><i></i></span></span></div></div>
+                <div class="tp-ig__txt"><h3>{{mt.get.2.t}}</h3><p>{{mt.get.2.d}}</p></div>
+              </div>
+            </li>
+            <li class="tp-ig__step" data-step="">
+              <span class="tp-ig__node" aria-hidden="true"></span>
+              <div class="tp-ig__card">
+                <span class="tp-ig__n" aria-hidden="true">03</span>
+                <div class="tp-ig__art" aria-hidden="true"><div class="tp-igm3"><span class="tp-igm3__v"><b>✓</b></span><span class="tp-igm3__i"></span><span class="tp-igm3__g">GIF</span><span class="tp-igm3__a">Aa</span></div></div>
+                <div class="tp-ig__txt"><h3>{{mt.get.3.t}}</h3><p>{{mt.get.3.d}}</p></div>
+              </div>
+            </li>
+            <li class="tp-ig__step" data-step="">
+              <span class="tp-ig__node" aria-hidden="true"></span>
+              <div class="tp-ig__card">
+                <span class="tp-ig__n" aria-hidden="true">04</span>
+                <div class="tp-ig__art" aria-hidden="true"><div class="tp-igm4"><span class="tp-igm4__link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path></svg><i></i><b>{{mt.ig.copy}}</b></span><span class="tp-igm4__bars"><i></i><i></i><i></i><i></i><i></i><i></i></span></div></div>
+                <div class="tp-ig__txt"><h3>{{mt.get.4.t}}</h3><p>{{mt.get.4.d}}</p></div>
+              </div>
+            </li>
+          </ol>
         </div>
-        <ol class="tp-get">
-          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">01</span><h3>{{how.s2.t}}</h3><p>{{how.s2.d}}</p></li>
-          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">02</span><h3>{{mt.get.2.t}}</h3><p>{{mt.get.2.d}}</p></li>
-          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">03</span><h3>{{mt.get.3.t}}</h3><p>{{mt.get.3.d}}</p></li>
-          <li class="tp-get__step"><span class="tp-get__n" aria-hidden="true">04</span><h3>{{mt.get.4.t}}</h3><p>{{mt.get.4.d}}</p></li>
-        </ol>
       </div>
     </section>
 

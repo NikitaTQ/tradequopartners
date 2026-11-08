@@ -759,6 +759,32 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
   }
 
+  /* ---- processes that light up step by step: marketing-tools/ "From your portal to your audience"
+   * (Process_Ignition_Section) and partner-terms/ "Paid every day" (Paid_Daily_Silver) ------------------------------
+   * [data-stepper] holds [data-step] items. Every data-every ms the next step gets .is-on and the ones before it
+   * .is-done; --k (0…1) on the stepper sizes its rail; after the last step it starts over. It runs only while on
+   * screen (.is-live then, which also lets the CSS loops play) and starts from the first step each time it comes in.
+   * Reduced motion: the last step lit, the rail full, still. */
+  function startSteppers() {
+    $$('[data-stepper]').forEach((box) => {
+      const steps = $$('[data-step]', box), n = steps.length;
+      if (!n) return;
+      let on = 0, iv = 0;
+      const set = (k) => {
+        on = k;
+        steps.forEach((s, i) => { s.classList.toggle('is-on', i === k); s.classList.toggle('is-done', i < k); });
+        box.style.setProperty('--k', n > 1 ? (k / (n - 1)).toFixed(3) : '1');
+      };
+      if (reducedMotion()) { set(n - 1); return; }
+      set(0);
+      whileVisible(box, '0px', () => {
+        if (iv) return;
+        box.classList.add('is-live'); set(0);
+        iv = setInterval(() => set((on + 1) % n), +box.dataset.every || 1600);
+      }, () => { box.classList.remove('is-live'); clearInterval(iv); iv = 0; });
+    });
+  }
+
   /* ---- marketing-tools/: the partner dashboard in "Data and people" ticks along --------------------------
    * Every 1.6 s, while it is on screen: the bars shift left and a new one comes in red on the right, sign-ups,
    * lots and earnings creep up (the Data_and_People_Section design's numbers). Bars move by transform only.
@@ -1273,6 +1299,7 @@
   startProgSwiper();
   startFitWide();
   startLiveDash();
+  startSteppers();
   startGlass();
   startLiquidCta();
   startReviewsDrag();
