@@ -1,0 +1,55 @@
+      </div>
+      <div class="tq-pc__grid">
+        <div class="tq-pc__term">
+          <span class="tq-pc__tag">{{calc.terminal}} · <span data-calc-tid="">TQ-0000</span></span>
+          <div class="tq-pc__field">
+            <span class="tq-pc__label" id="tq-calc-lots">{{calc.lots}}</span>
+            <span class="tq-pc__val"><b data-calc-val="lots">130</b><span>{{calc.lotsUnit}}</span></span>
+            <div class="tq-pc__slider" data-calc-slider="lots">
+              <span class="tq-pc__ticks" aria-hidden="true"></span><span class="tq-pc__base" aria-hidden="true"></span>
+              <span class="tq-pc__fill" data-calc-fill="" aria-hidden="true" style="width: 12.12%;"></span>
+              <span class="tq-pc__knob" data-calc-knob="" aria-hidden="true" style="left: 12.12%;"><i></i></span>
+              <input type="range" min="10" max="1000" step="10" value="130" data-calc-range="lots" aria-labelledby="tq-calc-lots">
+            </div>
+          </div>
+          <div class="tq-pc__field">
+            <span class="tq-pc__label" id="tq-calc-traders">{{calc.traders}}</span>
+            <span class="tq-pc__val"><b data-calc-val="traders">60</b><span>{{calc.tradersUnit}}</span></span>
+            <div class="tq-pc__slider" data-calc-slider="traders">
+              <span class="tq-pc__ticks" aria-hidden="true"></span><span class="tq-pc__base" aria-hidden="true"></span>
+              <span class="tq-pc__fill" data-calc-fill="" aria-hidden="true" style="width: 19.73%;"></span>
+              <span class="tq-pc__knob" data-calc-knob="" aria-hidden="true" style="left: 19.73%;"><i></i></span>
+              <input type="range" min="1" max="300" step="1" value="60" data-calc-range="traders" aria-labelledby="tq-calc-traders">
+            </div>
+          </div>
+          <div class="tq-pc__per" data-inv-per="" role="group" aria-label="{{@inv.period}}"><span data-inv-per-thumb="" aria-hidden="true"></span><button type="button" data-per="day" aria-pressed="false">{{inv.pDay}}</button><button type="button" data-per="month" aria-pressed="true">{{inv.pMonth}}</button><button type="button" data-per="year" aria-pressed="false">{{inv.pYear}}</button></div>
+          <a class="tq-pc__go" href="{{signupHref}}"{{signupNav}}>{{nav.cta}} <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="tq-pc__printer">
+          <div class="tq-pc__slot" aria-hidden="true"><span></span></div>
+          <div class="tq-pc__paper" data-ref="inv" data-invoice="">
+            <span class="tq-pc__shade" aria-hidden="true"></span>
+            <div class="tq-pc__top">
+              <span class="tq-pc__brand"><img src="{{root}}assets/logo-mark.png" alt="" width="22" height="22"><span>TradeQuo<span style="color: #e7131b;">.</span></span></span>
+              <span class="tq-pc__doc" data-fitw="">{{inv.title}}</span>
+            </div>
+            <div class="tq-pc__meta">
+              <div><span>{{inv.no}}</span><span data-inv-no=""></span></div>
+              <div><span>{{inv.issued}}</span><span data-inv-issued=""></span></div>
+              <div><span>{{inv.period}}</span><span data-inv-period=""></span></div>
+            </div>
+            <div class="tq-pc__row"><div><span>{{inv.rebate}}</span><span>{{inv.rebateCalc}}</span></div><span data-inv-money=""></span></div>
+            <div class="tq-pc__row tq-pc__row--last"><div><span>{{inv.fees}}</span><span>{{inv.feesNote}}</span></div><span>$0.00</span></div>
+            <div class="tq-pc__total" data-inv-totals="">
+              <span data-inv-cap="" data-day="{{@inv.totDay}}" data-month="{{@inv.totMonth}}" data-year="{{@inv.totYear}}">{{inv.totMonth}}</span>
+              <span data-inv-money="" data-inv-total=""></span>
+            </div>
+            <div class="tq-pc__foot">
+              <div class="tq-pc__code"><span class="tq-pc__bars" aria-hidden="true"></span><span><span data-inv-code="">TQ 0000 060</span> · {{inv.thanks}}</span></div>
+              <svg class="tq-pc__stamp" data-inv-stamp="" aria-hidden="true" width="104" height="104" viewBox="0 0 132 132"><defs><path id="tqPcRing" d="M66,66 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"></path></defs><circle cx="66" cy="66" r="63" fill="none" stroke="#e7131b" stroke-width="2.5"></circle><circle cx="66" cy="66" r="38" fill="none" stroke="#e7131b" stroke-width="1.5"></circle><text font-family="Fragment Mono, monospace" font-size="10.5" letter-spacing="3.2" fill="#e7131b" direction="ltr" unicode-bidi="embed"><textPath href="#tqPcRing">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text><text x="66" y="73" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="800" font-size="21" fill="#e7131b" transform="rotate(-14 66 66)">PAID</text></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="tq-pc__note" data-calc-note="">{{calc.note}}</p>

@@ -426,22 +426,27 @@
   /* ---- revenue-share calculator + invoice ------------------------------------ */
   function startCalculator() {
     const inv = ref('inv');
-    if (!inv) return;
-    /* one rate per lot, $7.50, as in the original design; the same as partner-terms/ (plan.js) */
+    const box = inv && inv.closest('[data-calc]');
+    if (!inv || !box) return;
+    /* one rate per lot, $7.50, as in the design; the same as partner-terms/ (plan.js) */
     const RATE = 7.5;
-    const cfg = { lots: { min: 10, max: 5000, step: 10 }, traders: { min: 1, max: 300, step: 1 } };
+    const cfg = { lots: { min: 10, max: 1000 }, traders: { min: 1, max: 300 } };
     const state = { lots: 130, traders: 60 };
-    const inputs = {}, sliders = {};
-    $$('[data-calc-input]').forEach((el) => { inputs[el.dataset.calcInput] = el; });
-    $$('[data-calc-slider]').forEach((el) => { sliders[el.dataset.calcSlider] = el; });
+    const ranges = {}, sliders = {}, vals = {};
+    $$('[data-calc-range]', box).forEach((el) => { ranges[el.dataset.calcRange] = el; });
+    $$('[data-calc-slider]', box).forEach((el) => { sliders[el.dataset.calcSlider] = el; });
+    $$('[data-calc-val]', box).forEach((el) => { vals[el.dataset.calcVal] = el; });
 
     const d = new Date();
+    const yymm = String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1);
     let numLocale = 'en-US';
     try { numLocale = Intl.NumberFormat.supportedLocalesOf([document.documentElement.lang + '-u-nu-latn'])[0] || 'en-US'; } catch (e) {}
-    const setText = (sel, v) => { const el = $(sel, inv); if (el) el.textContent = v; };
+    const setText = (sel, v, root) => { const el = $(sel, root || inv); if (el) el.textContent = v; };
     setText('[data-inv-issued]', pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear());
-    /* the statement covers a day, a month or a year (the Day / Month / Year toggle): the amounts, the lot
-       count and the PERIOD field follow it. A day is a thirtieth of the month, a year twelve months. */
+    setText('[data-calc-tid]', 'TQ-' + yymm, box);
+    /* the receipt covers a day, a month or a year (the Day / Month / Year switch): the amounts, the lot
+       count, the PERIOD field and the caption over the total follow it. A day is a thirtieth of the month,
+       a year twelve months. */
     const PER = { day: 1 / 30, month: 1, year: 12 };
     let per = 'month';
     /* period in the page language, Western digits (amounts stay $ / en-US everywhere) */
@@ -450,20 +455,21 @@
       try { return new Intl.DateTimeFormat(document.documentElement.lang + '-u-nu-latn', PERIOD_FMT[per]).format(d); }
       catch (e) { return d.toLocaleString('en-US', PERIOD_FMT[per]); }
     };
-    setText('[data-inv-period]', periodText());
+    const cap = $('[data-inv-cap]', inv);
+    const showPeriod = () => { setText('[data-inv-period]', periodText()); if (cap && cap.dataset[per]) cap.textContent = cap.dataset[per]; };
+    showPeriod();
 
     /* money figures count up/down to the new total */
     const tot = $('[data-inv-total]', inv);
     const totals = tot && tot.closest('[data-inv-totals]');
-    const baseSize = tot ? tot.style.fontSize : '';   /* the size the markup gives it */
-    /* the big total shrinks to fit when a long figure (a year of a big network) would run past the statement */
+    /* the big total steps down to fit when a long figure (a year of a big network) would run past the receipt */
     const fit = (v) => {
       if (!tot || !totals) return;
-      tot.style.setProperty('font-size', baseSize);
+      tot.style.removeProperty('font-size');
       const keep = tot.textContent;
       tot.textContent = money(v);
       const room = totals.clientWidth, need = tot.scrollWidth;
-      if (room && need > room) tot.style.setProperty('font-size', Math.floor(parseFloat(getComputedStyle(tot).fontSize) * room / need * 0.98) + 'px', 'important');
+      if (room && need > room) tot.style.setProperty('font-size', Math.floor(parseFloat(getComputedStyle(tot).fontSize) * room / need * 0.98) + 'px');
       tot.textContent = keep;
     };
     let live = null, to = null, raf = 0, colT = 0;
@@ -492,22 +498,20 @@
       const { lots, traders } = state;
       for (const key of ['lots', 'traders']) {
         const c = cfg[key], s = sliders[key];
-        if (!s) continue;
         const pct = ((state[key] - c.min) / (c.max - c.min) * 100).toFixed(2) + '%';
-        $('[data-calc-fill]', s).style.width = 'calc(' + pct + ' - 2px)';
-        $('[data-calc-knob]', s).style.left = pct;
-        /* the highlight on the value box rides along with the slider */
-        const sh = $('[data-calc-sheen]', s.closest('.tq-calc__field') || s.parentNode);
-        if (sh) sh.style.left = (10 + parseFloat(pct) * 0.8).toFixed(1) + '%';
+        if (s) { $('[data-calc-fill]', s).style.width = pct; $('[data-calc-knob]', s).style.left = pct; }
+        if (vals[key]) vals[key].textContent = state[key].toLocaleString(numLocale);
       }
       /* lot count in local style (a day can be a fraction of a lot); $ amounts stay en-US */
       setText('[data-inv-lots]', (lots * traders * PER[per]).toLocaleString(numLocale, { maximumFractionDigits: 1 }));
-      setText('[data-inv-no]', 'TQ-' + String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + '-' + String(traders).padStart(3, '0'));
+      const no = String(traders).padStart(3, '0');
+      setText('[data-inv-no]', 'TQ-' + yymm + '-' + no);
+      setText('[data-inv-code]', 'TQ ' + yymm + ' ' + no);
       setText('[data-inv-rate]', '$' + RATE.toFixed(2));
       tween(lots * traders * RATE * PER[per]);
     };
 
-    const perBox = $('[data-inv-per]', inv);
+    const perBox = $('[data-inv-per]', box);
     if (perBox) {
       const btns = $$('button[data-per]', perBox);
       btns.forEach((b, i) => b.addEventListener('click', () => {
@@ -515,42 +519,16 @@
         per = b.dataset.per;
         btns.forEach((o) => o.setAttribute('aria-pressed', String(o === b)));
         perBox.style.setProperty('--i', String(i));
-        setText('[data-inv-period]', periodText());
+        showPeriod();
         render();
       }));
     }
 
     for (const key of ['lots', 'traders']) {
-      const c = cfg[key], input = inputs[key], slider = sliders[key];
-      if (input) {
-        input.addEventListener('input', () => {
-          const v = parseFloat(input.value);
-          state[key] = isNaN(v) ? 0 : Math.min(c.max, Math.max(0, v));
-          render();
-        });
-        input.addEventListener('blur', () => {
-          state[key] = Math.max(c.min, Math.min(c.max, Math.round(state[key] || c.min)));
-          input.value = String(state[key]);
-          render();
-        });
-      }
-      if (slider) {
-        slider.addEventListener('pointerdown', (e) => {
-          const rect = slider.getBoundingClientRect();
-          const apply = (clientX) => {
-            const t = clamp01((clientX - rect.left) / rect.width);
-            const v = Math.max(c.min, Math.min(c.max, Math.round((c.min + t * (c.max - c.min)) / c.step) * c.step));
-            state[key] = v;
-            if (input) input.value = String(v);
-            render();
-          };
-          apply(e.clientX);
-          const move = (ev) => apply(ev.clientX);
-          const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
-          window.addEventListener('pointermove', move);
-          window.addEventListener('pointerup', up);
-        });
-      }
+      const r = ranges[key];
+      if (!r) continue;
+      state[key] = Number(r.value) || state[key];
+      r.addEventListener('input', () => { state[key] = Number(r.value); render(); });
     }
     render();
   }
