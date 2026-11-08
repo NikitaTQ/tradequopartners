@@ -99,8 +99,8 @@
     };
     events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
     if (scrollY > 0) first(); /* reload half-way down the page */
-    /* frames marked data-eager sit in the first screen (the program cards' 3D art, which
-       shows a matching poster meanwhile): they also start on the first mouse movement */
+    /* frames marked data-eager sit in the first screen and show a matching poster meanwhile (none at
+       the moment: the program cards' art is a still image now): they also start on the first mouse movement */
     const eager = frames.filter((f) => f.hasAttribute('data-eager'));
     if (eager.length && !saveData) {
       const go = () => { window.removeEventListener('pointermove', go); idle(() => eager.forEach((f) => { if (f.getClientRects().length) start(f); }), { timeout: 600 }); };
@@ -781,6 +781,28 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
   }
 
+  /* ---- /programs/: a program card's big figure ("87%", "∞ tiers", "Yours.") keeps one line ------
+   * It is set large (partner.css .tp-pc__big); where a language's wording is wider than its card, the
+   * type steps down to fit, at most to 40%. Measured again once the fonts are in and on resize. */
+  function startFitWide() {
+    const els = $$('[data-fitw]');
+    if (!els.length) return;
+    const fit = () => els.forEach((el) => {
+      el.style.fontSize = '';
+      const fs0 = parseFloat(getComputedStyle(el).fontSize);
+      for (let i = 0; i < 4; i++) {           /* a wrapped name may re-break as it shrinks: measure again */
+        const room = el.clientWidth, w = el.scrollWidth;
+        if (!room || w <= room + 1) return;
+        const fs = parseFloat(getComputedStyle(el).fontSize);
+        el.style.fontSize = Math.max(fs0 * 0.4, fs * room / w - 0.5).toFixed(1) + 'px';
+      }
+    });
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    let t = 0;
+    addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
+  }
+
   /* ---- /programs/ on phones: the three program cards swipe sideways -------------------------
    * The row is a native scroller with snap points (partner.css); this only keeps the dots under it
    * in step with the card in the middle and lets a dot bring its card in. */
@@ -1206,6 +1228,7 @@
   startCta3d();
   startWhoFlow();
   startProgSwiper();
+  startFitWide();
   startGlass();
   startLiquidCta();
   startReviewsDrag();

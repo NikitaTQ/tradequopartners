@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /*
- * Posters for the 3D on the Partner Programs page, all transparent webp in site/assets/posters/:
- *   program-<obj>.webp           the cards' art (embeds/program-art.html), 16:9
+ * Posters for the 3D on the Partner Programs page, transparent webp in site/assets/posters/:
  *   trust-dome.webp              why TradeQuo dome, first frame: flat field (embeds/trust-dome.html), 600:520
  * The page shows a poster until its live scene has drawn the first frame, so re-run after
  * changing a scene (an optional argument renders only the posters whose name contains it):
@@ -34,7 +33,6 @@ mkdirSync(tmp, { recursive: true });
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined,
   args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const JOBS = [
-  ...['link', 'network', 'flag'].map((obj) => ({ name: `program-${obj}`, url: `program-art.html?still&obj=${obj}`, w: 384, h: 216, dpr: 2 })),
   { name: 'trust-dome', url: 'trust-dome.html?still', w: 600, h: 520, dpr: 1.5 },
 ].filter((j) => !process.argv[2] || j.name.includes(process.argv[2]));
 for (const job of JOBS) {
