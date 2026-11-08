@@ -5,8 +5,7 @@
   "description": "Dev-only helpers; the site itself needs no build step.",
   "scripts": {
     "optimize-embeds": "node optimize-embeds.mjs",
-    "posters": "node render-posters.mjs",
-    "film-video": "node record-film.mjs"
+    "posters": "node render-posters.mjs"
   },
   "devDependencies": {
     "esbuild": "0.24.2",

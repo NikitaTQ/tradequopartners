@@ -122,41 +122,6 @@
     });
   }
 
-  /* ---- Partner film on phones: the MP4 (see site.css). Loads when near, plays muted while in view
-   * (from the film's own still, 21.4 s, which is also the poster), pauses out of view. A tap shows the
-   * controls for 2.6 s: back/forward 1.5 s, pause/play. With reduced motion it waits on the still; if the
-   * browser refuses autoplay (iPhone in Low Power Mode) the controls stay up with the play button. */
-  function startFilmVideo() {
-    const box = $('[data-film-video]'); if (!box) return;
-    const v = $('video', box), play = $('[data-fv-play]', box), STILL = 21.4;
-    let held = reducedMotion(), inView = false, loaded = false, timer = 0;
-    const mark = () => { const p = v.paused; box.toggleAttribute('data-paused', p); play.setAttribute('aria-label', p ? 'Play video' : 'Pause video'); };
-    const show = () => { box.setAttribute('data-ctl', ''); clearTimeout(timer); if (!box.hasAttribute('data-ctl-stay')) timer = setTimeout(() => box.removeAttribute('data-ctl'), 2600); };
-    const go = () => {
-      if (held || !inView) return;
-      const r = v.play();
-      if (r && r.catch) r.catch(() => { held = true; mark(); box.setAttribute('data-ctl-stay', ''); show(); });
-    };
-    v.addEventListener('loadedmetadata', () => { if (v.currentTime < 0.05) { try { v.currentTime = STILL; } catch (e) {} } }, { once: true });
-    v.addEventListener('play', mark); v.addEventListener('pause', mark); mark();
-    new IntersectionObserver((en) => {
-      if (!en[0].isIntersecting || loaded) return;
-      loaded = true; if (!held) { v.preload = 'auto'; v.load(); }   /* buffer ahead of the visitor (not when it waits on the still) */
-    }, { rootMargin: '60% 0px' }).observe(box);
-    new IntersectionObserver((en) => { inView = en[0].isIntersecting; if (inView) go(); else if (!v.paused) v.pause(); }, { threshold: 0.2 }).observe(box);
-    document.addEventListener('visibilitychange', () => { if (document.hidden) { if (!v.paused) v.pause(); } else go(); });
-    box.addEventListener('pointerdown', show);
-    play.addEventListener('click', () => {
-      box.removeAttribute('data-ctl-stay');
-      if (v.paused) { held = false; go(); } else { held = true; v.pause(); }
-      show();
-    });
-    $$('[data-fv-skip]', box).forEach((b) => b.addEventListener('click', () => {
-      const d = v.duration || 22, t = v.currentTime + parseFloat(b.dataset.fvSkip);
-      v.currentTime = ((t % d) + d) % d; show();
-    }));
-  }
-
   /* Run `start`/`stop` as `el` enters/leaves the viewport (± margin). */
   function whileVisible(el, margin, start, stop) {
     new IntersectionObserver((en) => { (en[en.length - 1].isIntersecting ? start : stop)(); }, { rootMargin: margin }).observe(el);
@@ -1230,7 +1195,6 @@
   startIframeFit();
   startFanTap();
   startEmbeds();
-  startFilmVideo();
   startAnimationGate();
   startFlip();
   startHowLine();
