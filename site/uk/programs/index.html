@@ -187,6 +187,51 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
   src: url(../../assets/fonts/fragment-mono-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+/* Inter cyrillic-ext (variable 300–700) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(../../assets/fonts/inter-cyrillic-ext.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* Inter cyrillic (variable 300–700) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(../../assets/fonts/inter-cyrillic.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* Inter vietnamese (variable 300–700) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(../../assets/fonts/inter-vietnamese.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* Inter latin-ext (variable 300–700) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(../../assets/fonts/inter-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Inter latin (variable 300–700) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(../../assets/fonts/inter-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 
 html, body { margin: 0; padding: 0; background: #ffffff; }
@@ -1340,52 +1385,63 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* ---- program cards ------------------------------------------------------------- */
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
-@media (min-width: 961px) { .tp-programs { gap: clamp(28px, 3.6vw, 44px); } }   /* desktops: the cards twice as far apart */
+@media (min-width: 961px) { .tp-programs { gap: 24px; } }   /* desktops: the design's 24px between the glass cards */
 .tp-progdots { display: none; }
-/* Program cards (Partner_Cards 5a): a dark card with a red glow in its top corner, the number, the program's
-   name and a still of its silver 3D object (assets/programs/), then the figure, the points and the CTAs. */
-.tp-pc { position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 30px; border-radius: 28px; color: #fff;
-  background: radial-gradient(55% 40% at 100% 0%, rgba(231,19,27,.22) 0%, rgba(231,19,27,0) 70%), linear-gradient(180deg, #19191c 0%, #0c0c0e 100%);
-  box-shadow: inset 0 0 0 1px #26262b, inset 0 1px 0 rgba(255,255,255,.08), 0 40px 70px -40px rgba(10,10,14,.75); }
-[dir="rtl"] .tp-pc { background: radial-gradient(55% 40% at 0% 0%, rgba(231,19,27,.22) 0%, rgba(231,19,27,0) 70%), linear-gradient(180deg, #19191c 0%, #0c0c0e 100%); }
+/* Program cards (Partner_Cards_7a): a silver panel crossed by a red and a black ribbon (.tp-ribbons), and on it
+   three cards of light frosted glass: the number, the program's name and a still of its silver 3D object
+   (assets/programs/), then the figure, the points and the CTAs. Type: the site's Syncopate + Inter scheme. The
+   block has no H1, so it is all Inter (variable, 300–700); figures in tabular numerals; on phones nothing is
+   under 16px. Scripts Inter lacks (Arabic, Thai, CJK) fall back to the page's own faces. */
+.tp-hero .tp-stage { position: relative; isolation: isolate; max-width: 1320px; padding: clamp(28px, 3.9vw, 56px); border-radius: 36px; overflow: hidden;
+  background: radial-gradient(60% 60% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(160deg, #eef0f3 0%, #d3d6dc 100%); }
+.tp-hero .tp-stage::before { content: none; }
+.tp-ribbons { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; pointer-events: none; }
+.tp-programs { font-family: 'Inter', 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }   /* figures only: Inter's tnum also widens the hyphen */
+.tp-pc { position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 30px; border-radius: 30px; color: #141416;
+  background: linear-gradient(160deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.34) 100%);
+  -webkit-backdrop-filter: blur(26px) saturate(180%); backdrop-filter: blur(26px) saturate(180%);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.7), inset 0 -20px 40px -20px rgba(255,255,255,.5), 0 30px 60px -30px rgba(30,34,44,.4); }
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) { .tp-pc { background: rgba(246,247,249,.94); } }
 .tp-pc__art { position: absolute; top: 14px; inset-inline-end: 16px; width: 180px; height: 150px; display: block; pointer-events: none; user-select: none; }
 .tp-pc__art--temple { top: 12px; inset-inline-end: 18px; width: 170px; height: 164px; }
 .tp-pc__head { position: relative; display: flex; flex-direction: column; gap: 14px; max-width: 230px; }
-.tp-pc__num { font-family: 'Fragment Mono', monospace; font-size: 44px; line-height: .8; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.2px #ff4b52; }
-.tp-pc__name { --nf: 40px; margin: 0; min-height: 80px; font-size: var(--nf); line-height: .98; font-weight: 800; letter-spacing: -.05em; color: #fff; text-wrap: balance; }
+.tp-pc__num { font-size: 44px; line-height: .8; font-weight: 500; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.2px #e7131b; }
+.tp-pc__name { --nf: 40px; margin: 0; min-height: 80px; font-size: var(--nf); line-height: .98; font-weight: 700; letter-spacing: -.05em; color: #141416; text-wrap: balance; }
 /* the name wraps before it reaches its card's object; a single word wider than that steps the type down
    (landing.js, data-fitw; the widths follow --nf, not the stepped size); CJK breaks only where the string
    allows (a zero-width space) */
 .tp-pc__name { word-break: keep-all; }
-.tp-pc:nth-child(1) .tp-pc__name { max-width: calc(var(--nf) * 5); }
-.tp-pc:nth-child(2) .tp-pc__name { max-width: calc(var(--nf) * 4.4); }
-.tp-pc:nth-child(3) .tp-pc__name { max-width: calc(var(--nf) * 5.1); }
-.tp-pc__title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: #ff4b52; }
-.tp-pc__title i { flex: none; width: 22px; height: 3px; border-radius: 2px; background: #e7131b; box-shadow: 0 0 10px rgba(231,19,27,.9); }
+.tp-pc:nth-child(1) .tp-pc__name { max-width: calc(var(--nf) * 5.2); }
+.tp-pc:nth-child(2) .tp-pc__name { max-width: calc(var(--nf) * 4.6); }
+.tp-pc:nth-child(3) .tp-pc__name { max-width: calc(var(--nf) * 5.3); }
+.tp-pc__title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: #c70f16; }
+.tp-pc__title i { flex: none; width: 22px; height: 3px; border-radius: 2px; background: #e7131b; }
 .tp-pc__body { position: relative; flex: 1; display: flex; flex-direction: column; }
-.tp-pc__lead { margin: 26px 0 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); display: flex; flex-direction: column; gap: 20px; }
-.tp-pc__eyebrow { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .22em; color: #b9bbc1; }
-.tp-pc__big { display: block; font-size: 96px; line-height: .86; font-weight: 800; letter-spacing: -.065em; white-space: nowrap; color: #e7131b; }   /* landing.js steps it down to fit */
-.tp-pc__sub { margin-top: 8px; font-size: 17px; line-height: 1.35; font-weight: 500; color: #e6e7ea; text-wrap: pretty; }
+.tp-pc__lead { margin: 26px 0 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.8); display: flex; flex-direction: column; gap: 20px; }
+.tp-pc__eyebrow { font-size: 12px; line-height: 1.3; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #45464c; }
+.tp-pc__big { display: block; font-size: 96px; line-height: .86; font-weight: 700; letter-spacing: -.065em; white-space: nowrap; color: #e7131b; }   /* landing.js steps it down to fit */
+.tp-pc__sub { margin-top: 8px; font-size: 17px; line-height: 1.45; font-weight: 500; color: #2b2c31; text-wrap: pretty; }
 .tp-pc__pts { display: flex; flex-direction: column; gap: 11px; margin: 24px 0 0; padding: 0; list-style: none; }
-.tp-pc__pts li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; line-height: 1.35; color: #b9bbc1; }
-.tp-pc__pts li::before { content: ''; flex: none; width: 16px; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Ccircle cx='8' cy='8' r='7.25' stroke='%233A3A40' stroke-width='1.5'/%3E%3Cpath d='M4.8 8.2 7 10.3 11.2 5.8' stroke='%23FF4B52' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / 16px 16px; }
-.tp-pc__who { margin: 22px 0 0; font-family: 'Fragment Mono', monospace; font-size: 11px; line-height: 1.5; color: #76767c; }
+.tp-pc__pts li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; line-height: 1.4; color: #3a3b40; }
+.tp-pc__pts li::before { content: ''; flex: none; width: 20px; height: 20px; border-radius: 999px;
+  background: rgba(255,255,255,.7) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 6.2 5 8.6 9.5 3.6' stroke='%23E7131B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 11px no-repeat;
+  box-shadow: inset 0 1px 0 #fff, 0 2px 6px -2px rgba(30,34,44,.3); }
+.tp-pc__who { margin: 22px 0 0; font-size: 13px; line-height: 1.5; color: #55575e; }
 .tp-pc__cta { margin-top: auto; margin-inline-end: -12px; padding-top: 26px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 10px; }   /* the link may reach into the card's padding, as in the design */
 .tp-programs.is-stack .tp-pc__cta { flex-direction: column; align-items: flex-start; }   /* landing.js: when one card's link wraps */
-.tp-pc__go { display: flex; align-items: center; gap: 12px; height: 54px; padding-inline: 5px 22px; border-radius: 999px; background: rgba(231,19,27,.16); color: #fff;
-  font-size: 15.5px; font-weight: 700; white-space: nowrap; text-decoration: none; box-shadow: inset 0 0 0 1.5px #e7131b, 0 14px 26px -18px rgba(231,19,27,.6); transition: background .25s, box-shadow .25s; }
-.tp-pc__go:hover, .tp-pc__go:focus-visible { background: #e7131b; color: #fff; box-shadow: inset 0 0 0 1.5px #e7131b, inset 0 1px 0 rgba(255,255,255,.25), 0 18px 30px -16px rgba(231,19,27,.8); }
+.tp-pc__go { display: flex; align-items: center; gap: 12px; height: 54px; padding-inline: 5px 22px; border-radius: 999px; background: rgba(231,19,27,.07); color: #141416;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  font-size: 15.5px; font-weight: 700; white-space: nowrap; text-decoration: none;
+  box-shadow: inset 0 0 0 1.5px #e7131b, inset 0 1px 0 rgba(255,255,255,.8), 0 14px 26px -18px rgba(231,19,27,.55); transition: background .25s, color .25s, box-shadow .25s; }
+.tp-pc__go:hover, .tp-pc__go:focus-visible { background: #e7131b; color: #fff; box-shadow: inset 0 0 0 1.5px #e7131b, inset 0 1px 0 rgba(255,255,255,.3), 0 18px 30px -16px rgba(231,19,27,.75); }
 .tp-pc__dot { flex: none; width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(180deg, #fff 0%, #e3e4e8 35%, #a9abb1 55%, #e8e9ec 100%); box-shadow: inset 0 -2px 4px rgba(0,0,0,.25); }
+  background: linear-gradient(180deg, #fff 0%, #e3e4e8 35%, #a9abb1 55%, #e8e9ec 100%); box-shadow: inset 0 -2px 4px rgba(0,0,0,.18); }
 [dir="rtl"] .tp-pc__dot svg { transform: scaleX(-1); }
-.tp-pc__link { position: relative; padding-bottom: 2px; border-bottom: 1px solid rgba(255,255,255,.2); font-size: 13.5px; font-weight: 700; color: #b9bbc1; white-space: nowrap; text-decoration: none; transition: color .25s, border-color .25s; }
-.tp-pc__link:hover, .tp-pc__link:focus-visible { color: #fff; border-color: #ff4b52; }
-.tp-pc__go:focus-visible, .tp-pc__link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.tp-pc__link { position: relative; padding-bottom: 2px; border-bottom: 1px solid rgba(20,22,28,.25); font-size: 13.5px; font-weight: 700; color: #2b2c31; white-space: nowrap; text-decoration: none; transition: color .25s, border-color .25s; }
+.tp-pc__link:hover, .tp-pc__link:focus-visible { color: #0a0a0a; border-color: #e7131b; }
+.tp-pc__go:focus-visible, .tp-pc__link:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .tp-pc__go, .tp-pc__link { transition: none; } }
-/* the cards stand on the page itself: no grey stage under them */
-.tp-hero .tp-stage { max-width: 1240px; padding: 0; border-radius: 0; background: none; overflow: visible; }
-.tp-hero .tp-stage::before { content: none; }
 /* The CTAs in the first screen: the audience line goes under them; on desktops up to 940px high the card
    tightens, and again up to 800px. */
 @media (min-width: 961px) {
@@ -1402,15 +1458,16 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-hero .tp-h1 { font-size: clamp(40px, 6vh, 56px); }
   .tp-hero .tp-head { gap: 8px; }
   .tp-hero .tp-head .tp-sub { font-size: 19px; line-height: 1.45; }
-  .tp-hero .tp-stage { margin-top: 18px; }
-  .tp-pc { padding-top: 24px; }
+  .tp-hero .tp-stage { margin-top: 12px; padding-top: 14px; padding-bottom: 32px; }   /* the panel gives back height so the CTAs stay in the first screen */
+  .tp-pc { padding-top: 22px; }
   .tp-pc__head { gap: 10px; }
   .tp-pc__num { font-size: 36px; }
   .tp-pc__name { min-height: 72px; --nf: 36px; }
-  .tp-pc__lead { margin-top: 20px; padding-top: 16px; gap: 12px; }
+  .tp-pc__lead { margin-top: 18px; padding-top: 16px; gap: 12px; }
   .tp-pc__big { font-size: 72px; }
-  .tp-pc__sub { margin-top: 4px; font-size: 16px; }
+  .tp-pc__sub { margin-top: 4px; font-size: 16px; line-height: 1.35; }
   .tp-pc__pts { margin-top: 16px; gap: 7px; }
+  :lang(ja) .tp-pc__pts li, :lang(zh) .tp-pc__pts li, :lang(ko) .tp-pc__pts li { font-size: 14px; }   /* the longest CJK point keeps to one line */
   .tp-pc__cta { padding-top: 16px; }
 }
 @media (min-width: 961px) and (max-height: 800px) {
@@ -1418,7 +1475,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-hero .tp-h1 { font-size: clamp(38px, 5.6vh, 56px); }
   .tp-hero .tp-head { gap: 6px; }
   .tp-hero .tp-head .tp-sub { font-size: 16px; line-height: 1.4; }
-  .tp-hero .tp-stage { margin-top: 10px; }
+  .tp-hero .tp-stage { margin-top: 8px; padding: 10px 14px 20px; border-radius: 28px; }
   .tp-pc { padding-top: 20px; }
   .tp-pc__name { min-height: 66px; --nf: 33px; }
   .tp-pc__head { max-width: 196px; }   /* the name keeps its two lines, clear of the art */
@@ -1429,36 +1486,43 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pc__big { font-size: 64px; }
   .tp-pc__sub { font-size: 15px; }
   .tp-pc__pts { margin-top: 12px; gap: 5px; }
+  .tp-pc__pts li { font-size: 14px; line-height: 1.3; }
 }
 /* very short laptop screens (a 1536×730 window): a little tighter still, so the CTAs stay in the first screen */
 @media (min-width: 961px) and (max-height: 760px) {
   .tp-hero .tp-head .tp-sub { font-size: 15px; }
+  .tp-hero .tp-stage { margin-top: 6px; padding-top: 8px; }
+  .tp-pc { padding-top: 16px; }
   .tp-pc__lead { margin-top: 12px; padding-top: 10px; }
   .tp-pc__big { font-size: 56px; }
   .tp-pc__pts { margin-top: 10px; gap: 3px; }
 }
 /* phones: the card scaled to the swiper, the CTAs in the first screen like before */
 @media (max-width: 640px) {
-  .tp-pc { padding: 18px 20px 20px; border-radius: 24px; }
+  .tp-pc { padding: 14px 18px 20px; border-radius: 24px; }
   .tp-pc__art { top: 10px; inset-inline-end: 12px; width: 130px; height: 108px; }
   .tp-pc__art--temple { top: 8px; inset-inline-end: 12px; width: 122px; height: 118px; }
-  .tp-pc__head { gap: 6px; max-width: 190px; }
+  .tp-pc__head { gap: 4px; max-width: 190px; }
   .tp-pc__num { font-size: 28px; }
   .tp-pc__name { min-height: 56px; --nf: 29px; }
-  .tp-pc__title { font-size: 15px; }
-  .tp-pc__lead { margin-top: 14px; padding-top: 12px; gap: 8px; }
-  .tp-pc__big { font-size: 54px; }
-  .tp-pc__sub { margin-top: 2px; font-size: 14.5px; line-height: 1.3; }
-  .tp-pc__pts { margin-top: 12px; gap: 4px; }
-  .tp-pc__pts li { font-size: 13.5px; }
-  .tp-pc__who { order: 1; margin-top: 12px; }
+  .tp-pc__title { font-size: 16px; }
+  .tp-pc__lead { margin-top: 10px; padding-top: 10px; gap: 6px; }
+  .tp-pc__eyebrow { font-size: 16px; line-height: 1.2; letter-spacing: .14em; }
+  .tp-pc__big { font-size: 46px; }
+  .tp-pc__sub { margin-top: 2px; font-size: 16px; line-height: 1.3; }
+  .tp-pc__pts { margin-top: 10px; gap: 2px; }
+  .tp-pc__pts li { font-size: 16px; line-height: 1.3; }
+  .tp-pc__pts li::before { width: 18px; height: 18px; background-size: 10px; }
+  .tp-pc__who { order: 1; margin-top: 12px; font-size: 16px; }
   .tp-pc__cta { padding-top: 14px; gap: 12px 10px; }
-  .tp-pc__go { height: 50px; padding-inline: 4px 18px; font-size: 15px; }
+  .tp-pc__go { height: 50px; padding-inline: 4px 18px; font-size: 16px; }
+  .tp-pc__link { font-size: 16px; }
   .tp-pc__dot { width: 42px; height: 42px; }
 }
 /* phones: one row that swipes sideways and snaps to a card; the next card peeks in at the edge */
 @media (max-width: 640px) {
-  .tp-stage > .tp-programs { display: flex; gap: 12px; max-width: none; margin: 0 -12px; padding: 4px 12px 50px; overflow-x: auto;   /* 50px: room for the cards' shadow to fade out */ overscroll-behavior-x: contain;
+  .tp-hero .tp-stage { margin-inline: calc(-1 * clamp(16px, 4vw, 56px)); padding: 10px 0 0; border-radius: 0; }   /* the panel edge to edge */
+  .tp-stage > .tp-programs { display: flex; gap: 12px; max-width: none; margin: 0; padding: 4px 12px 50px; overflow-x: auto;   /* 50px: room for the cards' shadow to fade out */ overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory; scroll-padding-inline: 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .tp-programs::-webkit-scrollbar { display: none; }
   .tp-pc { flex: 0 0 86%; scroll-snap-align: center; scroll-snap-stop: always; }
@@ -2539,6 +2603,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500; font-display: swap; src: url(../../assets/fonts/intl/cormorant-garamond-500-cyrillic-ext.woff2) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
 @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500; font-display: swap; src: url(../../assets/fonts/intl/cormorant-garamond-500-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
 </style>
+<link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
 <div class="tq-loader" data-loader hidden>
@@ -2579,6 +2644,23 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       </div>
 
       <div class="tp-stage">
+        <!-- the panel's two ribbons, red and black, each with a soft shadow and a light edge (Partner_Cards_7a); they
+             stretch with the panel (preserveAspectRatio none), their width stays (non-scaling-stroke) -->
+        <svg class="tp-ribbons" viewBox="0 0 1352 880" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="tpRibBlur" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+            <linearGradient id="tpRibRed" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B80E15"/><stop offset=".5" stop-color="#F2262E"/><stop offset="1" stop-color="#C70F16"/></linearGradient>
+            <linearGradient id="tpRibBlack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0A0A0A"/><stop offset=".5" stop-color="#2B2C31"/><stop offset="1" stop-color="#0A0A0A"/></linearGradient>
+            <path id="tpRib1" d="M-40 150 C 300 60, 560 260, 820 180 S 1200 90, 1400 200" vector-effect="non-scaling-stroke"/>
+            <path id="tpRib2" d="M-40 650 C 300 570, 560 770, 820 690 S 1200 600, 1400 710" vector-effect="non-scaling-stroke"/>
+          </defs>
+          <use href="#tpRib1" stroke="rgba(20,22,28,.16)" stroke-width="20" stroke-linecap="round" transform="translate(0 16)" filter="url(#tpRibBlur)"/>
+          <use href="#tpRib1" stroke="url(#tpRibRed)" stroke-width="20" stroke-linecap="round"/>
+          <use href="#tpRib1" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
+          <use href="#tpRib2" stroke="rgba(20,22,28,.16)" stroke-width="20" stroke-linecap="round" transform="translate(0 16)" filter="url(#tpRibBlur)"/>
+          <use href="#tpRib2" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
+          <use href="#tpRib2" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
+        </svg>
         <div class="tp-programs" data-progs>
           <article class="tp-pc">
             <img class="tp-pc__art tp-pc__art--link" src="../../assets/programs/link.webp?v=24a01788f1" alt="" width="180" height="150" decoding="async" aria-hidden="true">
