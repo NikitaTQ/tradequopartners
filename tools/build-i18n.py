@@ -126,6 +126,15 @@ def face(family, f, root, weight=None):
             % (family, weight or f['weight'], root, f['file'], f['range']))
 
 
+# the H1 face of each language (site.css .tq-h1, tools/h1-fonts.py); Syncopate for the rest
+H1_FACE = {'uk': 'unbounded', 'vi': 'unbounded', 'ro': 'unbounded', 'ar': 'reem-kufi', 'th': 'prompt', 'ja': 'dela-gothic-one',
+           'ko': 'black-han-sans', 'zh-hans': 'zcool-qingke-sc', 'zh-hant': 'noto-sans-tc'}
+
+
+def h1_preload(code, root):
+    return '\n<link rel="preload" href="%sassets/fonts/h1/%s.woff2" as="font" type="font/woff2" crossorigin>' % (root, H1_FACE.get(code, 'syncopate'))
+
+
 def font_css(script, root):
     """Fonts and type rules for scripts Inter doesn't cover. Inter itself has Latin, Cyrillic and Vietnamese
     (site.css); Arabic and Thai get IBM Plex Sans Arabic / Noto Sans Thai declared as 'Inter' for their unicode
@@ -133,16 +142,16 @@ def font_css(script, root):
     rules, preload = [], []
     by = lambda font, subset=None: [f for f in fonts if f['font'] == font and (subset is None or f['subset'] == subset)]
     if script == 'cyrillic':
-        preload = ['../inter-cyrillic.woff2']
+        preload = ['inter-cyrillic.woff2']
     elif script == 'vietnamese':
-        preload = ['../inter-vietnamese.woff2']
+        preload = ['inter-vietnamese.woff2']
     elif script == 'arabic':
         rules += [face('Inter', f, root) for f in by('IBM-Plex-Sans-Arabic')]
-        preload = [f['file'] for f in by('IBM-Plex-Sans-Arabic') if f['weight'] in ('400', '700')]
+        preload = ['intl/' + f['file'] for f in by('IBM-Plex-Sans-Arabic') if f['weight'] in ('400', '700')]
     elif script == 'thai':
         thai = by('Noto-Sans-Thai', 'thai')[0]
         rules.append(face('Inter', thai, root))
-        preload = [thai['file']]
+        preload = ['intl/' + thai['file']]
     if script in ('arabic', 'thai', 'cjk'):
         # tracking breaks Arabic joining and crowds CJK/Thai; tight Latin leading clips their glyphs.
         # SVG text is left alone: it is only the fixed Latin lettering round the stamps.
@@ -151,10 +160,8 @@ def font_css(script, root):
     if script == 'cjk':
         rules.append('h1, h2, h3, p { line-break: strict; }')
         rules.append('html:lang(ko) * { word-break: keep-all; }')   # Korean wraps between words, not syllables
-    if not rules:
-        return '', ''
-    css = '\n<style id="i18n-fonts">\n' + '\n'.join(rules) + '\n</style>'
-    pre = ''.join('\n<link rel="preload" href="%sassets/fonts/intl/%s" as="font" type="font/woff2" crossorigin>' % (root, f) for f in preload)
+    css = '\n<style id="i18n-fonts">\n' + '\n'.join(rules) + '\n</style>' if rules else ''
+    pre = ''.join('\n<link rel="preload" href="%sassets/fonts/%s" as="font" type="font/woff2" crossorigin>' % (root, f) for f in preload)
     return css, pre
 
 
@@ -294,7 +301,7 @@ for page in PAGES:
         system = {
             'lang': lang.get('html', code), 'code': code, 'dir': lang.get('dir', 'ltr'), 'root': root, 'home': home or './',
             'canonical': url_of(lang, slug), 'hreflang': hreflang, 'ogLocale': lang['ogLocale'],
-            'fontFaces': faces, 'fontPreload': preload, 'langSwitcher': switcher(lang, s, slug, page['id'], home),
+            'fontFaces': faces, 'fontPreload': preload + h1_preload(lang['code'], root), 'langSwitcher': switcher(lang, s, slug, page['id'], home),
             'embedQuery': '' if code == 'en' else '?lang=' + code,
             # "become a partner" links in shared blocks: scroll to the form on the landing, go to it elsewhere
             'signupHref': (home + '#signup') if slug else '#signup',

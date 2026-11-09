@@ -5,8 +5,11 @@ Everything under /assets, /embeds and /vendor is cached for a year
 (netlify.toml); a new hash gives every changed file a new URL, so nobody gets
 stuck with an old landing.js against a new index.html. Fonts referenced from
 site.css and vendor files imported from JS are not stamped: fonts keep their
-names only while unchanged, vendor folders carry the library version.
-It also inlines the stylesheets of the translated pages (see inline_css).
+names only while unchanged, vendor folders carry the library version. Fonts named in the pages
+and embeds themselves are stamped: url(...woff2) in their <style> blocks (inlined CSS, per-language
+faces, an embed's Inter) and font preloads, with the same hash, so a preload and its @font-face
+stay one request.
+It also inlines the stylesheets of the translated pages (see inline_css), without comments.
 Run after editing anything in site/assets/ or site/embeds/:
 
     python3 tools/stamp-assets.py
@@ -18,7 +21,8 @@ from urllib.parse import urlsplit, parse_qsl, urlencode
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, 'site')
-ATTR = re.compile(r'''((?:href|src|data-src|srcset|poster)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg|mp4)(?:\?[^"#]*)?)(")''')
+ATTR = re.compile(r'''((?:href|src|data-src|srcset|poster)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg|mp4|woff2)(?:\?[^"#]*)?)(")''')
+FONT_URL = re.compile(r'''(url\()([^)'"#]+\.woff2(?:\?[^)'"#]*)?)(\))''')
 
 
 def digest(path):
@@ -43,6 +47,7 @@ def stamp(page):
         return m.group(1) + parts.path + '?' + urlencode(query) + m.group(3)
 
     out = ATTR.sub(repl, html)
+    out = FONT_URL.sub(repl, out)
     if out != html:
         with open(page, 'w', encoding='utf-8') as f:
             f.write(out)
@@ -57,6 +62,8 @@ def inline_css(page):
 
     def block(prefix, name):
         css = open(os.path.join(SITE, 'assets', 'css', name + '.css'), encoding='utf-8').read()
+        css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)                  # comments stay in the source only
+        css = re.sub(r'\n\s*\n+', '\n', css)
         body = css.replace('url(../fonts/', 'url(%sassets/fonts/' % prefix).replace('</style', '<\\/style')
         return '<style id="%s-css" data-prefix="%s">\n%s\n</style>' % (name, prefix, body.strip())
     out = re.sub(r'<link rel="stylesheet" href="([./]*)assets/css/([a-z-]+)\.css[^"]*" data-inline>', lambda m: block(m.group(1), m.group(2)), html)

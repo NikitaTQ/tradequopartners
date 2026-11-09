@@ -78,7 +78,7 @@ def render(i, p):
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <script>try{{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}}catch(e){{}}</script>
 <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/site.css" data-inline>
 </head>
 <body>
 <div class="tq-loader" data-loader hidden>
