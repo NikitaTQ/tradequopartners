@@ -1300,6 +1300,32 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-pc__per button { height: 38px; }
   .tq-pc__go { height: 48px; font-size: 15px; }
 }
+
+/* ---- landing: partner events (Partner_Event_Toasts) ---------------------------------------------------
+   Glass pills that slide up from the bottom-left corner while the first screen is in view (desktops from
+   1280px, where the corner left of the form is free): three at a time, the newest at the bottom, the oldest
+   fading out. A red dot marks money; amounts from $7,000 get the dark pill. Inter, like all new type. Under
+   the stack a small caption: the lines are examples. startToasts in landing.js places and replaces them. */
+.tq-toasts { position: fixed; left: 16px; bottom: 16px; z-index: 50; width: min(460px, calc(50vw - 300px)); display: none; flex-direction: column; align-items: flex-start;
+  font-family: 'Inter', 'DM Sans', system-ui, sans-serif; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
+@media (min-width: 1280px) { .tq-toasts { display: flex; } }
+.tq-toasts.is-on { opacity: 1; visibility: visible; transition: opacity .45s ease; }
+.tq-toasts__stack { position: relative; width: 100%; height: 0; }
+.tq-toast { position: absolute; left: 0; bottom: 0; box-sizing: border-box; width: max-content; max-width: 100%; min-height: 30px; display: flex; align-items: center; gap: 7px;
+  padding: 6px 12px 6px 11px; border-radius: 15px; font-size: 12px; line-height: 1.4; letter-spacing: -.005em; color: #45464c; pointer-events: auto; transform-origin: 0 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.5) 100%); -webkit-backdrop-filter: blur(14px) saturate(170%); backdrop-filter: blur(14px) saturate(170%);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.75), 0 1px 2px rgba(30,34,44,.06), 0 8px 16px -9px rgba(30,34,44,.35);
+  transition: transform .6s cubic-bezier(.2,.9,.25,1.05), opacity .45s ease, filter .45s ease; will-change: transform, opacity; }
+.tq-toast > i { flex: none; width: 4px; height: 4px; border-radius: 50%; background: #a9abb1; }
+.tq-toast > i.is-money { background: #e7131b; }
+.tq-toast b { font-weight: 700; color: #141416; }
+.tq-toast b.v { font-variant-numeric: tabular-nums; unicode-bidi: isolate; direction: ltr; }   /* $1,234 reads the same in Arabic */
+[dir="rtl"] .tq-toasts { align-items: flex-end; }   /* the caption stays in the corner, under the pills */
+.tq-toast.is-big { color: #b9bbc1; background: linear-gradient(180deg, rgba(38,38,43,.88) 0%, rgba(12,12,14,.92) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.06), 0 8px 16px -9px rgba(10,10,14,.55); }
+.tq-toast.is-big b { color: #fff; }
+.tq-toasts__cap { margin: 8px 0 0 4px; font-size: 11px; line-height: 1.3; color: #6b6b73; }
+@media (prefers-reduced-motion: reduce) { .tq-toast, .tq-toasts { transition: none; } }
 </style>
 <style id="i18n-fonts">
 @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 200 800; font-display: swap; src: url(../assets/fonts/intl/manrope-200-800-cyrillic-ext.woff2) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
@@ -1497,6 +1523,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       <div data-crys-cta="" style="display: flex; justify-content: center; margin-top: clamp(18px, 2.6vw, 32px);"><a class="tq-crys" href="#calculator" aria-label="Розрахуйте свій дохід"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">Розрахуйте свій дохід</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a></div>
     </div>
   </section>
+
+  <!-- Partner events (Partner_Event_Toasts): a short line of events in the bottom-left corner while the first
+       screen is in view, desktops from 1280px (startToasts in landing.js; the wording per language in
+       assets/js/toasts/<lang>.js, loaded when it first shows). The caption says the lines are examples. -->
+  <div class="tq-toasts" data-toasts data-src="../assets/js/toasts/uk.js?v=613f5d1b95" aria-hidden="true">
+    <div class="tq-toasts__stack" data-toasts-stack></div>
+    <span class="tq-toasts__cap" data-toasts-cap></span>
+  </div>
 
   <!-- How it works: sign-up to first payout in three steps (landing.js startHowLine drives the line).
      Shared by the landing, Partner Programs and Commission Plan: the button scrolls to the form on the
@@ -1956,6 +1990,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=4ea5e72e6c" defer></script>
+<script src="../assets/js/landing.js?v=4a6bdad2df" defer></script>
 </body>
 </html>
