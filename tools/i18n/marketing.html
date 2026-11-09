@@ -54,8 +54,8 @@
     </section>
     <div class="tq-mth-tail" aria-hidden="true"></div>
 
-    <!-- Promo materials library (Marketing_Materials_Bento_Glass): the formats partners get, as glass tiles
-         with a mock-up each, and the "Need something specific?" tile -->
+    <!-- Promo materials library (Marketing_Materials_Bento_v3): the formats partners get as tiles on a light
+         panel, each with a mock-up of its format; Videos dark, and the red "Need something specific?" tile -->
     <section id="library" class="tp-sec" data-screen-label="Promo materials">
       <div class="tp-wrap">
         <div class="tp-head">
@@ -63,7 +63,6 @@
           <p class="tp-sub">{{mt.lib.sub}}</p>
         </div>
         <div class="tp-bento">
-          <span class="tp-bento__ln tp-bento__ln--1" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--2" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--3" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--4" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--5" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--6" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--7" aria-hidden="true"></span>
           <div class="tp-bento__grid">
             <article class="tp-bento__t tp-bento__t--banner">
               <span class="tp-bento__n">01</span>
@@ -124,7 +123,6 @@
             <article class="tp-bento__t tp-bento__t--gif">
               <span class="tp-bento__n">04</span>
               <h3>{{mt.lib.4.t}}</h3>
-              <p>{{mt.lib.4.d}}</p>
               <div class="tp-bm tp-bm--gif" aria-hidden="true">
                 <span class="tp-bm__shadow"></span>
                 <div style="position:absolute;left:78px;top:2px;width:150px;height:110px;border-radius:12px;background:#e4e5e8;transform:rotate(6deg);"></div>
@@ -139,7 +137,6 @@
             <article class="tp-bento__t tp-bento__t--social">
               <span class="tp-bento__n">05</span>
               <h3>{{mt.lib.5.t}}</h3>
-              <p>{{mt.lib.5.d}}</p>
               <div class="tp-bm tp-bm--social" aria-hidden="true">
                 <span class="tp-bm__shadow"></span>
                 <div style="position:absolute;left:142px;top:8px;width:92px;height:150px;border-radius:14px;background:linear-gradient(170deg,#f0262e,#b70e15);transform:rotate(8deg);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 14px 22px -12px rgba(183,14,21,.6);padding:12px 10px;box-sizing:border-box;display:flex;flex-direction:column;color:#fff;">
@@ -172,11 +169,11 @@
                 </div>
               </div>
             </article>
-            <a class="tp-bento__t tp-bento__t--dark tp-bento__ask" href="{{signupHref}}"{{signupNav}}>
-              <span class="tp-bento__ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></span>
+            <a class="tp-bento__t tp-bento__ask" href="{{signupHref}}"{{signupNav}}>
+              <span class="tp-bento__tag">{{mt.lib.custom.tag}}</span>
               <h3>{{mt.lib.custom.t}}</h3>
               <p>{{mt.lib.custom.d}}</p>
-              <span class="tp-bento__go">{{mt.lib.custom.cta}} <span aria-hidden="true">→</span></span>
+              <span class="tp-bento__go">{{mt.lib.custom.cta}}<span class="tp-bento__arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
             </a>
           </div>
         </div>

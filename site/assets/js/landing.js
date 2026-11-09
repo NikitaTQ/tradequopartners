@@ -184,7 +184,7 @@
       ['usd', 150, 3800], [''], ['num', 8, 90], ['num', 5, 70], ['usd', 90, 2400], [''], ['usd', 10000, 90000], ['num', 10, 160], ['usd', 300, 5000],
       ['usd', 500, 7000], ['usd', 300, 6000], ['usd', 80, 1900], ['num', 6, 60], ['num', 2, 9], ['num', 12, 140], ['num', 8, 95], ['usd', 1200, 9000],
       ['usd', 40, 900], ['usd', 200, 5000], ['num', 100, 999], [''], ['num', 200, 4000], [''], ['usd', 500, 8000], ['usd', 50, 1200]];
-    const MAX = 3, GAP = 6, EVERY = 3200;
+    const MAX = 3, GAP = 9, EVERY = 3200;
     const rnd = (a, b) => a + Math.random() * (b - a), pick = (a) => a[Math.floor(Math.random() * a.length)];
     const fmt = (n) => Math.round(n).toLocaleString('en-US');
     let words = null, loading = false, deck = [], timer = 0, inView = false, hover = false;

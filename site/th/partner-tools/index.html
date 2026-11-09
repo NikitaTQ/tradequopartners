@@ -1303,19 +1303,19 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* ---- landing: partner events (Partner_Event_Toasts) ---------------------------------------------------
    Glass pills that slide up from the bottom-left corner while the first screen is in view (desktops from
    1280px, where the corner left of the form is free): three at a time, the newest at the bottom, the oldest
-   fading out. A red dot marks money; amounts from $7,000 get the dark pill. Inter, like all new type. Under
+   fading out (1.5x the design's size: 18px text). A red dot marks money; amounts from $7,000 get the dark pill. Inter, like all new type. Under
    the stack a small caption: the lines are examples. startToasts in landing.js places and replaces them. */
-.tq-toasts { position: fixed; left: 16px; bottom: 16px; z-index: 50; width: min(460px, calc(50vw - 300px)); display: none; flex-direction: column; align-items: flex-start;
+.tq-toasts { position: fixed; left: 16px; bottom: 16px; z-index: 50; width: min(640px, calc(50vw - 290px)); display: none; flex-direction: column; align-items: flex-start;
   font-family: 'Inter', 'DM Sans', system-ui, sans-serif; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
 @media (min-width: 1280px) { .tq-toasts { display: flex; } }
 .tq-toasts.is-on { opacity: 1; visibility: visible; transition: opacity .45s ease; }
 .tq-toasts__stack { position: relative; width: 100%; height: 0; }
-.tq-toast { position: absolute; left: 0; bottom: 0; box-sizing: border-box; width: max-content; max-width: 100%; min-height: 30px; display: flex; align-items: center; gap: 7px;
-  padding: 6px 12px 6px 11px; border-radius: 15px; font-size: 12px; line-height: 1.4; letter-spacing: -.005em; color: #45464c; pointer-events: auto; transform-origin: 0 100%;
+.tq-toast { position: absolute; left: 0; bottom: 0; box-sizing: border-box; width: max-content; max-width: 100%; min-height: 45px; display: flex; align-items: center; gap: 10px;
+  padding: 9px 18px 9px 16px; border-radius: 22px; font-size: 18px; line-height: 1.4; letter-spacing: -.005em; color: #45464c; pointer-events: auto; transform-origin: 0 100%;
   background: linear-gradient(180deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.5) 100%); -webkit-backdrop-filter: blur(14px) saturate(170%); backdrop-filter: blur(14px) saturate(170%);
   box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.75), 0 1px 2px rgba(30,34,44,.06), 0 8px 16px -9px rgba(30,34,44,.35);
   transition: transform .6s cubic-bezier(.2,.9,.25,1.05), opacity .45s ease, filter .45s ease; will-change: transform, opacity; }
-.tq-toast > i { flex: none; width: 4px; height: 4px; border-radius: 50%; background: #a9abb1; }
+.tq-toast > i { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #a9abb1; }
 .tq-toast > i.is-money { background: #e7131b; }
 .tq-toast b { font-weight: 700; color: #141416; }
 .tq-toast b.v { font-variant-numeric: tabular-nums; unicode-bidi: isolate; direction: ltr; }   /* $1,234 reads the same in Arabic */
@@ -1323,7 +1323,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-toast.is-big { color: #b9bbc1; background: linear-gradient(180deg, rgba(38,38,43,.88) 0%, rgba(12,12,14,.92) 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.06), 0 8px 16px -9px rgba(10,10,14,.55); }
 .tq-toast.is-big b { color: #fff; }
-.tq-toasts__cap { margin: 8px 0 0 4px; font-size: 11px; line-height: 1.3; color: #6b6b73; }
+.tq-toasts__cap { margin: 10px 0 0 6px; font-size: 13px; line-height: 1.3; color: #6b6b73; }
 @media (prefers-reduced-motion: reduce) { .tq-toast, .tq-toasts { transition: none; } }
 </style>
 <style id="partner-css" data-prefix="../../">
@@ -1438,7 +1438,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
 @media (min-width: 961px) { .tp-programs { gap: 24px; } }   /* desktops: the design's 24px between the glass cards */
 .tp-progdots { display: none; }
-/* Program cards (Partner_Cards_7a): a silver panel crossed by a red and a black ribbon (.tp-ribbons), and on it
+/* Program cards (Partner_Cards_7a): a silver panel crossed by two black ribbons (.tp-ribbons), and on it
    three cards of light frosted glass: the number, the program's name and a still of its silver 3D object
    (assets/programs/), then the figure, the points and the CTAs. Type: the site's Syncopate + Inter scheme. The
    block has no H1, so it is all Inter (variable, 300–700); figures in tabular numerals; on phones nothing is
@@ -2191,102 +2191,87 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-earn__dot { width: 40px; height: 40px; }
 }
 
-/* ---- Marketing Tools: promo materials (Marketing_Materials_Bento_Glass) --------------------------------------
-   A grey panel crossed by thin red, black and steel streaks; over it a bento of frosted glass tiles (two dark),
-   each with a mock-up of its format (.tp-bm, 260x180, placed per tile); the last tile asks the manager.
-   Desktops: 4 columns x 3 rows of 250px. Tablets and phones: 2 columns. */
-.tp-bento { position: relative; overflow: hidden; max-width: 1120px; box-sizing: border-box; margin: clamp(28px, 4vw, 48px) auto 0; padding: 24px; border-radius: 28px; background: #ecedef; }
-.tp-bento__ln { position: absolute; display: block; border-radius: 999px; pointer-events: none; }
-.tp-bento__ln--1 { left: -120px; top: 560px; width: 1300px; height: 10px; background: linear-gradient(90deg, rgba(231,19,27,0), #e7131b 25%, #ff4148 60%, rgba(231,19,27,0)); transform: rotate(-27deg); }
-.tp-bento__ln--2 { left: 520px; top: 120px; width: 760px; height: 3px; background: linear-gradient(90deg, rgba(10,10,10,0), #0a0a0a 40%, rgba(10,10,10,0)); transform: rotate(38deg); }
-.tp-bento__ln--3 { left: -80px; top: 180px; width: 820px; height: 2px; background: linear-gradient(90deg, rgba(231,19,27,0), #e7131b 45%, rgba(231,19,27,0)); transform: rotate(9deg); }
-.tp-bento__ln--4 { left: 180px; top: 420px; width: 1100px; height: 2px; background: linear-gradient(90deg, rgba(94,99,107,0), #5e636b 35%, #9aa0a8 70%, rgba(94,99,107,0)); transform: rotate(-6deg); }
-.tp-bento__ln--5 { left: 640px; top: 520px; width: 560px; height: 6px; background: linear-gradient(90deg, rgba(231,19,27,0), #e7131b 50%, rgba(231,19,27,0)); transform: rotate(62deg); }
-.tp-bento__ln--6 { left: -60px; top: 640px; width: 620px; height: 3px; background: linear-gradient(90deg, rgba(10,10,10,0), #0a0a0a 50%, rgba(10,10,10,0)); transform: rotate(-48deg); }
-.tp-bento__ln--7 { left: 760px; top: 40px; width: 420px; height: 2px; background: linear-gradient(90deg, rgba(94,99,107,0), #7a7f87 50%, rgba(94,99,107,0)); transform: rotate(-15deg); }
-.tp-bento__grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, 250px); gap: 16px; }
-.tp-bento__t { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding: 24px; border-radius: 22px; color: #0a0a0a; text-decoration: none;
-  background: linear-gradient(160deg, rgba(255,255,255,.78), rgba(255,255,255,.42)); -webkit-backdrop-filter: blur(26px) saturate(160%); backdrop-filter: blur(26px) saturate(160%);
-  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.65), 0 0 0 1px rgba(18,22,30,.05), 0 28px 44px -32px rgba(18,22,30,.4); }
-.tp-bento__t--dark { color: #fff; background: linear-gradient(160deg, rgba(38,40,46,.8), rgba(10,10,12,.88)); -webkit-backdrop-filter: blur(26px) saturate(140%); backdrop-filter: blur(26px) saturate(140%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.24), inset 0 0 0 1px rgba(255,255,255,.08), 0 28px 44px -26px rgba(0,0,0,.55); }
-.tp-bento__t--dark::before { content: ''; position: absolute; left: 12%; right: 12%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); }
-.tp-bento__n { position: relative; font-family: 'Fragment Mono', monospace; font-size: 12px; color: #e7131b; }
+/* ---- Partner Tools: promo materials (Marketing_Materials_Bento_v3) -------------------------------------------
+   A light panel with a bento of white tiles, each with a mock-up of its format (.tp-bm, 260x180, placed per tile);
+   Videos is dark with a red glow, the last tile red and asks the manager. Type in Inter (the site's main pair).
+   Desktops: 4 columns x 3 rows of 190px, 980px wide. Tablets: 2 columns. Phones: 2 columns, no text under 16px. */
+.tp-bento { position: relative; max-width: 980px; box-sizing: border-box; margin: clamp(28px, 4vw, 48px) auto 0; padding: 12px; border-radius: 26px;
+  background: linear-gradient(180deg, #f6f6f8 0%, #e3e4e8 100%); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.06), 0 30px 60px -40px rgba(18,22,30,.35); }
+.tp-bento__grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, 190px); gap: 12px; font-family: 'Inter', 'DM Sans', system-ui, sans-serif; }
+.tp-bento__t { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding: 22px; border-radius: 18px; color: #0a0a0a; text-decoration: none;
+  background: linear-gradient(160deg, #fff 0%, #f4f4f6 100%); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.05), 0 14px 28px -22px rgba(18,22,30,.35);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.tp-bento__t:hover { transform: translateY(-3px); }
+.tp-bento__n { position: relative; font-size: 11px; line-height: 1.2; font-weight: 600; font-variant-numeric: tabular-nums; color: #e7131b; }
+.tp-bento__t h3 { position: relative; z-index: 1; margin: 0; align-self: flex-start; font-size: 22px; line-height: 1; font-weight: 700; letter-spacing: -.025em; }
+.tp-bento__t p { position: relative; z-index: 1; margin: 0; max-width: 150px; font-size: 13px; line-height: 1.45; color: #55585f; text-wrap: pretty; }
+.tp-bento__t--banner { grid-column: 1 / 3; grid-row: 1; }
+.tp-bento__t--landing { grid-column: 3 / 5; grid-row: 1; }
+.tp-bento__t--video { grid-column: 1; grid-row: 2 / 4; }
+.tp-bento__t--gif { grid-column: 2; grid-row: 2; padding: 20px; gap: 5px; }
+.tp-bento__t--social { grid-column: 2; grid-row: 3; padding: 20px; gap: 5px; }
+.tp-bento__t--gif h3, .tp-bento__t--social h3 { font-size: 18px; line-height: 1.05; letter-spacing: -.02em; }
+.tp-bento__t--brand { grid-column: 3 / 5; grid-row: 2; }
+.tp-bento__t--dark { color: #fff; background: radial-gradient(70% 45% at 50% 78%, rgba(231,19,27,.42) 0%, rgba(231,19,27,0) 70%), linear-gradient(165deg, #24252a 0%, #0a0a0b 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 18px 34px -22px rgba(0,0,0,.6); }
 .tp-bento__t--dark .tp-bento__n { color: #ff4148; }
-.tp-bento__t h3 { position: relative; margin: 0; font-size: 20px; line-height: 1.15; font-weight: 700; letter-spacing: -.02em; }
-.tp-bento__t p { position: relative; margin: 0; font-size: 13px; line-height: 1.45; color: #4a4d54; text-wrap: pretty; }
 .tp-bento__t--dark p { color: #b4b7bd; }
-/* the three bigger tiles */
-.tp-bento__t--banner { grid-column: 1 / 3; grid-row: 1 / 3; padding: 30px; gap: 8px; }
-.tp-bento__t--banner h3 { font-size: 30px; line-height: 1; letter-spacing: -.03em; }
-.tp-bento__t--banner p { max-width: 260px; font-size: 15px; line-height: 1.5; }
-.tp-bento__t--landing { grid-column: 3 / 5; grid-row: 1; padding: 28px; gap: 8px; }
-.tp-bento__t--brand { grid-column: 2 / 4; grid-row: 3; padding: 28px; gap: 8px; }
-.tp-bento__t--landing h3, .tp-bento__t--brand h3 { font-size: 22px; }
-.tp-bento__t--landing p, .tp-bento__t--brand p { max-width: 200px; font-size: 14px; line-height: 1.5; }
-.tp-bento__t--video { grid-column: 3; grid-row: 2; }
-.tp-bento__t--gif { grid-column: 4; grid-row: 2; }
-.tp-bento__t--social { grid-column: 1; grid-row: 3; }
-.tp-bento__t--social p { max-width: 200px; }
-.tp-bento__ask { grid-column: 4; grid-row: 3; gap: 10px; cursor: pointer; transition: transform .4s cubic-bezier(.2,.8,.2,1); }
-.tp-bento__ask:hover, .tp-bento__ask:focus-visible { color: #fff; transform: translateY(-4px); }
-.tp-bento__ask:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
-.tp-bento__ic { width: 44px; height: 44px; flex: none; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 35% 30%, #ff5a60, #e7131b 55%, #a50c12); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 8px 16px -6px rgba(231,19,27,.6); }
-.tp-bento__ask h3 { margin-top: auto; }
-.tp-bento__go { position: relative; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #ff4148; }
-.tp-bento__go span { font-size: 16px; }
-[dir="rtl"] .tp-bento__go span { transform: scaleX(-1); }
-@media (prefers-reduced-motion: reduce) { .tp-bento__ask { transition: none; } }
+.tp-bento__ask { grid-column: 3 / 5; grid-row: 3; justify-content: space-between; gap: 8px; padding: 24px; color: #fff; cursor: pointer;
+  background: radial-gradient(60% 90% at 85% 10%, #ff5a60 0%, rgba(255,90,96,0) 60%), linear-gradient(150deg, #e7131b 0%, #b80e15 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 22px 40px -24px rgba(231,19,27,.75); }
+.tp-bento__ask:hover, .tp-bento__ask:focus-visible { color: #fff; }
+.tp-bento__ask:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
+.tp-bento__tag { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #fff; }
+.tp-bento__ask h3 { max-width: 300px; font-size: 26px; line-height: 1.02; letter-spacing: -.03em; }
+.tp-bento__ask p { max-width: 300px; font-size: 13.5px; color: #fff; }
+.tp-bento__go { position: relative; align-self: flex-start; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 6px 0 16px; border-radius: 999px; background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.tp-bento__arr { flex: none; width: 28px; height: 28px; border-radius: 50%; background: #0a0a0a; display: flex; align-items: center; justify-content: center; }
+[dir="rtl"] .tp-bento__arr svg { transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) { .tp-bento__t { transition: none; } .tp-bento__t:hover { transform: none; } }
 /* the mock-ups: drawn at 260x180 and placed per tile (the design's positions; mirrored in RTL) */
 .tp-bm { position: absolute; width: 260px; height: 180px; font-family: 'DM Sans', sans-serif; color: #0a0a0a; pointer-events: none; }
 .tp-bm > * { direction: ltr; text-align: left; }   /* the drawing itself is never mirrored; the box takes the page's side (RTL) */
 .tp-bm__shadow { position: absolute; left: 30px; right: 30px; bottom: -6px; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(18,22,30,.28), rgba(18,22,30,0)); }
-.tp-bm--banner { inset-inline-end: 44px; bottom: 44px; transform: scale(1.3); transform-origin: right bottom; }
-.tp-bm--landing { inset-inline-end: -20px; top: 40px; transform: perspective(900px) rotateY(-18deg) scale(1.2); transform-origin: right top; }
-.tp-bm--video { inset-inline-start: 24px; bottom: -34px; transform: scale(.92); transform-origin: left bottom; }
-.tp-bm--gif { inset-inline-start: -10px; bottom: -30px; transform: scale(.92); transform-origin: left bottom; }
-.tp-bm--social { inset-inline-start: 0; bottom: -96px; transform: scale(.9); transform-origin: left bottom; }
-.tp-bm--brand { inset-inline-end: 16px; bottom: 20px; transform: scale(1.05); transform-origin: right bottom; }   /* a touch smaller than the design: clear of a one-line title */
-[dir="rtl"] .tp-bm--banner, [dir="rtl"] .tp-bm--brand { transform-origin: left bottom; }
-[dir="rtl"] .tp-bm--landing { transform: perspective(900px) rotateY(18deg) scale(1.2); transform-origin: left top; }
-[dir="rtl"] .tp-bm--video, [dir="rtl"] .tp-bm--gif, [dir="rtl"] .tp-bm--social { transform-origin: right bottom; }
-/* tablets: two columns, the big tiles across both */
+.tp-bm--banner { inset-inline-end: -6px; bottom: -14px; transform: scale(.98); transform-origin: right bottom; }
+.tp-bm--landing { inset-inline-end: -40px; top: 26px; transform: perspective(900px) rotateY(-16deg) scale(1.02); transform-origin: right top; }
+.tp-bm--video { inset-inline-start: 14px; bottom: 24px; transform: scale(.78); transform-origin: left bottom; }
+.tp-bm--gif { inset-inline-end: -70px; bottom: -56px; transform: scale(.72); transform-origin: right bottom; }
+.tp-bm--social { inset-inline-start: 14px; bottom: -84px; transform: scale(.72); transform-origin: left bottom; }
+.tp-bm--brand { inset-inline-end: -10px; bottom: -24px; transform: scale(.82); transform-origin: right bottom; }
+[dir="rtl"] .tp-bm--banner, [dir="rtl"] .tp-bm--gif, [dir="rtl"] .tp-bm--brand { transform-origin: left bottom; }
+[dir="rtl"] .tp-bm--landing { transform: perspective(900px) rotateY(16deg) scale(1.02); transform-origin: left top; }
+[dir="rtl"] .tp-bm--video, [dir="rtl"] .tp-bm--social { transform-origin: right bottom; }
+/* tablets: two columns; the wide tiles across both, Videos down the left beside GIF and Social */
 @media (max-width: 1099px) {
-  .tp-bento { padding: 20px; }
-  .tp-bento__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: 250px; grid-auto-flow: dense; gap: 14px; }
-  .tp-bento__t--banner, .tp-bento__t--landing, .tp-bento__t--brand { grid-column: 1 / -1; grid-row: auto; }
-  .tp-bento__t--video, .tp-bento__t--gif, .tp-bento__t--social, .tp-bento__ask { grid-column: auto; grid-row: auto; }
-  .tp-bento__t--banner { grid-row: span 1; }
-  .tp-bm--banner { transform: scale(1.1); bottom: 30px; inset-inline-end: 30px; }
-  .tp-bm--landing { transform: perspective(900px) rotateY(-18deg) scale(1.1); }
-  [dir="rtl"] .tp-bm--landing { transform: perspective(900px) rotateY(18deg) scale(1.1); }
-  .tp-bm--brand { transform: scale(1.05); }
+  .tp-bento__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: 190px; }
+  .tp-bento__t--banner, .tp-bento__t--landing, .tp-bento__t--brand, .tp-bento__ask { grid-column: 1 / -1; grid-row: auto; }
+  .tp-bento__t--video { grid-column: 1; grid-row: span 2; }
+  .tp-bento__t--gif, .tp-bento__t--social { grid-column: 2; grid-row: auto; }
 }
-/* phones: two narrow columns; the mock-ups smaller */
+/* phones: the same, smaller mock-ups; text from 16px */
 @media (max-width: 640px) {
   .tp-bento { margin-top: 22px; padding: 10px; border-radius: 22px; }
-  .tp-bento__grid { grid-auto-rows: 214px; gap: 10px; }
-  .tp-bento__t { padding: 16px; gap: 4px; border-radius: 18px; }
-  .tp-bento__t h3 { font-size: 16.5px; }
-  .tp-bento__t p { font-size: 12.5px; line-height: 1.4; }
-  .tp-bento__t--banner, .tp-bento__t--landing, .tp-bento__t--brand { padding: 18px; gap: 6px; }
-  .tp-bento__t--banner h3 { font-size: 24px; }
-  .tp-bento__t--banner p, .tp-bento__t--landing p, .tp-bento__t--brand p { max-width: 150px; font-size: 13px; line-height: 1.45; }
-  .tp-bento__t--landing h3, .tp-bento__t--brand h3 { font-size: 19px; }
-  .tp-bm--banner { transform: scale(.62); bottom: 14px; inset-inline-end: 12px; }
-  .tp-bento__t--social, .tp-bento__ask { grid-column: 1 / -1; }   /* full width: room for the text */
-  .tp-bento__t--social p, .tp-bento__ask p { max-width: 170px; }
-  .tp-bm--landing { inset-inline-end: -36px; top: 52px; transform: perspective(900px) rotateY(-18deg) scale(.8); }
-  [dir="rtl"] .tp-bm--landing { transform: perspective(900px) rotateY(18deg) scale(.8); }
-  .tp-bm--video { inset-inline-start: 10px; bottom: -40px; transform: scale(.62); }
-  .tp-bm--gif { inset-inline-start: -12px; bottom: -26px; transform: scale(.62); }
-  .tp-bm--social { inset-inline-start: auto; inset-inline-end: 0; bottom: -60px; transform: scale(.72); transform-origin: right bottom; }
-  [dir="rtl"] .tp-bm--social { transform-origin: left bottom; }
-  .tp-bm--brand { inset-inline-end: 8px; bottom: 12px; transform: scale(.62); }
-  .tp-bento__ic { width: 38px; height: 38px; border-radius: 10px; }
-  .tp-bento__ask { gap: 6px; }
-  .tp-bento__go { font-size: 13px; }
+  .tp-bento__grid { grid-auto-rows: minmax(200px, auto); gap: 10px; }   /* a tile grows with long text (the mock-ups don't count) */
+  .tp-bento__t { padding: 16px; gap: 4px; border-radius: 16px; }
+  .tp-bento__n { font-size: 16px; }
+  .tp-bento__t h3 { font-size: 20px; }
+  .tp-bento__t p { max-width: 160px; font-size: 16px; line-height: 1.35; }
+  .tp-bento__t--gif, .tp-bento__t--social { padding: 14px; }
+  .tp-bento__t--gif h3, .tp-bento__t--social h3 { font-size: 17px; }
+  .tp-bento__t--video p { max-width: none; }
+  .tp-bento__ask { padding: 18px; gap: 12px; }
+  .tp-bento__tag { font-size: 16px; letter-spacing: .1em; }
+  .tp-bento__ask h3 { font-size: 24px; }
+  .tp-bento__ask p { font-size: 16px; }
+  .tp-bento__go { height: auto; min-height: 44px; max-width: 100%; box-sizing: border-box; padding: 6px 6px 6px 16px; font-size: 16px; line-height: 1.25; white-space: normal; }   /* a long label wraps inside the pill */
+  .tp-bm--banner { inset-inline-end: -12px; bottom: -28px; transform: scale(.6); }
+  .tp-bento__t--banner { min-height: 224px; }   /* room for a 4-line description above the mock-up */
+  .tp-bm--landing { inset-inline-end: -56px; top: 64px; transform: perspective(900px) rotateY(-16deg) scale(.72); }
+  [dir="rtl"] .tp-bm--landing { transform: perspective(900px) rotateY(16deg) scale(.72); }
+  .tp-bm--video { inset-inline-start: 4px; bottom: 16px; transform: scale(.6); }
+  .tp-bm--gif { inset-inline-end: -84px; bottom: -64px; transform: scale(.6); }
+  .tp-bm--social { inset-inline-start: 4px; bottom: -86px; transform: scale(.6); }
+  .tp-bm--brand { inset-inline-end: -16px; bottom: -30px; transform: scale(.56); }
 }
 
 /* ---- Marketing Tools: TradingView Premium on us (TradingView_Premium_Invoice_1) ---------------------------------------
@@ -2701,8 +2686,8 @@ h1, h2 { line-height: 1.2 !important; }
     </section>
     <div class="tq-mth-tail" aria-hidden="true"></div>
 
-    <!-- Promo materials library (Marketing_Materials_Bento_Glass): the formats partners get, as glass tiles
-         with a mock-up each, and the "Need something specific?" tile -->
+    <!-- Promo materials library (Marketing_Materials_Bento_v3): the formats partners get as tiles on a light
+         panel, each with a mock-up of its format; Videos dark, and the red "Need something specific?" tile -->
     <section id="library" class="tp-sec" data-screen-label="Promo materials">
       <div class="tp-wrap">
         <div class="tp-head">
@@ -2710,7 +2695,6 @@ h1, h2 { line-height: 1.2 !important; }
           <p class="tp-sub">แบนเนอร์ แลนดิ้งเพจ วิดีโอ และอื่น ๆ พร้อมใช้งาน</p>
         </div>
         <div class="tp-bento">
-          <span class="tp-bento__ln tp-bento__ln--1" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--2" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--3" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--4" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--5" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--6" aria-hidden="true"></span><span class="tp-bento__ln tp-bento__ln--7" aria-hidden="true"></span>
           <div class="tp-bento__grid">
             <article class="tp-bento__t tp-bento__t--banner">
               <span class="tp-bento__n">01</span>
@@ -2771,7 +2755,6 @@ h1, h2 { line-height: 1.2 !important; }
             <article class="tp-bento__t tp-bento__t--gif">
               <span class="tp-bento__n">04</span>
               <h3>ภาพเคลื่อนไหว GIF</h3>
-              <p>แบนเนอร์เคลื่อนไหวที่ดึงดูดสายตา</p>
               <div class="tp-bm tp-bm--gif" aria-hidden="true">
                 <span class="tp-bm__shadow"></span>
                 <div style="position:absolute;left:78px;top:2px;width:150px;height:110px;border-radius:12px;background:#e4e5e8;transform:rotate(6deg);"></div>
@@ -2786,7 +2769,6 @@ h1, h2 { line-height: 1.2 !important; }
             <article class="tp-bento__t tp-bento__t--social">
               <span class="tp-bento__n">05</span>
               <h3>โพสต์โซเชียลมีเดีย</h3>
-              <p>ภาพและข้อความพร้อมโพสต์</p>
               <div class="tp-bm tp-bm--social" aria-hidden="true">
                 <span class="tp-bm__shadow"></span>
                 <div style="position:absolute;left:142px;top:8px;width:92px;height:150px;border-radius:14px;background:linear-gradient(170deg,#f0262e,#b70e15);transform:rotate(8deg);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 14px 22px -12px rgba(183,14,21,.6);padding:12px 10px;box-sizing:border-box;display:flex;flex-direction:column;color:#fff;">
@@ -2819,11 +2801,11 @@ h1, h2 { line-height: 1.2 !important; }
                 </div>
               </div>
             </article>
-            <a class="tp-bento__t tp-bento__t--dark tp-bento__ask" href="../#signup" data-page-link data-label="กำลังโหลด · หน้าแรก">
-              <span class="tp-bento__ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></span>
+            <a class="tp-bento__t tp-bento__ask" href="../#signup" data-page-link data-label="กำลังโหลด · หน้าแรก">
+              <span class="tp-bento__tag">ตามสั่ง</span>
               <h3>ต้องการสื่อเฉพาะใช่ไหม</h3>
               <p>ผู้จัดการส่วนตัวของคุณช่วยเตรียมสื่อให้เหมาะกับผู้ติดตามของคุณได้</p>
-              <span class="tp-bento__go">สอบถามผู้จัดการของคุณ <span aria-hidden="true">→</span></span>
+              <span class="tp-bento__go">สอบถามผู้จัดการของคุณ<span class="tp-bento__arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
             </a>
           </div>
         </div>
@@ -3182,7 +3164,7 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=4a6bdad2df" defer></script>
+<script src="../../assets/js/landing.js?v=1b8fe07659" defer></script>
 <script type="module" src="../../assets/js/mt-hero.js?v=798f21687d"></script>
 </body>
 </html>
