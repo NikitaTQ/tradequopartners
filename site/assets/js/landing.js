@@ -162,11 +162,11 @@
   }
 
   /* ---- sticky header: shorter once the page scrolls, out of the way while a full-screen scene holds the screen
-   * (the landing's flip track, the Programs persona/perks scene: only where they pin, i.e. position: sticky) ---- */
+   * (the landing's flip track: only where it pins, i.e. position: sticky) ---- */
   function startStickyHead() {
     const head = $('header.tq-head');
     if (!head) return;
-    const stages = $$('[data-flip-sticky], #pf-stick');
+    const stages = $$('[data-flip-sticky]');
     let pinned = [], raf = 0;
     const measure = () => { pinned = stages.filter((s) => getComputedStyle(s).position === 'sticky').map((s) => s.parentElement); };
     const update = () => {
@@ -196,7 +196,7 @@
       /* clear of the sticky header (68px once scrolled); a stop inside a full-screen scene goes exactly there,
          the header steps aside for the scene anyway */
       const head = $('header.tq-head');
-      const off = head && !t.closest('[data-flip-track], .pf') ? 68 : 0;
+      const off = head && !t.closest('[data-flip-track]') ? 68 : 0;
       go(t.getBoundingClientRect().top + scrollY - off);
       history.replaceState(null, '', '#' + t.id);
     }));
@@ -1089,26 +1089,15 @@
     addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { W = track.firstElementChild.offsetWidth; wrap(); put(); }, 120); });
   }
 
-  /* ---- programs/: Who it's for (Who_Its_For_Drum) → Why partners choose --------------------------------
+  /* ---- programs/: Who it's for (Who_Its_For_Drum), then Why partners choose -------------------------------
    * The card: the five kinds of partner as chips and one sentence whose halves roll like a drum to the chosen
    * one. It rolls on every 3.3 s while on screen until a chip or the sentence is clicked (a click on the sentence
    * moves on one). A sentence too long for the card (a long language) steps its size down to fit.
-   * The scene, on a 326vh track (the landing's flip is 340vh: here the perks come in about a wheel step sooner),
-   * maps the scroll while #pf-stick is pinned to q 0 → 1, followed with the landing flip's lag:
-   *   0–.20   the card as it is (it keeps rolling)
-   *   .20–.38 its content fades; .22–.52 it shrinks to a slab; .28–.50 it turns black
-   *   .52     #pf-flip, black too, takes over at the card's place
-   *   .56–.86 it grows to the full screen (the landing's panel); .56–.80 the perks section shows through
-   *   .76–.94 the perks heading comes in (the landing's heading row)
-   *   .82–1   the CTA rises and the six cards are dealt in a fan (the landing's fan and CTA)
-   * Phones (<900px) and reduced motion: nothing is pinned, the perks section moves into #pf-perks-host. */
+   * The perks section below it: its six cards are dealt in a fan once it is well in view; with reduced motion they
+   * simply stand, and on phones (<900px) the CSS lays them out in a grid. */
   function startWhoFlow() {
-    const flow = document.getElementById('pf-flow');
-    if (!flow) return;
-    const stick = document.getElementById('pf-stick'), block = document.getElementById('pf-who'), flip = document.getElementById('pf-flip');
-    const perks = document.getElementById('pf-perks'), host = document.getElementById('pf-perks-host');
-    const back = document.getElementById('pf-back'), fan = document.getElementById('pf-fan');
-    if (!stick || !block || !flip || !perks || !host || !back || !fan) return;
+    const block = document.getElementById('pf-who'), fan = document.getElementById('pf-fan');
+    if (!block || !fan) return;
     const cards = $$('[data-pf-perk]', fan), N = cards.length;
 
     /* the drum */
@@ -1142,14 +1131,7 @@
       }
     };
 
-    const mq = matchMedia('(max-width: 899px), (prefers-reduced-motion: reduce)');
-    const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-    const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const out3 = (x) => 1 - Math.pow(1 - clamp(x), 3);
-    const head = perks.firstElementChild, cta = perks.lastElementChild, glass = $('.pf-glass', flip);
-    const kids = [...block.children];
-
+    const mq = matchMedia('(max-width: 899px)');
     /* the fan: six cards on an arc, dealt one after another. B is the line the cards stand on (from the
        fan's bottom): the design's 16% + 15px, raised 72px, but never so high that the cards come
        closer than G to the heading */
@@ -1174,101 +1156,16 @@
       B = Math.min(fh * 0.16 + 15 + 72, Math.max(fh * 0.16 + 15, fh - G - 340 * K));
       if (dealt != null) place(dealt);
     };
-    const mode = () => {
-      if (mq.matches) {
-        if (perks.parentNode !== host) host.appendChild(perks);
-        perks.style.opacity = ''; head.style.transform = ''; cta.style.transform = ''; head.style.opacity = ''; cta.style.opacity = '';
-        block.style.transform = ''; block.style.visibility = ''; block.style.removeProperty('--dk');
-        for (const k of kids) k.style.opacity = '';
-        deal(true);
-      } else if (perks.parentNode !== back) back.appendChild(perks);
-      sizeCards();
-    };
-    /* the card always fits the screen while pinned (sFit), and ends the shrink about 440px wide */
-    let sFit = 1;
-    const fit = () => {
-      if (mq.matches) return;
-      const t = block.style.transform;
-      block.style.transform = '';
-      sFit = Math.min(1, (innerHeight - 24) / block.offsetHeight);
-      block.style.transformOrigin = '50% 50%';
-      block.style.transform = t || 'scale(' + sFit + ')';
-    };
-
-    let qCur = 0, qTgt = 0, raf = 0;
-    const target = () => {
-      if (mq.matches) return 0;
-      const top = flow.getBoundingClientRect().top + scrollY;
-      const total = flow.offsetHeight - innerHeight;
-      return clamp((scrollY - top) / total);
-    };
-    const render = (q) => {
-      const vw = innerWidth, vh = innerHeight;
-      /* the card: content out, shrink, black */
-      const fo = 1 - ease(clamp((q - 0.2) / 0.18));
-      const sh = ease(clamp((q - 0.22) / 0.3));
-      const dk = ease(clamp((q - 0.28) / 0.22));
-      const bw = block.offsetWidth, bh = block.offsetHeight;
-      const sEnd = Math.min(sFit, Math.min(440, vw * 0.32) / bw);
-      const s = lerp(sFit, sEnd, sh);
-      block.style.transform = 'scale(' + s.toFixed(4) + ')';
-      block.style.setProperty('--dk', dk.toFixed(3));
-      for (const k of kids) k.style.opacity = fo.toFixed(3);
-      const sw = q >= 0.52 ? 1 : 0;                        // hand-off to #pf-flip
-      block.style.visibility = sw ? 'hidden' : '';
-      const hold = clamp((q - 0.52) / 0.04);
-      const eX = ease(clamp((q - 0.56) / 0.3));            // grow to the full screen
-      const c1 = out3((q - 0.76) / 0.18), c2 = out3((q - 0.82) / 0.18);   // heading, then CTA and cards
-      /* where the card stands (centred in the stage), at its final size */
-      const str = stick.getBoundingClientRect(), br = block.getBoundingClientRect();
-      const w0 = bw * sEnd, h0 = bh * sEnd;
-      const cx0 = br.left + br.width / 2 - str.left, cy0 = br.top + br.height / 2 - str.top;
-      const settle = 1 - 0.025 * Math.sin(hold * Math.PI);
-      const w = lerp(w0 * settle, vw, eX), hh = lerp(h0 * settle, vh, eX);
-      const cx = lerp(cx0, vw / 2, eX), cy = lerp(cy0, vh / 2, eX);
-      flip.style.visibility = sw > 0 ? 'visible' : 'hidden';
-      flip.style.opacity = sw;
-      flip.style.width = w + 'px'; flip.style.height = hh + 'px';
-      flip.style.borderRadius = lerp(32 * sEnd, 0, eX) + 'px';
-      flip.style.transform = 'translate(-50%,-50%) translate(' + (cx - vw / 2) + 'px,' + (cy - vh / 2) + 'px)';
-      const black = ease(clamp((q - 0.56) / 0.24));
-      glass.style.opacity = black >= 1 ? 0 : 1;
-      back.style.opacity = black;
-      head.style.opacity = c1; head.style.transform = 'translateY(' + (1 - c1) * 18 + 'px)';
-      cta.style.opacity = c2; cta.style.transform = 'translateY(' + (1 - c2) * 36 + 'px) scale(' + (0.96 + 0.04 * c2) + ')';
-      flip.classList.toggle('done', eX > 0.98);
-      flow.classList.toggle('is-dark', eX >= 1);     /* the pinned stage goes dark under the full-screen section: no light seams */
-      if (eX >= 1) { flip.style.transform = 'none'; flip.style.left = '0px'; flip.style.top = '0px'; flip.style.willChange = 'auto'; flip.style.borderRadius = '0px'; stick.style.perspective = 'none'; }
-      else { flip.style.willChange = ''; stick.style.perspective = ''; flip.style.left = ''; flip.style.top = ''; }
-      deal(q > 0.82);
-    };
-    /* q follows the scroll with the landing flip's lag (0.06 a frame at 60 fps), timed so a slow device
-       doesn't fall further behind */
-    let lastT = 0;
-    const loop = (t) => {
-      const dt = lastT ? Math.min(0.1, (t - lastT) / 1000) : 1 / 60;
-      lastT = t;
-      qCur += (qTgt - qCur) * (1 - Math.exp(-3.7 * dt));
-      if (Math.abs(qTgt - qCur) < 0.0004) qCur = qTgt;
-      render(qCur);
-      raf = qCur !== qTgt ? requestAnimationFrame(loop) : 0;
-      if (!raf) lastT = 0;
-    };
-    const tick = () => {
-      if (mq.matches) return;
-      qTgt = target();
-      if (!raf) raf = requestAnimationFrame(loop);
-    };
-    const all = () => { fitDrum(); mode(); block.style.transform = ''; fit(); if (!mq.matches) render(qCur); tick(); sizeCards(); };
-    addEventListener('scroll', tick, { passive: true });
+    const all = () => { fitDrum(); sizeCards(); };
     addEventListener('resize', all);
     if (mq.addEventListener) mq.addEventListener('change', all);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
-    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { fitDrum(); if (!mq.matches) { fit(); render(qCur); } });
+    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fitDrum);
     roll(0);
     deal(false);
     all();
-    if (!mq.matches) render(qCur = qTgt = target());
+    if (mq.matches || reducedMotion() || !('IntersectionObserver' in window)) deal(true);
+    else new IntersectionObserver((en, ob) => { if (en.some((e) => e.isIntersecting)) { deal(true); ob.disconnect(); } }, { threshold: 0.35 }).observe(fan);
   }
 
   function startCta3d() {

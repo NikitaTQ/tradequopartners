@@ -101,66 +101,57 @@
       </div>
     </section>
 
-    <!-- Who it's for → Why partners choose: one scene on a pinned scroll (startWhoFlow in landing.js). The Who it's
-         for card (Who_Its_For_Drum) is read, then fades, shrinks and turns black; that black card grows to fill the
-         screen and becomes the dark perks section, where six cards are dealt. Phones and reduced motion: the two
-         blocks simply stack and the perks sit in a grid. -->
+    <!-- Who it's for, then Why partners choose. The Who it's for card (Who_Its_For_Drum); below it the dark perks
+         section, which the white page eases into and out of (#pf-top, #pf-tail). Its six cards are dealt in a fan
+         as it comes into view (startWhoFlow in landing.js). Phones: the perks in a rounded dark card, the cards in a grid. -->
     <div class="pf" id="who">
-      <div id="pf-flow">
-        <div id="pf-stick">
-          <div id="pf-who-wrap">
-            <!-- Who it's for (Who_Its_For_Drum design): the five kinds of partner as chips, and one sentence whose two
-                 halves roll like a drum to the chosen one ("I teach trading / so I refer students"); under it what they
-                 get with TradeQuo and the CTA. It rolls on by itself every 3.3 s while on screen until a chip or the
-                 sentence is clicked (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
-                 reads the current sentence in .pf-dr__sr. -->
-            <section class="pf-who pf-dr" id="pf-who" data-screen-label="Who it's for">
-              <div class="pf-dr__top">
-                <h2 class="pf-dr__eyebrow"><i aria-hidden="true"></i><span>{{pp.who.title}}</span></h2>
-                <div class="pf-dr__chips" role="group" aria-label="{{@pp.who.title}}"><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="true">{{pp.dr.1.c}}</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">{{pp.dr.2.c}}</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">{{pp.dr.3.c}}</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">{{pp.dr.4.c}}</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">{{pp.dr.5.c}}</button></div>
-              </div>
-              <div class="pf-dr__sent" data-dr-sent>
-                <p class="pf-dr__sr" data-dr-sr>{{pp.dr.i}} {{pp.dr.1.v}} — {{pp.dr.so}} {{pp.dr.1.g}}</p>
-                <div class="pf-dr__line" aria-hidden="true"><span data-dr-i>{{pp.dr.i}}</span><span class="pf-dr__slot is-red"><span data-dr-verb><span>{{pp.dr.1.v}}</span><span>{{pp.dr.2.v}}</span><span>{{pp.dr.3.v}}</span><span>{{pp.dr.4.v}}</span><span>{{pp.dr.5.v}}</span></span></span></div>
-                <div class="pf-dr__line pf-dr__l2" aria-hidden="true"><span class="pf-dr__so" data-dr-so>{{pp.dr.so}}</span><span class="pf-dr__slot"><span data-dr-goal><span>{{pp.dr.1.g}}</span><span>{{pp.dr.2.g}}</span><span>{{pp.dr.3.g}}</span><span>{{pp.dr.4.g}}</span><span>{{pp.dr.5.g}}</span></span></span></div>
-              </div>
-              <div class="pf-dr__bot">
-                <div>
-                  <div class="pf-dr__meta">{{pp.dr.with}} · <span data-dr-num>01</span>/05</div>
-                  <div class="pf-dr__gains"><p class="pf-dr__gain" data-dr-gain>{{pp.dr.1.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.2.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.3.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.4.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.5.gain}}</p></div>
-                </div>
-                <a class="pf-dr__cta" href="{{signupHref}}"{{signupNav}}>{{pp.cta.apply}} <span aria-hidden="true">→</span></a>
-              </div>
-            </section>
+      <div id="pf-who-wrap">
+        <!-- Who it's for (Who_Its_For_Drum design): the five kinds of partner as chips, and one sentence whose two
+             halves roll like a drum to the chosen one ("I teach trading / so I refer students"); under it what they
+             get with TradeQuo and the CTA. It rolls on by itself every 3.3 s while on screen until a chip or the
+             sentence is clicked (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
+             reads the current sentence in .pf-dr__sr. -->
+        <section class="pf-who pf-dr" id="pf-who" data-screen-label="Who it's for">
+          <div class="pf-dr__top">
+            <h2 class="pf-dr__eyebrow"><i aria-hidden="true"></i><span>{{pp.who.title}}</span></h2>
+            <div class="pf-dr__chips" role="group" aria-label="{{@pp.who.title}}"><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="true">{{pp.dr.1.c}}</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">{{pp.dr.2.c}}</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">{{pp.dr.3.c}}</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">{{pp.dr.4.c}}</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">{{pp.dr.5.c}}</button></div>
           </div>
-          <div id="pf-flip">
-            <div class="pf-glass" aria-hidden="true"></div>
-            <div class="pf-blk" id="pf-back">
-              <section class="pf-perks" id="pf-perks" data-screen-label="Why partners choose">
-                <div class="pf-perks__head">
-                  <div class="pf-perks__titles">
-                    <h2 class="tp-h2 pf-perks__title">{{pp.ben.title}}</h2>
-                  </div>
-                </div>
-                <div class="pf-fan" id="pf-fan">
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">{{pp.perks.1.t}}</span><span class="pf-perk__d">{{pp.perks.1.d}}</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">{{pp.perks.2.t}}</span><span class="pf-perk__d">{{pp.perks.2.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span><span class="pf-pill-dk"><i></i>{{pp.perks.fees}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">{{pp.perks.3.t}}</span><span class="pf-perk__d">{{pp.perks.3.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><span class="pf-mono pf-live__lab"><i class="pf-pulse"></i>{{pp.perks.live}}</span><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">{{pp.perks.4.t}}</span><span class="pf-perk__d">{{pp.perks.4.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">{{pp.perks.mgr}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">{{pp.perks.5.t}}</span><span class="pf-perk__d">{{pp.perks.5.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">{{pp.perks.c1}}</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">{{pp.perks.c3}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">{{pp.perks.6.t}}</span><span class="pf-perk__d">{{pp.perks.6.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                </div>
-                <div class="pf-perks__cta">
-                  <a href="{{signupHref}}"{{signupNav}} class="pf-puzzle" aria-label="{{@pp.cta.start}}"><span class="pf-pz-a">{{pp.perks.go1}}</span><span class="pf-pz-b">{{pp.perks.go2}} <span class="pf-pz-arr">→</span></span></a>
-                </div>
-              </section>
+          <div class="pf-dr__sent" data-dr-sent>
+            <p class="pf-dr__sr" data-dr-sr>{{pp.dr.i}} {{pp.dr.1.v}} — {{pp.dr.so}} {{pp.dr.1.g}}</p>
+            <div class="pf-dr__line" aria-hidden="true"><span data-dr-i>{{pp.dr.i}}</span><span class="pf-dr__slot is-red"><span data-dr-verb><span>{{pp.dr.1.v}}</span><span>{{pp.dr.2.v}}</span><span>{{pp.dr.3.v}}</span><span>{{pp.dr.4.v}}</span><span>{{pp.dr.5.v}}</span></span></span></div>
+            <div class="pf-dr__line pf-dr__l2" aria-hidden="true"><span class="pf-dr__so" data-dr-so>{{pp.dr.so}}</span><span class="pf-dr__slot"><span data-dr-goal><span>{{pp.dr.1.g}}</span><span>{{pp.dr.2.g}}</span><span>{{pp.dr.3.g}}</span><span>{{pp.dr.4.g}}</span><span>{{pp.dr.5.g}}</span></span></span></div>
+          </div>
+          <div class="pf-dr__bot">
+            <div>
+              <div class="pf-dr__meta">{{pp.dr.with}} · <span data-dr-num>01</span>/05</div>
+              <div class="pf-dr__gains"><p class="pf-dr__gain" data-dr-gain>{{pp.dr.1.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.2.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.3.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.4.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.5.gain}}</p></div>
+            </div>
+            <a class="pf-dr__cta" href="{{signupHref}}"{{signupNav}}>{{pp.cta.apply}} <span aria-hidden="true">→</span></a>
+          </div>
+        </section>
+      </div>
+      <div class="pf-dark">
+        <div id="pf-top" aria-hidden="true"></div>
+        <section class="pf-perks" id="benefits" data-screen-label="Why partners choose">
+          <div class="pf-perks__head">
+            <div class="pf-perks__titles">
+              <h2 class="tp-h2 pf-perks__title">{{pp.ben.title}}</h2>
             </div>
           </div>
-        </div>
+          <div class="pf-fan" id="pf-fan">
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">{{pp.perks.1.t}}</span><span class="pf-perk__d">{{pp.perks.1.d}}</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">{{pp.perks.2.t}}</span><span class="pf-perk__d">{{pp.perks.2.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span><span class="pf-pill-dk"><i></i>{{pp.perks.fees}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">{{pp.perks.3.t}}</span><span class="pf-perk__d">{{pp.perks.3.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><span class="pf-mono pf-live__lab"><i class="pf-pulse"></i>{{pp.perks.live}}</span><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">{{pp.perks.4.t}}</span><span class="pf-perk__d">{{pp.perks.4.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">{{pp.perks.mgr}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">{{pp.perks.5.t}}</span><span class="pf-perk__d">{{pp.perks.5.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">{{pp.perks.c1}}</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">{{pp.perks.c3}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">{{pp.perks.6.t}}</span><span class="pf-perk__d">{{pp.perks.6.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+          </div>
+          <div class="pf-perks__cta">
+            <a href="{{signupHref}}"{{signupNav}} class="pf-puzzle" aria-label="{{@pp.cta.start}}"><span class="pf-pz-a">{{pp.perks.go1}}</span><span class="pf-pz-b">{{pp.perks.go2}} <span class="pf-pz-arr">→</span></span></a>
+          </div>
+        </section>
+        <div id="pf-tail" aria-hidden="true"></div>
       </div>
-      <span class="pf-anchor" id="benefits" aria-hidden="true"></span>
-      <div id="pf-perks-host"></div>
-      <div id="pf-tail" aria-hidden="true"></div>
     </div>
 
     <!-- one soft grey band behind Why TradeQuo -->

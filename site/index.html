@@ -1059,7 +1059,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    The header stays on top while the page scrolls (position: sticky in the markup). Scrolled, it is shorter (68px:
    it gives 20px of padding back as a bottom margin, at the same pace, so the page under it never moves) and sits on
    a white band from edge to edge with a soft shadow (the dark header keeps its black band). While a full-screen
-   scene holds the screen (the landing's Infinite Flow flip, the persona and perks scene on Programs) it slides up
+   scene holds the screen (the landing's Infinite Flow flip) it slides up
    out of the way and comes back after it (startStickyHead in landing.js). */
 .tq-head { transition: padding-top .25s ease, padding-bottom .25s ease, margin-bottom .25s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
 .tq-head::after { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; margin-left: -50vw; pointer-events: none;
@@ -1899,6 +1899,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="assets/js/transition.js?v=602a71328d" defer></script>
-<script src="assets/js/landing.js?v=8044725ad6" defer></script>
+<script src="assets/js/landing.js?v=f4fd36cdbe" defer></script>
 </body>
 </html>
