@@ -183,6 +183,29 @@
       </div>
     </section>
 
+    <!-- TradingView Premium on us (TradingView_Premium_Invoice_1 design): a dark card with the TradingView mark faint
+         behind a red glow; the two logos on a glass pill, a huge silver "$0", the line, and the glass bill: the product,
+         the list price struck through, paid by TradeQuo, you pay $0.00. The CTA goes to the form. Prices are USD in
+         every language. -->
+    <section id="premium" class="tp-sec" data-screen-label="TradingView Premium">
+      <div class="tp-wrap">
+        <div class="tp-tv">
+          <div class="tp-tv__glow" aria-hidden="true"></div>
+          <div class="tp-tv__mark" aria-hidden="true"><img src="{{root}}assets/marketing/tradingview.webp" alt="" width="969" height="134" loading="lazy" decoding="async"></div>
+          <div class="tp-tv__duo"><img src="{{root}}assets/logo-wordmark-light.png" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span aria-hidden="true">×</span><img src="{{root}}assets/marketing/tradingview.webp" alt="TradingView" width="969" height="134" loading="lazy" decoding="async"></div>
+          <span class="tp-tv__zero" aria-hidden="true">$0</span>
+          <h2 class="tp-tv__h">{{mt.tv.h}}</h2>
+          <div class="tp-tv__bill">
+            <div class="tp-tv__prod"><img src="{{root}}assets/marketing/tradingview-app.webp" alt="" width="32" height="32" loading="lazy" decoding="async"><span><b>TradingView Premium</b><span class="tp-tv__lab">{{mt.tv.life}}</span></span></div>
+            <div class="tp-tv__list"><span class="tp-tv__lab">{{mt.tv.list}}</span><span class="tp-tv__val"><s>$719.40</s> <small>{{mt.tv.yr}}</small></span></div>
+            <div><span class="tp-tv__lab">{{mt.tv.paid}}</span><span class="tp-tv__val"><i aria-hidden="true">✓</i>$719.40<small>{{mt.tv.yr}}</small></span></div>
+            <div class="tp-tv__you"><span class="tp-tv__lab">{{mt.tv.pay}}</span><span class="tp-tv__val">$0.00</span></div>
+          </div>
+          <a class="tp-tv__cta" href="{{signupHref}}"{{signupNav}}>{{mt.tv.cta}} <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
     <!-- How to get them (Process_Ignition_Section): a dark panel; a red rail runs node to node and the step it reaches
          lifts and glows (startSteppers in landing.js, only while on screen). The drawings in the cards are decoration. -->
     <section id="get" class="tp-sec" data-screen-label="How to get materials">

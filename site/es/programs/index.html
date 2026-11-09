@@ -1059,7 +1059,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    The header stays on top while the page scrolls (position: sticky in the markup). Scrolled, it is shorter (68px:
    it gives 20px of padding back as a bottom margin, at the same pace, so the page under it never moves) and sits on
    a white band from edge to edge with a soft shadow (the dark header keeps its black band). While a full-screen
-   scene holds the screen (the landing's Infinite Flow flip, the persona and perks scene on Programs) it slides up
+   scene holds the screen (the landing's Infinite Flow flip) it slides up
    out of the way and comes back after it (startStickyHead in landing.js). */
 .tq-head { transition: padding-top .25s ease, padding-bottom .25s ease, margin-bottom .25s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
 .tq-head::after { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; margin-left: -50vw; pointer-events: none;
@@ -1756,20 +1756,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 
 /* ---- Who it's for → Why partners choose ---------------------------------------------------------------
-   #pf-flow is 326vh tall (the landing's flip track is 340vh: here the perks come in a wheel step sooner); #pf-stick
-   holds the scene on screen while it plays (startWhoFlow in landing.js maps the scroll to q 0 → 1). The Who it's
-   for card (Who_Its_For_Drum) fades, shrinks and turns black; #pf-flip takes over at its place, grows to the full
-   screen and turns into the dark perks section, where the six .pf-perk cards are dealt in a fan. Below 900px and
-   with reduced motion nothing is pinned: the card stays put and the perks section moves into #pf-perks-host. */
-#pf-flow { position: relative; height: 326vh; }
-#pf-stick { position: sticky; top: 0; height: 100vh; overflow: hidden; perspective: 1700px; display: flex; align-items: center; justify-content: center; }
-#pf-who-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; display: flex; justify-content: center; transform-origin: 50% 50%; }
+   Two blocks in the page flow: the Who it's for card (Who_Its_For_Drum), then the dark perks section a screen tall,
+   which the white page eases into (#pf-top) and out of (#pf-tail); its six .pf-perk cards are dealt in a fan as it
+   comes into view (startWhoFlow in landing.js). Below 900px the perks sit in a rounded dark card, the cards in a grid. */
+#pf-who-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; display: flex; justify-content: center; }
 @keyframes pfFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-/* the Who it's for card (Who_Its_For_Drum). Grey on the white page (the design's white card sits on grey);
-   --dk (startWhoFlow) blacks it out before the black card grows into the perks section */
+/* the Who it's for card (Who_Its_For_Drum). Grey on the white page (the design's white card sits on grey) */
 .pf-dr { position: relative; width: 100%; max-width: 1200px; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 48px; padding: 72px 64px; border-radius: 32px;
   background: #f2f2f5; color: #0e0e10; }
-.pf-dr::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: #0e0e10; opacity: var(--dk, 0); pointer-events: none; }
 .pf-dr__top { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
 .pf-dr__eyebrow { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 20px; line-height: 1.2; font-weight: 800; letter-spacing: -.03em; color: #0e0e10; }
 .pf-dr__eyebrow span { color: inherit !important; }   /* the heading's red words stay black in this small line */
@@ -1814,14 +1808,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .pf-dr__cta { justify-self: start; }
 }
 
-/* the flip: the blacked-out card, then the dark perks section at full screen */
-#pf-flip { position: absolute; left: 50%; top: 50%; width: 200px; height: 120px; transform-origin: 50% 50%; visibility: hidden; pointer-events: none; will-change: transform, width, height; border-radius: 24px; overflow: hidden; }
-#pf-flip.done { pointer-events: auto; }
-#pf-flip.done .pf-perk, #pf-flip.done .pf-perk__in { -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-font-smoothing: antialiased; }
-.pf-glass { position: absolute; inset: 0; box-sizing: border-box; background: #0e0e10; }
-.pf-blk { position: absolute; inset: 0; background: #0a0a0b; }
-.pf-blk > .pf-perks { position: absolute; left: 50%; top: 50%; width: 100vw; height: 100vh; margin: -50vh 0 0 -50vw; }
-.pf-perks { position: relative; width: 100%; height: 100%; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; color: #fff;
+/* Why partners choose: dark, as tall as the screen under the stuck header (68px); the white page eases into it
+   (#pf-top: the curve of #pf-tail below, upside down) and out of it */
+.pf-dark { position: relative; margin-top: clamp(24px, 4vw, 56px); }
+#pf-top { height: clamp(300px, 42vh, 480px); margin-bottom: -1px;
+  background: linear-gradient(0deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
+      #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
+      #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
+.pf-perks { position: relative; width: 100%; height: calc(100vh - 68px); min-height: 560px; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; color: #fff;
   padding: clamp(28px, 6vh, 64px) clamp(24px, 6vw, 96px) clamp(24px, 5vh, 52px);
   background: radial-gradient(55% 45% at 50% 100%, rgba(150,10,15,.42), rgba(150,10,15,0) 70%), #0a0a0b; }
 .pf-perks__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
@@ -1871,8 +1865,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-pass__route { display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 19px; letter-spacing: -.02em; color: #0a0a0a; }
 .pf-pass__arr { color: #e7131b; font-size: 14px; }
 .pf-pass__foot { border-top: 1px dashed #c9c6be; padding-top: 6px; }
-.pf-perks__cta { display: flex; justify-content: center; }
-#pf-flip .pf-perks__cta { position: relative; top: -25px; }   /* a little higher than the design */
+.pf-perks__cta { position: relative; top: -25px; display: flex; justify-content: center; }   /* a little higher than the design */
 .pf-puzzle { display: flex; align-items: stretch; height: 56px; border-radius: 999px; overflow: visible; font-weight: 700; font-size: 16px; color: #fff; text-decoration: none; }
 .pf-puzzle:hover { color: #fff; }
 .pf-pz-a { position: relative; display: flex; align-items: center; padding-inline: 32px 30px; border-start-start-radius: 999px; border-end-start-radius: 999px; background: #16171a; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
@@ -1882,27 +1875,23 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-puzzle:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 .pf-pz-arr { font-size: 15px; }
 [dir="rtl"] .pf-pz-arr { display: inline-block; transform: scaleX(-1); }
-/* after the scene: the perks' red glow carries on and the black eases into the white the next block
-   starts with (the same curve as the landing's dark tail); it tucks 1px under the scene so no seam shows */
-#pf-flow.is-dark #pf-stick { background: #0a0a0b; }
+/* under the perks: their red glow carries on and the black eases into the white the next block starts with
+   (the same curve as the landing's dark tail); it tucks 1px under the section so no seam shows */
 #pf-tail { position: relative; height: clamp(360px, 50vh, 560px); margin-top: -1px; margin-bottom: -20px;   /* Why TradeQuo and what follows sit 20px into its white end */
   background: radial-gradient(55% 34vh at 50% 0%, rgba(150,10,15,.42), rgba(150,10,15,0) 70%),
     linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
-.pf-anchor { position: absolute; left: 0; top: 228vh; width: 1px; height: 1px; pointer-events: none; }   /* #benefits: where the perks are dealt */
 .pf { position: relative; padding-top: clamp(24px, 5.5vw, 80px); }   /* room above the persona block, like the gap between blocks */
-#pf-perks-host { display: none; }
 #why { padding-top: 0; }   /* on wide screens the dark-to-white tail above is the gap */
-@media (max-width: 899px), (prefers-reduced-motion: reduce) {
-  #pf-flow { height: auto; }
-  #pf-stick { position: relative; height: auto; display: block; perspective: none; overflow: visible; }
+@media (prefers-reduced-motion: reduce) { .pf-perk { transition: none; } }   /* the fan simply stands */
+@media (max-width: 899px) {
   #pf-who-wrap { padding: 24px 16px; }
-  #pf-flip, #pf-tail { display: none; }
-  .pf-anchor { position: static; display: block; }
-  #pf-perks-host { display: block; padding: 72px 0 48px; }   /* the usual gap from the persona card, then down to the dome */
+  .pf-dark { margin-top: 0; padding: 72px 0 48px; }   /* the usual gap from the persona card, then down to the dome */
+  #pf-top, #pf-tail { display: none; }
   #why { padding-top: calc(clamp(48px, 6.1vw, 88px) - 20px); }   /* 20px closer to the perks above, as on wide screens */
-  #pf-perks-host .pf-perks { height: auto !important; min-height: 0; padding-bottom: 40px; border-radius: clamp(28px, 4vw, 48px); margin: 0 clamp(8px, 2vw, 16px); width: auto; }
+  .pf-perks { height: auto; min-height: 0; padding-bottom: 40px; border-radius: clamp(28px, 4vw, 48px); margin: 0 clamp(8px, 2vw, 16px); width: auto; }
+  .pf-perks__cta { top: auto; }
   /* the landing's Partner perks on phones: heading on the centre line, the cards in a grid, the CTA last */
   .pf-perks__head { flex-direction: column; align-items: center; text-align: center; }
   .pf-perks__titles { align-items: center; }
@@ -2182,6 +2171,64 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-bento__ic { width: 38px; height: 38px; border-radius: 10px; }
   .tp-bento__ask { gap: 6px; }
   .tp-bento__go { font-size: 13px; }
+}
+
+/* ---- Marketing Tools: TradingView Premium on us (TradingView_Premium_Invoice_1) ---------------------------------------
+   A dark card: the TradingView mark faint behind a red glow, the two logos on a glass pill, a huge silver "$0", the
+   line, the glass bill (the product; the list price struck through; paid by TradeQuo; you pay $0.00) and the CTA.
+   Phones: the product across the top of the bill, the two prices side by side, "You pay" across the bottom. */
+.tp-tv { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 64px; border-radius: 32px; background: #070708; color: #fff; text-align: center; }
+.tp-tv > * { position: relative; }
+.tp-tv > .tp-tv__glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(45% 50% at 50% 60%, rgba(231,19,27,.32), rgba(231,19,27,0) 70%); }
+.tp-tv > .tp-tv__mark { position: absolute; left: 50%; top: 46%; width: 520px; height: 360px; transform: translate(-50%, -50%); overflow: hidden; opacity: .07; pointer-events: none; direction: ltr; }
+.tp-tv__mark img { display: block; width: auto; max-width: none; height: 360px; }
+.tp-tv__duo { display: flex; align-items: center; gap: 18px; padding: 14px 22px; border-radius: 999px; direction: ltr;
+  background: linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.14); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.tp-tv__duo img { display: block; width: auto; height: 15px; }
+.tp-tv__duo img:last-child { height: 17px; }
+.tp-tv__duo span { font-family: 'Fragment Mono', monospace; font-size: 13px; color: #8a8a93; }
+.tp-tv__zero { margin-top: 24px; padding: 0 .1em; font-size: 260px; line-height: 1; font-weight: 800; letter-spacing: -.07em; direction: ltr;
+  color: transparent; -webkit-background-clip: text; background-clip: text; background-image: linear-gradient(180deg, #fff 0%, #e8e8ee 34%, #7e7e88 52%, #d2d2d8 68%, #fff 100%);
+  filter: drop-shadow(0 20px 60px rgba(231,19,27,.35)); }
+.tp-tv__h { margin: 0; max-width: 880px; font-size: 28px; line-height: 1.2; font-weight: 800; letter-spacing: -.03em; color: #fff; text-wrap: balance; }
+.tp-tv__bill { margin-top: 40px; width: 100%; max-width: 880px; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, .9fr); overflow: hidden; text-align: start;
+  border-radius: 22px; background: linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 30px 70px rgba(0,0,0,.5); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+.tp-tv__bill > div { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 20px 18px; }
+.tp-tv__bill > div + div { border-inline-start: 1px solid rgba(255,255,255,.08); }
+.tp-tv__bill > .tp-tv__prod { flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; padding: 20px 22px; }
+.tp-tv__prod img { flex: none; width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 0 0 1px rgba(255,255,255,.18); }
+.tp-tv__prod > span { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tp-tv__prod b { font-size: 15px; font-weight: 800; }
+.tp-tv__lab { font-family: 'Fragment Mono', monospace; font-size: 10px; line-height: 1.35; letter-spacing: .16em; text-transform: uppercase; color: #9a9aa2; }
+[dir="rtl"] .tp-tv__lab { letter-spacing: 0; font-size: 11px; }   /* Arabic letters stay joined */
+:lang(th) .tp-tv__lab, :lang(ja) .tp-tv__lab, :lang(ko) .tp-tv__lab, :lang(zh) .tp-tv__lab { letter-spacing: .02em; font-size: 11px; }   /* no wide tracking in these scripts */
+.tp-tv__val { display: flex; align-items: center; flex-wrap: wrap; gap: 0 8px; font-size: 20px; font-weight: 800; color: #fff; }
+.tp-tv__val small { font-size: 13px; font-weight: 700; color: #9a9aa2; }
+.tp-tv__val i { flex: none; display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #e7131b; font-size: 11px; font-style: normal; line-height: 1; }
+.tp-tv__list .tp-tv__lab, .tp-tv__list .tp-tv__val, .tp-tv__list small { color: #6e6e77; }
+.tp-tv__list .tp-tv__val { gap: 0 4px; }
+.tp-tv__list s { text-decoration-color: #e7131b; }
+.tp-tv__bill > .tp-tv__you { background: rgba(231,19,27,.12); }
+.tp-tv__you .tp-tv__lab { color: #e4e4e8; }
+.tp-tv__cta { margin-top: 32px; display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700;
+  text-decoration: none; box-shadow: 0 12px 36px rgba(231,19,27,.4); transition: background .2s; }
+.tp-tv__cta:hover { background: #ff2a33; color: #fff; }
+.tp-tv__cta:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+[dir="rtl"] .tp-tv__cta span { display: inline-block; transform: scaleX(-1); }
+@media (max-width: 900px) {
+  .tp-tv { padding: 40px 20px; border-radius: 24px; }
+  .tp-tv__zero { font-size: clamp(120px, 34vw, 260px); }
+  .tp-tv__h { font-size: 22px; }
+  .tp-tv__bill { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .tp-tv__bill > .tp-tv__prod, .tp-tv__bill > .tp-tv__you { grid-column: 1 / -1; }
+  .tp-tv__bill > div { border-inline-start: 0 !important; border-top: 1px solid rgba(255,255,255,.08); }
+  .tp-tv__bill > div:first-child { border-top: 0; }
+  .tp-tv__bill > div:nth-child(3) { border-inline-start: 1px solid rgba(255,255,255,.08) !important; }
+  .tp-tv__bill > div { padding: 16px 12px; }
+  .tp-tv__bill > .tp-tv__prod { padding: 16px; }
+  .tp-tv__val { flex-wrap: nowrap; gap: 0 5px; font-size: 17px; white-space: nowrap; }
+  .tp-tv__val small { font-size: 12px; }
 }
 
 /* ---- Marketing Tools: Data and people on your side (Data_and_People_Section) -------------------------------
@@ -2578,66 +2625,57 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       </div>
     </section>
 
-    <!-- Who it's for → Why partners choose: one scene on a pinned scroll (startWhoFlow in landing.js). The Who it's
-         for card (Who_Its_For_Drum) is read, then fades, shrinks and turns black; that black card grows to fill the
-         screen and becomes the dark perks section, where six cards are dealt. Phones and reduced motion: the two
-         blocks simply stack and the perks sit in a grid. -->
+    <!-- Who it's for, then Why partners choose. The Who it's for card (Who_Its_For_Drum); below it the dark perks
+         section, which the white page eases into and out of (#pf-top, #pf-tail). Its six cards are dealt in a fan
+         as it comes into view (startWhoFlow in landing.js). Phones: the perks in a rounded dark card, the cards in a grid. -->
     <div class="pf" id="who">
-      <div id="pf-flow">
-        <div id="pf-stick">
-          <div id="pf-who-wrap">
-            <!-- Who it's for (Who_Its_For_Drum design): the five kinds of partner as chips, and one sentence whose two
-                 halves roll like a drum to the chosen one ("I teach trading / so I refer students"); under it what they
-                 get with TradeQuo and the CTA. It rolls on by itself every 3.3 s while on screen until a chip or the
-                 sentence is clicked (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
-                 reads the current sentence in .pf-dr__sr. -->
-            <section class="pf-who pf-dr" id="pf-who" data-screen-label="Who it's for">
-              <div class="pf-dr__top">
-                <h2 class="pf-dr__eyebrow"><i aria-hidden="true"></i><span>Pensado para quienes <span style="color: #e7131b;">mueven traders</span></span></h2>
-                <div class="pf-dr__chips" role="group" aria-label="Pensado para quienes mueven traders"><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="true">Educadores</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Grupos de señales</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Creadores</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Equipos de IB</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Marcas</button></div>
-              </div>
-              <div class="pf-dr__sent" data-dr-sent>
-                <p class="pf-dr__sr" data-dr-sr>Yo enseño trading — así que refiero alumnos</p>
-                <div class="pf-dr__line" aria-hidden="true"><span data-dr-i>Yo</span><span class="pf-dr__slot is-red"><span data-dr-verb><span>enseño trading</span><span>dirijo un grupo de señales</span><span>creo contenido de mercados</span><span>lidero un equipo de IB</span><span>tengo una marca de trading</span></span></span></div>
-                <div class="pf-dr__line pf-dr__l2" aria-hidden="true"><span class="pf-dr__so" data-dr-so>así que</span><span class="pf-dr__slot"><span data-dr-goal><span>refiero alumnos</span><span>refiero miembros</span><span>refiero a mi audiencia</span><span>creo una red</span><span>lanzo la mía</span></span></span></div>
-              </div>
-              <div class="pf-dr__bot">
-                <div>
-                  <div class="pf-dr__meta">CON TRADEQUO · <span data-dr-num>01</span>/05</div>
-                  <div class="pf-dr__gains"><p class="pf-dr__gain" data-dr-gain>Gana hasta el 87% del spread en cada lote que operen tus alumnos, mientras sigan activos.</p><p class="pf-dr__gain" data-dr-gain hidden>Gráficos de TradingView gratis y señales en tiempo real para tus miembros. Tu comisión llega cada día a las 00:00.</p><p class="pf-dr__gain" data-dr-gain hidden>Banners, landings y videos listos para usar, y cada registro y operación en tu panel en vivo.</p><p class="pf-dr__gain" data-dr-gain hidden>Gana con el negocio que aportan tus socios, además de tus propios clientes, con un gestor de socios dedicado.</p><p class="pf-dr__gain" data-dr-gain hidden>Lanza un bróker o una academia White Label con tu propio nombre, sobre la infraestructura de TradeQuo.</p></div>
-                </div>
-                <a class="pf-dr__cta" href="../#signup" data-page-link data-label="CARGANDO · Inicio">Solicitar ser socio <span aria-hidden="true">→</span></a>
-              </div>
-            </section>
+      <div id="pf-who-wrap">
+        <!-- Who it's for (Who_Its_For_Drum design): the five kinds of partner as chips, and one sentence whose two
+             halves roll like a drum to the chosen one ("I teach trading / so I refer students"); under it what they
+             get with TradeQuo and the CTA. It rolls on by itself every 3.3 s while on screen until a chip or the
+             sentence is clicked (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
+             reads the current sentence in .pf-dr__sr. -->
+        <section class="pf-who pf-dr" id="pf-who" data-screen-label="Who it's for">
+          <div class="pf-dr__top">
+            <h2 class="pf-dr__eyebrow"><i aria-hidden="true"></i><span>Pensado para quienes <span style="color: #e7131b;">mueven traders</span></span></h2>
+            <div class="pf-dr__chips" role="group" aria-label="Pensado para quienes mueven traders"><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="true">Educadores</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Grupos de señales</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Creadores</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Equipos de IB</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Marcas</button></div>
           </div>
-          <div id="pf-flip">
-            <div class="pf-glass" aria-hidden="true"></div>
-            <div class="pf-blk" id="pf-back">
-              <section class="pf-perks" id="pf-perks" data-screen-label="Why partners choose">
-                <div class="pf-perks__head">
-                  <div class="pf-perks__titles">
-                    <h2 class="tp-h2 pf-perks__title">Por qué los socios eligen <span style="color: #e7131b;">TradeQuo</span></h2>
-                  </div>
-                </div>
-                <div class="pf-fan" id="pf-fan">
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">Hasta el 87%</span><span class="pf-perk__d">Tu parte de cada operación.</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">Pagos diarios</span><span class="pf-perk__d">Retira cualquier día. Nosotros cubrimos las comisiones.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span><span class="pf-pill-dk"><i></i>COMISIONES · PAGADO HOY</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">Seguimiento en vivo</span><span class="pf-perk__d">Cada cliente y cada lote, en tiempo real.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><span class="pf-mono pf-live__lab"><i class="pf-pulse"></i>SEGUIMIENTO EN VIVO</span><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">Gestor personal</span><span class="pf-perk__d">Una persona que conoce tu negocio.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">TU GESTOR</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">Herramientas gratis</span><span class="pf-perk__d">Creatividades, TradingView y señales.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">Creatividades</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">Señales</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                  <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">Viajes de incentivo</span><span class="pf-perk__d">Alcanza tus objetivos y viaja con nosotros.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-                </div>
-                <div class="pf-perks__cta">
-                  <a href="../#signup" data-page-link data-label="CARGANDO · Inicio" class="pf-puzzle" aria-label="Empieza a ganar"><span class="pf-pz-a">Empieza</span><span class="pf-pz-b">a ganar <span class="pf-pz-arr">→</span></span></a>
-                </div>
-              </section>
+          <div class="pf-dr__sent" data-dr-sent>
+            <p class="pf-dr__sr" data-dr-sr>Yo enseño trading — así que refiero alumnos</p>
+            <div class="pf-dr__line" aria-hidden="true"><span data-dr-i>Yo</span><span class="pf-dr__slot is-red"><span data-dr-verb><span>enseño trading</span><span>dirijo un grupo de señales</span><span>creo contenido de mercados</span><span>lidero un equipo de IB</span><span>tengo una marca de trading</span></span></span></div>
+            <div class="pf-dr__line pf-dr__l2" aria-hidden="true"><span class="pf-dr__so" data-dr-so>así que</span><span class="pf-dr__slot"><span data-dr-goal><span>refiero alumnos</span><span>refiero miembros</span><span>refiero a mi audiencia</span><span>creo una red</span><span>lanzo la mía</span></span></span></div>
+          </div>
+          <div class="pf-dr__bot">
+            <div>
+              <div class="pf-dr__meta">CON TRADEQUO · <span data-dr-num>01</span>/05</div>
+              <div class="pf-dr__gains"><p class="pf-dr__gain" data-dr-gain>Gana hasta el 87% del spread en cada lote que operen tus alumnos, mientras sigan activos.</p><p class="pf-dr__gain" data-dr-gain hidden>Gráficos de TradingView gratis y señales en tiempo real para tus miembros. Tu comisión llega cada día a las 00:00.</p><p class="pf-dr__gain" data-dr-gain hidden>Banners, landings y videos listos para usar, y cada registro y operación en tu panel en vivo.</p><p class="pf-dr__gain" data-dr-gain hidden>Gana con el negocio que aportan tus socios, además de tus propios clientes, con un gestor de socios dedicado.</p><p class="pf-dr__gain" data-dr-gain hidden>Lanza un bróker o una academia White Label con tu propio nombre, sobre la infraestructura de TradeQuo.</p></div>
+            </div>
+            <a class="pf-dr__cta" href="../#signup" data-page-link data-label="CARGANDO · Inicio">Solicitar ser socio <span aria-hidden="true">→</span></a>
+          </div>
+        </section>
+      </div>
+      <div class="pf-dark">
+        <div id="pf-top" aria-hidden="true"></div>
+        <section class="pf-perks" id="benefits" data-screen-label="Why partners choose">
+          <div class="pf-perks__head">
+            <div class="pf-perks__titles">
+              <h2 class="tp-h2 pf-perks__title">Por qué los socios eligen <span style="color: #e7131b;">TradeQuo</span></h2>
             </div>
           </div>
-        </div>
+          <div class="pf-fan" id="pf-fan">
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">Hasta el 87%</span><span class="pf-perk__d">Tu parte de cada operación.</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">Pagos diarios</span><span class="pf-perk__d">Retira cualquier día. Nosotros cubrimos las comisiones.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span><span class="pf-pill-dk"><i></i>COMISIONES · PAGADO HOY</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">Seguimiento en vivo</span><span class="pf-perk__d">Cada cliente y cada lote, en tiempo real.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><span class="pf-mono pf-live__lab"><i class="pf-pulse"></i>SEGUIMIENTO EN VIVO</span><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">Gestor personal</span><span class="pf-perk__d">Una persona que conoce tu negocio.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">TU GESTOR</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">Herramientas gratis</span><span class="pf-perk__d">Creatividades, TradingView y señales.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">Creatividades</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">Señales</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">Viajes de incentivo</span><span class="pf-perk__d">Alcanza tus objetivos y viaja con nosotros.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+          </div>
+          <div class="pf-perks__cta">
+            <a href="../#signup" data-page-link data-label="CARGANDO · Inicio" class="pf-puzzle" aria-label="Empieza a ganar"><span class="pf-pz-a">Empieza</span><span class="pf-pz-b">a ganar <span class="pf-pz-arr">→</span></span></a>
+          </div>
+        </section>
+        <div id="pf-tail" aria-hidden="true"></div>
       </div>
-      <span class="pf-anchor" id="benefits" aria-hidden="true"></span>
-      <div id="pf-perks-host"></div>
-      <div id="pf-tail" aria-hidden="true"></div>
     </div>
 
     <!-- one soft grey band behind Why TradeQuo -->
@@ -2943,6 +2981,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=8044725ad6" defer></script>
+<script src="../../assets/js/landing.js?v=f4fd36cdbe" defer></script>
 </body>
 </html>
