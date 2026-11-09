@@ -180,8 +180,16 @@ def href_from(cur, target, slug=''):
 SHORT = {'zh-hans': '简体', 'zh-hant': '繁體'}
 
 
-def switcher(cur, s, slug=''):
+def switcher(cur, s, slug='', page_id='landing', home=''):
+    # below 1140px the site navigation lives here: the four pages first, then "Language" and the languages
     items = []
+    for pid, path, key in NAV:
+        if pid == page_id:
+            items.append('<li class="tq-lang__page"><a href="#" aria-current="page" data-to-top>%s</a></li>' % html.escape(s(key)))
+        else:
+            items.append('<li class="tq-lang__page"><a href="%s" data-page-link data-label="%s">%s</a></li>'
+                         % (page_href(home, path), render_attr(s('loader') + ' · ' + s(key)), html.escape(s(key))))
+    items.append('<li class="tq-lang__page tq-lang__label" aria-hidden="true">%s</li>' % html.escape(s('lang.label')))
     for t in languages:
         current = ' aria-current="true"' if t['code'] == cur['code'] else ''
         items.append('<li><a href="%s" hreflang="%s" lang="%s"%s>%s</a></li>'
@@ -192,14 +200,15 @@ def switcher(cur, s, slug=''):
                  % html.escape(s('lang.translate'), quote=False))
     code = SHORT.get(cur['code'], cur['code'].upper())
     return ('<div class="tq-lang" data-lang>'
-            '<button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="%s: %s">'
-            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">'
+            '<button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="%s · %s: %s">'
+            '<svg class="tq-lang__burger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>'
+            '<svg class="tq-lang__globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">'
             '<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg>'
             '<span class="tq-lang__code">%s</span>'
             '<svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>'
             '</button>'
             '<ul class="tq-lang__menu" hidden>%s</ul></div>'
-            % (render_attr(s('lang.label')), html.escape(cur['name']), html.escape(code), ''.join(items)))
+            % (render_attr(s('fab.aria')), render_attr(s('lang.label')), html.escape(cur['name']), html.escape(code), ''.join(items)))
 
 
 def fan_menu(page_id):
@@ -229,17 +238,10 @@ def site_nav(home, page_id):
     return '\n        '.join(out)
 
 
-def fab_links(home, page_id):
-    """Phones: the red menu lists this page's sections, then, under a rule, the other pages."""
-    out, i = [], 0
-    for sid, key in TOC[page_id]:
-        out.append('<a class="tq-fab-link" href="#%s" data-toc-link style="--i: %d;">{{%s}}</a>' % (sid, i, key)); i += 1
-    out.append('<span class="tq-fab-sep" aria-hidden="true" style="--i: %d;"></span>' % i); i += 1
-    for pid, path, key in NAV:
-        if pid != page_id:
-            out.append('<a class="tq-fab-link tq-fab-link--page" href="%s" data-page-link data-label="{{@loader}} · {{@%s}}" style="--i: %d;">{{%s}}</a>'
-                       % (page_href(home, path), key, i, key)); i += 1
-    return '\n      '.join(out)
+def fab_links(page_id):
+    """Below 1140px: the red menu bottom right is this page's table of contents (the pages are in the header menu)."""
+    return '\n      '.join('<a class="tq-fab-link" href="#%s" data-toc-link style="--i: %d;">{{%s}}</a>' % (sid, i, key)
+                           for i, (sid, key) in enumerate(TOC[page_id]))
 
 
 FAQ_MACRO = re.compile(r'\{\{faq:([A-Za-z0-9_.-]+):(\d+)\}\}')
@@ -298,7 +300,7 @@ for page in PAGES:
         system = {
             'lang': lang.get('html', code), 'code': code, 'dir': lang.get('dir', 'ltr'), 'root': root, 'home': home or './',
             'canonical': url_of(lang, slug), 'hreflang': hreflang, 'ogLocale': lang['ogLocale'],
-            'fontFaces': faces, 'fontPreload': preload, 'langSwitcher': switcher(lang, s, slug),
+            'fontFaces': faces, 'fontPreload': preload, 'langSwitcher': switcher(lang, s, slug, page['id'], home),
             'embedQuery': '' if code == 'en' else '?lang=' + code,
             # "become a partner" links in shared blocks: scroll to the form on the landing, go to it elsewhere
             'signupHref': (home + '#signup') if slug else '#signup',
@@ -319,7 +321,7 @@ for page in PAGES:
             return render_text(keep_thai(text) if lang.get('script') == 'thai' else text)
 
         out = (template.replace('{{fanMenu}}', fan_menu(page['id'])).replace('{{siteNav}}', site_nav(home, page['id']))
-               .replace('{{fabLinks}}', fab_links(home, page['id'])))
+               .replace('{{fabLinks}}', fab_links(page['id'])))
         out = re.sub(r'\{\{(@?)([A-Za-z0-9_.-]+)\}\}', fill, out)
         assert '{{' not in out, out[out.index('{{'):][:80]
         out_dir = os.path.join(SITE, lang['path'], slug)

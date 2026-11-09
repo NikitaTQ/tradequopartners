@@ -490,7 +490,7 @@
     #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
     #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .tq-mth-tail + .tp-sec { padding-top: clamp(16px, 3vw, 40px); }
-@media (min-width: 641px) { .tq-mth-tail { margin-bottom: -40px; } }   /* the blocks after it start 40px higher, over the tail's white end */
+.tq-mth-tail { margin-bottom: -40px; }   /* the blocks after it start 40px higher, over the tail's white end */
 @media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout */
   .tq-mth__stage { height: 80%; }
 }
@@ -646,7 +646,7 @@
   #pf-flip, #pf-tail { display: none; }
   .pf-anchor { position: static; display: block; }
   #pf-perks-host { display: block; padding: 72px 0 48px; }   /* the usual gap from the persona card, then down to the dome */
-  #why { padding-top: clamp(48px, 6.1vw, 88px); }
+  #why { padding-top: calc(clamp(48px, 6.1vw, 88px) - 20px); }   /* 20px closer to the perks above, as on wide screens */
   #pf-perks-host .pf-perks { height: auto !important; min-height: 0; padding-bottom: 40px; border-radius: clamp(28px, 4vw, 48px); margin: 0 clamp(8px, 2vw, 16px); width: auto; }
   /* the landing's Partner perks on phones: heading on the centre line, the cards in a grid, the CTA last */
   .pf-perks__head { flex-direction: column; align-items: center; text-align: center; }

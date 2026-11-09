@@ -610,9 +610,15 @@ html { scroll-snap-type: y proximity; }
   [data-fab] { display: flex !important; }
 }
 /* The site navigation fits the header from 1140px (every language); there the fan bottom right is this page's table of contents.
-   Narrower (and on a phone on its side) the header keeps the logo, the language and the CTA, and the red menu
-   bottom right lists this page's sections and, under a rule, the other pages. */
-@media (max-width: 1139px), (max-height: 460px) { [data-fanmenu], [data-fanveil], [data-navlinks] { display: none !important; } [data-fab] { display: flex !important; } }
+   Narrower (and on a phone on its side) the four pages move into the header's language button, which turns into a
+   menu (☰: the pages, then "Language" and the languages), and the red button bottom right is the table of contents. */
+@media (max-width: 1139px), (max-height: 460px) {
+  [data-fanmenu], [data-fanveil], [data-navlinks] { display: none !important; }
+  [data-fab] { display: flex !important; }
+  .tq-lang__btn .tq-lang__globe { display: none; }
+  .tq-lang__btn .tq-lang__burger { display: block; }
+  .tq-lang__menu .tq-lang__page { display: block; }
+}
 @media (min-width: 1140px) and (max-width: 1279px) { header nav { gap: 18px !important; } .tq-nav-link { font-size: 14px; } }
 /* a short screen (a phone on its side) scrolls the menu's list */
 @media (max-height: 640px) { [data-fab-list] { max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; padding: 10px 14px; margin: -10px -14px; } }
@@ -731,13 +737,8 @@ html { scroll-snap-type: y proximity; }
   transition: opacity .28s cubic-bezier(.34,1.3,.5,1) calc((3 - var(--i)) * .03s), transform .32s cubic-bezier(.34,1.3,.5,1) calc((3 - var(--i)) * .03s);
 }
 .tq-fab-link:hover { color: #0a0a0a; }
-.tq-fab-link--page::before { content: ''; width: 6px; height: 6px; margin-inline-end: 9px; border-radius: 50%; background: #e7131b; }
 .tq-fab-link[aria-current] { background: #0a0a0a; color: #fff; }
 .tq-fab-link[aria-current]:hover { color: #fff; }
-/* between this page's sections and the other pages */
-.tq-fab-sep { width: 26px; height: 4px; margin: 2px 9px; border-radius: 2px; background: #fff; box-shadow: 0 0 0 1px rgba(10,10,10,.08), 0 4px 10px -4px rgba(10,10,10,.35);
-  opacity: 0; transform: scale(.6); transition: opacity .28s ease, transform .32s cubic-bezier(.34,1.3,.5,1); }
-[data-fab][data-open] .tq-fab-sep { opacity: 1; transform: none; transition-delay: calc(var(--i) * .04s); }
 [data-fab][data-open] .tq-fab-link { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; transition-delay: calc(var(--i) * .04s); }
 /* the menu's box spans the whole column of links above the button: closed, it must let taps through to
    the page (it used to swallow every tap on the lower right half of the screen); only the button and,
@@ -840,6 +841,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 }
 .tq-lang__menu a:hover, .tq-lang__menu a:focus-visible { color: #fff; background: rgba(255,255,255,.07); outline: none; }
 .tq-lang__menu a[aria-current="true"] { color: #e7131b; }
+/* the pages at the top of the menu (below 1140px only), the one you are on in red with a dot; then "Language" */
+.tq-lang__burger, .tq-lang__page { display: none; }
+.tq-lang__page a { font-size: 16.5px; padding-block: 11px; }
+.tq-lang__page a[aria-current="page"] { color: #e7131b; }
+.tq-lang__page a[aria-current="page"]::after { content: ''; display: inline-block; width: 6px; height: 6px; margin-inline-start: 9px; vertical-align: middle; border-radius: 50%; background: #e7131b; }
+.tq-lang__menu .tq-lang__label { margin: 8px 0 4px; padding: 14px 26px 4px; border-top: 1px solid rgba(255,255,255,.1); color: #8a8d94; font: 600 11px/1 'Fragment Mono', monospace; letter-spacing: .14em; text-transform: uppercase; }
 /* "Auto-translate" switch at the foot of the menu (landing.js startLang) */
 .tq-lang__opt { margin: 8px 0 -4px; padding: 8px 0 0; border-top: 1px solid rgba(255,255,255,.1); }
 .tq-lang__opt button {
