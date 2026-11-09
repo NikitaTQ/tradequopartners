@@ -156,9 +156,37 @@
     };
     knob.addEventListener('click', () => set(!menu.hasAttribute('data-open')));
     if (veil) veil.addEventListener('click', () => set(false));
-    $$('[data-page-link]', menu).forEach((a) => a.addEventListener('click', () => set(false)));
+    $$('a', menu).forEach((a) => a.addEventListener('click', () => set(false)));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
     window.addEventListener('pageshow', (e) => { if (e.persisted) set(false); });
+  }
+
+  /* ---- this page's table of contents (the fan on desktop, the red menu on phones) --------------------
+   * A link scrolls smoothly to its section (and the menu closes); while a menu is open, the section on screen
+   * is marked (aria-current="location"). The header's link to the page you are on takes you back to its top. */
+  function startToc() {
+    const links = $$('[data-toc-link]');
+    const secs = [...new Set(links.map((a) => a.getAttribute('href').slice(1)))].map((id) => document.getElementById(id)).filter(Boolean);
+    const go = (y) => window.scrollTo({ top: y, behavior: reducedMotion() ? 'auto' : 'smooth' });
+    links.forEach((a) => a.addEventListener('click', (e) => {
+      const t = document.getElementById(a.getAttribute('href').slice(1));
+      if (!t) return;
+      e.preventDefault();
+      go(t.getBoundingClientRect().top + scrollY);
+      history.replaceState(null, '', '#' + t.id);
+    }));
+    $$('[data-to-top]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); go(0); }));
+    let raf = 0;
+    const mark = () => {
+      raf = 0;
+      let cur = secs[0];
+      secs.forEach((s) => { if (s.getBoundingClientRect().top <= innerHeight * 0.4) cur = s; });
+      links.forEach((a) => { if (cur && a.getAttribute('href') === '#' + cur.id) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+    };
+    $$('[data-fan-toggle], [data-fab-toggle]').forEach((b) => b.addEventListener('click', () => requestAnimationFrame(mark)));
+    window.addEventListener('scroll', () => {
+      if (!raf && document.querySelector('[data-fanmenu][data-open], [data-fab][data-open]')) raf = requestAnimationFrame(mark);
+    }, { passive: true });
   }
 
   /* ---- mobile quick menu --------------------------------------------------- */
@@ -1282,6 +1310,7 @@
 
   startFanMenu();
   startFab();
+  startToc();
   startDock();
   startIframeFit();
   startFanTap();

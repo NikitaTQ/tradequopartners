@@ -34,12 +34,20 @@ PAGES = [
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
     {'id': 'marketing', 'template': 'marketing.html', 'slug': 'marketing-tools', 'css': 'partner', 'head': 'dark'},   # dark header over the dark hero
 ]
-# The site-map fan (bottom right): the translated partner pages.
-FAN = [
-    ('programs', 'home', 'programs/', 'fan.programs'),
-    ('commission', 'home', 'partner-terms/', 'fan.commission'),
-    ('marketing', 'home', 'marketing-tools/', 'fan.marketing'),
+# The site navigation in the header: the four pages, in this order (page id, path under the language root, label).
+NAV = [
+    ('landing', '', 'fan.home'),
+    ('programs', 'programs/', 'fan.programs'),
+    ('commission', 'partner-terms/', 'fan.commission'),
+    ('marketing', 'marketing-tools/', 'fan.marketing'),
 ]
+# Each page's table of contents: the fan bottom right on desktop, the red menu on phones (section id, label).
+TOC = {
+    'landing': [('signup', 'nav.cta'), ('how', 'nav.how'), ('calculator', 'nav.calc'), ('reviews', 'toc.reviews'), ('dashboard', 'nav.perks'), ('faq', 'nav.faq')],
+    'programs': [('programs', 'pp.nav.programs'), ('who', 'toc.who'), ('benefits', 'pp.nav.benefits'), ('why', 'pp.nav.why'), ('how', 'nav.how'), ('questions', 'nav.faq')],
+    'commission': [('earnings', 'toc.earnings'), ('calculator', 'nav.calc'), ('payouts', 'cp.nav.payouts'), ('perks', 'nav.perks'), ('how', 'nav.how'), ('questions', 'nav.faq')],
+    'marketing': [('tools', 'mt.nav.tools'), ('library', 'toc.materials'), ('get', 'toc.get'), ('support', 'toc.support'), ('how', 'nav.how'), ('questions', 'nav.faq')],
+}
 languages = json.load(open(os.path.join(I18N, 'languages.json'), encoding='utf-8'))
 fonts = json.load(open(os.path.join(I18N, 'font-files.json'), encoding='utf-8'))
 caption_fonts_path = os.path.join(I18N, 'caption-fonts.json')
@@ -194,16 +202,44 @@ def switcher(cur, s, slug=''):
             % (render_attr(s('lang.label')), html.escape(cur['name']), html.escape(code), ''.join(items)))
 
 
-def fan_menu(home, root, page_id):
-    """Veil + fan of page blades + knob (partials/fan.html, fan-blade.html). Numbers start at 02: the landing is 01."""
+def fan_menu(page_id):
+    """Veil + fan of this page's sections + knob (partials/fan.html, fan-blade.html): its table of contents."""
+    toc = TOC[page_id]
     blades = []
-    for i, (pid, base, href, key) in enumerate(FAN):
+    for i, (sid, key) in enumerate(toc):
         blades.append(partials['fan-blade']
-                      .replace('{{i}}', str(i)).replace('{{ri}}', str(len(FAN) - 1 - i))
-                      .replace('{{href}}', (home if base == 'home' else root) + href)
-                      .replace('{{current}}', ' aria-current="page"' if pid == page_id else '')
-                      .replace('{{num}}', '%02d' % (i + 2)).replace('{{key}}', key))
-    return partials['fan'].replace('{{fanBlades}}', ''.join(blades)).replace('{{fanCount}}', str(len(FAN)))
+                      .replace('{{i}}', str(i)).replace('{{ri}}', str(len(toc) - 1 - i))
+                      .replace('{{href}}', '#' + sid).replace('{{num}}', '%02d' % (i + 1)).replace('{{key}}', key))
+    return partials['fan'].replace('{{fanBlades}}', ''.join(blades)).replace('{{fanCount}}', str(len(toc)))
+
+
+def page_href(home, path):
+    return (home + path) or './'
+
+
+def site_nav(home, page_id):
+    """The header's links to the four pages; the page you are on is marked (and takes you back to its top)."""
+    out = []
+    for pid, path, key in NAV:
+        if pid == page_id:
+            out.append('<a class="hv-red tq-nav-link" href="#" aria-current="page" data-to-top>{{%s}}</a>' % key)
+        else:
+            out.append('<a class="hv-red tq-nav-link" href="%s" data-page-link data-label="{{@loader}} · {{@%s}}">{{%s}}</a>'
+                       % (page_href(home, path), key, key))
+    return '\n        '.join(out)
+
+
+def fab_links(home, page_id):
+    """Phones: the red menu lists this page's sections, then, under a rule, the other pages."""
+    out, i = [], 0
+    for sid, key in TOC[page_id]:
+        out.append('<a class="tq-fab-link" href="#%s" data-toc-link style="--i: %d;">{{%s}}</a>' % (sid, i, key)); i += 1
+    out.append('<span class="tq-fab-sep" aria-hidden="true" style="--i: %d;"></span>' % i); i += 1
+    for pid, path, key in NAV:
+        if pid != page_id:
+            out.append('<a class="tq-fab-link tq-fab-link--page" href="%s" data-page-link data-label="{{@loader}} · {{@%s}}" style="--i: %d;">{{%s}}</a>'
+                       % (page_href(home, path), key, i, key)); i += 1
+    return '\n      '.join(out)
 
 
 FAQ_MACRO = re.compile(r'\{\{faq:([A-Za-z0-9_.-]+):(\d+)\}\}')
@@ -282,7 +318,8 @@ for page in PAGES:
             text = s(key)
             return render_text(keep_thai(text) if lang.get('script') == 'thai' else text)
 
-        out = template.replace('{{fanMenu}}', fan_menu(home, root, page['id']))
+        out = (template.replace('{{fanMenu}}', fan_menu(page['id'])).replace('{{siteNav}}', site_nav(home, page['id']))
+               .replace('{{fabLinks}}', fab_links(home, page['id'])))
         out = re.sub(r'\{\{(@?)([A-Za-z0-9_.-]+)\}\}', fill, out)
         assert '{{' not in out, out[out.index('{{'):][:80]
         out_dir = os.path.join(SITE, lang['path'], slug)

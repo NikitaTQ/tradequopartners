@@ -658,7 +658,13 @@ html { scroll-snap-type: y proximity; }
   [data-navlinks] { display: none !important; }
   [data-fab] { display: flex !important; }
 }
-@media (max-width: 900px), (max-height: 460px) { [data-fanmenu], [data-fanveil] { display: none !important; } }
+/* The site navigation fits the header from 1140px (every language); there the fan bottom right is this page's table of contents.
+   Narrower (and on a phone on its side) the header keeps the logo, the language and the CTA, and the red menu
+   bottom right lists this page's sections and, under a rule, the other pages. */
+@media (max-width: 1139px), (max-height: 460px) { [data-fanmenu], [data-fanveil], [data-navlinks] { display: none !important; } [data-fab] { display: flex !important; } }
+@media (min-width: 1140px) and (max-width: 1279px) { header nav { gap: 18px !important; } .tq-nav-link { font-size: 14px; } }
+/* a short screen (a phone on its side) scrolls the menu's list */
+@media (max-height: 640px) { [data-fab-list] { max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; padding: 10px 14px; margin: -10px -14px; } }
 [data-fanmenu] > div:hover { z-index: 9 !important; }
 @keyframes tqFanVeil { from { opacity: 0; } to { opacity: 1; } }
 @keyframes tqPageIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -733,7 +739,12 @@ html { scroll-snap-type: y proximity; }
 .hv-ink-border:hover { border-color: #0a0a0a !important; }
 
 
-/* ---- site-map fan (desktop) ---------------------------------------------- */
+/* ---- site navigation (header): the four pages; the one you are on in black with a red dot under it ------- */
+.tq-nav-link { position: relative; font-size: 15px; color: #45474d; letter-spacing: -.01em; white-space: nowrap; }
+.tq-nav-link[aria-current="page"] { color: #0a0a0a; font-weight: 600; }
+.tq-nav-link[aria-current="page"]::after { content: ''; position: absolute; left: 50%; bottom: -9px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: #e7131b; }
+
+/* ---- this page's table of contents: the fan (desktop) ------------------------------ */
 /* open: blades rotate out from the knob, top one first; close: reverse order */
 .tq-fan-item {
   position: absolute; right: calc(100% + 24px); top: 50%;
@@ -756,7 +767,7 @@ html { scroll-snap-type: y proximity; }
 .tq-fan-ico--open, [data-fanmenu][data-open] .tq-fan-ico--closed { transform: rotate(90deg) scale(.5); opacity: 0; }
 [data-fanmenu][data-open] .tq-fan-ico--open { transform: none; opacity: 1; }
 .hv-fan-blade, .hv-fan-blade:hover { color: #0a0a0a; }
-.hv-fan-blade[aria-current="page"] .tq-fan-num { background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b30e14 100%) !important; }
+.hv-fan-blade[aria-current] .tq-fan-num { background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b30e14 100%) !important; }
 
 /* ---- mobile quick menu --------------------------------------------------- */
 .tq-fab-link {
@@ -770,8 +781,12 @@ html { scroll-snap-type: y proximity; }
 }
 .tq-fab-link:hover { color: #0a0a0a; }
 .tq-fab-link--page::before { content: ''; width: 6px; height: 6px; margin-inline-end: 9px; border-radius: 50%; background: #e7131b; }
-.tq-fab-link[aria-current="page"] { background: #0a0a0a; color: #fff; }
-.tq-fab-link[aria-current="page"]:hover { color: #fff; }
+.tq-fab-link[aria-current] { background: #0a0a0a; color: #fff; }
+.tq-fab-link[aria-current]:hover { color: #fff; }
+/* between this page's sections and the other pages */
+.tq-fab-sep { width: 26px; height: 4px; margin: 2px 9px; border-radius: 2px; background: #fff; box-shadow: 0 0 0 1px rgba(10,10,10,.08), 0 4px 10px -4px rgba(10,10,10,.35);
+  opacity: 0; transform: scale(.6); transition: opacity .28s ease, transform .32s cubic-bezier(.34,1.3,.5,1); }
+[data-fab][data-open] .tq-fab-sep { opacity: 1; transform: none; transition-delay: calc(var(--i) * .04s); }
 [data-fab][data-open] .tq-fab-link { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; transition-delay: calc(var(--i) * .04s); }
 /* the menu's box spans the whole column of links above the button: closed, it must let taps through to
    the page (it used to swallow every tap on the lower right half of the screen); only the button and,
@@ -1034,6 +1049,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    hairline of the white page show under the bar at the sides on some screens. */
 .tq-head--dark::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: -2px; left: 50%; width: 100vw; margin-left: -50vw; background: #0a0a0b; pointer-events: none; }
 .tq-head--dark nav a.hv-red { color: rgba(255,255,255,.78) !important; }
+.tq-head--dark nav a.tq-nav-link[aria-current="page"] { color: #fff !important; }
 .tq-head--dark nav a.hv-red:hover { color: #fff !important; }
 .tq-head--dark .tq-lang__btn { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.18); color: #f2f2f4; }
 .tq-head--dark .tq-lang__btn:hover, .tq-head--dark .tq-lang__btn[aria-expanded="true"] { border-color: rgba(255,255,255,.6); color: #fff; }
@@ -1710,6 +1726,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
     #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .tq-mth-tail + .tp-sec { padding-top: clamp(16px, 3vw, 40px); }
+@media (min-width: 641px) { .tq-mth-tail { margin-bottom: -40px; } }   /* the blocks after it start 40px higher, over the tail's white end */
 @media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout */
   .tq-mth__stage { height: 80%; }
 }
@@ -1849,7 +1866,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* after the scene: the perks' red glow carries on and the black eases into the white the next block
    starts with (the same curve as the landing's dark tail); it tucks 1px under the scene so no seam shows */
 #pf-flow.is-dark #pf-stick { background: #0a0a0b; }
-#pf-tail { position: relative; height: clamp(360px, 50vh, 560px); margin-top: -1px;
+#pf-tail { position: relative; height: clamp(360px, 50vh, 560px); margin-top: -1px; margin-bottom: -20px;   /* Why TradeQuo and what follows sit 20px into its white end */
   background: radial-gradient(55% 34vh at 50% 0%, rgba(150,10,15,.42), rgba(150,10,15,0) 70%),
     linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
@@ -2381,7 +2398,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* ---- partner-terms/: Paid every day (Paid_Daily_Silver) ------------------------------------------------------------
    A silver panel with a white glow on top and fine vertical lines fading in at the bottom. startSteppers
-   (landing.js) lights one step after another: a silver rail with a moving sheen fills to it (--k), its ball swells
+   (landing.js) lights one step after another: a red rail with a moving sheen fills to it (--k) over a faint red line, its ball swells
    into a polished silver sphere, its icon turns red and plays once (candles, a pop, a clock hand), and a chip floats up
    over it. The balls are solid (no backdrop blur, it would cost on every scroll for no visible difference here). */
 .tp-pds { position: relative; overflow: hidden; isolation: isolate; box-sizing: border-box; max-width: 1240px; margin: 0 auto;
@@ -2395,9 +2412,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-pds__track { position: relative; width: 100%; }
 /* the rail runs between the centres of the first and last columns (four columns, 24px gaps) */
 .tp-pds__base, .tp-pds__fill { position: absolute; inset-inline-start: calc(12.5% - 9px); }
-.tp-pds__base { top: 37px; width: calc(75% + 18px); height: 2px; border-radius: 1px; background: rgba(18,22,30,.12); box-shadow: 0 1px 0 #fff; }
-.tp-pds__fill { top: 35px; width: calc((75% + 18px) * var(--k, 0)); height: 6px; overflow: hidden; border-radius: 3px; background: linear-gradient(180deg, #fff 0%, #b9bdc4 45%, #6e737b 100%);
-  box-shadow: 0 2px 5px rgba(18,22,30,.3), inset 0 0 0 .5px rgba(18,22,30,.2); transition: width 1s cubic-bezier(.6,0,.3,1); }
+.tp-pds__base { top: 37px; width: calc(75% + 18px); height: 2px; border-radius: 1px; background: rgba(231,19,27,.22); box-shadow: 0 1px 0 #fff; }
+.tp-pds__fill { top: 35px; width: calc((75% + 18px) * var(--k, 0)); height: 6px; overflow: hidden; border-radius: 3px; background: linear-gradient(180deg, #ff7a7f 0%, #e7131b 50%, #a50c12 100%);
+  box-shadow: 0 2px 6px rgba(231,19,27,.4), inset 0 0 0 .5px rgba(120,8,12,.35); transition: width 1s cubic-bezier(.6,0,.3,1); }
 .tp-pds__fill::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 240px; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.95) 50%, rgba(255,255,255,0));
   transform: translateX(-240px); animation: tpPdsSheen 2.4s linear infinite; }
 @keyframes tpPdsSheen { to { transform: translateX(1000px); } }
@@ -2483,10 +2500,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <a href="../" data-page-link data-label="MEMUAT · Beranda" style="display: inline-flex; flex-shrink: 0;"><img src="../../assets/logo-wordmark-dark.png?v=be9b8240ee" alt="TradeQuo" style="height: 23px; width: auto;"></a>
     <nav style="display: flex; align-items: center; gap: clamp(14px, 2vw, 32px); flex-wrap: wrap; justify-content: flex-end;">
       <span data-navlinks="" style="display: contents;">
-        <a class="hv-red" href="#programs" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">Program</a>
-        <a class="hv-red" href="#benefits" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">Manfaat</a>
-        <a class="hv-red" href="#why" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">Mengapa TradeQuo</a>
-        <a class="hv-red" href="#questions" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">FAQ</a>
+        <a class="hv-red tq-nav-link" href="../" data-page-link data-label="MEMUAT · Beranda">Beranda</a>
+        <a class="hv-red tq-nav-link" href="#" aria-current="page" data-to-top>Pilihan Program</a>
+        <a class="hv-red tq-nav-link" href="../partner-terms/" data-page-link data-label="MEMUAT · Skema Komisi">Skema Komisi</a>
+        <a class="hv-red tq-nav-link" href="../marketing-tools/" data-page-link data-label="MEMUAT · Alat Pemasaran">Alat Pemasaran</a>
+
         </span>
       <div class="tq-lang" data-lang><button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="Bahasa: Bahasa Indonesia"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg><span class="tq-lang__code">ID</span><svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="tq-lang__menu" hidden><li><a href="../../programs/" hreflang="en" lang="en">English</a></li><li><a href="../../ar/programs/" hreflang="ar" lang="ar">العربية</a></li><li><a href="../../zh-hans/programs/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li><li><a href="../../zh-hant/programs/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li><li><a href="../../fr/programs/" hreflang="fr" lang="fr">Français</a></li><li><a href="../../de/programs/" hreflang="de" lang="de">Deutsch</a></li><li><a href="../../id/programs/" hreflang="id" lang="id" aria-current="true">Bahasa Indonesia</a></li><li><a href="../../it/programs/" hreflang="it" lang="it">Italiano</a></li><li><a href="../../ja/programs/" hreflang="ja" lang="ja">日本語</a></li><li><a href="../../ko/programs/" hreflang="ko" lang="ko">한국어</a></li><li><a href="../../pl/programs/" hreflang="pl" lang="pl">Polski</a></li><li><a href="../../pt/programs/" hreflang="pt" lang="pt">Português</a></li><li><a href="../../ro/programs/" hreflang="ro" lang="ro">Română</a></li><li><a href="../../es/programs/" hreflang="es" lang="es">Español</a></li><li><a href="../../th/programs/" hreflang="th" lang="th">ไทย</a></li><li><a href="../../tr/programs/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="../../uk/programs/" hreflang="uk" lang="uk">Українська</a></li><li><a href="../../vi/programs/" hreflang="vi" lang="vi">Tiếng Việt</a></li><li class="tq-lang__opt"><button type="button" role="switch" aria-checked="true" data-translate-toggle><span>Terjemahan otomatis</span><span class="tq-lang__switch" aria-hidden="true"></span></button></li></ul></div>
       <a class="hv-red-bg" href="../#signup" data-page-link data-label="MEMUAT · Beranda" style="display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap; height: 44px; padding: 0 24px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 15px; font-weight: 600; letter-spacing: -.01em;">Jadi mitra</a>
@@ -2846,12 +2864,17 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   </main>
 
   <div data-fab="" style="position: fixed; right: 16px; bottom: 16px; z-index: 60; display: none; flex-direction: column; align-items: flex-end; gap: 12px;">
-    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
-      <a class="tq-fab-link" href="../" data-page-link data-label="MEMUAT · Beranda" style="--i: 0;">Beranda</a>
-      <a class="tq-fab-link tq-fab-link--page" href="#programs" aria-current="page" style="--i: 1;">Pilihan Program</a>
-      <a class="tq-fab-link tq-fab-link--page" href="../partner-terms/" data-page-link data-label="MEMUAT · Skema Komisi" style="--i: 2;">Skema Komisi</a>
-      <a class="tq-fab-link tq-fab-link--page" href="../marketing-tools/" data-page-link data-label="MEMUAT · Alat Pemasaran" style="--i: 3;">Alat Pemasaran</a>
-      <a class="tq-fab-link" href="#questions" style="--i: 4;">FAQ</a>
+    <div data-fab-list="" style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+      <a class="tq-fab-link" href="#programs" data-toc-link style="--i: 0;">Program</a>
+      <a class="tq-fab-link" href="#who" data-toc-link style="--i: 1;">Untuk siapa</a>
+      <a class="tq-fab-link" href="#benefits" data-toc-link style="--i: 2;">Manfaat</a>
+      <a class="tq-fab-link" href="#why" data-toc-link style="--i: 3;">Mengapa TradeQuo</a>
+      <a class="tq-fab-link" href="#how" data-toc-link style="--i: 4;">Cara kerja</a>
+      <a class="tq-fab-link" href="#questions" data-toc-link style="--i: 5;">FAQ</a>
+      <span class="tq-fab-sep" aria-hidden="true" style="--i: 6;"></span>
+      <a class="tq-fab-link tq-fab-link--page" href="../" data-page-link data-label="MEMUAT · Beranda" style="--i: 7;">Beranda</a>
+      <a class="tq-fab-link tq-fab-link--page" href="../partner-terms/" data-page-link data-label="MEMUAT · Skema Komisi" style="--i: 8;">Skema Komisi</a>
+      <a class="tq-fab-link tq-fab-link--page" href="../marketing-tools/" data-page-link data-label="MEMUAT · Alat Pemasaran" style="--i: 9;">Alat Pemasaran</a>
     </div>
     <button type="button" data-fab-toggle aria-label="Menu" aria-expanded="false" style="width: 56px; height: 56px; border: none; border-radius: 50%; background: #e7131b; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 28px -8px rgba(231,19,27,.7), inset 0 1px 0 rgba(255,255,255,.25);">
       <span data-ref="fabIcon" style="display: flex; align-items: center; justify-content: center; transition: transform .35s cubic-bezier(.34,1.3,.5,1);">
@@ -2861,46 +2884,79 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   </div>
 
     <div data-fanveil="" hidden style="position: fixed; inset: 0; z-index: 68; background: rgba(255,255,255,.42); animation: tqFanVeil .3s ease both; cursor: pointer;"></div>
-  <div data-fanmenu="" style="--fan-n: 3; position: fixed; right: 28px; bottom: 28px; z-index: 78; width: 60px; height: 60px;">
-      <div class="tq-fan-item" style="--i: 0; --ri: 2;">
-        <a class="hv-fan-blade" href="../programs/" data-page-link data-label="MEMUAT · Pilihan Program" aria-current="page" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+  <div data-fanmenu="" style="--fan-n: 6; position: fixed; right: 28px; bottom: 28px; z-index: 78; width: 60px; height: 60px;">
+      <div class="tq-fan-item" style="--i: 0; --ri: 5;">
+        <a class="hv-fan-blade" href="#programs" data-toc-link style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
+          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">01</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Program</span>
+          </span>
+          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
+        </a>
+      </div>
+      <div class="tq-fan-item" style="--i: 1; --ri: 4;">
+        <a class="hv-fan-blade" href="#who" data-toc-link style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
             <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">02</span>
-            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Pilihan Program</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Untuk siapa</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 1; --ri: 1;">
-        <a class="hv-fan-blade" href="../partner-terms/" data-page-link data-label="MEMUAT · Skema Komisi" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+      <div class="tq-fan-item" style="--i: 2; --ri: 3;">
+        <a class="hv-fan-blade" href="#benefits" data-toc-link style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
             <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">03</span>
-            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Skema Komisi</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Manfaat</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-      <div class="tq-fan-item" style="--i: 2; --ri: 0;">
-        <a class="hv-fan-blade" href="../marketing-tools/" data-page-link data-label="MEMUAT · Alat Pemasaran" style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+      <div class="tq-fan-item" style="--i: 3; --ri: 2;">
+        <a class="hv-fan-blade" href="#why" data-toc-link style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
             <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
-            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Alat Pemasaran</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Mengapa TradeQuo</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
         </a>
       </div>
-    <button class="hv-fan-knob" type="button" data-fan-toggle aria-label="Peta situs" aria-expanded="false" style="position: absolute; inset: 0; width: 60px; height: 60px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; isolation: isolate; color: #0a0a0a; background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 45%), linear-gradient(180deg, #ffffff 0%, #eceef1 100%); box-shadow: 0 1px 2px rgba(10,10,10,.08), 0 22px 36px -20px rgba(10,10,10,.45); transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;">
+      <div class="tq-fan-item" style="--i: 4; --ri: 1;">
+        <a class="hv-fan-blade" href="#how" data-toc-link style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
+          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">05</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Cara kerja</span>
+          </span>
+          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
+        </a>
+      </div>
+      <div class="tq-fan-item" style="--i: 5; --ri: 0;">
+        <a class="hv-fan-blade" href="#questions" data-toc-link style="position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font-family: inherit; color: #0a0a0a; text-decoration: none; filter: drop-shadow(0 1px 1px rgba(10,10,10,.08)) drop-shadow(0 16px 16px rgba(10,10,10,.16)); transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .3s ease;">
+          <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
+          <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">06</span>
+            <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">FAQ</span>
+          </span>
+          <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
+        </a>
+      </div>
+    <button class="hv-fan-knob" type="button" data-fan-toggle aria-label="Di halaman ini" aria-expanded="false" style="position: absolute; inset: 0; width: 60px; height: 60px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; isolation: isolate; color: #0a0a0a; background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 45%), linear-gradient(180deg, #ffffff 0%, #eceef1 100%); box-shadow: 0 1px 2px rgba(10,10,10,.08), 0 22px 36px -20px rgba(10,10,10,.45); transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;">
       <span aria-hidden="true" style="position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;"></span>
       <span aria-hidden="true" style="position: absolute; inset: 3px; z-index: -1; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 -10px 16px -12px rgba(10,10,10,.2);"></span>
       <span class="tq-fan-ico tq-fan-ico--closed" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.6" stroke-linejoin="round"><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)"></rect><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)" transform="rotate(-28 12 19.5)"></rect><rect x="9" y="4" width="6" height="15" rx="2.2" fill="rgba(255,255,255,.9)" transform="rotate(28 12 19.5)"></rect><circle cx="12" cy="19.5" r="1.6" fill="#e7131b" stroke="none"></circle></svg></span>
       <span class="tq-fan-ico tq-fan-ico--open" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></span>
-      <span aria-hidden="true" style="position: absolute; top: -3px; right: -3px; width: 21px; height: 21px; border-radius: 50%; background: #e7131b; color: #fff; border: 2px solid #fff; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1;">3</span>
+      <span aria-hidden="true" style="position: absolute; top: -3px; right: -3px; width: 21px; height: 21px; border-radius: 50%; background: #e7131b; color: #fff; border: 2px solid #fff; font-size: 10.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; line-height: 1;">6</span>
     </button>
   </div>
 
@@ -2914,6 +2970,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=fea2b38578" defer></script>
+<script src="../../assets/js/landing.js?v=84b0b05816" defer></script>
 </body>
 </html>

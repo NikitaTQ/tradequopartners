@@ -31,10 +31,7 @@
     <img src="{{root}}assets/logo-wordmark-dark.png" alt="TradeQuo" style="height: 23px; width: auto; flex-shrink: 0;">
     <nav style="display: flex; align-items: center; gap: clamp(14px, 2vw, 32px); flex-wrap: wrap; justify-content: flex-end;">
       <span data-navlinks="" style="display: contents;">
-        <a class="hv-red" href="#how" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.how}}</a>
-        <a class="hv-red" href="#calculator" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.calc}}</a>
-        <a class="hv-red" href="#dashboard" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.perks}}</a>
-        <a class="hv-red" href="#faq" style="font-size: 15px; color: #45474d; letter-spacing: -.01em;">{{nav.faq}}</a>
+        {{siteNav}}
       </span>
       {{langSwitcher}}
       <a class="hv-red-bg" href="#signup" style="display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap; height: 44px; padding: 0 24px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 15px; font-weight: 600; letter-spacing: -.01em;">{{nav.cta}}</a>
@@ -401,14 +398,8 @@
   </div>
 
   <div data-fab="" style="position: fixed; right: 16px; bottom: 16px; z-index: 60; display: none; flex-direction: column; align-items: flex-end; gap: 12px;">
-    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
-      <a class="tq-fab-link" href="#how" style="--i: 0;">{{nav.how}}</a>
-      <a class="tq-fab-link" href="#calculator" style="--i: 1;">{{nav.calc}}</a>
-      <a class="tq-fab-link" href="#dashboard" style="--i: 2;">{{nav.perks}}</a>
-      <a class="tq-fab-link" href="#faq" style="--i: 3;">{{nav.faq}}</a>
-      <a class="tq-fab-link tq-fab-link--page" href="programs/" data-page-link data-label="{{@loader}} · {{@fan.programs}}" style="--i: 4;">{{fan.programs}}</a>
-      <a class="tq-fab-link tq-fab-link--page" href="partner-terms/" data-page-link data-label="{{@loader}} · {{@fan.commission}}" style="--i: 5;">{{fan.commission}}</a>
-      <a class="tq-fab-link tq-fab-link--page" href="marketing-tools/" data-page-link data-label="{{@loader}} · {{@fan.marketing}}" style="--i: 6;">{{fan.marketing}}</a>
+    <div data-fab-list="" style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+      {{fabLinks}}
     </div>
     {{> fab-button}}
   </div>
