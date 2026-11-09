@@ -1089,83 +1089,58 @@
     addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { W = track.firstElementChild.offsetWidth; wrap(); put(); }, 120); });
   }
 
-  /* ---- programs/: Who it's for → Why partners choose (TradeQuo_Partner_Flow design) ---------------
-   * The same stages as the landing's Infinite Flow → perks flip (startFlip), on a 326vh track (the landing's
-   * is 340vh: here the perks come in about a wheel step sooner), so 226vh of scrolling while #pf-stick is
-   * pinned, mapped to q 0 → 1 and followed with the same lag:
-   *   0–.17   the persona text fades (the landing's heading, gone by .17)
-   *   0–.52   the 3D platform rises and stands up (partner-flow.js, setFlip; the landing's zoom and flip)
-   *   .52     a snapshot of the platform takes over in #pf-flip (drawn 9-slice on a canvas)
-   *   .56–.86 it grows to the full screen (the landing's panel); .56–.80 it turns into the black perks section
+  /* ---- programs/: Who it's for (Who_Its_For_Drum) → Why partners choose --------------------------------
+   * The card: the five kinds of partner as chips and one sentence whose halves roll like a drum to the chosen
+   * one. It rolls on every 3.3 s while on screen until a chip or the sentence is clicked (a click on the sentence
+   * moves on one). A sentence too long for the card (a long language) steps its size down to fit.
+   * The scene, on a 326vh track (the landing's flip is 340vh: here the perks come in about a wheel step sooner),
+   * maps the scroll while #pf-stick is pinned to q 0 → 1, followed with the landing flip's lag:
+   *   0–.20   the card as it is (it keeps rolling)
+   *   .20–.38 its content fades; .22–.52 it shrinks to a slab; .28–.50 it turns black
+   *   .52     #pf-flip, black too, takes over at the card's place
+   *   .56–.86 it grows to the full screen (the landing's panel); .56–.80 the perks section shows through
    *   .76–.94 the perks heading comes in (the landing's heading row)
    *   .82–1   the CTA rises and the six cards are dealt in a fan (the landing's fan and CTA)
-   * The persona rows and stories are page text; the 3D stage follows the active one and reports
-   * clicks on itself (window.__pfWhoSet). On phones the rows and stories are a swiper of cards instead. The module, and three.js with it, loads when the scene is
-   * within a screen and a half. Phones (<900px) and reduced motion: nothing is pinned, the perks
-   * section moves into #pf-perks-host and its cards scroll sideways. */
+   * Phones (<900px) and reduced motion: nothing is pinned, the perks section moves into #pf-perks-host. */
   function startWhoFlow() {
     const flow = document.getElementById('pf-flow');
     if (!flow) return;
     const stick = document.getElementById('pf-stick'), block = document.getElementById('pf-who'), flip = document.getElementById('pf-flip');
-    const stage = document.getElementById('pf-who-stage'), perks = document.getElementById('pf-perks');
-    const host = document.getElementById('pf-perks-host'), back = document.getElementById('pf-back'), fan = document.getElementById('pf-fan');
-    if (!stick || !block || !flip || !stage || !perks || !host || !back || !fan) return;
+    const perks = document.getElementById('pf-perks'), host = document.getElementById('pf-perks-host');
+    const back = document.getElementById('pf-back'), fan = document.getElementById('pf-fan');
+    if (!stick || !block || !flip || !perks || !host || !back || !fan) return;
     const cards = $$('[data-pf-perk]', fan), N = cards.length;
 
-    /* persona rows */
-    const rows = $$('[data-pf-row]', block), stories = $$('[data-pf-story]', block);
-    let active = 0;
-    const show = (i, fromStage) => {
-      if (i === active) return;
-      active = i;
-      window.__pfWhoActive = i;
-      rows.forEach((r, j) => r.setAttribute('aria-pressed', String(j === i)));
-      stories.forEach((s, j) => { s.hidden = j !== i; });
-      if (!fromStage && window.__whoApi) window.__whoApi.pick(i);
+    /* the drum */
+    const chips = $$('[data-dr-chip]', block), sent = $('[data-dr-sent]', block);
+    const verb = $('[data-dr-verb]', block), goal = $('[data-dr-goal]', block), num = $('[data-dr-num]', block);
+    const gains = $$('[data-dr-gain]', block), sr = $('[data-dr-sr]', block);
+    const I = ($('[data-dr-i]', block) || {}).textContent || '', SO = ($('[data-dr-so]', block) || {}).textContent || '';
+    let cur = 0, user = false, iv = 0;
+    const roll = (i) => {
+      cur = i;
+      chips.forEach((c, k) => c.setAttribute('aria-pressed', String(k === i)));
+      verb.style.transform = goal.style.transform = 'translateY(calc(var(--drl) * ' + (-i) + '))';
+      if (num) num.textContent = ('0' + (i + 1)).slice(-2);
+      gains.forEach((g, k) => { g.hidden = k !== i; });
+      if (sr) sr.textContent = I + ' ' + verb.children[i].textContent + ' — ' + SO + ' ' + goal.children[i].textContent;
     };
-    rows.forEach((r, i) => r.addEventListener('click', () => show(i, false)));
-    window.__pfWhoSet = (i) => { show(i, true); if (!pSelf) swipeTo(i); };
-
-    /* phones: the types as a swiper of cards (partner.css). The card in the middle becomes the active type
-       and the 3D stage follows it; the stage's arrows and taps bring their card in. The stage doesn't cycle
-       on its own here, or the cards would move while being read. */
-    const pcards = $('[data-pf-cards]', block), pcs = pcards ? [...pcards.children] : [], pdots = $$('[data-pf-dots] button', block);
-    const swipeMq = matchMedia('(max-width: 640px)');
-    const pmid = (el) => { const r = el.getBoundingClientRect(); return r.left + r.width / 2; };
-    let pRaf = 0, pAuto = 0, pSelf = false;   /* pSelf: the swiper itself picked the type, the stage's echo moves nothing */
-    const pSync = () => {
-      pRaf = 0;
-      if (!pcards || !swipeMq.matches) return;
-      const c0 = pmid(pcards);
-      let on = 0, best = Infinity;
-      pcs.forEach((c, i) => { const d = Math.abs(pmid(c) - c0); if (d < best) { best = d; on = i; } });
-      pdots.forEach((b, i) => { if (i === on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
-      if (!pAuto && on !== active) { pSelf = true; show(on, false); pSelf = false; }
+    chips.forEach((c, i) => c.addEventListener('click', () => { user = true; roll(i); }));
+    if (sent) sent.addEventListener('click', () => { user = true; roll((cur + 1) % chips.length); });
+    if (!reducedMotion()) {
+      whileVisible(block, '0px',
+        () => { if (!iv) iv = setInterval(() => { if (!user) roll((cur + 1) % chips.length); }, 3300); },
+        () => { clearInterval(iv); iv = 0; });
+    }
+    const fitDrum = () => {
+      if (!sent) return;
+      sent.style.removeProperty('--drf');
+      for (let n = 0; n < 3; n++) {                   /* measure again: kerning doesn't scale quite linearly */
+        const room = sent.clientWidth, need = Math.max(...$$('.pf-dr__line', sent).map((l) => l.scrollWidth));
+        if (!room || need <= room) return;
+        sent.style.setProperty('--drf', (parseFloat(getComputedStyle(sent).fontSize) * room / need * 0.98).toFixed(1) + 'px');
+      }
     };
-    function swipeTo(i, smooth = true) {
-      if (!pcards || !swipeMq.matches || !pcs[i]) return;
-      clearTimeout(pAuto);
-      pAuto = setTimeout(() => { pAuto = 0; pSync(); }, 700);   /* cards passed on the way don't become active */
-      pcards.scrollTo({ left: pcards.scrollLeft + pmid(pcs[i]) - pmid(pcards), behavior: smooth && !reducedMotion() ? 'smooth' : 'auto' });
-    }
-    const pHold = () => { if (window.__whoApi && window.__whoApi.hold) window.__whoApi.hold(swipeMq.matches); };
-    if (pcards) {
-      pcards.addEventListener('scroll', () => { if (!pRaf) pRaf = requestAnimationFrame(pSync); }, { passive: true });
-      pdots.forEach((b, i) => b.addEventListener('click', () => { swipeTo(i); show(i, false); }));
-      addEventListener('pf:ready', pHold); pHold();
-      if (swipeMq.addEventListener) swipeMq.addEventListener('change', pHold);
-    }
-
-    /* the 3D module loads when the scene is near */
-    const src = flow.dataset.pfModule;
-    if (src && 'IntersectionObserver' in window) {
-      const io = new IntersectionObserver((en) => {
-        if (!en.some((e) => e.isIntersecting)) return;
-        io.disconnect();
-        import(new URL(src, document.baseURI).href).catch((e) => console.warn('[partner-flow]', e));
-      }, { rootMargin: '150% 0px' });
-      io.observe(flow);
-    }
 
     const mq = matchMedia('(max-width: 899px), (prefers-reduced-motion: reduce)');
     const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
@@ -1173,7 +1148,7 @@
     const lerp = (a, b, t) => a + (b - a) * t;
     const out3 = (x) => 1 - Math.pow(1 - clamp(x), 3);
     const head = perks.firstElementChild, cta = perks.lastElementChild, glass = $('.pf-glass', flip);
-    const kids = block.children;
+    const kids = [...block.children];
 
     /* the fan: six cards on an arc, dealt one after another. B is the line the cards stand on (from the
        fan's bottom): the design's 16% + 15px, raised 72px, but never so high that the cards come
@@ -1203,23 +1178,24 @@
       if (mq.matches) {
         if (perks.parentNode !== host) host.appendChild(perks);
         perks.style.opacity = ''; head.style.transform = ''; cta.style.transform = ''; head.style.opacity = ''; cta.style.opacity = '';
-        block.style.transform = ''; block.style.background = '';
+        block.style.transform = ''; block.style.visibility = ''; block.style.removeProperty('--dk');
         for (const k of kids) k.style.opacity = '';
-        $$('.pf-arrow', block).forEach((a) => { a.style.opacity = ''; a.style.pointerEvents = ''; });
         deal(true);
       } else if (perks.parentNode !== back) back.appendChild(perks);
       sizeCards();
     };
-    /* the persona block always fits the screen while pinned */
+    /* the card always fits the screen while pinned (sFit), and ends the shrink about 440px wide */
+    let sFit = 1;
     const fit = () => {
       if (mq.matches) return;
+      const t = block.style.transform;
       block.style.transform = '';
-      const s = Math.min(1, (innerHeight - 24) / block.offsetHeight);
+      sFit = Math.min(1, (innerHeight - 24) / block.offsetHeight);
       block.style.transformOrigin = '50% 50%';
-      block.style.transform = 'scale(' + s + ')';
+      block.style.transform = t || 'scale(' + sFit + ')';
     };
 
-    let hidden = false, qCur = 0, qTgt = 0, raf = 0, snap = null;
+    let qCur = 0, qTgt = 0, raf = 0;
     const target = () => {
       if (mq.matches) return 0;
       const top = flow.getBoundingClientRect().top + scrollY;
@@ -1227,59 +1203,39 @@
       return clamp((scrollY - top) / total);
     };
     const render = (q) => {
-      const vw = innerWidth, vh = innerHeight, api = window.__whoApi;
-      const sr = stage.getBoundingClientRect(), str = stick.getBoundingClientRect();
-      const p3 = ease(clamp(q / 0.52));                    // the platform rises and stands up
-      const sw = q >= 0.52 ? 1 : 0;                        // hand-off to the 2D slab
+      const vw = innerWidth, vh = innerHeight;
+      /* the card: content out, shrink, black */
+      const fo = 1 - ease(clamp((q - 0.2) / 0.18));
+      const sh = ease(clamp((q - 0.22) / 0.3));
+      const dk = ease(clamp((q - 0.28) / 0.22));
+      const bw = block.offsetWidth, bh = block.offsetHeight;
+      const sEnd = Math.min(sFit, Math.min(440, vw * 0.32) / bw);
+      const s = lerp(sFit, sEnd, sh);
+      block.style.transform = 'scale(' + s.toFixed(4) + ')';
+      block.style.setProperty('--dk', dk.toFixed(3));
+      for (const k of kids) k.style.opacity = fo.toFixed(3);
+      const sw = q >= 0.52 ? 1 : 0;                        // hand-off to #pf-flip
+      block.style.visibility = sw ? 'hidden' : '';
       const hold = clamp((q - 0.52) / 0.04);
       const eX = ease(clamp((q - 0.56) / 0.3));            // grow to the full screen
       const c1 = out3((q - 0.76) / 0.18), c2 = out3((q - 0.82) / 0.18);   // heading, then CTA and cards
-      if (api && api.setFlip) api.setFlip(p3);
-      if (sw <= 0) snap = null;
-      else if (!snap && api && api.snapshot) {
-        const s = api.snapshot();
-        if (s) {
-          snap = s; s.img = new Image(); s.img.src = s.url; s.k = s.r.w * sr.width / s.w;
-          if (!glass.firstChild) { const c = document.createElement('canvas'); c.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;'; glass.appendChild(c); }
-          glass.style.background = 'none';
-        }
-      }
-      const R = snap ? snap.r : api && api.rect ? api.rect() : null;
-      const w0 = R ? R.w * sr.width : sr.width * 0.3, h0 = R ? R.h * sr.height : w0 * 0.57;
-      const cx0 = sr.left + (R ? (R.x + R.w / 2) * sr.width : sr.width / 2) - str.left;
-      const cy0 = sr.top + (R ? (R.y + R.h / 2) * sr.height : sr.height / 2) - str.top;
+      /* where the card stands (centred in the stage), at its final size */
+      const str = stick.getBoundingClientRect(), br = block.getBoundingClientRect();
+      const w0 = bw * sEnd, h0 = bh * sEnd;
+      const cx0 = br.left + br.width / 2 - str.left, cy0 = br.top + br.height / 2 - str.top;
       const settle = 1 - 0.025 * Math.sin(hold * Math.PI);
       const w = lerp(w0 * settle, vw, eX), hh = lerp(h0 * settle, vh, eX);
       const cx = lerp(cx0, vw / 2, eX), cy = lerp(cy0, vh / 2, eX);
       flip.style.visibility = sw > 0 ? 'visible' : 'hidden';
       flip.style.opacity = sw;
       flip.style.width = w + 'px'; flip.style.height = hh + 'px';
-      const cv = glass.firstChild;
-      if (snap && cv && snap.img.complete && snap.img.naturalWidth) {
-        /* the snapshot stretched 9-slice, so its rounded frame keeps its corners while it grows */
-        const dpr = Math.min(2, devicePixelRatio || 1), W = Math.round(w * dpr), H = Math.round(hh * dpr);
-        if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
-        const x = cv.getContext('2d'), iw = snap.img.naturalWidth, ih = snap.img.naturalHeight, sl = Math.round(iw * 0.1), d = Math.round(sl * snap.k * dpr);
-        x.clearRect(0, 0, W, H); x.imageSmoothingQuality = 'high';
-        const sx = [0, sl, iw - sl, iw], sy = [0, sl, ih - sl, ih], dx = [0, d, W - d, W], dy = [0, d, H - d, H];
-        for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
-          x.drawImage(snap.img, sx[i], sy[j], sx[i + 1] - sx[i], sy[j + 1] - sy[j], dx[i], dy[j], dx[i + 1] - dx[i] + (i < 2 ? 1 : 0), dy[j + 1] - dy[j] + (j < 2 ? 1 : 0));
-        }
-      } else if (snap && snap.img && !snap.img.complete) snap.img.onload = () => render(qCur);
-      flip.style.borderRadius = lerp(w0 * 0.085, 0, eX) + 'px';
+      flip.style.borderRadius = lerp(32 * sEnd, 0, eX) + 'px';
       flip.style.transform = 'translate(-50%,-50%) translate(' + (cx - vw / 2) + 'px,' + (cy - vh / 2) + 'px)';
       const black = ease(clamp((q - 0.56) / 0.24));
       glass.style.opacity = black >= 1 ? 0 : 1;
       back.style.opacity = black;
       head.style.opacity = c1; head.style.transform = 'translateY(' + (1 - c1) * 18 + 'px)';
       cta.style.opacity = c2; cta.style.transform = 'translateY(' + (1 - c2) * 36 + 'px) scale(' + (0.96 + 0.04 * c2) + ')';
-      const fo = 1 - ease(clamp(q / 0.17));
-      kids[0].style.opacity = fo; kids[1].style.opacity = fo;
-      $$('.pf-arrow', block).forEach((a) => { a.style.opacity = fo; a.style.pointerEvents = fo < 0.5 ? 'none' : ''; });
-      block.style.background = fo < 1 ? 'transparent' : '';
-      kids[kids.length - 1].style.opacity = 1 - ease(clamp((q - 0.42) / 0.1));
-      const hide = sw >= 1;
-      if (hide !== hidden && api) { hidden = hide; api.hide(2, hide); }
       flip.classList.toggle('done', eX > 0.98);
       flow.classList.toggle('is-dark', eX >= 1);     /* the pinned stage goes dark under the full-screen section: no light seams */
       if (eX >= 1) { flip.style.transform = 'none'; flip.style.left = '0px'; flip.style.top = '0px'; flip.style.willChange = 'auto'; flip.style.borderRadius = '0px'; stick.style.perspective = 'none'; }
@@ -1303,12 +1259,13 @@
       qTgt = target();
       if (!raf) raf = requestAnimationFrame(loop);
     };
-    const all = () => { mode(); fit(); tick(); sizeCards(); };
+    const all = () => { fitDrum(); mode(); block.style.transform = ''; fit(); if (!mq.matches) render(qCur); tick(); sizeCards(); };
     addEventListener('scroll', tick, { passive: true });
     addEventListener('resize', all);
     if (mq.addEventListener) mq.addEventListener('change', all);
-    if ('ResizeObserver' in window) new ResizeObserver(() => { fit(); tick(); }).observe(block);
-    addEventListener('pf:ready', () => { hidden = !hidden; if (!mq.matches) render(qCur); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
+    if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { fitDrum(); if (!mq.matches) { fit(); render(qCur); } });
+    roll(0);
     deal(false);
     all();
     if (!mq.matches) render(qCur = qTgt = target());

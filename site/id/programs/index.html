@@ -1755,64 +1755,66 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 
 
-/* ---- Who it's for → Why partners choose (TradeQuo_Partner_Flow design) ------------------------------
-   #pf-flow is 326vh tall (the landing's flip track is 340vh: here the perks come in a wheel step sooner); #pf-stick holds the scene on screen while it plays (startWhoFlow in landing.js
-   maps the scroll to q 0 → 1). The persona block's 3D platform (assets/js/partner-flow.js) stands up;
-   #pf-flip takes over with its snapshot, grows to the full screen and turns into the dark perks section,
-   where the six .pf-perk cards are dealt in a fan. Below 900px and with reduced motion nothing is pinned:
-   the persona block stays put and the perks section moves into #pf-perks-host, its cards in a sideways row. */
+/* ---- Who it's for → Why partners choose ---------------------------------------------------------------
+   #pf-flow is 326vh tall (the landing's flip track is 340vh: here the perks come in a wheel step sooner); #pf-stick
+   holds the scene on screen while it plays (startWhoFlow in landing.js maps the scroll to q 0 → 1). The Who it's
+   for card (Who_Its_For_Drum) fades, shrinks and turns black; #pf-flip takes over at its place, grows to the full
+   screen and turns into the dark perks section, where the six .pf-perk cards are dealt in a fan. Below 900px and
+   with reduced motion nothing is pinned: the card stays put and the perks section moves into #pf-perks-host. */
 #pf-flow { position: relative; height: 326vh; }
 #pf-stick { position: sticky; top: 0; height: 100vh; overflow: hidden; perspective: 1700px; display: flex; align-items: center; justify-content: center; }
 #pf-who-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; display: flex; justify-content: center; transform-origin: 50% 50%; }
-.pf-who { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; overflow: hidden;
-  padding: clamp(32px, 6vw, 80px); border-radius: 32px;
-  background: radial-gradient(60% 70% at 70% 0%, #fff 0%, rgba(255,255,255,0) 70%), radial-gradient(40% 50% at 70% 100%, rgba(231,19,27,.05), rgba(231,19,27,0) 70%), #f2f2f5; }
-.pf-who__title { max-width: 16ch; text-align: start; color: #0e0e10; }
-.pf-who__pick { display: flex; flex-direction: column; gap: 20px; }
-.pf-who__rows { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
-.pf-row { display: flex; align-items: center; gap: 12px; margin: 0; padding: 16px 18px; border-radius: 18px; cursor: pointer; text-align: start; font: inherit; color: inherit;
-  background: rgba(255,255,255,.35); border: 1px solid rgba(255,255,255,.6); box-shadow: 0 0 0 1px rgba(14,14,22,.04);
-  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); transition: background .35s, box-shadow .35s, border-color .35s; -webkit-tap-highlight-color: transparent; }
-.pf-row[aria-pressed="true"] { background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.7)); border-color: rgba(255,255,255,.95);
-  box-shadow: 0 0 0 1px rgba(14,14,22,.06), 0 24px 44px -30px rgba(14,14,22,.4); }
-.pf-row:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
-.pf-row__n { font-family: 'Fragment Mono', monospace; font-size: 12px; color: #a0a0a8; }
-.pf-row__t { flex: 1; font-size: 15px; line-height: 1.2; font-weight: 800; letter-spacing: -.02em; color: #6b6b73; text-wrap: balance; }
-.pf-row__dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: rgba(14,14,22,.12); }
-.pf-row[aria-pressed="true"] .pf-row__n, .pf-row[aria-pressed="true"] .pf-row__dot { color: #e7131b; background-color: #e7131b; }
-.pf-row[aria-pressed="true"] .pf-row__n { background: none; }
-.pf-row[aria-pressed="true"] .pf-row__t { color: #0e0e10; }
-.pf-row:hover .pf-row__t { color: #0e0e10; }
 @keyframes pfFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-.pf-who__story { min-height: 72px; }
-.pf-story { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; animation: pfFade .5s ease; }
-.pf-story[hidden] { display: none; }
-.pf-cards { display: none; }   /* the phones' swiper of types (≤640px) */
-.pf-story__txt { flex: 1 1 420px; max-width: 720px; margin: 0; font-size: 17px; line-height: 1.6; color: #4a4a52; text-wrap: pretty; }
-.pf-story__fit { display: flex; align-items: center; gap: 10px; }
-.pf-story__lab { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .18em; color: #8a8a92; }
-.pf-story__pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #0e0e10; color: #fff; font-size: 14px; font-weight: 700; white-space: nowrap; }
-.pf-story__pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
-.pf-who__stagebox { position: relative; width: calc(100% + 2 * clamp(32px, 6vw, 80px)); margin: -85px calc(-1 * clamp(32px, 6vw, 80px)) 0; aspect-ratio: 1280 / 470; min-height: 280px; direction: ltr; }
-.pf-who__stage { position: absolute; inset: 0;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%); }
-.pf-arrow { position: absolute; top: 50%; left: 50%; z-index: 3; display: flex; align-items: center; justify-content: center; width: 54px; height: 54px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; color: #0e0e10;
-  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.6)); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(14,14,22,.08), 0 16px 30px -18px rgba(14,14,22,.5); transform: translate(-50%, -50%);
-  transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s, color .3s, left .4s cubic-bezier(.2, .8, .2, 1), top .4s cubic-bezier(.2, .8, .2, 1); }
-.pf-arrow:not(.is-placed) { visibility: hidden; }   /* until partner-flow.js has put them beside the platform */
-.pf-arrow:hover { transform: translate(-50%, -50%) scale(1.08); color: #e7131b; }
-.pf-arrow:active { transform: translate(-50%, -50%) scale(.94); }
-.pf-arrow:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
-.pf-who__cta { position: relative; z-index: 2; display: flex; justify-content: center; margin-top: -78px; }
-/* the persona block's CTA is the liquid button at the design's smaller size */
-.tq-liq--sm .tq-liq__body { min-width: 270px; height: 72px; padding: 0 34px; border-radius: 22px; }
-.tq-liq--sm .tq-liq__well { inset: 6px; border-radius: 17px; }
-.tq-liq--sm .tq-liq__gloss { left: 20px; right: 20px; top: 8px; height: 12px; }
-.tq-liq--sm .tq-liq__label { font-size: 17px; }
-.tq-liq--sm .tq-liq__shadow { top: calc(14px + 36px + 36px); width: 240px; height: 24px; margin-left: -120px; }
+/* the Who it's for card (Who_Its_For_Drum). Grey on the white page (the design's white card sits on grey);
+   --dk (startWhoFlow) blacks it out before the black card grows into the perks section */
+.pf-dr { position: relative; width: 100%; max-width: 1200px; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 48px; padding: 72px 64px; border-radius: 32px;
+  background: #f2f2f5; color: #0e0e10; }
+.pf-dr::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: #0e0e10; opacity: var(--dk, 0); pointer-events: none; }
+.pf-dr__top { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.pf-dr__eyebrow { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 20px; line-height: 1.2; font-weight: 800; letter-spacing: -.03em; color: #0e0e10; }
+.pf-dr__eyebrow span { color: inherit !important; }   /* the heading's red words stay black in this small line */
+.pf-dr__eyebrow i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #e7131b; }
+.pf-dr__eyebrow > span { min-width: 0; text-wrap: balance; }
+.pf-dr__chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.pf-dr__chip { min-height: 36px; padding: 8px 14px; border: 0; border-radius: 999px; background: #fff; color: #5e5e66; font: 700 13px/1.2 'DM Sans', sans-serif; cursor: pointer;
+  transition: background .25s, color .25s; -webkit-tap-highlight-color: transparent; }
+.pf-dr__chip:hover { color: #0e0e10; }
+.pf-dr__chip[aria-pressed="true"] { background: #0e0e10; color: #fff; }
+.pf-dr__chip:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+/* the sentence: each half is a slot as wide as its longest phrase; the phrases stand in a column inside it and the
+   column slides up a line per kind (startWhoFlow); a long language steps the size down to fit (--drf) */
+.pf-dr__sent { --drl: 1.3em; position: relative; display: flex; flex-direction: column; font-size: var(--drf, 80px); line-height: 1.08; font-weight: 800; letter-spacing: -.055em; cursor: pointer;
+  user-select: none; -webkit-tap-highlight-color: transparent; }
+.pf-dr__line { display: flex; gap: .24em; align-items: flex-end; }
+.pf-dr__line > span { flex: none; }
+.pf-dr__so { color: #a8a8b0; white-space: nowrap; }
+.pf-dr__slot { display: inline-block; height: var(--drl); line-height: var(--drl); overflow: hidden; margin-bottom: calc((1.08em - var(--drl)) / 2); }   /* on the line's baseline */
+.pf-dr__slot > span { display: flex; flex-direction: column; transition: transform .7s cubic-bezier(.7,0,.2,1); }
+.pf-dr__slot > span > span { height: var(--drl); line-height: var(--drl); white-space: nowrap; overflow: hidden; }   /* each phrase clipped to its row: no marks of the next one peek in */
+/* scripts with tall marks (Arabic, Thai, Vietnamese) get taller rows, so the next phrase's marks don't show above the slot */
+:lang(ar) .pf-dr__sent, :lang(th) .pf-dr__sent, :lang(vi) .pf-dr__sent { --drl: 1.6em; }
+.pf-dr__slot.is-red { color: #e7131b; }
+.pf-dr__l2 .pf-dr__slot > span { transition-delay: .12s; }
+.pf-dr__sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.pf-dr__bot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; padding-top: 32px; border-top: 1px solid rgba(14,14,22,.09); }
+.pf-dr__meta { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .22em; color: #8a8a93; }
+.pf-dr__gain { margin: 10px 0 0; max-width: 720px; font-size: 24px; line-height: 1.35; font-weight: 700; letter-spacing: -.02em; text-wrap: pretty; animation: pfFade .5s ease; }
+.pf-dr__gain[hidden] { display: none; }
+.pf-dr__cta { display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700; white-space: nowrap;
+  text-decoration: none; transition: background .2s; }
+.pf-dr__cta:hover { background: #c90f17; color: #fff; }
+.pf-dr__cta:focus-visible { outline: 2px solid #0e0e10; outline-offset: 3px; }
+[dir="rtl"] .pf-dr__cta span { display: inline-block; transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) { .pf-dr__slot > span { transition: none; } .pf-dr__gain { animation: none; } }
+@media (max-width: 900px) {
+  .pf-dr { padding: 40px 24px; gap: 32px; border-radius: 24px; }
+  .pf-dr__sent { font-size: var(--drf, clamp(34px, 9vw, 64px)); }
+  .pf-dr__bot { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .pf-dr__gain { font-size: 19px; }
+  .pf-dr__cta { justify-self: start; }
+}
 
-/* the flip: the platform's snapshot, then the dark perks section at full screen */
+/* the flip: the blacked-out card, then the dark perks section at full screen */
 #pf-flip { position: absolute; left: 50%; top: 50%; width: 200px; height: 120px; transform-origin: 50% 50%; visibility: hidden; pointer-events: none; will-change: transform, width, height; border-radius: 24px; overflow: hidden; }
 #pf-flip.done { pointer-events: auto; }
 #pf-flip.done .pf-perk, #pf-flip.done .pf-perk__in { -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-font-smoothing: antialiased; }
@@ -1879,7 +1881,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-puzzle:hover .pf-pz-b, .pf-puzzle:focus-visible .pf-pz-b { padding-inline-end: 38px; }
 .pf-puzzle:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 .pf-pz-arr { font-size: 15px; }
-[dir="rtl"] .pf-pz-arr, [dir="rtl"] .tq-liq--sm .tq-liq__arr { display: inline-block; transform: scaleX(-1); }
+[dir="rtl"] .pf-pz-arr { display: inline-block; transform: scaleX(-1); }
 /* after the scene: the perks' red glow carries on and the black eases into the white the next block
    starts with (the same curve as the landing's dark tail); it tucks 1px under the scene so no seam shows */
 #pf-flow.is-dark #pf-stick { background: #0a0a0b; }
@@ -1917,29 +1919,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .pf-perk__v * { white-space: nowrap; }
 }
 @media (max-width: 640px) {
-  .pf-who { gap: 0; border-radius: 26px; padding: 28px 18px; }
-  /* the rows and the story give way to a swiper of cards, one per type, story and best fit on each.
-     The 3D stage and the cards make one panel: the platform with its object on top, the type's text
-     under it (it slides inside the panel as you swipe), the dots and the CTA below the panel. */
-  .pf-who__rows, .pf-who__story { display: none; }
-  .pf-who__pick { display: contents; }
-  .pf-who__title { order: 0; margin-bottom: 20px; }
-  .pf-who__stagebox { order: 1; box-sizing: border-box; width: 100%; margin: 0; min-height: 0; aspect-ratio: 1 / .7; overflow: hidden; border-radius: 22px 22px 0 0;
-    background: radial-gradient(60% 55% at 50% 62%, rgba(231,19,27,.05), rgba(231,19,27,0) 70%), rgba(255,255,255,.9);
-    border: 1px solid rgba(14,14,22,.06); border-bottom: 0; }
-  .pf-cards { order: 2; display: flex; gap: 0; margin: 0; padding: 0; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
-    scrollbar-width: none; -webkit-overflow-scrolling: touch; border-radius: 0 0 22px 22px; background: rgba(255,255,255,.9);
-    border: 1px solid rgba(14,14,22,.06); border-top: 0; box-shadow: 0 30px 40px -32px rgba(14,14,22,.4); }
-  .pf-cards::-webkit-scrollbar { display: none; }
-  .pf-card { flex: 0 0 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 2px 20px 20px;
-    scroll-snap-align: center; scroll-snap-stop: always; }
-  .pf-card__n { font-family: 'Fragment Mono', monospace; font-size: 12px; color: #e7131b; }
-  .pf-card__t { margin: 0; font-size: 19px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; color: #0e0e10; text-wrap: balance; }
-  .pf-card__d { margin: 0; font-size: 15px; line-height: 1.55; color: #4a4a52; text-wrap: pretty; }
-  .pf-card .pf-story__fit { margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
-  .pf-arrow { width: 44px; height: 44px; }
-  .tp-progdots.pf-dots { order: 3; margin-top: 2px; }
-  .pf-who__cta { order: 4; margin-top: 6px; }
   .pf-perks__head { gap: 14px; }
   .pf-fan { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 24px 0; }
   .pf-perk__in { min-height: 214px; padding: 16px 10px 10px; gap: 5px; border-radius: 22px; }
@@ -2599,54 +2578,35 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       </div>
     </section>
 
-    <!-- Who it's for → Why partners choose (TradeQuo_Partner_Flow design). A sticky scene over 280vh: the
-         persona block with its 3D platform (assets/js/partner-flow.js, loaded when the scene is near); on
-         scroll the platform stands up, its snapshot grows to fill the screen and becomes the dark perks
-         section, where six cards are dealt. Phones and reduced motion: the two blocks simply stack and the
-         perks scroll sideways. startWhoFlow in landing.js runs the scroll part and the persona rows. -->
+    <!-- Who it's for → Why partners choose: one scene on a pinned scroll (startWhoFlow in landing.js). The Who it's
+         for card (Who_Its_For_Drum) is read, then fades, shrinks and turns black; that black card grows to fill the
+         screen and becomes the dark perks section, where six cards are dealt. Phones and reduced motion: the two
+         blocks simply stack and the perks sit in a grid. -->
     <div class="pf" id="who">
-      <div id="pf-flow" data-pf-module="../../assets/js/partner-flow.js">
+      <div id="pf-flow">
         <div id="pf-stick">
           <div id="pf-who-wrap">
-            <section class="pf-who" id="pf-who" data-screen-label="Who it's for">
-              <h2 class="tp-h2 pf-who__title">Dirancang untuk mereka yang <span style="color: #e7131b;">menggerakkan trader</span></h2>
-              <div class="pf-who__pick">
-                <div class="pf-who__rows" role="group" aria-label="Dirancang untuk mereka yang menggerakkan trader">
-                  <button type="button" class="pf-row" data-pf-row aria-pressed="true"><span class="pf-row__n">01</span><span class="pf-row__t">Edukator trading</span><span class="pf-row__dot" aria-hidden="true"></span></button>
-                  <button type="button" class="pf-row" data-pf-row aria-pressed="false"><span class="pf-row__n">02</span><span class="pf-row__t">Grup sinyal</span><span class="pf-row__dot" aria-hidden="true"></span></button>
-                  <button type="button" class="pf-row" data-pf-row aria-pressed="false"><span class="pf-row__n">03</span><span class="pf-row__t">Kreator konten</span><span class="pf-row__dot" aria-hidden="true"></span></button>
-                  <button type="button" class="pf-row" data-pf-row aria-pressed="false"><span class="pf-row__n">04</span><span class="pf-row__t">Komunitas &amp; tim IB</span><span class="pf-row__dot" aria-hidden="true"></span></button>
-                  <button type="button" class="pf-row" data-pf-row aria-pressed="false"><span class="pf-row__n">05</span><span class="pf-row__t">Bisnis &amp; merek edukasi</span><span class="pf-row__dot" aria-hidden="true"></span></button>
-                </div>
-                <div class="pf-who__story" aria-live="polite">
-                  <div class="pf-story" data-pf-story><p class="pf-story__txt">Anda mengajar trading lewat kursus, webinar, atau mentoring, dan murid Anda butuh broker tempat mereka bisa membuka akun hari ini juga. Bagikan tautan Anda kepada mereka dan dapatkan hingga 87% dari spread untuk setiap lot yang mereka transaksikan, selama mereka tetap aktif.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Ajak trader</span></span></div>
-                  <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">Anda mengelola channel tempat para anggota mengikuti ide trading Anda. Arahkan mereka ke TradeQuo, berikan grafik TradingView dan sinyal real-time gratis, lalu terima komisi Anda setiap hari pukul 00:00 waktu server.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Ajak trader</span></span></div>
-                  <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">Anda membuat video, postingan, atau siaran langsung tentang pasar. Gunakan banner, landing page, dan video siap pakai dari kami, lalu pantau setiap pendaftaran dan transaksi di dasbor real-time Anda.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Ajak trader</span></span></div>
-                  <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">Anda memimpin komunitas trading atau tim mitra di wilayah Anda. Ajak mitra lain bergabung dengan TradeQuo dan dapatkan penghasilan dari bisnis yang mereka bawa, sebagai tambahan dari klien Anda sendiri, didampingi manajer mitra khusus.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Bangun jaringan</span></span></div>
-                  <div class="pf-story" data-pf-story hidden><p class="pf-story__txt">Anda menjalankan bisnis mapan atau akademi trading dan ingin semuanya berjalan di bawah nama Anda sendiri. Luncurkan Broker White-Label atau Akademi White-Label yang dibangun di atas infrastruktur TradeQuo.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Luncurkan merek Anda</span></span></div>
-                </div>
-                <!-- phones: the five types as a swiper, each card with its story and best fit; the 3D stage follows the
-                     card in the middle (startWhoFlow) -->
-                <div class="pf-cards" data-pf-cards>
-                  <article class="pf-card" data-pf-card><span class="pf-card__n">01</span><h3 class="pf-card__t">Edukator trading</h3><p class="pf-card__d">Anda mengajar trading lewat kursus, webinar, atau mentoring, dan murid Anda butuh broker tempat mereka bisa membuka akun hari ini juga. Bagikan tautan Anda kepada mereka dan dapatkan hingga 87% dari spread untuk setiap lot yang mereka transaksikan, selama mereka tetap aktif.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Ajak trader</span></span></article>
-                  <article class="pf-card" data-pf-card><span class="pf-card__n">02</span><h3 class="pf-card__t">Grup sinyal</h3><p class="pf-card__d">Anda mengelola channel tempat para anggota mengikuti ide trading Anda. Arahkan mereka ke TradeQuo, berikan grafik TradingView dan sinyal real-time gratis, lalu terima komisi Anda setiap hari pukul 00:00 waktu server.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Ajak trader</span></span></article>
-                  <article class="pf-card" data-pf-card><span class="pf-card__n">03</span><h3 class="pf-card__t">Kreator konten</h3><p class="pf-card__d">Anda membuat video, postingan, atau siaran langsung tentang pasar. Gunakan banner, landing page, dan video siap pakai dari kami, lalu pantau setiap pendaftaran dan transaksi di dasbor real-time Anda.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Ajak trader</span></span></article>
-                  <article class="pf-card" data-pf-card><span class="pf-card__n">04</span><h3 class="pf-card__t">Komunitas &amp; tim IB</h3><p class="pf-card__d">Anda memimpin komunitas trading atau tim mitra di wilayah Anda. Ajak mitra lain bergabung dengan TradeQuo dan dapatkan penghasilan dari bisnis yang mereka bawa, sebagai tambahan dari klien Anda sendiri, didampingi manajer mitra khusus.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Bangun jaringan</span></span></article>
-                  <article class="pf-card" data-pf-card><span class="pf-card__n">05</span><h3 class="pf-card__t">Bisnis &amp; merek edukasi</h3><p class="pf-card__d">Anda menjalankan bisnis mapan atau akademi trading dan ingin semuanya berjalan di bawah nama Anda sendiri. Luncurkan Broker White-Label atau Akademi White-Label yang dibangun di atas infrastruktur TradeQuo.</p><span class="pf-story__fit"><span class="pf-story__lab">PALING COCOK</span><span class="pf-story__pill">Luncurkan merek Anda</span></span></article>
-                </div>
-                <div class="tp-progdots pf-dots" data-pf-dots>
-                  <button type="button" aria-label="Edukator trading" aria-current="true"></button>
-                  <button type="button" aria-label="Grup sinyal"></button>
-                  <button type="button" aria-label="Kreator konten"></button>
-                  <button type="button" aria-label="Komunitas &amp; tim IB"></button>
-                  <button type="button" aria-label="Bisnis &amp; merek edukasi"></button>
-                </div>
+            <!-- Who it's for (Who_Its_For_Drum design): the five kinds of partner as chips, and one sentence whose two
+                 halves roll like a drum to the chosen one ("I teach trading / so I refer students"); under it what they
+                 get with TradeQuo and the CTA. It rolls on by itself every 3.3 s while on screen until a chip or the
+                 sentence is clicked (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
+                 reads the current sentence in .pf-dr__sr. -->
+            <section class="pf-who pf-dr" id="pf-who" data-screen-label="Who it's for">
+              <div class="pf-dr__top">
+                <h2 class="pf-dr__eyebrow"><i aria-hidden="true"></i><span>Dirancang untuk mereka yang <span style="color: #e7131b;">menggerakkan trader</span></span></h2>
+                <div class="pf-dr__chips" role="group" aria-label="Dirancang untuk mereka yang menggerakkan trader"><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="true">Edukator</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Grup sinyal</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Kreator</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Tim IB</button><button type="button" class="pf-dr__chip" data-dr-chip aria-pressed="false">Merek</button></div>
               </div>
-              <div class="pf-who__stagebox">
-                <div class="pf-who__stage" id="pf-who-stage" data-prev="Sebelumnya" data-next="Berikutnya"></div>
+              <div class="pf-dr__sent" data-dr-sent>
+                <p class="pf-dr__sr" data-dr-sr>Saya mengajar trading — jadi saya mereferensikan murid</p>
+                <div class="pf-dr__line" aria-hidden="true"><span data-dr-i>Saya</span><span class="pf-dr__slot is-red"><span data-dr-verb><span>mengajar trading</span><span>mengelola grup sinyal</span><span>membuat konten pasar</span><span>memimpin tim IB</span><span>menjalankan merek trading</span></span></span></div>
+                <div class="pf-dr__line pf-dr__l2" aria-hidden="true"><span class="pf-dr__so" data-dr-so>jadi saya</span><span class="pf-dr__slot"><span data-dr-goal><span>mereferensikan murid</span><span>mereferensikan anggota</span><span>mereferensikan audiens</span><span>membangun jaringan</span><span>meluncurkan merek sendiri</span></span></span></div>
               </div>
-              <div class="pf-who__cta">
-                <a class="tq-liq tq-liq--sm" href="../#signup" data-page-link data-label="MEMUAT · Beranda" aria-label="Daftar jadi mitra"><span class="tq-liq__shadow" aria-hidden="true"></span><span class="tq-liq__body"><span class="tq-liq__well" aria-hidden="true"><span class="tq-liq__fluid"><span class="tq-liq__wave"><svg viewBox="0 0 400 20" preserveAspectRatio="none" width="100%" height="10" focusable="false"><path d="M0 12 Q 50 2 100 12 T 200 12 T 300 12 T 400 12 V 20 H 0 Z" fill="#FF6A70"></path></svg></span><span class="tq-liq__line"></span></span></span><span class="tq-liq__gloss" aria-hidden="true"></span><span class="tq-liq__label">Daftar jadi mitra<span class="tq-liq__arr">→</span></span><span class="tq-liq__label tq-liq__label--lit" aria-hidden="true">Daftar jadi mitra<span>→</span></span></span></a>
+              <div class="pf-dr__bot">
+                <div>
+                  <div class="pf-dr__meta">BERSAMA TRADEQUO · <span data-dr-num>01</span>/05</div>
+                  <div class="pf-dr__gains"><p class="pf-dr__gain" data-dr-gain>Dapatkan hingga 87% spread dari setiap lot yang ditradingkan murid Anda, selama mereka tetap aktif.</p><p class="pf-dr__gain" data-dr-gain hidden>Grafik TradingView gratis dan sinyal real-time untuk anggota Anda. Komisi Anda masuk setiap hari pukul 00:00.</p><p class="pf-dr__gain" data-dr-gain hidden>Banner, landing page, dan video siap pakai — plus setiap pendaftaran dan trade di dasbor live Anda.</p><p class="pf-dr__gain" data-dr-gain hidden>Dapatkan penghasilan dari bisnis yang dibawa partner Anda, di atas klien Anda sendiri, dengan manajer partner khusus.</p><p class="pf-dr__gain" data-dr-gain hidden>Luncurkan Brokerage atau Akademi White-Label atas nama Anda sendiri, dibangun di atas infrastruktur TradeQuo.</p></div>
+                </div>
+                <a class="pf-dr__cta" href="../#signup" data-page-link data-label="MEMUAT · Beranda">Daftar jadi mitra <span aria-hidden="true">→</span></a>
               </div>
             </section>
           </div>
@@ -2983,6 +2943,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=bc92598fa2" defer></script>
+<script src="../../assets/js/landing.js?v=8044725ad6" defer></script>
 </body>
 </html>
