@@ -1380,6 +1380,32 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-hero .tp-head { gap: 10px; }
 .tp-hero .tp-head .tp-sub { max-width: 64ch; font-size: 22px; }
 .tp-hero .tp-stage { margin-top: clamp(16px, 2vw, 26px); }
+/* The H1 in the site's display scheme: Syncopate 700, in capitals with wide tracking (it doesn't read without it),
+   each sentence on its own line; a word too wide for the screen steps the size down (data-fitw, landing.js).
+   Syncopate has Latin letters only (and no Romanian Ș), so other languages get a look-alike wide display face:
+   Unbounded (Ukrainian, Vietnamese, Romanian), Reem Kufi (Arabic), Prompt (Thai), Dela Gothic One (Japanese),
+   Black Han Sans (Korean), ZCOOL QingKe HuangYou (Chinese). Each file holds only this H1's characters, a few KB:
+   tools/h1-fonts.py fetches them again when pp.hero.h1 changes. Scripts without capitals keep their spacing. */
+@font-face { font-family: 'TQ H1 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 ZCOOL TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-tc.woff2) format('woff2'); }
+.tp-hero .tp-head { max-width: 1120px; }
+.tp-hero .tp-h1 { --h1f: 'TQ H1 Syncopate'; --h1s: clamp(22px, 3.1vw, 44px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h1f), 'DM Sans', sans-serif; font-size: calc(var(--h1s) * var(--h1k, 1));
+  font-weight: 700; font-synthesis: none; line-height: 1.12; letter-spacing: .15em; text-transform: uppercase; }   /* the padding balances the tracking after the last letter */
+.tp-hero .tp-h1 > span { display: block; }
+:lang(uk) .tp-hero .tp-h1, :lang(vi) .tp-hero .tp-h1, :lang(ro) .tp-hero .tp-h1 { --h1f: 'TQ H1 Unbounded'; }
+:lang(ar) .tp-hero .tp-h1 { --h1f: 'TQ H1 Reem Kufi'; }
+:lang(th) .tp-hero .tp-h1 { --h1f: 'TQ H1 Prompt'; }
+:lang(ja) .tp-hero .tp-h1 { --h1f: 'TQ H1 Dela Gothic One'; }
+:lang(ko) .tp-hero .tp-h1 { --h1f: 'TQ H1 Black Han Sans'; }
+:lang(zh-Hans) .tp-hero .tp-h1 { --h1f: 'TQ H1 ZCOOL SC'; }
+:lang(zh-Hant) .tp-hero .tp-h1 { --h1f: 'TQ H1 ZCOOL TC'; }
+:lang(ar) .tp-hero .tp-h1, :lang(th) .tp-hero .tp-h1, :lang(ja) .tp-hero .tp-h1, :lang(ko) .tp-hero .tp-h1, :lang(zh) .tp-hero .tp-h1 { --h1k: 1.45; padding-inline-start: 0; text-transform: none; }   /* no capitals or tracking: a size up to stand as large */
 
 /* ---- program cards ------------------------------------------------------------- */
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
@@ -1453,7 +1479,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pc { padding-bottom: 24px; }
 }
 @media (min-width: 961px) and (max-height: 1000px) {
-  .tp-hero .tp-h1 { font-size: clamp(40px, 6vh, 56px); }
+  .tp-hero .tp-h1 { --h1s: clamp(24px, 4.2vh, 40px); }
   .tp-hero .tp-head { gap: 8px; }
   .tp-hero .tp-head .tp-sub { font-size: 19px; line-height: 1.45; }
   .tp-hero .tp-stage { margin-top: 12px; padding-top: 14px; padding-bottom: 32px; }   /* the panel gives back height so the CTAs stay in the first screen */
@@ -1470,7 +1496,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 @media (min-width: 961px) and (max-height: 800px) {
   .tp-hero { padding-top: 4px; }
-  .tp-hero .tp-h1 { font-size: clamp(38px, 5.6vh, 56px); }
+  .tp-hero .tp-h1 { --h1s: clamp(22px, 4vh, 32px); }
   .tp-hero .tp-head { gap: 6px; }
   .tp-hero .tp-head .tp-sub { font-size: 16px; line-height: 1.4; }
   .tp-hero .tp-stage { margin-top: 8px; padding: 10px 14px 20px; border-radius: 28px; }
@@ -1497,7 +1523,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 /* phones: the card scaled to the swiper, the CTAs in the first screen like before */
 @media (max-width: 640px) {
-  .tp-pc { padding: 14px 18px 20px; border-radius: 24px; }
+  .tp-pc { padding: 12px 18px 20px; border-radius: 24px; }
   .tp-pc__art { top: 10px; inset-inline-end: 12px; width: 130px; height: 108px; }
   .tp-pc__art--temple { top: 8px; inset-inline-end: 12px; width: 122px; height: 118px; }
   .tp-pc__head { gap: 4px; max-width: 190px; }
@@ -1519,7 +1545,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 /* phones: one row that swipes sideways and snaps to a card; the next card peeks in at the edge */
 @media (max-width: 640px) {
-  .tp-hero .tp-stage { margin-inline: calc(-1 * clamp(16px, 4vw, 56px)); padding: 10px 0 0; border-radius: 0; }   /* the panel edge to edge */
+  .tp-hero .tp-stage { margin-inline: calc(-1 * clamp(16px, 4vw, 56px)); padding: 6px 0 0; border-radius: 0; }   /* the panel edge to edge */
   .tp-stage > .tp-programs { display: flex; gap: 12px; max-width: none; margin: 0; padding: 4px 12px 50px; overflow-x: auto;   /* 50px: room for the cards' shadow to fade out */ overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory; scroll-padding-inline: 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .tp-programs::-webkit-scrollbar { display: none; }
@@ -2116,9 +2142,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 /* phones: the first CTA in the first screen (with the short subtitles, site.css .tq-ph) */
 @media (max-width: 640px) {
-  .tp-hero .tp-h1 { font-size: 34px; }
+  .tp-hero .tp-h1 { --h1s: 23px; line-height: 1.04; }   /* capitals only: little room needed between the lines */
+  :lang(vi) .tp-hero .tp-h1 { line-height: 1.16; }   /* stacked Vietnamese accents above the capitals */
+  .tp-hero .tp-h1 > span { display: inline; }   /* phones: the two sentences run on, so the wide face takes fewer lines */
   .tp-hero .tp-head { gap: 6px; }
-  .tp-hero .tp-stage { margin-top: 8px; }
+  .tp-hero .tp-stage { margin-top: 4px; }
   .tp-stage > .tp-programs { padding-top: 0; }
   .tp-ticks { margin-top: 10px; gap: 5px; }
   .tp-ticks li { font-size: 14px; line-height: 1.35; }
@@ -2623,7 +2651,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <!-- Hero + the three programs -->
     <section id="programs" class="tp-sec tp-hero" data-screen-label="Partner programs — hero">
       <div class="tp-head">
-        <h1 class="tp-h1">Tek partner programı. <span style="color: #e7131b;">Üç kazanç yolu.</span></h1>
+        <h1 class="tp-h1" data-fitw>Tek partner programı. <span style="color: #e7131b;">Üç kazanç yolu.</span></h1>
         <p class="tp-sub tp-hero__lead"><span class="tq-nph">Yatırımcı yönlendirin, partner ağı kurun ya da kendi markanızı başlatın. Hangi yolu seçerseniz seçin, size özel bir partner yöneticisiyle çalışırsınız.</span><span class="tq-ph">Yatırımcı yönlendirin, partner ağı kurun ya da kendi markanızı başlatın.</span></p>
       </div>
 
