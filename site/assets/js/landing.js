@@ -161,6 +161,27 @@
     window.addEventListener('pageshow', (e) => { if (e.persisted) set(false); });
   }
 
+  /* ---- sticky header: shorter once the page scrolls, out of the way while a full-screen scene holds the screen
+   * (the landing's flip track, the Programs persona/perks scene: only where they pin, i.e. position: sticky) ---- */
+  function startStickyHead() {
+    const head = $('header.tq-head');
+    if (!head) return;
+    const stages = $$('[data-flip-sticky], #pf-stick');
+    let pinned = [], raf = 0;
+    const measure = () => { pinned = stages.filter((s) => getComputedStyle(s).position === 'sticky').map((s) => s.parentElement); };
+    const update = () => {
+      raf = 0;
+      head.classList.toggle('is-stuck', scrollY > 4);
+      const h = head.offsetHeight;
+      head.classList.toggle('is-away', pinned.some((t) => { const r = t.getBoundingClientRect(); return r.top < h && r.bottom > innerHeight * 0.6; }));
+    };
+    const later = () => { if (!raf) raf = requestAnimationFrame(update); };
+    measure();
+    addEventListener('scroll', later, { passive: true });
+    addEventListener('resize', () => { measure(); later(); });
+    update();
+  }
+
   /* ---- this page's table of contents (the fan on desktop, the red menu on phones) --------------------
    * A link scrolls smoothly to its section (and the menu closes); while a menu is open, the section on screen
    * is marked (aria-current="location"). The header's link to the page you are on takes you back to its top. */
@@ -172,7 +193,11 @@
       const t = document.getElementById(a.getAttribute('href').slice(1));
       if (!t) return;
       e.preventDefault();
-      go(t.getBoundingClientRect().top + scrollY);
+      /* clear of the sticky header (68px once scrolled); a stop inside a full-screen scene goes exactly there,
+         the header steps aside for the scene anyway */
+      const head = $('header.tq-head');
+      const off = head && !t.closest('[data-flip-track], .pf') ? 68 : 0;
+      go(t.getBoundingClientRect().top + scrollY - off);
       history.replaceState(null, '', '#' + t.id);
     }));
     $$('[data-to-top]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); go(0); }));
@@ -1311,6 +1336,7 @@
   startFanMenu();
   startFab();
   startToc();
+  startStickyHead();
   startDock();
   startIframeFit();
   startFanTap();
