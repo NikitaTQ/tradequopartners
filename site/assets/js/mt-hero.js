@@ -421,8 +421,11 @@ export function mount(el, opts = {}) {
       tg.d.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%,-100%)';
       boxes.push({ l: x - tg.w / 2, r: x + tg.w / 2, t: y - tg.h, b: y });
     });
-    /* all four names stand at once: where two would meet (long names, narrow screens), they all step down a size */
-    if (nameK > 0.55 && boxes.some((a, i) => boxes.some((c, j) => j > i && a.l < c.r + 14 && c.l < a.r + 14 && a.t < c.b && c.t < a.b))) nameK *= 0.94;
+    /* all four names stand at once: where two would meet (long names, narrow screens), they all step down a size.
+       Judged only with the objects landed and the scene at rest (not mid pop-in, not turned by the mouse), so the
+       names shrink only as far as they must */
+    const atRest = t > 2.6 && Math.abs(px) < 0.04 && Math.abs(py) < 0.04;
+    if (atRest && nameK > 0.55 && boxes.some((a, i) => boxes.some((c, j) => j > i && a.l < c.r + 8 && c.l < a.r + 8 && a.t < c.b && c.t < a.b))) nameK *= 0.96;
     renderer.render(scene, camera);
   };
   const frame = now => {
