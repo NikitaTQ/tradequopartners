@@ -5,13 +5,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TradeQuo — Infinite Flow</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+/* the site's Inter (self-hosted, one file per script) */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(../assets/fonts/inter-cyrillic-ext.woff2) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(../assets/fonts/inter-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(../assets/fonts/inter-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(../assets/fonts/inter-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(../assets/fonts/inter-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+</style>
 <style>
   html, body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; overflow: hidden; scrollbar-width: none; }
   html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
-  .if { background: #FFFFFF; color: #0A0A0A; font-family: 'DM Sans', sans-serif; padding: clamp(40px,6vw,96px) clamp(20px,5vw,80px); display: flex; flex-direction: column; gap: clamp(20px,3vw,36px); box-sizing: border-box; }
+  .if { background: #FFFFFF; color: #0A0A0A; font-family: 'Inter', sans-serif; padding: clamp(40px,6vw,96px) clamp(20px,5vw,80px); display: flex; flex-direction: column; gap: clamp(20px,3vw,36px); box-sizing: border-box; }
   .if-head { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .if-title { margin: 0; font-weight: 700; font-size: clamp(46px,8.6vw,124px); line-height: .9; letter-spacing: -.045em; text-transform: uppercase; text-wrap: balance; }
   .if-title span { color: #E7131B; }
@@ -38,7 +43,7 @@
     box-shadow: inset 0 0 0 1px rgba(255,255,255,.07), 0 1px 2px rgba(0,0,0,.18), 0 10px 22px -14px rgba(0,0,0,.45);
     text-decoration: none;
     color: #FFFFFF;
-    font-family: 'DM Sans', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     font-weight: 700;
     font-size: 16px;
     line-height: 1;
@@ -269,15 +274,9 @@ const ctex = (c, srgb = true) => { const t = new THREE.CanvasTexture(c); if (srg
 const fmtUSD = n => '$' + Math.round(n).toLocaleString('en-US');
 
 function ensureFonts() {
-  if (!document.querySelector('link[href*="Fragment+Mono"]')) {
-    const l = document.createElement('link');
-    l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Fragment+Mono&display=swap';
-    document.head.appendChild(l);
-  }
   return Promise.all([
-    document.fonts.load('400 64px "Fragment Mono"'),
-    document.fonts.load('700 64px "DM Sans"'),
+    document.fonts.load('400 64px "Inter"'),
+    document.fonts.load('700 64px "Inter"'),
   ]).catch(() => {});
 }
 
@@ -540,7 +539,7 @@ function mount(el, opts = {}) {
       }
       const draw = (col, dy) => {
         g.save();
-        g.font = '700 92px "DM Sans", sans-serif'; g.letterSpacing = '14px';
+        g.font = '700 92px "Inter", sans-serif'; g.letterSpacing = '14px';
         const tw = g.measureText('TRADEQUO').width - 14;
         const mh = 104, mw = mark ? mark.sw * mh / mark.sh : 0, gap = mark ? 36 : 0;
         const x = (1024 - (mw + gap + tw)) / 2, base = 80 + mh / 2 - 6 + dy;
@@ -608,7 +607,7 @@ function mount(el, opts = {}) {
       bg.fillStyle = '#404040'; bg.fillRect(0, 0, S, S);
       [[g, j.ring], [bg, '#ffffff']].forEach(([x, col]) => { x.strokeStyle = col; x.lineWidth = 9; x.beginPath(); x.arc(S / 2, S / 2, S * 0.41, 0, TAU); x.stroke(); });
       [[g, j.glyph], [bg, '#ffffff']].forEach(([x, col]) => {
-        x.font = '700 150px "DM Sans", sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
+        x.font = '700 150px "Inter", sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
         x.fillStyle = col; x.fillText(sym, S / 2, S / 2 + 6);
       });
       bg.filter = 'blur(2px)'; bg.drawImage(b, 0, 0);
@@ -684,7 +683,7 @@ function mount(el, opts = {}) {
       const d = document.createElement('div');
       Object.assign(d.style, {
         position: 'absolute', left: '0', top: '0', whiteSpace: 'nowrap', willChange: 'transform,opacity',
-        font: `400 ${mobile ? 28 : 30}px "Fragment Mono", monospace`, color: '#0A0A0A',
+        font: `400 ${mobile ? 28 : 30}px "Inter", sans-serif`, color: '#0A0A0A',
         textShadow: '0 0 14px rgba(231,19,27,0.25)', opacity: '0',
       });
       d.innerHTML = `<span style="color:${C.red}">+</span>${text}`;
@@ -930,7 +929,7 @@ document.querySelectorAll('.tq-conv').forEach(function (el) {
   });
 });
 </script>
-<script src="i18n.js?v=44ce7d2adc"></script>
+<script src="i18n.js?v=7fac418451"></script>
 <script>
 /* Labels in the page language (?lang=…; strings from i18n.js, built by tools/build-i18n.py). */
 (function () {

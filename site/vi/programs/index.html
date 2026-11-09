@@ -45,148 +45,11 @@
 <script>/* loader veil on arrival; visitor's "no auto-translate" choice (set in the language menu) */
 try{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}catch(e){}
 try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=document.createElement('meta');d.setAttribute('translate','no');d.classList.add('notranslate');m.name='google';m.content='notranslate';document.head.appendChild(m)}}catch(e){}</script>
-<link rel="preload" href="../../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../../assets/fonts/intl/manrope-200-800-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../../assets/fonts/intl/manrope-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style id="site-css" data-prefix="../../">
 /* TradeQuo Partner Program — ported from the Claude Design handoff (Partner Program v2). */
 
 /* Self-hosted Google Fonts: no render-blocking third-party CSS. */
-/* Caveat cyrillic (variable 400–700) */
-@font-face {
-  font-family: 'Caveat';
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url(../../assets/fonts/caveat-cyrillic.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* Caveat latin-ext (variable 400–700) */
-@font-face {
-  font-family: 'Caveat';
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url(../../assets/fonts/caveat-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* Caveat latin (variable 400–700) */
-@font-face {
-  font-family: 'Caveat';
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url(../../assets/fonts/caveat-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* Cormorant Garamond latin-ext */
-@font-face {
-  font-family: 'Cormorant Garamond';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(../../assets/fonts/cormorant-garamond-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* Cormorant Garamond latin */
-@font-face {
-  font-family: 'Cormorant Garamond';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(../../assets/fonts/cormorant-garamond-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* Cormorant Garamond latin-ext */
-@font-face {
-  font-family: 'Cormorant Garamond';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(../../assets/fonts/cormorant-garamond-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* Cormorant Garamond latin */
-@font-face {
-  font-family: 'Cormorant Garamond';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(../../assets/fonts/cormorant-garamond-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* DM Sans latin-ext */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../../assets/fonts/dm-sans-italic-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* DM Sans latin */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../../assets/fonts/dm-sans-italic-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* DM Sans latin-ext */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 300 900;
-  font-display: swap;
-  src: url(../../assets/fonts/dm-sans-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* DM Sans latin */
-@font-face {
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 300 900;
-  font-display: swap;
-  src: url(../../assets/fonts/dm-sans-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* Fragment Mono latin-ext */
-@font-face {
-  font-family: 'Fragment Mono';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../../assets/fonts/fragment-mono-italic-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* Fragment Mono latin */
-@font-face {
-  font-family: 'Fragment Mono';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../../assets/fonts/fragment-mono-italic-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* Fragment Mono latin-ext */
-@font-face {
-  font-family: 'Fragment Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../../assets/fonts/fragment-mono-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* Fragment Mono latin */
-@font-face {
-  font-family: 'Fragment Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../../assets/fonts/fragment-mono-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 /* Inter cyrillic-ext (variable 300–700) */
 @font-face {
   font-family: 'Inter';
@@ -234,6 +97,32 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 }
 
 
+/* ---- the H1 on every page: Syncopate 700, in capitals with wide tracking (the site's display scheme; all other
+   text is Inter). Syncopate has Latin letters only (and no Romanian Ș), so other languages get a look-alike wide
+   display face: Unbounded (Ukrainian, Vietnamese, Romanian), Reem Kufi (Arabic), Prompt (Thai), Dela Gothic One
+   (Japanese), Black Han Sans (Korean), ZCOOL QingKe HuangYou (Simplified Chinese), Noto Sans TC Black (Traditional:
+   ZCOOL lacks some of its characters). Each file holds only the characters of the
+   H1s, a few KB: tools/h1-fonts.py fetches them again when an H1 changes. A word too wide for the screen steps the
+   size down (data-fitw, landing.js). Scripts without capitals keep their spacing, a size up. */
+@font-face { font-family: 'TQ H1 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc.woff2) format('woff2'); }
+.tq-h1 { --h1f: 'TQ H1 Syncopate'; --h1s: clamp(22px, 3.1vw, 44px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h1f), 'Inter', sans-serif; font-size: calc(var(--h1s) * var(--h1k, 1));
+  font-weight: 700; font-synthesis: none; line-height: 1.12; letter-spacing: .15em; text-transform: uppercase; text-wrap: balance; }   /* the padding balances the tracking after the last letter */
+:lang(uk) .tq-h1, :lang(vi) .tq-h1, :lang(ro) .tq-h1 { --h1f: 'TQ H1 Unbounded'; }
+:lang(ar) .tq-h1 { --h1f: 'TQ H1 Reem Kufi'; }
+:lang(th) .tq-h1 { --h1f: 'TQ H1 Prompt'; }
+:lang(ja) .tq-h1 { --h1f: 'TQ H1 Dela Gothic One'; }
+:lang(ko) .tq-h1 { --h1f: 'TQ H1 Black Han Sans'; }
+:lang(zh-Hans) .tq-h1 { --h1f: 'TQ H1 ZCOOL SC'; }
+:lang(zh-Hant) .tq-h1 { --h1f: 'TQ H1 Noto TC'; }
+:lang(ar) .tq-h1, :lang(th) .tq-h1, :lang(ja) .tq-h1, :lang(ko) .tq-h1, :lang(zh) .tq-h1 { --h1k: 1.45; padding-inline-start: 0; text-transform: none; }   /* no capitals or tracking: a size up to stand as large */
+
 html, body { margin: 0; padding: 0; background: #ffffff; }
 /* Nothing on the site scrolls sideways. The page wrappers clip with overflow: clip, which
    Safari < 16 ignores; on the root this reaches the viewport in every browser (sticky still
@@ -247,7 +136,7 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 @property --tqx { syntax: '<length>'; inherits: true; initial-value: 0px; }
 @property --tqy { syntax: '<length>'; inherits: true; initial-value: 0px; }
 @keyframes tq-breathe { 0%, 100% { --tqo: -1; } 50% { --tqo: 1; } }
-.tq-dock { display: inline-flex; border: 0; padding: 0; margin: 0; background: none; text-decoration: none; color: #fff; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; cursor: pointer; border-radius: 999px; -webkit-tap-highlight-color: transparent; animation: tq-breathe 2.86s ease-in-out infinite; transition: --tqh .5s cubic-bezier(.55,0,.25,1), --tqx .45s cubic-bezier(.2,.9,.25,1), --tqy .45s cubic-bezier(.2,.9,.25,1), --tqd .14s ease-out; }
+.tq-dock { display: inline-flex; border: 0; padding: 0; margin: 0; background: none; text-decoration: none; color: #fff; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; cursor: pointer; border-radius: 999px; -webkit-tap-highlight-color: transparent; animation: tq-breathe 2.86s ease-in-out infinite; transition: --tqh .5s cubic-bezier(.55,0,.25,1), --tqx .45s cubic-bezier(.2,.9,.25,1), --tqy .45s cubic-bezier(.2,.9,.25,1), --tqd .14s ease-out; }
 .tq-dock:hover, .tq-dock:focus-visible { --tqh: 1; }
 .tq-dock:active { --tqd: 1; }
 .tq-dock:focus-visible { outline: 2px solid #e7131b; outline-offset: 6px; }
@@ -282,7 +171,7 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
     0 0 calc(var(--tqh) * 28px) rgba(231,19,27,.35);
   text-decoration: none;
   color: #FFFFFF;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 1;
@@ -383,7 +272,7 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
   perspective: 480px;
   text-decoration: none;
   color: #FFFFFF;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 1;
@@ -438,7 +327,7 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), inset 0 1px 0 rgba(255,255,255,.6), 0 6px 14px rgba(0,0,0,.45);
 }
 .tq-launch__label {
-  font-family: 'Fragment Mono', ui-monospace, monospace;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 9px;
   letter-spacing: .2em;
@@ -491,7 +380,7 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 .tq-liq__wave svg { display: block; }
 .tq-liq__line { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255,255,255,.45); }
 .tq-liq__gloss { position: absolute; left: 22px; right: 22px; top: 9px; height: 14px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,0)); pointer-events: none; }
-.tq-liq__label { position: relative; display: inline-flex; align-items: center; gap: 12px; font: 700 19px/1 'DM Sans', sans-serif; letter-spacing: -.01em; color: #0a0a0a; white-space: nowrap; opacity: calc(1 - var(--lqe)); }
+.tq-liq__label { position: relative; display: inline-flex; align-items: center; gap: 12px; font: 700 19px/1 'Inter', sans-serif; letter-spacing: -.01em; color: #0a0a0a; white-space: nowrap; opacity: calc(1 - var(--lqe)); }
 .tq-liq__arr { color: #e7131b; }
 .tq-liq__label--lit { position: absolute; inset: 0; justify-content: center; color: #fff; opacity: var(--lqe); text-shadow: 0 1px 2px rgba(120,10,14,.4); }
 [dir="rtl"] .tq-liq { direction: ltr; }
@@ -512,10 +401,10 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 [data-hero-stage] > form[data-agreement] { align-self: start; }
 [data-hero-stage].is-done > form[data-agreement] { filter: opacity(0); translate: 0 24px; scale: .96; visibility: hidden; pointer-events: none;
   transition: filter .45s ease .2s, translate .6s cubic-bezier(.4, 0, .2, 1) .2s, scale .6s cubic-bezier(.4, 0, .2, 1) .2s, visibility 0s .8s; }
-.tq-done { --in: 0; position: relative; z-index: 3; align-self: start; display: flex; flex-direction: column; align-items: center; padding: 72px 0 40px; text-align: center; color: #0e0e10; font-family: 'DM Sans', system-ui, sans-serif; }
+.tq-done { --in: 0; position: relative; z-index: 3; align-self: start; display: flex; flex-direction: column; align-items: center; padding: 72px 0 40px; text-align: center; color: #0e0e10; font-family: 'Inter', system-ui, sans-serif; }
 .tq-done[hidden] { display: none; }
 .is-done > .tq-done { --in: 1; }
-.tq-done__title { margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 46px; line-height: 1; letter-spacing: .01em; outline: none;
+.tq-done__title { margin: 0; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 46px; line-height: 1; letter-spacing: .01em; outline: none;
   opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px)); transition: opacity .45s ease .5s, transform .6s cubic-bezier(.2, .8, .2, 1) .5s; }
 .tq-done__title span { color: #e7131b; }
 .tq-done__art { width: min(440px, 100%); margin-top: 40px; container-type: inline-size; }
@@ -543,9 +432,9 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
   box-shadow: 0 .1em .1em rgba(0,0,0,.06), 0 1.8em 3em -1.6em rgba(14,14,22,.35); opacity: var(--in);
   transform: translateY(calc((1 - var(--in)) * 2.4em)) rotate(3deg); transition: opacity .4s ease 1.15s, transform .6s cubic-bezier(.2, .8, .2, 1) 1.15s; }
 .tq-done__tape { position: absolute; left: 50%; top: -1.2em; width: 9.2em; height: 2.6em; margin-left: -4.6em; background: rgba(236,232,220,.75); box-shadow: 0 .1em .2em rgba(0,0,0,.08); transform: rotate(-5deg); }
-.tq-done__hand, .tq-done__sign { margin: 0; font-family: 'Caveat', 'DM Sans', cursive; font-weight: 600; color: #1f2d4d; }
-.tq-done__hand { font-size: 2.8em; font-weight: 500; line-height: 1.12; }
-.tq-done__sign { margin-top: .55em; font-size: 2.2em; line-height: 1.1; }
+.tq-done__hand, .tq-done__sign { margin: 0; font-family: 'Inter', sans-serif; font-weight: 600; color: #1f2d4d; }
+.tq-done__hand { font-size: 1.9em; font-weight: 500; line-height: 1.22; }   /* Inter: ~2/3 of the old handwriting size, same footprint */
+.tq-done__sign { margin-top: .7em; font-size: 1.45em; line-height: 1.15; }
 .tq-done__steps { position: relative; width: min(448px, 100%); margin-top: 6px; opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px));
   transition: opacity .45s ease 1.3s, transform .6s cubic-bezier(.2, .8, .2, 1) 1.3s; }
 .tq-done__steps ol { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
@@ -632,7 +521,6 @@ html { scroll-snap-type: y proximity; }
   [data-rep-card] { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background-color: rgba(255,255,255,.5) !important; }
   #signup { padding-top: 10px !important; }
   #signup [data-hero-intro] { gap: 8px !important; }
-  #signup [data-hero-intro] h1 { font-size: 38px !important; }
   #signup [data-hero-intro] p { display: none !important; }
   #signup [data-hero-panel] { margin-top: 12px !important; padding: 8px 0 0 !important; background: transparent !important; border-radius: 0 !important; }
   #signup [data-hero-panel] > div[aria-hidden] { display: none !important; }
@@ -724,7 +612,7 @@ html { scroll-snap-type: y proximity; }
 @keyframes tqLoaderIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes tqLoaderOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes tq-logo-idle { from { --tqo: -1; } to { --tqo: 1; } }
-.tq-logo { position: relative; display: inline-flex; align-items: center; gap: 18px; height: 64px; box-sizing: border-box; padding: 0 4px 0 28px; border-radius: 999px; background: linear-gradient(180deg, #1A1A1D 0%, #0D0D0F 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.08); color: #FFFFFF; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate; transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
+.tq-logo { position: relative; display: inline-flex; align-items: center; gap: 18px; height: 64px; box-sizing: border-box; padding: 0 4px 0 28px; border-radius: 999px; background: linear-gradient(180deg, #1A1A1D 0%, #0D0D0F 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.08); color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate; transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
 .tq-logo:hover, .tq-logo:focus-visible { --tqh: 1; animation: none; color: #FFFFFF; }
 .tq-logo:active { --tqd: 1; }
 .tq-logo:focus-visible { outline: 2px solid #0A0A0A; outline-offset: 6px; }
@@ -752,7 +640,7 @@ html { scroll-snap-type: y proximity; }
 [data-rep-viewport].is-drag, [data-rep-viewport].is-drag * { -webkit-user-select: none; user-select: none; }
 [data-rep-viewport][data-rep-live] img { -webkit-user-drag: none; }
 @keyframes tq-crys-idle { from { --tqo: -1; } to { --tqo: 1; } }
-.tq-crys { position: relative; display: inline-flex; align-items: center; color: #0A0A0A; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; border-radius: 999px; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.03)); animation: tq-crys-idle 2.25s ease-in-out infinite alternate; transition: --tqh .65s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
+.tq-crys { position: relative; display: inline-flex; align-items: center; color: #0A0A0A; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; border-radius: 999px; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.03)); animation: tq-crys-idle 2.25s ease-in-out infinite alternate; transition: --tqh .65s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
 .tq-crys:hover, .tq-crys:focus-visible { --tqh: 1; animation: none; color: #0A0A0A; }
 .tq-crys:active { --tqd: 1; }
 .tq-crys:focus-visible { outline: 2px solid #E7131B; outline-offset: 6px; }
@@ -820,6 +708,7 @@ html { scroll-snap-type: y proximity; }
 .tq-fan-ico--open, [data-fanmenu][data-open] .tq-fan-ico--closed { transform: rotate(90deg) scale(.5); opacity: 0; }
 [data-fanmenu][data-open] .tq-fan-ico--open { transform: none; opacity: 1; }
 .hv-fan-blade, .hv-fan-blade:hover { color: #0a0a0a; }
+.tq-fan-num { font-variant-numeric: tabular-nums; }
 .hv-fan-blade[aria-current] .tq-fan-num { background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b30e14 100%) !important; }
 
 /* ---- mobile quick menu --------------------------------------------------- */
@@ -872,7 +761,7 @@ html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform
 @media (prefers-reduced-motion: reduce) { .tq-loader__wave { animation: none; } }
 .tq-loader__label {
   position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%);
-  font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .2em; color: #9a9da3; white-space: nowrap;
+  font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .2em; color: #9a9da3; white-space: nowrap;
   text-transform: uppercase;
 }
 html.tq-arriving, html.tq-locked { overflow: hidden; }
@@ -917,7 +806,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tq-lang__btn {
   display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 14px;
   border: 1px solid #e4e4e6; border-radius: 999px; background: #fff; color: #2b2d31;
-  font: 600 14px/1 'DM Sans', sans-serif; letter-spacing: .02em; cursor: pointer;
+  font: 600 14px/1 'Inter', sans-serif; letter-spacing: .02em; cursor: pointer;
   transition: border-color .2s ease, color .2s ease;
 }
 .tq-lang__btn:hover, .tq-lang__btn[aria-expanded="true"] { border-color: #0a0a0a; color: #0a0a0a; }
@@ -932,7 +821,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 }
 .tq-lang__menu[hidden] { display: none; }
 .tq-lang__menu a {
-  display: block; padding: 10px 26px; color: #fff; font: 700 15px/1.3 'DM Sans', system-ui, sans-serif;
+  display: block; padding: 10px 26px; color: #fff; font: 700 15px/1.3 'Inter', system-ui, sans-serif;
   letter-spacing: -.005em; text-decoration: none; white-space: nowrap;
 }
 .tq-lang__menu a:hover, .tq-lang__menu a:focus-visible { color: #fff; background: rgba(255,255,255,.07); outline: none; }
@@ -942,12 +831,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 .tq-lang__page a { font-size: 16.5px; padding-block: 11px; }
 .tq-lang__page a[aria-current="page"] { color: #e7131b; }
 .tq-lang__page a[aria-current="page"]::after { content: ''; display: inline-block; width: 6px; height: 6px; margin-inline-start: 9px; vertical-align: middle; border-radius: 50%; background: #e7131b; }
-.tq-lang__menu .tq-lang__label { margin: 8px 0 4px; padding: 14px 26px 4px; border-top: 1px solid rgba(255,255,255,.1); color: #8a8d94; font: 600 11px/1 'Fragment Mono', monospace; letter-spacing: .14em; text-transform: uppercase; }
+.tq-lang__menu .tq-lang__label { margin: 8px 0 4px; padding: 14px 26px 4px; border-top: 1px solid rgba(255,255,255,.1); color: #8a8d94; font: 600 11px/1 'Inter', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 /* "Auto-translate" switch at the foot of the menu (landing.js startLang) */
 .tq-lang__opt { margin: 8px 0 -4px; padding: 8px 0 0; border-top: 1px solid rgba(255,255,255,.1); }
 .tq-lang__opt button {
   display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; padding: 10px 26px;
-  border: 0; background: transparent; color: #a7a9ae; font: 600 13.5px/1.3 'DM Sans', system-ui, sans-serif; text-align: start; cursor: pointer;
+  border: 0; background: transparent; color: #a7a9ae; font: 600 13.5px/1.3 'Inter', system-ui, sans-serif; text-align: start; cursor: pointer;
 }
 .tq-lang__opt button:hover, .tq-lang__opt button:focus-visible { color: #fff; background: rgba(255,255,255,.07); outline: none; }
 .tq-lang__switch { position: relative; flex-shrink: 0; width: 34px; height: 20px; border-radius: 999px; background: rgba(255,255,255,.18); transition: background .2s ease; }
@@ -1161,12 +1050,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-pc__term { position: relative; display: flex; flex-direction: column; gap: 34px; padding: 36px; border-radius: 28px;
   background: linear-gradient(160deg, rgba(255,255,255,.13), rgba(255,255,255,.03)); -webkit-backdrop-filter: blur(28px) saturate(150%); backdrop-filter: blur(28px) saturate(150%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.32), inset 1px 0 0 rgba(255,255,255,.1), inset 0 0 0 1px rgba(255,255,255,.08), 0 2px 0 #1c1d21, 0 4px 0 #151619, 0 6px 0 #101113, 0 50px 70px -30px rgba(0,0,0,.9); }
-.tq-pc__tag { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #a3a6ad; }
+.tq-pc__tag { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .16em; color: #a3a6ad; }
 .tq-pc__field { display: flex; flex-direction: column; gap: 10px; }
 .tq-pc__label { font-weight: 600; font-size: 16px; color: #d4d6da; }
 .tq-pc__val { display: flex; align-items: baseline; gap: 10px; }
 .tq-pc__val b { font-weight: 800; font-size: 44px; letter-spacing: -.045em; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
-.tq-pc__val span { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .16em; color: #8a8d94; }
+.tq-pc__val span { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .16em; color: #8a8d94; }
 .tq-pc__slider { position: relative; height: 48px; }
 .tq-pc__ticks { position: absolute; left: 0; right: 0; top: 12px; height: 12px;
   background: linear-gradient(90deg, rgba(255,255,255,.4) 0 1px, transparent 1px calc(25% - .5px), rgba(255,255,255,.4) calc(25% - .5px) calc(25% + .5px), transparent calc(25% + .5px) calc(50% - .5px), rgba(255,255,255,.4) calc(50% - .5px) calc(50% + .5px), transparent calc(50% + .5px) calc(75% - .5px), rgba(255,255,255,.4) calc(75% - .5px) calc(75% + .5px), transparent calc(75% + .5px) calc(100% - 1px), rgba(255,255,255,.4) calc(100% - 1px) 100%); }
@@ -1185,7 +1074,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-pc__per [data-inv-per-thumb] { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / 3); border-radius: 999px; background: #fff;
   transform: translateX(calc(var(--i) * 100%)); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
 [dir="rtl"] .tq-pc__per [data-inv-per-thumb] { left: auto; right: 4px; transform: translateX(calc(var(--i) * -100%)); }
-.tq-pc__per button { position: relative; height: 40px; min-width: 0; padding: 0 8px; border: 0; border-radius: 999px; background: transparent; color: #b4b7bd; font: 600 14px/1 'DM Sans', sans-serif; cursor: pointer; transition: color .25s; }
+.tq-pc__per button { position: relative; height: 40px; min-width: 0; padding: 0 8px; border: 0; border-radius: 999px; background: transparent; color: #b4b7bd; font: 600 14px/1 'Inter', sans-serif; cursor: pointer; transition: color .25s; }
 .tq-pc__per button:hover { color: #fff; }
 .tq-pc__per button[aria-pressed="true"] { color: #0a0a0a; }
 .tq-pc__per button:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
@@ -1205,9 +1094,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-pc__top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 18px; border-bottom: 1px dashed #c9c7bf; }
 .tq-pc__brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 600; letter-spacing: -.035em; }
 .tq-pc__brand img { width: 22px; height: 22px; object-fit: contain; }
-.tq-pc__doc { flex: 0 1 auto; min-width: 0; white-space: nowrap; font-family: 'Cormorant Garamond', serif; font-size: 42px; line-height: .9; letter-spacing: .06em; font-weight: 500; }   /* a long word (AUSZAHLUNG) steps down to fit: landing.js, data-fitw */
+.tq-pc__doc { flex: 0 1 auto; min-width: 0; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 42px; line-height: .9; letter-spacing: .06em; font-weight: 500; }   /* a long word (AUSZAHLUNG) steps down to fit: landing.js, data-fitw */
 .tq-pc__brand { flex: none; }
-.tq-pc__meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 16px 0; border-bottom: 1px dashed #c9c7bf; font-family: 'Fragment Mono', monospace; }
+.tq-pc__meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 16px 0; border-bottom: 1px dashed #c9c7bf; font-family: 'Inter', sans-serif; }
 .tq-pc__meta div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .tq-pc__meta div > span:first-child { font-size: 10px; letter-spacing: .16em; color: #6a6a6e; }
 .tq-pc__meta div > span:last-child { font-size: 13px; white-space: nowrap; }
@@ -1215,15 +1104,15 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-pc__row--last { padding: 10px 0 18px; border-bottom: 1px dashed #c9c7bf; }
 .tq-pc__row > div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .tq-pc__row > div > span:first-child { font-weight: 600; font-size: 16px; }
-.tq-pc__row > div > span:last-child { font-family: 'Fragment Mono', monospace; font-size: 12px; color: #55555a; }
-.tq-pc__row > span { font-family: 'Fragment Mono', monospace; font-size: 15px; white-space: nowrap; }
+.tq-pc__row > div > span:last-child { font-family: 'Inter', sans-serif; font-size: 12px; color: #55555a; }
+.tq-pc__row > span { font-family: 'Inter', sans-serif; font-size: 15px; white-space: nowrap; }
 .tq-pc__total { position: relative; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; padding: 26px 0 24px; border-bottom: 1px dashed #c9c7bf; min-width: 0; }
-.tq-pc__total [data-inv-cap] { font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: .16em; color: #6a6a6e; }
+.tq-pc__total [data-inv-cap] { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: .16em; color: #6a6a6e; }
 .tq-pc__total [data-inv-total] { font-weight: 800; font-size: 88px; letter-spacing: -.06em; line-height: .85; white-space: nowrap; color: #0a0a0a; font-variant-numeric: tabular-nums; transition: color .3s; }   /* startCalculator steps a long figure down to fit */
 .tq-pc__foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; }
 .tq-pc__code { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
 .tq-pc__bars { width: 220px; max-width: 100%; height: 44px; background: repeating-linear-gradient(90deg, #0a0a0a 0 2px, transparent 2px 4px, #0a0a0a 4px 5px, transparent 5px 8px, #0a0a0a 8px 11px, transparent 11px 13px); }
-.tq-pc__code > span:last-child { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .3em; color: #55555a; }
+.tq-pc__code > span:last-child { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .3em; color: #55555a; }
 .tq-pc__stamp { flex: none; transform: rotate(-12deg); opacity: .9; margin: -18px -6px -10px 0; mix-blend-mode: multiply; }
 .tq-pc__note { max-width: 1240px; margin: clamp(16px, 2vw, 24px) auto 0; font-size: 12.5px; line-height: 1.55; color: #8a8a8e; text-align: center; text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) { .tq-pc__per [data-inv-per-thumb], .tq-pc__knob, .tq-pc__total [data-inv-total] { transition: none; } }
@@ -1307,7 +1196,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    fading out (1.5x the design's size: 18px text). A red dot marks money; amounts from $7,000 get the dark pill. Inter, like all new type. Under
    the stack a small caption: the lines are examples. startToasts in landing.js places and replaces them. */
 .tq-toasts { position: fixed; left: 16px; bottom: 16px; z-index: 50; width: min(640px, calc(50vw - 290px)); display: none; flex-direction: column; align-items: flex-start;
-  font-family: 'Inter', 'DM Sans', system-ui, sans-serif; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
+  font-family: 'Inter', system-ui, sans-serif; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
 @media (min-width: 1280px) { .tq-toasts { display: flex; } }
 .tq-toasts.is-on { opacity: 1; visibility: visible; transition: opacity .45s ease; }
 .tq-toasts__stack { position: relative; width: 100%; height: 0; }
@@ -1331,21 +1220,21 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
    Built on site.css: same type, chrome-glass cards, red accent. */
 
-.tp { font-family: 'DM Sans', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
+.tp { font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
 .tp-sec { position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px); }   /* the site rhythm: 88 + 88px between blocks, 48 + 48 on phones */
 .tp-wrap { position: relative; max-width: 1240px; margin: 0 auto; }
 
 /* ---- headings ---------------------------------------------------------------- */
 .tp-head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto; text-align: center; }
 .tp-head--left { align-items: flex-start; text-align: start; margin: 0; }
-.tp-h1 { margin: 0; max-width: 24ch; font-size: clamp(38px, 5.44vw, 64px); line-height: 1; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; }
+.tp-h1 { margin: 0; }   /* type: .tq-h1 (site.css) */
 .tp-h2 { margin: 0; max-width: 30ch; font-size: clamp(35px, 4.16vw, 51px); line-height: 1.06; letter-spacing: -.035em; font-weight: 700; text-wrap: balance; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
 
 /* ---- buttons ----------------------------------------------------------------- */
 .tp-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 26px;
-  border-radius: 999px; border: 1px solid transparent; font: 600 15px/1 'DM Sans', sans-serif; letter-spacing: -.01em;
+  border-radius: 999px; border: 1px solid transparent; font: 600 15px/1 'Inter', sans-serif; letter-spacing: -.01em;
   white-space: nowrap; text-decoration: none; cursor: pointer;
   transition: background .2s ease, border-color .2s ease, color .2s ease, transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
 }
@@ -1408,32 +1297,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-hero .tp-head { gap: 10px; }
 .tp-hero .tp-head .tp-sub { max-width: 64ch; font-size: 22px; }
 .tp-hero .tp-stage { margin-top: clamp(16px, 2vw, 26px); }
-/* The H1 in the site's display scheme: Syncopate 700, in capitals with wide tracking (it doesn't read without it),
-   each sentence on its own line; a word too wide for the screen steps the size down (data-fitw, landing.js).
-   Syncopate has Latin letters only (and no Romanian Ș), so other languages get a look-alike wide display face:
-   Unbounded (Ukrainian, Vietnamese, Romanian), Reem Kufi (Arabic), Prompt (Thai), Dela Gothic One (Japanese),
-   Black Han Sans (Korean), ZCOOL QingKe HuangYou (Chinese). Each file holds only this H1's characters, a few KB:
-   tools/h1-fonts.py fetches them again when pp.hero.h1 changes. Scripts without capitals keep their spacing. */
-@font-face { font-family: 'TQ H1 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 ZCOOL TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-tc.woff2) format('woff2'); }
+/* The H1 is the site's display H1 (.tq-h1 in site.css: Syncopate); here each sentence goes on its own line. */
 .tp-hero .tp-head { max-width: 1120px; }
-.tp-hero .tp-h1 { --h1f: 'TQ H1 Syncopate'; --h1s: clamp(22px, 3.1vw, 44px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h1f), 'DM Sans', sans-serif; font-size: calc(var(--h1s) * var(--h1k, 1));
-  font-weight: 700; font-synthesis: none; line-height: 1.12; letter-spacing: .15em; text-transform: uppercase; }   /* the padding balances the tracking after the last letter */
 .tp-hero .tp-h1 > span { display: block; }
-:lang(uk) .tp-hero .tp-h1, :lang(vi) .tp-hero .tp-h1, :lang(ro) .tp-hero .tp-h1 { --h1f: 'TQ H1 Unbounded'; }
-:lang(ar) .tp-hero .tp-h1 { --h1f: 'TQ H1 Reem Kufi'; }
-:lang(th) .tp-hero .tp-h1 { --h1f: 'TQ H1 Prompt'; }
-:lang(ja) .tp-hero .tp-h1 { --h1f: 'TQ H1 Dela Gothic One'; }
-:lang(ko) .tp-hero .tp-h1 { --h1f: 'TQ H1 Black Han Sans'; }
-:lang(zh-Hans) .tp-hero .tp-h1 { --h1f: 'TQ H1 ZCOOL SC'; }
-:lang(zh-Hant) .tp-hero .tp-h1 { --h1f: 'TQ H1 ZCOOL TC'; }
-:lang(ar) .tp-hero .tp-h1, :lang(th) .tp-hero .tp-h1, :lang(ja) .tp-hero .tp-h1, :lang(ko) .tp-hero .tp-h1, :lang(zh) .tp-hero .tp-h1 { --h1k: 1.45; padding-inline-start: 0; text-transform: none; }   /* no capitals or tracking: a size up to stand as large */
 
 /* ---- program cards ------------------------------------------------------------- */
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
@@ -1448,7 +1314,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   background: radial-gradient(60% 60% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(160deg, #eef0f3 0%, #d3d6dc 100%); }
 .tp-hero .tp-stage::before { content: none; }
 .tp-ribbons { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; pointer-events: none; }
-.tp-programs { font-family: 'Inter', 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.tp-programs { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }   /* figures only: Inter's tnum also widens the hyphen */
 .tp-pc { position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 30px; border-radius: 30px; color: #141416;
   background: linear-gradient(160deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.34) 100%);
@@ -1618,7 +1484,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-dome__stat[data-stat="br"] { right: 0; bottom: 44px; align-items: flex-end; text-align: right; }
 .tp-dome__stat b { font-size: 46px; line-height: .92; font-weight: 800; letter-spacing: -.055em; color: #0e0e10; direction: ltr; white-space: nowrap; }
 .tp-dome__stat b i { font-style: normal; color: #e7131b; }
-.tp-dome__stat span { font-family: 'Fragment Mono', monospace; font-size: 11px; line-height: 1.45; letter-spacing: .16em; color: #5e5e66; text-transform: uppercase; }
+.tp-dome__stat span { font-family: 'Inter', sans-serif; font-size: 11px; line-height: 1.45; letter-spacing: .16em; color: #5e5e66; text-transform: uppercase; }
 @media (max-width: 1320px) {
   .tp-dome-panel { grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 40px; padding: 44px 48px; }
 }
@@ -1679,7 +1545,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-roll__track { display: flex; flex-direction: column; align-items: center; transform: translateY(calc(var(--h) * -22px)); transition: transform .4s cubic-bezier(.6,0,.2,1); }
 .tp-roll__a, .tp-roll__b { display: block; height: 22px; line-height: 22px; }
 .tp-roll__a { font-size: 15px; font-weight: 700; }
-.tp-roll__b { font-family: 'Fragment Mono', monospace; font-size: 14px; color: #a4a4ac; }
+.tp-roll__b { font-family: 'Inter', sans-serif; font-size: 14px; color: #a4a4ac; }
 .tp-roll__b span[style*="e7131b"] { color: #ff4148 !important; }
 @media (max-width: 640px) {
   .tp-final__actions { flex-direction: column; align-items: center; width: 100%; }
@@ -1787,14 +1653,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-mth__fade { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; background: linear-gradient(180deg, rgba(241,241,244,0) 0%, rgba(241,241,244,.7) 45%, rgba(241,241,244,.94) 100%); pointer-events: none; }
 .tq-mth__foot { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); bottom: clamp(14px, 2.2vh, 22px); display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: flex-end; gap: 22px 40px; pointer-events: none; }
-.tq-mth__h1 { margin: 0; font-size: clamp(44px, 5.8vw, 92px); line-height: .94; font-weight: 700; letter-spacing: -.048em; color: #0a0a0b; }
+.tq-mth__h1 { margin: 0; color: #0a0a0b; }   /* type: .tq-h1 */
 /* Become a partner (TradeQuo_CTA_Candle_Window): a silver pill with a dark window and a sheen now and then.
    The window plays a loop on its own (5.6s): a red pip appears and bobs, slides into the dip, then four silver
    candles rise one by one, hold, and everything fades for the next round. Hovering plays the rise at once.
    --s sizes the whole button (1.5 on wide screens); the chart inside is scaled with it. */
 .tq-cw { --s: 1; position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: calc(16px * var(--s)); height: calc(64px * var(--s));
   padding-inline: calc(8px * var(--s)) calc(30px * var(--s)); box-sizing: border-box; border-radius: 999px;
-  white-space: nowrap; text-decoration: none; pointer-events: auto; color: #fff; font-family: 'Inter', 'DM Sans', system-ui, sans-serif; font-size: calc(18px * var(--s)); font-weight: 700; letter-spacing: -.01em; -webkit-tap-highlight-color: transparent;
+  white-space: nowrap; text-decoration: none; pointer-events: auto; color: #fff; font-family: 'Inter', system-ui, sans-serif; font-size: calc(18px * var(--s)); font-weight: 700; letter-spacing: -.01em; -webkit-tap-highlight-color: transparent;
   background: linear-gradient(180deg, #2e2f34 0%, #17181b 30%, #0a0a0b 55%, #1b1c20 80%, #0d0d0f 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.6), 0 0 0 1px rgba(10,10,11,.9), 0 16px 32px -18px rgba(10,10,11,.45);   /* no red glow under it */
   transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
@@ -1885,7 +1751,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-dr__eyebrow i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #e7131b; }
 .pf-dr__eyebrow > span { min-width: 0; text-wrap: balance; }
 .pf-dr__chips { display: flex; gap: 6px; flex-wrap: wrap; }
-.pf-dr__chip { min-height: 36px; padding: 8px 14px; border: 0; border-radius: 999px; background: #fff; color: #5e5e66; font: 700 13px/1.2 'DM Sans', sans-serif; cursor: pointer;
+.pf-dr__chip { min-height: 36px; padding: 8px 14px; border: 0; border-radius: 999px; background: #fff; color: #5e5e66; font: 700 13px/1.2 'Inter', sans-serif; cursor: pointer;
   transition: background .25s, color .25s; -webkit-tap-highlight-color: transparent; }
 .pf-dr__chip:hover { color: #0e0e10; }
 .pf-dr__chip[aria-pressed="true"] { background: #0e0e10; color: #fff; }
@@ -1906,7 +1772,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .pf-dr__l2 .pf-dr__slot > span { transition-delay: .12s; }
 .pf-dr__sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .pf-dr__bot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; padding-top: 32px; border-top: 1px solid rgba(14,14,22,.09); }
-.pf-dr__meta { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .22em; color: #8a8a93; }
+.pf-dr__meta { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .22em; color: #8a8a93; }
 .pf-dr__gain { margin: 10px 0 0; max-width: 720px; font-size: 24px; line-height: 1.35; font-weight: 700; letter-spacing: -.02em; text-wrap: pretty; animation: pfFade .5s ease; }
 .pf-dr__gain[hidden] { display: none; }
 .pf-dr__cta { display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700; white-space: nowrap;
@@ -1949,18 +1815,18 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-font-smoothing: antialiased; user-select: none; -webkit-tap-highlight-color: transparent; }
 .pf-perk:hover .pf-perk__in { transform: translate3d(0, -8px, 0);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(231,19,27,.35), 0 50px 70px -26px rgba(0,0,0,.85), 0 0 40px -10px rgba(231,19,27,.35); }
-.pf-perk__n { font-family: 'Fragment Mono', monospace; font-size: 11px; color: #e7131b; }
+.pf-perk__n { font-family: 'Inter', sans-serif; font-size: 11px; color: #e7131b; }
 .pf-perk__t { font-size: 23px; line-height: 1.05; font-weight: 800; letter-spacing: -.03em; color: #fff; text-wrap: balance; }
 .pf-perk__d { max-width: 180px; font-size: 14px; line-height: 1.45; color: #9a9aa2; text-wrap: pretty; }
 .pf-perk__v { margin-top: auto; height: 44%; width: 100%; display: flex; align-items: center; justify-content: center; }
 .pf-perk__rim { position: absolute; left: 18%; right: 18%; bottom: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, rgba(231,19,27,0), #e7131b, rgba(231,19,27,0)); opacity: .55; }
 .pf-g-red { font-weight: 800; line-height: .9; letter-spacing: -.06em; background: linear-gradient(180deg, #ff6a70 0%, #e7131b 55%, #a90c12 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 8px 18px rgba(231,19,27,.45)); }
 .pf-g-silver { font-weight: 800; line-height: .9; letter-spacing: -.05em; background: linear-gradient(180deg, #fff 0%, #c9cbd0 55%, #7e828a 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.pf-mono { font-family: 'Fragment Mono', monospace; font-size: 9.5px; letter-spacing: .14em; }
+.pf-mono { font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: .14em; }
 .pf-stack { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .pf-stack--chips { gap: 7px; }
 .pf-pill-dk { display: flex; align-items: center; justify-content: center; gap: 6px; max-width: 100%; min-height: 24px; box-sizing: border-box; padding: 4px 10px; border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); font-family: 'Fragment Mono', monospace; font-size: 9.5px; line-height: 1.3; letter-spacing: .12em; color: #c9c9d0; text-align: center; }
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); font-family: 'Inter', sans-serif; font-size: 9.5px; line-height: 1.3; letter-spacing: .12em; color: #c9c9d0; text-align: center; }
 .pf-pill-dk i, .pf-pulse { display: block; flex: none; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
 @keyframes pfPulse { 0% { box-shadow: 0 0 0 0 rgba(231,19,27,.6); } 70% { box-shadow: 0 0 0 7px rgba(231,19,27,0); } 100% { box-shadow: 0 0 0 0 rgba(231,19,27,0); } }
 .pf-pulse { width: 7px; height: 7px; animation: pfPulse 1.6s infinite; }
@@ -2041,11 +1907,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   background: radial-gradient(70% 55% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #fff 0, #f7f7f8 clamp(140px, 22vw, 260px), #f7f7f8 calc(100% - 140px), #fff 100%); }
 .tq-earn__in { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; }
 .tq-earn__head { display: flex; flex-direction: column; gap: 16px; }
-.tq-earn__h1 { margin: 0; font-size: clamp(38px, 4.2vw, 60px); line-height: 1.04; font-weight: 700; letter-spacing: -.045em; text-wrap: balance; }
+.tq-earn__h1 { margin: 0; }   /* type: .tq-h1 */
 .tq-earn__sub { margin: 0; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.5; color: #5b5b5b; }
 .tq-earn__grid { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 28px; }
 .tq-earn__foot { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
-.tq-earn__note { margin: 0; max-width: 720px; font-family: 'Fragment Mono', monospace; font-size: 12.5px; line-height: 1.6; color: #5b5b5b; text-wrap: balance; }
+.tq-earn__note { margin: 0; max-width: 720px; font-family: 'Inter', sans-serif; font-size: 12.5px; line-height: 1.6; color: #5b5b5b; text-wrap: balance; }
 .tq-earn__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; }
 .tq-earn__cta { flex: none; display: flex; align-items: center; gap: 14px; height: 56px; padding: 0 30px 0 5px; box-sizing: border-box; border-radius: 999px; background: #0a0a0a; color: #fff;
   font-size: 17px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; text-decoration: none;
@@ -2083,9 +1949,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ecard__row { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 26px; }
 .tq-ecard__id { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .tq-ecard__emoji { flex: none; width: 30px; height: 30px; border-radius: 10px; background: var(--tint); box-shadow: inset 0 0 0 1px rgba(10,10,10,.04); display: flex; align-items: center; justify-content: center; font-size: 16px; line-height: 1; }
-.tq-ecard__label { font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .16em; color: #0a0a0a; text-transform: uppercase; }
+.tq-ecard__label { font-family: 'Inter', sans-serif; font-size: 11.5px; letter-spacing: .16em; color: #0a0a0a; text-transform: uppercase; }
 .tq-ecard__sel { display: none; flex: none; align-items: center; gap: 7px; height: 26px; padding: 0 11px; border-radius: 999px; background: #fdeded; color: #c40f17;
-  font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+  font-family: 'Inter', sans-serif; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
 .tq-ecard__sel::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
 .tq-ecard.is-sel .tq-ecard__sel { display: flex; }
 .tq-ecard__who { font-size: 15px; line-height: 1.4; color: #5b5b5b; }
@@ -2101,7 +1967,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ecard__glyph { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; line-height: 1; }
 .tq-ecard__ctxt { display: flex; flex-direction: column; gap: 1px; min-width: 0; overflow: hidden; }
 .tq-ecard__ctxt b { font-size: 12px; font-weight: 700; color: #0a0a0a; white-space: nowrap; }
-.tq-ecard__ctxt span { display: flex; align-items: center; gap: 5px; font-family: 'Fragment Mono', monospace; font-size: 9.5px; color: #8a8a8f; white-space: nowrap; }
+.tq-ecard__ctxt span { display: flex; align-items: center; gap: 5px; font-family: 'Inter', sans-serif; font-size: 9.5px; color: #8a8a8f; white-space: nowrap; }
 .tq-ecard__ctxt span::before { content: ''; flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 .tq-ecard__chart { position: relative; height: 70px; direction: ltr; }
 .tq-ecard__chart i { position: absolute; }
@@ -2111,18 +1977,18 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   transform: translate3d(0,0,0); transition: transform .7s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; display: flex; flex-direction: column; gap: 11px; }
 .tq-ecard.is-hov .tq-ecard__front, .tq-ecard.is-sel .tq-ecard__front { transform: translate3d(2px,-6px,30px);
   box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(10,10,10,.06), 0 1px 0 #e9e9ec, 0 2px 0 #e2e2e6, 0 3px 0 #dbdbe0, 0 22px 34px -20px rgba(10,10,10,.32); }
-.tq-ecard__fhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: 'Fragment Mono', monospace; font-size: 9.5px; letter-spacing: .14em; color: #8a8a8f; text-transform: uppercase; }
+.tq-ecard__fhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: .14em; color: #8a8a8f; text-transform: uppercase; }
 .tq-ecard__ex { display: flex; align-items: center; gap: 6px; color: #c40f17; }
 .tq-ecard__ex::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #e7131b; }
 .tq-ecard__sum { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
 .tq-ecard__sum b { font-size: min(36px, 9.6cqw); line-height: 1; font-weight: 700; letter-spacing: -.045em; color: #0a0a0a; font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
 .tq-ecard__sum span { font-size: 14px; color: #5b5b5b; }
-.tq-ecard__rows { display: flex; flex-direction: column; gap: 5px; font-family: 'Fragment Mono', monospace; font-size: 11px; line-height: 1.3; color: #5b5b5b; }
+.tq-ecard__rows { display: flex; flex-direction: column; gap: 5px; font-family: 'Inter', sans-serif; font-size: 11px; line-height: 1.3; color: #5b5b5b; }
 .tq-ecard__rows > div { display: flex; align-items: baseline; gap: 6px; }
 .tq-ecard__rows > div > span:first-child { flex: none; width: 10px; color: #b5b5ba; }
 .tq-ecard__rows i { flex: 1; min-width: 8px; border-bottom: 1px dotted #d4d4d9; transform: translateY(-3px); }
 .tq-ecard__rows bdi { color: #0a0a0a; }
-.tq-ecard__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; padding-top: 10px; border-top: 1px solid rgba(10,10,10,.07); font-family: 'Fragment Mono', monospace; font-size: 11px; color: #5b5b5b; }
+.tq-ecard__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; padding-top: 10px; border-top: 1px solid rgba(10,10,10,.07); font-family: 'Inter', sans-serif; font-size: 11px; color: #5b5b5b; }
 /* under 1040px (three cards no longer fit a row): a swiper. The row runs edge to edge and snaps a card to
    the middle; the cards beside it shrink toward it and fade (--off, --ox from plan.js); dots under it. */
 .tq-earn__dots { display: none; }
@@ -2155,7 +2021,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-earn__note { max-width: 1000px; }
 }
 @media (min-width: 1041px) and (max-height: 820px) {   /* short windows: a smaller title, the cards' scene a little lower */
-  .tq-earn__h1 { font-size: clamp(38px, min(4.2vw, 6.6vh), 60px); }
   .tq-earn__head { gap: 10px; }
   .tq-earn__grid { margin-top: 18px; }
   .tq-earn__foot { margin-top: 8px; gap: 12px; }
@@ -2177,7 +2042,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-ticks li { font-size: 14px; line-height: 1.35; }
   .tq-earn { padding-top: 4px; }
   .tq-earn__head { gap: 6px; }
-  .tq-earn__h1 { font-size: 30px; }
   .tq-earn__sub { font-size: 15px; line-height: 1.35; }
   .tq-earn__grid { margin-top: 8px; padding-bottom: 26px; }
   /* the scene 16px lower and the estimate 16px shorter: the cards keep their layout, the channel card stays in view */
@@ -2198,7 +2062,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    Desktops: 4 columns x 3 rows of 190px, 980px wide. Tablets: 2 columns. Phones: 2 columns, no text under 16px. */
 .tp-bento { position: relative; max-width: 980px; box-sizing: border-box; margin: clamp(28px, 4vw, 48px) auto 0; padding: 12px; border-radius: 26px;
   background: linear-gradient(180deg, #f6f6f8 0%, #e3e4e8 100%); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.06), 0 30px 60px -40px rgba(18,22,30,.35); }
-.tp-bento__grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, 190px); gap: 12px; font-family: 'Inter', 'DM Sans', system-ui, sans-serif; }
+.tp-bento__grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, 190px); gap: 12px; font-family: 'Inter', system-ui, sans-serif; }
 .tp-bento__t { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding: 22px; border-radius: 18px; color: #0a0a0a; text-decoration: none;
   background: linear-gradient(160deg, #fff 0%, #f4f4f6 100%); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.05), 0 14px 28px -22px rgba(18,22,30,.35);
   transition: transform .35s cubic-bezier(.2,.8,.2,1); }
@@ -2230,7 +2094,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 [dir="rtl"] .tp-bento__arr svg { transform: scaleX(-1); }
 @media (prefers-reduced-motion: reduce) { .tp-bento__t { transition: none; } .tp-bento__t:hover { transform: none; } }
 /* the mock-ups: drawn at 260x180 and placed per tile (the design's positions; mirrored in RTL) */
-.tp-bm { position: absolute; width: 260px; height: 180px; font-family: 'DM Sans', sans-serif; color: #0a0a0a; pointer-events: none; }
+.tp-bm { position: absolute; width: 260px; height: 180px; font-family: 'Inter', sans-serif; color: #0a0a0a; pointer-events: none; }
 .tp-bm > * { direction: ltr; text-align: left; }   /* the drawing itself is never mirrored; the box takes the page's side (RTL) */
 .tp-bm__shadow { position: absolute; left: 30px; right: 30px; bottom: -6px; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(18,22,30,.28), rgba(18,22,30,0)); }
 .tp-bm--banner { inset-inline-end: -6px; bottom: -14px; transform: scale(.98); transform-origin: right bottom; }
@@ -2288,7 +2152,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   background: linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.14); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
 .tp-tv__duo img { display: block; width: auto; height: 15px; }
 .tp-tv__duo img:last-child { height: 17px; }
-.tp-tv__duo span { font-family: 'Fragment Mono', monospace; font-size: 13px; color: #8a8a93; }
+.tp-tv__duo span { font-family: 'Inter', sans-serif; font-size: 13px; color: #8a8a93; }
 .tp-tv__zero { margin-top: 24px; padding: 0 .1em; font-size: 260px; line-height: 1; font-weight: 800; letter-spacing: -.07em; direction: ltr;
   color: transparent; -webkit-background-clip: text; background-clip: text; background-image: linear-gradient(180deg, #fff 0%, #e8e8ee 34%, #7e7e88 52%, #d2d2d8 68%, #fff 100%);
   filter: drop-shadow(0 20px 60px rgba(231,19,27,.35)); }
@@ -2302,7 +2166,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-tv__prod img { flex: none; width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 0 0 1px rgba(255,255,255,.18); }
 .tp-tv__prod > span { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .tp-tv__prod b { font-size: 15px; font-weight: 800; }
-.tp-tv__lab { font-family: 'Fragment Mono', monospace; font-size: 10px; line-height: 1.35; letter-spacing: .16em; text-transform: uppercase; color: #9a9aa2; }
+.tp-tv__lab { font-family: 'Inter', sans-serif; font-size: 10px; line-height: 1.35; letter-spacing: .16em; text-transform: uppercase; color: #9a9aa2; }
 [dir="rtl"] .tp-tv__lab { letter-spacing: 0; font-size: 11px; }   /* Arabic letters stay joined */
 :lang(th) .tp-tv__lab, :lang(ja) .tp-tv__lab, :lang(ko) .tp-tv__lab, :lang(zh) .tp-tv__lab { letter-spacing: .02em; font-size: 11px; }   /* no wide tracking in these scripts */
 .tp-tv__val { display: flex; align-items: center; flex-wrap: wrap; gap: 0 8px; font-size: 20px; font-weight: 800; color: #fff; }
@@ -2346,15 +2210,15 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   box-shadow: 0 0 0 1px rgba(18,22,30,.06), 0 30px 50px -28px rgba(18,22,30,.45); transform: perspective(1000px) rotateX(8deg) rotateY(-8deg); }
 [dir="rtl"] .tp-dp__dash { transform: perspective(1000px) rotateX(8deg) rotateY(8deg); }
 .tp-dp__dhead { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; }
-.tp-dp__live { display: flex; align-items: center; gap: 7px; font-family: 'Fragment Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .14em; color: #e7131b; }
+.tp-dp__live { display: flex; align-items: center; gap: 7px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 400; letter-spacing: .14em; color: #e7131b; }
 .tp-dp__live i { position: relative; width: 7px; height: 7px; border-radius: 50%; background: #e7131b; }
 .tp-dp__live i::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: #e7131b; animation: tpDpPulse 1.4s ease-out infinite; }
 @keyframes tpDpPulse { from { transform: scale(1); opacity: .7; } to { transform: scale(3); opacity: 0; } }
 .tp-dp__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .tp-dp__stats > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 10px 12px; border-radius: 10px; background: #f6f6f7; }
-.tp-dp__stats span { font-family: 'Fragment Mono', monospace; font-size: 9px; letter-spacing: .12em; color: #6b6f76; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tp-dp__stats span { font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: .12em; color: #6b6f76; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tp-dp__stats b { font-weight: 700; font-size: 20px; letter-spacing: -.03em; white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; }
-.tp-dp__stats em { font-style: normal; font-family: 'Fragment Mono', monospace; font-size: 10px; color: #1f9d55; white-space: nowrap; overflow: hidden; }
+.tp-dp__stats em { font-style: normal; font-family: 'Inter', sans-serif; font-size: 10px; color: #1f9d55; white-space: nowrap; overflow: hidden; }
 .tp-dp__bars { height: 86px; display: flex; align-items: flex-end; gap: 5px; padding-bottom: 6px; border-bottom: 1px solid #eeeff1; direction: ltr; }
 .tp-dp__bars i { flex: 1; height: 100%; border-radius: 2px 2px 0 0; background: #c9cbd0; transform-origin: 50% 100%; transition: transform .6s cubic-bezier(.2,.8,.2,1), background-color .3s; }
 .tp-dp__bars i.is-up { background: #0f1012; }
@@ -2365,7 +2229,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-dp__who { display: flex; align-items: center; gap: 14px; }
 .tp-dp__who > div:last-child { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .tp-dp__who > div:last-child b { font-weight: 700; font-size: 17px; }
-.tp-dp__who > div:last-child span { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .1em; color: #22c55e; }
+.tp-dp__who > div:last-child span { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .1em; color: #22c55e; }
 .tp-dp__ava { position: relative; width: 60px; height: 60px; flex: none; }
 .tp-dp__ava > i { position: absolute; inset: 0; border-radius: 18px; transform: rotate(-8deg); background: linear-gradient(150deg, #ff5a60 0%, #e7131b 45%, #8e0a10 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 10px 20px -8px rgba(231,19,27,.8); }
 .tp-dp__ava > span { position: absolute; inset: 0; border-radius: 18px; overflow: hidden; display: flex; align-items: flex-end; justify-content: center;
@@ -2441,7 +2305,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-ig__step.is-on .tp-ig__card { transform: translateY(-8px); }
 .tp-ig__step.is-on .tp-ig__card::before, .tp-ig__step.is-on::after { opacity: 1; }
 .tp-ig__step.is-on::after { transform: translateY(-8px); }
-.tp-ig__n { position: absolute; z-index: 1; top: 24px; inset-inline-end: 24px; font-family: 'Fragment Mono', monospace; font-size: 13px; letter-spacing: .1em; color: #8a8d94; transition: color .7s; }
+.tp-ig__n { position: absolute; z-index: 1; top: 24px; inset-inline-end: 24px; font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: .1em; color: #8a8d94; transition: color .7s; }
 .tp-ig__step.is-on .tp-ig__n { color: #ff4148; }
 .tp-ig__art { position: relative; height: 150px; display: flex; align-items: center; justify-content: center; direction: ltr; opacity: .5; transition: opacity .7s; }
 .tp-ig__art > * { flex: none; }   /* keep the drawing's own size; a narrow card scales it (below) instead of squeezing it */
@@ -2463,7 +2327,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-igm1__btn { height: 24px; display: flex; align-items: center; justify-content: center; padding: 0 8px; border-radius: 999px; background: #e7131b; box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
   font-size: 11px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; }
 .tp-igm1__chip { position: absolute; left: -22px; top: -14px; height: 26px; display: flex; align-items: center; gap: 6px; padding: 0 10px; border-radius: 999px; background: #0f1012; transform: rotate(4deg);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(255,255,255,.12), 0 8px 14px -6px rgba(0,0,0,.8); font-family: 'Fragment Mono', monospace; font-size: 10px; color: #fff; white-space: nowrap; unicode-bidi: plaintext; }
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(255,255,255,.12), 0 8px 14px -6px rgba(0,0,0,.8); font-family: 'Inter', sans-serif; font-size: 10px; color: #fff; white-space: nowrap; unicode-bidi: plaintext; }
 .tp-igm1__chip em { font-style: normal; color: #ff4148; }
 .tp-igm2 { position: relative; width: 200px; height: 130px; }
 .tp-igm2__back { position: absolute; left: 0; top: 18px; width: 120px; height: 90px; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 6px; border-radius: 12px; transform: rotate(-10deg);
@@ -2587,14 +2451,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-pds__step.is-on .tp-pds__hand { animation: tpPdsSpin 1.2s cubic-bezier(.6,0,.3,1); }
 .tp-pds__chip { position: absolute; z-index: 1; left: 50%; top: -40px; height: 26px; display: flex; align-items: center; padding: 0 11px; border-radius: 999px; white-space: nowrap;
   background: linear-gradient(160deg, rgba(255,255,255,.95), rgba(255,255,255,.75)); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(18,22,30,.08), 0 8px 16px -8px rgba(18,22,30,.4);
-  font-family: 'Fragment Mono', monospace; font-size: 12px; color: #0f1012; opacity: 0; transform: translate(var(--cx, -50%), 10px); pointer-events: none; }
+  font-family: 'Inter', sans-serif; font-size: 12px; color: #0f1012; opacity: 0; transform: translate(var(--cx, -50%), 10px); pointer-events: none; }
 .tp-pds__chip.is-red { color: #e7131b; }
 .tp-pds__step.is-on .tp-pds__chip { animation: tpPdsFloat 1.8s ease-out forwards; }
 @keyframes tpPdsFloat { 0% { opacity: 0; transform: translate(var(--cx, -50%), 10px); } 18% { opacity: 1; transform: translate(var(--cx, -50%), 0); } 75% { opacity: 1; transform: translate(var(--cx, -50%), -8px); } 100% { opacity: 0; transform: translate(var(--cx, -50%), -16px); } }
 @keyframes tpPdsPop { 0% { transform: scale(.7); } 55% { transform: scale(1.18); } 100% { transform: scale(1); } }
 @keyframes tpPdsSpin { to { transform: rotate(360deg); } }
 @keyframes tpPdsCandle { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.55); } }
-.tp-pds__n { margin-top: 26px; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .22em; color: #8a8d94; transition: color .6s; }
+.tp-pds__n { margin-top: 26px; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .22em; color: #8a8d94; transition: color .6s; }
 .tp-pds__step h3 { margin: 10px 0 0; font-weight: 700; font-size: 21px; line-height: 1.2; letter-spacing: -.02em; color: #6a6d74; transition: color .6s; text-wrap: balance; }
 .tp-pds__step p { margin: 10px 0 0; max-width: 230px; font-size: 15px; line-height: 1.5; color: #8a8d94; transition: color .6s; text-wrap: pretty; }
 .tp-pds__step.is-on .tp-pds__n { color: #e7131b; }
@@ -2624,19 +2488,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pds__fill::after, .tp-pds__step.is-on .tp-pds__ic, .tp-pds__step.is-on .tp-pds__ca, .tp-pds__step.is-on .tp-pds__cb, .tp-pds__step.is-on .tp-pds__hand { animation: none; }
   .tp-pds__step.is-on .tp-pds__chip { animation: none; opacity: 1; transform: translate(var(--cx, -50%), 0); }
 }
-</style>
-<style id="i18n-fonts">
-@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 200 800; font-display: swap; src: url(../../assets/fonts/intl/manrope-200-800-cyrillic-ext.woff2) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
-@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 200 800; font-display: swap; src: url(../../assets/fonts/intl/manrope-200-800-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 200 800; font-display: swap; src: url(../../assets/fonts/intl/manrope-200-800-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
-@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 200 800; font-display: swap; src: url(../../assets/fonts/intl/manrope-200-800-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 200 800; font-display: swap; src: url(../../assets/fonts/intl/manrope-200-800-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-mono-400-cyrillic-ext.woff2) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
-@font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-mono-400-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-@font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-mono-400-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
-@font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-mono-400-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Fragment Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-mono-400-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500; font-display: swap; src: url(../../assets/fonts/intl/cormorant-garamond-500-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+
+/* figures standing alone (step numbers, prices, the big $0 / 87%): tabular, the site's rule for numbers in Inter */
+.pf-perk__n, .pf-g-red, .pf-g-silver, .tp-tv__zero, .tp-tv__val, .tp-ig__n, .tp-pds__n { font-variant-numeric: tabular-nums; }
 </style>
 <link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 </head>
@@ -2674,7 +2528,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <!-- Hero + the three programs -->
     <section id="programs" class="tp-sec tp-hero" data-screen-label="Partner programs — hero">
       <div class="tp-head">
-        <h1 class="tp-h1" data-fitw>Một chương trình đối tác. <span style="color: #e7131b;">Ba cách kiếm tiền.</span></h1>
+        <h1 class="tp-h1 tq-h1" data-fitw>Một chương trình đối tác. <span style="color: #e7131b;">Ba cách kiếm tiền.</span></h1>
         <p class="tp-sub tp-hero__lead"><span class="tq-nph">Giới thiệu nhà giao dịch, xây dựng mạng lưới đối tác hoặc ra mắt thương hiệu của riêng bạn. Dù bạn chọn hình thức nào, luôn có một quản lý đối tác riêng đồng hành cùng bạn.</span><span class="tq-ph">Giới thiệu nhà giao dịch, xây dựng mạng lưới đối tác hoặc ra mắt thương hiệu của riêng bạn.</span></p>
       </div>
 
@@ -2835,7 +2689,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
         <div class="tp-dome" data-dome>
           <div class="tp-dome__stage">
             <img class="tp-dome__poster" data-poster src="../../assets/posters/trust-dome.webp?v=cd64cd2f23" alt="" width="900" height="780" loading="lazy" decoding="async">
-            <iframe class="tp-dome__3d" data-embed data-src="../../embeds/trust-dome.html?lang=vi&v=ab23820c8d" title="VÌ SAO CHỌN TRADEQUO" aria-hidden="true" tabindex="-1"></iframe>
+            <iframe class="tp-dome__3d" data-embed data-src="../../embeds/trust-dome.html?lang=vi&v=6b0c2e0c9a" title="VÌ SAO CHỌN TRADEQUO" aria-hidden="true" tabindex="-1"></iframe>
           </div>
           <div class="tp-dome__stat" data-stat="tl"><b>800K<i>+</i></b><span>KHÁCH HÀNG GIAO DỊCH</span></div>
           <div class="tp-dome__stat" data-stat="tr"><b>4.9<i>★</i></b><span>ĐIỂM TRUSTPILOT</span></div>
@@ -3033,7 +2887,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">01</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Inter', sans-serif; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">01</span>
             <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Chương trình</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -3044,7 +2898,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">02</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Inter', sans-serif; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">02</span>
             <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Dành cho ai</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -3055,7 +2909,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">03</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Inter', sans-serif; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">03</span>
             <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Lợi ích</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -3066,7 +2920,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Inter', sans-serif; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">04</span>
             <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Vì sao TradeQuo</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -3077,7 +2931,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">05</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Inter', sans-serif; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">05</span>
             <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Cách hoạt động</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>
@@ -3088,7 +2942,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <span aria-hidden="true" style="position: absolute; inset: 0; clip-path: path('M26 0 L226 12 A14 14 0 0 1 226 40 L26 52 A26 26 0 0 1 26 0 Z'); background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg);"></span>
           <span aria-hidden="true" style="position: absolute; inset: 2.5px; clip-path: path('M23.5 0 L223.5 12 A11.5 11.5 0 0 1 223.5 35 L23.5 47 A23.5 23.5 0 0 1 23.5 0 Z'); background: linear-gradient(200deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.7) 42%), linear-gradient(112deg, rgba(255,255,255,0) 58%, rgba(226,228,232,.5) 58.2%, rgba(238,240,243,.25) 74%, rgba(255,255,255,0) 74.2%), linear-gradient(180deg, #ffffff 0%, #f1f2f4 100%);"></span>
           <span style="position: absolute; inset: 0; display: flex; align-items: center; gap: 14px; padding: 0 44px 0 6px;">
-            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Fragment Mono', monospace; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">06</span>
+            <span class="tq-fan-num" style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #1e1e21 0%, #0a0a0a 100%); color: #fff; font-family: 'Inter', sans-serif; font-size: 11.5px; letter-spacing: .06em; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 6px 14px -8px rgba(10,10,10,.6);">06</span>
             <span data-fan-label style="min-width: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance;">Hỏi đáp</span>
           </span>
           <span aria-hidden="true" style="position: absolute; right: 16px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: #e7131b;"></span>

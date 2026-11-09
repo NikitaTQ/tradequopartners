@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Display faces for the /programs/ H1 (the site's font scheme: Syncopate 700 for the H1).
+"""Display faces for the H1 of every page (the site's font scheme: Syncopate 700 for the H1, Inter for the rest).
 
 Syncopate has Latin letters only, and no Romanian Ș, so the other languages get a look-alike wide display face.
-Every file is a Google Fonts subset holding only the characters of that H1 (the `text=` parameter, capitals where
-the CSS sets capitals), a few KB each. Run this again whenever pp.hero.h1 changes in any language: it fetches the
-subsets anew into site/assets/fonts/h1/ and stops if a face lacks a letter.
+Every file is a Google Fonts subset holding only the characters of the H1s (the `text=` parameter, capitals where
+the CSS sets capitals), a few KB each. Run this again whenever an H1 changes in any language (hero.h1, pp.hero.h1,
+cp.earn.h1, mt.top.h1, or the 404 page): it fetches the subsets anew into site/assets/fonts/h1/ and stops if a face
+lacks a letter.
 
     python3 tools/h1-fonts.py
 
@@ -18,7 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'site', 'assets', 'fonts', 'h1')
 UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
 
-# file: (Google family, weight, languages, capitals?) — keep in step with the H1 rules in partner.css
+# file: (Google family, weight, languages, capitals?) — keep in step with the .tq-h1 rules in site.css
 FACES = {
     'syncopate.woff2':       ('Syncopate', 700, ['en', 'de', 'fr', 'es', 'it', 'pt', 'pl', 'tr', 'id'], True),
     'unbounded.woff2':       ('Unbounded', 700, ['uk', 'vi', 'ro'], True),
@@ -27,13 +28,21 @@ FACES = {
     'dela-gothic-one.woff2': ('Dela Gothic One', 400, ['ja'], False),
     'black-han-sans.woff2':  ('Black Han Sans', 400, ['ko'], False),
     'zcool-qingke-sc.woff2': ('ZCOOL QingKe HuangYou', 400, ['zh-hans'], False),
-    'zcool-qingke-tc.woff2': ('ZCOOL QingKe HuangYou', 400, ['zh-hant'], False),
+    'noto-sans-tc.woff2':    ('Noto Sans TC', 900, ['zh-hant'], False),   # ZCOOL QingKe lacks 眾
 }
 
 
+# (strings file under tools/i18n/strings/, key) of each page's H1
+H1S = [('', 'hero.h1'), ('programs', 'pp.hero.h1'), ('commission', 'cp.earn.h1'), ('marketing', 'mt.top.h1')]
+PAGE_404 = 'This page doesn’t exist.'   # site/404.html, English only
+
+
 def h1(lang):
-    with open(os.path.join(ROOT, 'tools', 'i18n', 'strings', 'programs', lang + '.json'), encoding='utf-8') as f:
-        return re.sub(r'<[^>]+>', '', json.load(f)['pp.hero.h1'])
+    text = PAGE_404 if lang == 'en' else ''
+    for folder, key in H1S:
+        with open(os.path.join(ROOT, 'tools', 'i18n', 'strings', folder, lang + '.json'), encoding='utf-8') as f:
+            text += ' ' + re.sub(r'<[^>]+>', '', json.load(f).get(key, ''))
+    return text
 
 
 def fetch(url):
