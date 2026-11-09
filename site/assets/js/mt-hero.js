@@ -1,6 +1,8 @@
-/* /marketing-tools/ hero (TradeQuo_Marketing_Tools_Hero design): the four tools as 3D objects —
- * creative cards, a TradingView screen, signal candles on a base, the academy temple — over the dark
- * hero. They pop in, bob, follow the mouse (parallax); each one's name stands above it, coming in as it lands;
+/* /partner-tools/ hero (Partner_Tools_Hero design; first TradeQuo_Marketing_Tools_Hero): the four tools as 3D
+ * objects — creative cards, a TradingView screen, signal candles on a base, and IB Tools (three stacked tiles:
+ * analytics, controls, a gear) or the academy temple — over the hero. The stage's data-theme="light" lights them
+ * for a light page (darker silver, black candles, a soft red glow, dark names); data-ib puts IB Tools in the
+ * temple's place. They pop in, bob, follow the mouse (parallax); each one's name stands above it, coming in as it lands;
  * hovering or tapping one lifts it a little and brightens its glow.
  * Phones and other tall screens (stage narrower than 0.95 of its height) get a 2×2 layout.
  * A name always sits above its object, never higher than 8px from the stage's top (3px on tall stages; opts.floor() px if given). Trading Signals and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
@@ -21,9 +23,9 @@ function rr(w, h, r) {
   s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
   return s;
 }
-function makeEnv(renderer, noRed) {
+function makeEnv(renderer, light, noRed) {
   const env = new THREE.Scene();
-  env.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0x0c0c0e, side: THREE.BackSide })));
+  env.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: light ? 0x8e8e94 : 0x0c0c0e, side: THREE.BackSide })));
   const panel = (w, h, pos, rgb) => {
     const m = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }); m.color.setRGB(...rgb);
     const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m); p.position.set(...pos); p.lookAt(0, 0, 0); env.add(p);
@@ -33,6 +35,7 @@ function makeEnv(renderer, noRed) {
   panel(1.0, 11, [7, 0, -1], [3, 3, 3.2]);
   panel(11, 4, [0, 1, 8], [0.9, 0.9, 0.95]);
   panel(4, 11, [-5, 0, -6], [1.6, 1.6, 1.7]);
+  if (light) { panel(14, 5, [0, -5, 2], [0.02, 0.02, 0.025]); panel(3, 11, [6, 0, 4], [0.03, 0.03, 0.035]); }   /* dark below and aside: the metal reads on white */
   if (!noRed) { panel(12, 1.4, [0, -6.5, 3], [1.2, 0.05, 0.07]); panel(1.4, 5, [6.5, -1.5, 4], [0.9, 0.03, 0.05]); }
   const pm = new THREE.PMREMGenerator(renderer); const t = pm.fromScene(env, 0.03).texture; pm.dispose();
   return t;
@@ -51,11 +54,11 @@ function sheenTex() {
   x.fillStyle = g; x.fillRect(0, 0, 256, 256);
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 }
-function materials() {
+function materials(light) {
   return {
     lacquer: new THREE.MeshPhysicalMaterial({ color: 0x09090b, metalness: 0.1, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 1.3 }),
     chrome: new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: 0.1, envMapIntensity: 1.5 }),
-    silver: new THREE.MeshStandardMaterial({ color: 0xe4e4ea, metalness: 0.92, roughness: 0.24, envMapIntensity: 1.45 }),
+    silver: new THREE.MeshStandardMaterial({ color: light ? 0xbfbfc6 : 0xe4e4ea, metalness: 0.92, roughness: light ? 0.2 : 0.24, envMapIntensity: 1.45 }),
     cellaGlow: new THREE.MeshStandardMaterial({ color: 0x220205, emissive: 0x9a0a12, emissiveIntensity: 0.9, roughness: 0.4 }),
     pearl: new THREE.MeshPhysicalMaterial({ color: 0xf4f4f7, metalness: 0.3, roughness: 0.25, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.2 }),
     sheen: new THREE.MeshBasicMaterial({ map: sheenTex(), transparent: true, depthWrite: false }),
@@ -63,7 +66,7 @@ function materials() {
     ruby: new THREE.MeshPhysicalMaterial({ color: 0xd60f19, emissive: 0x5a0006, metalness: 0.15, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.4 }),
     red: new THREE.MeshBasicMaterial({ color: 0xff2a33 }),
     /* Trading Signals and the temple (TradeQuo_Academy_Temple): their own pearl and ruby, the base's lacquer and chrome */
-    pearl2: new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0.12, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.25 }),
+    pearl2: new THREE.MeshPhysicalMaterial({ color: light ? 0x141417 : 0xffffff, metalness: 0.12, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.25 }),
     ruby2: new THREE.MeshPhysicalMaterial({ color: 0xd60f19, emissive: 0x380004, metalness: 0.15, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.4 }),
     baseLacquer: new THREE.MeshPhysicalMaterial({ color: 0x060607, metalness: 0.1, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.2 }),
     baseChrome: new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 1, roughness: 0.08, envMapIntensity: 1.7 }),
@@ -293,6 +296,33 @@ function buildTemple(M, q = 1) {
   return g;
 }
 
+/* IB Tools (Partner_Tools_Hero): three rounded tiles stacked at an angle — analytics (silver bars, the last one
+   ruby), controls (a lacquer track with a ruby knob, two graphite lines), a tool (a chrome gear with a ruby hub) */
+function buildIB(M) {
+  const g = new THREE.Group(), inner = new THREE.Group(); g.add(inner);
+  const S = 0.9, tileGeo = new THREE.ExtrudeGeometry(rr(S, S, 0.16), { depth: 0.05, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.012, bevelSegments: 3, curveSegments: 18 });
+  tileGeo.translate(0, 0, -0.025);
+  const tile = (mat, y, rz) => { const t = new THREE.Group(); t.add(new THREE.Mesh(tileGeo, [mat, M.chrome])); t.position.set(0, y, 0); t.rotation.set(-Math.PI / 2, 0, rz); inner.add(t); return t; };
+  const add = (parent, geo, mat, x, y, z) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); parent.add(m); return m; };
+  const top = 0.038;
+  const a = tile(M.lacquer, 0, 0);
+  [0.16, 0.26, 0.2, 0.34, 0.44].forEach((h, i) => add(a, new THREE.BoxGeometry(0.075, h, 0.03), i === 4 ? M.ruby2 : M.silver, -0.24 + i * 0.12, -0.25 + h / 2, top + 0.015));
+  add(a, new THREE.BoxGeometry(0.62, 0.008, 0.006), M.graphite, 0, -0.27, top + 0.003);
+  const b = tile(M.silver, 0.32, 0.06);
+  const track = new THREE.ExtrudeGeometry(rr(0.36, 0.16, 0.08), { depth: 0.03, bevelEnabled: false, curveSegments: 16 });
+  add(b, track, M.baseLacquer, -0.08, 0.16, top);
+  add(b, new THREE.SphereGeometry(0.065, 32, 24), M.ruby2, 0.02, 0.16, top + 0.045);
+  [0, 1].forEach(k => add(b, new THREE.BoxGeometry(k ? 0.36 : 0.52, 0.04, 0.012), M.graphite, -0.32 + (k ? 0.18 : 0.26), -0.08 - k * 0.12, top + 0.006));
+  const c = tile(M.baseLacquer, 0.64, -0.05);
+  const gear = new THREE.Group(); gear.position.set(0, 0, top + 0.03); c.add(gear);
+  gear.add(new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.05, 20, 64), M.chrome));
+  for (let i = 0; i < 8; i++) { const ang = i / 8 * Math.PI * 2, tth = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.09, 0.08), M.chrome); tth.position.set(Math.cos(ang) * 0.24, Math.sin(ang) * 0.24, 0); tth.rotation.z = ang; gear.add(tth); }
+  add(gear, new THREE.CylinderGeometry(0.07, 0.07, 0.06, 32), M.ruby2, 0, 0, 0.01).rotation.x = Math.PI / 2;
+  inner.position.y = -0.34;
+  g.rotation.set(0.55, -0.6, 0);
+  return g;
+}
+
 const PRESETS = {
   portrait: { fitW: 3.25, look: [0, -0.05, 0], scale: 0.84, pos: [[-0.72, 1.12, 0.1], [0.74, 0.62, -0.35], [-0.7, -0.62, 0.2], [0.72, -1.12, 0]] },
   landscape: { fitW: 8.7, look: [0, 0.05, 0], scale: 1.12, pos: [[-3.3, 0.35, 0], [-1.1, -0.1, -0.4], [1.12, 0.4, 0.1], [3.3, -0.12, 0]] },
@@ -301,31 +331,33 @@ const PRESETS = {
 export function mount(el, opts = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.25;
+  const light = opts.theme === 'light';
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = light ? 1.1 : 1.25;
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.setClearColor(0x000000, 0);
   const cv = renderer.domElement;
   cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;';
   el.appendChild(cv);
-  const scene = new THREE.Scene(); scene.environment = makeEnv(renderer);
+  const scene = new THREE.Scene(); scene.environment = makeEnv(renderer, light);
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
   const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(-3, 5, 5); scene.add(key);
   const rim = new THREE.DirectionalLight(0xffffff, 2.6); rim.position.set(3, 2, -4); scene.add(rim);
-  const under = new THREE.DirectionalLight(0xff2a33, 1.4); under.position.set(0, -4, 3); scene.add(under);
-  const M = materials(); M.baseLacquer.envMap = M.baseChrome.envMap = makeEnv(renderer, true);
+  const under = new THREE.DirectionalLight(0xff2a33, light ? 0.7 : 1.4); under.position.set(0, -4, 3); scene.add(under);
+  const M = materials(light); M.baseLacquer.envMap = M.baseChrome.envMap = makeEnv(renderer, light, true);
   const root = new THREE.Group(); scene.add(root);
-  const glowTex = radTex([[0, 'rgba(255,42,51,0.55)'], [0.35, 'rgba(200,16,26,0.18)'], [1, 'rgba(200,16,26,0)']]);
+  const glowTex = light ? radTex([[0, 'rgba(231,19,27,0.32)'], [0.4, 'rgba(231,19,27,0.08)'], [1, 'rgba(231,19,27,0)']])
+    : radTex([[0, 'rgba(255,42,51,0.55)'], [0.35, 'rgba(200,16,26,0.18)'], [1, 'rgba(200,16,26,0)']]);
   const tall = (opts.layout === 'portrait' || (!opts.layout && el.clientWidth / Math.max(1, el.clientHeight) < 0.95));
-  const items = [buildCards, buildScreen, buildSignals, buildTemple].map((fn, i) => {
+  const items = [buildCards, buildScreen, buildSignals, opts.ibTools ? buildIB : buildTemple].map((fn, i) => {
     const holder = new THREE.Group(), bob = new THREE.Group(), spin = new THREE.Group();
     holder.add(bob); bob.add(spin); spin.add(fn(M, tall ? 0.6 : 1)); root.add(holder);
-    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.55 }));
+    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: light ? THREE.NormalBlending : THREE.AdditiveBlending, opacity: 0.55 }));
     halo.position.set(0, -0.1, -0.7); halo.scale.set(2.6, 2.6, 1); holder.add(halo);
     return { holder, bob, spin, halo, i };
   });
   const N = 140, pg = new THREE.BufferGeometry(), pa = new Float32Array(N * 3), seeds = [];
   for (let i = 0; i < N; i++) { pa[i * 3] = (Math.random() - 0.5) * 9; pa[i * 3 + 1] = (Math.random() - 0.5) * 8; pa[i * 3 + 2] = (Math.random() - 0.5) * 4 - 1; seeds.push(Math.random() * 6.28); }
   pg.setAttribute('position', new THREE.BufferAttribute(pa, 3));
-  const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xffffff, size: 0.022, transparent: true, opacity: 0.45, depthWrite: false }));
+  const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: light ? 0x1a1a1e : 0xffffff, size: 0.022, transparent: true, opacity: light ? 0.28 : 0.45, depthWrite: false }));
   scene.add(dust);
 
   let preset = PRESETS.landscape, w = 1, h = 1, minY = 0, nameK = 1;   /* nameK: the names' size factor, below 1 where long names would meet */
@@ -345,8 +377,8 @@ export function mount(el, opts = {}) {
     const d = document.createElement('div');
     d.style.cssText = 'position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;white-space:nowrap;will-change:transform,opacity;';
     d.innerHTML = '<span style="font-family:\'Fragment Mono\',monospace;font-size:11px;letter-spacing:0.22em;color:#E7131B;">0' + (i + 1) + '</span>' +
-      '<span data-t style="font-family:\'DM Sans\',system-ui,sans-serif;font-weight:760;letter-spacing:-0.022em;line-height:1.05;padding:0 .06em .2em;margin:0 -.06em -.2em;background:linear-gradient(180deg,#FFFFFF 0%,#F3F3F6 36%,#BDBDC4 60%,#E2E2E7 80%,#FFFFFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.75));">' + txt + '</span>' +
-      '<span style="width:1px;height:18px;background:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0));"></span>';
+      '<span data-t style="font-family:\'DM Sans\',system-ui,sans-serif;font-weight:760;letter-spacing:-0.022em;line-height:1.05;padding:0 .06em .2em;margin:0 -.06em -.2em;background:' + (light ? 'linear-gradient(180deg,#3A3A40 0%,#0A0A0B 40%,#55555C 62%,#1A1A1E 82%,#0A0A0B 100%)' : 'linear-gradient(180deg,#FFFFFF 0%,#F3F3F6 36%,#BDBDC4 60%,#E2E2E7 80%,#FFFFFF 100%)') + ';-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px ' + (light ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.75)') + ');">' + txt + '</span>' +
+      '<span style="width:1px;height:18px;background:' + (light ? 'linear-gradient(180deg,rgba(10,10,11,0.45),rgba(10,10,11,0))' : 'linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0))') + ';"></span>';
     d.setAttribute('aria-hidden', 'true');
     overlay.appendChild(d); return { d, t: d.querySelector('[data-t]'), k: 0, v: 0, w: 0, h: 0, fs: 0, op: '', fl: '' };
   });
@@ -444,6 +476,8 @@ if (stage) {
     const labels = (stage.dataset.labels || '').split('|').filter(Boolean);
     const opts = {};
     if (labels.length === 4) opts.labels = labels;
+    if (stage.dataset.theme) opts.theme = stage.dataset.theme;
+    if ('ib' in stage.dataset) opts.ibTools = true;
     stage.mtHero = mount(stage, opts);   /* show(i) names an object, as a hover would */
   } catch (e) { /* no WebGL: the hero keeps its background, title and list */ }
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the translated pages (landing, partner programs, commission plan, marketing tools) in every language.
+"""Build the translated pages (landing, partner programs, partner terms, partner tools) in every language.
 
     tools/i18n/<page>.html           templates ({{key}} = text, {{@key}} = attribute value,
                                      {{> name}} = tools/i18n/partials/name.html,
@@ -32,14 +32,14 @@ PAGES = [
     {'id': 'landing', 'template': 'landing.html', 'slug': ''},
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
-    {'id': 'marketing', 'template': 'marketing.html', 'slug': 'marketing-tools', 'css': 'partner', 'head': 'dark'},   # dark header over the dark hero
+    {'id': 'marketing', 'template': 'marketing.html', 'slug': 'partner-tools', 'css': 'partner'},   # was marketing-tools (netlify.toml redirects)
 ]
 # The site navigation in the header: the four pages, in this order (page id, path under the language root, label).
 NAV = [
     ('landing', '', 'fan.home'),
     ('programs', 'programs/', 'fan.programs'),
     ('commission', 'partner-terms/', 'fan.commission'),
-    ('marketing', 'marketing-tools/', 'fan.marketing'),
+    ('marketing', 'partner-tools/', 'fan.marketing'),
 ]
 # Each page's table of contents: the fan bottom right on desktop, the red menu on phones (section id, label).
 TOC = {

@@ -812,7 +812,7 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
   }
 
-  /* ---- processes that light up step by step: marketing-tools/ "From your portal to your audience"
+  /* ---- processes that light up step by step: partner-tools/ "From your portal to your audience"
    * (Process_Ignition_Section) and partner-terms/ "Paid every day" (Paid_Daily_Silver) ------------------------------
    * [data-stepper] holds [data-step] items. Every data-every ms the next step gets .is-on and the ones before it
    * .is-done; --k (0…1) on the stepper sizes its rail; after the last step it starts over. It runs only while on
@@ -838,7 +838,7 @@
     });
   }
 
-  /* ---- marketing-tools/: the partner dashboard in "Data and people" ticks along --------------------------
+  /* ---- partner-tools/: the partner dashboard in "Data and people" ticks along --------------------------
    * Every 1.6 s, while it is on screen: the bars shift left and a new one comes in red on the right, sign-ups,
    * lots and earnings creep up (the Data_and_People_Section design's numbers). Bars move by transform only.
    * The figures are bidi-isolated (LRI…PDI) so "+46" stays "+46" in Arabic; a label or figure too wide for its

@@ -35,6 +35,27 @@
   to = "/partner-terms/"
   status = 301
 
+# The marketing tools page became Partner Tools: /marketing-tools/ moved to /partner-tools/ (every language).
+[[redirects]]
+  from = "/marketing-tools"
+  to = "/partner-tools/"
+  status = 301
+
+[[redirects]]
+  from = "/marketing-tools/*"
+  to = "/partner-tools/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/:lang/marketing-tools"
+  to = "/:lang/partner-tools/"
+  status = 301
+
+[[redirects]]
+  from = "/:lang/marketing-tools/*"
+  to = "/:lang/partner-tools/:splat"
+  status = 301
+
 # The commission plan page moved from /commission-plan/ to /partner-terms/ (every language).
 [[redirects]]
   from = "/commission-plan"
