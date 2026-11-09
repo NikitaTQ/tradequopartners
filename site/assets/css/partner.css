@@ -490,6 +490,7 @@
     #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
     #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .tq-mth-tail + .tp-sec { padding-top: clamp(16px, 3vw, 40px); }
+@media (min-width: 641px) { .tq-mth-tail { margin-bottom: -40px; } }   /* the blocks after it start 40px higher, over the tail's white end */
 @media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout */
   .tq-mth__stage { height: 80%; }
 }
@@ -629,7 +630,7 @@
 /* after the scene: the perks' red glow carries on and the black eases into the white the next block
    starts with (the same curve as the landing's dark tail); it tucks 1px under the scene so no seam shows */
 #pf-flow.is-dark #pf-stick { background: #0a0a0b; }
-#pf-tail { position: relative; height: clamp(360px, 50vh, 560px); margin-top: -1px;
+#pf-tail { position: relative; height: clamp(360px, 50vh, 560px); margin-top: -1px; margin-bottom: -20px;   /* Why TradeQuo and what follows sit 20px into its white end */
   background: radial-gradient(55% 34vh at 50% 0%, rgba(150,10,15,.42), rgba(150,10,15,0) 70%),
     linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
@@ -1161,7 +1162,7 @@
 
 /* ---- partner-terms/: Paid every day (Paid_Daily_Silver) ------------------------------------------------------------
    A silver panel with a white glow on top and fine vertical lines fading in at the bottom. startSteppers
-   (landing.js) lights one step after another: a silver rail with a moving sheen fills to it (--k), its ball swells
+   (landing.js) lights one step after another: a red rail with a moving sheen fills to it (--k) over a faint red line, its ball swells
    into a polished silver sphere, its icon turns red and plays once (candles, a pop, a clock hand), and a chip floats up
    over it. The balls are solid (no backdrop blur, it would cost on every scroll for no visible difference here). */
 .tp-pds { position: relative; overflow: hidden; isolation: isolate; box-sizing: border-box; max-width: 1240px; margin: 0 auto;
@@ -1175,9 +1176,9 @@
 .tp-pds__track { position: relative; width: 100%; }
 /* the rail runs between the centres of the first and last columns (four columns, 24px gaps) */
 .tp-pds__base, .tp-pds__fill { position: absolute; inset-inline-start: calc(12.5% - 9px); }
-.tp-pds__base { top: 37px; width: calc(75% + 18px); height: 2px; border-radius: 1px; background: rgba(18,22,30,.12); box-shadow: 0 1px 0 #fff; }
-.tp-pds__fill { top: 35px; width: calc((75% + 18px) * var(--k, 0)); height: 6px; overflow: hidden; border-radius: 3px; background: linear-gradient(180deg, #fff 0%, #b9bdc4 45%, #6e737b 100%);
-  box-shadow: 0 2px 5px rgba(18,22,30,.3), inset 0 0 0 .5px rgba(18,22,30,.2); transition: width 1s cubic-bezier(.6,0,.3,1); }
+.tp-pds__base { top: 37px; width: calc(75% + 18px); height: 2px; border-radius: 1px; background: rgba(231,19,27,.22); box-shadow: 0 1px 0 #fff; }
+.tp-pds__fill { top: 35px; width: calc((75% + 18px) * var(--k, 0)); height: 6px; overflow: hidden; border-radius: 3px; background: linear-gradient(180deg, #ff7a7f 0%, #e7131b 50%, #a50c12 100%);
+  box-shadow: 0 2px 6px rgba(231,19,27,.4), inset 0 0 0 .5px rgba(120,8,12,.35); transition: width 1s cubic-bezier(.6,0,.3,1); }
 .tp-pds__fill::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 240px; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.95) 50%, rgba(255,255,255,0));
   transform: translateX(-240px); animation: tpPdsSheen 2.4s linear infinite; }
 @keyframes tpPdsSheen { to { transform: translateX(1000px); } }
