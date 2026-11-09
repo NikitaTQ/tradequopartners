@@ -148,6 +148,14 @@
     </div>
   </section>
 
+  <!-- Partner events (Partner_Event_Toasts): a short line of events in the bottom-left corner while the first
+       screen is in view, desktops from 1280px (startToasts in landing.js; the wording per language in
+       assets/js/toasts/<lang>.js, loaded when it first shows). The caption says the lines are examples. -->
+  <div class="tq-toasts" data-toasts data-src="{{root}}assets/js/toasts/{{code}}.js" aria-hidden="true">
+    <div class="tq-toasts__stack" data-toasts-stack></div>
+    <span class="tq-toasts__cap" data-toasts-cap></span>
+  </div>
+
   {{> how}}
 
   <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px); background: #fff; color: #0a0a0a;">

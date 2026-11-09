@@ -1300,6 +1300,32 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-pc__per button { height: 38px; }
   .tq-pc__go { height: 48px; font-size: 15px; }
 }
+
+/* ---- landing: partner events (Partner_Event_Toasts) ---------------------------------------------------
+   Glass pills that slide up from the bottom-left corner while the first screen is in view (desktops from
+   1280px, where the corner left of the form is free): three at a time, the newest at the bottom, the oldest
+   fading out. A red dot marks money; amounts from $7,000 get the dark pill. Inter, like all new type. Under
+   the stack a small caption: the lines are examples. startToasts in landing.js places and replaces them. */
+.tq-toasts { position: fixed; left: 16px; bottom: 16px; z-index: 50; width: min(460px, calc(50vw - 300px)); display: none; flex-direction: column; align-items: flex-start;
+  font-family: 'Inter', 'DM Sans', system-ui, sans-serif; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
+@media (min-width: 1280px) { .tq-toasts { display: flex; } }
+.tq-toasts.is-on { opacity: 1; visibility: visible; transition: opacity .45s ease; }
+.tq-toasts__stack { position: relative; width: 100%; height: 0; }
+.tq-toast { position: absolute; left: 0; bottom: 0; box-sizing: border-box; width: max-content; max-width: 100%; min-height: 30px; display: flex; align-items: center; gap: 7px;
+  padding: 6px 12px 6px 11px; border-radius: 15px; font-size: 12px; line-height: 1.4; letter-spacing: -.005em; color: #45464c; pointer-events: auto; transform-origin: 0 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.5) 100%); -webkit-backdrop-filter: blur(14px) saturate(170%); backdrop-filter: blur(14px) saturate(170%);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.75), 0 1px 2px rgba(30,34,44,.06), 0 8px 16px -9px rgba(30,34,44,.35);
+  transition: transform .6s cubic-bezier(.2,.9,.25,1.05), opacity .45s ease, filter .45s ease; will-change: transform, opacity; }
+.tq-toast > i { flex: none; width: 4px; height: 4px; border-radius: 50%; background: #a9abb1; }
+.tq-toast > i.is-money { background: #e7131b; }
+.tq-toast b { font-weight: 700; color: #141416; }
+.tq-toast b.v { font-variant-numeric: tabular-nums; unicode-bidi: isolate; direction: ltr; }   /* $1,234 reads the same in Arabic */
+[dir="rtl"] .tq-toasts { align-items: flex-end; }   /* the caption stays in the corner, under the pills */
+.tq-toast.is-big { color: #b9bbc1; background: linear-gradient(180deg, rgba(38,38,43,.88) 0%, rgba(12,12,14,.92) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 0 0 1px rgba(255,255,255,.06), 0 8px 16px -9px rgba(10,10,14,.55); }
+.tq-toast.is-big b { color: #fff; }
+.tq-toasts__cap { margin: 8px 0 0 4px; font-size: 11px; line-height: 1.3; color: #6b6b73; }
+@media (prefers-reduced-motion: reduce) { .tq-toast, .tq-toasts { transition: none; } }
 </style>
 <style id="partner-css" data-prefix="../../">
 /* Partner Programs + Commission Plan pages (tools/i18n/programs.html, commission.html).
@@ -1768,18 +1794,18 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    --s sizes the whole button (1.5 on wide screens); the chart inside is scaled with it. */
 .tq-cw { --s: 1; position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: calc(16px * var(--s)); height: calc(64px * var(--s));
   padding-inline: calc(8px * var(--s)) calc(30px * var(--s)); box-sizing: border-box; border-radius: 999px;
-  white-space: nowrap; text-decoration: none; pointer-events: auto; color: #0a0a0a; font-size: calc(18px * var(--s)); font-weight: 700; letter-spacing: -.01em; -webkit-tap-highlight-color: transparent;
-  background: linear-gradient(180deg, #fff 0%, #e6e7ea 28%, #b3b5bb 52%, #dddee2 74%, #c3c5ca 100%);
-  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0,0,0,.25), 0 0 0 1px rgba(255,255,255,.18), 0 18px 40px -14px rgba(231,19,27,.6);
+  white-space: nowrap; text-decoration: none; pointer-events: auto; color: #fff; font-family: 'Inter', 'DM Sans', system-ui, sans-serif; font-size: calc(18px * var(--s)); font-weight: 700; letter-spacing: -.01em; -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(180deg, #2e2f34 0%, #17181b 30%, #0a0a0b 55%, #1b1c20 80%, #0d0d0f 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 0 rgba(0,0,0,.6), 0 0 0 1px rgba(10,10,11,.9), 0 18px 40px -14px rgba(231,19,27,.55);
   transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
-.tq-cw:hover, .tq-cw:focus-visible { color: #0a0a0a; transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0,0,0,.25), 0 0 0 1px rgba(255,255,255,.3), 0 22px 48px -12px rgba(255,255,255,.35); }
+.tq-cw:hover, .tq-cw:focus-visible { color: #fff; transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(0,0,0,.6), 0 0 0 1px #0a0a0b, 0 22px 48px -12px rgba(231,19,27,.7); }
 .tq-cw:focus-visible { outline: 2px solid #0a0a0b; outline-offset: 4px; }
-.tq-cw__sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(110deg, rgba(255,255,255,0) 42%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 58%);
+.tq-cw__sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(110deg, rgba(255,255,255,0) 42%, rgba(255,255,255,.22) 50%, rgba(255,255,255,0) 58%);
   background-size: 300% 100%; animation: tqCwSheen 4.2s ease-in-out infinite; }
 @keyframes tqCwSheen { 0% { background-position: 150% 0; } 55%, 100% { background-position: -50% 0; } }
-.tq-cw__win { position: relative; flex: none; display: flex; align-items: center; justify-content: center; width: calc(112px * var(--s)); height: calc(48px * var(--s)); border-radius: 999px; background: #0a0a0b;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,.9), inset 0 -1px 0 rgba(255,255,255,.12); direction: ltr; }
+.tq-cw__win { position: relative; flex: none; display: flex; align-items: center; justify-content: center; width: calc(112px * var(--s)); height: calc(48px * var(--s)); border-radius: 999px;
+  background: linear-gradient(180deg, #fff 0%, #ececef 45%, #d6d7dc 100%); box-shadow: inset 0 2px 5px rgba(0,0,0,.22), inset 0 -1px 0 #fff; direction: ltr; }   /* inverted: a light window */
 .tq-cw__chart { position: relative; flex: none; width: 96px; height: 40px; transform: scale(var(--s)); }
 .tq-cw__label { position: relative; }
 .tq-cw__c { position: absolute; width: 8px; transform-origin: 50% 100%; }
@@ -1789,8 +1815,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-cw__red i { background: #ff6b71; }
 .tq-cw__red b { bottom: 6px; height: 16px; background: linear-gradient(90deg, #8e0a10 0%, #ff5a60 38%, #e7131b 60%, #8e0a10 100%); box-shadow: 0 0 12px rgba(231,19,27,.75); }
 .tq-cw__s { opacity: 0; transform: translateY(6px) scaleY(.04); }
-.tq-cw__s i { background: #c9cbd0; }
-.tq-cw__s b { bottom: 3px; background: linear-gradient(90deg, #7d7f86 0%, #f6f6f8 38%, #d4d6da 58%, #8e9097 100%); box-shadow: 0 0 10px rgba(255,255,255,.25); }
+.tq-cw__s i { background: #3a3b40; }
+.tq-cw__s b { bottom: 3px; background: linear-gradient(90deg, #0a0a0b 0%, #4a4b52 38%, #2a2b30 58%, #0a0a0b 100%); box-shadow: 0 2px 6px rgba(10,10,11,.3); }   /* dark candles in the light window */
 .tq-cw__s1 { left: 24px; bottom: 7px; height: 16px; animation: tqCwS1 5.6s cubic-bezier(.2,.9,.25,1.12) infinite both; } .tq-cw__s1 b { height: 10px; }
 .tq-cw__s2 { left: 42px; bottom: 11px; height: 18px; animation: tqCwS2 5.6s cubic-bezier(.2,.9,.25,1.12) infinite both; } .tq-cw__s2 b { height: 12px; }
 .tq-cw__s3 { left: 60px; bottom: 15px; height: 19px; animation: tqCwS3 5.6s cubic-bezier(.2,.9,.25,1.12) infinite both; } .tq-cw__s3 b { height: 13px; }
@@ -3164,7 +3190,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=4ea5e72e6c" defer></script>
+<script src="../../assets/js/landing.js?v=4a6bdad2df" defer></script>
 <script type="module" src="../../assets/js/mt-hero.js?v=e8074b9ecb"></script>
 </body>
 </html>

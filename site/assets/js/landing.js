@@ -161,6 +161,103 @@
     window.addEventListener('pageshow', (e) => { if (e.persisted) set(false); });
   }
 
+  /* ---- landing: partner events in the corner (Partner_Event_Toasts) ---------------------------------------
+   * While the first screen is in view on a desktop from 1280px, an event line slides up from the bottom-left
+   * corner every 3.2 s; three stand at a time, the oldest fades out. The events are generated as the design
+   * does it: a name, one of its forty lines (wording per language in assets/js/toasts/<lang>.js, loaded the first
+   * time the stack shows) and a figure in the line's range; the caption under the stack says they are examples.
+   * Hovering a line pauses the stream; it also stops while the tab is hidden, and the stack fades out once the
+   * first screen has scrolled away. */
+  function startToasts() {
+    const box = $('[data-toasts]'), hero = document.getElementById('signup');
+    const stack = box && $('[data-toasts-stack]', box);
+    if (!box || !hero || !stack) return;
+    const wide = matchMedia('(min-width: 1280px)');
+    const NAMES = ['Jack', 'Nick', 'Amir', 'Sofia', 'Lukas', 'Mei', 'Ravi', 'Omar', 'Elena', 'Kwame', 'Diego', 'Yuki', 'Fatima', 'Tomás', 'Anya', 'Chen', 'Priya', 'Mateo',
+      'Leila', 'Hassan', 'Marco', 'Ines', 'Daniel', 'Aisha', 'Viktor', 'Hana', 'Carlos', 'Nadia', 'Samuel', 'Julia', 'Arjun', 'Zara', 'Felix', 'Lina', 'Youssef', 'Emma',
+      'Kenji', 'Sara', 'Pavel', 'Grace', 'Adam', 'Maya', 'Ivan', 'Noor', 'Leo', 'Chloe', 'Tariq', 'Rosa', 'Ethan', 'Amina', 'Bruno', 'Olga', 'Kai', 'Selin', 'Hugo',
+      'Dina', 'Mohammed', 'Lucia', 'Sami', 'Vera'];
+    const SYMS = ['XAUUSD', 'EURUSD', 'GBPJPY', 'USDJPY', 'NAS100', 'BTCUSD', 'GBPUSD', 'US30', 'XAGUSD', 'AUDUSD'];
+    /* the figure of each of the forty lines, in the design's order: [kind, from, to] */
+    const SPEC = [['usd', 800, 12000], ['num', 4, 40], ['usd', 120, 4200], ['usd', 60, 2600], ['usd', 400, 9000], ['usd', 1500, 22000], ['num', 3, 48],
+      ['num', 2, 12], [''], ['num', 40, 600], ['usd', 50000, 400000], ['usd', 200, 6000], ['fix', '87%'], ['num', 120, 3800], ['num', 1000, 25000],
+      ['usd', 150, 3800], [''], ['num', 8, 90], ['num', 5, 70], ['usd', 90, 2400], [''], ['usd', 10000, 90000], ['num', 10, 160], ['usd', 300, 5000],
+      ['usd', 500, 7000], ['usd', 300, 6000], ['usd', 80, 1900], ['num', 6, 60], ['num', 2, 9], ['num', 12, 140], ['num', 8, 95], ['usd', 1200, 9000],
+      ['usd', 40, 900], ['usd', 200, 5000], ['num', 100, 999], [''], ['num', 200, 4000], [''], ['usd', 500, 8000], ['usd', 50, 1200]];
+    const MAX = 3, GAP = 6, EVERY = 3200;
+    const rnd = (a, b) => a + Math.random() * (b - a), pick = (a) => a[Math.floor(Math.random() * a.length)];
+    const fmt = (n) => Math.round(n).toLocaleString('en-US');
+    let words = null, loading = false, deck = [], timer = 0, inView = false, hover = false;
+    const deal = () => {
+      const d = [];
+      for (let i = 0; i < 120; i++) {
+        const k = i % SPEC.length, [kind, a, b] = SPEC[k];
+        const v = kind === 'usd' ? '$' + fmt(rnd(a, b)) : kind === 'num' ? fmt(rnd(a, b)) : kind === 'fix' ? a : '';
+        d.push({ p: words.t[k], v, money: kind === 'usd', big: kind === 'usd' && parseFloat(v.replace(/[$,]/g, '')) >= 7000, name: pick(NAMES), sym: pick(SYMS) });
+      }
+      for (let i = d.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [d[i], d[j]] = [d[j], d[i]]; }
+      return d;
+    };
+    const make = (ev) => {
+      const el = document.createElement('div');
+      el.className = 'tq-toast' + (ev.big ? ' is-big' : '');
+      const dot = document.createElement('i');
+      if (ev.money) dot.className = 'is-money';
+      const txt = document.createElement('span');
+      ev.p.split(/(\{[nvs]\})/).forEach((part) => {
+        if (!part) return;
+        if (part === '{n}' || part === '{v}') {
+          const b = document.createElement('b');
+          b.textContent = part === '{n}' ? ev.name : ev.v;
+          if (part === '{v}') b.className = 'v';
+          txt.appendChild(b);
+        } else txt.appendChild(document.createTextNode(part === '{s}' ? ev.sym : part));
+      });
+      el.append(dot, txt);
+      return el;
+    };
+    /* the newest at the bottom; each one above the next by its own height (a long line may take two) */
+    const layout = () => {
+      let y = 0;
+      [...stack.children].filter((el) => !el.dataset.gone).forEach((el, i) => {
+        const out = i >= MAX;
+        el.style.transform = 'translate3d(0,' + (-y) + 'px,0) scale(' + (out ? 0.96 : 1) + ')';
+        el.style.opacity = out ? '0' : i === MAX - 1 ? '0.72' : '1';
+        if (out) { el.dataset.gone = '1'; setTimeout(() => el.remove(), 650); }
+        y += el.offsetHeight + GAP;
+      });
+    };
+    const push = () => {
+      if (!deck.length) deck = deal();
+      const el = make(deck.pop());
+      el.style.opacity = '0'; el.style.transform = 'translate3d(0,12px,0)'; el.style.filter = 'blur(4px)';
+      el.addEventListener('pointerenter', () => { hover = true; });
+      el.addEventListener('pointerleave', () => { hover = false; });
+      stack.prepend(el);
+      requestAnimationFrame(() => requestAnimationFrame(() => { el.style.filter = ''; layout(); }));
+    };
+    const tick = () => { timer = setTimeout(tick, EVERY); if (!hover && !document.hidden) push(); };
+    const update = async () => {
+      const on = inView && wide.matches;
+      if (on && !words) {
+        if (loading) return;
+        loading = true;
+        try { words = (await import(new URL(box.dataset.src, document.baseURI).href)).default; } catch (e) { return; }   /* from the page's URL, not the script's */
+        $('[data-toasts-cap]', box).textContent = words.label;
+        return update();
+      }
+      box.classList.toggle('is-on', on);
+      if (on && !timer) timer = setTimeout(tick, 600);
+      if (!on && timer) { clearTimeout(timer); timer = 0; }
+    };
+    /* the first screen: until three quarters of a screen has scrolled by (the form's section runs on far below it) */
+    const check = () => { const v = scrollY < innerHeight * 0.75; if (v !== inView) { inView = v; update(); } };
+    addEventListener('scroll', check, { passive: true });
+    addEventListener('resize', check);
+    if (wide.addEventListener) wide.addEventListener('change', update);
+    check();
+  }
+
   /* ---- sticky header: shorter once the page scrolls, out of the way while a full-screen scene holds the screen
    * (the landing's flip track: only where it pins, i.e. position: sticky) ---- */
   function startStickyHead() {
@@ -1205,6 +1302,7 @@
   startFaq();
   startCta3d();
   startWhoFlow();
+  startToasts();
   startProgSwiper();
   startFitWide();
   startLiveDash();
