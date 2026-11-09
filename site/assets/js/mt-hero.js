@@ -1,6 +1,7 @@
 /* /marketing-tools/ hero (TradeQuo_Marketing_Tools_Hero design): the four tools as 3D objects —
  * creative cards, a TradingView screen, signal candles on a base, the academy temple — over the dark
- * hero. They pop in, bob, follow the mouse (parallax); hovering or tapping one shows its name above it.
+ * hero. They pop in, bob, follow the mouse (parallax); each one's name stands above it, coming in as it lands;
+ * hovering or tapping one lifts it a little and brightens its glow.
  * Phones and other tall screens (stage narrower than 0.95 of its height) get a 2×2 layout.
  * A name always sits above its object, never higher than 8px from the stage's top (3px on tall stages; opts.floor() px if given). Trading Signals and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
  * the old one had). Loaded as a module by marketing.html; three.js is the site's own copy. The page's text stays as it is
@@ -327,13 +328,14 @@ export function mount(el, opts = {}) {
   const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xffffff, size: 0.022, transparent: true, opacity: 0.45, depthWrite: false }));
   scene.add(dust);
 
-  let preset = PRESETS.landscape, w = 1, h = 1, minY = 0;
+  let preset = PRESETS.landscape, w = 1, h = 1, minY = 0, nameK = 1;   /* nameK: the names' size factor, below 1 where long names would meet */
   const resize = () => {
     w = opts.width || el.clientWidth; h = opts.height || el.clientHeight; if (!w || !h) return;
     renderer.setSize(w, h, false); camera.aspect = w / h;
     preset = (opts.layout === 'portrait' || (!opts.layout && w / h < 0.95)) ? PRESETS.portrait : PRESETS.landscape;
     camera.updateProjectionMatrix();
     minY = opts.floor ? opts.floor() : (preset === PRESETS.portrait ? 3 : 8);   /* phones: 5px more room above the first row */
+    nameK = 1;
   };
   const ro = new ResizeObserver(resize); ro.observe(el); resize();
 
@@ -346,7 +348,7 @@ export function mount(el, opts = {}) {
       '<span data-t style="font-family:\'DM Sans\',system-ui,sans-serif;font-weight:760;letter-spacing:-0.022em;line-height:1.05;padding:0 .06em .2em;margin:0 -.06em -.2em;background:linear-gradient(180deg,#FFFFFF 0%,#F3F3F6 36%,#BDBDC4 60%,#E2E2E7 80%,#FFFFFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.75));">' + txt + '</span>' +
       '<span style="width:1px;height:18px;background:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0));"></span>';
     d.setAttribute('aria-hidden', 'true');
-    overlay.appendChild(d); return { d, t: d.querySelector('[data-t]'), k: 0, w: 0, h: 0, fs: 0 };
+    overlay.appendChild(d); return { d, t: d.querySelector('[data-t]'), k: 0, v: 0, w: 0, h: 0, fs: 0, op: '', fl: '' };
   });
   const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), box = new THREE.Box3(), tv = new THREE.Vector3(), c0 = new THREE.Vector3();
   let hover = -1;
@@ -388,6 +390,7 @@ export function mount(el, opts = {}) {
       it.holder.position.set(x, y, z);
       const q = reduce ? 1 : backOut(clamp01((t - 0.15 - i * 0.16) / 1.1));
       const tg = tags[i]; tg.k = damp(tg.k, hover === i ? 1 : 0, dt, 7);
+      tg.v = reduce ? 1 : damp(tg.v, q > 0.85 ? 1 : 0, dt, 4);   /* the name: in as the object lands, then it stays */
       const hk = tg.k * tg.k * (3 - 2 * tg.k);
       it.holder.scale.setScalar(P.scale * Math.max(0.001, q) * (1 + 0.07 * hk));
       it.bob.position.y = Math.sin(t * 0.9 + i * 1.3) * 0.07 * wob;
@@ -400,20 +403,26 @@ export function mount(el, opts = {}) {
     a.needsUpdate = true;
     scene.updateMatrixWorld();
     /* the name goes above its object, no higher than the floor */
-    const portrait = preset === PRESETS.portrait, fs = portrait ? 20 : 30;
+    const portrait = preset === PRESETS.portrait, fs = Math.round((portrait ? 20 : 30) * nameK);
+    const boxes = [];
     items.forEach((it, i) => {
       const tg = tags[i];
-      if (tg.k < 0.005) { if (tg.d.style.opacity !== '0') tg.d.style.opacity = '0'; return; }
+      if (tg.v < 0.005) { if (tg.op !== '0') { tg.d.style.opacity = tg.op = '0'; } return; }
       if (tg.fs !== fs) { tg.t.style.fontSize = fs + 'px'; tg.fs = fs; tg.w = 0; }
       if (!tg.w) { tg.w = tg.d.offsetWidth; tg.h = tg.d.offsetHeight; }
       box.setFromObject(it.spin); box.getCenter(c0);
       tv.copy(c0).setY(box.max.y).project(camera);
-      const sx = (tv.x + 1) / 2 * w, top = (1 - tv.y) / 2 * h, e2 = tg.k * tg.k * (3 - 2 * tg.k);
+      const sx = (tv.x + 1) / 2 * w, top = (1 - tv.y) / 2 * h, e2 = tg.v * tg.v * (3 - 2 * tg.v);
       const half = Math.min(w / 2, tg.w / 2 + 12), x = Math.max(half, Math.min(w - half, sx)), drift = 10 * (1 - e2);
-      tg.d.style.opacity = e2.toFixed(3);
-      tg.d.style.transform = 'translate(' + x + 'px,' + (Math.max(top, minY + tg.h + 6) - 6 - drift) + 'px) translate(-50%,-100%)';
-      tg.d.style.filter = 'blur(' + ((1 - e2) * 4).toFixed(2) + 'px)';
+      const op = e2.toFixed(3), fl = e2 > 0.995 ? 'none' : 'blur(' + ((1 - e2) * 4).toFixed(2) + 'px)';
+      if (op !== tg.op) tg.d.style.opacity = tg.op = op;
+      if (fl !== tg.fl) tg.d.style.filter = tg.fl = fl;
+      const y = Math.max(top, minY + tg.h + 6) - 6 - drift;
+      tg.d.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%,-100%)';
+      boxes.push({ l: x - tg.w / 2, r: x + tg.w / 2, t: y - tg.h, b: y });
     });
+    /* all four names stand at once: where two would meet (long names, narrow screens), they all step down a size */
+    if (nameK > 0.55 && boxes.some((a, i) => boxes.some((c, j) => j > i && a.l < c.r + 14 && c.l < a.r + 14 && a.t < c.b && c.t < a.b))) nameK *= 0.94;
     renderer.render(scene, camera);
   };
   const frame = now => {
