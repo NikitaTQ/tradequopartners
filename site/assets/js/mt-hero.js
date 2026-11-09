@@ -323,8 +323,24 @@ function buildIB(M) {
   return g;
 }
 
+/* the points an object's name can stand on: its highest vertices in its own (spin) space, sampled once. On screen
+   the name goes on the highest of them, so it sits on what is drawn, not on a corner of the bounding box (which
+   for a tilted object is far above it) */
+function topPoints(obj) {
+  obj.updateMatrixWorld(true);
+  const inv = new THREE.Matrix4().copy(obj.matrixWorld).invert(), m4 = new THREE.Matrix4(), v = new THREE.Vector3(), pts = [];
+  obj.traverse((m) => {
+    const p = m.isMesh && m.geometry && m.geometry.attributes.position;
+    if (!p) return;
+    m4.multiplyMatrices(inv, m.matrixWorld);
+    for (let k = 0, s = Math.max(1, Math.floor(p.count / 600)); k < p.count; k += s) pts.push(v.fromBufferAttribute(p, k).applyMatrix4(m4).clone());
+  });
+  pts.sort((a, b) => b.y - a.y);
+  return pts.slice(0, 48);
+}
+
 const PRESETS = {
-  portrait: { fitW: 3.25, look: [0, -0.05, 0], scale: 0.84, pos: [[-0.72, 1.12, 0.1], [0.74, 0.62, -0.35], [-0.7, -0.62, 0.2], [0.72, -1.12, 0]] },
+  portrait: { fitW: 3.25, fitH: 5.25, look: [0, -0.12, 0], scale: 0.84, pos: [[-0.72, 1.12, 0.1], [0.74, 0.62, -0.35], [-0.7, -0.82, 0.2], [0.72, -1.3, 0]] },   /* the lower row a little lower: room for its names under the upper objects */
   landscape: { fitW: 8.7, look: [0, 0.05, 0], scale: 1.12, pos: [[-3.3, 0.35, 0], [-1.1, -0.1, -0.4], [1.12, 0.4, 0.1], [3.3, -0.12, 0]] },
 };
 
@@ -352,7 +368,7 @@ export function mount(el, opts = {}) {
     holder.add(bob); bob.add(spin); spin.add(fn(M, tall ? 0.6 : 1)); root.add(holder);
     const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: light ? THREE.NormalBlending : THREE.AdditiveBlending, opacity: 0.55 }));
     halo.position.set(0, -0.1, -0.7); halo.scale.set(2.6, 2.6, 1); holder.add(halo);
-    return { holder, bob, spin, halo, i };
+    return { holder, bob, spin, halo, i, tops: topPoints(spin) };
   });
   const N = 140, pg = new THREE.BufferGeometry(), pa = new Float32Array(N * 3), seeds = [];
   for (let i = 0; i < N; i++) { pa[i * 3] = (Math.random() - 0.5) * 9; pa[i * 3 + 1] = (Math.random() - 0.5) * 8; pa[i * 3 + 2] = (Math.random() - 0.5) * 4 - 1; seeds.push(Math.random() * 6.28); }
@@ -414,7 +430,9 @@ export function mount(el, opts = {}) {
     t += dt;
     px = damp(px, tx, dt, drag ? 10 : 2.5); py = damp(py, ty, dt, 2.5);
     const P = preset, wob = reduce ? 0 : 1;
-    const D = Math.max(7, P.fitW / (2 * Math.tan(15 * Math.PI / 180) * camera.aspect));
+    /* the camera stands back far enough for the layout's width and, on tall stages, its height with the names
+       above the top row (fitH): a squat phone stage keeps room over the first objects */
+    const tn = 2 * Math.tan(15 * Math.PI / 180), D = Math.max(7, P.fitW / (tn * camera.aspect), P.fitH ? P.fitH / tn : 0);
     camera.position.set(P.look[0] + px * 0.5, P.look[1] + 0.35 - py * 0.3, D); camera.lookAt(P.look[0], P.look[1], 0);
     root.rotation.y = px * 0.22;
     items.forEach((it, i) => {
@@ -443,8 +461,12 @@ export function mount(el, opts = {}) {
       if (tg.fs !== fs) { tg.t.style.fontSize = fs + 'px'; tg.fs = fs; tg.w = 0; }
       if (!tg.w) { tg.w = tg.d.offsetWidth; tg.h = tg.d.offsetHeight; }
       box.setFromObject(it.spin); box.getCenter(c0);
-      tv.copy(c0).setY(box.max.y).project(camera);
-      const sx = (tv.x + 1) / 2 * w, top = (1 - tv.y) / 2 * h, e2 = tg.v * tg.v * (3 - 2 * tg.v);
+      tv.copy(c0).project(camera);
+      const sx = (tv.x + 1) / 2 * w, e2 = tg.v * tg.v * (3 - 2 * tg.v);
+      let ny = -1;
+      for (const p of it.tops) { tv.copy(p).applyMatrix4(it.spin.matrixWorld).project(camera); if (tv.y > ny) ny = tv.y; }
+      const top = (1 - ny) / 2 * h;
+      tg.ot = top;
       const half = Math.min(w / 2, tg.w / 2 + 12), x = Math.max(half, Math.min(w - half, sx)), drift = 10 * (1 - e2);
       const op = e2.toFixed(3), fl = e2 > 0.995 ? 'none' : 'blur(' + ((1 - e2) * 4).toFixed(2) + 'px)';
       if (op !== tg.op) tg.d.style.opacity = tg.op = op;
@@ -452,6 +474,7 @@ export function mount(el, opts = {}) {
       const y = Math.max(top, minY + tg.h + 6) - 6 - drift;
       tg.d.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%,-100%)';
       boxes.push({ l: x - tg.w / 2, r: x + tg.w / 2, t: y - tg.h, b: y });
+      tg.box = boxes[boxes.length - 1];
     });
     /* all four names stand at once: where two would meet (long names, narrow screens), they all step down a size.
        Judged only with the objects landed and the scene at rest (not mid pop-in, not turned by the mouse), so the
@@ -467,7 +490,14 @@ export function mount(el, opts = {}) {
     step(dt);
   };
   raf = requestAnimationFrame(frame);
-  return { show(i) { hover = i; }, snap(sec) { resize(); for (let k = 0; k < sec * 30; k++) step(1 / 30); return cv; }, destroy() { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); removeEventListener('pointerup', onUp); renderer.dispose(); cv.remove(); overlay.remove(); } };
+  /* where the names and the objects stand (stage px): each name's box, its object's top and screen box */
+  const layout = () => items.map((it, i) => {
+    box.setFromObject(it.spin);
+    const xs = [], ys = [];
+    for (let k = 0; k < 8; k++) { tv.set(k & 1 ? box.max.x : box.min.x, k & 2 ? box.max.y : box.min.y, k & 4 ? box.max.z : box.min.z).project(camera); xs.push((tv.x + 1) / 2 * w); ys.push((1 - tv.y) / 2 * h); }
+    return { name: tags[i].box, top: tags[i].ot, obj: { l: Math.min(...xs), r: Math.max(...xs), t: Math.min(...ys), b: Math.max(...ys) } };
+  });
+  return { layout, show(i) { hover = i; }, snap(sec) { resize(); for (let k = 0; k < sec * 30; k++) step(1 / 30); return cv; }, destroy() { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); removeEventListener('pointerup', onUp); renderer.dispose(); cv.remove(); overlay.remove(); } };
 }
 
 const stage = document.querySelector('[data-mt-stage]');
