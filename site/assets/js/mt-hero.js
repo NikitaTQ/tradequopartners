@@ -392,8 +392,8 @@ export function mount(el, opts = {}) {
   const tags = LABELS.map((txt, i) => {
     const d = document.createElement('div');
     d.style.cssText = 'position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0;white-space:nowrap;will-change:transform,opacity;';
-    d.innerHTML = '<span style="font-family:\'Fragment Mono\',monospace;font-size:11px;letter-spacing:0.22em;color:#E7131B;">0' + (i + 1) + '</span>' +
-      '<span data-t style="font-family:\'DM Sans\',system-ui,sans-serif;font-weight:760;letter-spacing:-0.022em;line-height:1.05;padding:0 .06em .2em;margin:0 -.06em -.2em;background:' + (light ? 'linear-gradient(180deg,#3A3A40 0%,#0A0A0B 40%,#55555C 62%,#1A1A1E 82%,#0A0A0B 100%)' : 'linear-gradient(180deg,#FFFFFF 0%,#F3F3F6 36%,#BDBDC4 60%,#E2E2E7 80%,#FFFFFF 100%)') + ';-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px ' + (light ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.75)') + ');">' + txt + '</span>' +
+    d.innerHTML = '<span style="font-family:\'Inter\',sans-serif;font-size:11px;letter-spacing:0.22em;color:#E7131B;">0' + (i + 1) + '</span>' +
+      '<span data-t style="font-family:\'Inter\',system-ui,sans-serif;font-weight:760;letter-spacing:-0.022em;line-height:1.05;padding:0 .06em .2em;margin:0 -.06em -.2em;background:' + (light ? 'linear-gradient(180deg,#3A3A40 0%,#0A0A0B 40%,#55555C 62%,#1A1A1E 82%,#0A0A0B 100%)' : 'linear-gradient(180deg,#FFFFFF 0%,#F3F3F6 36%,#BDBDC4 60%,#E2E2E7 80%,#FFFFFF 100%)') + ';-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px ' + (light ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.75)') + ');">' + txt + '</span>' +
       '<span style="width:1px;height:18px;background:' + (light ? 'linear-gradient(180deg,rgba(10,10,11,0.45),rgba(10,10,11,0))' : 'linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0))') + ';"></span>';
     d.setAttribute('aria-hidden', 'true');
     overlay.appendChild(d); return { d, t: d.querySelector('[data-t]'), k: 0, v: 0, w: 0, h: 0, fs: 0, op: '', fl: '' };

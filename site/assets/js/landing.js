@@ -1044,19 +1044,6 @@
     }));
   }
 
-  /* ---- liquid CTA under the calculator: the pill tilts toward the pointer ---------------- */
-  function startLiquidCta() {
-    if (!matchMedia('(hover: hover) and (pointer: fine)').matches || reducedMotion()) return;
-    $$('.tq-liq').forEach((el) => {
-      el.addEventListener('pointermove', (e) => {
-        const r = el.getBoundingClientRect();
-        el.style.setProperty('--lqx', (((e.clientX - r.left) / r.width - 0.5) * 22).toFixed(2));
-        el.style.setProperty('--lqy', ((0.5 - (e.clientY - r.top) / r.height) * 16).toFixed(2));
-      });
-      el.addEventListener('pointerleave', () => { el.style.setProperty('--lqx', '0'); el.style.setProperty('--lqy', '0'); });
-    });
-  }
-
   /* ---- phone: country code -------------------------------------------------------------
    * A native <select> lies invisibly over the flag and the code, so every phone gets its own picker.
    * The list: every country with its calling code (from libphonenumber-js), named in the page
@@ -1098,7 +1085,8 @@
     const base = flag.getAttribute('src').replace(/[a-z]{2}\.svg(\?.*)?$/, '');
     const show = () => {
       const [iso, dial] = sel.value.split(' ');
-      flag.src = base + iso.toLowerCase() + '.svg';
+      const src = base + iso.toLowerCase() + '.svg';
+      if (!flag.getAttribute('src').startsWith(src)) flag.src = src;   /* the page's own flag (with ?v=) is not fetched twice */
       code.textContent = dial;
       if (num && example[iso]) num.placeholder = example[iso];
     };
@@ -1308,7 +1296,6 @@
   startLiveDash();
   startSteppers();
   startGlass();
-  startLiquidCta();
   startReviewsDrag();
   startTwoLine();
   startLang();

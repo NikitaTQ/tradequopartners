@@ -40,12 +40,12 @@ def render(i, p):
     nav = '\n          '.join(nav_link(q, p['slug']) for q in LIVE + pages)
     rows = '\n'.join('''            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 15px 0; border-top: 1px solid rgba(150,156,165,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.9);">
               <span style="font-size: 14px; color: #5b5b5b;">{label}</span>
-              <span style="display: flex; align-items: baseline; gap: 10px;"><span style="font-size: 24px; font-weight: 700; letter-spacing: -.035em; color: #0a0a0a;">{value}</span><span style="font-family: 'Fragment Mono', monospace; font-size: 10.5px; color: #9a9da3; white-space: nowrap;">{note}</span></span>
+              <span style="display: flex; align-items: baseline; gap: 10px;"><span style="font-size: 24px; font-weight: 700; letter-spacing: -.035em; color: #0a0a0a;">{value}</span><span style="font-family: 'Inter', sans-serif; font-size: 10.5px; color: #9a9da3; white-space: nowrap;">{note}</span></span>
             </div>'''.format(label=e(r['label']), value=e(r['value']), note=e(r['note'])) for r in p['rows'])
     sections = '\n'.join('''          <div class="hv-glass-glow" style="position: relative; isolation: isolate; display: flex; flex-direction: column; gap: 10px; min-height: 196px; padding: 24px 24px 22px; border-radius: 14px; background: linear-gradient(200deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 40%), linear-gradient(112deg, rgba(255,255,255,0) 54%, rgba(226,228,232,.42) 54.2%, rgba(238,240,243,.22) 76%, rgba(255,255,255,0) 76.2%), linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(244,245,247,.3) 100%); box-shadow: 0 1px 2px rgba(10,10,10,.05), 0 16px 32px -24px rgba(10,10,10,.24); transition: box-shadow .3s ease;">
             <span aria-hidden="true" style="position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #ffffff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #ffffff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #ffffff 330deg, #ffffff 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;"></span>
             <span aria-hidden="true" style="position: absolute; inset: 3px; z-index: -1; border-radius: 11px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 6px 14px -10px rgba(10,10,10,.14); pointer-events: none;"></span>
-            <span style="font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #e7131b;">{n}</span>
+            <span style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b;">{n}</span>
             <h2 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -.025em; line-height: 1.15; text-wrap: balance;">{title}</h2>
             <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">{desc}</p>
           </div>'''.format(n='%02d' % (k + 1), title=e(s['title']), desc=e(s['desc'])) for k, s in enumerate(p['sections']))
@@ -77,8 +77,8 @@ def render(i, p):
 <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <script>try{{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}}catch(e){{}}</script>
-<link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css" data-inline>
 </head>
 <body>
 <div class="tq-loader" data-loader hidden>
@@ -93,7 +93,7 @@ def render(i, p):
   </svg>
   <span class="tq-loader__label" data-loader-label>LOADING</span>
 </div>
-<div style="min-height: 100vh; background: #fff; color: #0a0a0a; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased;">
+<div style="min-height: 100vh; background: #fff; color: #0a0a0a; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased;">
   <header data-page-bar style="position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px clamp(16px, 4vw, 56px); background: rgba(255,255,255,.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #ececee;">
     <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" style="display: inline-flex; flex-shrink: 0;"><img src="../assets/logo-wordmark-dark.png" alt="TradeQuo Partner Program" style="height: 21px; width: auto;"></a>
     <nav aria-label="Partner Program pages" style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; justify-content: center;">
@@ -105,7 +105,7 @@ def render(i, p):
       Back
     </a>
   </header>
-  <div style="display: flex; align-items: center; justify-content: center; gap: 14px; padding: 9px clamp(16px, 4vw, 56px); background: #fafafa; border-bottom: 1px solid #ececee; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .12em; color: #6b6e74; text-align: center;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 14px; padding: 9px clamp(16px, 4vw, 56px); background: #fafafa; border-bottom: 1px solid #ececee; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .12em; color: #6b6e74; text-align: center;">
     <span style="width: 6px; height: 6px; border-radius: 50%; background: #e7131b; flex-shrink: 0;"></span>
     <span>CONCEPT PREVIEW · PAGE {num} / {total:02d} · COPY AND LAYOUT ARE PLACEHOLDERS · PLANNED Q1 2027</span>
   </div>
@@ -115,7 +115,7 @@ def render(i, p):
       <div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(10,10,10,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,10,.07) 1px, transparent 1px); background-size: 64px 64px; opacity: .35; mask-image: radial-gradient(ellipse 60% 70% at 70% 40%, #000 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 60% 70% at 70% 40%, #000 0%, transparent 75%);"></div>
       <div style="position: relative; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: clamp(28px, 5vw, 72px); align-items: center;" data-page-hero>
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 22px;">
-          <span style="display: inline-flex; align-items: center; gap: 10px; font-family: 'Fragment Mono', monospace; font-size: 12px; letter-spacing: .16em; color: #e7131b;">{num} / {total:02d}<span style="width: 22px; height: 1px; background: #c9cbd0;"></span><span style="color: #6b6e74;">{kicker}</span></span>
+          <span style="display: inline-flex; align-items: center; gap: 10px; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: .16em; color: #e7131b;">{num} / {total:02d}<span style="width: 22px; height: 1px; background: #c9cbd0;"></span><span style="color: #6b6e74;">{kicker}</span></span>
           <h1 style="margin: 0; font-size: clamp(24px, 2.8vw, 38px); line-height: 1; letter-spacing: -.045em; font-weight: 700; text-wrap: balance; max-width: 13ch;">{h1}</h1>
           <p style="margin: 0; max-width: 56ch; font-size: 14px; line-height: 1.55; color: #5b5b5b; text-wrap: pretty;">{sub}</p>
           <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px;">
@@ -128,7 +128,7 @@ def render(i, p):
           <span aria-hidden="true" style="position: absolute; inset: 3px; z-index: -1; border-radius: 21px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.26), inset 0 6px 14px -10px rgba(10,10,10,.14); pointer-events: none;"></span>
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 14px;">
             <span style="font-size: 13px; font-weight: 600; letter-spacing: -.01em; color: #0a0a0a;">{card_title}</span>
-            <span style="font-family: 'Fragment Mono', monospace; font-size: 10.5px; letter-spacing: .14em; color: #9a9da3;">PREVIEW</span>
+            <span style="font-family: 'Inter', sans-serif; font-size: 10.5px; letter-spacing: .14em; color: #9a9da3;">PREVIEW</span>
           </div>
 {rows}
         </div>
@@ -145,7 +145,7 @@ def render(i, p):
   <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 56px) clamp(48px, 6vw, 80px);">
     <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" class="hv-red" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 4px; border: 0; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">← Back to Partner Program</a>
     <a href="../{next_slug}/" data-page-link data-label="LOADING · {next_label}" class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">
-      <span style="font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: .14em; color: #e7131b;">NEXT</span>{next_title}
+      <span style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b;">NEXT</span>{next_title}
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
     </a>
   </div>
