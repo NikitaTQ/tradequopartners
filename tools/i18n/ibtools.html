@@ -146,15 +146,20 @@
           <div class="tq-ibn__text">
             <h2 class="tq-ibn__h2 tq-h2" data-fitw><span>{{ib.net.t1}}</span> <span>{{ib.net.t2}}</span></h2>
             <p class="tq-ibx__lead">{{ib.net.lead}}</p>
+            <p class="tq-ibx__lead tq-ibn__lead-m">{{ib.net.leadm}}</p>
             <p class="tq-ibx__sub">{{ib.net.sub}}</p>
             <div class="tq-ibx__ctas">
               <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.net.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
               <a class="tq-ibx__how" href="#sib-pillars">{{nav.how}}</a>
+              <a class="tq-ibn__q" href="#flow" aria-label="{{nav.how}}">?</a>
             </div>
           </div>
           <div class="tq-ibn__fig">
             <div class="tq-ibn__stage" dir="ltr">
 {{> ib-net-svg}}
+            </div>
+            <div class="tq-ibn__stage tq-ibn__stage--m" dir="ltr">
+{{> ib-net-svg-m}}
             </div>
           </div>
         </div>

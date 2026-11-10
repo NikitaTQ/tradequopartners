@@ -34,6 +34,7 @@
   "ib.net.t1": "Toda tu red.",
   "ib.net.t2": "Activa en <red>2 horas.</red>",
   "ib.net.lead": "Trae a cada Sub-IB y a cada cliente referido de una sola vez, sin importar la profundidad de tu estructura.",
+  "ib.net.leadm": "Cada Sub-IB y cada cliente referido, traídos de una sola vez.",
   "ib.net.sub": "Nuestro equipo mapea tu red nivel por nivel y te la entrega activa en IB Desk. Revisas, apruebas y empiezas a hacer el seguimiento el mismo día.",
   "ib.net.go": "Reservar el onboarding",
   "ib.net.p1t": "Niveles ilimitados",
