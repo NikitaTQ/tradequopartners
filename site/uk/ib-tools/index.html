@@ -2142,14 +2142,10 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibx__wrap { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(40px, 7vw, 88px) clamp(20px, 5.5vw, 80px); box-sizing: border-box;
   display: flex; flex-wrap: wrap; align-items: center; gap: clamp(28px, 4vw, 56px); }
 .tq-ibx__text { flex: 1 1 400px; max-width: 520px; min-width: 0; display: flex; flex-direction: column; gap: clamp(18px, 2.4vw, 28px); position: relative; z-index: 3; }
-.tq-ibx__kick { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: #55585f; }
-.tq-ibx__badge { font-size: 11px; line-height: 1; letter-spacing: 0; padding: 4px 6px; border-radius: 6px; background: #e7131b; color: #fff; font-weight: 500; }
-:lang(ar) .tq-ibx__kick, :lang(th) .tq-ibx__kick, :lang(ja) .tq-ibx__kick, :lang(ko) .tq-ibx__kick, :lang(zh) .tq-ibx__kick { letter-spacing: .04em; }
 .tq-ibx__h1 { --h1s: clamp(30px, 4vw, 54px); margin: 0; line-height: 1.1; letter-spacing: normal; padding-inline-start: 0; }   
 :lang(ar) .tq-ibx__h1, :lang(th) .tq-ibx__h1, :lang(ja) .tq-ibx__h1, :lang(ko) .tq-ibx__h1, :lang(zh) .tq-ibx__h1 { --h1k: 1.15; }
 .tq-ibx__h1 > span { display: block; }
 :lang(ja) .tq-ibx__h1 > span { word-break: auto-phrase; }   
-.tq-ibx__kick > span:last-child { text-wrap: balance; }
 .tq-ibx__red { color: #e7131b; }
 .tq-ibx__lead { margin: 0; max-width: 470px; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.45; font-weight: 700; letter-spacing: -.01em; text-wrap: pretty; }
 .tq-ibx__sub { margin: -6px 0 0; max-width: 460px; font-size: 15px; line-height: 1.6; color: #55585f; text-wrap: pretty; }
@@ -2183,29 +2179,23 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibx__pill b { font-size: 11px; font-weight: 500; color: #e7131b; font-variant-numeric: tabular-nums; }
 .tq-ibx__pill--dark { background: #0a0a0a; border-color: #0a0a0a; color: #fff; }
 .tq-ibx__pill--dark b { color: #ff4148; }
-.tq-ibx__chips { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); list-style: none; }
 @media (max-width: 640px) {
   .tq-ibx__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 16px; padding-top: 18px; padding-bottom: 40px; }
   .tq-ibx__text { display: contents; }
-  .tq-ibx__kick { order: 1; }
   .tq-ibx__h1 { order: 2; }
   .tq-ibx__col { order: 3; }
   .tq-ibx__ctas { order: 4; flex-direction: column; gap: 10px; padding-top: 0; }
   .tq-ibx__lead { order: 5; padding-top: 6px; }
   .tq-ibx__sub { order: 6; margin-top: -4px; }
-  .tq-ibx__chips { order: 7; }
   .tq-ibx__go { justify-content: space-between; }
   .tq-ibx__how { justify-content: center; }
   .tq-ibx__col--lot { --sw: 855; flex: none; margin-inline: calc(-1 * clamp(20px, 5.5vw, 80px)); }
   .tq-ibx__col--lot .tq-ibx__stage { height: calc(550px * var(--s)); }
   .tq-ibx__col--lot .tq-ibx__scene { left: calc(-45px * var(--s)); top: calc(-70px * var(--s)); }
   .tq-ibx__callouts { display: none; }
-  .tq-ibx__chips { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip-path: none; display: flex; flex-wrap: wrap; gap: 8px; }
-  .tq-ibx__chips .tq-ibx__pill { height: 34px; padding: 0 13px; gap: 8px; font-size: 12.5px; box-shadow: 0 10px 18px -14px rgba(18,22,30,.45); }
 }
 @media (max-width: 640px) and (max-height: 600px) {   
   .tq-ibx__wrap { gap: 10px; padding-top: 10px; }
-  .tq-ibx__kick { display: none; }
   .tq-ibx__h1 { --h1s: 24px; }
 }
 @media (max-width: 640px) { .tq-ibx { min-height: 0; } }
@@ -2247,13 +2237,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
          dashboard (illustrative data) on a 920x660 stage scaled to its column (--s, set by the script after it: the
          column's width / 920, at most 1.12), with five numbered callouts naming the tools. Phones (up to 640px): the title,
          then the dashboard across the screen (the stage cropped to it), then the buttons, all in the first screen; the
-         lead, the sub line and the tools as a row of chips below. A sheen crosses the two big panes every 7 s
+         lead and the sub line below (no callouts there). A sheen crosses the two big panes every 7 s
          (not with reduced motion). The dashboard is product UI: English in every language; the callouts are translated.
          The previous heroes (the devices film; the creators dashboard) are in the git history. -->
     <section id="desk" class="tq-ibx" data-screen-label="IB Tools hero · Every lot">
       <div class="tq-ibx__wrap">
         <div class="tq-ibx__text">
-          <div class="tq-ibx__kick"><span class="tq-ibx__badge">IB</span><span>Інструменти IB · для партнерів</span></div>
           <h1 class="tq-ibx__h1 tq-h1" data-fitw><span>Кожен лот.</span> <span>Кожен рівень.</span> <span class="tq-ibx__red">Одна панель.</span></h1>
           <p class="tq-ibx__lead">Відстежуйте ребейти за кожен лот, помічайте клієнтів, які перестали торгувати, розбивайте обсяг за інструментами та розподіляйте кожен рівень Sub-IB.</p>
           <p class="tq-ibx__sub">Дані в реальному часі, а не звіти наприкінці місяця, — і ШІ, який підкаже, з чого почати.</p>
@@ -2261,13 +2250,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
             <a class="tq-ibx__go" href="../#signup" data-page-link data-label="ЗАВАНТАЖЕННЯ · Головна"><span>Отримати доступ</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             <a class="tq-ibx__how" href="#ib-tools">Огляд інструментів IB</a>
           </div>
-          <ol class="tq-ibx__chips">
-            <li class="tq-ibx__pill"><b>01</b>Ребейти за лот</li>
-            <li class="tq-ibx__pill"><b>02</b>Відтік і активність</li>
-            <li class="tq-ibx__pill"><b>03</b>Обсяг за інструментами</li>
-            <li class="tq-ibx__pill"><b>04</b>Багаторівневі Sub-IB</li>
-            <li class="tq-ibx__pill tq-ibx__pill--dark"><b>05</b>Аналітика ШІ</li>
-          </ol>
         </div>
 
         <div class="tq-ibx__col tq-ibx__col--lot" id="ib-tools">
