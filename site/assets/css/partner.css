@@ -1281,3 +1281,27 @@
 
 /* figures standing alone (step numbers, prices, the big $0 / 87%): tabular, the site's rule for numbers in Inter */
 .pf-perk__n, .pf-g-red, .pf-g-silver, .tp-tv__zero, .tp-tv__val, .tp-ig__n, .tp-pds__n { font-variant-numeric: tabular-nums; }
+
+/* IB Tools hero (IB_Tools_Devices_Film): the 1920x1080 scene of assets/js/ib-film.js on a light grey screen. The grey
+   is the hero's (the scene has none of its own, so its scaled box never shows an edge): white under the header, the
+   scene's #e9eaec, white again at the foot where the footer begins. The captions lie over it at the foot, in the
+   heading face (.tq-h2), with the brand line under the last one. */
+.tq-ibh { position: relative; width: 100%; height: calc(100vh - 88px); height: calc(100svh - 88px); min-height: 560px; max-height: 980px; overflow: hidden; color: #0a0a0a;
+  background: linear-gradient(180deg, #fff 0, #e9eaec 120px, #e9eaec calc(100% - 120px), #fff 100%); }
+.tq-ibh__film, .tq-ibh__box { position: absolute; inset: 0; }
+.tq-ibh__scene { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; pointer-events: none; }
+.tq-ibh__box.is-tall .tq-ibh__scene { top: 44%; }
+/* landscape: where the design has them and at its sizes, scaled with the scene (--k, set by the film), so they keep
+   clear of the devices; tall screens: under the devices, at sizes of their own */
+.tq-ibh__cap { position: absolute; left: 16px; right: 16px; bottom: calc(52px * var(--k, 1)); display: flex; flex-direction: column; align-items: center; gap: calc(12px * var(--k, 1));
+  text-align: center; pointer-events: none; will-change: opacity, transform; }
+.tq-ibh__line { --h2s: max(13px, calc(26px * var(--k, 1))); max-width: min(100%, 1100px); margin: 0; letter-spacing: .03em; padding-inline-start: .03em; color: #0a0a0a; }
+.tq-ibh__line.is-sub { --h2s: max(16px, calc(34px * var(--k, 1))); }
+.tq-ibh__s { display: inline-block; }
+.tq-ibh__dot { color: #e7131b; }
+.tq-ibh__brand { font-size: max(12px, calc(14px * var(--k, 1))); line-height: 1.2; letter-spacing: .12em; text-transform: uppercase; color: #6b6e75; font-variant-numeric: tabular-nums; }
+.tq-ibh__box.is-tall .tq-ibh__cap { bottom: clamp(36px, 9svh, 96px); gap: 12px; }
+.tq-ibh__box.is-tall .tq-ibh__line { --h2s: clamp(15px, 2.4vw, 22px); }
+.tq-ibh__box.is-tall .tq-ibh__line.is-sub { --h2s: clamp(19px, 3vw, 28px); }
+.tq-ibh__box.is-tall .tq-ibh__brand { font-size: 12px; }
+@media (max-width: 640px) { .tq-ibh { height: calc(100vh - 84px); height: calc(100svh - 84px); } }

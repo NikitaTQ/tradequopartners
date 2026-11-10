@@ -11,7 +11,7 @@ NUM = re.compile(r'\$?\d[\d,.:]*\+?%?')
 def width(s):  # East-Asian wide chars count double
     return sum(2 if unicodedata.east_asian_width(c) in 'WF' else 1 for c in TOK.sub('', s))
 bad = 0
-for sub in ('', 'programs', 'commission', 'marketing'):
+for sub in ('', 'programs', 'commission', 'marketing', 'ibtools'):
   D = os.path.join(BASE, sub)
   en = json.load(open(os.path.join(D, 'en.json'), encoding='utf-8'))
   for f in sorted(os.listdir(D)):

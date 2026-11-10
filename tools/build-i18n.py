@@ -33,6 +33,9 @@ PAGES = [
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
     {'id': 'marketing', 'template': 'marketing.html', 'slug': 'partner-tools', 'css': 'partner'},   # was marketing-tools (netlify.toml redirects)
+    # IB Tools: the hero only for now; not in NAV yet, no table of contents (fan, FAB); its display text is the
+    # captions (tq-h2), so the page preloads the H2 face instead of the H1 one
+    {'id': 'ibtools', 'template': 'ibtools.html', 'slug': 'ib-tools', 'css': 'partner', 'display': 'h2'},
 ]
 # The site navigation in the header: the four pages, in this order (page id, path under the language root, label).
 NAV = [
@@ -131,8 +134,8 @@ H1_FACE = {'uk': 'unbounded', 'vi': 'unbounded', 'ro': 'unbounded', 'ar': 'reem-
            'ko': 'black-han-sans', 'zh-hans': 'zcool-qingke-sc', 'zh-hant': 'noto-sans-tc'}
 
 
-def h1_preload(code, root):
-    return '\n<link rel="preload" href="%sassets/fonts/h1/%s.woff2" as="font" type="font/woff2" crossorigin>' % (root, H1_FACE.get(code, 'syncopate'))
+def h1_preload(code, root, suffix=''):
+    return '\n<link rel="preload" href="%sassets/fonts/h1/%s%s.woff2" as="font" type="font/woff2" crossorigin>' % (root, H1_FACE.get(code, 'syncopate'), suffix)
 
 
 def font_css(script, root):
@@ -214,7 +217,7 @@ def switcher(cur, s, slug='', page_id='landing', home=''):
 
 def fan_menu(page_id):
     """Veil + fan of this page's sections + knob (partials/fan.html, fan-blade.html): its table of contents."""
-    toc = TOC[page_id]
+    toc = TOC.get(page_id, ())
     blades = []
     for i, (sid, key) in enumerate(toc):
         blades.append(partials['fan-blade']
@@ -242,7 +245,7 @@ def site_nav(home, page_id):
 def fab_links(page_id):
     """Below 1140px: the red menu bottom right is this page's table of contents (the pages are in the header menu)."""
     return '\n      '.join('<a class="tq-fab-link" href="#%s" data-toc-link style="--i: %d;">{{%s}}</a>' % (sid, i, key)
-                           for i, (sid, key) in enumerate(TOC[page_id]))
+                           for i, (sid, key) in enumerate(TOC.get(page_id, ())))
 
 
 FAQ_MACRO = re.compile(r'\{\{faq:([A-Za-z0-9_.-]+):(\d+)\}\}')
@@ -301,7 +304,7 @@ for page in PAGES:
         system = {
             'lang': lang.get('html', code), 'code': code, 'dir': lang.get('dir', 'ltr'), 'root': root, 'home': home or './',
             'canonical': url_of(lang, slug), 'hreflang': hreflang, 'ogLocale': lang['ogLocale'],
-            'fontFaces': faces, 'fontPreload': preload + h1_preload(lang['code'], root), 'langSwitcher': switcher(lang, s, slug, page['id'], home),
+            'fontFaces': faces, 'fontPreload': preload + h1_preload(lang['code'], root, '-h2' if page.get('display') == 'h2' else ''), 'langSwitcher': switcher(lang, s, slug, page['id'], home),
             'embedQuery': '' if code == 'en' else '?lang=' + code,
             # "become a partner" links in shared blocks: scroll to the form on the landing, go to it elsewhere
             'signupHref': (home + '#signup') if slug else '#signup',
