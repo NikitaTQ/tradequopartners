@@ -33,8 +33,9 @@
   <main>
     <!-- Hero (IB_Tools_Hero_Every_Lot design): static. Left the pitch for partners and two buttons, right the IB Desk
          dashboard (illustrative data) on a 920x660 stage scaled to its column (--s, set by the script after it: the
-         column's width / 920, at most 1.12), with five numbered callouts naming the tools; where the column is narrower
-         than 600px the callouts give way to a row of chips under the stage. A sheen crosses the two big panes every 7 s
+         column's width / 920, at most 1.12), with five numbered callouts naming the tools. Phones (up to 640px): the title,
+         then the dashboard across the screen (the stage cropped to it), then the buttons, all in the first screen; the
+         lead, the sub line and the tools as a row of chips below. A sheen crosses the two big panes every 7 s
          (not with reduced motion). The dashboard is product UI: English in every language; the callouts are translated.
          The previous heroes (the devices film; the creators dashboard) are in the git history. -->
     <section id="desk" class="tq-ibx" data-screen-label="IB Tools hero · Every lot">
@@ -48,6 +49,13 @@
             <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.lot.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             <a class="tq-ibx__how" href="#ib-tools">{{ib.lot.explore}}</a>
           </div>
+          <ol class="tq-ibx__chips">
+            <li class="tq-ibx__pill"><b>01</b>{{ib.tool.1}}</li>
+            <li class="tq-ibx__pill"><b>02</b>{{ib.tool.2}}</li>
+            <li class="tq-ibx__pill"><b>03</b>{{ib.tool.3}}</li>
+            <li class="tq-ibx__pill"><b>04</b>{{ib.tool.4}}</li>
+            <li class="tq-ibx__pill tq-ibx__pill--dark"><b>05</b>{{ib.tool.5}}</li>
+          </ol>
         </div>
 
         <div class="tq-ibx__col tq-ibx__col--lot" id="ib-tools">
@@ -130,16 +138,9 @@
               </div>
             </div>
           </div>
-          <ol class="tq-ibx__chips">
-            <li class="tq-ibx__pill"><b>01</b>{{ib.tool.1}}</li>
-            <li class="tq-ibx__pill"><b>02</b>{{ib.tool.2}}</li>
-            <li class="tq-ibx__pill"><b>03</b>{{ib.tool.3}}</li>
-            <li class="tq-ibx__pill"><b>04</b>{{ib.tool.4}}</li>
-            <li class="tq-ibx__pill tq-ibx__pill--dark"><b>05</b>{{ib.tool.5}}</li>
-          </ol>
         </div>
-        <script>/* the stage at its column's width (design: 920 px wide, at most 1.12x); set before the first paint */
-(function(){var c=document.currentScript.previousElementSibling,f=function(){c.style.setProperty('--s',Math.min(1.12,c.clientWidth/920).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
+        <script>/* the stage at its column's width (design: 920 px wide, at most 1.12x; phones: the 855 px around the dashboard); set before the first paint */
+(function(){var c=document.currentScript.previousElementSibling,f=function(){var d=parseFloat(getComputedStyle(c).getPropertyValue('--sw'))||920;c.style.setProperty('--s',Math.min(1.12,c.clientWidth/d).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
       </div>
     </section>
   </main>
