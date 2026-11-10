@@ -27,5 +27,8 @@
   "ib.tool.2": "Churn & aktivitas",
   "ib.tool.3": "Volume per instrumen",
   "ib.tool.4": "Sub-IB multi-tingkat",
-  "ib.tool.5": "Insight AI"
+  "ib.tool.5": "Insight AI",
+  "ib.hole.s1": "Tarikan",
+  "ib.hole.s2": "Setiap lot",
+  "ib.hole.s3": "Setiap tingkat"
 }

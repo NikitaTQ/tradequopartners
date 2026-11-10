@@ -27,5 +27,8 @@
   "ib.tool.2": "Odpływ i aktywność",
   "ib.tool.3": "Obrót wg instrumentu",
   "ib.tool.4": "Wielopoziomowe Sub-IB",
-  "ib.tool.5": "Wnioski AI"
+  "ib.tool.5": "Wnioski AI",
+  "ib.hole.s1": "Przyciąganie",
+  "ib.hole.s2": "Każdy lot",
+  "ib.hole.s3": "Każdy poziom"
 }

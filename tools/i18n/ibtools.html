@@ -135,6 +135,21 @@
 (function(){var c=document.currentScript.previousElementSibling,f=function(){var d=parseFloat(getComputedStyle(c).getPropertyValue('--sw'))||920;c.style.setProperty('--s',Math.min(1.12,c.clientWidth/d).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
       </div>
     </section>
+
+    <!-- Black hole (IB_Tools_Black_Hole_Obsidian design): assets/js/ib-hole.js draws it on the canvas. Event chips fall
+         into an obsidian black hole, crystals stack into volume-by-lot bars, regroup into the Sub-IB tree and drain back;
+         the HUD follows the three steps. The canvas text (chips, captions) is product UI, English; the steps are the
+         page's text. -->
+    <section id="flow" class="tq-ibb" data-ib-hole aria-label="{{@ib.hole.s1}} · {{@ib.hole.s2}} · {{@ib.hole.s3}}" data-screen-label="IB Tools · Black hole">
+      <canvas class="tq-ibb__cv" dir="ltr" aria-hidden="true"></canvas>
+      <div class="tq-ibb__hud">
+        <ol class="tq-ibb__tabs">
+          <li class="tq-ibb__tab is-on" data-ib-hole-tab><b>01</b><span>{{ib.hole.s1}}</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>02</b><span>{{ib.hole.s2}}</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>03</b><span>{{ib.hole.s3}}</span><i><i data-ib-hole-fill></i></i></li>
+        </ol>
+      </div>
+    </section>
   </main>
 
 {{> footer}}
@@ -142,5 +157,6 @@
 
 <script src="{{root}}assets/js/transition.js" defer></script>
 <script src="{{root}}assets/js/landing.js" defer></script>
+<script src="{{root}}assets/js/ib-hole.js" defer></script>
 </body>
 </html>

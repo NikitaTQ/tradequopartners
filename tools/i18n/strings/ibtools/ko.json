@@ -27,5 +27,8 @@
   "ib.tool.2": "이탈 및 활동",
   "ib.tool.3": "상품별 거래량",
   "ib.tool.4": "다단계 서브 IB",
-  "ib.tool.5": "AI 인사이트"
+  "ib.tool.5": "AI 인사이트",
+  "ib.hole.s1": "끌어당김",
+  "ib.hole.s2": "모든 랏",
+  "ib.hole.s3": "모든 단계"
 }

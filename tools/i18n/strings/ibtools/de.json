@@ -27,5 +27,8 @@
   "ib.tool.2": "Abwanderung & Aktivität",
   "ib.tool.3": "Volumen nach Instrument",
   "ib.tool.4": "Mehrstufige Sub-IBs",
-  "ib.tool.5": "KI-Einblicke"
+  "ib.tool.5": "KI-Einblicke",
+  "ib.hole.s1": "Sog",
+  "ib.hole.s2": "Jedes Lot",
+  "ib.hole.s3": "Jede Stufe"
 }
