@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "Instrumente IB · pentru creatori — Publicul tău. Panoul tău. | TradeQuo",
-  "ib.meta.description": "Distribuie un singur link și vezi pe toți cei care se alătură prin el — clicuri, înregistrări și câștigurile tale într-un singur panou simplu. Nu ai nevoie de experiență în trading.",
-  "ib.meta.ogDescription": "Distribuie un singur link și vezi pe toți cei care se alătură prin el — clicuri, înregistrări și câștigurile tale într-un singur panou simplu.",
+  "ib.meta.title": "Instrumente IB · pentru parteneri — Fiecare lot. Fiecare nivel. Un singur panou. | TradeQuo",
+  "ib.meta.description": "Urmărește comisioanele pe lot, identifică clienții care au încetat să tranzacționeze, defalcă volumul pe instrumente și atribuie fiecare nivel de Sub-IB. Date în timp real, nu extrase de la final de lună — și AI care îți spune unde să acționezi mai întâi.",
+  "ib.meta.ogDescription": "Urmărește comisioanele pe lot, identifică clienții care au încetat să tranzacționeze, defalcă volumul pe instrumente și atribuie fiecare nivel de Sub-IB.",
   "ib.hero.h1": "IB Tools: IB Desk pe orice ecran",
   "ib.cap.1": "Fiecare comision. Urmărit.",
   "ib.cap.2": "Clienții tăi. În buzunar.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Panoul tău.",
   "ib.hero.lead": "Distribuie un singur link și vezi pe toți cei care se alătură prin el — clicuri, înregistrări și câștigurile tale într-un singur panou simplu.",
   "ib.hero.sub": "Nu ai nevoie de experiență în trading. Noi ne ocupăm de platformă — tu aduci publicul.",
-  "ib.hero.how": "Vezi cum funcționează"
+  "ib.hero.how": "Vezi cum funcționează",
+  "ib.lot.kicker": "Instrumente IB · pentru parteneri",
+  "ib.lot.t1": "Fiecare lot.",
+  "ib.lot.t2": "Fiecare nivel.",
+  "ib.lot.t3": "Un singur panou.",
+  "ib.lot.lead": "Urmărește comisioanele pe lot, identifică clienții care au încetat să tranzacționeze, defalcă volumul pe instrumente și atribuie fiecare nivel de Sub-IB.",
+  "ib.lot.sub": "Date în timp real, nu extrase de la final de lună — și AI care îți spune unde să acționezi mai întâi.",
+  "ib.lot.go": "Obține acces",
+  "ib.lot.explore": "Explorează instrumentele IB",
+  "ib.tool.1": "Comision pe lot",
+  "ib.tool.2": "Pierderi și activitate",
+  "ib.tool.3": "Volum pe instrument",
+  "ib.tool.4": "Sub-IB pe niveluri",
+  "ib.tool.5": "Analize AI"
 }

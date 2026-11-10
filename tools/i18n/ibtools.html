@@ -31,93 +31,112 @@
   {{> page-header-end}}
 
   <main>
-    <!-- Hero (IB_Tools_Hero_Creators – Dashboard design): static. Left the pitch for creators and two buttons, right the
-         partner's glass dashboard ("Partner Studio", illustrative data) on a 920x640 stage, scaled to its column (--s,
-         set by the script after it: the column's width / 920, at most 1.12); a sheen crosses the two big panes every 7 s
-         (not with reduced motion). The dashboard is product UI: English in every language, like the IB Desk mock-ups.
-         The previous hero (the devices film, assets/js/ib-film.js) is kept in the repo, not loaded. -->
-    <section id="desk" class="tq-ibx" data-screen-label="IB Tools hero · Creators">
+    <!-- Hero (IB_Tools_Hero_Every_Lot design): static. Left the pitch for partners and two buttons, right the IB Desk
+         dashboard (illustrative data) on a 920x660 stage scaled to its column (--s, set by the script after it: the
+         column's width / 920, at most 1.12), with five numbered callouts naming the tools; where the column is narrower
+         than 600px the callouts give way to a row of chips under the stage. A sheen crosses the two big panes every 7 s
+         (not with reduced motion). The dashboard is product UI: English in every language; the callouts are translated.
+         The previous heroes (the devices film; the creators dashboard) are in the git history. -->
+    <section id="desk" class="tq-ibx" data-screen-label="IB Tools hero · Every lot">
       <div class="tq-ibx__wrap">
         <div class="tq-ibx__text">
-          <div class="tq-ibx__kick"><span class="tq-ibx__badge">IB</span><span>{{ib.hero.kicker}}</span></div>
-          <h1 class="tq-ibx__h1 tq-h1" data-fitw><span>{{ib.hero.t1}}</span> <span class="tq-ibx__red">{{ib.hero.t2}}</span></h1>
-          <p class="tq-ibx__lead">{{ib.hero.lead}}</p>
-          <p class="tq-ibx__sub">{{ib.hero.sub}}</p>
+          <div class="tq-ibx__kick"><span class="tq-ibx__badge">IB</span><span>{{ib.lot.kicker}}</span></div>
+          <h1 class="tq-ibx__h1 tq-h1" data-fitw><span>{{ib.lot.t1}}</span> <span>{{ib.lot.t2}}</span> <span class="tq-ibx__red">{{ib.lot.t3}}</span></h1>
+          <p class="tq-ibx__lead">{{ib.lot.lead}}</p>
+          <p class="tq-ibx__sub">{{ib.lot.sub}}</p>
           <div class="tq-ibx__ctas">
-            <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{nav.cta}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a class="tq-ibx__how" href="{{home}}#how" data-page-link data-label="{{@loader}} · {{@fan.home}}">{{ib.hero.how}}</a>
+            <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.lot.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a class="tq-ibx__how" href="#ib-tools">{{ib.lot.explore}}</a>
           </div>
         </div>
 
-        <div class="tq-ibx__col" aria-hidden="true">
-          <div class="tq-ibx__stage" dir="ltr" lang="en">
+        <div class="tq-ibx__col tq-ibx__col--lot" id="ib-tools">
+          <div class="tq-ibx__stage" dir="ltr" lang="en" aria-hidden="true">
             <div class="tq-ibx__scene">
-              <div style="position: absolute; left: 400px; top: 40px; width: 520px; height: 420px; border-radius: 50%; background: radial-gradient(closest-side, rgba(28,30,36,0.42), rgba(28,30,36,0));"></div>
-              <div style="position: absolute; left: 0px; top: 300px; width: 460px; height: 300px; border-radius: 50%; background: radial-gradient(closest-side, rgba(150,154,162,0.55), rgba(150,154,162,0));"></div>
-              <div style="position: absolute; left: 560px; top: 400px; width: 320px; height: 240px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,0.2), rgba(231,19,27,0));"></div>
+              <div style="position: absolute; left: 380px; top: 60px; width: 520px; height: 420px; border-radius: 50%; background: radial-gradient(closest-side, rgba(28,30,36,0.42), rgba(28,30,36,0));"></div>
+              <div style="position: absolute; left: 20px; top: 300px; width: 460px; height: 300px; border-radius: 50%; background: radial-gradient(closest-side, rgba(150,154,162,0.55), rgba(150,154,162,0));"></div>
+              <div style="position: absolute; left: 560px; top: 420px; width: 320px; height: 240px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,0.2), rgba(231,19,27,0));"></div>
 
               <div style="position: absolute; inset: 0; transform: perspective(2200px) rotateY(-7deg) rotateX(3deg); transform-origin: 40% 50%;">
-                <div style="position: absolute; left: 112px; top: 112px; width: 660px; height: 450px; border-radius: 26px; background: linear-gradient(150deg, rgba(255,255,255,0.4), rgba(255,255,255,0.12)); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 40px 70px -40px rgba(18,22,30,0.45);"></div>
+                <div style="position: absolute; left: 92px; top: 122px; width: 660px; height: 450px; border-radius: 26px; background: linear-gradient(150deg, rgba(255,255,255,0.4), rgba(255,255,255,0.12)); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 40px 70px -40px rgba(18,22,30,0.45);"></div>
 
-                <div style="position: absolute; left: 80px; top: 80px; width: 660px; height: 450px; border-radius: 26px; overflow: hidden; background: linear-gradient(140deg, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.22) 48%, rgba(255,255,255,0.46) 100%); -webkit-backdrop-filter: blur(20px) saturate(190%) brightness(1.05); backdrop-filter: blur(20px) saturate(190%) brightness(1.05); border: 1px solid rgba(255,255,255,0.55); box-shadow: inset 0 26px 40px -26px #FFFFFF, inset 0 -26px 40px -30px rgba(18,22,30,0.22), 0 60px 100px -44px rgba(18,22,30,0.55), 0 18px 34px -20px rgba(18,22,30,0.25);">
+                <div style="position: absolute; left: 60px; top: 90px; width: 660px; height: 450px; border-radius: 26px; overflow: hidden; background: linear-gradient(140deg, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.22) 48%, rgba(255,255,255,0.46) 100%); -webkit-backdrop-filter: blur(20px) saturate(190%) brightness(1.05); backdrop-filter: blur(20px) saturate(190%) brightness(1.05); border: 1px solid rgba(255,255,255,0.55); box-shadow: inset 0 26px 40px -26px #FFFFFF, inset 0 -26px 40px -30px rgba(18,22,30,0.22), 0 60px 100px -44px rgba(18,22,30,0.55), 0 18px 34px -20px rgba(18,22,30,0.25);">
                   <div style="position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; background: linear-gradient(135deg, #FFFFFF 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.9) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; z-index: 3;"></div>
                   <div style="position: absolute; left: -15%; top: -55%; width: 70%; height: 100%; pointer-events: none; background: radial-gradient(closest-side, rgba(255,255,255,0.6), rgba(255,255,255,0));"></div>
 
-                  <div style="position: absolute; left: 0; right: 0; top: 0; height: 52px; display: flex; align-items: center; gap: 12px; padding: 0 18px; border-bottom: 1px solid rgba(255,255,255,0.75); box-shadow: 0 1px 0 rgba(18,22,30,0.05);">
-                    <span style="width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(160deg, #F4F5F7, #9FA3AA); border: 2px solid #FFFFFF; box-shadow: 0 0 0 2px #E7131B; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #2A2C31;">MC</span>
-                    <span style="display: flex; flex-direction: column; gap: 1px;"><span style="font-size: 13.5px; font-weight: 700;">Partner Studio</span><span class="tq-ibx__num" style="font-size: 10px; color: #6B6E75;">@mia.creates</span></span>
-                    <span class="tq-ibx__num" style="margin-left: auto; display: flex; padding: 3px; border-radius: 8px; background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.9); font-size: 10px; color: #6B6E75;"><span style="padding: 3px 7px;">Week</span><span style="padding: 3px 7px; border-radius: 5px; background: #0A0A0A; color: #FFFFFF;">Month</span><span style="padding: 3px 7px;">Year</span></span>
+                  <div style="position: absolute; left: 0; right: 0; top: 0; height: 46px; display: flex; align-items: center; gap: 20px; padding: 0 18px; border-bottom: 1px solid rgba(255,255,255,0.75); box-shadow: 0 1px 0 rgba(18,22,30,0.05);">
+                    <span style="display: flex; align-items: center; gap: 9px; font-size: 13.5px; font-weight: 700;"><span style="width: 18px; height: 18px; border-radius: 6px; background: linear-gradient(150deg, #F2262E, #B80E15); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);"></span>IB Desk</span>
+                    <span style="display: flex; gap: 16px; font-size: 12px; font-weight: 600; color: #6B6E75;"><span style="color: #0A0A0A;">Overview</span><span>Clients</span><span>Network</span><span>Reports</span></span>
+                    <span class="tq-ibx__num" style="margin-left: auto; display: flex; padding: 3px; border-radius: 8px; background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.9); font-size: 10px; color: #6B6E75;"><span style="padding: 3px 7px;">7D</span><span style="padding: 3px 7px; border-radius: 5px; background: #0A0A0A; color: #FFFFFF;">30D</span><span style="padding: 3px 7px;">90D</span></span>
+                    <span style="width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(160deg, #F4F5F7, #B9BCC3); border: 1px solid #FFFFFF; box-shadow: 0 2px 6px rgba(18,22,30,0.18);"></span>
                   </div>
 
-                  <div style="position: absolute; left: 18px; right: 18px; top: 68px; height: 84px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
-                    <div style="border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(170deg, rgba(255,255,255,0.86), rgba(255,255,255,0.55)); border: 1px solid #FFFFFF; box-shadow: 0 8px 16px -12px rgba(18,22,30,0.35);"><span style="font-size: 10px; font-weight: 700; color: #6B6E75;">People joined via your link</span><span class="tq-ibx__num" style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em;">1,284</span><span style="font-size: 10.5px; font-weight: 700; color: #2A2C31;">▲ 86 this month</span></div>
-                    <div style="border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(170deg, rgba(255,255,255,0.86), rgba(255,255,255,0.55)); border: 1px solid #FFFFFF; box-shadow: 0 8px 16px -12px rgba(18,22,30,0.35);"><span style="font-size: 10px; font-weight: 700; color: #6B6E75;">Your earnings · this month</span><span class="tq-ibx__num" style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em;">$4,920</span><span style="font-size: 10.5px; font-weight: 700; color: #2A2C31;">▲ 12% vs last month</span></div>
-                    <div style="border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(170deg, rgba(255,255,255,0.86), rgba(255,255,255,0.55)); border: 1px solid #FFFFFF; box-shadow: 0 8px 16px -12px rgba(18,22,30,0.35);"><span style="font-size: 10px; font-weight: 700; color: #6B6E75;">Link clicks</span><span class="tq-ibx__num" style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em;">18.2K</span><span style="font-size: 10.5px; font-weight: 700; color: #2A2C31;">7% sign up</span></div>
+                  <div style="position: absolute; left: 18px; right: 18px; top: 62px; height: 72px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;">
+                    <div style="border-radius: 13px; padding: 11px 13px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(170deg, rgba(255,255,255,0.86), rgba(255,255,255,0.55)); border: 1px solid #FFFFFF; box-shadow: 0 8px 16px -12px rgba(18,22,30,0.35);"><span style="font-size: 9px; font-weight: 700; letter-spacing: 0.12em; color: #6B6E75;">COMMISSION</span><span class="tq-ibx__num" style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em;">$48,215</span></div>
+                    <div style="border-radius: 13px; padding: 11px 13px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(170deg, rgba(255,255,255,0.86), rgba(255,255,255,0.55)); border: 1px solid #FFFFFF; box-shadow: 0 8px 16px -12px rgba(18,22,30,0.35);"><span style="font-size: 9px; font-weight: 700; letter-spacing: 0.12em; color: #6B6E75;">ACTIVE CLIENTS</span><span class="tq-ibx__num" style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em;">1,284</span></div>
+                    <div style="border-radius: 13px; padding: 11px 13px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(170deg, rgba(255,255,255,0.86), rgba(255,255,255,0.55)); border: 1px solid #FFFFFF; box-shadow: 0 8px 16px -12px rgba(18,22,30,0.35);"><span style="font-size: 9px; font-weight: 700; letter-spacing: 0.12em; color: #6B6E75;">INACTIVE</span><span class="tq-ibx__num" style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #E7131B;">316</span></div>
+                    <div style="border-radius: 13px; padding: 11px 13px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(170deg, rgba(255,255,255,0.86), rgba(255,255,255,0.55)); border: 1px solid #FFFFFF; box-shadow: 0 8px 16px -12px rgba(18,22,30,0.35);"><span style="font-size: 9px; font-weight: 700; letter-spacing: 0.12em; color: #6B6E75;">VOLUME · LOTS</span><span class="tq-ibx__num" style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em;">18,420</span></div>
                   </div>
 
-                  <div style="position: absolute; left: 18px; top: 166px; width: 374px; height: 262px; border-radius: 15px; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; background: linear-gradient(170deg, rgba(255,255,255,0.82), rgba(255,255,255,0.5)); border: 1px solid #FFFFFF; box-shadow: 0 10px 20px -14px rgba(18,22,30,0.35);">
-                    <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 12.5px; font-weight: 700;">New people from your audience</span><span class="tq-ibx__num" style="font-size: 10px; color: #6B6E75;">30 days</span></div>
-                    <svg width="346" height="190" viewBox="0 0 346 190" style="display: block;">
-                      <defs><linearGradient id="ibx-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7131B" stop-opacity="0.22"/><stop offset="1" stop-color="#E7131B" stop-opacity="0"/></linearGradient></defs>
-                      <path d="M0 40H346M0 95H346M0 150H346" stroke="rgba(18,22,30,0.07)"/>
-                      <path d="M0 168 L29 160 L58 163 L87 146 L115 150 L144 128 L173 134 L202 108 L231 112 L259 84 L288 76 L317 50 L346 30 L346 190 L0 190 Z" fill="url(#ibx-area)"/>
-                      <path d="M0 168 L29 160 L58 163 L87 146 L115 150 L144 128 L173 134 L202 108 L231 112 L259 84 L288 76 L317 50 L346 30" fill="none" stroke="#E7131B" stroke-width="2.4" stroke-linejoin="round"/>
-                      <circle cx="202" cy="108" r="5" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
-                      <rect x="150" y="68" width="104" height="28" rx="8" fill="#0A0A0A"/>
-                      <text x="202" y="86" font-size="11" font-weight="700" fill="#FFFFFF" font-family="Inter, sans-serif" text-anchor="middle">Video posted</text>
+                  <div style="position: absolute; left: 18px; top: 150px; width: 380px; height: 282px; border-radius: 15px; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; background: linear-gradient(170deg, rgba(255,255,255,0.82), rgba(255,255,255,0.5)); border: 1px solid #FFFFFF; box-shadow: 0 10px 20px -14px rgba(18,22,30,0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 12.5px; font-weight: 700;">Volume · lots</span><span class="tq-ibx__num" style="font-size: 10px; color: #6B6E75;">▲ 7.9%</span></div>
+                    <svg width="352" height="222" viewBox="0 0 352 222" style="display: block;">
+                      <defs><linearGradient id="ibx-red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2262E"/><stop offset="1" stop-color="#B80E15"/></linearGradient></defs>
+                      <path d="M0 50H352M0 110H352M0 170H352" stroke="rgba(18,22,30,0.07)"/>
+                      <g fill="#CDD0D5"><rect x="6" y="150" width="20" height="70" rx="4"/><rect x="35" y="130" width="20" height="90" rx="4"/><rect x="64" y="140" width="20" height="80" rx="4"/><rect x="93" y="116" width="20" height="104" rx="4"/><rect x="122" y="124" width="20" height="96" rx="4"/><rect x="151" y="100" width="20" height="120" rx="4"/><rect x="180" y="108" width="20" height="112" rx="4"/><rect x="209" y="86" width="20" height="134" rx="4"/></g>
+                      <g fill="#6B6E75"><rect x="238" y="74" width="20" height="146" rx="4"/><rect x="267" y="60" width="20" height="160" rx="4"/><rect x="296" y="50" width="20" height="170" rx="4"/></g>
+                      <rect x="325" y="26" width="20" height="194" rx="4" fill="url(#ibx-red)"/>
                     </svg>
                   </div>
 
-                  <div style="position: absolute; left: 408px; top: 166px; width: 234px; height: 262px; border-radius: 15px; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(170deg, rgba(255,255,255,0.82), rgba(255,255,255,0.5)); border: 1px solid #FFFFFF; box-shadow: 0 10px 20px -14px rgba(18,22,30,0.35);">
-                    <span style="font-size: 12.5px; font-weight: 700; padding-bottom: 6px;">Where they came from</span>
-                    <div style="display: flex; flex-direction: column; gap: 5px; padding: 8px 0; border-top: 1px solid rgba(18,22,30,0.07);"><div class="tq-ibx__num" style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;"><span>YouTube video</span><span>642</span></div><span style="height: 5px; border-radius: 3px; background: rgba(18,22,30,0.07);"><span style="display: block; width: 100%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #B80E15, #F2262E);"></span></span></div>
-                    <div style="display: flex; flex-direction: column; gap: 5px; padding: 8px 0; border-top: 1px solid rgba(18,22,30,0.07);"><div class="tq-ibx__num" style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;"><span>Link in bio</span><span>388</span></div><span style="height: 5px; border-radius: 3px; background: rgba(18,22,30,0.07);"><span style="display: block; width: 60%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #2A2C31, #6B6E75);"></span></span></div>
-                    <div style="display: flex; flex-direction: column; gap: 5px; padding: 8px 0; border-top: 1px solid rgba(18,22,30,0.07);"><div class="tq-ibx__num" style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;"><span>Telegram post</span><span>254</span></div><span style="height: 5px; border-radius: 3px; background: rgba(18,22,30,0.07);"><span style="display: block; width: 40%; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #6B6E75, #A0A3A9);"></span></span></div>
+                  <div style="position: absolute; left: 414px; top: 150px; width: 228px; height: 282px; border-radius: 15px; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(170deg, rgba(255,255,255,0.82), rgba(255,255,255,0.5)); border: 1px solid #FFFFFF; box-shadow: 0 10px 20px -14px rgba(18,22,30,0.35);">
+                    <span style="font-size: 12.5px; font-weight: 700;">Sub-IB network</span>
+                    <svg width="200" height="160" viewBox="0 0 200 160" style="display: block;">
+                      <g fill="none" stroke="rgba(18,22,30,0.2)" stroke-width="1.2"><path d="M100 24 C100 52 34 46 34 78"/><path d="M100 24 V78"/><path d="M100 24 C100 52 166 46 166 78"/><path d="M34 86 C34 112 16 106 16 134"/><path d="M100 86 C100 112 82 106 82 134"/><path d="M100 86 C100 112 118 106 118 134"/><path d="M166 86 V134"/></g>
+                      <path d="M100 24 C100 52 34 46 34 78 M34 86 C34 112 52 106 52 134" fill="none" stroke="#E7131B" stroke-width="2"/>
+                      <circle cx="100" cy="17" r="13" fill="rgba(231,19,27,0.12)"/>
+                      <circle cx="100" cy="17" r="7" fill="#E7131B"/>
+                      <g fill="#2A2C31" stroke="#FFFFFF" stroke-width="2"><circle cx="34" cy="82" r="6.5"/><circle cx="100" cy="82" r="6.5"/><circle cx="166" cy="82" r="6.5"/></g>
+                      <g fill="#A0A3A9" stroke="#FFFFFF" stroke-width="1.5"><circle cx="16" cy="138" r="4.5"/><circle cx="82" cy="138" r="4.5"/><circle cx="118" cy="138" r="4.5"/><circle cx="166" cy="138" r="4.5"/></g>
+                      <circle cx="52" cy="138" r="5" fill="#E7131B" stroke="#FFFFFF" stroke-width="1.5"/>
+                    </svg>
+                    <div class="tq-ibx__num" style="margin-top: auto; display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 600; color: #55585F; border-top: 1px solid rgba(18,22,30,0.08); padding-top: 9px;"><span>Sub-IBs <b style="color: #0A0A0A;">18</b></span><span>Levels <b style="color: #0A0A0A;">3</b></span></div>
                   </div>
-                  <div style="position: absolute; left: 18px; bottom: 10px; font-size: 9.5px; color: #6B6E75;">Illustrative data</div>
+
+                  <div style="position: absolute; left: 18px; bottom: 12px; font-size: 9.5px; color: #6B6E75;">Illustrative data</div>
                   <i class="tq-ibx__sheen" style="--d: 1.2s; --a: .55;"></i>
                 </div>
 
-                <div style="position: absolute; left: 10px; top: 20px; width: 330px; border-radius: 18px; padding: 12px 12px 12px 16px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.45)); -webkit-backdrop-filter: blur(16px) saturate(180%); backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(255,255,255,0.9); box-shadow: inset 0 14px 22px -16px #FFFFFF, 0 30px 50px -26px rgba(18,22,30,0.5);">
-                  <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1;"><span style="font-size: 10px; font-weight: 700; letter-spacing: 0.16em; color: #6B6E75;">YOUR PARTNER LINK</span><span class="tq-ibx__num" style="font-size: 13px; color: #0A0A0A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">tradequo.com/p/mia</span></span>
-                  <span style="flex: none; height: 34px; padding: 0 14px; border-radius: 999px; background: #0A0A0A; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center;">Copy</span>
-                </div>
-
-                <div style="position: absolute; left: 640px; top: 40px; width: 260px; border-radius: 16px; padding: 12px 14px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.5)); -webkit-backdrop-filter: blur(16px) saturate(180%); backdrop-filter: blur(16px) saturate(180%); border: 1px solid rgba(255,255,255,0.9); box-shadow: inset 0 14px 22px -16px #FFFFFF, 0 30px 50px -26px rgba(18,22,30,0.5);">
-                  <span style="width: 34px; height: 34px; flex: none; border-radius: 10px; background: linear-gradient(150deg, #F2262E, #B80E15); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 15px; font-weight: 700;">+</span>
-                  <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 13px; font-weight: 700;">12 people joined via your link</span><span style="font-size: 11px; font-weight: 600; color: #6B6E75;">From your new video · 2 min ago</span></span>
-                </div>
-
-                <div style="position: absolute; left: 610px; top: 410px; width: 280px; border-radius: 20px; overflow: hidden; padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 11px; color: #FFFFFF; background: linear-gradient(140deg, rgba(62,64,72,0.72) 0%, rgba(12,13,16,0.82) 55%, rgba(34,36,42,0.76) 100%); -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%); border: 1px solid rgba(255,255,255,0.22); box-shadow: inset 0 20px 30px -22px rgba(255,255,255,0.45), inset 0 -16px 26px -20px rgba(0,0,0,0.5), 0 44px 70px -30px rgba(18,22,30,0.65);">
+                <div style="position: absolute; left: 600px; top: 398px; width: 270px; border-radius: 20px; overflow: hidden; padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 11px; color: #FFFFFF; background: linear-gradient(140deg, rgba(62,64,72,0.72) 0%, rgba(12,13,16,0.82) 55%, rgba(34,36,42,0.76) 100%); -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%); border: 1px solid rgba(255,255,255,0.22); box-shadow: inset 0 20px 30px -22px rgba(255,255,255,0.45), inset 0 -16px 26px -20px rgba(0,0,0,0.5), 0 44px 70px -30px rgba(18,22,30,0.65);">
                   <div style="position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; background: linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.4) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></div>
                   <span style="display: flex; align-items: center; gap: 7px; font-size: 10px; font-weight: 700; letter-spacing: 0.2em;"><svg width="13" height="13" viewBox="0 0 14 14"><path d="M7 0 C7.6 4.2 9.8 6.4 14 7 C9.8 7.6 7.6 9.8 7 14 C6.4 9.8 4.2 7.6 0 7 C4.2 6.4 6.4 4.2 7 0 Z" fill="#FF4148"/></svg>ASK AI</span>
-                  <span style="align-self: flex-end; padding: 8px 11px; border-radius: 11px 11px 3px 11px; background: linear-gradient(170deg, #FFFFFF, #DCDEE3); color: #0A0A0A; font-size: 12px; font-weight: 600;">Which post brought the most people?</span>
-                  <span style="font-size: 12px; line-height: 1.45; color: #D4D6DB;">Your YouTube video from Oct 28 — 642 sign-ups. Post more like it.</span>
+                  <span style="align-self: flex-end; padding: 8px 11px; border-radius: 11px 11px 3px 11px; background: linear-gradient(170deg, #FFFFFF, #DCDEE3); color: #0A0A0A; font-size: 12px; font-weight: 600;">Which clients went quiet this week?</span>
+                  <span style="font-size: 12px; line-height: 1.45; color: #D4D6DB;">42 clients, mostly via Northline. 17 traded XAUUSD daily last month.</span>
+                  <div style="display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 4px 0 12px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);"><span style="flex: 1; font-size: 11px; color: #8A8D93;">Ask about your network…</span><span style="width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(150deg, #F2262E, #B80E15);"></span></div>
                   <i class="tq-ibx__sheen" style="--d: 1.75s; --a: .16;"></i>
+                </div>
+
+                <div class="tq-ibx__callouts">
+                  <svg width="920" height="660" viewBox="0 0 920 660" style="position: absolute; inset: 0; pointer-events: none; overflow: visible;">
+                    <g stroke="rgba(18,22,30,0.34)" stroke-width="1" fill="none"><path d="M152 152 V58"/><path d="M469 152 V58"/><path d="M268 522 V600"/><path d="M702 300 H742"/><path d="M735 572 V612"/></g>
+                    <g fill="#FFFFFF" stroke="#E7131B" stroke-width="2"><circle cx="152" cy="152" r="5"/><circle cx="469" cy="152" r="5"/><circle cx="268" cy="522" r="5"/><circle cx="702" cy="300" r="5"/><circle cx="735" cy="572" r="5"/></g>
+                  </svg>
+                  <div class="tq-ibx__co" style="left: 32px; top: 22px; width: 240px;"><span class="tq-ibx__pill" lang="{{lang}}" dir="{{dir}}"><b>01</b>{{ib.tool.1}}</span></div>
+                  <div class="tq-ibx__co" style="left: 349px; top: 22px; width: 240px;"><span class="tq-ibx__pill" lang="{{lang}}" dir="{{dir}}"><b>02</b>{{ib.tool.2}}</span></div>
+                  <div class="tq-ibx__co" style="left: 148px; top: 600px; width: 240px;"><span class="tq-ibx__pill" lang="{{lang}}" dir="{{dir}}"><b>03</b>{{ib.tool.3}}</span></div>
+                  <div class="tq-ibx__co tq-ibx__co--side" style="left: 742px; top: 282px;"><span class="tq-ibx__pill" lang="{{lang}}" dir="{{dir}}"><b>04</b>{{ib.tool.4}}</span></div>
+                  <div class="tq-ibx__co" style="left: 615px; top: 612px; width: 240px;"><span class="tq-ibx__pill tq-ibx__pill--dark" lang="{{lang}}" dir="{{dir}}"><b>05</b>{{ib.tool.5}}</span></div>
                 </div>
               </div>
             </div>
           </div>
+          <ol class="tq-ibx__chips">
+            <li class="tq-ibx__pill"><b>01</b>{{ib.tool.1}}</li>
+            <li class="tq-ibx__pill"><b>02</b>{{ib.tool.2}}</li>
+            <li class="tq-ibx__pill"><b>03</b>{{ib.tool.3}}</li>
+            <li class="tq-ibx__pill"><b>04</b>{{ib.tool.4}}</li>
+            <li class="tq-ibx__pill tq-ibx__pill--dark"><b>05</b>{{ib.tool.5}}</li>
+          </ol>
         </div>
         <script>/* the stage at its column's width (design: 920 px wide, at most 1.12x); set before the first paint */
 (function(){var c=document.currentScript.previousElementSibling,f=function(){c.style.setProperty('--s',Math.min(1.12,c.clientWidth/920).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>

@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "Alat IB · untuk kreator — Audiens Anda. Dasbor Anda. | TradeQuo",
-  "ib.meta.description": "Bagikan satu tautan dan lihat semua orang yang bergabung melaluinya — klik, pendaftaran, dan penghasilan Anda dalam satu dasbor sederhana. Tidak perlu pengalaman trading.",
-  "ib.meta.ogDescription": "Bagikan satu tautan dan lihat semua orang yang bergabung melaluinya — klik, pendaftaran, dan penghasilan Anda dalam satu dasbor sederhana.",
+  "ib.meta.title": "Alat IB · untuk mitra — Setiap lot. Setiap tingkat. Satu dasbor. | TradeQuo",
+  "ib.meta.description": "Lacak rebate per lot, kenali klien yang berhenti trading, rinci volume per instrumen, dan atribusikan setiap tingkat Sub-IB. Data real-time, bukan laporan akhir bulan — dan AI yang memberi tahu di mana Anda harus bertindak lebih dulu.",
+  "ib.meta.ogDescription": "Lacak rebate per lot, kenali klien yang berhenti trading, rinci volume per instrumen, dan atribusikan setiap tingkat Sub-IB.",
   "ib.hero.h1": "IB Tools: IB Desk di layar apa pun",
   "ib.cap.1": "Setiap komisi. Tercatat.",
   "ib.cap.2": "Klien Anda. Di saku Anda.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Dasbor Anda.",
   "ib.hero.lead": "Bagikan satu tautan dan lihat semua orang yang bergabung melaluinya — klik, pendaftaran, dan penghasilan Anda dalam satu dasbor sederhana.",
   "ib.hero.sub": "Tidak perlu pengalaman trading. Kami yang menjalankan platformnya — Anda membawa audiens.",
-  "ib.hero.how": "Lihat cara kerjanya"
+  "ib.hero.how": "Lihat cara kerjanya",
+  "ib.lot.kicker": "Alat IB · untuk mitra",
+  "ib.lot.t1": "Setiap lot.",
+  "ib.lot.t2": "Setiap tingkat.",
+  "ib.lot.t3": "Satu dasbor.",
+  "ib.lot.lead": "Lacak rebate per lot, kenali klien yang berhenti trading, rinci volume per instrumen, dan atribusikan setiap tingkat Sub-IB.",
+  "ib.lot.sub": "Data real-time, bukan laporan akhir bulan — dan AI yang memberi tahu di mana Anda harus bertindak lebih dulu.",
+  "ib.lot.go": "Dapatkan akses",
+  "ib.lot.explore": "Jelajahi alat IB",
+  "ib.tool.1": "Rebate per lot",
+  "ib.tool.2": "Churn & aktivitas",
+  "ib.tool.3": "Volume per instrumen",
+  "ib.tool.4": "Sub-IB multi-tingkat",
+  "ib.tool.5": "Insight AI"
 }

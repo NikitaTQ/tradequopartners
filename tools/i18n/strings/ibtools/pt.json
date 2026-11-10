@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "Ferramentas IB · para criadores — Seu público. Seu painel. | TradeQuo",
-  "ib.meta.description": "Compartilhe um único link e veja todos que entram por ele — cliques, cadastros e seus ganhos em um painel simples. Não é preciso experiência em trading.",
-  "ib.meta.ogDescription": "Compartilhe um único link e veja todos que entram por ele — cliques, cadastros e seus ganhos em um painel simples.",
+  "ib.meta.title": "Ferramentas IB · para parceiros — Cada lote. Cada nível. Um só painel. | TradeQuo",
+  "ib.meta.description": "Acompanhe suas comissões por lote, identifique clientes que pararam de operar, detalhe o volume por instrumento e atribua cada nível de Sub-IB. Dados em tempo real, não extratos de fim de mês — e uma IA que diz onde agir primeiro.",
+  "ib.meta.ogDescription": "Acompanhe suas comissões por lote, identifique clientes que pararam de operar, detalhe o volume por instrumento e atribua cada nível de Sub-IB.",
   "ib.hero.h1": "IB Tools: IB Desk em qualquer tela",
   "ib.cap.1": "Cada comissão. Registrada.",
   "ib.cap.2": "Seus clientes. No seu bolso.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Seu painel.",
   "ib.hero.lead": "Compartilhe um único link e veja todos que entram por ele — cliques, cadastros e seus ganhos em um painel simples.",
   "ib.hero.sub": "Não é preciso experiência em trading. Nós cuidamos da plataforma — você traz o público.",
-  "ib.hero.how": "Veja como funciona"
+  "ib.hero.how": "Veja como funciona",
+  "ib.lot.kicker": "Ferramentas IB · para parceiros",
+  "ib.lot.t1": "Cada lote.",
+  "ib.lot.t2": "Cada nível.",
+  "ib.lot.t3": "Um só painel.",
+  "ib.lot.lead": "Acompanhe suas comissões por lote, identifique clientes que pararam de operar, detalhe o volume por instrumento e atribua cada nível de Sub-IB.",
+  "ib.lot.sub": "Dados em tempo real, não extratos de fim de mês — e uma IA que diz onde agir primeiro.",
+  "ib.lot.go": "Obter acesso",
+  "ib.lot.explore": "Explorar ferramentas IB",
+  "ib.tool.1": "Comissão por lote",
+  "ib.tool.2": "Churn e atividade",
+  "ib.tool.3": "Volume por instrumento",
+  "ib.tool.4": "Sub-IB multinível",
+  "ib.tool.5": "Insights de IA"
 }

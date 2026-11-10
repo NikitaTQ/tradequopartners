@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "Outils IB · pour les créateurs — Votre audience. Votre espace. | TradeQuo",
-  "ib.meta.description": "Partagez un seul lien et voyez tous ceux qui s’inscrivent grâce à lui — clics, inscriptions et vos gains dans un tableau de bord simple. Aucune expérience en trading requise.",
-  "ib.meta.ogDescription": "Partagez un seul lien et voyez tous ceux qui s’inscrivent grâce à lui — clics, inscriptions et vos gains dans un tableau de bord simple.",
+  "ib.meta.title": "Outils IB · pour les partenaires — Chaque lot. Chaque niveau. Un seul espace. | TradeQuo",
+  "ib.meta.description": "Suivez vos commissions par lot, repérez les clients qui ont cessé de trader, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB. Des données en temps réel, pas des relevés de fin de mois — et une IA qui vous dit où agir en priorité.",
+  "ib.meta.ogDescription": "Suivez vos commissions par lot, repérez les clients qui ont cessé de trader, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB.",
   "ib.hero.h1": "IB Tools : IB Desk sur tous les écrans",
   "ib.cap.1": "Chaque commission. Suivie.",
   "ib.cap.2": "Vos clients. Dans votre poche.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Votre espace.",
   "ib.hero.lead": "Partagez un seul lien et voyez tous ceux qui s’inscrivent grâce à lui — clics, inscriptions et vos gains dans un tableau de bord simple.",
   "ib.hero.sub": "Aucune expérience en trading requise. Nous gérons la plateforme — vous apportez l’audience.",
-  "ib.hero.how": "Voir comment ça marche"
+  "ib.hero.how": "Voir comment ça marche",
+  "ib.lot.kicker": "Outils IB · pour les partenaires",
+  "ib.lot.t1": "Chaque lot.",
+  "ib.lot.t2": "Chaque niveau.",
+  "ib.lot.t3": "Un seul espace.",
+  "ib.lot.lead": "Suivez vos commissions par lot, repérez les clients qui ont cessé de trader, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB.",
+  "ib.lot.sub": "Des données en temps réel, pas des relevés de fin de mois — et une IA qui vous dit où agir en priorité.",
+  "ib.lot.go": "Obtenir l’accès",
+  "ib.lot.explore": "Découvrir les outils IB",
+  "ib.tool.1": "Commission par lot",
+  "ib.tool.2": "Churn et activité",
+  "ib.tool.3": "Volume par instrument",
+  "ib.tool.4": "Sub-IB multiniveaux",
+  "ib.tool.5": "Analyses IA"
 }

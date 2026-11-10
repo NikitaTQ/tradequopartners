@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "IB-Tools · für Creator — Ihr Publikum. Ihr Dashboard. | TradeQuo",
-  "ib.meta.description": "Teilen Sie einen Link und sehen Sie alle, die darüber beitreten – Klicks, Anmeldungen und Ihre Einnahmen in einem übersichtlichen Dashboard. Keine Trading-Erfahrung nötig.",
-  "ib.meta.ogDescription": "Teilen Sie einen Link und sehen Sie alle, die darüber beitreten – Klicks, Anmeldungen und Ihre Einnahmen in einem übersichtlichen Dashboard.",
+  "ib.meta.title": "IB-Tools · für Partner — Jedes Lot. Jede Stufe. Ein Dashboard. | TradeQuo",
+  "ib.meta.description": "Verfolgen Sie Rebates pro Lot, erkennen Sie Kunden, die nicht mehr handeln, schlüsseln Sie das Volumen nach Instrument auf und ordnen Sie jede Sub-IB-Stufe zu. Echtzeitdaten statt Monatsabrechnungen – und KI, die Ihnen sagt, wo Sie zuerst handeln sollten.",
+  "ib.meta.ogDescription": "Verfolgen Sie Rebates pro Lot, erkennen Sie Kunden, die nicht mehr handeln, schlüsseln Sie das Volumen nach Instrument auf und ordnen Sie jede Sub-IB-Stufe zu.",
   "ib.hero.h1": "IB Tools: IB Desk auf jedem Bildschirm",
   "ib.cap.1": "Jede Provision. Erfasst.",
   "ib.cap.2": "Ihre Kunden. In der Tasche.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Ihr Dashboard.",
   "ib.hero.lead": "Teilen Sie einen Link und sehen Sie alle, die darüber beitreten – Klicks, Anmeldungen und Ihre Einnahmen in einem übersichtlichen Dashboard.",
   "ib.hero.sub": "Keine Trading-Erfahrung nötig. Wir betreiben die Plattform – Sie bringen das Publikum.",
-  "ib.hero.how": "So funktioniert’s"
+  "ib.hero.how": "So funktioniert’s",
+  "ib.lot.kicker": "IB-Tools · für Partner",
+  "ib.lot.t1": "Jedes Lot.",
+  "ib.lot.t2": "Jede Stufe.",
+  "ib.lot.t3": "Ein Dashboard.",
+  "ib.lot.lead": "Verfolgen Sie Rebates pro Lot, erkennen Sie Kunden, die nicht mehr handeln, schlüsseln Sie das Volumen nach Instrument auf und ordnen Sie jede Sub-IB-Stufe zu.",
+  "ib.lot.sub": "Echtzeitdaten statt Monatsabrechnungen – und KI, die Ihnen sagt, wo Sie zuerst handeln sollten.",
+  "ib.lot.go": "Zugang erhalten",
+  "ib.lot.explore": "IB-Tools entdecken",
+  "ib.tool.1": "Rebates pro Lot",
+  "ib.tool.2": "Abwanderung & Aktivität",
+  "ib.tool.3": "Volumen nach Instrument",
+  "ib.tool.4": "Mehrstufige Sub-IBs",
+  "ib.tool.5": "KI-Einblicke"
 }
