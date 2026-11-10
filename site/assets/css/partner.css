@@ -391,7 +391,7 @@
 /* ---- Marketing Tools page (tools/i18n/marketing.html) ----------------------------------
    Hero: Partner_Tools_Hero — a light full-width screen under the header with the four tools as 3D objects
    (assets/js/mt-hero.js draws them into .tq-mth__stage, light theme), the title and the CTA at the bottom.
-   The page's address is /partner-tools/ (it was /marketing-tools/). */
+   The page's address is /marketing-tools/ (for a while it was /partner-tools/). */
 .tq-mth { position: relative; z-index: 1; width: 100%; height: calc(100vh - 88px); height: calc(100svh - 88px); min-height: 600px; max-height: 980px; overflow: hidden; overflow-x: clip; overflow-y: visible; color: #0a0a0b;
   background: radial-gradient(70% 45% at 50% 100%, rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%), radial-gradient(75% 60% at 50% 32%, #fff 0%, #f1f1f4 70%), #f1f1f4; }
 /* clipped at the sides only: the CTA's shadow runs on over the tail (same colour there) instead of ending in a line

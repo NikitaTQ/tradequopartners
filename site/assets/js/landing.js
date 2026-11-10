@@ -909,7 +909,7 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
   }
 
-  /* ---- processes that light up step by step: partner-tools/ "From your portal to your audience"
+  /* ---- processes that light up step by step: marketing-tools/ "From your portal to your audience"
    * (Process_Ignition_Section) and partner-terms/ "Paid every day" (Paid_Daily_Silver) ------------------------------
    * [data-stepper] holds [data-step] items. Every data-every ms the next step gets .is-on and the ones before it
    * .is-done; --k (0…1) on the stepper sizes its rail; after the last step it starts over. It runs only while on
@@ -935,7 +935,7 @@
     });
   }
 
-  /* ---- partner-tools/: the partner dashboard in "Data and people" ticks along --------------------------
+  /* ---- marketing-tools/: the partner dashboard in "Data and people" ticks along --------------------------
    * Every 1.6 s, while it is on screen: the bars shift left and a new one comes in red on the right, sign-ups,
    * lots and earnings creep up (the Data_and_People_Section design's numbers). Bars move by transform only.
    * The figures are bidi-isolated (LRI…PDI) so "+46" stays "+46" in Arabic; a label or figure too wide for its
@@ -1044,7 +1044,7 @@
     }));
   }
 
-  /* ---- /partner-tools/: promo materials, a slab of cut glass (Marketing_Materials_Cut_Glass_2) ------------
+  /* ---- /marketing-tools/: promo materials, a slab of cut glass (Marketing_Materials_Cut_Glass_2) ------------
    * Desktop: the design's five curves cut the 1000x460 slab into six pieces (clip-paths in % of the slab, the lines
    * in an SVG of the same box). Under 1024px the formats stack as bands and the cuts are waves at the bands' edges,
    * measured again whenever the slab changes size. Pointing at a piece (or tapping it) lights it and its format;

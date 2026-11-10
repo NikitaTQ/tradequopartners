@@ -1,4 +1,4 @@
-/* /partner-tools/ hero (Partner_Tools_Hero design; first TradeQuo_Marketing_Tools_Hero): the four tools as 3D
+/* /marketing-tools/ hero (Partner_Tools_Hero design; first TradeQuo_Marketing_Tools_Hero): the four tools as 3D
  * objects — creative cards, a TradingView screen, signal candles on a base, and IB Tools (three stacked tiles:
  * analytics, controls, a gear) or the academy temple — over the hero. The stage's data-theme="light" lights them
  * for a light page (darker silver, black candles, a soft red glow, dark names); data-ib puts IB Tools in the
