@@ -346,7 +346,10 @@ const PRESETS = {
 
 export function mount(el, opts = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  /* on a desktop screen below 1.5x the scene is drawn 1.5-2x larger and scaled down by the browser: clean edges and
+     wicks; phones keep their own ratio (capped at 2) */
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  renderer.setPixelRatio(Math.min(2, Math.max(devicePixelRatio || 1, fine ? 1.75 : 1)));
   const light = opts.theme === 'light';
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = light ? 1.1 : 1.25;
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.setClearColor(0x000000, 0);
@@ -359,6 +362,13 @@ export function mount(el, opts = {}) {
   const rim = new THREE.DirectionalLight(0xffffff, 2.6); rim.position.set(3, 2, -4); scene.add(rim);
   const under = new THREE.DirectionalLight(0xff2a33, light ? 0.7 : 1.4); under.position.set(0, -4, 3); scene.add(under);
   const M = materials(light); M.baseLacquer.envMap = M.baseChrome.envMap = makeEnv(renderer, light, true);
+  if (light) {
+    /* the black and red parts reflect a dark studio (thin bright strips on black), not the light page's grey room:
+       glossy black with crisp highlights however a GPU blurs its reflections; metal keeps the light room so it
+       reads as silver on white */
+    const studio = makeEnv(renderer, false, true);
+    for (const k of ['lacquer', 'pearl2', 'baseLacquer', 'ruby', 'ruby2', 'graphite']) M[k].envMap = studio;
+  }
   const root = new THREE.Group(); scene.add(root);
   const glowTex = light ? radTex([[0, 'rgba(231,19,27,0.32)'], [0.4, 'rgba(231,19,27,0.08)'], [1, 'rgba(231,19,27,0)']])
     : radTex([[0, 'rgba(255,42,51,0.55)'], [0.35, 'rgba(200,16,26,0.18)'], [1, 'rgba(200,16,26,0)']]);
@@ -370,11 +380,6 @@ export function mount(el, opts = {}) {
     halo.position.set(0, -0.1, -0.7); halo.scale.set(2.6, 2.6, 1); holder.add(halo);
     return { holder, bob, spin, halo, i, tops: topPoints(spin) };
   });
-  const N = 140, pg = new THREE.BufferGeometry(), pa = new Float32Array(N * 3), seeds = [];
-  for (let i = 0; i < N; i++) { pa[i * 3] = (Math.random() - 0.5) * 9; pa[i * 3 + 1] = (Math.random() - 0.5) * 8; pa[i * 3 + 2] = (Math.random() - 0.5) * 4 - 1; seeds.push(Math.random() * 6.28); }
-  pg.setAttribute('position', new THREE.BufferAttribute(pa, 3));
-  const dust = new THREE.Points(pg, new THREE.PointsMaterial({ color: light ? 0x1a1a1e : 0xffffff, size: 0.022, transparent: true, opacity: light ? 0.28 : 0.45, depthWrite: false }));
-  scene.add(dust);
 
   let preset = PRESETS.landscape, w = 1, h = 1, minY = 0, nameK = 1;   /* nameK: the names' size factor, below 1 where long names would meet */
   const resize = () => {
@@ -448,9 +453,6 @@ export function mount(el, opts = {}) {
       it.spin.rotation.x = Math.sin(t * 0.27 + i) * 0.05 * wob;
       it.halo.material.opacity = 0.42 + 0.12 * Math.sin(t * 1.4 + i) + 0.4 * hk;
     });
-    const a = dust.geometry.attributes.position;
-    for (let i = 0; i < N; i++) { a.array[i * 3 + 1] += dt * 0.05 * wob; if (a.array[i * 3 + 1] > 4) a.array[i * 3 + 1] = -4; a.array[i * 3] += Math.sin(t * 0.4 + seeds[i]) * dt * 0.02 * wob; }
-    a.needsUpdate = true;
     scene.updateMatrixWorld();
     /* the name goes above its object, no higher than the floor */
     const portrait = preset === PRESETS.portrait, fs = Math.round((portrait ? 20 : 30) * nameK);
