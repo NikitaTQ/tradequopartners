@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "Strumenti IB · per creator — Il tuo pubblico. Il tuo pannello. | TradeQuo",
-  "ib.meta.description": "Condividi un solo link e vedi tutti quelli che si iscrivono tramite esso: clic, iscrizioni e i tuoi guadagni in un’unica dashboard semplice. Non serve esperienza di trading.",
-  "ib.meta.ogDescription": "Condividi un solo link e vedi tutti quelli che si iscrivono tramite esso: clic, iscrizioni e i tuoi guadagni in un’unica dashboard semplice.",
+  "ib.meta.title": "Strumenti IB · per i partner — Ogni lotto. Ogni livello. Un solo pannello. | TradeQuo",
+  "ib.meta.description": "Monitora i rebate per lotto, individua i clienti che hanno smesso di fare trading, suddividi il volume per strumento e attribuisci ogni livello di Sub-IB. Dati in tempo reale, non estratti di fine mese, e un’IA che ti dice dove intervenire per primo.",
+  "ib.meta.ogDescription": "Monitora i rebate per lotto, individua i clienti che hanno smesso di fare trading, suddividi il volume per strumento e attribuisci ogni livello di Sub-IB.",
   "ib.hero.h1": "IB Tools: IB Desk su ogni schermo",
   "ib.cap.1": "Ogni commissione. Tracciata.",
   "ib.cap.2": "I tuoi clienti. In tasca.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Il tuo pannello.",
   "ib.hero.lead": "Condividi un solo link e vedi tutti quelli che si iscrivono tramite esso: clic, iscrizioni e i tuoi guadagni in un’unica dashboard semplice.",
   "ib.hero.sub": "Non serve esperienza di trading. Noi gestiamo la piattaforma, tu porti il pubblico.",
-  "ib.hero.how": "Scopri come funziona"
+  "ib.hero.how": "Scopri come funziona",
+  "ib.lot.kicker": "Strumenti IB · per i partner",
+  "ib.lot.t1": "Ogni lotto.",
+  "ib.lot.t2": "Ogni livello.",
+  "ib.lot.t3": "Un solo pannello.",
+  "ib.lot.lead": "Monitora i rebate per lotto, individua i clienti che hanno smesso di fare trading, suddividi il volume per strumento e attribuisci ogni livello di Sub-IB.",
+  "ib.lot.sub": "Dati in tempo reale, non estratti di fine mese, e un’IA che ti dice dove intervenire per primo.",
+  "ib.lot.go": "Ottieni l’accesso",
+  "ib.lot.explore": "Scopri gli strumenti IB",
+  "ib.tool.1": "Rebate per lotto",
+  "ib.tool.2": "Abbandoni e attività",
+  "ib.tool.3": "Volume per strumento",
+  "ib.tool.4": "Sub-IB multilivello",
+  "ib.tool.5": "Insight IA"
 }

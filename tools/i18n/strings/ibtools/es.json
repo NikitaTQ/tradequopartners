@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "Herramientas IB · para creadores — Tu audiencia. Tu panel. | TradeQuo",
-  "ib.meta.description": "Comparte un solo enlace y ve a todos los que se unen a través de él: clics, registros y tus ganancias en un panel sencillo. No necesitas experiencia en trading.",
-  "ib.meta.ogDescription": "Comparte un solo enlace y ve a todos los que se unen a través de él: clics, registros y tus ganancias en un panel sencillo.",
+  "ib.meta.title": "Herramientas IB · para socios — Cada lote. Cada nivel. Un solo panel. | TradeQuo",
+  "ib.meta.description": "Sigue tus comisiones por lote, detecta a los clientes que dejaron de operar, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB. Datos en tiempo real, no extractos a fin de mes, y una IA que te dice dónde actuar primero.",
+  "ib.meta.ogDescription": "Sigue tus comisiones por lote, detecta a los clientes que dejaron de operar, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB.",
   "ib.hero.h1": "IB Tools: IB Desk en cualquier pantalla",
   "ib.cap.1": "Cada comisión. Registrada.",
   "ib.cap.2": "Tus clientes. En tu bolsillo.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Tu panel.",
   "ib.hero.lead": "Comparte un solo enlace y ve a todos los que se unen a través de él: clics, registros y tus ganancias en un panel sencillo.",
   "ib.hero.sub": "No necesitas experiencia en trading. Nosotros gestionamos la plataforma; tú aportas la audiencia.",
-  "ib.hero.how": "Mira cómo funciona"
+  "ib.hero.how": "Mira cómo funciona",
+  "ib.lot.kicker": "Herramientas IB · para socios",
+  "ib.lot.t1": "Cada lote.",
+  "ib.lot.t2": "Cada nivel.",
+  "ib.lot.t3": "Un solo panel.",
+  "ib.lot.lead": "Sigue tus comisiones por lote, detecta a los clientes que dejaron de operar, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB.",
+  "ib.lot.sub": "Datos en tiempo real, no extractos a fin de mes, y una IA que te dice dónde actuar primero.",
+  "ib.lot.go": "Obtener acceso",
+  "ib.lot.explore": "Explorar herramientas IB",
+  "ib.tool.1": "Comisión por lote",
+  "ib.tool.2": "Bajas y actividad",
+  "ib.tool.3": "Volumen por instrumento",
+  "ib.tool.4": "Sub-IB multinivel",
+  "ib.tool.5": "Insights con IA"
 }

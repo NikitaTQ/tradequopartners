@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "IB Araçları · içerik üreticileri için — Kitleniz. Paneliniz. | TradeQuo",
-  "ib.meta.description": "Tek bir bağlantı paylaşın ve onunla katılan herkesi görün — tıklamalar, kayıtlar ve kazancınız tek bir basit panelde. Trading deneyimi gerekmez.",
-  "ib.meta.ogDescription": "Tek bir bağlantı paylaşın ve onunla katılan herkesi görün — tıklamalar, kayıtlar ve kazancınız tek bir basit panelde.",
+  "ib.meta.title": "IB Araçları · partnerler için — Her lot. Her kademe. Tek panel. | TradeQuo",
+  "ib.meta.description": "Lot başına komisyonlarınızı takip edin, işlem yapmayı bırakan müşterileri fark edin, hacmi enstrümana göre ayırın ve her Sub-IB kademesini atayın. Ay sonu ekstreleri değil, gerçek zamanlı veriler — ve önce nereye odaklanmanız gerektiğini söyleyen yapay zekâ.",
+  "ib.meta.ogDescription": "Lot başına komisyonlarınızı takip edin, işlem yapmayı bırakan müşterileri fark edin, hacmi enstrümana göre ayırın ve her Sub-IB kademesini atayın.",
   "ib.hero.h1": "IB Tools: Her ekranda IB Desk",
   "ib.cap.1": "Her komisyon. Kayıt altında.",
   "ib.cap.2": "Müşterileriniz. Cebinizde.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Paneliniz.",
   "ib.hero.lead": "Tek bir bağlantı paylaşın ve onunla katılan herkesi görün — tıklamalar, kayıtlar ve kazancınız tek bir basit panelde.",
   "ib.hero.sub": "Trading deneyimi gerekmez. Platformu biz yönetiriz — kitleyi siz getirirsiniz.",
-  "ib.hero.how": "Nasıl çalıştığını görün"
+  "ib.hero.how": "Nasıl çalıştığını görün",
+  "ib.lot.kicker": "IB Araçları · partnerler için",
+  "ib.lot.t1": "Her lot.",
+  "ib.lot.t2": "Her kademe.",
+  "ib.lot.t3": "Tek panel.",
+  "ib.lot.lead": "Lot başına komisyonlarınızı takip edin, işlem yapmayı bırakan müşterileri fark edin, hacmi enstrümana göre ayırın ve her Sub-IB kademesini atayın.",
+  "ib.lot.sub": "Ay sonu ekstreleri değil, gerçek zamanlı veriler — ve önce nereye odaklanmanız gerektiğini söyleyen yapay zekâ.",
+  "ib.lot.go": "Erişim alın",
+  "ib.lot.explore": "IB Araçlarını keşfedin",
+  "ib.tool.1": "Lot başına komisyon",
+  "ib.tool.2": "Kayıp ve aktivite",
+  "ib.tool.3": "Enstrümana göre hacim",
+  "ib.tool.4": "Çok kademeli Sub-IB",
+  "ib.tool.5": "Yapay zekâ içgörüleri"
 }

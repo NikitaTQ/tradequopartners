@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "Công cụ IB · dành cho nhà sáng tạo — Khán giả của bạn. Bảng điều khiển của bạn. | TradeQuo",
-  "ib.meta.description": "Chia sẻ một đường link và xem tất cả những người tham gia qua đó — lượt nhấp, lượt đăng ký và thu nhập của bạn trong một bảng điều khiển đơn giản. Không cần kinh nghiệm giao dịch.",
-  "ib.meta.ogDescription": "Chia sẻ một đường link và xem tất cả những người tham gia qua đó — lượt nhấp, lượt đăng ký và thu nhập của bạn trong một bảng điều khiển đơn giản.",
+  "ib.meta.title": "Công cụ IB · dành cho đối tác — Mọi lot. Mọi cấp. Một bảng điều khiển. | TradeQuo",
+  "ib.meta.description": "Theo dõi hoa hồng theo từng lot, phát hiện khách hàng đã ngừng giao dịch, phân tích khối lượng theo công cụ và phân bổ từng cấp Sub-IB. Dữ liệu theo thời gian thực, không phải sao kê cuối tháng — cùng AI cho bạn biết nên hành động ở đâu trước.",
+  "ib.meta.ogDescription": "Theo dõi hoa hồng theo từng lot, phát hiện khách hàng đã ngừng giao dịch, phân tích khối lượng theo công cụ và phân bổ từng cấp Sub-IB.",
   "ib.hero.h1": "IB Tools: IB Desk trên mọi màn hình",
   "ib.cap.1": "Mọi khoản hoa hồng. Đều được theo dõi.",
   "ib.cap.2": "Khách hàng của bạn. Trong túi bạn.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Bảng điều khiển của bạn.",
   "ib.hero.lead": "Chia sẻ một đường link và xem tất cả những người tham gia qua đó — lượt nhấp, lượt đăng ký và thu nhập của bạn trong một bảng điều khiển đơn giản.",
   "ib.hero.sub": "Không cần kinh nghiệm giao dịch. Chúng tôi vận hành nền tảng — bạn mang đến khán giả.",
-  "ib.hero.how": "Xem cách hoạt động"
+  "ib.hero.how": "Xem cách hoạt động",
+  "ib.lot.kicker": "Công cụ IB · dành cho đối tác",
+  "ib.lot.t1": "Mọi lot.",
+  "ib.lot.t2": "Mọi cấp.",
+  "ib.lot.t3": "Một bảng điều khiển.",
+  "ib.lot.lead": "Theo dõi hoa hồng theo từng lot, phát hiện khách hàng đã ngừng giao dịch, phân tích khối lượng theo công cụ và phân bổ từng cấp Sub-IB.",
+  "ib.lot.sub": "Dữ liệu theo thời gian thực, không phải sao kê cuối tháng — cùng AI cho bạn biết nên hành động ở đâu trước.",
+  "ib.lot.go": "Nhận quyền truy cập",
+  "ib.lot.explore": "Khám phá công cụ IB",
+  "ib.tool.1": "Hoa hồng theo lot",
+  "ib.tool.2": "Rời bỏ & hoạt động",
+  "ib.tool.3": "Khối lượng theo công cụ",
+  "ib.tool.4": "Sub-IB đa cấp",
+  "ib.tool.5": "Phân tích AI"
 }

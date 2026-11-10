@@ -1,7 +1,7 @@
 {
-  "ib.meta.title": "Narzędzia IB · dla twórców — Twoi odbiorcy. Twój panel. | TradeQuo",
-  "ib.meta.description": "Udostępnij jeden link i zobacz wszystkich, którzy dołączają przez niego — kliknięcia, rejestracje i Twoje zarobki w jednym prostym panelu. Nie potrzebujesz doświadczenia w tradingu.",
-  "ib.meta.ogDescription": "Udostępnij jeden link i zobacz wszystkich, którzy dołączają przez niego — kliknięcia, rejestracje i Twoje zarobki w jednym prostym panelu.",
+  "ib.meta.title": "Narzędzia IB · dla partnerów — Każdy lot. Każdy poziom. Jeden panel. | TradeQuo",
+  "ib.meta.description": "Śledź prowizje za każdy lot, wychwytuj klientów, którzy przestali handlować, rozbijaj obrót na instrumenty i przypisuj każdy poziom Sub-IB. Dane w czasie rzeczywistym, a nie wyciągi na koniec miesiąca — i AI, które podpowiada, od czego zacząć.",
+  "ib.meta.ogDescription": "Śledź prowizje za każdy lot, wychwytuj klientów, którzy przestali handlować, rozbijaj obrót na instrumenty i przypisuj każdy poziom Sub-IB.",
   "ib.hero.h1": "IB Tools: IB Desk na każdym ekranie",
   "ib.cap.1": "Każda prowizja. Pod kontrolą.",
   "ib.cap.2": "Twoi klienci. W kieszeni.",
@@ -14,5 +14,18 @@
   "ib.hero.t2": "Twój panel.",
   "ib.hero.lead": "Udostępnij jeden link i zobacz wszystkich, którzy dołączają przez niego — kliknięcia, rejestracje i Twoje zarobki w jednym prostym panelu.",
   "ib.hero.sub": "Nie potrzebujesz doświadczenia w tradingu. My prowadzimy platformę — Ty przyprowadzasz odbiorców.",
-  "ib.hero.how": "Zobacz, jak to działa"
+  "ib.hero.how": "Zobacz, jak to działa",
+  "ib.lot.kicker": "Narzędzia IB · dla partnerów",
+  "ib.lot.t1": "Każdy lot.",
+  "ib.lot.t2": "Każdy poziom.",
+  "ib.lot.t3": "Jeden panel.",
+  "ib.lot.lead": "Śledź prowizje za każdy lot, wychwytuj klientów, którzy przestali handlować, rozbijaj obrót na instrumenty i przypisuj każdy poziom Sub-IB.",
+  "ib.lot.sub": "Dane w czasie rzeczywistym, a nie wyciągi na koniec miesiąca — i AI, które podpowiada, od czego zacząć.",
+  "ib.lot.go": "Uzyskaj dostęp",
+  "ib.lot.explore": "Poznaj narzędzia IB",
+  "ib.tool.1": "Prowizja za lot",
+  "ib.tool.2": "Odpływ i aktywność",
+  "ib.tool.3": "Obrót wg instrumentu",
+  "ib.tool.4": "Wielopoziomowe Sub-IB",
+  "ib.tool.5": "Wnioski AI"
 }
