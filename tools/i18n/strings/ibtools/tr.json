@@ -1,12 +1,18 @@
 {
-  "ib.meta.title": "IB Tools — Her ekranda IB Desk | TradeQuo",
-  "ib.meta.description": "TradeQuo partnerleri için IB Desk: komisyonlar, müşteri aktivitesi, Sub-IB ağınız ve yapay zekâdan yanıtlar — telefonda, tablette, dizüstü ve masaüstü bilgisayarda.",
-  "ib.meta.ogDescription": "Komisyonlar, müşteriler, Sub-IB ağınız ve yapay zekâ — her ekranda IB Desk.",
+  "ib.meta.title": "IB Araçları · içerik üreticileri için — Kitleniz. Paneliniz. | TradeQuo",
+  "ib.meta.description": "Tek bir bağlantı paylaşın ve onunla katılan herkesi görün — tıklamalar, kayıtlar ve kazancınız tek bir basit panelde. Trading deneyimi gerekmez.",
+  "ib.meta.ogDescription": "Tek bir bağlantı paylaşın ve onunla katılan herkesi görün — tıklamalar, kayıtlar ve kazancınız tek bir basit panelde.",
   "ib.hero.h1": "IB Tools: Her ekranda IB Desk",
   "ib.cap.1": "Her komisyon. Kayıt altında.",
   "ib.cap.2": "Müşterileriniz. Cebinizde.",
   "ib.cap.3": "Tüm ağınızı görün.",
   "ib.cap.4": "Yapay zekâya sorun. Yanıt alın.",
   "ib.cap.5": "IB Desk. Her ekranda.",
-  "ib.cap.brand": "TradeQuo · Partner Araçları"
+  "ib.cap.brand": "TradeQuo · Partner Araçları",
+  "ib.hero.kicker": "IB Araçları · içerik üreticileri için",
+  "ib.hero.t1": "Kitleniz.",
+  "ib.hero.t2": "Paneliniz.",
+  "ib.hero.lead": "Tek bir bağlantı paylaşın ve onunla katılan herkesi görün — tıklamalar, kayıtlar ve kazancınız tek bir basit panelde.",
+  "ib.hero.sub": "Trading deneyimi gerekmez. Platformu biz yönetiriz — kitleyi siz getirirsiniz.",
+  "ib.hero.how": "Nasıl çalıştığını görün"
 }

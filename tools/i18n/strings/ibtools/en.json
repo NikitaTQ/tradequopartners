@@ -1,12 +1,18 @@
 {
-  "ib.meta.title": "IB Tools — IB Desk on any screen | TradeQuo",
-  "ib.meta.description": "IB Desk for TradeQuo partners: commissions, client activity, your Sub-IB network and answers from AI — on phone, tablet, laptop and desktop.",
-  "ib.meta.ogDescription": "Commissions, clients, your Sub-IB network and AI — IB Desk on any screen.",
+  "ib.meta.title": "IB Tools · for creators — Your audience. Your desk. | TradeQuo",
+  "ib.meta.description": "Share one link and see everyone who joins through it — clicks, sign-ups and your earnings in one simple dashboard. No trading background needed.",
+  "ib.meta.ogDescription": "Share one link and see everyone who joins through it — clicks, sign-ups and your earnings in one simple dashboard.",
   "ib.hero.h1": "IB Tools: IB Desk on any screen",
   "ib.cap.1": "Every commission. Tracked.",
   "ib.cap.2": "Your clients. In your pocket.",
   "ib.cap.3": "See your whole network.",
   "ib.cap.4": "Ask AI. Get answers.",
   "ib.cap.5": "IB Desk. Any screen.",
-  "ib.cap.brand": "TradeQuo · Partner Tools"
+  "ib.cap.brand": "TradeQuo · Partner Tools",
+  "ib.hero.kicker": "IB Tools · for creators",
+  "ib.hero.t1": "Your audience.",
+  "ib.hero.t2": "Your desk.",
+  "ib.hero.lead": "Share one link and see everyone who joins through it — clicks, sign-ups and your earnings in one simple dashboard.",
+  "ib.hero.sub": "No trading background needed. We run the platform — you bring the audience.",
+  "ib.hero.how": "See how it works"
 }

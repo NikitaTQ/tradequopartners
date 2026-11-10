@@ -1,12 +1,18 @@
 {
-  "ib.meta.title": "IB Tools — IB Desk na każdym ekranie | TradeQuo",
-  "ib.meta.description": "IB Desk dla partnerów TradeQuo: prowizje, aktywność klientów, Twoja sieć Sub-IB i odpowiedzi AI — na telefonie, tablecie, laptopie i komputerze.",
-  "ib.meta.ogDescription": "Prowizje, klienci, Twoja sieć Sub-IB i AI — IB Desk na każdym ekranie.",
+  "ib.meta.title": "Narzędzia IB · dla twórców — Twoi odbiorcy. Twój panel. | TradeQuo",
+  "ib.meta.description": "Udostępnij jeden link i zobacz wszystkich, którzy dołączają przez niego — kliknięcia, rejestracje i Twoje zarobki w jednym prostym panelu. Nie potrzebujesz doświadczenia w tradingu.",
+  "ib.meta.ogDescription": "Udostępnij jeden link i zobacz wszystkich, którzy dołączają przez niego — kliknięcia, rejestracje i Twoje zarobki w jednym prostym panelu.",
   "ib.hero.h1": "IB Tools: IB Desk na każdym ekranie",
   "ib.cap.1": "Każda prowizja. Pod kontrolą.",
   "ib.cap.2": "Twoi klienci. W kieszeni.",
   "ib.cap.3": "Zobacz całą swoją sieć.",
   "ib.cap.4": "Zapytaj AI. Otrzymaj odpowiedź.",
   "ib.cap.5": "IB Desk. Każdy ekran.",
-  "ib.cap.brand": "TradeQuo · Kit partnera"
+  "ib.cap.brand": "TradeQuo · Kit partnera",
+  "ib.hero.kicker": "Narzędzia IB · dla twórców",
+  "ib.hero.t1": "Twoi odbiorcy.",
+  "ib.hero.t2": "Twój panel.",
+  "ib.hero.lead": "Udostępnij jeden link i zobacz wszystkich, którzy dołączają przez niego — kliknięcia, rejestracje i Twoje zarobki w jednym prostym panelu.",
+  "ib.hero.sub": "Nie potrzebujesz doświadczenia w tradingu. My prowadzimy platformę — Ty przyprowadzasz odbiorców.",
+  "ib.hero.how": "Zobacz, jak to działa"
 }

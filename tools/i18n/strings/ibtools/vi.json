@@ -1,12 +1,18 @@
 {
-  "ib.meta.title": "IB Tools — IB Desk trên mọi màn hình | TradeQuo",
-  "ib.meta.description": "IB Desk dành cho đối tác TradeQuo: hoa hồng, hoạt động của khách hàng, mạng lưới Sub-IB và câu trả lời từ AI — trên điện thoại, máy tính bảng, laptop và máy tính để bàn.",
-  "ib.meta.ogDescription": "Hoa hồng, khách hàng, mạng lưới Sub-IB và AI — IB Desk trên mọi màn hình.",
+  "ib.meta.title": "Công cụ IB · dành cho nhà sáng tạo — Khán giả của bạn. Bảng điều khiển của bạn. | TradeQuo",
+  "ib.meta.description": "Chia sẻ một đường link và xem tất cả những người tham gia qua đó — lượt nhấp, lượt đăng ký và thu nhập của bạn trong một bảng điều khiển đơn giản. Không cần kinh nghiệm giao dịch.",
+  "ib.meta.ogDescription": "Chia sẻ một đường link và xem tất cả những người tham gia qua đó — lượt nhấp, lượt đăng ký và thu nhập của bạn trong một bảng điều khiển đơn giản.",
   "ib.hero.h1": "IB Tools: IB Desk trên mọi màn hình",
   "ib.cap.1": "Mọi khoản hoa hồng. Đều được theo dõi.",
   "ib.cap.2": "Khách hàng của bạn. Trong túi bạn.",
   "ib.cap.3": "Xem toàn bộ mạng lưới.",
   "ib.cap.4": "Hỏi AI. Nhận câu trả lời.",
   "ib.cap.5": "IB Desk. Mọi màn hình.",
-  "ib.cap.brand": "TradeQuo · Công cụ đối tác"
+  "ib.cap.brand": "TradeQuo · Công cụ đối tác",
+  "ib.hero.kicker": "Công cụ IB · dành cho nhà sáng tạo",
+  "ib.hero.t1": "Khán giả của bạn.",
+  "ib.hero.t2": "Bảng điều khiển của bạn.",
+  "ib.hero.lead": "Chia sẻ một đường link và xem tất cả những người tham gia qua đó — lượt nhấp, lượt đăng ký và thu nhập của bạn trong một bảng điều khiển đơn giản.",
+  "ib.hero.sub": "Không cần kinh nghiệm giao dịch. Chúng tôi vận hành nền tảng — bạn mang đến khán giả.",
+  "ib.hero.how": "Xem cách hoạt động"
 }

@@ -1,12 +1,18 @@
 {
-  "ib.meta.title": "IB Tools — IB Desk pe orice ecran | TradeQuo",
-  "ib.meta.description": "IB Desk pentru partenerii TradeQuo: comisioane, activitatea clienților, rețeaua ta de Sub-IB și răspunsuri de la AI — pe telefon, tabletă, laptop și desktop.",
-  "ib.meta.ogDescription": "Comisioane, clienți, rețeaua ta de Sub-IB și AI — IB Desk pe orice ecran.",
+  "ib.meta.title": "Instrumente IB · pentru creatori — Publicul tău. Panoul tău. | TradeQuo",
+  "ib.meta.description": "Distribuie un singur link și vezi pe toți cei care se alătură prin el — clicuri, înregistrări și câștigurile tale într-un singur panou simplu. Nu ai nevoie de experiență în trading.",
+  "ib.meta.ogDescription": "Distribuie un singur link și vezi pe toți cei care se alătură prin el — clicuri, înregistrări și câștigurile tale într-un singur panou simplu.",
   "ib.hero.h1": "IB Tools: IB Desk pe orice ecran",
   "ib.cap.1": "Fiecare comision. Urmărit.",
   "ib.cap.2": "Clienții tăi. În buzunar.",
   "ib.cap.3": "Vezi întreaga ta rețea.",
   "ib.cap.4": "Întreabă AI. Primește răspunsuri.",
   "ib.cap.5": "IB Desk. Orice ecran.",
-  "ib.cap.brand": "TradeQuo · Instrumente partener"
+  "ib.cap.brand": "TradeQuo · Instrumente partener",
+  "ib.hero.kicker": "Instrumente IB · pentru creatori",
+  "ib.hero.t1": "Publicul tău.",
+  "ib.hero.t2": "Panoul tău.",
+  "ib.hero.lead": "Distribuie un singur link și vezi pe toți cei care se alătură prin el — clicuri, înregistrări și câștigurile tale într-un singur panou simplu.",
+  "ib.hero.sub": "Nu ai nevoie de experiență în trading. Noi ne ocupăm de platformă — tu aduci publicul.",
+  "ib.hero.how": "Vezi cum funcționează"
 }

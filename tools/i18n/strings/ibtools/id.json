@@ -1,12 +1,18 @@
 {
-  "ib.meta.title": "IB Tools — IB Desk di layar apa pun | TradeQuo",
-  "ib.meta.description": "IB Desk untuk mitra TradeQuo: komisi, aktivitas klien, jaringan Sub-IB Anda, dan jawaban dari AI — di ponsel, tablet, laptop, dan desktop.",
-  "ib.meta.ogDescription": "Komisi, klien, jaringan Sub-IB Anda, dan AI — IB Desk di layar apa pun.",
+  "ib.meta.title": "Alat IB · untuk kreator — Audiens Anda. Dasbor Anda. | TradeQuo",
+  "ib.meta.description": "Bagikan satu tautan dan lihat semua orang yang bergabung melaluinya — klik, pendaftaran, dan penghasilan Anda dalam satu dasbor sederhana. Tidak perlu pengalaman trading.",
+  "ib.meta.ogDescription": "Bagikan satu tautan dan lihat semua orang yang bergabung melaluinya — klik, pendaftaran, dan penghasilan Anda dalam satu dasbor sederhana.",
   "ib.hero.h1": "IB Tools: IB Desk di layar apa pun",
   "ib.cap.1": "Setiap komisi. Tercatat.",
   "ib.cap.2": "Klien Anda. Di saku Anda.",
   "ib.cap.3": "Lihat seluruh jaringan Anda.",
   "ib.cap.4": "Tanya AI. Dapatkan jawaban.",
   "ib.cap.5": "IB Desk. Layar apa pun.",
-  "ib.cap.brand": "TradeQuo · Alat Mitra"
+  "ib.cap.brand": "TradeQuo · Alat Mitra",
+  "ib.hero.kicker": "Alat IB · untuk kreator",
+  "ib.hero.t1": "Audiens Anda.",
+  "ib.hero.t2": "Dasbor Anda.",
+  "ib.hero.lead": "Bagikan satu tautan dan lihat semua orang yang bergabung melaluinya — klik, pendaftaran, dan penghasilan Anda dalam satu dasbor sederhana.",
+  "ib.hero.sub": "Tidak perlu pengalaman trading. Kami yang menjalankan platformnya — Anda membawa audiens.",
+  "ib.hero.how": "Lihat cara kerjanya"
 }
