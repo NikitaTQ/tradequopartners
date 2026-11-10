@@ -131,8 +131,8 @@
             </div>
           </div>
         </div>
-        <script>/* the stage at its column's width (design: 920 px wide, at most 1.12x; phones: the 855 px around the dashboard); set before the first paint */
-(function(){var c=document.currentScript.previousElementSibling,f=function(){var d=parseFloat(getComputedStyle(c).getPropertyValue('--sw'))||920;c.style.setProperty('--s',Math.min(1.12,c.clientWidth/d).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
+        <script>/* the stage at its column's width (design: 920 px wide, at most 1.12x; phones: the 855 px around the dashboard); --s on the row (the text column uses it too); set before the first paint */
+(function(){var c=document.currentScript.previousElementSibling,f=function(){var d=parseFloat(getComputedStyle(c).getPropertyValue('--sw'))||920;c.parentNode.style.setProperty('--s',Math.min(1.12,c.clientWidth/d).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
       </div>
     </section>
 

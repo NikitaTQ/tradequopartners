@@ -2140,7 +2140,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibx { position: relative; overflow: hidden; display: flex; align-items: center; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px); color: #0a0a0a;
   background: radial-gradient(34% 44% at 72% 46%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 70%), radial-gradient(30% 40% at 20% 30%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%),
     linear-gradient(180deg, #fff 0, #e9eaec 110px); }   
-.tq-ibx__wrap { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(40px, 7vw, 88px) clamp(20px, 5.5vw, 80px); box-sizing: border-box;
+.tq-ibx__wrap { --s: .75; position: relative; width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(40px, 7vw, 88px) clamp(20px, 5.5vw, 80px); box-sizing: border-box;
   display: flex; flex-wrap: wrap; align-items: center; gap: clamp(28px, 4vw, 56px); }
 .tq-ibx__text { flex: 1 1 400px; max-width: 520px; min-width: 0; display: flex; flex-direction: column; gap: clamp(18px, 2.4vw, 28px); position: relative; z-index: 3; }
 .tq-ibx__h1 { --h1s: clamp(30px, 4vw, 54px); margin: 0; line-height: 1.1; letter-spacing: normal; padding-inline-start: 0; }   
@@ -2162,7 +2162,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibx__how:hover { color: #0a0a0a; background: linear-gradient(170deg, rgba(255,255,255,.95), rgba(255,255,255,.55)); }
 :lang(ar) .tq-ibx__go, :lang(ar) .tq-ibx__how, :lang(th) .tq-ibx__go, :lang(th) .tq-ibx__how, :lang(ja) .tq-ibx__go, :lang(ja) .tq-ibx__how,
 :lang(ko) .tq-ibx__go, :lang(ko) .tq-ibx__how, :lang(zh) .tq-ibx__go, :lang(zh) .tq-ibx__how { letter-spacing: .04em; font-size: 14px; }
-.tq-ibx__col { flex: 1.5 1 560px; min-width: 0; --s: .75; }
+.tq-ibx__col { flex: 1.5 1 560px; min-width: 0; }
 .tq-ibx__stage { position: relative; width: 100%; height: calc(640px * var(--s)); }
 .tq-ibx__scene { position: absolute; left: 0; top: 0; width: 920px; height: 640px; transform-origin: 0 0; transform: scale(var(--s)); font-family: 'Inter', sans-serif; color: #0a0a0a; }
 .tq-ibx__num { font-variant-numeric: tabular-nums; }
@@ -2170,6 +2170,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibx__sheen { position: absolute; top: -20%; bottom: -20%; left: 0; width: 34%; pointer-events: none; z-index: 4; transform: translateX(-130%) skewX(-18deg);
   background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,var(--a)) 50%, rgba(255,255,255,0) 100%); animation: ibxSheen 7s cubic-bezier(.45,0,.25,1) var(--d) infinite; }
 @media (prefers-reduced-motion: reduce) { .tq-ibx__sheen { display: none; } }
+@media (min-width: 641px) {
+  .tq-ibx { align-items: flex-start; }
+  .tq-ibx__wrap { align-items: flex-start; padding-top: calc(clamp(88px, 7.7vw, 118px) - 22px * var(--s)); }
+  .tq-ibx__text { margin-top: calc(22px * var(--s)); }
+  .tq-ibx__h1 { margin-top: -.15em; }
+}
 .tq-ibx__col--lot { --sw: 920; display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px; }
 .tq-ibx__col--lot .tq-ibx__stage { height: calc(660px * var(--s)); }
 .tq-ibx__col--lot .tq-ibx__scene { height: 660px; }
