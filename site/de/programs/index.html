@@ -1772,9 +1772,20 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-cut__n { font-size: 16px; padding: 4px 7px; border-radius: 7px; }
   .tp-cut__t, .tp-cut__i.is-on .tp-cut__t { font-size: 20px; }
   .tp-cut__i .tp-cut__m, .tp-cut__i.is-on .tp-cut__m { inset-inline-end: 6px; transform: translateY(-50%) scale(.46); }
-  .tp-cut__p { -webkit-backdrop-filter: none; backdrop-filter: none; background: linear-gradient(170deg, rgba(255,255,255,.6), rgba(255,255,255,.3)); }   
-  .tp-cut__p.is-on { background: linear-gradient(170deg, rgba(255,255,255,.6), rgba(255,255,255,.3)); }
-  .tp-cut__p--dark, .tp-cut__p--dark.is-on { background: linear-gradient(170deg, rgba(40,42,48,.95), rgba(10,10,12,.97)); }
+  .tp-cut__blobs i:nth-child(1) { filter: blur(28px); opacity: .34; }
+  .tp-cut__blobs i:nth-child(2) { filter: blur(32px); opacity: .42; }
+  .tp-cut__blobs i:nth-child(3) { filter: blur(9px); }
+  .tp-cut__blobs i:nth-child(4) { filter: blur(12px); opacity: .5; }
+  .tp-cut__blobs i:nth-child(5) { filter: blur(6px); }
+  .tp-cut__blobs i:nth-child(6) { filter: blur(9px); opacity: .42; }
+  .tp-cut__p, .tp-cut__p.is-on { background: linear-gradient(170deg, rgba(255,255,255,.3), rgba(255,255,255,.08));
+    -webkit-backdrop-filter: blur(10px) saturate(185%) brightness(1.08); backdrop-filter: blur(10px) saturate(185%) brightness(1.08); }
+  html.tq-liquid .tp-cut__p { backdrop-filter: url(#tq-liquid) blur(2px) saturate(185%) brightness(1.08); }
+  .tp-cut__p--dark, .tp-cut__p--dark.is-on { background: linear-gradient(170deg, rgba(36,37,42,.8), rgba(8,8,10,.88)); }
+  .tp-cut__i::before { content: ''; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+    background: radial-gradient(70% 80% at 16% 0%, rgba(255,255,255,.5), rgba(255,255,255,0) 70%); }
+  .tp-cut__i--dark::before { background: radial-gradient(70% 80% at 16% 0%, rgba(255,255,255,.16), rgba(255,255,255,0) 70%); }
+  .tp-cut__i .tp-cut__l { position: relative; inset: auto; z-index: 1; }   
   .tp-cut__ask { width: 100%; justify-content: space-between; font-size: 16px; padding-block: 6px; }
 }
 .tp-tv { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 64px; border-radius: 32px; background: #070708; color: #fff; text-align: center; }
@@ -2571,6 +2582,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=abc2ef9237" defer></script>
+<script src="../../assets/js/landing.js?v=30ef5160e3" defer></script>
 </body>
 </html>
