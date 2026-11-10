@@ -2123,6 +2123,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibh__film, .tq-ibh__box { position: absolute; inset: 0; }
 .tq-ibh__scene { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; pointer-events: none; }
 .tq-ibh__box.is-tall .tq-ibh__scene { top: 44%; }
+.tq-ibh__video { position: absolute; left: 0; top: 44%; display: block; width: 100%; height: auto; aspect-ratio: 1080 / 1060; transform: translateY(-50%); object-fit: cover;
+  background: transparent; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 92%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 92%, transparent 100%); }
 .tq-ibh__cap { position: absolute; left: 16px; right: 16px; bottom: calc(52px * var(--k, 1)); display: flex; flex-direction: column; align-items: center; gap: calc(12px * var(--k, 1));
   text-align: center; pointer-events: none; will-change: opacity, transform; }
 .tq-ibh__line { --h2s: max(13px, calc(26px * var(--k, 1))); max-width: min(100%, 1100px); margin: 0; letter-spacing: .03em; padding-inline-start: .03em; color: #0a0a0a; }
@@ -2190,7 +2192,7 @@ h1, h2 { line-height: 1.2 !important; }
         <li class="tq-h2">اسأل الذكاء الاصطناعي. واحصل على إجابات.</li>
         <li class="tq-h2">IB Desk. على أي شاشة.</li>
       </ol>
-      <div class="tq-ibh__film" data-ib-film data-brand="TradeQuo · أدوات الشركاء" aria-hidden="true" translate="no"></div>
+      <div class="tq-ibh__film" data-ib-film data-brand="TradeQuo · أدوات الشركاء" data-src="../../assets/ib/ib-film-phone.mp4?v=1c0cd9c50a" data-poster="../../assets/ib/ib-film-phone.webp?v=15f74ee907" aria-hidden="true" translate="no"></div>
     </section>
   </main>
 
@@ -2206,6 +2208,6 @@ h1, h2 { line-height: 1.2 !important; }
 <script src="../../assets/js/landing.js?v=30ef5160e3" defer></script>
 <script src="../../vendor/react@18.3.1/react.production.min.js?v=aa77ae4c49" defer></script>
 <script src="../../vendor/react@18.3.1/react-dom.production.min.js?v=feb8ddc9d0" defer></script>
-<script src="../../assets/js/ib-film.js?v=21d6326c48" defer></script>
+<script src="../../assets/js/ib-film.js?v=82abc348a9" defer></script>
 </body>
 </html>
