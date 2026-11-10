@@ -70,16 +70,28 @@
 @font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/black-han-sans.woff2?v=9bbfd6e95b) format('woff2'); }
 @font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/zcool-qingke-sc.woff2?v=92ee9f4555) format('woff2'); }
 @font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/noto-sans-tc.woff2?v=4780b54696) format('woff2'); }
-.tq-h1 { --h1f: 'TQ H1 Syncopate'; --h1s: clamp(22px, 3.1vw, 44px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h1f), 'Inter', sans-serif; font-size: calc(var(--h1s) * var(--h1k, 1));
+@font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/syncopate-h2.woff2?v=ba9e179b52) format('woff2'); }
+@font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/unbounded-h2.woff2?v=ffc16ebd24) format('woff2'); }
+@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/reem-kufi-h2.woff2?v=3f0c4567e0) format('woff2'); }
+@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/prompt-h2.woff2?v=86fcc56da1) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/dela-gothic-one-h2.woff2?v=0e0c4c9fe4) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/black-han-sans-h2.woff2?v=8c412278fe) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=9ce02d7215) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/noto-sans-tc-h2.woff2?v=f6b42ee436) format('woff2'); }
+html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
+html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
+html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
+html:lang(th) { --h1f: 'TQ H1 Prompt'; --h2f: 'TQ H2 Prompt'; }
+html:lang(ja) { --h1f: 'TQ H1 Dela Gothic One'; --h2f: 'TQ H2 Dela Gothic One'; }
+html:lang(ko) { --h1f: 'TQ H1 Black Han Sans'; --h2f: 'TQ H2 Black Han Sans'; }
+html:lang(zh-Hans) { --h1f: 'TQ H1 ZCOOL SC'; --h2f: 'TQ H2 ZCOOL SC'; }
+html:lang(zh-Hant) { --h1f: 'TQ H1 Noto TC'; --h2f: 'TQ H2 Noto TC'; }
+.tq-h1 { --h1s: clamp(22px, 3.1vw, 44px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h1f), 'Inter', sans-serif; font-size: calc(var(--h1s) * var(--h1k, 1));
   font-weight: 700; font-synthesis: none; line-height: 1.12; letter-spacing: .15em; text-transform: uppercase; text-wrap: balance; }   
-:lang(uk) .tq-h1, :lang(vi) .tq-h1, :lang(ro) .tq-h1 { --h1f: 'TQ H1 Unbounded'; }
-:lang(ar) .tq-h1 { --h1f: 'TQ H1 Reem Kufi'; }
-:lang(th) .tq-h1 { --h1f: 'TQ H1 Prompt'; }
-:lang(ja) .tq-h1 { --h1f: 'TQ H1 Dela Gothic One'; }
-:lang(ko) .tq-h1 { --h1f: 'TQ H1 Black Han Sans'; }
-:lang(zh-Hans) .tq-h1 { --h1f: 'TQ H1 ZCOOL SC'; }
-:lang(zh-Hant) .tq-h1 { --h1f: 'TQ H1 Noto TC'; }
 :lang(ar) .tq-h1, :lang(th) .tq-h1, :lang(ja) .tq-h1, :lang(ko) .tq-h1, :lang(zh) .tq-h1 { --h1k: 1.45; padding-inline-start: 0; text-transform: none; }   
+.tq-h2 { --h2s: clamp(20px, 2.1vw, 30px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h2f), 'Inter', sans-serif; font-size: calc(var(--h2s) * var(--h2k, 1));
+  font-weight: 700; font-synthesis: none; line-height: 1.2; letter-spacing: .15em; text-transform: uppercase; text-wrap: balance; }
+:lang(ar) .tq-h2, :lang(th) .tq-h2, :lang(ja) .tq-h2, :lang(ko) .tq-h2, :lang(zh) .tq-h2 { --h2k: 1.3; padding-inline-start: 0; text-transform: none; }
 html, body { margin: 0; padding: 0; background: #ffffff; }
 html { overflow-x: hidden; overscroll-behavior-x: none; }
 * { box-sizing: border-box; }
@@ -295,7 +307,7 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 .tq-done { --in: 0; position: relative; z-index: 3; align-self: start; display: flex; flex-direction: column; align-items: center; padding: 72px 0 40px; text-align: center; color: #0e0e10; font-family: 'Inter', system-ui, sans-serif; }
 .tq-done[hidden] { display: none; }
 .is-done > .tq-done { --in: 1; }
-.tq-done__title { margin: 0; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 46px; line-height: 1; letter-spacing: .01em; outline: none;
+.tq-done__title { margin: 0; outline: none;
   opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px)); transition: opacity .45s ease .5s, transform .6s cubic-bezier(.2, .8, .2, 1) .5s; }
 .tq-done__title span { color: #e7131b; }
 .tq-done__art { width: min(440px, 100%); margin-top: 40px; container-type: inline-size; }
@@ -354,7 +366,6 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 .tq-done__go:focus-visible, .tq-done__link:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; }
 @media (max-width: 640px) {
   .tq-done { padding: 36px 0 28px; }
-  .tq-done__title { font-size: 36px; }
   .tq-done__art { margin-top: 26px; }
   .tq-done__cta { margin-top: 40px; }
 }
@@ -411,7 +422,6 @@ html { scroll-snap-type: y proximity; }
   #signup [data-hero-field] { min-height: 0 !important; }
   #signup [data-hero-stage] { width: min(380px, 92%) !important; transform: none !important; }
   #signup form[data-agreement] { padding: 30px 20px 22px !important; gap: 10px !important; }
-  #signup form[data-agreement] h2 { font-size: 34px !important; }
   #signup form[data-agreement] [data-seal] { display: none !important; }
   #signup form[data-agreement] label { gap: 6px !important; }
   #signup form[data-agreement] label > span:first-child { padding-left: 0 !important; }
@@ -807,7 +817,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-pc__glow { position: absolute; right: 120px; top: 250px; width: 560px; height: 220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.32), rgba(231,19,27,0)); pointer-events: none; }
 [dir="rtl"] .tq-pc__glow { right: auto; left: 120px; }
 .tq-pc__head { position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
-.tq-pc__title { margin: 0; font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -.055em; color: #fff; text-wrap: balance; }
+.tq-pc__title { margin: 0; color: #fff; }   
 .tq-pc__sub { margin: 0; max-width: 380px; padding-bottom: 6px; font-size: 18px; line-height: 1.5; color: #b4b7bd; text-wrap: pretty; }
 .tq-pc__sub br { display: none; }
 .tq-pc__grid { position: relative; display: grid; grid-template-columns: 500px minmax(0, 1fr); gap: 56px; align-items: start; }
@@ -881,7 +891,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (prefers-reduced-motion: reduce) { .tq-pc__per [data-inv-per-thumb], .tq-pc__knob, .tq-pc__total [data-inv-total] { transition: none; } }
 @media (max-width: 1180px) {
   .tq-pc { padding: 64px 40px 72px; gap: 48px; }
-  .tq-pc__title { font-size: 54px; }
   .tq-pc__grid { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 36px; }
   .tq-pc__paper { margin-inline: 16px; padding: 36px 26px 56px; }
   .tq-pc__glow { right: 40px; }
@@ -898,7 +907,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-pc__val b { font-size: 38px; }
   .tq-pc { padding: 52px 28px 60px; gap: 36px; border-radius: 28px; }
   .tq-pc__head { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .tq-pc__title { font-size: 46px; }
   .tq-pc__sub { max-width: 520px; padding-bottom: 0; }
   .tq-pc__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; max-width: 560px; margin: 0 auto; width: 100%; }
   .tq-pc__glow { top: auto; bottom: 120px; right: -80px; }
@@ -906,7 +914,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (max-width: 640px) {
   .tq-pc { padding: 40px 16px 44px; gap: 28px; border-radius: 24px; }
   .tq-pc__head { padding: 0 4px; }
-  .tq-pc__title { font-size: 34px; letter-spacing: -.045em; }
   .tq-pc__sub { font-size: 16px; }
   .tq-pc__grid { gap: 14px; }
   .tq-pc__slot { height: 20px; border-radius: 10px; padding: 0 14px; }
