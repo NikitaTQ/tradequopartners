@@ -1,12 +1,18 @@
 {
-  "ib.meta.title": "IB Tools — 任何屏幕上的 IB Desk | TradeQuo",
-  "ib.meta.description": "面向 TradeQuo 合作伙伴的 IB Desk：佣金、客户活动、您的下级IB网络和 AI 解答，手机、平板、笔记本和台式机均可使用。",
-  "ib.meta.ogDescription": "佣金、客户、下级IB网络和 AI——任何屏幕上的 IB Desk。",
+  "ib.meta.title": "IB工具 · 面向创作者 — 您的受众。您的工作台。 | TradeQuo",
+  "ib.meta.description": "分享一个链接，即可看到通过它加入的每一个人——点击、注册和您的收益，尽在一个简洁的仪表板中。无需交易经验。",
+  "ib.meta.ogDescription": "分享一个链接，即可看到通过它加入的每一个人——点击、注册和您的收益，尽在一个简洁的仪表板中。",
   "ib.hero.h1": "IB Tools：任何屏幕上的 IB Desk",
   "ib.cap.1": "每一笔佣金。都有记录。",
   "ib.cap.2": "您的客户。尽在掌中。",
   "ib.cap.3": "整个网络。一目了然。",
   "ib.cap.4": "向 AI 提问。获得解答。",
   "ib.cap.5": "IB Desk。任何屏幕。",
-  "ib.cap.brand": "TradeQuo · 合作伙伴工具"
+  "ib.cap.brand": "TradeQuo · 合作伙伴工具",
+  "ib.hero.kicker": "IB工具 · 面向创作者",
+  "ib.hero.t1": "您的受众。",
+  "ib.hero.t2": "您的工作台。",
+  "ib.hero.lead": "分享一个链接，即可看到通过它加入的每一个人——点击、注册和您的收益，尽在一个简洁的仪表板中。",
+  "ib.hero.sub": "无需交易经验。平台由我们运营——您只需带来受众。",
+  "ib.hero.how": "了解运作方式"
 }

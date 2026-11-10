@@ -1,12 +1,18 @@
 {
-  "ib.meta.title": "IB Tools — IB Desk en cualquier pantalla | TradeQuo",
-  "ib.meta.description": "IB Desk para socios de TradeQuo: comisiones, actividad de clientes, tu red de Sub-IB y respuestas de la IA, en móvil, tableta, portátil y ordenador.",
-  "ib.meta.ogDescription": "Comisiones, clientes, tu red de Sub-IB y la IA: IB Desk en cualquier pantalla.",
+  "ib.meta.title": "Herramientas IB · para creadores — Tu audiencia. Tu panel. | TradeQuo",
+  "ib.meta.description": "Comparte un solo enlace y ve a todos los que se unen a través de él: clics, registros y tus ganancias en un panel sencillo. No necesitas experiencia en trading.",
+  "ib.meta.ogDescription": "Comparte un solo enlace y ve a todos los que se unen a través de él: clics, registros y tus ganancias en un panel sencillo.",
   "ib.hero.h1": "IB Tools: IB Desk en cualquier pantalla",
   "ib.cap.1": "Cada comisión. Registrada.",
   "ib.cap.2": "Tus clientes. En tu bolsillo.",
   "ib.cap.3": "Mira toda tu red.",
   "ib.cap.4": "Pregunta a la IA. Obtén respuestas.",
   "ib.cap.5": "IB Desk. Cualquier pantalla.",
-  "ib.cap.brand": "TradeQuo · Herramientas para socios"
+  "ib.cap.brand": "TradeQuo · Herramientas para socios",
+  "ib.hero.kicker": "Herramientas IB · para creadores",
+  "ib.hero.t1": "Tu audiencia.",
+  "ib.hero.t2": "Tu panel.",
+  "ib.hero.lead": "Comparte un solo enlace y ve a todos los que se unen a través de él: clics, registros y tus ganancias en un panel sencillo.",
+  "ib.hero.sub": "No necesitas experiencia en trading. Nosotros gestionamos la plataforma; tú aportas la audiencia.",
+  "ib.hero.how": "Mira cómo funciona"
 }
