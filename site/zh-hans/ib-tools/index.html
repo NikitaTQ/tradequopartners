@@ -2172,7 +2172,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibx__sheen { position: absolute; top: -20%; bottom: -20%; left: 0; width: 34%; pointer-events: none; z-index: 4; transform: translateX(-130%) skewX(-18deg);
   background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,var(--a)) 50%, rgba(255,255,255,0) 100%); animation: ibxSheen 7s cubic-bezier(.45,0,.25,1) var(--d) infinite; }
 @media (prefers-reduced-motion: reduce) { .tq-ibx__sheen { display: none; } }
-.tq-ibx__col--lot { display: flex; flex-direction: column; gap: 16px; container-type: inline-size; scroll-margin-top: 96px; }
+.tq-ibx__col--lot { --sw: 920; display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px; }
 .tq-ibx__col--lot .tq-ibx__stage { height: calc(660px * var(--s)); }
 .tq-ibx__col--lot .tq-ibx__scene { height: 660px; }
 .tq-ibx__co { position: absolute; display: flex; justify-content: center; }
@@ -2183,10 +2183,29 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibx__pill--dark { background: #0a0a0a; border-color: #0a0a0a; color: #fff; }
 .tq-ibx__pill--dark b { color: #ff4148; }
 .tq-ibx__chips { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); list-style: none; }
-@container (max-width: 599px) {
+@media (max-width: 640px) {
+  .tq-ibx__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 16px; padding-top: 18px; padding-bottom: 40px; }
+  .tq-ibx__text { display: contents; }
+  .tq-ibx__kick { order: 1; }
+  .tq-ibx__h1 { order: 2; }
+  .tq-ibx__col { order: 3; }
+  .tq-ibx__ctas { order: 4; flex-direction: column; gap: 10px; padding-top: 0; }
+  .tq-ibx__lead { order: 5; padding-top: 6px; }
+  .tq-ibx__sub { order: 6; margin-top: -4px; }
+  .tq-ibx__chips { order: 7; }
+  .tq-ibx__go { justify-content: space-between; }
+  .tq-ibx__how { justify-content: center; }
+  .tq-ibx__col--lot { --sw: 855; flex: none; margin-inline: calc(-1 * clamp(20px, 5.5vw, 80px)); }
+  .tq-ibx__col--lot .tq-ibx__stage { height: calc(550px * var(--s)); }
+  .tq-ibx__col--lot .tq-ibx__scene { left: calc(-45px * var(--s)); top: calc(-70px * var(--s)); }
   .tq-ibx__callouts { display: none; }
   .tq-ibx__chips { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip-path: none; display: flex; flex-wrap: wrap; gap: 8px; }
   .tq-ibx__chips .tq-ibx__pill { height: 34px; padding: 0 13px; gap: 8px; font-size: 12.5px; box-shadow: 0 10px 18px -14px rgba(18,22,30,.45); }
+}
+@media (max-width: 640px) and (max-height: 600px) {   
+  .tq-ibx__wrap { gap: 10px; padding-top: 10px; }
+  .tq-ibx__kick { display: none; }
+  .tq-ibx__h1 { --h1s: 24px; }
 }
 @media (max-width: 640px) { .tq-ibx { min-height: 0; } }
 </style>
@@ -2231,8 +2250,9 @@ html:lang(ko) * { word-break: keep-all; }
   <main>
     <!-- Hero (IB_Tools_Hero_Every_Lot design): static. Left the pitch for partners and two buttons, right the IB Desk
          dashboard (illustrative data) on a 920x660 stage scaled to its column (--s, set by the script after it: the
-         column's width / 920, at most 1.12), with five numbered callouts naming the tools; where the column is narrower
-         than 600px the callouts give way to a row of chips under the stage. A sheen crosses the two big panes every 7 s
+         column's width / 920, at most 1.12), with five numbered callouts naming the tools. Phones (up to 640px): the title,
+         then the dashboard across the screen (the stage cropped to it), then the buttons, all in the first screen; the
+         lead, the sub line and the tools as a row of chips below. A sheen crosses the two big panes every 7 s
          (not with reduced motion). The dashboard is product UI: English in every language; the callouts are translated.
          The previous heroes (the devices film; the creators dashboard) are in the git history. -->
     <section id="desk" class="tq-ibx" data-screen-label="IB Tools hero · Every lot">
@@ -2246,6 +2266,13 @@ html:lang(ko) * { word-break: keep-all; }
             <a class="tq-ibx__go" href="../#signup" data-page-link data-label="加载中 · 首页"><span>获取访问权限</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             <a class="tq-ibx__how" href="#ib-tools">了解IB工具</a>
           </div>
+          <ol class="tq-ibx__chips">
+            <li class="tq-ibx__pill"><b>01</b>按手返佣</li>
+            <li class="tq-ibx__pill"><b>02</b>流失与活跃度</li>
+            <li class="tq-ibx__pill"><b>03</b>按品种交易量</li>
+            <li class="tq-ibx__pill"><b>04</b>多层级下级IB</li>
+            <li class="tq-ibx__pill tq-ibx__pill--dark"><b>05</b>AI洞察</li>
+          </ol>
         </div>
 
         <div class="tq-ibx__col tq-ibx__col--lot" id="ib-tools">
@@ -2328,16 +2355,9 @@ html:lang(ko) * { word-break: keep-all; }
               </div>
             </div>
           </div>
-          <ol class="tq-ibx__chips">
-            <li class="tq-ibx__pill"><b>01</b>按手返佣</li>
-            <li class="tq-ibx__pill"><b>02</b>流失与活跃度</li>
-            <li class="tq-ibx__pill"><b>03</b>按品种交易量</li>
-            <li class="tq-ibx__pill"><b>04</b>多层级下级IB</li>
-            <li class="tq-ibx__pill tq-ibx__pill--dark"><b>05</b>AI洞察</li>
-          </ol>
         </div>
-        <script>/* the stage at its column's width (design: 920 px wide, at most 1.12x); set before the first paint */
-(function(){var c=document.currentScript.previousElementSibling,f=function(){c.style.setProperty('--s',Math.min(1.12,c.clientWidth/920).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
+        <script>/* the stage at its column's width (design: 920 px wide, at most 1.12x; phones: the 855 px around the dashboard); set before the first paint */
+(function(){var c=document.currentScript.previousElementSibling,f=function(){var d=parseFloat(getComputedStyle(c).getPropertyValue('--sw'))||920;c.style.setProperty('--s',Math.min(1.12,c.clientWidth/d).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
       </div>
     </section>
   </main>
