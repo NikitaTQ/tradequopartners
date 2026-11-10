@@ -33,16 +33,17 @@ PAGES = [
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
     {'id': 'marketing', 'template': 'marketing.html', 'slug': 'partner-tools', 'css': 'partner'},   # was marketing-tools (netlify.toml redirects)
-    # IB Tools: the hero only for now; not in NAV yet, no table of contents (fan, FAB); its display text is the
+    # IB Tools: the hero only for now; no table of contents yet (fan, FAB); its display text is the
     # captions (tq-h2), so the page preloads the H2 face instead of the H1 one
     {'id': 'ibtools', 'template': 'ibtools.html', 'slug': 'ib-tools', 'css': 'partner', 'display': 'h2'},
 ]
-# The site navigation in the header: the four pages, in this order (page id, path under the language root, label).
+# The site navigation in the header: the five pages, in this order (page id, path under the language root, label).
 NAV = [
     ('landing', '', 'fan.home'),
     ('programs', 'programs/', 'fan.programs'),
     ('commission', 'partner-terms/', 'fan.commission'),
     ('marketing', 'partner-tools/', 'fan.marketing'),
+    ('ibtools', 'ib-tools/', 'fan.ibtools'),
 ]
 # Each page's table of contents: the fan bottom right on desktop, the red menu on phones (section id, label).
 TOC = {
@@ -185,7 +186,7 @@ SHORT = {'zh-hans': '简体', 'zh-hant': '繁體'}
 
 
 def switcher(cur, s, slug='', page_id='landing', home=''):
-    # below 1140px the site navigation lives here: the four pages first, then "Language" and the languages
+    # below 1140px the site navigation lives here: the five pages first, then "Language" and the languages
     items = []
     for pid, path, key in NAV:
         if pid == page_id:
@@ -231,7 +232,7 @@ def page_href(home, path):
 
 
 def site_nav(home, page_id):
-    """The header's links to the four pages; the page you are on is marked (and takes you back to its top)."""
+    """The header's links to the five pages; the page you are on is marked (and takes you back to its top)."""
     out = []
     for pid, path, key in NAV:
         if pid == page_id:

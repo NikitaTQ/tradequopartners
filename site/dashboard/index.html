@@ -494,7 +494,15 @@ html { scroll-snap-type: y proximity; }
   .tq-lang__btn .tq-lang__burger { display: block; }
   .tq-lang__menu .tq-lang__page { display: block; }
 }
-@media (min-width: 1140px) and (max-width: 1279px) { header nav { gap: 18px !important; } .tq-nav-link { font-size: 14px; } }
+@media (min-width: 1140px) and (max-width: 1279px) { header nav { gap: 16px !important; } header .tq-nav-link { font-size: 14px; } }
+@media (min-width: 1280px) and (max-width: 1439px) { html:lang(es) header nav, html:lang(pt) header nav, html:lang(pl) header nav, html:lang(uk) header nav { gap: 16px !important; } html:lang(es) .tq-nav-link, html:lang(pt) .tq-nav-link, html:lang(pl) .tq-nav-link, html:lang(uk) .tq-nav-link { font-size: 14px; } }
+@media (min-width: 1140px) and (max-width: 1219px) {
+  html:lang(es) [data-fanmenu], html:lang(es) [data-fanveil], html:lang(es) [data-navlinks], html:lang(pt) [data-fanmenu], html:lang(pt) [data-fanveil], html:lang(pt) [data-navlinks], html:lang(pl) [data-fanmenu], html:lang(pl) [data-fanveil], html:lang(pl) [data-navlinks], html:lang(uk) [data-fanmenu], html:lang(uk) [data-fanveil], html:lang(uk) [data-navlinks] { display: none !important; }
+  html:lang(es) [data-fab], html:lang(pt) [data-fab], html:lang(pl) [data-fab], html:lang(uk) [data-fab] { display: flex !important; }
+  html:lang(es) .tq-lang__btn .tq-lang__globe, html:lang(pt) .tq-lang__btn .tq-lang__globe, html:lang(pl) .tq-lang__btn .tq-lang__globe, html:lang(uk) .tq-lang__btn .tq-lang__globe { display: none; }
+  html:lang(es) .tq-lang__btn .tq-lang__burger, html:lang(pt) .tq-lang__btn .tq-lang__burger, html:lang(pl) .tq-lang__btn .tq-lang__burger, html:lang(uk) .tq-lang__btn .tq-lang__burger { display: block; }
+  html:lang(es) .tq-lang__menu .tq-lang__page, html:lang(pt) .tq-lang__menu .tq-lang__page, html:lang(pl) .tq-lang__menu .tq-lang__page, html:lang(uk) .tq-lang__menu .tq-lang__page { display: block; }
+}
 @media (max-height: 640px) { [data-fab-list] { max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; padding: 10px 14px; margin: -10px -14px; } }
 [data-fanmenu] > div:hover { z-index: 9 !important; }
 @keyframes tqFanVeil { from { opacity: 0; } to { opacity: 1; } }

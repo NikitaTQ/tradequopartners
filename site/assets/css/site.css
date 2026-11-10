@@ -515,7 +515,7 @@ html { scroll-snap-type: y proximity; }
   [data-fab] { display: flex !important; }
 }
 /* The site navigation fits the header from 1140px (every language); there the fan bottom right is this page's table of contents.
-   Narrower (and on a phone on its side) the four pages move into the header's language button, which turns into a
+   Narrower (and on a phone on its side) the five pages move into the header's language button, which turns into a
    menu (☰: the pages, then "Language" and the languages), and the red button bottom right is the table of contents. */
 @media (max-width: 1139px), (max-height: 460px) {
   [data-fanmenu], [data-fanveil], [data-navlinks] { display: none !important; }
@@ -524,7 +524,18 @@ html { scroll-snap-type: y proximity; }
   .tq-lang__btn .tq-lang__burger { display: block; }
   .tq-lang__menu .tq-lang__page { display: block; }
 }
-@media (min-width: 1140px) and (max-width: 1279px) { header nav { gap: 18px !important; } .tq-nav-link { font-size: 14px; } }
+/* (header .tq-nav-link: the base 15px is declared further down and would win over a bare .tq-nav-link here) */
+@media (min-width: 1140px) and (max-width: 1279px) { header nav { gap: 16px !important; } header .tq-nav-link { font-size: 14px; } }
+/* five pages in the row: the longest languages (es, pt, pl, uk) keep that compact row up to 1439px, and below 1220px
+   they use the menu, as every language does below 1140px */
+@media (min-width: 1280px) and (max-width: 1439px) { html:lang(es) header nav, html:lang(pt) header nav, html:lang(pl) header nav, html:lang(uk) header nav { gap: 16px !important; } html:lang(es) .tq-nav-link, html:lang(pt) .tq-nav-link, html:lang(pl) .tq-nav-link, html:lang(uk) .tq-nav-link { font-size: 14px; } }
+@media (min-width: 1140px) and (max-width: 1219px) {
+  html:lang(es) [data-fanmenu], html:lang(es) [data-fanveil], html:lang(es) [data-navlinks], html:lang(pt) [data-fanmenu], html:lang(pt) [data-fanveil], html:lang(pt) [data-navlinks], html:lang(pl) [data-fanmenu], html:lang(pl) [data-fanveil], html:lang(pl) [data-navlinks], html:lang(uk) [data-fanmenu], html:lang(uk) [data-fanveil], html:lang(uk) [data-navlinks] { display: none !important; }
+  html:lang(es) [data-fab], html:lang(pt) [data-fab], html:lang(pl) [data-fab], html:lang(uk) [data-fab] { display: flex !important; }
+  html:lang(es) .tq-lang__btn .tq-lang__globe, html:lang(pt) .tq-lang__btn .tq-lang__globe, html:lang(pl) .tq-lang__btn .tq-lang__globe, html:lang(uk) .tq-lang__btn .tq-lang__globe { display: none; }
+  html:lang(es) .tq-lang__btn .tq-lang__burger, html:lang(pt) .tq-lang__btn .tq-lang__burger, html:lang(pl) .tq-lang__btn .tq-lang__burger, html:lang(uk) .tq-lang__btn .tq-lang__burger { display: block; }
+  html:lang(es) .tq-lang__menu .tq-lang__page, html:lang(pt) .tq-lang__menu .tq-lang__page, html:lang(pl) .tq-lang__menu .tq-lang__page, html:lang(uk) .tq-lang__menu .tq-lang__page { display: block; }
+}
 /* a short screen (a phone on its side) scrolls the menu's list */
 @media (max-height: 640px) { [data-fab-list] { max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; padding: 10px 14px; margin: -10px -14px; } }
 [data-fanmenu] > div:hover { z-index: 9 !important; }
@@ -596,7 +607,7 @@ html { scroll-snap-type: y proximity; }
 .hv-fan-knob:hover { transform: scale(1.06) !important; box-shadow: 0 1px 2px rgba(10,10,10,.08), 0 0 0 1px rgba(231,19,27,.2), 0 26px 40px -20px rgba(231,19,27,.38) !important; }
 .hv-ink-border:hover { border-color: #0a0a0a !important; }
 
-/* ---- site navigation (header): the four pages; the one you are on in black with a red dot under it ------- */
+/* ---- site navigation (header): the five pages; the one you are on in black with a red dot under it ------- */
 .tq-nav-link { position: relative; font-size: 15px; color: #45474d; letter-spacing: -.01em; white-space: nowrap; }
 .tq-nav-link[aria-current="page"] { color: #0a0a0a; font-weight: 600; }
 .tq-nav-link[aria-current="page"]::after { content: ''; position: absolute; left: 50%; bottom: -9px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: #e7131b; }
