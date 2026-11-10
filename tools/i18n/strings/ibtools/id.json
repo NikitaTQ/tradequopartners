@@ -30,5 +30,22 @@
   "ib.tool.5": "Insight AI",
   "ib.hole.s1": "Tarikan",
   "ib.hole.s2": "Setiap lot",
-  "ib.hole.s3": "Setiap tingkat"
+  "ib.hole.s3": "Setiap tingkat",
+  "ib.net.t1": "Seluruh jaringan Anda.",
+  "ib.net.t2": "Aktif dalam <red>2 jam.</red>",
+  "ib.net.lead": "Pindahkan setiap Sub-IB dan setiap klien rujukan sekaligus — sedalam apa pun struktur Anda.",
+  "ib.net.sub": "Tim kami memetakan jaringan Anda tingkat demi tingkat dan menyerahkannya dalam keadaan aktif di IB Desk. Anda meninjau, menyetujui, dan mulai melacak di hari yang sama.",
+  "ib.net.go": "Jadwalkan onboarding",
+  "ib.net.p1t": "Tingkat tanpa batas",
+  "ib.net.p1d": "Setiap Sub-IB dan setiap klien, di kedalaman mana pun.",
+  "ib.net.p2t": "Aktif dalam 2 jam",
+  "ib.net.p2d": "Dari file pertama Anda hingga jaringan yang aktif.",
+  "ib.net.p3t": "Kami yang mengerjakan",
+  "ib.net.p3d": "Tim kami memetakan setiap tingkat dan memeriksanya bersama Anda.",
+  "ib.net.clients": "Klien rujukan",
+  "ib.net.deeper": "+ Tingkat lebih dalam, tanpa batas",
+  "ib.net.tier2": "Tingkat 2",
+  "ib.net.c3": "3 klien",
+  "ib.net.c4": "4 klien",
+  "ib.net.c5": "5 klien"
 }

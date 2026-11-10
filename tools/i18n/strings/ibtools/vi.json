@@ -30,5 +30,22 @@
   "ib.tool.5": "Phân tích AI",
   "ib.hole.s1": "Lực hút",
   "ib.hole.s2": "Mọi lot",
-  "ib.hole.s3": "Mọi cấp"
+  "ib.hole.s3": "Mọi cấp",
+  "ib.net.t1": "Toàn bộ mạng lưới của bạn.",
+  "ib.net.t2": "Hoạt động sau <red>2 giờ.</red>",
+  "ib.net.lead": "Chuyển mọi Sub-IB và mọi khách hàng được giới thiệu chỉ trong một lần — dù cấu trúc của bạn sâu đến đâu.",
+  "ib.net.sub": "Đội ngũ của chúng tôi lập bản đồ mạng lưới của bạn theo từng cấp và bàn giao hoạt động ngay trong IB Desk. Bạn xem lại, phê duyệt và bắt đầu theo dõi ngay trong ngày.",
+  "ib.net.go": "Đặt lịch onboarding",
+  "ib.net.p1t": "Không giới hạn cấp",
+  "ib.net.p1d": "Mọi Sub-IB và mọi khách hàng, ở bất kỳ cấp nào.",
+  "ib.net.p2t": "Hoạt động sau 2 giờ",
+  "ib.net.p2d": "Từ tệp đầu tiên đến mạng lưới hoạt động.",
+  "ib.net.p3t": "Chúng tôi làm thay bạn",
+  "ib.net.p3d": "Đội ngũ của chúng tôi lập bản đồ từng cấp và kiểm tra cùng bạn.",
+  "ib.net.clients": "Khách hàng được giới thiệu",
+  "ib.net.deeper": "+ Các cấp sâu hơn, không giới hạn",
+  "ib.net.tier2": "Cấp 2",
+  "ib.net.c3": "3 khách hàng",
+  "ib.net.c4": "4 khách hàng",
+  "ib.net.c5": "5 khách hàng"
 }

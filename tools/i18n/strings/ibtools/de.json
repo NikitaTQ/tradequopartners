@@ -30,5 +30,22 @@
   "ib.tool.5": "KI-Einblicke",
   "ib.hole.s1": "Sog",
   "ib.hole.s2": "Jedes Lot",
-  "ib.hole.s3": "Jede Stufe"
+  "ib.hole.s3": "Jede Stufe",
+  "ib.net.t1": "Ihr ganzes Netzwerk.",
+  "ib.net.t2": "Live in <red>2 Stunden.</red>",
+  "ib.net.lead": "Übertragen Sie jeden Sub-IB und jeden geworbenen Kunden in einem Schritt – ganz gleich, wie tief Ihre Struktur reicht.",
+  "ib.net.sub": "Unser Team bildet Ihr Netzwerk Stufe für Stufe ab und übergibt es live in IB Desk. Sie prüfen, geben frei und starten das Tracking noch am selben Tag.",
+  "ib.net.go": "Onboarding buchen",
+  "ib.net.p1t": "Unbegrenzte Stufen",
+  "ib.net.p1d": "Jeder Sub-IB und jeder Kunde, in jeder Tiefe.",
+  "ib.net.p2t": "Live in 2 Stunden",
+  "ib.net.p2d": "Von Ihrer ersten Datei bis zum fertigen Netzwerk.",
+  "ib.net.p3t": "Wir erledigen das für Sie",
+  "ib.net.p3d": "Unser Team bildet jede Stufe ab und prüft sie mit Ihnen.",
+  "ib.net.clients": "Geworbene Kunden",
+  "ib.net.deeper": "+ Tiefere Stufen, ohne Limit",
+  "ib.net.tier2": "Stufe 2",
+  "ib.net.c3": "3 Kunden",
+  "ib.net.c4": "4 Kunden",
+  "ib.net.c5": "5 Kunden"
 }

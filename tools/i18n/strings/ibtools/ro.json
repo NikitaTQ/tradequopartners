@@ -30,5 +30,22 @@
   "ib.tool.5": "Analize AI",
   "ib.hole.s1": "Atracție",
   "ib.hole.s2": "Fiecare lot",
-  "ib.hole.s3": "Fiecare nivel"
+  "ib.hole.s3": "Fiecare nivel",
+  "ib.net.t1": "Întreaga ta rețea.",
+  "ib.net.t2": "Activă în <red>2 ore.</red>",
+  "ib.net.lead": "Adu fiecare Sub-IB și fiecare client recomandat dintr-o singură mișcare — oricât de adâncă ar fi structura ta.",
+  "ib.net.sub": "Echipa noastră îți cartografiază rețeaua nivel cu nivel și ți-o predă activă în IB Desk. Verifici, aprobi și începi monitorizarea în aceeași zi.",
+  "ib.net.go": "Programează onboardingul",
+  "ib.net.p1t": "Niveluri nelimitate",
+  "ib.net.p1d": "Fiecare Sub-IB și fiecare client, la orice nivel.",
+  "ib.net.p2t": "Activă în 2 ore",
+  "ib.net.p2d": "De la primul fișier la o rețea activă.",
+  "ib.net.p3t": "Ne ocupăm noi",
+  "ib.net.p3d": "Echipa noastră cartografiază fiecare nivel și îl verifică împreună cu tine.",
+  "ib.net.clients": "Clienți recomandați",
+  "ib.net.deeper": "+ Niveluri mai adânci, fără limită",
+  "ib.net.tier2": "Nivelul 2",
+  "ib.net.c3": "3 clienți",
+  "ib.net.c4": "4 clienți",
+  "ib.net.c5": "5 clienți"
 }

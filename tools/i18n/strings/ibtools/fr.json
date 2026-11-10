@@ -30,5 +30,22 @@
   "ib.tool.5": "Analyses IA",
   "ib.hole.s1": "Attraction",
   "ib.hole.s2": "Chaque lot",
-  "ib.hole.s3": "Chaque niveau"
+  "ib.hole.s3": "Chaque niveau",
+  "ib.net.t1": "Tout votre réseau.",
+  "ib.net.t2": "En ligne en <red>2 heures.</red>",
+  "ib.net.lead": "Transférez chaque Sub-IB et chaque client parrainé en une seule fois — quelle que soit la profondeur de votre structure.",
+  "ib.net.sub": "Notre équipe reconstitue votre réseau niveau par niveau et vous le remet en ligne dans IB Desk. Vous vérifiez, validez et commencez le suivi le jour même.",
+  "ib.net.go": "Réserver l’onboarding",
+  "ib.net.p1t": "Niveaux illimités",
+  "ib.net.p1d": "Chaque Sub-IB et chaque client, à toute profondeur.",
+  "ib.net.p2t": "En ligne en 2 heures",
+  "ib.net.p2d": "De votre premier fichier à un réseau en ligne.",
+  "ib.net.p3t": "On s’en charge pour vous",
+  "ib.net.p3d": "Notre équipe reconstitue chaque niveau et le vérifie avec vous.",
+  "ib.net.clients": "Clients parrainés",
+  "ib.net.deeper": "+ Niveaux plus profonds, sans limite",
+  "ib.net.tier2": "Niveau 2",
+  "ib.net.c3": "3 clients",
+  "ib.net.c4": "4 clients",
+  "ib.net.c5": "5 clients"
 }

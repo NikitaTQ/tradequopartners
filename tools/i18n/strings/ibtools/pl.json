@@ -30,5 +30,22 @@
   "ib.tool.5": "Wnioski AI",
   "ib.hole.s1": "Przyciąganie",
   "ib.hole.s2": "Każdy lot",
-  "ib.hole.s3": "Każdy poziom"
+  "ib.hole.s3": "Każdy poziom",
+  "ib.net.t1": "Cała Twoja sieć.",
+  "ib.net.t2": "Gotowa w <red>2 godziny.</red>",
+  "ib.net.lead": "Przenieś każdego Sub-IB i każdego poleconego klienta za jednym razem — bez względu na to, jak głęboka jest Twoja struktura.",
+  "ib.net.sub": "Nasz zespół odwzorowuje Twoją sieć poziom po poziomie i przekazuje ją aktywną w IB Desk. Sprawdzasz, zatwierdzasz i zaczynasz śledzenie tego samego dnia.",
+  "ib.net.go": "Umów onboarding",
+  "ib.net.p1t": "Bez limitu poziomów",
+  "ib.net.p1d": "Każdy Sub-IB i każdy klient, na dowolnym poziomie.",
+  "ib.net.p2t": "Gotowa w 2 godziny",
+  "ib.net.p2d": "Od pierwszego pliku do działającej sieci.",
+  "ib.net.p3t": "Robimy to za Ciebie",
+  "ib.net.p3d": "Nasz zespół odwzorowuje każdy poziom i sprawdza go z Tobą.",
+  "ib.net.clients": "Poleceni klienci",
+  "ib.net.deeper": "+ Głębsze poziomy, bez limitu",
+  "ib.net.tier2": "Poziom 2",
+  "ib.net.c3": "klienci: 3",
+  "ib.net.c4": "klienci: 4",
+  "ib.net.c5": "klienci: 5"
 }

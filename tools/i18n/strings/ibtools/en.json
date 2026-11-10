@@ -30,5 +30,22 @@
   "ib.tool.5": "AI insights",
   "ib.hole.s1": "Pull",
   "ib.hole.s2": "Every lot",
-  "ib.hole.s3": "Every tier"
+  "ib.hole.s3": "Every tier",
+  "ib.net.t1": "Your whole network.",
+  "ib.net.t2": "Live in <red>2 hours.</red>",
+  "ib.net.lead": "Bring every Sub-IB and every referred client across in one move — however deep your structure goes.",
+  "ib.net.sub": "Our team maps your network tier by tier and hands it back live in IB Desk. You review, sign off and start tracking the same day.",
+  "ib.net.go": "Book onboarding",
+  "ib.net.p1t": "Unlimited tiers",
+  "ib.net.p1d": "Every Sub-IB and every client, at any depth.",
+  "ib.net.p2t": "Live in 2 hours",
+  "ib.net.p2d": "From your first file to a live network.",
+  "ib.net.p3t": "Done for you",
+  "ib.net.p3d": "Our team maps every tier and checks it with you.",
+  "ib.net.clients": "Referred clients",
+  "ib.net.deeper": "+ Deeper tiers, no limit",
+  "ib.net.tier2": "Tier 2",
+  "ib.net.c3": "3 clients",
+  "ib.net.c4": "4 clients",
+  "ib.net.c5": "5 clients"
 }
