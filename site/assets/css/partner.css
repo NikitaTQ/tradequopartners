@@ -1291,6 +1291,10 @@
 .tq-ibh__film, .tq-ibh__box { position: absolute; inset: 0; }
 .tq-ibh__scene { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; pointer-events: none; }
 .tq-ibh__box.is-tall .tq-ibh__scene { top: 44%; }
+/* phones: the video of the scene, cut as the live scene is there (the screen's width, 1100 scene px across, centred at
+   44%); its top and bottom fade out so its grey meets the hero's without an edge */
+.tq-ibh__video { position: absolute; left: 0; top: 44%; display: block; width: 100%; height: auto; aspect-ratio: 1080 / 1060; transform: translateY(-50%); object-fit: cover;
+  background: transparent; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 92%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 92%, transparent 100%); }
 /* landscape: where the design has them and at its sizes, scaled with the scene (--k, set by the film), so they keep
    clear of the devices; tall screens: under the devices, at sizes of their own */
 .tq-ibh__cap { position: absolute; left: 16px; right: 16px; bottom: calc(52px * var(--k, 1)); display: flex; flex-direction: column; align-items: center; gap: calc(12px * var(--k, 1));

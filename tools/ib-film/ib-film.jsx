@@ -501,19 +501,38 @@ function Caption({ T, texts, brand }) {
 }
 
 /* the 1920x1080 scene in the hero. Landscape: whole, as large as fits. Tall screens: the scene runs past the sides
-   (only its middle holds devices): the single devices (at most ~1100 px wide) fill the width, and from the line-up's
-   start the view widens to its ~1720 px */
+   (only its middle holds devices): card, phone and tablet (at most ~1100 px wide) fill the width; while the laptop is
+   on, the view widens to its ~1400 px (keyboard deck in perspective), and for the line-up to ~1780 px */
 function scale(w, h, T) {
   if (!w || !h) return 0;
   if (w >= h * 1.1) return Math.min(w / 1920, h / 1080);
+  const lap = MOTION.morph(CUES.Laptop - 0.25, CUES.Laptop + 0.8)(T);
   const all = MOTION.morph(CUES.Lineup - 0.1, CUES.Lineup + 1.0)(T);
-  return Math.min(h * 0.6 / 800, w / lerp(1100, 1780, all));   // the tallest device (the phone) ~800 px: 60% of the hero
+  return Math.min(h * 0.6 / 800, w / lerp(lerp(1100, 1400, lap), 1780, all));   // the tallest device (the phone) ~800 px: 60% of the hero
 }
 
-function Hero({ texts, brand, still }) {
+/* Phones (portrait, up to 640px) play a video of the scene instead (assets/ib/ib-film-phone.mp4, made by
+   tools/render-ib-film.mjs from this film in ?film=capture mode): ~1800 elements with shadows and gradients redrawn
+   30 times a second are too much for a phone, a video is not. The captions stay the page's text, in step with the
+   video's time. If the video cannot play (iOS Low Power Mode), its poster (the line-up) stays, with the last caption. */
+const CAPTURE = /[?&]film=capture\b/.test(location.search);
+const PHONE = '(max-width: 640px) and (max-aspect-ratio: 1/1)';
+
+function Hero({ texts, brand, still, src, poster }) {
   const [T, setT] = React.useState(still ? STILL : 0);
   const [size, setSize] = React.useState([0, 0]);
-  const box = React.useRef(null);
+  const usesVideo = () => !!src && !still && !CAPTURE && matchMedia(PHONE).matches;
+  const [video, setVideo] = React.useState(usesVideo);
+  const box = React.useRef(null), vid = React.useRef(null);
+  React.useEffect(() => {
+    const mq = matchMedia(PHONE), on = () => setVideo(usesVideo());
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  /* capture mode: the renderer sets the time itself */
+  React.useEffect(() => {
+    if (CAPTURE) window.ibFilmSeek = (t) => new Promise((r) => { setT(t); requestAnimationFrame(() => requestAnimationFrame(r)); });
+  }, []);
   React.useLayoutEffect(() => {
     const el = box.current;
     const fit = () => setSize([el.clientWidth, el.clientHeight]);
@@ -522,34 +541,42 @@ function Hero({ texts, brand, still }) {
     return () => ro.disconnect();
   }, []);
   const [w, h] = size, k = scale(w, h, T), tall = w && w < h * 1.1;
-  /* the loop: real time, paused off screen and in a hidden tab; phones at 30 fps */
+  /* the loop: real time (or the video's), paused off screen and in a hidden tab; touch screens at 30 fps */
   React.useEffect(() => {
-    if (still) return undefined;
-    const el = box.current, coarse = matchMedia('(pointer: coarse)').matches;
+    if (still || CAPTURE) return undefined;
+    const el = box.current, v = video ? vid.current : null, coarse = matchMedia('(pointer: coarse)').matches;
     let raf = 0, last = 0, t = 0, seen = true, acc = 0;
     const frame = (now) => {
       raf = requestAnimationFrame(frame);
       const dt = last ? Math.min(0.1, (now - last) / 1000) : 0; last = now;
-      t = (t + dt) % TOTAL; acc += dt;
+      t = v ? v.currentTime % TOTAL : (t + dt) % TOTAL; acc += dt;
       if (coarse && acc < 1 / 30) return;
       acc = 0; setT(t);
     };
-    const run = () => { if (!raf && seen && !document.hidden) { last = 0; raf = requestAnimationFrame(frame); } };
-    const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+    const run = () => {
+      if (raf || !seen || document.hidden) return;
+      last = 0; raf = requestAnimationFrame(frame);
+      if (v) { v.muted = true; v.play().catch(() => { stop(); setT(STILL); }); }
+    };
+    const stop = () => { cancelAnimationFrame(raf); raf = 0; if (v) v.pause(); };
     const io = new IntersectionObserver(([e]) => { seen = e.isIntersecting; if (seen) run(); else stop(); });
     io.observe(el);
     const vis = () => { if (document.hidden) stop(); else run(); };
     document.addEventListener('visibilitychange', vis);
     run();
     return () => { stop(); io.disconnect(); document.removeEventListener('visibilitychange', vis); };
-  }, [still]);
+  }, [still, video]);
   const value = React.useMemo(() => ({ T, CUES, authoredTotal: TOTAL }), [T]);
   return (
     <Ctx.Provider value={value}>
       <div ref={box} className={'tq-ibh__box' + (tall ? ' is-tall' : '')} style={{ '--k': k }}>
-        <div className="tq-ibh__scene" dir="ltr" lang="en" style={{ transform: `translate(-50%, -50%) scale(${k})`, visibility: k ? 'visible' : 'hidden' }}>
-          <Piece orbit />
-        </div>
+        {video ? (
+          <video ref={vid} className="tq-ibh__video" src={src} poster={poster} muted playsInline loop preload="auto" disablePictureInPicture />
+        ) : (
+          <div className="tq-ibh__scene" dir="ltr" lang="en" style={{ transform: `translate(-50%, -50%) scale(${k})`, visibility: k ? 'visible' : 'hidden' }}>
+            <Piece orbit />
+          </div>
+        )}
         <Caption T={T} texts={texts} brand={brand} />
       </div>
     </Ctx.Provider>
@@ -560,6 +587,6 @@ const root = document.querySelector('[data-ib-film]');
 if (root && window.React && window.ReactDOM) {
   const texts = Array.from(document.querySelectorAll('[data-ib-caps] li'), (li) => li.textContent.trim());
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  ReactDOM.createRoot(root).render(<Hero texts={texts} brand={root.getAttribute('data-brand') || ''} still={still} />);
+  ReactDOM.createRoot(root).render(<Hero texts={texts} brand={root.getAttribute('data-brand') || ''} still={still} src={root.getAttribute('data-src')} poster={root.getAttribute('data-poster')} />);
 }
 })();
