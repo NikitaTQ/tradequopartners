@@ -56,7 +56,7 @@
     const DISK = ring(SMALL ? 20 : 36), HTOP = ring(SMALL ? 10 : 18), HBOT = ring(SMALL ? 6 : 9);
 
     const gemCache = {}, barCache = {}; let chipCache = new Map(); let chipK = 1, sparks = [], W = 0, H = 0, cx = 0, cy = 0, RX = 500, R = 90, gw = 400, gh = 300, step = 26, cs = 11, parts = [], chips = [];
-    const TILT = 0.075;
+    const TILT = 0.075, ZOOM = 1.3;
     const resetChips = () => {
       const sh = ['Weekly report', 'Most active clients'].concat(LABELS.filter(l => l !== 'Weekly report').sort(() => Math.random() - 0.5)), n = chips.length;
       for (let i = sh.length - 1; i > 0; i--) { if (i < n) { const j = (Math.random() * (i + 1)) | 0; const t = sh[i]; sh[i] = sh[j]; sh[j] = t; } }
@@ -358,7 +358,12 @@
       const Rk = R * (0.05 + 0.95 * k) * (1 + 0.06 * rage);
       const cst = showChips && isV ? chips.map(c => chipState(c, u, ph === 0 ? SK : 0.7, Rk)) : [];
       if (!still) { for (const q of cst) { if (q.c.ep < 0.92 && q.raw >= 0.92) sparks.push({ a: Math.atan2(q.y - cy, q.x - cx), t: 0 }); q.c.ep = q.raw; } sparks.forEach(s => { s.t += dt; }); sparks = sparks.filter(s => s.t < 0.6); }
-      if (k > 0.002) hole(th, k, rage, Rk, dt, cst);
+      if (k > 0.002) {   /* phones: the hole scene (hole, disk, dust, chips) 1.3x, around its centre */
+        const Z = W < 700 ? ZOOM : 1;
+        if (Z !== 1) { ctx.save(); ctx.translate(cx, cy); ctx.scale(Z, Z); ctx.translate(-cx, -cy); }
+        hole(th, k, rage, Rk, dt, cst);
+        if (Z !== 1) ctx.restore();
+      }
       if (still) return;
       if (ph === 1 && u < 0.6) flash(th, u / 0.6);
       if (ph === 1 && u > 0.75) bars(th, u, 1); else if (ph === 2 && u < 0.35) bars(th, 9, 1 - u / 0.35);
