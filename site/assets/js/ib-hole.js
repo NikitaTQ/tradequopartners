@@ -92,7 +92,7 @@
       const m = (p.y + q.y) / 2, it = 1 - t;
       return { x: it * it * it * p.x + 3 * it * it * t * p.x + 3 * it * t * t * q.x + t * t * t * q.x, y: it * it * it * p.y + 3 * it * it * t * m + 3 * it * t * t * m + t * t * t * q.y };
     };
-    let T = 0, spin = 0, wt = 0, bulge = 0.035;
+    let T = 0, spin = 0, wt = 0, bulge = 0.035, holeK = 0;
     const wob = th => {
       const s = Math.sin(th); let w = s > 0 ? 1 + bulge * s * s : 1;
       for (const sp of sparks) { let d = Math.abs(th - sp.a) % PI2; if (d > Math.PI) d = PI2 - d; const env = sp.t < 0.12 ? sp.t / 0.12 : Math.pow(Math.max(0, 1 - (sp.t - 0.12) / 0.48), 2); w += 0.04 * env * Math.exp(-d * d / 0.22); }
@@ -356,6 +356,7 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalAlpha = 1;
       ctx.clearRect(0, 0, W, H);
       const Rk = R * (0.05 + 0.95 * k) * (1 + 0.06 * rage);
+      holeK = isV ? k : 0;   /* for the lens */
       const cst = showChips && isV ? chips.map(c => chipState(c, u, ph === 0 ? SK : 0.7, Rk)) : [];
       if (!still) { for (const q of cst) { if (q.c.ep < 0.92 && q.raw >= 0.92) sparks.push({ a: Math.atan2(q.y - cy, q.x - cx), t: 0 }); q.c.ep = q.raw; } sparks.forEach(s => { s.t += dt; }); sparks = sparks.filter(s => s.t < 0.6); }
       if (k > 0.002) {   /* phones: the hole scene (hole, disk, dust, chips) 1.3x, around its centre */
@@ -377,7 +378,64 @@
     if (still) { draw(); return; }
     /* the loop: only while on screen and the tab is visible */
     let raf = 0, seen = false;
-    const loop = (now) => { raf = requestAnimationFrame(loop); try { frame(now); } catch (e) { cancelAnimationFrame(raf); } };
+    /* the lens (desktop, mouse): while the hole is on and the cursor is over its disk, a WebGL layer redraws this
+       canvas bent around the cursor like a gravitational lens — magnified towards the middle, a little swirl, a faint
+       colour split — and fades out off the disk or when the scene moves on to the bars. The WebGL layer is made on
+       the first mouse move over the block; without WebGL there is simply no lens. */
+    const FS = 'precision highp float;uniform sampler2D u_tex;uniform vec2 u_res,u_m;uniform float u_r,u_s,u_ca;' +
+      'void main(){vec2 p=vec2(gl_FragCoord.x,u_res.y-gl_FragCoord.y);vec2 d=p-u_m;float dist=length(d);float t=clamp(dist/u_r,0.,1.);' +
+      'float w=1.-t*t;w=w*w*u_s;float a=.42*w;float cs=cos(a),sn=sin(a);vec2 q=u_m+vec2(d.x*cs-d.y*sn,d.x*sn+d.y*cs)*(1.-.3*w);' +
+      'vec2 dir=dist>.5?d/dist:vec2(0.);vec2 o=dir*u_ca*w;vec4 r=texture2D(u_tex,(q+o)/u_res),g=texture2D(u_tex,q/u_res),b=texture2D(u_tex,(q-o)/u_res);' +
+      'gl_FragColor=vec4(r.r,g.g,b.b,max(max(r.a,g.a),b.a));}';
+    const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let lens = null, mx = 0, my = 0, lx = 0, ly = 0, over = false, ls = 0, lt = 0;
+    const lensInit = () => {
+      const c = document.createElement('canvas'); c.className = 'tq-ibb__cv'; c.setAttribute('aria-hidden', 'true'); c.style.opacity = '0';
+      const gl = c.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
+      if (!gl) return false;
+      const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); return gl.getShaderParameter(x, gl.COMPILE_STATUS) ? x : null; };
+      const vs = sh(gl.VERTEX_SHADER, 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}'), fs = sh(gl.FRAGMENT_SHADER, FS);
+      if (!vs || !fs) return false;
+      const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+      if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return false;
+      gl.useProgram(pr);
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      const at = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(at); gl.vertexAttribPointer(at, 2, gl.FLOAT, false, 0, 0);
+      gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
+      [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]].forEach(([k, v]) => gl.texParameteri(gl.TEXTURE_2D, k, v));
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+      const u = (n) => gl.getUniformLocation(pr, n);
+      cv.after(c);
+      return { c, gl, on: false, uRes: u('u_res'), uM: u('u_m'), uR: u('u_r'), uS: u('u_s'), uCa: u('u_ca') };
+    };
+    if (fine) {
+      root.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        const r = root.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top;
+        if (!over) { lx = mx; ly = my; } over = true;
+        if (lens === null) lens = lensInit();
+      });
+      root.addEventListener('pointerleave', () => { over = false; });
+    }
+    const lensFrame = (now) => {
+      if (!lens) return;
+      const dt = lt ? Math.min(0.05, (now - lt) / 1000) : 0; lt = now;
+      const Z = W < 700 ? ZOOM : 1, ex = (mx - cx) / (RX * Z * 0.92), ey = (my - cy) / (R * Z * 2.3);
+      const want = over && holeK > 0.6 && ex * ex + ey * ey < 1 ? 1 : 0;   /* over the disk, while the hole is on */
+      ls += (want - ls) * Math.min(1, dt * (want ? 5 : 7));
+      lx += (mx - lx) * Math.min(1, dt * 12); ly += (my - ly) * Math.min(1, dt * 12);
+      const on = ls > 0.004;
+      if (on !== lens.on) { lens.on = on; lens.c.style.opacity = on ? '1' : '0'; cv.style.opacity = on ? '0' : ''; }
+      if (!on) return;
+      const gl = lens.gl, c = lens.c;
+      if (c.width !== cv.width || c.height !== cv.height) { c.width = cv.width; c.height = cv.height; }
+      gl.viewport(0, 0, c.width, c.height);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, cv);
+      gl.uniform2f(lens.uRes, c.width, c.height); gl.uniform2f(lens.uM, lx * dpr, ly * dpr);
+      gl.uniform1f(lens.uR, Math.max(120, R * Z * 1.2) * dpr); gl.uniform1f(lens.uS, ls); gl.uniform1f(lens.uCa, 1.6 * dpr);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    };
+    const loop = (now) => { raf = requestAnimationFrame(loop); try { frame(now); lensFrame(now); } catch (e) { cancelAnimationFrame(raf); } };
     const run = () => { if (!raf && seen && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(loop); } };
     const stop = () => { cancelAnimationFrame(raf); raf = 0; };
     new IntersectionObserver(([e]) => { seen = e.isIntersecting; if (seen) run(); else stop(); }).observe(root);
