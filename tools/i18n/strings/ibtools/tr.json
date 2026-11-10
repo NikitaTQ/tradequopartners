@@ -30,5 +30,22 @@
   "ib.tool.5": "Yapay zekâ içgörüleri",
   "ib.hole.s1": "Çekim",
   "ib.hole.s2": "Her lot",
-  "ib.hole.s3": "Her kademe"
+  "ib.hole.s3": "Her kademe",
+  "ib.net.t1": "Tüm ağınız.",
+  "ib.net.t2": "<red>2 saatte</red> aktif.",
+  "ib.net.lead": "Her Sub-IB’yi ve yönlendirdiğiniz her müşteriyi tek seferde taşıyın — yapınız ne kadar derin olursa olsun.",
+  "ib.net.sub": "Ekibimiz ağınızı kademe kademe haritalar ve IB Desk’te canlı olarak teslim eder. Siz kontrol eder, onaylar ve aynı gün takibe başlarsınız.",
+  "ib.net.go": "Onboarding planlayın",
+  "ib.net.p1t": "Sınırsız kademe",
+  "ib.net.p1d": "Her Sub-IB ve her müşteri, her derinlikte.",
+  "ib.net.p2t": "2 saatte aktif",
+  "ib.net.p2d": "İlk dosyanızdan canlı bir ağa.",
+  "ib.net.p3t": "Sizin yerinize yapıyoruz",
+  "ib.net.p3d": "Ekibimiz her kademeyi haritalar ve sizinle birlikte kontrol eder.",
+  "ib.net.clients": "Yönlendirilen müşteriler",
+  "ib.net.deeper": "+ Daha derin kademeler, sınırsız",
+  "ib.net.tier2": "Kademe 2",
+  "ib.net.c3": "3 müşteri",
+  "ib.net.c4": "4 müşteri",
+  "ib.net.c5": "5 müşteri"
 }

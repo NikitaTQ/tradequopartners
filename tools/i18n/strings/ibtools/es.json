@@ -30,5 +30,22 @@
   "ib.tool.5": "Insights con IA",
   "ib.hole.s1": "Atracción",
   "ib.hole.s2": "Cada lote",
-  "ib.hole.s3": "Cada nivel"
+  "ib.hole.s3": "Cada nivel",
+  "ib.net.t1": "Toda tu red.",
+  "ib.net.t2": "Activa en <red>2 horas.</red>",
+  "ib.net.lead": "Trae a cada Sub-IB y a cada cliente referido de una sola vez, sin importar la profundidad de tu estructura.",
+  "ib.net.sub": "Nuestro equipo mapea tu red nivel por nivel y te la entrega activa en IB Desk. Revisas, apruebas y empiezas a hacer el seguimiento el mismo día.",
+  "ib.net.go": "Reservar el onboarding",
+  "ib.net.p1t": "Niveles ilimitados",
+  "ib.net.p1d": "Cada Sub-IB y cada cliente, a cualquier profundidad.",
+  "ib.net.p2t": "Activa en 2 horas",
+  "ib.net.p2d": "De tu primer archivo a una red activa.",
+  "ib.net.p3t": "Lo hacemos por ti",
+  "ib.net.p3d": "Nuestro equipo mapea cada nivel y lo revisa contigo.",
+  "ib.net.clients": "Clientes referidos",
+  "ib.net.deeper": "+ Niveles más profundos, sin límite",
+  "ib.net.tier2": "Nivel 2",
+  "ib.net.c3": "3 clientes",
+  "ib.net.c4": "4 clientes",
+  "ib.net.c5": "5 clientes"
 }
