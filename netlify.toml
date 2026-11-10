@@ -35,26 +35,28 @@
   to = "/partner-terms/"
   status = 301
 
-# The marketing tools page became Partner Tools: /marketing-tools/ moved to /partner-tools/ (every language).
+# The tools showcase is Marketing Tools again, at /marketing-tools/. /partner-tools/ (its address for a while) is kept
+# for the coming page for newcomers to trading; until then it sends visitors to /marketing-tools/ — temporarily (302),
+# so that browsers do not remember it. Delete these four rules when the new page is published.
 [[redirects]]
-  from = "/marketing-tools"
-  to = "/partner-tools/"
-  status = 301
+  from = "/partner-tools"
+  to = "/marketing-tools/"
+  status = 302
 
 [[redirects]]
-  from = "/marketing-tools/*"
-  to = "/partner-tools/:splat"
-  status = 301
+  from = "/partner-tools/*"
+  to = "/marketing-tools/:splat"
+  status = 302
 
 [[redirects]]
-  from = "/:lang/marketing-tools"
-  to = "/:lang/partner-tools/"
-  status = 301
+  from = "/:lang/partner-tools"
+  to = "/:lang/marketing-tools/"
+  status = 302
 
 [[redirects]]
-  from = "/:lang/marketing-tools/*"
-  to = "/:lang/partner-tools/:splat"
-  status = 301
+  from = "/:lang/partner-tools/*"
+  to = "/:lang/marketing-tools/:splat"
+  status = 302
 
 # The commission plan page moved from /commission-plan/ to /partner-terms/ (every language).
 [[redirects]]

@@ -32,7 +32,7 @@ PAGES = [
     {'id': 'landing', 'template': 'landing.html', 'slug': ''},
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
-    {'id': 'marketing', 'template': 'marketing.html', 'slug': 'partner-tools', 'css': 'partner'},   # was marketing-tools (netlify.toml redirects)
+    {'id': 'marketing', 'template': 'marketing.html', 'slug': 'marketing-tools', 'css': 'partner'},   # was partner-tools for a while (netlify.toml: 302 there until the beginners' page takes that address)
     # IB Tools: the hero only for now; no table of contents yet (fan, FAB); its display text is the
     # captions (tq-h2), so the page preloads the H2 face instead of the H1 one
     {'id': 'ibtools', 'template': 'ibtools.html', 'slug': 'ib-tools', 'css': 'partner', 'display': 'h2'},
@@ -42,7 +42,7 @@ NAV = [
     ('landing', '', 'fan.home'),
     ('programs', 'programs/', 'fan.programs'),
     ('commission', 'partner-terms/', 'fan.commission'),
-    ('marketing', 'partner-tools/', 'fan.marketing'),
+    ('marketing', 'marketing-tools/', 'fan.marketing'),
     ('ibtools', 'ib-tools/', 'fan.ibtools'),
 ]
 # Each page's table of contents: the fan bottom right on desktop, the red menu on phones (section id, label).
