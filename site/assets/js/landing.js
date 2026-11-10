@@ -834,8 +834,8 @@
    * .tq-liquid; other browsers keep the plain blur. The highlight follows the mouse; on touch the
    * glass simply rests. */
   function startGlass() {
-    if (!$$('.tq-glass, .tp-glass, .tq-frost').length) return;
-    if (navigator.userAgentData && $$('.tq-glass, .tp-glass').length && !document.getElementById('tq-liquid')) {
+    if (!$$('.tq-glass, .tp-glass, .tq-frost, .tp-cut').length) return;
+    if (navigator.userAgentData && $$('.tq-glass, .tp-glass, .tp-cut').length && !document.getElementById('tq-liquid')) {
       const ns = 'http://www.w3.org/2000/svg';
       const svg = document.createElementNS(ns, 'svg');
       svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
@@ -1081,10 +1081,14 @@
         cuts = items.slice(0, -1).map((it, i) => { const y = it.offsetTop + it.offsetHeight; return (x) => y + WAVE[i % WAVE.length](x / W, amp); });
       } else { W = W0; H = H0; cuts = DESIGN; }
       const xs = Array.from({ length: N + 1 }, (_, i) => i / N * W);
-      const P = (x, y) => (x / W * 100).toFixed(2) + '% ' + (y / H * 100).toFixed(2) + '%';
       const bounds = [() => 0, ...cuts, () => H];
       pieces.forEach((p, i) => {
         const a = bounds[i], b = bounds[i + 1];
+        /* stacked, a piece is only as tall as its band (its glass filter then works on the band alone) */
+        let y0 = 0, hh = H;
+        if (stacked.matches) { y0 = Math.floor(Math.min(...xs.map(a))); hh = Math.ceil(Math.max(...xs.map(b))) - y0; }
+        p.style.top = stacked.matches ? y0 + 'px' : ''; p.style.height = stacked.matches ? hh + 'px' : ''; p.style.bottom = stacked.matches ? 'auto' : '';
+        const P = (x, y) => (x / W * 100).toFixed(2) + '% ' + ((y - y0) / hh * 100).toFixed(2) + '%';
         p.style.clipPath = 'polygon(' + xs.map((x) => P(x, a(x))).concat(xs.slice().reverse().map((x) => P(x, b(x)))).join(',') + ')';
       });
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);

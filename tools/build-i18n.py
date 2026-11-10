@@ -46,7 +46,7 @@ TOC = {
     'landing': [('signup', 'nav.cta'), ('how', 'nav.how'), ('calculator', 'nav.calc'), ('reviews', 'toc.reviews'), ('dashboard', 'nav.perks'), ('faq', 'nav.faq')],
     'programs': [('programs', 'pp.nav.programs'), ('who', 'toc.who'), ('benefits', 'pp.nav.benefits'), ('why', 'pp.nav.why'), ('how', 'nav.how'), ('questions', 'nav.faq')],
     'commission': [('earnings', 'toc.earnings'), ('calculator', 'nav.calc'), ('payouts', 'cp.nav.payouts'), ('perks', 'nav.perks'), ('how', 'nav.how'), ('questions', 'nav.faq')],
-    'marketing': [('tools', 'mt.nav.tools'), ('library', 'toc.materials'), ('get', 'toc.get'), ('support', 'toc.support'), ('how', 'nav.how'), ('questions', 'nav.faq')],
+    'marketing': [('tools', 'mt.nav.tools'), ('library', 'toc.materials'), ('get', 'toc.get'), ('support', 'toc.support'), ('questions', 'nav.faq')],
 }
 languages = json.load(open(os.path.join(I18N, 'languages.json'), encoding='utf-8'))
 fonts = json.load(open(os.path.join(I18N, 'font-files.json'), encoding='utf-8'))
