@@ -1044,6 +1044,71 @@
     }));
   }
 
+  /* ---- /partner-tools/: promo materials, a slab of cut glass (Marketing_Materials_Cut_Glass_2) ------------
+   * Desktop: the design's five curves cut the 1000x460 slab into six pieces (clip-paths in % of the slab, the lines
+   * in an SVG of the same box). Under 1024px the formats stack as bands and the cuts are waves at the bands' edges,
+   * measured again whenever the slab changes size. Pointing at a piece (or tapping it) lights it and its format;
+   * the last one stays lit. */
+  function startCutGlass() {
+    const root = $('[data-cut]');
+    if (!root) return;
+    const panel = $('.tp-cut__panel', root), pieces = $$('[data-cut-p]', root), items = $$('[data-cut-i]', root);
+    const svg = $('.tp-cut__lines', root), rect = $('rect', svg), lines = $$('[data-cut-line]', svg);
+    const stacked = matchMedia('(max-width: 1023px)');
+    const ss = (t) => t * t * (3 - 2 * t);
+    const W0 = 1000, H0 = 460, N = 28;
+    const DESIGN = [
+      (x) => 70 + 100 * Math.pow(x / W0, 1.25),
+      (x) => 200 + 10 * Math.sin(Math.PI * x / W0) - 22 * (x / W0),
+      (x) => 345 - 155 * ss(x / W0),
+      (x) => 346 - 36 * Math.pow(x / W0, 2),
+      (x) => { const u = x / W0; return u < 0.4 ? 440 - 56 * ss(u / 0.4) : u < 0.55 ? 384 : 384 + 58 * ss((u - 0.55) / 0.45); },
+    ];
+    /* the waves between stacked bands: around each band's lower edge, a different gentle shape each time */
+    const WAVE = [
+      (u, a) => -a + 2 * a * Math.pow(u, 1.25),
+      (u, a) => a * Math.sin(Math.PI * u) - a * 0.6 * u,
+      (u, a) => a - 2 * a * ss(u),
+      (u, a) => -a * 0.4 + a * 1.2 * u * u,
+      (u, a) => a * 0.8 * Math.sin(2 * Math.PI * u),
+    ];
+    const draw = () => {
+      let W, H, cuts;
+      if (stacked.matches) {
+        W = panel.clientWidth; H = panel.clientHeight;
+        if (!W || !H) return;
+        const amp = Math.min(14, W / 40);
+        cuts = items.slice(0, -1).map((it, i) => { const y = it.offsetTop + it.offsetHeight; return (x) => y + WAVE[i % WAVE.length](x / W, amp); });
+      } else { W = W0; H = H0; cuts = DESIGN; }
+      const xs = Array.from({ length: N + 1 }, (_, i) => i / N * W);
+      const P = (x, y) => (x / W * 100).toFixed(2) + '% ' + (y / H * 100).toFixed(2) + '%';
+      const bounds = [() => 0, ...cuts, () => H];
+      pieces.forEach((p, i) => {
+        const a = bounds[i], b = bounds[i + 1];
+        p.style.clipPath = 'polygon(' + xs.map((x) => P(x, a(x))).concat(xs.slice().reverse().map((x) => P(x, b(x)))).join(',') + ')';
+      });
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      rect.setAttribute('width', W - 2); rect.setAttribute('height', H - 2);
+      lines.forEach((g, i) => {
+        const f = cuts[i], d = 'M' + xs.map((x) => x.toFixed(1) + ' ' + f(x).toFixed(1)).join(' L');
+        $$('path', g).forEach((p) => p.setAttribute('d', d));
+      });
+      root.classList.add('is-cut');
+    };
+    const light = (i) => {
+      pieces.forEach((p, k) => p.classList.toggle('is-on', k === i));
+      items.forEach((it, k) => it.classList.toggle('is-on', k === i));
+    };
+    pieces.forEach((p, i) => {
+      p.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') light(i); });
+      p.addEventListener('click', () => light(i));
+    });
+    draw();
+    if ('ResizeObserver' in window) new ResizeObserver(() => draw()).observe(panel);
+    else addEventListener('resize', draw);
+    stacked.addEventListener('change', draw);
+  }
+
   /* ---- phone: country code -------------------------------------------------------------
    * A native <select> lies invisibly over the flag and the code, so every phone gets its own picker.
    * The list: every country with its calling code (from libphonenumber-js), named in the page
@@ -1299,4 +1364,5 @@
   startReviewsDrag();
   startTwoLine();
   startLang();
+  startCutGlass();
 })();
