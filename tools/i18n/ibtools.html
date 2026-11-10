@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ib.meta.title}}</title>
+<meta name="description" content="{{@ib.meta.description}}">
+<link rel="canonical" href="{{canonical}}">
+{{hreflang}}
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TradeQuo Partners">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:title" content="{{@ib.meta.title}}">
+<meta property="og:description" content="{{@ib.meta.ogDescription}}">
+<meta property="og:image" content="https://tradequopartners.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{@ib.meta.title}}">
+<meta name="twitter:description" content="{{@ib.meta.ogDescription}}">
+<meta name="twitter:image" content="https://tradequopartners.com/og.png">
+{{> head}}
+</head>
+<body>
+{{> loader}}
+<div class="tp">
+
+  {{> page-header-start}}
+  {{> page-header-end}}
+
+  <main>
+    <!-- Hero (IB_Tools_Devices_Film design): a 15.5 s loop on a light grey screen. A glass commission card becomes a
+         phone, a tablet, a laptop and a desktop that the others join (assets/js/ib-film.js, source tools/ib-film/).
+         The captions under it are the page's text: the list below (for screen readers and the heading fonts), drawn
+         over the scene by the film in step with it. -->
+    <section id="desk" class="tq-ibh" data-screen-label="IB Tools hero">
+      <h1 class="tq-sr">{{ib.hero.h1}}</h1>
+      <ol class="tq-sr" data-ib-caps>
+        <li class="tq-h2">{{ib.cap.1}}</li>
+        <li class="tq-h2">{{ib.cap.2}}</li>
+        <li class="tq-h2">{{ib.cap.3}}</li>
+        <li class="tq-h2">{{ib.cap.4}}</li>
+        <li class="tq-h2">{{ib.cap.5}}</li>
+      </ol>
+      <div class="tq-ibh__film" data-ib-film data-brand="{{@ib.cap.brand}}" aria-hidden="true" translate="no"></div>
+    </section>
+  </main>
+
+{{> footer}}
+</div>
+
+<script src="{{root}}assets/js/transition.js" defer></script>
+<script src="{{root}}assets/js/landing.js" defer></script>
+<script src="{{root}}vendor/react@18.3.1/react.production.min.js" defer></script>
+<script src="{{root}}vendor/react@18.3.1/react-dom.production.min.js" defer></script>
+<script src="{{root}}assets/js/ib-film.js" defer></script>
+</body>
+</html>

@@ -1512,4 +1512,382 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/partner-tools/"/>
     <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/partner-tools/"/>
   </url>
+  <url>
+    <loc>https://tradequopartners.com/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/ar/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/zh-hans/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/zh-hant/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/fr/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/de/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/id/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/it/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/ja/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/ko/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/pl/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/pt/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/ro/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/es/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/th/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/tr/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/uk/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
+  <url>
+    <loc>https://tradequopartners.com/vi/ib-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://tradequopartners.com/zh-hans/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://tradequopartners.com/zh-hant/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://tradequopartners.com/fr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://tradequopartners.com/de/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://tradequopartners.com/id/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://tradequopartners.com/it/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://tradequopartners.com/ja/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://tradequopartners.com/ko/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://tradequopartners.com/pl/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://tradequopartners.com/pt/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://tradequopartners.com/ro/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://tradequopartners.com/es/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://tradequopartners.com/th/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://tradequopartners.com/tr/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://tradequopartners.com/uk/ib-tools/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://tradequopartners.com/vi/ib-tools/"/>
+  </url>
 </urlset>

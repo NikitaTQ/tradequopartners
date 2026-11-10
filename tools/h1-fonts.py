@@ -7,7 +7,8 @@ Every file is a Google Fonts subset holding only the characters of the headings 
 where the CSS sets capitals). Two files per face, both in site/assets/fonts/h1/:
   <face>.woff2      the H1s (class tq-h1) — small, preloaded on every page;
   <face>-h2.woff2   the section headings (class tq-h2) — loaded when one is drawn.
-The headings are found in the templates (tools/i18n/*.html, partials, site/404.html) by their class; their text is
+The headings are found in the templates (tools/i18n/*.html, partials, site/404.html) by their class (on a heading, or
+on any element that is drawn in a heading face, like the IB Tools hero's caption list); their text is
 the strings of each language (English where a translation is missing) plus any literal text in the markup.
 Run this again whenever a heading changes in any language: it fetches the subsets anew and stops if a face lacks
 a letter.
@@ -45,7 +46,7 @@ def headings(cls):
     for f in TEMPLATES:
         src = open(f, encoding='utf-8').read()
         src = re.sub(r'<style.*?</style>', '', src, flags=re.S)
-        for m in re.finditer(r'<(h[1-6])\b[^>]*\bclass="[^"]*\b%s\b[^"]*"[^>]*>(.*?)</\1>' % cls, src, re.S):
+        for m in re.finditer(r'<([a-z][a-z0-9]*)\b[^>]*\bclass="[^"]*\b%s\b[^"]*"[^>]*>(.*?)</\1>' % cls, src, re.S):
             out.append((f, m.group(2)))
     return out
 
