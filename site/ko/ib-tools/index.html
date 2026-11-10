@@ -2137,7 +2137,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (max-width: 640px) { .tq-ibh { height: calc(100vh - 84px); height: calc(100svh - 84px); } }
 .tq-ibx { position: relative; overflow: hidden; display: flex; align-items: center; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px); color: #0a0a0a;
   background: radial-gradient(34% 44% at 72% 46%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 70%), radial-gradient(30% 40% at 20% 30%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%),
-    linear-gradient(180deg, #fff 0, #e9eaec 110px, #e9eaec calc(100% - 110px), #fff 100%); }
+    linear-gradient(180deg, #fff 0, #e9eaec 110px); }   
 .tq-ibx__wrap { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(40px, 7vw, 88px) clamp(20px, 5.5vw, 80px); box-sizing: border-box;
   display: flex; flex-wrap: wrap; align-items: center; gap: clamp(28px, 4vw, 56px); }
 .tq-ibx__text { flex: 1 1 400px; max-width: 520px; min-width: 0; display: flex; flex-direction: column; gap: clamp(18px, 2.4vw, 28px); position: relative; z-index: 3; }
@@ -2198,6 +2198,23 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-ibx__h1 { --h1s: 24px; }
 }
 @media (max-width: 640px) { .tq-ibx { min-height: 0; } }
+.tq-ibb { position: relative; overflow: hidden; height: clamp(520px, min(100vh, 112vw), 920px); height: clamp(520px, min(100svh, 112vw), 920px); color: #0a0a0a;   
+  background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
+.tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(16px, 3vw, 28px); display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+.tq-ibb__tabs { display: flex; flex-wrap: nowrap; gap: 2px; margin: 0; padding: 5px; max-width: 100%; box-sizing: border-box; list-style: none; white-space: nowrap; border-radius: 999px;
+  background: linear-gradient(170deg, rgba(255,255,255,.78), rgba(255,255,255,.38)); border: 1px solid #fff; box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 14px 28px -18px rgba(18,22,30,.35);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.tq-ibb__tab { position: relative; display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 clamp(8px, 1.4vw, 14px); flex: 0 1 auto; min-width: 0;
+  font-size: clamp(10px, 1vw, 11px); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: #8a8d93; transition: color .3s ease; }
+.tq-ibb__tab.is-on { color: #0a0a0a; }
+.tq-ibb__tab b { font-size: 10px; font-weight: 500; letter-spacing: 0; color: #e7131b; font-variant-numeric: tabular-nums; }
+.tq-ibb__tab span { overflow: hidden; text-overflow: ellipsis; }
+.tq-ibb__tab > i { position: absolute; left: 14px; right: 14px; bottom: 4px; height: 2px; border-radius: 2px; background: rgba(18,22,30,.08); overflow: hidden; }
+.tq-ibb__tab > i > i { display: block; height: 100%; width: 0; background: #e7131b; }
+:lang(ar) .tq-ibb__tab, :lang(th) .tq-ibb__tab, :lang(ja) .tq-ibb__tab, :lang(ko) .tq-ibb__tab, :lang(zh) .tq-ibb__tab { letter-spacing: .02em; font-size: 12px; }
+@media (max-width: 480px) { .tq-ibb__tab { padding: 0 7px; gap: 6px; letter-spacing: .06em; } .tq-ibb__tab > i { left: 7px; right: 7px; } }
+.tq-ibb__tabs.is-tight .tq-ibb__tab b { display: none; }
 </style>
 <style id="i18n-fonts">
 *:not(svg *) { letter-spacing: 0 !important; }
@@ -2342,6 +2359,21 @@ html:lang(ko) * { word-break: keep-all; }
 (function(){var c=document.currentScript.previousElementSibling,f=function(){var d=parseFloat(getComputedStyle(c).getPropertyValue('--sw'))||920;c.style.setProperty('--s',Math.min(1.12,c.clientWidth/d).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
       </div>
     </section>
+
+    <!-- Black hole (IB_Tools_Black_Hole_Obsidian design): assets/js/ib-hole.js draws it on the canvas. Event chips fall
+         into an obsidian black hole, crystals stack into volume-by-lot bars, regroup into the Sub-IB tree and drain back;
+         the HUD follows the three steps. The canvas text (chips, captions) is product UI, English; the steps are the
+         page's text. -->
+    <section id="flow" class="tq-ibb" data-ib-hole aria-label="끌어당김 · 모든 랏 · 모든 단계" data-screen-label="IB Tools · Black hole">
+      <canvas class="tq-ibb__cv" dir="ltr" aria-hidden="true"></canvas>
+      <div class="tq-ibb__hud">
+        <ol class="tq-ibb__tabs">
+          <li class="tq-ibb__tab is-on" data-ib-hole-tab><b>01</b><span>끌어당김</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>02</b><span>모든 랏</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>03</b><span>모든 단계</span><i><i data-ib-hole-fill></i></i></li>
+        </ol>
+      </div>
+    </section>
   </main>
 
   <footer style="padding: clamp(28px, 4vw, 48px) clamp(16px, 4vw, 56px); background: #fff; border-top: 1px solid #ececee;">
@@ -2354,5 +2386,6 @@ html:lang(ko) * { word-break: keep-all; }
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=4fa65f535e" defer></script>
+<script src="../../assets/js/ib-hole.js?v=c0837b2464" defer></script>
 </body>
 </html>

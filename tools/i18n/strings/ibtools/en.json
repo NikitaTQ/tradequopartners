@@ -27,5 +27,8 @@
   "ib.tool.2": "Churn & activity",
   "ib.tool.3": "Volume by instrument",
   "ib.tool.4": "Multi-tier Sub-IB",
-  "ib.tool.5": "AI insights"
+  "ib.tool.5": "AI insights",
+  "ib.hole.s1": "Pull",
+  "ib.hole.s2": "Every lot",
+  "ib.hole.s3": "Every tier"
 }

@@ -27,5 +27,8 @@
   "ib.tool.2": "Churn et activité",
   "ib.tool.3": "Volume par instrument",
   "ib.tool.4": "Sub-IB multiniveaux",
-  "ib.tool.5": "Analyses IA"
+  "ib.tool.5": "Analyses IA",
+  "ib.hole.s1": "Attraction",
+  "ib.hole.s2": "Chaque lot",
+  "ib.hole.s3": "Chaque niveau"
 }

@@ -27,5 +27,8 @@
   "ib.tool.2": "Bajas y actividad",
   "ib.tool.3": "Volumen por instrumento",
   "ib.tool.4": "Sub-IB multinivel",
-  "ib.tool.5": "Insights con IA"
+  "ib.tool.5": "Insights con IA",
+  "ib.hole.s1": "Atracción",
+  "ib.hole.s2": "Cada lote",
+  "ib.hole.s3": "Cada nivel"
 }

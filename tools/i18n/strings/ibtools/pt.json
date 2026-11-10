@@ -27,5 +27,8 @@
   "ib.tool.2": "Churn e atividade",
   "ib.tool.3": "Volume por instrumento",
   "ib.tool.4": "Sub-IB multinível",
-  "ib.tool.5": "Insights de IA"
+  "ib.tool.5": "Insights de IA",
+  "ib.hole.s1": "Atração",
+  "ib.hole.s2": "Cada lote",
+  "ib.hole.s3": "Cada nível"
 }
