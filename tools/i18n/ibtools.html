@@ -46,7 +46,7 @@
           <p class="tq-ibx__sub">{{ib.lot.sub}}</p>
           <div class="tq-ibx__ctas">
             <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.lot.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a class="tq-ibx__how" href="#ask">{{ib.lot.explore}}</a>
+            <a class="tq-ibx__how" href="#ai">{{ib.lot.explore}}</a>
           </div>
         </div>
 
@@ -133,6 +133,103 @@
         </div>
         <script>/* the stage at its column's width (design: 920 px wide, at most 1.12x; phones: the 855 px around the dashboard); --s on the row (the text column uses it too); set before the first paint */
 (function(){var c=document.currentScript.previousElementSibling,f=function(){var d=parseFloat(getComputedStyle(c).getPropertyValue('--sw'))||920;c.parentNode.style.setProperty('--s',Math.min(1.12,c.clientWidth/d).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c)})();</script>
+      </div>
+    </section>
+
+    <!-- AI assistant (IB_AI_Assistant design), right after the hero: the pitch and a red button to the application form on the
+         left, a glass "Ask AI" chat of IB Desk on the right that plays a four-turn conversation (the question is typed in the
+         box, sent, the assistant "thinks", answers with a ranked table or bars, rows come in one by one), then starts over.
+         assets/js/ib-ai.js plays it (data-play on the section, is-live on a turn, is-on on what has appeared); without it, and
+         with "reduce motion", the whole conversation stands still, scrolled to its end. The chat is a picture of the
+         interface: English on every language, figures from the design ("Demo data"). -->
+    <section id="ai" class="tq-iba" data-ib-ai data-screen-label="IB Tools · AI assistant">
+      <div class="tq-iba__wrap">
+        <div class="tq-iba__text">
+          <h2 class="tq-iba__h2 tq-h2">{{ib.ai.h2}}</h2>
+          <p class="tq-ibx__lead">{{ib.ai.lead}}</p>
+          <p class="tq-ibx__sub">{{ib.ai.sub}}</p>
+          <div class="tq-ibx__ctas">
+            <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.ai.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          </div>
+        </div>
+        <div class="tq-iba__fig" dir="ltr" aria-hidden="true">
+          <span class="tq-iba__blob tq-iba__blob--d"></span><span class="tq-iba__blob tq-iba__blob--r"></span><span class="tq-iba__blob tq-iba__blob--g"></span>
+          <div class="tq-iba__chat">
+            <span class="tq-iba__rim"></span><span class="tq-iba__glare"></span>
+            <div class="tq-iba__hd">
+              <div class="tq-iba__who"><span class="tq-iba__logo"><img src="{{root}}favicon.svg" alt="" width="30" height="30"></span><span class="tq-iba__name"><b>Ask AI</b><small>IB Desk assistant</small></span></div>
+              <span class="tq-iba__demo">DEMO DATA</span>
+            </div>
+            <div class="tq-iba__area">
+              <div class="tq-iba__log">
+                <div class="tq-iba__turn">
+                  <div class="tq-iba__q" data-s="1" data-fit>Who are my top sub-IBs?</div>
+                  <div class="tq-iba__a" data-s="2">
+                    <span class="tq-iba__av"><img src="{{root}}favicon.svg" alt="" width="24" height="24"></span>
+                    <div class="tq-iba__body">
+                      <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Reading 18 partner records</span></div><div class="tq-iba__intro" data-s="3">Your top 3 sub-IBs over the last 30 days, ranked by net deposits:</div></div>
+                      <div class="tq-iba__panel tq-iba__panel--rank" data-s="4">
+                        <div class="tq-iba__cols"><span>SUB-IB</span><span>NET DEPOSITS</span></div>
+                        <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__n">01</span><span class="tq-iba__nm"><b>Northline Partners</b><small>312 clients · $9,840 rebates</small></span><span class="tq-iba__v">$184,200</span></div>
+                        <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__n">02</span><span class="tq-iba__nm"><b>Meridian Group</b><small>228 clients · $7,215 rebates</small></span><span class="tq-iba__v">$131,600</span></div>
+                        <div class="tq-iba__r" data-s="6" data-fit><span class="tq-iba__n">03</span><span class="tq-iba__nm"><b>K. Ortiz</b><small>164 clients · $4,380 rebates</small></span><span class="tq-iba__v">$96,900</span></div>
+                      </div>
+                      <div class="tq-iba__follow" data-s="7" data-fit>Want me to break Northline down by client?</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tq-iba__turn">
+                  <div class="tq-iba__q" data-s="1" data-fit>Yes, show Northline’s top clients.</div>
+                  <div class="tq-iba__a" data-s="2">
+                    <span class="tq-iba__av"><img src="{{root}}favicon.svg" alt="" width="24" height="24"></span>
+                    <div class="tq-iba__body">
+                      <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Opening 312 Northline clients</span></div><div class="tq-iba__intro" data-s="3">Northline’s most active clients this month, by trading volume:</div></div>
+                      <div class="tq-iba__panel tq-iba__panel--rank" data-s="4">
+                        <div class="tq-iba__cols"><span>CLIENT</span><span>VOLUME</span></div>
+                        <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__n">01</span><span class="tq-iba__nm"><b>D. Moreau</b><small>XAUUSD · EURUSD</small></span><span class="tq-iba__v">412 lots</span></div>
+                        <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__n">02</span><span class="tq-iba__nm"><b>S. Haddad</b><small>EURUSD</small></span><span class="tq-iba__v">268 lots</span></div>
+                        <div class="tq-iba__r" data-s="6" data-fit><span class="tq-iba__n">03</span><span class="tq-iba__nm"><b>L. Brandt</b><small>US30 · GBPUSD</small></span><span class="tq-iba__v">193 lots</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tq-iba__turn">
+                  <div class="tq-iba__q" data-s="1" data-fit>Has anyone there gone quiet?</div>
+                  <div class="tq-iba__a" data-s="2">
+                    <span class="tq-iba__av"><img src="{{root}}favicon.svg" alt="" width="24" height="24"></span>
+                    <div class="tq-iba__body">
+                      <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Checking last trade dates</span></div><div class="tq-iba__intro" data-s="3">2 Northline clients haven’t traded in 30+ days:</div></div>
+                      <div class="tq-iba__panel" data-s="4">
+                        <div class="tq-iba__cols"><span>CLIENT</span><span>LAST TRADE</span></div>
+                        <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__nm"><b>Alex R.</b><small>$2,140 balance</small></span><span class="tq-iba__v">34 days ago</span></div>
+                        <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__nm"><b>P. Novak</b><small>$1,050 balance</small></span><span class="tq-iba__v">32 days ago</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tq-iba__turn">
+                  <div class="tq-iba__q" data-s="1" data-fit>Where do Northline’s rebates come from?</div>
+                  <div class="tq-iba__a" data-s="2">
+                    <span class="tq-iba__av"><img src="{{root}}favicon.svg" alt="" width="24" height="24"></span>
+                    <div class="tq-iba__body">
+                      <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Grouping $9,840 by instrument</span></div><div class="tq-iba__intro" data-s="3">Northline rebates over the last 30 days, by instrument:</div></div>
+                      <div class="tq-iba__panel tq-iba__panel--bars" data-s="4">
+                        <div class="tq-iba__b" data-s="4" data-fit><span>XAUUSD</span><span class="tq-iba__track"><span style="--bw: 100%"></span></span><span class="tq-iba__bv"><b>$4,530</b><small>46%</small></span></div>
+                        <div class="tq-iba__b" data-s="5" data-fit><span>EURUSD</span><span class="tq-iba__track"><span style="--bw: 67%"></span></span><span class="tq-iba__bv"><b>$3,050</b><small>31%</small></span></div>
+                        <div class="tq-iba__b" data-s="6" data-fit><span>US30</span><span class="tq-iba__track"><span style="--bw: 30%"></span></span><span class="tq-iba__bv"><b>$1,380</b><small>14%</small></span></div>
+                        <div class="tq-iba__b" data-s="7" data-fit><span>Other</span><span class="tq-iba__track"><span style="--bw: 20%"></span></span><span class="tq-iba__bv"><b>$880</b><small>9%</small></span></div>
+                      </div>
+                      <div class="tq-iba__follow" data-s="8" data-fit>Want this as an Excel or PDF report?</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tq-iba__foot">
+              <div class="tq-iba__in"><span class="tq-iba__txt"><span class="tq-iba__typed"></span><span class="tq-iba__ph">Ask about your IB business…</span><i class="tq-iba__caret"></i></span><span class="tq-iba__send"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M4 7l4-4 4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -259,6 +356,7 @@
 
 <script src="{{root}}assets/js/transition.js" defer></script>
 <script src="{{root}}assets/js/landing.js" defer></script>
+<script src="{{root}}assets/js/ib-ai.js" defer></script>
 <script src="{{root}}assets/js/ib-ask.js" defer></script>
 <script src="{{root}}assets/js/ib-hole.js" defer></script>
 </body>

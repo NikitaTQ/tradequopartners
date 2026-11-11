@@ -59,5 +59,9 @@
   "ib.ask.q2": "Klien mana yang berhenti trading",
   "ib.ask.q3": "Dari mana volume saya berasal",
   "ib.ask.q4": "Siapa yang performanya terbaik di jaringan saya",
-  "ib.ask.qm": "?"
+  "ib.ask.qm": "?",
+  "ib.ai.h2": "Ajukan pertanyaan <red>ke bisnis IB Anda.</red>",
+  "ib.ai.lead": "Telusuri kinerja partner dan aktivitas klien dengan asisten AI di dalam IB Desk Anda.",
+  "ib.ai.sub": "Tanpa ekspor, tanpa tabel pivot. Ketik apa yang ingin Anda ketahui dan dapatkan jawaban yang berurutan dan mudah dibaca dalam hitungan detik.",
+  "ib.ai.go": "Lihat AI beraksi"
 }

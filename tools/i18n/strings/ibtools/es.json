@@ -59,5 +59,9 @@
   "ib.ask.q2": "¿Qué clientes dejaron de operar",
   "ib.ask.q3": "¿De dónde viene mi volumen",
   "ib.ask.q4": "¿Quién rinde más en mi red",
-  "ib.ask.qm": "?"
+  "ib.ask.qm": "?",
+  "ib.ai.h2": "Hazle una pregunta <red>a tu negocio de IB.</red>",
+  "ib.ai.lead": "Explora el rendimiento de tus socios y la actividad de tus clientes con un asistente de IA dentro de tu IB Desk.",
+  "ib.ai.sub": "Sin exportaciones ni tablas dinámicas. Escribe lo que quieres saber y recibe en segundos una respuesta ordenada y fácil de leer.",
+  "ib.ai.go": "Ver la IA en acción"
 }
