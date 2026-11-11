@@ -48,5 +48,16 @@
   "ib.net.tier2": "Poziom 2",
   "ib.net.c3": "klienci: 3",
   "ib.net.c4": "klienci: 4",
-  "ib.net.c5": "klienci: 5"
+  "ib.net.c5": "klienci: 5",
+  "ib.ask.t1": "Cztery pytania, które zadaje każdy IB.",
+  "ib.ask.t2": "IB Desk odpowiada na nie w jednym miejscu.",
+  "ib.ask.f1": "Śledzenie prowizji",
+  "ib.ask.f2": "Aktywność klientów",
+  "ib.ask.f3": "Wolumen obrotu",
+  "ib.ask.f4": "Struktura Sub-IB",
+  "ib.ask.q1": "Ile dziś zarabiam",
+  "ib.ask.q2": "Którzy klienci przestali handlować",
+  "ib.ask.q3": "Skąd pochodzi mój wolumen",
+  "ib.ask.q4": "Kto w mojej sieci osiąga najlepsze wyniki",
+  "ib.ask.qm": "?"
 }

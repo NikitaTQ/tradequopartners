@@ -46,7 +46,7 @@
           <p class="tq-ibx__sub">{{ib.lot.sub}}</p>
           <div class="tq-ibx__ctas">
             <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.lot.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a class="tq-ibx__how" href="#network">{{ib.lot.explore}}</a>
+            <a class="tq-ibx__how" href="#ask">{{ib.lot.explore}}</a>
           </div>
         </div>
 
@@ -136,6 +136,71 @@
       </div>
     </section>
 
+    <!-- Four questions (IB_Features_Four_Questions design): four questions an IB asks on the left, a stack of glass IB Desk
+         cards on the right, one per question. Every 5.5 s the next question lights up (its red line fills) and its card
+         comes to the front; a click on a question or a card picks it; the pointer over the cards holds the turn.
+         assets/js/ib-ask.js turns them (data-a on the section, data-off on the cards); the rest is CSS. The cards are a
+         picture of the interface: English on every language, figures from the design. -->
+    <section id="ask" class="tq-ibq" data-ib-ask data-a="0" data-screen-label="IB Tools · Four questions">
+      <div class="tq-ibq__wrap">
+        <div class="tq-ibq__text">
+          <h2 class="tq-ibq__h2">{{ib.ask.t1}} <b>{{ib.ask.t2}}</b></h2>
+          <div class="tq-ibq__segs" aria-hidden="true">
+            <span class="tq-ibq__seg is-act" data-i="0"><span class="tq-ibq__bar"><span class="tq-ibq__fill"></span></span><span class="tq-ibq__n">Q.01</span></span>
+            <span class="tq-ibq__seg" data-i="1"><span class="tq-ibq__bar"><span class="tq-ibq__fill"></span></span><span class="tq-ibq__n">Q.02</span></span>
+            <span class="tq-ibq__seg" data-i="2"><span class="tq-ibq__bar"><span class="tq-ibq__fill"></span></span><span class="tq-ibq__n">Q.03</span></span>
+            <span class="tq-ibq__seg" data-i="3"><span class="tq-ibq__bar"><span class="tq-ibq__fill"></span></span><span class="tq-ibq__n">Q.04</span></span>
+          </div>
+          <ol class="tq-ibq__list">
+            <li class="tq-ibq__item is-act" data-i="0"><span class="tq-ibq__meta"><span class="tq-ibq__n">Q.01</span><span class="tq-ibq__feat">{{ib.ask.f1}}</span></span><h3 class="tq-ibq__q tq-h2"><button type="button" class="tq-ibq__btn" aria-current="true">{{ib.ask.q1}}<span class="tq-ibq__qm">{{ib.ask.qm}}</span></button></h3><span class="tq-ibq__line"><span class="tq-ibq__fill"></span></span></li>
+            <li class="tq-ibq__item" data-i="1"><span class="tq-ibq__meta"><span class="tq-ibq__n">Q.02</span><span class="tq-ibq__feat">{{ib.ask.f2}}</span></span><h3 class="tq-ibq__q tq-h2"><button type="button" class="tq-ibq__btn">{{ib.ask.q2}}<span class="tq-ibq__qm">{{ib.ask.qm}}</span></button></h3><span class="tq-ibq__line"><span class="tq-ibq__fill"></span></span></li>
+            <li class="tq-ibq__item" data-i="2"><span class="tq-ibq__meta"><span class="tq-ibq__n">Q.03</span><span class="tq-ibq__feat">{{ib.ask.f3}}</span></span><h3 class="tq-ibq__q tq-h2"><button type="button" class="tq-ibq__btn">{{ib.ask.q3}}<span class="tq-ibq__qm">{{ib.ask.qm}}</span></button></h3><span class="tq-ibq__line"><span class="tq-ibq__fill"></span></span></li>
+            <li class="tq-ibq__item" data-i="3"><span class="tq-ibq__meta"><span class="tq-ibq__n">Q.04</span><span class="tq-ibq__feat">{{ib.ask.f4}}</span></span><h3 class="tq-ibq__q tq-h2"><button type="button" class="tq-ibq__btn">{{ib.ask.q4}}<span class="tq-ibq__qm">{{ib.ask.qm}}</span></button></h3><span class="tq-ibq__line"><span class="tq-ibq__fill"></span></span></li>
+          </ol>
+        </div>
+        <div class="tq-ibq__stage" dir="ltr" aria-hidden="true">
+          <span class="tq-ibq__blob tq-ibq__blob--d"></span><span class="tq-ibq__blob tq-ibq__blob--r"></span><span class="tq-ibq__blob tq-ibq__blob--g"></span>
+          <div class="tq-ibq__card" data-c="0" data-off="0">
+            <span class="tq-ibq__rim"></span><span class="tq-ibq__glare"></span>
+            <div class="tq-ibq__hd"><span>COMMISSIONS · TODAY</span><span class="tq-ibq__mono">Nov 10</span></div>
+            <div class="tq-ibq__fig"><span class="tq-ibq__big">$1,240<span class="tq-ibq__dim">.00</span></span><span class="tq-ibq__delta">▲ 8.6% vs yesterday</span></div>
+            <svg class="tq-ibq__chart" viewBox="0 0 400 90" preserveAspectRatio="none"><defs><linearGradient id="tqIbqArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7131B" stop-opacity="0.2"/><stop offset="1" stop-color="#E7131B" stop-opacity="0"/></linearGradient></defs><path class="tq-ibq__area" d="M0 80 L33 77 L67 72 L100 73 L133 63 L167 57 L200 59 L233 46 L267 40 L300 34 L333 25 L367 19 L400 10 L400 90 L0 90 Z" fill="url(#tqIbqArea)"/><path class="tq-ibq__spark" d="M0 80 L33 77 L67 72 L100 73 L133 63 L167 57 L200 59 L233 46 L267 40 L300 34 L333 25 L367 19 L400 10" pathLength="1"/></svg>
+            <div class="tq-ibq__ft"><span>Paid daily</span><span>Next payout <b>00:00 UTC</b></span></div>
+          </div>
+          <div class="tq-ibq__card" data-c="1" data-off="3">
+            <span class="tq-ibq__rim"></span><span class="tq-ibq__glare"></span>
+            <div class="tq-ibq__hd"><span>NO TRADES · 30+ DAYS</span><span class="tq-ibq__mono">of 1,600</span></div>
+            <div class="tq-ibq__fig"><span class="tq-ibq__big tq-ibq__big--red">42</span><span class="tq-ibq__delta tq-ibq__delta--l">clients to re-engage</span></div>
+            <div class="tq-ibq__rows">
+              <div class="tq-ibq__row"><span><i></i>Alex R. <em>Northline</em></span><span class="tq-ibq__mono">34d</span></div>
+              <div class="tq-ibq__row"><span><i></i>M. Lindqvist <em>Direct</em></span><span class="tq-ibq__mono">31d</span></div>
+              <div class="tq-ibq__row"><span><i></i>J. Okafor <em>Meridian</em></span><span class="tq-ibq__mono">30d</span></div>
+            </div>
+          </div>
+          <div class="tq-ibq__card" data-c="2" data-off="2">
+            <span class="tq-ibq__rim"></span><span class="tq-ibq__glare"></span>
+            <div class="tq-ibq__hd"><span>NETWORK VOLUME · 30D</span><span class="tq-ibq__mono">lots</span></div>
+            <div class="tq-ibq__fig"><span class="tq-ibq__big">18,420</span><span class="tq-ibq__delta">▲ 7.9% vs prior</span></div>
+            <div class="tq-ibq__vol">
+              <div class="tq-ibq__v"><span>EURUSD</span><span class="tq-ibq__track"><span style="--qw: 100%"></span></span><span>4,860</span></div>
+              <div class="tq-ibq__v"><span>XAUUSD</span><span class="tq-ibq__track"><span style="--qw: 80%"></span></span><span>3,870</span></div>
+              <div class="tq-ibq__v"><span>GBPUSD</span><span class="tq-ibq__track"><span style="--qw: 45%"></span></span><span>2,210</span></div>
+              <div class="tq-ibq__v"><span>US30</span><span class="tq-ibq__track"><span style="--qw: 34%"></span></span><span>1,650</span></div>
+            </div>
+          </div>
+          <div class="tq-ibq__card tq-ibq__card--dark" data-c="3" data-off="1">
+            <span class="tq-ibq__rim"></span><span class="tq-ibq__glare"></span>
+            <div class="tq-ibq__hd"><span>TOP SUB-IBS · 30D</span><span class="tq-ibq__mono">18 partners</span></div>
+            <div class="tq-ibq__top">
+              <div class="tq-ibq__t"><span class="tq-ibq__mono">01</span><span><b>Northline Partners</b><small>L1 · 312 clients</small></span><span>$9,840</span></div>
+              <div class="tq-ibq__t"><span class="tq-ibq__mono">02</span><span><b>Meridian Group</b><small>L1 · 228 clients</small></span><span>$7,215</span></div>
+              <div class="tq-ibq__t"><span class="tq-ibq__mono">03</span><span><b>K. Ortiz</b><small>L2 · via Northline</small></span><span>$4,380</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Sub-IB network (Sub-IB_Network_Silver design): the pitch for moving a whole network over, and the 3D glass
          diagram of a Main IB, five Sub-IBs with their clients and a tier-2 Sub-IB (static SVG, partials/ib-net-svg.html,
          generated by tools/build-ib-net.mjs). Hovering a group lights it red and dims the rest (the script below sets
@@ -194,6 +259,7 @@
 
 <script src="{{root}}assets/js/transition.js" defer></script>
 <script src="{{root}}assets/js/landing.js" defer></script>
+<script src="{{root}}assets/js/ib-ask.js" defer></script>
 <script src="{{root}}assets/js/ib-hole.js" defer></script>
 </body>
 </html>

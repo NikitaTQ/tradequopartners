@@ -48,5 +48,16 @@
   "ib.net.tier2": "Stufe 2",
   "ib.net.c3": "3 Kunden",
   "ib.net.c4": "4 Kunden",
-  "ib.net.c5": "5 Kunden"
+  "ib.net.c5": "5 Kunden",
+  "ib.ask.t1": "Vier Fragen, die sich jeder IB stellt.",
+  "ib.ask.t2": "IB Desk beantwortet sie an einem Ort.",
+  "ib.ask.f1": "Rebate-Tracking",
+  "ib.ask.f2": "Kundenaktivität",
+  "ib.ask.f3": "Handelsvolumen",
+  "ib.ask.f4": "Sub-IB-Struktur",
+  "ib.ask.q1": "Wie viel habe ich heute verdient",
+  "ib.ask.q2": "Welche Kunden sind inaktiv geworden",
+  "ib.ask.q3": "Woher kommt mein Volumen",
+  "ib.ask.q4": "Wer in meinem Netzwerk ist am stärksten",
+  "ib.ask.qm": "?"
 }

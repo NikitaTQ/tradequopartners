@@ -48,5 +48,16 @@
   "ib.net.tier2": "Tingkat 2",
   "ib.net.c3": "3 klien",
   "ib.net.c4": "4 klien",
-  "ib.net.c5": "5 klien"
+  "ib.net.c5": "5 klien",
+  "ib.ask.t1": "Empat pertanyaan yang diajukan setiap IB.",
+  "ib.ask.t2": "IB Desk menjawabnya di satu tempat.",
+  "ib.ask.f1": "Pelacakan rebate",
+  "ib.ask.f2": "Aktivitas klien",
+  "ib.ask.f3": "Volume trading",
+  "ib.ask.f4": "Struktur Sub-IB",
+  "ib.ask.q1": "Berapa penghasilan saya hari ini",
+  "ib.ask.q2": "Klien mana yang berhenti trading",
+  "ib.ask.q3": "Dari mana volume saya berasal",
+  "ib.ask.q4": "Siapa yang performanya terbaik di jaringan saya",
+  "ib.ask.qm": "?"
 }

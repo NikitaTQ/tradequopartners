@@ -48,5 +48,16 @@
   "ib.net.tier2": "Niveau 2",
   "ib.net.c3": "3 clients",
   "ib.net.c4": "4 clients",
-  "ib.net.c5": "5 clients"
+  "ib.net.c5": "5 clients",
+  "ib.ask.t1": "Quatre questions que se pose chaque IB.",
+  "ib.ask.t2": "IB Desk y répond en un seul endroit.",
+  "ib.ask.f1": "Suivi des commissions",
+  "ib.ask.f2": "Activité des clients",
+  "ib.ask.f3": "Volume de trading",
+  "ib.ask.f4": "Structure Sub-IB",
+  "ib.ask.q1": "Combien ai-je gagné aujourd’hui",
+  "ib.ask.q2": "Quels clients sont devenus inactifs",
+  "ib.ask.q3": "D’où vient mon volume",
+  "ib.ask.q4": "Qui performe le mieux dans mon réseau",
+  "ib.ask.qm": " ?"
 }
