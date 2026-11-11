@@ -116,5 +116,11 @@
   "ib.ce.from": "od {n} · 30 dni",
   "ib.ce.lots": "loty: {n}",
   "ib.ce.other": "Inne",
-  "ib.ce.none": "Brak prowizji od tego klienta w tym okresie."
+  "ib.ce.none": "Brak prowizji od tego klienta w tym okresie.",
+  "ib.hole.sc": "Każdy klient",
+  "ib.hole.c1": "Wszystko jest *rozrzucone*",
+  "ib.hole.c2": "Ale Big IB Bang wszystko *ułatwia*",
+  "ib.hole.c3": "Każdy *lot* trafia na swoje miejsce",
+  "ib.hole.c4": "Zobacz, kto handluje, a kto *ucichł*",
+  "ib.hole.c5": "Zobacz każdą *gałąź* swojej sieci"
 }

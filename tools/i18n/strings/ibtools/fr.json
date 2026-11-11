@@ -116,5 +116,11 @@
   "ib.ce.from": "de {n} · 30 j",
   "ib.ce.lots": "{n} lots",
   "ib.ce.other": "Autres",
-  "ib.ce.none": "Aucune commission pour ce client sur la période."
+  "ib.ce.none": "Aucune commission pour ce client sur la période.",
+  "ib.hole.sc": "Chaque client",
+  "ib.hole.c1": "Tout est *éparpillé*",
+  "ib.hole.c2": "Mais le Big IB Bang rend tout *simple*",
+  "ib.hole.c3": "Chaque *lot* trouve sa place",
+  "ib.hole.c4": "Voyez qui trade et qui s’est *arrêté*",
+  "ib.hole.c5": "Voyez chaque *branche* de votre réseau"
 }

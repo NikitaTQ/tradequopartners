@@ -379,17 +379,22 @@
 (function(){var s=document.currentScript.parentNode,set=function(g){if(g==null){s.setAttribute('data-hl','0');s.removeAttribute('data-act')}else{s.setAttribute('data-hl',g);s.setAttribute('data-act','')}};s.querySelectorAll('.sib-n[data-g]').forEach(function(n){n.addEventListener('mouseenter',function(){set(n.getAttribute('data-g'))});n.addEventListener('mouseleave',function(){set(null)})})})();</script>
     </section>
 
-    <!-- Black hole (IB_Tools_Black_Hole_Obsidian design): assets/js/ib-hole.js draws it on the canvas. Event chips fall
-         into an obsidian black hole, crystals stack into volume-by-lot bars, regroup into the Sub-IB tree and drain back;
-         the HUD follows the three steps. The canvas text (chips, captions) is product UI, English; the steps are the
-         page's text. -->
-    <section id="flow" class="tq-ibb" data-ib-hole aria-label="{{@ib.hole.s1}} · {{@ib.hole.s2}} · {{@ib.hole.s3}}" data-screen-label="IB Tools · Black hole">
+    <!-- Black hole (IB_Tools_Black_Hole design, Nov 2026 version): assets/js/ib-hole.js draws it on the canvas. Event chips
+         fall into an obsidian black hole, crystals stack into volume-by-lot bars, gather into the client groups (active,
+         dormant risk, inactive), regroup into the Sub-IB tree and drain back; big captions over the scene tell the story
+         (data-c1..c5, *word* in red), the HUD follows the four steps. The chips and the figures on the canvas are product
+         UI, English; the captions, the group names and the steps are the page's text. .tq-ibb__font is not seen: it holds
+         the captions and group names in the heading face, so that face's subset has their letters and the browser loads
+         it before the canvas draws with it. -->
+    <section id="flow" class="tq-ibb" data-ib-hole aria-label="{{@ib.hole.s1}} · {{@ib.hole.s2}} · {{@ib.hole.sc}} · {{@ib.hole.s3}}" data-c1="{{@ib.hole.c1}}" data-c2="{{@ib.hole.c2}}" data-c3="{{@ib.hole.c3}}" data-c4="{{@ib.hole.c4}}" data-c5="{{@ib.hole.c5}}" data-act="{{@ib.ce.active}}" data-dor="{{@ib.ce.dormant}}" data-ina="{{@ib.ce.inactive}}" data-screen-label="IB Tools · Black hole">
+      <span class="tq-ibb__font tq-h2" aria-hidden="true">{{ib.hole.c1}} {{ib.hole.c2}} {{ib.hole.c3}} {{ib.hole.c4}} {{ib.hole.c5}} {{ib.ce.active}} {{ib.ce.dormant}} {{ib.ce.inactive}}</span>
       <canvas class="tq-ibb__cv" dir="ltr" aria-hidden="true"></canvas>
       <div class="tq-ibb__hud">
         <ol class="tq-ibb__tabs">
           <li class="tq-ibb__tab is-on" data-ib-hole-tab><b>01</b><span>{{ib.hole.s1}}</span><i><i data-ib-hole-fill></i></i></li>
           <li class="tq-ibb__tab" data-ib-hole-tab><b>02</b><span>{{ib.hole.s2}}</span><i><i data-ib-hole-fill></i></i></li>
-          <li class="tq-ibb__tab" data-ib-hole-tab><b>03</b><span>{{ib.hole.s3}}</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>03</b><span>{{ib.hole.sc}}</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>04</b><span>{{ib.hole.s3}}</span><i><i data-ib-hole-fill></i></i></li>
         </ol>
       </div>
     </section>

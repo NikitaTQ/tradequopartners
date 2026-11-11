@@ -116,5 +116,11 @@
   "ib.ce.from": "from {n} · 30D",
   "ib.ce.lots": "{n} lots",
   "ib.ce.other": "Other",
-  "ib.ce.none": "No commission records for this client in the period."
+  "ib.ce.none": "No commission records for this client in the period.",
+  "ib.hole.sc": "Every client",
+  "ib.hole.c1": "It is *all* over the place",
+  "ib.hole.c2": "But the Big IB Bang makes it *easy*",
+  "ib.hole.c3": "Every *lot* finds its place",
+  "ib.hole.c4": "See who trades and who went *quiet*",
+  "ib.hole.c5": "See every *branch* of your network"
 }
