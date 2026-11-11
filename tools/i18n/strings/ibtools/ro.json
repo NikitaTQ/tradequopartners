@@ -48,5 +48,16 @@
   "ib.net.tier2": "Nivelul 2",
   "ib.net.c3": "3 clienți",
   "ib.net.c4": "4 clienți",
-  "ib.net.c5": "5 clienți"
+  "ib.net.c5": "5 clienți",
+  "ib.ask.t1": "Patru întrebări pe care și le pune orice IB.",
+  "ib.ask.t2": "IB Desk le răspunde într-un singur loc.",
+  "ib.ask.f1": "Urmărirea comisioanelor",
+  "ib.ask.f2": "Activitatea clienților",
+  "ib.ask.f3": "Volum de tranzacționare",
+  "ib.ask.f4": "Structura Sub-IB",
+  "ib.ask.q1": "Cât am câștigat azi",
+  "ib.ask.q2": "Ce clienți au devenit inactivi",
+  "ib.ask.q3": "De unde vine volumul meu",
+  "ib.ask.q4": "Cine are cele mai bune rezultate în rețeaua mea",
+  "ib.ask.qm": "?"
 }

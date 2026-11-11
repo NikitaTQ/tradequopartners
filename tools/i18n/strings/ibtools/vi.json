@@ -48,5 +48,16 @@
   "ib.net.tier2": "Cấp 2",
   "ib.net.c3": "3 khách hàng",
   "ib.net.c4": "4 khách hàng",
-  "ib.net.c5": "5 khách hàng"
+  "ib.net.c5": "5 khách hàng",
+  "ib.ask.t1": "Bốn câu hỏi mà IB nào cũng đặt ra.",
+  "ib.ask.t2": "IB Desk trả lời tất cả ở một nơi.",
+  "ib.ask.f1": "Theo dõi hoa hồng",
+  "ib.ask.f2": "Hoạt động khách hàng",
+  "ib.ask.f3": "Khối lượng giao dịch",
+  "ib.ask.f4": "Cấu trúc Sub-IB",
+  "ib.ask.q1": "Hôm nay tôi kiếm được bao nhiêu",
+  "ib.ask.q2": "Khách hàng nào đã ngừng giao dịch",
+  "ib.ask.q3": "Khối lượng của tôi đến từ đâu",
+  "ib.ask.q4": "Ai trong mạng lưới của tôi hiệu quả nhất",
+  "ib.ask.qm": "?"
 }

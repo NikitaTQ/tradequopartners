@@ -48,5 +48,16 @@
   "ib.net.tier2": "Kademe 2",
   "ib.net.c3": "3 müşteri",
   "ib.net.c4": "4 müşteri",
-  "ib.net.c5": "5 müşteri"
+  "ib.net.c5": "5 müşteri",
+  "ib.ask.t1": "Her IB’nin sorduğu dört soru.",
+  "ib.ask.t2": "IB Desk hepsini tek yerde yanıtlar.",
+  "ib.ask.f1": "Komisyon takibi",
+  "ib.ask.f2": "Müşteri aktivitesi",
+  "ib.ask.f3": "İşlem hacmi",
+  "ib.ask.f4": "Sub-IB yapısı",
+  "ib.ask.q1": "Bugün ne kadar kazandım",
+  "ib.ask.q2": "Hangi müşteriler işlem yapmayı bıraktı",
+  "ib.ask.q3": "Hacmim nereden geliyor",
+  "ib.ask.q4": "Ağımda en iyi performansı kim gösteriyor",
+  "ib.ask.qm": "?"
 }
