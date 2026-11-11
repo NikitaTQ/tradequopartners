@@ -59,5 +59,9 @@
   "ib.ask.q2": "Khách hàng nào đã ngừng giao dịch",
   "ib.ask.q3": "Khối lượng của tôi đến từ đâu",
   "ib.ask.q4": "Ai trong mạng lưới của tôi hiệu quả nhất",
-  "ib.ask.qm": "?"
+  "ib.ask.qm": "?",
+  "ib.ai.h2": "Đặt câu hỏi <red>cho mảng IB của bạn.</red>",
+  "ib.ai.lead": "Khám phá hiệu quả của đối tác và hoạt động của khách hàng với trợ lý AI ngay trong IB Desk.",
+  "ib.ai.sub": "Không cần xuất dữ liệu, không cần bảng pivot. Gõ điều bạn muốn biết và nhận câu trả lời được xếp hạng, dễ đọc chỉ trong vài giây.",
+  "ib.ai.go": "Xem AI hoạt động"
 }

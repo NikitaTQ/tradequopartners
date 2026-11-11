@@ -59,5 +59,9 @@
   "ib.ask.q2": "Hangi müşteriler işlem yapmayı bıraktı",
   "ib.ask.q3": "Hacmim nereden geliyor",
   "ib.ask.q4": "Ağımda en iyi performansı kim gösteriyor",
-  "ib.ask.qm": "?"
+  "ib.ask.qm": "?",
+  "ib.ai.h2": "IB işinize <red>bir soru sorun.</red>",
+  "ib.ai.lead": "IB Desk içindeki yapay zekâ asistanıyla partner performansını ve müşteri aktivitesini inceleyin.",
+  "ib.ai.sub": "Dışa aktarma yok, pivot tablo yok. Ne öğrenmek istediğinizi yazın, saniyeler içinde sıralı ve okunaklı bir yanıt alın.",
+  "ib.ai.go": "Yapay zekâyı iş başında görün"
 }

@@ -59,5 +59,9 @@
   "ib.ask.q2": "Ce clienți au devenit inactivi",
   "ib.ask.q3": "De unde vine volumul meu",
   "ib.ask.q4": "Cine are cele mai bune rezultate în rețeaua mea",
-  "ib.ask.qm": "?"
+  "ib.ask.qm": "?",
+  "ib.ai.h2": "Pune o întrebare <red>afacerii tale de IB.</red>",
+  "ib.ai.lead": "Analizează performanța partenerilor și activitatea clienților cu un asistent AI integrat în IB Desk.",
+  "ib.ai.sub": "Fără exporturi, fără tabele pivot. Scrie ce vrei să afli și primești în câteva secunde un răspuns ordonat și ușor de citit.",
+  "ib.ai.go": "Vezi AI-ul în acțiune"
 }

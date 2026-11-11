@@ -59,5 +59,9 @@
   "ib.ask.q2": "Którzy klienci przestali handlować",
   "ib.ask.q3": "Skąd pochodzi mój wolumen",
   "ib.ask.q4": "Kto w mojej sieci osiąga najlepsze wyniki",
-  "ib.ask.qm": "?"
+  "ib.ask.qm": "?",
+  "ib.ai.h2": "Zadaj pytanie <red>swojemu biznesowi IB.</red>",
+  "ib.ai.lead": "Analizuj wyniki partnerów i aktywność klientów z asystentem AI wbudowanym w IB Desk.",
+  "ib.ai.sub": "Bez eksportów i tabel przestawnych. Napisz, czego chcesz się dowiedzieć, i w kilka sekund otrzymaj uporządkowaną, czytelną odpowiedź.",
+  "ib.ai.go": "Zobacz AI w akcji"
 }
