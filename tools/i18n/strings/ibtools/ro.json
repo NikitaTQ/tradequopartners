@@ -85,5 +85,15 @@
   "ib.ai.x4m1": "L1 · 312 clienți",
   "ib.ai.x4m2": "L1 · 228 de clienți",
   "ib.ai.x4m3": "L2 · 164 de clienți",
-  "ib.ai.x4follow": "Vrei detalierea Northline pe clienți?"
+  "ib.ai.x4follow": "Vrei detalierea Northline pe clienți?",
+  "ib.ins.h2": "Vezi-ți rețeaua. Înțelege <red>fiecare ramură.</red>",
+  "ib.ins.lead": "Explorează structura de Sub-IB și compară performanța partenerilor într-un singur loc.",
+  "ib.ins.v1": "Rețea",
+  "ib.ins.v1t": "Fiecare ramură, nivel cu nivel. Vezi cum se leagă fiecare partener de tine.",
+  "ib.ins.v2": "Performanță",
+  "ib.ins.v2t": "Aceiași parteneri, aliniați după depozitele nete. Vezi cine îți duce rețeaua înainte.",
+  "ib.ins.go": "Explorează analizele rețelei",
+  "ib.ins.you": "Tu",
+  "ib.ins.total": "{v} în total",
+  "ib.ins.net": "Depozitele nete ale rețelei"
 }

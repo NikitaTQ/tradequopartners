@@ -46,7 +46,7 @@
           <p class="tq-ibx__sub">{{ib.lot.sub}}</p>
           <div class="tq-ibx__ctas">
             <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.lot.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a class="tq-ibx__how" href="#ai">{{ib.lot.explore}}</a>
+            <a class="tq-ibx__how" href="#insights">{{ib.lot.explore}}</a>
           </div>
         </div>
 
@@ -136,7 +136,33 @@
       </div>
     </section>
 
-    <!-- Ask AI (IB_AI_Assistant + IB_Features_Four_Questions, merged), right after the hero. Left: a line about the AI
+    <!-- Network insights (IB_Network_Insights design), right after the hero: the pitch, two views to pick (V.01 Network,
+         V.02 Performance) and a red button to the Sub-IB network block; right a canvas: the partner tree in glass (You at
+         the top, Sub-IBs level by level, pulses running up the links, the strongest branch red), which turns into a bar
+         chart of the same partners by net deposits, and back (7.5 s / 5.5 s, held while the pointer is over it; a click on a
+         view stops the turns). assets/js/ib-insights.js draws it; its words come from data-* on the canvas. Names and
+         figures are demo data (the same partners as in the Ask AI chat). -->
+    <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
+      <div class="tq-ibi__wrap">
+        <div class="tq-ibi__text">
+          <h2 class="tq-ibi__h2 tq-h2">{{ib.ins.h2}}</h2>
+          <p class="tq-ibx__lead">{{ib.ins.lead}}</p>
+          <div class="tq-ibi__guide">
+            <button type="button" class="tq-ibi__g is-act" aria-pressed="true"><span class="tq-ibi__n">V.01</span><span class="tq-ibi__gt"><b>{{ib.ins.v1}}</b><span>{{ib.ins.v1t}}</span></span></button>
+            <button type="button" class="tq-ibi__g" aria-pressed="false"><span class="tq-ibi__n">V.02</span><span class="tq-ibi__gt"><b>{{ib.ins.v2}}</b><span>{{ib.ins.v2t}}</span></span></button>
+          </div>
+          <div class="tq-ibx__ctas">
+            <a class="tq-ibx__go" href="#network"><span>{{ib.ins.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          </div>
+        </div>
+        <div class="tq-ibi__fig" aria-hidden="true">
+          <span class="tq-ibi__blob tq-ibi__blob--d"></span><span class="tq-ibi__blob tq-ibi__blob--w"></span>
+          <div class="tq-ibi__stage" dir="ltr"><canvas data-you="{{@ib.ins.you}}" data-total="{{@ib.ins.total}}" data-net="{{@ib.ins.net}}"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ask AI (IB_AI_Assistant + IB_Features_Four_Questions, merged). Left: a line about the AI
          assistant, the four questions an IB asks (Q.01–Q.04; the lit one black with a red "?", a red line filling under it)
          and a red button to the application form. Right: the glass "Ask AI" chat of IB Desk. Picking a question (or its
          turn coming, every 10 s) types that same question into the chat's box, sends it, and "IB Desk AI" answers: dots,
@@ -307,6 +333,7 @@
 
 <script src="{{root}}assets/js/transition.js" defer></script>
 <script src="{{root}}assets/js/landing.js" defer></script>
+<script src="{{root}}assets/js/ib-insights.js" defer></script>
 <script src="{{root}}assets/js/ib-ai.js" defer></script>
 <script src="{{root}}assets/js/ib-hole.js" defer></script>
 </body>

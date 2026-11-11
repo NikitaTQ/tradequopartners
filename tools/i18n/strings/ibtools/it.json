@@ -85,5 +85,15 @@
   "ib.ai.x4m1": "L1 · 312 clienti",
   "ib.ai.x4m2": "L1 · 228 clienti",
   "ib.ai.x4m3": "L2 · 164 clienti",
-  "ib.ai.x4follow": "Vuoi il dettaglio di Northline per cliente?"
+  "ib.ai.x4follow": "Vuoi il dettaglio di Northline per cliente?",
+  "ib.ins.h2": "Guarda la tua rete. Capisci <red>ogni ramo.</red>",
+  "ib.ins.lead": "Esplora la tua struttura di Sub-IB e confronta le performance dei partner in un unico posto.",
+  "ib.ins.v1": "Rete",
+  "ib.ins.v1t": "Ogni ramo, livello per livello. Guarda come ogni partner è collegato a te.",
+  "ib.ins.v2": "Performance",
+  "ib.ins.v2t": "Gli stessi partner, in fila per depositi netti. Guarda chi spinge la tua rete.",
+  "ib.ins.go": "Esplora gli insight della rete",
+  "ib.ins.you": "Tu",
+  "ib.ins.total": "{v} in totale",
+  "ib.ins.net": "Depositi netti della rete"
 }

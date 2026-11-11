@@ -85,5 +85,15 @@
   "ib.ai.x4m1": "L1 · 312位客戶",
   "ib.ai.x4m2": "L1 · 228位客戶",
   "ib.ai.x4m3": "L2 · 164位客戶",
-  "ib.ai.x4follow": "需要把Northline按客戶拆分嗎？"
+  "ib.ai.x4follow": "需要把Northline按客戶拆分嗎？",
+  "ib.ins.h2": "看清您的網路，讀懂<red>每一個分支。</red>",
+  "ib.ins.lead": "在一個地方查看下級IB結構，並比較合作夥伴的表現。",
+  "ib.ins.v1": "網路",
+  "ib.ins.v1t": "每個分支，逐層展開。看清每位合作夥伴如何與您相連。",
+  "ib.ins.v2": "表現",
+  "ib.ins.v2t": "同一批合作夥伴，按淨入金排列。看清誰在推動您的網路。",
+  "ib.ins.go": "探索網路洞察",
+  "ib.ins.you": "您",
+  "ib.ins.total": "合計 {v}",
+  "ib.ins.net": "網路淨入金"
 }
