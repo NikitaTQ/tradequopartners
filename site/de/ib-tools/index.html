@@ -98,12 +98,12 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc.woff2?v=ed84a90471) format('woff2'); }
 @font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=b74add9688) format('woff2'); }
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=9f06ac8ad5) format('woff2'); }
-@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=b3cb9a8a26) format('woff2'); }
-@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=7d776df46a) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=d27fda92eb) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=448acf5005) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=4713ffb8f8) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=28789095a0) format('woff2'); }
+@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=cc401c2105) format('woff2'); }
+@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=14208c685d) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=80d84cb5fb) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=8db26119e4) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=b6a16e5995) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=83dea4b0f0) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -2222,7 +2222,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (max-width: 480px) { .tq-ibb__tab { padding: 0 7px; gap: 6px; letter-spacing: .06em; } .tq-ibb__tab > i { left: 7px; right: 7px; } }
 .tq-ibb__tabs.is-tight .tq-ibb__tab b { display: none; }   
 .tq-ibn { position: relative; overflow: hidden; color: #0a0a0a;
-  background: radial-gradient(44% 48% at 66% 30%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), radial-gradient(30% 40% at 14% 30%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }
+  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(44% 48% at 66% 30%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), radial-gradient(30% 40% at 14% 30%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   
 .tq-ibn__wrap { position: relative; max-width: 1440px; margin: 0 auto; padding: clamp(24px, 4.5vh, 56px) clamp(20px, 5.5vw, 80px); box-sizing: border-box; display: flex; flex-direction: column;
   justify-content: center; min-height: 100vh; min-height: 100svh; gap: clamp(16px, 3.2vh, 36px); }
 .tq-ibn__row { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(32px, 4vw, 56px); }
@@ -2319,142 +2319,40 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-ibn .tq-ibn__q { display: flex; flex: none; align-items: center; justify-content: center; width: 54px; height: 54px; border-radius: 50%; color: #0a0a0a; font-size: 18px; font-weight: 700;
     text-decoration: none; background: linear-gradient(170deg, rgba(255,255,255,.75), rgba(255,255,255,.35)); border: 1px solid #fff; box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 14px 28px -18px rgba(18,22,30,.35); }
 }
-.tq-ibq { position: relative; overflow: hidden; height: 100vh; height: 100svh; min-height: 620px; max-height: 940px; display: flex; align-items: center; color: #0a0a0a;
-  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 30% 20%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   
-.tq-ibq__wrap { position: relative; width: 100%; height: 100%; max-width: 1280px; margin: 0 auto; padding: clamp(40px, 6vh, 72px) clamp(24px, 5vw, 64px); box-sizing: border-box;
-  display: flex; align-items: stretch; gap: clamp(32px, 5vw, 80px); }
-.tq-ibq__text { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: clamp(24px, 4vh, 44px); }
-.tq-ibq__h2 { margin: 0; max-width: 440px; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.45; font-weight: 600; color: #55585f; text-wrap: pretty; }
-.tq-ibq__h2 b { color: #0a0a0a; font-weight: 700; }
-.tq-ibq__segs { display: none; }
-.tq-ibq__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.tq-ibq__item { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 18px 0 20px; border-top: 1px solid rgba(18,22,30,.1); cursor: pointer; }
-.tq-ibq__meta { display: flex; align-items: center; gap: 12px; }
-.tq-ibq__n { font-size: 11px; font-variant-numeric: tabular-nums; color: #8a8d93; transition: color .4s; }
-.tq-ibq__feat { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #8a8d93; }
-:lang(ar) .tq-ibq__feat, :lang(th) .tq-ibq__feat, :lang(ja) .tq-ibq__feat, :lang(ko) .tq-ibq__feat, :lang(zh) .tq-ibq__feat { font-size: 11px; letter-spacing: .04em; }
-.tq-ibq__q { --h2s: clamp(17px, 1.9vw, 27px); margin: 0; padding-inline-start: 0; letter-spacing: 0; line-height: 1.2; color: #a3a6ac; transition: color .4s ease; }   
-.tq-ibq__btn { all: unset; cursor: pointer; }
-.tq-ibq__btn:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; border-radius: 4px; }
-.tq-ibq__qm { color: #a3a6ac; transition: color .4s; }
-.tq-ibq__item.is-act .tq-ibq__q { color: #0a0a0a; }
-.tq-ibq .is-act .tq-ibq__qm, .tq-ibq .is-act .tq-ibq__n { color: #e7131b; }
-.tq-ibq__line { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; overflow: hidden; }
-.tq-ibq__fill { display: block; width: 100%; height: 100%; background: #e7131b; transform: scaleX(0); transform-origin: 0 50%; }
-[dir="rtl"] .tq-ibq__fill { transform-origin: 100% 50%; }
-.tq-ibq.is-on .is-act .tq-ibq__fill { animation: tqIbqFill 5.5s linear forwards; }
-.tq-ibq.is-on[data-hold] .is-act .tq-ibq__fill, .tq-ibq.is-on:not([data-run]) .is-act .tq-ibq__fill { animation-play-state: paused; }   
-@keyframes tqIbqFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-.tq-ibq__stage { --qcw: min(440px, calc(100% - 110px)); --qch: 380px; --qdx: 46px; --qdy: -30px; --qdz: -130px; --qry: -13deg; --qrx: 6deg;
-  position: relative; flex: 1.05 1 0; min-width: 0; min-height: 0; }
-.tq-ibq__blob { position: absolute; left: 50%; top: 50%; border-radius: 50%; pointer-events: none; }
-.tq-ibq__blob--d { width: 70%; height: 70%; transform: translate(-30%, -70%); background: radial-gradient(closest-side, rgba(28,30,36,.42), rgba(28,30,36,0)); }
-.tq-ibq__blob--r { width: 55%; height: 55%; transform: translate(-95%, -10%); background: radial-gradient(closest-side, rgba(231,19,27,.18), rgba(231,19,27,0)); }
-.tq-ibq__blob--g { width: 60%; height: 60%; transform: translate(-20%, -5%); background: radial-gradient(closest-side, rgba(150,154,162,.5), rgba(150,154,162,0)); }
-.tq-ibq__card { --qtx: 0px; --qty: 0px; --qtz: 0px; position: absolute; inset: 0; z-index: 4; margin: auto; width: var(--qcw); height: var(--qch); box-sizing: border-box; padding: 22px;
-  border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; gap: 14px; cursor: pointer; color: #0a0a0a; font-size: 13px; line-height: 1.3;
-  background: linear-gradient(135deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.2) 50%, rgba(255,255,255,.4) 100%);
-  -webkit-backdrop-filter: blur(18px) saturate(190%) brightness(1.05); backdrop-filter: blur(18px) saturate(190%) brightness(1.05); border: 1px solid rgba(255,255,255,.55);
-  box-shadow: inset 0 22px 32px -22px rgba(255,255,255,.95), inset 0 -20px 30px -24px rgba(18,22,30,.18), 0 40px 70px -34px rgba(18,22,30,.45), 0 12px 24px -16px rgba(18,22,30,.25);
-  transform: perspective(1400px) rotateY(calc(var(--qry) + var(--qmx, 0) * 7deg)) rotateX(calc(var(--qrx) - var(--qmy, 0) * 5deg)) translate3d(var(--qtx), var(--qty), var(--qtz));
-  transition: transform .9s cubic-bezier(.2,.8,.2,1), opacity .7s ease; }
-.tq-ibq__card[data-off="1"] { --qtx: var(--qdx); --qty: var(--qdy); --qtz: var(--qdz); z-index: 3; opacity: .62; }
-.tq-ibq__card[data-off="2"] { --qtx: calc(var(--qdx) * 2); --qty: calc(var(--qdy) * 2); --qtz: calc(var(--qdz) * 2); z-index: 2; opacity: .32; }
-.tq-ibq__card[data-off="3"] { --qtx: calc(var(--qdx) * -1.6); --qty: calc(var(--qdy) * -1.4); --qtz: calc(var(--qdz) * -.9); z-index: 5; opacity: 0; pointer-events: none; }
-.tq-ibq__card--dark { color: #fff; background: linear-gradient(135deg, rgba(58,60,68,.78) 0%, rgba(12,13,16,.86) 55%, rgba(30,32,38,.82) 100%);
-  -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%); border-color: rgba(255,255,255,.2);
-  box-shadow: inset 0 22px 32px -24px rgba(255,255,255,.35), inset 0 -18px 28px -22px rgba(0,0,0,.5), 0 40px 70px -30px rgba(18,22,30,.6); }
-.tq-ibq__rim { position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
-  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 68%, rgba(255,255,255,.85) 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; }
-.tq-ibq__card--dark .tq-ibq__rim { background: linear-gradient(135deg, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,.4) 100%); }
-.tq-ibq__glare { position: absolute; left: -20%; top: -45%; width: 75%; height: 85%; pointer-events: none; background: radial-gradient(closest-side, rgba(255,255,255,.5), rgba(255,255,255,0)); }
-.tq-ibq__card--dark .tq-ibq__glare { left: -15%; top: -50%; width: 70%; background: radial-gradient(closest-side, rgba(255,255,255,.14), rgba(255,255,255,0)); }
-.tq-ibq__hd { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.tq-ibq__hd > span:first-child { font-size: 10px; font-weight: 700; letter-spacing: .2em; color: #55585f; }
-.tq-ibq__mono { font-size: 10px; font-variant-numeric: tabular-nums; color: #6b6e75; }
-.tq-ibq__card--dark .tq-ibq__hd > span:first-child { color: #a0a3a9; }
-.tq-ibq__card--dark .tq-ibq__hd .tq-ibq__mono { color: #8a8d93; }
-.tq-ibq__fig { position: relative; display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; }
-.tq-ibq__big { font-size: clamp(34px, 3.4vw, 46px); font-weight: 700; letter-spacing: -.035em; line-height: 1; font-variant-numeric: tabular-nums; }
-.tq-ibq__big--red { color: #e7131b; }
-.tq-ibq__dim { color: #8a8d93; }
-.tq-ibq__delta { font-size: 12.5px; font-weight: 700; color: #2a2c31; }
-.tq-ibq__delta--l { font-size: 14px; }
-.tq-ibq__chart { position: relative; display: block; width: 100%; height: auto; flex: 1 1 0; min-height: 40px; overflow: visible; }
-.tq-ibq__area { opacity: 0; transition: opacity .8s ease .5s; }
-.tq-ibq__spark { fill: none; stroke: #e7131b; stroke-width: 2.2; stroke-linejoin: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.3s cubic-bezier(.4,0,.2,1) .2s; }
-.tq-ibq__ft { position: relative; display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.7); font-size: 12px; font-weight: 600; color: #55585f; }
-.tq-ibq__ft b { color: #0a0a0a; font-weight: 700; }
-.tq-ibq__rows { position: relative; flex: 1 1 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
-.tq-ibq__row { flex: none; display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 13px; font-weight: 700; border-top: 1px solid rgba(255,255,255,.7);
-  opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1); }
-.tq-ibq__row > span:first-child { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-.tq-ibq__row i { width: 7px; height: 7px; border-radius: 50%; background: #e7131b; }
-.tq-ibq__row em { font-style: normal; font-weight: 600; color: #6b6e75; }
-.tq-ibq__row .tq-ibq__mono { font-size: 11.5px; color: #c40f16; }
-.tq-ibq__vol { position: relative; flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
-.tq-ibq__v { display: grid; grid-template-columns: 64px minmax(0, 1fr) 46px; align-items: center; gap: 12px; font-size: 12.5px; font-weight: 700; }
-.tq-ibq__v > span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
-.tq-ibq__track { height: 8px; border-radius: 5px; background: rgba(18,22,30,.08); overflow: hidden; }
-.tq-ibq__track > span { display: block; width: 0; height: 100%; border-radius: 5px; transition: width 1s cubic-bezier(.2,.8,.2,1) .2s; }
-.tq-ibq__v:nth-child(1) .tq-ibq__track > span { background: linear-gradient(90deg, #b80e15, #f2262e); }
-.tq-ibq__v:nth-child(2) .tq-ibq__track > span { background: linear-gradient(90deg, #2a2c31, #6b6e75); transition-delay: .28s; }
-.tq-ibq__v:nth-child(3) .tq-ibq__track > span { background: linear-gradient(90deg, #6b6e75, #a0a3a9); transition-delay: .36s; }
-.tq-ibq__v:nth-child(4) .tq-ibq__track > span { background: linear-gradient(90deg, #8a8d93, #b9bcc3); transition-delay: .44s; }
-.tq-ibq__top { position: relative; flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
-.tq-ibq__t { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1px solid transparent;
-  opacity: 0; transform: translateX(-12px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1); }
-.tq-ibq__t:first-child { background: rgba(255,255,255,.07); border-color: rgba(231,19,27,.5); }
-.tq-ibq__t .tq-ibq__mono { font-size: 11px; color: #8a8d93; }
-.tq-ibq__t:first-child .tq-ibq__mono { color: #ff4148; }
-.tq-ibq__t > span:nth-child(2) { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.tq-ibq__t b { font-size: 13.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tq-ibq__t small { font-size: 11px; font-weight: 600; color: #8a8d93; white-space: nowrap; }
-.tq-ibq__t > span:last-child { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.tq-ibq__row:nth-child(1), .tq-ibq__t:nth-child(1) { transition-delay: .25s; }
-.tq-ibq__row:nth-child(2), .tq-ibq__t:nth-child(2) { transition-delay: .35s; }
-.tq-ibq__row:nth-child(3), .tq-ibq__t:nth-child(3) { transition-delay: .45s; }
-.tq-ibq.is-on [data-off="0"] .tq-ibq__area { opacity: 1; }
-.tq-ibq.is-on [data-off="0"] .tq-ibq__spark { stroke-dashoffset: 0; }
-.tq-ibq.is-on [data-off="0"] .tq-ibq__row, .tq-ibq.is-on [data-off="0"] .tq-ibq__t { opacity: 1; transform: none; }
-.tq-ibq.is-on [data-off="0"] .tq-ibq__track > span { width: var(--qw); }
-@media (max-width: 819px) {
-  .tq-ibq__wrap { flex-direction: column; gap: 14px; padding: 28px 20px 20px; }
-  .tq-ibq__text { flex: 0 0 auto; justify-content: flex-start; gap: 20px; }
-  .tq-ibq__segs { display: flex; gap: 6px; margin-bottom: -6px; }
-  .tq-ibq__seg { flex: 1; display: flex; flex-direction: column; gap: 7px; padding-top: 4px; cursor: pointer; }
-  .tq-ibq__bar { position: relative; height: 3px; border-radius: 3px; overflow: hidden; background: rgba(18,22,30,.12); }
-  .tq-ibq__bar .tq-ibq__fill { position: absolute; inset: 0; }
-  .tq-ibq__seg .tq-ibq__n { font-size: 10.5px; }
-  .tq-ibq__seg.is-past .tq-ibq__fill { transform: none; }
-  .tq-ibq__item { display: none; gap: 14px; padding: 0; border: 0; cursor: default; }
-  .tq-ibq__item.is-act { display: flex; }
-  .tq-ibq__item .tq-ibq__n, .tq-ibq__line { display: none; }
-  .tq-ibq__q { --h2s: clamp(19px, 5.6vw, 26px); min-height: 2.4em; }
-  .tq-ibq__stage { --qcw: min(400px, calc(100% - 52px)); --qch: min(320px, max(250px, calc(min(940px, max(620px, 100svh)) - 330px))); --qdx: 22px; --qdy: -16px; --qdz: -70px; --qry: -5deg; --qrx: 4deg;
-    flex: 1 1 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .tq-ibq .tq-ibq__fill { animation: none; }
-  .tq-ibq__card { transition: opacity .3s ease; }
-}
 .tq-iba { position: relative; overflow: hidden; min-height: min(100vh, 940px); min-height: min(100svh, 940px); display: flex; align-items: center; box-sizing: border-box;
-  padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 80px); color: #0a0a0a;
+  padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 80px) max(88px, clamp(40px, 7vh, 80px)); color: #0a0a0a;   
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 28% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   
-.tq-iba__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(40px, 5vw, 72px); }
-.tq-iba__text { flex: 1 1 340px; max-width: 470px; min-width: 0; display: flex; flex-direction: column; gap: clamp(16px, 2.4vh, 24px); }
-.tq-iba__h2 { --h2s: clamp(26px, min(3.2vw, 5.4vh), 48px); margin: 0; line-height: 1.1; letter-spacing: -.01em; padding-inline-start: 0; }   
-.tq-iba .tq-ibx__lead { max-width: 440px; font-size: clamp(16px, min(1.3vw, 2.3vh), 19px); }
-.tq-iba .tq-ibx__sub { max-width: 430px; }
-.tq-iba__fig { position: relative; flex: 1 1 460px; max-width: 620px; min-width: 0; }
+.tq-iba__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: clamp(40px, 5vw, 80px); }
+.tq-iba__text { flex: 1 1 0; min-width: 0; max-width: 520px; display: flex; flex-direction: column; gap: clamp(20px, 3.4vh, 34px); }
+.tq-iba__h2 { margin: 0; max-width: 460px; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.45; font-weight: 600; color: #55585f; text-wrap: pretty; }
+.tq-iba__h2 b { color: #0a0a0a; font-weight: 700; }
+.tq-iba__segs { display: none; }
+.tq-iba__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.tq-iba__item { position: relative; display: flex; flex-direction: column; gap: 9px; padding: 16px 0 18px; border-top: 1px solid rgba(18,22,30,.1); cursor: pointer; }
+.tq-iba__meta { display: flex; align-items: center; gap: 12px; }
+.tq-iba__n { font-size: 11px; font-variant-numeric: tabular-nums; color: #8a8d93; transition: color .4s; }
+.tq-iba__feat { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #8a8d93; }
+:lang(ar) .tq-iba__feat, :lang(th) .tq-iba__feat, :lang(ja) .tq-iba__feat, :lang(ko) .tq-iba__feat, :lang(zh) .tq-iba__feat { font-size: 11px; letter-spacing: .04em; }
+.tq-iba__qq { --h2s: clamp(16px, 1.75vw, 25px); margin: 0; padding-inline-start: 0; letter-spacing: 0; line-height: 1.2; color: #a3a6ac; transition: color .4s ease; }   
+.tq-iba__btn { all: unset; cursor: pointer; }
+.tq-iba__btn:focus-visible, .tq-iba__seg:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; border-radius: 4px; }
+.tq-iba__qm { color: #a3a6ac; transition: color .4s; }
+.tq-iba__item:hover .tq-iba__qq { color: #6b6e75; }
+.tq-iba__item.is-act .tq-iba__qq { color: #0a0a0a; }
+.tq-iba .is-act .tq-iba__qm, .tq-iba .is-act .tq-iba__n { color: #e7131b; }
+.tq-iba__line { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; overflow: hidden; }
+.tq-iba__fill { display: block; width: 100%; height: 100%; background: #e7131b; transform: scaleX(0); transform-origin: 0 50%; }
+[dir="rtl"] .tq-iba__fill { transform-origin: 100% 50%; }
+.tq-iba.is-on .is-act .tq-iba__fill { animation: tqIbaFill 10s linear forwards; }
+.tq-iba.is-on[data-hold] .is-act .tq-iba__fill, .tq-iba.is-on:not([data-run]) .is-act .tq-iba__fill { animation-play-state: paused; }   
+@keyframes tqIbaFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.tq-iba__fig { position: relative; flex: 1.05 1 0; max-width: 620px; min-width: 0; }
 .tq-iba__blob { position: absolute; left: 50%; top: 50%; border-radius: 50%; pointer-events: none; }
 .tq-iba__blob--d { width: 80%; height: 80%; transform: translate(-20%, -75%); background: radial-gradient(closest-side, rgba(28,30,36,.4), rgba(28,30,36,0)); }
 .tq-iba__blob--r { width: 60%; height: 60%; transform: translate(-105%, -5%); background: radial-gradient(closest-side, rgba(231,19,27,.2), rgba(231,19,27,0)); }
 .tq-iba__blob--g { width: 70%; height: 70%; transform: translate(-10%, 0); background: radial-gradient(closest-side, rgba(150,154,162,.5), rgba(150,154,162,0));
   -webkit-mask-image: linear-gradient(#000 62%, transparent 84%); mask-image: linear-gradient(#000 62%, transparent 84%); }   
-.tq-iba__chat { position: relative; height: clamp(560px, 72vh, 640px); border-radius: 28px; overflow: hidden; display: flex; flex-direction: column;
+.tq-iba__chat { position: relative; height: clamp(580px, 72vh, 620px); border-radius: 28px; overflow: hidden; display: flex; flex-direction: column;
   background: linear-gradient(135deg, rgba(255,255,255,.62) 0%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.42) 100%);
   -webkit-backdrop-filter: blur(20px) saturate(190%) brightness(1.05); backdrop-filter: blur(20px) saturate(190%) brightness(1.05); border: 1px solid rgba(255,255,255,.55);
   box-shadow: inset 0 22px 32px -22px rgba(255,255,255,.95), inset 0 -20px 30px -24px rgba(18,22,30,.18), 0 40px 70px -34px rgba(18,22,30,.45), 0 12px 24px -16px rgba(18,22,30,.25); }
@@ -2470,19 +2368,20 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-iba__name { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .tq-iba__name b { font-size: 14.5px; font-weight: 700; }
 .tq-iba__name small { font-size: 11.5px; font-weight: 600; color: #6b6e75; white-space: nowrap; }
-.tq-iba__demo { flex: none; padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(18,22,30,.14); background: rgba(255,255,255,.5); font-size: 10px; letter-spacing: .06em; color: #55585f; }
+.tq-iba__demo { flex: none; padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(18,22,30,.14); background: rgba(255,255,255,.5); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #55585f; }
 .tq-iba__area { position: relative; flex: 1 1 0; min-height: 0; overflow: hidden; padding: 0 20px;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 28px); mask-image: linear-gradient(to bottom, transparent 0, #000 28px); }
-.tq-iba__log { display: flex; flex-direction: column; gap: 18px; padding: 18px 0 20px; transition: opacity .35s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.tq-iba__log { display: flex; flex-direction: column; gap: 18px; padding: 18px 0 20px; transition: opacity .3s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
 .tq-iba__log.is-out { opacity: 0; }
-.tq-iba__turn { display: flex; flex-direction: column; gap: 12px; }
-.tq-iba__q { align-self: flex-end; max-width: 80%; padding: 12px 16px; border-radius: 18px 18px 4px 18px; background: linear-gradient(150deg, #2e3036 0%, #0a0a0a 100%); color: #fff;
+.tq-iba__turn { display: flex; flex-direction: column; gap: 14px; }
+.tq-iba__q { align-self: flex-end; max-width: 80%; padding: 12px 16px; border-radius: 18px; border-end-end-radius: 4px; background: linear-gradient(150deg, #2e3036 0%, #0a0a0a 100%); color: #fff;
   font-size: 14.5px; font-weight: 700; line-height: 1.35; box-shadow: 0 14px 24px -16px rgba(10,10,10,.6); }
 .tq-iba__a { display: flex; align-items: flex-start; gap: 12px; }
 .tq-iba__av { width: 28px; height: 28px; box-shadow: 0 6px 12px -8px rgba(18,22,30,.4); }
 .tq-iba__av img { display: block; width: 18px; height: 18px; }
-.tq-iba__body { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
-.tq-iba__say { display: grid; min-height: 28px; align-items: center; }
+.tq-iba__body { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.tq-iba__by { padding-top: 6px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #e7131b; }
+.tq-iba__say { display: grid; min-height: 24px; align-items: center; }
 .tq-iba__think, .tq-iba__intro { grid-area: 1 / 1; }
 .tq-iba__think { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: #6b6e75; opacity: 0; transition: opacity .3s ease; }
 .tq-iba__turn.is-think .tq-iba__think { opacity: 1; }
@@ -2492,20 +2391,28 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-iba__dots i:nth-child(3) { animation-delay: .3s; }
 @keyframes tqIbaDot { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
 .tq-iba__intro { font-size: 14px; line-height: 1.45; font-weight: 600; color: #2a2c31; text-wrap: pretty; }
-.tq-iba__panel { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.9);
+.tq-iba__panel { display: flex; flex-direction: column; margin-top: 2px; border-radius: 16px; overflow: hidden; background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.9);
   box-shadow: inset 0 1px 0 #fff, 0 14px 28px -20px rgba(18,22,30,.35); }
-.tq-iba__cols { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid rgba(18,22,30,.07); font-size: 10px; font-weight: 700; letter-spacing: .18em; color: #6b6e75; }
+.tq-iba__cols { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid rgba(18,22,30,.07); font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6b6e75; }
+:lang(ar) .tq-iba__cols, :lang(th) .tq-iba__cols, :lang(ja) .tq-iba__cols, :lang(ko) .tq-iba__cols, :lang(zh) .tq-iba__cols, :lang(ar) .tq-iba__by { font-size: 11px; letter-spacing: .04em; }
+.tq-iba__up { color: #2a2c31; letter-spacing: .04em; }
 .tq-iba__r { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 10px 14px; border-top: 1px solid rgba(18,22,30,.07); }
 .tq-iba__cols + .tq-iba__r { border-top: 0; }
 .tq-iba__panel--rank .tq-iba__r { grid-template-columns: 26px minmax(0, 1fr) auto; }
 .tq-iba__panel--rank .tq-iba__cols + .tq-iba__r { background: rgba(231,19,27,.05); }
-.tq-iba__n { font-size: 11.5px; font-variant-numeric: tabular-nums; color: #8a8d93; }
+.tq-iba__r .tq-iba__n { font-size: 11.5px; }
 .tq-iba__cols + .tq-iba__r .tq-iba__n { color: #e7131b; }
 .tq-iba__nm { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.tq-iba__nm b, .tq-iba__nm small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-iba__nm b, .tq-iba__nm small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; unicode-bidi: plaintext; }   
 .tq-iba__nm b { font-size: 14px; font-weight: 700; }
 .tq-iba__nm small { font-size: 11.5px; font-weight: 600; color: #6b6e75; }
 .tq-iba__v { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tq-iba__chart { display: block; width: 100%; height: 74px; margin-top: 10px; overflow: visible; }
+.tq-iba__shade { transition: opacity .8s ease .5s; }
+.tq-iba__spark { fill: none; stroke: #e7131b; stroke-width: 2.2; stroke-linejoin: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1.5; stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.3s cubic-bezier(.4,0,.2,1) .2s; }   
+.tq-iba__cf { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 14px; border-top: 1px solid rgba(18,22,30,.07); font-size: 12px; font-weight: 600; color: #55585f; }
+.tq-iba__cf b { font-size: 17px; font-weight: 700; color: #0a0a0a; font-variant-numeric: tabular-nums; }
 .tq-iba__panel--bars { gap: 12px; padding: 14px; }
 .tq-iba__b { display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; align-items: center; gap: 12px; font-size: 12.5px; font-weight: 700; }
 .tq-iba__track { height: 8px; border-radius: 5px; background: rgba(18,22,30,.08); overflow: hidden; }
@@ -2516,17 +2423,17 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-iba__b:nth-child(4) .tq-iba__track > span { background: linear-gradient(90deg, #8a8d93, #b9bcc3); }
 .tq-iba__bv { display: flex; align-items: baseline; gap: 8px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .tq-iba__bv b { font-size: 14px; font-weight: 700; }
-.tq-iba__bv small { min-width: 28px; text-align: right; font-size: 10.5px; color: #6b6e75; }
+.tq-iba__bv small { min-width: 28px; text-align: end; font-size: 10.5px; color: #6b6e75; }
 .tq-iba__follow { font-size: 13.5px; line-height: 1.45; font-weight: 600; color: #2a2c31; }
 .tq-iba__foot { position: relative; padding: 14px 16px 16px; border-top: 1px solid rgba(255,255,255,.7); }
-.tq-iba__in { display: flex; align-items: center; gap: 10px; height: 50px; padding: 0 6px 0 18px; border-radius: 999px; background: rgba(255,255,255,.72); border: 1px solid #fff;
+.tq-iba__in { display: flex; align-items: center; gap: 10px; height: 50px; padding-inline: 18px 6px; border-radius: 999px; background: rgba(255,255,255,.72); border: 1px solid #fff;
   box-shadow: inset 0 1px 2px rgba(18,22,30,.08), 0 10px 20px -16px rgba(18,22,30,.4); }
 .tq-iba__txt { flex: 1 1 0; min-width: 0; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; color: #0a0a0a; }
 .tq-iba__typed { display: none; }
 .tq-iba__ph { color: #8a8d93; }
 .tq-iba__in.is-typing .tq-iba__typed { display: inline; }
 .tq-iba__in.is-typing .tq-iba__ph { display: none; }
-.tq-iba__caret { display: none; width: 2px; height: 16px; margin-left: 2px; vertical-align: -3px; background: #e7131b; animation: tqIbaCaret 1s steps(1) infinite; }
+.tq-iba__caret { display: none; width: 2px; height: 16px; margin-inline-start: 2px; vertical-align: -3px; background: #e7131b; animation: tqIbaCaret 1s steps(1) infinite; }
 .tq-iba__in.is-caret .tq-iba__caret { display: inline-block; }
 @keyframes tqIbaCaret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 .tq-iba__send { flex: none; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #0a0a0a; transition: background .25s ease; }
@@ -2539,12 +2446,44 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-iba[data-play] .tq-iba__q:not(.is-on), .tq-iba[data-play] .tq-iba__a:not(.is-on), .tq-iba[data-play] .tq-iba__follow:not(.is-on) { opacity: 0; transform: translateY(8px); }
 .tq-iba[data-play] .tq-iba__intro:not(.is-on), .tq-iba[data-play] .tq-iba__panel:not(.is-on), .tq-iba[data-play] .tq-iba__b:not(.is-on) { opacity: 0; }
 .tq-iba[data-play] .tq-iba__r:not(.is-on) { opacity: 0; transform: translateX(-10px); }
+[dir="rtl"] .tq-iba[data-play] .tq-iba__r:not(.is-on) { transform: translateX(10px); }
 .tq-iba[data-play] .tq-iba__b:not(.is-on) .tq-iba__track > span { width: 0; }
-@media (max-width: 939px) {   
-  .tq-iba { padding-bottom: 104px; }
+.tq-iba[data-play] .tq-iba__panel:not(.is-on) .tq-iba__spark { stroke-dashoffset: 1.5; }
+.tq-iba[data-play] .tq-iba__panel:not(.is-on) .tq-iba__shade { opacity: 0; }
+@media (max-width: 819px) {
+  .tq-iba { padding-top: 28px; padding-bottom: 40px; }
+  .tq-iba__wrap { flex-direction: column; align-items: stretch; gap: 16px; }
+  .tq-iba__text { display: contents; }
+  .tq-iba__h2 { order: 1; margin-bottom: 4px; }
+  .tq-iba__segs { order: 2; display: flex; gap: 6px; }
+  .tq-iba__seg { all: unset; flex: 1; display: flex; flex-direction: column; gap: 7px; min-height: 30px; padding-top: 4px; cursor: pointer; }
+  .tq-iba__bar { position: relative; height: 3px; border-radius: 3px; overflow: hidden; background: rgba(18,22,30,.12); }
+  .tq-iba__bar .tq-iba__fill { position: absolute; inset: 0; }
+  .tq-iba__seg .tq-iba__n { font-size: 10.5px; }
+  .tq-iba__seg.is-past .tq-iba__fill { transform: none; }
+  .tq-iba__list { order: 3; }
+  .tq-iba__item { display: none; gap: 12px; padding: 0; border: 0; cursor: default; }
+  .tq-iba__item.is-act { display: flex; }
+  .tq-iba__item .tq-iba__n, .tq-iba__line { display: none; }
+  .tq-iba__qq { --h2s: clamp(19px, 5.6vw, 26px); min-height: 2.4em; }
+  .tq-iba__fig { order: 4; flex: none; max-width: none; }
+  .tq-iba__chat { height: clamp(560px, calc(100svh - 230px), 600px); }
+  .tq-iba__hd { padding: 12px 16px; }
+  .tq-iba__area { padding: 0 14px; }
+  .tq-iba__log { gap: 14px; padding-top: 14px; }
+  .tq-iba__av { display: none; }
+  .tq-iba__by { padding-top: 0; }
+  .tq-iba__q { max-width: 88%; padding: 10px 14px; font-size: 14px; }
+  .tq-iba__cols { padding: 9px 12px; }
+  .tq-iba__r { padding: 8px 12px; }
+  .tq-iba__panel--rank .tq-iba__r { grid-template-columns: 20px minmax(0, 1fr) auto; }
+  .tq-iba__panel--bars { padding: 12px; }
+  .tq-iba__foot { padding: 10px 12px 12px; }
+  .tq-iba__ctas { order: 5; padding-top: 8px; }
+  .tq-iba .tq-ibx__go { flex: 1; justify-content: space-between; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tq-iba__dots i, .tq-iba__caret { animation: none; }
+  .tq-iba .tq-iba__fill, .tq-iba__dots i, .tq-iba__caret { animation: none; }
 }
 </style>
 </head>
@@ -2685,162 +2624,113 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       </div>
     </section>
 
-    <!-- AI assistant (IB_AI_Assistant design), right after the hero: the pitch and a red button to the application form on the
-         left, a glass "Ask AI" chat of IB Desk on the right that plays a four-turn conversation (the question is typed in the
-         box, sent, the assistant "thinks", answers with a ranked table or bars, rows come in one by one), then starts over.
-         assets/js/ib-ai.js plays it (data-play on the section, is-live on a turn, is-on on what has appeared); without it, and
-         with "reduce motion", the whole conversation stands still, scrolled to its end. The chat is a picture of the
-         interface: English on every language, figures from the design ("Demo data"). -->
-    <section id="ai" class="tq-iba" data-ib-ai data-screen-label="IB Tools · AI assistant">
+    <!-- Ask AI (IB_AI_Assistant + IB_Features_Four_Questions, merged), right after the hero. Left: a line about the AI
+         assistant, the four questions an IB asks (Q.01–Q.04; the lit one black with a red "?", a red line filling under it)
+         and a red button to the application form. Right: the glass "Ask AI" chat of IB Desk. Picking a question (or its
+         turn coming, every 10 s) types that same question into the chat's box, sends it, and "IB Desk AI" answers: dots,
+         a line, then a chart, a table or bars, row by row, and a follow-up offer. assets/js/ib-ai.js runs it (see there);
+         everything in the chat is translated except names, instruments and figures (demo data). -->
+    <section id="ai" class="tq-iba" data-ib-ai data-screen-label="IB Tools · Ask AI">
       <div class="tq-iba__wrap">
         <div class="tq-iba__text">
-          <h2 class="tq-iba__h2 tq-h2">Stellen Sie Ihrem IB-Geschäft <span style="color: #e7131b;">eine Frage.</span></h2>
-          <p class="tq-ibx__lead">Analysieren Sie die Performance Ihrer Partner und die Aktivität Ihrer Kunden mit einem KI-Assistenten direkt in Ihrem IB Desk.</p>
-          <p class="tq-ibx__sub">Keine Exporte, keine Pivot-Tabellen. Schreiben Sie, was Sie wissen möchten, und erhalten Sie in Sekunden eine sortierte, gut lesbare Antwort.</p>
-          <div class="tq-ibx__ctas">
+          <h2 class="tq-iba__h2">Stellen Sie Ihrem IB-Geschäft eine Frage. <b>Der KI-Assistent in IB Desk antwortet in Sekunden.</b></h2>
+          <div class="tq-iba__segs">
+            <button type="button" class="tq-iba__seg is-act" aria-label="Wie viel habe ich heute verdient?"><span class="tq-iba__bar"><span class="tq-iba__fill"></span></span><span class="tq-iba__n">Q.01</span></button>
+            <button type="button" class="tq-iba__seg" aria-label="Welche Kunden sind inaktiv geworden?"><span class="tq-iba__bar"><span class="tq-iba__fill"></span></span><span class="tq-iba__n">Q.02</span></button>
+            <button type="button" class="tq-iba__seg" aria-label="Woher kommt mein Volumen?"><span class="tq-iba__bar"><span class="tq-iba__fill"></span></span><span class="tq-iba__n">Q.03</span></button>
+            <button type="button" class="tq-iba__seg" aria-label="Wer in meinem Netzwerk ist am stärksten?"><span class="tq-iba__bar"><span class="tq-iba__fill"></span></span><span class="tq-iba__n">Q.04</span></button>
+          </div>
+          <ol class="tq-iba__list">
+            <li class="tq-iba__item is-act"><span class="tq-iba__meta"><span class="tq-iba__n">Q.01</span><span class="tq-iba__feat">Rebate-Tracking</span></span><h3 class="tq-iba__qq tq-h2"><button type="button" class="tq-iba__btn" aria-current="true">Wie viel habe ich heute verdient<span class="tq-iba__qm">?</span></button></h3><span class="tq-iba__line"><span class="tq-iba__fill"></span></span></li>
+            <li class="tq-iba__item"><span class="tq-iba__meta"><span class="tq-iba__n">Q.02</span><span class="tq-iba__feat">Kundenaktivität</span></span><h3 class="tq-iba__qq tq-h2"><button type="button" class="tq-iba__btn">Welche Kunden sind inaktiv geworden<span class="tq-iba__qm">?</span></button></h3><span class="tq-iba__line"><span class="tq-iba__fill"></span></span></li>
+            <li class="tq-iba__item"><span class="tq-iba__meta"><span class="tq-iba__n">Q.03</span><span class="tq-iba__feat">Handelsvolumen</span></span><h3 class="tq-iba__qq tq-h2"><button type="button" class="tq-iba__btn">Woher kommt mein Volumen<span class="tq-iba__qm">?</span></button></h3><span class="tq-iba__line"><span class="tq-iba__fill"></span></span></li>
+            <li class="tq-iba__item"><span class="tq-iba__meta"><span class="tq-iba__n">Q.04</span><span class="tq-iba__feat">Sub-IB-Struktur</span></span><h3 class="tq-iba__qq tq-h2"><button type="button" class="tq-iba__btn">Wer in meinem Netzwerk ist am stärksten<span class="tq-iba__qm">?</span></button></h3><span class="tq-iba__line"><span class="tq-iba__fill"></span></span></li>
+          </ol>
+          <div class="tq-ibx__ctas tq-iba__ctas">
             <a class="tq-ibx__go" href="../#signup" data-page-link data-label="WIRD GELADEN · Startseite"><span>KI in Aktion sehen</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
           </div>
         </div>
-        <div class="tq-iba__fig" dir="ltr" aria-hidden="true">
+        <div class="tq-iba__fig" aria-hidden="true">
           <span class="tq-iba__blob tq-iba__blob--d"></span><span class="tq-iba__blob tq-iba__blob--r"></span><span class="tq-iba__blob tq-iba__blob--g"></span>
           <div class="tq-iba__chat">
             <span class="tq-iba__rim"></span><span class="tq-iba__glare"></span>
             <div class="tq-iba__hd">
-              <div class="tq-iba__who"><span class="tq-iba__logo"><img src="../../favicon.svg?v=ff199c552e" alt="" width="30" height="30"></span><span class="tq-iba__name"><b>Ask AI</b><small>IB Desk assistant</small></span></div>
-              <span class="tq-iba__demo">DEMO DATA</span>
+              <div class="tq-iba__who"><span class="tq-iba__logo"><img src="../../favicon.svg?v=ff199c552e" alt="" width="22" height="22"></span><span class="tq-iba__name"><b>Ask AI</b><small>IB-Desk-Assistent</small></span></div>
+              <span class="tq-iba__demo">Demodaten</span>
             </div>
             <div class="tq-iba__area">
               <div class="tq-iba__log">
-                <div class="tq-iba__turn">
-                  <div class="tq-iba__q" data-s="1" data-fit>Who are my top sub-IBs?</div>
-                  <div class="tq-iba__a" data-s="2">
-                    <span class="tq-iba__av"><img src="../../favicon.svg?v=ff199c552e" alt="" width="24" height="24"></span>
-                    <div class="tq-iba__body">
-                      <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Reading 18 partner records</span></div><div class="tq-iba__intro" data-s="3">Your top 3 sub-IBs over the last 30 days, ranked by net deposits:</div></div>
-                      <div class="tq-iba__panel tq-iba__panel--rank" data-s="4">
-                        <div class="tq-iba__cols"><span>SUB-IB</span><span>NET DEPOSITS</span></div>
-                        <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__n">01</span><span class="tq-iba__nm"><b>Northline Partners</b><small>312 clients · $9,840 rebates</small></span><span class="tq-iba__v">$184,200</span></div>
-                        <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__n">02</span><span class="tq-iba__nm"><b>Meridian Group</b><small>228 clients · $7,215 rebates</small></span><span class="tq-iba__v">$131,600</span></div>
-                        <div class="tq-iba__r" data-s="6" data-fit><span class="tq-iba__n">03</span><span class="tq-iba__nm"><b>K. Ortiz</b><small>164 clients · $4,380 rebates</small></span><span class="tq-iba__v">$96,900</span></div>
-                      </div>
-                      <div class="tq-iba__follow" data-s="7" data-fit>Want me to break Northline down by client?</div>
+              <div class="tq-iba__turn">
+                <div class="tq-iba__q" data-s="1" data-fit>Wie viel habe ich heute verdient?</div>
+                <div class="tq-iba__a" data-s="2">
+                  <span class="tq-iba__av"><img src="../../favicon.svg?v=ff199c552e" alt="" width="18" height="18"></span>
+                  <div class="tq-iba__body">
+                    <span class="tq-iba__by">IB Desk AI</span>
+                    <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Rechne die heutigen Rebates zusammen</span></div><div class="tq-iba__intro" data-s="3">Ihre Rebates liegen heute schon über gestern:</div></div>
+                    <div class="tq-iba__panel tq-iba__panel--chart" data-s="4" data-fit>
+                      <div class="tq-iba__cols"><span>Rebates · heute</span><span class="tq-iba__up">▲ 8.6%</span></div>
+                      <svg class="tq-iba__chart" viewBox="0 0 400 90" preserveAspectRatio="none"><defs><linearGradient id="tqIbaArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7131B" stop-opacity="0.2"/><stop offset="1" stop-color="#E7131B" stop-opacity="0"/></linearGradient></defs><path class="tq-iba__shade" d="M0 80 L33 77 L67 72 L100 73 L133 63 L167 57 L200 59 L233 46 L267 40 L300 34 L333 25 L367 19 L400 10 L400 90 L0 90 Z" fill="url(#tqIbaArea)"/><path class="tq-iba__spark" d="M0 80 L33 77 L67 72 L100 73 L133 63 L167 57 L200 59 L233 46 L267 40 L300 34 L333 25 L367 19 L400 10" pathLength="1"/></svg>
+                      <div class="tq-iba__cf"><span>Tägliche Auszahlung</span><b>$1,240.00</b></div>
                     </div>
-                  </div>
-                </div>
-                <div class="tq-iba__turn">
-                  <div class="tq-iba__q" data-s="1" data-fit>Yes, show Northline’s top clients.</div>
-                  <div class="tq-iba__a" data-s="2">
-                    <span class="tq-iba__av"><img src="../../favicon.svg?v=ff199c552e" alt="" width="24" height="24"></span>
-                    <div class="tq-iba__body">
-                      <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Opening 312 Northline clients</span></div><div class="tq-iba__intro" data-s="3">Northline’s most active clients this month, by trading volume:</div></div>
-                      <div class="tq-iba__panel tq-iba__panel--rank" data-s="4">
-                        <div class="tq-iba__cols"><span>CLIENT</span><span>VOLUME</span></div>
-                        <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__n">01</span><span class="tq-iba__nm"><b>D. Moreau</b><small>XAUUSD · EURUSD</small></span><span class="tq-iba__v">412 lots</span></div>
-                        <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__n">02</span><span class="tq-iba__nm"><b>S. Haddad</b><small>EURUSD</small></span><span class="tq-iba__v">268 lots</span></div>
-                        <div class="tq-iba__r" data-s="6" data-fit><span class="tq-iba__n">03</span><span class="tq-iba__nm"><b>L. Brandt</b><small>US30 · GBPUSD</small></span><span class="tq-iba__v">193 lots</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tq-iba__turn">
-                  <div class="tq-iba__q" data-s="1" data-fit>Has anyone there gone quiet?</div>
-                  <div class="tq-iba__a" data-s="2">
-                    <span class="tq-iba__av"><img src="../../favicon.svg?v=ff199c552e" alt="" width="24" height="24"></span>
-                    <div class="tq-iba__body">
-                      <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Checking last trade dates</span></div><div class="tq-iba__intro" data-s="3">2 Northline clients haven’t traded in 30+ days:</div></div>
-                      <div class="tq-iba__panel" data-s="4">
-                        <div class="tq-iba__cols"><span>CLIENT</span><span>LAST TRADE</span></div>
-                        <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__nm"><b>Alex R.</b><small>$2,140 balance</small></span><span class="tq-iba__v">34 days ago</span></div>
-                        <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__nm"><b>P. Novak</b><small>$1,050 balance</small></span><span class="tq-iba__v">32 days ago</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tq-iba__turn">
-                  <div class="tq-iba__q" data-s="1" data-fit>Where do Northline’s rebates come from?</div>
-                  <div class="tq-iba__a" data-s="2">
-                    <span class="tq-iba__av"><img src="../../favicon.svg?v=ff199c552e" alt="" width="24" height="24"></span>
-                    <div class="tq-iba__body">
-                      <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Grouping $9,840 by instrument</span></div><div class="tq-iba__intro" data-s="3">Northline rebates over the last 30 days, by instrument:</div></div>
-                      <div class="tq-iba__panel tq-iba__panel--bars" data-s="4">
-                        <div class="tq-iba__b" data-s="4" data-fit><span>XAUUSD</span><span class="tq-iba__track"><span style="--bw: 100%"></span></span><span class="tq-iba__bv"><b>$4,530</b><small>46%</small></span></div>
-                        <div class="tq-iba__b" data-s="5" data-fit><span>EURUSD</span><span class="tq-iba__track"><span style="--bw: 67%"></span></span><span class="tq-iba__bv"><b>$3,050</b><small>31%</small></span></div>
-                        <div class="tq-iba__b" data-s="6" data-fit><span>US30</span><span class="tq-iba__track"><span style="--bw: 30%"></span></span><span class="tq-iba__bv"><b>$1,380</b><small>14%</small></span></div>
-                        <div class="tq-iba__b" data-s="7" data-fit><span>Other</span><span class="tq-iba__track"><span style="--bw: 20%"></span></span><span class="tq-iba__bv"><b>$880</b><small>9%</small></span></div>
-                      </div>
-                      <div class="tq-iba__follow" data-s="8" data-fit>Want this as an Excel or PDF report?</div>
-                    </div>
+                    <div class="tq-iba__follow" data-s="5" data-fit>Soll ich nach Sub-IB aufschlüsseln?</div>
                   </div>
                 </div>
               </div>
+              <div class="tq-iba__turn">
+                <div class="tq-iba__q" data-s="1" data-fit>Welche Kunden sind inaktiv geworden?</div>
+                <div class="tq-iba__a" data-s="2">
+                  <span class="tq-iba__av"><img src="../../favicon.svg?v=ff199c552e" alt="" width="18" height="18"></span>
+                  <div class="tq-iba__body">
+                    <span class="tq-iba__by">IB Desk AI</span>
+                    <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Prüfe die letzten Trades</span></div><div class="tq-iba__intro" data-s="3">42 Kunden haben seit über 30 Tagen nicht gehandelt. Am längsten inaktiv:</div></div>
+                    <div class="tq-iba__panel" data-s="4">
+                      <div class="tq-iba__cols"><span>Kunde</span><span>Tage ohne Trades</span></div>
+                      <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__nm"><b>Alex R.</b><small>Northline</small></span><span class="tq-iba__v">34</span></div>
+                      <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__nm"><b>M. Lindqvist</b><small>Direkt</small></span><span class="tq-iba__v">31</span></div>
+                      <div class="tq-iba__r" data-s="6" data-fit><span class="tq-iba__nm"><b>J. Okafor</b><small>Meridian</small></span><span class="tq-iba__v">30</span></div>
+                    </div>
+                    <div class="tq-iba__follow" data-s="7" data-fit>Soll ich alle 42 auflisten?</div>
+                  </div>
+                </div>
+              </div>
+              <div class="tq-iba__turn">
+                <div class="tq-iba__q" data-s="1" data-fit>Woher kommt mein Volumen?</div>
+                <div class="tq-iba__a" data-s="2">
+                  <span class="tq-iba__av"><img src="../../favicon.svg?v=ff199c552e" alt="" width="18" height="18"></span>
+                  <div class="tq-iba__body">
+                    <span class="tq-iba__by">IB Desk AI</span>
+                    <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Gruppiere Ihre Lots nach Instrument</span></div><div class="tq-iba__intro" data-s="3">Das Volumen Ihres Netzwerks der letzten 30 Tage nach Instrument:</div></div>
+                    <div class="tq-iba__panel tq-iba__panel--bars" data-s="4">
+                      <div class="tq-iba__b" data-s="4" data-fit><span>EURUSD</span><span class="tq-iba__track"><span style="--bw: 100%"></span></span><span class="tq-iba__bv"><b>4,860</b><small>26%</small></span></div>
+                      <div class="tq-iba__b" data-s="5" data-fit><span>XAUUSD</span><span class="tq-iba__track"><span style="--bw: 80%"></span></span><span class="tq-iba__bv"><b>3,870</b><small>21%</small></span></div>
+                      <div class="tq-iba__b" data-s="6" data-fit><span>GBPUSD</span><span class="tq-iba__track"><span style="--bw: 45%"></span></span><span class="tq-iba__bv"><b>2,210</b><small>12%</small></span></div>
+                      <div class="tq-iba__b" data-s="7" data-fit><span>US30</span><span class="tq-iba__track"><span style="--bw: 34%"></span></span><span class="tq-iba__bv"><b>1,650</b><small>9%</small></span></div>
+                    </div>
+                    <div class="tq-iba__follow" data-s="8" data-fit>Soll ich das als Excel- oder PDF-Bericht ausgeben?</div>
+                  </div>
+                </div>
+              </div>
+              <div class="tq-iba__turn">
+                <div class="tq-iba__q" data-s="1" data-fit>Wer in meinem Netzwerk ist am stärksten?</div>
+                <div class="tq-iba__a" data-s="2">
+                  <span class="tq-iba__av"><img src="../../favicon.svg?v=ff199c552e" alt="" width="18" height="18"></span>
+                  <div class="tq-iba__body">
+                    <span class="tq-iba__by">IB Desk AI</span>
+                    <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>Erstelle das Ranking Ihrer Sub-IBs</span></div><div class="tq-iba__intro" data-s="3">Ihre Top-3-Sub-IBs der letzten 30 Tage nach Nettoeinzahlungen:</div></div>
+                    <div class="tq-iba__panel tq-iba__panel--rank" data-s="4">
+                      <div class="tq-iba__cols"><span>Sub-IB</span><span>Nettoeinzahlungen</span></div>
+                      <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__n">01</span><span class="tq-iba__nm"><b>Northline Partners</b><small>L1 · 312 Kunden</small></span><span class="tq-iba__v">$184,200</span></div>
+                      <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__n">02</span><span class="tq-iba__nm"><b>Meridian Group</b><small>L1 · 228 Kunden</small></span><span class="tq-iba__v">$131,600</span></div>
+                      <div class="tq-iba__r" data-s="6" data-fit><span class="tq-iba__n">03</span><span class="tq-iba__nm"><b>K. Ortiz</b><small>L2 · 164 Kunden</small></span><span class="tq-iba__v">$96,900</span></div>
+                    </div>
+                    <div class="tq-iba__follow" data-s="7" data-fit>Soll ich Northline nach Kunden aufschlüsseln?</div>
+                  </div>
+                </div>
+              </div>
+              </div>
             </div>
             <div class="tq-iba__foot">
-              <div class="tq-iba__in"><span class="tq-iba__txt"><span class="tq-iba__typed"></span><span class="tq-iba__ph">Ask about your IB business…</span><i class="tq-iba__caret"></i></span><span class="tq-iba__send"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M4 7l4-4 4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Four questions (IB_Features_Four_Questions design): four questions an IB asks on the left, a stack of glass IB Desk
-         cards on the right, one per question. Every 5.5 s the next question lights up (its red line fills) and its card
-         comes to the front; a click on a question or a card picks it; the pointer over the cards holds the turn.
-         assets/js/ib-ask.js turns them (data-a on the section, data-off on the cards); the rest is CSS. The cards are a
-         picture of the interface: English on every language, figures from the design. -->
-    <section id="ask" class="tq-ibq" data-ib-ask data-a="0" data-screen-label="IB Tools · Four questions">
-      <div class="tq-ibq__wrap">
-        <div class="tq-ibq__text">
-          <h2 class="tq-ibq__h2">Vier Fragen, die sich jeder IB stellt. <b>IB Desk beantwortet sie an einem Ort.</b></h2>
-          <div class="tq-ibq__segs" aria-hidden="true">
-            <span class="tq-ibq__seg is-act" data-i="0"><span class="tq-ibq__bar"><span class="tq-ibq__fill"></span></span><span class="tq-ibq__n">Q.01</span></span>
-            <span class="tq-ibq__seg" data-i="1"><span class="tq-ibq__bar"><span class="tq-ibq__fill"></span></span><span class="tq-ibq__n">Q.02</span></span>
-            <span class="tq-ibq__seg" data-i="2"><span class="tq-ibq__bar"><span class="tq-ibq__fill"></span></span><span class="tq-ibq__n">Q.03</span></span>
-            <span class="tq-ibq__seg" data-i="3"><span class="tq-ibq__bar"><span class="tq-ibq__fill"></span></span><span class="tq-ibq__n">Q.04</span></span>
-          </div>
-          <ol class="tq-ibq__list">
-            <li class="tq-ibq__item is-act" data-i="0"><span class="tq-ibq__meta"><span class="tq-ibq__n">Q.01</span><span class="tq-ibq__feat">Rebate-Tracking</span></span><h3 class="tq-ibq__q tq-h2"><button type="button" class="tq-ibq__btn" aria-current="true">Wie viel habe ich heute verdient<span class="tq-ibq__qm">?</span></button></h3><span class="tq-ibq__line"><span class="tq-ibq__fill"></span></span></li>
-            <li class="tq-ibq__item" data-i="1"><span class="tq-ibq__meta"><span class="tq-ibq__n">Q.02</span><span class="tq-ibq__feat">Kundenaktivität</span></span><h3 class="tq-ibq__q tq-h2"><button type="button" class="tq-ibq__btn">Welche Kunden sind inaktiv geworden<span class="tq-ibq__qm">?</span></button></h3><span class="tq-ibq__line"><span class="tq-ibq__fill"></span></span></li>
-            <li class="tq-ibq__item" data-i="2"><span class="tq-ibq__meta"><span class="tq-ibq__n">Q.03</span><span class="tq-ibq__feat">Handelsvolumen</span></span><h3 class="tq-ibq__q tq-h2"><button type="button" class="tq-ibq__btn">Woher kommt mein Volumen<span class="tq-ibq__qm">?</span></button></h3><span class="tq-ibq__line"><span class="tq-ibq__fill"></span></span></li>
-            <li class="tq-ibq__item" data-i="3"><span class="tq-ibq__meta"><span class="tq-ibq__n">Q.04</span><span class="tq-ibq__feat">Sub-IB-Struktur</span></span><h3 class="tq-ibq__q tq-h2"><button type="button" class="tq-ibq__btn">Wer in meinem Netzwerk ist am stärksten<span class="tq-ibq__qm">?</span></button></h3><span class="tq-ibq__line"><span class="tq-ibq__fill"></span></span></li>
-          </ol>
-        </div>
-        <div class="tq-ibq__stage" dir="ltr" aria-hidden="true">
-          <span class="tq-ibq__blob tq-ibq__blob--d"></span><span class="tq-ibq__blob tq-ibq__blob--r"></span><span class="tq-ibq__blob tq-ibq__blob--g"></span>
-          <div class="tq-ibq__card" data-c="0" data-off="0">
-            <span class="tq-ibq__rim"></span><span class="tq-ibq__glare"></span>
-            <div class="tq-ibq__hd"><span>COMMISSIONS · TODAY</span><span class="tq-ibq__mono">Nov 10</span></div>
-            <div class="tq-ibq__fig"><span class="tq-ibq__big">$1,240<span class="tq-ibq__dim">.00</span></span><span class="tq-ibq__delta">▲ 8.6% vs yesterday</span></div>
-            <svg class="tq-ibq__chart" viewBox="0 0 400 90" preserveAspectRatio="none"><defs><linearGradient id="tqIbqArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7131B" stop-opacity="0.2"/><stop offset="1" stop-color="#E7131B" stop-opacity="0"/></linearGradient></defs><path class="tq-ibq__area" d="M0 80 L33 77 L67 72 L100 73 L133 63 L167 57 L200 59 L233 46 L267 40 L300 34 L333 25 L367 19 L400 10 L400 90 L0 90 Z" fill="url(#tqIbqArea)"/><path class="tq-ibq__spark" d="M0 80 L33 77 L67 72 L100 73 L133 63 L167 57 L200 59 L233 46 L267 40 L300 34 L333 25 L367 19 L400 10" pathLength="1"/></svg>
-            <div class="tq-ibq__ft"><span>Paid daily</span><span>Next payout <b>00:00 UTC</b></span></div>
-          </div>
-          <div class="tq-ibq__card" data-c="1" data-off="3">
-            <span class="tq-ibq__rim"></span><span class="tq-ibq__glare"></span>
-            <div class="tq-ibq__hd"><span>NO TRADES · 30+ DAYS</span><span class="tq-ibq__mono">of 1,600</span></div>
-            <div class="tq-ibq__fig"><span class="tq-ibq__big tq-ibq__big--red">42</span><span class="tq-ibq__delta tq-ibq__delta--l">clients to re-engage</span></div>
-            <div class="tq-ibq__rows">
-              <div class="tq-ibq__row"><span><i></i>Alex R. <em>Northline</em></span><span class="tq-ibq__mono">34d</span></div>
-              <div class="tq-ibq__row"><span><i></i>M. Lindqvist <em>Direct</em></span><span class="tq-ibq__mono">31d</span></div>
-              <div class="tq-ibq__row"><span><i></i>J. Okafor <em>Meridian</em></span><span class="tq-ibq__mono">30d</span></div>
-            </div>
-          </div>
-          <div class="tq-ibq__card" data-c="2" data-off="2">
-            <span class="tq-ibq__rim"></span><span class="tq-ibq__glare"></span>
-            <div class="tq-ibq__hd"><span>NETWORK VOLUME · 30D</span><span class="tq-ibq__mono">lots</span></div>
-            <div class="tq-ibq__fig"><span class="tq-ibq__big">18,420</span><span class="tq-ibq__delta">▲ 7.9% vs prior</span></div>
-            <div class="tq-ibq__vol">
-              <div class="tq-ibq__v"><span>EURUSD</span><span class="tq-ibq__track"><span style="--qw: 100%"></span></span><span>4,860</span></div>
-              <div class="tq-ibq__v"><span>XAUUSD</span><span class="tq-ibq__track"><span style="--qw: 80%"></span></span><span>3,870</span></div>
-              <div class="tq-ibq__v"><span>GBPUSD</span><span class="tq-ibq__track"><span style="--qw: 45%"></span></span><span>2,210</span></div>
-              <div class="tq-ibq__v"><span>US30</span><span class="tq-ibq__track"><span style="--qw: 34%"></span></span><span>1,650</span></div>
-            </div>
-          </div>
-          <div class="tq-ibq__card tq-ibq__card--dark" data-c="3" data-off="1">
-            <span class="tq-ibq__rim"></span><span class="tq-ibq__glare"></span>
-            <div class="tq-ibq__hd"><span>TOP SUB-IBS · 30D</span><span class="tq-ibq__mono">18 partners</span></div>
-            <div class="tq-ibq__top">
-              <div class="tq-ibq__t"><span class="tq-ibq__mono">01</span><span><b>Northline Partners</b><small>L1 · 312 clients</small></span><span>$9,840</span></div>
-              <div class="tq-ibq__t"><span class="tq-ibq__mono">02</span><span><b>Meridian Group</b><small>L1 · 228 clients</small></span><span>$7,215</span></div>
-              <div class="tq-ibq__t"><span class="tq-ibq__mono">03</span><span><b>K. Ortiz</b><small>L2 · via Northline</small></span><span>$4,380</span></div>
+              <div class="tq-iba__in"><span class="tq-iba__txt"><span class="tq-iba__typed"></span><span class="tq-iba__ph">Fragen Sie zu Ihrem IB-Geschäft …</span><i class="tq-iba__caret"></i></span><span class="tq-iba__send"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M4 7l4-4 4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
             </div>
           </div>
         </div>
@@ -3124,8 +3014,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=4fa65f535e" defer></script>
-<script src="../../assets/js/ib-ai.js?v=31022e963b" defer></script>
-<script src="../../assets/js/ib-ask.js?v=262b09512f" defer></script>
+<script src="../../assets/js/ib-ai.js?v=5994fd2032" defer></script>
 <script src="../../assets/js/ib-hole.js?v=a59bcf77cc" defer></script>
 </body>
 </html>
