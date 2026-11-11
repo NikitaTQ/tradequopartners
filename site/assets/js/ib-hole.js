@@ -1,6 +1,7 @@
-/* IB Tools: the black hole block (IB_Tools_Black_Hole_Obsidian design), drawn on a canvas. Event chips orbit an
- * obsidian black hole and fall in; a flash, and crystals stack into the volume-by-lot bars, regroup into the Sub-IB
- * tree and drain back into the hole; the HUD under it follows the three steps (Pull, Every lot, Every tier).
+/* IB Tools: the black hole block (IB_Tools_Black_Hole design, Nov 2026), drawn on a canvas. Event chips orbit an
+ * obsidian black hole and fall in; a flash, and crystals stack into the volume-by-lot bars, gather into the client
+ * groups (active, dormant risk, inactive), regroup into the Sub-IB tree and drain back into the hole; big captions over
+ * the scene tell the story; the HUD under it follows the four steps (Pull, Every lot, Every client, Every tier).
  * The drawing is the design's, as it is (theme obsidian, liquid crystals); its type is Inter. The loop runs only while
  * the block is on screen and the tab is visible; with reduced motion it draws one still frame (the hole). */
 (function () {
@@ -10,6 +11,19 @@
   const fills = Array.from(root.querySelectorAll('[data-ib-hole-fill]')), tabs = Array.from(root.querySelectorAll('[data-ib-hole-tab]'));
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let draw = () => {};
+  /* the page's words on the canvas: captions with *word* in red, the cluster labels; the page's heading face for them
+     (the hidden .tq-ibb__font holds them in that face, so its subset has their letters and the browser loads it) */
+  const lang = document.documentElement.lang || 'en', CASED = !/^(ar|th|ja|ko|zh)/.test(lang), RTL = document.documentElement.dir === 'rtl';
+  const up = (t) => { if (!CASED) return t; try { return t.toLocaleUpperCase(lang); } catch (e) { return t.toUpperCase(); } };
+  const fontEl = root.querySelector('.tq-ibb__font'), HF = fontEl ? getComputedStyle(fontEl).fontFamily : 'Inter, sans-serif';
+  const toks = (str) => {   /* "It is *all* over" -> [{t:'IT'}, {t:'IS', sp}, {t:'ALL', sp, red}, {t:'OVER', sp}] */
+    const out = []; let cur = '', red = false, sp = false;
+    const push = () => { if (cur) out.push({ t: up(cur), red, sp }); cur = ''; sp = false; };
+    for (const ch of str || '') { if (ch === ' ') { push(); sp = true; } else if (ch === '*') { const s0 = sp; push(); sp = s0; red = !red; } else cur += ch; }
+    push(); return out;
+  };
+  const CAP = [1, 2, 3, 4, 5].map((i) => toks(root.getAttribute('data-c' + i)));
+  const TXT = { act: up(root.getAttribute('data-act') || 'Active'), dor: up(root.getAttribute('data-dor') || 'Dormant risk'), ina: up(root.getAttribute('data-ina') || 'Inactive') };
   /* the HUD: if a long translation does not fit, the step numbers go (class is-tight) */
   const hud = root.querySelector('.tq-ibb__tabs');
   const tight = () => { hud.classList.remove('is-tight'); if (tabs.some((t) => { const x = t.querySelector('span'); return x.scrollWidth > x.clientWidth + 1; })) hud.classList.add('is-tight'); };
@@ -33,6 +47,7 @@
     Object.values(TH).forEach(t => { t.bandsRgb = t.bands.map(rgb); t.innerRgb = rgb(t.inner); });
     const CRY = {
       silver: { body: ['rgba(255,255,255,0.88)', 'rgba(186,190,198,0.44)'], rim: ['rgba(255,255,255,0.98)', 'rgba(18,22,30,0.42)'], pool: 'rgba(255,255,255,0.34)', spec: 'rgba(255,255,255,0.95)', solid: ['#F4F5F7', '#B9BCC3', '#8A8D93'], trail: '150,154,162' },
+      red: { body: ['rgba(255,96,102,0.94)', 'rgba(196,15,22,0.82)'], rim: ['rgba(255,214,216,0.98)', 'rgba(120,8,12,0.6)'], pool: 'rgba(255,255,255,0.24)', spec: 'rgba(255,255,255,0.92)', solid: ['#FF4148', '#E7131B', '#8E0B10'], trail: '231,19,27' },
       black: { body: ['rgba(78,80,88,0.86)', 'rgba(6,6,8,0.7)'], rim: ['rgba(255,255,255,0.62)', 'rgba(0,0,0,0.75)'], pool: 'rgba(255,255,255,0.14)', spec: 'rgba(255,255,255,0.7)', solid: ['#3A3C42', '#18191D', '#050506'], trail: '30,32,38' }
     };
     const LABELS = ['+$6.40 commission', 'New partner', '+$12.10', '0.8 lot', 'Weekly report', 'Sub-IB joined', '+$3.20 rebate', '1.5 lots', 'Payout sent', 'New client', 'Monthly report', '+$48.00', '2.0 lots', 'Partner L2', '+$9.75', 'Partner L5', 'XAUUSD 3.0 lots'];
@@ -51,6 +66,12 @@
     NODES.forEach((nd, ni) => HEXC[nd.hx].forEach(o => slots.push({ ni, ox: o[0], oy: o[1] })));
     slots.sort((a, b) => NODES[a.ni].fx - NODES[b.ni].fx || a.ni - b.ni);
     cr.forEach((c, i) => Object.assign(c, slots[i]));
+    const GRP = [{ n: 34, fx: -0.3, sp: 1, dark: 0, al: 1, lb: TXT.act }, { n: 17, fx: 0.1, sp: 1, dark: 1, al: 1, lb: TXT.dor }, { n: 10, fx: 0.36, sp: 1.5, dark: 0, al: 0.3, lb: TXT.ina }];
+    const hexFill = n => { const o = []; for (let q = -5; q <= 5; q++) for (let r = -5; r <= 5; r++) { const x = q + r / 2, y = r * 0.8660254; o.push([x, y, Math.hypot(x, y) + Math.atan2(y, x) * 1e-3]); } return o.sort((a, b) => a[2] - b[2]).slice(0, n); };
+    const cslots = [];
+    GRP.forEach((g, gi) => hexFill(g.n).forEach((o, k) => cslots.push({ gi, hot: gi === 0 && k % 4 === 1, kx: o[0] * g.sp + (gi === 2 ? rnd(-0.3, 0.3) : 0), ky: o[1] * g.sp + (gi === 2 ? rnd(-0.3, 0.3) : 0), kr: rnd(-0.6, 0.6) })));
+    cslots.sort((a, b) => a.gi - b.gi || a.kx - b.kx);
+    cr.forEach((c, i) => Object.assign(c, cslots[i]));
     const mkRing = (q, n) => ({ q, lw: rnd(1, 2.6) * (1 - q * 0.45), dash: [rnd(18, 110) * (1 + q), rnd(5, 36)], spd: rnd(0.8, 1.25) / Math.sqrt(0.25 + q), col: (Math.random() * n) | 0, al: 0.85 * Math.pow(1 - q, 1.1) + 0.08 });
     const SMALL = innerWidth < 700, ring = (n) => Array.from({ length: n }, (_, i) => mkRing(i / (n - 1), 6));   /* phones: fewer rings */
     const DISK = ring(SMALL ? 20 : 36), HTOP = ring(SMALL ? 10 : 18), HBOT = ring(SMALL ? 6 : 9);
@@ -88,6 +109,14 @@
       const p = nXY(NODES[c.ni]), ns = cs * 0.8, d = ns * 1.7320508 + Math.max(1.5, ns * 0.16);
       return { x: p.x + c.ox * d, y: p.y + c.oy * d, s: ns };
     };
+    const kd = () => { const ns = cs * 0.8; return ns * 1.7320508 + Math.max(1.5, ns * 0.16); };
+    const KCY = () => cy + gh * 0.02;
+    const kPos = c => {
+      const G = GRP[c.gi], d = kd(); let x = cx + G.fx * gw + c.kx * d, y = KCY() + c.ky * d, s = cs * 0.8;
+      if (c.gi === 0) { s *= 1 + (c.hot ? 0.09 : 0.05) * Math.sin(wt * (c.hot ? 4 : 2.2) - c.kx * 0.9 + c.kr * 3); y += Math.sin(wt * 3 + c.kx * 1.1) * 2.2; }
+      if (c.gi === 2) { y += Math.sin(wt * 0.7 + c.kr * 9) * 3; x += Math.cos(wt * 0.5 + c.kr * 7) * 2; s *= 0.86; }
+      return { x, y, s, dark: c.hot ? 2 : !!G.dark, al: G.al, rot: c.gi === 2 ? c.kr : 0 };
+    };
     const bz = (p, q, t) => {
       const m = (p.y + q.y) / 2, it = 1 - t;
       return { x: it * it * it * p.x + 3 * it * it * t * p.x + 3 * it * t * t * q.x + t * t * t * q.x, y: it * it * it * p.y + 3 * it * it * t * m + 3 * it * t * t * m + t * t * t * q.y };
@@ -108,7 +137,7 @@
       ctx.closePath();
     };
     const gemDraw = (c, style, s, dark) => {
-      const C = dark ? CRY.black : CRY.silver, rr = s * 0.1;
+      const C = dark === 2 ? CRY.red : dark ? CRY.black : CRY.silver, rr = s * 0.1;
       const hx = (S, r) => { c.beginPath(); const v = HEXV; c.moveTo((v[5][0] + v[0][0]) / 2 * S, (v[5][1] + v[0][1]) / 2 * S); for (let i = 0; i < 6; i++) { const a = v[i], b = v[(i + 1) % 6]; c.arcTo(a[0] * S, a[1] * S, b[0] * S, b[1] * S, r); } c.closePath(); };
       hx(s, rr);
       if (style === 'solid') {
@@ -121,7 +150,7 @@
       c.shadowColor = 'transparent'; c.shadowBlur = 0; c.shadowOffsetY = 0;
       const sg = c.createLinearGradient(0, -s, 0, s); sg.addColorStop(0, C.rim[0]); sg.addColorStop(1, C.rim[1]);
       c.strokeStyle = sg; c.lineWidth = 1; c.stroke();
-      hx(s * 0.56, rr * 0.6); c.strokeStyle = dark ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.6)'; c.lineWidth = 0.8; c.stroke();
+      hx(s * 0.56, rr * 0.6); c.strokeStyle = dark === 2 ? 'rgba(255,255,255,0.42)' : dark ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.6)'; c.lineWidth = 0.8; c.stroke();
       if (style === 'liquid') {
         const pg = c.createLinearGradient(0, s * 0.05, 0, s); pg.addColorStop(0, 'rgba(255,255,255,0)'); pg.addColorStop(1, C.pool);
         hx(s - 1.2, rr); c.fillStyle = pg; c.fill();
@@ -131,7 +160,7 @@
       }
     };
     const gemSprite = (style, dark) => {
-      const key = style + (dark ? 1 : 0); if (gemCache[key]) return gemCache[key];
+      const key = style + (dark === 2 ? 2 : dark ? 1 : 0); if (gemCache[key]) return gemCache[key];
       const S = Math.max(4, cs), w = 2 * S + 28, c = document.createElement('canvas');
       c.width = c.height = Math.ceil(w * dpr);
       const g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, w / 2 * dpr, w / 2 * dpr);
@@ -295,6 +324,64 @@
       ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.arc(pt.x, pt.y, 5.5, 0, PI2); ctx.fill();
       ctx.fillStyle = RED; ctx.beginPath(); ctx.arc(pt.x, pt.y, 3, 0, PI2); ctx.fill(); ctx.restore();
     };
+    const clients = (th, u, al) => {
+      const d = kd(), y0 = KCY(), x1 = cx + GRP[1].fx * gw, r = d * 2.75, p = eo(cl((u - 0.95) / 0.45));
+      if (p > 0) {
+        ctx.globalAlpha = al; ctx.save(); ctx.strokeStyle = rgba(th.edge, 0.5); ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.arc(x1, y0, r, -Math.PI / 2, -Math.PI / 2 + PI2 * p); ctx.stroke(); ctx.restore();
+        if (u > 1.4) { const f = ((u - 1.4) % 0.9) / 0.9; ctx.globalAlpha = al * (1 - f) * 0.7; ctx.beginPath(); ctx.arc(x1, y0, r * (1 + 0.3 * eo(f)), 0, PI2); ctx.strokeStyle = rgba(th.edge, 0.4); ctx.lineWidth = 1; ctx.stroke(); }
+      }
+      const la = al * cl((u - 1.0) / 0.35);
+      if (la > 0) {
+        ctx.globalAlpha = la; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+        GRP.forEach((g, i) => {   /* as wide as the gap to the nearest group allows; a long name in two rows */
+          const gap = Math.min(...GRP.filter((_, j) => j !== i).map((o) => Math.abs(o.fx - g.fx))) * gw - 10, set = (f) => { ctx.font = '700 ' + f + 'px ' + HF; ctx.letterSpacing = (CASED ? f * 0.12 : 0).toFixed(1) + 'px'; };
+          let fs = CASED ? 10 : 12, rows = [g.lb]; set(fs);
+          while (fs > 8 && ctx.measureText(g.lb).width > gap) set(fs -= 0.5);
+          if (ctx.measureText(g.lb).width > gap && g.lb.indexOf(' ') > 0) {
+            const w = g.lb.split(' '), h = Math.ceil(w.length / 2); rows = [w.slice(0, h).join(' '), w.slice(h).join(' ')]; fs = CASED ? 10 : 12; set(fs);
+            while (fs > 7 && Math.max(...rows.map((r) => ctx.measureText(r).width)) > gap) set(fs -= 0.5);
+          }
+          ctx.fillStyle = i === 0 ? '#0A0A0A' : th.mute;
+          rows.forEach((r, k) => ctx.fillText(r, cx + g.fx * gw, y0 + d * 3.55 + 14 + k * fs * 1.3));
+        });
+        ctx.letterSpacing = '0px';
+      }
+      ctx.globalAlpha = 1;
+    };
+    const oneLine = (toks, a) => {
+      if (a <= 0.01 || !toks.length) return;
+      const ls = (fs) => { ctx.font = '700 ' + fs + 'px ' + HF; ctx.letterSpacing = (CASED ? fs * 0.05 : 0).toFixed(1) + 'px'; };
+      const width = (ts) => { let w = 0; ts.forEach((t, i) => { if (i && t.sp) w += ctx.measureText(' ').width; w += ctx.measureText(t.t).width; }); return w; };
+      const split = () => {   /* two rows of about equal width, broken at a space */
+        let best = null, bd = 1e9;
+        for (let i = 1; i < toks.length; i++) if (toks[i].sp) { const d = Math.abs(width(toks.slice(0, i)) - width(toks.slice(i))); if (d < bd) { bd = d; best = i; } }
+        return best ? [toks.slice(0, best), toks.slice(best)] : [toks];
+      };
+      let fs = Math.round(Math.max(14, Math.min(28, W * 0.02))) * (CASED ? 1 : 1.15), rows = [toks];
+      for (;;) {
+        ls(fs); rows = [toks];
+        if (width(toks) > W - 48) rows = split();
+        if (fs <= 10 || rows.every((r) => width(r) <= W - 48)) break;
+        fs -= 1;
+      }
+      const lh = fs * 1.4, y0 = Math.max(fs + 28, cy - gh / 2 - 92) - (rows.length - 1) * lh + (1 - eo(a)) * 10, sp = ctx.measureText(' ').width;
+      ctx.globalAlpha = a; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      rows.forEach((r, i) => {
+        if (!RTL) {
+          let x = cx - width(r) / 2;
+          r.forEach((t, j) => { if (j && t.sp) x += sp; ctx.fillStyle = t.red ? '#E7131B' : '#0A0A0A'; ctx.fillText(t.t, x, y0 + i * lh); x += ctx.measureText(t.t).width; });
+          return;
+        }
+        /* right to left: from the right edge leftwards; consecutive Latin words stay one left-to-right run */
+        const runs = [];
+        r.forEach((t) => { const ltr = !/[\u0590-\u08FF]/.test(t.t), last = runs[runs.length - 1];
+          if (ltr && last && last.ltr && last.red === t.red) last.t += (t.sp ? ' ' : '') + t.t; else runs.push({ t: t.t, ltr, red: t.red, sp: t.sp }); });
+        let x = cx + width(r) / 2;
+        runs.forEach((u, j) => { if (j && u.sp) x -= sp; const w = ctx.measureText(u.t).width; x -= w; ctx.fillStyle = u.red ? '#E7131B' : '#0A0A0A'; ctx.fillText(u.t, x, y0 + i * lh); });
+      });
+      ctx.letterSpacing = '0px'; ctx.globalAlpha = 1;
+    };
     const drainPos = (N, v) => {
       const dx = N.x - cx, rad0 = Math.abs(dx) + 4, a0 = dx >= 0 ? 0 : Math.PI;
       const a = a0 + v * v * 7, rad = rad0 * (1 - eio(v)), yb = N.y + (cy + R * 0.12 - N.y) * Math.pow(v, 1.4);
@@ -310,9 +397,14 @@
           if (u < 0.4) { const e = eo(u / 0.4); x = cx + (bx - cx) * e; y = cy + (by - cy) * e; s = cs * (0.3 + 0.7 * e); rot = c.r0 + u * c.sv; }
           else { const v = cl((u - 0.4 - c.s1 * 0.35) / 0.6), e = eio(v); x = bx + (B.x - bx) * e; y = by + (B.y - by) * e - Math.sin(Math.PI * e) * 24 * c.arc; rot = (c.r0 + u * c.sv) * (1 - e); }
         } else if (ph === 2) {
-          const N = nodePos(c), v = cl((u - c.s2 * 0.3) / 0.65), e = eio(v), dx = N.x - B.x, dy = N.y - B.y, L = Math.hypot(dx, dy) || 1, off = Math.sin(Math.PI * e) * c.arc * Math.min(60, L * 0.35);
-          x = B.x + dx * e - dy / L * off; y = B.y + dy * e + dx / L * off; s = cs + (N.s - cs) * e; rot = Math.sin(Math.PI * e) * 0.6 * (c.arc > 0 ? 1 : -1);
-          dark = e < 0.5 ? c.b === BARS.length - 1 : !!nd.red;
+          const K = kPos(c), v = cl((u - c.s1 * 0.3) / 0.7), e = eio(v), dx = K.x - B.x, dy = K.y - B.y, L = Math.hypot(dx, dy) || 1, off = Math.sin(Math.PI * e) * c.arc * Math.min(60, L * 0.35);
+          x = B.x + dx * e - dy / L * off; y = B.y + dy * e + dx / L * off; s = cs + (K.s - cs) * e; rot = Math.sin(Math.PI * e) * 0.6 * (c.arc > 0 ? 1 : -1) + K.rot * e;
+          dark = e < 0.5 ? c.b === BARS.length - 1 : K.dark;
+          al = 1 - (1 - K.al) * eo(cl((u - 0.95) / 0.5));
+        } else if (ph === 3) {
+          const K = kPos(c), N = nodePos(c), v = cl((u - c.s2 * 0.3) / 0.65), e = eio(v), dx = N.x - K.x, dy = N.y - K.y, L = Math.hypot(dx, dy) || 1, off = Math.sin(Math.PI * e) * c.arc * Math.min(60, L * 0.35);
+          x = K.x + dx * e - dy / L * off; y = K.y + dy * e + dx / L * off; s = K.s + (N.s - K.s) * e; rot = K.rot * (1 - e) + Math.sin(Math.PI * e) * 0.6 * (c.arc > 0 ? 1 : -1);
+          dark = e < 0.5 ? K.dark : !!nd.red; al = K.al + (1 - K.al) * e;
         } else {
           const N = nodePos(c), v = cl((u - c.s3 * 0.3) / 0.9); if (v >= 1) continue;
           const P = drainPos(N, v); x = P.x; y = P.y; dark = !!nd.red; al = 1 - Math.pow(v, 4);
@@ -328,6 +420,11 @@
             }
           }
         }
+        if (dark === 2) {
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalAlpha = 1;
+          const gr = s * 2.4, ga = al * (0.24 + 0.12 * Math.sin(wt * 3.4 + c.kr * 6)), g = ctx.createRadialGradient(x, y, 0, x, y, gr);
+          g.addColorStop(0, rgba('231,19,27', ga)); g.addColorStop(1, 'rgba(231,19,27,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, gr, 0, PI2); ctx.fill();
+        }
         gem(style, x, y, s, rot, dark, al);
       }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalAlpha = 1;
@@ -342,15 +439,15 @@
       wt += dt;
       let ph, u;
       const VD = 4.6, V0 = 4.1, SK = VD - V0;
-      if (T < V0) { ph = 0; u = T + SK; } else { const tt = (T - V0) % (VD + 5); if (tt < 2.5) { ph = 1; u = tt; } else if (tt < 5) { ph = 2; u = tt - 2.5; } else { ph = 3; u = tt - 5; } }
-      if (ph !== lastRaw) { if (ph === 3) resetChips(); lastRaw = ph; }
-      const isV = ph === 0 || ph === 3;
+      if (T < V0) { ph = 0; u = T + SK; } else { const tt = (T - V0) % (VD + 8); if (tt < 3) { ph = 1; u = tt; } else if (tt < 5.5) { ph = 2; u = tt - 3; } else if (tt < 8) { ph = 3; u = tt - 5.5; } else { ph = 4; u = tt - 8; } }
+      if (ph !== lastRaw) { if (ph === 4) resetChips(); lastRaw = ph; }
+      const isV = ph === 0 || ph === 4;
       let k = 0, rage = 0;
       if (isV) { const f0 = ph === 0 ? SK : 0.25; k = Math.min(eo(cl((u - f0) / 0.7)), 1 - ei(cl((u - 4.2) / 0.4))); rage = eio(cl((u - 3.4) / 0.8)); }
       if (still) { k = 1; rage = 0; }
       bulge = 0.035 + 0.012 * Math.sin(wt * 0.55) + rage * 0.05;
       spin += dt * (1.1 + rage * 4 + (1 - k) * 3);
-      const si = ph === 1 ? 1 : ph === 2 ? 2 : 0, prog = ph === 0 ? (u - SK) / V0 : isV ? u / VD : u / 2.5;
+      const si = isV ? 0 : ph, prog = ph === 0 ? (u - SK) / V0 : isV ? u / VD : u / (ph === 1 ? 3 : 2.5);
       fills.forEach((f, i) => { f.style.width = (still || i !== si ? 0 : prog * 100).toFixed(1) + '%'; });
       if (si !== lastPh) { lastPh = si; tabs.forEach((x, i) => x.classList.toggle('is-on', i === si)); }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalAlpha = 1;
@@ -368,11 +465,14 @@
       if (still) return;
       if (ph === 1 && u < 0.6) flash(th, u / 0.6);
       if (ph === 1 && u > 0.75) bars(th, u, 1); else if (ph === 2 && u < 0.35) bars(th, 9, 1 - u / 0.35);
-      if (ph === 2 && u > 0.4) edges(th, u, 1); else if (ph === 3 && u < 0.4) edges(th, 9, 1 - u / 0.4);
-      if (ph === 1) caption(th, cl((u - 0.9) / 0.35) * (1 - cl((u - 2.3) / 0.2)), 'VOLUME · LOTS', '▲ 7.9%');
-      if (ph === 2) caption(th, cl((u - 0.7) / 0.35) * (1 - cl((u - 2.3) / 0.2)), 'SUB-IB NETWORK', 'UNLIMITED TIERS');
+      if (ph === 2) clients(th, u, 1); else if (ph === 3 && u < 0.35) clients(th, 9, 1 - u / 0.35);
+      if (ph === 3 && u > 0.4) edges(th, u, 1); else if (ph === 4 && u < 0.4) edges(th, 9, 1 - u / 0.4);
+      const win = (t0, t1) => cl((u - t0) / 0.4) * (1 - cl((u - t1) / 0.3));
+      if (ph === 0) oneLine(CAP[0], win(0.9, 4.0)); else if (ph === 4) oneLine(CAP[0], win(1.0, 4.0));
+      else if (ph === 1) { oneLine(CAP[1], win(0.15, 1.25)); oneLine(CAP[2], win(1.5, 2.7)); }
+      else if (ph === 2) oneLine(CAP[3], win(0.4, 2.2)); else if (ph === 3) oneLine(CAP[4], win(0.4, 2.2));
       if (ph !== 0) gems(style, ph, u);
-      if (ph === 2) pulse(u);
+      if (ph === 3) pulse(u);
     };
     draw = () => frame(performance.now());
     if (still) { draw(); return; }
@@ -441,5 +541,6 @@
     new IntersectionObserver(([e]) => { seen = e.isIntersecting; if (seen) run(); else stop(); }).observe(root);
     document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else run(); });
   };
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+  const fontsIn = () => (document.fonts && document.fonts.load ? Promise.all([document.fonts.load('700 20px ' + HF, (fontEl && fontEl.textContent) || 'IB'), document.fonts.ready]).catch(() => {}) : Promise.resolve());
+  fontsIn().then(start);
 })();

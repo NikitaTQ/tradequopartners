@@ -116,5 +116,11 @@
   "ib.ce.from": "{n} · 30 G",
   "ib.ce.lots": "{n} lot",
   "ib.ce.other": "Diğer",
-  "ib.ce.none": "Bu müşteriden bu dönemde komisyon kaydı yok."
+  "ib.ce.none": "Bu müşteriden bu dönemde komisyon kaydı yok.",
+  "ib.hole.sc": "Her müşteri",
+  "ib.hole.c1": "Her şey *dağınık*",
+  "ib.hole.c2": "Ama Big IB Bang her şeyi *kolaylaştırır*",
+  "ib.hole.c3": "Her *lot* yerini bulur",
+  "ib.hole.c4": "Kimin işlem yaptığını, kimin *sessizleştiğini* görün",
+  "ib.hole.c5": "Ağınızın her *dalını* görün"
 }

@@ -1412,6 +1412,8 @@
 :lang(ar) .tq-ibb__tab, :lang(th) .tq-ibb__tab, :lang(ja) .tq-ibb__tab, :lang(ko) .tq-ibb__tab, :lang(zh) .tq-ibb__tab { letter-spacing: .02em; font-size: 12px; }
 @media (max-width: 480px) { .tq-ibb__tab { padding: 0 7px; gap: 6px; letter-spacing: .06em; } .tq-ibb__tab > i { left: 7px; right: 7px; } }
 .tq-ibb__tabs.is-tight .tq-ibb__tab b { display: none; }   /* a translation too long for the screen: no step numbers (ib-hole.js) */
+@media (max-width: 639px) { .tq-ibb__tab:not(.is-on) span { display: none; } }   /* phones (as in the design): only the lit step shows its name */
+.tq-ibb__font { position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; white-space: nowrap; font-size: 20px; }   /* the canvas captions' face, loaded (ib-hole.js) */
 
 /* IB Tools: the Sub-IB network block (Sub-IB_Network_Silver). Text left, the 3D glass diagram right (static SVG from
    tools/build-ib-net.mjs, labels over it in % of its box, type sized by its width: cqi), three cards under both. The

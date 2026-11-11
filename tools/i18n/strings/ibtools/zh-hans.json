@@ -116,5 +116,11 @@
   "ib.ce.from": "来自 {n} · 30天",
   "ib.ce.lots": "{n} 手",
   "ib.ce.other": "其他",
-  "ib.ce.none": "该客户在此期间没有返佣记录。"
+  "ib.ce.none": "该客户在此期间没有返佣记录。",
+  "ib.hole.sc": "每位客户",
+  "ib.hole.c1": "一切都*杂乱无章*",
+  "ib.hole.c2": "但 Big IB Bang 让一切变得*简单*",
+  "ib.hole.c3": "每一*手*都找到归属",
+  "ib.hole.c4": "看清谁在交易、谁已*沉寂*",
+  "ib.hole.c5": "看清网络的每一个*分支*"
 }

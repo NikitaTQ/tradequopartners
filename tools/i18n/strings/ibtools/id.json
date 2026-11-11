@@ -116,5 +116,11 @@
   "ib.ce.from": "dari {n} · 30H",
   "ib.ce.lots": "{n} lot",
   "ib.ce.other": "Lainnya",
-  "ib.ce.none": "Tidak ada rebate dari klien ini dalam periode ini."
+  "ib.ce.none": "Tidak ada rebate dari klien ini dalam periode ini.",
+  "ib.hole.sc": "Setiap klien",
+  "ib.hole.c1": "Semuanya *berserakan*",
+  "ib.hole.c2": "Tapi Big IB Bang membuatnya *mudah*",
+  "ib.hole.c3": "Setiap *lot* menemukan tempatnya",
+  "ib.hole.c4": "Lihat siapa yang trading dan siapa yang *diam*",
+  "ib.hole.c5": "Lihat setiap *cabang* jaringan Anda"
 }

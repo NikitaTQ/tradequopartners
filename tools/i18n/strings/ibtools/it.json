@@ -116,5 +116,11 @@
   "ib.ce.from": "da {n} · 30 g",
   "ib.ce.lots": "{n} lotti",
   "ib.ce.other": "Altri",
-  "ib.ce.none": "Nessun rebate da questo cliente nel periodo."
+  "ib.ce.none": "Nessun rebate da questo cliente nel periodo.",
+  "ib.hole.sc": "Ogni cliente",
+  "ib.hole.c1": "È tutto *sparso* ovunque",
+  "ib.hole.c2": "Ma il Big IB Bang rende tutto *facile*",
+  "ib.hole.c3": "Ogni *lotto* trova il suo posto",
+  "ib.hole.c4": "Guarda chi fa trading e chi si è *fermato*",
+  "ib.hole.c5": "Guarda ogni *ramo* della tua rete"
 }

@@ -116,5 +116,11 @@
   "ib.ce.from": "từ {n} · 30N",
   "ib.ce.lots": "{n} lot",
   "ib.ce.other": "Khác",
-  "ib.ce.none": "Không có hoa hồng từ khách hàng này trong kỳ."
+  "ib.ce.none": "Không có hoa hồng từ khách hàng này trong kỳ.",
+  "ib.hole.sc": "Mọi khách hàng",
+  "ib.hole.c1": "Mọi thứ đang *rời rạc*",
+  "ib.hole.c2": "Nhưng Big IB Bang khiến mọi thứ *dễ dàng*",
+  "ib.hole.c3": "Mỗi *lot* đều về đúng chỗ",
+  "ib.hole.c4": "Xem ai đang giao dịch và ai đã *im lặng*",
+  "ib.hole.c5": "Xem từng *nhánh* trong mạng lưới của bạn"
 }
