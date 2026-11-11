@@ -5,7 +5,8 @@
    5.5 s on the bars) while the block is on screen and the pointer is not over the picture; a click on a view on the left
    picks it and stops the swapping. With "reduce motion" nothing moves: the picture is drawn once per view.
    The words drawn on the canvas come from its data-you / data-total ("{v}" = the sum) / data-net. Names and figures
-   are demo data. */
+   are demo data. Below 641px (the phone mockup) the picture is packed tighter: smaller glass, levels closer, smaller
+   words, no sum under "You" (the bars show it). */
 (function () {
   var s = document.querySelector('[data-ib-ins]');
   if (!s) return;
@@ -70,21 +71,26 @@
     var ctx = cv.getContext('2d');
     var PI2 = Math.PI * 2, cl = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; }, eo = function (v) { return 1 - Math.pow(1 - v, 3); };
     var eio = function (v) { return v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2; }, lerp = function (a, b, t) { return a + (b - a) * t; };
-    var W = 0, H = 0, dpr = 1, k = 1, top = 0, bot = 0, L = 0, R = 0, base = 0, maxH = 0, colW = 0, bw = 0;
+    var W = 0, H = 0, dpr = 1, k = 1, top = 0, bot = 0, L = 0, R = 0, base = 0, maxH = 0, colW = 0, bw = 0, ph = false;
+    var phone = window.matchMedia ? matchMedia('(max-width: 640px)') : null;
     var size = function () {
       W = stage.clientWidth; H = stage.clientHeight; if (!W || !H) return;
       dpr = Math.min(coarse ? 1.5 : 2, window.devicePixelRatio || 1);   /* phones: 1.5x is sharp enough and lighter for the blurred glass */
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      k = Math.max(0.68, Math.min(1, W / 620));
-      top = 24; bot = H - 10; L = 6; R = W - 6;
-      base = bot - (W < 520 ? 44 : 34); maxH = base - top - 70;
+      ph = !!(phone && phone.matches);
+      if (ph) { k = 0.55; top = 6; bot = H - 4; L = 4; R = W - 4; base = H - 36; maxH = base - top - 46; }
+      else {
+        k = Math.max(0.68, Math.min(1, W / 620));
+        top = 24; bot = H - 10; L = 6; R = W - 6;
+        base = bot - (W < 520 ? 44 : 34); maxH = base - top - 70;
+      }
       colW = (R - L) / PARTNERS.length; bw = Math.max(16, Math.min(46, colW * 0.56));
       if (reduced && draw) draw(performance.now());
     };
     if (window.ResizeObserver) new ResizeObserver(size).observe(stage); else window.addEventListener('resize', size);
     size();
     var RB = [30, 24, 19, 15];
-    var lvY = function (d) { return top + 34 + d * ((base - top - 70) / 3); };
+    var lvY = function (d) { return ph ? top + 22 + d * ((H - 64 - top - 22) / 3) : top + 34 + d * ((base - top - 70) / 3); };
     var rr = function (x, y, w, h, r) { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x - w / 2, y - h / 2, w, h, r); else ctx.rect(x - w / 2, y - h / 2, w, h); };
     var KIND = {
       silver: { c: 'rgba(255,255,255,0.10)', e: 'rgba(255,255,255,0.62)', shade: 'rgba(18,22,30,0.16)', sh: 'rgba(18,22,30,0.2)', rim: ['rgba(255,255,255,1)', 'rgba(255,255,255,0.35)'], line: 'rgba(18,22,30,0.14)', glow: 'rgba(255,255,255,0.9)', caus: 'rgba(255,255,255,0.95)', spec: 0.95 },
@@ -96,7 +102,7 @@
       if (al <= 0.01 || w < 1 || h < 1) return;
       var K = KIND[kind], m = Math.min(w, h), x0 = x - w / 2, y0 = y - h / 2;
       ctx.save(); ctx.globalAlpha = al;
-      ctx.shadowColor = K.sh; ctx.shadowBlur = 24; ctx.shadowOffsetY = 12;
+      ctx.shadowColor = K.sh; ctx.shadowBlur = ph ? 14 : 24; ctx.shadowOffsetY = ph ? 7 : 12;
       rr(x, y, w, h, r); ctx.fillStyle = K.c; ctx.fill();
       ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
       ctx.save(); rr(x, y, w, h, r); ctx.clip();
@@ -151,12 +157,12 @@
         ctx.save(); ctx.globalAlpha = ga;
         ctx.strokeStyle = 'rgba(18,22,30,0.18)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(L, base + 0.5); ctx.lineTo(R, base + 0.5); ctx.stroke();
         ctx.setLineDash([3, 5]); ctx.strokeStyle = 'rgba(18,22,30,0.1)';
-        ctx.font = '500 10px ' + F; ctx.fillStyle = '#8A8D93'; ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';
+        ctx.font = '500 ' + (ph ? 9 : 10) + 'px ' + F; ctx.fillStyle = '#8A8D93'; ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';
         [50000, 100000, 150000].forEach(function (v) { var y = base - maxH * v / MAX + 0.5; ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(R, y); ctx.stroke(); ctx.fillText(kfmt(v), R, y - 3); });
         ctx.setLineDash([]);
         ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-        ctx.font = '700 ' + (cased ? 10 : 11) + 'px ' + F; spaced(1.8); ctx.fillStyle = '#6B6E75'; ctx.fillText(TXT.net, L, top + 14); spaced(0);
-        ctx.font = '700 ' + Math.round(26 * k) + 'px ' + F; ctx.fillStyle = '#0A0A0A'; ctx.fillText('$541,500', L, top + 14 + 30 * k);
+        ctx.font = '700 ' + (ph ? (cased ? 9 : 10) : (cased ? 10 : 11)) + 'px ' + F; spaced(ph ? 1.4 : 1.8); ctx.fillStyle = '#6B6E75'; ctx.fillText(TXT.net, L, top + (ph ? 9 : 14)); spaced(0);
+        ctx.font = '700 ' + (ph ? 15 : Math.round(26 * k)) + 'px ' + F; ctx.fillStyle = '#0A0A0A'; ctx.fillText('$541,500', L, ph ? top + 27 : top + 14 + 30 * k);
         ctx.restore();
       }
       /* links and pulses */
@@ -197,16 +203,18 @@
         if (n.rank < 0) {
           var a = la * (1 - x.mi); if (a <= 0.01) return;
           ctx.globalAlpha = a; ctx.fillStyle = '#FFFFFF'; ctx.textBaseline = 'middle';
-          var fs = Math.round(11 * k + 1); ctx.font = '700 ' + fs + 'px ' + F; spaced(1);
-          while (fs > 8 && ctx.measureText(TXT.you).width > x.r * 1.6) { fs--; ctx.font = '700 ' + fs + 'px ' + F; }
+          var fs = ph ? 9 : Math.round(11 * k + 1), fmin = ph ? 6 : 8; ctx.font = '700 ' + fs + 'px ' + F; spaced(ph ? 0.6 : 1);
+          while (fs > fmin && ctx.measureText(TXT.you).width > x.r * 1.6) { fs--; ctx.font = '700 ' + fs + 'px ' + F; }
           ctx.fillText(TXT.you, x.x, x.y + 1); spaced(0);
-          ctx.textBaseline = 'alphabetic'; ctx.font = '500 11px ' + F; ctx.fillStyle = '#6B6E75'; ctx.fillText(TXT.total.replace('{v}', kfmt(n.net)), x.x, x.y + x.r + 18);
+          ctx.textBaseline = 'alphabetic';
+          if (!ph) { ctx.font = '500 11px ' + F; ctx.fillStyle = '#6B6E75'; ctx.fillText(TXT.total.replace('{v}', kfmt(n.net)), x.x, x.y + x.r + 18); }
           return;
         }
-        var nameY = lerp(x.ty + x.r + 17, base + 17 + (stag && n.rank % 2 ? 14 : 0), x.mi), valY = lerp(x.ty + x.r + 31, base - x.bh - 9, x.mi);
+        var nameY = ph ? lerp(x.ty + x.r + 12, base + 13 + (stag && n.rank % 2 ? 12 : 0), x.mi) : lerp(x.ty + x.r + 17, base + 17 + (stag && n.rank % 2 ? 14 : 0), x.mi);
+        var valY = ph ? lerp(x.ty + x.r + 23, base - x.bh - 6, x.mi) : lerp(x.ty + x.r + 31, base - x.bh - 9, x.mi);
         ctx.globalAlpha = la;
-        ctx.font = '700 ' + (x.mi > 0.5 && stag ? 10 : 12) + 'px ' + F; ctx.fillStyle = '#0A0A0A'; ctx.fillText(n.name, x.x, nameY);
-        ctx.font = x.mi > 0.5 ? '700 12px ' + F : '500 11px ' + F; ctx.fillStyle = n.id === 'n' ? '#C40F16' : x.mi > 0.5 ? '#0A0A0A' : '#6B6E75'; ctx.fillText(kfmt(n.net), x.x, valY);
+        ctx.font = '700 ' + (ph ? 10 : x.mi > 0.5 && stag ? 10 : 12) + 'px ' + F; ctx.fillStyle = '#0A0A0A'; ctx.fillText(n.name, x.x, nameY);
+        ctx.font = ph ? (x.mi > 0.5 ? '700 10px ' : '500 10px ') + F : x.mi > 0.5 ? '700 12px ' + F : '500 11px ' + F; ctx.fillStyle = n.id === 'n' ? '#C40F16' : x.mi > 0.5 ? '#0A0A0A' : '#6B6E75'; ctx.fillText(kfmt(n.net), x.x, valY);
       });
       ctx.globalAlpha = 1; ctx.textAlign = 'left';
     };
