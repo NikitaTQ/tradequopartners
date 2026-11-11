@@ -162,6 +162,73 @@
       </div>
     </section>
 
+    <!-- Clients & earnings (IB_Clients_Earnings design), the third block. Left the pitch and a red button (to the next block);
+         right two tilted glass panels of IB Desk: Clients (filters with counts, client rows with volume and status) and
+         Commissions (the month's total, its split by instrument, commission records). One client is picked (red); lines
+         run from it to its records, which stay bright while the others dim; the pick moves to the next client every 4.2 s.
+         Below 760px (the phone mockup): the filters as a pill switch above, two client rows, only the picked client's
+         records with their sum, the button last. assets/js/ib-clients.js does the picking, the filters and the lines; the
+         rows are fixed demo data here (names and dollar sums the same on every language; counts, lots and dates are set
+         in the page's language by the script). -->
+    <section id="clients" class="tq-ibc" data-ib-ce data-via="{{@ib.ce.via}}" data-total="{{@ib.ce.total}}" data-from="{{@ib.ce.from}}" data-lots="{{@ib.ce.lots}}" data-screen-label="IB Tools · Clients and earnings">
+      <div class="tq-ibc__wrap">
+        <div class="tq-ibc__text">
+          <h2 class="tq-ibc__h2 tq-h2">{{ib.ce.h2}}</h2>
+          <p class="tq-ibx__lead">{{ib.ce.lead}}</p>
+          <div class="tq-ibc__tabs">
+                <button type="button" class="tq-ibc__tab is-act" data-f="0" aria-pressed="true">{{ib.ce.all}}</button>
+                <button type="button" class="tq-ibc__tab" data-f="1" aria-pressed="false">{{ib.ce.active}}</button>
+                <button type="button" class="tq-ibc__tab" data-f="2" aria-pressed="false">{{ib.ce.dormant}}</button>
+                <button type="button" class="tq-ibc__tab" data-f="3" aria-pressed="false">{{ib.ce.inactive}}</button>
+          </div>
+          <div class="tq-ibx__ctas tq-ibc__ctas">
+            <a class="tq-ibx__go" href="#ai"><span>{{ib.lot.explore}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          </div>
+        </div>
+        <div class="tq-ibc__stage" dir="ltr">
+          <span class="tq-ibc__blob tq-ibc__blob--1"></span><span class="tq-ibc__blob tq-ibc__blob--2"></span><span class="tq-ibc__blob tq-ibc__blob--3"></span><span class="tq-ibc__blob tq-ibc__blob--4"></span>
+          <div class="tq-ibc__panels">
+            <div class="tq-ibc__panel tq-ibc__panel--cl">
+              <span class="tq-ibc__rim"></span><span class="tq-ibc__glare"></span><span class="tq-ibc__sheen"></span><span class="tq-ibc__foot"></span>
+              <div class="tq-ibc__hd"><b>{{ib.ce.clients}}</b><span class="tq-ibc__mono" data-total-n="1600">1,600 total</span></div>
+              <div class="tq-ibc__chips"><button type="button" class="tq-ibc__chip is-act" data-f="0">{{ib.ce.all}}<small data-n="1600">1,600</small></button><button type="button" class="tq-ibc__chip" data-f="1">{{ib.ce.active}}<small data-n="1184">1,184</small></button><button type="button" class="tq-ibc__chip" data-f="2">{{ib.ce.dormant}}<small data-n="42">42</small></button><button type="button" class="tq-ibc__chip" data-f="3">{{ib.ce.inactive}}<small data-n="374">374</small></button></div>
+              <div class="tq-ibc__th"><span>{{ib.ce.colClient}}</span><span>{{ib.ce.colVol}}</span><span>{{ib.ce.colStatus}}</span></div>
+              <div class="tq-ibc__rows">
+                  <div class="tq-ibc__cl" data-name="D. Moreau" data-st="a" data-has><span class="tq-ibc__who"><b>D. Moreau</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="412.0">412.0</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>{{ib.ce.active}}</span></div>
+                  <div class="tq-ibc__cl" data-name="S. Haddad" data-st="a" data-has><span class="tq-ibc__who"><b>S. Haddad</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="268.5">268.5</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>{{ib.ce.active}}</span></div>
+                  <div class="tq-ibc__cl" data-name="R. Castillo" data-st="a" data-has><span class="tq-ibc__who"><b>R. Castillo</b><small data-via="Meridian">via Meridian</small></span><span class="tq-ibc__vol" data-n="221.3">221.3</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>{{ib.ce.active}}</span></div>
+                  <div class="tq-ibc__cl" data-name="J. Okafor" data-st="d" data-has><span class="tq-ibc__who"><b>J. Okafor</b><small data-via="Meridian">via Meridian</small></span><span class="tq-ibc__vol" data-n="12.4">12.4</span><span class="tq-ibc__pill tq-ibc__pill--d"><i></i>{{ib.ce.dormant}}</span></div>
+                  <div class="tq-ibc__cl" data-name="P. Novak" data-st="i"><span class="tq-ibc__who"><b>P. Novak</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="0.0">0.0</span><span class="tq-ibc__pill tq-ibc__pill--i"><i></i>{{ib.ce.inactive}}</span></div>
+              </div>
+            </div>
+            <div class="tq-ibc__panel tq-ibc__panel--cm">
+              <span class="tq-ibc__rim"></span><span class="tq-ibc__glare"></span><span class="tq-ibc__sheen"></span><span class="tq-ibc__foot"></span>
+              <div class="tq-ibc__hd tq-ibc__hd--wide"><b>{{ib.ce.comms}}</b><span class="tq-ibc__mono" data-month="2026-11-01">November</span></div>
+              <div class="tq-ibc__hd tq-ibc__hd--narrow"><span><b>{{ib.ce.comms}}</b><small class="tq-ibc__from">from D. Moreau · 30D</small></span><span class="tq-ibc__sum">$112.00</span></div>
+              <div class="tq-ibc__fig"><span class="tq-ibc__big">$4,812<span>.60</span></span><span class="tq-ibc__split">{{ib.ce.pending}} $612.40 · {{ib.ce.settled}} $4,200.20</span></div>
+              <div class="tq-ibc__mix">
+                <div class="tq-ibc__bar"><span style="flex: 46"></span><span style="flex: 31"></span><span style="flex: 14"></span><span style="flex: 9"></span></div>
+                <div class="tq-ibc__legend"><span><i></i>XAUUSD 46%</span><span><i></i>EURUSD 31%</span><span><i></i>US30 14%</span><span><i></i>{{ib.ce.other}} 9%</span></div>
+              </div>
+              <div class="tq-ibc__th"><span>{{ib.ce.colRecord}}</span><span>{{ib.ce.colAmount}}</span><span>{{ib.ce.colStatus}}</span></div>
+              <div class="tq-ibc__rows">
+                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="42.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>XAUUSD · <span data-lots="3.0">3.0 lots</span> · <span data-date="2026-11-10">Nov 10</span></small></span><span class="tq-ibc__amt">$42.00</span><span class="tq-ibc__pill tq-ibc__pill--p"><i></i>{{ib.ce.pending}}</span></div>
+                  <div class="tq-ibc__rec" data-name="S. Haddad" data-amt="14.00"><span class="tq-ibc__who"><b>S. Haddad</b><small>EURUSD · <span data-lots="2.0">2.0 lots</span> · <span data-date="2026-11-10">Nov 10</span></small></span><span class="tq-ibc__amt">$14.00</span><span class="tq-ibc__pill tq-ibc__pill--p"><i></i>{{ib.ce.pending}}</span></div>
+                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="35.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>EURUSD · <span data-lots="5.0">5.0 lots</span> · <span data-date="2026-11-09">Nov 09</span></small></span><span class="tq-ibc__amt">$35.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
+                  <div class="tq-ibc__rec" data-name="R. Castillo" data-amt="9.75"><span class="tq-ibc__who"><b>R. Castillo</b><small>US30 · <span data-lots="1.5">1.5 lots</span> · <span data-date="2026-11-09">Nov 09</span></small></span><span class="tq-ibc__amt">$9.75</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
+                  <div class="tq-ibc__rec" data-name="S. Haddad" data-amt="8.40"><span class="tq-ibc__who"><b>S. Haddad</b><small>GBPUSD · <span data-lots="1.2">1.2 lots</span> · <span data-date="2026-11-08">Nov 08</span></small></span><span class="tq-ibc__amt">$8.40</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
+                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="35.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>XAUUSD · <span data-lots="2.5">2.5 lots</span> · <span data-date="2026-11-08">Nov 08</span></small></span><span class="tq-ibc__amt">$35.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
+                  <div class="tq-ibc__rec" data-name="R. Castillo" data-amt="14.00"><span class="tq-ibc__who"><b>R. Castillo</b><small>XAUUSD · <span data-lots="1.0">1.0 lots</span> · <span data-date="2026-11-07">Nov 07</span></small></span><span class="tq-ibc__amt">$14.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
+                  <div class="tq-ibc__rec" data-name="J. Okafor" data-amt="5.60"><span class="tq-ibc__who"><b>J. Okafor</b><small>EURUSD · <span data-lots="0.8">0.8 lots</span> · <span data-date="2026-10-23">Oct 23</span></small></span><span class="tq-ibc__amt">$5.60</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
+              </div>
+              <div class="tq-ibc__none">{{ib.ce.none}}</div>
+            </div>
+          </div>
+          <svg class="tq-ibc__lines" aria-hidden="true"></svg>
+        </div>
+      </div>
+    </section>
+
     <!-- Ask AI (IB_AI_Assistant + IB_Features_Four_Questions, merged). Left: a line about the AI
          assistant, the four questions an IB asks (Q.01–Q.04; the lit one black with a red "?", a red line filling under it)
          and a red button to the application form. Right: the glass "Ask AI" chat of IB Desk. Picking a question (or its
@@ -334,6 +401,7 @@
 <script src="{{root}}assets/js/transition.js" defer></script>
 <script src="{{root}}assets/js/landing.js" defer></script>
 <script src="{{root}}assets/js/ib-insights.js" defer></script>
+<script src="{{root}}assets/js/ib-clients.js" defer></script>
 <script src="{{root}}assets/js/ib-ai.js" defer></script>
 <script src="{{root}}assets/js/ib-hole.js" defer></script>
 </body>

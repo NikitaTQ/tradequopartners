@@ -101,8 +101,8 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=9f06ac8ad5) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=cc401c2105) format('woff2'); }
 @font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=14208c685d) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=7e603c8848) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=edd3344a39) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=6a66de55f9) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=19b5c50144) format('woff2'); }
 @font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=26635e52e4) format('woff2'); }
 @font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=d25a8ee9cd) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
@@ -2531,6 +2531,134 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-ibi .tq-ibx__go { flex: 1; justify-content: space-between; }
   .tq-ibi .tq-ibx__go > span:first-child { min-width: 0; white-space: normal; line-height: 1.2; }
 }
+.tq-ibc { position: relative; overflow: hidden; min-height: min(100vh, 960px); min-height: min(100svh, 960px); display: flex; align-items: center; box-sizing: border-box;
+  padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 80px) max(96px, clamp(40px, 7vh, 80px)); color: #0a0a0a;   
+  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 24% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(50% 60% at 72% 55%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   
+.tq-ibc::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }   
+.tq-ibc__wrap { position: relative; width: 100%; max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(36px, 4vw, 64px); }
+.tq-ibc__text { flex: 1 1 320px; max-width: 420px; min-width: 0; display: flex; flex-direction: column; gap: clamp(16px, 2.4vh, 24px); }
+.tq-ibc__h2 { --h2s: clamp(24px, min(2.8vw, 5vh), 42px); margin: 0; line-height: 1.1; letter-spacing: -.01em; padding-inline-start: 0; }   
+.tq-ibc .tq-ibx__lead { font-size: clamp(16px, min(1.3vw, 2.3vh), 19px); }
+.tq-ibc__tabs { display: none; }
+.tq-ibc .tq-ibx__go { font-size: clamp(11.5px, 3.2vw, 13px); letter-spacing: clamp(1px, .5vw, 2px); }
+.tq-ibc__stage { position: relative; flex: 1 1 600px; max-width: 820px; min-width: 0; container-type: inline-size; }
+.tq-ibc__blob { position: absolute; border-radius: 50%; pointer-events: none; }
+.tq-ibc__blob--1 { left: 10%; top: 10%; width: 80%; height: 80%; background: radial-gradient(closest-side, rgba(28,30,36,.22), rgba(28,30,36,0)); }
+.tq-ibc__blob--2 { left: 40%; top: 45%; width: 40%; height: 40%; background: radial-gradient(closest-side, rgba(231,19,27,.2), rgba(231,19,27,0)); }
+.tq-ibc__blob--3 { left: 58%; top: 0; width: 46%; height: 55%; background: radial-gradient(closest-side, rgba(28,30,36,.36), rgba(28,30,36,0)); }
+.tq-ibc__blob--4 { left: -6%; top: 50%; width: 40%; height: 46%; background: radial-gradient(closest-side, rgba(110,114,122,.4), rgba(110,114,122,0)); }
+.tq-ibc__panels { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 18px; }
+@container (min-width: 640px) {
+  .tq-ibc__panels { flex-direction: row; align-items: flex-start; gap: clamp(40px, 6vw, 72px); }
+  .tq-ibc__panel { flex: 1 1 0; }
+  .tq-ibc__panel--cl { margin-top: 80px; }
+}
+.tq-ibc__panel { position: relative; min-width: 0; padding-bottom: 10px; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; transform-origin: 50% 50%; will-change: transform;
+  background: linear-gradient(135deg, rgba(255,255,255,.58) 0%, rgba(255,255,255,.16) 45%, rgba(255,255,255,.34) 100%);
+  -webkit-backdrop-filter: blur(22px) saturate(200%) brightness(1.06); backdrop-filter: blur(22px) saturate(200%) brightness(1.06); border: 1px solid rgba(255,255,255,.5);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 26px 36px -26px rgba(255,255,255,.95), inset 0 -26px 40px -30px rgba(18,22,30,.24), inset 1px 0 0 rgba(255,255,255,.45),
+    inset -1px 0 0 rgba(255,255,255,.25), 0 60px 80px -44px rgba(18,22,30,.5), 0 14px 26px -16px rgba(18,22,30,.22); }
+.tq-ibc__rim { position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,.2) 26%, rgba(255,255,255,0) 50%, rgba(255,255,255,.3) 74%, #fff 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; }
+.tq-ibc__glare { position: absolute; left: -30%; top: -60%; width: 90%; height: 90%; pointer-events: none; background: radial-gradient(closest-side, rgba(255,255,255,.6), rgba(255,255,255,0)); }
+.tq-ibc__sheen { position: absolute; left: 0; right: 0; top: 0; height: 46%; pointer-events: none; border-radius: inherit; background: linear-gradient(172deg, rgba(255,255,255,.32) 0%, rgba(255,255,255,0) 60%); }
+.tq-ibc__foot { position: absolute; left: 15%; right: 15%; bottom: -30px; height: 70px; pointer-events: none; background: radial-gradient(closest-side, rgba(255,255,255,.55), rgba(255,255,255,0)); }
+.tq-ibc__hd { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 16px 16px 12px; }
+.tq-ibc__hd b { font-size: 15.5px; font-weight: 700; }
+.tq-ibc__mono { font-size: 10.5px; color: #6b6e75; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tq-ibc__hd--narrow { display: none; }
+.tq-ibc__panel--cm .tq-ibc__hd--wide { padding: 16px 16px 4px; }
+.tq-ibc__chips { position: relative; display: flex; flex-wrap: wrap; gap: 4px; padding: 0 12px 12px; }
+.tq-ibc__chip { all: unset; cursor: pointer; display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; box-sizing: border-box; font-size: 11.5px; font-weight: 700;
+  white-space: nowrap; background: rgba(255,255,255,.55); color: #2a2c31; border: 1px solid rgba(18,22,30,.1); transition: background .3s ease, color .3s ease, border-color .3s ease; }
+.tq-ibc__chip small { font-size: 10px; font-weight: 400; color: #8a8d93; font-variant-numeric: tabular-nums; }
+.tq-ibc__chip[data-f="2"] small { color: #c40f16; }
+.tq-ibc__chip.is-act { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
+.tq-ibc__chip.is-act small { color: #a0a3a9; }
+.tq-ibc__chip:focus-visible, .tq-ibc__tab:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+.tq-ibc__th { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 70px var(--stw, 96px); gap: 10px; padding: 8px 16px; font-size: 9.5px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: #6b6e75; border-top: 1px solid rgba(18,22,30,.07); border-bottom: 1px solid rgba(18,22,30,.07); }
+:lang(ar) .tq-ibc__th, :lang(th) .tq-ibc__th, :lang(ja) .tq-ibc__th, :lang(ko) .tq-ibc__th, :lang(zh) .tq-ibc__th { font-size: 10.5px; letter-spacing: .04em; }
+.tq-ibc__th span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-ibc__th span:nth-child(2) { text-align: end; }
+.tq-ibc__rows { position: relative; display: flex; flex-direction: column; }
+.tq-ibc__cl, .tq-ibc__rec { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 70px var(--stw, 96px); gap: 10px; align-items: center; height: 50px; padding: 0 16px;
+  border-bottom: 1px solid rgba(18,22,30,.05); transition: background .4s ease, opacity .4s ease; }
+.tq-ibc__panel--cm .tq-ibc__th, .tq-ibc__rec { grid-template-columns: minmax(0, 1fr) 64px var(--stw, 76px); }
+.tq-ibc__rec { height: 46px; opacity: .42; }
+.tq-ibc__cl[data-has] { cursor: pointer; }
+.tq-ibc__cl.is-sel { background: rgba(231,19,27,.07); }
+.tq-ibc__rec.is-sel { background: rgba(231,19,27,.06); opacity: 1; }
+.tq-ibc__cl.is-out { display: none; }
+.tq-ibc__who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tq-ibc__who b { font-size: 13.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .4s ease; }
+.tq-ibc__cl.is-sel .tq-ibc__who b { color: #c40f16; }
+.tq-ibc__rec .tq-ibc__who b { font-size: 13px; }
+.tq-ibc__who small { font-size: 11px; font-weight: 600; color: #6b6e75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-ibc__vol, .tq-ibc__amt { text-align: end; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tq-ibc__pill { justify-self: start; display: flex; align-items: center; gap: 6px; max-width: 100%; height: 24px; padding: 0 9px; border-radius: 999px; box-sizing: border-box; overflow: hidden;
+  font-size: 11px; font-weight: 700; white-space: nowrap; border: 1px solid transparent; }
+.tq-ibc__pill i { flex: none; width: 6px; height: 6px; border-radius: 50%; box-sizing: border-box; }
+.tq-ibc__pill--a, .tq-ibc__pill--s { background: rgba(18,22,30,.06); color: #2a2c31; border-color: rgba(18,22,30,.06); }
+.tq-ibc__pill--a i, .tq-ibc__pill--s i { background: #0a0a0a; }
+.tq-ibc__pill--d { background: rgba(231,19,27,.08); color: #c40f16; border-color: rgba(231,19,27,.18); }
+.tq-ibc__pill--d i { background: #e7131b; }
+.tq-ibc__pill--i { color: #8a8d93; border-color: rgba(18,22,30,.12); }
+.tq-ibc__pill--i i { background: #b9bcc3; }
+.tq-ibc__pill--p { color: #55585f; border-color: rgba(18,22,30,.16); }
+.tq-ibc__pill--p i { border: 1.5px solid #8a8d93; }
+.tq-ibc__fig { position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 0 16px 12px; }
+.tq-ibc__big { font-size: clamp(26px, 2.6vw, 32px); font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.tq-ibc__big span { color: #8a8d93; }
+.tq-ibc__split { font-size: 11.5px; font-weight: 600; color: #55585f; white-space: nowrap; }
+.tq-ibc__mix { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 0 16px 14px; }
+.tq-ibc__bar { display: flex; gap: 2px; height: 8px; border-radius: 5px; overflow: hidden; }
+.tq-ibc__bar span:nth-child(1) { background: linear-gradient(90deg, #b80e15, #f2262e); }
+.tq-ibc__bar span:nth-child(2) { background: linear-gradient(90deg, #2a2c31, #55585f); }
+.tq-ibc__bar span:nth-child(3) { background: linear-gradient(90deg, #6b6e75, #8a8d93); }
+.tq-ibc__bar span:nth-child(4) { background: linear-gradient(90deg, #a0a3a9, #b9bcc3); }
+.tq-ibc__legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 10.5px; font-weight: 700; color: #55585f; }
+.tq-ibc__legend span { display: flex; align-items: center; gap: 5px; }
+.tq-ibc__legend i { width: 7px; height: 7px; border-radius: 2px; }
+.tq-ibc__legend span:nth-child(1) i { background: #e7131b; }
+.tq-ibc__legend span:nth-child(2) i { background: #2a2c31; }
+.tq-ibc__legend span:nth-child(3) i { background: #6b6e75; }
+.tq-ibc__legend span:nth-child(4) i { background: #a0a3a9; }
+.tq-ibc__none { display: none; position: relative; padding: 16px; font-size: 12.5px; line-height: 1.5; font-weight: 600; color: #6b6e75; }
+.tq-ibc.no-sel .tq-ibc__none { display: block; }
+.tq-ibc__lines { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+@media (max-width: 759px) {
+  .tq-ibc { min-height: 0; padding: 20px 20px 44px; }   
+  .tq-ibc::after { display: none; }
+  .tq-ibc__wrap { flex-direction: column; align-items: stretch; gap: 16px; }
+  .tq-ibc__text { display: contents; }
+  .tq-ibc__h2 { order: 1; --h2s: clamp(18px, 5.4vw, 24px); }
+  .tq-ibc__h2 > span { white-space: nowrap; }
+  .tq-ibc .tq-ibx__lead { order: 2; margin-top: -4px; font-size: 15px; }
+  .tq-ibc__tabs { order: 3; display: flex; gap: 3px; padding: 4px; border-radius: 999px; background: linear-gradient(170deg, rgba(255,255,255,.78), rgba(255,255,255,.38)); border: 1px solid #fff;
+    box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 14px 28px -18px rgba(18,22,30,.35); }
+  .tq-ibc__tab { all: unset; flex: 1 1 auto; display: flex; align-items: center; justify-content: center; height: 34px; padding: 0 8px; border-radius: 999px; box-sizing: border-box;
+    font-size: 12px; font-weight: 700; white-space: nowrap; color: #2a2c31; cursor: pointer; transition: background .3s ease, color .3s ease; }
+  .tq-ibc__tab.is-act { background: #0a0a0a; color: #fff; }
+  .tq-ibc__stage { order: 4; flex: none; max-width: none; container-type: normal; }   
+  .tq-ibc__ctas { order: 5; }
+  .tq-ibc .tq-ibx__go { flex: 1; justify-content: space-between; height: 52px; padding-inline: 22px 6px; font-size: 12px; letter-spacing: 1.8px; }
+  .tq-ibc .tq-ibx__go > span:first-child { min-width: 0; white-space: normal; line-height: 1.2; }
+  .tq-ibc__chips, .tq-ibc__th, .tq-ibc__fig, .tq-ibc__mix, .tq-ibc__hd--wide { display: none; }
+  .tq-ibc__panel { padding-bottom: 4px; }
+  .tq-ibc__panel--cl .tq-ibc__hd { padding: 12px 16px 8px; }
+  .tq-ibc__hd--narrow { display: flex; padding: 12px 16px 10px; border-bottom: 1px solid rgba(18,22,30,.07); }
+  .tq-ibc__hd--narrow > span:first-child { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .tq-ibc__hd--narrow b { font-size: 15px; }
+  .tq-ibc__hd--narrow small { font-size: 11.5px; font-weight: 600; color: #55585f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tq-ibc__sum { font-size: 22px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tq-ibc__cl, .tq-ibc__rec { height: auto; min-height: 44px; padding-block: 6px; box-sizing: border-box; }
+  .tq-ibc__rec { min-height: 42px; }
+  .tq-ibc__who small { white-space: normal; line-height: 1.3; }   
+  .tq-ibc__cl:not(.is-shown), .tq-ibc__rec:not(.is-shown) { display: none; }
+}
 </style>
 </head>
 <body>
@@ -2692,6 +2820,73 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
         <div class="tq-ibi__fig" aria-hidden="true">
           <span class="tq-ibi__blob tq-ibi__blob--d"></span><span class="tq-ibi__blob tq-ibi__blob--w"></span>
           <div class="tq-ibi__stage" dir="ltr"><canvas data-you="Ви" data-total="{v} разом" data-net="Чисті депозити мережі"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clients & earnings (IB_Clients_Earnings design), the third block. Left the pitch and a red button (to the next block);
+         right two tilted glass panels of IB Desk: Clients (filters with counts, client rows with volume and status) and
+         Commissions (the month's total, its split by instrument, commission records). One client is picked (red); lines
+         run from it to its records, which stay bright while the others dim; the pick moves to the next client every 4.2 s.
+         Below 760px (the phone mockup): the filters as a pill switch above, two client rows, only the picked client's
+         records with their sum, the button last. assets/js/ib-clients.js does the picking, the filters and the lines; the
+         rows are fixed demo data here (names and dollar sums the same on every language; counts, lots and dates are set
+         in the page's language by the script). -->
+    <section id="clients" class="tq-ibc" data-ib-ce data-via="через {n}" data-total="усього {n}" data-from="від {n} · 30 дн." data-lots="лоти: {n}" data-screen-label="IB Tools · Clients and earnings">
+      <div class="tq-ibc__wrap">
+        <div class="tq-ibc__text">
+          <h2 class="tq-ibc__h2 tq-h2">Знайте своїх клієнтів. Розумійте <span style="color: #e7131b;">свій заробіток.</span></h2>
+          <p class="tq-ibx__lead">Бачте, хто торгує, хто сповільнився і з яких саме угод беруться ваші ребейти.</p>
+          <div class="tq-ibc__tabs">
+                <button type="button" class="tq-ibc__tab is-act" data-f="0" aria-pressed="true">Усі</button>
+                <button type="button" class="tq-ibc__tab" data-f="1" aria-pressed="false">Активний</button>
+                <button type="button" class="tq-ibc__tab" data-f="2" aria-pressed="false">Під ризиком</button>
+                <button type="button" class="tq-ibc__tab" data-f="3" aria-pressed="false">Неактивний</button>
+          </div>
+          <div class="tq-ibx__ctas tq-ibc__ctas">
+            <a class="tq-ibx__go" href="#ai"><span>Огляд інструментів IB</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          </div>
+        </div>
+        <div class="tq-ibc__stage" dir="ltr">
+          <span class="tq-ibc__blob tq-ibc__blob--1"></span><span class="tq-ibc__blob tq-ibc__blob--2"></span><span class="tq-ibc__blob tq-ibc__blob--3"></span><span class="tq-ibc__blob tq-ibc__blob--4"></span>
+          <div class="tq-ibc__panels">
+            <div class="tq-ibc__panel tq-ibc__panel--cl">
+              <span class="tq-ibc__rim"></span><span class="tq-ibc__glare"></span><span class="tq-ibc__sheen"></span><span class="tq-ibc__foot"></span>
+              <div class="tq-ibc__hd"><b>Клієнти</b><span class="tq-ibc__mono" data-total-n="1600">1,600 total</span></div>
+              <div class="tq-ibc__chips"><button type="button" class="tq-ibc__chip is-act" data-f="0">Усі<small data-n="1600">1,600</small></button><button type="button" class="tq-ibc__chip" data-f="1">Активний<small data-n="1184">1,184</small></button><button type="button" class="tq-ibc__chip" data-f="2">Під ризиком<small data-n="42">42</small></button><button type="button" class="tq-ibc__chip" data-f="3">Неактивний<small data-n="374">374</small></button></div>
+              <div class="tq-ibc__th"><span>Клієнт</span><span>Обсяг</span><span>Статус</span></div>
+              <div class="tq-ibc__rows">
+                  <div class="tq-ibc__cl" data-name="D. Moreau" data-st="a" data-has><span class="tq-ibc__who"><b>D. Moreau</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="412.0">412.0</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>Активний</span></div>
+                  <div class="tq-ibc__cl" data-name="S. Haddad" data-st="a" data-has><span class="tq-ibc__who"><b>S. Haddad</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="268.5">268.5</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>Активний</span></div>
+                  <div class="tq-ibc__cl" data-name="R. Castillo" data-st="a" data-has><span class="tq-ibc__who"><b>R. Castillo</b><small data-via="Meridian">via Meridian</small></span><span class="tq-ibc__vol" data-n="221.3">221.3</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>Активний</span></div>
+                  <div class="tq-ibc__cl" data-name="J. Okafor" data-st="d" data-has><span class="tq-ibc__who"><b>J. Okafor</b><small data-via="Meridian">via Meridian</small></span><span class="tq-ibc__vol" data-n="12.4">12.4</span><span class="tq-ibc__pill tq-ibc__pill--d"><i></i>Під ризиком</span></div>
+                  <div class="tq-ibc__cl" data-name="P. Novak" data-st="i"><span class="tq-ibc__who"><b>P. Novak</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="0.0">0.0</span><span class="tq-ibc__pill tq-ibc__pill--i"><i></i>Неактивний</span></div>
+              </div>
+            </div>
+            <div class="tq-ibc__panel tq-ibc__panel--cm">
+              <span class="tq-ibc__rim"></span><span class="tq-ibc__glare"></span><span class="tq-ibc__sheen"></span><span class="tq-ibc__foot"></span>
+              <div class="tq-ibc__hd tq-ibc__hd--wide"><b>Ребейти</b><span class="tq-ibc__mono" data-month="2026-11-01">November</span></div>
+              <div class="tq-ibc__hd tq-ibc__hd--narrow"><span><b>Ребейти</b><small class="tq-ibc__from">from D. Moreau · 30D</small></span><span class="tq-ibc__sum">$112.00</span></div>
+              <div class="tq-ibc__fig"><span class="tq-ibc__big">$4,812<span>.60</span></span><span class="tq-ibc__split">Очікує $612.40 · Виплачено $4,200.20</span></div>
+              <div class="tq-ibc__mix">
+                <div class="tq-ibc__bar"><span style="flex: 46"></span><span style="flex: 31"></span><span style="flex: 14"></span><span style="flex: 9"></span></div>
+                <div class="tq-ibc__legend"><span><i></i>XAUUSD 46%</span><span><i></i>EURUSD 31%</span><span><i></i>US30 14%</span><span><i></i>Інші 9%</span></div>
+              </div>
+              <div class="tq-ibc__th"><span>Запис</span><span>Сума</span><span>Статус</span></div>
+              <div class="tq-ibc__rows">
+                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="42.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>XAUUSD · <span data-lots="3.0">3.0 lots</span> · <span data-date="2026-11-10">Nov 10</span></small></span><span class="tq-ibc__amt">$42.00</span><span class="tq-ibc__pill tq-ibc__pill--p"><i></i>Очікує</span></div>
+                  <div class="tq-ibc__rec" data-name="S. Haddad" data-amt="14.00"><span class="tq-ibc__who"><b>S. Haddad</b><small>EURUSD · <span data-lots="2.0">2.0 lots</span> · <span data-date="2026-11-10">Nov 10</span></small></span><span class="tq-ibc__amt">$14.00</span><span class="tq-ibc__pill tq-ibc__pill--p"><i></i>Очікує</span></div>
+                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="35.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>EURUSD · <span data-lots="5.0">5.0 lots</span> · <span data-date="2026-11-09">Nov 09</span></small></span><span class="tq-ibc__amt">$35.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>Виплачено</span></div>
+                  <div class="tq-ibc__rec" data-name="R. Castillo" data-amt="9.75"><span class="tq-ibc__who"><b>R. Castillo</b><small>US30 · <span data-lots="1.5">1.5 lots</span> · <span data-date="2026-11-09">Nov 09</span></small></span><span class="tq-ibc__amt">$9.75</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>Виплачено</span></div>
+                  <div class="tq-ibc__rec" data-name="S. Haddad" data-amt="8.40"><span class="tq-ibc__who"><b>S. Haddad</b><small>GBPUSD · <span data-lots="1.2">1.2 lots</span> · <span data-date="2026-11-08">Nov 08</span></small></span><span class="tq-ibc__amt">$8.40</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>Виплачено</span></div>
+                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="35.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>XAUUSD · <span data-lots="2.5">2.5 lots</span> · <span data-date="2026-11-08">Nov 08</span></small></span><span class="tq-ibc__amt">$35.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>Виплачено</span></div>
+                  <div class="tq-ibc__rec" data-name="R. Castillo" data-amt="14.00"><span class="tq-ibc__who"><b>R. Castillo</b><small>XAUUSD · <span data-lots="1.0">1.0 lots</span> · <span data-date="2026-11-07">Nov 07</span></small></span><span class="tq-ibc__amt">$14.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>Виплачено</span></div>
+                  <div class="tq-ibc__rec" data-name="J. Okafor" data-amt="5.60"><span class="tq-ibc__who"><b>J. Okafor</b><small>EURUSD · <span data-lots="0.8">0.8 lots</span> · <span data-date="2026-10-23">Oct 23</span></small></span><span class="tq-ibc__amt">$5.60</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>Виплачено</span></div>
+              </div>
+              <div class="tq-ibc__none">Немає ребейтів від цього клієнта за період.</div>
+            </div>
+          </div>
+          <svg class="tq-ibc__lines" aria-hidden="true"></svg>
         </div>
       </div>
     </section>
@@ -3087,6 +3282,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=4fa65f535e" defer></script>
 <script src="../../assets/js/ib-insights.js?v=a668fd7893" defer></script>
+<script src="../../assets/js/ib-clients.js?v=32ab6f721b" defer></script>
 <script src="../../assets/js/ib-ai.js?v=5994fd2032" defer></script>
 <script src="../../assets/js/ib-hole.js?v=a59bcf77cc" defer></script>
 </body>
