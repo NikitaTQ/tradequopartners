@@ -100,10 +100,10 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=9f06ac8ad5) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=cc401c2105) format('woff2'); }
 @font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=14208c685d) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=80d84cb5fb) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=8db26119e4) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=b6a16e5995) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=83dea4b0f0) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=7e603c8848) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=edd3344a39) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=26635e52e4) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=d25a8ee9cd) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -2320,7 +2320,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     text-decoration: none; background: linear-gradient(170deg, rgba(255,255,255,.75), rgba(255,255,255,.35)); border: 1px solid #fff; box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 14px 28px -18px rgba(18,22,30,.35); }
 }
 .tq-iba { position: relative; overflow: hidden; min-height: min(100vh, 940px); min-height: min(100svh, 940px); display: flex; align-items: center; box-sizing: border-box;
-  padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 80px) max(88px, clamp(40px, 7vh, 80px)); color: #0a0a0a;   
+  padding: max(64px, clamp(40px, 7vh, 80px)) clamp(20px, 5vw, 80px) max(88px, clamp(40px, 7vh, 80px)); color: #0a0a0a;   
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 28% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   
 .tq-iba__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: clamp(40px, 5vw, 80px); }
 .tq-iba__text { flex: 1 1 0; min-width: 0; max-width: 520px; display: flex; flex-direction: column; gap: clamp(20px, 3.4vh, 34px); }
@@ -2484,6 +2484,35 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 @media (prefers-reduced-motion: reduce) {
   .tq-iba .tq-iba__fill, .tq-iba__dots i, .tq-iba__caret { animation: none; }
+}
+.tq-ibi { position: relative; overflow: hidden; min-height: min(100vh, 940px); min-height: min(100svh, 940px); display: flex; align-items: center; box-sizing: border-box;
+  padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 80px); color: #0a0a0a;
+  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 26% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   
+.tq-ibi__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(32px, 4vw, 64px); }
+.tq-ibi__text { flex: 1 1 340px; max-width: 440px; min-width: 0; display: flex; flex-direction: column; gap: clamp(16px, 2.4vh, 24px); }
+.tq-ibi__h2 { --h2s: clamp(24px, min(3vw, 5vh), 44px); margin: 0; line-height: 1.1; letter-spacing: -.01em; padding-inline-start: 0; }   
+.tq-ibi .tq-ibx__lead { max-width: 430px; font-size: clamp(16px, min(1.3vw, 2.3vh), 19px); }
+.tq-ibi__guide { display: flex; flex-direction: column; }
+.tq-ibi__g { all: unset; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; align-items: start; padding: 14px 0; border-top: 1px solid rgba(18,22,30,.1); cursor: pointer;
+  opacity: .45; transition: opacity .35s ease; }
+.tq-ibi__g.is-act, .tq-ibi__g:hover { opacity: 1; }
+.tq-ibi__g:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; border-radius: 4px; }
+.tq-ibi__n { padding-top: 2px; font-size: 11px; font-variant-numeric: tabular-nums; color: #8a8d93; transition: color .35s ease; }
+.tq-ibi__g.is-act .tq-ibi__n { color: #e7131b; }
+.tq-ibi__gt { display: flex; flex-direction: column; gap: 3px; }
+.tq-ibi__gt b { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+:lang(ar) .tq-ibi__gt b, :lang(th) .tq-ibi__gt b, :lang(ja) .tq-ibi__gt b, :lang(ko) .tq-ibi__gt b, :lang(zh) .tq-ibi__gt b { font-size: 13px; letter-spacing: .04em; }
+.tq-ibi__gt span { font-size: 14.5px; line-height: 1.5; color: #55585f; text-wrap: pretty; }
+.tq-ibi .tq-ibx__go { font-size: clamp(11.5px, 3.2vw, 13px); letter-spacing: clamp(1px, .5vw, 2px); }
+.tq-ibi__fig { position: relative; flex: 1 1 520px; max-width: 720px; min-width: 0; }
+.tq-ibi__blob { position: absolute; left: 50%; top: 50%; border-radius: 50%; pointer-events: none; }
+.tq-ibi__blob--d { width: 80%; height: 80%; transform: translate(-30%, -70%); background: radial-gradient(closest-side, rgba(28,30,36,.22), rgba(28,30,36,0)); }
+.tq-ibi__blob--w { width: 70%; height: 70%; transform: translate(-50%, -30%); background: radial-gradient(closest-side, rgba(255,255,255,.9), rgba(255,255,255,0)); }
+.tq-ibi__stage { position: relative; height: clamp(480px, 66vh, 620px); }
+.tq-ibi__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+@media (max-width: 640px) {
+  .tq-ibi .tq-ibx__go { flex: 1; justify-content: space-between; }
+  .tq-ibi .tq-ibx__go > span:first-child { min-width: 0; white-space: normal; line-height: 1.2; }
 }
 </style>
 <style id="i18n-fonts">

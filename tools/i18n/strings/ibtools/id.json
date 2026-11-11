@@ -85,5 +85,15 @@
   "ib.ai.x4m1": "L1 · 312 klien",
   "ib.ai.x4m2": "L1 · 228 klien",
   "ib.ai.x4m3": "L2 · 164 klien",
-  "ib.ai.x4follow": "Mau saya rinci Northline per klien?"
+  "ib.ai.x4follow": "Mau saya rinci Northline per klien?",
+  "ib.ins.h2": "Lihat jaringan Anda. Pahami <red>setiap cabangnya.</red>",
+  "ib.ins.lead": "Telusuri struktur Sub-IB Anda dan bandingkan kinerja partner di satu tempat.",
+  "ib.ins.v1": "Jaringan",
+  "ib.ins.v1t": "Setiap cabang, tingkat demi tingkat. Lihat bagaimana setiap partner terhubung dengan Anda.",
+  "ib.ins.v2": "Kinerja",
+  "ib.ins.v2t": "Partner yang sama, diurutkan berdasarkan deposit bersih. Lihat siapa yang menggerakkan jaringan Anda.",
+  "ib.ins.go": "Jelajahi insight jaringan",
+  "ib.ins.you": "Anda",
+  "ib.ins.total": "total {v}",
+  "ib.ins.net": "Deposit bersih jaringan"
 }

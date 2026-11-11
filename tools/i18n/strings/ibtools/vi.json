@@ -85,5 +85,15 @@
   "ib.ai.x4m1": "L1 · 312 khách hàng",
   "ib.ai.x4m2": "L1 · 228 khách hàng",
   "ib.ai.x4m3": "L2 · 164 khách hàng",
-  "ib.ai.x4follow": "Bạn có muốn xem chi tiết Northline theo từng khách hàng không?"
+  "ib.ai.x4follow": "Bạn có muốn xem chi tiết Northline theo từng khách hàng không?",
+  "ib.ins.h2": "Nhìn rõ mạng lưới. Hiểu <red>từng nhánh.</red>",
+  "ib.ins.lead": "Khám phá cấu trúc Sub-IB và so sánh hiệu quả của các đối tác ở cùng một nơi.",
+  "ib.ins.v1": "Mạng lưới",
+  "ib.ins.v1t": "Từng nhánh, từng cấp. Xem mỗi đối tác kết nối với bạn ra sao.",
+  "ib.ins.v2": "Hiệu quả",
+  "ib.ins.v2t": "Cùng các đối tác đó, xếp theo tiền nạp ròng. Xem ai đang dẫn dắt mạng lưới của bạn.",
+  "ib.ins.go": "Khám phá phân tích mạng lưới",
+  "ib.ins.you": "Bạn",
+  "ib.ins.total": "tổng {v}",
+  "ib.ins.net": "Tiền nạp ròng của mạng lưới"
 }
