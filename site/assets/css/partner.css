@@ -2057,3 +2057,115 @@
 .tq-ibt .k119{position:relative;flex:none;margin:8px 0 0;font-size:10px;line-height:1.4;color:#3A3B40;text-wrap:pretty}
 .tq-ibt .k11.tk-hov:hover,.tq-ibt .k11.tk-hov:focus-visible{background:#FFFFFF;color:#0A0A0A}
 .tq-ibt .k117.tk-hov:hover,.tq-ibt .k117.tk-hov:focus-visible{background:#FFFFFF;color:#0A0A0A}
+
+/* ---- IB Tools: the Signals feed block (IB_Signals_Feed, #signals) ------------------------------------------------
+   One signal under the IB's brand and the four channels it went to. Phones: the design's 390px block as it is (sizes in
+   the design's px), scaled to the screen by the section's script (zoom), at most ~70% of a 390x844 screen. Desktops (the
+   design has none, from 1000px): heading, button and note on the left, the feed on the right at 1.4x; tablets get the phone block, larger. Type: Inter (figures tabular),
+   the H2 in the site's H2 face; 800 in the design is 700. */
+.tq-ibs { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  padding: clamp(64px, 10vh, 112px) clamp(20px, 5vw, 80px) max(96px, clamp(64px, 10vh, 112px));
+  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 72% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(40% 40% at 10% 70%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   /* the top fades into the grey above: no seam */
+.tq-ibs::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+.tq-ibs a { text-decoration: none; }
+.tq-ibs__wrap { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: "h2 feed" "go feed" "note feed"; column-gap: clamp(40px, 6vw, 96px); }
+.tq-ibs__h2 { grid-area: h2; align-self: end; --h2s: clamp(24px, min(2.5vw, 4.4vh), 38px); max-width: 600px; margin: 0 0 clamp(24px, 3.4vh, 36px); padding-inline-start: 0; line-height: 1.12; color: #0a0a0a; }   /* face: .tq-h2 */
+.tq-ibs__feed { grid-area: feed; position: relative; width: 366px; }
+.tq-ibs__go { grid-area: go; justify-self: start; display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 56px; padding: 0 7px 0 28px; border-radius: 999px; box-sizing: border-box;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 16px 26px -16px rgba(231,19,27,.7); transition: filter .25s ease; }
+.tq-ibs__go:hover, .tq-ibs__go:focus-visible { color: #fff; filter: brightness(1.06); }
+.tq-ibs__go:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
+.tq-ibs__arr { flex: none; width: 42px; height: 42px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+[dir="rtl"] .tq-ibs__arr svg { transform: scaleX(-1); }
+.tq-ibs__note { grid-area: note; align-self: start; max-width: 460px; margin: 14px 2px 0; font-size: 12px; line-height: 1.45; color: #55585f; text-wrap: pretty; }
+/* the bell: at the feed's corner on desktops, by the heading on phones */
+.tq-ibs__bell { position: absolute; right: -10px; top: -14px; z-index: 3; width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+  background: linear-gradient(165deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.66) 55%, rgba(255,255,255,.8) 100%); border: 1px solid #fff;
+  box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 0 0 1px rgba(18,22,30,.05), 0 18px 30px -22px rgba(18,22,30,.45); }
+.tq-ibs__bell i { position: absolute; right: -3px; top: -3px; display: flex; align-items: center; justify-content: center; min-width: 17px; height: 17px; padding: 0 4px; box-sizing: border-box; border-radius: 999px;
+  background: #e7131b; color: #fff; font-size: 10px; font-weight: 700; font-style: normal; font-variant-numeric: tabular-nums; box-shadow: 0 0 0 2px #f1f2f4; }
+/* the signal */
+.tq-ibs__card { position: relative; overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; gap: 7px; padding: 10px 11px 8px; border-radius: 20px; color: #fff;
+  background: radial-gradient(80% 70% at 85% 0%, rgba(231,19,27,.22) 0%, rgba(231,19,27,0) 60%), linear-gradient(165deg, #2a2c31 0%, #0e0f12 55%, #17181c 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.22), inset 0 0 0 1px rgba(255,255,255,.07), 0 26px 40px -24px rgba(10,10,12,.7); }
+.tq-ibs__card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.08) 37%, rgba(255,255,255,0) 44%); }
+.tq-ibs__card > * { position: relative; }
+.tq-ibs__cardh, .tq-ibs__cardm, .tq-ibs__sent, .tq-ibs__chh, .tq-ibs__q, .tq-ibs__both { display: flex; align-items: center; }
+.tq-ibs__cardh > i, .tq-ibs__cardm > i, .tq-ibs__chh > i, .tq-ibs__both > i { flex: 1; }
+.tq-ibs__cardh { gap: 7px; height: 18px; }
+.tq-ibs__n { flex: none; width: 18px; height: 18px; border-radius: 5px; background: #fff; color: #0a0a0a; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+.tq-ibs__brand { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.tq-ibs__via { font-size: 10.5px; color: rgba(255,255,255,.72); white-space: nowrap; }
+.tq-ibs__cardm { gap: 8px; }
+.tq-ibs__sym { font-size: 24px; line-height: 1; font-weight: 700; letter-spacing: -.04em; }
+.tq-ibs__idea { height: 22px; padding: 0 9px; border-radius: 999px; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__tri { flex: none; }
+.tq-ibs__utc { font-size: 9.5px; color: rgba(255,255,255,.72); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tq-ibs__lv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+.tq-ibs__lv > div { display: flex; flex-direction: column; gap: 1px; min-width: 0; padding: 5px 8px; border-radius: 10px; background: rgba(255,255,255,.07); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+.tq-ibs__lv span { font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-ibs__lv b { font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: #fff; font-variant-numeric: tabular-nums; }
+.tq-ibs__lv b.tq-ibs__red { color: #ff6a6f; }
+/* sent to the channels */
+.tq-ibs__sent { gap: 8px; height: 22px; margin-top: 10px; }
+.tq-ibs__pulse { flex: none; width: 6px; height: 6px; border-radius: 999px; background: #e7131b; box-shadow: 0 0 0 3px rgba(231,19,27,.14); }
+.tq-ibs__sentl { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: #1e1f23; white-space: nowrap; }
+.tq-ibs__sent > i { flex: 1; height: 1px; min-width: 8px; background: linear-gradient(90deg, rgba(18,22,30,.18), rgba(18,22,30,0)); }
+.tq-ibs__min, .tq-ibs__ch { background: linear-gradient(165deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.66) 55%, rgba(255,255,255,.8) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%); border: 1px solid #fff;
+  box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 0 0 1px rgba(18,22,30,.05), 0 18px 30px -22px rgba(18,22,30,.45); }
+.tq-ibs__min { display: flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px 0 6px; box-sizing: border-box; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+/* the channels */
+.tq-ibs__list { list-style: none; margin: 5px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.tq-ibs__ch { position: relative; box-sizing: border-box; display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px 8px 8px; border-radius: 15px; }
+.tq-ibs__ico { position: relative; flex: none; width: 28px; height: 28px; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fff;
+  box-shadow: 0 0 0 1px rgba(18,22,30,.08), 0 4px 8px -4px rgba(18,22,30,.3); }
+.tq-ibs__ico img { display: block; width: 24px; height: 24px; object-fit: contain; }
+.tq-ibs__ico img.tq-ibs__tv { width: auto; height: 12px; }
+.tq-ibs__ico img.tq-ibs__wa { width: 27px; height: 27px; }
+.tq-ibs__ico img.tq-ibs__xmp { width: 26px; height: 26px; }
+.tq-ibs__chb { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.tq-ibs__chh { align-items: baseline; gap: 5px; line-height: 15px; }
+.tq-ibs__chh b { font-size: 12px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__sub { min-width: 0; font-size: 10.5px; color: #55585f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-ibs__t { font-size: 9.5px; color: #55585f; font-variant-numeric: tabular-nums; }
+.tq-ibs__q { gap: 5px; white-space: nowrap; font-size: 10.5px; line-height: 14px; color: #1e1f23; font-variant-numeric: tabular-nums; }
+.tq-ibs__q b { font-weight: 700; }
+.tq-ibs__q > b:first-child { color: #0a0a0a; }
+.tq-ibs__l { font-weight: 700; }
+.tq-ibs__dot { color: #8a8c92; }
+.tq-ibs__q b.tq-ibs__slv { color: #b5242a; }
+/* the Signal Check bot on the last channel */
+.tq-ibs__bot { margin-top: 4px; padding-top: 5px; border-top: 1px solid rgba(18,22,30,.07); display: flex; flex-direction: column; gap: 4px; }
+.tq-ibs__both { gap: 6px; }
+.tq-ibs__both > svg { flex: none; }
+.tq-ibs__both b { font-size: 11px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__tag { font-size: 7.5px; letter-spacing: .12em; padding: 2px 4px; border-radius: 4px; background: #0a0a0a; color: #fff; }
+.tq-ibs__ok { display: flex; align-items: center; height: 18px; padding: 0 8px; border-radius: 999px; background: #0a0a0a; color: #fff; font-size: 10px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__checks { display: flex; flex-wrap: nowrap; gap: 9px; }
+.tq-ibs__checks > span { display: flex; align-items: center; gap: 4px; min-width: 0; font-size: 9.5px; color: #1e1f23; white-space: nowrap; }
+.tq-ibs__checks i { flex: none; width: 12px; height: 12px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+/* the feed reads left to right on every language; its translated words keep their own direction */
+.tq-ibs__feed :is(.tq-ibs__via, .tq-ibs__idea, .tq-ibs__sentl, .tq-ibs__min, .tq-ibs__sub, .tq-ibs__l, .tq-ibs__ok, .tq-ibs__checks > span) { unicode-bidi: plaintext; }
+/* phones and tablets: the design's block, 390px wide in its own px (the section's script zooms it to the screen, at most 1.5x, centred) */
+@media (max-width: 999px) {
+  .tq-ibs { padding: 40px 0 56px; background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(70% 40% at 80% 0%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(60% 30% at 0% 55%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #eeeff1 0%, #e2e3e6 100%); }
+  .tq-ibs::after { height: 56px; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+  .tq-ibs__wrap { display: flex; flex-direction: column; width: 390px; max-width: none; margin: 0 auto; padding: 6px 12px 6px; box-sizing: border-box; }   /* the section's own padding spaces the blocks */
+  .tq-ibs__feed { display: contents; }
+  .tq-ibs__h2 { order: 1; --h2s: 17px; margin: 4px 0 0; padding-inline-end: 40px; line-height: 1.16; }
+  [dir="rtl"] .tq-ibs__h2 { padding-inline-end: 0; padding-inline-start: 40px; }
+  .tq-ibs__bell { right: 12px; top: 6px; }
+  .tq-ibs__card { order: 2; margin-top: 8px; }
+  .tq-ibs__sent { order: 3; margin-top: 8px; }
+  .tq-ibs__list { order: 4; margin-top: 4px; gap: 3px; }
+  .tq-ibs__ch { padding-block: 7px; }   /* a touch tighter than the design: the block keeps under ~68% of a 390x844 screen with the wider H2 face */
+  .tq-ibs__go { order: 5; justify-self: auto; margin-top: 9px; height: 46px; padding: 0 6px 0 22px; gap: 14px; font-size: 11.5px; }
+  .tq-ibs__arr { width: 34px; height: 34px; }
+  .tq-ibs__note { order: 6; max-width: none; margin: 9px 2px 0; font-size: 9.5px; line-height: 1.4; }
+}
+@media (prefers-reduced-motion: reduce) { .tq-ibs__go { transition: none; } }

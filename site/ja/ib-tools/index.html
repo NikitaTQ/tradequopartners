@@ -99,11 +99,11 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=a6ee5b5890) format('woff2'); }
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=9a232c4e92) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=782f47b6c6) format('woff2'); }
-@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=aff4c52d58) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=168054bad6) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=3bf0f79b28) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=ecb46d38b6) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=465e2d0a80) format('woff2'); }
+@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=1a980c147b) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=68458c6939) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=b93d184cdc) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=e3be5bb77c) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=44e5451665) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -1466,6 +1466,107 @@ footer p { font-size: 12px !important; }
 .tq-ibt .k119 {position:relative;flex:none;margin:8px 0 0;font-size:10px;line-height:1.4;color:#3A3B40;text-wrap:pretty}
 .tq-ibt .k11.tk-hov:hover,.tq-ibt .k11.tk-hov:focus-visible {background:#FFFFFF;color:#0A0A0A}
 .tq-ibt .k117.tk-hov:hover,.tq-ibt .k117.tk-hov:focus-visible {background:#FFFFFF;color:#0A0A0A}
+.tq-ibs { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  padding: clamp(64px, 10vh, 112px) clamp(20px, 5vw, 80px) max(96px, clamp(64px, 10vh, 112px));
+  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 72% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(40% 40% at 10% 70%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }
+.tq-ibs::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+.tq-ibs a { text-decoration: none; }
+.tq-ibs__wrap { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: "h2 feed" "go feed" "note feed"; column-gap: clamp(40px, 6vw, 96px); }
+.tq-ibs__h2 { grid-area: h2; align-self: end; --h2s: clamp(24px, min(2.5vw, 4.4vh), 38px); max-width: 600px; margin: 0 0 clamp(24px, 3.4vh, 36px); padding-inline-start: 0; line-height: 1.12; color: #0a0a0a; }
+.tq-ibs__feed { grid-area: feed; position: relative; width: 366px; }
+.tq-ibs__go { grid-area: go; justify-self: start; display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 56px; padding: 0 7px 0 28px; border-radius: 999px; box-sizing: border-box;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 16px 26px -16px rgba(231,19,27,.7); transition: filter .25s ease; }
+.tq-ibs__go:hover, .tq-ibs__go:focus-visible { color: #fff; filter: brightness(1.06); }
+.tq-ibs__go:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
+.tq-ibs__arr { flex: none; width: 42px; height: 42px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+[dir="rtl"] .tq-ibs__arr svg { transform: scaleX(-1); }
+.tq-ibs__note { grid-area: note; align-self: start; max-width: 460px; margin: 14px 2px 0; font-size: 12px; line-height: 1.45; color: #55585f; text-wrap: pretty; }
+.tq-ibs__bell { position: absolute; right: -10px; top: -14px; z-index: 3; width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+  background: linear-gradient(165deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.66) 55%, rgba(255,255,255,.8) 100%); border: 1px solid #fff;
+  box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 0 0 1px rgba(18,22,30,.05), 0 18px 30px -22px rgba(18,22,30,.45); }
+.tq-ibs__bell i { position: absolute; right: -3px; top: -3px; display: flex; align-items: center; justify-content: center; min-width: 17px; height: 17px; padding: 0 4px; box-sizing: border-box; border-radius: 999px;
+  background: #e7131b; color: #fff; font-size: 10px; font-weight: 700; font-style: normal; font-variant-numeric: tabular-nums; box-shadow: 0 0 0 2px #f1f2f4; }
+.tq-ibs__card { position: relative; overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; gap: 7px; padding: 10px 11px 8px; border-radius: 20px; color: #fff;
+  background: radial-gradient(80% 70% at 85% 0%, rgba(231,19,27,.22) 0%, rgba(231,19,27,0) 60%), linear-gradient(165deg, #2a2c31 0%, #0e0f12 55%, #17181c 100%);
+  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.22), inset 0 0 0 1px rgba(255,255,255,.07), 0 26px 40px -24px rgba(10,10,12,.7); }
+.tq-ibs__card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.08) 37%, rgba(255,255,255,0) 44%); }
+.tq-ibs__card > * { position: relative; }
+.tq-ibs__cardh, .tq-ibs__cardm, .tq-ibs__sent, .tq-ibs__chh, .tq-ibs__q, .tq-ibs__both { display: flex; align-items: center; }
+.tq-ibs__cardh > i, .tq-ibs__cardm > i, .tq-ibs__chh > i, .tq-ibs__both > i { flex: 1; }
+.tq-ibs__cardh { gap: 7px; height: 18px; }
+.tq-ibs__n { flex: none; width: 18px; height: 18px; border-radius: 5px; background: #fff; color: #0a0a0a; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+.tq-ibs__brand { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.tq-ibs__via { font-size: 10.5px; color: rgba(255,255,255,.72); white-space: nowrap; }
+.tq-ibs__cardm { gap: 8px; }
+.tq-ibs__sym { font-size: 24px; line-height: 1; font-weight: 700; letter-spacing: -.04em; }
+.tq-ibs__idea { height: 22px; padding: 0 9px; border-radius: 999px; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__tri { flex: none; }
+.tq-ibs__utc { font-size: 9.5px; color: rgba(255,255,255,.72); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tq-ibs__lv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+.tq-ibs__lv > div { display: flex; flex-direction: column; gap: 1px; min-width: 0; padding: 5px 8px; border-radius: 10px; background: rgba(255,255,255,.07); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+.tq-ibs__lv span { font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-ibs__lv b { font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: #fff; font-variant-numeric: tabular-nums; }
+.tq-ibs__lv b.tq-ibs__red { color: #ff6a6f; }
+.tq-ibs__sent { gap: 8px; height: 22px; margin-top: 10px; }
+.tq-ibs__pulse { flex: none; width: 6px; height: 6px; border-radius: 999px; background: #e7131b; box-shadow: 0 0 0 3px rgba(231,19,27,.14); }
+.tq-ibs__sentl { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: #1e1f23; white-space: nowrap; }
+.tq-ibs__sent > i { flex: 1; height: 1px; min-width: 8px; background: linear-gradient(90deg, rgba(18,22,30,.18), rgba(18,22,30,0)); }
+.tq-ibs__min, .tq-ibs__ch { background: linear-gradient(165deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.66) 55%, rgba(255,255,255,.8) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%); border: 1px solid #fff;
+  box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 0 0 1px rgba(18,22,30,.05), 0 18px 30px -22px rgba(18,22,30,.45); }
+.tq-ibs__min { display: flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px 0 6px; box-sizing: border-box; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__list { list-style: none; margin: 5px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.tq-ibs__ch { position: relative; box-sizing: border-box; display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px 8px 8px; border-radius: 15px; }
+.tq-ibs__ico { position: relative; flex: none; width: 28px; height: 28px; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fff;
+  box-shadow: 0 0 0 1px rgba(18,22,30,.08), 0 4px 8px -4px rgba(18,22,30,.3); }
+.tq-ibs__ico img { display: block; width: 24px; height: 24px; object-fit: contain; }
+.tq-ibs__ico img.tq-ibs__tv { width: auto; height: 12px; }
+.tq-ibs__ico img.tq-ibs__wa { width: 27px; height: 27px; }
+.tq-ibs__ico img.tq-ibs__xmp { width: 26px; height: 26px; }
+.tq-ibs__chb { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.tq-ibs__chh { align-items: baseline; gap: 5px; line-height: 15px; }
+.tq-ibs__chh b { font-size: 12px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__sub { min-width: 0; font-size: 10.5px; color: #55585f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-ibs__t { font-size: 9.5px; color: #55585f; font-variant-numeric: tabular-nums; }
+.tq-ibs__q { gap: 5px; white-space: nowrap; font-size: 10.5px; line-height: 14px; color: #1e1f23; font-variant-numeric: tabular-nums; }
+.tq-ibs__q b { font-weight: 700; }
+.tq-ibs__q > b:first-child { color: #0a0a0a; }
+.tq-ibs__l { font-weight: 700; }
+.tq-ibs__dot { color: #8a8c92; }
+.tq-ibs__q b.tq-ibs__slv { color: #b5242a; }
+.tq-ibs__bot { margin-top: 4px; padding-top: 5px; border-top: 1px solid rgba(18,22,30,.07); display: flex; flex-direction: column; gap: 4px; }
+.tq-ibs__both { gap: 6px; }
+.tq-ibs__both > svg { flex: none; }
+.tq-ibs__both b { font-size: 11px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__tag { font-size: 7.5px; letter-spacing: .12em; padding: 2px 4px; border-radius: 4px; background: #0a0a0a; color: #fff; }
+.tq-ibs__ok { display: flex; align-items: center; height: 18px; padding: 0 8px; border-radius: 999px; background: #0a0a0a; color: #fff; font-size: 10px; font-weight: 700; white-space: nowrap; }
+.tq-ibs__checks { display: flex; flex-wrap: nowrap; gap: 9px; }
+.tq-ibs__checks > span { display: flex; align-items: center; gap: 4px; min-width: 0; font-size: 9.5px; color: #1e1f23; white-space: nowrap; }
+.tq-ibs__checks i { flex: none; width: 12px; height: 12px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+.tq-ibs__feed :is(.tq-ibs__via, .tq-ibs__idea, .tq-ibs__sentl, .tq-ibs__min, .tq-ibs__sub, .tq-ibs__l, .tq-ibs__ok, .tq-ibs__checks > span) { unicode-bidi: plaintext; }
+@media (max-width: 999px) {
+.tq-ibs { padding: 40px 0 56px; background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(70% 40% at 80% 0%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(60% 30% at 0% 55%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #eeeff1 0%, #e2e3e6 100%); }
+.tq-ibs::after { height: 56px; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+.tq-ibs__wrap { display: flex; flex-direction: column; width: 390px; max-width: none; margin: 0 auto; padding: 6px 12px 6px; box-sizing: border-box; }
+.tq-ibs__feed { display: contents; }
+.tq-ibs__h2 { order: 1; --h2s: 17px; margin: 4px 0 0; padding-inline-end: 40px; line-height: 1.16; }
+[dir="rtl"] .tq-ibs__h2 { padding-inline-end: 0; padding-inline-start: 40px; }
+.tq-ibs__bell { right: 12px; top: 6px; }
+.tq-ibs__card { order: 2; margin-top: 8px; }
+.tq-ibs__sent { order: 3; margin-top: 8px; }
+.tq-ibs__list { order: 4; margin-top: 4px; gap: 3px; }
+.tq-ibs__ch { padding-block: 7px; }
+.tq-ibs__go { order: 5; justify-self: auto; margin-top: 9px; height: 46px; padding: 0 6px 0 22px; gap: 14px; font-size: 11.5px; }
+.tq-ibs__arr { width: 34px; height: 34px; }
+.tq-ibs__note { order: 6; max-width: none; margin: 9px 2px 0; font-size: 9.5px; line-height: 1.4; }
+}
+@media (prefers-reduced-motion: reduce) {
+.tq-ibs__go { transition: none; }
+}
 </style>
 <style id="i18n-fonts">
 *:not(svg *) { letter-spacing: 0 !important; }
@@ -1623,7 +1724,7 @@ html:lang(ko) * { word-break: keep-all; }
         <span class="k8">IB TOOLS · 自社ブランドの分析ツールキット</span>
         <h2 class="tq-ibt__h2 tq-h2" data-fitw><span class="tq-line">あなたのブランドで、</span><span class="tq-line"><span style="color: #e7131b;">顧客のトレードツールを。</span></span></h2>
         <p class="k9">あなたの名前が入った4つの分析ツール。TradingViewですぐに開けます。</p>
-        <div class="k10"><a class="k11 tk-hov" href="#insights"><span class="k12"><svg aria-hidden="true" focusable="false" width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>ブランド付きトレードツールを見る</a></div>
+        <div class="k10"><a class="k11 tk-hov" href="#signals"><span class="k12"><svg aria-hidden="true" focusable="false" width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>ブランド付きトレードツールを見る</a></div>
       </div>
       <div class="k13" data-tk-hover>
         <div class="k14"><div class="k15"><div class="k16"></div><div class="k17"></div>
@@ -1753,7 +1854,7 @@ html:lang(ko) * { word-break: keep-all; }
               <div class="k104"><div class="k105"><span class="k106">直近シグナル</span><span class="k107">買い</span></div><div class="k108"><span class="k106">経過本数</span><span class="k107">7</span></div><div class="k108"><span class="k106">本日</span><span class="k107">6件</span></div></div>
             </div></div></div></div></div>
         <div class="k110"><div class="k111"><div class="k34"><div class="tk-f" data-k="op"><div class="k112"><span class="k113">N</span><span class="k114"><span class="k115">NORTHLINE · Optimus Prime.</span> ゴールドのスキャナー。1分足で24/7、SLとTPを事前設定。</span></div></div></div><div class="k34"><div class="tk-f" data-k="ze"><div class="k112"><span class="k113">N</span><span class="k114"><span class="k115">NORTHLINE · Zero Edge.</span> あらゆる銘柄に使えるマルチタイムフレーム分析。</span></div></div></div><div class="k34"><div class="tk-f" data-k="bfs"><div class="k112"><span class="k113">N</span><span class="k114"><span class="k115">NORTHLINE · BFS.</span> 1分足のゴールド分析、SLとTPの水準付き。</span></div></div></div><div class="k34"><div class="tk-f" data-k="ut"><div class="k112"><span class="k113">N</span><span class="k114"><span class="k115">NORTHLINE · UTBOT.</span> 売買シグナル。</span></div></div></div></div></div>
-        <div class="k116"><a class="k117 tk-hov" href="#insights"><span class="k118"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>ブランド付きトレードツールを見る</a></div>
+        <div class="k116"><a class="k117 tk-hov" href="#signals"><span class="k118"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>ブランド付きトレードツールを見る</a></div>
         <p class="k119">データはイメージです。分析専用のツールで取引は発注せず、シグナルや水準の正確性・収益性は保証されません。CFD取引には高いリスクが伴います。</p>
       </div></div>
 
@@ -1761,7 +1862,66 @@ html:lang(ko) * { word-break: keep-all; }
 (function(){var s=document.currentScript.parentNode,d=s.querySelector('.tq-ibt__desk'),m=s.querySelector('.tq-ibt__mob');function f(){var w=s.clientWidth;d.style.zoom=Math.min(1,w/1440);m.style.zoom=Math.min(1.5,w/390)}f();addEventListener('resize',f)})();</script>
     </section>
 
-    <!-- Network insights (IB_Network_Insights design), after the branded toolkit: the pitch, two views to pick (V.01 Network,
+    <!-- Signals feed (IB_Signals_Feed design), after the branded toolkit: one signal under the IB's brand (the sample brand
+         NORTHLINE) and the four channels it went to (Telegram, TradingView, WhatsApp, XMP Club, with the Signal Check bot on the
+         last). Phones: the design's 390px block as it is, scaled to the screen (the script in the section sets the zoom), at
+         most ~70% of a 390x844 screen. Desktops (the design has no desktop view): the heading, the button and the note on
+         the left, the feed on the right at 1.4x. Quotes and times are demo data, the same on every language; the feed reads
+         left to right on every language. partner.css, "the Signals feed block". -->
+    <section id="signals" class="tq-ibs" data-screen-label="IB Tools · Signals feed">
+      <div class="tq-ibs__wrap">
+        <h2 class="tq-ibs__h2 tq-h2">ひとつのシグナルを、あなたのブランドで<span style="color: #e7131b;">全チャネルへ。</span></h2>
+        <div class="tq-ibs__feed" dir="ltr">
+          <span class="tq-ibs__bell" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg><i>4</i></span>
+          <div class="tq-ibs__card">
+            <div class="tq-ibs__cardh"><span class="tq-ibs__n">N</span><span class="tq-ibs__brand">NORTHLINE シグナル</span><i></i><span class="tq-ibs__via">Meridian Feed経由</span></div>
+            <div class="tq-ibs__cardm"><b class="tq-ibs__sym">XAUUSD</b><span class="tq-ibs__idea"><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg>ロングのアイデア</span><i></i><span class="tq-ibs__utc">09:41 UTC</span></div>
+            <div class="tq-ibs__lv"><div><span>エントリー</span><b>4,018.20</b></div><div><span>損切り</span><b class="tq-ibs__red">4,011.60</b></div><div><span>利確</span><b>4,031.80</b></div></div>
+          </div>
+          <div class="tq-ibs__sent"><span class="tq-ibs__pulse"></span><span class="tq-ibs__sentl">4チャネルに配信</span><i></i><span class="tq-ibs__min"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2" fill="#0A0A0A"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7" stroke="#0A0A0A" stroke-width="1.7"/></svg>最低入金額の条件あり</span></div>
+          <ul class="tq-ibs__list">
+          <li class="tq-ibs__ch">
+            <span class="tq-ibs__ico"><img src="../../assets/ib/ch-telegram.webp?v=5e6eebcd19" width="24" height="24" alt="" decoding="async" loading="lazy"></span>
+            <div class="tq-ibs__chb">
+              <div class="tq-ibs__chh"><b>Telegram</b><span class="tq-ibs__sub">Northline シグナル</span><i></i><span class="tq-ibs__t">09:42</span></div>
+              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">ロング</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
+            </div>
+          </li>
+          <li class="tq-ibs__ch">
+            <span class="tq-ibs__ico"><img class="tq-ibs__tv" src="../../assets/ib/tv-mark.webp?v=9bca845e10" width="23" height="12" alt="" decoding="async" loading="lazy"></span>
+            <div class="tq-ibs__chb">
+              <div class="tq-ibs__chh"><b>TradingView</b><span class="tq-ibs__sub">スキャナー · Northlineリスト</span><i></i><span class="tq-ibs__t">09:42</span></div>
+              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">ロング</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
+            </div>
+          </li>
+          <li class="tq-ibs__ch">
+            <span class="tq-ibs__ico"><img class="tq-ibs__wa" src="../../assets/ib/ch-whatsapp.webp?v=01f63b1b81" width="27" height="27" alt="" decoding="async" loading="lazy"></span>
+            <div class="tq-ibs__chb">
+              <div class="tq-ibs__chh"><b>WhatsApp</b><span class="tq-ibs__sub">Northline シグナル</span><i></i><span class="tq-ibs__t">09:43</span></div>
+              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">ロング</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
+            </div>
+          </li>
+          <li class="tq-ibs__ch">
+            <span class="tq-ibs__ico"><img class="tq-ibs__xmp" src="../../assets/ib/ch-xmp.svg?v=ed5db4e786" width="26" height="26" alt="" decoding="async" loading="lazy"></span>
+            <div class="tq-ibs__chb">
+              <div class="tq-ibs__chh"><b>XMP Club</b><span class="tq-ibs__sub">Northline · #signals</span><i></i><span class="tq-ibs__t">09:43</span></div>
+              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">ロング</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
+              <div class="tq-ibs__bot">
+                <div class="tq-ibs__both"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="5" width="10" height="8" rx="2.5" stroke="#0A0A0A" stroke-width="1.5"/><path d="M8 2.5V5" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="9" r="1" fill="#0A0A0A"/><circle cx="10" cy="9" r="1" fill="#E7131B"/></svg><b>Signal Check</b><span class="tq-ibs__tag">BOT</span><i></i><span class="tq-ibs__ok">条件を満たす</span></div>
+                <div class="tq-ibs__checks"><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>SLとTPを設定</span><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>R:R ≥ 1 : 1.5</span><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>SLは許容範囲内</span></div>
+              </div>
+            </div>
+          </li>
+          </ul>
+        </div>
+        <a class="tq-ibs__go" href="#insights"><span>連携シグナルを見る</span><span class="tq-ibs__arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <p class="tq-ibs__note">データはイメージで、ブランドは架空のものです。Signal Checkが確認するのはあなたの条件で、将来の結果ではありません。シグナルは情報であり、取引の執行ではありません。収益は保証されません。</p>
+      </div>
+      <script>/* phones: the design's 390px block, scaled to the screen (at most 1.5x); desktops: the feed at 1.4x */
+(function(){var s=document.currentScript.parentNode,w=s.querySelector('.tq-ibs__wrap'),f=s.querySelector('.tq-ibs__feed'),m=matchMedia('(max-width: 999px)');function z(){if(m.matches){w.style.zoom=Math.min(1.5,s.clientWidth/390);f.style.zoom=''}else{w.style.zoom='';f.style.zoom=1.4}}z();addEventListener('resize',z)})();</script>
+    </section>
+
+    <!-- Network insights (IB_Network_Insights design), after the signals feed: the pitch, two views to pick (V.01 Network,
          V.02 Performance) and a red button to the Sub-IB network block; right a canvas: the partner tree in glass (You at
          the top, Sub-IBs level by level, pulses running up the links, the strongest branch red), which turns into a bar
          chart of the same partners by net deposits, and back (7.5 s / 5.5 s, held while the pointer is over it; a click on a
