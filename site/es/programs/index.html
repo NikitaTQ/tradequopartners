@@ -1057,16 +1057,16 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (min-width: 641px) and (max-width: 960px) { .tp-programs { --pu-w: calc(100cqw / 517); --pu-h: 9px; } }   
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }   
 .tp-pc { --pu: min(var(--pu-w), var(--pu-h)); position: relative; isolation: isolate; display: flex; flex-direction: column;
-  padding: 8.2% 7.5% 7%; border-radius: 22px; color: #0b0b0d;
+  padding: 8.2% 7.5% 7%; color: #0b0b0d; }
+.tp-pc__slab { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 22px; pointer-events: none; transform: skewX(-2.4deg);
   background: rgba(226,227,231,.92);
   -webkit-backdrop-filter: blur(22px) saturate(140%); backdrop-filter: blur(22px) saturate(140%);
-  box-shadow: 0 0 0 1px rgba(30,34,44,.13), inset 1.5px 1.5px 0 rgba(255,255,255,.95), inset -1px -1.5px 0 rgba(255,255,255,.85),
+  box-shadow: 0 0 0 1px rgba(30,34,44,.1), inset 1.5px 1.5px 0 rgba(255,255,255,.95), inset -1px -1.5px 0 rgba(255,255,255,.8),
     0 4px 6px -2px rgba(20,24,34,.22), 0 22px 30px -18px rgba(20,24,34,.38), 0 40px 60px -40px rgba(20,24,34,.3); }
-@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) { .tp-pc { background: #e3e4e8; } }
-.tp-pc > * { min-width: 0; box-sizing: border-box; }   
-.tp-pc::before { content: ''; position: absolute; inset: calc(6 * var(--pu)); z-index: 0; border-radius: max(4px, calc(22px - 6 * var(--pu))); pointer-events: none;
-  box-shadow: inset 1px 1px 0 rgba(255,255,255,.8), inset -1px -1px 0 rgba(255,255,255,.9), 0 1px 0 rgba(40,44,54,.14), -1px 0 0 rgba(40,44,54,.06); }
-.tp-pc__cut { position: absolute; left: 0; top: 0; z-index: -1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+[dir="rtl"] .tp-pc__slab { transform: skewX(2.4deg); }
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) { .tp-pc__slab { background: #e3e4e8; } }
+.tp-pc > :not(.tp-pc__slab) { min-width: 0; box-sizing: border-box; }   
+.tp-pc__cut { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
 .tp-pc__head { position: relative; display: flex; flex-direction: column; }
 .tp-pc__num { font-size: calc(19 * var(--pu)); line-height: 1; font-weight: 500; letter-spacing: .24em; color: #0b0b0d; }
 .tp-pc__name { max-width: calc(335 * var(--pu)); margin: calc(17 * var(--pu)) 0 0; font-size: calc(55 * var(--pu)); line-height: .98; font-weight: 700; letter-spacing: -.04em; color: #0b0b0d; text-wrap: balance; word-break: keep-all; -webkit-text-stroke: .012em currentColor; }
@@ -1099,7 +1099,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (prefers-reduced-motion: reduce) { .tp-pc__go { transition: none; } }
 @media (max-width: 640px) {
   .tp-programs { --pu-w: calc(86cqw / 517); }   
-  .tp-pc { --pu: var(--pu-w); border-radius: 20px; }
+  .tp-pc { --pu: var(--pu-w); }
+  .tp-pc__slab { border-radius: 20px; }
   .tp-pc__num { font-size: 13px; }
   .tp-pc__name { min-height: 2em; max-width: none; }
   .tp-pc__title, .tp-pc__sub, .tp-pc__pts li { font-size: 16px; }
@@ -2688,13 +2689,13 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <use href="#tpRib1" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
           <use href="#tpRib1" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
         </svg>
-        <!-- the three cards (Partner_Cards_8): slabs of grey frosted glass, each cut into facets (the corner, the plate
-             under the figure) whose edges catch the light and meet in two red sparks. The facets are an SVG per card
-             drawn by landing.js (startProgCards) from where the figure's plate sits; the rows line up across the
-             three cards (subgrid). -->
+        <!-- the three cards (Partner_Cards_8): slabs of grey frosted glass leaning a little to the right (the slab is
+             skewed, the text stays upright), each cut into facets (the corner, the plate under the figure) whose edges
+             catch the light and meet in two red sparks. The facets are an SVG per card drawn by landing.js
+             (startProgCards) from where the figure's plate sits; it also lines the rows up across the three cards. -->
         <div class="tp-programs" data-progs>
           <article class="tp-pc">
-            <svg class="tp-pc__cut" aria-hidden="true" focusable="false"></svg>
+            <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">01</span>
               <h2 class="tp-pc__name" data-fitw>Introducing Broker</h2>
@@ -2708,7 +2709,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
             </div>
           </article>
           <article class="tp-pc">
-            <svg class="tp-pc__cut" aria-hidden="true" focusable="false"></svg>
+            <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">02</span>
               <h2 class="tp-pc__name" data-fitw>Red de socios</h2>
@@ -2722,7 +2723,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
             </div>
           </article>
           <article class="tp-pc">
-            <svg class="tp-pc__cut" aria-hidden="true" focusable="false"></svg>
+            <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">03</span>
               <h2 class="tp-pc__name" data-fitw>Marca blanca</h2>
@@ -3101,6 +3102,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=fc81d04d05" defer></script>
+<script src="../../assets/js/landing.js?v=3eae849d74" defer></script>
 </body>
 </html>

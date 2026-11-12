@@ -1011,7 +1011,7 @@
   /* ---- /programs/: the program cards' facets (Partner_Cards_8) ------------------------------------------
    * Each card is a slab of glass cut into facets: a corner from the top edge to a point on the side edge, and a
    * plate under the figure whose top runs from that point back across the card and whose side runs down to the
-   * plate's bottom. The edges are drawn in the card's SVG (.tp-pc__cut) in the card's own px, from where the plate
+   * plate's bottom. The edges are drawn in the card's SVG (.tp-pc__cut, inside the leaning slab that clips it) in the card's own px, from where the plate
    * (.tp-pc__lead) sits, as in the design's 517px card; a shadow and a highlight per edge, red sparks where they
    * meet. Mirrored for right-to-left. Drawn again whenever a card changes size. Also levels the cards' rows. */
   function startProgCards() {
@@ -1076,8 +1076,7 @@
         + red(R, T, 30 * s, 1) + red(R, L, 34 * s, 2) + red(R, Q, 28 * s, 3) + red(Q, R, 24 * s, 4) + red(Q, B, 30 * s, 5)
         + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(15 * s) + '" fill="url(#' + id + 'g)"/>'
         + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(1.8 * w1) + '" fill="#ff3940"/>'
-        + '<circle cx="' + Q[0] + '" cy="' + Q[1] + '" r="' + f(24 * s) + '" fill="url(#' + id + 'g)" opacity=".6"/>'
-        + '<circle cx="' + X(W - 12 * s) + '" cy="' + f(H - 9 * s) + '" r="' + f(22 * s) + '" fill="url(#' + id + 'g)" opacity=".28"/>';
+        + '<circle cx="' + Q[0] + '" cy="' + Q[1] + '" r="' + f(24 * s) + '" fill="url(#' + id + 'g)" opacity=".6"/>';
     };
     /* the rows (head, plate, line, points) as tall as the tallest of the three, so they line up; not on phones,
        where one card shows at a time */
