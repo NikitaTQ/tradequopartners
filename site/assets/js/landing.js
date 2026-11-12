@@ -1023,7 +1023,7 @@
     /* per card, in the texture's px: where the corner cut meets the top (tx), the spark on the side (yR), the plate's
        top at the left edge (yL), its bottom (yB) and where its side meets the bottom (qx) */
     const GEO = [{ tx: 275, yR: 211, yL: 267, yB: 454, qx: 391 }, { tx: 270, yR: 212, yL: 268, yB: 454, qx: 395 }, { tx: 372, yR: 213, yL: 268, yB: 454, qx: 391 }];
-    const TW = 512, TH = 768;
+    const TW = 512, TH = 768, phone = matchMedia('(max-width: 640px)');
     const TRI = [[0, 1, 3], [0, 3, 5], [1, 2, 3], [5, 3, 6], [5, 6, 7], [3, 8, 6], [7, 6, 9], [6, 8, 10], [6, 10, 9]];
     const f = (n) => Math.round(n * 1000) / 1000;
     const draw = (card, i) => {
@@ -1034,7 +1034,9 @@
       const sx = W / TW, rtl = getComputedStyle(card).direction === 'rtl';
       const yL = (l.top - c.top) / k + 9 * W / 517, yR = yL - (g.yL - g.yR) * sx, yB = (l.bottom - c.top) / k;
       const src = [[0, 0], [g.tx, 0], [TW, 0], [TW, g.yR], null, [0, g.yL], [g.qx, g.yB], [0, g.yB], [TW, g.yB], [0, TH], [TW, TH]];
-      const dst = [[0, 0], [g.tx * sx, 0], [W, 0], [W, yR], null, [0, yL], [g.qx * sx, yB], [0, yB], [W, yB], [0, H], [W, H]]
+      /* phones: the second card's corner cut meets the top further right, clear of its one-line name */
+      const tx = phone.matches && i === 1 ? 0.79 * W : g.tx * sx;
+      const dst = [[0, 0], [tx, 0], [W, 0], [W, yR], null, [0, yL], [g.qx * sx, yB], [0, yB], [W, yB], [0, H], [W, H]]
         .map((p) => p && [rtl ? W - p[0] : p[0], p[1]]);
       let defs = '', body = '';
       TRI.forEach((t, j) => {
