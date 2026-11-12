@@ -1008,76 +1008,54 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(all, 150); });
   }
 
-  /* ---- /programs/: the program cards' facets (Partner_Cards_8) ------------------------------------------
-   * Each card is a slab of glass cut into facets: a corner from the top edge to a point on the side edge, and a
-   * plate under the figure whose top runs from that point back across the card and whose side runs down to the
-   * plate's bottom. The edges are drawn in the card's SVG (.tp-pc__cut, inside the leaning slab that clips it) in the card's own px, from where the plate
-   * (.tp-pc__lead) sits, as in the design's 517px card; a shadow and a highlight per edge, red sparks where they
-   * meet. Mirrored for right-to-left. Drawn again whenever a card changes size. Also levels the cards' rows. */
+  /* ---- /programs/: the program cards' glass (Partner_Cards_8) ---------------------------------------------
+   * Each card's glass is the design's own card, light and all: its highlights, the cut facets with their bevelled
+   * edges and the red sparks (assets/programs/glass-1..3.webp, 512x768, the text, checks and button taken out). It is
+   * laid on the card piece by piece so that the facets meet the card's own rows wherever they fall: the texture's
+   * key points (the corner cut, the spark on the side, the plate's top and bottom) are pinned to where they belong
+   * on this card (the plate is .tp-pc__lead) and each triangle between them is stretched to fit (an SVG image per
+   * triangle, clipped, slightly overlapping its neighbours so no seam shows). Mirrored for right-to-left. Drawn
+   * again whenever a card changes size. Also levels the cards' rows. */
   function startProgCards() {
     const rail = $('[data-progs]');
     if (!rail) return;
     const cards = $$('.tp-pc', rail);
-    const f = (n) => Math.round(n * 10) / 10;
+    /* per card, in the texture's px: where the corner cut meets the top (tx), the spark on the side (yR), the plate's
+       top at the left edge (yL), its bottom (yB) and where its side meets the bottom (qx) */
+    const GEO = [{ tx: 275, yR: 211, yL: 267, yB: 454, qx: 391 }, { tx: 270, yR: 212, yL: 268, yB: 454, qx: 395 }, { tx: 372, yR: 213, yL: 268, yB: 454, qx: 391 }];
+    const TW = 512, TH = 768;
+    const TRI = [[0, 1, 3], [0, 3, 5], [1, 2, 3], [5, 3, 6], [5, 6, 7], [3, 8, 6], [7, 6, 9], [6, 8, 10], [6, 10, 9]];
+    const f = (n) => Math.round(n * 1000) / 1000;
     const draw = (card, i) => {
-      const svg = $('.tp-pc__cut', card), lead = $('.tp-pc__lead', card);
-      const W = card.offsetWidth, H = card.offsetHeight;
-      if (!svg || !lead || !W || !H) return;
+      const svg = $('.tp-pc__cut', card), lead = $('.tp-pc__lead', card), url = card.getAttribute('data-glass');
+      const W = card.offsetWidth, H = card.offsetHeight, g = GEO[i % 3];
+      if (!svg || !lead || !url || !W || !H) return;
       const c = card.getBoundingClientRect(), l = lead.getBoundingClientRect(), k = c.width / W || 1;
-      const s = W / 517, rtl = getComputedStyle(card).direction === 'rtl';
-      const X = (x) => f(rtl ? W - x : x);
-      const yL = (l.top - c.top) / k + 9 * s, yR = yL - 55 * s, yB = (l.bottom - c.top) / k;
-      const T = [X(0.516 * W), 0], C = [X(W), 0], R = [X(W - 7 * s), f(yR)], E = [X(W), f(yR)], L = [X(0), f(yL)], Q = [X(0.74 * W), f(yB)], B = [X(0), f(yB)];
-      const pt = (p) => p[0] + ' ' + p[1], seg = (a, b) => 'M' + pt(a) + 'L' + pt(b), poly = (...p) => 'M' + p.map(pt).join('L') + 'Z';
-      const along = (a, b, len) => { const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1; return [f(a[0] + dx / d * len), f(a[1] + dy / d * len)]; };
-      const id = 'tpc' + i, w1 = Math.max(1, s);
-      /* an edge is a bevel of cut glass: a soft shade on its lower-left side, a soft glow on the other, a fine dark cut
-         and a bright line on top */
-      const edge = (a, b) => {
-        const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1;
-        let nx = -dy / d, ny = dx / d;
-        if (ny - nx < 0) { nx = -nx; ny = -ny; }
-        const o = (p, k) => [f(p[0] + nx * k), f(p[1] + ny * k)];
-        return { shade: seg(o(a, 3 * s), o(b, 3 * s)), glow: seg(o(a, -3.2 * s), o(b, -3.2 * s)), cut: seg(o(a, 1.3 * s), o(b, 1.3 * s)), hi: seg(a, b) };
-      };
-      const es = [edge(T, R), edge(R, L), edge(R, Q), edge(Q, B)];
-      const join = (k) => es.map((e) => e[k]).join('');
-      /* a red stroke that fades out along an edge from a spark */
-      const red = (a, b, len, n) => {
-        const e = along(a, b, len);
-        return '<linearGradient id="' + id + 'r' + n + '" gradientUnits="userSpaceOnUse" x1="' + a[0] + '" y1="' + a[1] + '" x2="' + e[0] + '" y2="' + e[1] + '"><stop offset="0" stop-color="#ff1d26"/><stop offset="1" stop-color="#ff1d26" stop-opacity="0"/></linearGradient>'
-          + '<path d="' + seg(a, e) + '" stroke="url(#' + id + 'r' + n + ')" stroke-width="' + f(1.4 * w1) + '" stroke-linecap="round"/>';
-      };
-      const lin = (n, x1, y1, x2, y2, stops) => '<linearGradient id="' + id + n + '" gradientUnits="userSpaceOnUse" x1="' + f(x1) + '" y1="' + f(y1) + '" x2="' + f(x2) + '" y2="' + f(y2) + '">'
-        + stops.map((t) => '<stop offset="' + t[0] + '" stop-color="' + t[1] + '" stop-opacity="' + t[2] + '"/>').join('') + '</linearGradient>';
-      const mid = [(T[0] + R[0]) / 2, (T[1] + R[1]) / 2];
-      /* the corner piece: brightest along its cut, fading toward the card's corner */
-      const cn = (() => { const dx = R[0] - T[0], dy = R[1] - T[1], d = Math.hypot(dx, dy) || 1; let nx = -dy / d, ny = dx / d; if (ny > 0) { nx = -nx; ny = -ny; } return [mid[0] + nx * 60 * s, mid[1] + ny * 60 * s]; })();
+      const sx = W / TW, rtl = getComputedStyle(card).direction === 'rtl';
+      const yL = (l.top - c.top) / k + 9 * W / 517, yR = yL - (g.yL - g.yR) * sx, yB = (l.bottom - c.top) / k;
+      const src = [[0, 0], [g.tx, 0], [TW, 0], [TW, g.yR], null, [0, g.yL], [g.qx, g.yB], [0, g.yB], [TW, g.yB], [0, TH], [TW, TH]];
+      const dst = [[0, 0], [g.tx * sx, 0], [W, 0], [W, yR], null, [0, yL], [g.qx * sx, yB], [0, yB], [W, yB], [0, H], [W, H]]
+        .map((p) => p && [rtl ? W - p[0] : p[0], p[1]]);
+      let defs = '', body = '';
+      TRI.forEach((t, j) => {
+        const [a, b, cc] = t.map((n) => src[n]), [A, B, C] = t.map((n) => dst[n]);
+        /* the affine map of this triangle, texture -> card */
+        const d1 = [b[0] - a[0], b[1] - a[1]], d2 = [cc[0] - a[0], cc[1] - a[1]], D1 = [B[0] - A[0], B[1] - A[1]], D2 = [C[0] - A[0], C[1] - A[1]];
+        const det = d1[0] * d2[1] - d2[0] * d1[1];
+        if (!det) return;
+        const i11 = d2[1] / det, i12 = -d2[0] / det, i21 = -d1[1] / det, i22 = d1[0] / det;
+        const m11 = D1[0] * i11 + D2[0] * i21, m12 = D1[0] * i12 + D2[0] * i22, m21 = D1[1] * i11 + D2[1] * i21, m22 = D1[1] * i12 + D2[1] * i22;
+        const e = A[0] - m11 * a[0] - m12 * a[1], h = A[1] - m21 * a[0] - m22 * a[1];
+        /* the clip: the card's triangle, grown by a pixel so neighbours overlap */
+        const cx = (A[0] + B[0] + C[0]) / 3, cy = (A[1] + B[1] + C[1]) / 3;
+        const grow = (p) => { const dx = p[0] - cx, dy = p[1] - cy, d = Math.hypot(dx, dy) || 1; return f(p[0] + dx / d * 1.2) + ',' + f(p[1] + dy / d * 1.2); };
+        const id = 'tpg' + i + 't' + j;
+        defs += '<clipPath id="' + id + '"><polygon points="' + [A, B, C].map(grow).join(' ') + '"/></clipPath>';
+        body += '<g clip-path="url(#' + id + ')"><image href="' + url + '" width="' + TW + '" height="' + TH + '" preserveAspectRatio="none" transform="matrix('
+          + [m11, m21, m12, m22, e, h].map(f).join(' ') + ')"/></g>';
+      });
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      svg.innerHTML = '<defs>'
-        /* the light falls from the top left */
-        + lin('h', X(0), 0, mid[0], mid[1], [[0, '#fff', .32], [.75, '#fff', .08], [1, '#fff', 0]])
-        + lin('c', mid[0], mid[1], cn[0], cn[1], [[0, '#fff', .62], [.35, '#fff', .3], [1, '#fff', .14]])
-        + lin('p', X(0), 0, R[0], 0, [[0, '#fff', .22], [.6, '#fff', .1], [1, '#fff', .03]])
-        + lin('q', R[0], 0, X(W), 0, [[0, '#fff', .28], [1, '#fff', .12]])
-        + lin('b', 0, yB, 0, H, [[0, '#fff', .14], [Math.min(.99, 60 * s / (H - yB || 1)), '#fff', .06], [1, '#fff', 0]])
-        + '<radialGradient id="' + id + 'g"><stop offset="0" stop-color="#ff1d26" stop-opacity=".75"/><stop offset=".35" stop-color="#ff1d26" stop-opacity=".22"/><stop offset="1" stop-color="#ff1d26" stop-opacity="0"/></radialGradient>'
-        + '<filter id="' + id + 'f" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="' + f(Math.max(1.4, 2.4 * s)) + '"/></filter>'
-        + '<filter id="' + id + 'k" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="' + f(Math.max(0.35, 0.5 * s)) + '"/></filter>'
-        + '</defs>'
-        + '<path d="' + poly([X(0), 0], T, R, L) + '" fill="url(#' + id + 'h)"/>'
-        + '<path d="' + poly(T, C, E) + '" fill="url(#' + id + 'c)"/>'
-        + '<path d="' + poly(L, R, Q, B) + '" fill="url(#' + id + 'p)"/>'
-        + '<path d="' + poly(R, E, [E[0], Q[1]], Q) + '" fill="url(#' + id + 'q)"/>'
-        + '<rect x="0" y="' + f(yB) + '" width="' + W + '" height="' + f(H - yB) + '" fill="url(#' + id + 'b)"/>'
-        + '<path d="' + join('shade') + '" fill="none" stroke="#3c424e" stroke-opacity=".13" stroke-width="' + f(5 * w1) + '" filter="url(#' + id + 'f)"/>'
-        + '<path d="' + join('glow') + '" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="' + f(5 * w1) + '" filter="url(#' + id + 'f)"/>'
-        + '<path d="' + join('cut') + '" fill="none" stroke="#4a505c" stroke-opacity=".3" stroke-width="' + f(0.9 * w1) + '" filter="url(#' + id + 'k)"/>'
-        + '<path d="' + join('hi') + '" fill="none" stroke="#fff" stroke-width="' + f(1.6 * w1) + '" stroke-linecap="round"/>'
-        + red(R, T, 16 * s, 1) + red(R, L, 18 * s, 2) + red(R, Q, 14 * s, 3) + red(Q, R, 14 * s, 4) + red(Q, B, 20 * s, 5)
-        + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(12 * s) + '" fill="url(#' + id + 'g)" opacity=".8"/>'
-        + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(1.3 * w1) + '" fill="#ff3940"/>'
-        + '<circle cx="' + Q[0] + '" cy="' + Q[1] + '" r="' + f(24 * s) + '" fill="url(#' + id + 'g)" opacity=".6"/>';
+      svg.innerHTML = '<defs>' + defs + '</defs>' + body;
     };
     /* the rows (head, plate, line, points) as tall as the tallest of the three, so they line up; not on phones,
        where one card shows at a time */
