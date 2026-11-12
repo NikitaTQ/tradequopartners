@@ -20,7 +20,6 @@
   "ib.lot.t2": "Cada nivel.",
   "ib.lot.t3": "Un solo panel.",
   "ib.lot.lead": "Sigue tus comisiones por lote, detecta a los clientes que dejaron de operar, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB.",
-  "ib.lot.sub": "Datos en tiempo real, no extractos a fin de mes, y una IA que te dice dónde actuar primero.",
   "ib.lot.go": "Obtener acceso",
   "ib.lot.explore": "Explorar herramientas IB",
   "ib.tool.1": "Comisión por lote",
