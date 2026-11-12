@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL trong giới hạn",
   "ib.sig.cta": "Khám phá tín hiệu kết nối",
-  "ib.sig.note": "Dữ liệu minh họa, thương hiệu hư cấu. Signal Check kiểm tra tiêu chí của bạn, không phải kết quả tương lai. Tín hiệu là thông tin, không phải khớp lệnh; lợi nhuận không được đảm bảo."
+  "ib.sig.note": "Dữ liệu minh họa, thương hiệu hư cấu. Signal Check kiểm tra tiêu chí của bạn, không phải kết quả tương lai. Tín hiệu là thông tin, không phải khớp lệnh; lợi nhuận không được đảm bảo.",
+  "ib.ps.h2": "<line>Các mối quan hệ của bạn.</line> <line>Gắn rõ ràng với bạn.</line>",
+  "ib.ps.p": "Khách hàng bạn giới thiệu được đăng ký dưới IB của bạn và luôn liên kết với hồ sơ của bạn.",
+  "ib.ps.cta": "Khám phá Partnershield"
 }

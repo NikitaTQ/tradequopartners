@@ -206,6 +206,26 @@
 (function(){var s=document.currentScript.parentNode,w=s.querySelector('.tq-ibs__wrap'),f=s.querySelector('.tq-ibs__feed'),m=matchMedia('(max-width: 999px)');function z(){if(m.matches){w.style.zoom=Math.min(1.5,s.clientWidth/390);f.style.zoom=''}else{w.style.zoom='';f.style.zoom=1.4}}z();addEventListener('resize',z)})();</script>
     </section>
 
+    <!-- Partnershield (Partnershield_Block_Animated design), after the signals feed: a dark panel with the Partnershield
+         mark (a glass triangle: the IB sphere at the tip, two client spheres linked to it), the wordmark, the heading, a
+         line of copy and a red button to the clients block. Phones: the design's 390px panel as it is, scaled to the
+         screen (the script in the section sets the zoom). Desktops (the design has no desktop view): the words on the
+         left, the mark on the right at the size of the design's close-up. The mark (partials/ib-shield.html) holds its
+         end state; assets/js/ib-shield.js plays its 3.5 s intro once when the block comes into view. The wordmark and
+         the IB on the mark are Syncopate on every language (brand art). partner.css, "the Partnershield block". -->
+    <section id="partnershield" class="tq-ibp" data-ib-shield data-screen-label="IB Tools · Partnershield">
+      <div class="tq-ibp__panel">
+        <span class="tq-ibp__eye">{{fan.ibtools}}</span>
+        <p class="tq-ibp__name tq-h2" dir="ltr">Partnershield</p>
+        <div class="tq-ibp__mark" dir="ltr" aria-hidden="true">{{> ib-shield}}</div>
+        <h2 class="tq-ibp__h2 tq-h2">{{ib.ps.h2}}</h2>
+        <p class="tq-ibp__p">{{ib.ps.p}}</p>
+        <a class="tq-ibp__go" href="#clients"><span>{{ib.ps.cta}}</span><span class="tq-ibp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      </div>
+      <script>/* phones: the design's 390px panel, scaled to the screen (at most 1.5x) */
+(function(){var s=document.currentScript.parentNode,p=s.querySelector('.tq-ibp__panel'),m=matchMedia('(max-width: 999px)');function z(){p.style.zoom=m.matches?Math.min(1.5,s.clientWidth/390):''}z();addEventListener('resize',z)})();</script>
+    </section>
+
     <!-- Network insights (IB_Network_Insights design), after the signals feed: the pitch, two views to pick (V.01 Network,
          V.02 Performance) and a red button to the Sub-IB network block; right a canvas: the partner tree in glass (You at
          the top, Sub-IBs level by level, pulses running up the links, the strongest branch red), which turns into a bar
@@ -476,6 +496,7 @@
 <script src="{{root}}assets/js/transition.js" defer></script>
 <script src="{{root}}assets/js/landing.js" defer></script>
 <script src="{{root}}assets/js/ib-toolkit.js" defer></script>
+<script src="{{root}}assets/js/ib-shield.js" defer></script>
 <script src="{{root}}assets/js/ib-insights.js" defer></script>
 <script src="{{root}}assets/js/ib-clients.js" defer></script>
 <script src="{{root}}assets/js/ib-ai.js" defer></script>

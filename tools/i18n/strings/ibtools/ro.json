@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL în limita ta",
   "ib.sig.cta": "Descoperă semnalele conectate",
-  "ib.sig.note": "Date ilustrative, brand fictiv. Signal Check verifică criteriile tale, nu rezultatele viitoare. Semnalele sunt informații, nu execuție de tranzacții; randamentele nu sunt garantate."
+  "ib.sig.note": "Date ilustrative, brand fictiv. Signal Check verifică criteriile tale, nu rezultatele viitoare. Semnalele sunt informații, nu execuție de tranzacții; randamentele nu sunt garantate.",
+  "ib.ps.h2": "<line>Relațiile tale.</line> <line>Clar legate de tine.</line>",
+  "ib.ps.p": "Clienții pe care îi aduci sunt înregistrați sub IB-ul tău și rămân legați de profilul tău.",
+  "ib.ps.cta": "Descoperă Partnershield"
 }

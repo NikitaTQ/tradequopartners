@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL limitinizde",
   "ib.sig.cta": "Bağlı sinyalleri keşfedin",
-  "ib.sig.note": "Temsili veriler, kurgusal marka. Signal Check gelecekteki sonuçları değil, sizin kriterlerinizi test eder. Sinyaller bilgidir, işlem gerçekleştirme değildir; getiri garanti edilmez."
+  "ib.sig.note": "Temsili veriler, kurgusal marka. Signal Check gelecekteki sonuçları değil, sizin kriterlerinizi test eder. Sinyaller bilgidir, işlem gerçekleştirme değildir; getiri garanti edilmez.",
+  "ib.ps.h2": "<line>İlişkileriniz.</line> <line>Açıkça size bağlı.</line>",
+  "ib.ps.p": "Yönlendirdiğiniz müşteriler IB’niz altında kaydedilir ve profilinize bağlı kalır.",
+  "ib.ps.cta": "Partnershield’ı keşfedin"
 }

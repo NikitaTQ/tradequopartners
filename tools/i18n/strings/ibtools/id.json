@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL dalam batas Anda",
   "ib.sig.cta": "Jelajahi sinyal terhubung",
-  "ib.sig.note": "Data ilustratif, merek fiktif. Signal Check menguji kriteria Anda, bukan hasil di masa depan. Sinyal adalah informasi, bukan eksekusi transaksi; imbal hasil tidak dijamin."
+  "ib.sig.note": "Data ilustratif, merek fiktif. Signal Check menguji kriteria Anda, bukan hasil di masa depan. Sinyal adalah informasi, bukan eksekusi transaksi; imbal hasil tidak dijamin.",
+  "ib.ps.h2": "<line>Relasi Anda.</line> <line>Jelas terhubung dengan Anda.</line>",
+  "ib.ps.p": "Klien yang Anda perkenalkan terdaftar di bawah IB Anda dan tetap tertaut ke profil Anda.",
+  "ib.ps.cta": "Jelajahi Partnershield"
 }
