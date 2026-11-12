@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL w Twoim limicie",
   "ib.sig.cta": "Poznaj połączone sygnały",
-  "ib.sig.note": "Dane przykładowe, fikcyjna marka. Signal Check sprawdza Twoje kryteria, nie przyszłe wyniki. Sygnały to informacje, nie realizacja transakcji; zyski nie są gwarantowane."
+  "ib.sig.note": "Dane przykładowe, fikcyjna marka. Signal Check sprawdza Twoje kryteria, nie przyszłe wyniki. Sygnały to informacje, nie realizacja transakcji; zyski nie są gwarantowane.",
+  "ib.ps.h2": "<line>Twoje relacje.</line> <line>Wyraźnie przypisane do Ciebie.</line>",
+  "ib.ps.p": "Klienci, których polecasz, są rejestrowani pod Twoim IB i pozostają powiązani z Twoim profilem.",
+  "ib.ps.cta": "Poznaj Partnershield"
 }

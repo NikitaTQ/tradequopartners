@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL nel tuo limite",
   "ib.sig.cta": "Scopri i segnali connessi",
-  "ib.sig.note": "Dati illustrativi, brand fittizio. Signal Check verifica i tuoi criteri, non i risultati futuri. I segnali sono informazioni, non esecuzione di operazioni; rendimenti non garantiti."
+  "ib.sig.note": "Dati illustrativi, brand fittizio. Signal Check verifica i tuoi criteri, non i risultati futuri. I segnali sono informazioni, non esecuzione di operazioni; rendimenti non garantiti.",
+  "ib.ps.h2": "<line>Le tue relazioni.</line> <line>Chiaramente legate a te.</line>",
+  "ib.ps.p": "I clienti che presenti vengono registrati sotto il tuo IB e restano collegati al tuo profilo.",
+  "ib.ps.cta": "Scopri Partnershield"
 }

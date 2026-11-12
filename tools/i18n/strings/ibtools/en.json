@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL in your limit",
   "ib.sig.cta": "Explore connected signals",
-  "ib.sig.note": "Illustrative data, fictional brand. Signal Check tests your criteria, not future results. Signals are information, not trade execution; returns not guaranteed."
+  "ib.sig.note": "Illustrative data, fictional brand. Signal Check tests your criteria, not future results. Signals are information, not trade execution; returns not guaranteed.",
+  "ib.ps.h2": "<line>Your relationships.</line> <line>Clearly connected to you.</line>",
+  "ib.ps.p": "Clients you introduce are registered under your IB and stay linked to your profile.",
+  "ib.ps.cta": "Explore Partnershield"
 }

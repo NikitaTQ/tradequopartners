@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL 在您的限額內",
   "ib.sig.cta": "了解互聯訊號",
-  "ib.sig.note": "示意數據，品牌為虛構。Signal Check 檢驗的是您的標準，而非未來結果。訊號僅為資訊，不代表執行交易；不保證收益。"
+  "ib.sig.note": "示意數據，品牌為虛構。Signal Check 檢驗的是您的標準，而非未來結果。訊號僅為資訊，不代表執行交易；不保證收益。",
+  "ib.ps.h2": "<line>您的客戶關係，</line><line>清楚歸屬於您。</line>",
+  "ib.ps.p": "您介紹的客戶將註冊在您的IB名下，並持續關聯到您的個人資料。",
+  "ib.ps.cta": "了解 Partnershield"
 }

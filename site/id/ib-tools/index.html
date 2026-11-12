@@ -97,13 +97,13 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc.woff2?v=1511bbee3a) format('woff2'); }
 @font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc.woff2?v=ed84a90471) format('woff2'); }
 @font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=a6ee5b5890) format('woff2'); }
-@font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=9a232c4e92) format('woff2'); }
-@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=782f47b6c6) format('woff2'); }
-@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=1a980c147b) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=68458c6939) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=b93d184cdc) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=e3be5bb77c) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=44e5451665) format('woff2'); }
+@font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=10e47a2046) format('woff2'); }
+@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=7d6b5ac5a0) format('woff2'); }
+@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=258f5bb423) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=54136552a6) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=866eb312cb) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=539b1eb078) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=0ac153a3a1) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -693,6 +693,7 @@ footer p { font-size: 12px !important; }
     linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
+.pf { position: relative; padding-top: clamp(24px, 5.5vw, 80px); }
 #why { padding-top: 0; }
 @media (max-width: 899px) {
 #pf-who-wrap { padding: 24px 16px; }
@@ -1567,6 +1568,59 @@ footer p { font-size: 12px !important; }
 @media (prefers-reduced-motion: reduce) {
 .tq-ibs__go { transition: none; }
 }
+.tq-ibp { position: relative; overflow: hidden; box-sizing: border-box; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  padding: clamp(48px, 8vh, 96px) clamp(20px, 5vw, 80px) max(96px, clamp(64px, 10vh, 112px));
+  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 30% 40%, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 70%), #e9eaec; }
+.tq-ibp::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+.tq-ibp a { text-decoration: none; }
+.tq-ibp__panel { position: relative; z-index: 1; overflow: hidden; box-sizing: border-box; max-width: 1180px; margin: 0 auto; color: #fff; border-radius: 40px;
+  padding: clamp(44px, 6.5vh, 72px) clamp(44px, 5vw, 72px); display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr repeat(5, auto) 1fr;
+  grid-template-areas: ". mark" "eye mark" "name mark" "h2 mark" "p mark" "go mark" ". mark"; column-gap: clamp(40px, 5vw, 72px);
+  background: radial-gradient(30% 60% at 78% 34%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 70%), radial-gradient(20% 20% at 78% 62%, rgba(231,19,27,.18) 0%, rgba(231,19,27,0) 70%),
+    linear-gradient(180deg, #1c1d21 0%, #0b0b0d 100%);
+  box-shadow: 0 40px 80px -48px rgba(18,22,30,.55); }
+[dir="rtl"] .tq-ibp__panel { background: radial-gradient(30% 60% at 22% 34%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 70%), radial-gradient(20% 20% at 22% 62%, rgba(231,19,27,.18) 0%, rgba(231,19,27,0) 70%),
+    linear-gradient(180deg, #1c1d21 0%, #0b0b0d 100%); }
+.tq-ibp__panel::before { content: ""; position: absolute; left: 10%; right: 10%; top: 0; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.4), rgba(255,255,255,0)); }
+.tq-ibp__panel > * { position: relative; }
+.tq-ibp__eye { grid-area: eye; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.tq-ibp .tq-ibp__name { grid-area: name; justify-self: start; margin: 14px 0 0; padding: 0; font-family: 'TQ H2 Syncopate', 'Inter', sans-serif; font-size: 34px; line-height: 1.2; letter-spacing: .1em; text-transform: uppercase;
+  background: linear-gradient(180deg, #fff 0%, #e4e6ea 42%, #8e9096 58%, #f4f5f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tq-ibp__h2 { grid-area: h2; --h2s: clamp(22px, min(2vw, 3.8vh), 28px); margin: clamp(22px, 3.4vh, 34px) 0 0; padding-inline-start: 0; line-height: 1.18; letter-spacing: -.01em; color: #fff; }
+.tq-ibp__h2 .tq-line { display: block; }
+.tq-ibp__h2 .tq-line + .tq-line { color: #ff4148; }
+.tq-ibp__p { grid-area: p; max-width: 460px; margin: 16px 0 0; font-size: 17px; line-height: 1.5; color: rgba(255,255,255,.78); text-wrap: pretty; }
+.tq-ibp__go { grid-area: go; justify-self: start; margin-top: clamp(24px, 3.6vh, 36px); display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 56px; padding: 0 7px 0 28px; border-radius: 999px; box-sizing: border-box;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 18px 30px -18px rgba(231,19,27,.7); transition: filter .25s ease; }
+.tq-ibp__go:hover, .tq-ibp__go:focus-visible { color: #fff; filter: brightness(1.06); }
+.tq-ibp__go:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.tq-ibp__arr { flex: none; width: 42px; height: 42px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+[dir="rtl"] .tq-ibp__arr svg { transform: scaleX(-1); }
+.tq-ibp__mark { grid-area: mark; align-self: center; --pw: clamp(300px, 27vw, 390px); width: var(--pw); aspect-ratio: 671 / 612; margin: 0 0 calc(var(--pw) * .1); }
+.tq-ibp__mark::before { content: ""; position: absolute; left: -14%; top: calc(var(--pw) * -.1); width: 128%; height: 120%; border-radius: 50%; background: radial-gradient(50% 50% at 50% 45%, rgba(205,215,235,.16) 0%, rgba(205,215,235,0) 70%); }
+.tq-ibp__refl { position: absolute; left: 0; top: calc(100% + var(--pw) * .02); width: 100%; height: 100%; transform: scaleY(-1); opacity: var(--ps-refl, .14);
+  -webkit-mask-image: linear-gradient(0deg, #000 0%, transparent 42%); mask-image: linear-gradient(0deg, #000 0%, transparent 42%); }
+.tq-ibp__svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 calc(var(--pw) * .07) calc(var(--pw) * .085) rgba(0,0,0,.7)); }
+.tq-ibp .tq-ibp__ib { font-family: 'TQ H2 Syncopate', 'Inter', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: 0; text-transform: none; fill: #fff; }
+@media (max-width: 999px) {
+.tq-ibp { padding: 40px 0 56px; }
+.tq-ibp::after { height: 56px; }
+.tq-ibp__panel { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 390px; max-width: none; padding: 24px 20px 22px; border-radius: 32px; text-align: center;
+    background: radial-gradient(60% 34% at 50% 28%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 70%), radial-gradient(36% 12% at 50% 48%, rgba(231,19,27,.18) 0%, rgba(231,19,27,0) 70%),
+      linear-gradient(180deg, #1c1d21 0%, #0b0b0d 100%); box-shadow: none; }
+[dir="rtl"] .tq-ibp__panel { background: radial-gradient(60% 34% at 50% 28%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 70%), radial-gradient(36% 12% at 50% 48%, rgba(231,19,27,.18) 0%, rgba(231,19,27,0) 70%),
+      linear-gradient(180deg, #1c1d21 0%, #0b0b0d 100%); }
+.tq-ibp__eye { font-size: 10.5px; }
+.tq-ibp .tq-ibp__name { justify-self: auto; margin: 0; font-size: 23px; }
+.tq-ibp__mark { --pw: 250px; margin: 6px 0 12px; }
+.tq-ibp__h2 { --h2s: 16.5px; margin: 0; line-height: 1.22; }
+.tq-ibp__p { max-width: 320px; margin: 0; font-size: 14px; line-height: 1.45; }
+.tq-ibp__go { align-self: stretch; justify-self: auto; margin-top: 4px; height: 54px; padding: 0 6px 0 22px; gap: 14px; font-size: 12.5px; letter-spacing: .15em; }
+}
+@media (prefers-reduced-motion: reduce) {
+.tq-ibp__go { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -1913,6 +1967,54 @@ footer p { font-size: 12px !important; }
       </div>
       <script>/* phones: the design's 390px block, scaled to the screen (at most 1.5x); desktops: the feed at 1.4x */
 (function(){var s=document.currentScript.parentNode,w=s.querySelector('.tq-ibs__wrap'),f=s.querySelector('.tq-ibs__feed'),m=matchMedia('(max-width: 999px)');function z(){if(m.matches){w.style.zoom=Math.min(1.5,s.clientWidth/390);f.style.zoom=''}else{w.style.zoom='';f.style.zoom=1.4}}z();addEventListener('resize',z)})();</script>
+    </section>
+
+    <!-- Partnershield (Partnershield_Block_Animated design), after the signals feed: a dark panel with the Partnershield
+         mark (a glass triangle: the IB sphere at the tip, two client spheres linked to it), the wordmark, the heading, a
+         line of copy and a red button to the clients block. Phones: the design's 390px panel as it is, scaled to the
+         screen (the script in the section sets the zoom). Desktops (the design has no desktop view): the words on the
+         left, the mark on the right at the size of the design's close-up. The mark (partials/ib-shield.html) holds its
+         end state; assets/js/ib-shield.js plays its 3.5 s intro once when the block comes into view. The wordmark and
+         the IB on the mark are Syncopate on every language (brand art). partner.css, "the Partnershield block". -->
+    <section id="partnershield" class="tq-ibp" data-ib-shield data-screen-label="IB Tools · Partnershield">
+      <div class="tq-ibp__panel">
+        <span class="tq-ibp__eye">Alat IB</span>
+        <p class="tq-ibp__name tq-h2" dir="ltr">Partnershield</p>
+        <div class="tq-ibp__mark" dir="ltr" aria-hidden="true"><img class="tq-ibp__refl" data-src="../../assets/ib/partnershield.webp?v=85b1e9ab22" width="671" height="612" alt="" decoding="async"><svg class="tq-ibp__svg" viewBox="0 0 671 612" data-src="../../assets/ib/partnershield.webp?v=85b1e9ab22"><defs>
+<mask id="ps-logoA" maskUnits="userSpaceOnUse" x="-80" y="-80" width="831" height="772" style="mask-type:alpha"><image width="671" height="612" preserveAspectRatio="none"/></mask>
+<mask id="ps-regF" maskUnits="userSpaceOnUse" x="-80" y="-80" width="831" height="772"><rect x="-80" y="-80" width="831" height="772" fill="#fff"/><polygon points="69,78 603,78 334,553"/><circle cx="177" cy="141" r="78"/><circle cx="492" cy="141" r="78"/><circle cx="334" cy="401" r="78"/></mask>
+<mask id="ps-regB" maskUnits="userSpaceOnUse" x="-80" y="-80" width="831" height="772"><polygon points="69,78 603,78 334,553" fill="#fff"/><circle cx="177" cy="141" r="78"/><circle cx="492" cy="141" r="78"/><circle cx="334" cy="401" r="78"/></mask>
+<mask id="ps-drawF" maskUnits="userSpaceOnUse" x="-80" y="-80" width="831" height="772"><path data-k="f" d="M34,52 L334,590 L638,52 Z" pathLength="1" fill="none" stroke="#fff" stroke-width="96" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 2"/></mask>
+<mask id="ps-drawB" maskUnits="userSpaceOnUse" x="-80" y="-80" width="831" height="772"><path data-k="b1" d="M300,338 C291,300 280,262 246,222" pathLength="1" fill="none" stroke="#fff" stroke-width="58" stroke-linecap="round" stroke-dasharray="1 2"/><path data-k="b2" d="M368,338 C377,300 388,262 422,222" pathLength="1" fill="none" stroke="#fff" stroke-width="58" stroke-linecap="round" stroke-dasharray="1 2"/></mask>
+<clipPath id="ps-cTL"><circle cx="177" cy="141" r="76"/></clipPath><clipPath id="ps-cTR"><circle cx="492" cy="141" r="76"/></clipPath><clipPath id="ps-cB"><circle cx="334" cy="401" r="76"/></clipPath>
+<radialGradient id="ps-hl"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<radialGradient id="ps-gR"><stop offset="0" stop-color="#FF2830" stop-opacity=".75"/><stop offset="1" stop-color="#FF2830" stop-opacity="0"/></radialGradient>
+<radialGradient id="ps-gC"><stop offset="0" stop-color="#AABEE6" stop-opacity=".4"/><stop offset="1" stop-color="#AABEE6" stop-opacity="0"/></radialGradient>
+<radialGradient id="ps-halo"><stop offset="0" stop-color="#E7131B" stop-opacity=".55"/><stop offset=".4" stop-color="#E7131B" stop-opacity=".18"/><stop offset="1" stop-color="#E7131B" stop-opacity="0"/></radialGradient>
+<radialGradient id="ps-core"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<linearGradient id="ps-sV" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".3"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/><stop offset=".75" stop-color="#7890C0" stop-opacity="0"/><stop offset="1" stop-color="#7890C0" stop-opacity=".25"/></linearGradient>
+<linearGradient id="ps-bands" y2=".55"><stop offset=".26" stop-color="#fff" stop-opacity="0"/><stop offset=".33" stop-color="#fff" stop-opacity=".8"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset=".65" stop-color="#fff" stop-opacity=".42"/><stop offset=".69" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<linearGradient id="ps-irid" x2="1" y2="1"><stop offset="0" stop-color="#BFD3FF"/><stop offset=".25" stop-color="#FFD3E6"/><stop offset=".5" stop-color="#D2FFF1"/><stop offset=".75" stop-color="#FFF0C9"/><stop offset="1" stop-color="#BFD3FF"/></linearGradient>
+<linearGradient id="ps-sweep" data-k="sweep" gradientUnits="userSpaceOnUse" x2="671" y2="360" gradientTransform="translate(900 0)"><stop offset=".38" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".95"/><stop offset=".62" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<filter id="ps-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur data-k="blurF" stdDeviation="0"/></filter>
+</defs>
+<circle data-k="ibGlow" cx="334" cy="401" r="170" fill="url(#ps-halo)" opacity=".45"/>
+<g data-k="ghost" opacity="0"><image width="671" height="612" preserveAspectRatio="none" mask="url(#ps-regF)" opacity=".1"/></g>
+<g mask="url(#ps-drawF)"><g mask="url(#ps-regF)"><image width="671" height="612" preserveAspectRatio="none"/><g data-k="ovF" mask="url(#ps-logoA)"><rect width="671" height="612" fill="url(#ps-sV)" style="mix-blend-mode:screen"/><rect width="671" height="612" fill="url(#ps-bands)" style="mix-blend-mode:screen"/><rect width="671" height="612" fill="url(#ps-irid)" opacity=".28" style="mix-blend-mode:soft-light"/></g></g></g>
+<g mask="url(#ps-drawB)"><g mask="url(#ps-regB)"><image width="671" height="612" preserveAspectRatio="none"/><g data-k="ovB" mask="url(#ps-logoA)"><rect width="671" height="612" fill="url(#ps-sV)" style="mix-blend-mode:screen"/><rect width="671" height="612" fill="url(#ps-bands)" style="mix-blend-mode:screen"/><rect width="671" height="612" fill="url(#ps-irid)" opacity=".28" style="mix-blend-mode:soft-light"/></g></g></g>
+<g data-k="sTL"><image width="671" height="612" preserveAspectRatio="none" clip-path="url(#ps-cTL)"/><ellipse cx="177" cy="182.8" rx="62.32" ry="36.48" fill="url(#ps-gC)" clip-path="url(#ps-cTL)"/><circle cx="177" cy="141" r="66.88" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="4"/><ellipse cx="160.28" cy="103" rx="28.88" ry="15.2" fill="url(#ps-hl)" transform="rotate(-24 160.28 103)"/><circle cx="208.92" cy="172.92" r="7.6" fill="url(#ps-hl)"/><g data-k="icTL" transform="translate(150.6 114) scale(2.2)"><circle cx="12" cy="8.5" r="3.6" fill="#fff" fill-opacity=".92"/><path d="M5 19.5c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6" stroke="#fff" stroke-opacity=".92" stroke-width="2.2" stroke-linecap="round" fill="none"/></g></g>
+<g data-k="sTR"><image width="671" height="612" preserveAspectRatio="none" clip-path="url(#ps-cTR)"/><ellipse cx="492" cy="182.8" rx="62.32" ry="36.48" fill="url(#ps-gC)" clip-path="url(#ps-cTR)"/><circle cx="492" cy="141" r="66.88" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="4"/><ellipse cx="475.28" cy="103" rx="28.88" ry="15.2" fill="url(#ps-hl)" transform="rotate(-24 475.28 103)"/><circle cx="523.92" cy="172.92" r="7.6" fill="url(#ps-hl)"/><g data-k="icTR" transform="translate(465.6 114) scale(2.2)"><circle cx="12" cy="8.5" r="3.6" fill="#fff" fill-opacity=".92"/><path d="M5 19.5c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6" stroke="#fff" stroke-opacity=".92" stroke-width="2.2" stroke-linecap="round" fill="none"/></g></g>
+<g data-k="sB"><image width="671" height="612" preserveAspectRatio="none" clip-path="url(#ps-cB)"/><ellipse cx="334" cy="442.8" rx="62.32" ry="36.48" fill="url(#ps-gR)" clip-path="url(#ps-cB)"/><circle cx="334" cy="401" r="66.88" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="4"/><ellipse cx="317.28" cy="363" rx="28.88" ry="15.2" fill="url(#ps-hl)" transform="rotate(-24 317.28 363)"/><circle cx="365.92" cy="432.92" r="7.6" fill="url(#ps-hl)"/><text class="tq-ibp__ib tq-h2" data-k="ibT" x="334" y="403" text-anchor="middle" dominant-baseline="central">IB</text></g>
+<g mask="url(#ps-logoA)"><rect width="671" height="612" fill="url(#ps-sweep)" style="mix-blend-mode:screen"/></g>
+<g data-k="sb1" opacity="0"><circle r="46" fill="url(#ps-halo)"/><circle r="13" fill="url(#ps-core)"/></g><g data-k="sb2" opacity="0"><circle r="46" fill="url(#ps-halo)"/><circle r="13" fill="url(#ps-core)"/></g><g data-k="sf" opacity="0"><circle r="46" fill="url(#ps-halo)"/><circle r="13" fill="url(#ps-core)"/></g>
+</svg>
+</div>
+        <h2 class="tq-ibp__h2 tq-h2"><span class="tq-line">Relasi Anda.</span> <span class="tq-line">Jelas terhubung dengan Anda.</span></h2>
+        <p class="tq-ibp__p">Klien yang Anda perkenalkan terdaftar di bawah IB Anda dan tetap tertaut ke profil Anda.</p>
+        <a class="tq-ibp__go" href="#clients"><span>Jelajahi Partnershield</span><span class="tq-ibp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      </div>
+      <script>/* phones: the design's 390px panel, scaled to the screen (at most 1.5x) */
+(function(){var s=document.currentScript.parentNode,p=s.querySelector('.tq-ibp__panel'),m=matchMedia('(max-width: 999px)');function z(){p.style.zoom=m.matches?Math.min(1.5,s.clientWidth/390):''}z();addEventListener('resize',z)})();</script>
     </section>
 
     <!-- Network insights (IB_Network_Insights design), after the signals feed: the pitch, two views to pick (V.01 Network,
@@ -2404,6 +2506,7 @@ footer p { font-size: 12px !important; }
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=ad8bd6c12a" defer></script>
 <script src="../../assets/js/ib-toolkit.js?v=c2eca3103e" defer></script>
+<script src="../../assets/js/ib-shield.js?v=ef118aca3f" defer></script>
 <script src="../../assets/js/ib-insights.js?v=a668fd7893" defer></script>
 <script src="../../assets/js/ib-clients.js?v=32ab6f721b" defer></script>
 <script src="../../assets/js/ib-ai.js?v=5994fd2032" defer></script>

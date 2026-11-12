@@ -201,5 +201,8 @@
   "ib.sig.c2": "R:R ≥ 1 : 1.5",
   "ib.sig.c3": "SL no seu limite",
   "ib.sig.cta": "Explorar sinais conectados",
-  "ib.sig.note": "Dados ilustrativos, marca fictícia. O Signal Check testa seus critérios, não resultados futuros. Sinais são informação, não execução de operações; retornos não garantidos."
+  "ib.sig.note": "Dados ilustrativos, marca fictícia. O Signal Check testa seus critérios, não resultados futuros. Sinais são informação, não execução de operações; retornos não garantidos.",
+  "ib.ps.h2": "<line>Suas relações.</line> <line>Claramente ligadas a você.</line>",
+  "ib.ps.p": "Os clientes que você indica são registrados sob o seu IB e continuam vinculados ao seu perfil.",
+  "ib.ps.cta": "Explorar Partnershield"
 }
