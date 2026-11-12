@@ -41,6 +41,14 @@
       <div class="tp-stage">
         <!-- one black ribbon across the middle, with a soft shadow and a light edge (Partner_Cards_7a); it stretches
              with the stage (preserveAspectRatio none), its width stays (non-scaling-stroke) -->
+        <!-- liquid glass: the cards' backdrop is bent by this (partner.css .tp-pc__slab, backdrop-filter) -->
+        <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+          <filter id="tpLiquid" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.007 0.011" numOctaves="2" seed="11" result="n"/>
+            <feGaussianBlur in="n" stdDeviation="2.5" result="nb"/>
+            <feDisplacementMap in="SourceGraphic" in2="nb" scale="60" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </svg>
         <svg class="tp-ribbons" viewBox="0 0 1352 880" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
           <defs>
             <filter id="tpRibBlur" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
