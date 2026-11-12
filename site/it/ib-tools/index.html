@@ -2551,6 +2551,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibc__wrap { position: relative; width: 100%; max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(36px, 4vw, 64px); }
 .tq-ibc__text { flex: 1 1 320px; max-width: 420px; min-width: 0; display: flex; flex-direction: column; gap: clamp(16px, 2.4vh, 24px); }
 .tq-ibc__h2 { --h2s: clamp(24px, min(2.8vw, 5vh), 42px); margin: 0; line-height: 1.1; letter-spacing: -.01em; padding-inline-start: 0; }   
+@media (min-width: 760px) { .tq-ibc__h2 .tq-line { display: block; } .tq-ibc__h2 .tq-line + .tq-line { margin-top: .45em; } }   
 .tq-ibc .tq-ibx__lead { font-size: clamp(16px, min(1.3vw, 2.3vh), 19px); }
 .tq-ibc__tabs { display: none; }
 .tq-ibc .tq-ibx__go { font-size: clamp(11.5px, 3.2vw, 13px); letter-spacing: clamp(1px, .5vw, 2px); }
@@ -2647,7 +2648,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-ibc__wrap { flex-direction: column; align-items: stretch; gap: 16px; }
   .tq-ibc__text { display: contents; }
   .tq-ibc__h2 { order: 1; --h2s: clamp(18px, 5.4vw, 24px); }
-  .tq-ibc__h2 > span { white-space: nowrap; }
+  .tq-ibc__h2 span[style] { white-space: nowrap; }   
   .tq-ibc .tq-ibx__lead { order: 2; margin-top: -4px; font-size: 15px; }
   .tq-ibc__tabs { order: 3; display: flex; gap: 3px; padding: 4px; border-radius: 999px; background: linear-gradient(170deg, rgba(255,255,255,.78), rgba(255,255,255,.38)); border: 1px solid #fff;
     box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 14px 28px -18px rgba(18,22,30,.35); }
@@ -2847,7 +2848,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
     <section id="clients" class="tq-ibc" data-ib-ce data-via="tramite {n}" data-total="{n} in totale" data-from="da {n} · 30 g" data-lots="{n} lotti" data-screen-label="IB Tools · Clients and earnings">
       <div class="tq-ibc__wrap">
         <div class="tq-ibc__text">
-          <h2 class="tq-ibc__h2 tq-h2">Conosci i tuoi clienti. Capisci <span style="color: #e7131b;">i tuoi guadagni.</span></h2>
+          <h2 class="tq-ibc__h2 tq-h2"><span class="tq-line">Conosci i tuoi clienti.</span> <span class="tq-line">Capisci <span style="color: #e7131b;">i tuoi guadagni.</span></span></h2>
           <p class="tq-ibx__lead">Guarda chi fa trading, chi ha rallentato e da quali operazioni arrivano esattamente i tuoi rebate.</p>
           <div class="tq-ibc__tabs">
                 <button type="button" class="tq-ibc__tab is-act" data-f="0" aria-pressed="true">Tutti</button>

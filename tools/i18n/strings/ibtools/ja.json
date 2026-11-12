@@ -96,7 +96,7 @@
   "ib.ins.you": "あなた",
   "ib.ins.total": "合計 {v}",
   "ib.ins.net": "ネットワークの純入金額",
-  "ib.ce.h2": "顧客を知り、<red>収益を理解する。</red>",
+  "ib.ce.h2": "<line>顧客を知り、</line><line><red>収益を理解する。</red></line>",
   "ib.ce.lead": "誰が取引しているか、誰が減速しているか、そしてリベートがどの取引から生まれているかが正確にわかります。",
   "ib.ce.all": "すべて",
   "ib.ce.active": "アクティブ",

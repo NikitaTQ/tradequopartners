@@ -96,7 +96,7 @@
   "ib.ins.you": "Você",
   "ib.ins.total": "{v} no total",
   "ib.ins.net": "Depósitos líquidos da rede",
-  "ib.ce.h2": "Conheça seus clientes. Entenda <red>seus ganhos.</red>",
+  "ib.ce.h2": "<line>Conheça seus clientes.</line> <line>Entenda <red>seus ganhos.</red></line>",
   "ib.ce.lead": "Veja quem está operando, quem desacelerou e de quais operações vêm exatamente suas comissões.",
   "ib.ce.all": "Todos",
   "ib.ce.active": "Ativo",

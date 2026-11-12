@@ -96,7 +96,7 @@
   "ib.ins.you": "Anda",
   "ib.ins.total": "total {v}",
   "ib.ins.net": "Deposit bersih jaringan",
-  "ib.ce.h2": "Kenali klien Anda. Pahami <red>penghasilan Anda.</red>",
+  "ib.ce.h2": "<line>Kenali klien Anda.</line> <line>Pahami <red>penghasilan Anda.</red></line>",
   "ib.ce.lead": "Lihat siapa yang trading, siapa yang melambat, dan dari transaksi mana tepatnya rebate Anda berasal.",
   "ib.ce.all": "Semua",
   "ib.ce.active": "Aktif",
