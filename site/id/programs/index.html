@@ -1058,15 +1058,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }   
 .tp-pc { --pu: min(var(--pu-w), var(--pu-h)); position: relative; isolation: isolate; display: flex; flex-direction: column;
   padding: 8.2% 7.5% 7%; color: #0b0b0d; }
-.tp-pc__slab { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 22px; pointer-events: none; transform: skewX(-2.4deg);
-  background: linear-gradient(135deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.14) 34%, rgba(255,255,255,.06) 62%, rgba(255,255,255,.32) 100%), rgba(224,226,231,.5);
-  -webkit-backdrop-filter: blur(10px) saturate(180%) brightness(1.04); backdrop-filter: blur(10px) saturate(180%) brightness(1.04);
-  backdrop-filter: url(#tpLiquid) blur(6px) saturate(180%) brightness(1.04);   
-  box-shadow: inset 2px 2px 1px -1px rgba(255,255,255,.95), inset -2px -2px 1px -1px rgba(255,255,255,.75), inset 0 0 0 1px rgba(255,255,255,.55),
-    inset 0 0 24px rgba(255,255,255,.5), inset 8px 12px 24px -14px rgba(255,255,255,.9), inset -10px -16px 28px -16px rgba(110,118,134,.2),
-    0 0 0 1px rgba(30,34,44,.08), 0 3px 8px -3px rgba(20,24,34,.14), 0 22px 40px -20px rgba(20,24,34,.3); }
-[dir="rtl"] .tp-pc__slab { transform: skewX(2.4deg); }
-@media (hover: none) { .tp-pc__slab { backdrop-filter: blur(10px) saturate(180%) brightness(1.04); } }   
+.tp-pc__slab { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 22px; pointer-events: none; transform: skewX(-2.9deg);
+  background: #e3e4e8;   
+  box-shadow: 0 0 0 1px rgba(28,32,40,.13), 0 3px 0 0 #d7d9de, 0 4px 0 0 #eef0f2, 0 5px 0 0 rgba(28,32,40,.28),   
+    0 8px 10px -4px rgba(20,24,34,.2), 0 26px 40px -22px rgba(20,24,34,.32); }
+[dir="rtl"] .tp-pc__slab { transform: skewX(2.9deg); }
 .tp-pc > :not(.tp-pc__slab) { min-width: 0; box-sizing: border-box; }   
 .tp-pc__cut { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
 .tp-pc__head { position: relative; display: flex; flex-direction: column; }
@@ -2680,14 +2676,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       <div class="tp-stage">
         <!-- one black ribbon across the middle, with a soft shadow and a light edge (Partner_Cards_7a); it stretches
              with the stage (preserveAspectRatio none), its width stays (non-scaling-stroke) -->
-        <!-- liquid glass: the cards' backdrop is bent by this (partner.css .tp-pc__slab, backdrop-filter) -->
-        <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
-          <filter id="tpLiquid" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.007 0.011" numOctaves="2" seed="11" result="n"/>
-            <feGaussianBlur in="n" stdDeviation="2.5" result="nb"/>
-            <feDisplacementMap in="SourceGraphic" in2="nb" scale="60" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-        </svg>
         <svg class="tp-ribbons" viewBox="0 0 1352 880" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
           <defs>
             <filter id="tpRibBlur" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
@@ -2698,12 +2686,12 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
           <use href="#tpRib1" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
           <use href="#tpRib1" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
         </svg>
-        <!-- the three cards (Partner_Cards_8): slabs of grey frosted glass leaning a little to the right (the slab is
-             skewed, the text stays upright), each cut into facets (the corner, the plate under the figure) whose edges
-             catch the light and meet in two red sparks. The facets are an SVG per card drawn by landing.js
-             (startProgCards) from where the figure's plate sits; it also lines the rows up across the three cards. -->
+        <!-- the three cards (Partner_Cards_8): slabs of glass leaning a little to the right (the slab is skewed, the
+             text stays upright); the glass is the design's own card (its highlights, facets and red sparks; data-glass),
+             laid on by landing.js (startProgCards) so that its facets meet this card's rows; it also lines the rows up
+             across the three cards. The ribbon passes behind the cards, not through them. -->
         <div class="tp-programs" data-progs>
-          <article class="tp-pc">
+          <article class="tp-pc" data-glass="../../assets/programs/glass-1.webp">
             <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">01</span>
@@ -2717,7 +2705,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
               <a class="tp-pc__go" href="../#signup" data-page-link data-label="MEMUAT · Beranda"><span class="tp-pc__dot" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Jadi mitra</a>
             </div>
           </article>
-          <article class="tp-pc">
+          <article class="tp-pc" data-glass="../../assets/programs/glass-2.webp">
             <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">02</span>
@@ -2731,7 +2719,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
               <a class="tp-pc__go" href="../#signup" data-page-link data-label="MEMUAT · Beranda"><span class="tp-pc__dot" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Jadi mitra</a>
             </div>
           </article>
-          <article class="tp-pc">
+          <article class="tp-pc" data-glass="../../assets/programs/glass-3.webp">
             <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">03</span>
@@ -3111,6 +3099,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=4e4a9abc97" defer></script>
+<script src="../../assets/js/landing.js?v=dfea5977b1" defer></script>
 </body>
 </html>
