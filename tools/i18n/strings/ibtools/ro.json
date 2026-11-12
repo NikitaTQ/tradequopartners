@@ -96,7 +96,7 @@
   "ib.ins.you": "Tu",
   "ib.ins.total": "{v} în total",
   "ib.ins.net": "Depozitele nete ale rețelei",
-  "ib.ce.h2": "Cunoaște-ți clienții. Înțelege-ți <red>câștigurile.</red>",
+  "ib.ce.h2": "<line>Cunoaște-ți clienții.</line> <line>Înțelege-ți <red>câștigurile.</red></line>",
   "ib.ce.lead": "Vezi cine tranzacționează, cine a încetinit și din ce tranzacții provin exact comisioanele tale.",
   "ib.ce.all": "Toți",
   "ib.ce.active": "Activ",

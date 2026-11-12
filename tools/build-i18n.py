@@ -75,6 +75,7 @@ EN = strings['en']
 # ---- inline tokens allowed in copy ---------------------------------------------
 PAIRED = {
     'red': ('<span style="color: #e7131b;">', '</span>'),
+    'line': ('<span class="tq-line">', '</span>'),   # one sentence of a heading (a block of its own where the CSS says so)
     'privacy': ('<a href="#" style="color:#c8141b;">', '</a>'),
     'terms': ('<a href="#" style="color:#c8141b;">', '</a>'),
     'lots': ('<span data-inv-lots>', '</span>'),

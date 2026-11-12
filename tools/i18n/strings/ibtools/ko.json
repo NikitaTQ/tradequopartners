@@ -96,7 +96,7 @@
   "ib.ins.you": "나",
   "ib.ins.total": "합계 {v}",
   "ib.ins.net": "네트워크 순입금",
-  "ib.ce.h2": "고객을 알고, <red>수익을 이해하세요.</red>",
+  "ib.ce.h2": "<line>고객을 알고,</line> <line><red>수익을 이해하세요.</red></line>",
   "ib.ce.lead": "누가 거래하고 누가 주춤했는지, 그리고 리베이트가 정확히 어떤 거래에서 나오는지 확인하세요.",
   "ib.ce.all": "전체",
   "ib.ce.active": "활성",

@@ -96,7 +96,7 @@
   "ib.ins.you": "Tú",
   "ib.ins.total": "{v} en total",
   "ib.ins.net": "Depósitos netos de la red",
-  "ib.ce.h2": "Conoce a tus clientes. Entiende <red>tus ganancias.</red>",
+  "ib.ce.h2": "<line>Conoce a tus clientes.</line> <line>Entiende <red>tus ganancias.</red></line>",
   "ib.ce.lead": "Ve quién opera, quién ha bajado el ritmo y de qué operaciones salen exactamente tus comisiones.",
   "ib.ce.all": "Todos",
   "ib.ce.active": "Activo",

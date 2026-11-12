@@ -96,7 +96,7 @@
   "ib.ins.you": "Siz",
   "ib.ins.total": "toplam {v}",
   "ib.ins.net": "Ağın net yatırımları",
-  "ib.ce.h2": "Müşterilerinizi tanıyın. <red>Kazancınızı</red> anlayın.",
+  "ib.ce.h2": "<line>Müşterilerinizi tanıyın.</line> <line><red>Kazancınızı</red> anlayın.</line>",
   "ib.ce.lead": "Kimin işlem yaptığını, kimin yavaşladığını ve komisyonlarınızın tam olarak hangi işlemlerden geldiğini görün.",
   "ib.ce.all": "Tümü",
   "ib.ce.active": "Aktif",

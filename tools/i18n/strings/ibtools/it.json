@@ -96,7 +96,7 @@
   "ib.ins.you": "Tu",
   "ib.ins.total": "{v} in totale",
   "ib.ins.net": "Depositi netti della rete",
-  "ib.ce.h2": "Conosci i tuoi clienti. Capisci <red>i tuoi guadagni.</red>",
+  "ib.ce.h2": "<line>Conosci i tuoi clienti.</line> <line>Capisci <red>i tuoi guadagni.</red></line>",
   "ib.ce.lead": "Guarda chi fa trading, chi ha rallentato e da quali operazioni arrivano esattamente i tuoi rebate.",
   "ib.ce.all": "Tutti",
   "ib.ce.active": "Attivo",

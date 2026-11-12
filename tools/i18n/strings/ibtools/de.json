@@ -96,7 +96,7 @@
   "ib.ins.you": "Sie",
   "ib.ins.total": "{v} gesamt",
   "ib.ins.net": "Nettoeinzahlungen des Netzwerks",
-  "ib.ce.h2": "Kennen Sie Ihre Kunden. Verstehen Sie <red>Ihre Einnahmen.</red>",
+  "ib.ce.h2": "<line>Kennen Sie Ihre Kunden.</line> <line>Verstehen Sie <red>Ihre Einnahmen.</red></line>",
   "ib.ce.lead": "Sehen Sie, wer handelt, wer nachgelassen hat und aus welchen Trades Ihre Rebates genau stammen.",
   "ib.ce.all": "Alle",
   "ib.ce.active": "Aktiv",

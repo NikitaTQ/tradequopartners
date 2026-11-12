@@ -96,7 +96,7 @@
   "ib.ins.you": "Ty",
   "ib.ins.total": "{v} łącznie",
   "ib.ins.net": "Wpłaty netto sieci",
-  "ib.ce.h2": "Poznaj swoich klientów. Zrozum <red>swoje zarobki.</red>",
+  "ib.ce.h2": "<line>Poznaj swoich klientów.</line> <line>Zrozum <red>swoje zarobki.</red></line>",
   "ib.ce.lead": "Zobacz, kto handluje, kto zwolnił i z których dokładnie transakcji pochodzą Twoje prowizje.",
   "ib.ce.all": "Wszyscy",
   "ib.ce.active": "Aktywny",

@@ -96,7 +96,7 @@
   "ib.ins.you": "Bạn",
   "ib.ins.total": "tổng {v}",
   "ib.ins.net": "Tiền nạp ròng của mạng lưới",
-  "ib.ce.h2": "Hiểu khách hàng. Nắm rõ <red>thu nhập.</red>",
+  "ib.ce.h2": "<line>Hiểu khách hàng.</line> <line>Nắm rõ <red>thu nhập.</red></line>",
   "ib.ce.lead": "Xem ai đang giao dịch, ai đã chậm lại và hoa hồng của bạn đến chính xác từ những giao dịch nào.",
   "ib.ce.all": "Tất cả",
   "ib.ce.active": "Hoạt động",

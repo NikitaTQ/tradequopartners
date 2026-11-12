@@ -96,7 +96,7 @@
   "ib.ins.you": "您",
   "ib.ins.total": "合計 {v}",
   "ib.ins.net": "網路淨入金",
-  "ib.ce.h2": "了解您的客戶，<red>看懂您的收益。</red>",
+  "ib.ce.h2": "<line>了解您的客戶，</line><line><red>看懂您的收益。</red></line>",
   "ib.ce.lead": "看清誰在交易、誰放慢了節奏，以及您的返佣究竟來自哪些交易。",
   "ib.ce.all": "全部",
   "ib.ce.active": "活躍",
