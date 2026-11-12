@@ -1901,3 +1901,13 @@
   .tq-ibc__who small { white-space: normal; line-height: 1.3; }   /* a long record line wraps instead of being cut */
   .tq-ibc__cl:not(.is-shown), .tq-ibc__rec:not(.is-shown) { display: none; }
 }
+
+/* IB Tools on phones: twice the room between the blocks (each block's own top and bottom spacing doubled; the hero's
+   top under the header and the black hole's canvas stay as they were) */
+@media (max-width: 640px) {
+  .tq-ibx__wrap { padding-bottom: 80px; }
+  .tq-ibi { padding-top: 44px; padding-bottom: 64px; }
+  .tq-ibc { padding-top: 40px; padding-bottom: 88px; }
+  .tq-iba { padding-top: 56px; padding-bottom: 80px; }
+  .tq-ibn__wrap { padding-block: 44px 68px; }
+}
