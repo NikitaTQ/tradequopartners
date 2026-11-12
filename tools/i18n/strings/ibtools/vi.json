@@ -20,7 +20,6 @@
   "ib.lot.t2": "Mọi cấp.",
   "ib.lot.t3": "Một bảng điều khiển.",
   "ib.lot.lead": "Theo dõi hoa hồng theo từng lot, phát hiện khách hàng đã ngừng giao dịch, phân tích khối lượng theo công cụ và phân bổ từng cấp Sub-IB.",
-  "ib.lot.sub": "Dữ liệu theo thời gian thực, không phải sao kê cuối tháng — cùng AI cho bạn biết nên hành động ở đâu trước.",
   "ib.lot.go": "Nhận quyền truy cập",
   "ib.lot.explore": "Khám phá công cụ IB",
   "ib.tool.1": "Hoa hồng theo lot",
