@@ -1001,24 +1001,105 @@
         el.style.fontSize = Math.max(fs0 * 0.4, fs * room / w - 0.5).toFixed(1) + 'px';
       }
     });
-    /* the cards' text links: beside the CTA where all three fit, under it in all three otherwise; and the
-       audience lines under the CTAs as tall as the tallest one (so the CTAs stay level) */
-    const rail = $('[data-progs]');
-    const level = () => {
-      if (!rail) return;
-      rail.classList.toggle('is-stack', false);
-      const wraps = $$('.tp-pc__cta', rail).some((r) => { const a = r.children[0], b = r.children[1]; return a && b && b.offsetTop > a.offsetTop + a.offsetHeight / 2; });
-      rail.classList.toggle('is-stack', wraps);
-      const who = $$('.tp-pc__who', rail);
-      who.forEach((w) => { w.style.minHeight = ''; });
-      const h = Math.max(...who.map((w) => w.offsetHeight));
-      who.forEach((w) => { w.style.minHeight = h + 'px'; });
-    };
-    const all = () => { fit(); level(); };
+    const all = () => { fit(); if (window.tqCutCards) window.tqCutCards(); };
     all();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
     let t = 0;
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(all, 150); });
+  }
+
+  /* ---- /programs/: the program cards' facets (Partner_Cards_8) ------------------------------------------
+   * Each card is a slab of glass cut into facets: a corner from the top edge to a point on the side edge, and a
+   * plate under the figure whose top runs from that point back across the card and whose side runs down to the
+   * plate's bottom. The edges are drawn in the card's SVG (.tp-pc__cut) in the card's own px, from where the plate
+   * (.tp-pc__lead) sits, as in the design's 517px card; a shadow and a highlight per edge, red sparks where they
+   * meet. Mirrored for right-to-left. Drawn again whenever a card changes size. Also levels the cards' rows. */
+  function startProgCards() {
+    const rail = $('[data-progs]');
+    if (!rail) return;
+    const cards = $$('.tp-pc', rail);
+    const f = (n) => Math.round(n * 10) / 10;
+    const draw = (card, i) => {
+      const svg = $('.tp-pc__cut', card), lead = $('.tp-pc__lead', card);
+      const W = card.offsetWidth, H = card.offsetHeight;
+      if (!svg || !lead || !W || !H) return;
+      const c = card.getBoundingClientRect(), l = lead.getBoundingClientRect(), k = c.width / W || 1;
+      const s = W / 517, rtl = getComputedStyle(card).direction === 'rtl';
+      const X = (x) => f(rtl ? W - x : x);
+      const yL = (l.top - c.top) / k + 9 * s, yR = yL - 55 * s, yB = (l.bottom - c.top) / k;
+      const T = [X(0.516 * W), 0], C = [X(W), 0], R = [X(W - 7 * s), f(yR)], E = [X(W), f(yR)], L = [X(0), f(yL)], Q = [X(0.74 * W), f(yB)], B = [X(0), f(yB)];
+      const pt = (p) => p[0] + ' ' + p[1], seg = (a, b) => 'M' + pt(a) + 'L' + pt(b), poly = (...p) => 'M' + p.map(pt).join('L') + 'Z';
+      const along = (a, b, len) => { const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1; return [f(a[0] + dx / d * len), f(a[1] + dy / d * len)]; };
+      const id = 'tpc' + i, w1 = Math.max(1, s);
+      /* an edge: its shadow on the lower-left side, a bright line, a fainter second line on the other side (the
+         facet's thickness) */
+      const edge = (a, b) => {
+        const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1;
+        let nx = -dy / d, ny = dx / d;
+        if (ny - nx < 0) { nx = -nx; ny = -ny; }
+        const o = (p, k) => [f(p[0] + nx * k), f(p[1] + ny * k)];
+        return { sh: seg(o(a, 1.6 * s), o(b, 1.6 * s)), hi: seg(a, b), hi2: seg(o(a, -3.2 * s), o(b, -3.2 * s)) };
+      };
+      const es = [edge(T, R), edge(R, L), edge(R, Q), edge(Q, B)];
+      const sh = es.map((e) => e.sh).join(''), hi = es.map((e) => e.hi).join(''), hi2 = es.map((e) => e.hi2).join('');
+      /* a red stroke that fades out along an edge from a spark */
+      const red = (a, b, len, n) => {
+        const e = along(a, b, len);
+        return '<linearGradient id="' + id + 'r' + n + '" gradientUnits="userSpaceOnUse" x1="' + a[0] + '" y1="' + a[1] + '" x2="' + e[0] + '" y2="' + e[1] + '"><stop offset="0" stop-color="#ff1d26"/><stop offset="1" stop-color="#ff1d26" stop-opacity="0"/></linearGradient>'
+          + '<path d="' + seg(a, e) + '" stroke="url(#' + id + 'r' + n + ')" stroke-width="' + f(1.7 * w1) + '" stroke-linecap="round"/>';
+      };
+      const lin = (n, x1, y1, x2, y2, stops) => '<linearGradient id="' + id + n + '" gradientUnits="userSpaceOnUse" x1="' + f(x1) + '" y1="' + f(y1) + '" x2="' + f(x2) + '" y2="' + f(y2) + '">'
+        + stops.map((t) => '<stop offset="' + t[0] + '" stop-color="' + t[1] + '" stop-opacity="' + t[2] + '"/>').join('') + '</linearGradient>';
+      const mid = [(T[0] + R[0]) / 2, (T[1] + R[1]) / 2], xr = X(W - 22 * s);
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.innerHTML = '<defs>'
+        /* the light falls from the top left: the head facet darkens toward the corner's edge */
+        + lin('h', X(0), 0, mid[0], mid[1], [[0, '#fff', .5], [.7, '#fff', .08], [1, '#262a34', .06]])
+        + lin('c', T[0], 0, X(W), f(yR), [[0, '#fff', .42], [1, '#fff', .16]])
+        + lin('p', X(0), 0, R[0], 0, [[0, '#fff', .12], [1, '#262a34', .05]])
+        + lin('s', R[0], 0, Q[0], 0, [[0, '#262a34', .07], [1, '#262a34', .02]])
+        /* under the plate: its shadow, then a light band, then darker toward the foot */
+        + lin('b', 0, yB, 0, H, [[0, '#262a34', .1], [Math.min(.99, 24 * s / (H - yB || 1)), '#fff', .35], [Math.min(.995, 90 * s / (H - yB || 1)), '#fff', .3], [1, '#262a34', .03]])
+        + lin('k', X(0), 0, X(W), 0, [[0, '#fff', .12], [.6, '#fff', 0], [1, '#262a34', .06]])
+        + '<radialGradient id="' + id + 'g"><stop offset="0" stop-color="#ff1d26" stop-opacity=".75"/><stop offset=".35" stop-color="#ff1d26" stop-opacity=".22"/><stop offset="1" stop-color="#ff1d26" stop-opacity="0"/></radialGradient>'
+        + '<filter id="' + id + 'f" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="' + f(Math.max(0.7, 1.1 * s)) + '"/></filter>'
+        + '</defs>'
+        + '<path d="' + poly([X(0), 0], T, R, L) + '" fill="url(#' + id + 'h)"/>'
+        + '<path d="' + poly(T, C, E) + '" fill="url(#' + id + 'c)"/>'
+        + '<path d="' + poly(L, R, Q, B) + '" fill="url(#' + id + 'p)"/>'
+        + '<path d="' + poly(R, E, [E[0], Q[1]], Q) + '" fill="url(#' + id + 's)"/>'
+        + '<rect x="0" y="' + f(yB) + '" width="' + W + '" height="' + f(H - yB) + '" fill="url(#' + id + 'b)"/>'
+        + '<rect x="0" y="' + f(yB) + '" width="' + W + '" height="' + f(H - yB) + '" fill="url(#' + id + 'k)"/>'
+        /* the slab's side, seen on the right */
+        + '<path d="M' + xr + ' ' + f(26 * s) + 'V' + f(H - 26 * s) + '" stroke="#3c414c" stroke-opacity=".16" stroke-width="' + f(w1) + '"/>'
+        + '<path d="M' + f(xr + (rtl ? -1.2 : 1.2) * w1) + ' ' + f(26 * s) + 'V' + f(H - 26 * s) + '" stroke="#fff" stroke-opacity=".55" stroke-width="' + f(w1) + '"/>'
+        + '<path d="' + sh + '" fill="none" stroke="#4a505c" stroke-opacity=".34" stroke-width="' + f(1.6 * w1) + '" filter="url(#' + id + 'f)"/>'
+        + '<path d="' + hi2 + '" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="' + f(1.1 * w1) + '" stroke-linecap="round"/>'
+        + '<path d="' + hi + '" fill="none" stroke="#fff" stroke-opacity=".97" stroke-width="' + f(1.8 * w1) + '" stroke-linecap="round"/>'
+        + red(R, T, 30 * s, 1) + red(R, L, 34 * s, 2) + red(R, Q, 28 * s, 3) + red(Q, R, 24 * s, 4) + red(Q, B, 30 * s, 5)
+        + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(15 * s) + '" fill="url(#' + id + 'g)"/>'
+        + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(1.8 * w1) + '" fill="#ff3940"/>'
+        + '<circle cx="' + Q[0] + '" cy="' + Q[1] + '" r="' + f(24 * s) + '" fill="url(#' + id + 'g)" opacity=".6"/>'
+        + '<circle cx="' + X(W - 12 * s) + '" cy="' + f(H - 9 * s) + '" r="' + f(22 * s) + '" fill="url(#' + id + 'g)" opacity=".28"/>';
+    };
+    /* the rows (head, plate, line, points) as tall as the tallest of the three, so they line up; not on phones,
+       where one card shows at a time */
+    const wide = matchMedia('(min-width: 641px)');
+    const level = () => ['.tp-pc__head', '.tp-pc__lead', '.tp-pc__sub', '.tp-pc__pts'].forEach((sel) => {
+      const els = cards.map((c) => $(sel, c)).filter(Boolean);
+      els.forEach((e) => { e.style.minHeight = ''; });
+      if (!wide.matches) return;
+      const h = Math.max(...els.map((e) => e.getBoundingClientRect().height));
+      els.forEach((e) => { e.style.minHeight = h + 'px'; });
+    });
+    const all = () => { level(); cards.forEach(draw); };
+    window.tqCutCards = all;
+    all();
+    if ('ResizeObserver' in window) {
+      let q = 0;
+      const ro = new ResizeObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; all(); }); });
+      cards.forEach((c) => ro.observe(c));
+    }
   }
 
   /* ---- /programs/ on phones: the three program cards swipe sideways -------------------------
@@ -1361,6 +1442,7 @@
   startWhoFlow();
   startToasts();
   startProgSwiper();
+  startProgCards();
   startFitWide();
   startLiveDash();
   startSteppers();
