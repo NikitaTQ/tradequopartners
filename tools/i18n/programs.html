@@ -39,21 +39,17 @@
       </div>
 
       <div class="tp-stage">
-        <!-- the panel's two ribbons, both black, each with a soft shadow and a light edge (Partner_Cards_7a); they
-             stretch with the panel (preserveAspectRatio none), their width stays (non-scaling-stroke) -->
+        <!-- one black ribbon across the middle, with a soft shadow and a light edge (Partner_Cards_7a); it stretches
+             with the stage (preserveAspectRatio none), its width stays (non-scaling-stroke) -->
         <svg class="tp-ribbons" viewBox="0 0 1352 880" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
           <defs>
             <filter id="tpRibBlur" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
             <linearGradient id="tpRibBlack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0A0A0A"/><stop offset=".5" stop-color="#2B2C31"/><stop offset="1" stop-color="#0A0A0A"/></linearGradient>
-            <path id="tpRib1" d="M-40 150 C 300 60, 560 260, 820 180 S 1200 90, 1400 200" vector-effect="non-scaling-stroke"/>
-            <path id="tpRib2" d="M-40 650 C 300 570, 560 770, 820 690 S 1200 600, 1400 710" vector-effect="non-scaling-stroke"/>
+            <path id="tpRib1" d="M-40 420 C 300 330, 560 530, 820 450 S 1200 360, 1400 470" vector-effect="non-scaling-stroke"/>
           </defs>
           <use href="#tpRib1" stroke="rgba(20,22,28,.16)" stroke-width="20" stroke-linecap="round" transform="translate(0 16)" filter="url(#tpRibBlur)"/>
           <use href="#tpRib1" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
           <use href="#tpRib1" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
-          <use href="#tpRib2" stroke="rgba(20,22,28,.16)" stroke-width="20" stroke-linecap="round" transform="translate(0 16)" filter="url(#tpRibBlur)"/>
-          <use href="#tpRib2" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
-          <use href="#tpRib2" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
         </svg>
         <div class="tp-programs" data-progs>
           <article class="tp-pc">
