@@ -96,14 +96,14 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans.woff2?v=a3e1abcb7c) format('woff2'); }
 @font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc.woff2?v=1511bbee3a) format('woff2'); }
 @font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc.woff2?v=ed84a90471) format('woff2'); }
-@font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=20b360141d) format('woff2'); }
+@font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=a6ee5b5890) format('woff2'); }
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=9a232c4e92) format('woff2'); }
-@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=ab5ccca113) format('woff2'); }
-@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=caf877fcdb) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=5bd788c534) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=6f1e7c7e72) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=a2245cc498) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=58bb049ce7) format('woff2'); }
+@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=782f47b6c6) format('woff2'); }
+@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=aff4c52d58) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=168054bad6) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=3bf0f79b28) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=ecb46d38b6) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=465e2d0a80) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -1067,7 +1067,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-pc__cut { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
 .tp-pc__head { position: relative; display: flex; flex-direction: column; }
 .tp-pc__num { font-size: calc(19 * var(--pu)); line-height: 1; font-weight: 500; letter-spacing: .24em; color: #0b0b0d; }
-.tp-pc__name { max-width: calc(335 * var(--pu)); margin: calc(17 * var(--pu)) 0 0; font-size: calc(55 * var(--pu)); line-height: .98; font-weight: 700; letter-spacing: -.04em; color: #0b0b0d; text-wrap: balance; word-break: keep-all; -webkit-text-stroke: .012em currentColor; }
+.tp-pc .tp-pc__name { --h2s: calc(34 * var(--pu)); max-width: calc(330 * var(--pu)); margin: calc(17 * var(--pu)) 0 0; padding-inline-start: 0; line-height: 1.14; color: #0b0b0d; word-break: keep-all; }   
 .tp-pc__title { margin-top: auto; padding-top: calc(19 * var(--pu)); font-size: calc(23 * var(--pu)); line-height: 1.15; font-weight: 650; letter-spacing: -.01em; color: #0b0b0d; }
 .tp-pc__lead { position: relative; margin: calc(27 * var(--pu)) 0 0; padding: calc(22 * var(--pu)) 0 calc(12 * var(--pu)); display: flex; flex-direction: column; }
 .tp-pc__eyebrow { font-size: calc(18 * var(--pu)); line-height: 1; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: #0b0b0d; }
@@ -1099,7 +1099,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-pc { --pu: var(--pu-w); }
   .tp-pc__slab { border-radius: 20px; }
   .tp-pc__num { font-size: 13px; }
-  .tp-pc__name { min-height: 2em; max-width: none; }
+  .tp-pc .tp-pc__name { min-height: 2.28em; }
   .tp-pc__title, .tp-pc__sub, .tp-pc__pts li { font-size: 16px; }
   .tp-pc__eyebrow { font-size: 13px; letter-spacing: .26em; }
   .tp-pc__pts { gap: 8px; }
@@ -2870,7 +2870,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
             <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">01</span>
-              <h2 class="tp-pc__name" data-fitw>Introducing Broker</h2>
+              <h2 class="tp-pc__name tq-h2" data-fitw>Introducing Broker</h2>
               <span class="tp-pc__title">Trader vermitteln</span>
             </div>
             <p class="tp-pc__lead"><span class="tp-pc__eyebrow">BIS ZU</span><span class="tp-pc__big" data-fitw>87<span style="color: #e7131b;">%</span></span><span class="tp-pc__big2" data-fitw>Revshare</span></p>
@@ -2884,7 +2884,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
             <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">02</span>
-              <h2 class="tp-pc__name" data-fitw>Partner­netzwerk</h2>
+              <h2 class="tp-pc__name tq-h2" data-fitw>Partner­netzwerk</h2>
               <span class="tp-pc__title">Netzwerk aufbauen</span>
             </div>
             <p class="tp-pc__lead"><span class="tp-pc__eyebrow">UNBEGRENZT</span><span class="tp-pc__big" data-fitw><span style="color: #e7131b;">∞</span> Ebenen</span></p>
@@ -2898,7 +2898,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
             <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">03</span>
-              <h2 class="tp-pc__name" data-fitw>White Label</h2>
+              <h2 class="tp-pc__name tq-h2" data-fitw>White Label</h2>
               <span class="tp-pc__title">Eigene Marke starten</span>
             </div>
             <p class="tp-pc__lead"><span class="tp-pc__eyebrow">DIE MARKE IST</span><span class="tp-pc__big" data-fitw>Ihre<span style="color: #e7131b;">.</span></span></p>
@@ -3276,6 +3276,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=51e3eb552f" defer></script>
+<script src="../../assets/js/landing.js?v=ad8bd6c12a" defer></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ a letter.
 
 Needs network access and fontTools (pip install fonttools). All faces are SIL Open Font License.
 """
-import glob, html, json, os, re, subprocess, sys, tempfile, urllib.parse
+import glob, html, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.parse
 
 from fontTools.ttLib import TTFont
 
@@ -83,7 +83,8 @@ def subset(family, weight, chars):
         tmp.write(data)
         tmp.flush()
         cmap = TTFont(tmp.name).getBestCmap() or {}
-    return data, ''.join(c for c in chars if ord(c) not in cmap and not c.isspace())
+    # spaces and the invisible format marks (a zero-width space marks where a CJK name may break) need no glyph
+    return data, ''.join(c for c in chars if ord(c) not in cmap and not c.isspace() and unicodedata.category(c) != 'Cf')
 
 
 def main():

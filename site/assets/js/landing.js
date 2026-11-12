@@ -1069,7 +1069,14 @@
       const h = Math.max(...els.map((e) => e.getBoundingClientRect().height));
       els.forEach((e) => { e.style.minHeight = h + 'px'; });
     });
-    const all = () => { level(); cards.forEach(draw); };
+    /* the three names in one size: the smallest the fitting left (a long word steps its own name down, data-fitw) */
+    const sameNames = () => {
+      const ns = cards.map((c) => $('.tp-pc__name', c)).filter(Boolean);
+      if (ns.length < 2) return;
+      const fs = Math.min(...ns.map((n) => parseFloat(getComputedStyle(n).fontSize)));
+      ns.forEach((n) => { n.style.fontSize = fs + 'px'; });
+    };
+    const all = () => { sameNames(); level(); cards.forEach(draw); };
     window.tqCutCards = all;
     all();
     if ('ResizeObserver' in window) {
