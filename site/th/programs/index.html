@@ -1042,7 +1042,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tp-stage > * { position: relative; }   
 .tp-hero { padding-top: clamp(10px, 1.6vw, 22px); padding-bottom: clamp(48px, 6vw, 88px); }
 .tp-hero .tp-head { gap: 10px; }
-.tp-hero .tp-head .tp-sub { max-width: 64ch; font-size: 22px; }
+.tp-hero .tp-hero__lead { max-width: 64ch; margin: 0 auto; font-size: 22px; text-align: center; }   
 .tp-hero .tp-stage { margin-top: clamp(16px, 2vw, 26px); }
 .tp-hero .tp-head { max-width: 1120px; }
 .tp-hero .tp-h1 > span { display: block; }
@@ -1112,19 +1112,19 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (min-width: 961px) and (max-height: 1000px) {
   .tp-hero .tp-h1 { --h1s: clamp(24px, 4.2vh, 40px); }
   .tp-hero .tp-head { gap: 8px; }
-  .tp-hero .tp-head .tp-sub { font-size: 19px; line-height: 1.45; }
+  .tp-hero .tp-hero__lead { font-size: 19px; line-height: 1.45; }
   .tp-hero .tp-stage { margin-top: 12px; padding-top: 14px; padding-bottom: 32px; }
 }
 @media (min-width: 961px) and (max-height: 800px) {
   .tp-hero { padding-top: 4px; }
   .tp-hero .tp-h1 { --h1s: clamp(22px, 4vh, 32px); }
   .tp-hero .tp-head { gap: 6px; }
-  .tp-hero .tp-head .tp-sub { font-size: 16px; line-height: 1.4; }
+  .tp-hero .tp-hero__lead { font-size: 16px; line-height: 1.4; }
   .tp-hero .tp-stage { margin-top: 8px; padding: 10px 14px 20px; }
   .tp-programs { --pu-h: calc((100vh - 230px) / 771); }
 }
 @media (min-width: 961px) and (max-height: 760px) {
-  .tp-hero .tp-head .tp-sub { font-size: 15px; }
+  .tp-hero .tp-hero__lead { font-size: 15px; }
   .tp-hero .tp-stage { margin-top: 6px; padding-top: 8px; }
 }
 @media (max-width: 640px) {
@@ -1134,6 +1134,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tp-programs::-webkit-scrollbar { display: none; }
   .tp-pc { flex: 0 0 86%; scroll-snap-align: center; scroll-snap-stop: always; }
   .tp-progdots { display: flex; justify-content: center; gap: 2px; margin-top: -53px; }
+  .tp-hero .tp-hero__lead { margin-top: 14px; padding-inline: 16px; }   
   .tp-progdots button { width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
   .tp-progdots button::before { content: ''; width: 8px; height: 8px; border-radius: 999px; background: rgba(14,14,16,.2); transition: width .3s ease, background-color .3s ease; }
   .tp-progdots button[aria-current="true"]::before { width: 24px; background: #e7131b; }
@@ -2851,7 +2852,6 @@ h1, h2 { line-height: 1.2 !important; }
     <section id="programs" class="tp-sec tp-hero" data-screen-label="Partner programs — hero">
       <div class="tp-head">
         <h1 class="tp-h1 tq-h1" data-fitw>หนึ่งโปรแกรมพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ <span style="color: #e7131b;">สามช่องทางสร้างรายได้</span></h1>
-        <p class="tp-sub tp-hero__lead"><span class="tq-nph">แนะนำเ⁠ท⁠ร⁠ด⁠เ⁠ด⁠อ⁠ร์ สร้างเครือข่ายพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ หรือเปิดตัวแบรนด์ของคุณเอง ไม่ว่าคุณจะเลือกช่องทางใด จะมีผู้จัดการพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ส่วนตัวทำงานร่วมกับคุณ</span><span class="tq-ph">แนะนำเ⁠ท⁠ร⁠ด⁠เ⁠ด⁠อ⁠ร์ สร้างเครือข่ายพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ หรือเปิดตัวแบรนด์ของคุณเอง</span></p>
       </div>
 
       <div class="tp-stage">
@@ -2922,6 +2922,8 @@ h1, h2 { line-height: 1.2 !important; }
           <button type="button" aria-label="เปิดตัวแบรนด์ของคุณ"></button>
         </div>
       </div>
+      <!-- the line under the heading, under the cards -->
+      <p class="tp-sub tp-hero__lead"><span class="tq-nph">แนะนำเ⁠ท⁠ร⁠ด⁠เ⁠ด⁠อ⁠ร์ สร้างเครือข่ายพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ หรือเปิดตัวแบรนด์ของคุณเอง ไม่ว่าคุณจะเลือกช่องทางใด จะมีผู้จัดการพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ส่วนตัวทำงานร่วมกับคุณ</span><span class="tq-ph">แนะนำเ⁠ท⁠ร⁠ด⁠เ⁠ด⁠อ⁠ร์ สร้างเครือข่ายพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ หรือเปิดตัวแบรนด์ของคุณเอง</span></p>
     </section>
 
     <!-- Who it's for, then Why partners choose. The Who it's for card (Who_Its_For_Drum); below it the dark perks
