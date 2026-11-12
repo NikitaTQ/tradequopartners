@@ -51,13 +51,13 @@
           <use href="#tpRib1" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
           <use href="#tpRib1" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
         </svg>
-        <!-- the three cards (Partner_Cards_8): slabs of grey frosted glass, each cut into facets (the corner, the plate
-             under the figure) whose edges catch the light and meet in two red sparks. The facets are an SVG per card
-             drawn by landing.js (startProgCards) from where the figure's plate sits; the rows line up across the
-             three cards (subgrid). -->
+        <!-- the three cards (Partner_Cards_8): slabs of grey frosted glass leaning a little to the right (the slab is
+             skewed, the text stays upright), each cut into facets (the corner, the plate under the figure) whose edges
+             catch the light and meet in two red sparks. The facets are an SVG per card drawn by landing.js
+             (startProgCards) from where the figure's plate sits; it also lines the rows up across the three cards. -->
         <div class="tp-programs" data-progs>
           <article class="tp-pc">
-            <svg class="tp-pc__cut" aria-hidden="true" focusable="false"></svg>
+            <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">01</span>
               <h2 class="tp-pc__name" data-fitw>{{pp.p1.name}}</h2>
@@ -71,7 +71,7 @@
             </div>
           </article>
           <article class="tp-pc">
-            <svg class="tp-pc__cut" aria-hidden="true" focusable="false"></svg>
+            <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">02</span>
               <h2 class="tp-pc__name" data-fitw>{{pp.p2.name}}</h2>
@@ -85,7 +85,7 @@
             </div>
           </article>
           <article class="tp-pc">
-            <svg class="tp-pc__cut" aria-hidden="true" focusable="false"></svg>
+            <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
             <div class="tp-pc__head">
               <span class="tp-pc__num" aria-hidden="true">03</span>
               <h2 class="tp-pc__name" data-fitw>{{pp.p3.name}}</h2>
