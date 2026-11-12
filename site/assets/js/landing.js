@@ -1031,51 +1031,52 @@
       const pt = (p) => p[0] + ' ' + p[1], seg = (a, b) => 'M' + pt(a) + 'L' + pt(b), poly = (...p) => 'M' + p.map(pt).join('L') + 'Z';
       const along = (a, b, len) => { const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1; return [f(a[0] + dx / d * len), f(a[1] + dy / d * len)]; };
       const id = 'tpc' + i, w1 = Math.max(1, s);
-      /* an edge: its shadow on the lower-left side, a bright line, a fainter second line on the other side (the
-         facet's thickness) */
+      /* an edge is a bevel of cut glass: a soft shade on its lower-left side, a soft glow on the other, a fine dark cut
+         and a bright line on top */
       const edge = (a, b) => {
         const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1;
         let nx = -dy / d, ny = dx / d;
         if (ny - nx < 0) { nx = -nx; ny = -ny; }
         const o = (p, k) => [f(p[0] + nx * k), f(p[1] + ny * k)];
-        return { sh: seg(o(a, 1.6 * s), o(b, 1.6 * s)), hi: seg(a, b), hi2: seg(o(a, -3.2 * s), o(b, -3.2 * s)) };
+        return { shade: seg(o(a, 3 * s), o(b, 3 * s)), glow: seg(o(a, -3.2 * s), o(b, -3.2 * s)), cut: seg(o(a, 1.3 * s), o(b, 1.3 * s)), hi: seg(a, b) };
       };
       const es = [edge(T, R), edge(R, L), edge(R, Q), edge(Q, B)];
-      const sh = es.map((e) => e.sh).join(''), hi = es.map((e) => e.hi).join(''), hi2 = es.map((e) => e.hi2).join('');
+      const join = (k) => es.map((e) => e[k]).join('');
       /* a red stroke that fades out along an edge from a spark */
       const red = (a, b, len, n) => {
         const e = along(a, b, len);
         return '<linearGradient id="' + id + 'r' + n + '" gradientUnits="userSpaceOnUse" x1="' + a[0] + '" y1="' + a[1] + '" x2="' + e[0] + '" y2="' + e[1] + '"><stop offset="0" stop-color="#ff1d26"/><stop offset="1" stop-color="#ff1d26" stop-opacity="0"/></linearGradient>'
-          + '<path d="' + seg(a, e) + '" stroke="url(#' + id + 'r' + n + ')" stroke-width="' + f(1.7 * w1) + '" stroke-linecap="round"/>';
+          + '<path d="' + seg(a, e) + '" stroke="url(#' + id + 'r' + n + ')" stroke-width="' + f(1.4 * w1) + '" stroke-linecap="round"/>';
       };
       const lin = (n, x1, y1, x2, y2, stops) => '<linearGradient id="' + id + n + '" gradientUnits="userSpaceOnUse" x1="' + f(x1) + '" y1="' + f(y1) + '" x2="' + f(x2) + '" y2="' + f(y2) + '">'
         + stops.map((t) => '<stop offset="' + t[0] + '" stop-color="' + t[1] + '" stop-opacity="' + t[2] + '"/>').join('') + '</linearGradient>';
       const mid = [(T[0] + R[0]) / 2, (T[1] + R[1]) / 2];
+      /* the corner piece: brightest along its cut, fading toward the card's corner */
+      const cn = (() => { const dx = R[0] - T[0], dy = R[1] - T[1], d = Math.hypot(dx, dy) || 1; let nx = -dy / d, ny = dx / d; if (ny > 0) { nx = -nx; ny = -ny; } return [mid[0] + nx * 60 * s, mid[1] + ny * 60 * s]; })();
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
       svg.innerHTML = '<defs>'
-        /* the light falls from the top left: the head facet darkens toward the corner's edge */
-        + lin('h', X(0), 0, mid[0], mid[1], [[0, '#fff', .5], [.7, '#fff', .08], [1, '#262a34', .06]])
-        + lin('c', T[0], 0, X(W), f(yR), [[0, '#fff', .42], [1, '#fff', .16]])
-        + lin('p', X(0), 0, R[0], 0, [[0, '#fff', .12], [1, '#262a34', .05]])
-        + lin('s', R[0], 0, Q[0], 0, [[0, '#262a34', .07], [1, '#262a34', .02]])
-        /* under the plate: its shadow, then a light band, then darker toward the foot */
-        + lin('b', 0, yB, 0, H, [[0, '#262a34', .1], [Math.min(.99, 24 * s / (H - yB || 1)), '#fff', .35], [Math.min(.995, 90 * s / (H - yB || 1)), '#fff', .3], [1, '#262a34', .03]])
-        + lin('k', X(0), 0, X(W), 0, [[0, '#fff', .12], [.6, '#fff', 0], [1, '#262a34', .06]])
+        /* the light falls from the top left */
+        + lin('h', X(0), 0, mid[0], mid[1], [[0, '#fff', .32], [.75, '#fff', .08], [1, '#fff', 0]])
+        + lin('c', mid[0], mid[1], cn[0], cn[1], [[0, '#fff', .62], [.35, '#fff', .3], [1, '#fff', .14]])
+        + lin('p', X(0), 0, R[0], 0, [[0, '#fff', .22], [.6, '#fff', .1], [1, '#fff', .03]])
+        + lin('q', R[0], 0, X(W), 0, [[0, '#fff', .28], [1, '#fff', .12]])
+        + lin('b', 0, yB, 0, H, [[0, '#fff', .14], [Math.min(.99, 60 * s / (H - yB || 1)), '#fff', .06], [1, '#fff', 0]])
         + '<radialGradient id="' + id + 'g"><stop offset="0" stop-color="#ff1d26" stop-opacity=".75"/><stop offset=".35" stop-color="#ff1d26" stop-opacity=".22"/><stop offset="1" stop-color="#ff1d26" stop-opacity="0"/></radialGradient>'
-        + '<filter id="' + id + 'f" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="' + f(Math.max(0.7, 1.1 * s)) + '"/></filter>'
+        + '<filter id="' + id + 'f" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="' + f(Math.max(1.4, 2.4 * s)) + '"/></filter>'
+        + '<filter id="' + id + 'k" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="' + f(Math.max(0.35, 0.5 * s)) + '"/></filter>'
         + '</defs>'
         + '<path d="' + poly([X(0), 0], T, R, L) + '" fill="url(#' + id + 'h)"/>'
         + '<path d="' + poly(T, C, E) + '" fill="url(#' + id + 'c)"/>'
         + '<path d="' + poly(L, R, Q, B) + '" fill="url(#' + id + 'p)"/>'
-        + '<path d="' + poly(R, E, [E[0], Q[1]], Q) + '" fill="url(#' + id + 's)"/>'
+        + '<path d="' + poly(R, E, [E[0], Q[1]], Q) + '" fill="url(#' + id + 'q)"/>'
         + '<rect x="0" y="' + f(yB) + '" width="' + W + '" height="' + f(H - yB) + '" fill="url(#' + id + 'b)"/>'
-        + '<rect x="0" y="' + f(yB) + '" width="' + W + '" height="' + f(H - yB) + '" fill="url(#' + id + 'k)"/>'
-        + '<path d="' + sh + '" fill="none" stroke="#4a505c" stroke-opacity=".34" stroke-width="' + f(1.6 * w1) + '" filter="url(#' + id + 'f)"/>'
-        + '<path d="' + hi2 + '" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="' + f(1.1 * w1) + '" stroke-linecap="round"/>'
-        + '<path d="' + hi + '" fill="none" stroke="#fff" stroke-opacity=".97" stroke-width="' + f(1.8 * w1) + '" stroke-linecap="round"/>'
-        + red(R, T, 30 * s, 1) + red(R, L, 34 * s, 2) + red(R, Q, 28 * s, 3) + red(Q, R, 24 * s, 4) + red(Q, B, 30 * s, 5)
-        + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(15 * s) + '" fill="url(#' + id + 'g)"/>'
-        + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(1.8 * w1) + '" fill="#ff3940"/>'
+        + '<path d="' + join('shade') + '" fill="none" stroke="#3c424e" stroke-opacity=".13" stroke-width="' + f(5 * w1) + '" filter="url(#' + id + 'f)"/>'
+        + '<path d="' + join('glow') + '" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="' + f(5 * w1) + '" filter="url(#' + id + 'f)"/>'
+        + '<path d="' + join('cut') + '" fill="none" stroke="#4a505c" stroke-opacity=".3" stroke-width="' + f(0.9 * w1) + '" filter="url(#' + id + 'k)"/>'
+        + '<path d="' + join('hi') + '" fill="none" stroke="#fff" stroke-width="' + f(1.6 * w1) + '" stroke-linecap="round"/>'
+        + red(R, T, 16 * s, 1) + red(R, L, 18 * s, 2) + red(R, Q, 14 * s, 3) + red(Q, R, 14 * s, 4) + red(Q, B, 20 * s, 5)
+        + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(12 * s) + '" fill="url(#' + id + 'g)" opacity=".8"/>'
+        + '<circle cx="' + R[0] + '" cy="' + R[1] + '" r="' + f(1.3 * w1) + '" fill="#ff3940"/>'
         + '<circle cx="' + Q[0] + '" cy="' + Q[1] + '" r="' + f(24 * s) + '" fill="url(#' + id + 'g)" opacity=".6"/>';
     };
     /* the rows (head, plate, line, points) as tall as the tallest of the three, so they line up; not on phones,
