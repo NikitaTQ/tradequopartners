@@ -88,7 +88,7 @@
 .tp-pc__cut { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
 .tp-pc__head { position: relative; display: flex; flex-direction: column; }
 .tp-pc__num { font-size: calc(19 * var(--pu)); line-height: 1; font-weight: 500; letter-spacing: .24em; color: #0b0b0d; }
-.tp-pc__name { max-width: calc(335 * var(--pu)); margin: calc(17 * var(--pu)) 0 0; font-size: calc(55 * var(--pu)); line-height: .98; font-weight: 700; letter-spacing: -.04em; color: #0b0b0d; text-wrap: balance; word-break: keep-all; -webkit-text-stroke: .012em currentColor; }
+.tp-pc .tp-pc__name { --h2s: calc(34 * var(--pu)); max-width: calc(330 * var(--pu)); margin: calc(17 * var(--pu)) 0 0; padding-inline-start: 0; line-height: 1.14; color: #0b0b0d; word-break: keep-all; }   /* the program's name in the site's H2 face (.tq-h2: Syncopate or the language's look-alike, capitals, tracked); it keeps clear of the glass's corner cut; a word too wide for it steps down (data-fitw) */
 .tp-pc__title { margin-top: auto; padding-top: calc(19 * var(--pu)); font-size: calc(23 * var(--pu)); line-height: 1.15; font-weight: 650; letter-spacing: -.01em; color: #0b0b0d; }
 .tp-pc__lead { position: relative; margin: calc(27 * var(--pu)) 0 0; padding: calc(22 * var(--pu)) 0 calc(12 * var(--pu)); display: flex; flex-direction: column; }
 .tp-pc__eyebrow { font-size: calc(18 * var(--pu)); line-height: 1; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: #0b0b0d; }
@@ -121,7 +121,7 @@
   .tp-pc { --pu: var(--pu-w); }
   .tp-pc__slab { border-radius: 20px; }
   .tp-pc__num { font-size: 13px; }
-  .tp-pc__name { min-height: 2em; max-width: none; }
+  .tp-pc .tp-pc__name { min-height: 2.28em; }
   .tp-pc__title, .tp-pc__sub, .tp-pc__pts li { font-size: 16px; }
   .tp-pc__eyebrow { font-size: 13px; letter-spacing: .26em; }
   .tp-pc__pts { gap: 8px; }
