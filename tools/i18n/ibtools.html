@@ -135,7 +135,19 @@
       </div>
     </section>
 
-    <!-- Network insights (IB_Network_Insights design), right after the hero: the pitch, two views to pick (V.01 Network,
+    <!-- Branded toolkit (IB_Branded_Toolkit_1 design), right after the hero: the IB's own analysis tools (Optimus Prime,
+         Zero Edge, BFS, UTBOT) under a sample IB brand (NORTHLINE): the IB's scanner, a TradingView-style chart of the picked
+         tool and the four tools to pick from (desktop); the tools as a switch over the chart (phones). The markup is the
+         design's (tools/i18n/partials/ib-toolkit.html, a class per inline style of the design; partner.css, "the Branded
+         toolkit block"); assets/js/ib-toolkit.js picks the tools. Quotes and levels are demo data, the same on every
+         language. The button goes on to the next block. -->
+    <section id="toolkit" class="tq-ibt" data-ib-tk data-tool="op" data-screen-label="IB Tools · Branded toolkit">
+{{> ib-toolkit}}
+      <script>/* each composition at its own size, scaled to the screen: the desktop one down from 1440px, the phone one from 390px (at most 1.5x) */
+(function(){var s=document.currentScript.parentNode,d=s.querySelector('.tq-ibt__desk'),m=s.querySelector('.tq-ibt__mob');function f(){var w=s.clientWidth;d.style.zoom=Math.min(1,w/1440);m.style.zoom=Math.min(1.5,w/390)}f();addEventListener('resize',f)})();</script>
+    </section>
+
+    <!-- Network insights (IB_Network_Insights design), after the branded toolkit: the pitch, two views to pick (V.01 Network,
          V.02 Performance) and a red button to the Sub-IB network block; right a canvas: the partner tree in glass (You at
          the top, Sub-IBs level by level, pulses running up the links, the strongest branch red), which turns into a bar
          chart of the same partners by net deposits, and back (7.5 s / 5.5 s, held while the pointer is over it; a click on a
@@ -404,6 +416,7 @@
 
 <script src="{{root}}assets/js/transition.js" defer></script>
 <script src="{{root}}assets/js/landing.js" defer></script>
+<script src="{{root}}assets/js/ib-toolkit.js" defer></script>
 <script src="{{root}}assets/js/ib-insights.js" defer></script>
 <script src="{{root}}assets/js/ib-clients.js" defer></script>
 <script src="{{root}}assets/js/ib-ai.js" defer></script>
