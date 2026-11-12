@@ -100,11 +100,11 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=20b360141d) format('woff2'); }
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=9a232c4e92) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=ab5ccca113) format('woff2'); }
-@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=b78dd3f193) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=9e56bc73a8) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=4078fc2d7a) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=92e7bf3ea9) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=9ca62f8635) format('woff2'); }
+@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=caf877fcdb) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=50ced29a40) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=4334a3dfb3) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=c9e1c56071) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=abb9e1e34a) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -1054,6 +1054,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   background: radial-gradient(60% 60% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(160deg, #eef0f3 0%, #d3d6dc 100%); }
 .tp-hero .tp-stage::before { content: none; }
 .tp-ribbons { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; pointer-events: none; }
+.tp-hero .tp-stage { padding-top: 20px; background: none; overflow: visible; }   
+.tp-hero .tp-ribbons { left: 50%; right: auto; width: 100vw; transform: translateX(-50%); }   
+.tp-hero .tp-pc { box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.7), inset 0 -20px 40px -20px rgba(255,255,255,.5), 0 0 0 1px rgba(18,22,30,.07), 0 2px 10px rgba(18,22,30,.05), 0 30px 60px -30px rgba(30,34,44,.4); }   
 .tp-programs { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }   
 .tp-pc { position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 30px; border-radius: 30px; color: #141416;
@@ -1172,11 +1175,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 @media (max-width: 640px) {
   .tp-hero .tp-stage { margin-inline: calc(-1 * clamp(16px, 4vw, 56px)); padding: 6px 0 0; border-radius: 0; }   
-  .tp-stage > .tp-programs { display: flex; gap: 12px; max-width: none; margin: 0; padding: 4px 12px 50px; overflow-x: auto;    overscroll-behavior-x: contain;
+  .tp-stage > .tp-programs { display: flex; gap: 12px; max-width: none; margin: 0; padding: 4px 12px 64px; overflow-x: auto;    overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory; scroll-padding-inline: 12px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .tp-programs::-webkit-scrollbar { display: none; }
   .tp-pc { flex: 0 0 86%; scroll-snap-align: center; scroll-snap-stop: always; }
-  .tp-progdots { display: flex; justify-content: center; gap: 2px; margin-top: -39px; }
+  .tp-progdots { display: flex; justify-content: center; gap: 2px; margin-top: -53px; }
   .tp-progdots button { width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
   .tp-progdots button::before { content: ''; width: 8px; height: 8px; border-radius: 999px; background: rgba(14,14,16,.2); transition: width .3s ease, background-color .3s ease; }
   .tp-progdots button[aria-current="true"]::before { width: 24px; background: #e7131b; }
@@ -2299,6 +2302,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-ibn__pill svg { display: block; flex: none; }
 .tq-ibn__pill b { font-size: clamp(18px, 1.5vw, 21px); font-weight: 700; line-height: 1.15; text-wrap: balance; }
 .tq-ibn__pill span { max-width: 300px; font-size: 14px; line-height: 1.45; color: #55585f; text-wrap: pretty; }
+@media (min-width: 961px) {
+  .tq-ibn__pillars { gap: 12px; }
+  .tq-ibn__pill { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; row-gap: 3px; align-items: center; align-content: center; text-align: start;
+    padding: 15px 20px; border-radius: 18px; box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 18px 30px -24px rgba(18,22,30,.4); }
+  .tq-ibn__pill svg { grid-row: 1 / span 2; width: 30px; height: 30px; }
+  .tq-ibn__pill b { font-size: 16px; }
+  .tq-ibn__pill span { max-width: none; font-size: 13px; line-height: 1.4; }
+}
 .tq-ibn__stage--m, .tq-ibn__lead-m, .tq-ibn__q { display: none; }
 @media (max-width: 640px) {
   .tq-ibn__wrap { min-height: 0; justify-content: flex-start; gap: 18px; padding-block: 22px 34px; }
@@ -2703,21 +2714,17 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
       </div>
 
       <div class="tp-stage">
-        <!-- the panel's two ribbons, both black, each with a soft shadow and a light edge (Partner_Cards_7a); they
-             stretch with the panel (preserveAspectRatio none), their width stays (non-scaling-stroke) -->
+        <!-- one black ribbon across the middle, with a soft shadow and a light edge (Partner_Cards_7a); it stretches
+             with the stage (preserveAspectRatio none), its width stays (non-scaling-stroke) -->
         <svg class="tp-ribbons" viewBox="0 0 1352 880" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
           <defs>
             <filter id="tpRibBlur" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
             <linearGradient id="tpRibBlack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0A0A0A"/><stop offset=".5" stop-color="#2B2C31"/><stop offset="1" stop-color="#0A0A0A"/></linearGradient>
-            <path id="tpRib1" d="M-40 150 C 300 60, 560 260, 820 180 S 1200 90, 1400 200" vector-effect="non-scaling-stroke"/>
-            <path id="tpRib2" d="M-40 650 C 300 570, 560 770, 820 690 S 1200 600, 1400 710" vector-effect="non-scaling-stroke"/>
+            <path id="tpRib1" d="M-40 420 C 300 330, 560 530, 820 450 S 1200 360, 1400 470" vector-effect="non-scaling-stroke"/>
           </defs>
           <use href="#tpRib1" stroke="rgba(20,22,28,.16)" stroke-width="20" stroke-linecap="round" transform="translate(0 16)" filter="url(#tpRibBlur)"/>
           <use href="#tpRib1" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
           <use href="#tpRib1" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
-          <use href="#tpRib2" stroke="rgba(20,22,28,.16)" stroke-width="20" stroke-linecap="round" transform="translate(0 16)" filter="url(#tpRibBlur)"/>
-          <use href="#tpRib2" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
-          <use href="#tpRib2" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
         </svg>
         <div class="tp-programs" data-progs>
           <article class="tp-pc">
