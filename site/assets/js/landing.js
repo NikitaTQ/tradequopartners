@@ -1050,7 +1050,7 @@
       };
       const lin = (n, x1, y1, x2, y2, stops) => '<linearGradient id="' + id + n + '" gradientUnits="userSpaceOnUse" x1="' + f(x1) + '" y1="' + f(y1) + '" x2="' + f(x2) + '" y2="' + f(y2) + '">'
         + stops.map((t) => '<stop offset="' + t[0] + '" stop-color="' + t[1] + '" stop-opacity="' + t[2] + '"/>').join('') + '</linearGradient>';
-      const mid = [(T[0] + R[0]) / 2, (T[1] + R[1]) / 2], xr = X(W - 22 * s);
+      const mid = [(T[0] + R[0]) / 2, (T[1] + R[1]) / 2];
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
       svg.innerHTML = '<defs>'
         /* the light falls from the top left: the head facet darkens toward the corner's edge */
@@ -1070,9 +1070,6 @@
         + '<path d="' + poly(R, E, [E[0], Q[1]], Q) + '" fill="url(#' + id + 's)"/>'
         + '<rect x="0" y="' + f(yB) + '" width="' + W + '" height="' + f(H - yB) + '" fill="url(#' + id + 'b)"/>'
         + '<rect x="0" y="' + f(yB) + '" width="' + W + '" height="' + f(H - yB) + '" fill="url(#' + id + 'k)"/>'
-        /* the slab's side, seen on the right */
-        + '<path d="M' + xr + ' ' + f(26 * s) + 'V' + f(H - 26 * s) + '" stroke="#3c414c" stroke-opacity=".16" stroke-width="' + f(w1) + '"/>'
-        + '<path d="M' + f(xr + (rtl ? -1.2 : 1.2) * w1) + ' ' + f(26 * s) + 'V' + f(H - 26 * s) + '" stroke="#fff" stroke-opacity=".55" stroke-width="' + f(w1) + '"/>'
         + '<path d="' + sh + '" fill="none" stroke="#4a505c" stroke-opacity=".34" stroke-width="' + f(1.6 * w1) + '" filter="url(#' + id + 'f)"/>'
         + '<path d="' + hi2 + '" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="' + f(1.1 * w1) + '" stroke-linecap="round"/>'
         + '<path d="' + hi + '" fill="none" stroke="#fff" stroke-opacity=".97" stroke-width="' + f(1.8 * w1) + '" stroke-linecap="round"/>'
