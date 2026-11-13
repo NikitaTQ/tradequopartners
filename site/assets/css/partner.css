@@ -2256,7 +2256,7 @@
 
 /* ---- IB Tools: the Copy trading hand-off block (Liquid_Glass_Hand-off, variant 4a, #copy) ----------------------------
    Scroll-driven: the section is the stage (one screen; its top --hdr kept free for the site's header, which hides on the
-   way down and comes back on the way up) plus three screens of scroll; the stage holds still (sticky) while they pass, and assets/js/ib-copy.js turns how far they have passed into the
+   way down and comes back on the way up) plus 2.1 screens of scroll; the stage holds still (sticky) while they pass, and assets/js/ib-copy.js turns how far they have passed into the
    animation. Desktops (1200px+): the design's 1440x900 composition as it is (sizes in the design's px), scaled to fit the
    stage by the section's script (zoom; --z lines the stage's background up with it, so wider screens carry it on to
    the edges). Narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition (the board's own
@@ -2264,7 +2264,7 @@
    phone screens drawn over them with the design's matrix3d, the client's thumb left over its screen by a clip-path),
    the drop (a WebGL canvas, assets/js/ib-copy.js), a ring where it lands, a progress rail. Type: Inter (Fragment Mono and
    DM Sans in the design; figures tabular), the H2 in the site's H2 face with the design's tracking; 800 is 700. */
-.tq-ibcp { --hdr: 68px; position: relative; box-sizing: border-box; height: 400svh; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.tq-ibcp { --hdr: 68px; position: relative; box-sizing: border-box; height: 310svh; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 .tq-ibcp__stage { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding-top: var(--hdr); overflow: hidden; display: flex; align-items: center;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px),
     radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(50% + var(--hdr) / 2 + 450px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
