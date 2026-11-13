@@ -290,10 +290,10 @@
       const t = document.getElementById(a.getAttribute('href').slice(1));
       if (!t) return;
       e.preventDefault();
-      /* clear of the sticky header (68px once scrolled); a stop inside a full-screen scene goes exactly there,
+      /* clear of the sticky header (72px once scrolled); a stop inside a full-screen scene goes exactly there,
          the header steps aside for the scene anyway */
       const head = $('header.tq-head');
-      const off = head && !t.closest('[data-flip-track]') ? 68 : 0;
+      const off = head && !t.closest('[data-flip-track]') ? 72 : 0;
       go(t.getBoundingClientRect().top + scrollY - off);
       history.replaceState(null, '', '#' + t.id);
     }));
