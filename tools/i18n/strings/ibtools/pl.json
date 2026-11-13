@@ -204,5 +204,12 @@
   "ib.sig.note": "Dane przykładowe, fikcyjna marka. Signal Check sprawdza Twoje kryteria, nie przyszłe wyniki. Sygnały to informacje, nie realizacja transakcji; zyski nie są gwarantowane.",
   "ib.ps.h2": "<line>Twoje relacje.</line> <line>Wyraźnie przypisane do Ciebie.</line>",
   "ib.ps.p": "Klienci, których polecasz, są rejestrowani pod Twoim IB i pozostają powiązani z Twoim profilem.",
-  "ib.ps.cta": "Poznaj Partnershield"
+  "ib.ps.cta": "Poznaj Partnershield",
+  "ib.cp.eye": "Narzędzia IB · Copy trading pod Twoją marką",
+  "ib.cp.h2": "<line>Ich doświadczenie.</line> <line>Przelane do Twojego.</line>",
+  "ib.cp.s1": "Dostawca otwiera transakcję.",
+  "ib.cp.s2": "Trafia na konto Twojego klienta — w jego własnej wielkości.",
+  "ib.cp.cta": "Poznaj copy trading",
+  "ib.cp.by": "Obsługiwane przez",
+  "ib.cp.note": "Ilustracja, fikcyjne tożsamości. Strategie prowadzą niezależni dostawcy na SocialTrading.ai. Copy trading wiąże się z ryzykiem strat; wyniki z przeszłości nie gwarantują przyszłych."
 }

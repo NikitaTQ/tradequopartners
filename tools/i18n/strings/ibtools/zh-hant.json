@@ -204,5 +204,12 @@
   "ib.sig.note": "示意數據，品牌為虛構。Signal Check 檢驗的是您的標準，而非未來結果。訊號僅為資訊，不代表執行交易；不保證收益。",
   "ib.ps.h2": "<line>您的客戶關係，</line><line>清楚歸屬於您。</line>",
   "ib.ps.p": "您介紹的客戶將註冊在您的IB名下，並持續關聯到您的個人資料。",
-  "ib.ps.cta": "了解 Partnershield"
+  "ib.ps.cta": "了解 Partnershield",
+  "ib.cp.eye": "IB工具 · 品牌跟單交易",
+  "ib.cp.h2": "<line>他們的經驗，</line><line>注入您的帳戶。</line>",
+  "ib.cp.s1": "策略提供者開倉。",
+  "ib.cp.s2": "交易流入您客戶的帳戶——按客戶自己的倉位比例。",
+  "ib.cp.cta": "了解跟單交易",
+  "ib.cp.by": "技術支援",
+  "ib.cp.note": "示意圖，人物均為虛構。策略由SocialTrading.ai上的獨立提供者運作。跟單交易存在虧損風險；過往表現不代表未來結果。"
 }

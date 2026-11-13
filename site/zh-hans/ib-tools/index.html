@@ -100,10 +100,10 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=10e47a2046) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=7d6b5ac5a0) format('woff2'); }
 @font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=258f5bb423) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=54136552a6) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=866eb312cb) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=539b1eb078) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=0ac153a3a1) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=18da92dfc8) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=43007dd31f) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=ce26d9c325) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=ab4e69f826) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -1636,6 +1636,130 @@ footer p { font-size: 12px !important; }
 @media (prefers-reduced-motion: reduce) {
 .tq-ibp__go { transition: none; }
 }
+.tq-ibcp { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px),
+    radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(900px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
+    radial-gradient(calc(792px * var(--z, 1)) calc(585px * var(--z, 1)) at calc(50% + 201.6px * var(--z, 1)) calc(360px * var(--z, 1)), #e8e8ee 0%, #d5d5dc 55%, #c3c4cb 100%); }
+.tq-ibcp::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; z-index: 2; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+.tq-ibcp a { text-decoration: none; }
+.tq-ibcp__in { position: relative; width: 1440px; height: 900px; margin: 0 auto; }
+.tq-ibcp__txt { position: absolute; z-index: 3; left: 72px; top: 0; bottom: 0; width: 380px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+.tq-ibcp__eye { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #5e5f64; font-variant-numeric: tabular-nums; }
+.tq-ibcp__h2 { --h2s: 32px; margin: 0; padding-inline-start: 0; line-height: 1.16; letter-spacing: -.01em; text-wrap: wrap; }
+.tq-ibcp__h2 .tq-line { display: block; }
+.tq-ibcp__h2 .tq-line:first-child { background: linear-gradient(180deg, #3a3c42 0%, #0b0b0d 48%, #5e5f64 62%, #1c1d21 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tq-ibcp__h2 .tq-line + .tq-line { color: #d10f17; }
+.tq-ibcp__steps { display: grid; }
+.tq-ibcp__step { grid-area: 1 / 1; display: flex; gap: 14px; margin: 0; font-size: 18px; line-height: 1.55; color: #3a3b40; text-wrap: pretty; }
+.tq-ibcp__step > span:first-child { flex: none; padding-top: 4px; font-size: 13px; line-height: 1.55; color: #e7131b; font-variant-numeric: tabular-nums; }
+.tq-ibcp__step + .tq-ibcp__step { opacity: 0; }
+.tq-ibcp__go { align-self: flex-start; display: flex; align-items: center; gap: 20px; height: 56px; padding: 0 5px 0 26px; border-radius: 999px; box-sizing: border-box;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); color: #fff; font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 18px 30px -18px rgba(184,14,21,.7); transition: filter .25s ease; }
+.tq-ibcp__go:hover, .tq-ibcp__go:focus-visible { color: #fff; filter: brightness(1.06); }
+.tq-ibcp__go:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
+.tq-ibcp__arr { flex: none; width: 46px; height: 46px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+[dir="rtl"] .tq-ibcp__arr svg { transform: scaleX(-1); }
+.tq-ibcp__by { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #5e5f64; }
+.tq-ibcp__st { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; letter-spacing: -.01em; line-height: 1; white-space: nowrap; }
+.tq-ibcp__st svg { flex: none; fill: currentColor; }
+.tq-ibcp__st--by { gap: 5px; height: 14px; font-size: 13px; color: #4a4b50; }
+.tq-ibcp__note { position: absolute; z-index: 3; left: 72px; bottom: 24px; width: 340px; margin: 0; font-size: 11px; line-height: 1.5; color: #4a4b50; }
+.tq-ibcp__board { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; }
+.tq-ibcp__hand { position: absolute; left: 0; top: 0; width: 790px; height: 1024px; transform-origin: 0 0; will-change: transform; }
+.tq-ibcp__hand + .tq-ibcp__hand { width: 746px; }
+.tq-ibcp__img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
+.tq-ibcp__on { position: absolute; inset: 0; }
+.tq-ibcp__on--thumb { clip-path: polygon(0 0, 746px 0, 746px 335px, 410px 335px, 410px 545px, 746px 545px, 746px 1024px, 0 1024px); }
+.tq-ibcp__mx { position: absolute; left: 0; top: 0; width: 300px; height: 650px; transform-origin: 0 0; }
+.tq-ibcp__ga { position: absolute; left: 0; top: 0; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 50%; opacity: 0; pointer-events: none;
+  background: radial-gradient(circle, rgba(255,58,65,.7) 0%, rgba(231,19,27,.2) 40%, rgba(231,19,27,0) 70%); }
+.tq-ibcp__gl { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; pointer-events: none; }
+.tq-ibcp__ring { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; box-sizing: border-box; border-radius: 50%; border: 1.5px solid #e7131b; opacity: 0; pointer-events: none; }
+.tq-ibcp__rail { position: absolute; right: 30px; top: 370px; width: 2px; height: 160px; border-radius: 2px; background: rgba(30,34,44,.14); overflow: hidden; }
+.tq-ibcp__rail i { display: block; width: 100%; height: 100%; transform-origin: 50% 0; transform: scaleY(1); background: #e7131b; }
+.tq-ibcp__scr { position: relative; width: 300px; height: 650px; border-radius: 46px; overflow: hidden; color: #fff; background: linear-gradient(170deg, #18191c 0%, #0c0d0f 45%, #08090a 100%); font-variant-numeric: tabular-nums; }
+.tq-ibcp__scr > * { position: absolute; }
+.tq-ibcp__scr b { font-weight: 700; }
+.tq-ibcp__isl { left: 50%; top: 13px; width: 98px; height: 29px; margin-left: -49px; border-radius: 16px; background: #000; }
+.tq-ibcp__clock { left: 30px; top: 19px; font-size: 14px; font-weight: 600; }
+.tq-ibcp__stat { right: 28px; top: 22px; display: flex; align-items: flex-end; gap: 6px; }
+.tq-ibcp__bars { display: flex; align-items: flex-end; gap: 2px; }
+.tq-ibcp__bars i { width: 3px; height: 4px; border-radius: 1px; background: #fff; }
+.tq-ibcp__bars i:nth-child(2) { height: 6px; }
+.tq-ibcp__bars i:nth-child(3) { height: 8px; }
+.tq-ibcp__bars i:nth-child(4) { height: 10px; }
+.tq-ibcp__bat { width: 22px; height: 10px; box-sizing: border-box; border: 1.5px solid rgba(255,255,255,.8); border-radius: 3px; padding: 1px; display: flex; }
+.tq-ibcp__bat i { flex: 1; border-radius: 1px; background: #fff; }
+.tq-ibcp__pbar { left: 24px; right: 24px; top: 62px; display: flex; align-items: center; justify-content: space-between; }
+.tq-ibcp__pbar .tq-ibcp__st { height: 12px; font-size: 11px; color: rgba(255,255,255,.9); }
+.tq-ibcp__dots { font-size: 16px; letter-spacing: 2px; color: rgba(255,255,255,.75); }
+.tq-ibcp__prof { left: 24px; right: 24px; top: 104px; display: flex; align-items: center; gap: 12px; }
+.tq-ibcp__fol { left: 24px; right: 24px; top: 108px; display: flex; align-items: center; gap: 10px; }
+.tq-ibcp__av { flex: none; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #0a0a0a;
+  background: radial-gradient(circle at 34% 28%, #fff 0%, #d4d6da 30%, #8e9096 70%, #4a4b50 100%); box-shadow: 0 0 0 2px rgba(255,255,255,.12); }
+.tq-ibcp__av--s { width: 34px; height: 34px; font-size: 11px; box-shadow: none; }
+.tq-ibcp__who { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.tq-ibcp__who b { font-size: 19px; line-height: 1; white-space: nowrap; }
+.tq-ibcp__who span { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.6); white-space: nowrap; }
+.tq-ibcp__who--s { gap: 3px; }
+.tq-ibcp__who--s b { font-size: 14px; line-height: normal; }
+.tq-ibcp__who--s span { font-size: 11px; color: rgba(255,255,255,.55); }
+.tq-ibcp__sym { left: 24px; right: 24px; display: flex; align-items: center; gap: 10px; }
+.tq-ibcp__sym--p { top: 180px; }
+.tq-ibcp__sym--p b { font-size: 26px; letter-spacing: -.01em; }
+.tq-ibcp__sym--c { top: 170px; }
+.tq-ibcp__sym--c b { font-size: 24px; }
+.tq-ibcp__buy { padding: 4px 9px; border-radius: 7px; background: #fff; color: #0a0a0a; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+.tq-ibcp__px { margin-left: auto; font-size: 13px; color: rgba(255,255,255,.7); }
+.tq-ibcp__chart { left: 20px; overflow: visible; }
+.tq-ibcp__chart--p { top: 236px; }
+.tq-ibcp__chart--c { top: 226px; }
+.tq-ibcp__pos, .tq-ibcp__card { left: 18px; right: 18px; height: 76px; box-sizing: border-box; padding: 0 16px; border-radius: 20px; display: flex; align-items: center; }
+.tq-ibcp__pos { top: 448px; gap: 14px; background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
+.tq-ibcp__ico { flex: none; width: 38px; height: 38px; border-radius: 12px; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; }
+.tq-ibcp__lbl { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.tq-ibcp__lbl b { font-size: 15px; white-space: nowrap; }
+.tq-ibcp__lbl span { font-size: 11.5px; color: rgba(255,255,255,.6); white-space: nowrap; }
+.tq-ibcp__lbl small { font-size: 10px; letter-spacing: .18em; color: rgba(255,255,255,.55); }
+.tq-ibcp__pos > svg { flex: none; }
+.tq-ibcp__send { position: absolute; inset: 0; border-radius: 20px; box-shadow: inset 0 0 0 1.5px #e7131b, 0 0 28px rgba(231,19,27,.55); opacity: 0; }
+.tq-ibcp__tabs { left: 0; right: 0; bottom: 0; height: 96px; box-sizing: border-box; padding: 20px 26px 0; border-top: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-around; }
+.tq-ibcp__tab { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.tq-ibcp__tab i { width: 18px; height: 2.5px; border-radius: 2px; background: #e7131b; }
+.tq-ibcp__chead { left: 24px; right: 24px; top: 60px; display: flex; align-items: center; gap: 10px; }
+.tq-ibcp__chead b { font-size: 17px; }
+.tq-ibcp__hc { flex: none; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; color: #e4e6ea;
+  background: linear-gradient(145deg, #5e6066 0%, #1c1d21 55%, #3a3c42 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.3); }
+.tq-ibcp__live { margin-left: auto; display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: rgba(231,19,27,.16); font-size: 11px; font-weight: 700; color: #ff6b70; }
+.tq-ibcp__live i { width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
+.tq-ibcp__card { top: 452px; gap: 12px; background: linear-gradient(150deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.06) 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 0 1px rgba(255,255,255,.1); }
+.tq-ibcp__lots { flex: none; font-size: 14px; white-space: nowrap; }
+.tq-ibcp__badge { left: 18px; right: 18px; top: 540px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; white-space: nowrap;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 12px 24px -10px rgba(231,19,27,.7); }
+.tq-ibcp__pw { left: 0; right: 0; bottom: 26px; display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 10.5px; color: rgba(255,255,255,.5); }
+.tq-ibcp__st--s { height: 10px; font-size: 10px; color: rgba(255,255,255,.75); }
+.tq-ibcp__home { left: 50%; bottom: 9px; width: 110px; height: 4.5px; margin-left: -55px; border-radius: 3px; background: rgba(255,255,255,.85); }
+.tq-ibcp__glint { inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(255,255,255,0) 28%, rgba(255,255,255,.07) 40%, rgba(255,255,255,0) 54%); }
+@media (max-width: 1199px) {
+.tq-ibcp { padding: 48px 0 40px; background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(60% 45% at 62% 62%, #e8e8ee 0%, #d5d5dc 60%, #cfd0d6 100%); }
+.tq-ibcp::after { height: 56px; }
+.tq-ibcp__in { width: auto; height: auto; }
+.tq-ibcp__txt { position: relative; left: auto; top: auto; bottom: auto; width: auto; max-width: 560px; margin: 0 auto; padding: 0 20px; gap: 20px; }
+.tq-ibcp__eye { font-size: 10.5px; }
+.tq-ibcp__h2 { --h2s: clamp(20px, 5.4vw, 30px); }
+.tq-ibcp__step { font-size: 15.5px; gap: 12px; }
+.tq-ibcp__step > span:first-child { font-size: 12px; padding-top: 3px; }
+.tq-ibcp__go { height: 54px; padding: 0 6px 0 22px; gap: 14px; font-size: 12px; }
+.tq-ibcp__arr { width: 42px; height: 42px; }
+.tq-ibcp__crop { position: relative; overflow: hidden; margin-top: 4px; -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
+.tq-ibcp__board { position: relative; margin-top: -110px; overflow: hidden; }
+.tq-ibcp__rail { display: none; }
+.tq-ibcp__note { position: relative; left: auto; bottom: auto; width: auto; max-width: 560px; margin: -10px auto 0; padding: 0 20px; box-sizing: border-box; font-size: 10.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+.tq-ibcp__go { transition: none; }
+}
 </style>
 <style id="i18n-fonts">
 *:not(svg *) { letter-spacing: 0 !important; }
@@ -2036,6 +2160,103 @@ html:lang(ko) * { word-break: keep-all; }
       </div>
       <script>/* phones: the design's 390px panel, scaled to the screen (at most 1.5x) */
 (function(){var s=document.currentScript.parentNode,p=s.querySelector('.tq-ibp__panel'),m=matchMedia('(max-width: 999px)');function z(){p.style.zoom=m.matches?Math.min(1.5,s.clientWidth/390):''}z();addEventListener('resize',z)})();</script>
+    </section>
+
+    <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after Partnershield: left
+         the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block, "Powered by
+         SocialTrading.ai"); right two glass hands with phones — the provider's (a trade opened) and the client's (the trade
+         copied at the client's size); the position gathers into a drop of liquid silver (WebGL) that leaves the provider's
+         screen and lands on the client's. A 13 s loop (forward, a hold, back) while the block is on screen; reduced motion
+         shows the end. Desktops (1200px+): the design's 1440x900 composition, scaled to the width (the script in the section
+         sets the zoom). Narrower: the words, then the hands cropped to the phones. The phone screens are the product's
+         interface (English on every language, demo data, not translated by the browser). partials/ib-copy.html holds the
+         hands; assets/js/ib-copy.js runs the loop and the drop; partner.css, "the Copy trading hand-off block". -->
+    <section id="copy" class="tq-ibcp" data-ib-copy data-screen-label="IB Tools · Copy trading hand-off">
+      <div class="tq-ibcp__in">
+        <div class="tq-ibcp__txt">
+          <span class="tq-ibcp__eye">IB工具 · 品牌跟单交易</span>
+          <h2 class="tq-ibcp__h2 tq-h2"><span class="tq-line">他们的经验，</span><span class="tq-line">注入您的账户。</span></h2>
+          <div class="tq-ibcp__steps">
+            <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>策略提供者开仓。</span></p>
+            <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>交易流入您客户的账户——按客户自己的仓位比例。</span></p>
+          </div>
+          <a class="tq-ibcp__go" href="#insights"><span>了解跟单交易</span><span class="tq-ibcp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          <div class="tq-ibcp__by"><span>技术支持</span><span class="tq-ibcp__st tq-ibcp__st--by" translate="no"><svg width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><rect x="0" y="4" width="2.2" height="6" rx=".6"/><rect x="3.9" y="1.5" width="2.2" height="8.5" rx=".6"/><rect x="7.8" y="0" width="2.2" height="10" rx=".6"/></svg>SocialTrading.ai</span></div>
+        </div>
+        <div class="tq-ibcp__crop"><div class="tq-ibcp__board" dir="ltr" translate="no" aria-hidden="true">
+  <div class="tq-ibcp__hand" data-k="L" style="transform:translate3d(360px,101px,0) scale(.78)">
+    <img class="tq-ibcp__img" src="../../assets/ib/hand-provider.webp?v=8ef1347c97" width="790" height="1024" alt="" decoding="async" loading="lazy">
+    <div class="tq-ibcp__on">
+      <div class="tq-ibcp__mx" style="transform:matrix3d(0.8316552,-0.06342102,0,0.00004116766,0.1565365,0.9015542,0,0.00001140881,0,0,1,0,339.5838,74.24875,0,1)">
+        <div class="tq-ibcp__scr">
+          <i class="tq-ibcp__isl"></i><span class="tq-ibcp__clock">10:24</span>
+          <span class="tq-ibcp__stat"><span class="tq-ibcp__bars"><i></i><i></i><i></i><i></i></span><span class="tq-ibcp__bat"><i></i></span></span>
+          <div class="tq-ibcp__pbar">
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8 2L2 8l6 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="tq-ibcp__st"><svg width="12" height="12" viewBox="0 0 10 10"><rect x="0" y="4" width="2.2" height="6" rx=".6"/><rect x="3.9" y="1.5" width="2.2" height="8.5" rx=".6"/><rect x="7.8" y="0" width="2.2" height="10" rx=".6"/></svg>SocialTrading.ai</span>
+            <span class="tq-ibcp__dots">•••</span>
+          </div>
+          <div class="tq-ibcp__prof">
+            <span class="tq-ibcp__av">LO</span>
+            <div class="tq-ibcp__who"><b>Meridian Swing</b><span>Strategy provider<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="6" fill="#E4E6EA"/><path d="M3.4 6.2l1.8 1.7 3.4-3.6" stroke="#0A0A0A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+          <div class="tq-ibcp__sym tq-ibcp__sym--p"><b>EURUSD</b><span class="tq-ibcp__buy">BUY</span><span class="tq-ibcp__px">1.0842</span></div>
+          <svg class="tq-ibcp__chart tq-ibcp__chart--p" width="260" height="190" viewBox="0 0 260 170" fill="none">
+            <defs><linearGradient id="ibcp-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30 L260,170 L0,170 Z" fill="url(#ibcp-area)"/>
+            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle data-k="p-dot" cx="260" cy="30" r="14" fill="rgba(231,19,27,.25)" style="transform-origin:260px 30px"/>
+            <circle cx="260" cy="30" r="6" fill="#E7131B"/>
+          </svg>
+          <div class="tq-ibcp__pos">
+            <span class="tq-ibcp__ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l7 4-7 4-7-4 7-4z" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 10l7 4 7-4" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="tq-ibcp__lbl"><b>Open position</b><span>EURUSD · BUY · 2.00 lots</span></div>
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1.5 1.5L6.5 7l-5 5.5" stroke="rgba(255,255,255,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <i class="tq-ibcp__send" data-k="p-send"></i>
+          </div>
+          <div class="tq-ibcp__tabs">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 10l8-7 8 7v9H3z" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span class="tq-ibcp__tab"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 17l5-6 4 3 7-9" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><i></i></span>
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="7" y="7" width="12" height="12" rx="3" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/><path d="M3 14V5a2 2 0 0 1 2-2h9" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7.5" r="4" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/><path d="M3.5 19c1.2-3.6 4-5 7.5-5s6.3 1.4 7.5 5" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <i class="tq-ibcp__home"></i><i class="tq-ibcp__glint"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tq-ibcp__hand" data-k="R" style="transform:translate3d(976.2px,101px,0) scale(.78)">
+    <img class="tq-ibcp__img" src="../../assets/ib/hand-client.webp?v=ccbbd62c7e" width="746" height="1024" alt="" decoding="async" loading="lazy">
+    <div class="tq-ibcp__on tq-ibcp__on--thumb">
+      <div class="tq-ibcp__mx" style="transform:matrix3d(0.8328572,0.07936495,0,0.0000266892,-0.1551771,0.7954829,0,-0.0001264555,0,0,1,0,204.2637,121.5337,0,1)">
+        <div class="tq-ibcp__scr">
+          <i class="tq-ibcp__isl"></i><span class="tq-ibcp__clock">10:24</span>
+          <span class="tq-ibcp__stat"><span class="tq-ibcp__bars"><i></i><i></i><i></i><i></i></span><span class="tq-ibcp__bat"><i></i></span></span>
+          <div class="tq-ibcp__chead"><span class="tq-ibcp__hc">HC</span><b>Copy trade</b><span class="tq-ibcp__live"><i></i>Live</span></div>
+          <div class="tq-ibcp__fol"><span class="tq-ibcp__av tq-ibcp__av--s">LO</span><div class="tq-ibcp__who tq-ibcp__who--s"><b>Following Meridian Swing</b><span>Strategy provider on SocialTrading.ai</span></div></div>
+          <div class="tq-ibcp__sym tq-ibcp__sym--c"><b data-k="c-sym">EURUSD</b><span class="tq-ibcp__buy" data-k="c-buy">BUY</span><span class="tq-ibcp__px" data-k="c-px">1.0842</span></div>
+          <svg class="tq-ibcp__chart tq-ibcp__chart--c" width="260" height="190" viewBox="0 0 260 170" fill="none">
+            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" stroke="rgba(255,255,255,.1)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path data-k="c-draw" d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" pathLength="1" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:1;stroke-dashoffset:0"/>
+          </svg>
+          <div class="tq-ibcp__card" data-k="c-card"><div class="tq-ibcp__lbl"><small>YOUR POSITION</small><b>EURUSD · BUY</b></div><span class="tq-ibcp__lots">0.20 lots</span></div>
+          <div class="tq-ibcp__badge" data-k="c-badge"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="8" rx="2" stroke="#FFFFFF" stroke-width="1.8"/><path d="M2.5 10V4a1.5 1.5 0 0 1 1.5-1.5h6" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/></svg>Copied · scaled to your account</div>
+          <div class="tq-ibcp__pw"><span>Powered by</span><span class="tq-ibcp__st tq-ibcp__st--s"><svg width="10" height="10" viewBox="0 0 10 10"><rect x="0" y="4" width="2.2" height="6" rx=".6"/><rect x="3.9" y="1.5" width="2.2" height="8.5" rx=".6"/><rect x="7.8" y="0" width="2.2" height="10" rx=".6"/></svg>SocialTrading.ai</span></div>
+          <i class="tq-ibcp__home"></i><i class="tq-ibcp__glint"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <i class="tq-ibcp__ga" data-k="gA"></i>
+  <canvas class="tq-ibcp__gl" data-k="gl" width="1440" height="900"></canvas>
+  <i class="tq-ibcp__ring" data-k="ring"></i>
+  <span class="tq-ibcp__rail"><i data-k="rail"></i></span>
+</div>
+</div>
+        <p class="tq-ibcp__note">示意图，人物均为虚构。策略由SocialTrading.ai上的独立提供者运作。跟单交易存在亏损风险；过往表现不代表未来结果。</p>
+      </div>
+      <script>/* 1200px+: the design's 1440x900 composition, scaled down to the width (--z for the background); narrower: the hands cropped to x 430–1440, y 110–900 of it, scaled to the width (at most 0.8x, centred) */
+(function(){var s=document.currentScript.parentNode,n=s.querySelector('.tq-ibcp__in'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,k;if(m.matches){k=Math.min(1,w/1440);n.style.zoom=k;s.style.setProperty('--z',k);b.style.zoom=b.style.marginLeft=c.style.height=''}else{k=Math.min(.8,w/1010);n.style.zoom='';s.style.removeProperty('--z');b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z)})();</script>
     </section>
 
     <!-- Network insights (IB_Network_Insights design), after the signals feed: the pitch, two views to pick (V.01 Network,
@@ -2528,6 +2749,7 @@ html:lang(ko) * { word-break: keep-all; }
 <script src="../../assets/js/landing.js?v=ad8bd6c12a" defer></script>
 <script src="../../assets/js/ib-toolkit.js?v=c2eca3103e" defer></script>
 <script src="../../assets/js/ib-shield.js?v=ef118aca3f" defer></script>
+<script src="../../assets/js/ib-copy.js?v=472d7e0760" defer></script>
 <script src="../../assets/js/ib-insights.js?v=a668fd7893" defer></script>
 <script src="../../assets/js/ib-clients.js?v=32ab6f721b" defer></script>
 <script src="../../assets/js/ib-ai.js?v=5994fd2032" defer></script>

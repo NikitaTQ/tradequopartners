@@ -204,5 +204,12 @@
   "ib.sig.note": "Data ilustratif, merek fiktif. Signal Check menguji kriteria Anda, bukan hasil di masa depan. Sinyal adalah informasi, bukan eksekusi transaksi; imbal hasil tidak dijamin.",
   "ib.ps.h2": "<line>Relasi Anda.</line> <line>Jelas terhubung dengan Anda.</line>",
   "ib.ps.p": "Klien yang Anda perkenalkan terdaftar di bawah IB Anda dan tetap tertaut ke profil Anda.",
-  "ib.ps.cta": "Jelajahi Partnershield"
+  "ib.ps.cta": "Jelajahi Partnershield",
+  "ib.cp.eye": "Alat IB · Copy trading dengan merek Anda",
+  "ib.cp.h2": "<line>Pengalaman mereka.</line> <line>Mengalir ke akun Anda.</line>",
+  "ib.cp.s1": "Penyedia membuka transaksi.",
+  "ib.cp.s2": "Transaksi mengalir ke akun klien Anda — dengan ukuran mereka sendiri.",
+  "ib.cp.cta": "Jelajahi copy trading",
+  "ib.cp.by": "Didukung oleh",
+  "ib.cp.note": "Ilustrasi, identitas fiktif. Strategi dijalankan oleh penyedia independen di SocialTrading.ai. Copy trading mengandung risiko kerugian; kinerja masa lalu tidak menjamin hasil di masa depan."
 }
