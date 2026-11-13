@@ -775,8 +775,7 @@ header { gap: 12px !important; }
 [dir="rtl"] [data-faq-panel] p { padding-right: 20px !important; }
 }
 @media (max-width: 380px) {
-header { gap: 6px !important; }
-header.tq-head { --hm: 6px; --hi: 10px; }
+header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
 header img[alt] { height: 15px !important; }
 header nav { gap: 6px !important; }
 header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
@@ -847,42 +846,14 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 header a:has(> img:only-child) { padding: 13px 0; margin: -13px 0; }
 footer p { font-size: 12px !important; }
 }
-.tq-head { --hg: 8px; --hv: 18px; --hm: clamp(8px, 1.4vw, 20px); --hi: clamp(16px, 2.6vw, 40px);
-  padding: calc(var(--hg) + var(--hv)) calc(var(--hm) + var(--hi)) var(--hv) !important;
-  transition: padding-top .25s ease, padding-bottom .25s ease, margin-bottom .25s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
-.tq-head::after { content: ''; position: absolute; z-index: -1; top: var(--hg); bottom: 0; left: var(--hm); right: var(--hm); pointer-events: none; border-radius: 999px;
-  border: 1.5px solid transparent;
-  background:
-    linear-gradient(170deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.42) 47%, rgba(255,255,255,.1) 49.5%, rgba(255,255,255,0) 63%) padding-box,
-    linear-gradient(180deg, rgba(255,255,255,.7) 0%, rgba(244,245,248,.5) 52%, rgba(250,251,253,.62) 100%) padding-box,
-    linear-gradient(180deg, #fff 0%, rgba(214,218,226,.95) 45%, rgba(176,182,194,.9) 70%, #fff 100%) border-box;
-  -webkit-backdrop-filter: blur(18px) saturate(170%) brightness(1.04); backdrop-filter: blur(18px) saturate(170%) brightness(1.04);
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(255,255,255,.85),
-    inset 0 0 0 5px rgba(255,255,255,.28), inset 0 0 0 6px rgba(150,156,170,.16),
-    inset 0 12px 18px -14px rgba(255,255,255,.95), inset 0 -12px 18px -14px rgba(160,166,180,.4),
-    0 0 0 .5px rgba(140,146,160,.35), 0 2px 3px rgba(20,24,34,.05), 0 20px 30px -20px rgba(20,24,34,.38), 0 34px 40px -36px rgba(20,24,34,.25); }
-.tq-head.is-stuck { --hv: 10px; margin-bottom: 16px !important; }
+.tq-head { transition: padding-top .25s ease, padding-bottom .25s ease, margin-bottom .25s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
+.tq-head::after { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; margin-left: -50vw; pointer-events: none;
+  background: #fff; box-shadow: 0 1px 0 rgba(10,10,10,.06), 0 12px 24px -20px rgba(10,10,10,.4); opacity: 0; transition: opacity .25s ease; }
+.tq-head.is-stuck { padding-top: 12px !important; padding-bottom: 12px !important; margin-bottom: 20px !important; }
+.tq-head.is-stuck::after { opacity: 1; }
 .tq-head.is-away { transform: translateY(calc(-100% - 24px)); }
-.tq-head:not(.tq-head--dark) .tq-nav-link[aria-current="page"] { display: inline-flex; align-items: center; height: 42px; padding: 0 22px 2px; margin-inline: -4px; box-sizing: border-box; border-radius: 999px; color: #0a0a0a; font-weight: 600;
-  background: linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(244,245,248,.66) 55%, rgba(252,252,254,.8) 100%);
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(170,176,190,.35), 0 0 0 1px rgba(160,166,180,.38), 0 1px 1px rgba(20,24,34,.04), 0 6px 12px -8px rgba(20,24,34,.28); }
-.tq-head:not(.tq-head--dark) .tq-nav-link[aria-current="page"]::after { bottom: 5px; }
-.tq-head:not(.tq-head--dark) .tq-nav-link { color: #2b2d33; }
-.tq-head:not(.tq-head--dark) .tq-lang__btn { border: 0; color: #1a1b1f;
-  background: linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(242,243,247,.6) 55%, rgba(250,250,252,.78) 100%);
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(170,176,190,.35), 0 0 0 1px rgba(160,166,180,.4), 0 6px 12px -8px rgba(20,24,34,.26);
-  transition: box-shadow .2s ease, color .2s ease; }
-.tq-head:not(.tq-head--dark) .tq-lang__btn:hover, .tq-head:not(.tq-head--dark) .tq-lang__btn[aria-expanded="true"] { color: #0a0a0a;
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(170,176,190,.35), 0 0 0 1px rgba(10,10,11,.55), 0 6px 12px -8px rgba(20,24,34,.26); }
-.tq-head nav > a.hv-red-bg { position: relative; overflow: hidden; isolation: isolate; font-weight: 700 !important;
-  background: linear-gradient(180deg, #ff3a41 0%, #ec1820 42%, #d3111a 78%, #e01a21 100%) !important;
-  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.55), inset 0 -2px 3px rgba(120,0,6,.3), inset 0 0 0 1px rgba(255,255,255,.12), 0 0 0 1px rgba(176,10,16,.55),
-    0 2px 3px rgba(150,8,14,.18), 0 10px 18px -8px rgba(231,19,27,.6); transition: filter .2s ease; }
-.tq-head nav > a.hv-red-bg::before { content: ''; position: absolute; z-index: -1; left: 8%; right: 8%; top: 2px; height: 46%; border-radius: 999px 999px 40% 40%; pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 100%); }
-.tq-head nav > a.hv-red-bg:hover { background: linear-gradient(180deg, #ff3a41 0%, #ec1820 42%, #d3111a 78%, #e01a21 100%) !important; filter: brightness(1.06); }
 @media (prefers-reduced-motion: reduce) {
-.tq-head, .tq-head::after, .tq-head .tq-lang__btn, .tq-head nav > a.hv-red-bg { transition: none; }
+.tq-head, .tq-head::after { transition: none; }
 }
 [dir="rtl"] [data-fab] { align-items: flex-start !important; }
 @media (min-width: 900px) {
@@ -1709,6 +1680,6 @@ footer p { font-size: 12px !important; }
 </div>
 
 <script src="assets/js/transition.js?v=602a71328d" defer></script>
-<script src="assets/js/landing.js?v=0e9b173579" defer></script>
+<script src="assets/js/landing.js?v=ad8bd6c12a" defer></script>
 </body>
 </html>
