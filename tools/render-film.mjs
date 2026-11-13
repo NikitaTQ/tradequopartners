@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 /*
- * The partner film on the home page as a video: site/assets/film/tradequo-film.mp4 (the 24.2 s loop, 30 fps, 1920x1080).
+ * The partner film on the home page as a video (the 24.2 s loop, 30 fps) in site/assets/film/: tradequo-film-1440.mp4
+ * (2560x1440, for screens where the film covers more than ~1700 pixels across: retina, 150% scaling), tradequo-film-1080.mp4
+ * (1920x1080, the same shrunk with Lanczos, for the rest) and tradequo-film-1080.webm (VP9, for browsers without H.264).
  *
  * The page plays this video (with the film's grain drawn over it: startFilm in landing.js) instead of running the film live (site/embeds/tradequo-film.html: React, three.js and a
  * glass logo drawn every frame, too heavy next to Infinite Flow). It is the film itself, frame by frame: the film is
  * authored at 1920x1080 and driven by its own clock, so a patched copy of its app (served to the browser only, the file
- * is not changed) exposes a seek and stops the clock; the glass logo is drawn at 1920 px; the player buttons are hidden
+ * is not changed) exposes a seek and stops the clock; it is drawn at 4/3 (2560x1440), the glass logo at 2560 px; the player buttons are hidden
  * (the page draws its own over the video). Re-run after changing the film:
  *
  *   cd tools && node render-film.mjs
@@ -36,7 +38,7 @@ const patch = (f, s) => {
     /* a seek; and no grain: the page draws the film's grain over the video (animated noise compresses worst) */
     return s.replace(k, k + 'window.__tqSeek=function(t){d.current=!0;n=t;w(n)};').replace(g, 'React.createElement(q,{grain:!1,letterbox:!1})');
   }
-  if (f.endsWith('/embeds/tradequo-film.html')) return s.replace('window.TQ_RENDER_W = ', 'window.TQ_RENDER_W = 1920 || ');
+  if (f.endsWith('/embeds/tradequo-film.html')) return s.replace('window.TQ_RENDER_W = ', 'window.TQ_RENDER_W = 2560 || ');
   return null;
 };
 const server = createServer((req, res) => {
@@ -55,7 +57,7 @@ mkdirSync(out, { recursive: true });
 
 const args = ['--enable-gpu-rasterization', '--ignore-gpu-blocklist', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
 const browser = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME, args } : { args });
-const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
+const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2560 / 1920 });
 await page.goto(`http://127.0.0.1:${port}/embeds/tradequo-film.html`, { waitUntil: 'load' });
 await page.evaluate(() => document.fonts.ready);
 await page.waitForFunction(() => typeof window.__tqSeek === 'function' && window.TQGlassRenderer, null, { timeout: 60000 });
@@ -77,12 +79,14 @@ server.close();
  * is tagged with (ffmpeg's default would be BT.601: reds would shift). */
 const VF = 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p';
 const TAGS = ['-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-color_range', 'tv'];
-execFileSync('ffmpeg', ['-y', '-v', 'error', '-framerate', String(FPS), '-i', join(tmp, 'f%04d.png'),
-  '-vf', VF, '-c:v', 'libx264', '-preset', 'slower', '-crf', '21', '-tune', 'film', '-aq-mode', '3', '-g', '60', '-profile:v', 'high',
-  ...TAGS, '-movflags', '+faststart', '-an', join(out, 'tradequo-film.mp4')]);
+const H264 = ['-c:v', 'libx264', '-preset', 'slower', '-crf', '21', '-tune', 'film', '-aq-mode', '3', '-g', '60', '-profile:v', 'high', ...TAGS, '-movflags', '+faststart', '-an'];
+const IN = ['-y', '-v', 'error', '-framerate', String(FPS), '-i', join(tmp, 'f%04d.png')];
+const TO1080 = 'scale=1920:1080:flags=lanczos,' + VF;
+execFileSync('ffmpeg', [...IN, '-vf', VF, ...H264, join(out, 'tradequo-film-1440.mp4')]);
+execFileSync('ffmpeg', [...IN, '-vf', TO1080, ...H264, join(out, 'tradequo-film-1080.mp4')]);
 /* the same in VP9, for browsers built without H.264 (some Linux builds) */
-execFileSync('ffmpeg', ['-y', '-v', 'error', '-framerate', String(FPS), '-i', join(tmp, 'f%04d.png'),
-  '-vf', VF, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '31', '-deadline', 'good', '-cpu-used', '2', '-row-mt', '1', '-g', '60', '-aq-mode', '2',
-  ...TAGS, '-an', join(out, 'tradequo-film.webm')]);
+execFileSync('ffmpeg', [...IN,
+  '-vf', TO1080, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '31', '-deadline', 'good', '-cpu-used', '2', '-row-mt', '1', '-g', '60', '-aq-mode', '2',
+  ...TAGS, '-an', join(out, 'tradequo-film-1080.webm')]);
 rmSync(tmp, { recursive: true, force: true });
-console.log('wrote site/assets/film/tradequo-film.mp4 and .webm');
+console.log('wrote site/assets/film/tradequo-film-1440.mp4, -1080.mp4 and -1080.webm');

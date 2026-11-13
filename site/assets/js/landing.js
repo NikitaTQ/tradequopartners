@@ -159,7 +159,11 @@
       loaded = true;
       if (userPaused) v.addEventListener('loadedmetadata', () => { v.currentTime = 23.5; }, { once: true });
       v.preload = 'auto';
-      $$('source', v).forEach((so) => { so.src = so.dataset.src; });   /* H.264, or VP9 where H.264 is missing */
+      /* H.264, or VP9 where H.264 is missing. 2560x1440 where the film covers more than ~1700 screen pixels across
+         (retina, 150% scaling), 1920x1080 below that: a browser shrinks video plainly, and 1440 squeezed into ~1240
+         pixels would shimmer on thin lines, while 1080 stretched over 2480 would be soft */
+      const hi = box.clientWidth * (window.devicePixelRatio || 1) > 1700;
+      $$('source', v).forEach((so) => { so.src = (hi && so.dataset.srcHi) || so.dataset.src; });
       v.load();
       sync();
     };
