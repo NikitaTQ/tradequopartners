@@ -218,6 +218,8 @@ HTTPS (Let's Encrypt) Netlify включит сам.
 
 Сцена — `site/assets/js/mt-hero.js` (модуль, three.js из `site/vendor`), стили — раздел Marketing Tools в `partner.css`. Без WebGL сцены нет, а фон, заголовок и кнопка остаются.
 
+**Сейчас сцена заморожена** (страницу будут переделывать): `mt-hero.js` и three.js на странице не грузятся, вместо сцены — два снимка её в покое (`site/assets/marketing/hero-wide.webp` и `hero-tall.webp` — раскладка 2×2 для сцены уже 0,95 её высоты, как переключалась живая сцена; под каждым крошечный слой мягкого свечения `hero-*-glow.webp`), вписанные в сцену по центру; подписи остались текстом страницы (`mt.top.l1`–`l4`) на тех местах, где их ставила сцена. Грузится только тот снимок, который виден (83 КБ на десктопе, 46 КБ на телефоне вместо ~200 КБ кода и 3D-рендера). Наведение, параллакс и появление с отскоком пока не работают. Вернуть сцену: в `tools/i18n/marketing.html` заменить блок `tq-mth__stage--still` на `<div class="tq-mth__stage" data-mt-stage data-theme="light" data-ib data-labels="{{@mt.top.l1}}|…|{{@mt.top.l4}}"></div>` и вернуть в конец файла `<script type="module" src="{{root}}assets/js/mt-hero.js"></script>` (подробно — в комментарии над хиро).
+
 Пункт «Marketing Tools» есть в навигации в шапке (`NAV` в `build-i18n.py`, подпись `fan.marketing`) и в мобильном меню каждой страницы. Там, где полное название не помещается в шапку от 1140px, взят короткий вариант: «Kit de marketing» (испанский, итальянский — «Kit di marketing», португальский, румынский), «Kit marketingowy» (польский), «Маркетинг-кіт» (украинский); у «Partner Terms» — «Conditions» (французский), «Condiții» (румынский).
 
 ### Страница IB Tools (`/ib-tools/`)
