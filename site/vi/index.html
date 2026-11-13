@@ -848,6 +848,7 @@ header a:has(> img:only-child) { padding: 13px 0; margin: -13px 0; }
 footer p { font-size: 12px !important; }
 }
 [data-film-box] { container-type: inline-size; }
+.tq-film__grain { position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; mix-blend-mode: overlay; background-repeat: repeat; will-change: transform; }
 .tq-film__ctl { --e: clamp(34px, 3cqw, 44px); position: absolute; left: 50%; bottom: calc(var(--e) * .5); transform: translateX(-50%); display: flex; align-items: flex-start;
   gap: calc(var(--e) * .3); padding-top: calc(var(--e) * .1); opacity: .55; transition: opacity .25s ease; }
 [data-film-box]:hover .tq-film__ctl, .tq-film__ctl.is-paused, .tq-film__ctl:focus-within { opacity: 1; }
@@ -1434,7 +1435,8 @@ footer p { font-size: 12px !important; }
     <div data-film-box="" data-film-desk="" style="position: relative; width: 100%; max-width: 1240px; margin: 0 auto; aspect-ratio: 16 / 9; max-height: 100svh; border-radius: clamp(18px, 3vw, 40px); overflow: hidden; background: #FFFFFF;">
       <!-- the partner film as a video (24.2 s loop, recorded frame by frame from embeds/tradequo-film.html, which stays as
            the source): it plays while on screen, with the film player's own buttons over it (startFilm in landing.js) -->
-      <video data-film muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-label="Phim giới thiệu Chương trình Đối tác TradeQuo" style="width: 100%; height: 100%; display: block; object-fit: contain; background: #FFFFFF;"><source data-src="../assets/film/tradequo-film.mp4?v=0b9e3fa435" type="video/mp4"><source data-src="../assets/film/tradequo-film.webm?v=289d4bfa19" type="video/webm"></video>
+      <video data-film muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-label="Phim giới thiệu Chương trình Đối tác TradeQuo" style="width: 100%; height: 100%; display: block; object-fit: contain; background: #FFFFFF;"><source data-src="../assets/film/tradequo-film.mp4?v=1d35dba39e" type="video/mp4"><source data-src="../assets/film/tradequo-film.webm?v=a750b89437" type="video/webm"></video>
+      <div class="tq-film__grain" data-film-grain aria-hidden="true"></div>
       <div class="tq-film__ctl" data-film-ctl>
         <span><button type="button" class="tq-film__b tq-film__b--s" data-film-skip="-1.5" aria-label="Back 1.5 seconds" title="Back 1.5 s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 6.2v11.6c0 .6-.7 1-1.2.6L3.6 12.6a.8.8 0 0 1 0-1.2l6.7-5.8c.5-.4 1.2 0 1.2.6z" fill="#FFFFFF"/><path d="M21 6.2v11.6c0 .6-.7 1-1.2.6l-6.7-5.8a.8.8 0 0 1 0-1.2l6.7-5.8c.5-.4 1.2 0 1.2.6z" fill="#FFFFFF" opacity="0.7"/></svg></button><span class="tq-film__l">−1.5s</span></span>
         <button type="button" class="tq-film__b tq-film__b--pp" data-film-pp aria-label="Pause video" title="Pause"><svg class="tq-film__pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2.5" width="2.8" height="9" rx="1" fill="#FFFFFF"/><rect x="8.2" y="2.5" width="2.8" height="9" rx="1" fill="#FFFFFF"/></svg><svg class="tq-film__play" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.6v8.8c0 .5.5.8.9.5l6.6-4.4a.6.6 0 0 0 0-1L4.9 2.1c-.4-.3-.9 0-.9.5z" fill="#FFFFFF"/></svg></button>
@@ -1709,6 +1711,6 @@ footer p { font-size: 12px !important; }
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=ae57111cc9" defer></script>
+<script src="../assets/js/landing.js?v=db7fc5d6db" defer></script>
 </body>
 </html>

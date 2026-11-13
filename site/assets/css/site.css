@@ -918,6 +918,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    The buttons as the film drew them: sizes off --e = 3% of the box's width (34-44px), dimmed to .55 until the film is
    hovered or paused; back / forward 1.5 s with their labels, pause / play in the middle (startFilm in landing.js). */
 [data-film-box] { container-type: inline-size; }
+/* the film's grain, drawn over the video (the video has none: animated noise is what compresses worst): the film's own
+   noise tile, 256 film px, shifted 24 times a second, overlay at .07 (startFilm sets size, shift and strength) */
+.tq-film__grain { position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; mix-blend-mode: overlay; background-repeat: repeat; will-change: transform; }
 .tq-film__ctl { --e: clamp(34px, 3cqw, 44px); position: absolute; left: 50%; bottom: calc(var(--e) * .5); transform: translateX(-50%); display: flex; align-items: flex-start;
   gap: calc(var(--e) * .3); padding-top: calc(var(--e) * .1); opacity: .55; transition: opacity .25s ease; }
 [data-film-box]:hover .tq-film__ctl, .tq-film__ctl.is-paused, .tq-film__ctl:focus-within { opacity: 1; }

@@ -2,7 +2,7 @@
 /*
  * The partner film on the home page as a video: site/assets/film/tradequo-film.mp4 (the 24.2 s loop, 30 fps, 1920x1080).
  *
- * The page plays this video instead of running the film live (site/embeds/tradequo-film.html: React, three.js and a
+ * The page plays this video (with the film's grain drawn over it: startFilm in landing.js) instead of running the film live (site/embeds/tradequo-film.html: React, three.js and a
  * glass logo drawn every frame, too heavy next to Infinite Flow). It is the film itself, frame by frame: the film is
  * authored at 1920x1080 and driven by its own clock, so a patched copy of its app (served to the browser only, the file
  * is not changed) exposes a seek and stops the clock; the glass logo is drawn at 1920 px; the player buttons are hidden
@@ -31,8 +31,10 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.png': 'image/p
 const patch = (f, s) => {
   if (f.endsWith('/embeds/tradequo-film.app.js')) {
     const k = 'h.current=F;';
-    if (s.split(k).length !== 2) throw new Error('render-film: the film app changed, its seek hook (' + k + ') is not there');
-    return s.replace(k, k + 'window.__tqSeek=function(t){d.current=!0;n=t;w(n)};');
+    const g = 'React.createElement(q,{grain:!0,letterbox:!1})';
+    if (s.split(k).length !== 2 || s.split(g).length !== 2) throw new Error('render-film: the film app changed, its seek / grain hooks are not there');
+    /* a seek; and no grain: the page draws the film's grain over the video (animated noise compresses worst) */
+    return s.replace(k, k + 'window.__tqSeek=function(t){d.current=!0;n=t;w(n)};').replace(g, 'React.createElement(q,{grain:!1,letterbox:!1})');
   }
   if (f.endsWith('/embeds/tradequo-film.html')) return s.replace('window.TQ_RENDER_W = ', 'window.TQ_RENDER_W = 1920 || ');
   return null;
@@ -70,12 +72,17 @@ for (let i = 0; i < N; i++) {
 await browser.close();
 server.close();
 
+/* Quality: the film is dark, with faint dots and soft light bands that a coarse encode turns into blocks — so a fine CRF,
+ * x264's film tuning and AQ that favours dark areas. Colours: the PNGs are converted with the BT.709 matrix the stream
+ * is tagged with (ffmpeg's default would be BT.601: reds would shift). */
+const VF = 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p';
+const TAGS = ['-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-color_range', 'tv'];
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-framerate', String(FPS), '-i', join(tmp, 'f%04d.png'),
-  '-vf', 'format=yuv420p', '-c:v', 'libx264', '-preset', 'slow', '-crf', '27', '-g', '30', '-profile:v', 'high',
-  '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-movflags', '+faststart', '-an', join(out, 'tradequo-film.mp4')]);
+  '-vf', VF, '-c:v', 'libx264', '-preset', 'slower', '-crf', '21', '-tune', 'film', '-aq-mode', '3', '-g', '60', '-profile:v', 'high',
+  ...TAGS, '-movflags', '+faststart', '-an', join(out, 'tradequo-film.mp4')]);
 /* the same in VP9, for browsers built without H.264 (some Linux builds) */
 execFileSync('ffmpeg', ['-y', '-v', 'error', '-framerate', String(FPS), '-i', join(tmp, 'f%04d.png'),
-  '-vf', 'format=yuv420p', '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '36', '-deadline', 'good', '-cpu-used', '2', '-row-mt', '1', '-g', '30',
-  '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-an', join(out, 'tradequo-film.webm')]);
+  '-vf', VF, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '31', '-deadline', 'good', '-cpu-used', '2', '-row-mt', '1', '-g', '60', '-aq-mode', '2',
+  ...TAGS, '-an', join(out, 'tradequo-film.webm')]);
 rmSync(tmp, { recursive: true, force: true });
 console.log('wrote site/assets/film/tradequo-film.mp4 and .webm');
