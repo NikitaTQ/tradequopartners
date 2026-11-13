@@ -739,13 +739,18 @@
       submitted = false;
     };
 
-    /* Delivery: the fields are POSTed to data-endpoint while the envelope flies.
-     * "/" = Netlify Forms (form name "partner-request"); any form backend that
+    /* Delivery, while the envelope flies: two copies of the fields.
+     * data-endpoint: urlencoded POST — "/" = Netlify Forms (form name "partner-request"); any form backend that
      * accepts urlencoded POSTs (Formspree, a CRM webhook) works the same way.
-     * The success screen waits for both the envelope and the server's answer.
-     * ?preview=sent skips the POST, to look at the success screen without sending anything. */
-    const endpoint = form.dataset.endpoint;
+     * data-notify: JSON POST to the site's function that sends the request to the Telegram chat
+     * (netlify/functions/lead.mjs), with the page's language and address added.
+     * The request counts as sent when either copy arrives; the success screen waits for that and for the envelope.
+     * ?preview=sent skips the POSTs, to look at the success screen without sending anything. */
+    const endpoint = form.dataset.endpoint, notify = form.dataset.notify;
     const preview = /[?&]preview=sent(&|$)/.test(location.search);
+    const post = (url, init, what) => fetch(url, Object.assign({ method: 'POST' }, init))
+      .then((r) => { if (!r.ok) throw new Error(what + ' ' + r.status); })
+      .catch((err) => { console.warn('[TradeQuo] form copy not sent:', (err && err.message) || err); throw err; });
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (submitted) return;
@@ -757,11 +762,16 @@
 
       let flown = false, ok = null;
       const settle = () => { if (flown && ok !== null) (ok ? showSuccess : fail)(); };
-      const request = (!endpoint || preview) ? Promise.resolve()
-        : fetch(endpoint, { method: 'POST', body: new URLSearchParams(new FormData(form)), headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } })
-          .then((r) => { if (!r.ok) throw new Error(r.status); });
-      /* a failed send names its cause in the console (e.g. 404 = the form isn't registered on Netlify) */
-      request.then(() => { ok = true; settle(); }, (err) => { ok = false; console.warn('[TradeQuo] form not sent:', (err && err.message) || err); settle(); });
+      const fields = new FormData(form);
+      const copies = preview ? [] : [
+        endpoint && post(endpoint, { body: new URLSearchParams(fields), headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } }, 'Netlify Forms'),
+        notify && post(notify, { body: JSON.stringify(Object.assign(Object.fromEntries(fields), { language: document.documentElement.lang, page: location.href })),
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' } }, 'Telegram'),
+      ].filter(Boolean);
+      /* a failed copy names its cause in the console (e.g. Netlify Forms 404 = the form isn't registered on Netlify;
+         Telegram 503 = the bot's token / chat aren't set on Netlify) */
+      const request = copies.length ? Promise.any(copies) : Promise.resolve();
+      request.then(() => { ok = true; settle(); }, () => { ok = false; settle(); });
 
       if (envBtn) { envBtn.classList.add('is-sealed'); envBtn.setAttribute('aria-busy', 'true'); }
       const still = !envBtn || reducedMotion();

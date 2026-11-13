@@ -3,6 +3,11 @@
   publish = "site"
   command = ""
 
+# Serverless functions: netlify/functions/lead.mjs sends each partner request to the Telegram chat
+# (its token and chat in the site's environment variables, see the function).
+[functions]
+  directory = "netlify/functions"
+
 [[headers]]
   for = "/*"
   [headers.values]
