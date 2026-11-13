@@ -1472,8 +1472,7 @@ footer p { font-size: 12px !important; }
 .tq-ibw::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
 .tq-ibw a { text-decoration: none; }
 .tq-ibw__in { position: relative; z-index: 1; width: 1340px; margin: 0 auto; padding: 84px 80px 72px; box-sizing: border-box; display: flex; flex-direction: column; }
-.tq-ibw__eye { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #4a4b50; }
-.tq-ibw__h2 { --h2s: 46px; margin: 18px 0 56px; padding-inline-start: 0; line-height: 1.08; letter-spacing: -.01em; text-wrap: wrap; }
+.tq-ibw__h2 { --h2s: 46px; margin: 0 0 56px; padding-inline-start: 0; line-height: 1.08; letter-spacing: -.01em; text-wrap: wrap; }
 .tq-ibw__h2 .tq-line { display: block; }
 .tq-ibw__h2 .tq-line + .tq-line { color: #d2262d; }
 .tq-ibw__table { position: relative; width: 1180px; margin-bottom: 24px; }
@@ -1488,7 +1487,9 @@ footer p { font-size: 12px !important; }
 .tq-ibw__rows { position: relative; display: flex; flex-direction: column; }
 .tq-ibw__head, .tq-ibw__row, .tq-ibw__foot { display: grid; grid-template-columns: 300px minmax(0, 1fr) 440px; }
 .tq-ibw__head { height: 132px; }
-.tq-ibw__oh { display: flex; align-items: flex-end; padding: 0 0 24px 8px; font-size: 12px; letter-spacing: .2em; color: #6b6c72; text-transform: uppercase; }
+.tq-ibw__oh { display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 14px; padding: 0 0 24px 8px; font-size: 12px; letter-spacing: .2em; color: #6b6c72; text-transform: uppercase; }
+.tq-ibw__oh b { font-size: 20px; line-height: 23px; font-weight: 700; letter-spacing: .16em; color: #8e9097; white-space: nowrap; }
+[dir="rtl"] .tq-ibw__oh b, :lang(th) .tq-ibw__oh b, :lang(ja) .tq-ibw__oh b, :lang(ko) .tq-ibw__oh b, :lang(zh) .tq-ibw__oh b { letter-spacing: .02em; }
 .tq-ibw__uh { display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; padding: 0 0 24px 44px; font-size: 12px; letter-spacing: .2em; color: #2b2c31; text-transform: uppercase; }
 .tq-ibw__uh img { display: block; align-self: flex-start; width: auto; height: 23px; }
 .tq-ibw__row { position: relative; min-height: 100px; }
@@ -1539,8 +1540,7 @@ footer p { font-size: 12px !important; }
 .tq-ibw__note { max-width: 640px; margin: 0; font-size: 12px; line-height: 1.5; color: #55575e; }
 @media (max-width: 999px) {
 .tq-ibw__in { width: auto; max-width: 600px; padding: 48px 20px 64px; }
-.tq-ibw__eye { font-size: 10.5px; }
-.tq-ibw__h2 { --h2s: clamp(24px, 6.4vw, 34px); margin: 14px 0 28px; }
+.tq-ibw__h2 { --h2s: clamp(24px, 6.4vw, 34px); margin: 0 0 28px; }
 .tq-ibw__table { width: auto; margin-bottom: 26px; }
 .tq-ibw__glow { right: 10%; bottom: -30px; width: 70%; height: 120px; }
 .tq-ibw__back { width: auto; left: 0; top: 10px; bottom: -10px; border-radius: 28px; }
@@ -1932,12 +1932,11 @@ footer p { font-size: 12px !important; }
          row as the term, ours, then the typical one. partner.css, "the Where our program wins block". -->
     <section id="wins" class="tq-ibw" data-screen-label="IB Tools · Where our program wins">
       <div class="tq-ibw__in">
-        <span class="tq-ibw__eye">Mengapa TradeQuo</span>
         <h2 class="tq-ibw__h2 tq-h2"><span class="tq-line">Di mana program kami</span> <span class="tq-line">unggul.</span></h2>
         <div class="tq-ibw__table">
           <i class="tq-ibw__glow"></i><i class="tq-ibw__back"></i><i class="tq-ibw__card"><i></i><i></i></i>
           <div class="tq-ibw__rows">
-            <div class="tq-ibw__head"><span></span><span class="tq-ibw__oh">Program IB pada umumnya</span><span class="tq-ibw__uh"><img src="../../assets/logo-wordmark-dark.png?v=4e0fc67613" width="525" height="71" alt="TradeQuo" decoding="async" loading="lazy"><span>Program kami</span></span></div>
+            <div class="tq-ibw__head"><span></span><span class="tq-ibw__oh"><b>Broker lain</b><span>Program IB pada umumnya</span></span><span class="tq-ibw__uh"><img src="../../assets/logo-wordmark-dark.png?v=4e0fc67613" width="525" height="71" alt="TradeQuo" decoding="async" loading="lazy"><span>Program kami</span></span></div>
             <div class="tq-ibw__row" style="--i:0">
               <i class="tq-ibw__band"></i>
               <div class="tq-ibw__lbl"><span>01</span><b>Tingkat sub-IB</b></div>
