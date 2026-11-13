@@ -56,37 +56,49 @@
 
   /* ---- embeds: load on approach, pause off-screen ----------------------------
    * The embeds are same-origin, so they share the page's main thread: anything
-   * they do while out of view costs scroll smoothness. They only load about a
-   * screen before they are reached (a display:none embed — the other film
+   * they do while out of view costs scroll smoothness. They only load 1.5
+   * screens before they are reached (a display:none embed — the other film
    * layout — never loads), and stop rendering once out of view: they poll
    * window.__tqPaused. `data-covered` marks an embed hidden under other content. */
   function setEmbedPaused(f) {
     try { if (f.contentWindow) f.contentWindow.__tqPaused = f.dataset.inview !== '1' || f.hasAttribute('data-covered'); } catch (e) {}
   }
+  /* A jump from the page menu (or back to the top) flies past embeds: they don't start on the way,
+   * only the ones near where it lands, once the page has stopped (no scroll for 200ms). */
+  let embedHold = false, embedSettle = () => {};
+  function holdEmbeds() {
+    embedHold = true;
+    let t = 0;
+    const quiet = () => { clearTimeout(t); t = setTimeout(() => { removeEventListener('scroll', quiet); embedHold = false; embedSettle(); }, 200); };
+    addEventListener('scroll', quiet, { passive: true });
+    quiet();
+  }
   function startEmbeds() {
     const frames = $$('iframe[data-embed]');
     const pending = new Set(frames);
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
     const start = (f) => {
       if (!pending.has(f)) return;
       pending.delete(f);
       load.unobserve(f);
       f.src = f.dataset.src;
     };
-    const load = new IntersectionObserver((entries) => {
-      entries.forEach((en) => { if (en.isIntersecting) start(en.target); });
-    }, { rootMargin: '50% 0px' });
-    /* Nothing heavy starts before the visitor does something: the first screen
-     * paints and becomes interactive with the main thread to itself. After the
-     * first scroll/touch/key, the rest warm up one by one in idle time, so their
-     * start-up (shaders, React mount) doesn't land mid-scroll. Skips the film
-     * layout that is display:none, and data-saver connections. */
-    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
-    const warm = () => {
-      const next = [...pending].find((f) => f.getClientRects().length);
-      if (!next) return;
-      start(next);
-      next.addEventListener('load', () => setTimeout(() => idle(warm, { timeout: 3000 }), 600), { once: true });
+    /* Each embed loads and starts 1.5 screens before it is reached (in a gap between frames, at
+     * most 400ms later) — not all of them in the first seconds on the page: their start-up (download,
+     * shaders, React mount) runs on the page's main thread and used to land on the start of scrolling.
+     * One flown past stays watched and starts when it is approached again. */
+    const near = (f) => {
+      if (embedHold || !f.getClientRects().length) return false;
+      const r = f.getBoundingClientRect();
+      return r.bottom > -innerHeight * 1.5 && r.top < innerHeight * 2.5;
     };
+    const load = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) idle(() => { if (near(en.target)) start(en.target); }, { timeout: 400 }); });
+    }, { rootMargin: '150% 0px' });
+    embedSettle = () => { if (started) pending.forEach((f) => { if (near(f)) start(f); }); };
+    /* Nothing heavy starts before the visitor does something: the first screen
+     * paints and becomes interactive with the main thread to itself. An embed that
+     * is display:none (the other film layout) never comes near, so it never loads. */
     const saveData = navigator.connection && navigator.connection.saveData;
     const events = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'];
     let started = false;
@@ -95,7 +107,6 @@
       started = true;
       events.forEach((ev) => window.removeEventListener(ev, first, { passive: true }));
       frames.forEach((f) => load.observe(f));
-      if (!saveData) idle(warm, { timeout: 2000 });
     };
     events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
     if (scrollY > 0) first(); /* reload half-way down the page */
@@ -285,7 +296,7 @@
   function startToc() {
     const links = $$('[data-toc-link]');
     const secs = [...new Set(links.map((a) => a.getAttribute('href').slice(1)))].map((id) => document.getElementById(id)).filter(Boolean);
-    const go = (y) => window.scrollTo({ top: y, behavior: reducedMotion() ? 'auto' : 'smooth' });
+    const go = (y) => { holdEmbeds(); window.scrollTo({ top: y, behavior: reducedMotion() ? 'auto' : 'smooth' }); };
     links.forEach((a) => a.addEventListener('click', (e) => {
       const t = document.getElementById(a.getAttribute('href').slice(1));
       if (!t) return;
