@@ -755,6 +755,21 @@ footer p { font-size: 12px !important; }
   background: radial-gradient(70% 45% at 50% 100%, rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%), radial-gradient(75% 60% at 50% 32%, #fff 0%, #f1f1f4 70%), #f1f1f4; }
 .tq-mth::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 120px; pointer-events: none; background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0) 100%); }
 .tq-mth__stage { position: absolute; left: 0; right: 0; top: 0; height: 86%; }
+.tq-mth__stage--still { container-type: size; }
+.tq-mth__still { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.tq-mth__still--wide { width: min(100cqw, 100cqh * 2160 / 1048); aspect-ratio: 2160 / 1048; }
+.tq-mth__still--tall { display: none; width: min(100cqw, 100cqh * 780 / 1216); aspect-ratio: 780 / 1216; }
+@container (max-aspect-ratio: 19 / 20) {
+.tq-mth__still--wide { display: none; }
+.tq-mth__still--tall { display: block; }
+}
+.tq-mth__still img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.tq-mth__tag { position: absolute; left: var(--x); top: var(--y); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 7px; white-space: nowrap; pointer-events: none; font-family: 'Inter', system-ui, sans-serif; }
+.tq-mth__tag i { font-style: normal; font-size: 11px; letter-spacing: .22em; color: #e7131b; font-variant-numeric: tabular-nums; }
+.tq-mth__tag b { font-size: 30px; font-weight: 700; letter-spacing: -.022em; line-height: 1.05; padding: 0 .06em .2em; margin: 0 -.06em -.2em;
+  background: linear-gradient(180deg, #3a3a40 0%, #0a0a0b 40%, #55555c 62%, #1a1a1e 82%, #0a0a0b 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 12px rgba(255,255,255,.9)); }
+.tq-mth__tag::after { content: ""; width: 1px; height: 18px; background: linear-gradient(180deg, rgba(10,10,11,.45), rgba(10,10,11,0)); }
+.tq-mth__still--tall .tq-mth__tag b { font-size: 20px; }
 .tq-mth__fade { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; background: linear-gradient(180deg, rgba(241,241,244,0) 0%, rgba(241,241,244,.7) 45%, rgba(241,241,244,.94) 100%); pointer-events: none; }
 .tq-mth__foot { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); bottom: clamp(14px, 2.2vh, 22px); display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: flex-end; gap: 22px 40px; pointer-events: none; }
@@ -1269,11 +1284,19 @@ html:lang(ko) * { word-break: keep-all; }
   </header>
 
   <main>
-    <!-- Hero (Partner_Tools_Hero design): a light full-width screen. The four tools float in it as 3D objects
-         (assets/js/mt-hero.js, light theme; each one's name stands above it): creatives, the TradingView Premium
-         screen, signals and IB Tools. The title and the CTA sit at the bottom. -->
+    <!-- Hero (Partner_Tools_Hero design): a light full-width screen with the four tools — creatives, the TradingView
+         Premium screen, signals and IB Tools — each with its name above it; the title and the CTA sit at the bottom.
+         FROZEN for now (the page is to be redone): the 3D scene (assets/js/mt-hero.js, three.js) no longer runs; the
+         stage shows two stills of it at rest instead — wide, and the phones' 2x2 layout for stages narrower than 0.95 of
+         their height — each as sharp objects over a tiny soft-glow layer, scaled to fit the stage (lazy images: only the
+         still that shows is fetched); the names stay page
+         text (mt.top.l1–l4) where the scene put them. To bring the scene back: the stage div with data-mt-stage
+         data-theme="light" data-ib data-labels="…l1|…l4" and the module script mt-hero.js at the end of this file. -->
     <section id="tools" class="tq-mth" data-screen-label="Marketing tools hero">
-      <div class="tq-mth__stage" data-mt-stage data-theme="light" data-ib data-labels="마케팅 소재|TradingView Premium|시그널|IB 도구"></div>
+      <div class="tq-mth__stage tq-mth__stage--still" aria-hidden="true">
+        <div class="tq-mth__still tq-mth__still--wide"><img class="tq-mth__glow" src="../../assets/marketing/hero-wide-glow.webp?v=672b0ed9aa" width="270" height="131" alt="" decoding="async" loading="lazy"><img src="../../assets/marketing/hero-wide.webp?v=01606a2afb" width="2160" height="1048" alt="" decoding="async" loading="lazy"><span class="tq-mth__tag" style="--x:13.27%;--y:13.92%"><i>01</i><b>마케팅 소재</b></span><span class="tq-mth__tag" style="--x:37.98%;--y:28.27%"><i>02</i><b>TradingView Premium</b></span><span class="tq-mth__tag" style="--x:62.74%;--y:16.01%"><i>03</i><b>시그널</b></span><span class="tq-mth__tag" style="--x:87.81%;--y:26.53%"><i>04</i><b>IB 도구</b></span></div>
+        <div class="tq-mth__still tq-mth__still--tall"><img class="tq-mth__glow" src="../../assets/marketing/hero-tall-glow.webp?v=4dd6448759" width="97" height="152" alt="" decoding="async" loading="lazy"><img src="../../assets/marketing/hero-tall.webp?v=cd81f0b7a3" width="780" height="1216" alt="" decoding="async" loading="lazy"><span class="tq-mth__tag" style="--x:29.25%;--y:3.49%"><i>01</i><b>마케팅 소재</b></span><span class="tq-mth__tag" style="--x:70.38%;--y:16.65%"><i>02</i><b>TradingView Premium</b></span><span class="tq-mth__tag" style="--x:29.15%;--y:44.35%"><i>03</i><b>시그널</b></span><span class="tq-mth__tag" style="--x:71.26%;--y:50.46%"><i>04</i><b>IB 도구</b></span></div>
+      </div>
       <div class="tq-mth__fade" aria-hidden="true"></div>
       <div class="tq-mth__foot">
         <h1 class="tq-mth__h1 tq-h1" data-fitw>마케팅 <span style="color: #e7131b;">도구.</span></h1>
@@ -1743,6 +1766,5 @@ html:lang(ko) * { word-break: keep-all; }
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=ad8bd6c12a" defer></script>
-<script type="module" src="../../assets/js/mt-hero.js?v=fda5786822"></script>
 </body>
 </html>

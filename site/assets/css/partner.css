@@ -357,6 +357,22 @@
 /* the hero's top in the header's white, so the two meet without a line */
 .tq-mth::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 120px; pointer-events: none; background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0) 100%); }
 .tq-mth__stage { position: absolute; left: 0; right: 0; top: 0; height: 86%; }
+/* the hero frozen for now (the page is to be redone): two stills of the 3D scene at rest instead of the scene, scaled to
+   fit the stage (contain, centred); the phones' 2x2 still where the stage is narrower than 0.95 of its height (as the
+   scene switched); each still: a tiny soft-glow layer under the sharp objects; the names are page text where the scene
+   put them (fixed sizes, as the scene's: 30px, 20px on the 2x2) */
+.tq-mth__stage--still { container-type: size; }
+.tq-mth__still { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.tq-mth__still--wide { width: min(100cqw, 100cqh * 2160 / 1048); aspect-ratio: 2160 / 1048; }
+.tq-mth__still--tall { display: none; width: min(100cqw, 100cqh * 780 / 1216); aspect-ratio: 780 / 1216; }
+@container (max-aspect-ratio: 19 / 20) { .tq-mth__still--wide { display: none; } .tq-mth__still--tall { display: block; } }
+.tq-mth__still img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.tq-mth__tag { position: absolute; left: var(--x); top: var(--y); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 7px; white-space: nowrap; pointer-events: none; font-family: 'Inter', system-ui, sans-serif; }
+.tq-mth__tag i { font-style: normal; font-size: 11px; letter-spacing: .22em; color: #e7131b; font-variant-numeric: tabular-nums; }
+.tq-mth__tag b { font-size: 30px; font-weight: 700; letter-spacing: -.022em; line-height: 1.05; padding: 0 .06em .2em; margin: 0 -.06em -.2em;
+  background: linear-gradient(180deg, #3a3a40 0%, #0a0a0b 40%, #55555c 62%, #1a1a1e 82%, #0a0a0b 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 12px rgba(255,255,255,.9)); }
+.tq-mth__tag::after { content: ""; width: 1px; height: 18px; background: linear-gradient(180deg, rgba(10,10,11,.45), rgba(10,10,11,0)); }
+.tq-mth__still--tall .tq-mth__tag b { font-size: 20px; }
 .tq-mth__fade { position: absolute; left: 0; right: 0; bottom: 0; height: 36%; background: linear-gradient(180deg, rgba(241,241,244,0) 0%, rgba(241,241,244,.7) 45%, rgba(241,241,244,.94) 100%); pointer-events: none; }
 .tq-mth__foot { position: absolute; left: clamp(28px, 5vw, 72px); right: clamp(28px, 5vw, 72px); bottom: clamp(14px, 2.2vh, 22px); display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: flex-end; gap: 22px 40px; pointer-events: none; }
