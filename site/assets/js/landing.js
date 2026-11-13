@@ -83,10 +83,9 @@
       f.src = f.dataset.src;
     };
     /* Two ways an embed starts, whichever comes first:
-     * - warm-up: the ones marked data-warm (Infinite Flow = 1, then the film = 2) start right after the visitor's
-     *   first scroll/touch/key, in gaps between frames, without waiting for each other (they download side by
-     *   side): their start-up is long (the film's most of all), and loading them on approach made a visitor who
-     *   scrolls straight down wait for them;
+     * - warm-up: the ones marked data-warm (Infinite Flow), in that order, start right after the visitor's first
+     *   scroll/touch/key, in gaps between frames, without waiting for each other: their start-up is long, and
+     *   loading them on approach made a visitor who scrolls straight down wait for them;
      * - approach: any other embed starts once it is 1.5 screens away (in a gap between frames, at most 400ms
      *   later). One only flown past (a jump from the page menu) stays watched and starts when approached again. */
     const near = (f) => {
@@ -136,6 +135,49 @@
       f.addEventListener('load', () => setEmbedPaused(f));
       view.observe(f);
     });
+  }
+
+  /* ---- the partner film: a video (#film) -------------------------------------------------------------------
+   * A video plays on the graphics card's decoder: next to nothing for the page, unlike the film it was recorded
+   * from (React, three.js and a glass logo drawn every frame). It downloads after the visitor's first scroll/touch/key
+   * (in a gap between frames; network only, so it is ready when reached) or once it is 1.5 screens away, plays while
+   * on screen and stops off it. Its buttons are the film player's: back / forward 1.5 s, pause / play. "Reduce
+   * motion": no autoplay, the film's last scene (23.5 s) stands until play is pressed. Hidden on phones, it never loads. */
+  function startFilm() {
+    const v = $('video[data-film]');
+    if (!v) return;
+    const box = v.parentElement, ctl = $('[data-film-ctl]', box), pp = $('[data-film-pp]', box);
+    let userPaused = reducedMotion(), inView = false, loaded = false;
+    const sync = () => {
+      if (loaded && inView && !userPaused && !document.hidden) { const pr = v.play(); if (pr) pr.catch(() => {}); } else if (!v.paused) v.pause();
+      ctl.classList.toggle('is-paused', userPaused);
+      pp.setAttribute('aria-label', userPaused ? 'Play video' : 'Pause video');
+      pp.title = userPaused ? 'Play' : 'Pause';
+    };
+    const load = () => {
+      if (loaded || !v.getClientRects().length) return;
+      loaded = true;
+      if (userPaused) v.addEventListener('loadedmetadata', () => { v.currentTime = 23.5; }, { once: true });
+      v.preload = 'auto';
+      $$('source', v).forEach((so) => { so.src = so.dataset.src; });   /* H.264, or VP9 where H.264 is missing */
+      v.load();
+      sync();
+    };
+    pp.addEventListener('click', () => { userPaused = !userPaused; load(); sync(); });
+    $$('[data-film-skip]', box).forEach((b) => b.addEventListener('click', () => {
+      load();
+      const d = v.duration || 24.2;
+      v.currentTime = ((v.currentTime + parseFloat(b.dataset.filmSkip)) % d + d) % d;
+    }));
+    new IntersectionObserver((es) => { inView = es[es.length - 1].isIntersecting; sync(); }).observe(box);
+    new IntersectionObserver((es) => { if (es[es.length - 1].isIntersecting) load(); }, { rootMargin: '150% 0px' }).observe(box);
+    document.addEventListener('visibilitychange', sync);
+    if (navigator.connection && navigator.connection.saveData) return;
+    const idle = window.requestIdleCallback ? (f) => window.requestIdleCallback(f, { timeout: 1500 }) : (f) => setTimeout(f, 200);
+    const events = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'];
+    const first = () => { events.forEach((ev) => window.removeEventListener(ev, first, { passive: true })); idle(load); };
+    events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
+    if (scrollY > 0) first();
   }
 
   /* Run `start`/`stop` as `el` enters/leaves the viewport (± margin). */
@@ -1430,6 +1472,7 @@
   startIframeFit();
   startFanTap();
   startEmbeds();
+  startFilm();
   startAnimationGate();
   startFlip();
   startHowLine();

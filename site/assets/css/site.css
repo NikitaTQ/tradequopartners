@@ -479,7 +479,7 @@ html { scroll-snap-type: y proximity; }
   [data-fan-stage] > [data-fan-card]:nth-child(6) { transform-origin: 72% 82% !important; }
   [data-fan-stage] > [data-fan-card][data-fan-card][data-sel], [data-fan-stage] > [data-fan-card][data-fan-card][data-sel]:hover { transform: scale(1.27) !important; z-index: 6 !important; border-color: rgba(231,19,27,.8) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.35), 0 0 26px rgba(231,19,27,.42), 0 18px 34px rgba(0,0,0,.6) !important; }
   [data-crystals] iframe { aspect-ratio: 0.72 / 1 !important; }
-  #film { display: none !important; }   /* phones: no partner film (its iframe never loads) */
+  #film { display: none !important; }   /* phones: no partner film (its video never loads) */
   [data-how-steps] { grid-template-columns: 1fr !important; row-gap: 14px !important; }
   [data-how-arrow] { display: flex !important; }
   [data-how-line] { display: none !important; }
@@ -914,6 +914,29 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    edge to edge (.tp clips the overhang), reaching 2px under the hero: no clipped shadow, whose soft edge let a
    hairline of the white page show under the bar at the sides on some screens. */
 .tq-head--dark::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: -2px; left: 50%; width: 100vw; margin-left: -50vw; background: #0a0a0b; pointer-events: none; }
+/* ---- the partner film (#film): a video with the film player's own buttons over it -----------------------------------
+   The buttons as the film drew them: sizes off --e = 3% of the box's width (34-44px), dimmed to .55 until the film is
+   hovered or paused; back / forward 1.5 s with their labels, pause / play in the middle (startFilm in landing.js). */
+[data-film-box] { container-type: inline-size; }
+.tq-film__ctl { --e: clamp(34px, 3cqw, 44px); position: absolute; left: 50%; bottom: calc(var(--e) * .5); transform: translateX(-50%); display: flex; align-items: flex-start;
+  gap: calc(var(--e) * .3); padding-top: calc(var(--e) * .1); opacity: .55; transition: opacity .25s ease; }
+[data-film-box]:hover .tq-film__ctl, .tq-film__ctl.is-paused, .tq-film__ctl:focus-within { opacity: 1; }
+.tq-film__ctl > span { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tq-film__b { width: var(--e); height: var(--e); margin-top: calc(var(--e) * -.1); padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; color: #fff;
+  border: 1px solid rgba(255,255,255,.24); background: rgba(12,12,14,.42); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 6px 18px -6px rgba(0,0,0,.45);
+  transition: transform .15s ease, background .15s ease; }
+.tq-film__b--s { width: calc(var(--e) * .8); height: calc(var(--e) * .8); margin-top: 0; }
+.tq-film__b svg { display: block; width: calc(var(--e) * .36); height: calc(var(--e) * .36); }
+.tq-film__b--s svg { width: calc(var(--e) * .4); height: calc(var(--e) * .4); }
+.tq-film__b:hover { transform: scale(1.06); background: rgba(12,12,14,.6); }
+.tq-film__b:active { transform: scale(.94); }
+.tq-film__b:focus-visible { outline: 2px solid #E7131B; outline-offset: 3px; }
+.tq-film__play, .tq-film__ctl.is-paused .tq-film__pause { display: none !important; }
+.tq-film__ctl.is-paused .tq-film__play { display: block !important; }
+.tq-film__l { font: 600 calc(var(--e) * .25) / 1 'Inter', sans-serif; letter-spacing: .04em; color: #fff; padding: 3px 7px; border-radius: 999px;
+  background: rgba(12,12,14,.42); border: 1px solid rgba(255,255,255,.24); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .tq-film__ctl, .tq-film__b { transition: none; } }
+
 /* ---- sticky header -------------------------------------------------------------------------------------
    The header stays on top while the page scrolls (position: sticky in the markup). Scrolled, it is shorter (68px:
    it gives 20px of padding back as a bottom margin, at the same pace, so the page under it never moves) and sits on

@@ -4,3 +4,4 @@ __pycache__/
 node_modules/
 tools/.posters-tmp/
 tools/.ib-film-tmp/
+tools/.film-tmp/
