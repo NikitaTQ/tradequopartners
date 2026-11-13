@@ -54,12 +54,11 @@
     });
   }
 
-  /* ---- embeds: load on approach, pause off-screen ----------------------------
+  /* ---- embeds: warm-up, load on approach, pause off-screen -------------------
    * The embeds are same-origin, so they share the page's main thread: anything
-   * they do while out of view costs scroll smoothness. They only load 1.5
-   * screens before they are reached (a display:none embed — the other film
-   * layout — never loads), and stop rendering once out of view: they poll
-   * window.__tqPaused. `data-covered` marks an embed hidden under other content. */
+   * they do while out of view costs scroll smoothness. They stop rendering once
+   * out of view: they poll window.__tqPaused. `data-covered` marks an embed
+   * hidden under other content. A display:none embed (the film on phones) never loads. */
   function setEmbedPaused(f) {
     try { if (f.contentWindow) f.contentWindow.__tqPaused = f.dataset.inview !== '1' || f.hasAttribute('data-covered'); } catch (e) {}
   }
@@ -83,10 +82,13 @@
       load.unobserve(f);
       f.src = f.dataset.src;
     };
-    /* Each embed loads and starts 1.5 screens before it is reached (in a gap between frames, at
-     * most 400ms later) — not all of them in the first seconds on the page: their start-up (download,
-     * shaders, React mount) runs on the page's main thread and used to land on the start of scrolling.
-     * One flown past stays watched and starts when it is approached again. */
+    /* Two ways an embed starts, whichever comes first:
+     * - warm-up: the ones marked data-warm (Infinite Flow = 1, then the film = 2) start right after the visitor's
+     *   first scroll/touch/key, in gaps between frames, without waiting for each other (they download side by
+     *   side): their start-up is long (the film's most of all), and loading them on approach made a visitor who
+     *   scrolls straight down wait for them;
+     * - approach: any other embed starts once it is 1.5 screens away (in a gap between frames, at most 400ms
+     *   later). One only flown past (a jump from the page menu) stays watched and starts when approached again. */
     const near = (f) => {
       if (embedHold || !f.getClientRects().length) return false;
       const r = f.getBoundingClientRect();
@@ -96,9 +98,11 @@
       entries.forEach((en) => { if (en.isIntersecting) idle(() => { if (near(en.target)) start(en.target); }, { timeout: 400 }); });
     }, { rootMargin: '150% 0px' });
     embedSettle = () => { if (started) pending.forEach((f) => { if (near(f)) start(f); }); };
+    const warm = () => frames.filter((f) => f.dataset.warm && f.getClientRects().length)
+      .sort((a, b) => a.dataset.warm - b.dataset.warm)
+      .forEach((f) => idle(() => start(f), { timeout: 500 }));
     /* Nothing heavy starts before the visitor does something: the first screen
-     * paints and becomes interactive with the main thread to itself. An embed that
-     * is display:none (the other film layout) never comes near, so it never loads. */
+     * paints and becomes interactive with the main thread to itself. */
     const saveData = navigator.connection && navigator.connection.saveData;
     const events = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'];
     let started = false;
@@ -107,6 +111,7 @@
       started = true;
       events.forEach((ev) => window.removeEventListener(ev, first, { passive: true }));
       frames.forEach((f) => load.observe(f));
+      if (!saveData) warm();
     };
     events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
     if (scrollY > 0) first(); /* reload half-way down the page */
