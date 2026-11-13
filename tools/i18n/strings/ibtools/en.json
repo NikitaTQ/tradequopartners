@@ -204,5 +204,12 @@
   "ib.sig.note": "Illustrative data, fictional brand. Signal Check tests your criteria, not future results. Signals are information, not trade execution; returns not guaranteed.",
   "ib.ps.h2": "<line>Your relationships.</line> <line>Clearly connected to you.</line>",
   "ib.ps.p": "Clients you introduce are registered under your IB and stay linked to your profile.",
-  "ib.ps.cta": "Explore Partnershield"
+  "ib.ps.cta": "Explore Partnershield",
+  "ib.cp.eye": "IB Tools · Branded copy trading",
+  "ib.cp.h2": "<line>Their experience.</line> <line>Poured into yours.</line>",
+  "ib.cp.s1": "The provider opens a trade.",
+  "ib.cp.s2": "It flows into your client’s account — at their own size.",
+  "ib.cp.cta": "Explore copy trading",
+  "ib.cp.by": "Powered by",
+  "ib.cp.note": "Illustrative, fictional identities. Strategies are run by independent providers on SocialTrading.ai. Copy trading involves risk of loss; past performance does not guarantee future results."
 }

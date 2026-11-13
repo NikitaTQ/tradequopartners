@@ -204,5 +204,12 @@
   "ib.sig.note": "Dữ liệu minh họa, thương hiệu hư cấu. Signal Check kiểm tra tiêu chí của bạn, không phải kết quả tương lai. Tín hiệu là thông tin, không phải khớp lệnh; lợi nhuận không được đảm bảo.",
   "ib.ps.h2": "<line>Các mối quan hệ của bạn.</line> <line>Gắn rõ ràng với bạn.</line>",
   "ib.ps.p": "Khách hàng bạn giới thiệu được đăng ký dưới IB của bạn và luôn liên kết với hồ sơ của bạn.",
-  "ib.ps.cta": "Khám phá Partnershield"
+  "ib.ps.cta": "Khám phá Partnershield",
+  "ib.cp.eye": "Công cụ IB · Copy trading mang thương hiệu của bạn",
+  "ib.cp.h2": "<line>Kinh nghiệm của họ.</line> <line>Rót vào tài khoản của bạn.</line>",
+  "ib.cp.s1": "Nhà cung cấp mở một lệnh.",
+  "ib.cp.s2": "Lệnh chảy vào tài khoản khách hàng của bạn — theo khối lượng của chính họ.",
+  "ib.cp.cta": "Khám phá copy trading",
+  "ib.cp.by": "Cung cấp bởi",
+  "ib.cp.note": "Minh họa, danh tính hư cấu. Các chiến lược do những nhà cung cấp độc lập trên SocialTrading.ai vận hành. Copy trading có rủi ro thua lỗ; kết quả trong quá khứ không đảm bảo kết quả tương lai."
 }

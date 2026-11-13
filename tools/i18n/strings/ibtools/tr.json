@@ -204,5 +204,12 @@
   "ib.sig.note": "Temsili veriler, kurgusal marka. Signal Check gelecekteki sonuçları değil, sizin kriterlerinizi test eder. Sinyaller bilgidir, işlem gerçekleştirme değildir; getiri garanti edilmez.",
   "ib.ps.h2": "<line>İlişkileriniz.</line> <line>Açıkça size bağlı.</line>",
   "ib.ps.p": "Yönlendirdiğiniz müşteriler IB’niz altında kaydedilir ve profilinize bağlı kalır.",
-  "ib.ps.cta": "Partnershield’ı keşfedin"
+  "ib.ps.cta": "Partnershield’ı keşfedin",
+  "ib.cp.eye": "IB Araçları · Markalı kopya işlem",
+  "ib.cp.h2": "<line>Onların deneyimi.</line> <line>Sizinkine aktarılır.</line>",
+  "ib.cp.s1": "Sağlayıcı bir işlem açar.",
+  "ib.cp.s2": "Müşterinizin hesabına kendi büyüklüğünde aktarılır.",
+  "ib.cp.cta": "Kopya işlemi keşfedin",
+  "ib.cp.by": "Altyapı:",
+  "ib.cp.note": "Temsilîdir, kişiler kurgusaldır. Stratejiler SocialTrading.ai üzerindeki bağımsız sağlayıcılar tarafından yürütülür. Kopya işlem zarar riski içerir; geçmiş performans gelecekteki sonuçları garanti etmez."
 }
