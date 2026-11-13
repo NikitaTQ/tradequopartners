@@ -135,19 +135,30 @@
       </div>
     </section>
 
-    <!-- Branded toolkit (IB_Branded_Toolkit_1 design), right after the hero: the IB's own analysis tools (Optimus Prime,
-         Zero Edge, BFS, UTBOT) under a sample IB brand (NORTHLINE): the IB's scanner, a TradingView-style chart of the picked
-         tool and the four tools to pick from (desktop); the tools as a switch over the chart (phones). The markup is the
-         design's (tools/i18n/partials/ib-toolkit.html, a class per inline style of the design; partner.css, "the Branded
-         toolkit block"); assets/js/ib-toolkit.js picks the tools. Quotes and levels are demo data, the same on every
-         language. The button goes on to the next block. -->
-    <section id="toolkit" class="tq-ibt" data-ib-tk data-tool="op" data-screen-label="IB Tools · Branded toolkit">
-{{> ib-toolkit}}
-      <script>/* each composition at its own size, scaled to the screen: the desktop one down from 1440px, the phone one from 390px (at most 1.5x) */
-(function(){var s=document.currentScript.parentNode,d=s.querySelector('.tq-ibt__desk'),m=s.querySelector('.tq-ibt__mob');function f(){var w=s.clientWidth;d.style.zoom=Math.min(1,w/1440);m.style.zoom=Math.min(1.5,w/390)}f();addEventListener('resize',f)})();</script>
+    <!-- TradingView Premium on us, still (in place of the Branded toolkit): the Marketing Tools card (a dark card, the
+         TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the CTA to the
+         form) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
+         Styles: partner.css, "the TradingView Premium block". Prices are USD in every language. -->
+    <section id="premium" class="tp-sec tq-ibtv" data-screen-label="IB Tools · TradingView Premium">
+      <div class="tp-wrap">
+        <div class="tp-tv">
+          <div class="tp-tv__glow" aria-hidden="true"></div>
+          <div class="tp-tv__mark" aria-hidden="true"><img src="{{root}}assets/marketing/tradingview.webp" alt="" width="969" height="134" loading="lazy" decoding="async"></div>
+          <div class="tp-tv__duo"><img src="{{root}}assets/logo-wordmark-light.png" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span aria-hidden="true">×</span><img src="{{root}}assets/marketing/tradingview.webp" alt="TradingView" width="969" height="134" loading="lazy" decoding="async"></div>
+          <div class="tq-ibtv__zero" aria-hidden="true"><b>$</b><img src="{{root}}assets/ib/tv-zero.webp" alt="" width="515" height="713" loading="lazy" decoding="async"></div>
+          <h2 class="tp-tv__h tq-h2" data-fitw>{{ib.tv.h}}</h2>
+          <div class="tp-tv__bill">
+            <div class="tp-tv__prod"><img src="{{root}}assets/marketing/tradingview-app.webp" alt="" width="32" height="32" loading="lazy" decoding="async"><span><b>TradingView Premium</b><span class="tp-tv__lab">{{ib.tv.life}}</span></span></div>
+            <div class="tp-tv__list"><span class="tp-tv__lab">{{ib.tv.list}}</span><span class="tp-tv__val"><s>$719.40</s> <small>{{ib.tv.yr}}</small></span></div>
+            <div><span class="tp-tv__lab">{{ib.tv.paid}}</span><span class="tp-tv__val"><i aria-hidden="true">✓</i>$719.40<small>{{ib.tv.yr}}</small></span></div>
+            <div class="tp-tv__you"><span class="tp-tv__lab">{{ib.tv.pay}}</span><span class="tp-tv__val">$0.00</span></div>
+          </div>
+          <a class="tp-tv__cta" href="{{signupHref}}"{{signupNav}}>{{ib.tv.cta}} <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
     </section>
 
-    <!-- Signals feed (IB_Signals_Feed design), after the branded toolkit: one signal under the IB's brand (the sample brand
+    <!-- Signals feed (IB_Signals_Feed design), after TradingView Premium: one signal under the IB's brand (the sample brand
          NORTHLINE) and the four channels it went to (Telegram, TradingView, WhatsApp, XMP Club, with the Signal Check bot on the
          last). Phones: the design's 390px block as it is, scaled to the screen (the script in the section sets the zoom), at
          most ~70% of a 390x844 screen. Desktops (the design has no desktop view): the heading, the button and the note on
@@ -564,7 +575,6 @@
 
 <script src="{{root}}assets/js/transition.js" defer></script>
 <script src="{{root}}assets/js/landing.js" defer></script>
-<script src="{{root}}assets/js/ib-toolkit.js" defer></script>
 <script src="{{root}}assets/js/ib-copy.js" defer></script>
 <script src="{{root}}assets/js/ib-insights.js" defer></script>
 <script src="{{root}}assets/js/ib-clients.js" defer></script>
