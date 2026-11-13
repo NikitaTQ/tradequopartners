@@ -1,20 +1,30 @@
-/* IB Tools, the Network insights block (#insights, IB_Network_Insights design), ported from the design's React component.
+/* IB Tools, the Network + clients block (#insights, IB_Network_Block design "IB Network + Clients", which grew from the
+   IB_Network_Insights one), ported from the design's React component.
    A canvas draws the partner tree in glass: "You" (dark) at the top, the Sub-IBs level by level under it, links with
    pulses running up to you, the strongest branch (Northline) red. View 2 turns the same partners into glass bars by
-   net deposits on a grid (each node grows into its bar, the tree fades). The views swap on their own (7.5 s on the tree,
-   5.5 s on the bars) while the block is on screen and the pointer is not over the picture; a click on a view on the left
-   picks it and stops the swapping. With "reduce motion" nothing moves: the picture is drawn once per view.
-   The words drawn on the canvas come from its data-you / data-total ("{v}" = the sum) / data-net. Names and figures
-   are demo data. Below 641px (the phone mockup) the picture is packed tighter: smaller glass, levels closer, smaller
-   words, no sum under "You" (the bars show it). */
+   net deposits on a grid (each node grows into its bar, the tree fades). View 3 lays each bar down as a row: each
+   partner's top client, a glass bar as long as the commission you earn from them, with the client's name, status
+   ("Dormant risk" in red) and the partner it came through; the month's total on top. The views turn on their own
+   (7.5 s on the tree, 5.5 s on the bars, 7 s on the clients) while the block is on screen and the pointer is not over
+   the picture; a click on a view on the left picks it and stops the turns. With "reduce motion" nothing moves: the
+   picture is drawn once per view.
+   The words drawn on the canvas come from its data-you / data-total ("{v}" = the sum) / data-net / data-comm ("{m}" =
+   the month, in the page's language) / data-top / data-active / data-dormant / data-via ("{n}" = the partner). Names
+   and figures are demo data. Below 641px (the phone mockup) the picture is packed tighter: smaller glass, levels
+   closer, smaller words, no sum under "You" (the bars show it). */
 (function () {
   var s = document.querySelector('[data-ib-ins]');
   if (!s) return;
   var fig = s.querySelector('.tq-ibi__fig'), stage = s.querySelector('.tq-ibi__stage'), cv = stage.querySelector('canvas');
   var guide = s.querySelectorAll('.tq-ibi__g');
-  var lang = document.documentElement.lang || 'en', cased = !/^(ar|th|ja|ko|zh)/.test(lang);
+  var lang = document.documentElement.lang || 'en', cased = !/^(ar|th|ja|ko|zh)/.test(lang), rtl = document.documentElement.dir === 'rtl';
   var upper = function (t) { if (!cased) return t; try { return t.toLocaleUpperCase(lang); } catch (e) { return t.toUpperCase(); } };
-  var TXT = { you: upper(cv.getAttribute('data-you') || 'You'), total: cv.getAttribute('data-total') || '{v} total', net: upper(cv.getAttribute('data-net') || 'Network net deposits') };
+  var attr = function (n, d) { return cv.getAttribute('data-' + n) || d; };
+  var month = 'November';
+  try { month = new Intl.DateTimeFormat(lang, { month: 'long' }).format(new Date(2026, 10, 15)); } catch (e) {}
+  var TXT = { you: upper(attr('you', 'You')), total: attr('total', '{v} total'), net: upper(attr('net', 'Network net deposits')),
+    comm: upper(attr('comm', 'Your commissions · {m}').replace('{m}', month)), top: upper(attr('top', 'Top client of each partner')),
+    active: attr('active', 'Active'), dormant: attr('dormant', 'Dormant risk'), via: attr('via', 'via {n}') };
   var F = 'Inter, system-ui, sans-serif';
   var coarse = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches);
 
@@ -45,6 +55,20 @@
   BY.r.rank = -1;
   var MAX = PARTNERS[0].net;
   var kfmt = function (v) { return '$' + (v / 1000).toFixed(1).replace(/\.0$/, '') + 'k'; };
+  /* view 3: the top client of each partner, in the partners' order (row i belongs to the partner ranked i) */
+  var CL = [
+    { n: 'D. Moreau', ib: 'Northline', amt: 112.00, s: 'a' },
+    { n: 'R. Castillo', ib: 'Meridian', amt: 23.75, s: 'a' },
+    { n: 'S. Haddad', ib: 'K. Ortiz', amt: 22.40, s: 'a' },
+    { n: 'A. Lindqvist', ib: 'Harbor FX', amt: 18.20, s: 'a' },
+    { n: 'M. Tanaka', ib: 'Atlas', amt: 14.60, s: 'a' },
+    { n: 'L. Brennan', ib: 'Bluefin', amt: 9.10, s: 'a' },
+    { n: 'J. Okafor', ib: 'E. Varga', amt: 5.60, s: 'd' },
+    { n: 'P. Novak', ib: 'S. Kumar', amt: 3.40, s: 'a' }
+  ];
+  var CMAX = CL[0].amt;
+  var STS = { a: [TXT.active, '#0A0A0A', '#55585F'], d: [TXT.dormant, '#E7131B', '#C40F16'] };
+  var DUR = [7500, 5500, 7000];
 
   var reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   var target = 0, manual = false, hover = false, vis = false, at = 0, raf = 0, draw = null;
@@ -60,8 +84,8 @@
     at = setTimeout(function () {
       if (manual) return;
       if (hover || !vis) { schedule(); return; }
-      setView(1 - target); schedule();
-    }, target === 0 ? 7500 : 5500);
+      setView((target + 1) % 3); schedule();
+    }, DUR[target]);
   }
   for (var g = 0; g < guide.length; g++) guide[g].addEventListener('click', setView.bind(null, g, true));
   fig.addEventListener('mouseenter', function () { hover = true; });
@@ -72,6 +96,7 @@
     var PI2 = Math.PI * 2, cl = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; }, eo = function (v) { return 1 - Math.pow(1 - v, 3); };
     var eio = function (v) { return v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2; }, lerp = function (a, b, t) { return a + (b - a) * t; };
     var W = 0, H = 0, dpr = 1, k = 1, top = 0, bot = 0, L = 0, R = 0, base = 0, maxH = 0, colW = 0, bw = 0, ph = false;
+    var rowTop = 0, pitch = 0, capH = 0, x0 = 0, maxLen = 0;
     var phone = window.matchMedia ? matchMedia('(max-width: 640px)') : null;
     var size = function () {
       W = stage.clientWidth; H = stage.clientHeight; if (!W || !H) return;
@@ -85,6 +110,9 @@
         base = bot - (W < 520 ? 44 : 34); maxH = base - top - 70;
       }
       colW = (R - L) / PARTNERS.length; bw = Math.max(16, Math.min(46, colW * 0.56));
+      /* view 3's rows: under the heading, one per client; the bars start a third of the way in */
+      rowTop = top + (ph ? 40 : 74); pitch = (base + 10 - rowTop) / CL.length; capH = Math.max(ph ? 11 : 14, Math.min(30, pitch * 0.5));
+      x0 = L + Math.min(210, (R - L) * (ph ? 0.38 : 0.34)); maxLen = R - x0 - (ph ? 56 : 76);
       if (reduced && draw) draw(performance.now());
     };
     if (window.ResizeObserver) new ResizeObserver(size).observe(stage); else window.addEventListener('resize', size);
@@ -131,15 +159,34 @@
     };
     var bez = function (p, q, t) { var my = (p.y + q.y) / 2, it = 1 - t; return { x: it * it * it * p.x + 3 * it * it * t * p.x + 3 * it * t * t * q.x + t * t * t * q.x, y: it * it * it * p.y + 3 * it * it * t * my + 3 * it * t * t * my + t * t * t * q.y }; };
     var spaced = function (px) { if ('letterSpacing' in ctx) ctx.letterSpacing = (cased ? px : 0) + 'px'; };
-    var last = performance.now(), T = 0, rv = 0, mt = 0;
+    var last = performance.now(), T = 0, rv = 0, mt = 0, mc = 0;
+    /* view 3: a row per client — a glass bar as long as the commission, starting at x0 */
+    var rows = function () {
+      return CL.map(function (c, i) { var rw = Math.max(capH, maxLen * c.amt / CMAX); return { x: x0 + rw / 2, y: rowTop + (i + 0.5) * pitch, w: rw, h: capH, rad: capH / 2, rw: rw }; });
+    };
+    /* view 3's words for a row: the client (red for the top one), a status dot, "status · via partner", the amount */
+    var rowLabel = function (s) {
+      var i = s.n.rank, c = CL[i], S2 = STS[c.s], g = s.g, nameC = i === 0 ? '#C40F16' : '#0A0A0A', amt = '$' + c.amt.toFixed(2);
+      ctx.textAlign = 'left';
+      ctx.font = '700 ' + (ph ? 11 : 13.5) + 'px ' + F; ctx.fillStyle = nameC; ctx.fillText(c.n, L, g.y - 2);
+      ctx.fillStyle = S2[1]; ctx.beginPath(); ctx.arc(L + 3, g.y + (ph ? 8 : 10), ph ? 2.5 : 3, 0, PI2); ctx.fill();
+      /* status and partner: a sentence of the page's language around a Latin name — written right to left in Arabic */
+      ctx.font = '600 ' + (ph ? 9.5 : 11) + 'px ' + F; ctx.fillStyle = S2[2]; if (rtl) ctx.direction = 'rtl';
+      ctx.fillText(S2[0] + ' · ' + TXT.via.replace('{n}', c.ib), L + (ph ? 9 : 11), g.y + (ph ? 11.5 : 14)); ctx.direction = 'ltr';
+      ctx.font = '700 ' + (ph ? 10.5 : 12.5) + 'px ' + F; ctx.fillStyle = nameC; ctx.textBaseline = 'middle'; ctx.fillText(amt, x0 + g.rw + (ph ? 8 : 12), g.y + 1); ctx.textBaseline = 'alphabetic';
+    };
 
     draw = function (now) {
       if (!W) return;
       var still = reduced;
       var dt = Math.min(0.05, (now - last) / 1000); last = now;
       T += dt; rv += dt;
-      if (still) { rv = 9; mt = target; }
-      mt += Math.sign(target - mt) * Math.min(Math.abs(target - mt), dt / 1.25);
+      /* two moves: tree -> bars (mt, 0..1), bars -> client rows (mc, 0..1) */
+      var tb = Math.min(1, target), tc = target === 2 ? 1 : 0;
+      if (still) { rv = 9; mt = tb; mc = tc; }
+      mt += Math.sign(tb - mt) * Math.min(Math.abs(tb - mt), dt / 1.25);
+      mc += Math.sign(tc - mc) * Math.min(Math.abs(tc - mc), dt / 1.25);
+      var cf = eio(cl(mc)), LAY = rows();
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
       var st = NODES.map(function (n) {
         var r = RB[n.depth] * k, tx = L + n.fx * (R - L), ty = lvY(n.depth);
@@ -147,12 +194,26 @@
         var pop = eo(cl((rv - n.depth * 0.32) / 0.4));
         var bx = tx, bh = 2 * r, by = ty, w = 2 * r, h = 2 * r, rad = r;
         if (n.rank >= 0) { bx = L + (n.rank + 0.5) * colW; bh = Math.max(bw, maxH * n.net / MAX); by = base - bh / 2; w = lerp(2 * r, bw, mi); h = lerp(2 * r, bh, mi); rad = lerp(r, Math.min(12, bw / 2), mi); }
-        return { n: n, r: r, tx: tx, ty: ty, mi: mi, pop: pop, x: lerp(tx, bx, mi), y: lerp(ty, by, mi), w: w, h: h, rad: rad, bx: bx, bh: bh };
+        var x = lerp(tx, bx, mi), y = lerp(ty, by, mi), ci = 0, g = null;
+        if (n.rank >= 0) { g = LAY[n.rank]; ci = eio(cl(mc * 1.35 - n.rank * 0.05)); x = lerp(x, g.x, ci); y = lerp(y, g.y, ci); w = lerp(w, g.w, ci); h = lerp(h, g.h, ci); rad = lerp(rad, g.rad, ci); }
+        return { n: n, r: r, tx: tx, ty: ty, mi: mi, ci: ci, g: g, pop: pop, x: x, y: y, w: w, h: h, rad: rad, bx: bx, bh: bh };
       });
       var S = {}; st.forEach(function (x) { S[x.n.id] = x; });
       var net = 1 - eio(cl(mt * 1.6));
+      /* view 3's heading: the month's commissions, what the rows are, the total; lines between the rows */
+      if (cf > 0.01) {
+        ctx.save(); ctx.globalAlpha = cf; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+        ctx.font = '700 ' + (ph ? (cased ? 9 : 10) : (cased ? 10 : 11)) + 'px ' + F; spaced(ph ? 1.4 : 1.8); ctx.fillStyle = '#6B6E75';
+        ctx.fillText(TXT.comm, L, top + (ph ? 9 : 14));
+        if (!ph && ctx.measureText(TXT.comm).width + ctx.measureText(TXT.top).width + 24 < R - L) { ctx.textAlign = 'right'; ctx.fillText(TXT.top, R, top + 14); ctx.textAlign = 'left'; }
+        spaced(0);
+        ctx.font = '700 ' + (ph ? 15 : Math.round(26 * k)) + 'px ' + F; ctx.fillStyle = '#0A0A0A'; ctx.fillText('$4,812.60', L, ph ? top + 27 : top + 14 + 30 * k);
+        ctx.strokeStyle = 'rgba(18,22,30,0.08)'; ctx.lineWidth = 1;
+        for (var ri = 1; ri < CL.length; ri++) { var ly = Math.round(rowTop + ri * pitch) + 0.5, lp = cl(cf * 1.4 - ri * 0.04); ctx.beginPath(); ctx.moveTo(L, ly); ctx.lineTo(L + (R - L) * lp, ly); ctx.stroke(); }
+        ctx.restore();
+      }
       /* the chart's grid, total and scale */
-      var ga = eio(cl((mt - 0.3) / 0.7));
+      var ga = eio(cl((mt - 0.3) / 0.7)) * (1 - cf);
       if (ga > 0) {
         ctx.save(); ctx.globalAlpha = ga;
         ctx.strokeStyle = 'rgba(18,22,30,0.18)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(L, base + 0.5); ctx.lineTo(R, base + 0.5); ctx.stroke();
@@ -212,7 +273,11 @@
         }
         var nameY = ph ? lerp(x.ty + x.r + 12, base + 13 + (stag && n.rank % 2 ? 12 : 0), x.mi) : lerp(x.ty + x.r + 17, base + 17 + (stag && n.rank % 2 ? 14 : 0), x.mi);
         var valY = ph ? lerp(x.ty + x.r + 23, base - x.bh - 6, x.mi) : lerp(x.ty + x.r + 31, base - x.bh - 9, x.mi);
-        ctx.globalAlpha = la;
+        /* view 3: the row's words come in as the bar lands; the partner's name and sum go first */
+        var ra = la * cl((x.ci - 0.45) / 0.55);
+        if (ra > 0.01) { ctx.save(); ctx.globalAlpha = ra; ctx.textBaseline = 'alphabetic'; rowLabel(x); ctx.restore(); ctx.textAlign = 'center'; }
+        ctx.globalAlpha = la * (1 - cl(x.ci * 2.2));
+        if (ctx.globalAlpha <= 0.01) return;
         ctx.font = '700 ' + (ph ? 10 : x.mi > 0.5 && stag ? 10 : 12) + 'px ' + F; ctx.fillStyle = '#0A0A0A'; ctx.fillText(n.name, x.x, nameY);
         ctx.font = ph ? (x.mi > 0.5 ? '700 10px ' : '500 10px ') + F : x.mi > 0.5 ? '700 12px ' + F : '500 11px ' + F; ctx.fillStyle = n.id === 'n' ? '#C40F16' : x.mi > 0.5 ? '#0A0A0A' : '#6B6E75'; ctx.fillText(kfmt(n.net), x.x, valY);
       });

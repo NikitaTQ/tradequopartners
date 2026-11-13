@@ -305,12 +305,14 @@
 (function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),o=s.querySelector('.tq-ibcp__note'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,H=g.clientHeight-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-o.offsetHeight-48)/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
     </section>
 
-    <!-- Network insights (IB_Network_Insights design), after the signals feed: the pitch, two views to pick (V.01 Network,
-         V.02 Performance) and a red button to the Sub-IB network block; right a canvas: the partner tree in glass (You at
-         the top, Sub-IBs level by level, pulses running up the links, the strongest branch red), which turns into a bar
-         chart of the same partners by net deposits, and back (7.5 s / 5.5 s, held while the pointer is over it; a click on a
-         view stops the turns). assets/js/ib-insights.js draws it; its words come from data-* on the canvas. Names and
-         figures are demo data (the same partners as in the Ask AI chat). -->
+    <!-- Network + clients (IB_Network_Block design: "IB Network + Clients", in place of the Network insights, Clients &
+         earnings and Ask AI blocks): the pitch, three views to pick (V.01 Network, V.02 Performance, V.03 Earnings) and a
+         red button to the Sub-IB network block; right a canvas: the partner tree in glass (You at the top, Sub-IBs level by
+         level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
+         net deposits, then into each partner's top client as a glass bar of the commission you earn from them, and round
+         again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the views
+         as a pill switch, the button last. assets/js/ib-insights.js draws it; its words come from data-* on the canvas.
+         Names and figures are demo data. -->
     <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
       <div class="tq-ibi__wrap">
         <div class="tq-ibi__text">
@@ -319,6 +321,7 @@
           <div class="tq-ibi__guide">
             <button type="button" class="tq-ibi__g is-act" aria-pressed="true"><span class="tq-ibi__n">V.01</span><span class="tq-ibi__gt"><b>{{ib.ins.v1}}</b><span>{{ib.ins.v1t}}</span></span></button>
             <button type="button" class="tq-ibi__g" aria-pressed="false"><span class="tq-ibi__n">V.02</span><span class="tq-ibi__gt"><b>{{ib.ins.v2}}</b><span>{{ib.ins.v2t}}</span></span></button>
+            <button type="button" class="tq-ibi__g" aria-pressed="false"><span class="tq-ibi__n">V.03</span><span class="tq-ibi__gt"><b>{{ib.ins.v3}}</b><span>{{ib.ins.v3t}}</span></span></button>
           </div>
           <div class="tq-ibx__ctas">
             <a class="tq-ibx__go" href="#network"><span>{{ib.ins.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
@@ -326,187 +329,7 @@
         </div>
         <div class="tq-ibi__fig" aria-hidden="true">
           <span class="tq-ibi__blob tq-ibi__blob--d"></span><span class="tq-ibi__blob tq-ibi__blob--w"></span>
-          <div class="tq-ibi__stage" dir="ltr"><canvas data-you="{{@ib.ins.you}}" data-total="{{@ib.ins.total}}" data-net="{{@ib.ins.net}}"></canvas></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Clients & earnings (IB_Clients_Earnings design), the third block. Left the pitch and a red button (to the next block);
-         right two tilted glass panels of IB Desk: Clients (filters with counts, client rows with volume and status) and
-         Commissions (the month's total, its split by instrument, commission records). One client is picked (red); lines
-         run from it to its records, which stay bright while the others dim; the pick moves to the next client every 4.2 s.
-         Below 760px (the phone mockup): the filters as a pill switch above, two client rows, only the picked client's
-         records with their sum, the button last. assets/js/ib-clients.js does the picking, the filters and the lines; the
-         rows are fixed demo data here (names and dollar sums the same on every language; counts, lots and dates are set
-         in the page's language by the script). -->
-    <section id="clients" class="tq-ibc" data-ib-ce data-via="{{@ib.ce.via}}" data-total="{{@ib.ce.total}}" data-from="{{@ib.ce.from}}" data-lots="{{@ib.ce.lots}}" data-screen-label="IB Tools · Clients and earnings">
-      <div class="tq-ibc__wrap">
-        <div class="tq-ibc__text">
-          <h2 class="tq-ibc__h2 tq-h2">{{ib.ce.h2}}</h2>
-          <p class="tq-ibx__lead">{{ib.ce.lead}}</p>
-          <div class="tq-ibc__tabs">
-                <button type="button" class="tq-ibc__tab is-act" data-f="0" aria-pressed="true">{{ib.ce.all}}</button>
-                <button type="button" class="tq-ibc__tab" data-f="1" aria-pressed="false">{{ib.ce.active}}</button>
-                <button type="button" class="tq-ibc__tab" data-f="2" aria-pressed="false">{{ib.ce.dormant}}</button>
-                <button type="button" class="tq-ibc__tab" data-f="3" aria-pressed="false">{{ib.ce.inactive}}</button>
-          </div>
-          <div class="tq-ibx__ctas tq-ibc__ctas">
-            <a class="tq-ibx__go" href="#ai"><span>{{ib.lot.explore}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-          </div>
-        </div>
-        <div class="tq-ibc__stage" dir="ltr">
-          <span class="tq-ibc__blob tq-ibc__blob--1"></span><span class="tq-ibc__blob tq-ibc__blob--2"></span><span class="tq-ibc__blob tq-ibc__blob--3"></span><span class="tq-ibc__blob tq-ibc__blob--4"></span>
-          <div class="tq-ibc__panels">
-            <div class="tq-ibc__panel tq-ibc__panel--cl">
-              <span class="tq-ibc__rim"></span><span class="tq-ibc__glare"></span><span class="tq-ibc__sheen"></span><span class="tq-ibc__foot"></span>
-              <div class="tq-ibc__hd"><b>{{ib.ce.clients}}</b><span class="tq-ibc__mono" data-total-n="1600">1,600 total</span></div>
-              <div class="tq-ibc__chips"><button type="button" class="tq-ibc__chip is-act" data-f="0">{{ib.ce.all}}<small data-n="1600">1,600</small></button><button type="button" class="tq-ibc__chip" data-f="1">{{ib.ce.active}}<small data-n="1184">1,184</small></button><button type="button" class="tq-ibc__chip" data-f="2">{{ib.ce.dormant}}<small data-n="42">42</small></button><button type="button" class="tq-ibc__chip" data-f="3">{{ib.ce.inactive}}<small data-n="374">374</small></button></div>
-              <div class="tq-ibc__th"><span>{{ib.ce.colClient}}</span><span>{{ib.ce.colVol}}</span><span>{{ib.ce.colStatus}}</span></div>
-              <div class="tq-ibc__rows">
-                  <div class="tq-ibc__cl" data-name="D. Moreau" data-st="a" data-has><span class="tq-ibc__who"><b>D. Moreau</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="412.0">412.0</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>{{ib.ce.active}}</span></div>
-                  <div class="tq-ibc__cl" data-name="S. Haddad" data-st="a" data-has><span class="tq-ibc__who"><b>S. Haddad</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="268.5">268.5</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>{{ib.ce.active}}</span></div>
-                  <div class="tq-ibc__cl" data-name="R. Castillo" data-st="a" data-has><span class="tq-ibc__who"><b>R. Castillo</b><small data-via="Meridian">via Meridian</small></span><span class="tq-ibc__vol" data-n="221.3">221.3</span><span class="tq-ibc__pill tq-ibc__pill--a"><i></i>{{ib.ce.active}}</span></div>
-                  <div class="tq-ibc__cl" data-name="J. Okafor" data-st="d" data-has><span class="tq-ibc__who"><b>J. Okafor</b><small data-via="Meridian">via Meridian</small></span><span class="tq-ibc__vol" data-n="12.4">12.4</span><span class="tq-ibc__pill tq-ibc__pill--d"><i></i>{{ib.ce.dormant}}</span></div>
-                  <div class="tq-ibc__cl" data-name="P. Novak" data-st="i"><span class="tq-ibc__who"><b>P. Novak</b><small data-via="Northline">via Northline</small></span><span class="tq-ibc__vol" data-n="0.0">0.0</span><span class="tq-ibc__pill tq-ibc__pill--i"><i></i>{{ib.ce.inactive}}</span></div>
-              </div>
-            </div>
-            <div class="tq-ibc__panel tq-ibc__panel--cm">
-              <span class="tq-ibc__rim"></span><span class="tq-ibc__glare"></span><span class="tq-ibc__sheen"></span><span class="tq-ibc__foot"></span>
-              <div class="tq-ibc__hd tq-ibc__hd--wide"><b>{{ib.ce.comms}}</b><span class="tq-ibc__mono" data-month="2026-11-01">November</span></div>
-              <div class="tq-ibc__hd tq-ibc__hd--narrow"><span><b>{{ib.ce.comms}}</b><small class="tq-ibc__from">from D. Moreau · 30D</small></span><span class="tq-ibc__sum">$112.00</span></div>
-              <div class="tq-ibc__fig"><span class="tq-ibc__big">$4,812<span>.60</span></span><span class="tq-ibc__split">{{ib.ce.pending}} $612.40 · {{ib.ce.settled}} $4,200.20</span></div>
-              <div class="tq-ibc__mix">
-                <div class="tq-ibc__bar"><span style="flex: 46"></span><span style="flex: 31"></span><span style="flex: 14"></span><span style="flex: 9"></span></div>
-                <div class="tq-ibc__legend"><span><i></i>XAUUSD 46%</span><span><i></i>EURUSD 31%</span><span><i></i>US30 14%</span><span><i></i>{{ib.ce.other}} 9%</span></div>
-              </div>
-              <div class="tq-ibc__th"><span>{{ib.ce.colRecord}}</span><span>{{ib.ce.colAmount}}</span><span>{{ib.ce.colStatus}}</span></div>
-              <div class="tq-ibc__rows">
-                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="42.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>XAUUSD · <span data-lots="3.0">3.0 lots</span> · <span data-date="2026-11-10">Nov 10</span></small></span><span class="tq-ibc__amt">$42.00</span><span class="tq-ibc__pill tq-ibc__pill--p"><i></i>{{ib.ce.pending}}</span></div>
-                  <div class="tq-ibc__rec" data-name="S. Haddad" data-amt="14.00"><span class="tq-ibc__who"><b>S. Haddad</b><small>EURUSD · <span data-lots="2.0">2.0 lots</span> · <span data-date="2026-11-10">Nov 10</span></small></span><span class="tq-ibc__amt">$14.00</span><span class="tq-ibc__pill tq-ibc__pill--p"><i></i>{{ib.ce.pending}}</span></div>
-                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="35.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>EURUSD · <span data-lots="5.0">5.0 lots</span> · <span data-date="2026-11-09">Nov 09</span></small></span><span class="tq-ibc__amt">$35.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
-                  <div class="tq-ibc__rec" data-name="R. Castillo" data-amt="9.75"><span class="tq-ibc__who"><b>R. Castillo</b><small>US30 · <span data-lots="1.5">1.5 lots</span> · <span data-date="2026-11-09">Nov 09</span></small></span><span class="tq-ibc__amt">$9.75</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
-                  <div class="tq-ibc__rec" data-name="S. Haddad" data-amt="8.40"><span class="tq-ibc__who"><b>S. Haddad</b><small>GBPUSD · <span data-lots="1.2">1.2 lots</span> · <span data-date="2026-11-08">Nov 08</span></small></span><span class="tq-ibc__amt">$8.40</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
-                  <div class="tq-ibc__rec" data-name="D. Moreau" data-amt="35.00"><span class="tq-ibc__who"><b>D. Moreau</b><small>XAUUSD · <span data-lots="2.5">2.5 lots</span> · <span data-date="2026-11-08">Nov 08</span></small></span><span class="tq-ibc__amt">$35.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
-                  <div class="tq-ibc__rec" data-name="R. Castillo" data-amt="14.00"><span class="tq-ibc__who"><b>R. Castillo</b><small>XAUUSD · <span data-lots="1.0">1.0 lots</span> · <span data-date="2026-11-07">Nov 07</span></small></span><span class="tq-ibc__amt">$14.00</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
-                  <div class="tq-ibc__rec" data-name="J. Okafor" data-amt="5.60"><span class="tq-ibc__who"><b>J. Okafor</b><small>EURUSD · <span data-lots="0.8">0.8 lots</span> · <span data-date="2026-10-23">Oct 23</span></small></span><span class="tq-ibc__amt">$5.60</span><span class="tq-ibc__pill tq-ibc__pill--s"><i></i>{{ib.ce.settled}}</span></div>
-              </div>
-              <div class="tq-ibc__none">{{ib.ce.none}}</div>
-            </div>
-          </div>
-          <svg class="tq-ibc__lines" aria-hidden="true"></svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ask AI (IB_AI_Assistant + IB_Features_Four_Questions, merged). Left: a line about the AI
-         assistant, the four questions an IB asks (Q.01–Q.04; the lit one black with a red "?", a red line filling under it)
-         and a red button to the application form. Right: the glass "Ask AI" chat of IB Desk. Picking a question (or its
-         turn coming, every 10 s) types that same question into the chat's box, sends it, and "IB Desk AI" answers: dots,
-         a line, then a chart, a table or bars, row by row, and a follow-up offer. assets/js/ib-ai.js runs it (see there);
-         everything in the chat is translated except names, instruments and figures (demo data). -->
-    <section id="ai" class="tq-iba" data-ib-ai data-screen-label="IB Tools · Ask AI">
-      <div class="tq-iba__wrap">
-        <div class="tq-iba__text">
-          <h2 class="tq-iba__h2">{{ib.ai.t1}} <b>{{ib.ai.t2}}</b></h2>
-          <div class="tq-iba__segs">
-            <button type="button" class="tq-iba__seg is-act" aria-label="{{@ib.ask.q1}}{{@ib.ask.qm}}"><span class="tq-iba__bar"><span class="tq-iba__fill"></span></span><span class="tq-iba__n">Q.01</span></button>
-            <button type="button" class="tq-iba__seg" aria-label="{{@ib.ask.q2}}{{@ib.ask.qm}}"><span class="tq-iba__bar"><span class="tq-iba__fill"></span></span><span class="tq-iba__n">Q.02</span></button>
-            <button type="button" class="tq-iba__seg" aria-label="{{@ib.ask.q3}}{{@ib.ask.qm}}"><span class="tq-iba__bar"><span class="tq-iba__fill"></span></span><span class="tq-iba__n">Q.03</span></button>
-            <button type="button" class="tq-iba__seg" aria-label="{{@ib.ask.q4}}{{@ib.ask.qm}}"><span class="tq-iba__bar"><span class="tq-iba__fill"></span></span><span class="tq-iba__n">Q.04</span></button>
-          </div>
-          <ol class="tq-iba__list">
-            <li class="tq-iba__item is-act"><span class="tq-iba__meta"><span class="tq-iba__n">Q.01</span><span class="tq-iba__feat">{{ib.ask.f1}}</span></span><h3 class="tq-iba__qq tq-h2"><button type="button" class="tq-iba__btn" aria-current="true">{{ib.ask.q1}}<span class="tq-iba__qm">{{ib.ask.qm}}</span></button></h3><span class="tq-iba__line"><span class="tq-iba__fill"></span></span></li>
-            <li class="tq-iba__item"><span class="tq-iba__meta"><span class="tq-iba__n">Q.02</span><span class="tq-iba__feat">{{ib.ask.f2}}</span></span><h3 class="tq-iba__qq tq-h2"><button type="button" class="tq-iba__btn">{{ib.ask.q2}}<span class="tq-iba__qm">{{ib.ask.qm}}</span></button></h3><span class="tq-iba__line"><span class="tq-iba__fill"></span></span></li>
-            <li class="tq-iba__item"><span class="tq-iba__meta"><span class="tq-iba__n">Q.03</span><span class="tq-iba__feat">{{ib.ask.f3}}</span></span><h3 class="tq-iba__qq tq-h2"><button type="button" class="tq-iba__btn">{{ib.ask.q3}}<span class="tq-iba__qm">{{ib.ask.qm}}</span></button></h3><span class="tq-iba__line"><span class="tq-iba__fill"></span></span></li>
-            <li class="tq-iba__item"><span class="tq-iba__meta"><span class="tq-iba__n">Q.04</span><span class="tq-iba__feat">{{ib.ask.f4}}</span></span><h3 class="tq-iba__qq tq-h2"><button type="button" class="tq-iba__btn">{{ib.ask.q4}}<span class="tq-iba__qm">{{ib.ask.qm}}</span></button></h3><span class="tq-iba__line"><span class="tq-iba__fill"></span></span></li>
-          </ol>
-          <div class="tq-ibx__ctas tq-iba__ctas">
-            <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.ai.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-          </div>
-        </div>
-        <div class="tq-iba__fig" aria-hidden="true">
-          <span class="tq-iba__blob tq-iba__blob--d"></span><span class="tq-iba__blob tq-iba__blob--r"></span><span class="tq-iba__blob tq-iba__blob--g"></span>
-          <div class="tq-iba__chat">
-            <span class="tq-iba__rim"></span><span class="tq-iba__glare"></span>
-            <div class="tq-iba__hd">
-              <div class="tq-iba__who"><span class="tq-iba__logo"><img src="{{root}}favicon.svg" alt="" width="22" height="22"></span><span class="tq-iba__name"><b>Ask AI</b><small>{{ib.ai.asst}}</small></span></div>
-              <span class="tq-iba__demo">{{ib.ai.demo}}</span>
-            </div>
-            <div class="tq-iba__area">
-              <div class="tq-iba__log">
-              <div class="tq-iba__turn">
-                <div class="tq-iba__q" data-s="1" data-fit>{{ib.ask.q1}}{{ib.ask.qm}}</div>
-                <div class="tq-iba__a" data-s="2">
-                  <span class="tq-iba__av"><img src="{{root}}favicon.svg" alt="" width="18" height="18"></span>
-                  <div class="tq-iba__body">
-                    <span class="tq-iba__by">IB Desk AI</span>
-                    <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>{{ib.ai.x1think}}</span></div><div class="tq-iba__intro" data-s="3">{{ib.ai.x1intro}}</div></div>
-                    <div class="tq-iba__panel tq-iba__panel--chart" data-s="4" data-fit>
-                      <div class="tq-iba__cols"><span>{{ib.ai.x1head}}</span><span class="tq-iba__up">▲ 8.6%</span></div>
-                      <svg class="tq-iba__chart" viewBox="0 0 400 90" preserveAspectRatio="none"><defs><linearGradient id="tqIbaArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E7131B" stop-opacity="0.2"/><stop offset="1" stop-color="#E7131B" stop-opacity="0"/></linearGradient></defs><path class="tq-iba__shade" d="M0 80 L33 77 L67 72 L100 73 L133 63 L167 57 L200 59 L233 46 L267 40 L300 34 L333 25 L367 19 L400 10 L400 90 L0 90 Z" fill="url(#tqIbaArea)"/><path class="tq-iba__spark" d="M0 80 L33 77 L67 72 L100 73 L133 63 L167 57 L200 59 L233 46 L267 40 L300 34 L333 25 L367 19 L400 10" pathLength="1"/></svg>
-                      <div class="tq-iba__cf"><span>{{ib.ai.x1foot}}</span><b>$1,240.00</b></div>
-                    </div>
-                    <div class="tq-iba__follow" data-s="5" data-fit>{{ib.ai.x1follow}}</div>
-                  </div>
-                </div>
-              </div>
-              <div class="tq-iba__turn">
-                <div class="tq-iba__q" data-s="1" data-fit>{{ib.ask.q2}}{{ib.ask.qm}}</div>
-                <div class="tq-iba__a" data-s="2">
-                  <span class="tq-iba__av"><img src="{{root}}favicon.svg" alt="" width="18" height="18"></span>
-                  <div class="tq-iba__body">
-                    <span class="tq-iba__by">IB Desk AI</span>
-                    <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>{{ib.ai.x2think}}</span></div><div class="tq-iba__intro" data-s="3">{{ib.ai.x2intro}}</div></div>
-                    <div class="tq-iba__panel" data-s="4">
-                      <div class="tq-iba__cols"><span>{{ib.ai.x2colL}}</span><span>{{ib.ai.x2colR}}</span></div>
-                      <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__nm"><b>Alex R.</b><small>Northline</small></span><span class="tq-iba__v">34</span></div>
-                      <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__nm"><b>M. Lindqvist</b><small>{{ib.ai.x2direct}}</small></span><span class="tq-iba__v">31</span></div>
-                      <div class="tq-iba__r" data-s="6" data-fit><span class="tq-iba__nm"><b>J. Okafor</b><small>Meridian</small></span><span class="tq-iba__v">30</span></div>
-                    </div>
-                    <div class="tq-iba__follow" data-s="7" data-fit>{{ib.ai.x2follow}}</div>
-                  </div>
-                </div>
-              </div>
-              <div class="tq-iba__turn">
-                <div class="tq-iba__q" data-s="1" data-fit>{{ib.ask.q3}}{{ib.ask.qm}}</div>
-                <div class="tq-iba__a" data-s="2">
-                  <span class="tq-iba__av"><img src="{{root}}favicon.svg" alt="" width="18" height="18"></span>
-                  <div class="tq-iba__body">
-                    <span class="tq-iba__by">IB Desk AI</span>
-                    <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>{{ib.ai.x3think}}</span></div><div class="tq-iba__intro" data-s="3">{{ib.ai.x3intro}}</div></div>
-                    <div class="tq-iba__panel tq-iba__panel--bars" data-s="4">
-                      <div class="tq-iba__b" data-s="4" data-fit><span>EURUSD</span><span class="tq-iba__track"><span style="--bw: 100%"></span></span><span class="tq-iba__bv"><b>4,860</b><small>26%</small></span></div>
-                      <div class="tq-iba__b" data-s="5" data-fit><span>XAUUSD</span><span class="tq-iba__track"><span style="--bw: 80%"></span></span><span class="tq-iba__bv"><b>3,870</b><small>21%</small></span></div>
-                      <div class="tq-iba__b" data-s="6" data-fit><span>GBPUSD</span><span class="tq-iba__track"><span style="--bw: 45%"></span></span><span class="tq-iba__bv"><b>2,210</b><small>12%</small></span></div>
-                      <div class="tq-iba__b" data-s="7" data-fit><span>US30</span><span class="tq-iba__track"><span style="--bw: 34%"></span></span><span class="tq-iba__bv"><b>1,650</b><small>9%</small></span></div>
-                    </div>
-                    <div class="tq-iba__follow" data-s="8" data-fit>{{ib.ai.x3follow}}</div>
-                  </div>
-                </div>
-              </div>
-              <div class="tq-iba__turn">
-                <div class="tq-iba__q" data-s="1" data-fit>{{ib.ask.q4}}{{ib.ask.qm}}</div>
-                <div class="tq-iba__a" data-s="2">
-                  <span class="tq-iba__av"><img src="{{root}}favicon.svg" alt="" width="18" height="18"></span>
-                  <div class="tq-iba__body">
-                    <span class="tq-iba__by">IB Desk AI</span>
-                    <div class="tq-iba__say" data-s="2" data-fit><div class="tq-iba__think"><span class="tq-iba__dots"><i></i><i></i><i></i></span><span>{{ib.ai.x4think}}</span></div><div class="tq-iba__intro" data-s="3">{{ib.ai.x4intro}}</div></div>
-                    <div class="tq-iba__panel tq-iba__panel--rank" data-s="4">
-                      <div class="tq-iba__cols"><span>{{ib.ai.x4colL}}</span><span>{{ib.ai.x4colR}}</span></div>
-                      <div class="tq-iba__r" data-s="4" data-fit><span class="tq-iba__n">01</span><span class="tq-iba__nm"><b>Northline Partners</b><small>{{ib.ai.x4m1}}</small></span><span class="tq-iba__v">$184,200</span></div>
-                      <div class="tq-iba__r" data-s="5" data-fit><span class="tq-iba__n">02</span><span class="tq-iba__nm"><b>Meridian Group</b><small>{{ib.ai.x4m2}}</small></span><span class="tq-iba__v">$131,600</span></div>
-                      <div class="tq-iba__r" data-s="6" data-fit><span class="tq-iba__n">03</span><span class="tq-iba__nm"><b>K. Ortiz</b><small>{{ib.ai.x4m3}}</small></span><span class="tq-iba__v">$96,900</span></div>
-                    </div>
-                    <div class="tq-iba__follow" data-s="7" data-fit>{{ib.ai.x4follow}}</div>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div class="tq-iba__foot">
-              <div class="tq-iba__in"><span class="tq-iba__txt"><span class="tq-iba__typed"></span><span class="tq-iba__ph">{{ib.ai.ph}}</span><i class="tq-iba__caret"></i></span><span class="tq-iba__send"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M4 7l4-4 4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-            </div>
-          </div>
+          <div class="tq-ibi__stage" dir="ltr"><canvas data-you="{{@ib.ins.you}}" data-total="{{@ib.ins.total}}" data-net="{{@ib.ins.net}}" data-comm="{{@ib.ins.comm}}" data-top="{{@ib.ins.top}}" data-active="{{@ib.ins.active}}" data-dormant="{{@ib.ins.dormant}}" data-via="{{@ib.ins.via}}"></canvas></div>
         </div>
       </div>
     </section>
@@ -555,8 +378,8 @@
          UI, English; the captions, the group names and the steps are the page's text. .tq-ibb__font is not seen: it holds
          the captions and group names in the heading face, so that face's subset has their letters and the browser loads
          it before the canvas draws with it. -->
-    <section id="flow" class="tq-ibb" data-ib-hole aria-label="{{@ib.hole.s1}} · {{@ib.hole.s2}} · {{@ib.hole.sc}} · {{@ib.hole.s3}}" data-c1="{{@ib.hole.c1}}" data-c2="{{@ib.hole.c2}}" data-c3="{{@ib.hole.c3}}" data-c4="{{@ib.hole.c4}}" data-c5="{{@ib.hole.c5}}" data-act="{{@ib.ce.active}}" data-dor="{{@ib.ce.dormant}}" data-ina="{{@ib.ce.inactive}}" data-screen-label="IB Tools · Black hole">
-      <span class="tq-ibb__font tq-h2" aria-hidden="true">{{ib.hole.c1}} {{ib.hole.c2}} {{ib.hole.c3}} {{ib.hole.c4}} {{ib.hole.c5}} {{ib.ce.active}} {{ib.ce.dormant}} {{ib.ce.inactive}}</span>
+    <section id="flow" class="tq-ibb" data-ib-hole aria-label="{{@ib.hole.s1}} · {{@ib.hole.s2}} · {{@ib.hole.sc}} · {{@ib.hole.s3}}" data-c1="{{@ib.hole.c1}}" data-c2="{{@ib.hole.c2}}" data-c3="{{@ib.hole.c3}}" data-c4="{{@ib.hole.c4}}" data-c5="{{@ib.hole.c5}}" data-act="{{@ib.hole.act}}" data-dor="{{@ib.hole.dor}}" data-ina="{{@ib.hole.ina}}" data-screen-label="IB Tools · Black hole">
+      <span class="tq-ibb__font tq-h2" aria-hidden="true">{{ib.hole.c1}} {{ib.hole.c2}} {{ib.hole.c3}} {{ib.hole.c4}} {{ib.hole.c5}} {{ib.hole.act}} {{ib.hole.dor}} {{ib.hole.ina}}</span>
       <canvas class="tq-ibb__cv" dir="ltr" aria-hidden="true"></canvas>
       <div class="tq-ibb__hud">
         <ol class="tq-ibb__tabs">
@@ -576,8 +399,6 @@
 <script src="{{root}}assets/js/landing.js" defer></script>
 <script src="{{root}}assets/js/ib-copy.js" defer></script>
 <script src="{{root}}assets/js/ib-insights.js" defer></script>
-<script src="{{root}}assets/js/ib-clients.js" defer></script>
-<script src="{{root}}assets/js/ib-ai.js" defer></script>
 <script src="{{root}}assets/js/ib-hole.js" defer></script>
 </body>
 </html>
