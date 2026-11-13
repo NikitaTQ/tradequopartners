@@ -480,8 +480,10 @@
     let raf = 0, seen = false;
     /* the lens (desktop, mouse): while the hole is on and the cursor is over its disk, a WebGL layer redraws this
        canvas bent around the cursor like a gravitational lens — magnified towards the middle, a little swirl, a faint
-       colour split — and fades out off the disk or when the scene moves on to the bars. The WebGL layer is made on
-       the first mouse move over the block; without WebGL there is simply no lens. */
+       colour split — and fades out off the disk or when the scene moves on to the bars. The WebGL layer is made ahead
+       of time, in an idle moment once the block is within two screens, and without blocking (KHR_parallel_shader_compile:
+       the driver compiles on its own thread, the result is read once it reports done), so the first move over the
+       disk does not wait for the compiler; without WebGL there is simply no lens. */
     const FS = 'precision highp float;uniform sampler2D u_tex;uniform vec2 u_res,u_m;uniform float u_r,u_s,u_ca;' +
       'void main(){vec2 p=vec2(gl_FragCoord.x,u_res.y-gl_FragCoord.y);vec2 d=p-u_m;float dist=length(d);float t=clamp(dist/u_r,0.,1.);' +
       'float w=1.-t*t;w=w*w*u_s;float a=.42*w;float cs=cos(a),sn=sin(a);vec2 q=u_m+vec2(d.x*cs-d.y*sn,d.x*sn+d.y*cs)*(1.-.3*w);' +
@@ -490,32 +492,43 @@
     const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
     let lens = null, mx = 0, my = 0, lx = 0, ly = 0, over = false, ls = 0, lt = 0;
     const lensInit = () => {
+      lens = false;                                            /* building (false: no lens yet) */
       const c = document.createElement('canvas'); c.className = 'tq-ibb__cv'; c.setAttribute('aria-hidden', 'true'); c.style.opacity = '0';
       const gl = c.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
-      if (!gl) return false;
-      const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); return gl.getShaderParameter(x, gl.COMPILE_STATUS) ? x : null; };
-      const vs = sh(gl.VERTEX_SHADER, 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}'), fs = sh(gl.FRAGMENT_SHADER, FS);
-      if (!vs || !fs) return false;
-      const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
-      if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return false;
-      gl.useProgram(pr);
-      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-      const at = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(at); gl.vertexAttribPointer(at, 2, gl.FLOAT, false, 0, 0);
-      gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
-      [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]].forEach(([k, v]) => gl.texParameteri(gl.TEXTURE_2D, k, v));
-      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
-      const u = (n) => gl.getUniformLocation(pr, n);
-      cv.after(c);
-      return { c, gl, on: false, uRes: u('u_res'), uM: u('u_m'), uR: u('u_r'), uS: u('u_s'), uCa: u('u_ca') };
+      if (!gl) return;
+      const ext = gl.getExtension('KHR_parallel_shader_compile');
+      const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); return x; };
+      const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}')); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(pr);
+      const finish = () => {
+        if (ext && !gl.getProgramParameter(pr, ext.COMPLETION_STATUS_KHR)) { setTimeout(finish, 50); return; }
+        if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+        gl.useProgram(pr);
+        gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+        const at = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(at); gl.vertexAttribPointer(at, 2, gl.FLOAT, false, 0, 0);
+        gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
+        [[gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]].forEach(([k, v]) => gl.texParameteri(gl.TEXTURE_2D, k, v));
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+        const u = (n) => gl.getUniformLocation(pr, n);
+        cv.after(c);
+        lens = { c, gl, on: false, uRes: u('u_res'), uM: u('u_m'), uR: u('u_r'), uS: u('u_s'), uCa: u('u_ca') };
+      };
+      finish();
     };
     if (fine) {
       root.addEventListener('pointermove', (e) => {
         if (e.pointerType !== 'mouse') return;
         const r = root.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top;
         if (!over) { lx = mx; ly = my; } over = true;
-        if (lens === null) lens = lensInit();
+        if (lens === null) lensInit();
       });
       root.addEventListener('pointerleave', () => { over = false; });
+      /* two screens before the block: build the lens in an idle moment */
+      const near = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        near.disconnect();
+        (window.requestIdleCallback || ((f) => setTimeout(f, 200)))(() => { if (lens === null) lensInit(); }, { timeout: 1500 });
+      }, { rootMargin: '200% 0px' });
+      near.observe(root);
     }
     const lensFrame = (now) => {
       if (!lens) return;
