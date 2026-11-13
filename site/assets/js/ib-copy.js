@@ -6,8 +6,8 @@
      · the client's screen fills in: symbol, price, the chart drawn, the position, the "Copied" badge (.76–.95).
    The drop is a metaball field drawn on a WebGL canvas (the design's shader: refraction of the background, a mirror-like
    environment, a red core, two highlights, a soft shadow); it is drawn only inside the box around the drops.
-   p follows the scroll: the stage holds still while the page scrolls three screens past it (partner.css);
-   the first one and a half take p to .30 (the client's hand comes in), the next one and a half to 1 (the drop forms,
+   p follows the scroll: the stage holds still while the page scrolls 2.1 screens past it (partner.css);
+   the first half takes p to .30 (the client's hand comes in), the second half to 1 (the drop forms,
    flies and lands, the client's screen fills in); scrolling up plays it back. p eases after the scroll; the hands float
    a little. Frames run only while the block is on screen and the tab is visible. Reduced motion: the end state, still.
    No WebGL (or no highp in fragment shaders): everything but the drop. */
@@ -149,7 +149,7 @@
 
   /* ---- the scroll ---- */
   var stage = root.querySelector('.tq-ibcp__stage');
-  /* how far the three screens of scroll have passed (0..1) → p: the first half to .30, the second from .30 to 1 */
+  /* how far the 2.1 screens of scroll have passed (0..1) → p: the first half to .30, the second from .30 to 1 */
   function target() {
     var r = root.getBoundingClientRect(), track = r.height - stage.offsetHeight, f = track > 0 ? cl(-r.top / track) : 1;
     return f < .5 ? .3 * f / .5 : .3 + .7 * (f - .5) / .5;
