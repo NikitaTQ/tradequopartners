@@ -163,6 +163,37 @@
       v.load();
       sync();
     };
+    /* the film's grain over the video, as the film drew it: its noise tile (the same generator, the same seed) at
+     * 256 film px, shifted by (73, 151) tiles-px every 1/24 s, overlay at .07, faded in from 1.7 to 2.2 s (the white
+     * opening has none). The layer is a tile larger than the box and moves by transform, so nothing is repainted. */
+    const grain = $('[data-film-grain]', box);
+    let noise = '', gRaf = 0, gK = -1, gW = 0;
+    const grainFrame = () => {
+      gRaf = 0;
+      const t = v.currentTime, s = Math.min(box.clientWidth / 1920, box.clientHeight / 1080), K = Math.floor(t * 24);
+      if (box.clientWidth !== gW) {
+        gW = box.clientWidth;
+        Object.assign(grain.style, { left: -256 * s + 'px', top: -256 * s + 'px', width: box.clientWidth + 256 * s + 'px', height: box.clientHeight + 256 * s + 'px', backgroundSize: 256 * s + 'px' });
+        gK = -1;
+      }
+      grain.style.opacity = String(0.07 * Math.max(0, Math.min(1, (t - 1.7) / 0.5)));
+      if (K !== gK) { gK = K; grain.style.transform = 'translate(' + (K * 73 % 256) * s + 'px,' + (K * 151 % 256) * s + 'px)'; }
+      if (!v.paused) gRaf = requestAnimationFrame(grainFrame);
+    };
+    const grainOn = () => {
+      if (!noise) {
+        const c = document.createElement('canvas'); c.width = c.height = 256;
+        const x = c.getContext('2d'), im = x.createImageData(256, 256);
+        let d = 1234567;
+        for (let a = 0; a < im.data.length; a += 4) { d = d * 1103515245 + 12345 & 2147483647; const n = d % 256; im.data[a] = im.data[a + 1] = im.data[a + 2] = n; im.data[a + 3] = 255; }
+        x.putImageData(im, 0, 0);
+        noise = c.toDataURL('image/png');
+        grain.style.backgroundImage = 'url(' + noise + ')';
+      }
+      if (!gRaf) gRaf = requestAnimationFrame(grainFrame);
+    };
+    ['play', 'seeked', 'loadeddata'].forEach((ev) => v.addEventListener(ev, grainOn));
+    window.addEventListener('resize', () => { gW = 0; if (noise && !gRaf) gRaf = requestAnimationFrame(grainFrame); });
     pp.addEventListener('click', () => { userPaused = !userPaused; load(); sync(); });
     $$('[data-film-skip]', box).forEach((b) => b.addEventListener('click', () => {
       load();
