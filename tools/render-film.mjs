@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * The partner film on the home page as a video (the 24.2 s loop, 30 fps) in site/assets/film/: tradequo-film-1440.mp4
+ * The partner film on the home page as a video (the 24.2 s loop, 60 fps: the live film moved every frame, 30 looked jerky) in site/assets/film/: tradequo-film-1440.mp4
  * (2560x1440, for screens where the film covers more than ~1700 pixels across: retina, 150% scaling), tradequo-film-1080.mp4
  * (1920x1080, the same shrunk with Lanczos, for the rest) and tradequo-film-1080.webm (VP9, for browsers without H.264).
  *
@@ -27,7 +27,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const site = join(here, '..', 'site');
 const out = join(site, 'assets', 'film');
 const tmp = join(here, '.film-tmp');
-const FPS = 30, TOTAL = 24.2;
+const FPS = 60, TOTAL = 24.2;
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.css': 'text/css', '.svg': 'image/svg+xml' };
 
 const patch = (f, s) => {
@@ -79,14 +79,14 @@ server.close();
  * is tagged with (ffmpeg's default would be BT.601: reds would shift). */
 const VF = 'scale=out_color_matrix=bt709:out_range=tv,format=yuv420p';
 const TAGS = ['-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-color_range', 'tv'];
-const H264 = ['-c:v', 'libx264', '-preset', 'slower', '-crf', '21', '-tune', 'film', '-aq-mode', '3', '-g', '60', '-profile:v', 'high', ...TAGS, '-movflags', '+faststart', '-an'];
+const H264 = ['-c:v', 'libx264', '-preset', 'slower', '-crf', '21', '-tune', 'film', '-aq-mode', '3', '-g', '120', '-profile:v', 'high', ...TAGS, '-movflags', '+faststart', '-an'];
 const IN = ['-y', '-v', 'error', '-framerate', String(FPS), '-i', join(tmp, 'f%04d.png')];
 const TO1080 = 'scale=1920:1080:flags=lanczos,' + VF;
 execFileSync('ffmpeg', [...IN, '-vf', VF, ...H264, join(out, 'tradequo-film-1440.mp4')]);
 execFileSync('ffmpeg', [...IN, '-vf', TO1080, ...H264, join(out, 'tradequo-film-1080.mp4')]);
 /* the same in VP9, for browsers built without H.264 (some Linux builds) */
 execFileSync('ffmpeg', [...IN,
-  '-vf', TO1080, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '31', '-deadline', 'good', '-cpu-used', '2', '-row-mt', '1', '-g', '60', '-aq-mode', '2',
+  '-vf', TO1080, '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '31', '-deadline', 'good', '-cpu-used', '2', '-row-mt', '1', '-g', '120', '-aq-mode', '2',
   ...TAGS, '-an', join(out, 'tradequo-film-1080.webm')]);
 rmSync(tmp, { recursive: true, force: true });
 console.log('wrote site/assets/film/tradequo-film-1440.mp4, -1080.mp4 and -1080.webm');
