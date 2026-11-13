@@ -70,14 +70,14 @@
 
   /* ---- the drop: the design's fragment shader (board px; uScale = canvas px per board px) ---- */
   var FS = 'precision highp float;\n' +
-    'uniform vec2 uRes;uniform float uScale;uniform vec4 uB[6];uniform float uT;uniform float uSh;\n' +
+    'uniform vec2 uRes;uniform vec2 uOff;uniform float uScale;uniform vec4 uB[6];uniform float uT;uniform float uSh;\n' +
     'const float R=26.;\n' +
     'float field(vec2 p){float f=0.;for(int i=0;i<6;i++){vec2 d=p-uB[i].xy;float r=uB[i].z;f+=r*r/(dot(d,d)+.001);}return f;}\n' +
     'float hz(float f){return R*sqrt(clamp(1.-1./max(f,1e-4),0.,1.));}\n' +
     'vec3 bgCol(vec2 q){float d=length((q-vec2(921.6,360.))/vec2(792.,585.));vec3 a=vec3(.910,.910,.933),b=vec3(.835,.835,.863),c=vec3(.765,.769,.796);return d<.55?mix(a,b,d/.55):mix(b,c,clamp((d-.55)/.45,0.,1.));}\n' +
     'vec3 envCol(vec3 r){float up=-r.y;vec3 c=mix(vec3(.16,.17,.19),vec3(.95,.955,.97),smoothstep(-.35,.55,up));c+=vec3(.55)*smoothstep(.6,.72,up)*(1.-smoothstep(.82,.95,up));c+=vec3(.35)*smoothstep(.72,.95,r.x);c=mix(c,vec3(.906,.075,.106),smoothstep(.45,.9,r.y)*.28);return c;}\n' +
     'void main(){\n' +
-    ' vec2 p=vec2(gl_FragCoord.x,uRes.y-gl_FragCoord.y)/uScale;\n' +
+    ' vec2 p=vec2(gl_FragCoord.x,uRes.y-gl_FragCoord.y)/uScale+uOff;\n' +
     ' float sh=smoothstep(.3,1.3,field(p-vec2(0.,22.)))*.14*uSh;\n' +
     ' float f=field(p);\n' +
     ' if(f<.75){gl_FragColor=vec4(0.,0.,0.,sh);return;}\n' +
@@ -102,34 +102,52 @@
     ' col=clamp(col,0.,1.);\n' +
     ' gl_FragColor=vec4(col*a,a)+vec4(0.,0.,0.,sh)*(1.-a);\n' +
     '}';
-  var G = null, glFailed = false;
-  function glInit() {
+  /* The program is built ahead of time (prepare(), in an idle moment once the block is within two screens) and without
+     blocking: with KHR_parallel_shader_compile the driver compiles on its own thread and the result is read only once it
+     reports done (polled), so no frame waits for the compiler; one 1px draw then makes the driver finish it. Until it is
+     ready the drop is simply not drawn. */
+  var G = null, glState = 0;                                    /* 0 not started, 1 building, 2 ready, -1 not available */
+  /* the canvas covers only where the drop goes (board x 640–1320, y 240–680: from the provider's screen over the arc to
+     the client's, with room for the drop's size and shadow); canvas px per board px: as it is seen (the board is zoomed),
+     at most 1.25 (a soft, round drop: sharper costs more and shows no more) */
+  var OX = 640, OY = 240, CW = 680, CH = 440;
+  var scale = function () { return Math.max(.5, Math.min(1.25, (window.devicePixelRatio || 1) * ((el.gl.getBoundingClientRect().width / CW) || 1))); };
+  var fit = function (s) { var W = Math.round(CW * s), H = Math.round(CH * s); if (el.gl.width !== W) { el.gl.width = W; el.gl.height = H; } };
+  function prepare() {
+    if (glState || reduce) return;
+    glState = 1;
+    fit(scale());                                               /* at its size now: no resize on the first frame of the drop */
     var cv = el.gl, gl = cv && cv.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false, depth: false, stencil: false });
-    if (!gl) return null;
+    if (!gl) { glState = -1; return; }
     var hp = gl.getShaderPrecisionFormat && gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.HIGH_FLOAT);
-    if (!hp || !hp.precision) return null;                 /* the field needs highp (distances squared up to ~2e6) */
-    var sh = function (t, src) { var s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
-    var vs = sh(gl.VERTEX_SHADER, 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}'), fs = sh(gl.FRAGMENT_SHADER, FS);
-    if (!vs || !fs) return null;
-    var pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
-    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return null;
-    gl.useProgram(pr);
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
-    var loc = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    var u = function (n) { return gl.getUniformLocation(pr, n); };
-    return { cv: cv, gl: gl, uB: u('uB'), uRes: u('uRes'), uScale: u('uScale'), uT: u('uT'), uSh: u('uSh'), drawn: false };
+    if (!hp || !hp.precision) { glState = -1; return; }      /* the field needs highp (distances squared up to ~2e6) */
+    var ext = gl.getExtension('KHR_parallel_shader_compile');
+    var sh = function (t, src) { var x = gl.createShader(t); gl.shaderSource(x, src); gl.compileShader(x); return x; };
+    var pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}')); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(pr);
+    (function check() {
+      if (ext && !gl.getProgramParameter(pr, ext.COMPLETION_STATUS_KHR)) { setTimeout(check, 50); return; }
+      if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { glState = -1; return; }
+      gl.useProgram(pr);
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+      var loc = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      var u = function (n) { return gl.getUniformLocation(pr, n); };
+      G = { cv: cv, gl: gl, uB: u('uB'), uRes: u('uRes'), uOff: u('uOff'), uScale: u('uScale'), uT: u('uT'), uSh: u('uSh'), drawn: true };
+      gl.enable(gl.SCISSOR_TEST); gl.scissor(0, 0, 1, 1); gl.uniform4fv(G.uB, new Float32Array(24)); gl.uniform2f(G.uRes, cv.width, cv.height); gl.uniform1f(G.uScale, 1);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      glState = 2;
+    })();
   }
   var arr = new Float32Array(24);
   function glDraw(blobs, T, shadow) {
     var on = blobs.some(function (x) { return x[2] > .4; });
-    if (!G) { if (!on || glFailed) return; G = glInit(); if (!G) { glFailed = true; return; } }
+    if (glState !== 2) { if (on) prepare(); return; }
     var gl = G.gl;
     if (!on) { if (G.drawn) { gl.disable(gl.SCISSOR_TEST); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); G.drawn = false; } return; }
-    /* the canvas at the size it is seen (the board is zoomed), at most 1.5 canvas px per board px */
-    var shown = G.cv.getBoundingClientRect().width / 1440 || 1;
-    var s = Math.max(.5, Math.min(1.5, (window.devicePixelRatio || 1) * shown)), W = Math.round(1440 * s), H = Math.round(900 * s);
-    if (G.cv.width !== W) { G.cv.width = W; G.cv.height = H; }
+    var s = scale(), W = Math.round(CW * s), H = Math.round(CH * s);
+    fit(s);
     gl.viewport(0, 0, W, H);
     /* only the box around the drops (and their shadow, 22px lower) is drawn */
     var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
@@ -138,10 +156,11 @@
       if (x[2] > .05) { var m = x[2] * 2.6 + 24; x0 = Math.min(x0, x[0] - m); x1 = Math.max(x1, x[0] + m); y0 = Math.min(y0, x[1] - m); y1 = Math.max(y1, x[1] + m + 22); }
     });
     gl.disable(gl.SCISSOR_TEST); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    x0 -= OX; x1 -= OX; y0 -= OY; y1 -= OY;                    /* board px → this canvas */
     var sx = Math.max(0, Math.floor(x0 * s)), sy = Math.max(0, Math.floor(H - y1 * s)), sw = Math.min(W, Math.ceil(x1 * s)) - sx, shh = Math.min(H, Math.ceil(H - y0 * s)) - sy;
     if (sw > 0 && shh > 0) {
       gl.enable(gl.SCISSOR_TEST); gl.scissor(sx, sy, sw, shh);
-      gl.uniform4fv(G.uB, arr); gl.uniform2f(G.uRes, W, H); gl.uniform1f(G.uScale, s); gl.uniform1f(G.uT, T); gl.uniform1f(G.uSh, shadow);
+      gl.uniform4fv(G.uB, arr); gl.uniform2f(G.uRes, W, H); gl.uniform2f(G.uOff, OX, OY); gl.uniform1f(G.uScale, s); gl.uniform1f(G.uT, T); gl.uniform1f(G.uSh, shadow);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     }
     G.drawn = true;
@@ -168,6 +187,13 @@
   function run() { var go = seen && !document.hidden; if (go && !raf) { last = 0; raf = requestAnimationFrame(tick); } else if (!go && raf) { cancelAnimationFrame(raf); raf = 0; } }
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es) { seen = es[es.length - 1].isIntersecting; run(); }, { rootMargin: '80px 0px' }).observe(root);
+    /* two screens before the block: build the drop's program in an idle moment */
+    var near = new IntersectionObserver(function (es) {
+      if (!es[es.length - 1].isIntersecting) return;
+      near.disconnect();
+      (window.requestIdleCallback || function (f) { return setTimeout(f, 200); })(prepare, { timeout: 1500 });
+    }, { rootMargin: '200% 0px' });
+    near.observe(root);
   } else { seen = true; }
   document.addEventListener('visibilitychange', run);
   run();
