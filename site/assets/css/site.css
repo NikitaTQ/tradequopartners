@@ -805,8 +805,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 
 /* narrow phones (360 px; after the 640 px header rules so these win): logo, language globe and the CTA share one row */
 @media (max-width: 380px) {
-  header { gap: 6px !important; }
-  header.tq-head { --hm: 6px; --hi: 10px; }   /* (header.tq-head: wins over the base rule further down) */
+  header { gap: 6px !important; padding-left: 12px !important; padding-right: 12px !important; }
   header img[alt] { height: 15px !important; }
   header nav { gap: 6px !important; }
   header nav > a.hv-red-bg { padding: 0 11px !important; font-size: 13px !important; letter-spacing: -.02em !important; }
@@ -915,56 +914,20 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    edge to edge (.tp clips the overhang), reaching 2px under the hero: no clipped shadow, whose soft edge let a
    hairline of the white page show under the bar at the sides on some screens. */
 .tq-head--dark::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: -2px; left: 50%; width: 100vw; margin-left: -50vw; background: #0a0a0b; pointer-events: none; }
-/* ---- the header: a floating pill of clear glass, sticky -------------------------------------------------------------
-   The header stays on top while the page scrolls (position: sticky in the markup) and is drawn as a rounded pill of
-   thick clear glass with a margin all round (::after): what scrolls under it shows through blurred and a touch brighter;
-   a bright rim, brightest at the top; a second, finer edge just inside it (the glass's thickness); a soft diagonal glint
-   across the middle; a soft shadow under it. The page you are on sits in a small glass capsule with a red dot; the
-   language button is the same glass; the CTA is glossy red. The header keeps its heights (the first screens of the pages
-   count on them): 88px at the top of the page, 72px scrolled (the pill gets slimmer; the difference goes to the bottom
-   margin at the same pace, so the page under it never moves). While a full-screen scene holds the screen (the landing's
-   Infinite Flow flip) it slides up out of the way and comes back after it (startStickyHead in landing.js).
-   --hg the gap above the pill, --hv the pill's inner top/bottom padding, --hm the pill's side margin, --hi its inner
-   side padding. */
-.tq-head { --hg: 8px; --hv: 18px; --hm: clamp(8px, 1.4vw, 20px); --hi: clamp(16px, 2.6vw, 40px);
-  padding: calc(var(--hg) + var(--hv)) calc(var(--hm) + var(--hi)) var(--hv) !important;
-  transition: padding-top .25s ease, padding-bottom .25s ease, margin-bottom .25s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
-.tq-head::after { content: ''; position: absolute; z-index: -1; top: var(--hg); bottom: 0; left: var(--hm); right: var(--hm); pointer-events: none; border-radius: 999px;
-  border: 1.5px solid transparent;
-  background:
-    linear-gradient(170deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.42) 47%, rgba(255,255,255,.1) 49.5%, rgba(255,255,255,0) 63%) padding-box,
-    linear-gradient(180deg, rgba(255,255,255,.7) 0%, rgba(244,245,248,.5) 52%, rgba(250,251,253,.62) 100%) padding-box,
-    linear-gradient(180deg, #fff 0%, rgba(214,218,226,.95) 45%, rgba(176,182,194,.9) 70%, #fff 100%) border-box;
-  -webkit-backdrop-filter: blur(18px) saturate(170%) brightness(1.04); backdrop-filter: blur(18px) saturate(170%) brightness(1.04);
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(255,255,255,.85),
-    inset 0 0 0 5px rgba(255,255,255,.28), inset 0 0 0 6px rgba(150,156,170,.16),
-    inset 0 12px 18px -14px rgba(255,255,255,.95), inset 0 -12px 18px -14px rgba(160,166,180,.4),
-    0 0 0 .5px rgba(140,146,160,.35), 0 2px 3px rgba(20,24,34,.05), 0 20px 30px -20px rgba(20,24,34,.38), 0 34px 40px -36px rgba(20,24,34,.25); }
-.tq-head.is-stuck { --hv: 10px; margin-bottom: 16px !important; }
+/* ---- sticky header -------------------------------------------------------------------------------------
+   The header stays on top while the page scrolls (position: sticky in the markup). Scrolled, it is shorter (68px:
+   it gives 20px of padding back as a bottom margin, at the same pace, so the page under it never moves) and sits on
+   a white band from edge to edge with a soft shadow (the dark header keeps its black band). While a full-screen
+   scene holds the screen (the landing's Infinite Flow flip) it slides up
+   out of the way and comes back after it (startStickyHead in landing.js). */
+.tq-head { transition: padding-top .25s ease, padding-bottom .25s ease, margin-bottom .25s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
+.tq-head::after { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; margin-left: -50vw; pointer-events: none;
+  background: #fff; box-shadow: 0 1px 0 rgba(10,10,10,.06), 0 12px 24px -20px rgba(10,10,10,.4); opacity: 0; transition: opacity .25s ease; }
+.tq-head.is-stuck { padding-top: 12px !important; padding-bottom: 12px !important; margin-bottom: 20px !important; }
+.tq-head.is-stuck::after { opacity: 1; }
 .tq-head--dark::after { display: none; }
 .tq-head.is-away { transform: translateY(calc(-100% - 24px)); }
-/* the page you are on: a small glass capsule with a red dot under the word */
-.tq-head:not(.tq-head--dark) .tq-nav-link[aria-current="page"] { display: inline-flex; align-items: center; height: 42px; padding: 0 22px 2px; margin-inline: -4px; box-sizing: border-box; border-radius: 999px; color: #0a0a0a; font-weight: 600;
-  background: linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(244,245,248,.66) 55%, rgba(252,252,254,.8) 100%);
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(170,176,190,.35), 0 0 0 1px rgba(160,166,180,.38), 0 1px 1px rgba(20,24,34,.04), 0 6px 12px -8px rgba(20,24,34,.28); }
-.tq-head:not(.tq-head--dark) .tq-nav-link[aria-current="page"]::after { bottom: 5px; }
-.tq-head:not(.tq-head--dark) .tq-nav-link { color: #2b2d33; }
-/* the language button: the same glass */
-.tq-head:not(.tq-head--dark) .tq-lang__btn { border: 0; color: #1a1b1f;
-  background: linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(242,243,247,.6) 55%, rgba(250,250,252,.78) 100%);
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(170,176,190,.35), 0 0 0 1px rgba(160,166,180,.4), 0 6px 12px -8px rgba(20,24,34,.26);
-  transition: box-shadow .2s ease, color .2s ease; }
-.tq-head:not(.tq-head--dark) .tq-lang__btn:hover, .tq-head:not(.tq-head--dark) .tq-lang__btn[aria-expanded="true"] { color: #0a0a0a;
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 -1px 0 rgba(170,176,190,.35), 0 0 0 1px rgba(10,10,11,.55), 0 6px 12px -8px rgba(20,24,34,.26); }
-/* the CTA: glossy red glass */
-.tq-head nav > a.hv-red-bg { position: relative; overflow: hidden; isolation: isolate; font-weight: 700 !important;
-  background: linear-gradient(180deg, #ff3a41 0%, #ec1820 42%, #d3111a 78%, #e01a21 100%) !important;
-  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.55), inset 0 -2px 3px rgba(120,0,6,.3), inset 0 0 0 1px rgba(255,255,255,.12), 0 0 0 1px rgba(176,10,16,.55),
-    0 2px 3px rgba(150,8,14,.18), 0 10px 18px -8px rgba(231,19,27,.6); transition: filter .2s ease; }
-.tq-head nav > a.hv-red-bg::before { content: ''; position: absolute; z-index: -1; left: 8%; right: 8%; top: 2px; height: 46%; border-radius: 999px 999px 40% 40%; pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,.5) 0%, rgba(255,255,255,0) 100%); }
-.tq-head nav > a.hv-red-bg:hover { background: linear-gradient(180deg, #ff3a41 0%, #ec1820 42%, #d3111a 78%, #e01a21 100%) !important; filter: brightness(1.06); }
-@media (prefers-reduced-motion: reduce) { .tq-head, .tq-head::after, .tq-head .tq-lang__btn, .tq-head nav > a.hv-red-bg { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .tq-head, .tq-head::after { transition: none; } }
 .tq-head--dark nav a.hv-red { color: rgba(255,255,255,.78) !important; }
 .tq-head--dark nav a.tq-nav-link[aria-current="page"] { color: #fff !important; }
 .tq-head--dark nav a.hv-red:hover { color: #fff !important; }
