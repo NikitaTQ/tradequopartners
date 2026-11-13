@@ -230,28 +230,35 @@
          the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block, "Powered by
          SocialTrading.ai"); right two glass hands with phones — the provider's (a trade opened) and the client's (the trade
          copied at the client's size); the position gathers into a drop of liquid silver (WebGL) that leaves the provider's
-         screen and lands on the client's. A 13 s loop (forward, a hold, back) while the block is on screen; reduced motion
-         shows the end. Desktops (1200px+): the design's 1440x900 composition, scaled to the width (the script in the section
-         sets the zoom). Narrower: the words, then the hands cropped to the phones. The phone screens are the product's
-         interface (English on every language, demo data, not translated by the browser). partials/ib-copy.html holds the
-         hands; assets/js/ib-copy.js runs the loop and the drop; partner.css, "the Copy trading hand-off block". -->
+         screen and lands on the client's. Driven by the scroll: the stage (one screen under the header) holds still while
+         the page scrolls three screens past it — the first one and a half bring the client's hand in, the next one and a
+         half form the drop, fly it and fill the client's screen; scrolling up plays it back. Reduced motion: no hold, the
+         end state. Desktops (1200px+): the design's 1440x900 composition, scaled to fit the stage; narrower: the words,
+         the hands cropped to the phones, the note, fitted to the stage (the script in the section sets the sizes). The
+         phone screens are the product's interface (English on every language, demo data, not translated by the browser).
+         partials/ib-copy.html holds the hands; assets/js/ib-copy.js reads the scroll and draws; partner.css, "the Copy
+         trading hand-off block". -->
     <section id="copy" class="tq-ibcp" data-ib-copy data-screen-label="IB Tools · Copy trading hand-off">
-      <div class="tq-ibcp__in">
-        <div class="tq-ibcp__txt">
-          <span class="tq-ibcp__eye">{{ib.cp.eye}}</span>
-          <h2 class="tq-ibcp__h2 tq-h2">{{ib.cp.h2}}</h2>
-          <div class="tq-ibcp__steps">
-            <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>{{ib.cp.s1}}</span></p>
-            <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>{{ib.cp.s2}}</span></p>
+      <div class="tq-ibcp__stage">
+        <div class="tq-ibcp__in">
+          <div class="tq-ibcp__txt">
+            <span class="tq-ibcp__eye">{{ib.cp.eye}}</span>
+            <h2 class="tq-ibcp__h2 tq-h2">{{ib.cp.h2}}</h2>
+            <div class="tq-ibcp__steps">
+              <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>{{ib.cp.s1}}</span></p>
+              <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>{{ib.cp.s2}}</span></p>
+            </div>
+            <a class="tq-ibcp__go" href="#insights"><span>{{ib.cp.cta}}</span><span class="tq-ibcp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <div class="tq-ibcp__by"><span>{{ib.cp.by}}</span><span class="tq-ibcp__st tq-ibcp__st--by" translate="no"><svg width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><rect x="0" y="4" width="2.2" height="6" rx=".6"/><rect x="3.9" y="1.5" width="2.2" height="8.5" rx=".6"/><rect x="7.8" y="0" width="2.2" height="10" rx=".6"/></svg>SocialTrading.ai</span></div>
           </div>
-          <a class="tq-ibcp__go" href="#insights"><span>{{ib.cp.cta}}</span><span class="tq-ibcp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-          <div class="tq-ibcp__by"><span>{{ib.cp.by}}</span><span class="tq-ibcp__st tq-ibcp__st--by" translate="no"><svg width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><rect x="0" y="4" width="2.2" height="6" rx=".6"/><rect x="3.9" y="1.5" width="2.2" height="8.5" rx=".6"/><rect x="7.8" y="0" width="2.2" height="10" rx=".6"/></svg>SocialTrading.ai</span></div>
+          <div class="tq-ibcp__crop">{{> ib-copy}}</div>
+          <p class="tq-ibcp__note">{{ib.cp.note}}</p>
         </div>
-        <div class="tq-ibcp__crop">{{> ib-copy}}</div>
-        <p class="tq-ibcp__note">{{ib.cp.note}}</p>
       </div>
-      <script>/* 1200px+: the design's 1440x900 composition, scaled down to the width (--z for the background); narrower: the hands cropped to x 430–1440, y 110–900 of it, scaled to the width (at most 0.8x, centred) */
-(function(){var s=document.currentScript.parentNode,n=s.querySelector('.tq-ibcp__in'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,k;if(m.matches){k=Math.min(1,w/1440);n.style.zoom=k;s.style.setProperty('--z',k);b.style.zoom=b.style.marginLeft=c.style.height=''}else{k=Math.min(.8,w/1010);n.style.zoom='';s.style.removeProperty('--z');b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z)})();</script>
+      <script>/* the stage: one screen, its top --hdr kept free for the header. 1200px+: the 1440x900 composition scaled to fit it (--z lines the
+   background up); narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition, scaled to the
+   width and to the room the words and the note leave (at most 0.8x, centred) */
+(function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),o=s.querySelector('.tq-ibcp__note'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,H=g.clientHeight-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-o.offsetHeight-48)/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
     </section>
 
     <!-- Network insights (IB_Network_Insights design), after the signals feed: the pitch, two views to pick (V.01 Network,

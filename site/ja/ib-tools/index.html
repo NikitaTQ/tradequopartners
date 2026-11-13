@@ -1636,13 +1636,14 @@ footer p { font-size: 12px !important; }
 @media (prefers-reduced-motion: reduce) {
 .tq-ibp__go { transition: none; }
 }
-.tq-ibcp { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+.tq-ibcp { --hdr: 68px; position: relative; box-sizing: border-box; height: 400svh; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.tq-ibcp__stage { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding-top: var(--hdr); overflow: hidden; display: flex; align-items: center;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px),
-    radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(900px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
-    radial-gradient(calc(792px * var(--z, 1)) calc(585px * var(--z, 1)) at calc(50% + 201.6px * var(--z, 1)) calc(360px * var(--z, 1)), #e8e8ee 0%, #d5d5dc 55%, #c3c4cb 100%); }
-.tq-ibcp::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; z-index: 2; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+    radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(50% + var(--hdr) / 2 + 450px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
+    radial-gradient(calc(792px * var(--z, 1)) calc(585px * var(--z, 1)) at calc(50% + 201.6px * var(--z, 1)) calc(50% + var(--hdr) / 2 - 90px * var(--z, 1)), #e8e8ee 0%, #d5d5dc 55%, #c3c4cb 100%); }
+.tq-ibcp__stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; z-index: 2; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
 .tq-ibcp a { text-decoration: none; }
-.tq-ibcp__in { position: relative; width: 1440px; height: 900px; margin: 0 auto; }
+.tq-ibcp__in { position: relative; flex: none; width: 1440px; height: 900px; margin: 0 auto; }
 .tq-ibcp__txt { position: absolute; z-index: 3; left: 72px; top: 0; bottom: 0; width: 380px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
 .tq-ibcp__eye { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #5e5f64; font-variant-numeric: tabular-nums; }
 .tq-ibcp__h2 { --h2s: 32px; margin: 0; padding-inline-start: 0; line-height: 1.16; letter-spacing: -.01em; text-wrap: wrap; }
@@ -1742,9 +1743,10 @@ footer p { font-size: 12px !important; }
 .tq-ibcp__home { left: 50%; bottom: 9px; width: 110px; height: 4.5px; margin-left: -55px; border-radius: 3px; background: rgba(255,255,255,.85); }
 .tq-ibcp__glint { inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(255,255,255,0) 28%, rgba(255,255,255,.07) 40%, rgba(255,255,255,0) 54%); }
 @media (max-width: 1199px) {
-.tq-ibcp { padding: 48px 0 40px; background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(60% 45% at 62% 62%, #e8e8ee 0%, #d5d5dc 60%, #cfd0d6 100%); }
-.tq-ibcp::after { height: 56px; }
-.tq-ibcp__in { width: auto; height: auto; }
+.tq-ibcp__stage { flex-direction: column; align-items: stretch; justify-content: center; padding: calc(var(--hdr) + 12px) 0 24px;
+    background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(60% 45% at 62% 62%, #e8e8ee 0%, #d5d5dc 60%, #cfd0d6 100%); }
+.tq-ibcp__stage::after { height: 40px; }
+.tq-ibcp__in { width: auto; height: auto; margin: 0; }
 .tq-ibcp__txt { position: relative; left: auto; top: auto; bottom: auto; width: auto; max-width: 560px; margin: 0 auto; padding: 0 20px; gap: 20px; }
 .tq-ibcp__eye { font-size: 10.5px; }
 .tq-ibcp__h2 { --h2s: clamp(20px, 5.4vw, 30px); }
@@ -1758,6 +1760,8 @@ footer p { font-size: 12px !important; }
 .tq-ibcp__note { position: relative; left: auto; bottom: auto; width: auto; max-width: 560px; margin: -10px auto 0; padding: 0 20px; box-sizing: border-box; font-size: 10.5px; }
 }
 @media (prefers-reduced-motion: reduce) {
+.tq-ibcp { height: auto; }
+.tq-ibcp__stage { position: relative; top: auto; }
 .tq-ibcp__go { transition: none; }
 }
 </style>
@@ -2166,24 +2170,28 @@ html:lang(ko) * { word-break: keep-all; }
          the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block, "Powered by
          SocialTrading.ai"); right two glass hands with phones — the provider's (a trade opened) and the client's (the trade
          copied at the client's size); the position gathers into a drop of liquid silver (WebGL) that leaves the provider's
-         screen and lands on the client's. A 13 s loop (forward, a hold, back) while the block is on screen; reduced motion
-         shows the end. Desktops (1200px+): the design's 1440x900 composition, scaled to the width (the script in the section
-         sets the zoom). Narrower: the words, then the hands cropped to the phones. The phone screens are the product's
-         interface (English on every language, demo data, not translated by the browser). partials/ib-copy.html holds the
-         hands; assets/js/ib-copy.js runs the loop and the drop; partner.css, "the Copy trading hand-off block". -->
+         screen and lands on the client's. Driven by the scroll: the stage (one screen under the header) holds still while
+         the page scrolls three screens past it — the first one and a half bring the client's hand in, the next one and a
+         half form the drop, fly it and fill the client's screen; scrolling up plays it back. Reduced motion: no hold, the
+         end state. Desktops (1200px+): the design's 1440x900 composition, scaled to fit the stage; narrower: the words,
+         the hands cropped to the phones, the note, fitted to the stage (the script in the section sets the sizes). The
+         phone screens are the product's interface (English on every language, demo data, not translated by the browser).
+         partials/ib-copy.html holds the hands; assets/js/ib-copy.js reads the scroll and draws; partner.css, "the Copy
+         trading hand-off block". -->
     <section id="copy" class="tq-ibcp" data-ib-copy data-screen-label="IB Tools · Copy trading hand-off">
-      <div class="tq-ibcp__in">
-        <div class="tq-ibcp__txt">
-          <span class="tq-ibcp__eye">IBツール · 自社ブランドのコピートレード</span>
-          <h2 class="tq-ibcp__h2 tq-h2"><span class="tq-line">プロの経験を、</span><span class="tq-line">あなたの口座へ。</span></h2>
-          <div class="tq-ibcp__steps">
-            <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>プロバイダーが取引を開始。</span></p>
-            <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>それが顧客の口座へ、顧客自身のサイズで反映されます。</span></p>
+      <div class="tq-ibcp__stage">
+        <div class="tq-ibcp__in">
+          <div class="tq-ibcp__txt">
+            <span class="tq-ibcp__eye">IBツール · 自社ブランドのコピートレード</span>
+            <h2 class="tq-ibcp__h2 tq-h2"><span class="tq-line">プロの経験を、</span><span class="tq-line">あなたの口座へ。</span></h2>
+            <div class="tq-ibcp__steps">
+              <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>プロバイダーが取引を開始。</span></p>
+              <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>それが顧客の口座へ、顧客自身のサイズで反映されます。</span></p>
+            </div>
+            <a class="tq-ibcp__go" href="#insights"><span>コピートレードを見る</span><span class="tq-ibcp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <div class="tq-ibcp__by"><span>提供元</span><span class="tq-ibcp__st tq-ibcp__st--by" translate="no"><svg width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><rect x="0" y="4" width="2.2" height="6" rx=".6"/><rect x="3.9" y="1.5" width="2.2" height="8.5" rx=".6"/><rect x="7.8" y="0" width="2.2" height="10" rx=".6"/></svg>SocialTrading.ai</span></div>
           </div>
-          <a class="tq-ibcp__go" href="#insights"><span>コピートレードを見る</span><span class="tq-ibcp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-          <div class="tq-ibcp__by"><span>提供元</span><span class="tq-ibcp__st tq-ibcp__st--by" translate="no"><svg width="14" height="14" viewBox="0 0 10 10" aria-hidden="true"><rect x="0" y="4" width="2.2" height="6" rx=".6"/><rect x="3.9" y="1.5" width="2.2" height="8.5" rx=".6"/><rect x="7.8" y="0" width="2.2" height="10" rx=".6"/></svg>SocialTrading.ai</span></div>
-        </div>
-        <div class="tq-ibcp__crop"><div class="tq-ibcp__board" dir="ltr" translate="no" aria-hidden="true">
+          <div class="tq-ibcp__crop"><div class="tq-ibcp__board" dir="ltr" translate="no" aria-hidden="true">
   <div class="tq-ibcp__hand" data-k="L" style="transform:translate3d(360px,101px,0) scale(.78)">
     <img class="tq-ibcp__img" src="../../assets/ib/hand-provider.webp?v=8ef1347c97" width="790" height="1024" alt="" decoding="async" loading="lazy">
     <div class="tq-ibcp__on">
@@ -2253,10 +2261,13 @@ html:lang(ko) * { word-break: keep-all; }
   <span class="tq-ibcp__rail"><i data-k="rail"></i></span>
 </div>
 </div>
-        <p class="tq-ibcp__note">イメージです。人物は架空です。戦略はSocialTrading.ai上の独立したプロバイダーが運用しています。コピートレードには損失のリスクがあり、過去の実績は将来の結果を保証しません。</p>
+          <p class="tq-ibcp__note">イメージです。人物は架空です。戦略はSocialTrading.ai上の独立したプロバイダーが運用しています。コピートレードには損失のリスクがあり、過去の実績は将来の結果を保証しません。</p>
+        </div>
       </div>
-      <script>/* 1200px+: the design's 1440x900 composition, scaled down to the width (--z for the background); narrower: the hands cropped to x 430–1440, y 110–900 of it, scaled to the width (at most 0.8x, centred) */
-(function(){var s=document.currentScript.parentNode,n=s.querySelector('.tq-ibcp__in'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,k;if(m.matches){k=Math.min(1,w/1440);n.style.zoom=k;s.style.setProperty('--z',k);b.style.zoom=b.style.marginLeft=c.style.height=''}else{k=Math.min(.8,w/1010);n.style.zoom='';s.style.removeProperty('--z');b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z)})();</script>
+      <script>/* the stage: one screen, its top --hdr kept free for the header. 1200px+: the 1440x900 composition scaled to fit it (--z lines the
+   background up); narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition, scaled to the
+   width and to the room the words and the note leave (at most 0.8x, centred) */
+(function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),o=s.querySelector('.tq-ibcp__note'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,H=g.clientHeight-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-o.offsetHeight-48)/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
     </section>
 
     <!-- Network insights (IB_Network_Insights design), after the signals feed: the pitch, two views to pick (V.01 Network,
@@ -2749,7 +2760,7 @@ html:lang(ko) * { word-break: keep-all; }
 <script src="../../assets/js/landing.js?v=ad8bd6c12a" defer></script>
 <script src="../../assets/js/ib-toolkit.js?v=c2eca3103e" defer></script>
 <script src="../../assets/js/ib-shield.js?v=ef118aca3f" defer></script>
-<script src="../../assets/js/ib-copy.js?v=472d7e0760" defer></script>
+<script src="../../assets/js/ib-copy.js?v=6f41ac5481" defer></script>
 <script src="../../assets/js/ib-insights.js?v=a668fd7893" defer></script>
 <script src="../../assets/js/ib-clients.js?v=32ab6f721b" defer></script>
 <script src="../../assets/js/ib-ai.js?v=5994fd2032" defer></script>

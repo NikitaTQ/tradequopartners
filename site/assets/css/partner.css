@@ -2255,20 +2255,23 @@
 @media (prefers-reduced-motion: reduce) { .tq-ibp__go { transition: none; } }
 
 /* ---- IB Tools: the Copy trading hand-off block (Liquid_Glass_Hand-off, variant 4a, #copy) ----------------------------
-   Desktops (1200px+): the design's 1440x900 composition as it is (sizes in the design's px), scaled down to the width by
-   the section's script (zoom; --z lines the section's background up with it, so wider screens carry it on to the
-   edges). Narrower: the words in the page's flow, then the hands cropped to x 430–1440, y 110–900 of the composition
-   (the board's own zoom and offset, set by the same script), then the note. The board: two glass hands (photos, the
+   Scroll-driven: the section is the stage (one screen; its top --hdr kept free for the site's header, which hides on the
+   way down and comes back on the way up) plus three screens of scroll; the stage holds still (sticky) while they pass, and assets/js/ib-copy.js turns how far they have passed into the
+   animation. Desktops (1200px+): the design's 1440x900 composition as it is (sizes in the design's px), scaled to fit the
+   stage by the section's script (zoom; --z lines the stage's background up with it, so wider screens carry it on to
+   the edges). Narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition (the board's own
+   zoom and offset, fitted to the room left), then the note. The board: two glass hands (photos, the
    phone screens drawn over them with the design's matrix3d, the client's thumb left over its screen by a clip-path),
    the drop (a WebGL canvas, assets/js/ib-copy.js), a ring where it lands, a progress rail. Type: Inter (Fragment Mono and
    DM Sans in the design; figures tabular), the H2 in the site's H2 face with the design's tracking; 800 is 700. */
-.tq-ibcp { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+.tq-ibcp { --hdr: 68px; position: relative; box-sizing: border-box; height: 400svh; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.tq-ibcp__stage { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding-top: var(--hdr); overflow: hidden; display: flex; align-items: center;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px),
-    radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(900px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
-    radial-gradient(calc(792px * var(--z, 1)) calc(585px * var(--z, 1)) at calc(50% + 201.6px * var(--z, 1)) calc(360px * var(--z, 1)), #e8e8ee 0%, #d5d5dc 55%, #c3c4cb 100%); }
-.tq-ibcp::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; z-index: 2; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+    radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(50% + var(--hdr) / 2 + 450px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
+    radial-gradient(calc(792px * var(--z, 1)) calc(585px * var(--z, 1)) at calc(50% + 201.6px * var(--z, 1)) calc(50% + var(--hdr) / 2 - 90px * var(--z, 1)), #e8e8ee 0%, #d5d5dc 55%, #c3c4cb 100%); }   /* the composition's background, about its centre */
+.tq-ibcp__stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; z-index: 2; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
 .tq-ibcp a { text-decoration: none; }
-.tq-ibcp__in { position: relative; width: 1440px; height: 900px; margin: 0 auto; }
+.tq-ibcp__in { position: relative; flex: none; width: 1440px; height: 900px; margin: 0 auto; }
 .tq-ibcp__txt { position: absolute; z-index: 3; left: 72px; top: 0; bottom: 0; width: 380px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
 .tq-ibcp__eye { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #5e5f64; font-variant-numeric: tabular-nums; }
 .tq-ibcp__h2 { --h2s: 32px; margin: 0; padding-inline-start: 0; line-height: 1.16; letter-spacing: -.01em; text-wrap: wrap; }   /* face: .tq-h2; the design's tracking and line breaks */
@@ -2366,9 +2369,10 @@
 .tq-ibcp__glint { inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(255,255,255,0) 28%, rgba(255,255,255,.07) 40%, rgba(255,255,255,0) 54%); }
 /* narrower than 1200px: the words, then the hands (cropped, scaled by the section's script), then the note */
 @media (max-width: 1199px) {
-  .tq-ibcp { padding: 48px 0 40px; background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(60% 45% at 62% 62%, #e8e8ee 0%, #d5d5dc 60%, #cfd0d6 100%); }
-  .tq-ibcp::after { height: 56px; }
-  .tq-ibcp__in { width: auto; height: auto; }
+  .tq-ibcp__stage { flex-direction: column; align-items: stretch; justify-content: center; padding: calc(var(--hdr) + 12px) 0 24px;
+    background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(60% 45% at 62% 62%, #e8e8ee 0%, #d5d5dc 60%, #cfd0d6 100%); }
+  .tq-ibcp__stage::after { height: 40px; }
+  .tq-ibcp__in { width: auto; height: auto; margin: 0; }
   .tq-ibcp__txt { position: relative; left: auto; top: auto; bottom: auto; width: auto; max-width: 560px; margin: 0 auto; padding: 0 20px; gap: 20px; }
   .tq-ibcp__eye { font-size: 10.5px; }
   .tq-ibcp__h2 { --h2s: clamp(20px, 5.4vw, 30px); }
@@ -2381,4 +2385,5 @@
   .tq-ibcp__rail { display: none; }   /* the progress rail reads as a stray line by the screen's edge */
   .tq-ibcp__note { position: relative; left: auto; bottom: auto; width: auto; max-width: 560px; margin: -10px auto 0; padding: 0 20px; box-sizing: border-box; font-size: 10.5px; }
 }
-@media (prefers-reduced-motion: reduce) { .tq-ibcp__go { transition: none; } }
+/* reduced motion: no hold, the end state on one screen */
+@media (prefers-reduced-motion: reduce) { .tq-ibcp { height: auto; } .tq-ibcp__stage { position: relative; top: auto; } .tq-ibcp__go { transition: none; } }

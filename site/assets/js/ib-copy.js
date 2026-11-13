@@ -6,8 +6,10 @@
      · the client's screen fills in: symbol, price, the chart drawn, the position, the "Copied" badge (.76–.95).
    The drop is a metaball field drawn on a WebGL canvas (the design's shader: refraction of the background, a mirror-like
    environment, a red core, two highlights, a soft shadow); it is drawn only inside the box around the drops.
-   p loops as in the design: 13 s — rest, forward 6.5 s, hold, back 2.3 s — eased; the hands float a little. The loop runs
-   only while the block is on screen and the tab is visible. Reduced motion: the end state (p = 1), still.
+   p follows the scroll: the stage holds still while the page scrolls three screens past it (partner.css);
+   the first one and a half take p to .30 (the client's hand comes in), the next one and a half to 1 (the drop forms,
+   flies and lands, the client's screen fills in); scrolling up plays it back. p eases after the scroll; the hands float
+   a little. Frames run only while the block is on screen and the tab is visible. Reduced motion: the end state, still.
    No WebGL (or no highp in fragment shaders): everything but the drop. */
 (function () {
   var root = document.querySelector('[data-ib-copy]');
@@ -145,17 +147,22 @@
     G.drawn = true;
   }
 
-  /* ---- the loop ---- */
-  var autoP = function (T) { var c = (T / 13) % 1; if (c < .06) return 0; if (c < .56) return (c - .06) / .5; if (c < .76) return 1; if (c < .94) return 1 - (c - .76) / .18; return 0; };
+  /* ---- the scroll ---- */
+  var stage = root.querySelector('.tq-ibcp__stage');
+  /* how far the three screens of scroll have passed (0..1) → p: the first half to .30, the second from .30 to 1 */
+  function target() {
+    var r = root.getBoundingClientRect(), track = r.height - stage.offsetHeight, f = track > 0 ? cl(-r.top / track) : 1;
+    return f < .5 ? .3 * f / .5 : .3 + .7 * (f - .5) / .5;
+  }
   if (reduce) { apply(1, 0); return; }
-  var T = 0, cur = 0, last = 0, raf = 0, seen = false;
-  apply(0, 0);
+  var T = 0, cur = target(), last = 0, raf = 0, seen = false;
+  apply(cur, 0);
   function tick(now) {
     raf = requestAnimationFrame(tick);
     var dt = last ? Math.min(.05, (now - last) / 1000) : 0; last = now;
     T += dt;
-    var target = autoP(T), k = 1 - Math.exp(-dt * 4.2);
-    cur = Math.abs(target - cur) < 1e-5 ? target : cur + (target - cur) * k;
+    var to = target(), k = 1 - Math.exp(-dt * 7);
+    cur = Math.abs(to - cur) < 1e-4 ? to : cur + (to - cur) * k;
     apply(cur, T);
   }
   function run() { var go = seen && !document.hidden; if (go && !raf) { last = 0; raf = requestAnimationFrame(tick); } else if (!go && raf) { cancelAnimationFrame(raf); raf = 0; } }
