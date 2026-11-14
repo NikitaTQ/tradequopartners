@@ -1792,8 +1792,8 @@ footer p { font-size: 12px !important; }
          the views to pick (Network, Performance, Earnings) on a red glass pill that slides over them (the design's "pill"
          selector), the picked view's line under it, and a canvas: the partner tree in glass (You at the top, Sub-IBs level by
          level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
-         net deposits, then into each partner's top client as a glass bar of the commission you earn from them, and round
-         again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
+         net deposits, then into a row per partner with a glass bar of what their clients earned you this month (the rows add
+         up to the month's total) and their top client under the name, and round again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
          across the width, the button last. assets/js/ib-insights.js draws it; its words come from data-* on the canvas.
          Names and figures are demo data. -->
     <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
@@ -1812,9 +1812,9 @@ footer p { font-size: 12px !important; }
               <span class="tq-ibi__pill" aria-hidden="true"><i></i></span>
               <button type="button" class="tq-ibi__b is-act" aria-pressed="true">Sieć</button><button type="button" class="tq-ibi__b" aria-pressed="false">Wyniki</button><button type="button" class="tq-ibi__b" aria-pressed="false">Zarobki</button>
             </div>
-            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">Twoi Sub-IB, poziom po poziomie. Zobacz dokładnie, kto jest pod kim.</span><span>Partnerzy według wpłat netto. Zobacz, która gałąź napędza Twój wzrost.</span><span>Najlepszy klient każdego partnera i prowizja, którą na nim zarabiasz. Zobacz, kto przestał handlować.</span></p>
+            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">Twoi Sub-IB, poziom po poziomie. Zobacz dokładnie, kto jest pod kim.</span><span>Partnerzy według wpłat netto. Zobacz, która gałąź napędza Twój wzrost.</span><span>Ile w tym miesiącu zarabiasz na klientach każdego partnera i kto jest jego najlepszym klientem. Zobacz, kto przestał handlować.</span></p>
           </div>
-          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="Ty" data-total="{v} łącznie" data-net="Wpłaty netto sieci" data-comm="Twoje prowizje · {m}" data-top="Najlepszy klient każdego partnera" data-active="Aktywny" data-dormant="Zagrożony" data-via="przez {n}"></canvas></div>
+          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="Ty" data-total="{v} łącznie" data-net="Wpłaty netto sieci" data-comm="Twoje prowizje · {m}" data-top="Według partnera" data-topc="Najlepszy klient: {n}" data-dormant="Zagrożony"></canvas></div>
         </div>
       </div>
     </section>
@@ -2102,7 +2102,7 @@ footer p { font-size: 12px !important; }
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=e5b91bee69" defer></script>
 <script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
-<script src="../../assets/js/ib-insights.js?v=15aa01d121" defer></script>
+<script src="../../assets/js/ib-insights.js?v=4c9e79410b" defer></script>
 <script src="../../assets/js/ib-hole.js?v=9caf46d5d6" defer></script>
 </body>
 </html>

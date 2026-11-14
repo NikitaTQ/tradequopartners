@@ -1798,8 +1798,8 @@ h1, h2 { line-height: 1.2 !important; }
          the views to pick (Network, Performance, Earnings) on a red glass pill that slides over them (the design's "pill"
          selector), the picked view's line under it, and a canvas: the partner tree in glass (You at the top, Sub-IBs level by
          level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
-         net deposits, then into each partner's top client as a glass bar of the commission you earn from them, and round
-         again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
+         net deposits, then into a row per partner with a glass bar of what their clients earned you this month (the rows add
+         up to the month's total) and their top client under the name, and round again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
          across the width, the button last. assets/js/ib-insights.js draws it; its words come from data-* on the canvas.
          Names and figures are demo data. -->
     <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
@@ -1818,9 +1818,9 @@ h1, h2 { line-height: 1.2 !important; }
               <span class="tq-ibi__pill" aria-hidden="true"><i></i></span>
               <button type="button" class="tq-ibi__b is-act" aria-pressed="true">เครือข่าย</button><button type="button" class="tq-ibi__b" aria-pressed="false">ผลงาน</button><button type="button" class="tq-ibi__b" aria-pressed="false">รายได้</button>
             </div>
-            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">Sub-IB ของคุณ ทีละระดับ เห็นชัดว่าใครอยู่ใต้ใคร</span><span>พ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์เรียงตามยอดฝากสุทธิ ดูว่าสาขาไหนขับเคลื่อนการเติบโตของคุณ</span><span>ลูกค้าอันดับหนึ่งของพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์แต่ละราย และค่าคอมมิชชันที่คุณได้จากพวกเขา ดูว่าใครเงียบไป</span></p>
+            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">Sub-IB ของคุณ ทีละระดับ เห็นชัดว่าใครอยู่ใต้ใคร</span><span>พ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์เรียงตามยอดฝากสุทธิ ดูว่าสาขาไหนขับเคลื่อนการเติบโตของคุณ</span><span>ลูกค้าของพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์แต่ละรายสร้างรายได้ให้คุณเท่าไรในเดือนนี้ และใครคือลูกค้าอันดับหนึ่ง ดูว่าใครเงียบไป</span></p>
           </div>
-          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="คุณ" data-total="รวม {v}" data-net="ยอดฝากสุทธิของเครือข่าย" data-comm="ค่าคอมมิชชันของคุณ · {m}" data-top="ลูกค้าอันดับหนึ่งของแต่ละพาร์ทเนอร์" data-active="ใช้งาน" data-dormant="เสี่ยงหยุด" data-via="ผ่าน {n}"></canvas></div>
+          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="คุณ" data-total="รวม {v}" data-net="ยอดฝากสุทธิของเครือข่าย" data-comm="ค่าคอมมิชชันของคุณ · {m}" data-top="แยกตามพาร์ทเนอร์" data-topc="ลูกค้าอันดับหนึ่ง: {n}" data-dormant="เสี่ยงหยุด"></canvas></div>
         </div>
       </div>
     </section>
@@ -2108,7 +2108,7 @@ h1, h2 { line-height: 1.2 !important; }
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=e5b91bee69" defer></script>
 <script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
-<script src="../../assets/js/ib-insights.js?v=15aa01d121" defer></script>
+<script src="../../assets/js/ib-insights.js?v=4c9e79410b" defer></script>
 <script src="../../assets/js/ib-hole.js?v=9caf46d5d6" defer></script>
 </body>
 </html>

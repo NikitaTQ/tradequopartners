@@ -3,13 +3,13 @@
    A canvas draws the partner tree in glass: "You" (dark) at the top, the Sub-IBs level by level under it, links with
    pulses running up to you, the strongest branch (Northline) red. View 2 turns the same partners into glass bars by
    net deposits on a grid (each node grows into its bar, the tree fades). View 3 lays each bar down as a row: each
-   partner's top client, a glass bar as long as the commission you earn from them, with the client's name, status
-   ("Dormant risk" in red) and the partner it came through; the month's total on top. The views turn on their own
-   (7.5 s on the tree, 5.5 s on the bars, 7 s on the clients) while the block is on screen and the pointer is not over
+   partner, a glass bar as long as what that partner's clients earned you this month (the rows add up to the month's
+   total on top), and under the name the partner's top client with their commission ("Dormant risk" in red instead
+   when they went quiet). The views turn on their own (7.5 s on the tree, 5.5 s on the bars, 7 s on the rows) while the block is on screen and the pointer is not over
    the picture; a click on a view on the pill above it picks it and stops the turns. With "reduce motion" nothing moves: the
    picture is drawn once per view.
    The words drawn on the canvas come from its data-you / data-total ("{v}" = the sum) / data-net / data-comm ("{m}" =
-   the month, in the page's language) / data-top / data-active / data-dormant / data-via ("{n}" = the partner). Names
+   the month, in the page's language) / data-top / data-topc ("{n}" = the client) / data-dormant. Names
    and figures are demo data. Below 641px (the phone mockup) the picture is packed tighter: smaller glass, levels
    closer, smaller words, no sum under "You" (the bars show it). */
 (function () {
@@ -25,8 +25,8 @@
   var month = 'November';
   try { month = new Intl.DateTimeFormat(lang, { month: 'long' }).format(new Date(2026, 10, 15)); } catch (e) {}
   var TXT = { you: upper(attr('you', 'You')), total: attr('total', '{v} total'), net: upper(attr('net', 'Network net deposits')),
-    comm: upper(attr('comm', 'Your commissions · {m}').replace('{m}', month)), top: upper(attr('top', 'Top client of each partner')),
-    active: attr('active', 'Active'), dormant: attr('dormant', 'Dormant risk'), via: attr('via', 'via {n}') };
+    comm: upper(attr('comm', 'Your commissions · {m}').replace('{m}', month)), top: upper(attr('top', 'By partner')),
+    topc: attr('topc', 'Top client: {n}'), dormant: attr('dormant', 'Dormant risk') };
   var F = 'Inter, system-ui, sans-serif';
   var coarse = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches);
 
@@ -57,19 +57,21 @@
   BY.r.rank = -1;
   var MAX = PARTNERS[0].net;
   var kfmt = function (v) { return '$' + (v / 1000).toFixed(1).replace(/\.0$/, '') + 'k'; };
-  /* view 3: the top client of each partner, in the partners' order (row i belongs to the partner ranked i) */
+  /* view 3: a row per partner, in the partners' order (row i belongs to the partner ranked i): br = what their clients
+     earned you this month (the rows add up to the total, $4,812.60), and their top client with its commission */
   var CL = [
-    { n: 'D. Moreau', ib: 'Northline', amt: 112.00, s: 'a' },
-    { n: 'R. Castillo', ib: 'Meridian', amt: 23.75, s: 'a' },
-    { n: 'S. Haddad', ib: 'K. Ortiz', amt: 22.40, s: 'a' },
-    { n: 'A. Lindqvist', ib: 'Harbor FX', amt: 18.20, s: 'a' },
-    { n: 'M. Tanaka', ib: 'Atlas', amt: 14.60, s: 'a' },
-    { n: 'L. Brennan', ib: 'Bluefin', amt: 9.10, s: 'a' },
-    { n: 'J. Okafor', ib: 'E. Varga', amt: 5.60, s: 'd' },
-    { n: 'P. Novak', ib: 'S. Kumar', amt: 3.40, s: 'a' }
+    { ib: 'Northline', br: 1642.80, n: 'D. Moreau', amt: 112.00, s: 'a' },
+    { ib: 'Meridian', br: 1158.40, n: 'R. Castillo', amt: 23.75, s: 'a' },
+    { ib: 'K. Ortiz', br: 874.25, n: 'S. Haddad', amt: 22.40, s: 'a' },
+    { ib: 'Harbor FX', br: 386.90, n: 'A. Lindqvist', amt: 18.20, s: 'a' },
+    { ib: 'Atlas', br: 281.15, n: 'M. Tanaka', amt: 14.60, s: 'a' },
+    { ib: 'Bluefin', br: 196.70, n: 'L. Brennan', amt: 9.10, s: 'a' },
+    { ib: 'E. Varga', br: 160.85, n: 'J. Okafor', amt: 5.60, s: 'd' },
+    { ib: 'S. Kumar', br: 111.55, n: 'P. Novak', amt: 3.40, s: 'a' }
   ];
-  var CMAX = CL[0].amt;
-  var STS = { a: [TXT.active, '#0A0A0A', '#55585F'], d: [TXT.dormant, '#E7131B', '#C40F16'] };
+  var CMAX = CL[0].br, TOTAL = CL.reduce(function (a, c) { return a + c.br; }, 0);   /* the month's total: the rows' sum */
+  var usd = function (v) { return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+  var STS = { a: ['#0A0A0A', '#55585F'], d: ['#E7131B', '#C40F16'] };
   var DUR = [7500, 5500, 7000];
 
   var reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -116,7 +118,7 @@
       colW = (R - L) / PARTNERS.length; bw = Math.max(16, Math.min(46, colW * 0.56));
       /* view 3's rows: under the heading, one per client; the bars start a third of the way in */
       rowTop = top + (ph ? 40 : 74); pitch = (base + 10 - rowTop) / CL.length; capH = Math.max(ph ? 11 : 14, Math.min(30, pitch * 0.5));
-      x0 = L + Math.min(210, (R - L) * (ph ? 0.38 : 0.34)); maxLen = R - x0 - (ph ? 56 : 76);
+      x0 = L + Math.min(210, (R - L) * (ph ? 0.38 : 0.34)); maxLen = R - x0 - (ph ? 62 : 84);
       if (reduced && draw) draw(performance.now());
     };
     if (window.ResizeObserver) new ResizeObserver(size).observe(stage); else window.addEventListener('resize', size);
@@ -166,18 +168,23 @@
     var last = performance.now(), T = 0, rv = 0, mt = 0, mc = 0;
     /* view 3: a row per client — a glass bar as long as the commission, starting at x0 */
     var rows = function () {
-      return CL.map(function (c, i) { var rw = Math.max(capH, maxLen * c.amt / CMAX); return { x: x0 + rw / 2, y: rowTop + (i + 0.5) * pitch, w: rw, h: capH, rad: capH / 2, rw: rw }; });
+      return CL.map(function (c, i) { var rw = Math.max(capH, maxLen * c.br / CMAX); return { x: x0 + rw / 2, y: rowTop + (i + 0.5) * pitch, w: rw, h: capH, rad: capH / 2, rw: rw }; });
     };
-    /* view 3's words for a row: the client (red for the top one), a status dot, "status · via partner", the amount */
+    /* view 3's words for a row: the partner (red for the top one), a dot (red when the top client went quiet), "Top
+       client: name · $commission" (or "· Dormant risk", red), and what the partner's clients earned you at the bar's end */
     var rowLabel = function (s) {
-      var i = s.n.rank, c = CL[i], S2 = STS[c.s], g = s.g, nameC = i === 0 ? '#C40F16' : '#0A0A0A', amt = '$' + c.amt.toFixed(2);
+      var i = s.n.rank, c = CL[i], S2 = STS[c.s], g = s.g, nameC = i === 0 ? '#C40F16' : '#0A0A0A';
       ctx.textAlign = 'left';
-      ctx.font = '700 ' + (ph ? 11 : 13.5) + 'px ' + F; ctx.fillStyle = nameC; ctx.fillText(c.n, L, g.y - 2);
-      ctx.fillStyle = S2[1]; ctx.beginPath(); ctx.arc(L + 3, g.y + (ph ? 8 : 10), ph ? 2.5 : 3, 0, PI2); ctx.fill();
-      /* status and partner: a sentence of the page's language around a Latin name — written right to left in Arabic */
-      ctx.font = '600 ' + (ph ? 9.5 : 11) + 'px ' + F; ctx.fillStyle = S2[2]; if (rtl) ctx.direction = 'rtl';
-      ctx.fillText(S2[0] + ' · ' + TXT.via.replace('{n}', c.ib), L + (ph ? 9 : 11), g.y + (ph ? 11.5 : 14)); ctx.direction = 'ltr';
-      ctx.font = '700 ' + (ph ? 10.5 : 12.5) + 'px ' + F; ctx.fillStyle = nameC; ctx.textBaseline = 'middle'; ctx.fillText(amt, x0 + g.rw + (ph ? 8 : 12), g.y + 1); ctx.textBaseline = 'alphabetic';
+      ctx.font = '700 ' + (ph ? 11 : 13.5) + 'px ' + F; ctx.fillStyle = nameC; ctx.fillText(c.ib, L, g.y - 2);
+      ctx.fillStyle = S2[0]; ctx.beginPath(); ctx.arc(L + 3, g.y + (ph ? 8 : 10), ph ? 2.5 : 3, 0, PI2); ctx.fill();
+      /* a sentence of the page's language around a Latin name — written right to left in Arabic */
+      ctx.font = '600 ' + (ph ? 9.5 : 11) + 'px ' + F; ctx.fillStyle = S2[1]; if (rtl) ctx.direction = 'rtl';
+      /* where "Top client: …" would run into the bars (narrow screens, long languages): just "name · amount" (the line
+         under the pill says what it is) */
+      var tail = ' · ' + (c.s === 'd' ? TXT.dormant : usd(c.amt)), sub = TXT.topc.replace('{n}', c.n) + tail, room = x0 - L - (ph ? 9 : 11) - 8;
+      if (ctx.measureText(sub).width > room) sub = c.n + tail;
+      ctx.fillText(sub, L + (ph ? 9 : 11), g.y + (ph ? 11.5 : 14)); ctx.direction = 'ltr';
+      ctx.font = '700 ' + (ph ? 10.5 : 12.5) + 'px ' + F; ctx.fillStyle = nameC; ctx.textBaseline = 'middle'; ctx.fillText(usd(c.br), x0 + g.rw + (ph ? 8 : 12), g.y + 1); ctx.textBaseline = 'alphabetic';
     };
 
     draw = function (now) {
@@ -211,7 +218,7 @@
         ctx.fillText(TXT.comm, L, top + (ph ? 9 : 14));
         if (!ph && ctx.measureText(TXT.comm).width + ctx.measureText(TXT.top).width + 24 < R - L) { ctx.textAlign = 'right'; ctx.fillText(TXT.top, R, top + 14); ctx.textAlign = 'left'; }
         spaced(0);
-        ctx.font = '700 ' + (ph ? 15 : Math.round(26 * k)) + 'px ' + F; ctx.fillStyle = '#0A0A0A'; ctx.fillText('$4,812.60', L, ph ? top + 27 : top + 14 + 30 * k);
+        ctx.font = '700 ' + (ph ? 15 : Math.round(26 * k)) + 'px ' + F; ctx.fillStyle = '#0A0A0A'; ctx.fillText(usd(TOTAL), L, ph ? top + 27 : top + 14 + 30 * k);
         ctx.strokeStyle = 'rgba(18,22,30,0.08)'; ctx.lineWidth = 1;
         for (var ri = 1; ri < CL.length; ri++) { var ly = Math.round(rowTop + ri * pitch) + 0.5, lp = cl(cf * 1.4 - ri * 0.04); ctx.beginPath(); ctx.moveTo(L, ly); ctx.lineTo(L + (R - L) * lp, ly); ctx.stroke(); }
         ctx.restore();
