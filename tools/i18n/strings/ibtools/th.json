@@ -115,8 +115,11 @@
   "ib.win.s4": "ไม่มีขั้นต่ำ ไม่มีค่าธรรมเนียมถอน",
   "ib.win.o5": "มีแค่ลิงก์แนะนำ",
   "ib.win.v5": "ในแบรนด์ของคุณ",
-  "ib.stage.hint": "เลื่อนเพื่อเปิดม่าน",
-  "ib.stage.t1": "เวที",
-  "ib.stage.t2": "เป็นของคุณ",
-  "ib.stage.lead": "แบรนด์ของคุณใต้แสงสปอตไลต์ — Copy Trading สัญญาณ และแอป ในชื่อของคุณ"
+  "ib.tv.h": "TradingView Premium ฟรีตลอดชีพ",
+  "ib.tv.life": "ใช้ได้ตลอดชีพ",
+  "ib.tv.list": "ราคาปกติ / ปี",
+  "ib.tv.paid": "TradeQuo จ่ายให้",
+  "ib.tv.pay": "คุณจ่าย",
+  "ib.tv.yr": "/ปี",
+  "ib.tv.cta": "รับ Premium ฟรี"
 }

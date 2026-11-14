@@ -779,6 +779,54 @@ footer p { font-size: 12px !important; }
 @media (max-width: 640px) {
 .tp-cut { gap: 16px; }
 }
+.tp-tv { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 64px; border-radius: 32px; background: #070708; color: #fff; text-align: center; }
+.tp-tv > * { position: relative; }
+.tp-tv > .tp-tv__glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(45% 50% at 50% 60%, rgba(231,19,27,.32), rgba(231,19,27,0) 70%); }
+.tp-tv > .tp-tv__mark { position: absolute; left: 50%; top: 46%; width: 520px; height: 360px; transform: translate(-50%, -50%); overflow: hidden; opacity: .07; pointer-events: none; direction: ltr; }
+.tp-tv__mark img { display: block; width: auto; max-width: none; height: 360px; }
+.tp-tv__duo { display: flex; align-items: center; gap: 18px; padding: 14px 22px; border-radius: 999px; direction: ltr;
+  background: linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.14); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.tp-tv__duo img { display: block; width: auto; height: 15px; }
+.tp-tv__duo img:last-child { height: 17px; }
+.tp-tv__duo span { font-family: 'Inter', sans-serif; font-size: 13px; color: #8a8a93; }
+.tp-tv__h { margin: 0; max-width: 880px; color: #fff; }
+.tp-tv__bill { margin-top: 40px; width: 100%; max-width: 880px; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, .9fr); overflow: hidden; text-align: start;
+  border-radius: 22px; background: linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 30px 70px rgba(0,0,0,.5); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+.tp-tv__bill > div { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 20px 18px; }
+.tp-tv__bill > div + div { border-inline-start: 1px solid rgba(255,255,255,.08); }
+.tp-tv__bill > .tp-tv__prod { flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; padding: 20px 22px; }
+.tp-tv__prod img { flex: none; width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 0 0 1px rgba(255,255,255,.18); }
+.tp-tv__prod > span { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tp-tv__prod b { font-size: 15px; font-weight: 800; }
+.tp-tv__lab { font-family: 'Inter', sans-serif; font-size: 10px; line-height: 1.35; letter-spacing: .16em; text-transform: uppercase; color: #9a9aa2; }
+[dir="rtl"] .tp-tv__lab { letter-spacing: 0; font-size: 11px; }
+:lang(th) .tp-tv__lab, :lang(ja) .tp-tv__lab, :lang(ko) .tp-tv__lab, :lang(zh) .tp-tv__lab { letter-spacing: .02em; font-size: 11px; }
+.tp-tv__val { display: flex; align-items: center; flex-wrap: wrap; gap: 0 8px; font-size: 20px; font-weight: 800; color: #fff; }
+.tp-tv__val small { font-size: 13px; font-weight: 700; color: #9a9aa2; }
+.tp-tv__val i { flex: none; display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: #e7131b; font-size: 11px; font-style: normal; line-height: 1; }
+.tp-tv__list .tp-tv__lab, .tp-tv__list .tp-tv__val, .tp-tv__list small { color: #6e6e77; }
+.tp-tv__list .tp-tv__val { gap: 0 4px; }
+.tp-tv__list s { text-decoration-color: #e7131b; }
+.tp-tv__bill > .tp-tv__you { background: rgba(231,19,27,.12); }
+.tp-tv__you .tp-tv__lab { color: #e4e4e8; }
+.tp-tv__cta { margin-top: 32px; display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700;
+  text-decoration: none; box-shadow: 0 12px 36px rgba(231,19,27,.4); transition: background .2s; }
+.tp-tv__cta:hover { background: #ff2a33; color: #fff; }
+.tp-tv__cta:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+[dir="rtl"] .tp-tv__cta span { display: inline-block; transform: scaleX(-1); }
+@media (max-width: 900px) {
+.tp-tv { padding: 40px 20px; border-radius: 24px; }
+.tp-tv__bill { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.tp-tv__bill > .tp-tv__prod, .tp-tv__bill > .tp-tv__you { grid-column: 1 / -1; }
+.tp-tv__bill > div { border-inline-start: 0 !important; border-top: 1px solid rgba(255,255,255,.08); }
+.tp-tv__bill > div:first-child { border-top: 0; }
+.tp-tv__bill > div:nth-child(3) { border-inline-start: 1px solid rgba(255,255,255,.08) !important; }
+.tp-tv__bill > div { padding: 16px 12px; }
+.tp-tv__bill > .tp-tv__prod { padding: 16px; }
+.tp-tv__val { flex-wrap: nowrap; gap: 0 5px; font-size: 17px; white-space: nowrap; }
+.tp-tv__val small { font-size: 12px; }
+}
 @keyframes tpDpPulse { from { transform: scale(1); opacity: .7; } to { transform: scale(3); opacity: 0; } }
 .tp-dp__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .tp-dp__stats > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 10px 12px; border-radius: 10px; background: #f6f6f7; }
@@ -795,6 +843,7 @@ footer p { font-size: 12px !important; }
 @keyframes tpPdsPop { 0% { transform: scale(.7); } 55% { transform: scale(1.18); } 100% { transform: scale(1); } }
 @keyframes tpPdsSpin { to { transform: rotate(360deg); } }
 @keyframes tpPdsCandle { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.55); } }
+.pf-perk__n, .pf-g-red, .pf-g-silver, .tp-tv__zero, .tp-tv__val, .tp-ig__n, .tp-pds__n { font-variant-numeric: tabular-nums; }
 .tq-ibx__lead { margin: 0; max-width: 470px; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.45; font-weight: 700; letter-spacing: -.01em; text-wrap: pretty; }
 .tq-ibx__sub { margin: -6px 0 0; max-width: 460px; font-size: 15px; line-height: 1.6; color: #55585f; text-wrap: pretty; }
 .tq-ibx__ctas { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; }
@@ -1073,33 +1122,15 @@ footer p { font-size: 12px !important; }
 .tq-ibi { padding-top: 44px; padding-bottom: 64px; }
 .tq-ibn__wrap { padding-block: 44px 68px; }
 }
-.tq-ibst { --k: 1; position: relative; background: #040405; color: #fff; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
-.tq-ibst::before, .tq-ibst::after { content: ''; display: block; height: clamp(140px, 22vh, 240px); }
-.tq-ibst::before { background: linear-gradient(180deg, #e9eaec 0%, #dfe0e2 12.5%, #c5c6c8 25%, #a1a1a3 37.5%, #777779 50%, #4c4d4e 62.5%, #282829 75%, #0e0e0f 87.5%, #040405 100%); }
-.tq-ibst::after { background: linear-gradient(0deg, #e9eaec 0%, #dfe0e2 12.5%, #c5c6c8 25%, #a1a1a3 37.5%, #777779 50%, #4c4d4e 62.5%, #282829 75%, #0e0e0f 87.5%, #040405 100%); }
-.tq-ibst__track { --p: 0; position: relative; height: 320vh; }
-.tq-ibst__view { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-.tq-ibst opera-stage { position: absolute; inset: 0; display: block; }
-.tq-ibst__vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 45%, rgba(4,4,5,0) 55%, rgba(4,4,5,.7) 100%); }
-.tq-ibst__hint { position: absolute; left: 0; right: 0; bottom: clamp(28px, 5vh, 56px); display: flex; flex-direction: column; align-items: center; gap: 10px; pointer-events: none;
-  opacity: clamp(0, calc(1 - var(--p) * 10), 1); }
-.tq-ibst__hint span { font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; white-space: nowrap; color: #e9d9cf; }
-.tq-ibst__hint i { width: 1px; height: 36px; background: linear-gradient(180deg, #ff2a32 0%, rgba(255,42,50,0) 100%); }
-.tq-ibst__shade { position: absolute; left: 0; bottom: 0; width: min(100%, 640px); height: 70%; pointer-events: none; opacity: clamp(0, calc((var(--p) - .8) * 6), 1);
-  background: radial-gradient(90% 80% at 0% 100%, rgba(4,4,5,.85) 0%, rgba(4,4,5,.5) 45%, rgba(4,4,5,0) 75%); }
-.tq-ibst__copy { --in: clamp(0, calc((var(--p) - .8) * 6), 1); position: absolute; left: clamp(20px, 6vw, 96px); right: 20px; bottom: clamp(28px, 7vh, 72px);
-  max-width: min(440px, 34vw); min-width: 260px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; text-align: start;
-  opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 24px)); }
-.tq-ibst__eye { font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: #c9cbd0; }
-.tq-ibst__h2 { --h2s: clamp(26px, 3.2vw, 46px); margin: 0; color: #fff; line-height: 1.04; letter-spacing: -.01em; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
-.tq-ibst__red { color: #ff2a32; }
-.tq-ibst__lead { margin: 0; max-width: 520px; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.45; font-weight: 500; color: #d6d8dd; text-wrap: pretty; }
-.tq-ibst__go { height: 58px; box-shadow: inset 0 1.5px 1px rgba(255,255,255,.45), inset 0 -10px 16px -8px rgba(90,0,4,.5), 0 20px 40px -14px rgba(231,19,27,.9); }
-.tq-ibst__go .tq-ibtp__arr { width: 44px; height: 44px; }
-[dir="rtl"] .tq-ibst__copy { left: 20px; right: clamp(20px, 6vw, 96px); }
-[dir="rtl"] .tq-ibst__shade { left: auto; right: 0; background: radial-gradient(90% 80% at 100% 100%, rgba(4,4,5,.85) 0%, rgba(4,4,5,.5) 45%, rgba(4,4,5,0) 75%); }
-:lang(ar) .tq-ibst__eye, :lang(th) .tq-ibst__eye, :lang(ja) .tq-ibst__eye, :lang(ko) .tq-ibst__eye, :lang(zh) .tq-ibst__eye,
-:lang(ar) .tq-ibst__hint span, :lang(th) .tq-ibst__hint span, :lang(ja) .tq-ibst__hint span, :lang(ko) .tq-ibst__hint span, :lang(zh) .tq-ibst__hint span { letter-spacing: .04em; }
+.tq-ibtv { background: #e9eaec; }
+.tq-ibtv__zero { position: relative; display: flex; align-items: center; justify-content: center; gap: .05em; margin-top: 30px; font-size: 250px; line-height: 1; direction: ltr;
+  filter: drop-shadow(0 20px 60px rgba(231,19,27,.35)); }
+.tq-ibtv__zero b { font-size: .78em; font-weight: 700; color: transparent; -webkit-background-clip: text; background-clip: text;
+  background-image: linear-gradient(180deg, #f4f4f6 0%, #e0e0e4 45%, #c2c2c8 100%); }
+.tq-ibtv__zero img { display: block; width: auto; height: .97em; }
+@media (max-width: 640px) {
+.tq-ibtv__zero { margin-top: 20px; font-size: clamp(110px, 32vw, 250px); }
+}
 .tq-ibs { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   padding: clamp(64px, 10vh, 112px) clamp(20px, 5vw, 80px) max(96px, clamp(64px, 10vh, 112px));
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 72% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
@@ -1449,26 +1480,25 @@ for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+
 fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
     </section>
 
-    <!-- The stage (Opera_Stage_Curtain design), in place of TradingView Premium: a 3D opera stage (assets/js/ib-stage.js,
-         <opera-stage>, three.js) whose velvet curtains open as the page scrolls through the block (the track is 320vh,
-         the stage sticks for it); then the spotlight on the microphone and the words, bottom left: "TradeQuo · IB
-         Program", "The stage is yours.", the line and the red button to the form. Before the curtains open: "Scroll to
-         raise the curtain". The words follow the scroll through --p, set on the track by the scene. The grey of the
-         blocks above and below eases into the stage's black and out of it (the section's ::before and ::after).
-         Styles: partner.css, "the stage". -->
-    <section id="stage" class="tq-ibst" data-screen-label="IB Tools · The stage">
-      <div class="tq-ibst__track" data-stage-track>
-        <div class="tq-ibst__view">
-          <opera-stage aria-hidden="true"></opera-stage>
-          <div class="tq-ibst__vig" aria-hidden="true"></div>
-          <div class="tq-ibst__hint" aria-hidden="true"><span>Gulir untuk membuka tirai</span><i></i></div>
-          <div class="tq-ibst__shade" aria-hidden="true"></div>
-          <div class="tq-ibst__copy">
-            <span class="tq-ibst__eye">TradeQuo · Program IB</span>
-            <h2 class="tq-ibst__h2 tq-h2" data-fitw>Panggung <span class="tq-ibst__red">milik Anda.</span></h2>
-            <p class="tq-ibst__lead">Merek Anda di bawah sorotan — copy trading, sinyal, dan aplikasi atas nama Anda.</p>
-            <a class="tq-ibtp__go tq-ibst__go" href="../#signup" data-page-link data-label="MEMUAT · Beranda"><span>Jadi mitra</span><span class="tq-ibtp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <!-- TradingView Premium on us, still (in place of the Branded toolkit): the Marketing Tools card (a dark card, the
+         TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the CTA to the
+         form) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
+         Styles: partner.css, "the TradingView Premium block". Prices are USD in every language. -->
+    <section id="premium" class="tp-sec tq-ibtv" data-screen-label="IB Tools · TradingView Premium">
+      <div class="tp-wrap">
+        <div class="tp-tv">
+          <div class="tp-tv__glow" aria-hidden="true"></div>
+          <div class="tp-tv__mark" aria-hidden="true"><img src="../../assets/marketing/tradingview.webp?v=b2dac21ca8" alt="" width="969" height="134" loading="lazy" decoding="async"></div>
+          <div class="tp-tv__duo"><img src="../../assets/logo-wordmark-light.png?v=3a415b95bb" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span aria-hidden="true">×</span><img src="../../assets/marketing/tradingview.webp?v=b2dac21ca8" alt="TradingView" width="969" height="134" loading="lazy" decoding="async"></div>
+          <div class="tq-ibtv__zero" aria-hidden="true"><b>$</b><img src="../../assets/ib/tv-zero.webp?v=f2b7efc601" alt="" width="515" height="713" loading="lazy" decoding="async"></div>
+          <h2 class="tp-tv__h tq-h2" data-fitw>TradingView Premium, gratis seumur hidup.</h2>
+          <div class="tp-tv__bill">
+            <div class="tp-tv__prod"><img src="../../assets/marketing/tradingview-app.webp?v=825ec516a7" alt="" width="32" height="32" loading="lazy" decoding="async"><span><b>TradingView Premium</b><span class="tp-tv__lab">Akses seumur hidup</span></span></div>
+            <div class="tp-tv__list"><span class="tp-tv__lab">Harga normal / tahun</span><span class="tp-tv__val"><s>$719.40</s> <small>/thn</small></span></div>
+            <div><span class="tp-tv__lab">Dibayar TradeQuo</span><span class="tp-tv__val"><i aria-hidden="true">✓</i>$719.40<small>/thn</small></span></div>
+            <div class="tp-tv__you"><span class="tp-tv__lab">Anda bayar</span><span class="tp-tv__val">$0.00</span></div>
           </div>
+          <a class="tp-tv__cta" href="../#signup" data-page-link data-label="MEMUAT · Beranda">Dapatkan Premium gratis <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -2034,6 +2064,5 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 <script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
 <script src="../../assets/js/ib-insights.js?v=4c9e79410b" defer></script>
 <script src="../../assets/js/ib-hole.js?v=9caf46d5d6" defer></script>
-<script src="../../assets/js/ib-stage.js?v=dc3817784e" defer></script>
 </body>
 </html>

@@ -115,8 +115,11 @@
   "ib.win.s4": "bez minimum, bez opłat za wypłatę",
   "ib.win.o5": "Tylko link polecający",
   "ib.win.v5": "Pod Twoją marką",
-  "ib.stage.hint": "Przewiń, aby podnieść kurtynę",
-  "ib.stage.t1": "Scena",
-  "ib.stage.t2": "należy do Ciebie.",
-  "ib.stage.lead": "Twoja marka w świetle reflektorów — copy trading, sygnały i aplikacje pod Twoją nazwą."
+  "ib.tv.h": "TradingView Premium za darmo, dożywotnio.",
+  "ib.tv.life": "Dostęp dożywotni",
+  "ib.tv.list": "Cena katalogowa / rok",
+  "ib.tv.paid": "Płaci TradeQuo",
+  "ib.tv.pay": "Ty płacisz",
+  "ib.tv.yr": "/rok",
+  "ib.tv.cta": "Odbierz Premium za darmo"
 }

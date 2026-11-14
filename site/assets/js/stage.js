@@ -1,4 +1,4 @@
-/* IB Tools: the stage (Opera_Stage_Curtain design). <opera-stage> draws the design's scene with three.js: velvet
+/* Marketing Tools: the stage (Opera_Stage_Curtain design, in place of TradingView Premium). <opera-stage> draws the design's scene with three.js: velvet
  * curtains that open as the page scrolls through the block (its track, [data-stage-track], 320vh, the stage sticky),
  * the proscenium with its chrome rim, the footlights, the microphone under a spotlight with dust in the beam. The
  * scroll progress goes to the track as --p, which the words over the scene follow (CSS in partner.css). three.js is the
