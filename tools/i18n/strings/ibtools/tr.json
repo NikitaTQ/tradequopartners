@@ -115,11 +115,8 @@
   "ib.win.s4": "minimum yok, ödeme ücreti yok",
   "ib.win.o5": "Yalnızca yönlendirme bağlantısı",
   "ib.win.v5": "Sizin markanızla",
-  "ib.tv.h": "TradingView Premium, ömür boyu ücretsiz.",
-  "ib.tv.life": "Ömür boyu erişim",
-  "ib.tv.list": "Liste fiyatı / yıl",
-  "ib.tv.paid": "TradeQuo öder",
-  "ib.tv.pay": "Sizin ödemeniz",
-  "ib.tv.yr": "/yıl",
-  "ib.tv.cta": "Premium’u ücretsiz alın"
+  "ib.stage.hint": "Perdeyi açmak için kaydırın",
+  "ib.stage.t1": "Sahne",
+  "ib.stage.t2": "sizin.",
+  "ib.stage.lead": "Markanız spot ışıkları altında: copy trading, sinyaller ve uygulamalar sizin adınızla."
 }

@@ -102,25 +102,26 @@ for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+
 fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
     </section>
 
-    <!-- TradingView Premium on us, still (in place of the Branded toolkit): the Marketing Tools card (a dark card, the
-         TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the CTA to the
-         form) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
-         Styles: partner.css, "the TradingView Premium block". Prices are USD in every language. -->
-    <section id="premium" class="tp-sec tq-ibtv" data-screen-label="IB Tools · TradingView Premium">
-      <div class="tp-wrap">
-        <div class="tp-tv">
-          <div class="tp-tv__glow" aria-hidden="true"></div>
-          <div class="tp-tv__mark" aria-hidden="true"><img src="{{root}}assets/marketing/tradingview.webp" alt="" width="969" height="134" loading="lazy" decoding="async"></div>
-          <div class="tp-tv__duo"><img src="{{root}}assets/logo-wordmark-light.png" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span aria-hidden="true">×</span><img src="{{root}}assets/marketing/tradingview.webp" alt="TradingView" width="969" height="134" loading="lazy" decoding="async"></div>
-          <div class="tq-ibtv__zero" aria-hidden="true"><b>$</b><img src="{{root}}assets/ib/tv-zero.webp" alt="" width="515" height="713" loading="lazy" decoding="async"></div>
-          <h2 class="tp-tv__h tq-h2" data-fitw>{{ib.tv.h}}</h2>
-          <div class="tp-tv__bill">
-            <div class="tp-tv__prod"><img src="{{root}}assets/marketing/tradingview-app.webp" alt="" width="32" height="32" loading="lazy" decoding="async"><span><b>TradingView Premium</b><span class="tp-tv__lab">{{ib.tv.life}}</span></span></div>
-            <div class="tp-tv__list"><span class="tp-tv__lab">{{ib.tv.list}}</span><span class="tp-tv__val"><s>$719.40</s> <small>{{ib.tv.yr}}</small></span></div>
-            <div><span class="tp-tv__lab">{{ib.tv.paid}}</span><span class="tp-tv__val"><i aria-hidden="true">✓</i>$719.40<small>{{ib.tv.yr}}</small></span></div>
-            <div class="tp-tv__you"><span class="tp-tv__lab">{{ib.tv.pay}}</span><span class="tp-tv__val">$0.00</span></div>
+    <!-- The stage (Opera_Stage_Curtain design), in place of TradingView Premium: a 3D opera stage (assets/js/ib-stage.js,
+         <opera-stage>, three.js) whose velvet curtains open as the page scrolls through the block (the track is 320vh,
+         the stage sticks for it); then the spotlight on the microphone and the words, bottom left: "TradeQuo · IB
+         Program", "The stage is yours.", the line and the red button to the form. Before the curtains open: "Scroll to
+         raise the curtain". The words follow the scroll through --p, set on the track by the scene. The grey of the
+         blocks above and below eases into the stage's black and out of it (the section's ::before and ::after).
+         Styles: partner.css, "the stage". -->
+    <section id="stage" class="tq-ibst" data-screen-label="IB Tools · The stage">
+      <div class="tq-ibst__track" data-stage-track>
+        <div class="tq-ibst__view">
+          <opera-stage aria-hidden="true"></opera-stage>
+          <div class="tq-ibst__vig" aria-hidden="true"></div>
+          <div class="tq-ibst__hint" aria-hidden="true"><span>{{ib.stage.hint}}</span><i></i></div>
+          <div class="tq-ibst__shade" aria-hidden="true"></div>
+          <div class="tq-ibst__copy">
+            <span class="tq-ibst__eye">{{ib.top.eye}}</span>
+            <h2 class="tq-ibst__h2 tq-h2" data-fitw>{{ib.stage.t1}} <span class="tq-ibst__red">{{ib.stage.t2}}</span></h2>
+            <p class="tq-ibst__lead">{{ib.stage.lead}}</p>
+            <a class="tq-ibtp__go tq-ibst__go" href="{{signupHref}}"{{signupNav}}><span>{{nav.cta}}</span><span class="tq-ibtp__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
           </div>
-          <a class="tp-tv__cta" href="{{signupHref}}"{{signupNav}}>{{ib.tv.cta}} <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -333,5 +334,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 <script src="{{root}}assets/js/ib-copy.js" defer></script>
 <script src="{{root}}assets/js/ib-insights.js" defer></script>
 <script src="{{root}}assets/js/ib-hole.js" defer></script>
+<script src="{{root}}assets/js/ib-stage.js" defer></script>
 </body>
 </html>

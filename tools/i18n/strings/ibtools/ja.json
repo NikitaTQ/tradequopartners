@@ -115,11 +115,8 @@
   "ib.win.s4": "最低額なし、手数料なし",
   "ib.win.o5": "紹介リンクのみ",
   "ib.win.v5": "あなたのブランドで",
-  "ib.tv.h": "TradingView Premium、永久無料。",
-  "ib.tv.life": "永久アクセス",
-  "ib.tv.list": "定価 / 年",
-  "ib.tv.paid": "TradeQuoが負担",
-  "ib.tv.pay": "お支払い",
-  "ib.tv.yr": "/年",
-  "ib.tv.cta": "Premiumを無料で入手"
+  "ib.stage.hint": "スクロールして幕を開ける",
+  "ib.stage.t1": "ステージは",
+  "ib.stage.t2": "あなたのもの。",
+  "ib.stage.lead": "スポットライトを浴びるのはあなたのブランド。コピートレード、シグナル、アプリをあなたの名前で。"
 }
