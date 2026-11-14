@@ -961,6 +961,41 @@
   .tp-tv__val small { font-size: 12px; }
 }
 
+/* ---- Marketing Tools: the stage (Opera_Stage_Curtain, #stage, in place of TradingView Premium) -----------------------
+   The design's 3D opera stage (assets/js/stage.js): a 320vh track with the stage sticky in it, one screen high; the
+   curtains open as the track scrolls by (--p, 0..1, set on the track by the scene). Over the scene, as the design has
+   them: a vignette; "Scroll to raise the curtain" with a red line under it, gone after the first tenth; from .8 on, a dark
+   pool bottom left and the words over it (eyebrow, H2 in the site's H2 face, the line, the red button), rising 24px as
+   they come in. The page's white eases into the stage's black and back (::before, ::after: an eased gradient,
+   140-240px). Type: Inter (DM Sans in the design); the H2 the site's H2 face. */
+.tq-mts { --k: 1; position: relative; background: #040405; color: #fff; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.tq-mts::before, .tq-mts::after { content: ''; display: block; height: clamp(140px, 22vh, 240px); }
+.tq-mts::before { background: linear-gradient(180deg, #ffffff 0%, #f4f4f4 12.5%, #d7d7d8 25%, #afafb0 37.5%, #828283 50%, #535354 62.5%, #2b2b2c 75%, #0f0f10 87.5%, #040405 100%); }
+.tq-mts::after { background: linear-gradient(0deg, #ffffff 0%, #f4f4f4 12.5%, #d7d7d8 25%, #afafb0 37.5%, #828283 50%, #535354 62.5%, #2b2b2c 75%, #0f0f10 87.5%, #040405 100%); }
+.tq-mts__track { --p: 0; position: relative; height: 320vh; }
+.tq-mts__view { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+.tq-mts opera-stage { position: absolute; inset: 0; display: block; }
+.tq-mts__vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 45%, rgba(4,4,5,0) 55%, rgba(4,4,5,.7) 100%); }
+.tq-mts__hint { position: absolute; left: 0; right: 0; bottom: clamp(28px, 5vh, 56px); display: flex; flex-direction: column; align-items: center; gap: 10px; pointer-events: none;
+  opacity: clamp(0, calc(1 - var(--p) * 10), 1); }
+.tq-mts__hint span { font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; white-space: nowrap; color: #e9d9cf; }
+.tq-mts__hint i { width: 1px; height: 36px; background: linear-gradient(180deg, #ff2a32 0%, rgba(255,42,50,0) 100%); }
+.tq-mts__shade { position: absolute; left: 0; bottom: 0; width: min(100%, 640px); height: 70%; pointer-events: none; opacity: clamp(0, calc((var(--p) - .8) * 6), 1);
+  background: radial-gradient(90% 80% at 0% 100%, rgba(4,4,5,.85) 0%, rgba(4,4,5,.5) 45%, rgba(4,4,5,0) 75%); }
+.tq-mts__copy { --in: clamp(0, calc((var(--p) - .8) * 6), 1); position: absolute; left: clamp(20px, 6vw, 96px); right: 20px; bottom: clamp(28px, 7vh, 72px);
+  max-width: min(440px, 34vw); min-width: 260px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; text-align: start;
+  opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 24px)); }
+.tq-mts__eye { font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: #c9cbd0; }
+.tq-mts__h2 { --h2s: clamp(26px, 3.2vw, 46px); margin: 0; color: #fff; line-height: 1.04; letter-spacing: -.01em; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
+.tq-mts__red { color: #ff2a32; }
+.tq-mts__lead { margin: 0; max-width: 520px; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.45; font-weight: 500; color: #d6d8dd; text-wrap: pretty; }
+.tq-mts .tq-mts__go { height: 58px; box-shadow: inset 0 1.5px 1px rgba(255,255,255,.45), inset 0 -10px 16px -8px rgba(90,0,4,.5), 0 20px 40px -14px rgba(231,19,27,.9); }
+.tq-mts .tq-mts__go .tq-ibtp__arr { width: 44px; height: 44px; }
+[dir="rtl"] .tq-mts__copy { left: 20px; right: clamp(20px, 6vw, 96px); }
+[dir="rtl"] .tq-mts__shade { left: auto; right: 0; background: radial-gradient(90% 80% at 100% 100%, rgba(4,4,5,.85) 0%, rgba(4,4,5,.5) 45%, rgba(4,4,5,0) 75%); }
+:lang(ar) .tq-mts__eye, :lang(th) .tq-mts__eye, :lang(ja) .tq-mts__eye, :lang(ko) .tq-mts__eye, :lang(zh) .tq-mts__eye,
+:lang(ar) .tq-mts__hint span, :lang(th) .tq-mts__hint span, :lang(ja) .tq-mts__hint span, :lang(ko) .tq-mts__hint span, :lang(zh) .tq-mts__hint span { letter-spacing: .04em; }
+
 /* ---- Marketing Tools: Data and people on your side (Data_and_People_Section) -------------------------------
    Two cards, each with an illustration over its text: a partner dashboard tilted in 3D, its figures and bars
    ticking along live (startLiveDash in landing.js; only while on screen), and a glass chat card with the partner
