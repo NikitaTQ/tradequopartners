@@ -1719,27 +1719,40 @@
 @media (prefers-reduced-motion: reduce) { .tq-ibs__go { transition: none; } }
 
 /* ---- IB Tools: the Where our program wins block (Where_Our_Program_Wins, #wins) -----------------------------------------
-   A comparison: five terms; a typical IB program's in the middle column, ours in the right one on a raised metal card
-   (a darker plate 12px lower, a red glow under it, a white sheen, a red line along its bottom edge). Desktops (1000px+):
+   A comparison: five terms; a typical IB program's in the middle column, ours in the right one on a liquid glass card
+   (a red orb behind it, blurred through it; the plate 12px lower shows only as its bottom edge; a red glow under it, a
+   white sheen, a red line along its bottom edge; the rim a little red). Right after the hero. Desktops (1000px+):
    the design's 1340px table in its px, scaled down under 1340px by the section's script (zoom). The rows come in one by
    one (the section's is-wait, cleared when a third of it is in view); pointing at a row (hover devices) lights it with
    glass bands — white on the left, red under ours — and dims the other rows' typical terms. Narrower than 1000px: one
    card; each row the term, ours, then the typical one. Type: Inter (Fragment Mono and DM Sans in the design; figures
    tabular), the H2 in the site's H2 face with the design's tracking; 800 is 700. */
-.tq-ibw { position: relative; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+.tq-ibw { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(60% 50% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #f4f4f6 0%, #e4e5e8 100%); }
 .tq-ibw::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
 .tq-ibw a { text-decoration: none; }
 .tq-ibw__in { position: relative; z-index: 1; width: 1340px; margin: 0 auto; padding: 84px 80px 72px; box-sizing: border-box; display: flex; flex-direction: column; }
 .tq-ibw__h2 { --h2s: 46px; margin: 0 0 56px; padding-inline-start: 0; line-height: 1.08; letter-spacing: -.01em; text-wrap: wrap; }   /* face: .tq-h2; the design's tracking */
 .tq-ibw__h2 .tq-line { display: block; }
+.tq-ibw__h2--m, .tq-ibw__sw { display: none; }
 .tq-ibw__h2 .tq-line + .tq-line { color: #d2262d; }
 .tq-ibw__table { position: relative; width: 1180px; margin-bottom: 24px; }
 .tq-ibw__glow { position: absolute; right: 30px; bottom: -40px; width: 380px; height: 160px; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(231,19,27,.45) 0%, rgba(231,19,27,0) 70%); filter: blur(24px); pointer-events: none; }
-.tq-ibw__back { position: absolute; right: 0; top: 12px; bottom: -12px; width: 440px; border-radius: 34px; background: linear-gradient(180deg, #c4c6cc 0%, #9ea1a8 60%, #8a8d94 100%); box-shadow: 0 60px 80px -40px rgba(20,22,28,.45); pointer-events: none; }
+/* a red orb behind the card: what the liquid glass bends and blurs (the phone design's) */
+.tq-ibw__orb { position: absolute; right: -64px; top: 48%; width: 250px; height: 250px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 34% 28%, #ffb3b6 0%, #ff4148 24%, #e7131b 55%, #7e080d 100%); }
+/* the glass's thickness: the plate 12px lower shows only along the bottom edge, tinted red (the rest is masked off, so it
+   doesn't show grey through the glass) */
+.tq-ibw__back { position: absolute; right: 0; top: 12px; bottom: -12px; width: 440px; border-radius: 34px; pointer-events: none;
+  background: linear-gradient(180deg, rgba(200,202,208,.7) 0%, rgba(176,150,154,.75) 100%); box-shadow: 0 60px 80px -40px rgba(20,22,28,.45);
+  -webkit-mask-image: linear-gradient(180deg, transparent calc(100% - 48px), #000 calc(100% - 30px)); mask-image: linear-gradient(180deg, transparent calc(100% - 48px), #000 calc(100% - 30px)); }
+/* the card: clear liquid glass — a thin white wash, what is behind blurred and saturated, a bright inner rim and edge
+   light, a red glow rising from the bottom, the rim itself a little red */
 .tq-ibw__card { position: absolute; right: 0; top: 0; bottom: 0; width: 440px; border-radius: 34px; overflow: hidden; pointer-events: none;
-  background: linear-gradient(170deg, #fff 0%, #f3f4f6 30%, #e2e4e8 68%, #cfd1d6 100%);
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 0 0 1.5px rgba(255,255,255,.85), inset 0 -24px 40px -24px rgba(231,19,27,.22), 0 0 0 1px rgba(154,157,164,.5); }
+  background: linear-gradient(165deg, rgba(255,255,255,.74) 0%, rgba(255,255,255,.42) 58%, rgba(255,255,255,.56) 100%);
+  -webkit-backdrop-filter: blur(26px) saturate(1.8); backdrop-filter: blur(26px) saturate(1.8);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.8), inset 2px 3px 0 rgba(255,255,255,.95), inset 0 -40px 50px -40px rgba(231,19,27,.3),
+    0 0 0 1px rgba(231,19,27,.22), 0 0 18px -4px rgba(231,19,27,.16), 0 40px 60px -34px rgba(18,22,30,.5); }
 .tq-ibw__card i { position: absolute; }
 .tq-ibw__card i:first-child { left: -30%; top: -40%; width: 120%; height: 90%; background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 70%); }
 .tq-ibw__card i + i { left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, rgba(231,19,27,0), rgba(231,19,27,.7), rgba(231,19,27,0)); filter: blur(1px); }
@@ -1799,42 +1812,67 @@
   background: radial-gradient(circle at 40% 30%, #ff4a50 0%, #e7131b 45%, #a80c12 100%); box-shadow: 0 6px 12px -4px rgba(231,19,27,.6); }
 [dir="rtl"] .tq-ibw__arr svg { transform: scaleX(-1); }
 .tq-ibw__note { max-width: 640px; margin: 0; font-size: 12px; line-height: 1.5; color: #55575e; }
-/* narrower than 1000px: one card — each row the term, ours, then the typical one */
+/* narrower than 1000px: the phone design (Compare_Brokers_Block). Its own heading; a switch Other brokers / TradeQuo on a
+   glass pill (a dark or red glass pill slides under the picked side, leading edge first); one liquid glass card over a
+   red orb, a row per term: number and term on the left, the picked side's words on the right — the two sides sit in
+   one grid cell and crossfade (rise, blur), row after row; then the red button and the note. data-side on the section
+   (them / us); the section's script flips it every 2.8 s while in view until a side is picked. */
 @media (max-width: 999px) {
-  .tq-ibw__in { width: auto; max-width: 600px; padding: 48px 20px 64px; }
-  .tq-ibw__h2 { --h2s: clamp(24px, 6.4vw, 34px); margin: 0 0 28px; }
-  .tq-ibw__table { width: auto; margin-bottom: 26px; }
-  .tq-ibw__glow { right: 10%; bottom: -30px; width: 70%; height: 120px; }
-  .tq-ibw__back { width: auto; left: 0; top: 10px; bottom: -10px; border-radius: 28px; }
-  .tq-ibw__card { width: auto; left: 0; border-radius: 28px; }
-  .tq-ibw__rows { padding: 26px 22px 22px; }
-  .tq-ibw__head, .tq-ibw__row, .tq-ibw__foot { display: flex; flex-direction: column; }
-  .tq-ibw__head { height: auto; }
-  .tq-ibw__head > span:first-child, .tq-ibw__oh, .tq-ibw__foot > span:not(.tq-ibw__fc) { display: none; }
-  .tq-ibw__uh { padding: 0 0 8px; gap: 12px; font-size: 10.5px; }
-  .tq-ibw__uh img { height: 19px; }
-  .tq-ibw__row { min-height: 0; padding: 16px 0 15px; }
-  .tq-ibw__row::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(40,44,54,.1); box-shadow: 0 1px 0 rgba(255,255,255,.95); }
-  .tq-ibw__row:nth-last-child(2)::after, .tq-ibw__band, .tq-ibw__band2, .tq-ibw__etch { display: none; }
-  .tq-ibw__lbl, .tq-ibw__oth { border-bottom: 0; }
-  .tq-ibw__lbl { order: 1; gap: 10px; }
-  .tq-ibw__lbl span { font-size: 11.5px; }
-  .tq-ibw__lbl b { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: #4a4b50; }
-  .tq-ibw__our { order: 2; padding: 0; }
-  .tq-ibw__val { gap: 5px; padding-block: 8px 6px; }
-  .tq-ibw__val b { gap: 9px; font-size: 25px; }
-  .tq-ibw__ico { width: 28px; }
-  .tq-ibw__val > span { font-size: 13px; }
-  .tq-ibw__oth { order: 3; gap: 9px; padding-left: 0; font-size: 13px; line-height: 1.4; }
-  .tq-ibw__oth > i { width: 10px; }
-  .tq-ibw__oth small { display: inline; font-size: inherit; color: #8a8c92; }
-  .tq-ibw__foot { height: auto; padding-top: 18px; }
+  .tq-ibw__in { width: auto; max-width: 480px; padding: 36px 16px 48px; gap: 20px; }
+  .tq-ibw__h2--d { display: none; }
+  .tq-ibw__h2--m { display: block; --h2s: clamp(20px, 6.2vw, 24px); margin: 0; padding: 0 4px; line-height: 1.1; text-wrap: balance; }
+  .tq-ibw__sw { position: relative; display: flex; padding: 5px; border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.35) 100%); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid rgba(255,255,255,.95); box-shadow: inset 0 2px 1px rgba(255,255,255,.95), inset 0 -8px 14px -10px rgba(18,22,30,.25), 0 22px 36px -24px rgba(18,22,30,.55); }
+  .tq-ibw__swp { position: absolute; top: 5px; bottom: 5px; inset-inline-start: 5px; inset-inline-end: 50%; border-radius: 999px;
+    background: linear-gradient(165deg, #5a5c63 0%, #2a2c31 50%, #0e0f12 100%); box-shadow: inset 0 2px 2px rgba(255,255,255,.35), inset 0 -7px 12px -5px rgba(0,0,0,.5), 0 12px 22px -10px rgba(0,0,0,.5);
+    transition: inset-inline-start .55s cubic-bezier(.7,0,.2,1) 0s, inset-inline-end .55s cubic-bezier(.7,0,.2,1) .12s, background .45s ease, box-shadow .45s ease; }
+  .tq-ibw__swp i { position: absolute; left: 12%; top: 4px; width: 44%; height: 8px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,0)); }
+  .tq-ibw[data-side="us"] .tq-ibw__swp { inset-inline-start: 50%; inset-inline-end: 5px; transition-delay: .12s, 0s, 0s, 0s;
+    background: linear-gradient(165deg, #ff5a60 0%, #e7131b 46%, #a80c12 100%); box-shadow: inset 0 2px 2px rgba(255,255,255,.55), inset 0 -7px 12px -5px rgba(90,0,4,.5), 0 12px 22px -10px rgba(231,19,27,.7); }
+  .tq-ibw__swb { all: unset; position: relative; z-index: 1; flex: 1 1 0; min-width: 0; box-sizing: border-box; height: 48px; padding: 0 6px; display: flex; align-items: center; justify-content: center;
+    border-radius: 999px; cursor: pointer; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #2a2c31; transition: color .3s ease .12s; }
+  .tq-ibw__swb.is-act { color: #fff; }
+  .tq-ibw__swb:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+  :lang(ar) .tq-ibw__swb, :lang(th) .tq-ibw__swb, :lang(ja) .tq-ibw__swb, :lang(ko) .tq-ibw__swb, :lang(zh) .tq-ibw__swb { font-size: 13px; letter-spacing: .02em; }
+  .tq-ibw__table { width: auto; margin: 0; }
+  .tq-ibw__glow, .tq-ibw__back { display: none; }
+  .tq-ibw__orb { right: -86px; top: 94px; width: 250px; height: 250px; }
+  .tq-ibw__card { width: auto; left: 0; bottom: 78px; border-radius: 28px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.8), inset 2px 3px 0 rgba(255,255,255,.95), inset 0 -40px 50px -40px rgba(231,19,27,.3), 0 40px 60px -34px rgba(18,22,30,.5); }
+  .tq-ibw__card i:first-child { left: -10%; top: -26%; width: 120%; height: 46%; background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 70%); }
+  .tq-ibw__card i + i { display: none; }
+  .tq-ibw__rows { padding: 0; }
+  .tq-ibw__head, .tq-ibw__band, .tq-ibw__band2, .tq-ibw__etch, .tq-ibw__foot > span:not(.tq-ibw__fc) { display: none; }
+  .tq-ibw__row { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; column-gap: 14px; min-height: 76px; padding: 10px 20px; box-sizing: border-box; }
+  .tq-ibw__row + .tq-ibw__row { border-top: 1px solid rgba(18,22,30,.08); }
+  .tq-ibw__lbl { grid-column: 1; grid-row: 1; flex-direction: column; align-items: flex-start; gap: 4px; border-bottom: 0; }
+  .tq-ibw__lbl span { font-size: 10.5px; color: #d2262d; }
+  .tq-ibw__lbl b { font-size: 10.5px; line-height: 1.25; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #4a4b50; overflow-wrap: anywhere; hyphens: auto; }
+  :lang(de) .tq-ibw__lbl b { letter-spacing: .05em; }   /* long compounds: tighter, then hyphenated */
+  :lang(ar) .tq-ibw__lbl b, :lang(th) .tq-ibw__lbl b, :lang(ja) .tq-ibw__lbl b, :lang(ko) .tq-ibw__lbl b, :lang(zh) .tq-ibw__lbl b { font-size: 11.5px; letter-spacing: 0; }
+  /* the two sides in one cell, crossfading row after row */
+  .tq-ibw__oth, .tq-ibw__our { grid-column: 2; grid-row: 1; transition: opacity .45s ease calc(var(--i) * .06s), transform .55s cubic-bezier(.2,.7,.2,1) calc(var(--i) * .06s), filter .45s ease calc(var(--i) * .06s); }
+  .tq-ibw__oth { gap: 0; padding: 0; border-bottom: 0; font-size: 17px; line-height: 1.15; font-weight: 600; letter-spacing: -.015em; color: #55585f; }
+  .tq-ibw__oth > i, .tq-ibw__oth small { display: none; }
+  .tq-ibw__our { padding: 0; }
+  .tq-ibw__val { gap: 4px; padding: 0; transition: none; }
+  .tq-ibw__val b { gap: 8px; font-size: 22px; line-height: 1.05; letter-spacing: -.035em; }
+  .tq-ibw__ico { width: 22px; }
+  .tq-ibw__val > span { font-size: 12px; line-height: 1.3; font-weight: 500; color: #3e3f44; }
+  .tq-ibw[data-side="them"] .tq-ibw__our { opacity: 0; transform: translateY(10px); filter: blur(8px); }
+  .tq-ibw[data-side="us"] .tq-ibw__oth { opacity: 0; transform: translateY(-10px); filter: blur(8px); }
+  .tq-ibw__foot { display: block; height: auto; margin-top: 20px; }
   .tq-ibw__fc { padding: 0; }
-  .tq-ibw__go { height: 54px; font-size: 15px; padding-right: 24px; }
-  .tq-ibw__arr { width: 42px; height: 42px; }
-  .tq-ibw__note { font-size: 11px; }
+  .tq-ibw__go { width: 100%; flex-direction: row-reverse; justify-content: space-between; height: 58px; padding: 0 6px 0 24px; font-size: 15px; color: #fff;
+    background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); box-shadow: inset 0 1.5px 1px rgba(255,255,255,.45), inset 0 -10px 16px -8px rgba(90,0,4,.5), 0 20px 32px -16px rgba(231,19,27,.75); }
+  .tq-ibw__go:hover, .tq-ibw__go:focus-visible { color: #fff; }
+  .tq-ibw__go:focus-visible { outline-color: #e7131b; }
+  .tq-ibw__arr { width: 46px; height: 46px; background: #fff; box-shadow: none; }
+  .tq-ibw__arr path { stroke: #0a0a0a; }
+  .tq-ibw__note { padding: 0 4px; font-size: 11px; }
 }
-@media (prefers-reduced-motion: reduce) { .tq-ibw__band, .tq-ibw__band2, .tq-ibw__oth, .tq-ibw__val, .tq-ibw__go { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .tq-ibw__band, .tq-ibw__band2, .tq-ibw__oth, .tq-ibw__our, .tq-ibw__val, .tq-ibw__go, .tq-ibw__swp, .tq-ibw__swb { transition: none; } }
 
 /* ---- IB Tools: the Copy trading hand-off block (Liquid_Glass_Hand-off, variant 4a, #copy) ----------------------------
    Scroll-driven: the section is the stage (one screen; its top --hdr kept free for the site's header, which hides on the

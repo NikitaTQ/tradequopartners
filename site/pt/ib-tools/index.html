@@ -98,12 +98,12 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc.woff2?v=ed84a90471) format('woff2'); }
 @font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=b9ff73bb14) format('woff2'); }
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=4d6a6698a8) format('woff2'); }
-@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=5fcf5445c0) format('woff2'); }
+@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=c998cf7bdb) format('woff2'); }
 @font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=dc0e26592e) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=bbc1cfdbba) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=06b86251a4) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=18dfcdaec7) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=ea48ceef9c) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=fd27191ecb) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=044473d53c) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=ec63df79e7) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=e6d52eefee) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -1174,20 +1174,27 @@ footer p { font-size: 12px !important; }
 @media (prefers-reduced-motion: reduce) {
 .tq-ibs__go { transition: none; }
 }
-.tq-ibw { position: relative; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+.tq-ibw { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(60% 50% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #f4f4f6 0%, #e4e5e8 100%); }
 .tq-ibw::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
 .tq-ibw a { text-decoration: none; }
 .tq-ibw__in { position: relative; z-index: 1; width: 1340px; margin: 0 auto; padding: 84px 80px 72px; box-sizing: border-box; display: flex; flex-direction: column; }
 .tq-ibw__h2 { --h2s: 46px; margin: 0 0 56px; padding-inline-start: 0; line-height: 1.08; letter-spacing: -.01em; text-wrap: wrap; }
 .tq-ibw__h2 .tq-line { display: block; }
+.tq-ibw__h2--m, .tq-ibw__sw { display: none; }
 .tq-ibw__h2 .tq-line + .tq-line { color: #d2262d; }
 .tq-ibw__table { position: relative; width: 1180px; margin-bottom: 24px; }
 .tq-ibw__glow { position: absolute; right: 30px; bottom: -40px; width: 380px; height: 160px; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(231,19,27,.45) 0%, rgba(231,19,27,0) 70%); filter: blur(24px); pointer-events: none; }
-.tq-ibw__back { position: absolute; right: 0; top: 12px; bottom: -12px; width: 440px; border-radius: 34px; background: linear-gradient(180deg, #c4c6cc 0%, #9ea1a8 60%, #8a8d94 100%); box-shadow: 0 60px 80px -40px rgba(20,22,28,.45); pointer-events: none; }
+.tq-ibw__orb { position: absolute; right: -64px; top: 48%; width: 250px; height: 250px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 34% 28%, #ffb3b6 0%, #ff4148 24%, #e7131b 55%, #7e080d 100%); }
+.tq-ibw__back { position: absolute; right: 0; top: 12px; bottom: -12px; width: 440px; border-radius: 34px; pointer-events: none;
+  background: linear-gradient(180deg, rgba(200,202,208,.7) 0%, rgba(176,150,154,.75) 100%); box-shadow: 0 60px 80px -40px rgba(20,22,28,.45);
+  -webkit-mask-image: linear-gradient(180deg, transparent calc(100% - 48px), #000 calc(100% - 30px)); mask-image: linear-gradient(180deg, transparent calc(100% - 48px), #000 calc(100% - 30px)); }
 .tq-ibw__card { position: absolute; right: 0; top: 0; bottom: 0; width: 440px; border-radius: 34px; overflow: hidden; pointer-events: none;
-  background: linear-gradient(170deg, #fff 0%, #f3f4f6 30%, #e2e4e8 68%, #cfd1d6 100%);
-  box-shadow: inset 0 1.5px 0 #fff, inset 0 0 0 1.5px rgba(255,255,255,.85), inset 0 -24px 40px -24px rgba(231,19,27,.22), 0 0 0 1px rgba(154,157,164,.5); }
+  background: linear-gradient(165deg, rgba(255,255,255,.74) 0%, rgba(255,255,255,.42) 58%, rgba(255,255,255,.56) 100%);
+  -webkit-backdrop-filter: blur(26px) saturate(1.8); backdrop-filter: blur(26px) saturate(1.8);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.8), inset 2px 3px 0 rgba(255,255,255,.95), inset 0 -40px 50px -40px rgba(231,19,27,.3),
+    0 0 0 1px rgba(231,19,27,.22), 0 0 18px -4px rgba(231,19,27,.16), 0 40px 60px -34px rgba(18,22,30,.5); }
 .tq-ibw__card i { position: absolute; }
 .tq-ibw__card i:first-child { left: -30%; top: -40%; width: 120%; height: 90%; background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 70%); }
 .tq-ibw__card i + i { left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, rgba(231,19,27,0), rgba(231,19,27,.7), rgba(231,19,27,0)); filter: blur(1px); }
@@ -1246,41 +1253,61 @@ footer p { font-size: 12px !important; }
 [dir="rtl"] .tq-ibw__arr svg { transform: scaleX(-1); }
 .tq-ibw__note { max-width: 640px; margin: 0; font-size: 12px; line-height: 1.5; color: #55575e; }
 @media (max-width: 999px) {
-.tq-ibw__in { width: auto; max-width: 600px; padding: 48px 20px 64px; }
-.tq-ibw__h2 { --h2s: clamp(24px, 6.4vw, 34px); margin: 0 0 28px; }
-.tq-ibw__table { width: auto; margin-bottom: 26px; }
-.tq-ibw__glow { right: 10%; bottom: -30px; width: 70%; height: 120px; }
-.tq-ibw__back { width: auto; left: 0; top: 10px; bottom: -10px; border-radius: 28px; }
-.tq-ibw__card { width: auto; left: 0; border-radius: 28px; }
-.tq-ibw__rows { padding: 26px 22px 22px; }
-.tq-ibw__head, .tq-ibw__row, .tq-ibw__foot { display: flex; flex-direction: column; }
-.tq-ibw__head { height: auto; }
-.tq-ibw__head > span:first-child, .tq-ibw__oh, .tq-ibw__foot > span:not(.tq-ibw__fc) { display: none; }
-.tq-ibw__uh { padding: 0 0 8px; gap: 12px; font-size: 10.5px; }
-.tq-ibw__uh img { height: 19px; }
-.tq-ibw__row { min-height: 0; padding: 16px 0 15px; }
-.tq-ibw__row::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(40,44,54,.1); box-shadow: 0 1px 0 rgba(255,255,255,.95); }
-.tq-ibw__row:nth-last-child(2)::after, .tq-ibw__band, .tq-ibw__band2, .tq-ibw__etch { display: none; }
-.tq-ibw__lbl, .tq-ibw__oth { border-bottom: 0; }
-.tq-ibw__lbl { order: 1; gap: 10px; }
-.tq-ibw__lbl span { font-size: 11.5px; }
-.tq-ibw__lbl b { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: #4a4b50; }
-.tq-ibw__our { order: 2; padding: 0; }
-.tq-ibw__val { gap: 5px; padding-block: 8px 6px; }
-.tq-ibw__val b { gap: 9px; font-size: 25px; }
-.tq-ibw__ico { width: 28px; }
-.tq-ibw__val > span { font-size: 13px; }
-.tq-ibw__oth { order: 3; gap: 9px; padding-left: 0; font-size: 13px; line-height: 1.4; }
-.tq-ibw__oth > i { width: 10px; }
-.tq-ibw__oth small { display: inline; font-size: inherit; color: #8a8c92; }
-.tq-ibw__foot { height: auto; padding-top: 18px; }
+.tq-ibw__in { width: auto; max-width: 480px; padding: 36px 16px 48px; gap: 20px; }
+.tq-ibw__h2--d { display: none; }
+.tq-ibw__h2--m { display: block; --h2s: clamp(20px, 6.2vw, 24px); margin: 0; padding: 0 4px; line-height: 1.1; text-wrap: balance; }
+.tq-ibw__sw { position: relative; display: flex; padding: 5px; border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255,255,255,.8) 0%, rgba(255,255,255,.35) 100%); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid rgba(255,255,255,.95); box-shadow: inset 0 2px 1px rgba(255,255,255,.95), inset 0 -8px 14px -10px rgba(18,22,30,.25), 0 22px 36px -24px rgba(18,22,30,.55); }
+.tq-ibw__swp { position: absolute; top: 5px; bottom: 5px; inset-inline-start: 5px; inset-inline-end: 50%; border-radius: 999px;
+    background: linear-gradient(165deg, #5a5c63 0%, #2a2c31 50%, #0e0f12 100%); box-shadow: inset 0 2px 2px rgba(255,255,255,.35), inset 0 -7px 12px -5px rgba(0,0,0,.5), 0 12px 22px -10px rgba(0,0,0,.5);
+    transition: inset-inline-start .55s cubic-bezier(.7,0,.2,1) 0s, inset-inline-end .55s cubic-bezier(.7,0,.2,1) .12s, background .45s ease, box-shadow .45s ease; }
+.tq-ibw__swp i { position: absolute; left: 12%; top: 4px; width: 44%; height: 8px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,0)); }
+.tq-ibw[data-side="us"] .tq-ibw__swp { inset-inline-start: 50%; inset-inline-end: 5px; transition-delay: .12s, 0s, 0s, 0s;
+    background: linear-gradient(165deg, #ff5a60 0%, #e7131b 46%, #a80c12 100%); box-shadow: inset 0 2px 2px rgba(255,255,255,.55), inset 0 -7px 12px -5px rgba(90,0,4,.5), 0 12px 22px -10px rgba(231,19,27,.7); }
+.tq-ibw__swb { all: unset; position: relative; z-index: 1; flex: 1 1 0; min-width: 0; box-sizing: border-box; height: 48px; padding: 0 6px; display: flex; align-items: center; justify-content: center;
+    border-radius: 999px; cursor: pointer; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #2a2c31; transition: color .3s ease .12s; }
+.tq-ibw__swb.is-act { color: #fff; }
+.tq-ibw__swb:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+:lang(ar) .tq-ibw__swb, :lang(th) .tq-ibw__swb, :lang(ja) .tq-ibw__swb, :lang(ko) .tq-ibw__swb, :lang(zh) .tq-ibw__swb { font-size: 13px; letter-spacing: .02em; }
+.tq-ibw__table { width: auto; margin: 0; }
+.tq-ibw__glow, .tq-ibw__back { display: none; }
+.tq-ibw__orb { right: -86px; top: 94px; width: 250px; height: 250px; }
+.tq-ibw__card { width: auto; left: 0; bottom: 78px; border-radius: 28px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.8), inset 2px 3px 0 rgba(255,255,255,.95), inset 0 -40px 50px -40px rgba(231,19,27,.3), 0 40px 60px -34px rgba(18,22,30,.5); }
+.tq-ibw__card i:first-child { left: -10%; top: -26%; width: 120%; height: 46%; background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 70%); }
+.tq-ibw__card i + i { display: none; }
+.tq-ibw__rows { padding: 0; }
+.tq-ibw__head, .tq-ibw__band, .tq-ibw__band2, .tq-ibw__etch, .tq-ibw__foot > span:not(.tq-ibw__fc) { display: none; }
+.tq-ibw__row { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; column-gap: 14px; min-height: 76px; padding: 10px 20px; box-sizing: border-box; }
+.tq-ibw__row + .tq-ibw__row { border-top: 1px solid rgba(18,22,30,.08); }
+.tq-ibw__lbl { grid-column: 1; grid-row: 1; flex-direction: column; align-items: flex-start; gap: 4px; border-bottom: 0; }
+.tq-ibw__lbl span { font-size: 10.5px; color: #d2262d; }
+.tq-ibw__lbl b { font-size: 10.5px; line-height: 1.25; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #4a4b50; overflow-wrap: anywhere; hyphens: auto; }
+:lang(de) .tq-ibw__lbl b { letter-spacing: .05em; }
+:lang(ar) .tq-ibw__lbl b, :lang(th) .tq-ibw__lbl b, :lang(ja) .tq-ibw__lbl b, :lang(ko) .tq-ibw__lbl b, :lang(zh) .tq-ibw__lbl b { font-size: 11.5px; letter-spacing: 0; }
+.tq-ibw__oth, .tq-ibw__our { grid-column: 2; grid-row: 1; transition: opacity .45s ease calc(var(--i) * .06s), transform .55s cubic-bezier(.2,.7,.2,1) calc(var(--i) * .06s), filter .45s ease calc(var(--i) * .06s); }
+.tq-ibw__oth { gap: 0; padding: 0; border-bottom: 0; font-size: 17px; line-height: 1.15; font-weight: 600; letter-spacing: -.015em; color: #55585f; }
+.tq-ibw__oth > i, .tq-ibw__oth small { display: none; }
+.tq-ibw__our { padding: 0; }
+.tq-ibw__val { gap: 4px; padding: 0; transition: none; }
+.tq-ibw__val b { gap: 8px; font-size: 22px; line-height: 1.05; letter-spacing: -.035em; }
+.tq-ibw__ico { width: 22px; }
+.tq-ibw__val > span { font-size: 12px; line-height: 1.3; font-weight: 500; color: #3e3f44; }
+.tq-ibw[data-side="them"] .tq-ibw__our { opacity: 0; transform: translateY(10px); filter: blur(8px); }
+.tq-ibw[data-side="us"] .tq-ibw__oth { opacity: 0; transform: translateY(-10px); filter: blur(8px); }
+.tq-ibw__foot { display: block; height: auto; margin-top: 20px; }
 .tq-ibw__fc { padding: 0; }
-.tq-ibw__go { height: 54px; font-size: 15px; padding-right: 24px; }
-.tq-ibw__arr { width: 42px; height: 42px; }
-.tq-ibw__note { font-size: 11px; }
+.tq-ibw__go { width: 100%; flex-direction: row-reverse; justify-content: space-between; height: 58px; padding: 0 6px 0 24px; font-size: 15px; color: #fff;
+    background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); box-shadow: inset 0 1.5px 1px rgba(255,255,255,.45), inset 0 -10px 16px -8px rgba(90,0,4,.5), 0 20px 32px -16px rgba(231,19,27,.75); }
+.tq-ibw__go:hover, .tq-ibw__go:focus-visible { color: #fff; }
+.tq-ibw__go:focus-visible { outline-color: #e7131b; }
+.tq-ibw__arr { width: 46px; height: 46px; background: #fff; box-shadow: none; }
+.tq-ibw__arr path { stroke: #0a0a0a; }
+.tq-ibw__note { padding: 0 4px; font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) {
-.tq-ibw__band, .tq-ibw__band2, .tq-ibw__oth, .tq-ibw__val, .tq-ibw__go { transition: none; }
+.tq-ibw__band, .tq-ibw__band2, .tq-ibw__oth, .tq-ibw__our, .tq-ibw__val, .tq-ibw__go, .tq-ibw__swp, .tq-ibw__swb { transition: none; }
 }
 .tq-ibcp { --hdr: 68px; position: relative; box-sizing: border-box; height: 310svh; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 .tq-ibcp__stage { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding-top: var(--hdr); overflow: hidden; display: flex; align-items: center;
@@ -1548,6 +1575,74 @@ footer p { font-size: 12px !important; }
       </div>
     </section>
 
+    <!-- Where our program wins (Where_Our_Program_Wins design; Compare_Brokers_Block for phones), right after the hero:
+         a comparison — five terms (Sub-IB levels, revenue share, client attribution, payouts, branded tools), a typical IB
+         program's in the middle, ours on the right on a raised metal card with the TradeQuo logo and a "Become a partner"
+         button. The rows come in one by one when the block comes into view; pointing at a row lights it with glass bands
+         (white on the left, red under ours) and dims the other rows' typical terms. Desktops (1000px+): the design's 1340px
+         table, scaled down to the width under 1340px (the script in the section sets the zoom); narrower: one card, each
+         row as the term, ours, then the typical one. partner.css, "the Where our program wins block". Desktops: ours on a
+         liquid glass card (a red orb behind it shows through), its rim a little red. Narrower than 1000px (the phone
+         design "Compare us with other brokers"): its own heading, a switch Other brokers / TradeQuo on a glass pill above
+         one glass card of the five terms — each row shows the picked side, the two crossfade; it flips every 2.8 s while in
+         view until a side is picked; "reduce motion": TradeQuo, still — then the red button. -->
+    <section id="wins" class="tq-ibw" data-side="them" data-screen-label="IB Tools · Where our program wins">
+      <div class="tq-ibw__in">
+        <h2 class="tq-ibw__h2 tq-ibw__h2--d tq-h2"><span class="tq-line">Onde nosso programa</span> <span class="tq-line">vence.</span></h2>
+        <h2 class="tq-ibw__h2 tq-ibw__h2--m tq-h2">Compare-nos com <span style="color: #e7131b;">outras corretoras.</span></h2>
+        <div class="tq-ibw__sw" role="group" aria-label="Outras corretoras / TradeQuo"><span class="tq-ibw__swp" aria-hidden="true"><i></i></span><button type="button" class="tq-ibw__swb is-act" data-side="them" aria-pressed="true">Outras corretoras</button><button type="button" class="tq-ibw__swb" data-side="us" aria-pressed="false">TradeQuo</button></div>
+        <div class="tq-ibw__table">
+          <i class="tq-ibw__glow"></i><i class="tq-ibw__orb"></i><i class="tq-ibw__back"></i><i class="tq-ibw__card"><i></i><i></i></i>
+          <div class="tq-ibw__rows">
+            <div class="tq-ibw__head"><span></span><span class="tq-ibw__oh"><b>Outras corretoras</b><span>Programa IB típico</span></span><span class="tq-ibw__uh"><img src="../../assets/logo-wordmark-dark.png?v=4e0fc67613" width="525" height="71" alt="TradeQuo" decoding="async" loading="lazy"><span>Nosso programa</span></span></div>
+            <div class="tq-ibw__row" style="--i:0">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>01</span><b>Níveis de sub-IB</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>1–2 níveis</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span><span style="color: #e7131b;">∞</span> Níveis ilimitados</span></b><span>ganhe com cada parceiro abaixo de você</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__row" style="--i:1">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>02</span><b>Participação na receita</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>Percentual fixo, muitas vezes limitado</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>Até 87<span style="color: #e7131b;">%</span></span></b><span>do spread, em cada lote</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__row" style="--i:2">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>03</span><b>Atribuição de clientes</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>Não garantida</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><img class="tq-ibw__ico" src="../../assets/ib/partnershield-icon.webp?v=1b62e007eb" width="34" height="31" alt="" decoding="async" loading="lazy"><span>Vinculados a você</span></b><span>protegidos pelo PartnerShield</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__row" style="--i:3">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>04</span><b>Pagamentos</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>Mensais, com valores mínimos</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>Diários</span></b><span>sem mínimo, sem taxas de saque</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__row" style="--i:4">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>05</span><b>Ferramentas com sua marca</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>Apenas um link de indicação</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>Com sua marca</span></b><span>Copy Trading · Sinais · apps</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__foot"><span></span><span></span><span class="tq-ibw__fc"><a class="tq-ibw__go" href="../#signup" data-page-link data-label="CARREGANDO · Início"><span class="tq-ibw__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Seja parceiro</span></a></span></div>
+          </div>
+        </div>
+        <p class="tq-ibw__note">As condições de mercado refletem a prática comum e são mostradas apenas para comparação; cada programa é diferente. Os ganhos dos parceiros dependem da atividade dos clientes.</p>
+      </div>
+      <script>/* 1000px+: the 1340px table scaled down to the width; the rows wait (is-wait) until a third of the block is in view, then come in one by one.
+   Narrower: the switch Other brokers / TradeQuo (data-side on the section) flips every 2.8 s while a third of the block is in view, until a side is picked; reduced motion: TradeQuo, still */
+(function(){var s=document.currentScript.parentNode,n=s.querySelector('.tq-ibw__in'),m=matchMedia('(min-width: 1000px)'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,b=s.querySelectorAll('.tq-ibw__swb'),vis=false,picked=false;
+function z(){n.style.zoom=m.matches?Math.min(1,s.clientWidth/1340):''}z();addEventListener('resize',z);
+function side(v){s.setAttribute('data-side',v);for(var i=0;i<b.length;i++){var on=b[i].getAttribute('data-side')===v;b[i].classList.toggle('is-act',on);b[i].setAttribute('aria-pressed',on?'true':'false')}}
+for(var i=0;i<b.length;i++)b[i].addEventListener('click',function(){picked=true;side(this.getAttribute('data-side'))});
+if(rm){side('us');return}
+if(!('IntersectionObserver' in window))return;
+new IntersectionObserver(function(e){vis=e[0].isIntersecting},{threshold:.3}).observe(s);
+setInterval(function(){if(!picked&&vis&&!m.matches&&!document.hidden)side(s.getAttribute('data-side')==='us'?'them':'us')},2800);
+if(!m.matches)return;var r=s.getBoundingClientRect();if(r.top<innerHeight*.7)return;s.classList.add('is-wait');var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){s.classList.remove('is-wait');o.disconnect()}},{threshold:.3});o.observe(s)})();</script>
+    </section>
+
     <!-- TradingView Premium on us, still (in place of the Branded toolkit): the Marketing Tools card (a dark card, the
          TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the CTA to the
          form) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
@@ -1630,60 +1725,7 @@ footer p { font-size: 12px !important; }
 (function(){var s=document.currentScript.parentNode,w=s.querySelector('.tq-ibs__wrap'),f=s.querySelector('.tq-ibs__feed'),m=matchMedia('(max-width: 999px)');function z(){if(m.matches){w.style.zoom=Math.min(1.5,s.clientWidth/390);f.style.zoom=''}else{w.style.zoom='';f.style.zoom=1.4}}z();addEventListener('resize',z)})();</script>
     </section>
 
-    <!-- Where our program wins (Where_Our_Program_Wins design), after the signals feed, in place of the Partnershield block:
-         a comparison — five terms (Sub-IB levels, revenue share, client attribution, payouts, branded tools), a typical IB
-         program's in the middle, ours on the right on a raised metal card with the TradeQuo logo and a "Become a partner"
-         button. The rows come in one by one when the block comes into view; pointing at a row lights it with glass bands
-         (white on the left, red under ours) and dims the other rows' typical terms. Desktops (1000px+): the design's 1340px
-         table, scaled down to the width under 1340px (the script in the section sets the zoom); narrower: one card, each
-         row as the term, ours, then the typical one. partner.css, "the Where our program wins block". -->
-    <section id="wins" class="tq-ibw" data-screen-label="IB Tools · Where our program wins">
-      <div class="tq-ibw__in">
-        <h2 class="tq-ibw__h2 tq-h2"><span class="tq-line">Onde nosso programa</span> <span class="tq-line">vence.</span></h2>
-        <div class="tq-ibw__table">
-          <i class="tq-ibw__glow"></i><i class="tq-ibw__back"></i><i class="tq-ibw__card"><i></i><i></i></i>
-          <div class="tq-ibw__rows">
-            <div class="tq-ibw__head"><span></span><span class="tq-ibw__oh"><b>Outras corretoras</b><span>Programa IB típico</span></span><span class="tq-ibw__uh"><img src="../../assets/logo-wordmark-dark.png?v=4e0fc67613" width="525" height="71" alt="TradeQuo" decoding="async" loading="lazy"><span>Nosso programa</span></span></div>
-            <div class="tq-ibw__row" style="--i:0">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>01</span><b>Níveis de sub-IB</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>1–2 níveis</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span><span style="color: #e7131b;">∞</span> Níveis ilimitados</span></b><span>ganhe com cada parceiro abaixo de você</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__row" style="--i:1">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>02</span><b>Participação na receita</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>Percentual fixo, muitas vezes limitado</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>Até 87<span style="color: #e7131b;">%</span></span></b><span>do spread, em cada lote</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__row" style="--i:2">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>03</span><b>Atribuição de clientes</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>Não garantida</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><img class="tq-ibw__ico" src="../../assets/ib/partnershield-icon.webp?v=1b62e007eb" width="34" height="31" alt="" decoding="async" loading="lazy"><span>Vinculados a você</span></b><span>protegidos pelo PartnerShield</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__row" style="--i:3">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>04</span><b>Pagamentos</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>Mensais, com valores mínimos</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>Diários</span></b><span>sem mínimo, sem taxas de saque</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__row" style="--i:4">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>05</span><b>Ferramentas com sua marca</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>Programa IB típico: </small>Apenas um link de indicação</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>Com sua marca</span></b><span>Copy Trading · Sinais · apps</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__foot"><span></span><span></span><span class="tq-ibw__fc"><a class="tq-ibw__go" href="../#signup" data-page-link data-label="CARREGANDO · Início"><span class="tq-ibw__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Seja parceiro</span></a></span></div>
-          </div>
-        </div>
-        <p class="tq-ibw__note">As condições de mercado refletem a prática comum e são mostradas apenas para comparação; cada programa é diferente. Os ganhos dos parceiros dependem da atividade dos clientes.</p>
-      </div>
-      <script>/* 1000px+: the 1340px table scaled down to the width; the rows wait (is-wait) until a third of the block is in view, then come in one by one */
-(function(){var s=document.currentScript.parentNode,n=s.querySelector('.tq-ibw__in'),m=matchMedia('(min-width: 1000px)');function z(){n.style.zoom=m.matches?Math.min(1,s.clientWidth/1340):''}z();addEventListener('resize',z);if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;var r=s.getBoundingClientRect();if(r.top<innerHeight*.7)return;s.classList.add('is-wait');var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){s.classList.remove('is-wait');o.disconnect()}},{threshold:.3});o.observe(s)})();</script>
-    </section>
-
-    <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after Partnershield: left
+    <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after the signals feed: left
          the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block, "Powered by
          SocialTrading.ai"); right two glass hands with phones — the provider's (a trade opened) and the client's (the trade
          copied at the client's size); the position gathers into a drop of liquid silver (WebGL) that leaves the provider's
