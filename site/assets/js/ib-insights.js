@@ -6,7 +6,7 @@
    partner's top client, a glass bar as long as the commission you earn from them, with the client's name, status
    ("Dormant risk" in red) and the partner it came through; the month's total on top. The views turn on their own
    (7.5 s on the tree, 5.5 s on the bars, 7 s on the clients) while the block is on screen and the pointer is not over
-   the picture; a click on a view on the left picks it and stops the turns. With "reduce motion" nothing moves: the
+   the picture; a click on a view on the pill above it picks it and stops the turns. With "reduce motion" nothing moves: the
    picture is drawn once per view.
    The words drawn on the canvas come from its data-you / data-total ("{v}" = the sum) / data-net / data-comm ("{m}" =
    the month, in the page's language) / data-top / data-active / data-dormant / data-via ("{n}" = the partner). Names
@@ -16,7 +16,9 @@
   var s = document.querySelector('[data-ib-ins]');
   if (!s) return;
   var fig = s.querySelector('.tq-ibi__fig'), stage = s.querySelector('.tq-ibi__stage'), cv = stage.querySelector('canvas');
-  var guide = s.querySelectorAll('.tq-ibi__g');
+  /* the views: buttons on a glass pill (a red pill slides over the picked one: --v on .tq-ibi__sel, data-dir = which way,
+     so its leading edge moves first), and the picked view's line under it */
+  var guide = s.querySelectorAll('.tq-ibi__b'), sel = s.querySelector('.tq-ibi__sel'), lines = s.querySelectorAll('.tq-ibi__cur > span');
   var lang = document.documentElement.lang || 'en', cased = !/^(ar|th|ja|ko|zh)/.test(lang), rtl = document.documentElement.dir === 'rtl';
   var upper = function (t) { if (!cased) return t; try { return t.toLocaleUpperCase(lang); } catch (e) { return t.toUpperCase(); } };
   var attr = function (n, d) { return cv.getAttribute('data-' + n) || d; };
@@ -75,8 +77,10 @@
 
   function setView(v, byHand) {
     if (byHand) { manual = true; clearTimeout(at); }
+    if (sel) { sel.setAttribute('data-dir', v >= target ? 'f' : 'b'); sel.style.setProperty('--v', v); }
     target = v;
     for (var i = 0; i < guide.length; i++) { guide[i].classList.toggle('is-act', i === v); guide[i].setAttribute('aria-pressed', i === v ? 'true' : 'false'); }
+    for (var j = 0; j < lines.length; j++) lines[j].classList.toggle('is-act', j === v);
     if (reduced && draw) draw(performance.now());
   }
   function schedule() {
