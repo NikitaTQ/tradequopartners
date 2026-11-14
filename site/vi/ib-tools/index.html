@@ -561,6 +561,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; mix-blend-mode: screen;
   background: radial-gradient(180px 120px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.35 + var(--tqgh) * .3)), rgba(255,255,255,0) 70%);
 }
+.tq-glass--row { border-radius: 20px; }
 @media (prefers-reduced-motion: reduce) {
 .tq-glass, .tp-glass { transform: none; transition: none; }
 }
@@ -625,6 +626,7 @@ footer p { font-size: 12px !important; }
 .tp { font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
 .tp-sec { position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px); }
 .tp-wrap { position: relative; max-width: 1240px; margin: 0 auto; }
+.tp-h2 { margin: 0; max-width: 30ch; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
 .tp-pc { --pu: min(var(--pu-w), var(--pu-h)); position: relative; isolation: isolate; display: flex; flex-direction: column;
@@ -661,8 +663,21 @@ footer p { font-size: 12px !important; }
 }
 .tp-final__sub { margin: 0; max-width: 60ch; font-size: clamp(24px, 2.56vw, 30px); line-height: 1.5; color: #a4a4ac; text-wrap: pretty; }
 @keyframes tqSweep { 0%, 55% { transform: translateX(-160%) skewX(-20deg); } 100% { transform: translateX(360%) skewX(-20deg); } }
+.tp-faq { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.tp-faq__side { position: sticky; top: 32px; display: flex; flex-direction: column; gap: 20px; }
+.tp-pill { display: inline-flex; align-self: flex-start; align-items: center; gap: 9px; height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #e4e4e1; background: #fff; font-size: 14px; font-weight: 500; }
+.tp-pill::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #e7131b; }
+.tp-faq__list { display: flex; flex-direction: column; gap: 14px; }
+@media (max-width: 960px) {
+.tp-faq { grid-template-columns: minmax(0, 1fr); }
+.tp-faq__side { position: static; }
+}
 @media (max-width: 640px) {
 .tp-sec { padding-top: 48px; padding-bottom: 48px; }
+.tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
+.tp-faq__side { align-items: center; text-align: center; }
+.tp-faq__side .tp-pill { align-self: center; }
+.tp-faq__side .tp-sub { max-width: 34ch !important; }
 }
 @media (prefers-reduced-motion: reduce) {
 .tp-dark, .tp-glass { transition: none; }
@@ -831,8 +846,6 @@ footer p { font-size: 12px !important; }
 .tq-ibvs__th { font-size: 20.5px; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; color: #1d1c1c; }
 .tq-ibvs__tl { font-size: 17px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #595958; }
 .tq-ibvs__tv { font-size: 26.5px; font-weight: 400; letter-spacing: -.01em; color: #1a1616; }
-.tq-ibvs__tv s { position: relative; display: inline-block; text-decoration: none; }
-.tq-ibvs__tv s::after { content: ""; position: absolute; left: -.1em; right: -.1em; top: .54em; height: max(1.6px, calc(.75px / var(--s))); border-radius: 1px; background: #d8262c; opacity: .92; transform: rotate(var(--a)); }
 .tq-ibvs__uh { font-size: 18.9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #494a4c; }
 .tq-ibvs__ul { font-size: 16px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: #6c6d71; }
 .tq-ibvs__ut { font-size: 37.9px; font-weight: 650; letter-spacing: -.03em; color: #0a0a0a; }
@@ -862,6 +875,7 @@ footer p { font-size: 12px !important; }
 @media (prefers-reduced-motion: reduce) {
 .tq-ibtp__go, .tq-ibtp__cmp { transition: none; }
 }
+.tq-ibq { background: #e9eaec; }
 .tq-ibb { position: relative; overflow: hidden; height: clamp(520px, min(100vh, 112vw), 920px); height: clamp(520px, min(100svh, 112vw), 920px); color: #0a0a0a;   
   background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
 .tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
@@ -1477,7 +1491,7 @@ footer p { font-size: 12px !important; }
   <main>
     <!-- Hero (IB_Tools_Hero design): static. Left an eyebrow, the H1 (the last sentence red), the lead and two buttons —
          "Become a partner" (the form) and "Compare programs" (the comparison right below, #wins). Right the design's
-         picture: "Other brokers" on a worn stone tablet (its old terms struck through in red), a silver "VS" ball between the
+         picture: "Other brokers" on a worn stone tablet, a silver "VS" ball between the
          cards, "Our IB program" on a glass card with a red glow (each row named as on the tablet, over its title). The picture is the design's own, without its words
          (assets/ib/hero-vs.webp, 1292x1217, laid with mix-blend-mode: multiply); the words are the page's, in its language,
          laid over it where the design has them (--x / --b: left and baseline in picture px; --s: the picture's scale, set
@@ -1501,15 +1515,15 @@ footer p { font-size: 12px !important; }
             <div class="tq-ibvs__w" dir="ltr">
               <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>Nhà môi giới khác</span>
               <span class="tq-ibvs__tl" style="--x:122.7;--b:371;--r:465" data-fitw>Cấp Sub-IB</span>
-              <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465;--a:.6deg" data-fitw><s>1–2 cấp</s></b>
+              <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465" data-fitw>1–2 cấp</b>
               <span class="tq-ibvs__tl" style="--x:124.1;--b:505;--r:465" data-fitw>Chia sẻ doanh thu</span>
-              <b class="tq-ibvs__tv" style="--x:124.1;--b:548;--r:465;--a:0deg" data-fitw><s>Cố định, có trần</s></b>
+              <b class="tq-ibvs__tv" style="--x:124.1;--b:548;--r:465" data-fitw>Cố định, có trần</b>
               <span class="tq-ibvs__tl" style="--x:126.4;--b:643;--r:465" data-fitw>Ghi nhận</span>
-              <b class="tq-ibvs__tv" style="--x:126.3;--b:684;--r:465;--a:-.3deg" data-fitw><s>Không được đảm bảo</s></b>
+              <b class="tq-ibvs__tv" style="--x:126.3;--b:684;--r:465" data-fitw>Không được đảm bảo</b>
               <span class="tq-ibvs__tl" style="--x:128.1;--b:775;--r:465" data-fitw>Thanh toán</span>
-              <b class="tq-ibvs__tv" style="--x:127.3;--b:818;--r:465;--a:-1deg" data-fitw><s>Hằng tháng</s></b>
+              <b class="tq-ibvs__tv" style="--x:127.3;--b:818;--r:465" data-fitw>Hằng tháng</b>
               <span class="tq-ibvs__tl" style="--x:129.6;--b:909;--r:465" data-fitw>Công cụ</span>
-              <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465;--a:-2deg" data-fitw><s>Chỉ có link giới thiệu</s></b>
+              <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465" data-fitw>Chỉ có link giới thiệu</b>
               <span class="tq-ibvs__uh" style="--x:676.9;--b:245;--r:1130" data-fitw>Chương trình IB của chúng tôi</span>
               <span class="tq-ibvs__ul" style="--x:761.6;--b:321.4;--r:1130" data-fitw>Cấp Sub-IB</span>
               <b class="tq-ibvs__ut" style="--x:760.5;--b:360;--r:1130" data-fitw>Không giới hạn cấp</b>
@@ -2077,6 +2091,87 @@ if(!m.matches)return;var r=s.getBoundingClientRect();if(r.top<innerHeight*.7)ret
       </div>
       <script>/* hover a group of the network: it lights up, the rest dim; off it, Sub-IB 01 lit again */
 (function(){var s=document.currentScript.parentNode,set=function(g){if(g==null){s.setAttribute('data-hl','0');s.removeAttribute('data-act')}else{s.setAttribute('data-hl',g);s.setAttribute('data-act','')}};s.querySelectorAll('.sib-n[data-g]').forEach(function(n){n.addEventListener('mouseenter',function(){set(n.getAttribute('data-g'))});n.addEventListener('mouseleave',function(){set(null)})})})();</script>
+    </section>
+
+    <!-- FAQ: five of the usual questions (the home page's own: becoming an IB, earnings, payouts, support, experience and
+         capital; global faq.1-5, so all 18 languages), as on the other pages (.tp-faq, the faq-card partial); on the grey
+         of the blocks either side of it (.tq-ibq), so no seams. -->
+    <section id="questions" class="tp-sec tq-ibq" data-screen-label="IB Tools FAQ">
+      <div class="tp-wrap tp-faq">
+        <div class="tp-faq__side">
+          <span class="tp-pill">Câu hỏi thường gặp</span>
+          <h2 class="tp-h2 tq-h2" data-fitw>Thắc mắc <span style="color: #e7131b;">được giải đáp</span></h2>
+          <p class="tp-sub" style="max-width: 30ch;">Mọi điều bạn cần biết để trở thành IB của TradeQuo.</p>
+        </div>
+        <div class="tp-faq__list">
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
+            <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 1; transition: opacity .3s ease;"></span>
+            <button type="button" data-faq-toggle aria-controls="faq-1-a" id="faq-1-q" aria-expanded="true" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
+              <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">01</span>
+              <span style="font-size: clamp(18px, 1.8vw, 23px); line-height: 1.25; letter-spacing: -.025em; font-weight: 600; color: #0a0a0a; text-wrap: pretty;">Làm thế nào để trở thành IB của TradeQuo?</span>
+              <svg data-faq-chev aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg); transition: transform .35s cubic-bezier(.2,.8,.2,1);"><path d="m6 9 6 6 6-6"></path></svg>
+            </button>
+            <div data-faq-panel id="faq-1-a" role="region" aria-labelledby="faq-1-q" style="display: grid; grid-template-rows: 1fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
+              <div style="overflow: hidden;">
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Mở và xác minh tài khoản TradeQuo, đăng ký chương trình IB trong Client Portal, rồi bắt đầu chia sẻ liên kết giới thiệu khi hồ sơ được phê duyệt. Chúng tôi xét duyệt hồ sơ trong vòng 24 giờ.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
+            <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 0; transition: opacity .3s ease;"></span>
+            <button type="button" data-faq-toggle aria-controls="faq-2-a" id="faq-2-q" aria-expanded="false" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
+              <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">02</span>
+              <span style="font-size: clamp(18px, 1.8vw, 23px); line-height: 1.25; letter-spacing: -.025em; font-weight: 600; color: #0a0a0a; text-wrap: pretty;">Tôi có thể kiếm được bao nhiêu?</span>
+              <svg data-faq-chev aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(0deg); transition: transform .35s cubic-bezier(.2,.8,.2,1);"><path d="m6 9 6 6 6-6"></path></svg>
+            </button>
+            <div data-faq-panel id="faq-2-a" role="region" aria-labelledby="faq-2-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
+              <div style="overflow: hidden;">
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Lên đến 87% spread trên mỗi giao dịch của khách hàng do bạn giới thiệu, chừng nào họ còn hoạt động. Không giới hạn số lượng khách hàng hay khối lượng giao dịch.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
+            <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 0; transition: opacity .3s ease;"></span>
+            <button type="button" data-faq-toggle aria-controls="faq-3-a" id="faq-3-q" aria-expanded="false" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
+              <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">03</span>
+              <span style="font-size: clamp(18px, 1.8vw, 23px); line-height: 1.25; letter-spacing: -.025em; font-weight: 600; color: #0a0a0a; text-wrap: pretty;">Khi nào và bằng cách nào tôi được thanh toán?</span>
+              <svg data-faq-chev aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(0deg); transition: transform .35s cubic-bezier(.2,.8,.2,1);"><path d="m6 9 6 6 6-6"></path></svg>
+            </button>
+            <div data-faq-panel id="faq-3-a" role="region" aria-labelledby="faq-3-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
+              <div style="overflow: hidden;">
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Mỗi ngày. Hoa hồng được chốt lúc 00:00 theo giờ máy chủ, và chúng tôi chịu phí xử lý cũng như phí rút tiền. Ngưỡng tối thiểu và các phương thức chi trả được hỗ trợ có trong lịch chi trả.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
+            <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 0; transition: opacity .3s ease;"></span>
+            <button type="button" data-faq-toggle aria-controls="faq-4-a" id="faq-4-q" aria-expanded="false" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
+              <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">04</span>
+              <span style="font-size: clamp(18px, 1.8vw, 23px); line-height: 1.25; letter-spacing: -.025em; font-weight: 600; color: #0a0a0a; text-wrap: pretty;">Tôi nhận được những hỗ trợ gì?</span>
+              <svg data-faq-chev aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(0deg); transition: transform .35s cubic-bezier(.2,.8,.2,1);"><path d="m6 9 6 6 6-6"></path></svg>
+            </button>
+            <div data-faq-panel id="faq-4-a" role="region" aria-labelledby="faq-4-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
+              <div style="overflow: hidden;">
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Quản lý đối tác riêng, bảng theo dõi trực tiếp, ấn phẩm tiếp thị có sẵn và tài liệu đào tạo miễn phí. Bạn cũng có thể xây dựng mạng lưới Sub-IB và nhận thu nhập từ các đối tác do bạn giới thiệu.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tq-glass tq-glass--row" data-faq-card="" style="position: relative;">
+            <span data-faq-edge aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff5d62 0%, #e7131b 42%, #9e0b11 100%); box-shadow: 0 0 14px 1px rgba(231,19,27,.55); opacity: 0; transition: opacity .3s ease;"></span>
+            <button type="button" data-faq-toggle aria-controls="faq-5-a" id="faq-5-q" aria-expanded="false" style="width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) 24px; gap: 20px; align-items: center; padding: clamp(20px, 2.2vw, 28px) clamp(20px, 2.6vw, 32px); border: 0; background: transparent; color: #0a0a0a; text-align: left; cursor: pointer;">
+              <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: radial-gradient(60% 45% at 34% 22%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%), linear-gradient(150deg, rgba(255,255,255,0) 48%, rgba(0,0,0,.22) 48.5%, rgba(0,0,0,.08) 100%), linear-gradient(30deg, rgba(120,6,10,.55) 0%, rgba(120,6,10,0) 45%), linear-gradient(180deg, #ff3a40 0%, #e7131b 50%, #b30e14 100%); color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; text-shadow: 0 1px 2px rgba(90,0,4,.55);">05</span>
+              <span style="font-size: clamp(18px, 1.8vw, 23px); line-height: 1.25; letter-spacing: -.025em; font-weight: 600; color: #0a0a0a; text-wrap: pretty;">Tôi có cần kinh nghiệm hoặc vốn không?</span>
+              <svg data-faq-chev aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(0deg); transition: transform .35s cubic-bezier(.2,.8,.2,1);"><path d="m6 9 6 6 6-6"></path></svg>
+            </button>
+            <div data-faq-panel id="faq-5-a" role="region" aria-labelledby="faq-5-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
+              <div style="overflow: hidden;">
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Không. Không có phí tham gia, và bạn không cần vốn hay kinh nghiệm giao dịch. Chỉ cần một tài khoản TradeQuo đã được xác minh.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
     <!-- Black hole (IB_Tools_Black_Hole design, Nov 2026 version): assets/js/ib-hole.js draws it on the canvas. Event chips

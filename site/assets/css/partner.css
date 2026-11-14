@@ -1332,10 +1332,8 @@
    background disappears into the section's and its shadows and glow stay. The words are laid over it at the design's
    places, in the page's language: each one's left edge and baseline in picture px (--x, --b), as wide as its card
    allows (to --r), scaled with the picture (--s, set by the section's script: width / 1292); a long word steps its
-   size down (data-fitw). Sizes, tracking and colours are the design's, measured off the picture, in Inter. The old
-   terms are struck through in red, each line at its own slight angle (--a), as drawn in the design (never thinner than 3/4 of a CSS pixel: a level hairline
-   under the phone's small scale would not be drawn at all). The picture stays
-   as it is in Arabic; the words there are right-aligned in their places. */
+   size down (data-fitw). Sizes, tracking and colours are the design's, measured off the picture, in Inter. The picture
+   stays as it is in Arabic; the words there are right-aligned in their places. */
 .tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; direction: ltr; }   /* ltr: the picture, wider than its column, hangs out by its own margins in Arabic too */
 /* the picture has wide empty margins round the cards (x 75-1200, y 115-1035 of 1292x1217): it is drawn larger than its
    column, so that the cards fill the column's width, and its margins hang out (invisible: multiply on the same grey) */
@@ -1347,8 +1345,6 @@
 .tq-ibvs__th { font-size: 20.5px; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; color: #1d1c1c; }
 .tq-ibvs__tl { font-size: 17px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #595958; }
 .tq-ibvs__tv { font-size: 26.5px; font-weight: 400; letter-spacing: -.01em; color: #1a1616; }
-.tq-ibvs__tv s { position: relative; display: inline-block; text-decoration: none; }
-.tq-ibvs__tv s::after { content: ""; position: absolute; left: -.1em; right: -.1em; top: .54em; height: max(1.6px, calc(.75px / var(--s))); border-radius: 1px; background: #d8262c; opacity: .92; transform: rotate(var(--a)); }
 .tq-ibvs__uh { font-size: 18.9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #494a4c; }
 .tq-ibvs__ul { font-size: 16px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: #6c6d71; }   /* our card: the same row names as the tablet's, over each title */
 .tq-ibvs__ut { font-size: 37.9px; font-weight: 650; letter-spacing: -.03em; color: #0a0a0a; }
@@ -1385,6 +1381,8 @@
 /* IB Tools: the black hole block (IB_Tools_Black_Hole_Obsidian), drawn by assets/js/ib-hole.js on the canvas, which
    fills the block; the HUD of the three steps sits at its foot (the active step dark, its bar filling). The grey goes on
    from the hero above and turns white at the foot, above the footer. */
+/* IB Tools: the FAQ (the shared .tp-faq) on the grey of the blocks either side of it: the Sub-IB network above, the black hole below */
+.tq-ibq { background: #e9eaec; }
 .tq-ibb { position: relative; overflow: hidden; height: clamp(520px, min(100vh, 112vw), 920px); height: clamp(520px, min(100svh, 112vw), 920px); color: #0a0a0a;   /* tall screens: about as tall as wide (phones 520px), not a whole screen of grey */
   background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
 .tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
