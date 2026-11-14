@@ -1327,15 +1327,16 @@
   box-shadow: inset 0 2px 1px #fff, inset 0 -6px 12px -8px rgba(18,22,30,.2), 0 16px 28px -20px rgba(18,22,30,.5); transition: color .2s ease; }
 .tq-ibtp__cmp:hover { color: #e7131b; }
 .tq-ibtp__go:focus-visible, .tq-ibtp__cmp:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
-/* the picture: the design's own (Typical broker on a worn stone tablet, VS, Our IB program on a glass card), without its
+/* the picture: the design's own (Other brokers on a worn stone tablet, VS, Our IB program on a glass card), without its
    words: assets/ib/hero-vs.webp, 1292x1217, divided by its background (#f3f3f5) and laid with multiply, so its
    background disappears into the section's and its shadows and glow stay. The words are laid over it at the design's
    places, in the page's language: each one's left edge and baseline in picture px (--x, --b), as wide as its card
    allows (to --r), scaled with the picture (--s, set by the section's script: width / 1292); a long word steps its
    size down (data-fitw). Sizes, tracking and colours are the design's, measured off the picture, in Inter. The old
-   terms are struck through in red, each line at its own slight angle (--a), as drawn in the design. The picture stays
+   terms are struck through in red, each line at its own slight angle (--a), as drawn in the design (never thinner than 3/4 of a CSS pixel: a level hairline
+   under the phone's small scale would not be drawn at all). The picture stays
    as it is in Arabic; the words there are right-aligned in their places. */
-.tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; }
+.tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; direction: ltr; }   /* ltr: the picture, wider than its column, hangs out by its own margins in Arabic too */
 /* the picture has wide empty margins round the cards (x 75-1200, y 115-1035 of 1292x1217): it is drawn larger than its
    column, so that the cards fill the column's width, and its margins hang out (invisible: multiply on the same grey) */
 .tq-ibvs { --s: .55; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
@@ -1347,17 +1348,39 @@
 .tq-ibvs__tl { font-size: 17px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #595958; }
 .tq-ibvs__tv { font-size: 26.5px; font-weight: 400; letter-spacing: -.01em; color: #1a1616; }
 .tq-ibvs__tv s { position: relative; display: inline-block; text-decoration: none; }
-.tq-ibvs__tv s::after { content: ""; position: absolute; left: -.1em; right: -.1em; top: .54em; height: 1.6px; border-radius: 1px; background: #d8262c; opacity: .92; transform: rotate(var(--a)); }
+.tq-ibvs__tv s::after { content: ""; position: absolute; left: -.1em; right: -.1em; top: .54em; height: max(1.6px, calc(.75px / var(--s))); border-radius: 1px; background: #d8262c; opacity: .92; transform: rotate(var(--a)); }
 .tq-ibvs__uh { font-size: 18.9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #494a4c; }
+.tq-ibvs__ul { font-size: 16px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: #6c6d71; }   /* our card: the same row names as the tablet's, over each title */
 .tq-ibvs__ut { font-size: 37.9px; font-weight: 650; letter-spacing: -.03em; color: #0a0a0a; }
 .tq-ibvs__ut--big { font-size: 44.3px; font-variant-numeric: tabular-nums; }
 .tq-ibvs__us { font-size: 19.8px; font-weight: 400; letter-spacing: -.005em; color: #434446; }
 .tq-ibvs__us--dots > span { display: inline-block; margin-inline: .15em; font-size: .7em; vertical-align: .12em; }   /* the red dots between the tools */
 :lang(ar) .tq-ibvs__th, :lang(th) .tq-ibvs__th, :lang(ja) .tq-ibvs__th, :lang(ko) .tq-ibvs__th, :lang(zh) .tq-ibvs__th,
 :lang(ar) .tq-ibvs__tl, :lang(th) .tq-ibvs__tl, :lang(ja) .tq-ibvs__tl, :lang(ko) .tq-ibvs__tl, :lang(zh) .tq-ibvs__tl,
-:lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh { letter-spacing: .02em; }
+:lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh,
+:lang(ar) .tq-ibvs__ul, :lang(th) .tq-ibvs__ul, :lang(ja) .tq-ibvs__ul, :lang(ko) .tq-ibvs__ul, :lang(zh) .tq-ibvs__ul { letter-spacing: .02em; }
 /* scripts without capitals: no wide tracking */
 :lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye { letter-spacing: .02em; }
+/* phones: the title, the picture, the buttons, then the lead (the text column's parts laid out with the picture, in that
+   order). Everything — type, buttons, picture, gaps — is sized by --k: 1.06, i.e. 6% over the base sizes, and less where
+   that would not fit the screen under the header (the section's script lowers it until the whole first screen fits).
+   The picture is centred on its cards and hangs out into the gutters; the text and buttons sit over its empty margins. */
+@media (max-width: 640px) {
+  .tq-ibtp { --k: 1.06; padding: calc(20px * var(--k)) clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
+  .tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; }
+  .tq-ibtp__text { display: contents; }
+  .tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
+  .tq-ibtp__eye { order: 1; font-size: calc(12px * var(--k)); }
+  .tq-ibtp__h1 { order: 2; --h1s: calc(34px * var(--k)); margin-top: calc(14px * var(--k)); }
+  .tq-ibtp__vis { order: 3; flex: none; width: 100%; max-width: none; margin-top: calc(12px * var(--k)); }
+  .tq-ibvs { width: calc(115% * var(--k)); margin: calc(-10.24% * var(--k)) 0 calc(-14.86% * var(--k)) calc(50% - 56.74% * var(--k)); }
+  .tq-ibtp__ctas { order: 4; margin-top: calc(14px * var(--k)); padding-top: 0; gap: calc(12px * var(--k)); }
+  .tq-ibtp__go, .tq-ibtp__cmp { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
+  .tq-ibtp__go { gap: calc(16px * var(--k)); padding-inline: calc(28px * var(--k)) calc(7px * var(--k)); }
+  .tq-ibtp__cmp { padding: 0 calc(28px * var(--k)); }
+  .tq-ibtp__arr { width: calc(46px * var(--k)); height: calc(46px * var(--k)); }
+  .tq-ibtp__lead { order: 5; max-width: none; margin-top: calc(16px * var(--k)); font-size: calc(16px * var(--k)); }
+}
 @media (prefers-reduced-motion: reduce) { .tq-ibtp__go, .tq-ibtp__cmp { transition: none; } }
 
 /* IB Tools: the black hole block (IB_Tools_Black_Hole_Obsidian), drawn by assets/js/ib-hole.js on the canvas, which

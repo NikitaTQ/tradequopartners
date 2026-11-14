@@ -33,11 +33,12 @@
   <main>
     <!-- Hero (IB_Tools_Hero design): static. Left an eyebrow, the H1 (the last sentence red), the lead and two buttons —
          "Become a partner" (the form) and "Compare programs" (the comparison right below, #wins). Right the design's
-         picture: "Typical broker" on a worn stone tablet (its old terms struck through in red), a silver "VS" ball, "Our IB
-         program" on a glass card with a red glow. The picture is the design's own, without its words
+         picture: "Other brokers" on a worn stone tablet (its old terms struck through in red), a silver "VS" ball between the
+         cards, "Our IB program" on a glass card with a red glow (each row named as on the tablet, over its title). The picture is the design's own, without its words
          (assets/ib/hero-vs.webp, 1292x1217, laid with mix-blend-mode: multiply); the words are the page's, in its language,
          laid over it where the design has them (--x / --b: left and baseline in picture px; --s: the picture's scale, set
-         by the script in the section). Narrow screens (as the design does it): the text, then the picture across the width. The previous heroes (Every lot dashboard, the creators
+         by the script in the section). Narrow screens (as the design does it): the text, then the picture across the width;
+         phones: the eyebrow and H1, the picture, the buttons, the lead, all sized to fit the screen (--k, same script). The previous heroes (Every lot dashboard, the creators
          dashboard, the devices film) are in the git history. partner.css, "the IB Tools hero". -->
     <section id="desk" class="tq-ibtp" data-screen-label="IB Tools hero · Compare">
       <div class="tq-ibtp__wrap">
@@ -54,7 +55,7 @@
           <div class="tq-ibvs" dir="ltr">
             <img class="tq-ibvs__img" src="{{root}}assets/ib/hero-vs.webp" width="1292" height="1217" alt="" decoding="async" fetchpriority="high">
             <div class="tq-ibvs__w" dir="{{dir}}">
-              <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>{{ib.top.typ}}</span>
+              <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>{{ib.win.brokers}}</span>
               <span class="tq-ibvs__tl" style="--x:122.7;--b:371;--r:465" data-fitw>{{ib.win.r1}}</span>
               <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465;--a:.6deg" data-fitw><s>{{ib.win.o1}}</s></b>
               <span class="tq-ibvs__tl" style="--x:124.1;--b:505;--r:465" data-fitw>{{ib.win.r2}}</span>
@@ -66,22 +67,35 @@
               <span class="tq-ibvs__tl" style="--x:129.6;--b:909;--r:465" data-fitw>{{ib.top.r5}}</span>
               <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465;--a:-2deg" data-fitw><s>{{ib.win.o5}}</s></b>
               <span class="tq-ibvs__uh" style="--x:676.9;--b:245;--r:1130" data-fitw>{{ib.top.ours}}</span>
-              <b class="tq-ibvs__ut" style="--x:769.7;--b:349;--r:1130" data-fitw>{{ib.top.v1}}</b>
-              <span class="tq-ibvs__us" style="--x:770.1;--b:386;--r:1130" data-fitw>{{ib.win.s1}}</span>
-              <b class="tq-ibvs__ut tq-ibvs__ut--big" style="--x:682.3;--b:489;--r:1130" data-fitw>{{ib.win.v2}}</b>
-              <span class="tq-ibvs__us" style="--x:683.2;--b:533;--r:1130" data-fitw>{{ib.win.s2}}</span>
-              <b class="tq-ibvs__ut" style="--x:760.9;--b:638;--r:1130" data-fitw>{{ib.win.v3}}</b>
-              <span class="tq-ibvs__us" style="--x:761.7;--b:679;--r:1130" data-fitw>{{ib.win.s3}}</span>
-              <b class="tq-ibvs__ut" style="--x:760.5;--b:782;--r:1130" data-fitw>{{ib.win.v4}}</b>
-              <span class="tq-ibvs__us" style="--x:761.6;--b:822;--r:1130" data-fitw>{{ib.win.s4}}</span>
-              <b class="tq-ibvs__ut" style="--x:760.2;--b:925;--r:1130" data-fitw>{{ib.win.v5}}</b>
-              <span class="tq-ibvs__us tq-ibvs__us--dots" style="--x:759.5;--b:966;--r:1130" data-fitw>{{ib.top.s5}}</span>
+              <span class="tq-ibvs__ul" style="--x:770.5;--b:318.4;--r:1130" data-fitw>{{ib.win.r1}}</span>
+              <b class="tq-ibvs__ut" style="--x:769.7;--b:357;--r:1130" data-fitw>{{ib.top.v1}}</b>
+              <span class="tq-ibvs__us" style="--x:770.1;--b:394;--r:1130" data-fitw>{{ib.win.s1}}</span>
+              <span class="tq-ibvs__ul" style="--x:683.5;--b:455.8;--r:1130" data-fitw>{{ib.win.r2}}</span>
+              <b class="tq-ibvs__ut tq-ibvs__ut--big" style="--x:682.3;--b:499;--r:1130" data-fitw>{{ib.win.v2}}</b>
+              <span class="tq-ibvs__us" style="--x:683.2;--b:543;--r:1130" data-fitw>{{ib.win.s2}}</span>
+              <span class="tq-ibvs__ul" style="--x:761.7;--b:609.4;--r:1130" data-fitw>{{ib.top.r3}}</span>
+              <b class="tq-ibvs__ut" style="--x:760.9;--b:648;--r:1130" data-fitw>{{ib.win.v3}}</b>
+              <span class="tq-ibvs__us" style="--x:761.7;--b:689;--r:1130" data-fitw>{{ib.win.s3}}</span>
+              <span class="tq-ibvs__ul" style="--x:761.6;--b:755.4;--r:1130" data-fitw>{{ib.win.r4}}</span>
+              <b class="tq-ibvs__ut" style="--x:760.5;--b:794;--r:1130" data-fitw>{{ib.win.v4}}</b>
+              <span class="tq-ibvs__us" style="--x:761.6;--b:834;--r:1130" data-fitw>{{ib.win.s4}}</span>
+              <span class="tq-ibvs__ul" style="--x:761;--b:897.4;--r:1130" data-fitw>{{ib.top.r5}}</span>
+              <b class="tq-ibvs__ut" style="--x:760.2;--b:936;--r:1130" data-fitw>{{ib.win.v5}}</b>
+              <span class="tq-ibvs__us tq-ibvs__us--dots" style="--x:759.5;--b:977;--r:1130" data-fitw>{{ib.top.s5}}</span>
             </div>
           </div>
         </div>
       </div>
-      <script>/* the picture (1292x1217) at its column's width: --s for the words laid over it; set before the first paint */
-(function(){var v=document.currentScript.parentNode.querySelector('.tq-ibvs'),f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',(w/1292).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(v);else addEventListener('resize',f)})();</script>
+      <script>/* the picture (1292x1217) at its width: --s for the words laid over it. Phones: --k, the first screen's size
+   (1.06: 6% over its base sizes), lowered until the whole screen (title, picture, buttons, lead) fits under the header;
+   the H1's own fitted size is cleared first (measured at its full size; the page's fit-to-width runs again after this).
+   Set before the first paint, again once the fonts are in and when the window changes. */
+(function(){var sec=document.currentScript.parentNode,v=sec.querySelector('.tq-ibvs'),wr=sec.querySelector('.tq-ibtp__wrap'),h1=sec.querySelector('.tq-ibtp__h1'),mq=window.matchMedia&&matchMedia('(max-width: 640px)'),
+f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',(w/1292).toFixed(4))},
+fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();return}
+var cs=getComputedStyle(sec),room=parseFloat(cs.minHeight)||innerHeight-sec.getBoundingClientRect().top-scrollY,k=1.06,i,need;h1.style.fontSize='';
+for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);if(need<=room+.5)break;k=Math.max(.6,k*room/need-.002)}f()};
+fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
     </section>
 
     <!-- Where our program wins (Where_Our_Program_Wins design; Compare_Brokers_Block for phones), right after the hero:

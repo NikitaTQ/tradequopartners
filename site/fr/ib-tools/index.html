@@ -821,7 +821,7 @@ footer p { font-size: 12px !important; }
   box-shadow: inset 0 2px 1px #fff, inset 0 -6px 12px -8px rgba(18,22,30,.2), 0 16px 28px -20px rgba(18,22,30,.5); transition: color .2s ease; }
 .tq-ibtp__cmp:hover { color: #e7131b; }
 .tq-ibtp__go:focus-visible, .tq-ibtp__cmp:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
-.tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; }
+.tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; direction: ltr; }
 .tq-ibvs { --s: .55; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
 .tq-ibvs__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
 .tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
@@ -831,16 +831,34 @@ footer p { font-size: 12px !important; }
 .tq-ibvs__tl { font-size: 17px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #595958; }
 .tq-ibvs__tv { font-size: 26.5px; font-weight: 400; letter-spacing: -.01em; color: #1a1616; }
 .tq-ibvs__tv s { position: relative; display: inline-block; text-decoration: none; }
-.tq-ibvs__tv s::after { content: ""; position: absolute; left: -.1em; right: -.1em; top: .54em; height: 1.6px; border-radius: 1px; background: #d8262c; opacity: .92; transform: rotate(var(--a)); }
+.tq-ibvs__tv s::after { content: ""; position: absolute; left: -.1em; right: -.1em; top: .54em; height: max(1.6px, calc(.75px / var(--s))); border-radius: 1px; background: #d8262c; opacity: .92; transform: rotate(var(--a)); }
 .tq-ibvs__uh { font-size: 18.9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #494a4c; }
+.tq-ibvs__ul { font-size: 16px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: #6c6d71; }
 .tq-ibvs__ut { font-size: 37.9px; font-weight: 650; letter-spacing: -.03em; color: #0a0a0a; }
 .tq-ibvs__ut--big { font-size: 44.3px; font-variant-numeric: tabular-nums; }
 .tq-ibvs__us { font-size: 19.8px; font-weight: 400; letter-spacing: -.005em; color: #434446; }
 .tq-ibvs__us--dots > span { display: inline-block; margin-inline: .15em; font-size: .7em; vertical-align: .12em; }
 :lang(ar) .tq-ibvs__th, :lang(th) .tq-ibvs__th, :lang(ja) .tq-ibvs__th, :lang(ko) .tq-ibvs__th, :lang(zh) .tq-ibvs__th,
 :lang(ar) .tq-ibvs__tl, :lang(th) .tq-ibvs__tl, :lang(ja) .tq-ibvs__tl, :lang(ko) .tq-ibvs__tl, :lang(zh) .tq-ibvs__tl,
-:lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh { letter-spacing: .02em; }
+:lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh,
+:lang(ar) .tq-ibvs__ul, :lang(th) .tq-ibvs__ul, :lang(ja) .tq-ibvs__ul, :lang(ko) .tq-ibvs__ul, :lang(zh) .tq-ibvs__ul { letter-spacing: .02em; }
 :lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye { letter-spacing: .02em; }
+@media (max-width: 640px) {
+.tq-ibtp { --k: 1.06; padding: calc(20px * var(--k)) clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
+.tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; }
+.tq-ibtp__text { display: contents; }
+.tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
+.tq-ibtp__eye { order: 1; font-size: calc(12px * var(--k)); }
+.tq-ibtp__h1 { order: 2; --h1s: calc(34px * var(--k)); margin-top: calc(14px * var(--k)); }
+.tq-ibtp__vis { order: 3; flex: none; width: 100%; max-width: none; margin-top: calc(12px * var(--k)); }
+.tq-ibvs { width: calc(115% * var(--k)); margin: calc(-10.24% * var(--k)) 0 calc(-14.86% * var(--k)) calc(50% - 56.74% * var(--k)); }
+.tq-ibtp__ctas { order: 4; margin-top: calc(14px * var(--k)); padding-top: 0; gap: calc(12px * var(--k)); }
+.tq-ibtp__go, .tq-ibtp__cmp { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
+.tq-ibtp__go { gap: calc(16px * var(--k)); padding-inline: calc(28px * var(--k)) calc(7px * var(--k)); }
+.tq-ibtp__cmp { padding: 0 calc(28px * var(--k)); }
+.tq-ibtp__arr { width: calc(46px * var(--k)); height: calc(46px * var(--k)); }
+.tq-ibtp__lead { order: 5; max-width: none; margin-top: calc(16px * var(--k)); font-size: calc(16px * var(--k)); }
+}
 @media (prefers-reduced-motion: reduce) {
 .tq-ibtp__go, .tq-ibtp__cmp { transition: none; }
 }
@@ -1459,11 +1477,12 @@ footer p { font-size: 12px !important; }
   <main>
     <!-- Hero (IB_Tools_Hero design): static. Left an eyebrow, the H1 (the last sentence red), the lead and two buttons —
          "Become a partner" (the form) and "Compare programs" (the comparison right below, #wins). Right the design's
-         picture: "Typical broker" on a worn stone tablet (its old terms struck through in red), a silver "VS" ball, "Our IB
-         program" on a glass card with a red glow. The picture is the design's own, without its words
+         picture: "Other brokers" on a worn stone tablet (its old terms struck through in red), a silver "VS" ball between the
+         cards, "Our IB program" on a glass card with a red glow (each row named as on the tablet, over its title). The picture is the design's own, without its words
          (assets/ib/hero-vs.webp, 1292x1217, laid with mix-blend-mode: multiply); the words are the page's, in its language,
          laid over it where the design has them (--x / --b: left and baseline in picture px; --s: the picture's scale, set
-         by the script in the section). Narrow screens (as the design does it): the text, then the picture across the width. The previous heroes (Every lot dashboard, the creators
+         by the script in the section). Narrow screens (as the design does it): the text, then the picture across the width;
+         phones: the eyebrow and H1, the picture, the buttons, the lead, all sized to fit the screen (--k, same script). The previous heroes (Every lot dashboard, the creators
          dashboard, the devices film) are in the git history. partner.css, "the IB Tools hero". -->
     <section id="desk" class="tq-ibtp" data-screen-label="IB Tools hero · Compare">
       <div class="tq-ibtp__wrap">
@@ -1478,9 +1497,9 @@ footer p { font-size: 12px !important; }
         </div>
         <div class="tq-ibtp__vis">
           <div class="tq-ibvs" dir="ltr">
-            <img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=311a7450bd" width="1292" height="1217" alt="" decoding="async" fetchpriority="high">
+            <img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=4322166899" width="1292" height="1217" alt="" decoding="async" fetchpriority="high">
             <div class="tq-ibvs__w" dir="ltr">
-              <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>Courtier classique</span>
+              <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>Autres courtiers</span>
               <span class="tq-ibvs__tl" style="--x:122.7;--b:371;--r:465" data-fitw>Niveaux de sous-IB</span>
               <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465;--a:.6deg" data-fitw><s>1 à 2 niveaux</s></b>
               <span class="tq-ibvs__tl" style="--x:124.1;--b:505;--r:465" data-fitw>Partage des revenus</span>
@@ -1492,22 +1511,35 @@ footer p { font-size: 12px !important; }
               <span class="tq-ibvs__tl" style="--x:129.6;--b:909;--r:465" data-fitw>Outils</span>
               <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465;--a:-2deg" data-fitw><s>Simple lien de parrainage</s></b>
               <span class="tq-ibvs__uh" style="--x:676.9;--b:245;--r:1130" data-fitw>Notre programme IB</span>
-              <b class="tq-ibvs__ut" style="--x:769.7;--b:349;--r:1130" data-fitw>Niveaux illimités</b>
-              <span class="tq-ibvs__us" style="--x:770.1;--b:386;--r:1130" data-fitw>gagnez sur chaque partenaire sous vous</span>
-              <b class="tq-ibvs__ut tq-ibvs__ut--big" style="--x:682.3;--b:489;--r:1130" data-fitw>Jusqu’à 87 <span style="color: #e7131b;">%</span></b>
-              <span class="tq-ibvs__us" style="--x:683.2;--b:533;--r:1130" data-fitw>du spread, sur chaque lot</span>
-              <b class="tq-ibvs__ut" style="--x:760.9;--b:638;--r:1130" data-fitw>Liés à vous</b>
-              <span class="tq-ibvs__us" style="--x:761.7;--b:679;--r:1130" data-fitw>protégés par PartnerShield</span>
-              <b class="tq-ibvs__ut" style="--x:760.5;--b:782;--r:1130" data-fitw>Quotidiens</b>
-              <span class="tq-ibvs__us" style="--x:761.6;--b:822;--r:1130" data-fitw>sans minimum, sans frais de retrait</span>
-              <b class="tq-ibvs__ut" style="--x:760.2;--b:925;--r:1130" data-fitw>À votre marque</b>
-              <span class="tq-ibvs__us tq-ibvs__us--dots" style="--x:759.5;--b:966;--r:1130" data-fitw>Copy trading <span style="color: #e7131b;">•</span> Signaux <span style="color: #e7131b;">•</span> applis</span>
+              <span class="tq-ibvs__ul" style="--x:770.5;--b:318.4;--r:1130" data-fitw>Niveaux de sous-IB</span>
+              <b class="tq-ibvs__ut" style="--x:769.7;--b:357;--r:1130" data-fitw>Niveaux illimités</b>
+              <span class="tq-ibvs__us" style="--x:770.1;--b:394;--r:1130" data-fitw>gagnez sur chaque partenaire sous vous</span>
+              <span class="tq-ibvs__ul" style="--x:683.5;--b:455.8;--r:1130" data-fitw>Partage des revenus</span>
+              <b class="tq-ibvs__ut tq-ibvs__ut--big" style="--x:682.3;--b:499;--r:1130" data-fitw>Jusqu’à 87 <span style="color: #e7131b;">%</span></b>
+              <span class="tq-ibvs__us" style="--x:683.2;--b:543;--r:1130" data-fitw>du spread, sur chaque lot</span>
+              <span class="tq-ibvs__ul" style="--x:761.7;--b:609.4;--r:1130" data-fitw>Attribution</span>
+              <b class="tq-ibvs__ut" style="--x:760.9;--b:648;--r:1130" data-fitw>Liés à vous</b>
+              <span class="tq-ibvs__us" style="--x:761.7;--b:689;--r:1130" data-fitw>protégés par PartnerShield</span>
+              <span class="tq-ibvs__ul" style="--x:761.6;--b:755.4;--r:1130" data-fitw>Paiements</span>
+              <b class="tq-ibvs__ut" style="--x:760.5;--b:794;--r:1130" data-fitw>Quotidiens</b>
+              <span class="tq-ibvs__us" style="--x:761.6;--b:834;--r:1130" data-fitw>sans minimum, sans frais de retrait</span>
+              <span class="tq-ibvs__ul" style="--x:761;--b:897.4;--r:1130" data-fitw>Outils</span>
+              <b class="tq-ibvs__ut" style="--x:760.2;--b:936;--r:1130" data-fitw>À votre marque</b>
+              <span class="tq-ibvs__us tq-ibvs__us--dots" style="--x:759.5;--b:977;--r:1130" data-fitw>Copy trading <span style="color: #e7131b;">•</span> Signaux <span style="color: #e7131b;">•</span> applis</span>
             </div>
           </div>
         </div>
       </div>
-      <script>/* the picture (1292x1217) at its column's width: --s for the words laid over it; set before the first paint */
-(function(){var v=document.currentScript.parentNode.querySelector('.tq-ibvs'),f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',(w/1292).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(v);else addEventListener('resize',f)})();</script>
+      <script>/* the picture (1292x1217) at its width: --s for the words laid over it. Phones: --k, the first screen's size
+   (1.06: 6% over its base sizes), lowered until the whole screen (title, picture, buttons, lead) fits under the header;
+   the H1's own fitted size is cleared first (measured at its full size; the page's fit-to-width runs again after this).
+   Set before the first paint, again once the fonts are in and when the window changes. */
+(function(){var sec=document.currentScript.parentNode,v=sec.querySelector('.tq-ibvs'),wr=sec.querySelector('.tq-ibtp__wrap'),h1=sec.querySelector('.tq-ibtp__h1'),mq=window.matchMedia&&matchMedia('(max-width: 640px)'),
+f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',(w/1292).toFixed(4))},
+fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();return}
+var cs=getComputedStyle(sec),room=parseFloat(cs.minHeight)||innerHeight-sec.getBoundingClientRect().top-scrollY,k=1.06,i,need;h1.style.fontSize='';
+for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);if(need<=room+.5)break;k=Math.max(.6,k*room/need-.002)}f()};
+fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
     </section>
 
     <!-- Where our program wins (Where_Our_Program_Wins design; Compare_Brokers_Block for phones), right after the hero:
