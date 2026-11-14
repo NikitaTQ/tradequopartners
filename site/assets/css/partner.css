@@ -1284,20 +1284,8 @@
 .tq-ibh__box.is-tall .tq-ibh__brand { font-size: 12px; }
 @media (max-width: 640px) { .tq-ibh { height: calc(100vh - 84px); height: calc(100svh - 84px); } }
 
-/* IB Tools hero for creators (IB_Tools_Hero_Creators – Dashboard): static. The pitch and two buttons on the left, the
-   partner's glass dashboard on the right (a 920x640 stage scaled by --s, which the page's inline script sets from the
-   column's width, at most 1.12). Grey #e9eaec with two white glows; white at the top under the header. The dashboard's inline styles are the design's; its type is Inter (numbers tabular). */
-.tq-ibx { position: relative; overflow: hidden; display: flex; align-items: center; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px); color: #0a0a0a;
-  background: radial-gradient(34% 44% at 72% 46%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 70%), radial-gradient(30% 40% at 20% 30%, rgba(255,255,255,.7) 0%, rgba(255,255,255,0) 70%),
-    linear-gradient(180deg, #fff 0, #e9eaec 110px); }   /* grey to the foot: the black hole block below goes on in it */
-.tq-ibx__wrap { --s: .75; position: relative; width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(40px, 7vw, 88px) clamp(20px, 5.5vw, 80px); box-sizing: border-box;
-  display: flex; flex-wrap: wrap; align-items: center; gap: clamp(28px, 4vw, 56px); }
-.tq-ibx__text { flex: 1 1 400px; max-width: 520px; min-width: 0; display: flex; flex-direction: column; gap: clamp(18px, 2.4vw, 28px); position: relative; z-index: 3; }
-.tq-ibx__h1 { --h1s: clamp(30px, 4vw, 54px); margin: 0; line-height: 1.1; letter-spacing: normal; padding-inline-start: 0; }   /* face: .tq-h1 (Syncopate or the language's look-alike) */
-:lang(ar) .tq-ibx__h1, :lang(th) .tq-ibx__h1, :lang(ja) .tq-ibx__h1, :lang(ko) .tq-ibx__h1, :lang(zh) .tq-ibx__h1 { --h1k: 1.15; }
-.tq-ibx__h1 > span { display: block; }
-:lang(ja) .tq-ibx__h1 > span { word-break: auto-phrase; }   /* Japanese breaks between phrases (あなたの / オーディエンス), not inside a word */
-.tq-ibx__red { color: #e7131b; }
+/* IB Tools: the pitch's shared pieces — the lead, the sub line, the red button with its arrow, the glass "how" button —
+   used by the Network + clients and Sub-IB network blocks (they came from the earlier heroes) */
 .tq-ibx__lead { margin: 0; max-width: 470px; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.45; font-weight: 700; letter-spacing: -.01em; text-wrap: pretty; }
 .tq-ibx__sub { margin: -6px 0 0; max-width: 460px; font-size: 15px; line-height: 1.6; color: #55585f; text-wrap: pretty; }
 .tq-ibx__ctas { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; }
@@ -1312,58 +1300,77 @@
 .tq-ibx__how:hover { color: #0a0a0a; background: linear-gradient(170deg, rgba(255,255,255,.95), rgba(255,255,255,.55)); }
 :lang(ar) .tq-ibx__go, :lang(ar) .tq-ibx__how, :lang(th) .tq-ibx__go, :lang(th) .tq-ibx__how, :lang(ja) .tq-ibx__go, :lang(ja) .tq-ibx__how,
 :lang(ko) .tq-ibx__go, :lang(ko) .tq-ibx__how, :lang(zh) .tq-ibx__go, :lang(zh) .tq-ibx__how { letter-spacing: .04em; font-size: 14px; }
-.tq-ibx__col { flex: 1.5 1 560px; min-width: 0; }
-.tq-ibx__stage { position: relative; width: 100%; height: calc(640px * var(--s)); }
-.tq-ibx__scene { position: absolute; left: 0; top: 0; width: 920px; height: 640px; transform-origin: 0 0; transform: scale(var(--s)); font-family: 'Inter', sans-serif; color: #0a0a0a; }
-.tq-ibx__num { font-variant-numeric: tabular-nums; }
-@keyframes ibxSheen { 0% { transform: translateX(-130%) skewX(-18deg); } 22% { transform: translateX(330%) skewX(-18deg); } 100% { transform: translateX(330%) skewX(-18deg); } }
-.tq-ibx__sheen { position: absolute; top: -20%; bottom: -20%; left: 0; width: 34%; pointer-events: none; z-index: 4; transform: translateX(-130%) skewX(-18deg);
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,var(--a)) 50%, rgba(255,255,255,0) 100%); animation: ibxSheen 7s cubic-bezier(.45,0,.25,1) var(--d) infinite; }
-@media (prefers-reduced-motion: reduce) { .tq-ibx__sheen { display: none; } }
-/* above phones: the content at the top, not centred — the title's first letter and the top callout ("02") start on one
-   line at the height of the title on /partner-terms/ — clamp(28px, 2.4vw - 2px, 42px) under the hero's top (about
-   120-130px from the top of the window): the row's padding is that line less the callout's place on the
-   stage (22 scene px × --s), the text column comes down by the same, and the title moves up by its letters' offset in
-   the line (.15em) */
-@media (min-width: 641px) {
-  .tq-ibx { align-items: flex-start; }
-  .tq-ibx__wrap { align-items: flex-start; padding-top: calc(clamp(28px, calc(2.4vw - 2px), 42px) - 22px * var(--s)); }
-  .tq-ibx__text { margin-top: calc(22px * var(--s)); }
-  .tq-ibx__h1 { margin-top: -.15em; }
-}
-/* Every lot: the stage is 920x660, with five numbered callouts on it (lines and pills naming the tools, in the page's
-   language). Phones (up to 640px): no callouts; the title, the dashboard across the whole screen width (the stage cropped
-   to the 855x550 around it: --sw is what the page's script divides the width by) and the buttons fill the first screen,
-   and the lead and the sub line follow. */
-.tq-ibx__col--lot { --sw: 920; display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px; }
-.tq-ibx__col--lot .tq-ibx__stage { height: calc(660px * var(--s)); }
-.tq-ibx__col--lot .tq-ibx__scene { height: 660px; }
-.tq-ibx__co { position: absolute; display: flex; justify-content: center; }
-.tq-ibx__co--side { justify-content: flex-start; }
-.tq-ibx__pill { display: flex; align-items: center; gap: 9px; height: 36px; padding: 0 16px; border-radius: 999px; background: linear-gradient(170deg, #fff, rgba(255,255,255,.72)); border: 1px solid #fff;
-  box-shadow: 0 12px 22px -14px rgba(18,22,30,.5); font-size: 14px; font-weight: 700; white-space: nowrap; color: #0a0a0a; box-sizing: border-box; }
-.tq-ibx__pill b { font-size: 11px; font-weight: 500; color: #e7131b; font-variant-numeric: tabular-nums; }
-.tq-ibx__pill--dark { background: #0a0a0a; border-color: #0a0a0a; color: #fff; }
-.tq-ibx__pill--dark b { color: #ff4148; }
-@media (max-width: 640px) {
-  .tq-ibx__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 16px; padding-top: 18px; padding-bottom: 40px; }
-  .tq-ibx .tq-ibx__text { display: contents; }
-  .tq-ibx .tq-ibx__h1 { order: 2; }
-  .tq-ibx .tq-ibx__col { order: 3; }
-  .tq-ibx .tq-ibx__ctas { order: 4; flex-direction: column; gap: 10px; padding-top: 0; }
-  .tq-ibx .tq-ibx__lead { order: 5; padding-top: 6px; }
-  .tq-ibx .tq-ibx__go { justify-content: space-between; }
-  .tq-ibx .tq-ibx__how { justify-content: center; }
-  .tq-ibx__col--lot { --sw: 855; flex: none; margin-inline: calc(-1 * clamp(20px, 5.5vw, 80px)); }
-  .tq-ibx__col--lot .tq-ibx__stage { height: calc(550px * var(--s)); }
-  .tq-ibx__col--lot .tq-ibx__scene { left: calc(-45px * var(--s)); top: calc(-70px * var(--s)); }
-  .tq-ibx__callouts { display: none; }
-}
-@media (max-width: 640px) and (max-height: 600px) {   /* short phones (iPhone SE with Safari's bars): tighter, so the CTA still fits */
-  .tq-ibx__wrap { gap: 10px; padding-top: 10px; }
-  .tq-ibx__h1 { --h1s: 24px; }
-}
-@media (max-width: 640px) { .tq-ibx { min-height: 0; } }
+
+/* IB Tools: the hero (IB_Tools_Hero). Left an eyebrow, the H1 (the site's H1 face; the last sentence red), the lead and two
+   buttons (red "Become a partner", glass "Compare programs"). Right the design's 800x720 composition (.tq-ibtp__scene, in
+   its px) scaled to the column by --s (the section's script: width / 800, at most 1): "Other brokers" on a cracked
+   stone tablet (a noise grain, hairline cracks), a silver VS ball, "Our IB program" on a white card with a red glow,
+   the first row lit. Positions are inline-start based, so it mirrors in Arabic. Below its two columns' widths the
+   composition goes under the text, across the width (as the design does). Type: Inter (DM Sans in the design), 800 is 700. */
+.tq-ibtp { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px);
+  padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px); color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: radial-gradient(55% 60% at 72% 50%, #fff 0%, rgba(255,255,255,0) 75%), linear-gradient(180deg, #fafafb 0%, #e9eaec 100%); }   /* the foot is the next block's grey */
+.tq-ibtp__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(40px, 5vw, 72px); }
+.tq-ibtp__text { position: relative; z-index: 2; flex: 1 1 420px; max-width: 560px; min-width: 0; display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); }
+.tq-ibtp__eye { font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #55585f; }
+.tq-ibtp__h1 { --h1s: clamp(34px, 4.1vw, 58px); margin: 0; padding-inline-start: 0; line-height: 1.04; letter-spacing: -.01em; }   /* face: .tq-h1 */
+:lang(ar) .tq-ibtp__h1, :lang(th) .tq-ibtp__h1, :lang(ja) .tq-ibtp__h1, :lang(ko) .tq-ibtp__h1, :lang(zh) .tq-ibtp__h1 { --h1k: 1.1; line-height: 1.2; }
+.tq-ibtp__h1 > span { display: block; white-space: nowrap; }   /* a sentence a line, as in the design: a long language steps the size down (data-fitw) */
+.tq-ibtp__red { color: #e7131b; }
+.tq-ibtp__lead { margin: 0; max-width: 460px; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.45; font-weight: 500; color: #2b2c31; text-wrap: pretty; }
+.tq-ibtp__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding-top: 4px; }
+.tq-ibtp__go, .tq-ibtp__cmp { display: flex; align-items: center; height: 60px; box-sizing: border-box; border-radius: 999px; font-size: 16px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.tq-ibtp__go { gap: 16px; padding-inline: 28px 7px; color: #fff; background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%);
+  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.45), inset 0 -10px 16px -8px rgba(90,0,4,.5), 0 20px 32px -16px rgba(231,19,27,.75); transition: filter .2s ease, transform .2s ease; }
+.tq-ibtp__go:hover { color: #fff; filter: brightness(1.06); transform: translateY(-1px); }
+.tq-ibtp__arr { flex: none; width: 46px; height: 46px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+[dir="rtl"] .tq-ibtp__arr svg { transform: scaleX(-1); }
+.tq-ibtp__cmp { padding: 0 28px; color: #0a0a0a; background: linear-gradient(135deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.55) 100%); border: 1px solid rgba(255,255,255,.95);
+  box-shadow: inset 0 2px 1px #fff, inset 0 -6px 12px -8px rgba(18,22,30,.2), 0 16px 28px -20px rgba(18,22,30,.5); transition: color .2s ease; }
+.tq-ibtp__cmp:hover { color: #e7131b; }
+.tq-ibtp__go:focus-visible, .tq-ibtp__cmp:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
+/* the composition */
+.tq-ibtp__vis { --s: .8; position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; aspect-ratio: 800 / 720; }
+.tq-ibtp__scene { position: absolute; left: 0; top: 0; width: 800px; height: 720px; transform: scale(var(--s)); transform-origin: 0 0; }
+[dir="rtl"] .tq-ibtp__scene { left: auto; right: 0; transform-origin: 100% 0; }
+.tq-ibtp__them { position: absolute; inset-inline-start: 0; top: 104px; width: 304px; height: 596px; box-sizing: border-box; padding: 4px; border-radius: 30px;
+  background: linear-gradient(160deg, #fff 0%, #ecedef 50%, #dadbde 100%); box-shadow: 0 30px 46px -30px rgba(18,22,30,.4), 0 6px 14px -10px rgba(18,22,30,.2); }
+.tq-ibtp__them-in { position: relative; width: 100%; height: 100%; box-sizing: border-box; padding: 0 30px; overflow: hidden; border-radius: 26px;
+  background: linear-gradient(175deg, #f7f7f8 0%, #f0f0f2 60%, #ebebed 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.07), inset 0 2px 1px rgba(255,255,255,.9), inset 0 -14px 24px -18px rgba(18,22,30,.18); }
+.tq-ibtp__grain { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .22; mix-blend-mode: multiply; pointer-events: none; }
+.tq-ibtp__cracks { position: absolute; left: 0; top: 0; pointer-events: none; }
+[dir="rtl"] .tq-ibtp__cracks { transform: scaleX(-1); }   /* the cracks run from the side the VS ball is on */
+.tq-ibtp__th { position: relative; height: 96px; display: flex; align-items: center; font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #45474c; }
+.tq-ibtp__tr { position: relative; height: 96px; display: flex; flex-direction: column; justify-content: center; gap: 7px; border-top: 1px solid rgba(18,22,30,.09); box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
+.tq-ibtp__tr span { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #7a7c82; }
+.tq-ibtp__tr b { font-size: 18px; line-height: 1.2; font-weight: 500; color: #55575d; }
+.tq-ibtp__us { position: absolute; inset-inline-start: 350px; top: 28px; width: 440px; height: 672px; box-sizing: border-box; padding: 11px; border-radius: 44px;
+  background: linear-gradient(165deg, #fff 0%, #f4f4f5 40%, #fafafa 70%, #fff 100%);
+  box-shadow: 0 0 0 1.5px rgba(255,120,126,.6), 0 0 26px 3px rgba(255,60,68,.3), 0 0 70px 10px rgba(255,60,68,.12), 0 50px 70px -40px rgba(18,22,30,.35), inset 0 0 0 1px #fff, inset 0 3px 3px #fff, inset 0 -4px 10px rgba(231,19,27,.14); }
+.tq-ibtp__us-in { position: relative; width: 100%; height: 100%; box-sizing: border-box; padding: 0 22px; overflow: hidden; border-radius: 34px;
+  background: linear-gradient(180deg, #f1f1f2 0%, #ececee 55%, #efeff1 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), inset 0 3px 8px rgba(18,22,30,.08), inset 0 -2px 6px rgba(255,255,255,.9); }
+.tq-ibtp__sheen { position: absolute; left: -10%; top: -6%; width: 120%; height: 16%; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%); pointer-events: none; }
+.tq-ibtp__uh { position: relative; height: 118px; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding-inline-start: 16px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #4a4b50; }
+.tq-ibtp__uh img { display: block; align-self: flex-start; width: auto; height: 21px; }
+.tq-ibtp__ur { position: relative; height: 104px; box-sizing: border-box; padding: 0 16px; display: flex; align-items: center; gap: 18px; border-top: 1px solid rgba(18,22,30,.1); box-shadow: inset 0 1px 0 #fff; }
+.tq-ibtp__ur--lit { border-top: 0; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.35) 100%); box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(18,22,30,.06); }
+.tq-ibtp__ur > span { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.tq-ibtp__ur b { font-size: 29px; line-height: 1.02; font-weight: 700; letter-spacing: -.03em; text-wrap: balance; }
+.tq-ibtp__ur b.tq-ibtp__big { font-size: 32px; font-variant-numeric: tabular-nums; }
+.tq-ibtp__ur > span > span { font-size: 15px; line-height: 1.25; font-weight: 500; color: #3e3f44; }
+.tq-ibtp__ic { flex: none; display: block; width: 40px; height: auto; }
+svg.tq-ibtp__ic { height: 40px; }
+svg.tq-ibtp__ic--inf { width: 44px; height: 44px; }
+.tq-ibtp__vs { position: absolute; z-index: 3; inset-inline-start: 290px; top: 362px; width: 76px; height: 76px; box-sizing: border-box; padding: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; --h1s: 18px; --h1k: 1; line-height: 1; color: #0a0a0a;
+  background: radial-gradient(circle at 34% 26%, #fff 0%, #e4e5e8 16%, #9a9da4 48%, #4a4d54 80%, #2b2d33 100%); box-shadow: inset 0 1px 1px rgba(255,255,255,.9), inset 0 -6px 10px rgba(0,0,0,.35), 0 16px 26px -10px rgba(18,22,30,.55); }
+/* scripts without capitals: no wide tracking */
+:lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye,
+:lang(ar) .tq-ibtp__th, :lang(th) .tq-ibtp__th, :lang(ja) .tq-ibtp__th, :lang(ko) .tq-ibtp__th, :lang(zh) .tq-ibtp__th,
+:lang(ar) .tq-ibtp__uh, :lang(th) .tq-ibtp__uh, :lang(ja) .tq-ibtp__uh, :lang(ko) .tq-ibtp__uh, :lang(zh) .tq-ibtp__uh,
+:lang(ar) .tq-ibtp__tr span, :lang(th) .tq-ibtp__tr span, :lang(ja) .tq-ibtp__tr span, :lang(ko) .tq-ibtp__tr span, :lang(zh) .tq-ibtp__tr span { letter-spacing: .02em; }
+:lang(ar) .tq-ibtp__tr span, :lang(th) .tq-ibtp__tr span, :lang(ja) .tq-ibtp__tr span, :lang(ko) .tq-ibtp__tr span, :lang(zh) .tq-ibtp__tr span { font-size: 12px; }
+@media (prefers-reduced-motion: reduce) { .tq-ibtp__go, .tq-ibtp__cmp { transition: none; } }
 
 /* IB Tools: the black hole block (IB_Tools_Black_Hole_Obsidian), drawn by assets/js/ib-hole.js on the canvas, which
    fills the block; the HUD of the three steps sits at its foot (the active step dark, its bar filling). The grey goes on
@@ -1566,7 +1573,6 @@
 /* IB Tools on phones: twice the room between the blocks (each block's own top and bottom spacing doubled; the hero's
    top under the header and the black hole's canvas stay as they were) */
 @media (max-width: 640px) {
-  .tq-ibx__wrap { padding-bottom: 80px; }
   .tq-ibi { padding-top: 44px; padding-bottom: 64px; }
   .tq-ibn__wrap { padding-block: 44px 68px; }
 }
