@@ -33,7 +33,7 @@
   <main>
     <!-- Hero (IB_Tools_Hero design): static. Left an eyebrow, the H1 (the last sentence red), the lead and two buttons —
          "Become a partner" (the form) and "Compare programs" (the comparison right below, #wins). Right the design's
-         picture: "Other brokers" on a worn stone tablet (its old terms struck through in red), a silver "VS" ball between the
+         picture: "Other brokers" on a worn stone tablet, a silver "VS" ball between the
          cards, "Our IB program" on a glass card with a red glow (each row named as on the tablet, over its title). The picture is the design's own, without its words
          (assets/ib/hero-vs.webp, 1292x1217, laid with mix-blend-mode: multiply); the words are the page's, in its language,
          laid over it where the design has them (--x / --b: left and baseline in picture px; --s: the picture's scale, set
@@ -57,15 +57,15 @@
             <div class="tq-ibvs__w" dir="{{dir}}">
               <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>{{ib.win.brokers}}</span>
               <span class="tq-ibvs__tl" style="--x:122.7;--b:371;--r:465" data-fitw>{{ib.win.r1}}</span>
-              <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465;--a:.6deg" data-fitw><s>{{ib.win.o1}}</s></b>
+              <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465" data-fitw>{{ib.win.o1}}</b>
               <span class="tq-ibvs__tl" style="--x:124.1;--b:505;--r:465" data-fitw>{{ib.win.r2}}</span>
-              <b class="tq-ibvs__tv" style="--x:124.1;--b:548;--r:465;--a:0deg" data-fitw><s>{{ib.top.o2}}</s></b>
+              <b class="tq-ibvs__tv" style="--x:124.1;--b:548;--r:465" data-fitw>{{ib.top.o2}}</b>
               <span class="tq-ibvs__tl" style="--x:126.4;--b:643;--r:465" data-fitw>{{ib.top.r3}}</span>
-              <b class="tq-ibvs__tv" style="--x:126.3;--b:684;--r:465;--a:-.3deg" data-fitw><s>{{ib.win.o3}}</s></b>
+              <b class="tq-ibvs__tv" style="--x:126.3;--b:684;--r:465" data-fitw>{{ib.win.o3}}</b>
               <span class="tq-ibvs__tl" style="--x:128.1;--b:775;--r:465" data-fitw>{{ib.win.r4}}</span>
-              <b class="tq-ibvs__tv" style="--x:127.3;--b:818;--r:465;--a:-1deg" data-fitw><s>{{ib.top.o4}}</s></b>
+              <b class="tq-ibvs__tv" style="--x:127.3;--b:818;--r:465" data-fitw>{{ib.top.o4}}</b>
               <span class="tq-ibvs__tl" style="--x:129.6;--b:909;--r:465" data-fitw>{{ib.top.r5}}</span>
-              <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465;--a:-2deg" data-fitw><s>{{ib.win.o5}}</s></b>
+              <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465" data-fitw>{{ib.win.o5}}</b>
               <span class="tq-ibvs__uh" style="--x:676.9;--b:245;--r:1130" data-fitw>{{ib.top.ours}}</span>
               <span class="tq-ibvs__ul" style="--x:761.6;--b:321.4;--r:1130" data-fitw>{{ib.win.r1}}</span>
               <b class="tq-ibvs__ut" style="--x:760.5;--b:360;--r:1130" data-fitw>{{ib.top.v1}}</b>
@@ -350,6 +350,22 @@ if(!m.matches)return;var r=s.getBoundingClientRect();if(r.top<innerHeight*.7)ret
       </div>
       <script>/* hover a group of the network: it lights up, the rest dim; off it, Sub-IB 01 lit again */
 (function(){var s=document.currentScript.parentNode,set=function(g){if(g==null){s.setAttribute('data-hl','0');s.removeAttribute('data-act')}else{s.setAttribute('data-hl',g);s.setAttribute('data-act','')}};s.querySelectorAll('.sib-n[data-g]').forEach(function(n){n.addEventListener('mouseenter',function(){set(n.getAttribute('data-g'))});n.addEventListener('mouseleave',function(){set(null)})})})();</script>
+    </section>
+
+    <!-- FAQ: five of the usual questions (the home page's own: becoming an IB, earnings, payouts, support, experience and
+         capital; global faq.1-5, so all 18 languages), as on the other pages (.tp-faq, the faq-card partial); on the grey
+         of the blocks either side of it (.tq-ibq), so no seams. -->
+    <section id="questions" class="tp-sec tq-ibq" data-screen-label="IB Tools FAQ">
+      <div class="tp-wrap tp-faq">
+        <div class="tp-faq__side">
+          <span class="tp-pill">{{faq.pill}}</span>
+          <h2 class="tp-h2 tq-h2" data-fitw>{{faq.title}}</h2>
+          <p class="tp-sub" style="max-width: 30ch;">{{faq.sub}}</p>
+        </div>
+        <div class="tp-faq__list">
+{{faq:faq:5}}
+        </div>
+      </div>
     </section>
 
     <!-- Black hole (IB_Tools_Black_Hole design, Nov 2026 version): assets/js/ib-hole.js draws it on the canvas. Event chips
