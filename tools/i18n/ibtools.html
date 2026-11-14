@@ -310,8 +310,8 @@
          the views to pick (Network, Performance, Earnings) on a red glass pill that slides over them (the design's "pill"
          selector), the picked view's line under it, and a canvas: the partner tree in glass (You at the top, Sub-IBs level by
          level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
-         net deposits, then into each partner's top client as a glass bar of the commission you earn from them, and round
-         again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
+         net deposits, then into a row per partner with a glass bar of what their clients earned you this month (the rows add
+         up to the month's total) and their top client under the name, and round again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
          across the width, the button last. assets/js/ib-insights.js draws it; its words come from data-* on the canvas.
          Names and figures are demo data. -->
     <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
@@ -332,7 +332,7 @@
             </div>
             <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">{{ib.ins.v1t}}</span><span>{{ib.ins.v2t}}</span><span>{{ib.ins.v3t}}</span></p>
           </div>
-          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="{{@ib.ins.you}}" data-total="{{@ib.ins.total}}" data-net="{{@ib.ins.net}}" data-comm="{{@ib.ins.comm}}" data-top="{{@ib.ins.top}}" data-active="{{@ib.ins.active}}" data-dormant="{{@ib.ins.dormant}}" data-via="{{@ib.ins.via}}"></canvas></div>
+          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="{{@ib.ins.you}}" data-total="{{@ib.ins.total}}" data-net="{{@ib.ins.net}}" data-comm="{{@ib.ins.comm}}" data-top="{{@ib.ins.top}}" data-topc="{{@ib.ins.topc}}" data-dormant="{{@ib.ins.dormant}}"></canvas></div>
         </div>
       </div>
     </section>

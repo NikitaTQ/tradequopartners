@@ -1798,8 +1798,8 @@ html:lang(ko) * { word-break: keep-all; }
          the views to pick (Network, Performance, Earnings) on a red glass pill that slides over them (the design's "pill"
          selector), the picked view's line under it, and a canvas: the partner tree in glass (You at the top, Sub-IBs level by
          level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
-         net deposits, then into each partner's top client as a glass bar of the commission you earn from them, and round
-         again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
+         net deposits, then into a row per partner with a glass bar of what their clients earned you this month (the rows add
+         up to the month's total) and their top client under the name, and round again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
          across the width, the button last. assets/js/ib-insights.js draws it; its words come from data-* on the canvas.
          Names and figures are demo data. -->
     <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
@@ -1818,9 +1818,9 @@ html:lang(ko) * { word-break: keep-all; }
               <span class="tq-ibi__pill" aria-hidden="true"><i></i></span>
               <button type="button" class="tq-ibi__b is-act" aria-pressed="true">네트워크</button><button type="button" class="tq-ibi__b" aria-pressed="false">성과</button><button type="button" class="tq-ibi__b" aria-pressed="false">수익</button>
             </div>
-            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">서브 IB를 단계별로. 누가 누구 아래에 있는지 정확히 확인하세요.</span><span>순입금 순으로 정렬한 파트너. 어느 가지가 성장을 이끄는지 확인하세요.</span><span>각 파트너의 최고 고객과 그 고객에게서 받는 커미션. 조용해진 고객을 찾아내세요.</span></p>
+            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">서브 IB를 단계별로. 누가 누구 아래에 있는지 정확히 확인하세요.</span><span>순입금 순으로 정렬한 파트너. 어느 가지가 성장을 이끄는지 확인하세요.</span><span>각 파트너의 고객이 이번 달 벌어 준 수익과 그중 최고 고객. 조용해진 고객을 찾아내세요.</span></p>
           </div>
-          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="나" data-total="합계 {v}" data-net="네트워크 순입금" data-comm="내 커미션 · {m}" data-top="파트너별 최고 고객" data-active="활성" data-dormant="휴면 위험" data-via="{n} 경유"></canvas></div>
+          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="나" data-total="합계 {v}" data-net="네트워크 순입금" data-comm="내 커미션 · {m}" data-top="파트너별" data-topc="최고 고객: {n}" data-dormant="휴면 위험"></canvas></div>
         </div>
       </div>
     </section>
@@ -2108,7 +2108,7 @@ html:lang(ko) * { word-break: keep-all; }
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=e5b91bee69" defer></script>
 <script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
-<script src="../../assets/js/ib-insights.js?v=15aa01d121" defer></script>
+<script src="../../assets/js/ib-insights.js?v=4c9e79410b" defer></script>
 <script src="../../assets/js/ib-hole.js?v=9caf46d5d6" defer></script>
 </body>
 </html>

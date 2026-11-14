@@ -1798,8 +1798,8 @@ html:lang(ko) * { word-break: keep-all; }
          the views to pick (Network, Performance, Earnings) on a red glass pill that slides over them (the design's "pill"
          selector), the picked view's line under it, and a canvas: the partner tree in glass (You at the top, Sub-IBs level by
          level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
-         net deposits, then into each partner's top client as a glass bar of the commission you earn from them, and round
-         again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
+         net deposits, then into a row per partner with a glass bar of what their clients earned you this month (the rows add
+         up to the month's total) and their top client under the name, and round again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
          across the width, the button last. assets/js/ib-insights.js draws it; its words come from data-* on the canvas.
          Names and figures are demo data. -->
     <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
@@ -1818,9 +1818,9 @@ html:lang(ko) * { word-break: keep-all; }
               <span class="tq-ibi__pill" aria-hidden="true"><i></i></span>
               <button type="button" class="tq-ibi__b is-act" aria-pressed="true">网络</button><button type="button" class="tq-ibi__b" aria-pressed="false">表现</button><button type="button" class="tq-ibi__b" aria-pressed="false">收益</button>
             </div>
-            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">您的下级IB，逐层展开。清楚看到谁在谁之下。</span><span>按净入金为合作伙伴排名。看清哪个分支在推动您的增长。</span><span>每位合作伙伴的头号客户，以及您从中赚取的佣金。及时发现谁沉寂了。</span></p>
+            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">您的下级IB，逐层展开。清楚看到谁在谁之下。</span><span>按净入金为合作伙伴排名。看清哪个分支在推动您的增长。</span><span>每位合作伙伴的客户本月为您带来的收益，以及其头号客户。及时发现谁沉寂了。</span></p>
           </div>
-          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="您" data-total="合计 {v}" data-net="网络净入金" data-comm="您的佣金 · {m}" data-top="每位合作伙伴的头号客户" data-active="活跃" data-dormant="沉睡风险" data-via="经由 {n}"></canvas></div>
+          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="您" data-total="合计 {v}" data-net="网络净入金" data-comm="您的佣金 · {m}" data-top="按合作伙伴" data-topc="头号客户：{n}" data-dormant="沉睡风险"></canvas></div>
         </div>
       </div>
     </section>
@@ -2108,7 +2108,7 @@ html:lang(ko) * { word-break: keep-all; }
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=e5b91bee69" defer></script>
 <script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
-<script src="../../assets/js/ib-insights.js?v=15aa01d121" defer></script>
+<script src="../../assets/js/ib-insights.js?v=4c9e79410b" defer></script>
 <script src="../../assets/js/ib-hole.js?v=9caf46d5d6" defer></script>
 </body>
 </html>
