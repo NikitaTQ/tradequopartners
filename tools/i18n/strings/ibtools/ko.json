@@ -100,6 +100,7 @@
   "ib.cp.by": "제공",
   "ib.cp.note": "예시이며 인물은 가상입니다. 전략은 SocialTrading.ai의 독립 제공자가 운용합니다. 카피 트레이딩에는 손실 위험이 있으며, 과거 성과가 미래 결과를 보장하지 않습니다.",
   "ib.win.h2": "<line>우리 프로그램이</line> <line>앞서는 점.</line>",
+  "ib.win.h2m": "<red>다른 브로커</red>와 비교해 보세요.",
   "ib.win.brokers": "다른 브로커",
   "ib.win.others": "일반적인 IB 프로그램",
   "ib.win.ours": "우리 프로그램",

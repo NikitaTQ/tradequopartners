@@ -135,6 +135,74 @@
       </div>
     </section>
 
+    <!-- Where our program wins (Where_Our_Program_Wins design; Compare_Brokers_Block for phones), right after the hero:
+         a comparison — five terms (Sub-IB levels, revenue share, client attribution, payouts, branded tools), a typical IB
+         program's in the middle, ours on the right on a raised metal card with the TradeQuo logo and a "Become a partner"
+         button. The rows come in one by one when the block comes into view; pointing at a row lights it with glass bands
+         (white on the left, red under ours) and dims the other rows' typical terms. Desktops (1000px+): the design's 1340px
+         table, scaled down to the width under 1340px (the script in the section sets the zoom); narrower: one card, each
+         row as the term, ours, then the typical one. partner.css, "the Where our program wins block". Desktops: ours on a
+         liquid glass card (a red orb behind it shows through), its rim a little red. Narrower than 1000px (the phone
+         design "Compare us with other brokers"): its own heading, a switch Other brokers / TradeQuo on a glass pill above
+         one glass card of the five terms — each row shows the picked side, the two crossfade; it flips every 2.8 s while in
+         view until a side is picked; "reduce motion": TradeQuo, still — then the red button. -->
+    <section id="wins" class="tq-ibw" data-side="them" data-screen-label="IB Tools · Where our program wins">
+      <div class="tq-ibw__in">
+        <h2 class="tq-ibw__h2 tq-ibw__h2--d tq-h2">{{ib.win.h2}}</h2>
+        <h2 class="tq-ibw__h2 tq-ibw__h2--m tq-h2">{{ib.win.h2m}}</h2>
+        <div class="tq-ibw__sw" role="group" aria-label="{{@ib.win.brokers}} / TradeQuo"><span class="tq-ibw__swp" aria-hidden="true"><i></i></span><button type="button" class="tq-ibw__swb is-act" data-side="them" aria-pressed="true">{{ib.win.brokers}}</button><button type="button" class="tq-ibw__swb" data-side="us" aria-pressed="false">TradeQuo</button></div>
+        <div class="tq-ibw__table">
+          <i class="tq-ibw__glow"></i><i class="tq-ibw__orb"></i><i class="tq-ibw__back"></i><i class="tq-ibw__card"><i></i><i></i></i>
+          <div class="tq-ibw__rows">
+            <div class="tq-ibw__head"><span></span><span class="tq-ibw__oh"><b>{{ib.win.brokers}}</b><span>{{ib.win.others}}</span></span><span class="tq-ibw__uh"><img src="{{root}}assets/logo-wordmark-dark.png" width="525" height="71" alt="TradeQuo" decoding="async" loading="lazy"><span>{{ib.win.ours}}</span></span></div>
+            <div class="tq-ibw__row" style="--i:0">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>01</span><b>{{ib.win.r1}}</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o1}}</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>{{ib.win.v1}}</span></b><span>{{ib.win.s1}}</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__row" style="--i:1">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>02</span><b>{{ib.win.r2}}</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o2}}</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>{{ib.win.v2}}</span></b><span>{{ib.win.s2}}</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__row" style="--i:2">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>03</span><b>{{ib.win.r3}}</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o3}}</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><img class="tq-ibw__ico" src="{{root}}assets/ib/partnershield-icon.webp" width="34" height="31" alt="" decoding="async" loading="lazy"><span>{{ib.win.v3}}</span></b><span>{{ib.win.s3}}</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__row" style="--i:3">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>04</span><b>{{ib.win.r4}}</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o4}}</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>{{ib.win.v4}}</span></b><span>{{ib.win.s4}}</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__row" style="--i:4">
+              <i class="tq-ibw__band"></i>
+              <div class="tq-ibw__lbl"><span>05</span><b>{{ib.win.r5}}</b></div>
+              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o5}}</span></div>
+              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>{{ib.win.v5}}</span></b><span>{{ib.win.s5}}</span></div><i class="tq-ibw__etch"></i></div>
+            </div>
+            <div class="tq-ibw__foot"><span></span><span></span><span class="tq-ibw__fc"><a class="tq-ibw__go" href="{{signupHref}}"{{signupNav}}><span class="tq-ibw__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{nav.cta}}</span></a></span></div>
+          </div>
+        </div>
+        <p class="tq-ibw__note">{{ib.win.note}}</p>
+      </div>
+      <script>/* 1000px+: the 1340px table scaled down to the width; the rows wait (is-wait) until a third of the block is in view, then come in one by one.
+   Narrower: the switch Other brokers / TradeQuo (data-side on the section) flips every 2.8 s while a third of the block is in view, until a side is picked; reduced motion: TradeQuo, still */
+(function(){var s=document.currentScript.parentNode,n=s.querySelector('.tq-ibw__in'),m=matchMedia('(min-width: 1000px)'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,b=s.querySelectorAll('.tq-ibw__swb'),vis=false,picked=false;
+function z(){n.style.zoom=m.matches?Math.min(1,s.clientWidth/1340):''}z();addEventListener('resize',z);
+function side(v){s.setAttribute('data-side',v);for(var i=0;i<b.length;i++){var on=b[i].getAttribute('data-side')===v;b[i].classList.toggle('is-act',on);b[i].setAttribute('aria-pressed',on?'true':'false')}}
+for(var i=0;i<b.length;i++)b[i].addEventListener('click',function(){picked=true;side(this.getAttribute('data-side'))});
+if(rm){side('us');return}
+if(!('IntersectionObserver' in window))return;
+new IntersectionObserver(function(e){vis=e[0].isIntersecting},{threshold:.3}).observe(s);
+setInterval(function(){if(!picked&&vis&&!m.matches&&!document.hidden)side(s.getAttribute('data-side')==='us'?'them':'us')},2800);
+if(!m.matches)return;var r=s.getBoundingClientRect();if(r.top<innerHeight*.7)return;s.classList.add('is-wait');var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){s.classList.remove('is-wait');o.disconnect()}},{threshold:.3});o.observe(s)})();</script>
+    </section>
+
     <!-- TradingView Premium on us, still (in place of the Branded toolkit): the Marketing Tools card (a dark card, the
          TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the CTA to the
          form) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
@@ -217,60 +285,7 @@
 (function(){var s=document.currentScript.parentNode,w=s.querySelector('.tq-ibs__wrap'),f=s.querySelector('.tq-ibs__feed'),m=matchMedia('(max-width: 999px)');function z(){if(m.matches){w.style.zoom=Math.min(1.5,s.clientWidth/390);f.style.zoom=''}else{w.style.zoom='';f.style.zoom=1.4}}z();addEventListener('resize',z)})();</script>
     </section>
 
-    <!-- Where our program wins (Where_Our_Program_Wins design), after the signals feed, in place of the Partnershield block:
-         a comparison — five terms (Sub-IB levels, revenue share, client attribution, payouts, branded tools), a typical IB
-         program's in the middle, ours on the right on a raised metal card with the TradeQuo logo and a "Become a partner"
-         button. The rows come in one by one when the block comes into view; pointing at a row lights it with glass bands
-         (white on the left, red under ours) and dims the other rows' typical terms. Desktops (1000px+): the design's 1340px
-         table, scaled down to the width under 1340px (the script in the section sets the zoom); narrower: one card, each
-         row as the term, ours, then the typical one. partner.css, "the Where our program wins block". -->
-    <section id="wins" class="tq-ibw" data-screen-label="IB Tools · Where our program wins">
-      <div class="tq-ibw__in">
-        <h2 class="tq-ibw__h2 tq-h2">{{ib.win.h2}}</h2>
-        <div class="tq-ibw__table">
-          <i class="tq-ibw__glow"></i><i class="tq-ibw__back"></i><i class="tq-ibw__card"><i></i><i></i></i>
-          <div class="tq-ibw__rows">
-            <div class="tq-ibw__head"><span></span><span class="tq-ibw__oh"><b>{{ib.win.brokers}}</b><span>{{ib.win.others}}</span></span><span class="tq-ibw__uh"><img src="{{root}}assets/logo-wordmark-dark.png" width="525" height="71" alt="TradeQuo" decoding="async" loading="lazy"><span>{{ib.win.ours}}</span></span></div>
-            <div class="tq-ibw__row" style="--i:0">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>01</span><b>{{ib.win.r1}}</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o1}}</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>{{ib.win.v1}}</span></b><span>{{ib.win.s1}}</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__row" style="--i:1">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>02</span><b>{{ib.win.r2}}</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o2}}</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>{{ib.win.v2}}</span></b><span>{{ib.win.s2}}</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__row" style="--i:2">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>03</span><b>{{ib.win.r3}}</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o3}}</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><img class="tq-ibw__ico" src="{{root}}assets/ib/partnershield-icon.webp" width="34" height="31" alt="" decoding="async" loading="lazy"><span>{{ib.win.v3}}</span></b><span>{{ib.win.s3}}</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__row" style="--i:3">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>04</span><b>{{ib.win.r4}}</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o4}}</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>{{ib.win.v4}}</span></b><span>{{ib.win.s4}}</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__row" style="--i:4">
-              <i class="tq-ibw__band"></i>
-              <div class="tq-ibw__lbl"><span>05</span><b>{{ib.win.r5}}</b></div>
-              <div class="tq-ibw__oth"><i></i><span><small>{{ib.win.others}}: </small>{{ib.win.o5}}</span></div>
-              <div class="tq-ibw__our"><i class="tq-ibw__band2"></i><div class="tq-ibw__val"><b><span>{{ib.win.v5}}</span></b><span>{{ib.win.s5}}</span></div><i class="tq-ibw__etch"></i></div>
-            </div>
-            <div class="tq-ibw__foot"><span></span><span></span><span class="tq-ibw__fc"><a class="tq-ibw__go" href="{{signupHref}}"{{signupNav}}><span class="tq-ibw__arr" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{nav.cta}}</span></a></span></div>
-          </div>
-        </div>
-        <p class="tq-ibw__note">{{ib.win.note}}</p>
-      </div>
-      <script>/* 1000px+: the 1340px table scaled down to the width; the rows wait (is-wait) until a third of the block is in view, then come in one by one */
-(function(){var s=document.currentScript.parentNode,n=s.querySelector('.tq-ibw__in'),m=matchMedia('(min-width: 1000px)');function z(){n.style.zoom=m.matches?Math.min(1,s.clientWidth/1340):''}z();addEventListener('resize',z);if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;var r=s.getBoundingClientRect();if(r.top<innerHeight*.7)return;s.classList.add('is-wait');var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){s.classList.remove('is-wait');o.disconnect()}},{threshold:.3});o.observe(s)})();</script>
-    </section>
-
-    <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after Partnershield: left
+    <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after the signals feed: left
          the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block, "Powered by
          SocialTrading.ai"); right two glass hands with phones — the provider's (a trade opened) and the client's (the trade
          copied at the client's size); the position gathers into a drop of liquid silver (WebGL) that leaves the provider's
