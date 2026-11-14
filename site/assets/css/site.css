@@ -947,64 +947,59 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   background: rgba(12,12,14,.42); border: 1px solid rgba(255,255,255,.24); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-variant-numeric: tabular-nums; }
 @media (prefers-reduced-motion: reduce) { .tq-film__ctl, .tq-film__b { transition: none; } }
 
-/* ---- the header: the steel plate (the TradeQuo menu design, a brushed-steel bar) ------------------------------------
-   The plate is the design's own picture: assets/head/plate.webp (1858x138, the bar cut out of the design with its rounded
-   ends; the logo, the pages, the language pill and the button taken off it), laid as a border image: its two rounded
-   ends (70 image px each) keep their shape, the brushed middle stretches to the width; for the light pages its light and
-   shade are a third flatter and lighter than the design's, its red tints mostly gone, and no red glow round its ends
-   (that is light on black, a smudge on white). The bar is 48px high (half the
-   design's size at the site's 15px type), the pages keep their 15px. On it: the logo cut into the steel (head/logo.webp,
-   the design's own), the five pages in Inter, letterpressed (a light hair under each letter), the page you are on darker
-   and semibold with its red dot; the language button an inset steel pill (head/lang.webp, 34px) and the red button an
-   inset red one (head/cta.webp, 32px), both stretched the same way round their words. No band round it: the page shows
-   round the plate (the dark header keeps its black band, as the design shows the plate). The pages are near-black, to
-   read on the steel as well as they did on white. The header stays 88px in the
-   page's flow (20px above and below the plate), so nothing under it moves; on the way down the plate stays on top, 12px
-   from the screen's top, and steps aside for a full-screen scene (startStickyHead in landing.js). */
-.tq-head { --g: 42px; position: sticky; top: 12px; z-index: 50; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  width: min(1408px, calc(100% - 32px)); height: 48px; margin: 20px auto; padding: 0 8px 0 18px; padding-inline: 18px 8px; border-radius: 24px;
-  border: 0 solid transparent; border-image: url(../head/plate.webp) 0 70 fill / 0 24.35px stretch;
-  box-shadow: 0 10px 16px -10px rgba(12,13,16,.5), 0 2px 5px -3px rgba(12,13,16,.3);
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease; }
-@media (max-width: 1439px) { .tq-head { --g: max(16px, calc(8.75vw - 84px)); } }   /* 28px at 1280 */
+/* ---- the header: the dark bar (the TradeQuo menu design: black, two hairlines lit red towards the ends) --------------
+   The bar is the design's own picture: assets/head/bar.webp (1967x118, the black bar between its hairlines, everything
+   on it taken off), laid as a border image across the whole width: its two ends (200 image px each, where the red light
+   is) keep their shape, the middle stretches. 64px high; the five pages 15px. On it: the silver logo (head/logo.webp,
+   the design's own), the pages light grey, the one you are on white and semibold with a short red line under it; the
+   language button a dark glass pill (head/lang.webp) and the red button a glossy red one (head/cta.webp), both stretched
+   the same way round their words. Under the bar the black runs on into the white page over 52px (::after, an eased
+   fade): the page's top shows through it, nothing moves (the header keeps its 88px in the flow: the bar and 24px under
+   it). Scrolled, the fade goes and the bar stays on top with a soft shadow; it steps aside for a full-screen scene
+   (startStickyHead in landing.js). */
+.tq-head { --g: 36px; position: sticky; top: 0; z-index: 50; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  width: 100%; height: 64px; margin: 0 0 24px; padding: 0 max(clamp(16px, 4vw, 56px), calc((100% - 1328px) / 2));
+  border: 0 solid transparent; border-image: url(../head/bar.webp) 0 200 fill / 0 108.5px stretch;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease; }
+.tq-head::after { content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: 100%; height: 52px; pointer-events: none; transition: opacity .3s ease;
+  background: linear-gradient(180deg, rgb(9,8,8) 0%, rgba(9,8,8,.72) 14%, rgba(9,8,8,.49) 28%, rgba(9,8,8,.3) 42%, rgba(9,8,8,.16) 56%, rgba(9,8,8,.07) 70%, rgba(9,8,8,.015) 85%, rgba(9,8,8,0) 100%); }
+.tq-head.is-stuck::after { opacity: 0; }
+.tq-head.is-stuck { box-shadow: 0 10px 22px -12px rgba(0,0,0,.55); }
+@media (max-width: 1439px) { .tq-head { --g: max(16px, calc(4.375vw - 27px)); } }   /* 29px at 1280 */
 @media (max-width: 1279px) { .tq-head { --g: 16px; gap: 16px; } .tq-head__cta { padding: 0 16px; } }
-.tq-head.is-stuck { box-shadow: 0 12px 20px -10px rgba(12,13,16,.55), 0 2px 6px -3px rgba(12,13,16,.32); }
 .tq-head.is-away { transform: translateY(calc(-100% - 24px)); }
-@media (prefers-reduced-motion: reduce) { .tq-head { transition: none; } }
-.tq-head__home { display: inline-flex; flex-shrink: 0; margin-top: 3px; }
-.tq-head__logo { display: block; flex-shrink: 0; height: 26px; width: auto; }
-header.tq-head > .tq-head__logo { margin-top: 3px; }
+@media (prefers-reduced-motion: reduce) { .tq-head, .tq-head::after { transition: none; } }
+.tq-head__home { display: inline-flex; flex-shrink: 0; }
+.tq-head__logo { display: block; flex-shrink: 0; height: 28px; width: auto; }
 .tq-head__nav { display: flex; align-items: center; justify-content: flex-end; flex-wrap: nowrap; gap: var(--g); }
-.tq-head .tq-nav-link { top: 1px; color: #131417; text-shadow: 0 1px 0 rgba(255,255,255,.55); }
-.tq-head .tq-nav-link[aria-current="page"] { color: #000; font-weight: 600; }
-.tq-head .tq-nav-link[aria-current="page"]::after { bottom: -6px; width: 4px; height: 4px; margin-left: -2px; }
-.tq-head .tq-lang { margin-inline-start: calc(-.2 * var(--g)); }
-.tq-head .tq-lang__btn { position: relative; box-sizing: border-box; height: 34px; gap: 6px; padding: 0 12px 0 11px; padding-inline: 11px 12px; border-radius: 999px; border: 0 solid transparent;
-  border-image: url(../head/lang.webp) 0 35 fill / 0 17px stretch; background: none; color: #17181a; font: 700 13.5px/1 'Inter', sans-serif; letter-spacing: .01em;
-  text-shadow: 0 1px 0 rgba(255,255,255,.45); transition: filter .2s ease; }
-.tq-head .tq-lang__btn:hover, .tq-head .tq-lang__btn[aria-expanded="true"] { color: #0a0a0a; filter: brightness(1.05); }
-.tq-head .tq-lang__globe { width: 17px; height: 17px; }
-.tq-head .tq-lang__chev { width: 12px; height: 12px; stroke-width: 2.9; }
+.tq-head .tq-nav-link { color: #bebec3; }
+.tq-head .tq-nav-link[aria-current="page"] { color: #f4f4f6; font-weight: 600; }
+.tq-head .tq-nav-link[aria-current="page"]::after { bottom: -11px; width: 66%; height: 2.5px; margin-left: -33%; border-radius: 2px; background: #d9161d; box-shadow: 0 0 8px rgba(231,19,27,.55); }
+.tq-head .tq-lang { margin-inline-start: 12px; }
+.tq-head .tq-lang__btn { position: relative; box-sizing: border-box; height: 36px; gap: 7px; padding: 0 14px 0 13px; padding-inline: 13px 14px; border-radius: 999px; border: 0 solid transparent;
+  border-image: url(../head/lang.webp) 0 36 fill / 0 18.25px stretch; background: none; color: #c9c9ce; font: 600 14px/1 'Inter', sans-serif; letter-spacing: .01em; transition: filter .2s ease, color .2s ease; }
+.tq-head .tq-lang__btn:hover, .tq-head .tq-lang__btn[aria-expanded="true"] { color: #fff; filter: brightness(1.3); }
+.tq-head .tq-lang__globe { width: 16px; height: 16px; }
+.tq-head .tq-lang__chev { width: 11px; height: 11px; stroke-width: 2.6; }
 .tq-head .tq-lang__burger { width: 18px; height: 18px; }
-.tq-head__cta { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; box-sizing: border-box; height: 32px; padding: 0 18px; margin-inline-start: calc(-.34 * var(--g));
-  border-radius: 999px; border: 0 solid transparent; border-image: url(../head/cta.webp) 0 32 fill / 0 16px stretch;
-  color: #f7dcdb; font-size: 14px; font-weight: 500; letter-spacing: -.005em; white-space: nowrap; text-decoration: none; transition: filter .2s ease, color .2s ease; }
-.tq-head__cta:hover, .tq-head__cta:focus-visible { color: #fff; filter: brightness(1.1); }
-/* phones: the plate nearly as wide as the screen, the logo smaller, the menu button a round inset pill (its tap area
-   44px), the red button a little tighter */
+.tq-head__cta { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; box-sizing: border-box; height: 38px; padding: 0 22px; margin-inline-start: -4px;
+  border-radius: 999px; border: 0 solid transparent; border-image: url(../head/cta.webp) 0 37 fill / 0 19.3px stretch;
+  color: #f0dcdc; font-size: 14.5px; font-weight: 500; letter-spacing: -.005em; white-space: nowrap; text-decoration: none; transition: filter .2s ease, color .2s ease; }
+.tq-head__cta:hover, .tq-head__cta:focus-visible { color: #fff; filter: brightness(1.12); }
+/* phones: the logo smaller, the menu button a round glass pill (its tap area 44px), the red button a little tighter */
 @media (max-width: 640px) {
-  .tq-head { width: calc(100% - 12px); gap: 8px !important; padding: 0 7px 0 14px !important; padding-inline: 14px 7px !important; }
-  .tq-head .tq-head__logo { height: clamp(16px, 5vw, 20px) !important; }
+  .tq-head { gap: 8px !important; padding: 0 12px 0 14px !important; padding-inline: 14px 12px !important; }
+  .tq-head .tq-head__logo { height: clamp(18px, 5.6vw, 24px) !important; }
   .tq-head .tq-head__nav { gap: 8px !important; }
   .tq-head .tq-lang { margin-inline-start: 0; }
   .tq-head .tq-lang__btn { width: 38px; height: 38px; padding: 0; justify-content: center; border-image-width: 0 19px; }
   .tq-head .tq-lang__btn::before { content: ''; position: absolute; inset: -3px; }
-  .tq-head .tq-head__cta { height: 34px; border-image-width: 0 17px; margin-inline-start: 0; padding: 0 clamp(12px, 3.6vw, 15px) !important; font-size: clamp(13px, 3.6vw, 14px) !important; letter-spacing: -.01em !important; }
+  .tq-head .tq-head__cta { height: 36px; border-image-width: 0 18.3px; margin-inline-start: 0; padding: 0 clamp(12px, 3.6vw, 16px) !important; font-size: clamp(13px, 3.6vw, 14px) !important; letter-spacing: -.01em !important; }
 }
-/* the narrowest phones (320px): every language's button still on the plate */
+/* the narrowest phones (320px): every language's button still in the bar */
 @media (max-width: 359px) {
-  .tq-head { width: calc(100% - 8px); gap: 6px !important; padding: 0 6px 0 10px !important; padding-inline: 10px 6px !important; }
-  .tq-head .tq-head__logo { height: 15px !important; }
+  .tq-head { gap: 6px !important; padding: 0 8px 0 10px !important; padding-inline: 10px 8px !important; }
+  .tq-head .tq-head__logo { height: 16px !important; }
   .tq-head .tq-head__nav { gap: 6px !important; }
   .tq-head .tq-head__cta { padding: 0 10px !important; font-size: 13px !important; }
 }
