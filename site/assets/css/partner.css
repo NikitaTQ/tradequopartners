@@ -1302,14 +1302,12 @@
 :lang(ko) .tq-ibx__go, :lang(ko) .tq-ibx__how, :lang(zh) .tq-ibx__go, :lang(zh) .tq-ibx__how { letter-spacing: .04em; font-size: 14px; }
 
 /* IB Tools: the hero (IB_Tools_Hero). Left an eyebrow, the H1 (the site's H1 face; the last sentence red), the lead and two
-   buttons (red "Become a partner", glass "Compare programs"). Right the design's 800x720 composition (.tq-ibtp__scene, in
-   its px) scaled to the column by --s (the section's script: width / 800, at most 1): "Other brokers" on a cracked
-   stone tablet (a noise grain, hairline cracks), a silver VS ball, "Our IB program" on a white card with a red glow,
-   the first row lit. Positions are inline-start based, so it mirrors in Arabic. Below its two columns' widths the
-   composition goes under the text, across the width (as the design does). Type: Inter (DM Sans in the design), 800 is 700. */
+   buttons (red "Become a partner", glass "Compare programs"). Right the design's picture with the page's words over it
+   (below). Below its two columns' widths the picture goes under the text, across the width (as the design does). Type:
+   Inter (DM Sans in the design), 800 is 700. */
 .tq-ibtp { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px);
   padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px); color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  background: radial-gradient(55% 60% at 72% 50%, #fff 0%, rgba(255,255,255,0) 75%), linear-gradient(180deg, #fafafb 0%, #e9eaec 100%); }   /* the foot is the next block's grey */
+  background: linear-gradient(180deg, #f7f7f8 0%, #f3f3f5 22%, #f3f3f5 78%, #e9eaec 100%); }   /* the picture's grey (#f3f3f5) through the middle; the foot is the next block's grey */
 .tq-ibtp__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(40px, 5vw, 72px); }
 .tq-ibtp__text { position: relative; z-index: 2; flex: 1 1 420px; max-width: 560px; min-width: 0; display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); }
 .tq-ibtp__eye { font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #55585f; }
@@ -1329,47 +1327,37 @@
   box-shadow: inset 0 2px 1px #fff, inset 0 -6px 12px -8px rgba(18,22,30,.2), 0 16px 28px -20px rgba(18,22,30,.5); transition: color .2s ease; }
 .tq-ibtp__cmp:hover { color: #e7131b; }
 .tq-ibtp__go:focus-visible, .tq-ibtp__cmp:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
-/* the composition */
-.tq-ibtp__vis { --s: .8; position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; aspect-ratio: 800 / 720; }
-.tq-ibtp__scene { position: absolute; left: 0; top: 0; width: 800px; height: 720px; transform: scale(var(--s)); transform-origin: 0 0; }
-[dir="rtl"] .tq-ibtp__scene { left: auto; right: 0; transform-origin: 100% 0; }
-.tq-ibtp__them { position: absolute; inset-inline-start: 0; top: 104px; width: 304px; height: 596px; box-sizing: border-box; padding: 4px; border-radius: 30px;
-  background: linear-gradient(160deg, #fff 0%, #ecedef 50%, #dadbde 100%); box-shadow: 0 30px 46px -30px rgba(18,22,30,.4), 0 6px 14px -10px rgba(18,22,30,.2); }
-.tq-ibtp__them-in { position: relative; width: 100%; height: 100%; box-sizing: border-box; padding: 0 30px; overflow: hidden; border-radius: 26px;
-  background: linear-gradient(175deg, #f7f7f8 0%, #f0f0f2 60%, #ebebed 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.07), inset 0 2px 1px rgba(255,255,255,.9), inset 0 -14px 24px -18px rgba(18,22,30,.18); }
-.tq-ibtp__grain { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .22; mix-blend-mode: multiply; pointer-events: none; }
-.tq-ibtp__cracks { position: absolute; left: 0; top: 0; pointer-events: none; }
-[dir="rtl"] .tq-ibtp__cracks { transform: scaleX(-1); }   /* the cracks run from the side the VS ball is on */
-.tq-ibtp__th { position: relative; height: 96px; display: flex; align-items: center; font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #45474c; }
-.tq-ibtp__tr { position: relative; height: 96px; display: flex; flex-direction: column; justify-content: center; gap: 7px; border-top: 1px solid rgba(18,22,30,.09); box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
-.tq-ibtp__tr span { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #7a7c82; }
-.tq-ibtp__tr b { font-size: 18px; line-height: 1.2; font-weight: 500; color: #55575d; }
-.tq-ibtp__us { position: absolute; inset-inline-start: 350px; top: 28px; width: 440px; height: 672px; box-sizing: border-box; padding: 11px; border-radius: 44px;
-  background: linear-gradient(165deg, #fff 0%, #f4f4f5 40%, #fafafa 70%, #fff 100%);
-  box-shadow: 0 0 0 1.5px rgba(255,120,126,.6), 0 0 26px 3px rgba(255,60,68,.3), 0 0 70px 10px rgba(255,60,68,.12), 0 50px 70px -40px rgba(18,22,30,.35), inset 0 0 0 1px #fff, inset 0 3px 3px #fff, inset 0 -4px 10px rgba(231,19,27,.14); }
-.tq-ibtp__us-in { position: relative; width: 100%; height: 100%; box-sizing: border-box; padding: 0 22px; overflow: hidden; border-radius: 34px;
-  background: linear-gradient(180deg, #f1f1f2 0%, #ececee 55%, #efeff1 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), inset 0 3px 8px rgba(18,22,30,.08), inset 0 -2px 6px rgba(255,255,255,.9); }
-.tq-ibtp__sheen { position: absolute; left: -10%; top: -6%; width: 120%; height: 16%; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%); pointer-events: none; }
-.tq-ibtp__uh { position: relative; height: 118px; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding-inline-start: 16px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #4a4b50; }
-.tq-ibtp__uh img { display: block; align-self: flex-start; width: auto; height: 21px; }
-.tq-ibtp__ur { position: relative; height: 104px; box-sizing: border-box; padding: 0 16px; display: flex; align-items: center; gap: 18px; border-top: 1px solid rgba(18,22,30,.1); box-shadow: inset 0 1px 0 #fff; }
-.tq-ibtp__ur--lit { border-top: 0; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.35) 100%); box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(18,22,30,.06); }
-.tq-ibtp__ur > span { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
-.tq-ibtp__ur b { font-size: 29px; line-height: 1.02; font-weight: 700; letter-spacing: -.03em; text-wrap: balance; }
-.tq-ibtp__ur b.tq-ibtp__big { font-size: 32px; font-variant-numeric: tabular-nums; }
-.tq-ibtp__ur > span > span { font-size: 15px; line-height: 1.25; font-weight: 500; color: #3e3f44; }
-.tq-ibtp__ic { flex: none; display: block; width: 40px; height: auto; }
-svg.tq-ibtp__ic { height: 40px; }
-svg.tq-ibtp__ic--inf { width: 44px; height: 44px; }
-.tq-ibtp__vs { position: absolute; z-index: 3; inset-inline-start: 290px; top: 362px; width: 76px; height: 76px; box-sizing: border-box; padding: 0; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; --h1s: 18px; --h1k: 1; line-height: 1; color: #0a0a0a;
-  background: radial-gradient(circle at 34% 26%, #fff 0%, #e4e5e8 16%, #9a9da4 48%, #4a4d54 80%, #2b2d33 100%); box-shadow: inset 0 1px 1px rgba(255,255,255,.9), inset 0 -6px 10px rgba(0,0,0,.35), 0 16px 26px -10px rgba(18,22,30,.55); }
+/* the picture: the design's own (Typical broker on a worn stone tablet, VS, Our IB program on a glass card), without its
+   words: assets/ib/hero-vs.webp, 1292x1217, divided by its background (#f3f3f5) and laid with multiply, so its
+   background disappears into the section's and its shadows and glow stay. The words are laid over it at the design's
+   places, in the page's language: each one's left edge and baseline in picture px (--x, --b), as wide as its card
+   allows (to --r), scaled with the picture (--s, set by the section's script: width / 1292); a long word steps its
+   size down (data-fitw). Sizes, tracking and colours are the design's, measured off the picture, in Inter. The old
+   terms are struck through in red, each line at its own slight angle (--a), as drawn in the design. The picture stays
+   as it is in Arabic; the words there are right-aligned in their places. */
+.tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; }
+/* the picture has wide empty margins round the cards (x 75-1200, y 115-1035 of 1292x1217): it is drawn larger than its
+   column, so that the cards fill the column's width, and its margins hang out (invisible: multiply on the same grey) */
+.tq-ibvs { --s: .55; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
+.tq-ibvs__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
+.tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
+.tq-ibvs__w > * { position: absolute; display: block; box-sizing: border-box; left: calc(var(--x) * 1px); width: calc((var(--r) - var(--x)) * 1px); top: calc(var(--b) * 1px - .86em);
+  line-height: 1; white-space: nowrap; text-align: start; }
+.tq-ibvs__th { font-size: 20.5px; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; color: #1d1c1c; }
+.tq-ibvs__tl { font-size: 17px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #595958; }
+.tq-ibvs__tv { font-size: 26.5px; font-weight: 400; letter-spacing: -.01em; color: #1a1616; }
+.tq-ibvs__tv s { position: relative; display: inline-block; text-decoration: none; }
+.tq-ibvs__tv s::after { content: ""; position: absolute; left: -.1em; right: -.1em; top: .54em; height: 1.6px; border-radius: 1px; background: #d8262c; opacity: .92; transform: rotate(var(--a)); }
+.tq-ibvs__uh { font-size: 18.9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #494a4c; }
+.tq-ibvs__ut { font-size: 37.9px; font-weight: 650; letter-spacing: -.03em; color: #0a0a0a; }
+.tq-ibvs__ut--big { font-size: 44.3px; font-variant-numeric: tabular-nums; }
+.tq-ibvs__us { font-size: 19.8px; font-weight: 400; letter-spacing: -.005em; color: #434446; }
+.tq-ibvs__us--dots > span { display: inline-block; margin-inline: .15em; font-size: .7em; vertical-align: .12em; }   /* the red dots between the tools */
+:lang(ar) .tq-ibvs__th, :lang(th) .tq-ibvs__th, :lang(ja) .tq-ibvs__th, :lang(ko) .tq-ibvs__th, :lang(zh) .tq-ibvs__th,
+:lang(ar) .tq-ibvs__tl, :lang(th) .tq-ibvs__tl, :lang(ja) .tq-ibvs__tl, :lang(ko) .tq-ibvs__tl, :lang(zh) .tq-ibvs__tl,
+:lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh { letter-spacing: .02em; }
 /* scripts without capitals: no wide tracking */
-:lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye,
-:lang(ar) .tq-ibtp__th, :lang(th) .tq-ibtp__th, :lang(ja) .tq-ibtp__th, :lang(ko) .tq-ibtp__th, :lang(zh) .tq-ibtp__th,
-:lang(ar) .tq-ibtp__uh, :lang(th) .tq-ibtp__uh, :lang(ja) .tq-ibtp__uh, :lang(ko) .tq-ibtp__uh, :lang(zh) .tq-ibtp__uh,
-:lang(ar) .tq-ibtp__tr span, :lang(th) .tq-ibtp__tr span, :lang(ja) .tq-ibtp__tr span, :lang(ko) .tq-ibtp__tr span, :lang(zh) .tq-ibtp__tr span { letter-spacing: .02em; }
-:lang(ar) .tq-ibtp__tr span, :lang(th) .tq-ibtp__tr span, :lang(ja) .tq-ibtp__tr span, :lang(ko) .tq-ibtp__tr span, :lang(zh) .tq-ibtp__tr span { font-size: 12px; }
+:lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye { letter-spacing: .02em; }
 @media (prefers-reduced-motion: reduce) { .tq-ibtp__go, .tq-ibtp__cmp { transition: none; } }
 
 /* IB Tools: the black hole block (IB_Tools_Black_Hole_Obsidian), drawn by assets/js/ib-hole.js on the canvas, which
