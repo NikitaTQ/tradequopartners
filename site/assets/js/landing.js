@@ -383,10 +383,10 @@
       const t = document.getElementById(a.getAttribute('href').slice(1));
       if (!t) return;
       e.preventDefault();
-      /* clear of the sticky header (the steel plate and the 6px above it); a stop inside a full-screen scene goes
-         exactly there, the header steps aside for the scene anyway */
+      /* clear of the sticky header: its bar and the darker part of the fade under it (40px); a stop inside a
+         full-screen scene goes exactly there, the header steps aside for the scene anyway */
       const head = $('header.tq-head');
-      const off = head && !t.closest('[data-flip-track]') ? Math.round(head.offsetHeight + (parseFloat(getComputedStyle(head).top) || 0)) : 0;
+      const off = head && !t.closest('[data-flip-track]') ? Math.round(head.offsetHeight + (parseFloat(getComputedStyle(head).top) || 0) + 40) : 0;
       go(t.getBoundingClientRect().top + scrollY - off);
       history.replaceState(null, '', '#' + t.id);
     }));
