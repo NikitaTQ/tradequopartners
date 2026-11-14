@@ -837,7 +837,7 @@ footer p { font-size: 12px !important; }
 .tq-ibtp__cmp:hover { color: #e7131b; }
 .tq-ibtp__go:focus-visible, .tq-ibtp__cmp:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
 .tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; direction: ltr; }
-.tq-ibvs { --s: .55; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
+.tq-ibvs { --s: .55; --pw: 1292; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
 .tq-ibvs__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
 .tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
 .tq-ibvs__w > * { position: absolute; display: block; box-sizing: border-box; left: calc(var(--x) * 1px); width: calc((var(--r) - var(--x)) * 1px); top: calc(var(--b) * 1px - .86em);
@@ -862,8 +862,20 @@ footer p { font-size: 12px !important; }
 .tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
 .tq-ibtp__eye { order: 1; font-size: calc(12px * var(--k)); }
 .tq-ibtp__h1 { order: 2; --h1s: calc(34px * var(--k)); margin-top: calc(14px * var(--k)); }
-.tq-ibtp__vis { order: 3; flex: none; width: 100%; max-width: none; margin-top: calc(12px * var(--k)); }
-.tq-ibvs { width: calc(115% * var(--k)); margin: calc(-10.24% * var(--k)) 0 calc(-14.86% * var(--k)) calc(50% - 56.74% * var(--k)); }
+.tq-ibtp__vis { order: 3; flex: none; width: auto; max-width: none; margin: calc(12px * var(--k)) calc(-1 * clamp(16px, 6vw, 24px)) 0; }
+.tq-ibvs { --pw: 923; width: calc((100% - 20px) * 923 / 805.8); aspect-ratio: 923 / 1080;
+    margin: calc((100% - 20px) * -35 / 805.8) 0 calc((100% - 20px) * -80 / 805.8) calc(10px - (100% - 20px) * 40 / 805.8); }
+.tq-ibvs__w--us { transform: scale(var(--s)) translate(-350px, -70px); }
+.tq-ibvs__w--them { transform: scale(var(--s)) translate(-14px, 89px) scale(.7); }
+.tq-ibvs__w--them > * { width: calc((358 - var(--x)) * 1px); }
+.tq-ibvs__w--them[dir="rtl"] > * { width: calc((345 - var(--x)) * 1px); }
+.tq-ibvs__w--us > * { width: calc((1145 - var(--x)) * 1px); }
+.tq-ibvs__th { font-size: 25px; }
+.tq-ibvs__tl { font-size: 22px; }
+.tq-ibvs__tv { font-size: 30px; }
+.tq-ibvs__uh { font-size: 22px; }
+.tq-ibvs__ul { font-size: 22px; }
+.tq-ibvs__us { font-size: 23.5px; }
 .tq-ibtp__ctas { order: 4; margin-top: calc(14px * var(--k)); padding-top: 0; gap: calc(12px * var(--k)); }
 .tq-ibtp__go, .tq-ibtp__cmp { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
 .tq-ibtp__go { gap: calc(16px * var(--k)); padding-inline: calc(28px * var(--k)) calc(7px * var(--k)); }
@@ -1495,7 +1507,8 @@ footer p { font-size: 12px !important; }
          (assets/ib/hero-vs.webp, 1292x1217, laid with mix-blend-mode: multiply); the words are the page's, in its language,
          laid over it where the design has them (--x / --b: left and baseline in picture px; --s: the picture's scale, set
          by the script in the section). Narrow screens (as the design does it): the text, then the picture across the width;
-         phones: the eyebrow and H1, the picture, the buttons, the lead, all sized to fit the screen (--k, same script). The previous heroes (Every lot dashboard, the creators
+         phones: the eyebrow and H1, the picture, the buttons, the lead (--k, same script). The phones' picture is its own
+         (hero-vs-m.webp): our card larger and in front, the tablet behind it, the words of each card in their own layer. The previous heroes (Every lot dashboard, the creators
          dashboard, the devices film) are in the git history. partner.css, "the IB Tools hero". -->
     <section id="desk" class="tq-ibtp" data-screen-label="IB Tools hero · Compare">
       <div class="tq-ibtp__wrap">
@@ -1510,8 +1523,8 @@ footer p { font-size: 12px !important; }
         </div>
         <div class="tq-ibtp__vis">
           <div class="tq-ibvs" dir="ltr">
-            <img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=08663d049a" width="1292" height="1217" alt="" decoding="async" fetchpriority="high">
-            <div class="tq-ibvs__w" dir="ltr">
+            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=fc8524a11a" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=08663d049a" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
+            <div class="tq-ibvs__w tq-ibvs__w--them" dir="ltr">
               <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>Andere Broker</span>
               <span class="tq-ibvs__tl" style="--x:122.7;--b:371;--r:465" data-fitw>Sub-IB-Ebenen</span>
               <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465" data-fitw>1–2 Ebenen</b>
@@ -1523,6 +1536,8 @@ footer p { font-size: 12px !important; }
               <b class="tq-ibvs__tv" style="--x:127.3;--b:818;--r:465" data-fitw>Monatlich</b>
               <span class="tq-ibvs__tl" style="--x:129.6;--b:909;--r:465" data-fitw>Tools</span>
               <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465" data-fitw>Nur ein Empfehlungslink</b>
+            </div>
+            <div class="tq-ibvs__w tq-ibvs__w--us" dir="ltr">
               <span class="tq-ibvs__uh" style="--x:676.9;--b:245;--r:1130" data-fitw>Unser IB-Programm</span>
               <span class="tq-ibvs__ul" style="--x:761.6;--b:321.4;--r:1130" data-fitw>Sub-IB-Ebenen</span>
               <b class="tq-ibvs__ut" style="--x:760.5;--b:360;--r:1130" data-fitw>Unbegrenzte Ebenen</b>
@@ -1543,15 +1558,16 @@ footer p { font-size: 12px !important; }
           </div>
         </div>
       </div>
-      <script>/* the picture (1292x1217) at its width: --s for the words laid over it. Phones: --k, the first screen's size
-   (1.06: 6% over its base sizes), lowered until the whole screen (title, picture, buttons, lead) fits under the header;
+      <script>/* the picture (1292x1217; phones: 923x1080, --pw) at its width: --s for the words laid over it. Phones: --k, the
+   size of the title, buttons and lead (1.06: 6% over their base sizes), lowered (to .9 at most) so that the first screen
+   fits under the header if it can; the picture keeps its size (the screen's width), so that its words stay readable;
    the H1's own fitted size is cleared first (measured at its full size; the page's fit-to-width runs again after this).
    Set before the first paint, again once the fonts are in and when the window changes. */
 (function(){var sec=document.currentScript.parentNode,v=sec.querySelector('.tq-ibvs'),wr=sec.querySelector('.tq-ibtp__wrap'),h1=sec.querySelector('.tq-ibtp__h1'),mq=window.matchMedia&&matchMedia('(max-width: 640px)'),
-f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',(w/1292).toFixed(4))},
+f=function(){var w=v.clientWidth,pw=parseFloat(getComputedStyle(v).getPropertyValue('--pw'))||1292;if(w)v.style.setProperty('--s',(w/pw).toFixed(4))},
 fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();return}
 var cs=getComputedStyle(sec),room=parseFloat(cs.minHeight)||innerHeight-sec.getBoundingClientRect().top-scrollY,k=1.06,i,need;h1.style.fontSize='';
-for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);if(need<=room+.5)break;k=Math.max(.6,k*room/need-.002)}f()};
+for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);if(need<=room+.5||k<=.9)break;k=Math.max(.9,k*room/need-.002)}f()};
 fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
     </section>
 
