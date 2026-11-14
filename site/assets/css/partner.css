@@ -1337,7 +1337,7 @@
 .tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; direction: ltr; }   /* ltr: the picture, wider than its column, hangs out by its own margins in Arabic too */
 /* the picture has wide empty margins round the cards (x 75-1200, y 115-1035 of 1292x1217): it is drawn larger than its
    column, so that the cards fill the column's width, and its margins hang out (invisible: multiply on the same grey) */
-.tq-ibvs { --s: .55; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
+.tq-ibvs { --s: .55; --pw: 1292; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
 .tq-ibvs__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
 .tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
 .tq-ibvs__w > * { position: absolute; display: block; box-sizing: border-box; left: calc(var(--x) * 1px); width: calc((var(--r) - var(--x)) * 1px); top: calc(var(--b) * 1px - .86em);
@@ -1357,9 +1357,9 @@
 /* scripts without capitals: no wide tracking */
 :lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye { letter-spacing: .02em; }
 /* phones: the title, the picture, the buttons, then the lead (the text column's parts laid out with the picture, in that
-   order). Everything — type, buttons, picture, gaps — is sized by --k: 1.06, i.e. 6% over the base sizes, and less where
-   that would not fit the screen under the header (the section's script lowers it until the whole first screen fits).
-   The picture is centred on its cards and hangs out into the gutters; the text and buttons sit over its empty margins. */
+   order). Type, buttons and gaps are sized by --k: 1.06, i.e. 6% over the base sizes, and less (down to .9) where that
+   would not fit the screen under the header (the section's script). The picture is sized by the screen's width only,
+   as large as it goes, so that its words stay readable; the text and buttons sit over its empty margins. */
 @media (max-width: 640px) {
   .tq-ibtp { --k: 1.06; padding: calc(20px * var(--k)) clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
   .tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; }
@@ -1367,8 +1367,25 @@
   .tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
   .tq-ibtp__eye { order: 1; font-size: calc(12px * var(--k)); }
   .tq-ibtp__h1 { order: 2; --h1s: calc(34px * var(--k)); margin-top: calc(14px * var(--k)); }
-  .tq-ibtp__vis { order: 3; flex: none; width: 100%; max-width: none; margin-top: calc(12px * var(--k)); }
-  .tq-ibvs { width: calc(115% * var(--k)); margin: calc(-10.24% * var(--k)) 0 calc(-14.86% * var(--k)) calc(50% - 56.74% * var(--k)); }
+  .tq-ibtp__vis { order: 3; flex: none; width: auto; max-width: none; margin: calc(12px * var(--k)) calc(-1 * clamp(16px, 6vw, 24px)) 0; }
+  /* the phones' own picture (hero-vs-m.webp, 923x1080): our card in front at the desktop picture's scale, the tablet
+     behind it at .7 with its right part (no words, only cracks) under our card's edge, VS on that edge. The two cards
+     (x 40-845.8 of it) span the screen less 10px a side; the glow above and the shadow below hang into the gaps. Each
+     card's words keep their desktop places, moved (and the tablet's scaled .7) onto this picture; the small ones are
+     larger here, and the tablet's stop short of the VS ball (smaller here, .75). */
+  .tq-ibvs { --pw: 923; width: calc((100% - 20px) * 923 / 805.8); aspect-ratio: 923 / 1080;
+    margin: calc((100% - 20px) * -35 / 805.8) 0 calc((100% - 20px) * -80 / 805.8) calc(10px - (100% - 20px) * 40 / 805.8); }
+  .tq-ibvs__w--us { transform: scale(var(--s)) translate(-350px, -70px); }
+  .tq-ibvs__w--them { transform: scale(var(--s)) translate(-14px, 89px) scale(.7); }
+  .tq-ibvs__w--them > * { width: calc((358 - var(--x)) * 1px); }   /* clear of the VS ball */
+  .tq-ibvs__w--them[dir="rtl"] > * { width: calc((345 - var(--x)) * 1px); }
+  .tq-ibvs__w--us > * { width: calc((1145 - var(--x)) * 1px); }
+  .tq-ibvs__th { font-size: 25px; }
+  .tq-ibvs__tl { font-size: 22px; }
+  .tq-ibvs__tv { font-size: 30px; }
+  .tq-ibvs__uh { font-size: 22px; }
+  .tq-ibvs__ul { font-size: 22px; }
+  .tq-ibvs__us { font-size: 23.5px; }
   .tq-ibtp__ctas { order: 4; margin-top: calc(14px * var(--k)); padding-top: 0; gap: calc(12px * var(--k)); }
   .tq-ibtp__go, .tq-ibtp__cmp { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
   .tq-ibtp__go { gap: calc(16px * var(--k)); padding-inline: calc(28px * var(--k)) calc(7px * var(--k)); }
