@@ -115,11 +115,8 @@
   "ib.win.s4": "sans minimum, sans frais de retrait",
   "ib.win.o5": "Simple lien de parrainage",
   "ib.win.v5": "À votre marque",
-  "ib.tv.h": "TradingView Premium, gratuit à vie.",
-  "ib.tv.life": "Accès à vie",
-  "ib.tv.list": "Prix catalogue / an",
-  "ib.tv.paid": "Payé par TradeQuo",
-  "ib.tv.pay": "Vous payez",
-  "ib.tv.yr": "/an",
-  "ib.tv.cta": "Obtenir Premium gratuitement"
+  "ib.stage.hint": "Faites défiler pour lever le rideau",
+  "ib.stage.t1": "La scène",
+  "ib.stage.t2": "est à vous.",
+  "ib.stage.lead": "Votre marque sous les projecteurs — copy trading, signaux et applis à votre nom."
 }
