@@ -313,7 +313,6 @@ for page in PAGES:
             'signupNav': (' data-page-link data-label="%s"' % render_attr(s('loader') + ' · ' + s('fan.home'))) if slug else '',
             # the header: dark (light wordmark) on pages that start with a dark screen
             'headClass': ' tq-head--dark' if page.get('head') == 'dark' else '',
-            'logoFile': 'logo-wordmark-light.png' if page.get('head') == 'dark' else 'logo-wordmark-dark.png',
             'pageCss': ('\n<link rel="stylesheet" href="%sassets/css/%s.css" data-inline>' % (root, page['css'])) if page.get('css') else '',
         }
 

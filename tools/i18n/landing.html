@@ -27,14 +27,14 @@
 {{> loader}}
 <div style="font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased;">
 
-  <header class="tq-head" style="position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px clamp(16px, 4vw, 56px); max-width: 1440px; margin: 0 auto;">
-    <img src="{{root}}assets/logo-wordmark-dark.png" alt="TradeQuo" style="height: 23px; width: auto; flex-shrink: 0;">
-    <nav style="display: flex; align-items: center; gap: clamp(14px, 2vw, 32px); flex-wrap: wrap; justify-content: flex-end;">
+  <header class="tq-head">
+    <img class="tq-head__logo" src="{{root}}assets/head/logo.webp" width="268" height="48" alt="TradeQuo">
+    <nav class="tq-head__nav">
       <span data-navlinks="" style="display: contents;">
         {{siteNav}}
       </span>
       {{langSwitcher}}
-      <a class="hv-red-bg" href="#signup" style="display: inline-flex; align-items: center; flex-shrink: 0; white-space: nowrap; height: 44px; padding: 0 24px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 15px; font-weight: 600; letter-spacing: -.01em;">{{nav.cta}}</a>
+      <a class="tq-head__cta" href="#signup">{{nav.cta}}</a>
     </nav>
   </header>
 

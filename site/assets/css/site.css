@@ -525,15 +525,22 @@ html { scroll-snap-type: y proximity; }
 }
 /* (header .tq-nav-link: the base 15px is declared further down and would win over a bare .tq-nav-link here) */
 @media (min-width: 1140px) and (max-width: 1279px) { header nav { gap: 16px !important; } header .tq-nav-link { font-size: 14px; } }
-/* five pages in the row: the longest languages (es, pt, pl, uk) keep that compact row up to 1439px, and below 1220px
-   they use the menu, as every language does below 1140px */
+/* five pages in the row: the longest languages (es, pt, pl, uk) keep that compact row up to 1439px, and below 1260px
+   they use the menu, as every language does below 1140px (Vietnamese below 1180px): the steel plate's ends take room */
 @media (min-width: 1280px) and (max-width: 1439px) { html:lang(es) header nav, html:lang(pt) header nav, html:lang(pl) header nav, html:lang(uk) header nav { gap: 16px !important; } html:lang(es) .tq-nav-link, html:lang(pt) .tq-nav-link, html:lang(pl) .tq-nav-link, html:lang(uk) .tq-nav-link { font-size: 14px; } }
-@media (min-width: 1140px) and (max-width: 1219px) {
+@media (min-width: 1140px) and (max-width: 1259px) {
   html:lang(es) [data-fanmenu], html:lang(es) [data-fanveil], html:lang(es) [data-navlinks], html:lang(pt) [data-fanmenu], html:lang(pt) [data-fanveil], html:lang(pt) [data-navlinks], html:lang(pl) [data-fanmenu], html:lang(pl) [data-fanveil], html:lang(pl) [data-navlinks], html:lang(uk) [data-fanmenu], html:lang(uk) [data-fanveil], html:lang(uk) [data-navlinks] { display: none !important; }
   html:lang(es) [data-fab], html:lang(pt) [data-fab], html:lang(pl) [data-fab], html:lang(uk) [data-fab] { display: flex !important; }
   html:lang(es) .tq-lang__btn .tq-lang__globe, html:lang(pt) .tq-lang__btn .tq-lang__globe, html:lang(pl) .tq-lang__btn .tq-lang__globe, html:lang(uk) .tq-lang__btn .tq-lang__globe { display: none; }
   html:lang(es) .tq-lang__btn .tq-lang__burger, html:lang(pt) .tq-lang__btn .tq-lang__burger, html:lang(pl) .tq-lang__btn .tq-lang__burger, html:lang(uk) .tq-lang__btn .tq-lang__burger { display: block; }
   html:lang(es) .tq-lang__menu .tq-lang__page, html:lang(pt) .tq-lang__menu .tq-lang__page, html:lang(pl) .tq-lang__menu .tq-lang__page, html:lang(uk) .tq-lang__menu .tq-lang__page { display: block; }
+}
+@media (min-width: 1140px) and (max-width: 1179px) {
+  html:lang(vi) [data-fanmenu], html:lang(vi) [data-fanveil], html:lang(vi) [data-navlinks] { display: none !important; }
+  html:lang(vi) [data-fab] { display: flex !important; }
+  html:lang(vi) .tq-lang__btn .tq-lang__globe { display: none; }
+  html:lang(vi) .tq-lang__btn .tq-lang__burger { display: block; }
+  html:lang(vi) .tq-lang__menu .tq-lang__page { display: block; }
 }
 /* a short screen (a phone on its side) scrolls the menu's list */
 @media (max-height: 640px) { [data-fab-list] { max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; padding: 10px 14px; margin: -10px -14px; } }
@@ -773,7 +780,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 @media (max-width: 640px) {
   .tq-lang__btn { width: 44px; height: 44px; padding: 0; justify-content: center; }
   .tq-lang__code, .tq-lang__chev { display: none; }
-  .tq-lang__menu { position: fixed; top: 72px; right: 16px; left: auto; min-width: 0; width: min(260px, calc(100vw - 32px)); max-height: calc(100vh - 96px); }
+  .tq-lang__menu { position: fixed; top: 96px; right: 16px; left: auto; min-width: 0; width: min(260px, calc(100vw - 32px)); max-height: calc(100vh - 112px); }
   header img[alt] { height: 19px !important; }
   header nav > a.hv-red-bg { height: 44px !important; padding: 0 16px !important; font-size: 14px !important; }
   header nav { gap: 10px !important; flex-wrap: nowrap !important; }
@@ -909,11 +916,11 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 }
 
 /* ---- Dark header (Marketing Tools: the page opens on a dark screen) ----------------------------------
-   The bar runs edge to edge in the hero's own black, so header and hero read as one dark screen;
-   the wordmark is the light one (build-i18n.py: page 'head': 'dark'). The black is one plain band behind the bar,
+   The bar runs edge to edge in the hero's own black, so header and hero read as one dark screen, with the steel plate
+   on it (as the plate's design shows it; build-i18n.py: page 'head': 'dark'). The black is one plain band behind the bar,
    edge to edge (.tp clips the overhang), reaching 2px under the hero: no clipped shadow, whose soft edge let a
    hairline of the white page show under the bar at the sides on some screens. */
-.tq-head--dark::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: -2px; left: 50%; width: 100vw; margin-left: -50vw; background: #0a0a0b; pointer-events: none; }
+.tq-head--dark::before { content: ''; position: absolute; z-index: -1; top: -6px; bottom: 12px; left: 50%; width: 100vw; margin-left: -50vw; background: #0a0a0b; pointer-events: none; }
 /* ---- the partner film (#film): a video with the film player's own buttons over it -----------------------------------
    The buttons as the film drew them: sizes off --e = 3% of the box's width (34-44px), dimmed to .55 until the film is
    hovered or paused; back / forward 1.5 s with their labels, pause / play in the middle (startFilm in landing.js). */
@@ -940,25 +947,75 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   background: rgba(12,12,14,.42); border: 1px solid rgba(255,255,255,.24); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-variant-numeric: tabular-nums; }
 @media (prefers-reduced-motion: reduce) { .tq-film__ctl, .tq-film__b { transition: none; } }
 
-/* ---- sticky header -------------------------------------------------------------------------------------
-   The header stays on top while the page scrolls (position: sticky in the markup). Scrolled, it is shorter (68px:
-   it gives 20px of padding back as a bottom margin, at the same pace, so the page under it never moves) and sits on
-   a white band from edge to edge with a soft shadow (the dark header keeps its black band). While a full-screen
-   scene holds the screen (the landing's Infinite Flow flip) it slides up
-   out of the way and comes back after it (startStickyHead in landing.js). */
-.tq-head { transition: padding-top .25s ease, padding-bottom .25s ease, margin-bottom .25s ease, transform .35s cubic-bezier(.2,.8,.2,1); }
-.tq-head::after { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; margin-left: -50vw; pointer-events: none;
-  background: #fff; box-shadow: 0 1px 0 rgba(10,10,10,.06), 0 12px 24px -20px rgba(10,10,10,.4); opacity: 0; transition: opacity .25s ease; }
-.tq-head.is-stuck { padding-top: 12px !important; padding-bottom: 12px !important; margin-bottom: 20px !important; }
-.tq-head.is-stuck::after { opacity: 1; }
-.tq-head--dark::after { display: none; }
+/* ---- the header: the steel plate (the TradeQuo menu design, a brushed-steel bar) ------------------------------------
+   The plate is the design's own picture: assets/head/plate.webp (1858x138, the bar cut out of the design with its rounded
+   ends; the logo, the pages, the language pill and the button taken off it), laid as a border image: its two rounded
+   ends (70 image px each) keep their shape, the brushed middle stretches to the width. Sizes are the design's at the
+   site's 15px type: .6957 css px a design px (the bar 96px high). On it: the logo cut into the steel (head/logo.webp,
+   the design's own), the five pages in Inter, letterpressed (a light hair under each letter), the page you are on darker
+   and semibold with its red dot; the language button an inset steel pill (head/lang.webp) and the red button an inset
+   red one (head/cta.webp), both stretched the same way round their words. No band round it: the page shows round the
+   plate (the dark header keeps its black band, as the design shows the plate). The header stays 88px in the page's
+   flow (6px above the plate, the plate's foot over the page's top), so nothing under it moves; on the way down it stays
+   on top, 6px from the screen's top, and steps aside for a full-screen scene (startStickyHead in landing.js). */
+.tq-head { --g: 42px; position: sticky; top: 6px; z-index: 50; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  width: min(1408px, calc(100% - 32px)); height: 96px; margin: 6px auto -14px; padding: 0 31.3px 0 40.4px; padding-inline: 40.4px 31.3px; border-radius: 48px;
+  border: 0 solid transparent; border-image: url(../head/plate.webp) 0 70 fill / 0 48.7px stretch;
+  box-shadow: 0 16px 24px -16px rgba(12,13,16,.55), 0 3px 8px -4px rgba(12,13,16,.3);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease; }
+/* the red light at the plate's two ends (the design's glow; soft on the light page) */
+.tq-head::after { content: ''; position: absolute; z-index: -1; inset: -12px -14px; pointer-events: none; opacity: .35;
+  background: radial-gradient(44px 52px at 30px 50%, rgba(231,19,27,.6), rgba(231,19,27,0) 100%), radial-gradient(44px 52px at calc(100% - 30px) 50%, rgba(231,19,27,.6), rgba(231,19,27,0) 100%); }
+@media (max-width: 1439px) { .tq-head { --g: max(16px, calc(8.75vw - 84px)); } }   /* 28px at 1280 */
+@media (max-width: 1279px) { .tq-head { --g: 16px; gap: 16px; } .tq-head__cta { padding: 0 25px; } }
+.tq-head.is-stuck { box-shadow: 0 18px 30px -16px rgba(12,13,16,.6), 0 3px 10px -4px rgba(12,13,16,.32); }
 .tq-head.is-away { transform: translateY(calc(-100% - 24px)); }
-@media (prefers-reduced-motion: reduce) { .tq-head, .tq-head::after { transition: none; } }
-.tq-head--dark nav a.hv-red { color: rgba(255,255,255,.78) !important; }
-.tq-head--dark nav a.tq-nav-link[aria-current="page"] { color: #fff !important; }
-.tq-head--dark nav a.hv-red:hover { color: #fff !important; }
-.tq-head--dark .tq-lang__btn { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.18); color: #f2f2f4; }
-.tq-head--dark .tq-lang__btn:hover, .tq-head--dark .tq-lang__btn[aria-expanded="true"] { border-color: rgba(255,255,255,.6); color: #fff; }
+@media (prefers-reduced-motion: reduce) { .tq-head { transition: none; } }
+.tq-head__home { display: inline-flex; flex-shrink: 0; margin-top: 4px; }
+.tq-head__logo { display: block; flex-shrink: 0; height: 33.4px; width: auto; }
+header.tq-head > .tq-head__logo { margin-top: 4px; }
+.tq-head__nav { display: flex; align-items: center; justify-content: flex-end; flex-wrap: nowrap; gap: var(--g); }
+.tq-head .tq-nav-link { top: 1px; color: #26272a; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
+.tq-head .tq-nav-link[aria-current="page"] { color: #0c0c0d; font-weight: 600; }
+.tq-head .tq-nav-link[aria-current="page"]::after { bottom: -11px; }
+.tq-head .tq-lang { margin-inline-start: calc(-.2 * var(--g)); }
+.tq-head .tq-lang__btn { box-sizing: border-box; height: 48.7px; gap: 8.2px; padding: 0 16.7px 0 16.3px; padding-inline: 16.3px 16.7px; border-radius: 999px; border: 0 solid transparent;
+  border-image: url(../head/lang.webp) 0 35 fill / 0 24.35px stretch; background: none; color: #17181a; font: 700 14.5px/1 'Inter', sans-serif; letter-spacing: .01em;
+  text-shadow: 0 1px 0 rgba(255,255,255,.45); transition: filter .2s ease; }
+.tq-head .tq-lang__btn:hover, .tq-head .tq-lang__btn[aria-expanded="true"] { color: #0a0a0a; filter: brightness(1.05); }
+.tq-head .tq-lang__globe { width: 20px; height: 20px; }
+.tq-head .tq-lang__chev { width: 14px; height: 14px; stroke-width: 2.9; }
+.tq-head .tq-lang__burger { width: 22px; height: 22px; }
+.tq-head__cta { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; box-sizing: border-box; height: 44.5px; padding: 0 28.4px; margin-inline-start: calc(-.34 * var(--g));
+  border-radius: 999px; border: 0 solid transparent; border-image: url(../head/cta.webp) 0 32 fill / 0 22.3px stretch;
+  color: #f7dcdb; font-size: 15px; font-weight: 500; letter-spacing: -.005em; white-space: nowrap; text-decoration: none; transition: filter .2s ease, color .2s ease; }
+.tq-head__cta:hover, .tq-head__cta:focus-visible { color: #fff; filter: brightness(1.1); }
+/* tablets and narrow desktops: the pages are in the language button's menu (☰); phones: the plate nearly as wide as the
+   screen, the logo smaller, the menu button a round inset pill, the red button a little tighter */
+/* below 1140px the plate is 82px high (and its buttons a little smaller), so that it ends where the page starts (88px):
+   the first screens there start their headings right under the header */
+@media (max-width: 1139px) {
+  .tq-head { height: 82px; margin-bottom: 0; border-image-width: 0 41.6px; }
+  .tq-head .tq-lang__btn { height: 44px; border-image-width: 0 22px; }
+  .tq-head .tq-head__cta { height: 40px; border-image-width: 0 20px; }
+  .tq-head__home, header.tq-head > .tq-head__logo { margin-top: 3px; }
+}
+@media (max-width: 640px) {
+  .tq-head { width: calc(100% - 12px); gap: 8px !important; padding: 0 clamp(12px, 5.6vw, 24px) 0 clamp(14px, 6.2vw, 26px) !important; padding-inline: clamp(14px, 6.2vw, 26px) clamp(12px, 5.6vw, 24px) !important; }
+  .tq-head .tq-head__logo { height: clamp(18px, 5.56vw, 22px) !important; }
+  .tq-head .tq-head__nav { gap: 8px !important; }
+  .tq-head .tq-lang { margin-inline-start: 0; }
+  .tq-head .tq-lang__btn { width: 44px; height: 44px; padding: 0; justify-content: center; }
+  .tq-head .tq-head__cta { margin-inline-start: 0; padding: 0 clamp(12px, 3.6vw, 16px) !important; font-size: clamp(13px, 3.6vw, 14px) !important; letter-spacing: -.01em !important; }
+}
+/* the narrowest phones (320px): every language's button still on the plate */
+@media (max-width: 359px) {
+  .tq-head { width: calc(100% - 8px); gap: 6px !important; padding: 0 10px 0 12px !important; padding-inline: 12px 10px !important; }
+  .tq-head .tq-head__logo { height: 16px !important; }
+  .tq-head .tq-head__nav { gap: 6px !important; }
+  .tq-head .tq-lang__btn { width: 44px; height: 44px; }
+  .tq-head .tq-head__cta { padding: 0 10px !important; font-size: 13px !important; }
+}
 
 /* ---- Phones: the first CTA of /programs/ and /partner-terms/ in the first screen -------------------------
    Short subtitles (.tq-ph / .tq-nph: one sentence of the full one), tighter spacing, a lower program art,

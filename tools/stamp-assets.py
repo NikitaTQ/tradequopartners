@@ -23,7 +23,7 @@ from urllib.parse import urlsplit, parse_qsl, urlencode
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, 'site')
 ATTR = re.compile(r'''((?:href|src|data-src|data-src-hi|srcset|poster)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg|mp4|webm|woff2)(?:\?[^"#]*)?)(")''')
-FONT_URL = re.compile(r'''(url\()([^)'"#]+\.woff2(?:\?[^)'"#]*)?)(\))''')
+FONT_URL = re.compile(r'''(url\()([^)'"#]+\.(?:woff2|webp|png)(?:\?[^)'"#]*)?)(\))''')   # fonts, and the images CSS draws (the header plate)
 
 
 def digest(path):
@@ -190,7 +190,7 @@ def inline_css(page):
         css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)                  # comments stay in the source only
         css = used_css(css, re.sub(r'<style[^>]*>.*?</style>', '', html, flags=re.S))   # only what this page can use
         css = re.sub(r'\n\s*\n+', '\n', css)
-        body = css.replace('url(../fonts/', 'url(%sassets/fonts/' % prefix).replace('</style', '<\\/style')
+        body = css.replace('url(../', 'url(%sassets/' % prefix).replace('</style', '<\\/style')   # fonts, images
         return '<style id="%s-css" data-prefix="%s">\n%s\n</style>' % (name, prefix, body.strip())
     out = re.sub(r'<link rel="stylesheet" href="([./]*)assets/css/([a-z-]+)\.css[^"]*" data-inline>', lambda m: block(m.group(1), m.group(2)), html)
     out = re.sub(r'<style id="([a-z-]+)-css" data-prefix="([./]*)">.*?</style>', lambda m: block(m.group(2), m.group(1)), out, flags=re.S)
