@@ -90,12 +90,12 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 }
 @font-face { font-family: 'TQ H1 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate.woff2?v=74200cea7f) format('woff2'); }
 @font-face { font-family: 'TQ H1 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded.woff2?v=096978db61) format('woff2'); }
-@font-face { font-family: 'TQ H1 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi.woff2?v=4c1859d4b1) format('woff2'); }
-@font-face { font-family: 'TQ H1 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt.woff2?v=cf00854b3c) format('woff2'); }
-@font-face { font-family: 'TQ H1 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one.woff2?v=8d00ffccb6) format('woff2'); }
-@font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans.woff2?v=afed8b4bba) format('woff2'); }
-@font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc.woff2?v=24f61ad28d) format('woff2'); }
-@font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc.woff2?v=dd74bdb290) format('woff2'); }
+@font-face { font-family: 'TQ H1 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi.woff2?v=58a5996bef) format('woff2'); }
+@font-face { font-family: 'TQ H1 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt.woff2?v=2cdc18041f) format('woff2'); }
+@font-face { font-family: 'TQ H1 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one.woff2?v=2fb41707d0) format('woff2'); }
+@font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans.woff2?v=2e79487be4) format('woff2'); }
+@font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc.woff2?v=f676322df4) format('woff2'); }
+@font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc.woff2?v=189ff0a42a) format('woff2'); }
 @font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=b9ff73bb14) format('woff2'); }
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=4d6a6698a8) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=c998cf7bdb) format('woff2'); }
@@ -801,7 +801,7 @@ footer p { font-size: 12px !important; }
 :lang(ko) .tq-ibx__go, :lang(ko) .tq-ibx__how, :lang(zh) .tq-ibx__go, :lang(zh) .tq-ibx__how { letter-spacing: .04em; font-size: 14px; }
 .tq-ibtp { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px);
   padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px); color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  background: radial-gradient(55% 60% at 72% 50%, #fff 0%, rgba(255,255,255,0) 75%), linear-gradient(180deg, #fafafb 0%, #e9eaec 100%); }
+  background: linear-gradient(180deg, #f7f7f8 0%, #f3f3f5 22%, #f3f3f5 78%, #e9eaec 100%); }
 .tq-ibtp__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(40px, 5vw, 72px); }
 .tq-ibtp__text { position: relative; z-index: 2; flex: 1 1 420px; max-width: 560px; min-width: 0; display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); }
 .tq-ibtp__eye { font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #55585f; }
@@ -821,45 +821,26 @@ footer p { font-size: 12px !important; }
   box-shadow: inset 0 2px 1px #fff, inset 0 -6px 12px -8px rgba(18,22,30,.2), 0 16px 28px -20px rgba(18,22,30,.5); transition: color .2s ease; }
 .tq-ibtp__cmp:hover { color: #e7131b; }
 .tq-ibtp__go:focus-visible, .tq-ibtp__cmp:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
-.tq-ibtp__vis { --s: .8; position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; aspect-ratio: 800 / 720; }
-.tq-ibtp__scene { position: absolute; left: 0; top: 0; width: 800px; height: 720px; transform: scale(var(--s)); transform-origin: 0 0; }
-[dir="rtl"] .tq-ibtp__scene { left: auto; right: 0; transform-origin: 100% 0; }
-.tq-ibtp__them { position: absolute; inset-inline-start: 0; top: 104px; width: 304px; height: 596px; box-sizing: border-box; padding: 4px; border-radius: 30px;
-  background: linear-gradient(160deg, #fff 0%, #ecedef 50%, #dadbde 100%); box-shadow: 0 30px 46px -30px rgba(18,22,30,.4), 0 6px 14px -10px rgba(18,22,30,.2); }
-.tq-ibtp__them-in { position: relative; width: 100%; height: 100%; box-sizing: border-box; padding: 0 30px; overflow: hidden; border-radius: 26px;
-  background: linear-gradient(175deg, #f7f7f8 0%, #f0f0f2 60%, #ebebed 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.07), inset 0 2px 1px rgba(255,255,255,.9), inset 0 -14px 24px -18px rgba(18,22,30,.18); }
-.tq-ibtp__grain { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .22; mix-blend-mode: multiply; pointer-events: none; }
-.tq-ibtp__cracks { position: absolute; left: 0; top: 0; pointer-events: none; }
-[dir="rtl"] .tq-ibtp__cracks { transform: scaleX(-1); }
-.tq-ibtp__th { position: relative; height: 96px; display: flex; align-items: center; font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #45474c; }
-.tq-ibtp__tr { position: relative; height: 96px; display: flex; flex-direction: column; justify-content: center; gap: 7px; border-top: 1px solid rgba(18,22,30,.09); box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
-.tq-ibtp__tr span { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #7a7c82; }
-.tq-ibtp__tr b { font-size: 18px; line-height: 1.2; font-weight: 500; color: #55575d; }
-.tq-ibtp__us { position: absolute; inset-inline-start: 350px; top: 28px; width: 440px; height: 672px; box-sizing: border-box; padding: 11px; border-radius: 44px;
-  background: linear-gradient(165deg, #fff 0%, #f4f4f5 40%, #fafafa 70%, #fff 100%);
-  box-shadow: 0 0 0 1.5px rgba(255,120,126,.6), 0 0 26px 3px rgba(255,60,68,.3), 0 0 70px 10px rgba(255,60,68,.12), 0 50px 70px -40px rgba(18,22,30,.35), inset 0 0 0 1px #fff, inset 0 3px 3px #fff, inset 0 -4px 10px rgba(231,19,27,.14); }
-.tq-ibtp__us-in { position: relative; width: 100%; height: 100%; box-sizing: border-box; padding: 0 22px; overflow: hidden; border-radius: 34px;
-  background: linear-gradient(180deg, #f1f1f2 0%, #ececee 55%, #efeff1 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), inset 0 3px 8px rgba(18,22,30,.08), inset 0 -2px 6px rgba(255,255,255,.9); }
-.tq-ibtp__sheen { position: absolute; left: -10%; top: -6%; width: 120%; height: 16%; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%); pointer-events: none; }
-.tq-ibtp__uh { position: relative; height: 118px; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding-inline-start: 16px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #4a4b50; }
-.tq-ibtp__uh img { display: block; align-self: flex-start; width: auto; height: 21px; }
-.tq-ibtp__ur { position: relative; height: 104px; box-sizing: border-box; padding: 0 16px; display: flex; align-items: center; gap: 18px; border-top: 1px solid rgba(18,22,30,.1); box-shadow: inset 0 1px 0 #fff; }
-.tq-ibtp__ur--lit { border-top: 0; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.35) 100%); box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(18,22,30,.06); }
-.tq-ibtp__ur > span { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
-.tq-ibtp__ur b { font-size: 29px; line-height: 1.02; font-weight: 700; letter-spacing: -.03em; text-wrap: balance; }
-.tq-ibtp__ur b.tq-ibtp__big { font-size: 32px; font-variant-numeric: tabular-nums; }
-.tq-ibtp__ur > span > span { font-size: 15px; line-height: 1.25; font-weight: 500; color: #3e3f44; }
-.tq-ibtp__ic { flex: none; display: block; width: 40px; height: auto; }
-svg.tq-ibtp__ic { height: 40px; }
-svg.tq-ibtp__ic--inf { width: 44px; height: 44px; }
-.tq-ibtp__vs { position: absolute; z-index: 3; inset-inline-start: 290px; top: 362px; width: 76px; height: 76px; box-sizing: border-box; padding: 0; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; --h1s: 18px; --h1k: 1; line-height: 1; color: #0a0a0a;
-  background: radial-gradient(circle at 34% 26%, #fff 0%, #e4e5e8 16%, #9a9da4 48%, #4a4d54 80%, #2b2d33 100%); box-shadow: inset 0 1px 1px rgba(255,255,255,.9), inset 0 -6px 10px rgba(0,0,0,.35), 0 16px 26px -10px rgba(18,22,30,.55); }
-:lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye,
-:lang(ar) .tq-ibtp__th, :lang(th) .tq-ibtp__th, :lang(ja) .tq-ibtp__th, :lang(ko) .tq-ibtp__th, :lang(zh) .tq-ibtp__th,
-:lang(ar) .tq-ibtp__uh, :lang(th) .tq-ibtp__uh, :lang(ja) .tq-ibtp__uh, :lang(ko) .tq-ibtp__uh, :lang(zh) .tq-ibtp__uh,
-:lang(ar) .tq-ibtp__tr span, :lang(th) .tq-ibtp__tr span, :lang(ja) .tq-ibtp__tr span, :lang(ko) .tq-ibtp__tr span, :lang(zh) .tq-ibtp__tr span { letter-spacing: .02em; }
-:lang(ar) .tq-ibtp__tr span, :lang(th) .tq-ibtp__tr span, :lang(ja) .tq-ibtp__tr span, :lang(ko) .tq-ibtp__tr span, :lang(zh) .tq-ibtp__tr span { font-size: 12px; }
+.tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; }
+.tq-ibvs { --s: .55; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
+.tq-ibvs__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
+.tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
+.tq-ibvs__w > * { position: absolute; display: block; box-sizing: border-box; left: calc(var(--x) * 1px); width: calc((var(--r) - var(--x)) * 1px); top: calc(var(--b) * 1px - .86em);
+  line-height: 1; white-space: nowrap; text-align: start; }
+.tq-ibvs__th { font-size: 20.5px; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; color: #1d1c1c; }
+.tq-ibvs__tl { font-size: 17px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #595958; }
+.tq-ibvs__tv { font-size: 26.5px; font-weight: 400; letter-spacing: -.01em; color: #1a1616; }
+.tq-ibvs__tv s { position: relative; display: inline-block; text-decoration: none; }
+.tq-ibvs__tv s::after { content: ""; position: absolute; left: -.1em; right: -.1em; top: .54em; height: 1.6px; border-radius: 1px; background: #d8262c; opacity: .92; transform: rotate(var(--a)); }
+.tq-ibvs__uh { font-size: 18.9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #494a4c; }
+.tq-ibvs__ut { font-size: 37.9px; font-weight: 650; letter-spacing: -.03em; color: #0a0a0a; }
+.tq-ibvs__ut--big { font-size: 44.3px; font-variant-numeric: tabular-nums; }
+.tq-ibvs__us { font-size: 19.8px; font-weight: 400; letter-spacing: -.005em; color: #434446; }
+.tq-ibvs__us--dots > span { display: inline-block; margin-inline: .15em; font-size: .7em; vertical-align: .12em; }
+:lang(ar) .tq-ibvs__th, :lang(th) .tq-ibvs__th, :lang(ja) .tq-ibvs__th, :lang(ko) .tq-ibvs__th, :lang(zh) .tq-ibvs__th,
+:lang(ar) .tq-ibvs__tl, :lang(th) .tq-ibvs__tl, :lang(ja) .tq-ibvs__tl, :lang(ko) .tq-ibvs__tl, :lang(zh) .tq-ibvs__tl,
+:lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh { letter-spacing: .02em; }
+:lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye { letter-spacing: .02em; }
 @media (prefers-reduced-motion: reduce) {
 .tq-ibtp__go, .tq-ibtp__cmp { transition: none; }
 }
@@ -1478,10 +1459,11 @@ svg.tq-ibtp__ic--inf { width: 44px; height: 44px; }
   <main>
     <!-- Hero (IB_Tools_Hero design): static. Left an eyebrow, the H1 (the last sentence red), the lead and two buttons —
          "Become a partner" (the form) and "Compare programs" (the comparison right below, #wins). Right the design's
-         800x720 composition, scaled to its column (--s, set by the script in the section: the column's width / 800, at
-         most 1): "Other brokers" on a cracked stone tablet, a silver "VS" ball, "Our IB program" on a white card with a
-         red glow — the same five terms as the comparison block. Mirrored in Arabic. Narrow screens (as the design does it):
-         the text, then the composition across the width. The previous heroes (Every lot dashboard, the creators
+         picture: "Typical broker" on a worn stone tablet (its old terms struck through in red), a silver "VS" ball, "Our IB
+         program" on a glass card with a red glow. The picture is the design's own, without its words
+         (assets/ib/hero-vs.webp, 1292x1217, laid with mix-blend-mode: multiply); the words are the page's, in its language,
+         laid over it where the design has them (--x / --b: left and baseline in picture px; --s: the picture's scale, set
+         by the script in the section). Narrow screens (as the design does it): the text, then the picture across the width. The previous heroes (Every lot dashboard, the creators
          dashboard, the devices film) are in the git history. partner.css, "the IB Tools hero". -->
     <section id="desk" class="tq-ibtp" data-screen-label="IB Tools hero · Compare">
       <div class="tq-ibtp__wrap">
@@ -1495,46 +1477,37 @@ svg.tq-ibtp__ic--inf { width: 44px; height: 44px; }
           </div>
         </div>
         <div class="tq-ibtp__vis">
-          <div class="tq-ibtp__scene">
-            <div class="tq-ibtp__them">
-              <div class="tq-ibtp__them-in">
-                <img class="tq-ibtp__grain" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .3 0 0 0 0 .32 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E" alt="">
-                <svg class="tq-ibtp__cracks" width="296" height="588" viewBox="0 0 296 588" fill="none" aria-hidden="true">
-                  <path d="M34 182 L196 166 M170 462 L270 450 M200 118 L276 110" stroke="rgba(255,255,255,.85)" stroke-width=".8"/>
-                  <path d="M34 183.5 L196 167.5 M170 463.5 L270 451.5" stroke="rgba(18,22,30,.1)" stroke-width=".6"/>
-                  <path d="M296 318 L272 328 L260 318 L238 342 L220 336 L202 360" stroke="#FFFFFF" stroke-width="1.2" stroke-linejoin="round" transform="translate(0 1)"/>
-                  <path d="M296 318 L272 328 L260 318 L238 342 L220 336 L202 360" stroke="rgba(18,22,30,.32)" stroke-width=".9" stroke-linejoin="round"/>
-                  <path d="M260 318 L255 292 L264 276 M238 342 L243 366" stroke="rgba(18,22,30,.22)" stroke-width=".7" stroke-linejoin="round"/>
-                  <path d="M296 528 L280 536 L276 558 L262 572 L264 588" stroke="#FFFFFF" stroke-width="1.1" stroke-linejoin="round" transform="translate(0 1)"/>
-                  <path d="M296 528 L280 536 L276 558 L262 572 L264 588" stroke="rgba(18,22,30,.28)" stroke-width=".8" stroke-linejoin="round"/>
-                  <path d="M0 132 L10 142 L6 160 L14 172" stroke="rgba(18,22,30,.22)" stroke-width=".7" stroke-linejoin="round"/>
-                  <path d="M240 0 L248 12 L262 10 L270 22" stroke="rgba(18,22,30,.2)" stroke-width=".7" stroke-linejoin="round"/>
-                </svg>
-                <div class="tq-ibtp__th">Andere Broker</div>
-                <div class="tq-ibtp__tr"><span>Sub-IB-Ebenen</span><b>1–2 Ebenen</b></div>
-                <div class="tq-ibtp__tr"><span>Umsatzbeteiligung</span><b>Fest, gedeckelt</b></div>
-                <div class="tq-ibtp__tr"><span>Zuordnung</span><b>Nicht garantiert</b></div>
-                <div class="tq-ibtp__tr"><span>Auszahlungen</span><b>Monatlich</b></div>
-                <div class="tq-ibtp__tr"><span>Tools</span><b>Nur ein Empfehlungslink</b></div>
-              </div>
+          <div class="tq-ibvs" dir="ltr">
+            <img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=311a7450bd" width="1292" height="1217" alt="" decoding="async" fetchpriority="high">
+            <div class="tq-ibvs__w" dir="ltr">
+              <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>Typischer Broker</span>
+              <span class="tq-ibvs__tl" style="--x:122.7;--b:371;--r:465" data-fitw>Sub-IB-Ebenen</span>
+              <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465;--a:.6deg" data-fitw><s>1–2 Ebenen</s></b>
+              <span class="tq-ibvs__tl" style="--x:124.1;--b:505;--r:465" data-fitw>Umsatzbeteiligung</span>
+              <b class="tq-ibvs__tv" style="--x:124.1;--b:548;--r:465;--a:0deg" data-fitw><s>Fest, gedeckelt</s></b>
+              <span class="tq-ibvs__tl" style="--x:126.4;--b:643;--r:465" data-fitw>Zuordnung</span>
+              <b class="tq-ibvs__tv" style="--x:126.3;--b:684;--r:465;--a:-.3deg" data-fitw><s>Nicht garantiert</s></b>
+              <span class="tq-ibvs__tl" style="--x:128.1;--b:775;--r:465" data-fitw>Auszahlungen</span>
+              <b class="tq-ibvs__tv" style="--x:127.3;--b:818;--r:465;--a:-1deg" data-fitw><s>Monatlich</s></b>
+              <span class="tq-ibvs__tl" style="--x:129.6;--b:909;--r:465" data-fitw>Tools</span>
+              <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465;--a:-2deg" data-fitw><s>Nur ein Empfehlungslink</s></b>
+              <span class="tq-ibvs__uh" style="--x:676.9;--b:245;--r:1130" data-fitw>Unser IB-Programm</span>
+              <b class="tq-ibvs__ut" style="--x:769.7;--b:349;--r:1130" data-fitw>Unbegrenzte Ebenen</b>
+              <span class="tq-ibvs__us" style="--x:770.1;--b:386;--r:1130" data-fitw>Sie verdienen an jedem Partner unter Ihnen</span>
+              <b class="tq-ibvs__ut tq-ibvs__ut--big" style="--x:682.3;--b:489;--r:1130" data-fitw>Bis zu 87 <span style="color: #e7131b;">%</span></b>
+              <span class="tq-ibvs__us" style="--x:683.2;--b:533;--r:1130" data-fitw>vom Spread, auf jedes Lot</span>
+              <b class="tq-ibvs__ut" style="--x:760.9;--b:638;--r:1130" data-fitw>Ihnen zugeordnet</b>
+              <span class="tq-ibvs__us" style="--x:761.7;--b:679;--r:1130" data-fitw>geschützt durch PartnerShield</span>
+              <b class="tq-ibvs__ut" style="--x:760.5;--b:782;--r:1130" data-fitw>Täglich</b>
+              <span class="tq-ibvs__us" style="--x:761.6;--b:822;--r:1130" data-fitw>kein Minimum, keine Auszahlungsgebühren</span>
+              <b class="tq-ibvs__ut" style="--x:760.2;--b:925;--r:1130" data-fitw>Unter Ihrer Marke</b>
+              <span class="tq-ibvs__us tq-ibvs__us--dots" style="--x:759.5;--b:966;--r:1130" data-fitw>Copy Trading <span style="color: #e7131b;">•</span> Signale <span style="color: #e7131b;">•</span> Apps</span>
             </div>
-            <div class="tq-ibtp__us">
-              <div class="tq-ibtp__us-in">
-                <i class="tq-ibtp__sheen"></i>
-                <div class="tq-ibtp__uh"><img src="../../assets/logo-wordmark-dark.png?v=4e0fc67613" width="525" height="71" alt="TradeQuo" decoding="async"><span>Unser IB-Programm</span></div>
-                <div class="tq-ibtp__ur tq-ibtp__ur--lit"><svg class="tq-ibtp__ic tq-ibtp__ic--inf" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12c-2-2.6-3.6-4.2-5.7-4.2a4.2 4.2 0 0 0 0 8.4c2.1 0 3.7-1.6 5.7-4.2s3.6-4.2 5.7-4.2a4.2 4.2 0 0 1 0 8.4c-2.1 0-3.7-1.6-5.7-4.2z" stroke="#E7131B" stroke-width="2.6" stroke-linejoin="round"/></svg><span><b>Unbegrenzte Ebenen</b><span>Sie verdienen an jedem Partner unter Ihnen</span></span></div>
-                <div class="tq-ibtp__ur"><span><b class="tq-ibtp__big">Bis zu 87 <span style="color: #e7131b;">%</span></b><span>vom Spread, auf jedes Lot</span></span></div>
-                <div class="tq-ibtp__ur"><img class="tq-ibtp__ic" src="../../assets/ib/partnershield-icon.webp?v=1b62e007eb" width="40" height="36" alt="" decoding="async"><span><b>Ihnen zugeordnet</b><span>geschützt durch PartnerShield</span></span></div>
-                <div class="tq-ibtp__ur"><svg class="tq-ibtp__ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3" stroke="#0A0A0A" stroke-width="1.7"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="#0A0A0A" stroke-width="1.7" stroke-linecap="round"/><circle cx="8.5" cy="13" r="1.05" fill="#0A0A0A"/><circle cx="12" cy="13" r="1.05" fill="#E7131B"/><circle cx="15.5" cy="13" r="1.05" fill="#0A0A0A"/><circle cx="8.5" cy="16.5" r="1.05" fill="#0A0A0A"/><circle cx="12" cy="16.5" r="1.05" fill="#0A0A0A"/><circle cx="15.5" cy="16.5" r="1.05" fill="#E7131B"/></svg><span><b>Täglich</b><span>kein Minimum, keine Auszahlungsgebühren</span></span></div>
-                <div class="tq-ibtp__ur"><svg class="tq-ibtp__ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6.5c.5 3.6 2 5.1 5.6 5.6-3.6.5-5.1 2-5.6 5.6-.5-3.6-2-5.1-5.6-5.6 3.6-.5 5.1-2 5.6-5.6z" stroke="#0A0A0A" stroke-width="1.6" stroke-linejoin="round"/><path d="M17.5 2.5c.25 1.6.9 2.25 2.5 2.5-1.6.25-2.25.9-2.5 2.5-.25-1.6-.9-2.25-2.5-2.5 1.6-.25 2.25-.9 2.5-2.5z" fill="#E7131B"/><path d="M17 15.5c.2 1.3.7 1.8 2 2-1.3.2-1.8.7-2 2-.2-1.3-.7-1.8-2-2 1.3-.2 1.8-.7 2-2z" fill="#0A0A0A"/></svg><span><b>Unter Ihrer Marke</b><span>Copy Trading <span style="color: #e7131b;">•</span> Signale <span style="color: #e7131b;">•</span> Apps</span></span></div>
-              </div>
-            </div>
-            <span class="tq-ibtp__vs tq-h1" aria-hidden="true">VS</span>
           </div>
         </div>
       </div>
-      <script>/* the 800x720 composition at its column's width (at most 1x); set before the first paint */
-(function(){var v=document.currentScript.parentNode.querySelector('.tq-ibtp__vis'),f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',Math.min(1,w/800).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(v);else addEventListener('resize',f)})();</script>
+      <script>/* the picture (1292x1217) at its column's width: --s for the words laid over it; set before the first paint */
+(function(){var v=document.currentScript.parentNode.querySelector('.tq-ibvs'),f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',(w/1292).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(v);else addEventListener('resize',f)})();</script>
     </section>
 
     <!-- Where our program wins (Where_Our_Program_Wins design; Compare_Brokers_Block for phones), right after the hero:

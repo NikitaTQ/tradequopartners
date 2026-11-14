@@ -33,10 +33,11 @@
   <main>
     <!-- Hero (IB_Tools_Hero design): static. Left an eyebrow, the H1 (the last sentence red), the lead and two buttons —
          "Become a partner" (the form) and "Compare programs" (the comparison right below, #wins). Right the design's
-         800x720 composition, scaled to its column (--s, set by the script in the section: the column's width / 800, at
-         most 1): "Other brokers" on a cracked stone tablet, a silver "VS" ball, "Our IB program" on a white card with a
-         red glow — the same five terms as the comparison block. Mirrored in Arabic. Narrow screens (as the design does it):
-         the text, then the composition across the width. The previous heroes (Every lot dashboard, the creators
+         picture: "Typical broker" on a worn stone tablet (its old terms struck through in red), a silver "VS" ball, "Our IB
+         program" on a glass card with a red glow. The picture is the design's own, without its words
+         (assets/ib/hero-vs.webp, 1292x1217, laid with mix-blend-mode: multiply); the words are the page's, in its language,
+         laid over it where the design has them (--x / --b: left and baseline in picture px; --s: the picture's scale, set
+         by the script in the section). Narrow screens (as the design does it): the text, then the picture across the width. The previous heroes (Every lot dashboard, the creators
          dashboard, the devices film) are in the git history. partner.css, "the IB Tools hero". -->
     <section id="desk" class="tq-ibtp" data-screen-label="IB Tools hero · Compare">
       <div class="tq-ibtp__wrap">
@@ -50,46 +51,37 @@
           </div>
         </div>
         <div class="tq-ibtp__vis">
-          <div class="tq-ibtp__scene">
-            <div class="tq-ibtp__them">
-              <div class="tq-ibtp__them-in">
-                <img class="tq-ibtp__grain" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .3 0 0 0 0 .32 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E" alt="">
-                <svg class="tq-ibtp__cracks" width="296" height="588" viewBox="0 0 296 588" fill="none" aria-hidden="true">
-                  <path d="M34 182 L196 166 M170 462 L270 450 M200 118 L276 110" stroke="rgba(255,255,255,.85)" stroke-width=".8"/>
-                  <path d="M34 183.5 L196 167.5 M170 463.5 L270 451.5" stroke="rgba(18,22,30,.1)" stroke-width=".6"/>
-                  <path d="M296 318 L272 328 L260 318 L238 342 L220 336 L202 360" stroke="#FFFFFF" stroke-width="1.2" stroke-linejoin="round" transform="translate(0 1)"/>
-                  <path d="M296 318 L272 328 L260 318 L238 342 L220 336 L202 360" stroke="rgba(18,22,30,.32)" stroke-width=".9" stroke-linejoin="round"/>
-                  <path d="M260 318 L255 292 L264 276 M238 342 L243 366" stroke="rgba(18,22,30,.22)" stroke-width=".7" stroke-linejoin="round"/>
-                  <path d="M296 528 L280 536 L276 558 L262 572 L264 588" stroke="#FFFFFF" stroke-width="1.1" stroke-linejoin="round" transform="translate(0 1)"/>
-                  <path d="M296 528 L280 536 L276 558 L262 572 L264 588" stroke="rgba(18,22,30,.28)" stroke-width=".8" stroke-linejoin="round"/>
-                  <path d="M0 132 L10 142 L6 160 L14 172" stroke="rgba(18,22,30,.22)" stroke-width=".7" stroke-linejoin="round"/>
-                  <path d="M240 0 L248 12 L262 10 L270 22" stroke="rgba(18,22,30,.2)" stroke-width=".7" stroke-linejoin="round"/>
-                </svg>
-                <div class="tq-ibtp__th">{{ib.win.brokers}}</div>
-                <div class="tq-ibtp__tr"><span>{{ib.win.r1}}</span><b>{{ib.win.o1}}</b></div>
-                <div class="tq-ibtp__tr"><span>{{ib.win.r2}}</span><b>{{ib.top.o2}}</b></div>
-                <div class="tq-ibtp__tr"><span>{{ib.top.r3}}</span><b>{{ib.win.o3}}</b></div>
-                <div class="tq-ibtp__tr"><span>{{ib.win.r4}}</span><b>{{ib.top.o4}}</b></div>
-                <div class="tq-ibtp__tr"><span>{{ib.top.r5}}</span><b>{{ib.win.o5}}</b></div>
-              </div>
+          <div class="tq-ibvs" dir="ltr">
+            <img class="tq-ibvs__img" src="{{root}}assets/ib/hero-vs.webp" width="1292" height="1217" alt="" decoding="async" fetchpriority="high">
+            <div class="tq-ibvs__w" dir="{{dir}}">
+              <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>{{ib.top.typ}}</span>
+              <span class="tq-ibvs__tl" style="--x:122.7;--b:371;--r:465" data-fitw>{{ib.win.r1}}</span>
+              <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465;--a:.6deg" data-fitw><s>{{ib.win.o1}}</s></b>
+              <span class="tq-ibvs__tl" style="--x:124.1;--b:505;--r:465" data-fitw>{{ib.win.r2}}</span>
+              <b class="tq-ibvs__tv" style="--x:124.1;--b:548;--r:465;--a:0deg" data-fitw><s>{{ib.top.o2}}</s></b>
+              <span class="tq-ibvs__tl" style="--x:126.4;--b:643;--r:465" data-fitw>{{ib.top.r3}}</span>
+              <b class="tq-ibvs__tv" style="--x:126.3;--b:684;--r:465;--a:-.3deg" data-fitw><s>{{ib.win.o3}}</s></b>
+              <span class="tq-ibvs__tl" style="--x:128.1;--b:775;--r:465" data-fitw>{{ib.win.r4}}</span>
+              <b class="tq-ibvs__tv" style="--x:127.3;--b:818;--r:465;--a:-1deg" data-fitw><s>{{ib.top.o4}}</s></b>
+              <span class="tq-ibvs__tl" style="--x:129.6;--b:909;--r:465" data-fitw>{{ib.top.r5}}</span>
+              <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465;--a:-2deg" data-fitw><s>{{ib.win.o5}}</s></b>
+              <span class="tq-ibvs__uh" style="--x:676.9;--b:245;--r:1130" data-fitw>{{ib.top.ours}}</span>
+              <b class="tq-ibvs__ut" style="--x:769.7;--b:349;--r:1130" data-fitw>{{ib.top.v1}}</b>
+              <span class="tq-ibvs__us" style="--x:770.1;--b:386;--r:1130" data-fitw>{{ib.win.s1}}</span>
+              <b class="tq-ibvs__ut tq-ibvs__ut--big" style="--x:682.3;--b:489;--r:1130" data-fitw>{{ib.win.v2}}</b>
+              <span class="tq-ibvs__us" style="--x:683.2;--b:533;--r:1130" data-fitw>{{ib.win.s2}}</span>
+              <b class="tq-ibvs__ut" style="--x:760.9;--b:638;--r:1130" data-fitw>{{ib.win.v3}}</b>
+              <span class="tq-ibvs__us" style="--x:761.7;--b:679;--r:1130" data-fitw>{{ib.win.s3}}</span>
+              <b class="tq-ibvs__ut" style="--x:760.5;--b:782;--r:1130" data-fitw>{{ib.win.v4}}</b>
+              <span class="tq-ibvs__us" style="--x:761.6;--b:822;--r:1130" data-fitw>{{ib.win.s4}}</span>
+              <b class="tq-ibvs__ut" style="--x:760.2;--b:925;--r:1130" data-fitw>{{ib.win.v5}}</b>
+              <span class="tq-ibvs__us tq-ibvs__us--dots" style="--x:759.5;--b:966;--r:1130" data-fitw>{{ib.top.s5}}</span>
             </div>
-            <div class="tq-ibtp__us">
-              <div class="tq-ibtp__us-in">
-                <i class="tq-ibtp__sheen"></i>
-                <div class="tq-ibtp__uh"><img src="{{root}}assets/logo-wordmark-dark.png" width="525" height="71" alt="TradeQuo" decoding="async"><span>{{ib.top.ours}}</span></div>
-                <div class="tq-ibtp__ur tq-ibtp__ur--lit"><svg class="tq-ibtp__ic tq-ibtp__ic--inf" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12c-2-2.6-3.6-4.2-5.7-4.2a4.2 4.2 0 0 0 0 8.4c2.1 0 3.7-1.6 5.7-4.2s3.6-4.2 5.7-4.2a4.2 4.2 0 0 1 0 8.4c-2.1 0-3.7-1.6-5.7-4.2z" stroke="#E7131B" stroke-width="2.6" stroke-linejoin="round"/></svg><span><b>{{ib.top.v1}}</b><span>{{ib.win.s1}}</span></span></div>
-                <div class="tq-ibtp__ur"><span><b class="tq-ibtp__big">{{ib.win.v2}}</b><span>{{ib.win.s2}}</span></span></div>
-                <div class="tq-ibtp__ur"><img class="tq-ibtp__ic" src="{{root}}assets/ib/partnershield-icon.webp" width="40" height="36" alt="" decoding="async"><span><b>{{ib.win.v3}}</b><span>{{ib.win.s3}}</span></span></div>
-                <div class="tq-ibtp__ur"><svg class="tq-ibtp__ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3" stroke="#0A0A0A" stroke-width="1.7"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="#0A0A0A" stroke-width="1.7" stroke-linecap="round"/><circle cx="8.5" cy="13" r="1.05" fill="#0A0A0A"/><circle cx="12" cy="13" r="1.05" fill="#E7131B"/><circle cx="15.5" cy="13" r="1.05" fill="#0A0A0A"/><circle cx="8.5" cy="16.5" r="1.05" fill="#0A0A0A"/><circle cx="12" cy="16.5" r="1.05" fill="#0A0A0A"/><circle cx="15.5" cy="16.5" r="1.05" fill="#E7131B"/></svg><span><b>{{ib.win.v4}}</b><span>{{ib.win.s4}}</span></span></div>
-                <div class="tq-ibtp__ur"><svg class="tq-ibtp__ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6.5c.5 3.6 2 5.1 5.6 5.6-3.6.5-5.1 2-5.6 5.6-.5-3.6-2-5.1-5.6-5.6 3.6-.5 5.1-2 5.6-5.6z" stroke="#0A0A0A" stroke-width="1.6" stroke-linejoin="round"/><path d="M17.5 2.5c.25 1.6.9 2.25 2.5 2.5-1.6.25-2.25.9-2.5 2.5-.25-1.6-.9-2.25-2.5-2.5 1.6-.25 2.25-.9 2.5-2.5z" fill="#E7131B"/><path d="M17 15.5c.2 1.3.7 1.8 2 2-1.3.2-1.8.7-2 2-.2-1.3-.7-1.8-2-2 1.3-.2 1.8-.7 2-2z" fill="#0A0A0A"/></svg><span><b>{{ib.win.v5}}</b><span>{{ib.top.s5}}</span></span></div>
-              </div>
-            </div>
-            <span class="tq-ibtp__vs tq-h1" aria-hidden="true">VS</span>
           </div>
         </div>
       </div>
-      <script>/* the 800x720 composition at its column's width (at most 1x); set before the first paint */
-(function(){var v=document.currentScript.parentNode.querySelector('.tq-ibtp__vis'),f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',Math.min(1,w/800).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(v);else addEventListener('resize',f)})();</script>
+      <script>/* the picture (1292x1217) at its column's width: --s for the words laid over it; set before the first paint */
+(function(){var v=document.currentScript.parentNode.querySelector('.tq-ibvs'),f=function(){var w=v.clientWidth;if(w)v.style.setProperty('--s',(w/1292).toFixed(4))};f();if(window.ResizeObserver)new ResizeObserver(f).observe(v);else addEventListener('resize',f)})();</script>
     </section>
 
     <!-- Where our program wins (Where_Our_Program_Wins design; Compare_Brokers_Block for phones), right after the hero:
