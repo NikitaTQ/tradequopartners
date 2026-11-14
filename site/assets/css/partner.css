@@ -1720,7 +1720,7 @@
 
 /* ---- IB Tools: the Where our program wins block (Where_Our_Program_Wins, #wins) -----------------------------------------
    A comparison: five terms; a typical IB program's in the middle column, ours in the right one on a liquid glass card
-   (a red orb behind it, blurred through it; the plate 12px lower shows only as its bottom edge; a red glow under it, a
+   (the plate 12px lower shows only as its bottom edge; a red glow under it, a
    white sheen, a red line along its bottom edge; the rim a little red). Right after the hero. Desktops (1000px+):
    the design's 1340px table in its px, scaled down under 1340px by the section's script (zoom). The rows come in one by
    one (the section's is-wait, cleared when a third of it is in view); pointing at a row (hover devices) lights it with
@@ -1738,8 +1738,8 @@
 .tq-ibw__h2 .tq-line + .tq-line { color: #d2262d; }
 .tq-ibw__table { position: relative; width: 1180px; margin-bottom: 24px; }
 .tq-ibw__glow { position: absolute; right: 30px; bottom: -40px; width: 380px; height: 160px; border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(231,19,27,.45) 0%, rgba(231,19,27,0) 70%); filter: blur(24px); pointer-events: none; }
-/* a red orb behind the card: what the liquid glass bends and blurs (the phone design's) */
-.tq-ibw__orb { position: absolute; right: -64px; top: 48%; width: 250px; height: 250px; border-radius: 50%; pointer-events: none;
+/* a red orb behind the card: what the liquid glass bends and blurs — phones only (the phone design's); none on desktops */
+.tq-ibw__orb { display: none; position: absolute; right: -64px; top: 48%; width: 250px; height: 250px; border-radius: 50%; pointer-events: none;
   background: radial-gradient(circle at 34% 28%, #ffb3b6 0%, #ff4148 24%, #e7131b 55%, #7e080d 100%); }
 /* the glass's thickness: the plate 12px lower shows only along the bottom edge, tinted red (the rest is masked off, so it
    doesn't show grey through the glass) */
@@ -1837,7 +1837,7 @@
   :lang(ar) .tq-ibw__swb, :lang(th) .tq-ibw__swb, :lang(ja) .tq-ibw__swb, :lang(ko) .tq-ibw__swb, :lang(zh) .tq-ibw__swb { font-size: 13px; letter-spacing: .02em; }
   .tq-ibw__table { width: auto; margin: 0; }
   .tq-ibw__glow, .tq-ibw__back { display: none; }
-  .tq-ibw__orb { right: -86px; top: 94px; width: 250px; height: 250px; }
+  .tq-ibw__orb { display: block; right: -86px; top: 94px; width: 250px; height: 250px; }
   .tq-ibw__card { width: auto; left: 0; bottom: 78px; border-radius: 28px;
     box-shadow: inset 0 0 0 1px rgba(255,255,255,.8), inset 2px 3px 0 rgba(255,255,255,.95), inset 0 -40px 50px -40px rgba(231,19,27,.3), 0 40px 60px -34px rgba(18,22,30,.5); }
   .tq-ibw__card i:first-child { left: -10%; top: -26%; width: 120%; height: 46%; background: radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 70%); }
