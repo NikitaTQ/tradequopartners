@@ -115,8 +115,11 @@
   "ib.win.s4": "无最低限额，无提现费用",
   "ib.win.o5": "仅有推荐链接",
   "ib.win.v5": "使用您的品牌",
-  "ib.stage.hint": "向下滚动，拉开帷幕",
-  "ib.stage.t1": "舞台",
-  "ib.stage.t2": "属于您。",
-  "ib.stage.lead": "让您的品牌站上聚光灯下——跟单交易、信号和应用，都以您的名义呈现。"
+  "ib.tv.h": "TradingView Premium，终身免费。",
+  "ib.tv.life": "终身使用",
+  "ib.tv.list": "标价 / 年",
+  "ib.tv.paid": "TradeQuo 支付",
+  "ib.tv.pay": "您需支付",
+  "ib.tv.yr": "/年",
+  "ib.tv.cta": "免费获取 Premium"
 }

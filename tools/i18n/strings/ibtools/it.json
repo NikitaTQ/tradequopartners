@@ -115,8 +115,11 @@
   "ib.win.s4": "nessun minimo, nessuna commissione",
   "ib.win.o5": "Solo un link di referral",
   "ib.win.v5": "Con il tuo brand",
-  "ib.stage.hint": "Scorri per alzare il sipario",
-  "ib.stage.t1": "Il palco",
-  "ib.stage.t2": "è tuo.",
-  "ib.stage.lead": "Il tuo brand sotto i riflettori: copy trading, segnali e app con il tuo nome."
+  "ib.tv.h": "TradingView Premium, gratis a vita.",
+  "ib.tv.life": "Accesso a vita",
+  "ib.tv.list": "Prezzo di listino / anno",
+  "ib.tv.paid": "Pagato da TradeQuo",
+  "ib.tv.pay": "Tu paghi",
+  "ib.tv.yr": "/anno",
+  "ib.tv.cta": "Ottieni Premium gratis"
 }

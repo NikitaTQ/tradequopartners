@@ -115,8 +115,11 @@
   "ib.win.s4": "최소 금액 없음, 지급 수수료 없음",
   "ib.win.o5": "추천 링크뿐",
   "ib.win.v5": "당신의 브랜드로",
-  "ib.stage.hint": "스크롤해서 막을 올리세요",
-  "ib.stage.t1": "무대는",
-  "ib.stage.t2": "당신의 것.",
-  "ib.stage.lead": "스포트라이트 아래 당신의 브랜드 — 카피 트레이딩, 시그널, 앱을 당신의 이름으로."
+  "ib.tv.h": "TradingView Premium, 평생 무료.",
+  "ib.tv.life": "평생 이용",
+  "ib.tv.list": "정가 / 연간",
+  "ib.tv.paid": "TradeQuo 부담",
+  "ib.tv.pay": "내 부담액",
+  "ib.tv.yr": "/년",
+  "ib.tv.cta": "Premium 무료로 받기"
 }

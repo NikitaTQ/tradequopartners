@@ -115,8 +115,11 @@
   "ib.win.s4": "tanpa minimum, tanpa biaya penarikan",
   "ib.win.o5": "Hanya tautan referral",
   "ib.win.v5": "Dengan merek Anda",
-  "ib.stage.hint": "Gulir untuk membuka tirai",
-  "ib.stage.t1": "Panggung",
-  "ib.stage.t2": "milik Anda.",
-  "ib.stage.lead": "Merek Anda di bawah sorotan — copy trading, sinyal, dan aplikasi atas nama Anda."
+  "ib.tv.h": "TradingView Premium, gratis seumur hidup.",
+  "ib.tv.life": "Akses seumur hidup",
+  "ib.tv.list": "Harga normal / tahun",
+  "ib.tv.paid": "Dibayar TradeQuo",
+  "ib.tv.pay": "Anda bayar",
+  "ib.tv.yr": "/thn",
+  "ib.tv.cta": "Dapatkan Premium gratis"
 }
