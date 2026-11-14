@@ -1759,8 +1759,7 @@
    phone screens drawn over them with the design's matrix3d, the client's thumb left over its screen by a clip-path),
    the drop (a WebGL canvas, assets/js/ib-copy.js), a ring where it lands, a progress rail. Type: Inter (Fragment Mono and
    DM Sans in the design; figures tabular), the H2 in the site's H2 face with the design's tracking; 800 is 700. */
-.tq-ibcp { --hdr: 102px; position: relative; box-sizing: border-box; height: 310svh; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
-@media (max-width: 1139px) { .tq-ibcp { --hdr: 88px; } }   /* the header's steel plate: 6 + 96px, 6 + 82px below 1140px */
+.tq-ibcp { --hdr: 60px; position: relative; box-sizing: border-box; height: 310svh; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 .tq-ibcp__stage { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding-top: var(--hdr); overflow: hidden; display: flex; align-items: center;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px),
     radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(50% + var(--hdr) / 2 + 450px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
