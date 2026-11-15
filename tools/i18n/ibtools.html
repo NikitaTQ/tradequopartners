@@ -102,8 +102,8 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
     </section>
 
     <!-- TradingView Premium on us, still (in place of the Branded toolkit): the Marketing Tools card (a dark card, the
-         TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the CTA to the
-         form) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
+         TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the chrome CTA to the
+         form: CTA «Get Premium for $0» · Chrome) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
          Styles: partner.css, "the TradingView Premium block". Prices are USD in every language. -->
     <section id="premium" class="tp-sec tq-ibtv" data-screen-label="IB Tools · TradingView Premium">
       <div class="tp-wrap">
@@ -119,7 +119,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
             <div><span class="tp-tv__lab">{{ib.tv.paid}}</span><span class="tp-tv__val"><i aria-hidden="true">✓</i>$719.40<small>{{ib.tv.yr}}</small></span></div>
             <div class="tp-tv__you"><span class="tp-tv__lab">{{ib.tv.pay}}</span><span class="tp-tv__val">$0.00</span></div>
           </div>
-          <a class="tp-tv__cta" href="{{signupHref}}"{{signupNav}}>{{ib.tv.cta}} <span aria-hidden="true">→</span></a>
+          <span class="tq-chrome-wrap"><a class="tq-chrome" href="{{signupHref}}"{{signupNav}}><span class="tq-chrome__sheen" aria-hidden="true"></span><span class="tq-chrome__label">{{ib.tv.cta}}</span><span class="tq-chrome__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></span>
         </div>
       </div>
     </section>
@@ -233,7 +233,12 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
           <h2 class="tq-ibi__h2 tq-h2">{{ib.ins.h2}}</h2>
           <p class="tq-ibx__lead">{{ib.ins.lead}}</p>
           <div class="tq-ibx__ctas">
-            <a class="tq-ibx__go" href="#network"><span>{{ib.ins.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a class="tq-pos" href="#network">
+              <span class="tq-pos__plus" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+              <span class="tq-pos__label" data-fitw>{{ib.ins.go}}</span>
+              <svg class="tq-pos__chart" width="72" height="30" viewBox="0 0 72 30" fill="none" aria-hidden="true"><path d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path class="tq-pos__line" d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" pathLength="1" stroke="#E7131B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle class="tq-pos__pulse" cx="70" cy="3" r="6" fill="#E7131B" opacity="0.3"><animate attributeName="r" values="3;8;3" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.45;0;0.45" dur="1.6s" repeatCount="indefinite"/></circle><circle cx="70" cy="3" r="3" fill="#E7131B"/></svg>
+              <svg class="tq-pos__chev" width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true"><path d="M1.5 1.5L6 6l-4.5 4.5" stroke="#8A8B90" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
         </div>
         <div class="tq-ibi__fig">
@@ -263,9 +268,13 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
             <p class="tq-ibx__lead tq-ibn__lead-m">{{ib.net.leadm}}</p>
             <p class="tq-ibx__sub">{{ib.net.sub}}</p>
             <div class="tq-ibx__ctas">
-              <a class="tq-ibx__go" href="{{signupHref}}"{{signupNav}}><span>{{ib.net.go}}</span><span class="tq-ibx__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0A0A0A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-              <a class="tq-ibx__how" href="#sib-pillars">{{nav.how}}</a>
-              <a class="tq-ibn__q" href="#flow" aria-label="{{nav.how}}">?</a>
+              <div class="tq-start-wrap" data-start-timer data-seconds="7182">
+                <a class="tq-start" href="{{signupHref}}"{{signupNav}} aria-label="{{@ib.net.go}}">
+                  <svg class="tq-start__dial" viewBox="0 0 200 200" fill="none" aria-hidden="true"><g class="tq-start__ticks"></g><circle cx="100" cy="100" r="86" stroke="rgba(10,10,10,0.08)" stroke-width="3"/><circle class="tq-start__arc" cx="100" cy="100" r="86" stroke="#E7131B" stroke-width="3" stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="540.35" stroke-dashoffset="540.35"/></svg>
+                  <span class="tq-start__btn"><span class="tq-start__label tq-h2" data-fitw>{{ib.net.start}}</span><span class="tq-start__arrow"><svg width="7" height="7" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#E7131B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+                </a>
+                <span class="tq-start-live"><span>{{ib.net.livein}}</span> <span class="tq-start__time">01:59:42</span></span>
+              </div>
             </div>
           </div>
           <div class="tq-ibn__fig">

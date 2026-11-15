@@ -27,6 +27,41 @@
     }, { passive: true });
   }
 
+  /* ---- the start timer (IB Tools, Sub-IB network: CTA «Start» · Timer) -------------------------------------------
+   * 60 ticks round the dial; the red arc runs round with the seconds of a countdown from data-seconds (then from two
+   * hours again), "Live in" shows it; on hover the arc closes the circle. The countdown goes by the clock, and is
+   * drawn only while the timer is near the screen. */
+  function startStartTimer() {
+    $$('[data-start-timer]').forEach((wrap) => {
+      const C = 540.35, NS = 'http://www.w3.org/2000/svg', pad = (n) => String(n).padStart(2, '0');
+      const a = $('.tq-start', wrap), arc = $('.tq-start__arc', wrap), g = $('.tq-start__ticks', wrap), out = $('.tq-start__time', wrap);
+      const t0 = parseInt(wrap.getAttribute('data-seconds'), 10) || 7200, began = Date.now();
+      let hover = false, iv = 0;
+      for (let i = 0; i < 60; i++) {
+        const l = document.createElementNS(NS, 'line'), major = i % 5 === 0;
+        l.setAttribute('x1', 100); l.setAttribute('x2', 100); l.setAttribute('y1', major ? 2 : 5); l.setAttribute('y2', 9);
+        l.setAttribute('stroke', major ? 'rgba(10,10,10,0.55)' : 'rgba(10,10,10,0.22)');
+        l.setAttribute('stroke-width', 1.4); l.setAttribute('stroke-linecap', 'round');
+        l.setAttribute('transform', 'rotate(' + i * 6 + ' 100 100)');
+        g.appendChild(l);
+      }
+      const render = () => {
+        const run = Math.floor((Date.now() - began) / 1000);
+        const t = run <= t0 ? t0 - run : 7200 - ((run - t0 - 1) % 7201);
+        const sec = (60 - (t % 60)) % 60;
+        if (!hover) {
+          arc.style.transition = sec === 0 || reducedMotion() ? 'none' : '';
+          arc.style.strokeDashoffset = C * (1 - sec / 60);
+        }
+        out.textContent = pad(Math.floor(t / 3600)) + ':' + pad(Math.floor((t % 3600) / 60)) + ':' + pad(t % 60);
+      };
+      a.addEventListener('mouseenter', () => { hover = true; a.classList.add('is-hover'); arc.style.transition = ''; arc.style.strokeDashoffset = 0; });
+      a.addEventListener('mouseleave', () => { hover = false; a.classList.remove('is-hover'); render(); });
+      render();
+      whileVisible(wrap, '200px', () => { if (!iv) { render(); iv = setInterval(render, 1000); } }, () => { clearInterval(iv); iv = 0; });
+    });
+  }
+
   /* ---- embeds: auto-height + "scroll to section" requests ------------------ */
   function startIframeFit() {
     window.addEventListener('message', (e) => {
@@ -1648,5 +1683,6 @@
   startTwoLine();
   startLang();
   startPhoneNav();
+  startStartTimer();
   startCutGlass();
 })();
