@@ -992,7 +992,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   background: linear-gradient(180deg, #f7f7f8 0%, #f3f3f5 22%, #f3f3f5 78%, #e9eaec 100%); }
 .tq-ibtp__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(40px, 5vw, 72px); }
 .tq-ibtp__text { position: relative; z-index: 2; flex: 1 1 420px; max-width: 560px; min-width: 0; display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); }
-.tq-ibtp__eye { font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #55585f; }
 .tq-ibtp__h1 { --h1s: clamp(34px, 4.1vw, 58px); margin: 0; padding-inline-start: 0; line-height: 1.04; letter-spacing: -.01em; }
 :lang(ar) .tq-ibtp__h1, :lang(th) .tq-ibtp__h1, :lang(ja) .tq-ibtp__h1, :lang(ko) .tq-ibtp__h1, :lang(zh) .tq-ibtp__h1 { --h1k: 1.1; line-height: 1.2; }
 .tq-ibtp__h1 > span { display: block; white-space: nowrap; }
@@ -1051,13 +1050,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 :lang(ar) .tq-ibvs__tl, :lang(th) .tq-ibvs__tl, :lang(ja) .tq-ibvs__tl, :lang(ko) .tq-ibvs__tl, :lang(zh) .tq-ibvs__tl,
 :lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh,
 :lang(ar) .tq-ibvs__ul, :lang(th) .tq-ibvs__ul, :lang(ja) .tq-ibvs__ul, :lang(ko) .tq-ibvs__ul, :lang(zh) .tq-ibvs__ul { letter-spacing: .02em; }
-:lang(ar) .tq-ibtp__eye, :lang(th) .tq-ibtp__eye, :lang(ja) .tq-ibtp__eye, :lang(ko) .tq-ibtp__eye, :lang(zh) .tq-ibtp__eye { letter-spacing: .02em; }
 @media (max-width: 640px) {
 .tq-ibtp { --k: 1.06; padding: calc(20px * var(--k)) clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
 .tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; }
 .tq-ibtp__text { display: contents; }
 .tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
-.tq-ibtp__eye { order: 1; font-size: calc(12px * var(--k)); }
 .tq-ibtp__h1 { order: 2; --h1s: calc(34px * var(--k)); margin-top: calc(14px * var(--k)); }
 .tq-ibtp__vis { order: 3; flex: none; width: auto; max-width: none; margin: calc(12px * var(--k)) calc(-1 * clamp(16px, 6vw, 24px)) 0; }
 .tq-ibvs { --pw: 923; width: calc((100% - 20px) * 923 / 805.8); aspect-ratio: 923 / 1080;
@@ -1252,29 +1249,39 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-pos, .tq-pos__line { transition: none; }
 .tq-pos__pulse { display: none; }
 }
+@media (max-width: 640px) {
+.tq-pos__label { white-space: normal; font-size: 17px; line-height: 1.15; }
+}
 .tq-ibi__fig { position: relative; flex: 1 1 520px; max-width: 720px; min-width: 0; }
 .tq-ibi__blob { position: absolute; left: 50%; top: 50%; border-radius: 50%; pointer-events: none; }
 .tq-ibi__blob--d { width: 80%; height: 80%; transform: translate(-30%, -70%); background: radial-gradient(closest-side, rgba(28,30,36,.22), rgba(28,30,36,0)); }
 .tq-ibi__blob--w { width: 70%; height: 70%; transform: translate(-50%, -30%); background: radial-gradient(closest-side, rgba(255,255,255,.9), rgba(255,255,255,0)); }
 .tq-ibi__pick { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 6px; }
-.tq-ibi__sel { position: relative; display: inline-grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); padding: 5px; border-radius: 999px;
-  background: linear-gradient(135deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,.3) 100%); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
-  border: 1px solid rgba(255,255,255,.95); box-shadow: inset 0 2px 1px rgba(255,255,255,.95), inset 0 -8px 14px -10px rgba(18,22,30,.25), 0 22px 36px -24px rgba(18,22,30,.55); }
-.tq-ibi__pill { position: absolute; top: 5px; bottom: 5px; inset-inline-start: calc(5px + var(--v) * (100% - 10px) / 3); inset-inline-end: calc(5px + (2 - var(--v)) * (100% - 10px) / 3); border-radius: 999px;
-  background: linear-gradient(165deg, #FF5A60 0%, #E7131B 46%, #A80C12 100%); box-shadow: inset 0 2px 2px rgba(255,255,255,.55), inset 0 -7px 12px -5px rgba(90,0,4,.5), 0 12px 22px -10px rgba(231,19,27,.7);
-  transition: inset-inline-start .55s cubic-bezier(.7,0,.2,1) .14s, inset-inline-end .55s cubic-bezier(.7,0,.2,1) 0s; }
-.tq-ibi__sel[data-dir="b"] .tq-ibi__pill { transition-delay: 0s, .14s; }
-.tq-ibi__pill i { position: absolute; left: 12%; top: 4px; width: 42%; height: 8px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,0)); }
+.tq-ibi__sel { position: relative; display: inline-grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); padding: 4px; border-radius: 999px; will-change: transform;
+  background: linear-gradient(180deg, rgba(255,255,255,.82) 0%, rgba(255,255,255,.55) 100%); border: 1px solid rgba(255,255,255,.95);
+  box-shadow: inset 0 1px 0 #fff, 0 8px 18px -14px rgba(18,22,30,.45); }
+.tq-ibi__pill { position: absolute; top: 4px; bottom: 4px; inset-inline-start: 4px; width: calc((100% - 8px) / 3); border-radius: 999px; will-change: transform;
+  background: linear-gradient(170deg, #f5343b 0%, #e7131b 50%, #b80e15 100%); box-shadow: inset 0 1px 1px rgba(255,255,255,.45), 0 6px 12px -8px rgba(231,19,27,.75);
+  translate: calc(var(--v) * 100%) 0; transform-origin: 0 50%; transition: translate .55s cubic-bezier(.7,0,.2,1); }
+[dir="rtl"] .tq-ibi__pill { translate: calc(var(--v) * -100%) 0; transform-origin: 100% 50%; }
+.tq-ibi__sel[data-dir="b"] .tq-ibi__pill { transform-origin: 100% 50%; }
+[dir="rtl"] .tq-ibi__sel[data-dir="b"] .tq-ibi__pill { transform-origin: 0 50%; }
+.tq-ibi__sel[data-k="0"] .tq-ibi__pill { animation: tq-pill-a .55s cubic-bezier(.5,0,.3,1); }
+.tq-ibi__sel[data-k="1"] .tq-ibi__pill { animation: tq-pill-b .55s cubic-bezier(.5,0,.3,1); }
+@keyframes tq-pill-a { 0%, 100% { scale: 1 1; } 42% { scale: 1.34 1; } }
+@keyframes tq-pill-b { 0%, 100% { scale: 1 1; } 42% { scale: 1.34 1; } }
+.tq-ibi__pill i { position: absolute; left: 14%; top: 3px; width: 36%; height: 5px; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,0)); }
 .tq-ibi__b { all: unset; position: relative; z-index: 1; box-sizing: border-box; height: 46px; padding: 0 14px; display: flex; align-items: center; justify-content: center; border-radius: 999px; cursor: pointer;
   white-space: nowrap; font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #2a2c31; transition: color .3s ease .12s; }
 .tq-ibi__b.is-act { color: #fff; }
 .tq-ibi__b:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
 :lang(ar) .tq-ibi__b, :lang(th) .tq-ibi__b, :lang(ja) .tq-ibi__b, :lang(ko) .tq-ibi__b, :lang(zh) .tq-ibi__b { font-size: 13.5px; letter-spacing: .02em; }
 .tq-ibi__cur { margin: 0; padding-inline-start: 6px; max-width: 520px; font-size: 15px; line-height: 1.45; font-weight: 600; color: #55585f; text-wrap: pretty; }
-.tq-ibi__cur > span { display: none; }
-.tq-ibi__cur > span.is-act { display: inline; }
+.tq-ibi__cur { display: grid; }
+.tq-ibi__cur > span { grid-area: 1 / 1; opacity: 0; visibility: hidden; will-change: opacity; transition: opacity .3s ease, visibility 0s .3s; }
+.tq-ibi__cur > span.is-act { opacity: 1; visibility: visible; transition: opacity .3s ease .1s, visibility 0s; }
 @media (prefers-reduced-motion: reduce) {
-.tq-ibi__pill, .tq-ibi__b { transition: none; }
+.tq-ibi__pill, .tq-ibi__b, .tq-ibi__cur > span { transition: none; animation: none !important; }
 }
 .tq-ibi__stage { position: relative; height: clamp(480px, 66vh, 620px); }
 .tq-ibi__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -1294,7 +1301,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibi__stage { height: clamp(250px, calc(100svh - 380px), 340px); }
 .tq-ibi .tq-ibx__ctas { order: 5; width: 100%; padding-top: 4px; }
 .tq-ibi .tq-pos { width: 100%; }
-.tq-pos__label { white-space: normal; font-size: 17px; line-height: 1.15; }
 }
 @media (max-width: 640px) {
 .tq-ibi { padding-top: 44px; padding-bottom: 64px; }
@@ -1435,7 +1441,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibcp a { text-decoration: none; }
 .tq-ibcp__in { position: relative; flex: none; width: 1440px; height: 900px; margin: 0 auto; }
 .tq-ibcp__txt { position: absolute; z-index: 3; left: 72px; top: 0; bottom: 0; width: 380px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
-.tq-ibcp__eye { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #5e5f64; font-variant-numeric: tabular-nums; }
 .tq-ibcp__h2 { --h2s: 32px; margin: 0; padding-inline-start: 0; line-height: 1.16; letter-spacing: -.01em; text-wrap: wrap; }
 .tq-ibcp__h2 .tq-line { display: block; }
 .tq-ibcp__h2 .tq-line:first-child { background: linear-gradient(180deg, #3a3c42 0%, #0b0b0d 48%, #5e5f64 62%, #1c1d21 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -1542,7 +1547,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibcp__stage::after { height: 40px; }
 .tq-ibcp__in { width: auto; height: auto; margin: 0; }
 .tq-ibcp__txt { position: relative; left: auto; top: auto; bottom: auto; width: auto; max-width: 560px; margin: 0 auto; padding: 0 20px; gap: 20px; }
-.tq-ibcp__eye { font-size: 10.5px; }
 .tq-ibcp__h2 { --h2s: clamp(20px, 5.4vw, 30px); }
 .tq-ibcp__step { font-size: 15.5px; gap: 12px; }
 .tq-ibcp__step > span:first-child { font-size: 12px; padding-top: 3px; }
@@ -1670,7 +1674,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <section id="desk" class="tq-ibtp" data-screen-label="IB Tools hero · Compare">
       <div class="tq-ibtp__wrap">
         <div class="tq-ibtp__text">
-          <span class="tq-ibtp__eye">TradeQuo · IB Programı</span>
           <h1 class="tq-ibtp__h1 tq-h1" data-fitw><span>Daha fazla seviye.</span> <span>Daha fazla pay.</span> <span class="tq-ibtp__red">Her gün ödeme.</span></h1>
           <p class="tq-ibtp__lead">Aynı müşteriler. Aynı lotlar. Size her seviyede, her gün ödeme yapan bir program.</p>
           <div class="tq-ibtp__ctas">
@@ -1825,7 +1828,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
       <div class="tq-ibcp__stage">
         <div class="tq-ibcp__in">
           <div class="tq-ibcp__txt">
-            <span class="tq-ibcp__eye">IB Araçları · Markalı kopya işlem</span>
             <h2 class="tq-ibcp__h2 tq-h2"><span class="tq-line">Onların deneyimi.</span> <span class="tq-line">Sizinkine aktarılır.</span></h2>
             <div class="tq-ibcp__steps">
               <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>Sağlayıcı bir işlem açar.</span></p>
@@ -2317,9 +2319,9 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=7be833d322" defer></script>
+<script src="../../assets/js/landing.js?v=c22b474340" defer></script>
 <script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
-<script src="../../assets/js/ib-insights.js?v=4c9e79410b" defer></script>
+<script src="../../assets/js/ib-insights.js?v=161db91095" defer></script>
 <script src="../../assets/js/ib-hole.js?v=9caf46d5d6" defer></script>
 </body>
 </html>

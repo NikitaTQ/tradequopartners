@@ -1206,14 +1206,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .pf-dr__l2 .pf-dr__slot > span { transition-delay: .12s; }
 .pf-dr__sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .pf-dr__bot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; padding-top: 32px; border-top: 1px solid rgba(14,14,22,.09); }
+.pf-dr__go { justify-self: end; }
 .pf-dr__meta { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .22em; color: #8a8a93; }
 .pf-dr__gain { margin: 10px 0 0; max-width: 720px; font-size: 24px; line-height: 1.35; font-weight: 700; letter-spacing: -.02em; text-wrap: pretty; animation: pfFade .5s ease; }
 .pf-dr__gain[hidden] { display: none; }
-.pf-dr__cta { display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700; white-space: nowrap;
-  text-decoration: none; transition: background .2s; }
-.pf-dr__cta:hover { background: #c90f17; color: #fff; }
-.pf-dr__cta:focus-visible { outline: 2px solid #0e0e10; outline-offset: 3px; }
-[dir="rtl"] .pf-dr__cta span { display: inline-block; transform: scaleX(-1); }
 @media (prefers-reduced-motion: reduce) {
 .pf-dr__slot > span { transition: none; }
 .pf-dr__gain { animation: none; }
@@ -1223,7 +1219,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .pf-dr__sent { font-size: var(--drf, clamp(34px, 9vw, 64px)); }
 .pf-dr__bot { grid-template-columns: minmax(0, 1fr); gap: 24px; }
 .pf-dr__gain { font-size: 19px; }
-.pf-dr__cta { justify-self: start; }
+.pf-dr .pf-dr__go { justify-self: stretch; width: 100%; }
 }
 .pf-dark { position: relative; margin-top: clamp(24px, 4vw, 56px); }
 #pf-top { height: clamp(300px, 42vh, 480px); margin-bottom: -1px;
@@ -1391,6 +1387,28 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (prefers-reduced-motion: reduce) {
 .tq-start__arc, .tq-start__btn { transition: none; }
 }
+.tq-pos { display: flex; align-items: center; gap: 14px; width: max-content; min-width: min(360px, 100%); max-width: 100%; height: 72px; box-sizing: border-box; padding: 0; padding-inline: 12px 18px;
+  border-radius: 20px; border: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, #242427 0%, #0c0c0d 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 26px 40px -18px rgba(0,0,0,.6); color: #fff; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform .25s ease; }
+.tq-pos:hover { color: #fff; transform: translateY(-2px); }
+.tq-pos:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; }
+.tq-pos__plus { flex: none; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+.tq-pos__label { flex: 1; min-width: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+.tq-pos__chart { flex: none; overflow: visible; }
+.tq-pos__line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .7s ease; }
+.tq-pos:hover .tq-pos__line, .tq-pos:focus-visible .tq-pos__line { stroke-dashoffset: 0; }
+.tq-pos__chev { flex: none; }
+[dir="rtl"] .tq-pos__chev { transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) {
+.tq-pos, .tq-pos__line { transition: none; }
+.tq-pos__pulse { display: none; }
+}
+@media (max-width: 640px) {
+.tq-pos__label { white-space: normal; font-size: 17px; line-height: 1.15; }
+}
+@keyframes tq-pill-a { 0%, 100% { scale: 1 1; } 42% { scale: 1.34 1; } }
+@keyframes tq-pill-b { 0%, 100% { scale: 1 1; } 42% { scale: 1.34 1; } }
 </style>
 </head>
 <body>
@@ -1575,8 +1593,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       <div id="pf-who-wrap">
         <!-- Who it's for (Who_Its_For_Drum design): the five kinds of partner as chips, and one sentence whose two
              halves roll like a drum to the chosen one ("I teach trading / so I refer students"); under it what they
-             get with TradeQuo and the CTA. It rolls on by itself every 3.3 s while on screen until a chip or the
-             sentence is clicked (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
+             get with TradeQuo and the CTA. It rolls on by itself every 4 s while on screen; a click on a chip or the
+             sentence picks one and the rolling goes on from it 8 s later (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
              reads the current sentence in .pf-dr__sr. -->
         <section class="pf-who pf-dr" id="pf-who" data-screen-label="Who it's for">
           <div class="pf-dr__top">
@@ -1593,7 +1611,12 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
               <div class="pf-dr__meta">WITH TRADEQUO · <span data-dr-num>01</span>/05</div>
               <div class="pf-dr__gains"><p class="pf-dr__gain" data-dr-gain>Earn up to 87% of spread on every lot your students trade, for as long as they stay active.</p><p class="pf-dr__gain" data-dr-gain hidden>Free TradingView charts and real-time signals for your members. Your commission lands every day at 00:00.</p><p class="pf-dr__gain" data-dr-gain hidden>Ready-made banners, landing pages and videos — and every sign-up and trade in your live dashboard.</p><p class="pf-dr__gain" data-dr-gain hidden>Earn on the business your partners bring in, on top of your own clients, with a dedicated partner manager.</p><p class="pf-dr__gain" data-dr-gain hidden>Launch a White-Label Brokerage or Academy under your own name, built on TradeQuo infrastructure.</p></div>
             </div>
-            <a class="pf-dr__cta" href="../#signup" data-page-link data-label="LOADING · Home">Apply as a partner <span aria-hidden="true">→</span></a>
+            <a class="tq-pos pf-dr__go" href="../#signup" data-page-link data-label="LOADING · Home">
+              <span class="tq-pos__plus" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+              <span class="tq-pos__label" data-fitw>Apply as a partner</span>
+              <svg class="tq-pos__chart" width="72" height="30" viewBox="0 0 72 30" fill="none" aria-hidden="true"><path d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path class="tq-pos__line" d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" pathLength="1" stroke="#E7131B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle class="tq-pos__pulse" cx="70" cy="3" r="6" fill="#E7131B" opacity="0.3"><animate attributeName="r" values="3;8;3" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.45;0;0.45" dur="1.6s" repeatCount="indefinite"/></circle><circle cx="70" cy="3" r="3" fill="#E7131B"/></svg>
+              <svg class="tq-pos__chev" width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true"><path d="M1.5 1.5L6 6l-4.5 4.5" stroke="#8A8B90" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
         </section>
       </div>
@@ -1924,6 +1947,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=7be833d322" defer></script>
+<script src="../assets/js/landing.js?v=c22b474340" defer></script>
 </body>
 </html>

@@ -5,9 +5,10 @@
    net deposits on a grid (each node grows into its bar, the tree fades). View 3 lays each bar down as a row: each
    partner, a glass bar as long as what that partner's clients earned you this month (the rows add up to the month's
    total on top), and under the name the partner's top client with their commission ("Dormant risk" in red instead
-   when they went quiet). The views turn on their own (7.5 s on the tree, 5.5 s on the bars, 7 s on the rows) while the block is on screen and the pointer is not over
-   the picture; a click on a view on the pill above it picks it and stops the turns. With "reduce motion" nothing moves: the
-   picture is drawn once per view.
+   when they went quiet). The views turn on their own every 4 s while the block is on screen and the mouse is not over the
+   picture; a click on a view on the pill above it picks it, and the turns go on from it 8 s later. With "reduce motion"
+   nothing moves: the picture is drawn once per view. Phones and touch screens draw the glass without canvas blur (the
+   slow part there): the drop shadows from a soft sprite, the inner glow as plain strokes, the pulses' glow as a soft disc.
    The words drawn on the canvas come from its data-you / data-total ("{v}" = the sum) / data-net / data-comm ("{m}" =
    the month, in the page's language) / data-top / data-topc ("{n}" = the client) / data-dormant. Names
    and figures are demo data. Below 641px (the phone mockup) the picture is packed tighter: smaller glass, levels
@@ -17,7 +18,7 @@
   if (!s) return;
   var fig = s.querySelector('.tq-ibi__fig'), stage = s.querySelector('.tq-ibi__stage'), cv = stage.querySelector('canvas');
   /* the views: buttons on a glass pill (a red pill slides over the picked one: --v on .tq-ibi__sel, data-dir = which way,
-     so its leading edge moves first), and the picked view's line under it */
+     it stretches that way; data-k flips to start its stretch afresh), and the picked view's line under it */
   var guide = s.querySelectorAll('.tq-ibi__b'), sel = s.querySelector('.tq-ibi__sel'), lines = s.querySelectorAll('.tq-ibi__cur > span');
   var lang = document.documentElement.lang || 'en', cased = !/^(ar|th|ja|ko|zh)/.test(lang), rtl = document.documentElement.dir === 'rtl';
   var upper = function (t) { if (!cased) return t; try { return t.toLocaleUpperCase(lang); } catch (e) { return t.toUpperCase(); } };
@@ -72,43 +73,43 @@
   var CMAX = CL[0].br, TOTAL = CL.reduce(function (a, c) { return a + c.br; }, 0);   /* the month's total: the rows' sum */
   var usd = function (v) { return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
   var STS = { a: ['#0A0A0A', '#55585F'], d: ['#E7131B', '#C40F16'] };
-  var DUR = [7500, 5500, 7000];
+  var DUR = [4000, 4000, 4000];
 
   var reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var target = 0, manual = false, hover = false, vis = false, at = 0, raf = 0, draw = null;
+  var target = 0, hover = false, vis = false, at = 0, raf = 0, draw = null;
 
   function setView(v, byHand) {
-    if (byHand) { manual = true; clearTimeout(at); }
-    if (sel) { sel.setAttribute('data-dir', v >= target ? 'f' : 'b'); sel.style.setProperty('--v', v); }
+    if (byHand && !reduced) schedule(8000);
+    if (sel && v !== target) { sel.setAttribute('data-dir', v > target ? 'f' : 'b'); sel.setAttribute('data-k', sel.getAttribute('data-k') === '0' ? '1' : '0'); }
+    if (sel) sel.style.setProperty('--v', v);
     target = v;
     for (var i = 0; i < guide.length; i++) { guide[i].classList.toggle('is-act', i === v); guide[i].setAttribute('aria-pressed', i === v ? 'true' : 'false'); }
     for (var j = 0; j < lines.length; j++) lines[j].classList.toggle('is-act', j === v);
     if (reduced && draw) draw(performance.now());
   }
-  function schedule() {
+  function schedule(wait) {
     clearTimeout(at);
     at = setTimeout(function () {
-      if (manual) return;
       if (hover || !vis) { schedule(); return; }
       setView((target + 1) % 3); schedule();
-    }, DUR[target]);
+    }, wait || DUR[target]);
   }
   for (var g = 0; g < guide.length; g++) guide[g].addEventListener('click', setView.bind(null, g, true));
-  fig.addEventListener('mouseenter', function () { hover = true; });
-  fig.addEventListener('mouseleave', function () { hover = false; });
+  fig.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hover = true; });
+  fig.addEventListener('pointerleave', function () { hover = false; });
 
   function start() {
     var ctx = cv.getContext('2d');
     var PI2 = Math.PI * 2, cl = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; }, eo = function (v) { return 1 - Math.pow(1 - v, 3); };
     var eio = function (v) { return v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2; }, lerp = function (a, b, t) { return a + (b - a) * t; };
-    var W = 0, H = 0, dpr = 1, k = 1, top = 0, bot = 0, L = 0, R = 0, base = 0, maxH = 0, colW = 0, bw = 0, ph = false;
+    var W = 0, H = 0, dpr = 1, k = 1, top = 0, bot = 0, L = 0, R = 0, base = 0, maxH = 0, colW = 0, bw = 0, ph = false, lite = coarse;
     var rowTop = 0, pitch = 0, capH = 0, x0 = 0, maxLen = 0;
     var phone = window.matchMedia ? matchMedia('(max-width: 640px)') : null;
     var size = function () {
       W = stage.clientWidth; H = stage.clientHeight; if (!W || !H) return;
       dpr = Math.min(coarse ? 1.5 : 2, window.devicePixelRatio || 1);   /* phones: 1.5x is sharp enough and lighter for the blurred glass */
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      ph = !!(phone && phone.matches);
+      ph = !!(phone && phone.matches); lite = coarse || ph;
       if (ph) { k = 0.55; top = 6; bot = H - 4; L = 4; R = W - 4; base = H - 36; maxH = base - top - 46; }
       else {
         k = Math.max(0.68, Math.min(1, W / 620));
@@ -131,14 +132,44 @@
       red: { c: 'rgba(231,19,27,0.42)', e: 'rgba(255,118,122,0.82)', shade: 'rgba(120,6,10,0.35)', sh: 'rgba(231,19,27,0.38)', rim: ['rgba(255,226,228,1)', 'rgba(255,120,124,0.5)'], line: 'rgba(150,10,16,0.35)', glow: 'rgba(255,190,192,0.85)', caus: 'rgba(255,214,216,0.95)', spec: 0.95 },
       dark: { c: 'rgba(14,15,18,0.86)', e: 'rgba(78,80,88,0.9)', shade: 'rgba(0,0,0,0.4)', sh: 'rgba(0,0,0,0.32)', rim: ['rgba(255,255,255,0.7)', 'rgba(255,255,255,0.12)'], line: 'rgba(0,0,0,0.5)', glow: 'rgba(255,255,255,0.35)', caus: 'rgba(255,255,255,0.4)', spec: 0.75 }
     };
+    /* lite (phones, touch screens): a soft disc per shadow colour, drawn once (a radial gradient: no blur), from which a
+       shadow of any size is laid in three slices (its two round ends and the stretched middle) */
+    var SPR = {}, SR = 32, SB = 18;
+    var sprite = function (col) {
+      if (SPR[col]) return SPR[col];
+      var c = document.createElement('canvas'), D = 2 * (SR + SB); c.width = c.height = D;
+      var x = c.getContext('2d'), gr = x.createRadialGradient(D / 2, D / 2, 0, D / 2, D / 2, SR + SB);
+      gr.addColorStop(0, col); gr.addColorStop((SR - SB * 0.6) / (SR + SB), col); gr.addColorStop(1, 'rgba(0,0,0,0)');
+      x.fillStyle = gr; x.fillRect(0, 0, D, D);
+      return (SPR[col] = c);
+    };
+    var softShadow = function (col, x, y, w, h, e) {
+      var sp = sprite(col), D = sp.width, half = D / 2, x0 = x - w / 2 - e, y0 = y - h / 2 - e, W2 = w + 2 * e, H2 = h + 2 * e;
+      if (h >= w) {   /* upright: top cap, middle, bottom cap */
+        var cap = w / 2 + e;
+        ctx.drawImage(sp, 0, 0, D, half, x0, y0, W2, cap);
+        if (H2 - 2 * cap > 0) ctx.drawImage(sp, 0, half - 1, D, 2, x0, y0 + cap, W2, H2 - 2 * cap);
+        ctx.drawImage(sp, 0, half, D, half, x0, y0 + H2 - cap, W2, cap);
+      } else {        /* lying: left cap, middle, right cap */
+        var cw = h / 2 + e;
+        ctx.drawImage(sp, 0, 0, half, D, x0, y0, cw, H2);
+        if (W2 - 2 * cw > 0) ctx.drawImage(sp, half - 1, 0, 2, D, x0 + cw, y0, W2 - 2 * cw, H2);
+        ctx.drawImage(sp, half, 0, half, D, x0 + W2 - cw, y0, cw, H2);
+      }
+    };
     /* one glass shape (a disc or a bar): drop shadow, fresnel edge, darker bottom, inner glow, caustic, specular dots, rim */
     var glass = function (x, y, w, h, r, kind, al) {
       if (al <= 0.01 || w < 1 || h < 1) return;
       var K = KIND[kind], m = Math.min(w, h), x0 = x - w / 2, y0 = y - h / 2;
       ctx.save(); ctx.globalAlpha = al;
-      ctx.shadowColor = K.sh; ctx.shadowBlur = ph ? 14 : 24; ctx.shadowOffsetY = ph ? 7 : 12;
-      rr(x, y, w, h, r); ctx.fillStyle = K.c; ctx.fill();
-      ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+      if (lite) {
+        softShadow(K.sh, x, y + (ph ? 7 : 12), w, h, ph ? 7 : 12);
+        rr(x, y, w, h, r); ctx.fillStyle = K.c; ctx.fill();
+      } else {
+        ctx.shadowColor = K.sh; ctx.shadowBlur = ph ? 14 : 24; ctx.shadowOffsetY = ph ? 7 : 12;
+        rr(x, y, w, h, r); ctx.fillStyle = K.c; ctx.fill();
+        ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+      }
       ctx.save(); rr(x, y, w, h, r); ctx.clip();
       var fg = ctx.createRadialGradient(x - w * 0.08, y - h * 0.12, 0, x, y, Math.max(w, h) * 0.62);
       fg.addColorStop(0, 'rgba(255,255,255,0)'); fg.addColorStop(0.62, 'rgba(255,255,255,0)'); fg.addColorStop(1, K.e);
@@ -146,9 +177,16 @@
       var sg = ctx.createLinearGradient(0, y0, 0, y0 + h);
       sg.addColorStop(0, 'rgba(0,0,0,0)'); sg.addColorStop(0.55, 'rgba(0,0,0,0)'); sg.addColorStop(1, K.shade);
       ctx.fillStyle = sg; ctx.fillRect(x0, y0, w, h);
-      ctx.shadowColor = K.glow; ctx.shadowBlur = m * 0.18; ctx.lineWidth = Math.max(2, m * 0.06); ctx.strokeStyle = K.glow;
-      rr(x, y, w + ctx.lineWidth, h + ctx.lineWidth, r + ctx.lineWidth / 2); ctx.stroke();
-      ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+      var lw = Math.max(2, m * 0.06);
+      if (lite) {   /* the inner glow without blur: a wide faint stroke, then the edge */
+        ctx.strokeStyle = K.glow; ctx.globalAlpha = al * 0.32; ctx.lineWidth = lw + m * 0.2;
+        rr(x, y, w + lw, h + lw, r + lw / 2); ctx.stroke();
+        ctx.globalAlpha = al; ctx.lineWidth = lw; ctx.stroke();
+      } else {
+        ctx.shadowColor = K.glow; ctx.shadowBlur = m * 0.18; ctx.lineWidth = lw; ctx.strokeStyle = K.glow;
+        rr(x, y, w + lw, h + lw, r + lw / 2); ctx.stroke();
+        ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+      }
       var cy = y0 + h - m * 0.2, cg = ctx.createRadialGradient(x, cy, 0, x, cy, w * 0.36);
       cg.addColorStop(0, K.caus); cg.addColorStop(1, 'rgba(255,255,255,0)');
       ctx.save(); ctx.translate(x, cy); ctx.scale(1, 0.38); ctx.translate(-x, -cy); ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(x, cy, w * 0.36, 0, PI2); ctx.fill(); ctx.restore();
@@ -252,7 +290,11 @@
             for (var i = 0; i < 2; i++) {
               var t = ((T * (red ? 0.55 : 0.4) + i * 0.5 + n.fx) % 1), b = bez(P0, P1, 1 - t), fa = Math.sin(Math.PI * t);
               ctx.globalAlpha = net * fa;
-              if (red) { ctx.shadowColor = '#E7131B'; ctx.shadowBlur = 12; ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.arc(b.x, b.y, 4.5, 0, PI2); ctx.fill(); ctx.shadowBlur = 0; ctx.fillStyle = '#E7131B'; ctx.beginPath(); ctx.arc(b.x, b.y, 2.6, 0, PI2); ctx.fill(); }
+              if (red) {
+                if (lite) { ctx.fillStyle = 'rgba(231,19,27,0.22)'; ctx.beginPath(); ctx.arc(b.x, b.y, 9, 0, PI2); ctx.fill(); }
+                else { ctx.shadowColor = '#E7131B'; ctx.shadowBlur = 12; }
+                ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.arc(b.x, b.y, 4.5, 0, PI2); ctx.fill(); ctx.shadowBlur = 0; ctx.fillStyle = '#E7131B'; ctx.beginPath(); ctx.arc(b.x, b.y, 2.6, 0, PI2); ctx.fill();
+              }
               else { ctx.fillStyle = 'rgba(18,22,30,0.55)'; ctx.beginPath(); ctx.arc(b.x, b.y, 2.2, 0, PI2); ctx.fill(); }
             }
           }
