@@ -116,8 +116,8 @@
       <div id="pf-who-wrap">
         <!-- Who it's for (Who_Its_For_Drum design): the five kinds of partner as chips, and one sentence whose two
              halves roll like a drum to the chosen one ("I teach trading / so I refer students"); under it what they
-             get with TradeQuo and the CTA. It rolls on by itself every 3.3 s while on screen until a chip or the
-             sentence is clicked (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
+             get with TradeQuo and the CTA. It rolls on by itself every 4 s while on screen; a click on a chip or the
+             sentence picks one and the rolling goes on from it 8 s later (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
              reads the current sentence in .pf-dr__sr. -->
         <section class="pf-who pf-dr" id="pf-who" data-screen-label="Who it's for">
           <div class="pf-dr__top">
@@ -134,7 +134,12 @@
               <div class="pf-dr__meta">{{pp.dr.with}} · <span data-dr-num>01</span>/05</div>
               <div class="pf-dr__gains"><p class="pf-dr__gain" data-dr-gain>{{pp.dr.1.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.2.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.3.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.4.gain}}</p><p class="pf-dr__gain" data-dr-gain hidden>{{pp.dr.5.gain}}</p></div>
             </div>
-            <a class="pf-dr__cta" href="{{signupHref}}"{{signupNav}}>{{pp.cta.apply}} <span aria-hidden="true">→</span></a>
+            <a class="tq-pos pf-dr__go" href="{{signupHref}}"{{signupNav}}>
+              <span class="tq-pos__plus" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+              <span class="tq-pos__label" data-fitw>{{pp.cta.apply}}</span>
+              <svg class="tq-pos__chart" width="72" height="30" viewBox="0 0 72 30" fill="none" aria-hidden="true"><path d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path class="tq-pos__line" d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" pathLength="1" stroke="#E7131B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle class="tq-pos__pulse" cx="70" cy="3" r="6" fill="#E7131B" opacity="0.3"><animate attributeName="r" values="3;8;3" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.45;0;0.45" dur="1.6s" repeatCount="indefinite"/></circle><circle cx="70" cy="3" r="3" fill="#E7131B"/></svg>
+              <svg class="tq-pos__chev" width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true"><path d="M1.5 1.5L6 6l-4.5 4.5" stroke="#8A8B90" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
         </section>
       </div>

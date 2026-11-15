@@ -1557,8 +1557,8 @@
 
   /* ---- programs/: Who it's for (Who_Its_For_Drum), then Why partners choose -------------------------------
    * The card: the five kinds of partner as chips and one sentence whose halves roll like a drum to the chosen
-   * one. It rolls on every 3.3 s while on screen until a chip or the sentence is clicked (a click on the sentence
-   * moves on one). A sentence too long for the card (a long language) steps its size down to fit.
+   * one. It rolls on every 4 s while on screen; a click on a chip (or on the sentence: one on) picks one, and the
+   * rolling goes on from it 8 s later. A sentence too long for the card (a long language) steps its size down to fit.
    * The perks section below it: its six cards are dealt in a fan once it is well in view; with reduced motion they
    * simply stand, and on phones (<900px) the CSS lays them out in a grid. */
   function startWhoFlow() {
@@ -1571,7 +1571,7 @@
     const verb = $('[data-dr-verb]', block), goal = $('[data-dr-goal]', block), num = $('[data-dr-num]', block);
     const gains = $$('[data-dr-gain]', block), sr = $('[data-dr-sr]', block);
     const I = ($('[data-dr-i]', block) || {}).textContent || '', SO = ($('[data-dr-so]', block) || {}).textContent || '';
-    let cur = 0, user = false, iv = 0;
+    let cur = 0, hold = 0, iv = 0;
     const roll = (i) => {
       cur = i;
       chips.forEach((c, k) => c.setAttribute('aria-pressed', String(k === i)));
@@ -1580,11 +1580,12 @@
       gains.forEach((g, k) => { g.hidden = k !== i; });
       if (sr) sr.textContent = I + ' ' + verb.children[i].textContent + ' — ' + SO + ' ' + goal.children[i].textContent;
     };
-    chips.forEach((c, i) => c.addEventListener('click', () => { user = true; roll(i); }));
-    if (sent) sent.addEventListener('click', () => { user = true; roll((cur + 1) % chips.length); });
+    const pick = (i) => { hold = Date.now() + 8000; roll(i); };
+    chips.forEach((c, i) => c.addEventListener('click', () => pick(i)));
+    if (sent) sent.addEventListener('click', () => pick((cur + 1) % chips.length));
     if (!reducedMotion()) {
       whileVisible(block, '0px',
-        () => { if (!iv) iv = setInterval(() => { if (!user) roll((cur + 1) % chips.length); }, 3300); },
+        () => { if (!iv) iv = setInterval(() => { if (Date.now() >= hold) roll((cur + 1) % chips.length); }, 4000); },
         () => { clearInterval(iv); iv = 0; });
     }
     const fitDrum = () => {
