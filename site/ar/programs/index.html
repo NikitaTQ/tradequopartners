@@ -1364,6 +1364,26 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @keyframes tpPdsSpin { to { transform: rotate(360deg); } }
 @keyframes tpPdsCandle { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.55); } }
 .pf-perk__n, .pf-g-red, .pf-g-silver, .tp-tv__zero, .tp-tv__val, .tp-ig__n, .tp-pds__n { font-variant-numeric: tabular-nums; }
+@property --tqmx { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
+.tq-rglass { position: relative; isolation: isolate; align-self: flex-start; display: inline-flex; align-items: center; gap: 18px; height: 66px; box-sizing: border-box; padding: 0; padding-inline: 30px 5px;
+  border: 1px solid rgba(255,170,175,.75); border-radius: 999px; color: #fff; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -.01em;
+  white-space: nowrap; text-decoration: none; text-shadow: 0 1px 1px rgba(90,6,14,.35); cursor: pointer; -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(150deg, rgba(240,40,48,.94) 0%, rgba(222,24,34,.9) 45%, rgba(176,12,22,.95) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.7), inset 0 -1px 1px rgba(255,255,255,.35), inset 0 -14px 22px -12px rgba(100,0,8,.6), inset 0 0 22px rgba(255,180,184,.18),
+    0 calc(16px + var(--tqh) * 6px) calc(32px + var(--tqh) * 14px) -12px rgba(231,19,27,.5);
+  transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * .04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate;
+  transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqmx .45s ease, --tqd .14s ease-out; }
+.tq-rglass::before { content: ''; position: absolute; z-index: -1; inset: 1px 12px auto 12px; height: 46%; border-radius: 999px 999px 60% 60% / 999px 999px 100% 100%; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 100%); }
+.tq-rglass::after { content: ''; position: absolute; z-index: -1; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(40% 120% at var(--tqmx) 0%, rgba(255,255,255,calc(.18 + var(--tqh) * .22)) 0%, rgba(255,255,255,0) 70%); }
+.tq-rglass:hover, .tq-rglass:focus-visible { --tqh: 1; animation: none; color: #fff; }
+.tq-rglass:active { --tqd: 1; }
+.tq-rglass:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) {
+.tq-rglass { animation: none; transition-duration: .01s; }
+}
 </style>
 <style id="i18n-fonts">
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url(../../assets/fonts/intl/ibm-plex-sans-arabic-400-arabic.woff2?v=a9cefdcae5) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC7, U+10EC9-10EEE, U+10EF0-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1; }
@@ -1905,6 +1925,6 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=f988e7829c" defer></script>
+<script src="../../assets/js/landing.js?v=1a85065b92" defer></script>
 </body>
 </html>

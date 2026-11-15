@@ -14,15 +14,16 @@
   function startDock() {
     if (!matchMedia('(hover: hover)').matches || reducedMotion()) return;
     let cur = null;
-    const reset = (el) => { el.style.setProperty('--tqx', '0px'); el.style.setProperty('--tqy', '0px'); };
+    const reset = (el) => { el.style.setProperty('--tqx', '0px'); el.style.setProperty('--tqy', '0px'); el.style.removeProperty('--tqmx'); };
     document.addEventListener('pointermove', (e) => {
-      const el = e.target.closest && e.target.closest('.tq-dock, .tq-env, .tq-launch, .tq-logo, .tq-crys');
+      const el = e.target.closest && e.target.closest('.tq-dock, .tq-env, .tq-launch, .tq-logo, .tq-crys, .tq-rglass');
       if (cur && cur !== el) { reset(cur); cur = null; }
       if (!el) return;
       cur = el;
       const r = el.getBoundingClientRect();
       el.style.setProperty('--tqx', ((e.clientX - r.left - r.width / 2) * 0.12).toFixed(1) + 'px');
       el.style.setProperty('--tqy', ((e.clientY - r.top - r.height / 2) * 0.25).toFixed(1) + 'px');
+      if (el.classList.contains('tq-rglass')) el.style.setProperty('--tqmx', (((e.clientX - r.left) / r.width) * 100).toFixed(1) + '%');   /* its glare follows */
     }, { passive: true });
   }
 
