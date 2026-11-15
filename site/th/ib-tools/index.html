@@ -1250,10 +1250,11 @@ footer p { font-size: 12px !important; }
 }
 .tq-ibcp { --hdr: 64px; position: relative; box-sizing: border-box; height: 310svh; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 .tq-ibcp__stage { position: sticky; top: 0; height: 100svh; box-sizing: border-box; padding-top: var(--hdr); overflow: hidden; display: flex; align-items: center;
-  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px),
+  background: linear-gradient(#e9eaec 0, #e9eaec var(--hdr), rgba(233,234,236,.96) calc(var(--hdr) + 30px), rgba(233,234,236,.86) calc(var(--hdr) + 60px), rgba(233,234,236,.7) calc(var(--hdr) + 90px), rgba(233,234,236,.5) calc(var(--hdr) + 120px), rgba(233,234,236,.31) calc(var(--hdr) + 150px), rgba(233,234,236,.15) calc(var(--hdr) + 180px), rgba(233,234,236,.05) calc(var(--hdr) + 210px), rgba(233,234,236,0) calc(var(--hdr) + 240px)),
     radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(50% + var(--hdr) / 2 + 450px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
     radial-gradient(calc(792px * var(--z, 1)) calc(585px * var(--z, 1)) at calc(50% + 201.6px * var(--z, 1)) calc(50% + var(--hdr) / 2 - 90px * var(--z, 1)), #e8e8ee 0%, #d5d5dc 55%, #c3c4cb 100%); }
-.tq-ibcp__stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; z-index: 2; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
+.tq-ibcp__stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 200px; pointer-events: none; z-index: 2;   
+  background: linear-gradient(rgba(233,234,236,0) 0%, rgba(233,234,236,.04) 25%, rgba(233,234,236,.13) 42%, rgba(233,234,236,.28) 58%, rgba(233,234,236,.5) 72%, rgba(233,234,236,.74) 85%, rgba(233,234,236,.92) 94%, #e9eaec 100%); }
 .tq-ibcp a { text-decoration: none; }
 .tq-ibcp__in { position: relative; flex: none; width: 1440px; height: 900px; margin: 0 auto; }
 .tq-ibcp__txt { position: absolute; z-index: 3; left: 72px; top: 0; bottom: 0; width: 380px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
@@ -1289,7 +1290,7 @@ footer p { font-size: 12px !important; }
   background: radial-gradient(circle, rgba(255,58,65,.7) 0%, rgba(231,19,27,.2) 40%, rgba(231,19,27,0) 70%); }
 .tq-ibcp__gl { position: absolute; left: 640px; top: 240px; width: 680px; height: 440px; pointer-events: none; }
 .tq-ibcp__ring { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; box-sizing: border-box; border-radius: 50%; border: 1.5px solid #e7131b; opacity: 0; pointer-events: none; }
-.tq-ibcp__rail { position: absolute; right: 30px; top: 370px; width: 2px; height: 160px; border-radius: 2px; background: rgba(30,34,44,.14); overflow: hidden; }
+.tq-ibcp__rail { position: absolute; right: var(--rr, 30px); top: 370px; width: 2px; height: 160px; border-radius: 2px; background: rgba(30,34,44,.14); overflow: hidden; }
 .tq-ibcp__rail i { display: block; width: 100%; height: 100%; transform-origin: 50% 0; transform: scaleY(1); background: #e7131b; }
 .tq-ibcp__scr { position: relative; width: 300px; height: 650px; border-radius: 46px; overflow: hidden; color: #fff; background: linear-gradient(170deg, #18191c 0%, #0c0d0f 45%, #08090a 100%); font-variant-numeric: tabular-nums; }
 .tq-ibcp__scr > * { position: absolute; }
@@ -1667,9 +1668,9 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
         </div>
       </div>
       <script>/* the stage: one screen, its top --hdr kept free for the header. 1200px+: the 1440x900 composition scaled to fit it (--z lines the
-   background up); narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition, scaled to the
+   background up; --rr puts the progress rail near the screen's right edge: as far from it as the words are from the left one, 120px at most); narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition, scaled to the
    width and to the room the words and the note leave (at most 0.8x, centred) */
-(function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),o=s.querySelector('.tq-ibcp__note'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,H=g.clientHeight-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-o.offsetHeight-48)/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
+(function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),o=s.querySelector('.tq-ibcp__note'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,H=g.clientHeight-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);var gx=(w-1440*k)/2,R=Math.min(gx+72*k,120);s.style.setProperty('--rr',((R-gx)/k).toFixed(1)+'px');b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');s.style.removeProperty('--rr');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-o.offsetHeight-48)/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
     </section>
 
     <!-- Network + clients (IB_Network_Block design: "IB Network + Clients", in place of the Network insights, Clients &
