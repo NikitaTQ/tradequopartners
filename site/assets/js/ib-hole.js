@@ -87,7 +87,8 @@
     };
     const size = () => {
       W = Math.round(root.clientWidth); H = Math.round(root.clientHeight); if (!W || !H) return;
-      const sh = H - 70;
+      const hudBox = root.querySelector('.tq-ibb__hud');   /* the scene stays above the steps and the button under them */
+      const sh = H - Math.max(70, hudBox ? H - hudBox.offsetTop + 2 : 70);
       cx = W / 2; cy = sh * 0.52;
       const tall = W < H;   /* phones, portrait tablets: a bigger hole, wider bars and tree than the landscape design */
       RX = Math.min(W * 0.47, 760); R = Math.min(RX * (tall ? 0.28 : 0.2), sh * 0.17);
