@@ -288,22 +288,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 (function(){var s=document.currentScript.parentNode,set=function(g){if(g==null){s.setAttribute('data-hl','0');s.removeAttribute('data-act')}else{s.setAttribute('data-hl',g);s.setAttribute('data-act','')}};s.querySelectorAll('.sib-n[data-g]').forEach(function(n){n.addEventListener('mouseenter',function(){set(n.getAttribute('data-g'))});n.addEventListener('mouseleave',function(){set(null)})})})();</script>
     </section>
 
-    <!-- FAQ: five of the usual questions (the home page's own: becoming an IB, earnings, payouts, support, experience and
-         capital; global faq.1-5, so all 18 languages), as on the other pages (.tp-faq, the faq-card partial); on the grey
-         of the blocks either side of it (.tq-ibq), so no seams. -->
-    <section id="questions" class="tp-sec tq-ibq" data-screen-label="IB Tools FAQ">
-      <div class="tp-wrap tp-faq">
-        <div class="tp-faq__side">
-          <span class="tp-pill">{{faq.pill}}</span>
-          <h2 class="tp-h2 tq-h2" data-fitw>{{faq.title}}</h2>
-          <p class="tp-sub" style="max-width: 30ch;">{{faq.sub}}</p>
-        </div>
-        <div class="tp-faq__list">
-{{faq:faq:5}}
-        </div>
-      </div>
-    </section>
-
     <!-- Black hole (IB_Tools_Black_Hole design, Nov 2026 version): assets/js/ib-hole.js draws it on the canvas. Event chips
          fall into an obsidian black hole, crystals stack into volume-by-lot bars, gather into the client groups (active,
          dormant risk, inactive), regroup into the Sub-IB tree and drain back; big captions over the scene tell the story
@@ -321,6 +305,23 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
           <li class="tq-ibb__tab" data-ib-hole-tab><b>03</b><span>{{ib.hole.sc}}</span><i><i data-ib-hole-fill></i></i></li>
           <li class="tq-ibb__tab" data-ib-hole-tab><b>04</b><span>{{ib.hole.s3}}</span><i><i data-ib-hole-fill></i></i></li>
         </ol>
+      </div>
+    </section>
+
+    <!-- FAQ: five of the usual questions (the home page's own: becoming an IB, earnings, payouts, support, experience and
+         capital; global faq.1-5, so all 18 languages), as on the other pages (.tp-faq, the faq-card partial); on the grey
+         of the black hole above it (.tq-ibq), turning white at its foot for the footer, so no seams. Last on the page,
+         after the black hole. -->
+    <section id="questions" class="tp-sec tq-ibq" data-screen-label="IB Tools FAQ">
+      <div class="tp-wrap tp-faq">
+        <div class="tp-faq__side">
+          <span class="tp-pill">{{faq.pill}}</span>
+          <h2 class="tp-h2 tq-h2" data-fitw>{{faq.title}}</h2>
+          <p class="tp-sub" style="max-width: 30ch;">{{faq.sub}}</p>
+        </div>
+        <div class="tp-faq__list">
+{{faq:faq:5}}
+        </div>
       </div>
     </section>
   </main>

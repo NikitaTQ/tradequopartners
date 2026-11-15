@@ -1432,11 +1432,12 @@
 
 /* IB Tools: the black hole block (IB_Tools_Black_Hole_Obsidian), drawn by assets/js/ib-hole.js on the canvas, which
    fills the block; the HUD of the three steps sits at its foot (the active step dark, its bar filling). The grey goes on
-   from the hero above and turns white at the foot, above the footer. */
-/* IB Tools: the FAQ (the shared .tp-faq) on the grey of the blocks either side of it: the Sub-IB network above, the black hole below */
-.tq-ibq { background: #e9eaec; }
+   from the block above and into the FAQ below. */
+/* IB Tools: the FAQ (the shared .tp-faq), last on the page: on the grey of the black hole above it, turning white at its
+   foot, above the footer */
+.tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
 .tq-ibb { position: relative; overflow: hidden; height: clamp(520px, min(100vh, 112vw), 920px); height: clamp(520px, min(100svh, 112vw), 920px); color: #0a0a0a;   /* tall screens: about as tall as wide (phones 520px), not a whole screen of grey */
-  background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
+  background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), #e9eaec; }
 .tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
 .tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(16px, 3vw, 28px); display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
 .tq-ibb__tabs { display: flex; flex-wrap: nowrap; gap: 2px; margin: 0; padding: 5px; max-width: 100%; box-sizing: border-box; list-style: none; white-space: nowrap; border-radius: 999px;
