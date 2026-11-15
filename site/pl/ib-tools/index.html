@@ -930,9 +930,9 @@ footer p { font-size: 12px !important; }
 @media (prefers-reduced-motion: reduce) {
 .tq-ibtp__go, .tq-ibtp__cmp { transition: none; }
 }
-.tq-ibq { background: #e9eaec; }
+.tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
 .tq-ibb { position: relative; overflow: hidden; height: clamp(520px, min(100vh, 112vw), 920px); height: clamp(520px, min(100svh, 112vw), 920px); color: #0a0a0a;   
-  background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
+  background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), #e9eaec; }
 .tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
 .tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(16px, 3vw, 28px); display: flex; justify-content: center; padding: 0 16px; box-sizing: border-box; }
 .tq-ibb__tabs { display: flex; flex-wrap: nowrap; gap: 2px; margin: 0; padding: 5px; max-width: 100%; box-sizing: border-box; list-style: none; white-space: nowrap; border-radius: 999px;
@@ -1949,9 +1949,30 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 (function(){var s=document.currentScript.parentNode,set=function(g){if(g==null){s.setAttribute('data-hl','0');s.removeAttribute('data-act')}else{s.setAttribute('data-hl',g);s.setAttribute('data-act','')}};s.querySelectorAll('.sib-n[data-g]').forEach(function(n){n.addEventListener('mouseenter',function(){set(n.getAttribute('data-g'))});n.addEventListener('mouseleave',function(){set(null)})})})();</script>
     </section>
 
+    <!-- Black hole (IB_Tools_Black_Hole design, Nov 2026 version): assets/js/ib-hole.js draws it on the canvas. Event chips
+         fall into an obsidian black hole, crystals stack into volume-by-lot bars, gather into the client groups (active,
+         dormant risk, inactive), regroup into the Sub-IB tree and drain back; big captions over the scene tell the story
+         (data-c1..c5, *word* in red), the HUD follows the four steps. The chips and the figures on the canvas are product
+         UI, English; the captions, the group names and the steps are the page's text. .tq-ibb__font is not seen: it holds
+         the captions and group names in the heading face, so that face's subset has their letters and the browser loads
+         it before the canvas draws with it. -->
+    <section id="flow" class="tq-ibb" data-ib-hole aria-label="Przyciąganie · Każdy lot · Każdy klient · Każdy poziom" data-c1="Wszystko jest *rozrzucone*" data-c2="Ale Big IB Bang wszystko *ułatwia*" data-c3="Każdy *lot* trafia na swoje miejsce" data-c4="Zobacz, kto handluje, a kto *ucichł*" data-c5="Zobacz każdą *gałąź* swojej sieci" data-act="Aktywny" data-dor="Zagrożony" data-ina="Nieaktywny" data-screen-label="IB Tools · Black hole">
+      <span class="tq-ibb__font tq-h2" aria-hidden="true">Wszystko jest *rozrzucone* Ale Big IB Bang wszystko *ułatwia* Każdy *lot* trafia na swoje miejsce Zobacz, kto handluje, a kto *ucichł* Zobacz każdą *gałąź* swojej sieci Aktywny Zagrożony Nieaktywny</span>
+      <canvas class="tq-ibb__cv" dir="ltr" aria-hidden="true"></canvas>
+      <div class="tq-ibb__hud">
+        <ol class="tq-ibb__tabs">
+          <li class="tq-ibb__tab is-on" data-ib-hole-tab><b>01</b><span>Przyciąganie</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>02</b><span>Każdy lot</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>03</b><span>Każdy klient</span><i><i data-ib-hole-fill></i></i></li>
+          <li class="tq-ibb__tab" data-ib-hole-tab><b>04</b><span>Każdy poziom</span><i><i data-ib-hole-fill></i></i></li>
+        </ol>
+      </div>
+    </section>
+
     <!-- FAQ: five of the usual questions (the home page's own: becoming an IB, earnings, payouts, support, experience and
          capital; global faq.1-5, so all 18 languages), as on the other pages (.tp-faq, the faq-card partial); on the grey
-         of the blocks either side of it (.tq-ibq), so no seams. -->
+         of the black hole above it (.tq-ibq), turning white at its foot for the footer, so no seams. Last on the page,
+         after the black hole. -->
     <section id="questions" class="tp-sec tq-ibq" data-screen-label="IB Tools FAQ">
       <div class="tp-wrap tp-faq">
         <div class="tp-faq__side">
@@ -2027,26 +2048,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
           </div>
 
         </div>
-      </div>
-    </section>
-
-    <!-- Black hole (IB_Tools_Black_Hole design, Nov 2026 version): assets/js/ib-hole.js draws it on the canvas. Event chips
-         fall into an obsidian black hole, crystals stack into volume-by-lot bars, gather into the client groups (active,
-         dormant risk, inactive), regroup into the Sub-IB tree and drain back; big captions over the scene tell the story
-         (data-c1..c5, *word* in red), the HUD follows the four steps. The chips and the figures on the canvas are product
-         UI, English; the captions, the group names and the steps are the page's text. .tq-ibb__font is not seen: it holds
-         the captions and group names in the heading face, so that face's subset has their letters and the browser loads
-         it before the canvas draws with it. -->
-    <section id="flow" class="tq-ibb" data-ib-hole aria-label="Przyciąganie · Każdy lot · Każdy klient · Każdy poziom" data-c1="Wszystko jest *rozrzucone*" data-c2="Ale Big IB Bang wszystko *ułatwia*" data-c3="Każdy *lot* trafia na swoje miejsce" data-c4="Zobacz, kto handluje, a kto *ucichł*" data-c5="Zobacz każdą *gałąź* swojej sieci" data-act="Aktywny" data-dor="Zagrożony" data-ina="Nieaktywny" data-screen-label="IB Tools · Black hole">
-      <span class="tq-ibb__font tq-h2" aria-hidden="true">Wszystko jest *rozrzucone* Ale Big IB Bang wszystko *ułatwia* Każdy *lot* trafia na swoje miejsce Zobacz, kto handluje, a kto *ucichł* Zobacz każdą *gałąź* swojej sieci Aktywny Zagrożony Nieaktywny</span>
-      <canvas class="tq-ibb__cv" dir="ltr" aria-hidden="true"></canvas>
-      <div class="tq-ibb__hud">
-        <ol class="tq-ibb__tabs">
-          <li class="tq-ibb__tab is-on" data-ib-hole-tab><b>01</b><span>Przyciąganie</span><i><i data-ib-hole-fill></i></i></li>
-          <li class="tq-ibb__tab" data-ib-hole-tab><b>02</b><span>Każdy lot</span><i><i data-ib-hole-fill></i></i></li>
-          <li class="tq-ibb__tab" data-ib-hole-tab><b>03</b><span>Każdy klient</span><i><i data-ib-hole-fill></i></i></li>
-          <li class="tq-ibb__tab" data-ib-hole-tab><b>04</b><span>Każdy poziom</span><i><i data-ib-hole-fill></i></i></li>
-        </ol>
       </div>
     </section>
   </main>
