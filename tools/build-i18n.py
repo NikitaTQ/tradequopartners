@@ -217,6 +217,39 @@ def switcher(cur, s, slug='', page_id='landing', home=''):
             % (render_attr(s('fab.aria')), render_attr(s('lang.label')), html.escape(cur['name']), html.escape(code), ''.join(items)))
 
 
+# phones: the language sheet (partials/mnav.html): a round flag per language (assets/lang/flags.webp, one 96px circle
+# each, in the order of languages.json: GB, SA, CN, HK, FR, DE, ID, IT, JP, KR, PL, PT, RO, ES, TH, TR, UA, VN; from
+# flag-icons, MIT) and the English name, so that the search finds a language by either name
+EN_NAME = {'en': 'English', 'ar': 'Arabic', 'zh-hans': 'Chinese Simplified', 'zh-hant': 'Chinese Traditional', 'fr': 'French',
+           'de': 'German', 'id': 'Indonesian', 'it': 'Italian', 'ja': 'Japanese', 'ko': 'Korean', 'pl': 'Polish',
+           'pt': 'Portuguese', 'ro': 'Romanian', 'es': 'Spanish', 'th': 'Thai', 'tr': 'Turkish', 'uk': 'Ukrainian',
+           'vi': 'Vietnamese'}
+
+
+def lang_sheet_items(cur, slug=''):
+    items = []
+    for i, t in enumerate(languages):
+        current = ' aria-current="true"' if t['code'] == cur['code'] else ''
+        key = ' '.join((t['name'], EN_NAME[t['code']], t['code'], t['hreflang']))
+        items.append('<li data-k="%s"><a class="tq-lsheet__l" href="%s" hreflang="%s" lang="%s"%s>'
+                     '<span class="tq-lsheet__f" style="--f: %d" aria-hidden="true"></span><span class="tq-lsheet__n">%s</span></a></li>'
+                     % (html.escape(key), href_from(cur, t, slug), t['hreflang'], t.get('html', t['code']), current, i, html.escape(t['name'])))
+    return '\n          '.join(items)
+
+
+def mnav_links(home, page_id, s):
+    """phones: the menu's five pages, numbered; the page you are on is marked (and takes you back to its top)"""
+    out = []
+    for i, (pid, path, key) in enumerate(NAV):
+        inner = '<span class="tq-mnav__n">%02d</span><span class="tq-mnav__t">%s</span>' % (i + 1, html.escape(s(key)))
+        if pid == page_id:
+            out.append('<li><a class="tq-mnav__a" href="#" aria-current="page" data-to-top>%s</a></li>' % inner)
+        else:
+            out.append('<li><a class="tq-mnav__a" href="%s" data-page-link data-label="%s">%s</a></li>'
+                       % (page_href(home, path), render_attr(s('loader') + ' · ' + s(key)), inner))
+    return '\n      '.join(out)
+
+
 def fan_menu(page_id):
     """Veil + fan of this page's sections + knob (partials/fan.html, fan-blade.html): its table of contents."""
     toc = TOC.get(page_id, ())
@@ -307,6 +340,8 @@ for page in PAGES:
             'lang': lang.get('html', code), 'code': code, 'dir': lang.get('dir', 'ltr'), 'root': root, 'home': home or './',
             'canonical': url_of(lang, slug), 'hreflang': hreflang, 'ogLocale': lang['ogLocale'],
             'fontFaces': faces, 'fontPreload': preload + h1_preload(lang['code'], root, '-h2' if page.get('display') == 'h2' else ''), 'langSwitcher': switcher(lang, s, slug, page['id'], home),
+            'mnavLinks': mnav_links(home, page['id'], s), 'lsheetItems': lang_sheet_items(lang, slug), 'langCount': str(len(languages)),
+            'langCode': html.escape(SHORT.get(code, code.upper())), 'langName': html.escape(lang['name']),
             'embedQuery': '' if code == 'en' else '?lang=' + code,
             # "become a partner" links in shared blocks: scroll to the form on the landing, go to it elsewhere
             'signupHref': (home + '#signup') if slug else '#signup',

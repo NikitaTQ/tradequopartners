@@ -99,11 +99,11 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/syncopate-h2.woff2?v=b9ff73bb14) format('woff2'); }
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=4d6a6698a8) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=5fcf5445c0) format('woff2'); }
-@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=dc0e26592e) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=c8d4666399) format('woff2'); }
+@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=1e2456eaf3) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=afe7952bfb) format('woff2'); }
 @font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=92388e9486) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=f0a7a98cd4) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=1cc39d82b7) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=25e724efa5) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=aff4fb7aba) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -757,6 +757,119 @@ footer p { font-size: 12px !important; }
 .tq-head .tq-head__nav { gap: 6px !important; }
 .tq-head .tq-head__cta { padding: 0 10px !important; font-size: 13px !important; }
 }
+.tq-head__burger, .tq-mnav, .tq-lfab, .tq-lsheet { display: none; }
+@media (max-width: 640px) {
+.tq-head__burger { position: relative; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; box-sizing: border-box; width: 38px; height: 38px; padding: 0;
+    border: 0 solid transparent; border-radius: 999px; border-image: url(../../assets/head/lang.webp?v=1a01d67e6b) 0 36 fill / 0 19px stretch; background: none; color: #c9c9ce; cursor: pointer;
+    -webkit-tap-highlight-color: transparent; transition: filter .2s ease, color .2s ease, width .3s ease, height .3s ease, border-image-width .3s ease; }
+.tq-head__burger::before { content: ''; position: absolute; inset: -3px; }
+.tq-head__burger:hover, .tq-head__burger[aria-expanded="true"] { color: #fff; filter: brightness(1.3); }
+.tq-head__burger:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+.tq-head__bx, .tq-head__burger[aria-expanded="true"] .tq-head__bi { display: none; }
+.tq-head__burger[aria-expanded="true"] .tq-head__bx { display: block; }
+.tq-head.is-stuck .tq-head__burger { width: 34px; height: 34px; border-image-width: 0 17px; }
+.tq-head .tq-head__home { flex: 1 1 0; min-width: 0; justify-content: center; }
+.tq-head .tq-lang, [data-fab] { display: none !important; }
+html.tq-locked { overflow: hidden; }
+html.tq-mnav-on .tq-head { transform: none !important; }
+.tq-mnav { position: fixed; inset: 0; z-index: 49; display: flex; flex-direction: column; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain;
+    padding: calc(var(--top, 64px) + 20px) 14px calc(16px + env(safe-area-inset-bottom));
+    background: radial-gradient(75% 34% at 96% 24%, rgba(140,12,18,.34) 0%, rgba(140,12,18,0) 100%), #090808; color: #f4f4f6; opacity: 0; transition: opacity .25s ease; }
+.tq-mnav[hidden] { display: none; }
+.tq-mnav.is-open { opacity: 1; }
+.tq-mnav__label { margin: 0 0 12px; padding-inline: 10px; color: #8a8d94; font: 600 11px/1 'Inter', sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.tq-mnav__list { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+.tq-mnav__list li { border-top: 1px solid rgba(255,255,255,.08); opacity: 0; transform: translateY(10px); transition: opacity .3s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+.tq-mnav.is-open .tq-mnav__list li { opacity: 1; transform: none; }
+.tq-mnav.is-open .tq-mnav__list li:nth-child(2) { transition-delay: .03s; }
+.tq-mnav.is-open .tq-mnav__list li:nth-child(3) { transition-delay: .06s; }
+.tq-mnav.is-open .tq-mnav__list li:nth-child(4) { transition-delay: .09s; }
+.tq-mnav.is-open .tq-mnav__list li:nth-child(5) { transition-delay: .12s; }
+.tq-mnav__a { display: flex; align-items: center; gap: 18px; min-height: 62px; padding: 8px 10px; box-sizing: border-box; color: #bebec3; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: color .2s ease; }
+.tq-mnav__a:hover, .tq-mnav__a:active { color: #fff; }
+.tq-mnav__a:focus-visible { outline: 2px solid #e7131b; outline-offset: -2px; border-radius: 10px; }
+.tq-mnav__n { flex: none; min-width: 20px; color: #6f7178; font: 500 12px/1 'Inter', sans-serif; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+.tq-mnav__t { flex: 1; min-width: 0; font: 600 21px/1.2 'Inter', system-ui, sans-serif; letter-spacing: -.01em; }
+.tq-mnav__a[aria-current="page"] { color: #f4f4f6; }
+.tq-mnav__a[aria-current="page"] .tq-mnav__n { color: #e7131b; }
+.tq-mnav__a[aria-current="page"]::after { content: ''; flex: none; width: 7px; height: 7px; margin-inline-end: 4px; border-radius: 50%; background: #e7131b; box-shadow: 0 0 10px rgba(231,19,27,.85); }
+.tq-mnav__foot { display: flex; gap: 10px; margin-top: auto; padding-top: 24px; }
+.tq-mnav__cta { flex: 1; min-width: 0; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; height: 54px; padding: 0 20px;
+    border: 0 solid transparent; border-radius: 999px; border-image: url(../../assets/head/cta.webp?v=8a3872fab2) 0 37 fill / 0 27.4px stretch; color: #f6e6e6; font: 600 16px/1.2 'Inter', sans-serif;
+    letter-spacing: -.005em; text-align: center; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: filter .2s ease, color .2s ease; }
+.tq-mnav__cta:hover, .tq-mnav__cta:active { color: #fff; filter: brightness(1.12); }
+.tq-mnav__lang { flex: none; display: inline-flex; align-items: center; gap: 8px; box-sizing: border-box; height: 54px; padding: 0 18px;
+    border: 0 solid transparent; border-radius: 999px; border-image: url(../../assets/head/lang.webp?v=1a01d67e6b) 0 36 fill / 0 27.4px stretch; background: none; color: #d6d6da;
+    font: 600 14px/1 'Inter', sans-serif; letter-spacing: .04em; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: filter .2s ease, color .2s ease; }
+.tq-mnav__lang:hover, .tq-mnav__lang:active { color: #fff; filter: brightness(1.3); }
+.tq-mnav__cta:focus-visible, .tq-mnav__lang:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tq-lfab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 60; display: flex; align-items: center; justify-content: center;
+    width: 58px; height: 58px; padding: 0; border: 0; border-radius: 50%; cursor: pointer; isolation: isolate; -webkit-tap-highlight-color: transparent;
+    background: linear-gradient(200deg, #fff 0%, rgba(255,255,255,.7) 45%), linear-gradient(180deg, #fff 0%, #eceef1 100%);
+    box-shadow: 0 1px 2px rgba(10,10,10,.08), 0 18px 30px -16px rgba(10,10,10,.45), 0 16px 32px -8px rgba(231,19,27,.3);
+    transition: transform .3s cubic-bezier(.2,.8,.2,1), opacity .25s ease; }
+.tq-lfab::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 3px; pointer-events: none;
+    background: conic-gradient(from 200deg, #fff 0deg, #cfd2d7 28deg, #f6f7f8 52deg, #aeb2b9 86deg, #eff0f2 118deg, #fff 150deg, #c4c7cd 190deg, #f3f4f6 228deg, #a3a7ae 262deg, #e6e8eb 300deg, #fff 330deg, #fff 360deg);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.tq-lfab::after { content: ''; position: absolute; inset: 3px; z-index: -1; border-radius: 50%; pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), 0 0 0 1px rgba(110,116,124,.3), inset 0 -10px 16px -12px rgba(10,10,10,.2); }
+.tq-lfab:active { transform: scale(.94); }
+.tq-lfab:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tq-lfab__code { position: absolute; top: -4px; right: -7px; min-width: 24px; height: 21px; box-sizing: border-box; padding: 0 6px; border: 2px solid #fff; border-radius: 999px;
+    background: #e7131b; color: #fff; font: 700 10px/17px 'Inter', sans-serif; letter-spacing: .03em; text-align: center; white-space: nowrap; box-shadow: 0 4px 10px -3px rgba(231,19,27,.6); }
+html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8); }
+.tq-lsheet { position: fixed; inset: 0; z-index: 95; display: block; }
+.tq-lsheet[hidden] { display: none; }
+.tq-lsheet__veil { position: absolute; inset: 0; background: rgba(10,10,12,.34); opacity: 0; transition: opacity .3s ease; }
+.tq-lsheet.is-open .tq-lsheet__veil { opacity: 1; }
+.tq-lsheet__box { position: absolute; left: 8px; right: 8px; bottom: 0; display: flex; flex-direction: column; box-sizing: border-box; height: calc(100% - 12px); overflow: hidden; outline: none;
+    border: 1px solid rgba(255,255,255,.95); border-bottom: 0; border-radius: 34px 34px 0 0;
+    background: radial-gradient(58% 30% at 100% 31%, rgba(240,38,46,.5) 0%, rgba(240,38,46,0) 100%), linear-gradient(180deg, rgba(250,250,251,.88) 0%, rgba(239,240,242,.92) 100%);
+    -webkit-backdrop-filter: blur(22px) saturate(1.3); backdrop-filter: blur(22px) saturate(1.3);
+    box-shadow: inset 0 1px 0 #fff, 0 -24px 60px -24px rgba(10,10,12,.45); transform: translateY(104%); transition: transform .42s cubic-bezier(.2,.85,.25,1); }
+.tq-lsheet.is-open .tq-lsheet__box { transform: none; }
+.tq-lsheet__drag { position: relative; flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 30px 18px 0 26px; padding-inline: 26px 18px; touch-action: none; }
+.tq-lsheet__grip { position: absolute; top: 9px; left: 50%; width: 42px; height: 5px; margin-left: -21px; border-radius: 3px; background: rgba(10,10,12,.2); }
+.tq-lsheet__t { --h2s: 19px; min-width: 0; margin: 0; padding-inline-start: 0; color: #0a0a0a; line-height: 1.15; letter-spacing: .08em; }
+.tq-lsheet__x { position: relative; flex: none; display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; padding: 0; border: 1px solid rgba(255,255,255,.95); border-radius: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.62) 100%); color: #0a0a0a; cursor: pointer; -webkit-tap-highlight-color: transparent;
+    box-shadow: inset 0 -5px 10px -6px rgba(18,22,30,.22), 0 8px 18px -10px rgba(18,22,30,.45); }
+.tq-lsheet__x:active { transform: scale(.94); }
+.tq-lsheet__x:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+.tq-lsheet__search { flex: none; display: flex; align-items: center; gap: 12px; box-sizing: border-box; height: 54px; margin: 20px 16px 0; padding: 0 20px; border-radius: 999px; color: #2b2d31; cursor: text;
+    background: rgba(255,255,255,.52); border: 1.5px solid rgba(255,255,255,.95); box-shadow: inset 0 1px 3px rgba(18,22,30,.08), 0 8px 18px -14px rgba(18,22,30,.35); transition: box-shadow .2s ease; }
+.tq-lsheet__search:focus-within { box-shadow: 0 0 0 3px rgba(231,19,27,.14), 0 8px 18px -14px rgba(18,22,30,.35); }
+.tq-lsheet__search svg { flex: none; }
+.tq-lsheet__search input { flex: 1; min-width: 0; height: 100%; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; outline: none; color: #0a0a0a; font: 400 16px/1 'Inter', sans-serif; -webkit-appearance: none; appearance: none; }
+.tq-lsheet__search input::placeholder { color: #8b8c91; opacity: 1; }
+.tq-lsheet__search input::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
+.tq-lsheet__scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 16px calc(20px + env(safe-area-inset-bottom)); }
+.tq-lsheet__all { margin: 22px 10px 12px; color: #55575c; font: 600 11px/1 'Inter', sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.tq-lsheet__list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.tq-lsheet__list li[hidden] { display: none; }
+.tq-lsheet__l { display: flex; align-items: center; gap: 10px; box-sizing: border-box; height: 58px; padding-inline: 5px 10px; border-radius: 999px; color: #0a0a0a; text-decoration: none;
+    background: linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.5) 100%); border: 1.5px solid rgba(255,255,255,.95);
+    box-shadow: inset 0 -6px 12px -8px rgba(18,22,30,.18), 0 10px 20px -14px rgba(18,22,30,.45); -webkit-tap-highlight-color: transparent; transition: transform .15s ease; }
+.tq-lsheet__l:hover { color: #0a0a0a; }
+.tq-lsheet__l:active { transform: scale(.97); }
+.tq-lsheet__l:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
+.tq-lsheet__l[aria-current="true"], .tq-lsheet__l[aria-current="true"]:hover { color: #fff; border-color: rgba(255,150,150,.5);
+    background: linear-gradient(180deg, #f2343c 0%, #d8141c 52%, #b40c13 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -8px 14px -8px rgba(80,0,0,.45), 0 14px 24px -12px rgba(231,19,27,.75); }
+.tq-lsheet__f { flex: none; width: 46px; height: 46px; border-radius: 50%; background: url(../../assets/lang/flags.webp?v=4714f5c27f) calc(var(--f) * 100% / 17) 0 / 1800% 100% no-repeat;
+    box-shadow: 0 0 0 2px #fff, 0 3px 8px -2px rgba(10,10,12,.35); }
+.tq-lsheet__n { min-width: 0; font: 700 15px/1.15 'Inter', system-ui, sans-serif; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.tq-lsheet__none { margin: 6px 10px 0; color: #6c6d71; font: 500 14px/1.4 'Inter', sans-serif; }
+.tq-lsheet__opt { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; margin: 18px 0 0; padding: 14px 10px 4px; border: 0; border-top: 1px solid rgba(10,10,12,.08);
+    background: none; color: #55575c; font: 600 13.5px/1.3 'Inter', sans-serif; text-align: start; cursor: pointer; }
+.tq-lsheet__opt .tq-lang__switch { background: rgba(10,10,12,.18); }
+.tq-lsheet__opt[aria-checked="true"] .tq-lang__switch { background: #e7131b; }
+.tq-lsheet__opt[aria-checked="true"] .tq-lang__switch::after { transform: translateX(14px); }
+[dir="rtl"] .tq-lsheet__opt[aria-checked="true"] .tq-lang__switch::after { transform: translateX(-14px); }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+.tq-mnav, .tq-mnav__list li, .tq-lsheet__veil, .tq-lsheet__box, .tq-lfab { transition: none; }
+}
 .tq-ph { display: none; }
 @media (max-width: 640px) {
 .tq-ph { display: inline; }
@@ -1273,6 +1386,7 @@ html:lang(ko) * { word-break: keep-all; }
 <div class="tp">
 
   <header class="tq-head">
+    <button type="button" class="tq-head__burger" data-mnav-toggle aria-controls="tq-mnav" aria-expanded="false" aria-label="選單"><svg class="tq-head__bi" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><svg class="tq-head__bx" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></button>
     <a class="tq-head__home" href="../" data-page-link data-label="載入中 · 首頁"><img class="tq-head__logo" src="../../assets/head/logo.webp?v=fbcac7b3e0" width="268" height="48" alt="TradeQuo"></a>
     <nav class="tq-head__nav">
       <span data-navlinks="" style="display: contents;">
@@ -1287,6 +1401,70 @@ html:lang(ko) * { word-break: keep-all; }
       <a class="tq-head__cta" href="../#signup" data-page-link data-label="載入中 · 首頁">成為合作夥伴</a>
     </nav>
   </header>
+  
+  <!-- phones: the menu (the ☰ in the header), the language button bottom right and the language sheet (landing.js startPhoneNav) -->
+  <div class="tq-mnav" id="tq-mnav" data-mnav hidden>
+    <p class="tq-mnav__label">選單</p>
+    <ol class="tq-mnav__list">
+      <li><a class="tq-mnav__a" href="../" data-page-link data-label="載入中 · 首頁"><span class="tq-mnav__n">01</span><span class="tq-mnav__t">首頁</span></a></li>
+      <li><a class="tq-mnav__a" href="#" aria-current="page" data-to-top><span class="tq-mnav__n">02</span><span class="tq-mnav__t">合作夥伴方案</span></a></li>
+      <li><a class="tq-mnav__a" href="../partner-terms/" data-page-link data-label="載入中 · 合作夥伴條款"><span class="tq-mnav__n">03</span><span class="tq-mnav__t">合作夥伴條款</span></a></li>
+      <li><a class="tq-mnav__a" href="../marketing-tools/" data-page-link data-label="載入中 · 行銷工具"><span class="tq-mnav__n">04</span><span class="tq-mnav__t">行銷工具</span></a></li>
+      <li><a class="tq-mnav__a" href="../ib-tools/" data-page-link data-label="載入中 · IB工具"><span class="tq-mnav__n">05</span><span class="tq-mnav__t">IB工具</span></a></li>
+    </ol>
+    <div class="tq-mnav__foot">
+      <a class="tq-mnav__cta" href="../#signup" data-page-link data-label="載入中 · 首頁">成為合作夥伴</a>
+      <button type="button" class="tq-mnav__lang" data-lsheet-open aria-haspopup="dialog" aria-controls="tq-lsheet" aria-expanded="false" aria-label="語言: 繁體中文">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg>
+        <span>繁體</span>
+        <svg class="tq-mnav__chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+      </button>
+    </div>
+  </div>
+  <button type="button" class="tq-lfab" data-lsheet-open aria-haspopup="dialog" aria-controls="tq-lsheet" aria-expanded="false" aria-label="語言: 繁體中文">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg>
+    <span class="tq-lfab__code" aria-hidden="true">繁體</span>
+  </button>
+  <div class="tq-lsheet" id="tq-lsheet" data-lsheet hidden>
+    <div class="tq-lsheet__veil" data-lsheet-close></div>
+    <div class="tq-lsheet__box" role="dialog" aria-modal="true" aria-labelledby="tq-lsheet-t" tabindex="-1">
+      <div class="tq-lsheet__drag">
+        <span class="tq-lsheet__grip" aria-hidden="true"></span>
+        <h2 class="tq-h2 tq-lsheet__t" id="tq-lsheet-t">語言</h2>
+        <button type="button" class="tq-lsheet__x" data-lsheet-close aria-label="關閉"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></button>
+      </div>
+      <label class="tq-lsheet__search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></svg>
+        <input type="search" data-lsheet-q placeholder="搜尋語言" aria-label="搜尋語言" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go">
+      </label>
+      <div class="tq-lsheet__scroll">
+        <p class="tq-lsheet__all">所有語言 · 18</p>
+        <ul class="tq-lsheet__list">
+          <li data-k="English English en en"><a class="tq-lsheet__l" href="../../programs/" hreflang="en" lang="en"><span class="tq-lsheet__f" style="--f: 0" aria-hidden="true"></span><span class="tq-lsheet__n">English</span></a></li>
+          <li data-k="العربية Arabic ar ar"><a class="tq-lsheet__l" href="../../ar/programs/" hreflang="ar" lang="ar"><span class="tq-lsheet__f" style="--f: 1" aria-hidden="true"></span><span class="tq-lsheet__n">العربية</span></a></li>
+          <li data-k="简体中文 Chinese Simplified zh-hans zh-Hans"><a class="tq-lsheet__l" href="../../zh-hans/programs/" hreflang="zh-Hans" lang="zh-Hans"><span class="tq-lsheet__f" style="--f: 2" aria-hidden="true"></span><span class="tq-lsheet__n">简体中文</span></a></li>
+          <li data-k="繁體中文 Chinese Traditional zh-hant zh-Hant"><a class="tq-lsheet__l" href="../../zh-hant/programs/" hreflang="zh-Hant" lang="zh-Hant" aria-current="true"><span class="tq-lsheet__f" style="--f: 3" aria-hidden="true"></span><span class="tq-lsheet__n">繁體中文</span></a></li>
+          <li data-k="Français French fr fr"><a class="tq-lsheet__l" href="../../fr/programs/" hreflang="fr" lang="fr"><span class="tq-lsheet__f" style="--f: 4" aria-hidden="true"></span><span class="tq-lsheet__n">Français</span></a></li>
+          <li data-k="Deutsch German de de"><a class="tq-lsheet__l" href="../../de/programs/" hreflang="de" lang="de"><span class="tq-lsheet__f" style="--f: 5" aria-hidden="true"></span><span class="tq-lsheet__n">Deutsch</span></a></li>
+          <li data-k="Bahasa Indonesia Indonesian id id"><a class="tq-lsheet__l" href="../../id/programs/" hreflang="id" lang="id"><span class="tq-lsheet__f" style="--f: 6" aria-hidden="true"></span><span class="tq-lsheet__n">Bahasa Indonesia</span></a></li>
+          <li data-k="Italiano Italian it it"><a class="tq-lsheet__l" href="../../it/programs/" hreflang="it" lang="it"><span class="tq-lsheet__f" style="--f: 7" aria-hidden="true"></span><span class="tq-lsheet__n">Italiano</span></a></li>
+          <li data-k="日本語 Japanese ja ja"><a class="tq-lsheet__l" href="../../ja/programs/" hreflang="ja" lang="ja"><span class="tq-lsheet__f" style="--f: 8" aria-hidden="true"></span><span class="tq-lsheet__n">日本語</span></a></li>
+          <li data-k="한국어 Korean ko ko"><a class="tq-lsheet__l" href="../../ko/programs/" hreflang="ko" lang="ko"><span class="tq-lsheet__f" style="--f: 9" aria-hidden="true"></span><span class="tq-lsheet__n">한국어</span></a></li>
+          <li data-k="Polski Polish pl pl"><a class="tq-lsheet__l" href="../../pl/programs/" hreflang="pl" lang="pl"><span class="tq-lsheet__f" style="--f: 10" aria-hidden="true"></span><span class="tq-lsheet__n">Polski</span></a></li>
+          <li data-k="Português Portuguese pt pt"><a class="tq-lsheet__l" href="../../pt/programs/" hreflang="pt" lang="pt"><span class="tq-lsheet__f" style="--f: 11" aria-hidden="true"></span><span class="tq-lsheet__n">Português</span></a></li>
+          <li data-k="Română Romanian ro ro"><a class="tq-lsheet__l" href="../../ro/programs/" hreflang="ro" lang="ro"><span class="tq-lsheet__f" style="--f: 12" aria-hidden="true"></span><span class="tq-lsheet__n">Română</span></a></li>
+          <li data-k="Español Spanish es es"><a class="tq-lsheet__l" href="../../es/programs/" hreflang="es" lang="es"><span class="tq-lsheet__f" style="--f: 13" aria-hidden="true"></span><span class="tq-lsheet__n">Español</span></a></li>
+          <li data-k="ไทย Thai th th"><a class="tq-lsheet__l" href="../../th/programs/" hreflang="th" lang="th"><span class="tq-lsheet__f" style="--f: 14" aria-hidden="true"></span><span class="tq-lsheet__n">ไทย</span></a></li>
+          <li data-k="Türkçe Turkish tr tr"><a class="tq-lsheet__l" href="../../tr/programs/" hreflang="tr" lang="tr"><span class="tq-lsheet__f" style="--f: 15" aria-hidden="true"></span><span class="tq-lsheet__n">Türkçe</span></a></li>
+          <li data-k="Українська Ukrainian uk uk"><a class="tq-lsheet__l" href="../../uk/programs/" hreflang="uk" lang="uk"><span class="tq-lsheet__f" style="--f: 16" aria-hidden="true"></span><span class="tq-lsheet__n">Українська</span></a></li>
+          <li data-k="Tiếng Việt Vietnamese vi vi"><a class="tq-lsheet__l" href="../../vi/programs/" hreflang="vi" lang="vi"><span class="tq-lsheet__f" style="--f: 17" aria-hidden="true"></span><span class="tq-lsheet__n">Tiếng Việt</span></a></li>
+        </ul>
+        <p class="tq-lsheet__none" hidden>找不到語言</p>
+        <button type="button" class="tq-lsheet__opt" role="switch" aria-checked="true" data-translate-toggle><span>自動翻譯</span><span class="tq-lang__switch" aria-hidden="true"></span></button>
+      </div>
+    </div>
+  </div>
+
 
   <main>
     <!-- Hero + the three programs -->
@@ -1723,6 +1901,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=153ad4a9ee" defer></script>
+<script src="../../assets/js/landing.js?v=f988e7829c" defer></script>
 </body>
 </html>

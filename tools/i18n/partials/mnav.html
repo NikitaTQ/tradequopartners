@@ -1,0 +1,42 @@
+
+  <!-- phones: the menu (the ☰ in the header), the language button bottom right and the language sheet (landing.js startPhoneNav) -->
+  <div class="tq-mnav" id="tq-mnav" data-mnav hidden>
+    <p class="tq-mnav__label">{{fab.aria}}</p>
+    <ol class="tq-mnav__list">
+      {{mnavLinks}}
+    </ol>
+    <div class="tq-mnav__foot">
+      <a class="tq-mnav__cta" href="{{signupHref}}"{{signupNav}}>{{nav.cta}}</a>
+      <button type="button" class="tq-mnav__lang" data-lsheet-open aria-haspopup="dialog" aria-controls="tq-lsheet" aria-expanded="false" aria-label="{{@lang.label}}: {{langName}}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg>
+        <span>{{langCode}}</span>
+        <svg class="tq-mnav__chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+      </button>
+    </div>
+  </div>
+  <button type="button" class="tq-lfab" data-lsheet-open aria-haspopup="dialog" aria-controls="tq-lsheet" aria-expanded="false" aria-label="{{@lang.label}}: {{langName}}">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg>
+    <span class="tq-lfab__code" aria-hidden="true">{{langCode}}</span>
+  </button>
+  <div class="tq-lsheet" id="tq-lsheet" data-lsheet hidden>
+    <div class="tq-lsheet__veil" data-lsheet-close></div>
+    <div class="tq-lsheet__box" role="dialog" aria-modal="true" aria-labelledby="tq-lsheet-t" tabindex="-1">
+      <div class="tq-lsheet__drag">
+        <span class="tq-lsheet__grip" aria-hidden="true"></span>
+        <h2 class="tq-h2 tq-lsheet__t" id="tq-lsheet-t">{{lang.label}}</h2>
+        <button type="button" class="tq-lsheet__x" data-lsheet-close aria-label="{{@lang.close}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></button>
+      </div>
+      <label class="tq-lsheet__search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></svg>
+        <input type="search" data-lsheet-q placeholder="{{@lang.search}}" aria-label="{{@lang.search}}" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go">
+      </label>
+      <div class="tq-lsheet__scroll">
+        <p class="tq-lsheet__all">{{lang.all}} · {{langCount}}</p>
+        <ul class="tq-lsheet__list">
+          {{lsheetItems}}
+        </ul>
+        <p class="tq-lsheet__none" hidden>{{lang.none}}</p>
+        <button type="button" class="tq-lsheet__opt" role="switch" aria-checked="true" data-translate-toggle><span>{{lang.translate}}</span><span class="tq-lang__switch" aria-hidden="true"></span></button>
+      </div>
+    </div>
+  </div>

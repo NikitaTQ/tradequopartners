@@ -886,20 +886,138 @@
      * language can switch it off. The <head> script applies the choice (translate="no",
      * <meta name="google" content="notranslate">) before the browser looks at the page,
      * so changing it reloads: that also undoes a translation already on screen. */
-    const tr = $('[data-translate-toggle]', box);
-    if (tr) {
-      let off = false;
-      try { off = !!localStorage.getItem('tqNoTranslate'); } catch (e) {}
+    startTranslateSwitch();
+  }
+
+  /* the auto-translate switches (the header's language menu, the phones' language sheet): one setting */
+  function startTranslateSwitch() {
+    const sw = $$('[data-translate-toggle]');
+    if (!sw.length) return;
+    let off = false;
+    try { off = !!localStorage.getItem('tqNoTranslate'); } catch (e) {}
+    sw.forEach((tr) => {
       tr.setAttribute('aria-checked', String(!off));
       tr.addEventListener('click', () => {
         try {
           if (off) localStorage.removeItem('tqNoTranslate');
           else localStorage.setItem('tqNoTranslate', '1');
         } catch (e) { return; }
-        tr.setAttribute('aria-checked', String(off));
+        sw.forEach((t) => t.setAttribute('aria-checked', String(off)));
         setTimeout(() => location.reload(), 180);
       });
+    });
+  }
+
+  /* ---- phones: the menu (the header's ☰) and the language sheet (the globe bottom right, the menu's language button)
+   * Each shows at once and fades / slides in (is-open on the next frame), and goes the same way. While either is open
+   * the page under it does not scroll (tq-locked); while the menu is open the header stays in view (tq-mnav-on) and the
+   * menu starts under it. The sheet: Escape, the veil, × or a pull down on its head close it; the search keeps the
+   * languages whose name (in itself or in English) or code holds what is typed; Enter opens the first. */
+  function startPhoneNav() {
+    const root = document.documentElement, head = $('header.tq-head');
+    const nav = $('[data-mnav]'), burger = $('[data-mnav-toggle]'), sheet = $('[data-lsheet]');
+    const phone = matchMedia('(max-width: 640px)');
+    let navOpen = false, sheetOpen = false;
+    const lock = () => root.classList.toggle('tq-locked', navOpen || sheetOpen);
+    const reveal = (el, open) => {
+      clearTimeout(el.tqHide);
+      if (open) {
+        el.hidden = false;
+        el.getBoundingClientRect();
+        el.classList.add('is-open');
+      } else {
+        el.classList.remove('is-open');
+        el.tqHide = setTimeout(() => { el.hidden = true; }, reducedMotion() ? 0 : 420);
+      }
+    };
+    const setNav = (open) => {
+      if (!nav || !burger || open === navOpen) return;
+      navOpen = open;
+      if (open && head) nav.style.setProperty('--top', Math.round(Math.max(0, head.getBoundingClientRect().bottom)) + 'px');
+      root.classList.toggle('tq-mnav-on', open);
+      burger.setAttribute('aria-expanded', String(open));
+      reveal(nav, open);
+      lock();
+    };
+    let opener = null, filter = () => {};
+    const box = sheet && $('.tq-lsheet__box', sheet), q = sheet && $('[data-lsheet-q]', sheet);
+    const setSheet = (open) => {
+      if (!sheet || open === sheetOpen) return;
+      sheetOpen = open;
+      $$('[data-lsheet-open]').forEach((b) => b.setAttribute('aria-expanded', String(open)));
+      reveal(sheet, open);
+      lock();
+      if (open) {
+        opener = document.activeElement;
+        box.focus({ preventScroll: true });
+        const cur = $('[aria-current="true"]', sheet);
+        if (cur) cur.scrollIntoView({ block: 'nearest' });
+      } else {
+        if (q && q.value) { q.value = ''; filter(); }
+        if (opener && opener.focus) opener.focus({ preventScroll: true });
+      }
+    };
+
+    if (nav && burger) {
+      burger.addEventListener('click', () => setNav(!navOpen));
+      $$('a', nav).forEach((a) => a.addEventListener('click', () => setNav(false)));
     }
+    if (sheet) {
+      $$('[data-lsheet-open]').forEach((b) => b.addEventListener('click', () => setSheet(true)));
+      $$('[data-lsheet-close]', sheet).forEach((b) => b.addEventListener('click', () => setSheet(false)));
+      const items = $$('.tq-lsheet__list li', sheet), none = $('.tq-lsheet__none', sheet);
+      const norm = (t) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      filter = () => {
+        const v = norm(q.value.trim());
+        let n = 0;
+        items.forEach((li) => { const hit = !v || norm(li.dataset.k || '').includes(v); li.hidden = !hit; if (hit) n++; });
+        if (none) none.hidden = n > 0;
+      };
+      if (q) {
+        q.addEventListener('input', filter);
+        q.addEventListener('keydown', (e) => {
+          if (e.key !== 'Enter') return;
+          const first = items.find((li) => !li.hidden);
+          if (first) { e.preventDefault(); $('a', first).click(); }
+        });
+      }
+      /* pull the sheet down by its head: it follows the finger; let go past 90px and it closes */
+      const drag = $('.tq-lsheet__drag', sheet);
+      let y0 = null, dy = 0;
+      drag.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('button')) return;
+        y0 = e.clientY; dy = 0; box.style.transition = 'none';
+        try { drag.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      drag.addEventListener('pointermove', (e) => {
+        if (y0 === null) return;
+        dy = Math.max(0, e.clientY - y0);
+        box.style.transform = 'translateY(' + dy + 'px)';
+      });
+      const letGo = () => {
+        if (y0 === null) return;
+        y0 = null; box.style.transition = ''; box.style.transform = '';
+        if (dy > 90) setSheet(false);
+      };
+      drag.addEventListener('pointerup', letGo);
+      drag.addEventListener('pointercancel', letGo);
+      /* Tab stays inside the sheet */
+      sheet.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+        const f = $$('button, input, a[href]', box).filter((el) => el.getClientRects().length);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && (document.activeElement === first || document.activeElement === box)) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (sheetOpen) setSheet(false);
+      else if (navOpen) { setNav(false); burger.focus(); }
+    });
+    const wide = () => { if (!phone.matches) { setSheet(false); setNav(false); } };
+    if (phone.addEventListener) phone.addEventListener('change', wide);
   }
 
   function startFaq() {
@@ -1528,5 +1646,6 @@
   startReviewsDrag();
   startTwoLine();
   startLang();
+  startPhoneNav();
   startCutGlass();
 })();
