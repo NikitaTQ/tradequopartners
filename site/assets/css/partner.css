@@ -942,11 +942,28 @@
 .tp-tv__list s { text-decoration-color: #e7131b; }
 .tp-tv__bill > .tp-tv__you { background: rgba(231,19,27,.12); }
 .tp-tv__you .tp-tv__lab { color: #e4e4e8; }
-.tp-tv__cta { margin-top: 32px; display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700;
-  text-decoration: none; box-shadow: 0 12px 36px rgba(231,19,27,.4); transition: background .2s; }
-.tp-tv__cta:hover { background: #ff2a33; color: #fff; }
-.tp-tv__cta:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-[dir="rtl"] .tp-tv__cta span { display: inline-block; transform: scaleX(-1); }
+/* its button (CTA «Get Premium for $0» · Chrome): a chrome pill, black tracked capitals, a red round arrow; a sheen runs across
+   it on hover and the red glow under it brightens */
+.tq-chrome-wrap { position: relative; display: inline-block; max-width: 100%; margin-top: 34px; }
+.tq-chrome-wrap::before { content: ''; position: absolute; left: 50%; bottom: -26px; width: 300px; height: 70px; transform: translateX(-50%); border-radius: 50%; pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(231,19,27,.75) 0%, rgba(231,19,27,0) 70%); filter: blur(10px); opacity: .55; transition: opacity .4s ease; }
+.tq-chrome-wrap:hover::before { opacity: 1; }
+.tq-chrome { position: relative; display: flex; align-items: center; gap: 18px; height: 58px; box-sizing: border-box; padding: 0; padding-inline: 28px 6px; border-radius: 999px; overflow: hidden;
+  background: linear-gradient(180deg, #fafafb 0%, #d6d7db 34%, #9c9ea4 50%, #c9cace 66%, #eeeef0 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.14);
+  color: #0a0a0a; font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.tq-chrome:hover { color: #0a0a0a; }
+.tq-chrome__sheen { position: absolute; top: -10px; bottom: -10px; left: -50%; width: 34%; pointer-events: none;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 100%); transform: skewX(-22deg); transition: left .8s cubic-bezier(.2,.7,.2,1); }
+.tq-chrome:hover .tq-chrome__sheen { left: 120%; }
+.tq-chrome__label { position: relative; min-width: 0; }
+.tq-chrome__arrow { position: relative; flex: none; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+[dir="rtl"] .tq-chrome__arrow svg { transform: scaleX(-1); }
+.tq-chrome:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+:lang(ar) .tq-chrome, :lang(th) .tq-chrome, :lang(ja) .tq-chrome, :lang(ko) .tq-chrome, :lang(zh) .tq-chrome { letter-spacing: .04em; font-size: 14px; }
+@media (max-width: 640px) { .tq-chrome__label { white-space: normal; line-height: 1.25; text-align: start; } }   /* a long language takes two lines */
+@media (prefers-reduced-motion: reduce) { .tq-chrome__sheen, .tq-chrome-wrap::before { transition: none; } }
 @media (max-width: 900px) {
   .tp-tv { padding: 40px 20px; border-radius: 24px; }
   .tp-tv__zero { font-size: clamp(120px, 34vw, 260px); }
@@ -1577,16 +1594,37 @@
   .tq-ibn__pill b { font-size: 16px; }
   .tq-ibn__pill span { max-width: none; font-size: 13px; line-height: 1.4; }
 }
-.tq-ibn__stage--m, .tq-ibn__lead-m, .tq-ibn__q { display: none; }
+.tq-ibn__stage--m, .tq-ibn__lead-m { display: none; }
+/* its button (CTA «Start» · Timer): a round red START in a watch dial (60 ticks, drawn by landing.js); the red arc runs
+   round with the seconds of a countdown, and closes the circle on hover; under it "Live in" and the countdown from two
+   hours (data-seconds, then from 2:00:00 again). The word is the H2 face; "Live in" Inter (Fragment Mono in the design) */
+.tq-start-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: 10px; }
+.tq-start { position: relative; display: block; width: 100px; height: 100px; color: #fff; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.tq-start:hover { color: #fff; }
+.tq-start .tq-start__dial { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tq-start__arc { transition: stroke-dashoffset .9s linear; }
+.tq-start.is-hover .tq-start__arc { transition: stroke-dashoffset 1.1s cubic-bezier(.2,.7,.2,1); }
+.tq-start__btn { position: absolute; inset: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 50%;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -4px 9px rgba(0,0,0,.18), 0 11px 20px -7px rgba(231,19,27,.7);
+  transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+.tq-start:hover .tq-start__btn { transform: scale(1.05); }
+.tq-start__label { --h2s: 10px; display: block; max-width: 62px; overflow: hidden; padding-inline-start: .08em; line-height: 1.2; letter-spacing: .08em; text-align: center; white-space: nowrap; color: #fff; }   /* face: .tq-h2 */
+:lang(ar) .tq-start__label, :lang(th) .tq-start__label, :lang(ja) .tq-start__label, :lang(ko) .tq-start__label, :lang(zh) .tq-start__label { --h2k: 1.2; }
+.tq-start__arrow { flex: none; display: flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%; background: #fff; }
+[dir="rtl"] .tq-start__arrow svg { transform: scaleX(-1); }
+.tq-start:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; border-radius: 50%; }
+.tq-start-live { display: flex; align-items: center; gap: 6px; font-family: 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: #4a4b50; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tq-start-live::before { content: ''; flex: none; width: 5px; height: 5px; border-radius: 50%; background: #e7131b; }
+.tq-start__time { direction: ltr; unicode-bidi: isolate; }
+@media (prefers-reduced-motion: reduce) { .tq-start__arc, .tq-start__btn { transition: none; } }
 @media (max-width: 640px) {
   /* phones (the phone mockup): title, a short lead (ib.net.leadm), the smaller phone scene (ib-net-svg-m) edge to edge,
-     the three cards in one row with titles only, then "Book onboarding" and a round "?" (= "How it works": it goes to
-     the black hole block below, the cards are already on screen). The lead, the line under it and the desktop scene
+     the three cards in one row with titles only, then the start timer, centred. The lead, the line under it and the desktop scene
      are hidden; the row and the text column are unwrapped so their parts can be reordered. */
   .tq-ibn__wrap { min-height: 0; justify-content: flex-start; gap: 18px; padding-block: 22px 34px; }
   .tq-ibn__row, .tq-ibn__text { display: contents; }
   .tq-ibn__h2 { order: 1; }
-  .tq-ibn .tq-ibx__lead, .tq-ibn .tq-ibx__sub, .tq-ibn__stage, .tq-ibn .tq-ibx__how { display: none; }
+  .tq-ibn .tq-ibx__lead, .tq-ibn .tq-ibx__sub, .tq-ibn__stage { display: none; }
   .tq-ibn .tq-ibn__lead-m { display: block; order: 2; margin-top: -4px; font-size: 16px; line-height: 1.4; }
   .tq-ibn__fig { order: 3; flex: none; margin: 0 calc(clamp(20px, 5.5vw, 80px) * -1) 10px; }
   .tq-ibn .tq-ibn__stage--m { display: block; width: 100%; }
@@ -1597,12 +1635,7 @@
   .tq-ibn__pill svg { width: 30px; height: 30px; }
   .tq-ibn__pill b { font-size: clamp(12.5px, 3.75vw, 15px); line-height: 1.2; max-width: 100%; overflow-wrap: break-word; }
   .tq-ibn__pill span { display: none; }
-  .tq-ibn .tq-ibx__ctas { order: 5; flex-wrap: nowrap; gap: 12px; padding-top: 22px; }
-  .tq-ibn .tq-ibx__go { flex: 1; min-width: 0; justify-content: space-between; }
-  .tq-ibn .tq-ibx__go { gap: 10px; padding-inline-start: 22px; letter-spacing: .12em; }
-  .tq-ibn .tq-ibx__go > span:first-child { min-width: 0; white-space: normal; line-height: 1.2; overflow-wrap: break-word; }
-  .tq-ibn .tq-ibn__q { display: flex; flex: none; align-items: center; justify-content: center; width: 54px; height: 54px; border-radius: 50%; color: #0a0a0a; font-size: 18px; font-weight: 700;
-    text-decoration: none; background: linear-gradient(170deg, rgba(255,255,255,.75), rgba(255,255,255,.35)); border: 1px solid #fff; box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 14px 28px -18px rgba(18,22,30,.35); }
+  .tq-ibn .tq-ibx__ctas { order: 5; justify-content: center; padding-top: 22px; }
 }
 
 /* IB Tools: the Network + clients block (IB_Network_Block, "IB Network + Clients"; grew from the Network insights block),
@@ -1617,7 +1650,23 @@
 .tq-ibi__text { flex: 1 1 340px; max-width: 440px; min-width: 0; display: flex; flex-direction: column; gap: clamp(16px, 2.4vh, 24px); }
 .tq-ibi__h2 { --h2s: clamp(24px, min(3vw, 5vh), 44px); margin: 0; line-height: 1.1; letter-spacing: -.01em; padding-inline-start: 0; }   /* face: .tq-h2 */
 .tq-ibi .tq-ibx__lead { max-width: 430px; font-size: clamp(16px, min(1.3vw, 2.3vh), 19px); }
-.tq-ibi .tq-ibx__go { font-size: clamp(11.5px, 3.2vw, 13px); letter-spacing: clamp(1px, .5vw, 2px); }
+/* its button (CTA · App position): a dark app row, a red "+" tile, the words, a small chart whose red line draws on hover
+   and whose last point pulses, a chevron. As wide as its words need, at least the design's 360px; where the column is
+   narrower the words step down (data-fitw) */
+.tq-pos { display: flex; align-items: center; gap: 14px; width: max-content; min-width: min(360px, 100%); max-width: 100%; height: 72px; box-sizing: border-box; padding: 0; padding-inline: 12px 18px;
+  border-radius: 20px; border: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, #242427 0%, #0c0c0d 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 26px 40px -18px rgba(0,0,0,.6); color: #fff; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform .25s ease; }
+.tq-pos:hover { color: #fff; transform: translateY(-2px); }
+.tq-pos:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; }
+.tq-pos__plus { flex: none; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px;
+  background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+.tq-pos__label { flex: 1; min-width: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+.tq-pos__chart { flex: none; overflow: visible; }
+.tq-pos__line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .7s ease; }
+.tq-pos:hover .tq-pos__line, .tq-pos:focus-visible .tq-pos__line { stroke-dashoffset: 0; }
+.tq-pos__chev { flex: none; }
+[dir="rtl"] .tq-pos__chev { transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) { .tq-pos, .tq-pos__line { transition: none; } .tq-pos__pulse { display: none; } }
 .tq-ibi__fig { position: relative; flex: 1 1 520px; max-width: 720px; min-width: 0; }
 .tq-ibi__blob { position: absolute; left: 50%; top: 50%; border-radius: 50%; pointer-events: none; }
 .tq-ibi__blob--d { width: 80%; height: 80%; transform: translate(-30%, -70%); background: radial-gradient(closest-side, rgba(28,30,36,.22), rgba(28,30,36,0)); }
@@ -1659,9 +1708,9 @@
   .tq-ibi__cur { padding-inline-start: 4px; font-size: 14px; }
   .tq-ibi__fig { order: 4; flex: none; max-width: none; }
   .tq-ibi__stage { height: clamp(250px, calc(100svh - 380px), 340px); }   /* the design's: taller on taller phones */
-  .tq-ibi .tq-ibx__ctas { order: 5; padding-top: 4px; }
-  .tq-ibi .tq-ibx__go { flex: 1; justify-content: space-between; }
-  .tq-ibi .tq-ibx__go > span:first-child { min-width: 0; white-space: normal; line-height: 1.2; }
+  .tq-ibi .tq-ibx__ctas { order: 5; width: 100%; padding-top: 4px; }   /* the column wraps: without a width, the button's words would widen it */
+  .tq-ibi .tq-pos { width: 100%; }
+  .tq-pos__label { white-space: normal; font-size: 17px; line-height: 1.15; }   /* a long language takes two lines */
 }
 
 /* IB Tools on phones: twice the room between the blocks (each block's own top and bottom spacing doubled; the hero's

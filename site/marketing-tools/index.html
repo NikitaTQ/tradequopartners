@@ -100,8 +100,8 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/unbounded-h2.woff2?v=4d6a6698a8) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/reem-kufi-h2.woff2?v=5fcf5445c0) format('woff2'); }
 @font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/prompt-h2.woff2?v=1e2456eaf3) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/dela-gothic-one-h2.woff2?v=afe7952bfb) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/black-han-sans-h2.woff2?v=92388e9486) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/dela-gothic-one-h2.woff2?v=016aa0a498) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/black-han-sans-h2.woff2?v=d3d989a9aa) format('woff2'); }
 @font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=25e724efa5) format('woff2'); }
 @font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../assets/fonts/h1/noto-sans-tc-h2.woff2?v=aff4fb7aba) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
@@ -1415,6 +1415,15 @@ html.tq-liquid .tp-cut__p { backdrop-filter: url(#tq-liquid) blur(2px) saturate(
 @media (prefers-reduced-motion: reduce) {
 .tq-ibtp__go { transition: none; }
 }
+.tq-start { position: relative; display: block; width: 100px; height: 100px; color: #fff; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.tq-start:hover { color: #fff; }
+.tq-start__arc { transition: stroke-dashoffset .9s linear; }
+.tq-start.is-hover .tq-start__arc { transition: stroke-dashoffset 1.1s cubic-bezier(.2,.7,.2,1); }
+.tq-start:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; border-radius: 50%; }
+.tq-start__time { direction: ltr; unicode-bidi: isolate; }
+@media (prefers-reduced-motion: reduce) {
+.tq-start__arc, .tq-start__btn { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -1996,7 +2005,7 @@ html.tq-liquid .tp-cut__p { backdrop-filter: url(#tq-liquid) blur(2px) saturate(
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=1a85065b92" defer></script>
+<script src="../assets/js/landing.js?v=7be833d322" defer></script>
 <script src="../assets/js/stage.js?v=2cf5d424e9" defer></script>
 </body>
 </html>
