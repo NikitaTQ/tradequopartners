@@ -1488,12 +1488,12 @@
 /* IB Tools: the FAQ (the shared .tp-faq), last on the page: on the grey of the black hole above it, turning white at its
    foot, above the footer */
 .tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
-.tq-ibb { position: relative; overflow: hidden; height: clamp(520px, min(100vh, 112vw), 920px); height: clamp(520px, min(100svh, 112vw), 920px); color: #0a0a0a;   /* tall screens: about as tall as wide (phones 520px), not a whole screen of grey */
+.tq-ibb { position: relative; overflow: hidden; height: clamp(592px, calc(min(100vh, 112vw) + 72px), 992px); height: clamp(592px, calc(min(100svh, 112vw) + 72px), 992px); color: #0a0a0a;   /* tall screens: about as tall as wide (phones 520px), not a whole screen of grey */
   background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), #e9eaec; }
 .tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-.tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(16px, 3vw, 28px); display: flex; flex-wrap: wrap-reverse; align-items: center; justify-content: center; gap: 14px 18px; padding: 0 16px; box-sizing: border-box; }
-/* its button (CTA «Become a partner» · Event horizon): a black pill ringed in red with a red glow, the red round arrow; the
-   glow widens on hover */
+.tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 16px; box-sizing: border-box; }   /* the steps, the button under them */
+/* its button (CTA «Become a partner» · Event horizon), under the steps (the block is 72px taller for it; ib-hole.js keeps
+   the scene above them): a black pill ringed in red with a red glow, the red round arrow; the glow widens on hover */
 .tq-horizon { display: inline-flex; align-items: center; gap: 14px; height: 58px; box-sizing: border-box; padding: 0; padding-inline: 26px 7px; border-radius: 999px; border: 1.5px solid #e7131b;
   background: radial-gradient(80% 140% at 30% 20%, #1e1e21 0%, #000 70%); color: #fff; font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .16em;
   text-transform: uppercase; white-space: nowrap; text-decoration: none; -webkit-tap-highlight-color: transparent;
@@ -1802,7 +1802,8 @@
 [dir="rtl"] .tq-cast:is(:hover, :focus-visible) .tq-cast__icon:nth-child(6) { transform: translate(30px, -78px) rotate(-8deg); }
 :lang(ar) .tq-cast, :lang(th) .tq-cast, :lang(ja) .tq-cast, :lang(ko) .tq-cast, :lang(zh) .tq-cast { letter-spacing: .04em; font-size: 15px; }
 @media (prefers-reduced-motion: reduce) { .tq-cast__dot::before { animation: none; } .tq-cast__icon { transition: none; } }
-.tq-ibs__cast { grid-area: go; justify-self: start; }
+.tq-ibs__cast { grid-area: go; justify-self: start; margin-top: 46px; }   /* room above it for the channels it sends up */
+@media (hover: none) { .tq-cast__icon { display: none; } }   /* touch screens: no hover, the tiles would stay over the content after a tap */
 .tq-ibs__go { grid-area: go; justify-self: start; display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 56px; padding: 0 7px 0 28px; border-radius: 999px; box-sizing: border-box;
   background: linear-gradient(150deg, #f2262e 0%, #b80e15 100%); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 16px 26px -16px rgba(231,19,27,.7); transition: filter .25s ease; }
@@ -1921,7 +1922,7 @@
   .tq-ibs__cast { order: 5; justify-self: auto; justify-content: space-between; margin-top: 9px; height: 50px; padding-inline: 22px 6px; gap: 12px; font-size: 11.5px; letter-spacing: .12em; }
   .tq-ibs__cast .tq-cast__label { white-space: normal; line-height: 1.2; }
   .tq-ibs__cast .tq-cast__dot { width: 38px; height: 38px; }
-  .tq-ibs__cast .tq-cast__icon { top: 5px; inset-inline-end: 5px; }
+  .tq-ibs__cast .tq-cast__icon { display: none; }   /* the feed sits right above the button here: no room for the channels to fly into */
   .tq-ibs__arr { width: 34px; height: 34px; }
   .tq-ibs__note { order: 6; max-width: none; margin: 9px 2px 0; font-size: 9.5px; line-height: 1.4; }
 }
