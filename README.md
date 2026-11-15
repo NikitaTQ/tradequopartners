@@ -396,7 +396,7 @@ HTTPS (Let's Encrypt) Netlify включит сам.
 
 ### Partner perks на главной
 
-Подпись под заголовком «Everything you need to grow» — короткая строка `offer.lead` («Tools and support to win and keep clients.»). Длинная `offer.sub` осталась для блока перков на /partner-terms/. На телефоне кнопка-пазл «Become a partner» стоит в конце блока, после карточек.
+Подпись под заголовком «Everything you need to grow» — короткая строка `offer.lead` («Tools and support to win and keep clients.»). Длинная `offer.sub` осталась для блока перков на /partner-terms/ («More than commission», шесть тёмных карточек); под его карточками по центру — красная кнопка «Become a partner» с бегущим бликом (`.tp-glint`, та же, что в финальном блоке Partner Programs и Partner Terms; на форму на главной; обёртка `.tp-perks__cta`, на телефоне шириной до 320px). На телефоне кнопка-пазл «Become a partner» стоит в конце блока, после карточек.
 
 ### Infinite Flow
 
