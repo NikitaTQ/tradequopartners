@@ -270,6 +270,9 @@
    ============================================================================= */
 /* perks */
 .tp-perkgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 4.5vw, 60px); }
+.tp-perks__cta { display: flex; justify-content: center; margin-top: clamp(32px, 4vw, 52px); }   /* Partner Terms, under the perks: the final call's glint button */
+.tp-perks__cta .tp-glint:focus-visible { outline-color: #0a0a0a; }   /* on white */
+@media (max-width: 640px) { .tp-perks__cta .tp-glint { width: min(100%, 320px); justify-content: center; } }
 .tp-perk { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 18px; padding: 18px 22px 18px 14px; min-height: 148px; }
 .tp-perk img { width: 112px; height: 112px; object-fit: contain; }
 .tp-perk h3 { margin: 0; font-size: 18px; letter-spacing: -.02em; font-weight: 700; }

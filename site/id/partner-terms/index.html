@@ -1115,6 +1115,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-pill::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #e7131b; }
 .tp-faq__list { display: flex; flex-direction: column; gap: 14px; }
 .tp-perkgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 4.5vw, 60px); }
+.tp-perks__cta { display: flex; justify-content: center; margin-top: clamp(32px, 4vw, 52px); }
+.tp-perks__cta .tp-glint:focus-visible { outline-color: #0a0a0a; }
+@media (max-width: 640px) {
+.tp-perks__cta .tp-glint { width: min(100%, 320px); justify-content: center; }
+}
 .tp-perk { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 18px; padding: 18px 22px 18px 14px; min-height: 148px; }
 .tp-perk img { width: 112px; height: 112px; object-fit: contain; }
 .tp-perk h3 { margin: 0; font-size: 18px; letter-spacing: -.02em; font-weight: 700; }
@@ -1782,6 +1787,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="280" height="350"><div><h3>Materi kreatif</h3><p>Banner, landing page, dan video yang dirancang untuk konversi.</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330"><div><h3>Akademi White-Label</h3><p>Edukasi trading dengan merek Anda sendiri, siap dibagikan.</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-bro.webp?v=dc3ab59778" alt="" width="330" height="320"><div><h3>Broker White-Label</h3><p>Luncurkan merek broker Anda sendiri dengan infrastruktur kami.</p></div></div>
+        </div>
+        <!-- the final call's red glint button (Final CTA Glint Teaser), to the form -->
+        <div class="tp-perks__cta">
+          <a class="tp-glint" href="../#signup" data-page-link data-label="MEMUAT · Beranda">
+            <span class="tp-glint__sweep" aria-hidden="true"></span>
+            <span class="tp-glint__label">Jadi mitra</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
         </div>
       </div>
     </section>
