@@ -1386,14 +1386,34 @@ html.tq-liquid .tp-cut__p { backdrop-filter: url(#tq-liquid) blur(2px) saturate(
 .tq-ibtp__go:hover { color: #fff; filter: brightness(1.06); transform: translateY(-1px); }
 .tq-ibtp__arr { flex: none; width: 46px; height: 46px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
 [dir="rtl"] .tq-ibtp__arr svg { transform: scaleX(-1); }
-.tq-ibtp__go:focus-visible, .tq-ibtp__cmp:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
+.tq-ibtp__go:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
+@property --tqmx { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
+.tq-rglass { position: relative; isolation: isolate; align-self: flex-start; display: inline-flex; align-items: center; gap: 18px; height: 66px; box-sizing: border-box; padding: 0; padding-inline: 30px 5px;
+  border: 1px solid rgba(255,170,175,.75); border-radius: 999px; color: #fff; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -.01em;
+  white-space: nowrap; text-decoration: none; text-shadow: 0 1px 1px rgba(90,6,14,.35); cursor: pointer; -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(150deg, rgba(240,40,48,.94) 0%, rgba(222,24,34,.9) 45%, rgba(176,12,22,.95) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.7), inset 0 -1px 1px rgba(255,255,255,.35), inset 0 -14px 22px -12px rgba(100,0,8,.6), inset 0 0 22px rgba(255,180,184,.18),
+    0 calc(16px + var(--tqh) * 6px) calc(32px + var(--tqh) * 14px) -12px rgba(231,19,27,.5);
+  transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * .04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate;
+  transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqmx .45s ease, --tqd .14s ease-out; }
+.tq-rglass::before { content: ''; position: absolute; z-index: -1; inset: 1px 12px auto 12px; height: 46%; border-radius: 999px 999px 60% 60% / 999px 999px 100% 100%; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 100%); }
+.tq-rglass::after { content: ''; position: absolute; z-index: -1; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(40% 120% at var(--tqmx) 0%, rgba(255,255,255,calc(.18 + var(--tqh) * .22)) 0%, rgba(255,255,255,0) 70%); }
+.tq-rglass:hover, .tq-rglass:focus-visible { --tqh: 1; animation: none; color: #fff; }
+.tq-rglass:active { --tqd: 1; }
+.tq-rglass:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) {
+.tq-rglass { animation: none; transition-duration: .01s; }
+}
 @media (max-width: 640px) {
-.tq-ibtp__go, .tq-ibtp__cmp { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
+.tq-ibtp__go { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
 .tq-ibtp__go { gap: calc(16px * var(--k)); padding-inline: calc(28px * var(--k)) calc(7px * var(--k)); }
 .tq-ibtp__arr { width: calc(46px * var(--k)); height: calc(46px * var(--k)); }
 }
 @media (prefers-reduced-motion: reduce) {
-.tq-ibtp__go, .tq-ibtp__cmp { transition: none; }
+.tq-ibtp__go { transition: none; }
 }
 </style>
 </head>
@@ -1976,7 +1996,7 @@ html.tq-liquid .tp-cut__p { backdrop-filter: url(#tq-liquid) blur(2px) saturate(
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=f988e7829c" defer></script>
+<script src="../../assets/js/landing.js?v=1a85065b92" defer></script>
 <script src="../../assets/js/stage.js?v=2cf5d424e9" defer></script>
 </body>
 </html>
