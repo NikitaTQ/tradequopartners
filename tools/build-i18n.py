@@ -32,17 +32,15 @@ PAGES = [
     {'id': 'landing', 'template': 'landing.html', 'slug': ''},
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
-    {'id': 'marketing', 'template': 'marketing.html', 'slug': 'marketing-tools', 'css': 'partner'},   # was partner-tools for a while (netlify.toml: 302 there until the beginners' page takes that address)
     # IB Tools: the hero only for now; no table of contents yet (fan, FAB). ('display': 'h2' preloads the H2 face instead
     # of the H1 one, for a page whose display text is section-heading type, as with the earlier devices-film hero)
     {'id': 'ibtools', 'template': 'ibtools.html', 'slug': 'ib-tools', 'css': 'partner'},
 ]
-# The site navigation in the header: the five pages, in this order (page id, path under the language root, label).
+# The site navigation in the header: the four pages, in this order (Marketing Tools was removed in November 2026) (page id, path under the language root, label).
 NAV = [
     ('landing', '', 'fan.home'),
     ('programs', 'programs/', 'fan.programs'),
     ('commission', 'partner-terms/', 'fan.commission'),
-    ('marketing', 'marketing-tools/', 'fan.marketing'),
     ('ibtools', 'ib-tools/', 'fan.ibtools'),
 ]
 # Each page's table of contents: the fan bottom right on desktop, the red menu on phones (section id, label).
@@ -50,7 +48,6 @@ TOC = {
     'landing': [('signup', 'nav.cta'), ('how', 'nav.how'), ('calculator', 'nav.calc'), ('reviews', 'toc.reviews'), ('dashboard', 'nav.perks'), ('faq', 'nav.faq')],
     'programs': [('programs', 'pp.nav.programs'), ('who', 'toc.who'), ('benefits', 'pp.nav.benefits'), ('why', 'pp.nav.why'), ('how', 'nav.how'), ('questions', 'nav.faq')],
     'commission': [('earnings', 'toc.earnings'), ('calculator', 'nav.calc'), ('payouts', 'cp.nav.payouts'), ('perks', 'nav.perks'), ('how', 'nav.how'), ('questions', 'nav.faq')],
-    'marketing': [('tools', 'mt.nav.tools'), ('library', 'toc.materials'), ('get', 'toc.get'), ('support', 'toc.support'), ('questions', 'nav.faq')],
 }
 languages = json.load(open(os.path.join(I18N, 'languages.json'), encoding='utf-8'))
 fonts = json.load(open(os.path.join(I18N, 'font-files.json'), encoding='utf-8'))

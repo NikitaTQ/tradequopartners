@@ -1081,8 +1081,8 @@
    * .tq-liquid; other browsers keep the plain blur. The highlight follows the mouse; on touch the
    * glass simply rests. */
   function startGlass() {
-    if (!$$('.tq-glass, .tp-glass, .tq-frost, .tp-cut').length) return;
-    if (navigator.userAgentData && $$('.tq-glass, .tp-glass, .tp-cut').length && !document.getElementById('tq-liquid')) {
+    if (!$$('.tq-glass, .tp-glass, .tq-frost').length) return;
+    if (navigator.userAgentData && $$('.tq-glass, .tp-glass').length && !document.getElementById('tq-liquid')) {
       const ns = 'http://www.w3.org/2000/svg';
       const svg = document.createElementNS(ns, 'svg');
       svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
@@ -1156,8 +1156,8 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
   }
 
-  /* ---- processes that light up step by step: marketing-tools/ "From your portal to your audience"
-   * (Process_Ignition_Section) and partner-terms/ "Paid every day" (Paid_Daily_Silver) ------------------------------
+  /* ---- processes that light up step by step: partner-terms/ "Paid every day" (Paid_Daily_Silver; Marketing Tools'
+   * "From your portal to your audience" used it too, until that page was removed) ------------------------------
    * [data-stepper] holds [data-step] items. Every data-every ms the next step gets .is-on and the ones before it
    * .is-done; --k (0…1) on the stepper sizes its rail; after the last step it starts over. It runs only while on
    * screen (.is-live then, which also lets the CSS loops play) and starts from the first step each time it comes in.
@@ -1180,56 +1180,6 @@
         iv = setInterval(() => set((on + 1) % n), +box.dataset.every || 1600);
       }, () => { box.classList.remove('is-live'); clearInterval(iv); iv = 0; });
     });
-  }
-
-  /* ---- marketing-tools/: the partner dashboard in "Data and people" ticks along --------------------------
-   * Every 1.6 s, while it is on screen: the bars shift left and a new one comes in red on the right, sign-ups,
-   * lots and earnings creep up (the Data_and_People_Section design's numbers). Bars move by transform only.
-   * The figures are bidi-isolated (LRI…PDI) so "+46" stays "+46" in Arabic; a label or figure too wide for its
-   * box (long words on narrow phones) is shrunk to fit. Reduced motion: drawn once, then still. */
-  function startLiveDash() {
-    const dash = $('[data-live-dash]');
-    if (!dash) return;
-    const bars = $$('[data-ld-bars] i', dash);
-    let h = bars.map((b) => Math.round(parseFloat((/scaleY\(([\d.]+)\)/.exec(b.style.transform) || [0, 0.5])[1]) * 100));
-    let numLocale = 'en-US';
-    try { numLocale = Intl.NumberFormat.supportedLocalesOf([document.documentElement.lang + '-u-nu-latn'])[0] || 'en-US'; } catch (e) {}
-    const iso = (s) => '⁦' + s + '⁩';
-    const n = (v) => v.toLocaleString(numLocale), usd = (v) => '$' + Math.round(v).toLocaleString('en-US');
-    const set = (k, v) => { const el = $('[data-ld="' + k + '"]', dash); if (el) el.textContent = v; };
-    const today = dash.dataset.today || '+{n}';
-    const fitEls = $$('.tp-dp__stats span, .tp-dp__stats b, .tp-dp__stats em', dash);
-    const fit = () => fitEls.forEach((el) => {
-      el.style.fontSize = '';
-      const room = el.clientWidth, w = el.scrollWidth;
-      if (!room || w <= room + 1) return;
-      const fs = parseFloat(getComputedStyle(el).fontSize);
-      el.style.fontSize = Math.max(fs * 0.6, fs * room / w - 0.3).toFixed(1) + 'px';
-    });
-    let tick = 0, iv = 0;
-    const draw = () => {
-      bars.forEach((b, i) => {
-        b.style.transform = 'scaleY(' + (Math.min(100, h[i]) / 100).toFixed(2) + ')';
-        b.className = i === h.length - 1 ? 'is-red' : h[i] > (h[i - 1] || 0) ? 'is-up' : '';
-      });
-      set('signups', iso(n(184 + Math.floor(tick / 3))));
-      set('signupsD', today.replace('+{n}', iso('+' + n(3 + Math.floor(tick / 3)))));
-      set('lots', iso(n(7800 + tick * 2))); set('lotsD', iso('+' + n(42 + tick * 2)));
-      set('earned', iso(usd(58500 + tick * 15))); set('earnedD', iso('+' + usd(1950 + tick * 15)));
-      fit();
-    };
-    const step = () => {
-      tick++;
-      const last = h[h.length - 1];
-      h = h.slice(1).concat(Math.max(14, Math.min(100, last + Math.round((Math.random() - 0.4) * 18))));
-      draw();
-    };
-    draw();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-    let rt = 0;
-    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 150); });
-    if (reducedMotion()) return;
-    whileVisible(dash, '0px', () => { if (!iv) iv = setInterval(step, 1600); }, () => { clearInterval(iv); iv = 0; });
   }
 
   /* ---- /programs/: a program card's big figure ("87%", "∞ tiers", "Yours.") keeps one line ------
@@ -1354,75 +1304,6 @@
       /* scrollTo, not scrollBy: a relative scroll stops at every card on the way */
       rail.scrollTo({ left: rail.scrollLeft + mid(cards[i]) - mid(rail), behavior: reducedMotion() ? 'auto' : 'smooth' });
     }));
-  }
-
-  /* ---- /marketing-tools/: promo materials, a slab of cut glass (Marketing_Materials_Cut_Glass_2) ------------
-   * Desktop: the design's five curves cut the 1000x460 slab into six pieces (clip-paths in % of the slab, the lines
-   * in an SVG of the same box). Under 1024px the formats stack as bands and the cuts are waves at the bands' edges,
-   * measured again whenever the slab changes size. Pointing at a piece (or tapping it) lights it and its format;
-   * the last one stays lit. */
-  function startCutGlass() {
-    const root = $('[data-cut]');
-    if (!root) return;
-    const panel = $('.tp-cut__panel', root), pieces = $$('[data-cut-p]', root), items = $$('[data-cut-i]', root);
-    const svg = $('.tp-cut__lines', root), rect = $('rect', svg), lines = $$('[data-cut-line]', svg);
-    const stacked = matchMedia('(max-width: 1023px)');
-    const ss = (t) => t * t * (3 - 2 * t);
-    const W0 = 1000, H0 = 460, N = 28;
-    const DESIGN = [
-      (x) => 70 + 100 * Math.pow(x / W0, 1.25),
-      (x) => 200 + 10 * Math.sin(Math.PI * x / W0) - 22 * (x / W0),
-      (x) => 345 - 155 * ss(x / W0),
-      (x) => 346 - 36 * Math.pow(x / W0, 2),
-      (x) => { const u = x / W0; return u < 0.4 ? 440 - 56 * ss(u / 0.4) : u < 0.55 ? 384 : 384 + 58 * ss((u - 0.55) / 0.45); },
-    ];
-    /* the waves between stacked bands: around each band's lower edge, a different gentle shape each time */
-    const WAVE = [
-      (u, a) => -a + 2 * a * Math.pow(u, 1.25),
-      (u, a) => a * Math.sin(Math.PI * u) - a * 0.6 * u,
-      (u, a) => a - 2 * a * ss(u),
-      (u, a) => -a * 0.4 + a * 1.2 * u * u,
-      (u, a) => a * 0.8 * Math.sin(2 * Math.PI * u),
-    ];
-    const draw = () => {
-      let W, H, cuts;
-      if (stacked.matches) {
-        W = panel.clientWidth; H = panel.clientHeight;
-        if (!W || !H) return;
-        const amp = Math.min(14, W / 40);
-        cuts = items.slice(0, -1).map((it, i) => { const y = it.offsetTop + it.offsetHeight; return (x) => y + WAVE[i % WAVE.length](x / W, amp); });
-      } else { W = W0; H = H0; cuts = DESIGN; }
-      const xs = Array.from({ length: N + 1 }, (_, i) => i / N * W);
-      const bounds = [() => 0, ...cuts, () => H];
-      pieces.forEach((p, i) => {
-        const a = bounds[i], b = bounds[i + 1];
-        /* stacked, a piece is only as tall as its band (its glass filter then works on the band alone) */
-        let y0 = 0, hh = H;
-        if (stacked.matches) { y0 = Math.floor(Math.min(...xs.map(a))); hh = Math.ceil(Math.max(...xs.map(b))) - y0; }
-        p.style.top = stacked.matches ? y0 + 'px' : ''; p.style.height = stacked.matches ? hh + 'px' : ''; p.style.bottom = stacked.matches ? 'auto' : '';
-        const P = (x, y) => (x / W * 100).toFixed(2) + '% ' + ((y - y0) / hh * 100).toFixed(2) + '%';
-        p.style.clipPath = 'polygon(' + xs.map((x) => P(x, a(x))).concat(xs.slice().reverse().map((x) => P(x, b(x)))).join(',') + ')';
-      });
-      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      rect.setAttribute('width', W - 2); rect.setAttribute('height', H - 2);
-      lines.forEach((g, i) => {
-        const f = cuts[i], d = 'M' + xs.map((x) => x.toFixed(1) + ' ' + f(x).toFixed(1)).join(' L');
-        $$('path', g).forEach((p) => p.setAttribute('d', d));
-      });
-      root.classList.add('is-cut');
-    };
-    const light = (i) => {
-      pieces.forEach((p, k) => p.classList.toggle('is-on', k === i));
-      items.forEach((it, k) => it.classList.toggle('is-on', k === i));
-    };
-    pieces.forEach((p, i) => {
-      p.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') light(i); });
-      p.addEventListener('click', () => light(i));
-    });
-    draw();
-    if ('ResizeObserver' in window) new ResizeObserver(() => draw()).observe(panel);
-    else addEventListener('resize', draw);
-    stacked.addEventListener('change', draw);
   }
 
   /* ---- phone: country code -------------------------------------------------------------
@@ -1677,7 +1558,6 @@
   startProgSwiper();
   startProgCards();
   startFitWide();
-  startLiveDash();
   startSteppers();
   startGlass();
   startReviewsDrag();
@@ -1685,5 +1565,4 @@
   startLang();
   startPhoneNav();
   startStartTimer();
-  startCutGlass();
 })();
