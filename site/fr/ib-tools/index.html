@@ -989,7 +989,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @keyframes tpPdsCoin { 0% { transform: translateY(-5px); opacity: 0; } 100% { transform: none; opacity: 1; } }
 .pf-perk__n, .pf-g-red, .pf-g-silver, .tp-tv__zero, .tp-tv__val, .tp-ig__n, .tp-pds__n { font-variant-numeric: tabular-nums; }
 .tq-ibx__lead { margin: 0; max-width: 470px; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.45; font-weight: 700; letter-spacing: -.01em; text-wrap: pretty; }
-.tq-ibx__sub { margin: -6px 0 0; max-width: 460px; font-size: 15px; line-height: 1.6; color: #55585f; text-wrap: pretty; }
 .tq-ibx__ctas { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; }
 .tq-ibtp { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px);
   padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px) var(--tq-half); color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -1133,7 +1132,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibn__h2 > span > span { white-space: nowrap; }
 :lang(ar) .tq-ibn__h2, :lang(th) .tq-ibn__h2, :lang(ja) .tq-ibn__h2, :lang(ko) .tq-ibn__h2, :lang(zh) .tq-ibn__h2 { --h2k: 1.1; }
 .tq-ibn .tq-ibx__lead { max-width: 440px; font-size: clamp(16px, min(1.3vw, 2.3vh), 19px); }
-.tq-ibn .tq-ibx__sub { max-width: 430px; }
+.tq-ibn .tq-ibx__ctas { max-width: 440px; justify-content: center; }
 .tq-ibn__fig { flex: 1.7 1 520px; min-width: 0; }
 .tq-ibn__stage { position: relative; width: min(100%, max(560px, calc((100vh - 260px) * 1.43))); width: min(100%, max(560px, calc((100svh - 260px) * 1.43))); margin: 0 auto; container-type: inline-size; }
 .sib-svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -1236,7 +1235,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibn__wrap { min-height: 0; justify-content: flex-start; gap: 18px; padding-block: 22px 34px; }
 .tq-ibn__row, .tq-ibn__text { display: contents; }
 .tq-ibn__h2 { order: 1; }
-.tq-ibn .tq-ibx__lead, .tq-ibn .tq-ibx__sub, .tq-ibn__stage { display: none; }
+.tq-ibn .tq-ibx__lead, .tq-ibn__stage { display: none; }
 .tq-ibn .tq-ibn__lead-m { display: block; order: 2; margin-top: -4px; font-size: 16px; line-height: 1.4; }
 .tq-ibn__fig { order: 3; flex: none; margin: 0 calc(clamp(20px, 5.5vw, 80px) * -1) 10px; }
 .tq-ibn .tq-ibn__stage--m { display: block; width: 100%; }
@@ -1248,7 +1247,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibn__pill svg { width: 18px; height: 18px; stroke-width: 1.9; }
 .tq-ibn__pill b { min-width: 0; font-size: 12px; line-height: 1.2; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
 .tq-ibn__pill span { display: none; }
-.tq-ibn .tq-ibx__ctas { order: 5; justify-content: center; padding-top: 22px; }
+.tq-ibn .tq-ibx__ctas { order: 5; max-width: none; justify-content: center; padding-top: 22px; }
 }
 .tq-ibi { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box;
   padding: var(--tq-half) clamp(20px, 5vw, 80px); color: #0a0a0a;
@@ -1768,7 +1767,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
             <h2 class="tq-ibn__h2 tq-h2" data-fitw><span>Tout votre réseau.</span> <span>En ligne en <span style="color: #e7131b;">2 minutes.</span></span></h2>
             <p class="tq-ibx__lead">Transférez chaque Sub-IB et chaque client parrainé en une seule fois — quelle que soit la profondeur de votre structure.</p>
             <p class="tq-ibx__lead tq-ibn__lead-m">Chaque Sub-IB et chaque client parrainé, transférés en une seule fois.</p>
-            <p class="tq-ibx__sub">Notre équipe reconstitue votre réseau niveau par niveau et vous le remet en ligne dans IB Desk. Vous vérifiez, validez et commencez le suivi le jour même.</p>
             <div class="tq-ibx__ctas">
               <div class="tq-start-wrap" data-start-timer data-seconds="119">
                 <a class="tq-start" href="../#signup" data-page-link data-label="CHARGEMENT · Accueil" aria-label="Réserver l’onboarding">

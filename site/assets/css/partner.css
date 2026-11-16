@@ -1550,7 +1550,8 @@
 .tq-ibn__h2 > span > span { white-space: nowrap; }
 :lang(ar) .tq-ibn__h2, :lang(th) .tq-ibn__h2, :lang(ja) .tq-ibn__h2, :lang(ko) .tq-ibn__h2, :lang(zh) .tq-ibn__h2 { --h2k: 1.1; }
 .tq-ibn .tq-ibx__lead { max-width: 440px; font-size: clamp(16px, min(1.3vw, 2.3vh), 19px); }
-.tq-ibn .tq-ibx__sub { max-width: 430px; }
+/* the START button and its timer: centred under the text, on the lead's measure (on phones the block's own rule centres it) */
+.tq-ibn .tq-ibx__ctas { max-width: 440px; justify-content: center; }
 .tq-ibn__fig { flex: 1.7 1 520px; min-width: 0; }
 .tq-ibn__stage { position: relative; width: min(100%, max(560px, calc((100vh - 260px) * 1.43))); width: min(100%, max(560px, calc((100svh - 260px) * 1.43))); margin: 0 auto; container-type: inline-size; }
 .sib-svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -1653,7 +1654,7 @@
   .tq-ibn__wrap { min-height: 0; justify-content: flex-start; gap: 18px; padding-block: 22px 34px; }
   .tq-ibn__row, .tq-ibn__text { display: contents; }
   .tq-ibn__h2 { order: 1; }
-  .tq-ibn .tq-ibx__lead, .tq-ibn .tq-ibx__sub, .tq-ibn__stage { display: none; }
+  .tq-ibn .tq-ibx__lead, .tq-ibn__stage { display: none; }
   .tq-ibn .tq-ibn__lead-m { display: block; order: 2; margin-top: -4px; font-size: 16px; line-height: 1.4; }
   .tq-ibn__fig { order: 3; flex: none; margin: 0 calc(clamp(20px, 5.5vw, 80px) * -1) 10px; }
   .tq-ibn .tq-ibn__stage--m { display: block; width: 100%; }
@@ -1667,7 +1668,7 @@
   .tq-ibn__pill svg { width: 18px; height: 18px; stroke-width: 1.9; }
   .tq-ibn__pill b { min-width: 0; font-size: 12px; line-height: 1.2; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
   .tq-ibn__pill span { display: none; }
-  .tq-ibn .tq-ibx__ctas { order: 5; justify-content: center; padding-top: 22px; }
+  .tq-ibn .tq-ibx__ctas { order: 5; max-width: none; justify-content: center; padding-top: 22px; }
 }
 
 /* IB Tools: the Network + clients block (IB_Network_Block, "IB Network + Clients"; grew from the Network insights block),
