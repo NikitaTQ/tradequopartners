@@ -1,30 +1,12 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script>
-/* The start-up's pace. This frame shares the page's main thread (same origin). Its 3D start-up goes in small steps (each a
-   task of its own); __tqQuiet() says when the next may go: while the block is far from the screen (more than about two
-   screens away) only when the page has not scrolled for 250ms (the page or this frame), at once otherwise; once it is
-   close, at once in any case, so it is live by the time it is reached. Its still stands in its place until then. */
-(function () {
-  var last = 0, on = function () { last = performance.now(); }, ev = ['scroll', 'wheel', 'touchmove'];
-  ev.forEach(function (e) { addEventListener(e, on, { passive: true }); });
-  try { if (parent !== window) ev.forEach(function (e) { parent.addEventListener(e, on, { passive: true }); }); } catch (e) {}
-  var near = function () {
-    try { var f = window.frameElement; if (!f) return true; var r = f.getBoundingClientRect(), h = parent.innerHeight; return r.top < h * 3 && r.bottom > -h * 2; }
-    catch (e) { return true; }
-  };
-  window.__tqQuiet = function () {
-    return new Promise(function (res) {
-      (function go() {
-        if (near() || performance.now() - last >= 250) { setTimeout(res, 0); return; }
-        setTimeout(go, 100);
-      })();
-    });
-  };
-})();
-</script>
 <script type="importmap">{"imports":{"three":"../vendor/three@0.184.0/three.module.min.js"}}</script>
+<!-- three.js fetched in parallel, before the start-up needs it: three.module.min.js imports three.core.min.js, found
+     only once the first is in (a second round trip before anything can run) -->
+<link rel="modulepreload" href="../vendor/three@0.184.0/three.core.min.js">
+<link rel="modulepreload" href="../vendor/three@0.184.0/three.module.min.js">
+<link rel="modulepreload" href="../vendor/three@0.184.0/addons/objects/Reflector.js">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TradeQuo — Infinite Flow</title>
@@ -48,13 +30,18 @@
   .if-sub { margin: clamp(14px,1.6vw,22px) auto 0; font-size: clamp(16px,1.5vw,20px); line-height: 1.4; color: #5B5B5B; max-width: 26ch; text-wrap: balance; }
   .if-scene { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #FFFFFF; overflow: hidden; }
   @media (max-width: 640px) { .if-scene { aspect-ratio: 1 / 1; } }
-  /* a still of the scene's first frame (tools/flow-poster/shoot.mjs), in place from the first paint; the live scene fades
-     in over it once its first frame is drawn, and the still fades out */
-  .if-poster { position: absolute; inset: 0; background: url(../assets/flow/poster-wide.webp?v=d80b95d1a7) center / 100% 100% no-repeat; transition: opacity .6s ease; pointer-events: none; }
+  /* a still of the scene's first frame (tools/flow-poster/shoot.cjs), in place from the first paint; over it, a film of the
+     scene's first seconds (.if-motion, tools/flow-poster/motion.cjs; its frame 0 is the still) plays while the block is
+     on screen, so the scene moves from the first moment; the live scene starts from the film's moment and fades in over
+     them, which go once it is fully in */
+  .if-poster { position: absolute; inset: 0; background: url(../assets/flow/poster-wide.webp?v=d80b95d1a7) center / 100% 100% no-repeat; pointer-events: none; }
   @media (max-width: 640px) { .if-poster { background-image: url(../assets/flow/poster-square.webp?v=6778e6ad17); } }
-  .if-scene canvas { opacity: 0; transition: opacity .6s ease; }
+  /* white under the scene's own see-through parts (its soft shadows and reflections), as the still and the film show them:
+     the fade-in is then an exact cross-fade, with nothing of the film showing through */
+  .if-scene canvas { opacity: 0; transition: opacity .6s ease; background: #fff; }
   .if-scene.is-live canvas { opacity: 1; }
-  .if-scene.is-live .if-poster { opacity: 0; }
+  .if-motion { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; background: transparent; pointer-events: none; }
+  .if-scene.is-live .if-poster, .if-scene.is-live .if-motion { opacity: 0; transition: opacity 0s linear .6s; }
   .if-cta { display: flex; justify-content: center; margin-top: calc(-1 * clamp(28px, 5vw, 76px)); position: relative; z-index: 2; }
 
   @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -199,7 +186,41 @@
       <p class="if-sub" data-i18n="flow.sub">Commissions that keep coming. Settled every day.</p>
     </div>
   </header>
-  <div class="if-scene" id="if-scene"><div class="if-poster" aria-hidden="true"></div></div>
+  <div class="if-scene" id="if-scene"><div class="if-poster" aria-hidden="true"></div><video class="if-motion" muted playsinline preload="auto" disablepictureinpicture disableremoteplayback tabindex="-1" aria-hidden="true" data-src="../assets/flow/motion-wide.mp4?v=626695bd99" data-src-square="../assets/flow/motion-square.mp4?v=1ec202254e"></video></div>
+  <script>
+  /* The stand-in film: it plays while the block is on screen (window.__tqPaused, set by the page; before the page has
+     said, the frame's own place on it) until the live scene takes over (window.__tqMotion, used by prepare below). Not
+     for "reduce motion" or "save data": the still stands in alone then; nor for the stills' and films' camera (?shoot). */
+  (function () {
+    var v = document.querySelector('.if-motion');
+    if (!v) return;
+    var conn = navigator.connection;
+    if ((window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) || (conn && conn.saveData) || /[?&]shoot\b/.test(location.search)) { v.remove(); return; }
+    var small = window.innerWidth <= 640, over = false;
+    v.muted = true;
+    v.src = small ? v.getAttribute('data-src-square') : v.getAttribute('data-src');
+    var shown = function () {
+      if (document.hidden) return false;
+      if (window.__tqPaused !== undefined) return !window.__tqPaused;
+      try { var f = window.frameElement; if (f) { var r = f.getBoundingClientRect(); return r.bottom > 0 && r.top < parent.innerHeight; } } catch (e) {}
+      return true;
+    };
+    var tick = function () {
+      if (over) return;
+      if (shown()) { if (v.paused && !v.ended) { var p = v.play(); if (p) p.catch(function () {}); } }
+      else if (!v.paused) v.pause();
+    };
+    var iv = setInterval(tick, 100);
+    tick();
+    window.__tqMotion = {
+      small: small,
+      time: function () { return v.currentTime || 0; },
+      playing: function () { return !v.paused && !v.ended && v.readyState > 2; },
+      /* the live scene is in (or fading in): the film keeps playing under it for the fade, then goes */
+      done: function () { over = true; clearInterval(iv); setTimeout(function () { v.pause(); v.removeAttribute('src'); try { v.load(); } catch (e) {} v.remove(); }, 800); },
+    };
+  })();
+  </script>
   <div class="if-cta">
     <a class="tq-conv" href="#signup" target="_top" aria-label="Become a partner" data-i18n-aria="flow.cta">
   <span data-i18n="flow.cta">Become a partner</span>
@@ -231,13 +252,36 @@
 </a>
   </div>
 </section>
+<script>
+/* When the 3D start-up may begin. Running three.js and making the scene is this block's one heavy job, on the main thread
+   it shares with the page (same origin). In a page it waits for the visitor's first move there (a scroll, the wheel, a
+   touch, a click, a key, the mouse moving) or for the block being on screen, so a page that is only opened (or measured:
+   Lighthouse, PageSpeed) pays nothing for it; until the scene is ready the film above stands in. On its own: at once. */
+window.__tqGo = new Promise(function (go) {
+  var w = null;
+  try { if (window.parent !== window && window.parent.document) w = window.parent; } catch (e) {}
+  if (!w || /[?&]shoot\b/.test(location.search)) { go(); return; }
+  var ev = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'pointermove', 'keydown'], iv = 0;
+  var fire = function () {
+    ev.forEach(function (e) { w.removeEventListener(e, fire, true); window.removeEventListener(e, fire, true); });
+    clearInterval(iv); go();
+  };
+  var seen = function () {
+    try { var f = window.frameElement, r = f && f.getBoundingClientRect(); return !!r && r.width > 0 && r.bottom > 0 && r.top < w.innerHeight; } catch (e) { return false; }
+  };
+  if (w.scrollY > 0 || seen()) { go(); return; }
+  ev.forEach(function (e) { w.addEventListener(e, fire, { capture: true, passive: true }); window.addEventListener(e, fire, { capture: true, passive: true }); });
+  iv = setInterval(function () { if (seen()) fire(); }, 500);
+});
+</script>
 <script type="module">
 // TradeQuo — "Infinite Flow" 3D block.
 // Usage:  import { mount } from './infinite-flow-scene.js';
 //         const api = mount(containerEl, { cursorTilt: true });
 //         api.downloadGLB(); api.destroy();
-import * as THREE from '../vendor/three@0.184.0/three.module.min.js';
-import { Reflector } from '../vendor/three@0.184.0/addons/objects/Reflector.js';
+await window.__tqGo;   // the visitor's first move on the page (above); three.js is already in the cache by then
+const THREE = await import('../vendor/three@0.184.0/three.module.min.js');
+const { Reflector } = await import('../vendor/three@0.184.0/addons/objects/Reflector.js');
 
 /* ======================= PARAMETERS ======================= */
 const PARAMS = {
@@ -404,8 +448,9 @@ function mount(el, opts = {}) {
   if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
   el.style.overflow = 'hidden';
 
-  /* the start-up goes in small steps, paced by __tqQuiet (above): in pauses while far away, at once when close */
-  const step = async () => { if (window.__tqQuiet) await window.__tqQuiet(); if (dead) throw new Error('destroyed'); };
+  /* the start-up goes in small steps, each a task of its own (a frame can be drawn between any two), one right after the
+     other from the moment the page loads this frame: never waiting on the scrolling, so the scene is live at once */
+  const step = () => (window.scheduler && scheduler.yield ? scheduler.yield() : new Promise((r) => setTimeout(r, 0))).then(() => { if (dead) throw new Error('destroyed'); });
   const SMALL = window.innerWidth <= 640;
   let renderer = null;
   const makeRenderer = () => {
@@ -415,6 +460,9 @@ function mount(el, opts = {}) {
     renderer.toneMapping = THREE.NeutralToneMapping;
     renderer.transmissionResolutionScale = SMALL ? 0.5 : 1;
     renderer.setClearColor(0x000000, 0);
+    /* no shader-log queries on first use (three.js advises it for production): each is a wait on the graphics process,
+       sixty of them in the first frame; ?debug brings them back */
+    renderer.debug.checkShaderErrors = /[?&]debug\b/.test(location.search);
     Object.assign(renderer.domElement.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block' });
     el.appendChild(renderer.domElement);   /* over the still (.if-poster) */
   };
@@ -867,6 +915,7 @@ function mount(el, opts = {}) {
 
     /* ---------- loop (pauses off-screen; checked every frame) ---------- */
     let last = performance.now(), simT = 0;
+    let film = null, filmUntil = 0;   // the stand-in film (above the module), followed for the fade-in
     function frame(now) {
       if (dead) return;
       raf = requestAnimationFrame(frame);
@@ -878,6 +927,7 @@ function mount(el, opts = {}) {
       if (prevDraw) adapt(now - prevDraw);
       prevDraw = now;
       simT += dt; frameId++;
+      if (film && now < filmUntil && film.playing()) simT = film.time();   // in step with the film under it, while it fades in
       checkSize();
       update(simT);
       renderer.render(scene, camera);
@@ -891,9 +941,9 @@ function mount(el, opts = {}) {
      * for the screen and for the render targets) and upload every texture: a stall of a few hundred ms just as the visitor
      * scrolled the block in, worst on Windows. Now, once the scene is built, each object's shaders compile one at a time
      * (in the background where the browser can: KHR_parallel_shader_compile), then each texture goes to the graphics card,
-     * then one frame is drawn: each a small step of its own, from right after the page loads (in pauses of the scrolling
-     * while the block is far away, at once when it is close), so the scene is live when it is reached. Only a visitor who
-     * gets here in the first second may see its still (.if-poster) for a moment; the live scene fades in over it. */
+     * then one frame is drawn: each a small step of its own, one right after the other from the moment this frame loads
+     * (the home page starts it right after its first paint, and has three.js on its way before that), so the scene is
+     * live by the time anyone gets here. Its still (.if-poster) stands in until then; the live scene fades in over it. */
     let warm = 0;   // 1 preparing, 3 ready (a frame drawn)
     const prepare = async () => {
       warm = 1;
@@ -901,31 +951,41 @@ function mount(el, opts = {}) {
       scene.traverse(o => { const ms = [].concat(o.material || []); if (ms.length && ms.some(m => !seen.has(m))) { ms.forEach(m => seen.add(m)); objs.push(o); } });   // the coins carry three materials each
       const rt = new THREE.WebGLRenderTarget(4, 4);
       try {
+        const ready = [];                                               // asked for one by one, compiled side by side, waited for together
         for (const o of objs) {                                         // as drawn on the screen
           await step(); if (warm === 3) return;
-          await renderer.compileAsync(o, camera, scene);
+          ready.push(renderer.compileAsync(o, camera, scene));
         }
         for (const o of objs) {                                         // as drawn into the transmission and mirror buffers
           await step(); if (warm === 3) return;
-          renderer.setRenderTarget(rt); const pr = renderer.compileAsync(o, camera, scene); renderer.setRenderTarget(null);
-          await pr;
+          renderer.setRenderTarget(rt); ready.push(renderer.compileAsync(o, camera, scene)); renderer.setRenderTarget(null);
         }
         await step(); if (warm === 3) return;                           // the mirrors' cheap glass
         glassMeshes.forEach(m => { m.material = glassCheap; });
-        renderer.setRenderTarget(rt); const pc = renderer.compileAsync(glassMeshes[0], camera, scene); renderer.setRenderTarget(null);
+        renderer.setRenderTarget(rt); ready.push(renderer.compileAsync(glassMeshes[0], camera, scene)); renderer.setRenderTarget(null);
         glassMeshes.forEach(m => { m.material = glass; });
-        await pc;
         const texs = new Set();                                         // the canvas textures, to the graphics card
         seen.forEach(m => { for (const k in m) { const v = m[k]; if (v && v.isTexture && !v.isRenderTargetTexture) texs.add(v); } });
         for (const t of texs) { await step(); if (warm === 3) return; renderer.initTexture(t); }
+        await Promise.all(ready);
         await step(); if (warm === 3) return;                           // and one frame
-        frameId++; checkSize(); update(simT); renderer.render(scene, camera);
+        frameId++; checkSize(); update(simT); renderer.render(scene, camera);   // unseen yet: whatever the first drawing still costs
+        const f = window.__tqMotion;                                    // then the stand-in film's moment, drawn at once: no jump
+        if (f && f.small === SMALL) {
+          simT = f.time(); film = f;
+          lastEject = Math.floor((simT - T.ejectOffset - T.flight - 0.3) / T.ejectEvery);   // no late words for coins long landed
+          frameId++; update(simT); renderer.render(scene, camera);
+          filmUntil = performance.now() + 700;
+        }
         warm = 3; el.classList.add('is-live');
+        if (f) f.done();
       } catch (e) {
         glassMeshes.forEach(m => { m.material = glass; }); renderer.setRenderTarget(null);
       } finally { rt.dispose(); }
     };
     prepare();
+    /* the stand-in film's camera (tools/flow-poster/motion.cjs): with ?shoot, the scene drawn at a given moment */
+    if (/[?&]shoot\b/.test(location.search)) window.__tqRenderAt = (t) => { simT = t; frameId++; checkSize(); update(t); renderer.render(scene, camera); };
 
     /* ---------- GLB ---------- */
     exportGLB = async () => {

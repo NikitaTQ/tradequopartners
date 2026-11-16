@@ -12,7 +12,7 @@ const OUT = path.join(__dirname);
     const ctx = await b.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: dpr });
     await ctx.addInitScript(() => { window.__tqPaused = true; });
     const p = await ctx.newPage();
-    await p.goto('http://localhost:8772/embeds/infinite-flow.html', { waitUntil: 'load' });
+    await p.goto('http://localhost:8772/embeds/infinite-flow.html?shoot', { waitUntil: 'load' });
     await p.waitForSelector('.if-scene.is-live', { timeout: 120000 });
     await p.addStyleTag({ content: '.if-poster { display: none !important; } .if-scene canvas { transition: none !important; } .if-scene > div:not(.if-poster), .if-cta, .if-head, .if-metrics { visibility: hidden !important; }' });
     await p.waitForTimeout(500);

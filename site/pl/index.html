@@ -1229,6 +1229,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-toast, .tq-toasts { transition: none; }
 }
 </style>
+<!-- three.js for Infinite Flow (further down, in its own frame), fetched while this page loads, at low priority: the frame
+     then finds it in the cache and is live by the time anyone scrolls to it -->
+<link rel="preload" href="../vendor/three@0.184.0/three.core.min.js" as="fetch" crossorigin fetchpriority="low">
+<link rel="preload" href="../vendor/three@0.184.0/three.module.min.js" as="fetch" crossorigin fetchpriority="low">
 </head>
 <body>
 <div class="tq-loader" data-loader hidden>
@@ -1469,7 +1473,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
         <h2 class="tq-h2" style="margin: clamp(20px, 3vw, 36px) 0 0; text-align: center; color: #0a0a0a;" data-fitw>Program w liczbach</h2>
         <div data-crys-stage style="position: relative;">
           <picture><source media="(max-width: 640px)" srcset="../assets/posters/crystals-pl-mobile.webp?v=feba081de1"><img data-crys-poster fetchpriority="low" src="../assets/posters/crystals-pl-desktop.webp?v=03db9a4bfe" alt="30K+ partnerów, $9M+ wypłacanych partnerom co miesiąc, do 87% udziału w przychodach (revenue share), ocena 4.9 na Trustpilot, 800K+ klientów, 400+ wyjazdów motywacyjnych" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;"></picture>
-          <iframe data-embed data-src="../embeds/crystals.html?lang=pl&v=d6e7c1e899" title="TradeQuo w liczbach" style="position: relative; display: block; width: 100%; aspect-ratio: 1.6 / 1; border: 0; background: #fff; pointer-events: none; opacity: 0; transition: opacity .5s ease;"></iframe>
+          <iframe data-embed data-src="../embeds/crystals.html?lang=pl&v=8fc4c60ed4" title="TradeQuo w liczbach" style="position: relative; display: block; width: 100%; aspect-ratio: 1.6 / 1; border: 0; background: #fff; pointer-events: none; opacity: 0; transition: opacity .5s ease;"></iframe>
         </div>
       
       <div data-crys-cta="" style="display: flex; justify-content: center; margin-top: clamp(18px, 2.6vw, 32px);"><a class="tq-crys" href="#calculator" aria-label="Oszacuj swoje zarobki"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">Oszacuj swoje zarobki</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a></div>
@@ -1690,7 +1694,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <span id="dashboard" data-flip-anchor="" aria-hidden="true" style="position: absolute; left: 0; top: calc(100% - 100vh); width: 1px; height: 1px; pointer-events: none; scroll-snap-align: start;"></span>
     <div data-flip-sticky="" style="position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; perspective: 1800px; padding: 0 clamp(16px, 4vw, 56px); box-sizing: border-box; background: #fff;">
       <div data-flip-front="" style="position: relative; width: 100%; max-width: 1240px; transform-origin: 50% 64%; will-change: transform; border-radius: clamp(20px, 3vw, 36px); overflow: hidden; background: #fff;">
-        <iframe data-embed data-warm="1" data-src="../embeds/infinite-flow.html?lang=pl&v=5c3751213e" title="Infinite Flow — prowizje rozliczane codziennie" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
+        <iframe data-embed data-warm="1" data-src="../embeds/infinite-flow.html?lang=pl&v=c457e84c69" title="Infinite Flow — prowizje rozliczane codziennie" scrolling="no" style="display: block; width: 100%; aspect-ratio: 1.2 / 1; border: 0; background: #fff;"></iframe>
         <div data-flip-shade="" style="position: absolute; inset: 0; background: #0a0a0a; opacity: 0; pointer-events: none;"></div>
       </div>
       <div data-flip-back="" style="position: absolute; inset: clamp(8px, 1.4vw, 20px) 0 0; opacity: 0; transform: scale(.9); transform-origin: 50% 50%; visibility: hidden; will-change: transform, opacity;">
@@ -1951,6 +1955,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=c7db67d6f1" defer></script>
+<script src="../assets/js/landing.js?v=8e380fb7f9" defer></script>
 </body>
 </html>

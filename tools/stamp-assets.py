@@ -22,7 +22,7 @@ from urllib.parse import urlsplit, parse_qsl, urlencode
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, 'site')
-ATTR = re.compile(r'''((?:href|src|data-src|data-src-hi|srcset|poster)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg|mp4|webm|woff2)(?:\?[^"#]*)?)(")''')
+ATTR = re.compile(r'''((?:href|src|data-src(?:-[a-z]+)?|srcset|poster)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg|mp4|webm|woff2)(?:\?[^"#]*)?)(")''')
 FONT_URL = re.compile(r'''(url\()([^)'"#]+\.(?:woff2|webp|png)(?:\?[^)'"#]*)?)(\))''')   # fonts, and the images CSS draws (the header plate)
 
 
@@ -43,6 +43,10 @@ def stamp(page):
         local = os.path.join(SITE, parts.path.lstrip('/')) if parts.path.startswith('/') else os.path.join(base, parts.path)
         if not os.path.isfile(local) or os.path.abspath(local) == os.path.abspath(page):
             return m.group(0)
+        if os.sep + 'vendor' + os.sep in os.path.abspath(local):
+            # vendor folders carry the library version in their name, and their modules are imported by these exact URLs
+            # (import maps, imports inside the library): a preload of them must name the very same URL, so no ?v= here
+            return m.group(1) + parts.path + ('?' + urlencode([(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if k != 'v']) if [k for k, _ in parse_qsl(parts.query) if k != 'v'] else '') + m.group(3)
         query = [(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if k != 'v']
         query.append(('v', digest(local)))
         return m.group(1) + parts.path + '?' + urlencode(query) + m.group(3)
