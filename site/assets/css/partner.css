@@ -1461,8 +1461,8 @@
    would not fit the screen under the header (the section's script). The picture is sized by the screen's width only,
    as large as it goes, so that its words stay readable; the text and buttons sit over its empty margins. */
 @media (max-width: 640px) {
-  .tq-ibtp { --k: 1.06; min-height: min(calc(100svh - 80px), 900px); padding: 2px clamp(16px, 6vw, 24px) calc(24px * var(--k)); }   /* under the 80px header */
-  .tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; }
+  .tq-ibtp { --k: 1.06; min-height: min(calc(100svh - 80px), 900px); align-items: flex-start; padding: 2px clamp(16px, 6vw, 24px) calc(24px * var(--k)); }   /* under the 80px header, from the top */
+  .tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-start; gap: 0; }
   .tq-ibtp__text { display: contents; }
   .tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
   .tq-ibtp__eye { order: 1; font-size: calc(12px * var(--k)); }
@@ -1486,11 +1486,11 @@
   .tq-ibvs__uh { font-size: 22px; }
   .tq-ibvs__ul { font-size: 22px; }
   .tq-ibvs__us { font-size: 23.5px; }
-  .tq-ibtp__ctas { order: 4; margin-top: -4px; padding-top: 0; gap: calc(12px * var(--k)); }   /* right under the card */
+  .tq-ibtp__ctas { order: 4; margin-top: calc(var(--cg, 0px) - 4px); padding-top: 0; gap: calc(12px * var(--k)); }   /* under the card, lower by what the screen has to spare (--cg, at most 24px; the section's script) */
   .tq-ibtp__go { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
   .tq-ibtp__go { gap: calc(16px * var(--k)); padding-inline: calc(28px * var(--k)) calc(7px * var(--k)); }
   .tq-ibtp__arr { width: calc(46px * var(--k)); height: calc(46px * var(--k)); }
-  .tq-ibtp__lead { order: 5; max-width: none; margin-top: calc(16px * var(--k)); font-size: calc(16px * var(--k)); }
+  .tq-ibtp__lead { display: none; }   /* phones: the first screen ends with the red button */
 }
 @media (prefers-reduced-motion: reduce) { .tq-ibtp__go { transition: none; } }
 
