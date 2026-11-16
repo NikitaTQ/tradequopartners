@@ -1560,54 +1560,44 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibcp__bat { width: 22px; height: 10px; box-sizing: border-box; border: 1.5px solid rgba(255,255,255,.8); border-radius: 3px; padding: 1px; display: flex; }
 .tq-ibcp__bat i { flex: 1; border-radius: 1px; background: #fff; }
 .tq-ibcp__pbar { left: 24px; right: 24px; top: 62px; display: flex; align-items: center; justify-content: space-between; }
-.tq-ibcp__pbar .tq-stai { font-size: 13.5px; color: #fff; }
+.tq-ibcp__mark .tq-stai__m { display: block; width: 24px; height: 24px; fill: #e9eaec; }
+.tq-ibcp__pbar--c::after { content: ''; width: 24px; }
 .tq-ibcp__dots { font-size: 16px; letter-spacing: 2px; color: rgba(255,255,255,.75); }
-.tq-ibcp__prof { left: 24px; right: 24px; top: 104px; display: flex; align-items: center; gap: 12px; }
-.tq-ibcp__fol { left: 24px; right: 24px; top: 108px; display: flex; align-items: center; gap: 10px; }
-.tq-ibcp__av { flex: none; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #0a0a0a;
+.tq-ibcp__role { left: 50%; top: 99px; transform: translateX(-50%); padding: 4px 13px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px #b0f127; color: #b0f127;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+.tq-ibcp__me { left: 22px; right: 22px; top: 134px; display: flex; align-items: center; gap: 12px; }
+.tq-ibcp__me > b { font-size: 23px; font-weight: 500; letter-spacing: -.01em; }
+.tq-ibcp__av { flex: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; color: #0a0a0a;
   background: radial-gradient(circle at 34% 28%, #fff 0%, #d4d6da 30%, #8e9096 70%, #4a4b50 100%); box-shadow: 0 0 0 2px rgba(255,255,255,.12); }
-.tq-ibcp__av--s { width: 34px; height: 34px; font-size: 11px; box-shadow: none; }
+.tq-ibcp__av--s { width: 24px; height: 24px; font-size: 10.5px; box-shadow: none; }
 .tq-ibcp__who { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.tq-ibcp__who b { font-size: 19px; line-height: 1; white-space: nowrap; }
-.tq-ibcp__who span { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.6); white-space: nowrap; }
-.tq-ibcp__who--s { gap: 3px; }
-.tq-ibcp__who--s b { font-size: 14px; line-height: normal; }
-.tq-ibcp__who--s span { font-size: 11px; color: rgba(255,255,255,.55); }
-.tq-ibcp__sym { left: 24px; right: 24px; display: flex; align-items: center; gap: 10px; }
-.tq-ibcp__sym--p { top: 180px; }
-.tq-ibcp__sym--p b { font-size: 26px; letter-spacing: -.01em; }
-.tq-ibcp__sym--c { top: 170px; }
-.tq-ibcp__sym--c b { font-size: 24px; }
-.tq-ibcp__buy { padding: 4px 9px; border-radius: 7px; background: #b0f127; color: #0a0a0a; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
-.tq-ibcp__px { margin-left: auto; font-size: 13px; color: rgba(255,255,255,.7); }
-.tq-ibcp__chart { left: 20px; overflow: visible; }
-.tq-ibcp__chart--p { top: 236px; }
-.tq-ibcp__chart--c { top: 226px; }
-.tq-ibcp__pos, .tq-ibcp__card { left: 18px; right: 18px; height: 76px; box-sizing: border-box; padding: 0 16px; border-radius: 20px; display: flex; align-items: center; }
-.tq-ibcp__pos { top: 448px; gap: 14px; background: #18181b; box-shadow: inset 0 0 0 1px #27272a; }
-.tq-ibcp__ico { flex: none; width: 38px; height: 38px; border-radius: 12px; background: rgba(176,241,39,.12); display: flex; align-items: center; justify-content: center; }
-.tq-ibcp__lbl { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.tq-ibcp__lbl b { font-size: 15px; white-space: nowrap; }
-.tq-ibcp__lbl span { font-size: 11.5px; color: rgba(255,255,255,.6); white-space: nowrap; }
-.tq-ibcp__lbl small { font-size: 10px; letter-spacing: .18em; color: rgba(255,255,255,.55); }
-.tq-ibcp__pos > svg { flex: none; }
-.tq-ibcp__send { position: absolute; inset: 0; border-radius: 20px; box-shadow: inset 0 0 0 1.5px #e7131b, 0 0 28px rgba(231,19,27,.55); opacity: 0; }
-.tq-ibcp__tabs { left: 0; right: 0; bottom: 0; height: 96px; box-sizing: border-box; padding: 20px 26px 0; border-top: 1px solid #27272a; display: flex; justify-content: space-around; }
-.tq-ibcp__tab { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.tq-ibcp__tab i { width: 18px; height: 2.5px; border-radius: 2px; background: #b0f127; }
-.tq-ibcp__chead { left: 24px; right: 24px; top: 60px; display: flex; align-items: center; gap: 10px; }
-.tq-ibcp__chead b { font-size: 17px; }
-.tq-ibcp__hc { flex: none; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; color: #e4e6ea;
-  background: linear-gradient(145deg, #5e6066 0%, #1c1d21 55%, #3a3c42 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.3); }
-.tq-ibcp__live { margin-left: auto; display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: rgba(176,241,39,.14); font-size: 11px; font-weight: 700; color: #b0f127; }
-.tq-ibcp__live i { width: 6px; height: 6px; border-radius: 50%; background: #b0f127; box-shadow: 0 0 6px rgba(176,241,39,.8); }
-.tq-ibcp__card { top: 452px; gap: 12px; background: linear-gradient(150deg, #222226 0%, #18181b 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 0 0 1px #27272a; }
-.tq-ibcp__card .tq-ibcp__lbl small { color: #b0f127; }
-.tq-ibcp__lots { flex: none; font-size: 14px; white-space: nowrap; }
-.tq-ibcp__badge { left: 18px; right: 18px; top: 540px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; white-space: nowrap;
-  background: #b0f127; color: #0a0a0a; box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 12px 24px -12px rgba(176,241,39,.55); }
-.tq-ibcp__pw { left: 0; right: 0; bottom: 26px; display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 10.5px; color: rgba(255,255,255,.5); }
-.tq-ibcp__pw .tq-stai { font-size: 11px; color: rgba(255,255,255,.85); }
+.tq-ibcp__who b { font-size: 20px; font-weight: 500; line-height: 1; white-space: nowrap; }
+.tq-ibcp__who span { font-size: 11.5px; color: rgba(255,255,255,.55); white-space: nowrap; }
+.tq-ibcp__strat { left: 16px; right: 16px; top: 196px; height: 196px; border-radius: 22px;
+  background: linear-gradient(160deg, #2b2b30 0%, #19191c 55%, #121214 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 0 0 1px rgba(255,255,255,.07); }
+.tq-ibcp__strat > * { position: absolute; }
+.tq-ibcp__strat > b { left: 16px; top: 16px; font-size: 19px; letter-spacing: -.015em; white-space: nowrap; }
+.tq-ibcp__strat > span { left: 16px; top: 42px; font-size: 12.5px; color: rgba(255,255,255,.5); }
+.tq-ibcp__rib { left: calc(50% - 118px); top: 66px; width: 236px; height: auto; display: block; }
+.tq-ibcp__strat--c { top: 194px; height: 226px; }
+.tq-ibcp__strat--c .tq-ibcp__rib { top: 44px; }
+.tq-ibcp__fl { left: 12px; right: 12px; bottom: 12px; height: 40px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; display: flex; align-items: center; gap: 10px;
+  font-size: 13.5px; background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+.tq-ibcp__row { left: 16px; right: 16px; height: 42px; box-sizing: border-box; padding: 0 14px 0 9px; border-radius: 14px; display: flex; align-items: center; gap: 10px;
+  font-size: 13.5px; background: #18181b; box-shadow: inset 0 0 0 1px #27272a; }
+.tq-ibcp__row > span:nth-child(2) { flex: 1; }
+.tq-ibcp__ri { flex: none; width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.06); }
+.tq-ibcp__row--1 { top: 406px; }
+.tq-ibcp__row--2 { top: 456px; }
+.tq-ibcp__row--c1 { top: 434px; }
+.tq-ibcp__row--c2 { top: 484px; }
+.tq-ibcp__go2 { left: 22px; right: 22px; top: 526px; height: 50px; border-radius: 25px; display: flex; align-items: center; justify-content: center; gap: 9px;
+  font-size: 15.5px; font-weight: 700; color: #0a0a0a; white-space: nowrap; background: #b0f127; box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 12px 24px -12px rgba(176,241,39,.55); }
+.tq-ibcp__go2--c { top: 550px; }
+.tq-ibcp__pulse, .tq-ibcp__pdot { position: absolute; top: 50%; border-radius: 50%; }
+.tq-ibcp__pulse { right: 17px; width: 12px; height: 12px; margin-top: -6px; background: rgba(10,10,10,.3); }
+.tq-ibcp__pdot { right: 20px; width: 6px; height: 6px; margin-top: -3px; background: #0a0a0a; }
+.tq-ibcp__send { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1.5px #e7131b, 0 0 28px rgba(231,19,27,.55); opacity: 0; }
 .tq-ibcp__home { left: 50%; bottom: 9px; width: 110px; height: 4.5px; margin-left: -55px; border-radius: 3px; background: rgba(255,255,255,.85); }
 .tq-ibcp__glint { inset: 0; pointer-events: none; background: linear-gradient(118deg, rgba(255,255,255,0) 28%, rgba(255,255,255,.07) 40%, rgba(255,255,255,0) 54%); }
 @media (max-width: 1199px) {
@@ -2150,33 +2140,15 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
           <span class="tq-ibcp__stat"><span class="tq-ibcp__bars"><i></i><i></i><i></i><i></i></span><span class="tq-ibcp__bat"><i></i></span></span>
           <div class="tq-ibcp__pbar">
             <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8 2L2 8l6 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="tq-stai tq-stai--bar" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span>
+            <span class="tq-ibcp__mark" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg></span>
             <span class="tq-ibcp__dots">•••</span>
           </div>
-          <div class="tq-ibcp__prof">
-            <span class="tq-ibcp__av">LO</span>
-            <div class="tq-ibcp__who"><b>Meridian Swing</b><span>Strategy provider<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="6" fill="#B0F127"/><path d="M3.4 6.2l1.8 1.7 3.4-3.6" stroke="#0A0A0A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-          </div>
-          <div class="tq-ibcp__sym tq-ibcp__sym--p"><b>EURUSD</b><span class="tq-ibcp__buy">BUY</span><span class="tq-ibcp__px">1.0842</span></div>
-          <svg class="tq-ibcp__chart tq-ibcp__chart--p" width="260" height="190" viewBox="0 0 260 170" fill="none">
-            <defs><linearGradient id="ibcp-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B0F127" stop-opacity=".22"/><stop offset="1" stop-color="#B0F127" stop-opacity="0"/></linearGradient></defs>
-            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30 L260,170 L0,170 Z" fill="url(#ibcp-area)"/>
-            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" stroke="#B0F127" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle data-k="p-dot" cx="260" cy="30" r="14" fill="rgba(176,241,39,.28)" style="transform-origin:260px 30px"/>
-            <circle cx="260" cy="30" r="6" fill="#B0F127"/>
-          </svg>
-          <div class="tq-ibcp__pos">
-            <span class="tq-ibcp__ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l7 4-7 4-7-4 7-4z" stroke="#B0F127" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 10l7 4 7-4" stroke="#B0F127" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
-            <div class="tq-ibcp__lbl"><b>Open position</b><span>EURUSD · BUY · 2.00 lots</span></div>
-            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1.5 1.5L6.5 7l-5 5.5" stroke="rgba(255,255,255,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <i class="tq-ibcp__send" data-k="p-send"></i>
-          </div>
-          <div class="tq-ibcp__tabs">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 10l8-7 8 7v9H3z" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linejoin="round"/></svg>
-            <span class="tq-ibcp__tab"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 17l5-6 4 3 7-9" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><i></i></span>
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="7" y="7" width="12" height="12" rx="3" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/><path d="M3 14V5a2 2 0 0 1 2-2h9" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linecap="round"/></svg>
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7.5" r="4" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/><path d="M3.5 19c1.2-3.6 4-5 7.5-5s6.3 1.4 7.5 5" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
+          <span class="tq-ibcp__role">Strategy provider</span>
+          <div class="tq-ibcp__me"><span class="tq-ibcp__av">M</span><b>Meridian</b></div>
+          <div class="tq-ibcp__strat"><b>Meridian Core</b><span>Your strategy</span><img class="tq-ibcp__rib" src="../../assets/ib/copy-ribbon.webp?v=5acb50c93c" width="520" height="273" alt="" decoding="async" loading="lazy"><i class="tq-ibcp__send" data-k="p-send"></i></div>
+          <div class="tq-ibcp__row tq-ibcp__row--1"><span class="tq-ibcp__ri"><svg width="16" height="16" viewBox="0 0 18 18"><path d="M9 1.5 16 5.5 9 9.5 2 5.5Z" fill="#ECEDF1"/><path d="M2 5.5 9 9.5V17L2 13Z" fill="#A9ACB3"/><path d="M16 5.5 9 9.5V17L16 13Z" fill="#6E7178"/></svg></span><span>Strategy overview</span><svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1.5 1.5 5.5 6l-4 4.5" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tq-ibcp__row tq-ibcp__row--2"><span class="tq-ibcp__ri"><svg width="16" height="16" viewBox="0 0 18 18"><path d="M9 1 16 5v8l-7 4-7-4V5Z" fill="#7C7F86"/><path d="M9 3.6 13.8 6.4v5.2L9 14.4 4.2 11.6V6.4Z" fill="#D9DBE0"/><path d="M9 3.6 13.8 6.4 9 9.2 4.2 6.4Z" fill="#F4F5F7"/></svg></span><span>Latest activity</span><svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1.5 1.5 5.5 6l-4 4.5" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tq-ibcp__go2"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="7" y="7" width="10" height="10" rx="2.5" stroke="#0A0A0A" stroke-width="1.8"/><path d="M3.5 13V5.5a2 2 0 0 1 2-2H13" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round"/></svg>Sharing strategy<i class="tq-ibcp__pulse" data-k="p-dot"></i><i class="tq-ibcp__pdot"></i></div>
           <i class="tq-ibcp__home"></i><i class="tq-ibcp__glint"></i>
         </div>
       </div>
@@ -2189,16 +2161,16 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
         <div class="tq-ibcp__scr">
           <i class="tq-ibcp__isl"></i><span class="tq-ibcp__clock">10:24</span>
           <span class="tq-ibcp__stat"><span class="tq-ibcp__bars"><i></i><i></i><i></i><i></i></span><span class="tq-ibcp__bat"><i></i></span></span>
-          <div class="tq-ibcp__chead"><span class="tq-ibcp__hc">HC</span><b>Copy trade</b><span class="tq-ibcp__live"><i></i>Live</span></div>
-          <div class="tq-ibcp__fol"><span class="tq-ibcp__av tq-ibcp__av--s">LO</span><div class="tq-ibcp__who tq-ibcp__who--s"><b>Following Meridian Swing</b><span>Strategy provider on SocialTrading.AI</span></div></div>
-          <div class="tq-ibcp__sym tq-ibcp__sym--c"><b data-k="c-sym">EURUSD</b><span class="tq-ibcp__buy" data-k="c-buy">BUY</span><span class="tq-ibcp__px" data-k="c-px">1.0842</span></div>
-          <svg class="tq-ibcp__chart tq-ibcp__chart--c" width="260" height="190" viewBox="0 0 260 170" fill="none">
-            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" stroke="rgba(255,255,255,.1)" stroke-width="2.5" stroke-linejoin="round"/>
-            <path data-k="c-draw" d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" pathLength="1" stroke="#B0F127" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:1;stroke-dashoffset:0"/>
-          </svg>
-          <div class="tq-ibcp__card" data-k="c-card"><div class="tq-ibcp__lbl"><small>YOUR POSITION</small><b>EURUSD · BUY</b></div><span class="tq-ibcp__lots">0.20 lots</span></div>
-          <div class="tq-ibcp__badge" data-k="c-badge"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="8" rx="2" stroke="#0A0A0A" stroke-width="1.8"/><path d="M2.5 10V4a1.5 1.5 0 0 1 1.5-1.5h6" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round"/></svg>Copied · scaled to your account</div>
-          <div class="tq-ibcp__pw"><span>Powered by</span><span class="tq-stai tq-stai--pw" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span></div>
+          <div class="tq-ibcp__pbar tq-ibcp__pbar--c">
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8 2L2 8l6 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="tq-ibcp__mark" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg></span>
+          </div>
+          <span class="tq-ibcp__role">Follower</span>
+          <div class="tq-ibcp__me"><span class="tq-ibcp__av">A</span><div class="tq-ibcp__who"><b>Alex</b><span>Your account</span></div></div>
+          <div class="tq-ibcp__strat tq-ibcp__strat--c" data-k="c-card"><b>Meridian Core</b><img class="tq-ibcp__rib" data-k="c-rib" src="../../assets/ib/copy-ribbon.webp?v=5acb50c93c" width="520" height="273" alt="" decoding="async" loading="lazy"><div class="tq-ibcp__fl" data-k="c-fol"><span class="tq-ibcp__av tq-ibcp__av--s">M</span><span>Following Meridian</span></div></div>
+          <div class="tq-ibcp__row tq-ibcp__row--c1" data-k="c-l1"><span class="tq-ibcp__ri"><svg width="16" height="16" viewBox="0 0 18 18"><path d="M9 1.5 16 5.5 9 9.5 2 5.5Z" fill="#ECEDF1"/><path d="M2 5.5 9 9.5V17L2 13Z" fill="#A9ACB3"/><path d="M16 5.5 9 9.5V17L16 13Z" fill="#6E7178"/></svg></span><span>Strategy overview</span><svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1.5 1.5 5.5 6l-4 4.5" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tq-ibcp__row tq-ibcp__row--c2" data-k="c-l2"><span class="tq-ibcp__ri"><svg width="16" height="16" viewBox="0 0 18 18"><path d="M9 1 16 5v8l-7 4-7-4V5Z" fill="#7C7F86"/><path d="M9 3.6 13.8 6.4v5.2L9 14.4 4.2 11.6V6.4Z" fill="#D9DBE0"/><path d="M9 3.6 13.8 6.4 9 9.2 4.2 6.4Z" fill="#F4F5F7"/></svg></span><span>Latest activity</span><svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1.5 1.5 5.5 6l-4 4.5" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tq-ibcp__go2 tq-ibcp__go2--c" data-k="c-btn"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="7" y="7" width="10" height="10" rx="2.5" stroke="#0A0A0A" stroke-width="1.8"/><path d="M3.5 13V5.5a2 2 0 0 1 2-2H13" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round"/><path d="M9.4 12.1l1.6 1.6 2.9-3.1" stroke="#0A0A0A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Copying Meridian</div>
           <i class="tq-ibcp__home"></i><i class="tq-ibcp__glint"></i>
         </div>
       </div>
@@ -2401,7 +2373,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=67f1542748" defer></script>
-<script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
+<script src="../../assets/js/ib-copy.js?v=8863573876" defer></script>
 <script src="../../assets/js/ib-insights.js?v=2ebb166ea9" defer></script>
 <script src="../../assets/js/ib-hole.js?v=ebe409c5f7" defer></script>
 </body>

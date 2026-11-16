@@ -1,9 +1,11 @@
 /* IB Tools, the Copy trading hand-off block (#copy, Liquid_Glass_Hand-off design, variant 4a), ported from the design's
    component. One progress value p (0..1) drives everything:
      · the client's hand slides in (0–.30), the step "01" gives way to "02" (.44–.60);
-     · the provider's position glows (.28–.60), gathers into a drop of liquid silver (.30–.44), flies along an arc to
-       the client's phone (.46–.74), lands (.70–.78) and spreads into it (.77–.88), a ring opening where it lands;
-     · the client's screen fills in: symbol, price, the chart drawn, the position, the "Copied" badge (.76–.95).
+     · the provider's strategy card ("Meridian Core") glows (.28–.60), gathers into a drop of liquid silver (.30–.44),
+       flies along an arc to the follower's phone (.46–.74), lands on the same card there (.70–.78) and spreads into it
+       (.77–.88), a ring opening where it lands;
+     · the follower's screen fills in: the strategy card, its chrome ribbon, "Following Meridian", the two rows and the
+       "Copying Meridian" button (.76–.95).
    The drop is a metaball field drawn on a WebGL canvas (the design's shader: refraction of the background, a mirror-like
    environment, a red core, two highlights, a soft shadow); it is drawn only inside the box around the drops.
    p follows the scroll: the stage holds still while the page scrolls 2.1 screens past it (partner.css);
@@ -48,7 +50,7 @@
       var a = side === 'L' ? ML : MR, X = a[0] * u + a[4] * v + a[12], Y = a[1] * u + a[5] * v + a[13], W = a[3] * u + a[7] * v + a[15];
       return side === 'L' ? [lx + .78 * X / W, ly + .78 * Y / W] : [rx + .78 * X / W, ry + .78 * Y / W];
     };
-    var A = P('L', 150, 486), Bp = P('R', 150, 490), Q = [(A[0] + Bp[0]) / 2, Math.min(A[1], Bp[1]) - 260];
+    var A = P('L', 150, 294), Bp = P('R', 150, 307), Q = [(A[0] + Bp[0]) / 2, Math.min(A[1], Bp[1]) - 150];   /* from the provider's strategy card to the follower's */
     var form = E(sg(.3, .44)), fly = E(sg(.46, .74)), land = sm(sg(.7, .78)), spread = E(sg(.77, .88));
     var Wb = function (i) { return 1 + .05 * Math.sin(T * 6.5 + i * 1.7); }, live = form * (1 - spread);
     var m = qp(A, Q, Bp, fly), tl = qp(A, Q, Bp, Math.max(0, fly - .035)), sat = qp(A, Q, Bp, Math.max(0, fly - .09));
@@ -64,8 +66,8 @@
     set('p-send', null, sg(.28, .34) * (1 - sg(.5, .6)));
     at('gA', A[0], A[1], 1, bell(.4, .08) * .9);
     var r = sg(.76, .92); at('ring', Bp[0], Bp[1], .4 + 3 * r, r > 0 && r < 1 ? (1 - r) * .85 : 0);
-    up('c-sym', sg(.76, .81)); up('c-buy', sg(.78, .83)); up('c-px', sg(.78, .83));
-    draw('c-draw', E(sg(.78, .94))); up('c-card', sg(.8, .86)); up('c-badge', sg(.88, .95));
+    up('c-card', sg(.76, .82)); var rb = E(sg(.78, .92)); set('c-rib', 'scale(' + L(.55, 1, rb).toFixed(3) + ')', rb);
+    up('c-fol', sg(.82, .88)); up('c-l1', sg(.84, .89)); up('c-l2', sg(.86, .91)); up('c-btn', sg(.88, .95));
   }
 
   /* ---- the drop: the design's fragment shader (board px; uScale = canvas px per board px) ---- */
