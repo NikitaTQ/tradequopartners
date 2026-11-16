@@ -1778,8 +1778,8 @@
 .tq-ibtv__zero img { display: block; width: auto; height: .97em; }
 @media (max-width: 640px) { .tq-ibtv__zero { margin-top: 20px; font-size: clamp(110px, 32vw, 250px); } }
 
-/* ---- IB Tools: the Signals feed block (IB_Signals_Feed, #signals) ------------------------------------------------
-   One signal under the IB's brand and the four channels it went to. Phones: the design's 390px block as it is (sizes in
+/* ---- IB Tools: the market outlooks feed block (the IB feed design, #outlooks) ------------------------------------------------
+   One market outlook under the IB's brand and the four channels it went to. Phones: the design's 390px block as it is (sizes in
    the design's px), scaled to the screen by the section's script (zoom), at most ~70% of a 390x844 screen. Desktops (the
    design has none, from 1000px): heading, button and note on the left, the feed on the right at 1.4x; tablets get the phone block, larger. Type: Inter (figures tabular),
    the H2 in the site's H2 face; 800 in the design is 700. */
@@ -1793,7 +1793,7 @@
   grid-template-areas: "h2 feed" "go feed" "note feed"; column-gap: clamp(40px, 6vw, 96px); }
 .tq-ibs__h2 { grid-area: h2; align-self: end; --h2s: clamp(24px, min(2.5vw, 4.4vh), 38px); max-width: 600px; margin: 0 0 clamp(24px, 3.4vh, 36px); padding-inline-start: 0; line-height: 1.12; color: #0a0a0a; }   /* face: .tq-h2 */
 .tq-ibs__feed { grid-area: feed; position: relative; width: 366px; }
-/* its button (CTA «Explore connected signals» · Broadcast): the red pill, a white disc with a red dot pinging; on hover
+/* its button (CTA «Explore market outlooks» · Broadcast): the red pill, a white disc with a red dot pinging; on hover
    (or keyboard focus) the four channels' tiles fly up out of it, one after another (children 3-6: the words and the dot
    come first; the design's nth-of-type counted them too, so only two flew) */
 @keyframes tq-ping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.6); opacity: 0; } }
@@ -1836,8 +1836,8 @@
 .tq-ibs__bell { position: absolute; right: -10px; top: -14px; z-index: 3; width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }   /* glass: below, with the channels */
 .tq-ibs__bell i { position: absolute; right: -3px; top: -3px; display: flex; align-items: center; justify-content: center; min-width: 17px; height: 17px; padding: 0 4px; box-sizing: border-box; border-radius: 999px;
   background: #e7131b; color: #fff; font-size: 10px; font-weight: 700; font-style: normal; font-variant-numeric: tabular-nums; box-shadow: 0 0 0 2px #f1f2f4; }
-/* the signal */
-/* the signal: smoked liquid glass — a dark pane (a little of what is behind shows through), a red glow in its top corner,
+/* the outlook */
+/* the outlook: smoked liquid glass — a dark pane (a little of what is behind shows through), a red glow in its top corner,
    light pooling inside its lower edge, a gloss at the top, a diagonal glint and a rim that catches the light top left */
 .tq-ibs__card { position: relative; overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; gap: 7px; padding: 10px 11px 8px; border-radius: 20px; color: #fff;
   background: radial-gradient(80% 70% at 85% 0%, rgba(231,19,27,.3) 0%, rgba(231,19,27,0) 60%), radial-gradient(60% 55% at 0% 100%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 70%),
@@ -1912,7 +1912,7 @@
 .tq-ibs__l { font-weight: 700; }
 .tq-ibs__dot { color: #8a8c92; }
 .tq-ibs__q b.tq-ibs__slv { color: #b5242a; }
-/* the Signal Check bot on the last channel */
+/* the Idea Check bot on the last channel */
 .tq-ibs__bot { margin-top: 4px; padding-top: 5px; border-top: 1px solid rgba(18,22,30,.07); display: flex; flex-direction: column; gap: 4px; }
 .tq-ibs__both { gap: 6px; }
 .tq-ibs__both > svg { flex: none; }

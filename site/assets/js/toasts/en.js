@@ -20,7 +20,7 @@ export default {
 "{n} earned {v} on {s} volume",
 "{n} unlocked a dedicated partner manager",
 "{n} onboarded {v} clients from a webinar",
-"{n}’s signal group brought {v} funded accounts",
+"{n}’s analysis group brought {v} funded accounts",
 "{n} received {v} in tier-2 commission",
 "{n} joined the partner program",
 "{n} hit a {v} month",
