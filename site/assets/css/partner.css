@@ -1787,8 +1787,8 @@
 .tq-ibtv__zero img { display: block; width: auto; height: .97em; }
 @media (max-width: 640px) { .tq-ibtv__zero { margin-top: 20px; font-size: clamp(110px, 32vw, 250px); } }
 
-/* ---- IB Tools: the market outlooks feed block (the IB feed design, #outlooks) ------------------------------------------------
-   One market outlook under the IB's brand and the four channels it went to. Phones: the design's 390px block as it is (sizes in
+/* ---- IB Tools: the market outlooks feed block (#outlooks) -----------------------------------------------------------------
+   The IB's market outlook channel (a glass card, two posts) and the four channels it goes out on. Phones: the design's 390px block as it is (sizes in
    the design's px), scaled to the screen by the section's script (zoom), at most ~70% of a 390x844 screen. Desktops (the
    design has none, from 1000px): heading, button and note on the left, the feed on the right at 1.4x; tablets get the phone block, larger. Type: Inter (figures tabular),
    the H2 in the site's H2 face; 800 in the design is 700. */
@@ -1841,98 +1841,47 @@
 .tq-ibs__arr { flex: none; width: 42px; height: 42px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
 [dir="rtl"] .tq-ibs__arr svg { transform: scaleX(-1); }
 .tq-ibs__note { grid-area: note; align-self: start; max-width: 460px; margin: 14px 2px 0; font-size: 12px; line-height: 1.45; color: #55585f; text-wrap: pretty; }
-/* the bell: at the feed's corner on desktops, by the heading on phones */
-.tq-ibs__bell { position: absolute; right: -10px; top: -14px; z-index: 3; width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }   /* glass: below, with the channels */
-.tq-ibs__bell i { position: absolute; right: -3px; top: -3px; display: flex; align-items: center; justify-content: center; min-width: 17px; height: 17px; padding: 0 4px; box-sizing: border-box; border-radius: 999px;
-  background: #e7131b; color: #fff; font-size: 10px; font-weight: 700; font-style: normal; font-variant-numeric: tabular-nums; box-shadow: 0 0 0 2px #f1f2f4; }
-/* the outlook */
-/* the outlook: smoked liquid glass — a dark pane (a little of what is behind shows through), a red glow in its top corner,
-   light pooling inside its lower edge, a gloss at the top, a diagonal glint and a rim that catches the light top left */
-.tq-ibs__card { position: relative; overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; gap: 7px; padding: 10px 11px 8px; border-radius: 20px; color: #fff;
-  background: radial-gradient(80% 70% at 85% 0%, rgba(231,19,27,.3) 0%, rgba(231,19,27,0) 60%), radial-gradient(60% 55% at 0% 100%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 70%),
-    linear-gradient(165deg, rgba(46,48,54,.9) 0%, rgba(14,15,18,.93) 55%, rgba(26,27,32,.9) 100%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
-  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(255,255,255,.07), inset 0 -16px 24px -20px rgba(255,255,255,.24),
-    inset 0 14px 22px -20px rgba(255,255,255,.18), 0 26px 40px -24px rgba(10,10,12,.7); }
-.tq-ibs__card::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.1) 36%, rgba(255,255,255,.03) 40%, rgba(255,255,255,0) 45%), radial-gradient(70% 45% at 22% 0%, rgba(255,255,255,.13) 0%, rgba(255,255,255,0) 70%); }
-.tq-ibs__card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.2px; pointer-events: none;
-  background: linear-gradient(135deg, rgba(255,255,255,.6) 0%, rgba(255,255,255,.1) 28%, rgba(255,255,255,0) 50%, rgba(255,255,255,.05) 72%, rgba(255,255,255,.35) 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
-.tq-ibs__card > * { position: relative; }
-.tq-ibs__cardh, .tq-ibs__cardm, .tq-ibs__sent, .tq-ibs__chh, .tq-ibs__q, .tq-ibs__both { display: flex; align-items: center; }
-.tq-ibs__cardh > i, .tq-ibs__cardm > i, .tq-ibs__chh > i, .tq-ibs__both > i { flex: 1; }
-.tq-ibs__cardh { gap: 7px; height: 18px; }
-.tq-ibs__n { flex: none; width: 18px; height: 18px; border-radius: 5px; background: #fff; color: #0a0a0a; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
-.tq-ibs__brand { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
-.tq-ibs__via { font-size: 10.5px; color: rgba(255,255,255,.72); white-space: nowrap; }
-.tq-ibs__cardm { gap: 8px; }
-.tq-ibs__sym { font-size: 24px; line-height: 1; font-weight: 700; letter-spacing: -.04em; }
-.tq-ibs__idea { height: 22px; padding: 0 9px; border-radius: 999px; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; white-space: nowrap; }
-.tq-ibs__tri { flex: none; }
-.tq-ibs__utc { font-size: 9.5px; color: rgba(255,255,255,.72); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.tq-ibs__lv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
-.tq-ibs__lv > div { display: flex; flex-direction: column; gap: 1px; min-width: 0; padding: 5px 8px; border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,.11) 0%, rgba(255,255,255,.04) 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 1px rgba(255,255,255,.05), inset 0 -6px 10px -8px rgba(255,255,255,.14); }
-.tq-ibs__lv span { font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tq-ibs__lv b { font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: #fff; font-variant-numeric: tabular-nums; }
-.tq-ibs__lv b.tq-ibs__red { color: #ff6a6f; }
-/* sent to the channels */
-.tq-ibs__sent { gap: 8px; height: 22px; margin-top: 10px; }
-.tq-ibs__pulse { flex: none; width: 6px; height: 6px; border-radius: 999px; background: #e7131b; box-shadow: 0 0 0 3px rgba(231,19,27,.14); }
-.tq-ibs__sentl { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: #1e1f23; white-space: nowrap; }
-.tq-ibs__sent > i { flex: 1; height: 1px; min-width: 8px; background: linear-gradient(90deg, rgba(18,22,30,.18), rgba(18,22,30,0)); }
-/* liquid glass (the channels, the minimum-deposit pill, the bell): a clear, thick pane — what is behind shows through
-   blurred, a touch brighter and more saturated; the edge is a lens: bright where it catches the light (top left, bottom
-   right), with a faint cool / warm fringe as in real glass, and light pooling just inside it; a gloss at the top.
-   The rim is ::before (a ring), the gloss ::after; both sit under the content. */
-.tq-ibs__min, .tq-ibs__ch, .tq-ibs__bell { isolation: isolate; background: linear-gradient(160deg, rgba(255,255,255,.6) 0%, rgba(250,251,253,.32) 48%, rgba(255,255,255,.46) 100%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.04); backdrop-filter: blur(12px) saturate(180%) brightness(1.04); border: 1px solid rgba(255,255,255,.2);
-  box-shadow: inset 1.5px 1.5px 1px -1px rgba(255,255,255,1), inset -1.5px -1.5px 1px -1px rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.18),
-    inset 3px 4px 8px -5px rgba(255,255,255,.95), inset -3px -5px 9px -5px rgba(255,255,255,.9), inset 0 -12px 18px -14px rgba(176,186,206,.35),
-    0 0 0 .5px rgba(18,22,30,.07), 0 1px 1.5px rgba(18,22,30,.06), 0 6px 12px -8px rgba(18,22,30,.16), 0 20px 34px -24px rgba(18,22,30,.42); }
-.tq-ibs__min::before, .tq-ibs__ch::before, .tq-ibs__bell::before { content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: inherit; padding: 1.25px; pointer-events: none;
-  background: linear-gradient(135deg, #fff 0%, rgba(214,228,255,.85) 9%, rgba(255,255,255,.25) 24%, rgba(255,255,255,0) 42%, rgba(255,255,255,0) 58%, rgba(255,222,232,.55) 80%, #fff 94%, rgba(220,232,255,.9) 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
-.tq-ibs__min::after, .tq-ibs__ch::after, .tq-ibs__bell::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
-  background: linear-gradient(172deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.12) 34%, rgba(255,255,255,0) 52%), radial-gradient(50% 70% at 96% 108%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 70%); }
-.tq-ibs__min { position: relative; display: flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px 0 6px; box-sizing: border-box; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
-/* the channels */
-.tq-ibs__list { position: relative; isolation: isolate; list-style: none; margin: 5px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-/* what the glass bends: one wide, soft wash behind the channels (warm red at the top right, graphite at the bottom left),
-   so each pane shows its own part of it */
-.tq-ibs__list::before { content: ""; position: absolute; inset: 6% 2% 4%; z-index: -1; pointer-events: none; border-radius: 40px; filter: blur(14px);
-  background: radial-gradient(60% 46% at 86% 22%, rgba(231,19,27,.2) 0%, rgba(231,19,27,0) 100%), radial-gradient(55% 45% at 10% 84%, rgba(30,33,40,.16) 0%, rgba(30,33,40,0) 100%); }
-.tq-ibs__ch { position: relative; box-sizing: border-box; display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px 8px 8px; border-radius: 15px; }
-.tq-ibs__ico { position: relative; flex: none; width: 28px; height: 28px; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fff;
-  box-shadow: 0 0 0 1px rgba(18,22,30,.08), 0 4px 8px -4px rgba(18,22,30,.3); }
-.tq-ibs__ico img { display: block; width: 24px; height: 24px; object-fit: contain; }
-.tq-ibs__ico img.tq-ibs__tv { width: auto; height: 12px; }
-.tq-ibs__ico img.tq-ibs__wa { width: 27px; height: 27px; }
-.tq-ibs__ico img.tq-ibs__xmp { width: 26px; height: 26px; }
-.tq-ibs__chb { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
-.tq-ibs__chh { align-items: baseline; gap: 5px; line-height: 15px; }
-.tq-ibs__chh b { font-size: 12px; font-weight: 700; white-space: nowrap; }
-.tq-ibs__sub { min-width: 0; font-size: 10.5px; color: #55585f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tq-ibs__t { font-size: 9.5px; color: #55585f; font-variant-numeric: tabular-nums; }
-.tq-ibs__q { gap: 5px; white-space: nowrap; font-size: 10.5px; line-height: 14px; color: #1e1f23; font-variant-numeric: tabular-nums; }
-.tq-ibs__q b { font-weight: 700; }
-.tq-ibs__q > b:first-child { color: #0a0a0a; }
-.tq-ibs__l { font-weight: 700; }
-.tq-ibs__dot { color: #8a8c92; }
-.tq-ibs__q b.tq-ibs__slv { color: #b5242a; }
-/* the Idea Check bot on the last channel */
-.tq-ibs__bot { margin-top: 4px; padding-top: 5px; border-top: 1px solid rgba(18,22,30,.07); display: flex; flex-direction: column; gap: 4px; }
-.tq-ibs__both { gap: 6px; }
-.tq-ibs__both > svg { flex: none; }
-.tq-ibs__both b { font-size: 11px; font-weight: 700; white-space: nowrap; }
-.tq-ibs__tag { font-size: 7.5px; letter-spacing: .12em; padding: 2px 4px; border-radius: 4px; background: #0a0a0a; color: #fff; }
-.tq-ibs__ok { display: flex; align-items: center; height: 18px; padding: 0 8px; border-radius: 999px; background: #0a0a0a; color: #fff; font-size: 10px; font-weight: 700; white-space: nowrap; }
-.tq-ibs__checks { display: flex; flex-wrap: nowrap; gap: 9px; }
-.tq-ibs__checks > span { display: flex; align-items: center; gap: 4px; min-width: 0; font-size: 9.5px; color: #1e1f23; white-space: nowrap; }
-.tq-ibs__checks i { flex: none; width: 12px; height: 12px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
-/* the feed reads left to right on every language; its translated words keep their own direction */
-.tq-ibs__feed :is(.tq-ibs__via, .tq-ibs__idea, .tq-ibs__sentl, .tq-ibs__min, .tq-ibs__sub, .tq-ibs__l, .tq-ibs__ok, .tq-ibs__checks > span) { unicode-bidi: plaintext; }
+/* the channel: a frosted glass card (white edge, a soft red glow along its right and lower edges), its head (the brand's
+   round N, a hairline, the name and "Market outlook channel", search and menu), two white posts and the posting field;
+   under it the four channels it goes out on, each icon over its name */
+.tq-ibs__chan { position: relative; box-sizing: border-box; padding: 12px 11px 11px; border-radius: 22px;
+  background: linear-gradient(160deg, rgba(255,255,255,.7) 0%, rgba(246,247,250,.55) 55%, rgba(255,255,255,.62) 100%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.95), inset 0 2px 1px rgba(255,255,255,.9), 0 0 0 1px rgba(18,22,30,.05),
+    10px 14px 30px -14px rgba(231,19,27,.42), 0 22px 40px -26px rgba(231,19,27,.5), 0 18px 34px -24px rgba(18,22,30,.3); }
+.tq-ibs__top { display: flex; align-items: center; gap: 9px; padding: 2px 4px 11px; border-bottom: 1px solid rgba(18,22,30,.12); }
+.tq-ibs__nl { flex: none; display: block; width: 30px; height: 30px; }
+.tq-ibs__sep { flex: none; align-self: stretch; width: 1px; margin: 2px 2px; background: rgba(18,22,30,.16); }
+.tq-ibs__tt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.tq-ibs__tt b { font-size: 13.5px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+.tq-ibs__tt span { font-size: 9.5px; color: #6c6e74; white-space: nowrap; }
+.tq-ibs__top > svg { flex: none; margin-inline-start: 6px; }
+.tq-ibs__post { position: relative; margin-top: 9px; padding: 10px 11px 9px; border-radius: 13px; background: #fff;
+  box-shadow: 0 0 0 1px rgba(18,22,30,.05), 0 6px 14px -10px rgba(18,22,30,.25); }
+.tq-ibs__by { display: flex; align-items: center; gap: 7px; }
+.tq-ibs__by .tq-ibs__nl { width: 19px; height: 19px; }
+.tq-ibs__by b { font-size: 9.5px; font-weight: 600; white-space: nowrap; }
+.tq-ibs__pt { display: block; margin: 4px 0 0 1px; font-size: 16px; font-weight: 700; letter-spacing: -.015em; line-height: 1.2; white-space: nowrap; }
+.tq-ibs__pm { display: flex; align-items: flex-start; gap: 11px; margin-top: 8px; }
+.tq-ibs__pic { flex: none; display: block; width: 130px; height: 50px; border-radius: 7px; box-shadow: 0 0 0 1px rgba(18,22,30,.06); }
+.tq-ibs__sk { flex: 1; display: flex; flex-direction: column; gap: 9px; padding-top: 11px; }
+.tq-ibs__sk i, .tq-ibs__bl i { display: block; height: 5px; border-radius: 3px; background: #d3d4d8; }
+.tq-ibs__sk i:last-child { width: 72%; }
+.tq-ibs__bl { list-style: none; margin: 10px 0 0; padding: 0 0 0 12px; display: flex; flex-direction: column; gap: 9px; }
+.tq-ibs__bl li { position: relative; display: block; }
+.tq-ibs__bl li::before { content: ""; position: absolute; left: -11px; top: 0; width: 4px; height: 4px; margin-top: .5px; border-radius: 50%; background: #e7131b; }
+.tq-ibs__bl li:nth-child(1) i { width: 86%; } .tq-ibs__bl li:nth-child(2) i { width: 64%; } .tq-ibs__bl li:nth-child(3) i { width: 72%; }
+.tq-ibs__vw { display: flex; justify-content: flex-end; align-items: center; gap: 4px; margin-top: 4px; font-size: 9px; font-weight: 500; color: #6e7076; font-variant-numeric: tabular-nums; }
+.tq-ibs__inp { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 24px; margin-top: 10px; padding: 0 9px 0 12px; border-radius: 999px;
+  background: rgba(255,255,255,.6); box-shadow: inset 0 0 0 1px rgba(18,22,30,.12); font-size: 9.5px; color: #77797f; }
+.tq-ibs__inp span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tq-ibs__inp svg { flex: none; }
+.tq-ibs__chs { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tq-ibs__chs li { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 500; color: #1d1e22; white-space: nowrap; }
+.tq-ibs__chs img { display: block; width: 26px; height: 26px; }
+.tq-ibs__chs img.tq-ibs__tvm { width: auto; height: 15px; margin: 5.5px 0; }
+/* the channel reads left to right on every language; its translated words keep their own direction (and alignment) */
+.tq-ibs__feed :is(.tq-ibs__tt b, .tq-ibs__tt span, .tq-ibs__by b, .tq-ibs__pt, .tq-ibs__inp span) { unicode-bidi: plaintext; text-align: start; }
 /* phones and tablets: the design's block, 390px wide in its own px (the section's script zooms it to the screen, at most 1.5x, centred) */
 @media (max-width: 999px) {
   .tq-ibs { padding: 40px 0 56px; background: linear-gradient(#e9eaec, rgba(233,234,236,0) 120px), radial-gradient(70% 40% at 80% 0%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
@@ -1940,13 +1889,17 @@
   .tq-ibs::after { height: 56px; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
   .tq-ibs__wrap { display: flex; flex-direction: column; width: 390px; max-width: none; margin: 0 auto; padding: 6px 12px 6px; box-sizing: border-box; }   /* the section's own padding spaces the blocks */
   .tq-ibs__feed { display: contents; }
-  .tq-ibs__h2 { order: 1; --h2s: 17px; margin: 4px 0 0; padding-inline-end: 40px; line-height: 1.16; }
-  [dir="rtl"] .tq-ibs__h2 { padding-inline-end: 0; padding-inline-start: 40px; }
-  .tq-ibs__bell { right: 12px; top: 6px; }
-  .tq-ibs__card { order: 2; margin-top: 8px; }
-  .tq-ibs__sent { order: 3; margin-top: 8px; }
-  .tq-ibs__list { order: 4; margin-top: 4px; gap: 3px; }
-  .tq-ibs__ch { padding-block: 7px; }   /* a touch tighter than the design: the block keeps under ~68% of a 390x844 screen with the wider H2 face */
+  .tq-ibs__h2 { order: 1; --h2s: 17px; margin: 4px 0 0; line-height: 1.16; }
+  .tq-ibs__chan { order: 2; margin-top: 10px; padding: 10px 10px 9px; }
+  /* a touch tighter inside than on desktops: the block keeps under ~70% of a 390x844 screen */
+  .tq-ibs__top { padding-bottom: 9px; }
+  .tq-ibs__post { margin-top: 7px; padding: 8px 10px 7px; }
+  .tq-ibs__pm { margin-top: 6px; }
+  .tq-ibs__bl { margin-top: 8px; gap: 8px; }
+  .tq-ibs__vw { margin-top: 2px; }
+  .tq-ibs__inp { margin-top: 8px; }
+  .tq-ibs__chs { order: 3; margin-top: 10px; }
+  .tq-ibs__chs li { gap: 4px; }
   .tq-ibs__go { order: 5; justify-self: auto; margin-top: 9px; height: 46px; padding: 0 6px 0 22px; gap: 14px; font-size: 11.5px; }
   .tq-ibs__cast { order: 5; justify-self: auto; justify-content: space-between; margin-top: 9px; height: 50px; padding-inline: 22px 6px; gap: 12px; font-size: 11.5px; letter-spacing: .12em; }
   .tq-ibs__cast .tq-cast__label { white-space: normal; line-height: 1.2; }
