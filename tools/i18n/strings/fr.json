@@ -57,7 +57,6 @@
   "how.s3.d": "Obtenez votre lien de parrainage, partagez-le avec votre audience et gagnez grâce à l’activité de vos clients sur les marchés.",
   "how.cta": "Devenir partenaire",
   "calc.title": "Estimez votre<br/><red>versement mensuel</red>",
-  "calc.sub": "Indiquez le nombre de clients et leur volume mensuel : <brd/>le relevé de versement se met à jour instantanément. Calcul basé sur nos spreads les plus bas.",
   "calc.lots": "Lots par client et par mois",
   "calc.lotsUnit": "LOTS",
   "calc.traders": "Clients actifs",
