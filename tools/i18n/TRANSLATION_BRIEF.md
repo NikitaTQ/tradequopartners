@@ -31,9 +31,7 @@ language would: natural phrasing for that market, not word-for-word.
    CJK max ~8 characters), `embed.flow.f1-3`, `embed.flow.live`.
 6. Strings that are UPPERCASE in English (`form.*` labels, `inv.*`, kickers, `embed.crys.*`) should be
    uppercase in scripts that have case; in scripts without case just translate.
-7. `footer.risk` is a **regulatory risk warning**: translate faithfully and completely. Where an official
-   ESMA standard wording exists in your language ("CFDs are complex instruments…"), use it, keeping `72.6%`
-   with your language's decimal separator **only here** if the official wording requires it (e.g. `72,6 %`).
+7. (No risk warning in the footer any more: `footer.risk` was removed in November 2026.)
 8. `form.datePh` is a date-format hint: use the local abbreviation of DD / MM / YYYY (e.g. TT / MM / JJJJ),
    keep day/month/year order.
 9. `meta.*` are search/social snippets: natural, keyword-aware ("partner program", "IB program",
