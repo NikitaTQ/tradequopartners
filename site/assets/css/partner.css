@@ -59,8 +59,15 @@
 /* ---- program cards ------------------------------------------------------------- */
 .tp-programs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
 @media (min-width: 961px) { .tp-programs { gap: 24px; } }   /* desktops: the design's 24px between the glass cards */
+/* desktops with room to spare: up to twice that (48px), out of room the cards do not need — they keep the size they have
+   at 24px (the stage may be up to 48px wider for it); where there is none, 24px. The stage is the container the gap is
+   measured against (100cqw = the row's width); the cards' scale (--pu-w) counts the same gap. */
+@media (min-width: 961px) {
+  .tp-hero .tp-stage { container-type: inline-size; }
+  .tp-programs { --tp-gap: calc(24px + clamp(0px, (100cqw - 1208px) / 2, 24px)); gap: var(--tp-gap); }
+}
 .tp-progdots { display: none; }
-/* Program cards (Partner_Cards_8): the ribbon (.tp-ribbons) crosses the white page behind three slabs of grey
+/* Program cards (Partner_Cards_8): a thin line of red carbon (.tp-line) crosses the white page behind three slabs of grey
    frosted glass. Each slab: the number, the program's name and its line; a raised plate with the figure ("87% revshare",
    "∞ tiers", "Yours."; the accent red); the line under it, three points with round checks and one pill CTA with a red
    ball. The slab is cut into facets (the top corner, the plate) whose edges catch the light and meet in red sparks: an
@@ -68,12 +75,32 @@
    517px-wide card (--pu, from the cards' row width, cqw), capped by the screen height so the CTAs stay in the first
    screen. The rows line up across the three cards (landing.js gives each row the tallest card's height). Type: Inter (variable, 300–700); scripts Inter lacks
    (Arabic, Thai, CJK) fall back to the page's own faces. */
-.tp-hero .tp-stage { position: relative; isolation: isolate; max-width: 1320px; padding: clamp(28px, 3.9vw, 56px); padding-top: 20px; border-radius: 36px; background: none; overflow: visible; }   /* no panel behind the cards */
+.tp-hero .tp-stage { position: relative; isolation: isolate; max-width: 1368px; padding: clamp(28px, 3.9vw, 56px); padding-top: 20px; border-radius: 36px; background: none; overflow: visible; }   /* no panel behind the cards */
 .tp-hero .tp-stage::before { content: none; }
-.tp-ribbons { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; display: block; pointer-events: none; }
-.tp-hero .tp-ribbons { left: 50%; right: auto; width: 100vw; transform: translateX(-50%); }   /* so the ribbon crosses the whole screen */
+/* the line: red carbon fibre, 4px — a twill weave of bright and deep reds, a gloss along its top and a shade along its
+   foot; across the whole screen, behind the cards, at the height of their figures (--tp-line-y: startProgLine in landing.js).
+   Its silver pulse runs to each card in turn (the same script); the card it reaches lights up faintly red and stays so. */
+.tp-line { position: absolute; z-index: -1; left: 50%; top: var(--tp-line-y, 47%); width: 100vw; height: 4px; margin-top: -2px; border-radius: 2px; transform: translateX(-50%); pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.55) 0, rgba(255,255,255,.14) 30%, rgba(255,255,255,0) 50%, rgba(0,0,0,.08) 70%, rgba(0,0,0,.42) 100%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.16) 0 1px, rgba(255,255,255,0) 1px 4px),
+    conic-gradient(from 45deg at 50% 50%, #e2203a 0 25%, #6e0915 0 50%, #c4142a 0 75%, #3a040b 0) 0 0 / 4px 4px;
+  box-shadow: 0 1.5px 3px -1px rgba(60,6,12,.35); }
+.tp-line__pulse { position: absolute; left: 0; top: 50%; width: 76px; height: 6px; margin-top: -3px; border-radius: 3px; opacity: 0; will-change: transform;
+  background: linear-gradient(90deg, rgba(196,200,208,0) 0, rgba(196,200,208,.75) 28%, #e9ebef 58%, #ffffff 78%, #d4d7dd 92%, rgba(190,194,202,0) 100%);
+  box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px 1px rgba(150,156,168,.45); }
+@media (min-width: 641px) and (max-width: 960px) { .tp-line { display: none; } }   /* tablets: the cards one under another */
+/* a card the pulse reached: a faint red halo behind the slab and a faint red edge on it, eased in, kept */
+.tp-pc::before { content: ''; position: absolute; inset: 0; z-index: -2; border-radius: 22px; transform: skewX(-2.9deg); pointer-events: none; opacity: 0; transition: opacity 1.2s ease;
+  box-shadow: 0 0 0 1px rgba(231,19,27,.14), 0 20px 56px -18px rgba(231,19,27,.32), 0 0 40px -8px rgba(231,19,27,.2); }
+[dir="rtl"] .tp-pc::before { transform: skewX(2.9deg); }
+.tp-pc__slab::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 1.2s ease;
+  box-shadow: inset 0 0 0 1px rgba(231,19,27,.2), inset 0 0 44px rgba(231,19,27,.07); }
+.tp-pc.is-lit::before, .tp-pc.is-lit .tp-pc__slab::after { opacity: 1; }
+@media (max-width: 640px) { .tp-pc::before { border-radius: 20px; } }
+@media (prefers-reduced-motion: reduce) { .tp-pc::before, .tp-pc__slab::after { transition: none; } }
 .tp-programs { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; container-type: inline-size;
-  --pu-w: calc((100cqw - 48px) / 3 / 517); --pu-h: calc((100vh - 290px) / 771); }   /* the row of cards is the container (a card's own size containment would shrink its height to nothing) */
+  --pu-w: calc((100cqw - 2 * (24px + clamp(0px, (100cqw - 1208px) / 2, 24px))) / 3 / 517); --pu-h: calc((100vh - 290px) / 771); }   /* the row of cards is the container (a card's own size containment would shrink its height to nothing) */
 @media (min-width: 641px) and (max-width: 960px) { .tp-programs { --pu-w: calc(100cqw / 517); --pu-h: 9px; } }   /* tablets: the cards one under another (max 560px wide), no first-screen cap */
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }   /* figures only: Inter's tnum also widens the hyphen */
 .tp-pc { --pu: min(var(--pu-w), var(--pu-h)); position: relative; isolation: isolate; display: flex; flex-direction: column;
