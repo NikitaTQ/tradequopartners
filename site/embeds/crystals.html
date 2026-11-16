@@ -3,29 +3,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TradeQuo Crystals — embed</title>
-<script>
-/* The start-up's pace. This frame shares the page's main thread (same origin). Its 3D start-up goes in small steps (each a
-   task of its own); __tqQuiet() says when the next may go: while the block is far from the screen (more than about two
-   screens away) only when the page has not scrolled for 250ms (the page or this frame), at once otherwise; once it is
-   close, at once in any case, so it is live by the time it is reached. Its still stands in its place until then. */
-(function () {
-  var last = 0, on = function () { last = performance.now(); }, ev = ['scroll', 'wheel', 'touchmove'];
-  ev.forEach(function (e) { addEventListener(e, on, { passive: true }); });
-  try { if (parent !== window) ev.forEach(function (e) { parent.addEventListener(e, on, { passive: true }); }); } catch (e) {}
-  var near = function () {
-    try { var f = window.frameElement; if (!f) return true; var r = f.getBoundingClientRect(), h = parent.innerHeight; return r.top < h * 3 && r.bottom > -h * 2; }
-    catch (e) { return true; }
-  };
-  window.__tqQuiet = function () {
-    return new Promise(function (res) {
-      (function go() {
-        if (near() || performance.now() - last >= 250) { setTimeout(res, 0); return; }
-        setTimeout(go, 100);
-      })();
-    });
-  };
-})();
-</script>
 <script type="importmap">
 {
   "imports": {
@@ -43,6 +20,11 @@
   }
 }
 </script>
+<!-- three.js in parallel (three.module.min.js imports three.core.min.js); each with its hash from the import map, or the
+     browser would not use the preload for the import (a second download) -->
+<link rel="modulepreload" href="../vendor/three@0.184.0/three.core.min.js" integrity="sha384-/2vXInuUL2LKgd3n86c5RIzG+YC7vk3zYPTknaEkF2H2sauHtaOrS8swZ+MURxU6">
+<link rel="modulepreload" href="../vendor/three@0.184.0/three.module.min.js" integrity="sha384-35WaVqXNGvw49+RCXk67Ci9ebo55/5+CfirDbAVSG21KV8/7gO4xwIkhA5ZRcUHc">
+<link rel="modulepreload" href="../vendor/three@0.184.0/addons/controls/OrbitControls.js" integrity="sha384-4rziNxOBZKQ69i+w+f89KJ55TCYquwchVbByQwmaOeIOXdOU2PLDn3kOfXHwIJC9">
 <style>
 /* the site's Inter (self-hosted, one file per script) */
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(../assets/fonts/inter-cyrillic-ext.woff2?v=705d625066) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
@@ -74,7 +56,7 @@
 
 <three-d-stage name="tradequo-crystals" background="#ffffff"></three-d-stage>
 <script src="i18n.js?v=a35edf15c5"></script>
-<script src="crystals-stage.js?v=43438659da"></script>
+<script src="crystals-stage.js?v=1d0991c6ab"></script>
 <script type="module">
 const P = new URLSearchParams(location.search);
 const EMBED = !P.has('ui');
@@ -95,8 +77,8 @@ if (T._fonts) { const st = document.createElement('style'); st.textContent = T._
 const CAP_FONT = "'Inter', 'TQ CJK', sans-serif";
 const CAP_TRACK = /arabic|thai|cjk/.test(T._script) ? 0 : 1; /* tracking breaks Arabic joining, crowds Thai/CJK */
 const { THREE } = await stage.ready;
-/* the start-up goes in small steps, paced by __tqQuiet (above): in pauses while far away, at once when close */
-const step = async () => { if (window.__tqQuiet) await window.__tqQuiet(); };
+/* the start-up goes in small steps, each a task of its own (a frame can be drawn between any two), one right after the other */
+const step = () => (window.scheduler && scheduler.yield ? scheduler.yield() : new Promise((r) => setTimeout(r, 0)));
 await step();
 const CAP_TEXT = ['partners', 'payouts', 'revshare', 'rating', 'traders', 'trips'].map((k) => T['crys.' + k]).join(' ');
 await Promise.all([document.fonts.load('700 200px Inter'), document.fonts.load('700 40px Inter'),

@@ -213,16 +213,17 @@
         import('three/addons/controls/OrbitControls.js'),
       ]);
       this._THREE = THREE;
-      // The site: the renderer (a WebGL context) is made when the embed page's pacing allows (window.__tqQuiet: in a
-      // pause of the scrolling while far away, at once when close). preserveDrawingBuffer keeps the last frame readable after compositing (toDataURL / drawImage) for the design
+      // preserveDrawingBuffer keeps the last frame readable after compositing (toDataURL / drawImage) for the design
       // tools' screenshots (?ui); on the site it would cost a copy of the frame every frame, so it is off.
-      if (window.__tqQuiet) await window.__tqQuiet();
       const renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
         preserveDrawingBuffer: new URLSearchParams(location.search).has('ui'),
       });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      // no shader-log queries on first use (three.js advises it for production): each is a wait on the graphics
+      // process; ?ui or ?debug brings them back
+      renderer.debug.checkShaderErrors = /[?&](ui|debug)\b/.test(location.search);
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       this._renderer = renderer;

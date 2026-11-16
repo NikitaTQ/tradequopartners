@@ -135,7 +135,7 @@
     embedSettle = () => { if (started) pending.forEach((f) => { if (near(f)) start(f); }); };
     const warm = () => frames.filter((f) => f.dataset.warm && f.getClientRects().length)
       .sort((a, b) => a.dataset.warm - b.dataset.warm)
-      .forEach((f) => idle(() => start(f), { timeout: 800 }));
+      .forEach((f) => start(f));
     /* Nothing heavy starts before the visitor does something: the first screen
      * paints and becomes interactive with the main thread to itself. */
     const saveData = navigator.connection && navigator.connection.saveData;
@@ -150,13 +150,11 @@
     };
     events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
     if (scrollY > 0) first(); /* reload half-way down the page */
-    /* the warm-up also starts by itself as soon as the page has loaded (the first screen painted and interactive), so
-       Infinite Flow is live by the time anyone scrolls down to it; its start-up goes in small steps
-       (embeds/infinite-flow.html), and its still stands in only if it is reached in the first moments */
-    if (!saveData) {
-      const auto = () => warm();
-      if (document.readyState === 'complete') auto(); else window.addEventListener('load', auto, { once: true });
-    }
+    /* the warm-up also starts by itself right after the page's first paint: Infinite Flow's frame loads its still and its
+       film (network only), and three.js is on its way from the page's head; the 3D start-up itself waits in the frame for
+       the visitor's first move (embeds/infinite-flow.html, window.__tqGo) and goes in small steps; until the scene is
+       ready the film of it plays in its place, and the scene picks up from the film's moment */
+    if (!saveData) requestAnimationFrame(() => setTimeout(warm, 0));   /* right after the first paint */
     /* frames marked data-eager sit in the first screen and show a matching poster meanwhile (none at
        the moment: the program cards' art is a still image now): they also start on the first mouse movement */
     const eager = frames.filter((f) => f.hasAttribute('data-eager'));
