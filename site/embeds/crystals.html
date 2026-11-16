@@ -3,6 +3,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TradeQuo Crystals — embed</title>
+<script>
+/* Start-up in quiet moments. This frame shares the page's main thread (same origin), so none of its start-up may run
+   during a scroll: __tqQuiet() resolves once nothing has scrolled for 250ms (the page or this frame) and the main thread
+   is idle, however long that takes; __tqScrolling() says whether a scroll is going on. */
+(function () {
+  var last = 0, on = function () { last = performance.now(); }, ev = ['scroll', 'wheel', 'touchmove'];
+  ev.forEach(function (e) { addEventListener(e, on, { passive: true }); });
+  try { if (parent !== window) ev.forEach(function (e) { parent.addEventListener(e, on, { passive: true }); }); } catch (e) {}
+  var idle = window.requestIdleCallback ? function (f) { requestIdleCallback(f, { timeout: 1000 }); } : function (f) { setTimeout(f, 50); };
+  window.__tqScrolling = function () { return performance.now() - last < 250; };
+  window.__tqQuiet = function () { return new Promise(function (res) { (function go() { idle(function () { if (window.__tqScrolling()) setTimeout(go, 100); else res(); }); })(); }); };
+})();
+</script>
 <script type="importmap">
 {
   "imports": {
@@ -51,7 +64,7 @@
 
 <three-d-stage name="tradequo-crystals" background="#ffffff"></three-d-stage>
 <script src="i18n.js?v=a35edf15c5"></script>
-<script src="crystals-stage.js?v=432dd675f4"></script>
+<script src="crystals-stage.js?v=9016e6b63f"></script>
 <script type="module">
 const P = new URLSearchParams(location.search);
 const EMBED = !P.has('ui');
@@ -72,6 +85,9 @@ if (T._fonts) { const st = document.createElement('style'); st.textContent = T._
 const CAP_FONT = "'Inter', 'TQ CJK', sans-serif";
 const CAP_TRACK = /arabic|thai|cjk/.test(T._script) ? 0 : 1; /* tracking breaks Arabic joining, crowds Thai/CJK */
 const { THREE } = await stage.ready;
+/* every step of the start-up waits for a quiet moment (no scrolling, an idle main thread): see __tqQuiet above */
+const step = async () => { if (window.__tqQuiet) await window.__tqQuiet(); };
+await step();
 const CAP_TEXT = ['partners', 'payouts', 'revshare', 'rating', 'traders', 'trips'].map((k) => T['crys.' + k]).join(' ');
 await Promise.all([document.fonts.load('700 200px Inter'), document.fonts.load('700 40px Inter'),
   document.fonts.load('700 40px ' + CAP_FONT, CAP_TEXT)]).catch(() => {});
@@ -107,7 +123,8 @@ const N = METRICS.length;
 const HR = 0.64;                        // hexagon circumradius (vertex left/right)
 const HW = HR * 2, HH = HR * Math.sqrt(3);   // across corners / across flats
 const DW = HR * 1.44, DH = HR * 0.66;   // metric plate, inside the faceted dome
-const TX = innerWidth <= 640 ? 1024 : 2048, TY = Math.round(TX * DH / DW);   /* phones: ~150px plates, a quarter of the memory */
+const TX = 1024, TY = Math.round(TX * DH / DW);   /* a plate is ~150-200 CSS px wide (up to ~500 device px at 2.5x): 1024 is twice that; 2048 on desktop
+                                                    was 4x the pixels to draw, upload and mip-map for no visible gain */
 const INK = { clear: '#0A0A0A', smoked: '#FFFFFF' };
 const SUB = { clear: '#0A0A0A', smoked: '#FFFFFF' };
 const HALO = { clear: 'rgba(255,255,255,0.6)', smoked: 'rgba(0,0,0,0.45)' };
@@ -118,17 +135,21 @@ const logoImg = await new Promise(res => {
   const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null);
   i.src = (el && (el.currentSrc || el.src)) || 'logo.png';
 });
-const logoMasks = !logoImg ? null : (() => {
+await step();
+const logoMasks = !logoImg ? null : await (async () => {   /* a million pixels: a quarter at a time, each in a quiet moment */
   const S = 1024, c = document.createElement('canvas'); c.width = c.height = S;
-  const x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(logoImg, 0, 0, S, S);
+  const x = c.getContext('2d', { willReadFrequently: true }); x.imageSmoothingQuality = 'high'; x.drawImage(logoImg, 0, 0, S, S);   // read back once: a CPU canvas, no GPU stall
   const d = x.getImageData(0, 0, S, S).data;
   const ss = (a, b, t) => { t = Math.min(1, Math.max(0, (t - a) / (b - a))); return t * t * (3 - 2 * t); };
   const mono = new Float32Array(S * S), dot = new Float32Array(S * S);
   let x0 = S, y0 = S, x1 = 0, y1 = 0;
-  for (let p = 0; p < S * S; p++) {
-    const r = d[p * 4], g = d[p * 4 + 1];
-    mono[p] = ss(0.38, 0.62, g / 255); dot[p] = ss(0.38, 0.62, Math.max(0, r - g) / 200);
-    if (mono[p] > 0.5 || dot[p] > 0.5) { const px = p % S, py = (p / S) | 0; x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py); }
+  for (let q = 0; q < 4; q++) {
+    if (q) await step();
+    for (let p = q * S * S / 4, pe = (q + 1) * S * S / 4; p < pe; p++) {
+      const r = d[p * 4], g = d[p * 4 + 1];
+      mono[p] = ss(0.38, 0.62, g / 255); dot[p] = ss(0.38, 0.62, Math.max(0, r - g) / 200);
+      if (mono[p] > 0.5 || dot[p] > 0.5) { const px = p % S, py = (p / S) | 0; x0 = Math.min(x0, px); x1 = Math.max(x1, px); y0 = Math.min(y0, py); y1 = Math.max(y1, py); }
+    }
   }
   return { S, mono, dot, box: [x0, y0, x1 + 1, y1 + 1] };
 })();
@@ -258,6 +279,7 @@ const rimGeo = (() => {
 const rimMat = new THREE.MeshBasicMaterial({ name: 'rim', color: 0xc4c8ce, transparent: true, opacity: 0.85, depthWrite: false });
 const maxAniso = R.capabilities.getMaxAnisotropy();
 
+await step();
 const gems = METRICS.map((f, k) => {
   const id = `${String(k + 1).padStart(2, '0')}_${f.id}`;
   const slot = new THREE.Group(); slot.name = `slot_${id}`;
@@ -345,7 +367,10 @@ function envTexture(v) {
   const pm = new THREE.PMREMGenerator(R); const out = pm.fromEquirectangular(t).texture; t.dispose(); pm.dispose();
   return out;
 }
-const ENV = { clear: envTexture('clear'), smoked: envTexture('smoked') };
+await step();
+const ENV = { clear: envTexture('clear') };
+await step();
+ENV.smoked = envTexture('smoked');
 const key = new THREE.DirectionalLight(0xffffff, 1.0); key.name = 'softbox_key'; key.position.set(-3, 6, 4);
 const rim = new THREE.DirectionalLight(0xE7131B, 0.40); rim.name = 'red_rim'; rim.position.set(4, 1, -4);
 scene.add(key, rim);
@@ -430,7 +455,7 @@ gems.forEach((b, k) => {
 
 /* ---------------- Variant ---------------- */
 const buttons = [...document.querySelectorAll('.switch button')];
-function applyVariant(v) {
+function applyVariant(v, later) {   /* later: the plates are drawn by the caller (the start-up, one per quiet moment) */
   variant = v;
   const s = GLASS[v];
   glass.attenuationColor.set(s.attenuationColor);
@@ -448,7 +473,7 @@ function applyVariant(v) {
     m.envMap = ENV[v];
     m.envMapIntensity = s.envInt;
     m.needsUpdate = true;
-    drawMetric(b.ctx, b.f, v); b.tex.needsUpdate = true;
+    if (!later) { drawMetric(b.ctx, b.f, v); b.tex.needsUpdate = true; }
   });
   // Reflections come from each crystal's own envMap, not the scene one, so a
   // single stone can turn its reflection without disturbing its neighbours.
@@ -459,7 +484,8 @@ function applyVariant(v) {
 }
 buttons.forEach(b => b.addEventListener('click', () => applyVariant(b.dataset.v)));
 relayout(N);
-applyVariant(variant);
+applyVariant(variant, true);
+for (const b of gems) { await step(); drawMetric(b.ctx, b.f, variant); b.tex.needsUpdate = true; }
 
 /* ---------------- Glint: one stone at a time turns its reflection ----------------
    The crystals never move. Instead the active stone rotates only its envMap by a
@@ -492,8 +518,26 @@ frame(); new ResizeObserver(frame).observe(stage);
 const clock = new THREE.Clock(), origLoop = stage._loop;
 let shown = false;
 gems.forEach(b => { b.shadow.position.set(0, b.shadowY, -0.02); b.shadow.scale.set(1, 0.28, 1); });
+/* A resolution the graphics card keeps up with: the stones are drawn at 2x-2.5x on desktop (1x-2x on phones); where
+   the card cannot keep up (20 frames on screen slower than ~45 a second), the drawing steps down by 0.25x at a time to
+   1x, then the transmission buffer to 0.3; never back up during the visit. A card that keeps up keeps it all. */
+let prevDraw = 0, drsN = 0, drsSum = 0, drsSkip = 10, warm = 0;
+const adapt = (ms) => {
+  if (drsSkip > 0) { drsSkip--; return; }
+  drsSum += Math.min(ms, 100);
+  if (++drsN < 20) return;
+  const avg = drsSum / drsN; drsN = 0; drsSum = 0;
+  if (avg < 22) return;
+  const pr = R.getPixelRatio();
+  if (pr > 1) R.setPixelRatio(Math.max(1, pr - 0.25));
+  else if (R.transmissionResolutionScale > 0.3) R.transmissionResolutionScale = 0.3;
+  else return;
+  drsSkip = 10;
+};
 stage._loop = () => {
-  if (window.__tqPaused) { clock.getDelta(); return; }
+  if (window.__tqPaused || document.hidden) { prevDraw = 0; clock.getDelta(); return; }
+  if (warm !== 3 && window.__tqScrolling && window.__tqScrolling()) { prevDraw = 0; clock.getDelta(); return; }   /* not ready yet: not during a scroll */
+  { const now = performance.now(); if (prevDraw) adapt(now - prevDraw); prevDraw = now; warm = 3; }
   const t = STILL ? 0 : clock.getElapsedTime();
   const active = ORDER[Math.floor(t / PERIOD) % N];
   const p = (t % PERIOD) / SWEEP;
@@ -514,6 +558,26 @@ stage._loop = () => {
   if (!shown) { shown = true; requestAnimationFrame(() => { try { parent.postMessage({ tqReady: true }, location.origin); } catch (e) {} }); }
 };
 R.setAnimationLoop(stage._loop);
+
+/* Ready before it is reached: each object's shaders (for the screen and for the transmission buffer) compile one at a
+   time (in the background where the browser can: KHR_parallel_shader_compile), then each texture goes to the graphics
+   card, then one frame is drawn, the block still off-screen: every step in a quiet moment. The first frame on screen
+   used to do all of it at once: a stall as the block scrolled in. Until then the stones are not drawn during a scroll. */
+(async () => {
+  warm = 1;
+  const objs = [], seen = new Set();
+  scene.traverse(o => { const m = o.material; if (!m || Array.isArray(m) || seen.has(m)) return; seen.add(m); objs.push(o); });
+  const rt = new THREE.WebGLRenderTarget(4, 4);
+  try {
+    for (const o of objs) { await step(); if (warm === 3) return; await R.compileAsync(o, cam, scene); }
+    for (const o of objs) { await step(); if (warm === 3) return; R.setRenderTarget(rt); const pr = R.compileAsync(o, cam, scene); R.setRenderTarget(null); await pr; }
+    const texs = new Set();
+    scene.traverse(o => { const m = o.material; if (!m || Array.isArray(m)) return; for (const k in m) { const v = m[k]; if (v && v.isTexture && !v.isRenderTargetTexture) texs.add(v); } });
+    for (const t of texs) { await step(); if (warm === 3) return; R.initTexture(t); }
+    await step(); if (warm === 3) return;
+    controls.update(); R.render(scene, cam); warm = 3;
+  } catch (e) { R.setRenderTarget(null); } finally { rt.dispose(); }
+})();
 
 /* ---------------- GLB with the embedded float clip ---------------- */
 stage._exportGlb = async function () {

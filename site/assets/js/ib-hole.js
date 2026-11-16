@@ -30,6 +30,7 @@
   const start = () => {
     const ctx = cv.getContext('2d');
     const DPR0 = Math.min(2, window.devicePixelRatio || 1); let dpr = DPR0;
+    let budget = 3.4e6;   /* the canvas's device pixels at most; steps down where the graphics card cannot keep up (adapt, below) */
     const PI2 = Math.PI * 2;
     const rnd = (a, b) => a + Math.random() * (b - a);
     const cl = v => v < 0 ? 0 : v > 1 ? 1 : v;
@@ -106,6 +107,11 @@
     /* the caption's top at half the site's gap between blocks from the block's top, like every block's first line
        (site.css --tq-gap: clamp(128px, 17.5vw, 252px)) */
     const capTop = () => Math.min(126, Math.max(64, innerWidth * 0.0875));
+    const fitCanvas = () => {
+      dpr = Math.max(1, Math.min(W < 700 ? 1.5 : DPR0, Math.sqrt(budget / (W * H))));   /* phones: 1.5x, the canvas raster is what costs there */
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      for (const key in gemCache) delete gemCache[key]; chipCache = new Map(); for (const key in barCache) delete barCache[key];
+    };
     const size = () => {
       W = Math.round(cv.clientWidth); H = Math.round(cv.clientHeight); if (!W || !H) return;
       const hudBox = root.querySelector('.tq-ibb__hud');   /* the scene stays above the steps and the button under them */
@@ -126,9 +132,7 @@
       }
       tight();
       step = gh / 11.6; cs = step * 0.46; chipK = Math.min(1, Math.max(0.55, R / 110));
-      dpr = Math.max(1, Math.min(W < 700 ? 1.5 : DPR0, Math.sqrt(3.4e6 / (W * H))));   /* phones: 1.5x, the canvas raster is what costs there */
-      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      for (const key in gemCache) delete gemCache[key]; chipCache = new Map(); for (const key in barCache) delete barCache[key];
+      fitCanvas();
       parts = Array.from({ length: Math.round(Math.min(260, W / 5)) }, () => ({ r: rnd(1.6, RX / R), a: rnd(0, PI2), z: rnd(0.7, 2), red: Math.random() < 0.1 }));
       chips = Array.from({ length: W < 700 ? 6 : 9 }, () => ({})); resetChips();
     };
@@ -567,9 +571,20 @@
       gl.uniform1f(lens.uR, Math.max(120, R * Z * 1.2) * dpr); gl.uniform1f(lens.uS, ls); gl.uniform1f(lens.uCa, 1.6 * dpr);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
-    const loop = (now) => { raf = requestAnimationFrame(loop); try { frame(now); lensFrame(now); } catch (e) { cancelAnimationFrame(raf); } };
+    /* a resolution the graphics card keeps up with: where 20 frames on screen come slower than ~45 a second, the canvas steps
+       down (3.4 → 2.4 → 1.6 → 1 million device pixels, never under 1x); never back up during the visit */
+    let pf = 0, fN = 0, fS = 0, fSkip = 10;
+    const adapt = (now) => {
+      const ms = pf ? Math.min(100, now - pf) : 0; pf = now;
+      if (!ms || fSkip > 0) { if (ms) fSkip--; return; }
+      fS += ms; if (++fN < 20) return;
+      const avg = fS / fN; fN = 0; fS = 0;
+      if (avg < 22 || budget <= 1e6) return;
+      budget = budget > 2.5e6 ? 2.4e6 : budget > 1.7e6 ? 1.6e6 : 1e6; fitCanvas(); fSkip = 10;
+    };
+    const loop = (now) => { raf = requestAnimationFrame(loop); try { adapt(now); frame(now); lensFrame(now); } catch (e) { cancelAnimationFrame(raf); } };
     const run = () => { if (!raf && seen && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(loop); } };
-    const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+    const stop = () => { cancelAnimationFrame(raf); raf = 0; pf = 0; };
     new IntersectionObserver(([e]) => { seen = e.isIntersecting; if (seen) run(); else stop(); }).observe(root);
     document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else run(); });
   };
