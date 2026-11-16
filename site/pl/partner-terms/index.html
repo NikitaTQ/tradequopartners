@@ -1374,11 +1374,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-pds__step.is-on .tp-pds__ball { color: #e7131b; transform: scale(1.14); box-shadow: 0 0 0 8px rgba(255,255,255,.6), 0 0 0 9px rgba(18,22,30,.08), 0 22px 36px -12px rgba(18,22,30,.55); }
 .tp-pds__step.is-on .tp-pds__ball::before { opacity: 1; }
 .tp-pds__step.is-on .tp-pds__ic { animation: tpPdsPop .6s cubic-bezier(.2,.8,.2,1); }
-.tp-pds__ca, .tp-pds__cb { transform-box: view-box; }
-.tp-pds__ca { transform-origin: 8px 12px; }
-.tp-pds__cb { transform-origin: 16px 12px; }
-.tp-pds__step.is-on .tp-pds__ca { animation: tpPdsCandle .9s ease-in-out 2; }
-.tp-pds__step.is-on .tp-pds__cb { animation: tpPdsCandle .9s ease-in-out .45s 2; }
+.tp-pds__net, .tp-pds__coin { transform-box: view-box; }
+.tp-pds__net { transform-origin: 17.5px 12px; }
+.tp-pds__step.is-on .tp-pds__net { animation: tpPdsNet .9s ease-in-out 2; }
+.tp-pds__step.is-on .tp-pds__coin { animation: tpPdsCoin .7s cubic-bezier(.2,.8,.2,1); }
 .tp-pds__hand { transform-box: view-box; transform-origin: 12px 12px; }
 .tp-pds__step.is-on .tp-pds__hand { animation: tpPdsSpin 1.2s cubic-bezier(.6,0,.3,1); }
 .tp-pds__chip { position: absolute; z-index: 1; left: 50%; top: -40px; height: 26px; display: flex; align-items: center; padding: 0 11px; border-radius: 999px; white-space: nowrap;
@@ -1389,7 +1388,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @keyframes tpPdsFloat { 0% { opacity: 0; transform: translate(var(--cx, -50%), 10px); } 18% { opacity: 1; transform: translate(var(--cx, -50%), 0); } 75% { opacity: 1; transform: translate(var(--cx, -50%), -8px); } 100% { opacity: 0; transform: translate(var(--cx, -50%), -16px); } }
 @keyframes tpPdsPop { 0% { transform: scale(.7); } 55% { transform: scale(1.18); } 100% { transform: scale(1); } }
 @keyframes tpPdsSpin { to { transform: rotate(360deg); } }
-@keyframes tpPdsCandle { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.55); } }
+@keyframes tpPdsNet { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes tpPdsCoin { 0% { transform: translateY(-5px); opacity: 0; } 100% { transform: none; opacity: 1; } }
 .tp-pds__n { margin-top: 26px; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .22em; color: #8a8d94; transition: color .6s; }
 .tp-pds__step h3 { margin: 10px 0 0; font-weight: 700; font-size: 21px; line-height: 1.2; letter-spacing: -.02em; color: #6a6d74; transition: color .6s; text-wrap: balance; }
 .tp-pds__step p { margin: 10px 0 0; max-width: 230px; font-size: 15px; line-height: 1.5; color: #8a8d94; transition: color .6s; text-wrap: pretty; }
@@ -1415,7 +1415,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 }
 @media (prefers-reduced-motion: reduce) {
 .tp-pds__fill, .tp-pds__ball, .tp-pds__ball::before, .tp-pds__n, .tp-pds__step h3, .tp-pds__step p { transition: none; }
-.tp-pds__fill::after, .tp-pds__step.is-on .tp-pds__ic, .tp-pds__step.is-on .tp-pds__ca, .tp-pds__step.is-on .tp-pds__cb, .tp-pds__step.is-on .tp-pds__hand { animation: none; }
+.tp-pds__fill::after, .tp-pds__step.is-on .tp-pds__ic, .tp-pds__step.is-on .tp-pds__net, .tp-pds__step.is-on .tp-pds__coin, .tp-pds__step.is-on .tp-pds__hand { animation: none; }
 .tp-pds__step.is-on .tp-pds__chip { animation: none; opacity: 1; transform: translate(var(--cx, -50%), 0); }
 }
 .pf-perk__n, .pf-g-red, .pf-g-silver, .tp-tv__zero, .tp-tv__val, .tp-ig__n, .tp-pds__n { font-variant-numeric: tabular-nums; }
@@ -1733,8 +1733,9 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
     </section>
 
-    <!-- Daily payouts (Paid_Daily_Silver design): a silver panel; a silver rail runs step to step and the step it reaches
-         swells into a silver ball with a chip floating over it (startSteppers in landing.js, only while on screen) -->
+    <!-- Daily payouts (Paid_Daily_Silver design; its steps 01-02 as in the Nov 2026 version: clients engage, commission
+         accrues): a silver panel; a red rail runs step to step and the step it reaches swells into a silver ball with a chip
+         floating over it (startSteppers in landing.js, only while on screen) -->
     <section id="payouts" class="tp-sec" data-screen-label="Daily payouts">
       <div class="tp-pds" data-stepper="" data-every="1900">
         <span class="tp-pds__sky" aria-hidden="true"></span>
@@ -1747,14 +1748,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
           <span class="tp-pds__base" aria-hidden="true"></span><span class="tp-pds__fill" aria-hidden="true"></span>
           <ol class="tp-pds__steps">
             <li class="tp-pds__step" data-step="">
-              <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip">+1 transakcja</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><g class="tp-pds__ca"><line x1="8" y1="3" x2="8" y2="21"></line><rect x="5.5" y="7" width="5" height="9" rx="1" fill="currentColor"></rect></g><g class="tp-pds__cb"><line x1="16" y1="4" x2="16" y2="20"></line><rect x="13.5" y="9" width="5" height="7" rx="1"></rect></g></svg></span></span></div>
+              <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip">+1 klient</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3.4"></circle><path d="M2 19.5c.6-3.5 3-5.4 6-5.4 1.6 0 3 .5 4.1 1.5"></path><g class="tp-pds__net"><path d="M15.6 11.6 19.6 8.4M15.6 12.4l4 3.2"></path><circle cx="14.4" cy="12" r="1.7"></circle><circle cx="20.6" cy="7.6" r="1.7"></circle><circle cx="20.6" cy="16.4" r="1.7"></circle></g></svg></span></span></div>
               <span class="tp-pds__n" aria-hidden="true">01</span>
-              <h3>Klienci handlują</h3><p>Twoi poleceni klienci otwierają i zamykają transakcje.</p>
+              <h3>Klienci są aktywni</h3><p>Twoi poleceni klienci są aktywni na rynkach.</p>
             </li>
             <li class="tp-pds__step" data-step="">
-              <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip is-red">&#x2066;+$7.50&#x2069;</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="15 7 21 7 21 13"></polyline></svg></span></span></div>
+              <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip is-red">&#x2066;+$7.50&#x2069;</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="5" rx="5.6" ry="2.2"></ellipse><path d="M3.4 5v8.6c0 1.2 2.5 2.2 5.6 2.2M14.6 5v5.4M3.4 9.3c0 1.2 2.5 2.2 5.6 2.2s5.6-1 5.6-2.2"></path><g class="tp-pds__coin"><path d="M10.6 12.6v6c0 1.2 2.4 2.1 5.4 2.1s5.4-.9 5.4-2.1v-6" fill="#F4F4F6"></path><ellipse cx="16" cy="12.6" rx="5.4" ry="2.1" fill="#F4F4F6"></ellipse><path d="M10.6 15.6c0 1.2 2.4 2.1 5.4 2.1s5.4-.9 5.4-2.1"></path></g></svg></span></span></div>
               <span class="tp-pds__n" aria-hidden="true">02</span>
-              <h3>Naliczanie prowizji</h3><p>Każdy lot w obrocie Twoich klientów jest śledzony w czasie rzeczywistym.</p>
+              <h3>Naliczanie prowizji</h3><p>Prowizje z kwalifikowanej aktywności rynkowej są śledzone w czasie rzeczywistym.</p>
             </li>
             <li class="tp-pds__step" data-step="">
               <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip">Rozliczono</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><line class="tp-pds__hand" x1="12" y1="12" x2="12" y2="6.5"></line><line x1="12" y1="12" x2="15.5" y2="13.5"></line></svg></span></span></div>

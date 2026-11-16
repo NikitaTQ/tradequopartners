@@ -154,8 +154,9 @@
 {{> calc-close}}
     </section>
 
-    <!-- Daily payouts (Paid_Daily_Silver design): a silver panel; a silver rail runs step to step and the step it reaches
-         swells into a silver ball with a chip floating over it (startSteppers in landing.js, only while on screen) -->
+    <!-- Daily payouts (Paid_Daily_Silver design; its steps 01-02 as in the Nov 2026 version: clients engage, commission
+         accrues): a silver panel; a red rail runs step to step and the step it reaches swells into a silver ball with a chip
+         floating over it (startSteppers in landing.js, only while on screen) -->
     <section id="payouts" class="tp-sec" data-screen-label="Daily payouts">
       <div class="tp-pds" data-stepper="" data-every="1900">
         <span class="tp-pds__sky" aria-hidden="true"></span>
@@ -168,12 +169,12 @@
           <span class="tp-pds__base" aria-hidden="true"></span><span class="tp-pds__fill" aria-hidden="true"></span>
           <ol class="tp-pds__steps">
             <li class="tp-pds__step" data-step="">
-              <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip">{{cp.pay.c1}}</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><g class="tp-pds__ca"><line x1="8" y1="3" x2="8" y2="21"></line><rect x="5.5" y="7" width="5" height="9" rx="1" fill="currentColor"></rect></g><g class="tp-pds__cb"><line x1="16" y1="4" x2="16" y2="20"></line><rect x="13.5" y="9" width="5" height="7" rx="1"></rect></g></svg></span></span></div>
+              <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip">{{cp.pay.c1}}</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3.4"></circle><path d="M2 19.5c.6-3.5 3-5.4 6-5.4 1.6 0 3 .5 4.1 1.5"></path><g class="tp-pds__net"><path d="M15.6 11.6 19.6 8.4M15.6 12.4l4 3.2"></path><circle cx="14.4" cy="12" r="1.7"></circle><circle cx="20.6" cy="7.6" r="1.7"></circle><circle cx="20.6" cy="16.4" r="1.7"></circle></g></svg></span></span></div>
               <span class="tp-pds__n" aria-hidden="true">01</span>
               <h3>{{cp.pay.t1}}</h3><p>{{cp.pay.d1}}</p>
             </li>
             <li class="tp-pds__step" data-step="">
-              <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip is-red">&#x2066;+$7.50&#x2069;</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="15 7 21 7 21 13"></polyline></svg></span></span></div>
+              <div class="tp-pds__orb" aria-hidden="true"><span class="tp-pds__chip is-red">&#x2066;+$7.50&#x2069;</span><span class="tp-pds__ball"><span class="tp-pds__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="5" rx="5.6" ry="2.2"></ellipse><path d="M3.4 5v8.6c0 1.2 2.5 2.2 5.6 2.2M14.6 5v5.4M3.4 9.3c0 1.2 2.5 2.2 5.6 2.2s5.6-1 5.6-2.2"></path><g class="tp-pds__coin"><path d="M10.6 12.6v6c0 1.2 2.4 2.1 5.4 2.1s5.4-.9 5.4-2.1v-6" fill="#F4F4F6"></path><ellipse cx="16" cy="12.6" rx="5.4" ry="2.1" fill="#F4F4F6"></ellipse><path d="M10.6 15.6c0 1.2 2.4 2.1 5.4 2.1s5.4-.9 5.4-2.1"></path></g></svg></span></span></div>
               <span class="tp-pds__n" aria-hidden="true">02</span>
               <h3>{{cp.pay.t2}}</h3><p>{{cp.pay.d2}}</p>
             </li>
