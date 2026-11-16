@@ -641,7 +641,6 @@
 .tq-earn__sub { margin: 0; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.5; color: #5b5b5b; }
 .tq-earn__grid { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 28px; }
 .tq-earn__foot { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
-.tq-earn__note { margin: 0; max-width: 720px; font-family: 'Inter', sans-serif; font-size: 12.5px; line-height: 1.6; color: #5b5b5b; text-wrap: balance; }
 .tq-earn__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 14px; }
 .tq-earn__cta { flex: none; display: flex; align-items: center; gap: 14px; height: 56px; padding: 0 30px 0 5px; box-sizing: border-box; border-radius: 999px; background: #0a0a0a; color: #fff;
   font-size: 17px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; text-decoration: none;
@@ -748,7 +747,6 @@
   .tq-earn__head { gap: 12px; }
   .tq-earn__grid { margin-top: clamp(24px, 3.6vh, 40px); }
   .tq-earn__foot { margin-top: clamp(18px, 2.8vh, 30px); gap: 14px; }
-  .tq-earn__note { max-width: 1000px; }
 }
 @media (min-width: 1041px) and (max-height: 820px) {   /* short windows: a smaller title, the cards' scene a little lower */
   .tq-earn__head { gap: 10px; }
@@ -780,7 +778,6 @@
   .tq-ecard__front { padding: 13px 14px 12px; gap: 7px; }
   .tq-earn__dots { margin-top: -35px; }
   .tq-earn__foot { margin-top: 0; gap: 18px; }
-  .tq-earn__note { order: 1; font-size: 12px; line-height: 1.45; }   /* under the CTAs */
   .tq-earn__ctas { gap: 10px; }
   .tq-earn__cta { height: 52px; font-size: 16px; }
   .tq-earn__dot { width: 40px; height: 40px; }
@@ -1464,20 +1461,20 @@
    would not fit the screen under the header (the section's script). The picture is sized by the screen's width only,
    as large as it goes, so that its words stay readable; the text and buttons sit over its empty margins. */
 @media (max-width: 640px) {
-  .tq-ibtp { --k: 1.06; padding: calc(20px * var(--k)) clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
+  .tq-ibtp { --k: 1.06; min-height: min(calc(100svh - 80px), 900px); padding: 2px clamp(16px, 6vw, 24px) calc(24px * var(--k)); }   /* under the 80px header */
   .tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; }
   .tq-ibtp__text { display: contents; }
   .tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
   .tq-ibtp__eye { order: 1; font-size: calc(12px * var(--k)); }
   .tq-ibtp__h1 { order: 2; --h1s: calc(34px * var(--k)); margin-top: calc(14px * var(--k)); }
-  .tq-ibtp__vis { order: 3; flex: none; width: auto; max-width: none; margin: calc(12px * var(--k)) calc(-1 * clamp(16px, 6vw, 24px)) 0; }
+  .tq-ibtp__vis { order: 3; flex: none; width: auto; max-width: none; margin: -8px calc(-1 * clamp(16px, 6vw, 24px)) 0; }   /* the card's glow tucks under the title's last line */
   /* the phones' own picture (hero-vs-m.webp, 923x1080): our card in front at the desktop picture's scale, the tablet
      behind it at .7 with its right part (no words, only cracks) under our card's edge, VS on that edge. The two cards
      (x 40-845.8 of it) span the screen less 10px a side; the glow above and the shadow below hang into the gaps. Each
      card's words keep their desktop places, moved (and the tablet's scaled .7) onto this picture; the small ones are
      larger here, and the tablet's stop short of the VS ball (smaller here, .75). */
-  .tq-ibvs { --pw: 923; width: calc((100% - 20px) * 923 / 805.8); aspect-ratio: 923 / 1080;
-    margin: calc((100% - 20px) * -35 / 805.8) 0 calc((100% - 20px) * -80 / 805.8) calc(10px - (100% - 20px) * 40 / 805.8); }
+  .tq-ibvs { --pw: 923; width: calc((100% - 20px) * 923 / 805.8 * var(--pk, 1)); aspect-ratio: 923 / 1080;   /* --pk: a little smaller on short screens */
+    margin: calc((100% - 20px) * -35 / 805.8 * var(--pk, 1)) 0 calc((100% - 20px) * -80 / 805.8 * var(--pk, 1)) calc(10px + (100% - 20px) * ((1 - var(--pk, 1)) / 2 - 40 / 805.8 * var(--pk, 1))); }
   .tq-ibvs__w--us { transform: scale(var(--s)) translate(-350px, -70px); }
   .tq-ibvs__w--them { transform: scale(var(--s)) translate(-14px, 89px) scale(.7); }
   .tq-ibvs__w--them > * { width: calc((334 - var(--x)) * 1px); }   /* clear of the VS disc (on our card's left edge) */
@@ -1489,7 +1486,7 @@
   .tq-ibvs__uh { font-size: 22px; }
   .tq-ibvs__ul { font-size: 22px; }
   .tq-ibvs__us { font-size: 23.5px; }
-  .tq-ibtp__ctas { order: 4; margin-top: calc(14px * var(--k)); padding-top: 0; gap: calc(12px * var(--k)); }
+  .tq-ibtp__ctas { order: 4; margin-top: -4px; padding-top: 0; gap: calc(12px * var(--k)); }   /* right under the card */
   .tq-ibtp__go { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
   .tq-ibtp__go { gap: calc(16px * var(--k)); padding-inline: calc(28px * var(--k)) calc(7px * var(--k)); }
   .tq-ibtp__arr { width: calc(46px * var(--k)); height: calc(46px * var(--k)); }
