@@ -1255,7 +1255,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    the foot is not shown (900px and narrower) */
 .tq-pc__foot--note p { margin: 0; max-width: 420px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; color: #55555a; text-wrap: pretty; }
 @media (min-width: 901px) { .tq-pc__sub--narrow { display: none; } }
-.tq-pc__note { max-width: 1240px; margin: clamp(16px, 2vw, 24px) auto 0; font-size: 12.5px; line-height: 1.55; color: #8a8a8e; text-align: center; text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) { .tq-pc__per [data-inv-per-thumb], .tq-pc__knob, .tq-pc__total [data-inv-total] { transition: none; } }
 /* laptops: a narrower terminal */
 @media (max-width: 1180px) {
