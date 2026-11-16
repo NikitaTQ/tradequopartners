@@ -29,13 +29,13 @@
 
   /* ---- the start timer (IB Tools, Sub-IB network: CTA «Start» · Timer) -------------------------------------------
    * 60 ticks round the dial; the red arc runs round with the seconds of a countdown from data-seconds (then from two
-   * hours again), "Live in" shows it; on hover the arc closes the circle. The countdown goes by the clock, and is
+   * minutes again, shown as mm:ss), "Live in" shows it; on hover the arc closes the circle. The countdown goes by the clock, and is
    * drawn only while the timer is near the screen. */
   function startStartTimer() {
     $$('[data-start-timer]').forEach((wrap) => {
       const C = 540.35, NS = 'http://www.w3.org/2000/svg', pad = (n) => String(n).padStart(2, '0');
       const a = $('.tq-start', wrap), arc = $('.tq-start__arc', wrap), g = $('.tq-start__ticks', wrap), out = $('.tq-start__time', wrap);
-      const t0 = parseInt(wrap.getAttribute('data-seconds'), 10) || 7200, began = Date.now();
+      const t0 = parseInt(wrap.getAttribute('data-seconds'), 10) || 120, full = 120, began = Date.now();   /* a two-minute countdown, round and round */
       let hover = false, iv = 0;
       for (let i = 0; i < 60; i++) {
         const l = document.createElementNS(NS, 'line'), major = i % 5 === 0;
@@ -47,13 +47,13 @@
       }
       const render = () => {
         const run = Math.floor((Date.now() - began) / 1000);
-        const t = run <= t0 ? t0 - run : 7200 - ((run - t0 - 1) % 7201);
+        const t = run <= t0 ? t0 - run : full - ((run - t0 - 1) % (full + 1));
         const sec = (60 - (t % 60)) % 60;
         if (!hover) {
           arc.style.transition = sec === 0 || reducedMotion() ? 'none' : '';
           arc.style.strokeDashoffset = C * (1 - sec / 60);
         }
-        out.textContent = pad(Math.floor(t / 3600)) + ':' + pad(Math.floor((t % 3600) / 60)) + ':' + pad(t % 60);
+        out.textContent = pad(Math.floor(t / 60)) + ':' + pad(t % 60);
       };
       a.addEventListener('mouseenter', () => { hover = true; a.classList.add('is-hover'); arc.style.transition = ''; arc.style.strokeDashoffset = 0; });
       a.addEventListener('mouseleave', () => { hover = false; a.classList.remove('is-hover'); render(); });

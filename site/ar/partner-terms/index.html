@@ -102,10 +102,10 @@ try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=d
 @font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/unbounded-h2.woff2?v=4d6a6698a8) format('woff2'); }
 @font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/reem-kufi-h2.woff2?v=5fcf5445c0) format('woff2'); }
 @font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/prompt-h2.woff2?v=1e2456eaf3) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=9bf6316e70) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=957d6d1765) format('woff2'); }
 @font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/black-han-sans-h2.woff2?v=93302bd3eb) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=e466aa330b) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=ea70269cdc) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/zcool-qingke-sc-h2.woff2?v=7fa4fd2519) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../../assets/fonts/h1/noto-sans-tc-h2.woff2?v=70b5d3c62a) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
@@ -931,8 +931,17 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-pc__total { position: relative; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; padding: 26px 0 24px; border-bottom: 1px dashed #c9c7bf; min-width: 0; }
 .tq-pc__total [data-inv-cap] { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: .16em; color: #6a6a6e; }
 .tq-pc__total [data-inv-total] { font-weight: 800; font-size: 88px; letter-spacing: -.06em; line-height: .85; white-space: nowrap; color: #0a0a0a; font-variant-numeric: tabular-nums; transition: color .3s; }
-.tq-pc__foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; }
-.tq-pc__foot--note p { margin: 0; max-width: 420px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; color: #55555a; text-wrap: pretty; }
+.tq-pc__foot { display: flex; align-items: center; gap: 14px; }
+.tq-pc__hint { position: relative; margin: 24px 0 -28px; padding: 15px 18px 15px 16px; padding-inline: 16px 18px; border-radius: 10px;
+  background: linear-gradient(100deg, #fbe2e3 0%, #fcecec 55%, #fdf2f2 100%); box-shadow: inset 0 0 0 1px rgba(231,19,27,.13); }
+.tq-pc__hint::before { content: ''; position: absolute; inset-block: 0; inset-inline-start: 0; width: 3px; border-start-start-radius: 10px; border-end-start-radius: 10px; background: #e7131b; }
+.tq-pc__hint-arr { flex: none; display: flex; padding-inline-start: 4px; }
+[dir="rtl"] .tq-pc__hint-arr svg { transform: scaleX(-1); }
+.tq-pc__hint-ic { flex: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 40% 35%, #fcd9db 0%, #f7c3c6 100%); box-shadow: inset 0 0 0 1px rgba(231,19,27,.1); }
+.tq-pc__hint p { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-family: 'Inter', sans-serif; }
+.tq-pc__hint b { font-size: 19px; line-height: 1.2; font-weight: 700; letter-spacing: -.015em; color: #0a0a0a; }
+.tq-pc__hint span { font-size: 13.5px; line-height: 1.45; color: #4f4f55; text-wrap: pretty; }
 @media (min-width: 901px) {
 .tq-pc__sub--narrow { display: none; }
 }
@@ -1677,8 +1686,8 @@ h1, h2 { line-height: 1.2 !important; }
 <!-- Payout calculator (Payout_Calculator_Receipt_Dark design): a dark panel with the page's heading, a glass
      "terminal" with the two sliders, the Day / Month / Year switch and the CTA, and a receipt printing out of a
      slot. Shared by the landing and partner-terms/: each page puts its own heading (.tq-pc__title,
-     .tq-pc__sub) between calc-open and calc-body, then the receipt's foot (calc-foot: the barcode and the PAID stamp, on the
-     landing; partner-terms/ prints its sub line there instead) and calc-close. startCalculator in landing.js drives it. -->
+     .tq-pc__sub) between calc-open and calc-body, then the receipt's foot (calc-foot: the pale red "Adjust the sliders" note with
+     an arrow to the sliders) and calc-close. startCalculator in landing.js drives it. -->
     <div class="tq-pc" data-calc="">
       <span class="tq-pc__edge" aria-hidden="true"></span>
       <span class="tq-pc__glow" aria-hidden="true"></span>
@@ -1733,7 +1742,12 @@ h1, h2 { line-height: 1.2 !important; }
               <span data-inv-money="" data-inv-total=""></span>
             </div>
 
-            <div class="tq-pc__foot tq-pc__foot--note"><p>حرّك أشرطة التمرير لترى ما يمكن أن تحققه لك خطة عمولات شركاء TradeQuo كل شهر.</p></div>
+            <div class="tq-pc__foot tq-pc__hint">
+              <span class="tq-pc__hint-arr" aria-hidden="true"><svg width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M17 7H2M7.5 1.5 2 7l5.5 5.5" stroke="#E7131B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="tq-pc__hint-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E7131B" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2.2" fill="#FBE3E4"/><circle cx="15.5" cy="12" r="2.2" fill="#FBE3E4"/><circle cx="8" cy="18" r="2.2" fill="#FBE3E4"/></svg></span>
+              <p><b>حرّك أشرطة التمرير</b><span>اكتشف كيف قد يؤثر نشاط عملائك في تقدير عمولتك الشهرية.</span></p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -2073,7 +2087,7 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=67f1542748" defer></script>
+<script src="../../assets/js/landing.js?v=7a9290f971" defer></script>
 <script src="../../assets/js/plan.js?v=80defb0ea6" defer></script>
 </body>
 </html>
