@@ -121,6 +121,7 @@ html:lang(zh-Hant) { --h1f: 'TQ H1 Noto TC'; --h2f: 'TQ H2 Noto TC'; }
 html, body { margin: 0; padding: 0; background: #ffffff; }
 html { overflow-x: hidden; overscroll-behavior-x: none; }
 * { box-sizing: border-box; }
+:root { --tq-gap: clamp(128px, 17.5vw, 252px); --tq-half: calc(var(--tq-gap) / 2); }
 @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --tqfm { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
 @property --tqo { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -499,10 +500,10 @@ html { scroll-snap-type: none; }
 [data-fan-card] > span:first-child { font-size: 15px !important; }
 [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
 [data-faq-grid] { grid-template-columns: 1fr !important; }
-[data-dark-tail] { margin: -2px 0 16px !important; }
+[data-dark-tail] { margin: -2px 0 0 !important; }
 [data-tail-glow] { display: none !important; }
-[data-dark-tail] { background: linear-gradient(180deg, #0a0a0a 0px, #0b0b0b 23px, #0e0e0e 45px, #161616 68px, #232323 90px, #363636 113px, #4d4d4d 135px, #686868 158px, #858585 180px, #a1a1a1 203px, #bcbcbc 225px, #d3d3d3 248px, #e6e6e6 270px, #f3f3f3 293px, #fbfbfb 315px, #fefefe 338px, #ffffff 360px) !important; }
-#faq { padding-top: 284px !important; }
+#faq { padding-top: var(--tq-gap) !important; }
+#reviews { padding-bottom: calc(var(--tq-gap) - 84px) !important; }
 [data-panel-glow] { bottom: 0 !important; height: 45% !important; }
 [data-faq-side] { position: static !important; }
 [data-faq-art] { max-width: 240px !important; margin: 0 auto !important; }
@@ -1313,7 +1314,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   </div>
 
 
-  <section id="signup" data-screen-label="Hero — sign up" style="position: relative; padding: clamp(10px, 1.6vw, 22px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px);">
+  <section id="signup" data-screen-label="Hero — sign up" style="position: relative; padding: clamp(10px, 1.6vw, 22px) clamp(16px, 4vw, 56px) var(--tq-half);">
     <div data-hero-intro="" style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;">
       <h1 class="tq-h1" data-fitw style="margin: 0; color: #0a0a0a;">Até 87% do spread. Pago <span style="color: #e7131b;">todo dia.</span></h1>
       <p data-sub2="" style="margin: 0; max-width: 60ch; font-size: 22px; line-height: 1.5; color: #5b5b5b; text-wrap: pretty;">Indique traders para a TradeQuo e ganhe em cada lote que eles negociarem. Comissões liquidadas todos os dias, acompanhadas em tempo real e sem taxas de pagamento.</p>
@@ -1477,7 +1478,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   <!-- How it works: sign-up to first payout in three steps (landing.js startHowLine drives the line).
      Shared by the landing, Partner Programs and Commission Plan: the button scrolls to the form on the
      landing and goes to it from the other pages (signupHref and signupNav in build-i18n.py). -->
-  <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px); background: #fff; overflow: hidden;">
+  <section id="how" data-screen-label="How it works — 3 steps" style="position: relative; padding: var(--tq-half) clamp(16px, 4vw, 56px) var(--tq-half); background: #fff; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
       <h2 class="tq-h2" style="margin: 0; color: #0a0a0a;" data-fitw>Do cadastro ao primeiro pagamento<br><span style="color: #e7131b;">em três passos</span></h2>
     </div>
@@ -1523,7 +1524,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   </section>
 
 
-  <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px) clamp(48px, 6.1vw, 88px); background: #fff; color: #0a0a0a;">
+  <section id="calculator" data-screen-label="Revenue share calculator" style="position: relative; padding: var(--tq-half) clamp(16px, 4vw, 56px) var(--tq-half); background: #fff; color: #0a0a0a;">
 <!-- Payout calculator (Payout_Calculator_Receipt_Dark design): a dark panel with the page's heading, a glass
      "terminal" with the two sliders, the Day / Month / Year switch and the CTA, and a receipt printing out of a
      slot. Shared by the landing and partner-terms/: each page puts its own heading (.tq-pc__title,
@@ -1593,7 +1594,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
   </section>
 
-  <section id="reviews" data-screen-label="Reputation — reviews marquee" style="position: relative; padding: clamp(48px, 6.1vw, 88px) 0 clamp(48px, 6.1vw, 88px); background: #fff; color: #0a0a0a; overflow: hidden;">
+  <section id="reviews" data-screen-label="Reputation — reviews marquee" style="position: relative; padding: var(--tq-half) 0 calc(var(--tq-half) - 44px); background: #fff; color: #0a0a0a; overflow: hidden;">
     <div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 56px); display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
       <h2 class="tq-h2" style="margin: 0; max-width: 20ch;" data-fitw>Avaliada onde os traders conversam</h2>
     </div>
@@ -1660,7 +1661,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     </div>
   </section>
 
-  <section id="film" data-screen-label="Partner film" style="position: relative; padding: clamp(16px, 3vw, 40px) clamp(16px, 4vw, 56px) clamp(40px, 6vw, 80px); background: #fff;">
+  <section id="film" data-screen-label="Partner film" style="position: relative; padding: var(--tq-half) clamp(16px, 4vw, 56px) var(--tq-film-b, calc(var(--tq-gap) - 115px)); background: #fff;">
     <div data-film-box="" data-film-desk="" style="position: relative; width: 100%; max-width: 1240px; margin: 0 auto; aspect-ratio: 16 / 9; max-height: 100svh; border-radius: clamp(18px, 3vw, 40px); overflow: hidden; background: #FFFFFF;">
       <!-- the partner film as a video (24.2 s loop, recorded frame by frame from embeds/tradequo-film.html, which stays as
            the source): it plays while on screen, with the film player's own buttons over it (startFilm in landing.js) -->
@@ -1737,10 +1738,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
   <!-- the dark tail tucks 2px under the "What we offer" panel above: where the two meet on a fractional pixel (125% / 150% screen scaling)
        a hairline of the white page would show between them -->
-  <div data-dark-tail="" style="position: relative; margin: -2px 0 clamp(16px, 3vw, 32px); border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); background: linear-gradient(180deg, #0a0a0a 0px, #0a0a0a 25px, #0c0c0c 51px, #0f0f0f 76px, #151515 102px, #1e1e1e 127px, #2a2a2a 153px, #383838 178px, #494949 204px, #5c5c5c 229px, #707070 255px, #858585 280px, #999999 305px, #adadad 331px, #c0c0c0 356px, #d1d1d1 382px, #dfdfdf 407px, #ebebeb 433px, #f4f4f4 458px, #fafafa 484px, #fdfdfd 509px, #ffffff 535px, #ffffff 560px); color: #0a0a0a; overflow: clip;">
+  <div data-dark-tail="" style="position: relative; margin: -2px 0 0; border-radius: 0 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); background: linear-gradient(180deg, #0a0a0a 0%, #0a0a0a 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%, #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%, #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%) 0 0 / 100% var(--tq-gap) no-repeat, #fff; color: #0a0a0a; overflow: clip;">
   <div data-tail-glow="" aria-hidden="true" style="position: absolute; left: 62%; top: calc(-40vh + clamp(8px, 1.4vw, 20px) * .4); width: 60%; height: calc(70vh - clamp(8px, 1.4vw, 20px) * .7); transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.22), transparent); pointer-events: none;"></div>
   <canvas data-ref="star" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 150px); mask-image: linear-gradient(180deg, transparent 0, #000 150px);"></canvas>
-  <section id="faq" data-screen-label="Partner Program FAQ" style="position: relative; padding: 430px clamp(20px, 4vw, 56px) clamp(56px, 8vw, 112px);">
+  <section id="faq" data-screen-label="Partner Program FAQ" style="position: relative; padding: var(--tq-gap) clamp(20px, 4vw, 56px) var(--tq-half);">
     <div data-faq-grid="" style="position: relative; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(32px, 5vw, 72px); align-items: start;">
       <div data-faq-side="" style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: 20px;">
         <div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 9px; height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #e4e4e1; background: #fff; font-size: 14px; font-weight: 500; color: #0a0a0a;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #e7131b;"></span>FAQ</div>
@@ -1824,9 +1825,9 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
   
 
-  <section id="reach" data-screen-label="Starfield — audience reach" style="position: relative; min-height: clamp(400px, 48vw, 600px); display: flex; align-items: center; justify-content: center; color: #0a0a0a;">
+  <section id="reach" data-screen-label="Starfield — audience reach" style="position: relative; padding: var(--tq-half) 0; display: flex; align-items: center; justify-content: center; color: #0a0a0a;">
     <div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(10,10,10,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,10,.07) 1px, transparent 1px); background-size: 64px 64px; opacity: .35; mask-image: radial-gradient(ellipse 65% 55% at 50% 50%, #000 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 50%, #000 0%, transparent 75%);"></div>
-    <div style="position: relative; z-index: 2; width: 100%; max-width: 1240px; padding: clamp(60px, 9vw, 110px) clamp(24px, 4vw, 40px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px;">
+    <div style="position: relative; z-index: 2; width: 100%; max-width: 1240px; padding: 0 clamp(24px, 4vw, 40px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px;">
       <h2 class="tq-h2" style="margin: 0; color: #0a0a0a;" data-fitw>Você traz o público.<br class="br-desk"> Nós transformamos em receita.</h2>
       <p data-sub2="" style="margin: 0; max-width: 42ch; font-size: clamp(24px, 2.56vw, 30px); line-height: 1.6; color: #5b5b5b;">Até 87% do spread, pagamentos diários, acompanhamento em tempo real e um gerente que atende o telefone. As solicitações são analisadas em até 24 horas.</p>
       <div style="margin-top: 6px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">

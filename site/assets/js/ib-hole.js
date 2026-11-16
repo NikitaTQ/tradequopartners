@@ -86,9 +86,9 @@
       sparks = [];
     };
     const size = () => {
-      W = Math.round(root.clientWidth); H = Math.round(root.clientHeight); if (!W || !H) return;
+      W = Math.round(cv.clientWidth); H = Math.round(cv.clientHeight); if (!W || !H) return;
       const hudBox = root.querySelector('.tq-ibb__hud');   /* the scene stays above the steps and the button under them */
-      const sh = H - Math.max(70, hudBox ? H - hudBox.offsetTop + 2 : 70);
+      const sh = H - Math.max(70, hudBox ? H - (hudBox.offsetTop - cv.offsetTop) + 2 : 70);
       cx = W / 2; cy = sh * 0.52;
       const tall = W < H;   /* phones, portrait tablets: a bigger hole, wider bars and tree than the landscape design */
       RX = Math.min(W * 0.47, 760); R = Math.min(RX * (tall ? 0.28 : 0.2), sh * 0.17);
@@ -366,7 +366,10 @@
         if (fs <= 10 || rows.every((r) => width(r) <= W - 48)) break;
         fs -= 1;
       }
-      const lh = fs * 1.4, y0 = Math.max(fs + 28, cy - gh / 2 - 92) - (rows.length - 1) * lh + (1 - eo(a)) * 10, sp = ctx.measureText(' ').width;
+      /* the caption's top at half the site's gap between blocks from the block's top, like every block's first line
+         (site.css --tq-gap: clamp(128px, 17.5vw, 252px)) */
+      const half = Math.min(126, Math.max(64, innerWidth * 0.0875));
+      const lh = fs * 1.4, y0 = half + fs * 0.76 + (1 - eo(a)) * 10, sp = ctx.measureText(' ').width;
       ctx.globalAlpha = a; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
       rows.forEach((r, i) => {
         if (!RTL) {

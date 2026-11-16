@@ -123,6 +123,7 @@ html:lang(zh-Hant) { --h1f: 'TQ H1 Noto TC'; --h2f: 'TQ H2 Noto TC'; }
 html, body { margin: 0; padding: 0; background: #ffffff; }
 html { overflow-x: hidden; overscroll-behavior-x: none; }
 * { box-sizing: border-box; }
+:root { --tq-gap: clamp(128px, 17.5vw, 252px); --tq-half: calc(var(--tq-gap) / 2); }
 @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --tqfm { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
 @property --tqo { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -309,10 +310,10 @@ html { scroll-snap-type: none; }
 [data-fan-card] > span:first-child { font-size: 15px !important; }
 [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
 [data-faq-grid] { grid-template-columns: 1fr !important; }
-[data-dark-tail] { margin: -2px 0 16px !important; }
+[data-dark-tail] { margin: -2px 0 0 !important; }
 [data-tail-glow] { display: none !important; }
-[data-dark-tail] { background: linear-gradient(180deg, #0a0a0a 0px, #0b0b0b 23px, #0e0e0e 45px, #161616 68px, #232323 90px, #363636 113px, #4d4d4d 135px, #686868 158px, #858585 180px, #a1a1a1 203px, #bcbcbc 225px, #d3d3d3 248px, #e6e6e6 270px, #f3f3f3 293px, #fbfbfb 315px, #fefefe 338px, #ffffff 360px) !important; }
-#faq { padding-top: 284px !important; }
+#faq { padding-top: var(--tq-gap) !important; }
+#reviews { padding-bottom: calc(var(--tq-gap) - 84px) !important; }
 [data-panel-glow] { bottom: 0 !important; height: 45% !important; }
 [data-faq-side] { position: static !important; }
 [data-faq-art] { max-width: 240px !important; margin: 0 auto !important; }
@@ -790,7 +791,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 </style>
 <style id="partner-css" data-prefix="../../">
 .tp { font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
-.tp-sec { position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px); }
+.tp-sec { position: relative; padding: var(--tq-half) clamp(16px, 4vw, 56px); }
 .tp-wrap { position: relative; max-width: 1240px; margin: 0 auto; }
 .tp-h2 { margin: 0; max-width: 30ch; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
@@ -839,7 +840,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-faq__side { position: static; }
 }
 @media (max-width: 640px) {
-.tp-sec { padding-top: 48px; padding-bottom: 48px; }
 .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
 .tp-faq__side { align-items: center; text-align: center; }
 .tp-faq__side .tp-pill { align-self: center; }
@@ -869,13 +869,13 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @keyframes pfFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .pf-dr__line { display: flex; gap: .24em; align-items: flex-end; }
 .pf-dr__line > span { flex: none; }
-#pf-top { height: clamp(300px, 42vh, 480px); margin-bottom: -1px;
+#pf-top { height: var(--tq-gap); margin-bottom: -1px;
   background: linear-gradient(0deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .pf-fan { position: relative; flex: 1; min-height: 0; }
 @keyframes pfPulse { 0% { box-shadow: 0 0 0 0 rgba(231,19,27,.6); } 70% { box-shadow: 0 0 0 7px rgba(231,19,27,0); } 100% { box-shadow: 0 0 0 0 rgba(231,19,27,0); } }
-#pf-tail { position: relative; height: clamp(360px, 50vh, 560px); margin-top: -1px; margin-bottom: -20px;   
+#pf-tail { position: relative; height: var(--tq-gap); margin-top: -1px;   
   background: radial-gradient(55% 34vh at 50% 0%, rgba(150,10,15,.42), rgba(150,10,15,0) 70%),
     linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
@@ -884,7 +884,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (max-width: 899px) {
 #pf-who-wrap { padding: 24px 16px; }
 #pf-top, #pf-tail { display: none; }
-#why { padding-top: calc(clamp(48px, 6.1vw, 88px) - 20px); }
+#why { padding-top: var(--tq-half); }
 .pf-fan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; max-width: 760px; margin: 0 auto; padding: 28px 0; }
 }
 @media (max-width: 640px) {
@@ -969,6 +969,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-tv__val { flex-wrap: nowrap; gap: 0 5px; font-size: 17px; white-space: nowrap; }
 .tp-tv__val small { font-size: 12px; }
 }
+#library:has(+ .tq-mts) { padding-bottom: 0; }
 @keyframes tpDpPulse { from { transform: scale(1); opacity: .7; } to { transform: scale(3); opacity: 0; } }
 .tp-dp__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .tp-dp__stats > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 10px 12px; border-radius: 10px; background: #f6f6f7; }
@@ -990,7 +991,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibx__sub { margin: -6px 0 0; max-width: 460px; font-size: 15px; line-height: 1.6; color: #55585f; text-wrap: pretty; }
 .tq-ibx__ctas { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px; }
 .tq-ibtp { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px);
-  padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px); color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px) var(--tq-half); color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   background: linear-gradient(180deg, #f7f7f8 0%, #f3f3f5 22%, #f3f3f5 78%, #e9eaec 100%); }
 .tq-ibtp__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(40px, 5vw, 72px); }
 .tq-ibtp__text { position: relative; z-index: 2; flex: 1 1 420px; max-width: 560px; min-width: 0; display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); }
@@ -1076,10 +1077,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibtp__lead { order: 5; max-width: none; margin-top: calc(16px * var(--k)); font-size: calc(16px * var(--k)); }
 }
 .tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
-.tq-ibb { position: relative; overflow: hidden; height: clamp(592px, calc(min(100vh, 112vw) + 72px), 992px); height: clamp(592px, calc(min(100svh, 112vw) + 72px), 992px); color: #0a0a0a;   
+.tq-ibpage { background: #e9eaec; }
+.tq-ibb { position: relative; overflow: hidden; height: calc(clamp(520px, min(100vh, 112vw), 920px) + 44px + var(--tq-half)); height: calc(clamp(520px, min(100svh, 112vw), 920px) + 44px + var(--tq-half)); color: #0a0a0a;   
   background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), #e9eaec; }
 .tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-.tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 16px; box-sizing: border-box; }
+.tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: var(--tq-half); display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 16px; box-sizing: border-box; }
 .tq-horizon { display: inline-flex; align-items: center; gap: 14px; height: 58px; box-sizing: border-box; padding: 0; padding-inline: 26px 7px; border-radius: 999px; border: 1.5px solid #e7131b;
   background: radial-gradient(80% 140% at 30% 20%, #1e1e21 0%, #000 70%); color: #fff; font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .16em;
   text-transform: uppercase; white-space: nowrap; text-decoration: none; -webkit-tap-highlight-color: transparent;
@@ -1119,8 +1121,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibb__font { position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; white-space: nowrap; font-size: 20px; }
 .tq-ibn { position: relative; overflow: hidden; color: #0a0a0a;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(44% 48% at 66% 30%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), radial-gradient(30% 40% at 14% 30%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }
-.tq-ibn__wrap { position: relative; max-width: 1440px; margin: 0 auto; padding: clamp(24px, 4.5vh, 56px) clamp(20px, 5.5vw, 80px); box-sizing: border-box; display: flex; flex-direction: column;
-  justify-content: center; min-height: 100vh; min-height: 100svh; gap: clamp(16px, 3.2vh, 36px); }
+.tq-ibn__wrap { position: relative; max-width: 1440px; margin: 0 auto; padding: var(--tq-half) clamp(20px, 5.5vw, 80px); box-sizing: border-box; display: flex; flex-direction: column;
+  justify-content: center; gap: clamp(16px, 3.2vh, 36px); }
 .tq-ibn__row { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(32px, 4vw, 56px); }
 .tq-ibn__text { flex: 1 1 340px; max-width: 450px; min-width: 0; display: flex; flex-direction: column; gap: clamp(14px, 2.2vh, 24px); }
 .tq-ibn__h2 { --h2s: clamp(26px, min(3.2vw, 5.4vh), 50px); margin: 0; line-height: 1.08; letter-spacing: -.01em; padding-inline-start: 0; }
@@ -1244,8 +1246,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibn__pill span { display: none; }
 .tq-ibn .tq-ibx__ctas { order: 5; justify-content: center; padding-top: 22px; }
 }
-.tq-ibi { position: relative; overflow: hidden; min-height: min(100vh, 940px); min-height: min(100svh, 940px); display: flex; align-items: center; box-sizing: border-box;
-  padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 80px); color: #0a0a0a;
+.tq-ibi { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box;
+  padding: var(--tq-half) clamp(20px, 5vw, 80px); color: #0a0a0a;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 26% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%), #e9eaec; }
 .tq-ibi__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(32px, 4vw, 64px); }
 .tq-ibi__text { flex: 1 1 340px; max-width: 440px; min-width: 0; display: flex; flex-direction: column; gap: clamp(16px, 2.4vh, 24px); }
@@ -1322,8 +1324,19 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibi .tq-pos { width: 100%; }
 }
 @media (max-width: 640px) {
-.tq-ibi { padding-top: 44px; padding-bottom: 64px; }
-.tq-ibn__wrap { padding-block: 44px 68px; }
+.tq-ibi { padding-top: var(--tq-half); padding-bottom: var(--tq-half); }
+.tq-ibn__wrap { padding-block: var(--tq-half); }
+.tq-ibtp + .tq-ibn .tq-ibn__wrap { padding-top: calc(var(--tq-gap) - 24px); }
+.tq-ibs { padding-top: var(--tq-half) !important; padding-bottom: var(--tq-half) !important; }
+}
+@media (max-width: 1199px) {
+.tq-ibcp .tq-ibcp__stage { justify-content: flex-start; }
+.tq-ibcp .tq-ibcp__in { flex: 1 1 auto; display: flex; flex-direction: column; }
+.tq-ibcp .tq-ibcp__note { margin-top: auto; }
+.tq-ibcp { margin-top: calc(var(--tq-half) - 76px); margin-bottom: calc(var(--tq-half) - 24px); }
+}
+@media (min-width: 1200px) {
+.tq-ibcp { margin-top: calc(var(--tq-half) - 226px); margin-bottom: var(--tq-half); }
 }
 .tq-ibtv { background: #e9eaec; }
 .tq-ibtv__zero { position: relative; display: flex; align-items: center; justify-content: center; gap: .05em; margin-top: 30px; font-size: 250px; line-height: 1; direction: ltr;
@@ -1335,7 +1348,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibtv__zero { margin-top: 20px; font-size: clamp(110px, 32vw, 250px); }
 }
 .tq-ibs { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  padding: clamp(64px, 10vh, 112px) clamp(20px, 5vw, 80px) max(96px, clamp(64px, 10vh, 112px));
+  padding: var(--tq-half) clamp(20px, 5vw, 80px);
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 72% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
     radial-gradient(40% 40% at 10% 70%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }
 .tq-ibs::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
@@ -1480,7 +1493,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   background: linear-gradient(#e9eaec 0, #e9eaec var(--hdr), rgba(233,234,236,.96) calc(var(--hdr) + 30px), rgba(233,234,236,.86) calc(var(--hdr) + 60px), rgba(233,234,236,.7) calc(var(--hdr) + 90px), rgba(233,234,236,.5) calc(var(--hdr) + 120px), rgba(233,234,236,.31) calc(var(--hdr) + 150px), rgba(233,234,236,.15) calc(var(--hdr) + 180px), rgba(233,234,236,.05) calc(var(--hdr) + 210px), rgba(233,234,236,0) calc(var(--hdr) + 240px)),
     radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(50% + var(--hdr) / 2 + 450px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
     radial-gradient(calc(792px * var(--z, 1)) calc(585px * var(--z, 1)) at calc(50% + 201.6px * var(--z, 1)) calc(50% + var(--hdr) / 2 - 90px * var(--z, 1)), #e8e8ee 0%, #d5d5dc 55%, #c3c4cb 100%); }
-.tq-ibcp__stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 200px; pointer-events: none; z-index: 2;   
+.tq-ibcp__stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: max(200px, var(--tq-half)); pointer-events: none; z-index: 2;   
   background: linear-gradient(rgba(233,234,236,0) 0%, rgba(233,234,236,.04) 25%, rgba(233,234,236,.13) 42%, rgba(233,234,236,.28) 58%, rgba(233,234,236,.5) 72%, rgba(233,234,236,.74) 85%, rgba(233,234,236,.92) 94%, #e9eaec 100%); }
 .tq-ibcp a { text-decoration: none; }
 .tq-ibcp__in { position: relative; flex: none; width: 1440px; height: 900px; margin: 0 auto; }
@@ -1724,7 +1737,7 @@ h1, h2 { line-height: 1.2 !important; }
   </div>
 
 
-  <main>
+  <main class="tq-ibpage">
     <!-- Hero (IB_Tools_Hero design): static. Left an eyebrow, the H1 (the last sentence red), the lead and two buttons —
          "Become a partner" (the form) and "Compare programs" (the Partner Programs page). Right the design's
          picture: "Other brokers" on a worn stone tablet, a silver "VS" ball between the
@@ -1794,236 +1807,7 @@ for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+
 fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
     </section>
 
-    <!-- TradingView Premium on us, still (in place of the Branded toolkit): the Marketing Tools card (a dark card, the
-         TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the chrome CTA to the
-         form: CTA «Get Premium for $0» · Chrome) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
-         Styles: partner.css, "the TradingView Premium block". Prices are USD in every language. -->
-    <section id="premium" class="tp-sec tq-ibtv" data-screen-label="IB Tools · TradingView Premium">
-      <div class="tp-wrap">
-        <div class="tp-tv">
-          <div class="tp-tv__glow" aria-hidden="true"></div>
-          <div class="tp-tv__mark" aria-hidden="true"><img src="../../assets/marketing/tradingview.webp?v=b2dac21ca8" alt="" width="969" height="134" loading="lazy" decoding="async"></div>
-          <div class="tp-tv__duo"><img src="../../assets/logo-wordmark-light.png?v=3a415b95bb" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span aria-hidden="true">×</span><img src="../../assets/marketing/tradingview.webp?v=b2dac21ca8" alt="TradingView" width="969" height="134" loading="lazy" decoding="async"></div>
-          <div class="tq-ibtv__zero" aria-hidden="true"><b>$</b><img src="../../assets/ib/tv-zero.webp?v=f2b7efc601" alt="" width="515" height="713" loading="lazy" decoding="async"></div>
-          <h2 class="tp-tv__h tq-h2" data-fitw>TradingView Premium مجانًا مدى الحياة.</h2>
-          <div class="tp-tv__bill">
-            <div class="tp-tv__prod"><img src="../../assets/marketing/tradingview-app.webp?v=825ec516a7" alt="" width="32" height="32" loading="lazy" decoding="async"><span><b>TradingView Premium</b><span class="tp-tv__lab">وصول مدى الحياة</span></span></div>
-            <div class="tp-tv__list"><span class="tp-tv__lab">السعر الرسمي / سنويًا</span><span class="tp-tv__val"><s>$719.40</s> <small>/سنة</small></span></div>
-            <div><span class="tp-tv__lab">تدفعه TradeQuo</span><span class="tp-tv__val"><i aria-hidden="true">✓</i>$719.40<small>/سنة</small></span></div>
-            <div class="tp-tv__you"><span class="tp-tv__lab">تدفع أنت</span><span class="tp-tv__val">$0.00</span></div>
-          </div>
-          <span class="tq-chrome-wrap"><a class="tq-chrome" href="../#signup" data-page-link data-label="جارٍ التحميل · الرئيسية"><span class="tq-chrome__sheen" aria-hidden="true"></span><span class="tq-chrome__label">احصل على Premium مجانًا</span><span class="tq-chrome__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Signals feed (IB_Signals_Feed design), after TradingView Premium: one signal under the IB's brand (the sample brand
-         NORTHLINE) and the four channels it went to (Telegram, TradingView, WhatsApp, XMP Club, with the Signal Check bot on the
-         last). Phones: the design's 390px block as it is, scaled to the screen (the script in the section sets the zoom), at
-         most ~70% of a 390x844 screen. Desktops (the design has no desktop view): the heading, the button and the note on
-         the left, the feed on the right at 1.4x. Quotes and times are demo data, the same on every language; the feed reads
-         left to right on every language. partner.css, "the Signals feed block". -->
-    <section id="signals" class="tq-ibs" data-screen-label="IB Tools · Signals feed">
-      <div class="tq-ibs__wrap">
-        <h2 class="tq-ibs__h2 tq-h2">إشارة واحدة. علامتك التجارية. <span style="color: #e7131b;">على كل القنوات.</span></h2>
-        <div class="tq-ibs__feed" dir="ltr">
-          <span class="tq-ibs__bell" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg><i>4</i></span>
-          <div class="tq-ibs__card">
-            <div class="tq-ibs__cardh"><span class="tq-ibs__n">N</span><span class="tq-ibs__brand">NORTHLINE Signals</span><i></i><span class="tq-ibs__via">عبر Meridian Feed</span></div>
-            <div class="tq-ibs__cardm"><b class="tq-ibs__sym">XAUUSD</b><span class="tq-ibs__idea"><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg>فكرة شراء</span><i></i><span class="tq-ibs__utc">09:41 UTC</span></div>
-            <div class="tq-ibs__lv"><div><span>الدخول</span><b>4,018.20</b></div><div><span>وقف الخسارة</span><b class="tq-ibs__red">4,011.60</b></div><div><span>جني الأرباح</span><b>4,031.80</b></div></div>
-          </div>
-          <div class="tq-ibs__sent"><span class="tq-ibs__pulse"></span><span class="tq-ibs__sentl">أُرسلت إلى 4 قنوات</span><i></i><span class="tq-ibs__min"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2" fill="#0A0A0A"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7" stroke="#0A0A0A" stroke-width="1.7"/></svg>يلزم حد أدنى للإيداع</span></div>
-          <ul class="tq-ibs__list">
-          <li class="tq-ibs__ch">
-            <span class="tq-ibs__ico"><img src="../../assets/ib/ch-telegram.webp?v=5e6eebcd19" width="24" height="24" alt="" decoding="async" loading="lazy"></span>
-            <div class="tq-ibs__chb">
-              <div class="tq-ibs__chh"><b>Telegram</b><span class="tq-ibs__sub">Northline Signals</span><i></i><span class="tq-ibs__t">09:42</span></div>
-              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">شراء</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
-            </div>
-          </li>
-          <li class="tq-ibs__ch">
-            <span class="tq-ibs__ico"><img class="tq-ibs__tv" src="../../assets/ib/tv-mark.webp?v=9bca845e10" width="23" height="12" alt="" decoding="async" loading="lazy"></span>
-            <div class="tq-ibs__chb">
-              <div class="tq-ibs__chh"><b>TradingView</b><span class="tq-ibs__sub">ماسح · قائمة Northline</span><i></i><span class="tq-ibs__t">09:42</span></div>
-              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">شراء</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
-            </div>
-          </li>
-          <li class="tq-ibs__ch">
-            <span class="tq-ibs__ico"><img class="tq-ibs__wa" src="../../assets/ib/ch-whatsapp.webp?v=01f63b1b81" width="27" height="27" alt="" decoding="async" loading="lazy"></span>
-            <div class="tq-ibs__chb">
-              <div class="tq-ibs__chh"><b>WhatsApp</b><span class="tq-ibs__sub">Northline Signals</span><i></i><span class="tq-ibs__t">09:43</span></div>
-              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">شراء</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
-            </div>
-          </li>
-          <li class="tq-ibs__ch">
-            <span class="tq-ibs__ico"><img class="tq-ibs__xmp" src="../../assets/ib/ch-xmp.svg?v=ed5db4e786" width="26" height="26" alt="" decoding="async" loading="lazy"></span>
-            <div class="tq-ibs__chb">
-              <div class="tq-ibs__chh"><b>XMP Club</b><span class="tq-ibs__sub">Northline · #signals</span><i></i><span class="tq-ibs__t">09:43</span></div>
-              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">شراء</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
-              <div class="tq-ibs__bot">
-                <div class="tq-ibs__both"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="5" width="10" height="8" rx="2.5" stroke="#0A0A0A" stroke-width="1.5"/><path d="M8 2.5V5" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="9" r="1" fill="#0A0A0A"/><circle cx="10" cy="9" r="1" fill="#E7131B"/></svg><b>Signal Check</b><span class="tq-ibs__tag">BOT</span><i></i><span class="tq-ibs__ok">تستوفي المعايير</span></div>
-                <div class="tq-ibs__checks"><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>SL وTP محددان</span><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>R:R ≥ 1 : 1.5</span><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>SL ضمن حدّك</span></div>
-              </div>
-            </div>
-          </li>
-          </ul>
-        </div>
-        <a class="tq-cast tq-ibs__cast" href="#insights">
-          <span class="tq-cast__label">استكشف الإشارات المتصلة</span>
-          <span class="tq-cast__dot" aria-hidden="true"></span>
-          <span class="tq-cast__icon" aria-hidden="true"><img src="../../assets/ib/ch-telegram.webp?v=5e6eebcd19" width="24" height="24" alt="" decoding="async" loading="lazy"></span>
-          <span class="tq-cast__icon" aria-hidden="true"><img class="tq-cast__tv" src="../../assets/ib/tv-mark.webp?v=9bca845e10" width="23" height="12" alt="" decoding="async" loading="lazy"></span>
-          <span class="tq-cast__icon" aria-hidden="true"><img src="../../assets/ib/ch-whatsapp.webp?v=01f63b1b81" width="27" height="27" alt="" decoding="async" loading="lazy"></span>
-          <span class="tq-cast__icon" aria-hidden="true"><img src="../../assets/ib/ch-xmp.svg?v=ed5db4e786" width="26" height="26" alt="" decoding="async" loading="lazy"></span>
-        </a>
-        <p class="tq-ibs__note">بيانات توضيحية وعلامة تجارية خيالية. يختبر Signal Check معاييرك، لا النتائج المستقبلية. الإشارات معلومات وليست تنفيذًا للصفقات؛ العوائد غير مضمونة.</p>
-      </div>
-      <script>/* phones: the design's 390px block, scaled to the screen (at most 1.5x); desktops: the feed at 1.4x */
-(function(){var s=document.currentScript.parentNode,w=s.querySelector('.tq-ibs__wrap'),f=s.querySelector('.tq-ibs__feed'),m=matchMedia('(max-width: 999px)');function z(){if(m.matches){w.style.zoom=Math.min(1.5,s.clientWidth/390);f.style.zoom=''}else{w.style.zoom='';f.style.zoom=1.4}}z();addEventListener('resize',z)})();</script>
-    </section>
-
-    <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after the signals feed: left
-         the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block, "Powered by
-         SocialTrading.ai"); right two glass hands with phones — the provider's (a trade opened) and the client's (the trade
-         copied at the client's size); the position gathers into a drop of liquid silver (WebGL) that leaves the provider's
-         screen and lands on the client's. Driven by the scroll: the stage (one screen, room for the header at its top) holds
-         still while the page scrolls 2.1 screens past it — the first half brings the client's hand in, the second half
-         forms the drop, flies it and fills the client's screen; scrolling up plays it back. Reduced motion: no hold, the
-         end state. Desktops (1200px+): the design's 1440x900 composition, scaled to fit the stage; narrower: the words,
-         the hands cropped to the phones, the note, fitted to the stage (the script in the section sets the sizes). The
-         phone screens are the product's interface (English on every language, demo data, not translated by the browser).
-         partials/ib-copy.html holds the hands; assets/js/ib-copy.js reads the scroll and draws; partner.css, "the Copy
-         trading hand-off block". -->
-    <section id="copy" class="tq-ibcp" data-ib-copy data-screen-label="IB Tools · Copy trading hand-off">
-      <div class="tq-ibcp__stage">
-        <div class="tq-ibcp__in">
-          <div class="tq-ibcp__txt">
-            <h2 class="tq-ibcp__h2 tq-h2"><span class="tq-line">خبرتهم.</span> <span class="tq-line">تنساب إلى حسابك.</span></h2>
-            <div class="tq-ibcp__steps">
-              <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>يفتح مزوّد الاستراتيجية صفقة.</span></p>
-              <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>وتنتقل إلى حساب عميلك — بالحجم المناسب له.</span></p>
-            </div>
-            <a class="tq-copy tq-ibcp__cta" href="#insights"><span class="tq-copy__label">استكشف نسخ الصفقات</span><span class="tq-copy__icon" aria-hidden="true"><span class="tq-copy__back"></span><span class="tq-copy__front"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
-            <div class="tq-ibcp__by"><span>مدعوم من</span><span class="tq-stai tq-stai--by" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span></div>
-          </div>
-          <div class="tq-ibcp__crop"><div class="tq-ibcp__board" dir="ltr" translate="no" aria-hidden="true">
-  <div class="tq-ibcp__hand" data-k="L" style="transform:translate3d(360px,101px,0) scale(.78)">
-    <img class="tq-ibcp__img" src="../../assets/ib/hand-provider.webp?v=8ef1347c97" width="790" height="1024" alt="" decoding="async" loading="lazy">
-    <div class="tq-ibcp__on">
-      <div class="tq-ibcp__mx" style="transform:matrix3d(0.8316552,-0.06342102,0,0.00004116766,0.1565365,0.9015542,0,0.00001140881,0,0,1,0,339.5838,74.24875,0,1)">
-        <div class="tq-ibcp__scr">
-          <i class="tq-ibcp__isl"></i><span class="tq-ibcp__clock">10:24</span>
-          <span class="tq-ibcp__stat"><span class="tq-ibcp__bars"><i></i><i></i><i></i><i></i></span><span class="tq-ibcp__bat"><i></i></span></span>
-          <div class="tq-ibcp__pbar">
-            <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8 2L2 8l6 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="tq-stai tq-stai--bar" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span>
-            <span class="tq-ibcp__dots">•••</span>
-          </div>
-          <div class="tq-ibcp__prof">
-            <span class="tq-ibcp__av">LO</span>
-            <div class="tq-ibcp__who"><b>Meridian Swing</b><span>Strategy provider<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="6" fill="#B0F127"/><path d="M3.4 6.2l1.8 1.7 3.4-3.6" stroke="#0A0A0A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-          </div>
-          <div class="tq-ibcp__sym tq-ibcp__sym--p"><b>EURUSD</b><span class="tq-ibcp__buy">BUY</span><span class="tq-ibcp__px">1.0842</span></div>
-          <svg class="tq-ibcp__chart tq-ibcp__chart--p" width="260" height="190" viewBox="0 0 260 170" fill="none">
-            <defs><linearGradient id="ibcp-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B0F127" stop-opacity=".22"/><stop offset="1" stop-color="#B0F127" stop-opacity="0"/></linearGradient></defs>
-            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30 L260,170 L0,170 Z" fill="url(#ibcp-area)"/>
-            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" stroke="#B0F127" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle data-k="p-dot" cx="260" cy="30" r="14" fill="rgba(176,241,39,.28)" style="transform-origin:260px 30px"/>
-            <circle cx="260" cy="30" r="6" fill="#B0F127"/>
-          </svg>
-          <div class="tq-ibcp__pos">
-            <span class="tq-ibcp__ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l7 4-7 4-7-4 7-4z" stroke="#B0F127" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 10l7 4 7-4" stroke="#B0F127" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
-            <div class="tq-ibcp__lbl"><b>Open position</b><span>EURUSD · BUY · 2.00 lots</span></div>
-            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1.5 1.5L6.5 7l-5 5.5" stroke="rgba(255,255,255,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <i class="tq-ibcp__send" data-k="p-send"></i>
-          </div>
-          <div class="tq-ibcp__tabs">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 10l8-7 8 7v9H3z" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linejoin="round"/></svg>
-            <span class="tq-ibcp__tab"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 17l5-6 4 3 7-9" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><i></i></span>
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="7" y="7" width="12" height="12" rx="3" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/><path d="M3 14V5a2 2 0 0 1 2-2h9" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linecap="round"/></svg>
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7.5" r="4" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/><path d="M3.5 19c1.2-3.6 4-5 7.5-5s6.3 1.4 7.5 5" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
-          <i class="tq-ibcp__home"></i><i class="tq-ibcp__glint"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="tq-ibcp__hand" data-k="R" style="transform:translate3d(976.2px,101px,0) scale(.78)">
-    <img class="tq-ibcp__img" src="../../assets/ib/hand-client.webp?v=ccbbd62c7e" width="746" height="1024" alt="" decoding="async" loading="lazy">
-    <div class="tq-ibcp__on tq-ibcp__on--thumb">
-      <div class="tq-ibcp__mx" style="transform:matrix3d(0.8328572,0.07936495,0,0.0000266892,-0.1551771,0.7954829,0,-0.0001264555,0,0,1,0,204.2637,121.5337,0,1)">
-        <div class="tq-ibcp__scr">
-          <i class="tq-ibcp__isl"></i><span class="tq-ibcp__clock">10:24</span>
-          <span class="tq-ibcp__stat"><span class="tq-ibcp__bars"><i></i><i></i><i></i><i></i></span><span class="tq-ibcp__bat"><i></i></span></span>
-          <div class="tq-ibcp__chead"><span class="tq-ibcp__hc">HC</span><b>Copy trade</b><span class="tq-ibcp__live"><i></i>Live</span></div>
-          <div class="tq-ibcp__fol"><span class="tq-ibcp__av tq-ibcp__av--s">LO</span><div class="tq-ibcp__who tq-ibcp__who--s"><b>Following Meridian Swing</b><span>Strategy provider on SocialTrading.AI</span></div></div>
-          <div class="tq-ibcp__sym tq-ibcp__sym--c"><b data-k="c-sym">EURUSD</b><span class="tq-ibcp__buy" data-k="c-buy">BUY</span><span class="tq-ibcp__px" data-k="c-px">1.0842</span></div>
-          <svg class="tq-ibcp__chart tq-ibcp__chart--c" width="260" height="190" viewBox="0 0 260 170" fill="none">
-            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" stroke="rgba(255,255,255,.1)" stroke-width="2.5" stroke-linejoin="round"/>
-            <path data-k="c-draw" d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" pathLength="1" stroke="#B0F127" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:1;stroke-dashoffset:0"/>
-          </svg>
-          <div class="tq-ibcp__card" data-k="c-card"><div class="tq-ibcp__lbl"><small>YOUR POSITION</small><b>EURUSD · BUY</b></div><span class="tq-ibcp__lots">0.20 lots</span></div>
-          <div class="tq-ibcp__badge" data-k="c-badge"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="8" rx="2" stroke="#0A0A0A" stroke-width="1.8"/><path d="M2.5 10V4a1.5 1.5 0 0 1 1.5-1.5h6" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round"/></svg>Copied · scaled to your account</div>
-          <div class="tq-ibcp__pw"><span>Powered by</span><span class="tq-stai tq-stai--pw" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span></div>
-          <i class="tq-ibcp__home"></i><i class="tq-ibcp__glint"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-  <i class="tq-ibcp__ga" data-k="gA"></i>
-  <canvas class="tq-ibcp__gl" data-k="gl" width="680" height="440"></canvas>
-  <i class="tq-ibcp__ring" data-k="ring"></i>
-  <span class="tq-ibcp__rail"><i data-k="rail"></i></span>
-</div>
-</div>
-          <p class="tq-ibcp__note">توضيحي، بهويات خيالية. يدير الاستراتيجيات مزوّدون مستقلون على SocialTrading.ai. ينطوي نسخ الصفقات على مخاطر الخسارة، والأداء السابق لا يضمن النتائج المستقبلية.</p>
-        </div>
-      </div>
-      <script>/* the stage: one screen, its top --hdr kept free for the header. 1200px+: the 1440x900 composition scaled to fit it (--z lines the
-   background up; --rr puts the progress rail near the screen's right edge: as far from it as the words are from the left one, 120px at most); narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition, scaled to the
-   width and to the room the words and the note leave (at most 0.8x, centred) */
-(function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),o=s.querySelector('.tq-ibcp__note'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,H=g.clientHeight-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);var gx=(w-1440*k)/2,R=Math.min(gx+72*k,120);s.style.setProperty('--rr',((R-gx)/k).toFixed(1)+'px');b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');s.style.removeProperty('--rr');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-o.offsetHeight-48)/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
-    </section>
-
-    <!-- Network + clients (IB_Network_Block design: "IB Network + Clients", in place of the Network insights, Clients &
-         earnings and Ask AI blocks): the pitch and a red button to the Sub-IB network block; right
-         the views to pick (Network, Performance, Earnings) on a red glass pill that slides over them (the design's "pill"
-         selector), the picked view's line under it, and a canvas: the partner tree in glass (You at the top, Sub-IBs level by
-         level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
-         net deposits, then into a row per partner with a glass bar of what their clients earned you this month (the rows add
-         up to the month's total) and their top client under the name, and round again (7.5 s / 5.5 s / 7 s, held while the pointer is over it; a click on a view stops the turns). Phones: the pill
-         across the width, the button last. assets/js/ib-insights.js draws it; its words come from data-* on the canvas.
-         Names and figures are demo data. -->
-    <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
-      <div class="tq-ibi__wrap">
-        <div class="tq-ibi__text">
-          <h2 class="tq-ibi__h2 tq-h2">اعرف ما يدرّه عليك <span style="color: #e7131b;">كل فرع.</span></h2>
-          <p class="tq-ibx__lead">شبكة الـ Sub-IB كاملة، وأداء كل شريك، وما يدرّه عليك عملاؤه، في عرض واحد.</p>
-          <div class="tq-ibx__ctas">
-            <a class="tq-pos" href="#network">
-              <span class="tq-pos__plus" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg></span>
-              <span class="tq-pos__label" data-fitw>استكشف أدوات IB</span>
-              <svg class="tq-pos__chart" width="72" height="30" viewBox="0 0 72 30" fill="none" aria-hidden="true"><path d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path class="tq-pos__line" d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" pathLength="1" stroke="#E7131B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle class="tq-pos__pulse" cx="70" cy="3" r="6" fill="#E7131B" opacity="0.3"><animate attributeName="r" values="3;8;3" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.45;0;0.45" dur="1.6s" repeatCount="indefinite"/></circle><circle cx="70" cy="3" r="3" fill="#E7131B"/></svg>
-              <svg class="tq-pos__chev" width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true"><path d="M1.5 1.5L6 6l-4.5 4.5" stroke="#8A8B90" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="tq-ibi__fig">
-          <span class="tq-ibi__blob tq-ibi__blob--d" aria-hidden="true"></span><span class="tq-ibi__blob tq-ibi__blob--w" aria-hidden="true"></span>
-          <div class="tq-ibi__pick">
-            <div class="tq-ibi__sel" role="group" aria-label="الشبكة / الأداء / الأرباح" style="--v:0" data-dir="f">
-              <span class="tq-ibi__pill" aria-hidden="true"><i></i></span>
-              <button type="button" class="tq-ibi__b is-act" aria-pressed="true">الشبكة</button><button type="button" class="tq-ibi__b" aria-pressed="false">الأداء</button><button type="button" class="tq-ibi__b" aria-pressed="false">الأرباح</button>
-            </div>
-            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">وسطاء الـ Sub-IB لديك، مستوى بعد مستوى. اعرف بدقة من يقع تحت من.</span><span>الشركاء مرتّبون حسب صافي الإيداعات. اعرف أي فرع يقود نموك.</span><span>ما يدرّه عليك عملاء كل شريك هذا الشهر، ومن هو أفضل عملائه. اكتشف من توقّف عن التداول.</span></p>
-          </div>
-          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="أنت" data-total="الإجمالي {v}" data-net="صافي إيداعات الشبكة" data-comm="عمولاتك · {m}" data-top="حسب الشريك" data-topc="أفضل عميل: {n}" data-dormant="معرّض للتوقف"></canvas></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sub-IB network (Sub-IB_Network_Silver design): the pitch for moving a whole network over, and the 3D glass
+    <!-- Sub-IB network (Sub-IB_Network_Silver design), second on the page, under the hero: the pitch for moving a whole network over, and the 3D glass
          diagram of a Main IB, five Sub-IBs with their clients and a tier-2 Sub-IB (static SVG, partials/ib-net-svg.html,
          generated by tools/build-ib-net.mjs). Hovering a group lights it red and dims the rest (the script below sets
          data-hl / data-act; partner.css draws it); by default Sub-IB 01 is lit. Under it three cards. -->
@@ -2278,10 +2062,10 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 (function(){var s=document.currentScript.parentNode,set=function(g){if(g==null){s.setAttribute('data-hl','0');s.removeAttribute('data-act')}else{s.setAttribute('data-hl',g);s.setAttribute('data-act','')}};s.querySelectorAll('.sib-n[data-g]').forEach(function(n){n.addEventListener('mouseenter',function(){set(n.getAttribute('data-g'))});n.addEventListener('mouseleave',function(){set(null)})})})();</script>
     </section>
 
-    <!-- Black hole (IB_Tools_Black_Hole design, Nov 2026 version): assets/js/ib-hole.js draws it on the canvas. Event chips
+    <!-- Black hole (IB_Tools_Black_Hole design, Nov 2026 version), after the Sub-IB network: assets/js/ib-hole.js draws it on the canvas. Event chips
          fall into an obsidian black hole, crystals stack into volume-by-lot bars, gather into the client groups (active,
          dormant risk, inactive), regroup into the Sub-IB tree and drain back; big captions over the scene tell the story
-         (data-c1..c5, *word* in red), the HUD follows the four steps; beside it (above it on narrow screens) the event-horizon "Become a partner". The chips and the figures on the canvas are product
+         (data-c1..c5, *word* in red), the HUD follows the four steps; under it the event-horizon "Become a partner". The chips and the figures on the canvas are product
          UI, English; the captions, the group names and the steps are the page's text. .tq-ibb__font is not seen: it holds
          the captions and group names in the heading face, so that face's subset has their letters and the browser loads
          it before the canvas draws with it. -->
@@ -2299,10 +2083,239 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
       </div>
     </section>
 
+    <!-- Network + clients (IB_Network_Block design: "IB Network + Clients", in place of the Network insights, Clients &
+         earnings and Ask AI blocks), after the black hole: the pitch and its button (to the copy trading block); right
+         the views to pick (Network, Performance, Earnings) on a red glass pill that slides over them (the design's "pill"
+         selector), the picked view's line under it, and a canvas: the partner tree in glass (You at the top, Sub-IBs level by
+         level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
+         net deposits, then into a row per partner with a glass bar of what their clients earned you this month (the rows add
+         up to the month's total) and their top client under the name, and round again (4 s each, held while the mouse is over it; a click on a view picks it, the turns go on 8 s later). Phones: the pill
+         across the width, the button last. assets/js/ib-insights.js draws it; its words come from data-* on the canvas.
+         Names and figures are demo data. -->
+    <section id="insights" class="tq-ibi" data-ib-ins data-screen-label="IB Tools · Network insights">
+      <div class="tq-ibi__wrap">
+        <div class="tq-ibi__text">
+          <h2 class="tq-ibi__h2 tq-h2">اعرف ما يدرّه عليك <span style="color: #e7131b;">كل فرع.</span></h2>
+          <p class="tq-ibx__lead">شبكة الـ Sub-IB كاملة، وأداء كل شريك، وما يدرّه عليك عملاؤه، في عرض واحد.</p>
+          <div class="tq-ibx__ctas">
+            <a class="tq-pos" href="#copy">
+              <span class="tq-pos__plus" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+              <span class="tq-pos__label" data-fitw>استكشف أدوات IB</span>
+              <svg class="tq-pos__chart" width="72" height="30" viewBox="0 0 72 30" fill="none" aria-hidden="true"><path d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" stroke="rgba(255,255,255,0.35)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path class="tq-pos__line" d="M2 25 L12 21 L22 23 L32 15 L42 17 L52 9 L62 8 L70 3" pathLength="1" stroke="#E7131B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle class="tq-pos__pulse" cx="70" cy="3" r="6" fill="#E7131B" opacity="0.3"><animate attributeName="r" values="3;8;3" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.45;0;0.45" dur="1.6s" repeatCount="indefinite"/></circle><circle cx="70" cy="3" r="3" fill="#E7131B"/></svg>
+              <svg class="tq-pos__chev" width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true"><path d="M1.5 1.5L6 6l-4.5 4.5" stroke="#8A8B90" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="tq-ibi__fig">
+          <span class="tq-ibi__blob tq-ibi__blob--d" aria-hidden="true"></span><span class="tq-ibi__blob tq-ibi__blob--w" aria-hidden="true"></span>
+          <div class="tq-ibi__pick">
+            <div class="tq-ibi__sel" role="group" aria-label="الشبكة / الأداء / الأرباح" style="--v:0" data-dir="f">
+              <span class="tq-ibi__pill" aria-hidden="true"><i></i></span>
+              <button type="button" class="tq-ibi__b is-act" aria-pressed="true">الشبكة</button><button type="button" class="tq-ibi__b" aria-pressed="false">الأداء</button><button type="button" class="tq-ibi__b" aria-pressed="false">الأرباح</button>
+            </div>
+            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">وسطاء الـ Sub-IB لديك، مستوى بعد مستوى. اعرف بدقة من يقع تحت من.</span><span>الشركاء مرتّبون حسب صافي الإيداعات. اعرف أي فرع يقود نموك.</span><span>ما يدرّه عليك عملاء كل شريك هذا الشهر، ومن هو أفضل عملائه. اكتشف من توقّف عن التداول.</span></p>
+          </div>
+          <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="أنت" data-total="الإجمالي {v}" data-net="صافي إيداعات الشبكة" data-comm="عمولاتك · {m}" data-top="حسب الشريك" data-topc="أفضل عميل: {n}" data-dormant="معرّض للتوقف"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after Network + clients: left
+         the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block, "Powered by
+         SocialTrading.ai"); right two glass hands with phones — the provider's (a trade opened) and the client's (the trade
+         copied at the client's size); the position gathers into a drop of liquid silver (WebGL) that leaves the provider's
+         screen and lands on the client's. Driven by the scroll: the stage (one screen, room for the header at its top) holds
+         still while the page scrolls 2.1 screens past it — the first half brings the client's hand in, the second half
+         forms the drop, flies it and fills the client's screen; scrolling up plays it back. Reduced motion: no hold, the
+         end state. Desktops (1200px+): the design's 1440x900 composition, scaled to fit the stage; narrower: the words,
+         the hands cropped to the phones, the note, fitted to the stage (the script in the section sets the sizes). The
+         phone screens are the product's interface (English on every language, demo data, not translated by the browser).
+         partials/ib-copy.html holds the hands; assets/js/ib-copy.js reads the scroll and draws; partner.css, "the Copy
+         trading hand-off block". -->
+    <section id="copy" class="tq-ibcp" data-ib-copy data-screen-label="IB Tools · Copy trading hand-off">
+      <div class="tq-ibcp__stage">
+        <div class="tq-ibcp__in">
+          <div class="tq-ibcp__txt">
+            <h2 class="tq-ibcp__h2 tq-h2"><span class="tq-line">خبرتهم.</span> <span class="tq-line">تنساب إلى حسابك.</span></h2>
+            <div class="tq-ibcp__steps">
+              <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>يفتح مزوّد الاستراتيجية صفقة.</span></p>
+              <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>وتنتقل إلى حساب عميلك — بالحجم المناسب له.</span></p>
+            </div>
+            <a class="tq-copy tq-ibcp__cta" href="#signals"><span class="tq-copy__label">استكشف نسخ الصفقات</span><span class="tq-copy__icon" aria-hidden="true"><span class="tq-copy__back"></span><span class="tq-copy__front"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+            <div class="tq-ibcp__by"><span>مدعوم من</span><span class="tq-stai tq-stai--by" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span></div>
+          </div>
+          <div class="tq-ibcp__crop"><div class="tq-ibcp__board" dir="ltr" translate="no" aria-hidden="true">
+  <div class="tq-ibcp__hand" data-k="L" style="transform:translate3d(360px,101px,0) scale(.78)">
+    <img class="tq-ibcp__img" src="../../assets/ib/hand-provider.webp?v=8ef1347c97" width="790" height="1024" alt="" decoding="async" loading="lazy">
+    <div class="tq-ibcp__on">
+      <div class="tq-ibcp__mx" style="transform:matrix3d(0.8316552,-0.06342102,0,0.00004116766,0.1565365,0.9015542,0,0.00001140881,0,0,1,0,339.5838,74.24875,0,1)">
+        <div class="tq-ibcp__scr">
+          <i class="tq-ibcp__isl"></i><span class="tq-ibcp__clock">10:24</span>
+          <span class="tq-ibcp__stat"><span class="tq-ibcp__bars"><i></i><i></i><i></i><i></i></span><span class="tq-ibcp__bat"><i></i></span></span>
+          <div class="tq-ibcp__pbar">
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8 2L2 8l6 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="tq-stai tq-stai--bar" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span>
+            <span class="tq-ibcp__dots">•••</span>
+          </div>
+          <div class="tq-ibcp__prof">
+            <span class="tq-ibcp__av">LO</span>
+            <div class="tq-ibcp__who"><b>Meridian Swing</b><span>Strategy provider<svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="6" fill="#B0F127"/><path d="M3.4 6.2l1.8 1.7 3.4-3.6" stroke="#0A0A0A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+          <div class="tq-ibcp__sym tq-ibcp__sym--p"><b>EURUSD</b><span class="tq-ibcp__buy">BUY</span><span class="tq-ibcp__px">1.0842</span></div>
+          <svg class="tq-ibcp__chart tq-ibcp__chart--p" width="260" height="190" viewBox="0 0 260 170" fill="none">
+            <defs><linearGradient id="ibcp-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B0F127" stop-opacity=".22"/><stop offset="1" stop-color="#B0F127" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30 L260,170 L0,170 Z" fill="url(#ibcp-area)"/>
+            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" stroke="#B0F127" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle data-k="p-dot" cx="260" cy="30" r="14" fill="rgba(176,241,39,.28)" style="transform-origin:260px 30px"/>
+            <circle cx="260" cy="30" r="6" fill="#B0F127"/>
+          </svg>
+          <div class="tq-ibcp__pos">
+            <span class="tq-ibcp__ico"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2l7 4-7 4-7-4 7-4z" stroke="#B0F127" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 10l7 4 7-4" stroke="#B0F127" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div class="tq-ibcp__lbl"><b>Open position</b><span>EURUSD · BUY · 2.00 lots</span></div>
+            <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1.5 1.5L6.5 7l-5 5.5" stroke="rgba(255,255,255,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <i class="tq-ibcp__send" data-k="p-send"></i>
+          </div>
+          <div class="tq-ibcp__tabs">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 10l8-7 8 7v9H3z" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span class="tq-ibcp__tab"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 17l5-6 4 3 7-9" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><i></i></span>
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="7" y="7" width="12" height="12" rx="3" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/><path d="M3 14V5a2 2 0 0 1 2-2h9" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="7.5" r="4" stroke="rgba(255,255,255,.6)" stroke-width="1.6"/><path d="M3.5 19c1.2-3.6 4-5 7.5-5s6.3 1.4 7.5 5" stroke="rgba(255,255,255,.6)" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <i class="tq-ibcp__home"></i><i class="tq-ibcp__glint"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tq-ibcp__hand" data-k="R" style="transform:translate3d(976.2px,101px,0) scale(.78)">
+    <img class="tq-ibcp__img" src="../../assets/ib/hand-client.webp?v=ccbbd62c7e" width="746" height="1024" alt="" decoding="async" loading="lazy">
+    <div class="tq-ibcp__on tq-ibcp__on--thumb">
+      <div class="tq-ibcp__mx" style="transform:matrix3d(0.8328572,0.07936495,0,0.0000266892,-0.1551771,0.7954829,0,-0.0001264555,0,0,1,0,204.2637,121.5337,0,1)">
+        <div class="tq-ibcp__scr">
+          <i class="tq-ibcp__isl"></i><span class="tq-ibcp__clock">10:24</span>
+          <span class="tq-ibcp__stat"><span class="tq-ibcp__bars"><i></i><i></i><i></i><i></i></span><span class="tq-ibcp__bat"><i></i></span></span>
+          <div class="tq-ibcp__chead"><span class="tq-ibcp__hc">HC</span><b>Copy trade</b><span class="tq-ibcp__live"><i></i>Live</span></div>
+          <div class="tq-ibcp__fol"><span class="tq-ibcp__av tq-ibcp__av--s">LO</span><div class="tq-ibcp__who tq-ibcp__who--s"><b>Following Meridian Swing</b><span>Strategy provider on SocialTrading.AI</span></div></div>
+          <div class="tq-ibcp__sym tq-ibcp__sym--c"><b data-k="c-sym">EURUSD</b><span class="tq-ibcp__buy" data-k="c-buy">BUY</span><span class="tq-ibcp__px" data-k="c-px">1.0842</span></div>
+          <svg class="tq-ibcp__chart tq-ibcp__chart--c" width="260" height="190" viewBox="0 0 260 170" fill="none">
+            <path d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" stroke="rgba(255,255,255,.1)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path data-k="c-draw" d="M0,150 L22,140 L44,144 L66,124 L88,128 L110,106 L132,112 L154,88 L176,92 L198,66 L220,70 L242,40 L260,30" pathLength="1" stroke="#B0F127" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:1;stroke-dashoffset:0"/>
+          </svg>
+          <div class="tq-ibcp__card" data-k="c-card"><div class="tq-ibcp__lbl"><small>YOUR POSITION</small><b>EURUSD · BUY</b></div><span class="tq-ibcp__lots">0.20 lots</span></div>
+          <div class="tq-ibcp__badge" data-k="c-badge"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5.5" y="5.5" width="8" height="8" rx="2" stroke="#0A0A0A" stroke-width="1.8"/><path d="M2.5 10V4a1.5 1.5 0 0 1 1.5-1.5h6" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round"/></svg>Copied · scaled to your account</div>
+          <div class="tq-ibcp__pw"><span>Powered by</span><span class="tq-stai tq-stai--pw" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span></div>
+          <i class="tq-ibcp__home"></i><i class="tq-ibcp__glint"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <i class="tq-ibcp__ga" data-k="gA"></i>
+  <canvas class="tq-ibcp__gl" data-k="gl" width="680" height="440"></canvas>
+  <i class="tq-ibcp__ring" data-k="ring"></i>
+  <span class="tq-ibcp__rail"><i data-k="rail"></i></span>
+</div>
+</div>
+          <p class="tq-ibcp__note">توضيحي، بهويات خيالية. يدير الاستراتيجيات مزوّدون مستقلون على SocialTrading.ai. ينطوي نسخ الصفقات على مخاطر الخسارة، والأداء السابق لا يضمن النتائج المستقبلية.</p>
+        </div>
+      </div>
+      <script>/* the stage: one screen, its top --hdr kept free for the header. 1200px+: the 1440x900 composition scaled to fit it (--z lines the
+   background up; --rr puts the progress rail near the screen's right edge: as far from it as the words are from the left one, 120px at most); narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition, scaled to the
+   width and to the room the words and the note leave (at most 0.8x, centred) */
+(function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),o=s.querySelector('.tq-ibcp__note'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,H=g.clientHeight-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);var gx=(w-1440*k)/2,R=Math.min(gx+72*k,120);s.style.setProperty('--rr',((R-gx)/k).toFixed(1)+'px');b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');s.style.removeProperty('--rr');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-o.offsetHeight-48)/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
+    </section>
+
+    <!-- Signals feed (IB_Signals_Feed design), after the copy trading hand-off: one signal under the IB's brand (the sample brand
+         NORTHLINE) and the four channels it went to (Telegram, TradingView, WhatsApp, XMP Club, with the Signal Check bot on the
+         last). Phones: the design's 390px block as it is, scaled to the screen (the script in the section sets the zoom), at
+         most ~70% of a 390x844 screen. Desktops (the design has no desktop view): the heading, the button and the note on
+         the left, the feed on the right at 1.4x. Quotes and times are demo data, the same on every language; the feed reads
+         left to right on every language. partner.css, "the Signals feed block". -->
+    <section id="signals" class="tq-ibs" data-screen-label="IB Tools · Signals feed">
+      <div class="tq-ibs__wrap">
+        <h2 class="tq-ibs__h2 tq-h2">إشارة واحدة. علامتك التجارية. <span style="color: #e7131b;">على كل القنوات.</span></h2>
+        <div class="tq-ibs__feed" dir="ltr">
+          <span class="tq-ibs__bell" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg><i>4</i></span>
+          <div class="tq-ibs__card">
+            <div class="tq-ibs__cardh"><span class="tq-ibs__n">N</span><span class="tq-ibs__brand">NORTHLINE Signals</span><i></i><span class="tq-ibs__via">عبر Meridian Feed</span></div>
+            <div class="tq-ibs__cardm"><b class="tq-ibs__sym">XAUUSD</b><span class="tq-ibs__idea"><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg>فكرة شراء</span><i></i><span class="tq-ibs__utc">09:41 UTC</span></div>
+            <div class="tq-ibs__lv"><div><span>الدخول</span><b>4,018.20</b></div><div><span>وقف الخسارة</span><b class="tq-ibs__red">4,011.60</b></div><div><span>جني الأرباح</span><b>4,031.80</b></div></div>
+          </div>
+          <div class="tq-ibs__sent"><span class="tq-ibs__pulse"></span><span class="tq-ibs__sentl">أُرسلت إلى 4 قنوات</span><i></i><span class="tq-ibs__min"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2" fill="#0A0A0A"/><path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7" stroke="#0A0A0A" stroke-width="1.7"/></svg>يلزم حد أدنى للإيداع</span></div>
+          <ul class="tq-ibs__list">
+          <li class="tq-ibs__ch">
+            <span class="tq-ibs__ico"><img src="../../assets/ib/ch-telegram.webp?v=5e6eebcd19" width="24" height="24" alt="" decoding="async" loading="lazy"></span>
+            <div class="tq-ibs__chb">
+              <div class="tq-ibs__chh"><b>Telegram</b><span class="tq-ibs__sub">Northline Signals</span><i></i><span class="tq-ibs__t">09:42</span></div>
+              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">شراء</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
+            </div>
+          </li>
+          <li class="tq-ibs__ch">
+            <span class="tq-ibs__ico"><img class="tq-ibs__tv" src="../../assets/ib/tv-mark.webp?v=9bca845e10" width="23" height="12" alt="" decoding="async" loading="lazy"></span>
+            <div class="tq-ibs__chb">
+              <div class="tq-ibs__chh"><b>TradingView</b><span class="tq-ibs__sub">ماسح · قائمة Northline</span><i></i><span class="tq-ibs__t">09:42</span></div>
+              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">شراء</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
+            </div>
+          </li>
+          <li class="tq-ibs__ch">
+            <span class="tq-ibs__ico"><img class="tq-ibs__wa" src="../../assets/ib/ch-whatsapp.webp?v=01f63b1b81" width="27" height="27" alt="" decoding="async" loading="lazy"></span>
+            <div class="tq-ibs__chb">
+              <div class="tq-ibs__chh"><b>WhatsApp</b><span class="tq-ibs__sub">Northline Signals</span><i></i><span class="tq-ibs__t">09:43</span></div>
+              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">شراء</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
+            </div>
+          </li>
+          <li class="tq-ibs__ch">
+            <span class="tq-ibs__ico"><img class="tq-ibs__xmp" src="../../assets/ib/ch-xmp.svg?v=ed5db4e786" width="26" height="26" alt="" decoding="async" loading="lazy"></span>
+            <div class="tq-ibs__chb">
+              <div class="tq-ibs__chh"><b>XMP Club</b><span class="tq-ibs__sub">Northline · #signals</span><i></i><span class="tq-ibs__t">09:43</span></div>
+              <div class="tq-ibs__q"><b>XAUUSD</b><svg class="tq-ibs__tri" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1.5 9 8H1z" fill="#E7131B"/></svg><span class="tq-ibs__l">شراء</span><span class="tq-ibs__dot">·</span><span>E <b>4,018.20</b></span><span>SL <b class="tq-ibs__slv">4,011.60</b></span><span>TP <b>4,031.80</b></span></div>
+              <div class="tq-ibs__bot">
+                <div class="tq-ibs__both"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="5" width="10" height="8" rx="2.5" stroke="#0A0A0A" stroke-width="1.5"/><path d="M8 2.5V5" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="9" r="1" fill="#0A0A0A"/><circle cx="10" cy="9" r="1" fill="#E7131B"/></svg><b>Signal Check</b><span class="tq-ibs__tag">BOT</span><i></i><span class="tq-ibs__ok">تستوفي المعايير</span></div>
+                <div class="tq-ibs__checks"><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>SL وTP محددان</span><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>R:R ≥ 1 : 1.5</span><span><i><svg width="7" height="7" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>SL ضمن حدّك</span></div>
+              </div>
+            </div>
+          </li>
+          </ul>
+        </div>
+        <a class="tq-cast tq-ibs__cast" href="#premium">
+          <span class="tq-cast__label">استكشف الإشارات المتصلة</span>
+          <span class="tq-cast__dot" aria-hidden="true"></span>
+          <span class="tq-cast__icon" aria-hidden="true"><img src="../../assets/ib/ch-telegram.webp?v=5e6eebcd19" width="24" height="24" alt="" decoding="async" loading="lazy"></span>
+          <span class="tq-cast__icon" aria-hidden="true"><img class="tq-cast__tv" src="../../assets/ib/tv-mark.webp?v=9bca845e10" width="23" height="12" alt="" decoding="async" loading="lazy"></span>
+          <span class="tq-cast__icon" aria-hidden="true"><img src="../../assets/ib/ch-whatsapp.webp?v=01f63b1b81" width="27" height="27" alt="" decoding="async" loading="lazy"></span>
+          <span class="tq-cast__icon" aria-hidden="true"><img src="../../assets/ib/ch-xmp.svg?v=ed5db4e786" width="26" height="26" alt="" decoding="async" loading="lazy"></span>
+        </a>
+        <p class="tq-ibs__note">بيانات توضيحية وعلامة تجارية خيالية. يختبر Signal Check معاييرك، لا النتائج المستقبلية. الإشارات معلومات وليست تنفيذًا للصفقات؛ العوائد غير مضمونة.</p>
+      </div>
+      <script>/* phones: the design's 390px block, scaled to the screen (at most 1.5x); desktops: the feed at 1.4x */
+(function(){var s=document.currentScript.parentNode,w=s.querySelector('.tq-ibs__wrap'),f=s.querySelector('.tq-ibs__feed'),m=matchMedia('(max-width: 999px)');function z(){if(m.matches){w.style.zoom=Math.min(1.5,s.clientWidth/390);f.style.zoom=''}else{w.style.zoom='';f.style.zoom=1.4}}z();addEventListener('resize',z)})();</script>
+    </section>
+
+    <!-- TradingView Premium on us, still (in place of the Branded toolkit): the Marketing Tools card (a dark card, the
+         TradingView mark faint behind a red glow, the two logos on a glass pill, the line, the glass bill, the chrome CTA to the
+         form: CTA «Get Premium for $0» · Chrome) with a 3D "$0": a flat silver "$" and a rendered brushed-silver "0" with a red body (assets/ib/tv-zero.webp).
+         Styles: partner.css, "the TradingView Premium block". Prices are USD in every language. -->
+    <section id="premium" class="tp-sec tq-ibtv" data-screen-label="IB Tools · TradingView Premium">
+      <div class="tp-wrap">
+        <div class="tp-tv">
+          <div class="tp-tv__glow" aria-hidden="true"></div>
+          <div class="tp-tv__mark" aria-hidden="true"><img src="../../assets/marketing/tradingview.webp?v=b2dac21ca8" alt="" width="969" height="134" loading="lazy" decoding="async"></div>
+          <div class="tp-tv__duo"><img src="../../assets/logo-wordmark-light.png?v=3a415b95bb" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span aria-hidden="true">×</span><img src="../../assets/marketing/tradingview.webp?v=b2dac21ca8" alt="TradingView" width="969" height="134" loading="lazy" decoding="async"></div>
+          <div class="tq-ibtv__zero" aria-hidden="true"><b>$</b><img src="../../assets/ib/tv-zero.webp?v=f2b7efc601" alt="" width="515" height="713" loading="lazy" decoding="async"></div>
+          <h2 class="tp-tv__h tq-h2" data-fitw>TradingView Premium مجانًا مدى الحياة.</h2>
+          <div class="tp-tv__bill">
+            <div class="tp-tv__prod"><img src="../../assets/marketing/tradingview-app.webp?v=825ec516a7" alt="" width="32" height="32" loading="lazy" decoding="async"><span><b>TradingView Premium</b><span class="tp-tv__lab">وصول مدى الحياة</span></span></div>
+            <div class="tp-tv__list"><span class="tp-tv__lab">السعر الرسمي / سنويًا</span><span class="tp-tv__val"><s>$719.40</s> <small>/سنة</small></span></div>
+            <div><span class="tp-tv__lab">تدفعه TradeQuo</span><span class="tp-tv__val"><i aria-hidden="true">✓</i>$719.40<small>/سنة</small></span></div>
+            <div class="tp-tv__you"><span class="tp-tv__lab">تدفع أنت</span><span class="tp-tv__val">$0.00</span></div>
+          </div>
+          <span class="tq-chrome-wrap"><a class="tq-chrome" href="../#signup" data-page-link data-label="جارٍ التحميل · الرئيسية"><span class="tq-chrome__sheen" aria-hidden="true"></span><span class="tq-chrome__label">احصل على Premium مجانًا</span><span class="tq-chrome__arrow" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></span>
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ: five of the usual questions (the home page's own: becoming an IB, earnings, payouts, support, experience and
          capital; global faq.1-5, so all 18 languages), as on the other pages (.tp-faq, the faq-card partial); on the grey
-         of the black hole above it (.tq-ibq), turning white at its foot for the footer, so no seams. Last on the page,
-         after the black hole. -->
+         of the TradingView block above it (.tq-ibq), turning white at its foot for the footer, so no seams. Last on the
+         page, after TradingView Premium. -->
     <section id="questions" class="tp-sec tq-ibq" data-screen-label="IB Tools FAQ">
       <div class="tp-wrap tp-faq">
         <div class="tp-faq__side">
@@ -2394,6 +2407,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 <script src="../../assets/js/landing.js?v=c22b474340" defer></script>
 <script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
 <script src="../../assets/js/ib-insights.js?v=161db91095" defer></script>
-<script src="../../assets/js/ib-hole.js?v=ef8bb78f54" defer></script>
+<script src="../../assets/js/ib-hole.js?v=db901c76ff" defer></script>
 </body>
 </html>
