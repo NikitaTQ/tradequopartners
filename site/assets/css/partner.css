@@ -1963,14 +1963,11 @@
 .tq-ibcp__go:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
 .tq-ibcp__arr { flex: none; width: 46px; height: 46px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
 [dir="rtl"] .tq-ibcp__arr svg { transform: scaleX(-1); }
-.tq-ibcp__by { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #5e5f64; }
 /* the SocialTrading.AI logo (their brand: 3x3 dots, the last one lime, as tall as the capitals; the wordmark Inter 700,
    tight), white on the phones, dark on our grey */
 .tq-stai { --dot: #d9d9d9; display: inline-flex; align-items: baseline; gap: .32em; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -.03em; line-height: 1; white-space: nowrap; }
 .tq-stai__m { flex: none; width: .73em; height: .73em; fill: var(--dot); overflow: visible; }
 .tq-stai__g { fill: #b0f127; }
-.tq-stai--by { --dot: #47484d; font-size: 13.5px; color: #1c1d21; }
-.tq-stai--by .tq-stai__g { fill: #9fdc1c; }   /* their lime, a step deeper on the light grey */
 /* the board: the composition's 1440x900, in its px */
 .tq-ibcp__board { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; }
 .tq-ibcp__hand { position: absolute; left: 0; top: 0; width: 790px; height: 1024px; transform-origin: 0 0; will-change: transform; }
