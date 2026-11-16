@@ -119,9 +119,9 @@
       f.src = f.dataset.src;
     };
     /* Two ways an embed starts, whichever comes first:
-     * - warm-up: the ones marked data-warm (Infinite Flow), in that order, start right after the visitor's first
-     *   scroll/touch/key, in gaps between frames, without waiting for each other: their start-up is long, and
-     *   loading them on approach made a visitor who scrolls straight down wait for them;
+     * - warm-up: the ones marked data-warm (Infinite Flow), in that order, start a moment after the page has loaded
+     *   (or at the visitor's first scroll/touch/key, if sooner), in gaps between frames, without waiting for each
+     *   other: their start-up is long, and loading them on approach made a visitor who scrolls straight down wait;
      * - approach: any other embed starts once it is 1.5 screens away (in a gap between frames, at most 400ms
      *   later). One only flown past (a jump from the page menu) stays watched and starts when approached again. */
     const near = (f) => {
@@ -129,26 +129,13 @@
       const r = f.getBoundingClientRect();
       return r.bottom > -innerHeight * 1.5 && r.top < innerHeight * 2.5;
     };
-    /* Starting an embed is a burst of main-thread work (its page, three.js, its scene): it waits for a moment without
-     * scrolling (250ms) and an idle main thread, however long that takes, so it never lands in a scroll — a visitor who
-     * flings the page to its end in two seconds starts nothing on the way. Until then an embed shows its poster or white.
-     * Inside the embeds every further step of the start-up waits the same way (window.__tqQuiet in each). */
-    let lastScroll = 0;
-    ['scroll', 'wheel', 'touchmove'].forEach((ev) => addEventListener(ev, () => { lastScroll = performance.now(); }, { passive: true }));
-    const whenQuiet = (fn) => {
-      const go = () => idle(() => {
-        if (performance.now() - lastScroll < 250) { setTimeout(go, 150); return; }
-        fn();
-      }, { timeout: 500 });
-      go();
-    };
     const load = new IntersectionObserver((entries) => {
-      entries.forEach((en) => { if (en.isIntersecting) whenQuiet(() => { if (near(en.target)) start(en.target); }); });
+      entries.forEach((en) => { if (en.isIntersecting) idle(() => { if (near(en.target)) start(en.target); }, { timeout: 400 }); });
     }, { rootMargin: '150% 0px' });
     embedSettle = () => { if (started) pending.forEach((f) => { if (near(f)) start(f); }); };
     const warm = () => frames.filter((f) => f.dataset.warm && f.getClientRects().length)
       .sort((a, b) => a.dataset.warm - b.dataset.warm)
-      .forEach((f) => whenQuiet(() => start(f)));
+      .forEach((f) => idle(() => start(f), { timeout: 800 }));
     /* Nothing heavy starts before the visitor does something: the first screen
      * paints and becomes interactive with the main thread to itself. */
     const saveData = navigator.connection && navigator.connection.saveData;
@@ -163,6 +150,13 @@
     };
     events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
     if (scrollY > 0) first(); /* reload half-way down the page */
+    /* the warm-up also starts by itself a moment after the page has loaded (the first screen painted and
+       interactive), so a visitor who flings the page to its end at once finds Infinite Flow there, live within a
+       second or two; its start-up goes in small steps (embeds/infinite-flow.html), and its still stands in meanwhile */
+    if (!saveData) {
+      const auto = () => setTimeout(warm, 600);
+      if (document.readyState === 'complete') auto(); else window.addEventListener('load', auto, { once: true });
+    }
     /* frames marked data-eager sit in the first screen and show a matching poster meanwhile (none at
        the moment: the program cards' art is a still image now): they also start on the first mouse movement */
     const eager = frames.filter((f) => f.hasAttribute('data-eager'));
@@ -206,7 +200,9 @@
     const load = () => {
       if (loaded || !v.getClientRects().length) return;
       loaded = true;
-      if (userPaused) v.addEventListener('loadedmetadata', () => { v.currentTime = 23.5; }, { once: true });
+      /* the first play starts at 0.4 s, the frame its poster shows (the film opens on 0.4 s of plain white): a visitor who
+         flings past sees the film's phone at once, and the video takes over from the same picture */
+      v.addEventListener('loadedmetadata', () => { v.currentTime = userPaused ? 23.5 : 0.4; }, { once: true });
       v.preload = 'auto';
       /* H.264, or VP9 where H.264 is missing. 2560x1440 where the film covers more than ~1700 screen pixels across
          (retina, 150% scaling), 1920x1080 below that: a browser shrinks video plainly, and 1440 squeezed into ~1240

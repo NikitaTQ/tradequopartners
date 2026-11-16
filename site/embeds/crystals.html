@@ -4,16 +4,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TradeQuo Crystals — embed</title>
 <script>
-/* Start-up in quiet moments. This frame shares the page's main thread (same origin), so none of its start-up may run
-   during a scroll: __tqQuiet() resolves once nothing has scrolled for 250ms (the page or this frame) and the main thread
-   is idle, however long that takes; __tqScrolling() says whether a scroll is going on. */
+/* Start-up in quiet moments. This frame shares the page's main thread (same origin), so the heavy steps of its 3D start-up
+   wait for a moment without scrolling: __tqQuiet() resolves once nothing has scrolled for 250ms (the page or this frame)
+   and the main thread is idle. Its still stands in its place meanwhile, so the block is never missing. */
 (function () {
   var last = 0, on = function () { last = performance.now(); }, ev = ['scroll', 'wheel', 'touchmove'];
   ev.forEach(function (e) { addEventListener(e, on, { passive: true }); });
   try { if (parent !== window) ev.forEach(function (e) { parent.addEventListener(e, on, { passive: true }); }); } catch (e) {}
   var idle = window.requestIdleCallback ? function (f) { requestIdleCallback(f, { timeout: 1000 }); } : function (f) { setTimeout(f, 50); };
-  window.__tqScrolling = function () { return performance.now() - last < 250; };
-  window.__tqQuiet = function () { return new Promise(function (res) { (function go() { idle(function () { if (window.__tqScrolling()) setTimeout(go, 100); else res(); }); })(); }); };
+  window.__tqQuiet = function () { return new Promise(function (res) { (function go() { idle(function () { if (performance.now() - last < 250) setTimeout(go, 100); else res(); }); })(); }); };
 })();
 </script>
 <script type="importmap">
@@ -64,7 +63,7 @@
 
 <three-d-stage name="tradequo-crystals" background="#ffffff"></three-d-stage>
 <script src="i18n.js?v=a35edf15c5"></script>
-<script src="crystals-stage.js?v=9016e6b63f"></script>
+<script src="crystals-stage.js?v=aaa7c39684"></script>
 <script type="module">
 const P = new URLSearchParams(location.search);
 const EMBED = !P.has('ui');
@@ -85,7 +84,7 @@ if (T._fonts) { const st = document.createElement('style'); st.textContent = T._
 const CAP_FONT = "'Inter', 'TQ CJK', sans-serif";
 const CAP_TRACK = /arabic|thai|cjk/.test(T._script) ? 0 : 1; /* tracking breaks Arabic joining, crowds Thai/CJK */
 const { THREE } = await stage.ready;
-/* every step of the start-up waits for a quiet moment (no scrolling, an idle main thread): see __tqQuiet above */
+/* the start-up goes in small steps, each in a moment without scrolling (__tqQuiet above); the page's poster stands in */
 const step = async () => { if (window.__tqQuiet) await window.__tqQuiet(); };
 await step();
 const CAP_TEXT = ['partners', 'payouts', 'revshare', 'rating', 'traders', 'trips'].map((k) => T['crys.' + k]).join(' ');
@@ -536,7 +535,7 @@ const adapt = (ms) => {
 };
 stage._loop = () => {
   if (window.__tqPaused || document.hidden) { prevDraw = 0; clock.getDelta(); return; }
-  if (warm !== 3 && window.__tqScrolling && window.__tqScrolling()) { prevDraw = 0; clock.getDelta(); return; }   /* not ready yet: not during a scroll */
+  if (warm !== 3) { prevDraw = 0; clock.getDelta(); return; }   /* not ready yet: the page's poster stands in */
   { const now = performance.now(); if (prevDraw) adapt(now - prevDraw); prevDraw = now; warm = 3; }
   const t = STILL ? 0 : clock.getElapsedTime();
   const active = ORDER[Math.floor(t / PERIOD) % N];
@@ -561,8 +560,8 @@ R.setAnimationLoop(stage._loop);
 
 /* Ready before it is reached: each object's shaders (for the screen and for the transmission buffer) compile one at a
    time (in the background where the browser can: KHR_parallel_shader_compile), then each texture goes to the graphics
-   card, then one frame is drawn, the block still off-screen: every step in a quiet moment. The first frame on screen
-   used to do all of it at once: a stall as the block scrolled in. Until then the stones are not drawn during a scroll. */
+   card, then one frame is drawn: each a small step of its own, in a moment without scrolling. The first frame on screen
+   used to do all of it at once: a stall as the block scrolled in. Until then the page's poster stands in their place. */
 (async () => {
   warm = 1;
   const objs = [], seen = new Set();

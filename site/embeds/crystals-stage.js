@@ -213,9 +213,9 @@
         import('three/addons/controls/OrbitControls.js'),
       ]);
       this._THREE = THREE;
-      // The site: the renderer (a WebGL context) is made in a quiet moment, never during a scroll (window.__tqQuiet, in
-      // the embed page). preserveDrawingBuffer keeps the last frame readable after compositing (toDataURL / drawImage) for
-      // the design tools' screenshots (?ui); on the site it would cost a copy of the frame every frame, so it is off.
+      // The site: the renderer (a WebGL context) is made in a moment without scrolling (window.__tqQuiet, in the embed
+      // page). preserveDrawingBuffer keeps the last frame readable after compositing (toDataURL / drawImage) for the design
+      // tools' screenshots (?ui); on the site it would cost a copy of the frame every frame, so it is off.
       if (window.__tqQuiet) await window.__tqQuiet();
       const renderer = new THREE.WebGLRenderer({
         antialias: true,
