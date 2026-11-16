@@ -576,6 +576,12 @@ html { scroll-snap-type: y proximity; }
 @media (prefers-reduced-motion: reduce) { [data-rep-track] { animation: none !important; } [data-rep-viewport] { overflow-x: auto !important; } }
 /* the marquee under JS (startReviewsDrag): grab it with the mouse, swipe it sideways on touch */
 [data-rep-viewport][data-rep-live] { cursor: grab; touch-action: pan-y; }
+/* the editorial cards (DailyForex, TopBrokers): the outlet's name and a red "Editor's verdict" pill, kept on one line;
+   where the pair does not fit the card (a long word, e.g. Italian), the pill steps under the name; on phones it always does */
+.tq-rv-head { flex-wrap: wrap; row-gap: 8px; }
+.tq-rv-pill { white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b; padding: 5px 9px; border-radius: 999px;
+  border: 1px solid rgba(231,19,27,.35); background: rgba(255,255,255,.6); }
+@media (max-width: 640px) { .tq-rv-head { flex-direction: column; align-items: flex-start !important; } }   /* the card sets align-items inline */
 [data-rep-viewport].is-drag { cursor: grabbing; }
 [data-rep-viewport].is-drag, [data-rep-viewport].is-drag * { -webkit-user-select: none; user-select: none; }
 [data-rep-viewport][data-rep-live] img { -webkit-user-drag: none; }
