@@ -793,6 +793,28 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-wrap { position: relative; max-width: 1240px; margin: 0 auto; }
 .tp-h2 { margin: 0; max-width: 30ch; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
+.tp-line { position: absolute; z-index: -1; left: 50%; top: var(--tp-line-y, 47%); width: 100vw; height: 4px; margin-top: -2px; border-radius: 2px; transform: translateX(-50%); pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.55) 0, rgba(255,255,255,.14) 30%, rgba(255,255,255,0) 50%, rgba(0,0,0,.08) 70%, rgba(0,0,0,.42) 100%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.16) 0 1px, rgba(255,255,255,0) 1px 4px),
+    conic-gradient(from 45deg at 50% 50%, #e2203a 0 25%, #6e0915 0 50%, #c4142a 0 75%, #3a040b 0) 0 0 / 4px 4px;
+  box-shadow: 0 1.5px 3px -1px rgba(60,6,12,.35); }
+.tp-line__pulse { position: absolute; left: 0; top: 50%; width: 76px; height: 6px; margin-top: -3px; border-radius: 3px; opacity: 0; will-change: transform;
+  background: linear-gradient(90deg, rgba(196,200,208,0) 0, rgba(196,200,208,.75) 28%, #e9ebef 58%, #ffffff 78%, #d4d7dd 92%, rgba(190,194,202,0) 100%);
+  box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px 1px rgba(150,156,168,.45); }
+@media (min-width: 641px) and (max-width: 960px) {
+.tp-line { display: none; }
+}
+.tp-pc::before { content: ''; position: absolute; inset: 0; z-index: -2; border-radius: 22px; transform: skewX(-2.9deg); pointer-events: none; opacity: 0; transition: opacity 1.2s ease;
+  box-shadow: 0 0 0 1px rgba(231,19,27,.14), 0 20px 56px -18px rgba(231,19,27,.32), 0 0 40px -8px rgba(231,19,27,.2); }
+[dir="rtl"] .tp-pc::before { transform: skewX(2.9deg); }
+.tp-pc.is-lit::before, .tp-pc.is-lit .tp-pc__slab::after { opacity: 1; }
+@media (max-width: 640px) {
+.tp-pc::before { border-radius: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+.tp-pc::before, .tp-pc__slab::after { transition: none; }
+}
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
 .tp-pc { --pu: min(var(--pu-w), var(--pu-h)); position: relative; isolation: isolate; display: flex; flex-direction: column;
   padding: 8.2% 7.5% 7%; color: #0b0b0d; }
@@ -2399,7 +2421,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=67f1542748" defer></script>
+<script src="../assets/js/landing.js?v=fd3ab771ef" defer></script>
 <script src="../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
 <script src="../assets/js/ib-insights.js?v=2ebb166ea9" defer></script>
 <script src="../assets/js/ib-hole.js?v=ebe409c5f7" defer></script>

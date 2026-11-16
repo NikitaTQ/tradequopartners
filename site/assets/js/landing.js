@@ -1333,6 +1333,61 @@
     }
   }
 
+  /* Partner Programs, the line behind the three cards (.tp-line): it sits at the height of the cards' figures; a silver
+     pulse runs along it into the first card, which lights up faintly red (is-lit) and stays so; 4 s later the pulse runs
+     on from that card to the next, and so on; 4 s after the third, the cards go out and it starts again from the screen's
+     edge. In Arabic it runs right to left. Only while the cards are on screen and in one row (desktops; phones, where they
+     swipe sideways: the pulse goes to where each card is at the time); with "reduce motion" the line stays still. */
+  function startProgLine() {
+    const line = $('[data-prog-line]'), rail = $('[data-progs]');
+    if (!line || !rail || !line.animate) return;
+    const pulse = $('.tp-line__pulse', line), cards = $$('.tp-pc', rail), stage = line.parentElement;
+    if (!pulse || !cards.length) return;
+    const row = matchMedia('(max-width: 640px), (min-width: 961px)'), still = matchMedia('(prefers-reduced-motion: reduce)');
+    const PW = 76, HOLD = 4000;
+    const place = () => {
+      const big = $('.tp-pc__big', cards[0]);
+      if (!big) return;
+      const s = stage.getBoundingClientRect(), b = big.getBoundingClientRect();
+      if (b.height) line.style.setProperty('--tp-line-y', Math.round(b.top + b.height / 2 - s.top) + 'px');
+    };
+    let run = 0, seen = false;
+    const rtl = () => getComputedStyle(rail).direction === 'rtl';
+    const edge = (i, side) => { const l = line.getBoundingClientRect(), r = cards[i].getBoundingClientRect(); return (side === 'l' ? r.left : r.right) - l.left; };
+    /* the pulse's left end: from behind the card before (or off the screen's edge) to just behind the card's near edge */
+    const from = (i) => rtl() ? (i ? edge(i - 1, 'l') + 6 : line.getBoundingClientRect().width + 10) : (i ? edge(i - 1, 'r') - PW - 6 : -PW - 10);
+    const to = (i) => rtl() ? edge(i, 'r') - PW - 6 : edge(i, 'l') + 6;
+    const wait = (ms, id) => new Promise((ok) => setTimeout(ok, ms)).then(() => { if (id !== run) throw 0; });
+    const travel = (x0, x1, id) => {
+      const flip = rtl() ? ' scaleX(-1)' : '', dur = Math.max(520, Math.min(1500, Math.abs(x1 - x0) / 0.7));
+      const a = pulse.animate([{ transform: 'translateX(' + x0 + 'px)' + flip, opacity: 1 }, { transform: 'translateX(' + x1 + 'px)' + flip, opacity: 1 }],
+        { duration: dur, easing: 'cubic-bezier(.42,0,.4,1)', fill: 'forwards' });
+      return a.finished.then(() => { if (id !== run) throw 0; });
+    };
+    const loop = async (id) => {
+      try {
+        for (;;) {
+          for (let i = 0; i < cards.length; i++) {
+            await travel(from(i), to(i), id);
+            cards[i].classList.add('is-lit');
+            await wait(HOLD, id);
+          }
+          cards.forEach((c) => c.classList.remove('is-lit'));
+          await wait(1600, id);
+        }
+      } catch (e) { /* stopped */ }
+    };
+    const stop = () => { run++; pulse.getAnimations().forEach((a) => a.cancel()); cards.forEach((c) => c.classList.remove('is-lit')); };
+    const sync = () => { stop(); if (seen && row.matches && !still.matches) loop(run); };
+    place();
+    if ('ResizeObserver' in window) { let q = 0; new ResizeObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; place(); }); }).observe(rail); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+    [row, still].forEach((m) => m.addEventListener && m.addEventListener('change', sync));
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((es) => { const v = es[es.length - 1].isIntersecting; if (v !== seen) { seen = v; sync(); } }, { threshold: 0.25 }).observe(rail);
+    } else { seen = true; sync(); }
+  }
+
   /* ---- /programs/ on phones: the three program cards swipe sideways -------------------------
    * The row is a native scroller with snap points (partner.css); this only keeps the dots under it
    * in step with the card in the middle and lets a dot bring its card in. */
@@ -1676,6 +1731,7 @@
   startToasts();
   startProgSwiper();
   startProgCards();
+  startProgLine();
   startFitWide();
   startLiveDash();
   startSteppers();

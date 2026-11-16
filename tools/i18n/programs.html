@@ -38,22 +38,13 @@
       </div>
 
       <div class="tp-stage">
-        <!-- one black ribbon across the middle, with a soft shadow and a light edge (Partner_Cards_7a); it stretches
-             with the stage (preserveAspectRatio none), its width stays (non-scaling-stroke) -->
-        <svg class="tp-ribbons" viewBox="0 0 1352 880" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
-          <defs>
-            <filter id="tpRibBlur" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
-            <linearGradient id="tpRibBlack" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0A0A0A"/><stop offset=".5" stop-color="#2B2C31"/><stop offset="1" stop-color="#0A0A0A"/></linearGradient>
-            <path id="tpRib1" d="M-40 420 C 300 330, 560 530, 820 450 S 1200 360, 1400 470" vector-effect="non-scaling-stroke"/>
-          </defs>
-          <use href="#tpRib1" stroke="rgba(20,22,28,.16)" stroke-width="20" stroke-linecap="round" transform="translate(0 16)" filter="url(#tpRibBlur)"/>
-          <use href="#tpRib1" stroke="url(#tpRibBlack)" stroke-width="20" stroke-linecap="round"/>
-          <use href="#tpRib1" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round" transform="translate(0 -5)"/>
-        </svg>
+        <!-- one thin line of red carbon fibre across the screen, behind the cards, at the height of their figures (landing.js,
+             startProgLine); a silver pulse runs along it to each card in turn, and the card it reaches lights up a little red -->
+        <div class="tp-line" data-prog-line aria-hidden="true"><i class="tp-line__pulse"></i></div>
         <!-- the three cards (Partner_Cards_8): slabs of glass leaning a little to the right (the slab is skewed, the
              text stays upright); the glass is the design's own card (its highlights, facets and red sparks; data-glass),
              laid on by landing.js (startProgCards) so that its facets meet this card's rows; it also lines the rows up
-             across the three cards. The ribbon passes behind the cards, not through them. -->
+             across the three cards. The line passes behind the cards, not through them. -->
         <div class="tp-programs" data-progs>
           <article class="tp-pc" data-glass="{{root}}assets/programs/glass-1.webp">
             <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
