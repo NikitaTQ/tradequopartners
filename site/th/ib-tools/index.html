@@ -794,28 +794,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-wrap { position: relative; max-width: 1240px; margin: 0 auto; }
 .tp-h2 { margin: 0; max-width: 30ch; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
-.tp-line { position: absolute; z-index: -1; left: 50%; top: var(--tp-line-y, 47%); width: 100vw; height: 4px; margin-top: -2px; border-radius: 2px; transform: translateX(-50%); pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.55) 0, rgba(255,255,255,.14) 30%, rgba(255,255,255,0) 50%, rgba(0,0,0,.08) 70%, rgba(0,0,0,.42) 100%),
-    repeating-linear-gradient(135deg, rgba(255,255,255,.16) 0 1px, rgba(255,255,255,0) 1px 4px),
-    conic-gradient(from 45deg at 50% 50%, #e2203a 0 25%, #6e0915 0 50%, #c4142a 0 75%, #3a040b 0) 0 0 / 4px 4px;
-  box-shadow: 0 1.5px 3px -1px rgba(60,6,12,.35); }
-.tp-line__pulse { position: absolute; left: 0; top: 50%; width: 76px; height: 6px; margin-top: -3px; border-radius: 3px; opacity: 0; will-change: transform;
-  background: linear-gradient(90deg, rgba(196,200,208,0) 0, rgba(196,200,208,.75) 28%, #e9ebef 58%, #ffffff 78%, #d4d7dd 92%, rgba(190,194,202,0) 100%);
-  box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px 1px rgba(150,156,168,.45); }
-@media (min-width: 641px) and (max-width: 960px) {
-.tp-line { display: none; }
-}
-.tp-pc::before { content: ''; position: absolute; inset: 0; z-index: -2; border-radius: 22px; transform: skewX(-2.9deg); pointer-events: none; opacity: 0; transition: opacity 1.2s ease;
-  box-shadow: 0 0 0 1px rgba(231,19,27,.14), 0 20px 56px -18px rgba(231,19,27,.32), 0 0 40px -8px rgba(231,19,27,.2); }
-[dir="rtl"] .tp-pc::before { transform: skewX(2.9deg); }
-.tp-pc.is-lit::before, .tp-pc.is-lit .tp-pc__slab::after { opacity: 1; }
-@media (max-width: 640px) {
-.tp-pc::before { border-radius: 20px; }
-}
-@media (prefers-reduced-motion: reduce) {
-.tp-pc::before, .tp-pc__slab::after { transition: none; }
-}
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
 .tp-pc { --pu: min(var(--pu-w), var(--pu-h)); position: relative; isolation: isolate; display: flex; flex-direction: column;
   padding: 8.2% 7.5% 7%; color: #0b0b0d; }
@@ -1062,9 +1040,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
 .tq-ibvs__w > * { position: absolute; display: block; box-sizing: border-box; left: calc(var(--x) * 1px); width: calc((var(--r) - var(--x)) * 1px); top: calc(var(--b) * 1px - .86em);
   line-height: 1; white-space: nowrap; text-align: start; }
-.tq-ibvs__th { font-size: 20.5px; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; color: #1d1c1c; }
-.tq-ibvs__tl { font-size: 17px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: #595958; }
-.tq-ibvs__tv { font-size: 26.5px; font-weight: 400; letter-spacing: -.01em; color: #1a1616; }
+.tq-ibvs__th { font-size: 38.8px; font-weight: 700; letter-spacing: -.005em; text-transform: uppercase; color: #0b0b0d; }
+.tq-ibvs__tl { font-size: 18.2px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #46474b; }
+.tq-ibvs__tv { font-size: 32px; font-weight: 650; letter-spacing: -.012em; color: #0b0b0d; }
+.tq-ibvs__w--them > * { text-shadow: 0 1px 0 rgba(255,255,255,.5), 0 0 6px rgba(255,255,255,.35); }
 .tq-ibvs__uh { font-size: 18.9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #494a4c; }
 .tq-ibvs__ul { font-size: 16px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: #6c6d71; }
 .tq-ibvs__ut { font-size: 37.9px; font-weight: 650; letter-spacing: -.03em; color: #0a0a0a; }
@@ -1085,8 +1064,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     margin: calc((100% - 20px) * -35 / 805.8) 0 calc((100% - 20px) * -80 / 805.8) calc(10px - (100% - 20px) * 40 / 805.8); }
 .tq-ibvs__w--us { transform: scale(var(--s)) translate(-350px, -70px); }
 .tq-ibvs__w--them { transform: scale(var(--s)) translate(-14px, 89px) scale(.7); }
-.tq-ibvs__w--them > * { width: calc((358 - var(--x)) * 1px); }
-.tq-ibvs__w--them[dir="rtl"] > * { width: calc((345 - var(--x)) * 1px); }
+.tq-ibvs__w--them > * { width: calc((334 - var(--x)) * 1px); }
+.tq-ibvs__w--them[dir="rtl"] > * { width: calc((326 - var(--x)) * 1px); }
 .tq-ibvs__w--us > * { width: calc((1145 - var(--x)) * 1px); }
 .tq-ibvs__th { font-size: 25px; }
 .tq-ibvs__tl { font-size: 22px; }
@@ -1778,37 +1757,37 @@ h1, h2 { line-height: 1.2 !important; }
         </div>
         <div class="tq-ibtp__vis">
           <div class="tq-ibvs" dir="ltr">
-            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=fc8524a11a" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=08663d049a" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
+            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=19c4001382" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=ed67410b3b" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
             <div class="tq-ibvs__w tq-ibvs__w--them" dir="ltr">
-              <span class="tq-ibvs__th" style="--x:119;--b:269;--r:465" data-fitw>โบรกเกอร์อื่น</span>
-              <span class="tq-ibvs__tl" style="--x:122.7;--b:371;--r:465" data-fitw>ระดับ Sub-IB</span>
-              <b class="tq-ibvs__tv" style="--x:123.1;--b:413;--r:465" data-fitw>1–2 ระดับ</b>
-              <span class="tq-ibvs__tl" style="--x:124.1;--b:505;--r:465" data-fitw>ส่วนแบ่งรายได้</span>
-              <b class="tq-ibvs__tv" style="--x:124.1;--b:548;--r:465" data-fitw>คงที่ มีเพดาน</b>
-              <span class="tq-ibvs__tl" style="--x:126.4;--b:643;--r:465" data-fitw>การผูกลูกค้า</span>
-              <b class="tq-ibvs__tv" style="--x:126.3;--b:684;--r:465" data-fitw>ไม่รับประกัน</b>
-              <span class="tq-ibvs__tl" style="--x:128.1;--b:775;--r:465" data-fitw>การจ่ายเงิน</span>
-              <b class="tq-ibvs__tv" style="--x:127.3;--b:818;--r:465" data-fitw>รายเดือน</b>
-              <span class="tq-ibvs__tl" style="--x:129.6;--b:909;--r:465" data-fitw>เครื่องมือ</span>
-              <b class="tq-ibvs__tv" style="--x:129.5;--b:950;--r:465" data-fitw>มีแค่ลิงก์แนะนำ</b>
+              <span class="tq-ibvs__th" style="--x:116.5;--b:291.2;--r:500" data-fitw>โปรแกรมอื่น</span>
+              <span class="tq-ibvs__tl" style="--x:121;--b:391.7;--r:500" data-fitw>ระดับ Sub-IB</span>
+              <b class="tq-ibvs__tv" style="--x:120.5;--b:435.9;--r:500" data-fitw>1–2 ระดับ</b>
+              <span class="tq-ibvs__tl" style="--x:121;--b:504.5;--r:500" data-fitw>ส่วนแบ่งรายได้</span>
+              <b class="tq-ibvs__tv" style="--x:120.5;--b:547;--r:500" data-fitw>คงที่ มีเพดาน</b>
+              <span class="tq-ibvs__tl" style="--x:121;--b:622;--r:500" data-fitw>การผูกลูกค้า</span>
+              <b class="tq-ibvs__tv" style="--x:120.5;--b:666;--r:500" data-fitw>ไม่รับประกัน</b>
+              <span class="tq-ibvs__tl" style="--x:121;--b:740.2;--r:500" data-fitw>การจ่ายเงิน</span>
+              <b class="tq-ibvs__tv" style="--x:120.5;--b:781.6;--r:500" data-fitw>รายเดือน</b>
+              <span class="tq-ibvs__tl" style="--x:121;--b:856.7;--r:500" data-fitw>เครื่องมือ</span>
+              <b class="tq-ibvs__tv" style="--x:120.5;--b:898.1;--r:500" data-fitw>มีแค่ลิงก์แนะนำ</b>
             </div>
             <div class="tq-ibvs__w tq-ibvs__w--us" dir="ltr">
               <span class="tq-ibvs__uh" style="--x:676.9;--b:245;--r:1130" data-fitw>โปรแกรม IB ของเรา</span>
-              <span class="tq-ibvs__ul" style="--x:761.6;--b:321.4;--r:1130" data-fitw>ระดับ Sub-IB</span>
-              <b class="tq-ibvs__ut" style="--x:760.5;--b:360;--r:1130" data-fitw>ไม่จำกัดระดับ</b>
-              <span class="tq-ibvs__us" style="--x:761.6;--b:401;--r:1130" data-fitw>รับรายได้จากพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ทุกคนที่อยู่ใต้คุณ</span>
-              <span class="tq-ibvs__ul" style="--x:761.6;--b:465.4;--r:1130" data-fitw>ส่วนแบ่งรายได้</span>
-              <b class="tq-ibvs__ut" style="--x:760.5;--b:504;--r:1130" data-fitw>สูงสุด 87<span style="color: #e7131b;">%</span></b>
-              <span class="tq-ibvs__us" style="--x:761.6;--b:545;--r:1130" data-fitw>ของส⁠เ⁠ป⁠ร⁠ด ทุกล็⁠อ⁠ต</span>
-              <span class="tq-ibvs__ul" style="--x:761.7;--b:609.4;--r:1130" data-fitw>การผูกลูกค้า</span>
-              <b class="tq-ibvs__ut" style="--x:760.9;--b:648;--r:1130" data-fitw>ผูกกับคุณ</b>
-              <span class="tq-ibvs__us" style="--x:761.7;--b:689;--r:1130" data-fitw>ปกป้องโดย PartnerShield</span>
-              <span class="tq-ibvs__ul" style="--x:761.6;--b:755.4;--r:1130" data-fitw>การจ่ายเงิน</span>
-              <b class="tq-ibvs__ut" style="--x:760.5;--b:794;--r:1130" data-fitw>รายวัน</b>
-              <span class="tq-ibvs__us" style="--x:761.6;--b:834;--r:1130" data-fitw>ไม่มีขั้นต่ำ ไม่มีค่าธรรมเนียมถอน</span>
-              <span class="tq-ibvs__ul" style="--x:761;--b:897.4;--r:1130" data-fitw>เครื่องมือ</span>
-              <b class="tq-ibvs__ut tq-ibvs__ut--tools" style="--x:760.2;--b:932;--r:1130" data-fitw>Copy Trading <span style="color: #e7131b;">•</span> บทวิเคราะห์จากผู้เชี่ยวชาญ <span style="color: #e7131b;">•</span> อะคาเดมี</b>
-              <span class="tq-ibvs__us" style="--x:759.5;--b:975;--r:1130" data-fitw>ในแบรนด์ของคุณ</span>
+              <span class="tq-ibvs__ul" style="--x:761.6;--b:318.4;--r:1130" data-fitw>ระดับ Sub-IB</span>
+              <b class="tq-ibvs__ut" style="--x:760.5;--b:357;--r:1130" data-fitw>ไม่จำกัดระดับ</b>
+              <span class="tq-ibvs__us" style="--x:761.6;--b:397.5;--r:1130" data-fitw>รับรายได้จากพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ทุกคนที่อยู่ใต้คุณ</span>
+              <span class="tq-ibvs__ul" style="--x:761.6;--b:462;--r:1130" data-fitw>ส่วนแบ่งรายได้</span>
+              <b class="tq-ibvs__ut" style="--x:760.5;--b:501;--r:1130" data-fitw>สูงสุด 87<span style="color: #e7131b;">%</span></b>
+              <span class="tq-ibvs__us" style="--x:761.6;--b:541.5;--r:1130" data-fitw>ของส⁠เ⁠ป⁠ร⁠ด ทุกล็⁠อ⁠ต</span>
+              <span class="tq-ibvs__ul" style="--x:761.7;--b:605.4;--r:1130" data-fitw>การผูกลูกค้า</span>
+              <b class="tq-ibvs__ut" style="--x:760.9;--b:645;--r:1130" data-fitw>ผูกกับคุณ</b>
+              <span class="tq-ibvs__us" style="--x:761.7;--b:685.5;--r:1130" data-fitw>ปกป้องโดย PartnerShield</span>
+              <span class="tq-ibvs__ul" style="--x:761.6;--b:751.4;--r:1130" data-fitw>การจ่ายเงิน</span>
+              <b class="tq-ibvs__ut" style="--x:760.5;--b:791;--r:1130" data-fitw>รายวัน</b>
+              <span class="tq-ibvs__us" style="--x:761.6;--b:830;--r:1130" data-fitw>ไม่มีขั้นต่ำ ไม่มีค่าธรรมเนียมถอน</span>
+              <span class="tq-ibvs__ul" style="--x:761;--b:894.4;--r:1130" data-fitw>เครื่องมือ</span>
+              <b class="tq-ibvs__ut tq-ibvs__ut--tools" style="--x:760.2;--b:927;--r:1130" data-fitw>Copy Trading <span style="color: #e7131b;">•</span> บทวิเคราะห์จากผู้เชี่ยวชาญ <span style="color: #e7131b;">•</span> อะคาเดมี</b>
+              <span class="tq-ibvs__us" style="--x:759.5;--b:971;--r:1130" data-fitw>ในแบรนด์ของคุณ</span>
             </div>
           </div>
         </div>
@@ -2427,7 +2406,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=fd3ab771ef" defer></script>
+<script src="../../assets/js/landing.js?v=67f1542748" defer></script>
 <script src="../../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
 <script src="../../assets/js/ib-insights.js?v=2ebb166ea9" defer></script>
 <script src="../../assets/js/ib-hole.js?v=ebe409c5f7" defer></script>
