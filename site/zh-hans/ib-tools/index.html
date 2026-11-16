@@ -1487,12 +1487,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 }
 .tq-ibcp__cta { align-self: flex-start; }
 .tq-ibcp__cta .tq-copy__label { white-space: normal; line-height: 1.2; }
-.tq-ibcp__by { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #5e5f64; }
-.tq-stai { --dot: #d9d9d9; display: inline-flex; align-items: baseline; gap: .32em; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -.03em; line-height: 1; white-space: nowrap; }
 .tq-stai__m { flex: none; width: .73em; height: .73em; fill: var(--dot); overflow: visible; }
 .tq-stai__g { fill: #b0f127; }
-.tq-stai--by { --dot: #47484d; font-size: 13.5px; color: #1c1d21; }
-.tq-stai--by .tq-stai__g { fill: #9fdc1c; }
 .tq-ibcp__board { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; }
 .tq-ibcp__hand { position: absolute; left: 0; top: 0; width: 790px; height: 1024px; transform-origin: 0 0; will-change: transform; }
 .tq-ibcp__hand + .tq-ibcp__hand { width: 746px; }
@@ -2073,9 +2069,9 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
     </section>
 
     <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after Network + clients: left
-         the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block, "Powered by
-         SocialTrading.ai"); right two glass hands with phones — the provider's (a trade opened) and the client's (the trade
-         copied at the client's size); the position gathers into a drop of liquid silver (WebGL) that leaves the provider's
+         the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block); right two
+         glass hands with phones — the provider's (its strategy, "Meridian Core") and the follower's (copying it); the strategy
+         card gathers into a drop of liquid silver (WebGL) that leaves the provider's
          screen and lands on the client's. Driven by the scroll: the stage (one screen, room for the header at its top) holds
          still while the page scrolls 2.1 screens past it — the first half brings the client's hand in, the second half
          forms the drop, flies it and fills the client's screen; scrolling up plays it back. Reduced motion: no hold, the
@@ -2094,7 +2090,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
               <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>交易流入您客户的账户——按客户自己的仓位比例。</span></p>
             </div>
             <a class="tq-copy tq-ibcp__cta" href="#outlooks"><span class="tq-copy__label">了解跟单交易</span><span class="tq-copy__icon" aria-hidden="true"><span class="tq-copy__back"></span><span class="tq-copy__front"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
-            <div class="tq-ibcp__by"><span>技术支持</span><span class="tq-stai tq-stai--by" translate="no"><svg class="tq-stai__m" viewBox="0 0 32 32" aria-hidden="true"><circle cx="5" cy="5" r="5"/><circle cx="16" cy="5" r="5"/><circle cx="27" cy="5" r="5"/><circle cx="5" cy="16" r="5"/><circle cx="16" cy="16" r="5"/><circle cx="27" cy="16" r="5"/><circle cx="5" cy="27" r="5"/><circle cx="16" cy="27" r="5"/><circle class="tq-stai__g" cx="27" cy="27" r="5"/></svg>SocialTrading.AI</span></div>
           </div>
           <div class="tq-ibcp__crop"><div class="tq-ibcp__board" dir="ltr" translate="no" aria-hidden="true">
   <div class="tq-ibcp__hand" data-k="L" style="transform:translate3d(360px,101px,0) scale(.78)">
