@@ -91,10 +91,14 @@
    size of the title, buttons and lead (1.06: 6% over their base sizes), lowered (to .9 at most) so that the first screen
    fits under the header if it can; the picture keeps its size (the screen's width), so that its words stay readable;
    the H1's own fitted size is cleared first (measured at its full size; the page's fit-to-width runs again after this).
+   Desktops (two columns): the first screen keeps its height to the window and its content where it is, but not the
+   room the centring leaves under the content: the screen ends half the site's gap under the cards (its padding), so the
+   network block's title is the site's gap (--tq-gap) under them, as between the other blocks.
    Set before the first paint, again once the fonts are in and when the window changes. */
-(function(){var sec=document.currentScript.parentNode,v=sec.querySelector('.tq-ibvs'),wr=sec.querySelector('.tq-ibtp__wrap'),h1=sec.querySelector('.tq-ibtp__h1'),mq=window.matchMedia&&matchMedia('(max-width: 640px)'),
+(function(){var sec=document.currentScript.parentNode,v=sec.querySelector('.tq-ibvs'),wr=sec.querySelector('.tq-ibtp__wrap'),h1=sec.querySelector('.tq-ibtp__h1'),mq=window.matchMedia&&matchMedia('(max-width: 640px)'),dq=window.matchMedia&&matchMedia('(min-width: 1001px)'),
 f=function(){var w=v.clientWidth,pw=parseFloat(getComputedStyle(v).getPropertyValue('--pw'))||1292;if(w)v.style.setProperty('--s',(w/pw).toFixed(4))},
-fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();return}
+trim=function(){sec.style.paddingTop='';sec.style.minHeight='';if(!dq||!dq.matches)return;var cs=getComputedStyle(sec),pt=parseFloat(cs.paddingTop),m=sec.clientHeight-wr.offsetHeight-pt-parseFloat(cs.paddingBottom);if(m>1){sec.style.paddingTop=(pt+m/2).toFixed(1)+'px';sec.style.minHeight='0'}},
+fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();trim();return}
 var cs=getComputedStyle(sec),room=parseFloat(cs.minHeight)||innerHeight-sec.getBoundingClientRect().top-scrollY,k=1.06,i,need;h1.style.fontSize='';
 for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);if(need<=room+.5||k<=.9)break;k=Math.max(.9,k*room/need-.002)}f()};
 fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>

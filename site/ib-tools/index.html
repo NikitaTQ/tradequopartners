@@ -1237,10 +1237,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibn .tq-ibn__stage--m { display: block; width: 100%; }
 .tq-ibn__stage--m .sib-lab { font-size: 10px; }
 .tq-ibn__stage--m .sib-lab--main { font-size: 10.5px; }
-.tq-ibn__pillars { order: 4; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.tq-ibn__pill { justify-content: center; gap: 8px; padding: 16px 5px; border-radius: 20px; }
-.tq-ibn__pill svg { width: 30px; height: 30px; }
-.tq-ibn__pill b { font-size: clamp(12.5px, 3.75vw, 15px); line-height: 1.2; max-width: 100%; overflow-wrap: break-word; }
+.tq-ibn__pillars { order: 4; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.tq-ibn__pill { flex-direction: row; align-items: center; justify-content: center; gap: 5px; padding: 8px 6px; border-radius: 14px; text-align: start;
+    box-shadow: inset 0 1.5px 1px rgba(255,255,255,.95), 0 14px 24px -18px rgba(18,22,30,.4); }
+.tq-ibn__pill svg { width: 18px; height: 18px; stroke-width: 1.9; }
+.tq-ibn__pill b { min-width: 0; font-size: 12px; line-height: 1.2; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
 .tq-ibn__pill span { display: none; }
 .tq-ibn .tq-ibx__ctas { order: 5; justify-content: center; padding-top: 22px; }
 }
@@ -1788,10 +1789,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
    size of the title, buttons and lead (1.06: 6% over their base sizes), lowered (to .9 at most) so that the first screen
    fits under the header if it can; the picture keeps its size (the screen's width), so that its words stay readable;
    the H1's own fitted size is cleared first (measured at its full size; the page's fit-to-width runs again after this).
+   Desktops (two columns): the first screen keeps its height to the window and its content where it is, but not the
+   room the centring leaves under the content: the screen ends half the site's gap under the cards (its padding), so the
+   network block's title is the site's gap (--tq-gap) under them, as between the other blocks.
    Set before the first paint, again once the fonts are in and when the window changes. */
-(function(){var sec=document.currentScript.parentNode,v=sec.querySelector('.tq-ibvs'),wr=sec.querySelector('.tq-ibtp__wrap'),h1=sec.querySelector('.tq-ibtp__h1'),mq=window.matchMedia&&matchMedia('(max-width: 640px)'),
+(function(){var sec=document.currentScript.parentNode,v=sec.querySelector('.tq-ibvs'),wr=sec.querySelector('.tq-ibtp__wrap'),h1=sec.querySelector('.tq-ibtp__h1'),mq=window.matchMedia&&matchMedia('(max-width: 640px)'),dq=window.matchMedia&&matchMedia('(min-width: 1001px)'),
 f=function(){var w=v.clientWidth,pw=parseFloat(getComputedStyle(v).getPropertyValue('--pw'))||1292;if(w)v.style.setProperty('--s',(w/pw).toFixed(4))},
-fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();return}
+trim=function(){sec.style.paddingTop='';sec.style.minHeight='';if(!dq||!dq.matches)return;var cs=getComputedStyle(sec),pt=parseFloat(cs.paddingTop),m=sec.clientHeight-wr.offsetHeight-pt-parseFloat(cs.paddingBottom);if(m>1){sec.style.paddingTop=(pt+m/2).toFixed(1)+'px';sec.style.minHeight='0'}},
+fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();trim();return}
 var cs=getComputedStyle(sec),room=parseFloat(cs.minHeight)||innerHeight-sec.getBoundingClientRect().top-scrollY,k=1.06,i,need;h1.style.fontSize='';
 for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);if(need<=room+.5||k<=.9)break;k=Math.max(.9,k*room/need-.002)}f()};
 fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
@@ -2397,6 +2402,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 <script src="../assets/js/landing.js?v=67f1542748" defer></script>
 <script src="../assets/js/ib-copy.js?v=01d2f761bd" defer></script>
 <script src="../assets/js/ib-insights.js?v=161db91095" defer></script>
-<script src="../assets/js/ib-hole.js?v=db901c76ff" defer></script>
+<script src="../assets/js/ib-hole.js?v=ebe409c5f7" defer></script>
 </body>
 </html>

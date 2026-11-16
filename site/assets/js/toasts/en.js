@@ -6,7 +6,7 @@ export default {
 "{n} was onboarded with a sub-IB network of {v} partners",
 "{n} earned {v} in commission today",
 "{n} received a daily payout of {v}",
-"{n} withdrew {v} to USDT",
+"{n} withdrew {v}",
 "{n} withdrew {v} via bank wire",
 "{n} referred {v} new traders this week",
 "{n} added {v} sub-IBs to the network",

@@ -1653,10 +1653,13 @@
   .tq-ibn .tq-ibn__stage--m { display: block; width: 100%; }
   .tq-ibn__stage--m .sib-lab { font-size: 10px; }
   .tq-ibn__stage--m .sib-lab--main { font-size: 10.5px; }
-  .tq-ibn__pillars { order: 4; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-  .tq-ibn__pill { justify-content: center; gap: 8px; padding: 16px 5px; border-radius: 20px; }
-  .tq-ibn__pill svg { width: 30px; height: 30px; }
-  .tq-ibn__pill b { font-size: clamp(12.5px, 3.75vw, 15px); line-height: 1.2; max-width: 100%; overflow-wrap: break-word; }
+  /* the three cards as small glass chips, half the height they had: the red icon beside the title (not above it), the
+     title smaller, in two rows where it needs them (three in the longest languages) */
+  .tq-ibn__pillars { order: 4; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .tq-ibn__pill { flex-direction: row; align-items: center; justify-content: center; gap: 5px; padding: 8px 6px; border-radius: 14px; text-align: start;
+    box-shadow: inset 0 1.5px 1px rgba(255,255,255,.95), 0 14px 24px -18px rgba(18,22,30,.4); }
+  .tq-ibn__pill svg { width: 18px; height: 18px; stroke-width: 1.9; }
+  .tq-ibn__pill b { min-width: 0; font-size: 12px; line-height: 1.2; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
   .tq-ibn__pill span { display: none; }
   .tq-ibn .tq-ibx__ctas { order: 5; justify-content: center; padding-top: 22px; }
 }
