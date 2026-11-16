@@ -50,7 +50,7 @@
       red: { body: ['rgba(255,96,102,0.94)', 'rgba(196,15,22,0.82)'], rim: ['rgba(255,214,216,0.98)', 'rgba(120,8,12,0.6)'], pool: 'rgba(255,255,255,0.24)', spec: 'rgba(255,255,255,0.92)', solid: ['#FF4148', '#E7131B', '#8E0B10'], trail: '231,19,27' },
       black: { body: ['rgba(78,80,88,0.86)', 'rgba(6,6,8,0.7)'], rim: ['rgba(255,255,255,0.62)', 'rgba(0,0,0,0.75)'], pool: 'rgba(255,255,255,0.14)', spec: 'rgba(255,255,255,0.7)', solid: ['#3A3C42', '#18191D', '#050506'], trail: '30,32,38' }
     };
-    const LABELS = ['+$6.40 commission', 'New partner', '+$12.10', '0.8 lot', 'Weekly report', 'Sub-IB joined', '+$3.20 rebate', '1.5 lots', 'Payout sent', 'New client', 'Monthly report', '+$48.00', '2.0 lots', 'Partner L2', '+$9.75', 'Partner L5', 'XAUUSD 3.0 lots'];
+    const LABELS = ['+$6.40 commission', 'New partner', '+$12.10', '0.8 lot', 'Weekly report', 'Sub-IB joined', '+$3.20 rebate', '1.5 lots', 'Payout sent', 'New client', 'Monthly report', '+$48.00', '2.0 lots', 'Partner L2', '+$9.75', 'Partner L5'];
     const BARS = [2, 3, 3, 4, 5, 5, 6, 7, 7, 8, 11];
     const NODES = [
       { lv: 0, fx: 0, hx: 2, red: 1, par: -1 },
