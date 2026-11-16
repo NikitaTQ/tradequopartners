@@ -5,7 +5,7 @@ window.TQ_I18N = {
   "crys.payouts": "PAID TO PARTNERS MONTHLY",
   "crys.revshare": "MAX REVENUE SHARE",
   "crys.rating": "TRUSTPILOT RATING",
-  "crys.traders": "CLIENT TRADERS",
+  "crys.traders": "CLIENTS",
   "crys.trips": "INCENTIVE TRIPS",
   "flow.sub": "Commissions that keep coming. Settled every day.",
   "flow.cta": "Become a partner",

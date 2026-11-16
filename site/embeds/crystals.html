@@ -50,7 +50,7 @@
 </div>
 
 <three-d-stage name="tradequo-crystals" background="#ffffff"></three-d-stage>
-<script src="i18n.js?v=7fac418451"></script>
+<script src="i18n.js?v=cf2b5f61a3"></script>
 <script src="crystals-stage.js?v=432dd675f4"></script>
 <script type="module">
 const P = new URLSearchParams(location.search);
@@ -66,7 +66,7 @@ if (EMBED) ['.toolbar', '.note'].forEach((sel) => { const el = stage.shadowRoot 
  * Inter has Latin, Cyrillic, Vietnamese; Arabic and Thai come in i18n.js declared as 'Inter', CJK as 'TQ CJK'. */
 const LANG = (window.TQ_I18N || {})[P.get('lang')] ? P.get('lang') : 'en';
 const T = Object.assign({ 'crys.partners': 'PARTNERS', 'crys.payouts': 'PAID TO PARTNERS MONTHLY', 'crys.revshare': 'MAX REVENUE SHARE',
-  'crys.rating': 'TRUSTPILOT RATING', 'crys.traders': 'CLIENT TRADERS', 'crys.trips': 'INCENTIVE TRIPS', _script: 'latin' },
+  'crys.rating': 'TRUSTPILOT RATING', 'crys.traders': 'CLIENTS', 'crys.trips': 'INCENTIVE TRIPS', _script: 'latin' },
   (window.TQ_I18N || {})[LANG] || {});
 if (T._fonts) { const st = document.createElement('style'); st.textContent = T._fonts; document.head.appendChild(st); }
 const CAP_FONT = "'Inter', 'TQ CJK', sans-serif";
