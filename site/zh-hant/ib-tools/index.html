@@ -637,6 +637,8 @@ footer p { font-size: 12px !important; }
 .tq-head__cta:hover, .tq-head__cta:focus-visible { color: #fff; filter: brightness(1.12); }
 @media (max-width: 640px) {
 .tq-head { gap: 8px !important; padding: 0 12px 0 14px !important; padding-inline: 14px 12px !important; }
+.tq-head:not(.is-stuck) { height: 56px; border-image-width: 0 94.9px; }
+.tq-head.is-stuck { margin-bottom: 32px; }
 .tq-head .tq-head__logo { height: clamp(18px, 5.6vw, 24px) !important; }
 .tq-head .tq-head__nav { gap: 8px !important; }
 .tq-head .tq-lang { margin-inline-start: 0; }
@@ -1054,14 +1056,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 :lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh,
 :lang(ar) .tq-ibvs__ul, :lang(th) .tq-ibvs__ul, :lang(ja) .tq-ibvs__ul, :lang(ko) .tq-ibvs__ul, :lang(zh) .tq-ibvs__ul { letter-spacing: .02em; }
 @media (max-width: 640px) {
-.tq-ibtp { --k: 1.06; padding: calc(20px * var(--k)) clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
+.tq-ibtp { --k: 1.06; min-height: min(calc(100svh - 80px), 900px); padding: 2px clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
 .tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; }
 .tq-ibtp__text { display: contents; }
 .tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
 .tq-ibtp__h1 { order: 2; --h1s: calc(34px * var(--k)); margin-top: calc(14px * var(--k)); }
-.tq-ibtp__vis { order: 3; flex: none; width: auto; max-width: none; margin: calc(12px * var(--k)) calc(-1 * clamp(16px, 6vw, 24px)) 0; }
-.tq-ibvs { --pw: 923; width: calc((100% - 20px) * 923 / 805.8); aspect-ratio: 923 / 1080;
-    margin: calc((100% - 20px) * -35 / 805.8) 0 calc((100% - 20px) * -80 / 805.8) calc(10px - (100% - 20px) * 40 / 805.8); }
+.tq-ibtp__vis { order: 3; flex: none; width: auto; max-width: none; margin: -8px calc(-1 * clamp(16px, 6vw, 24px)) 0; }
+.tq-ibvs { --pw: 923; width: calc((100% - 20px) * 923 / 805.8 * var(--pk, 1)); aspect-ratio: 923 / 1080;   
+    margin: calc((100% - 20px) * -35 / 805.8 * var(--pk, 1)) 0 calc((100% - 20px) * -80 / 805.8 * var(--pk, 1)) calc(10px + (100% - 20px) * ((1 - var(--pk, 1)) / 2 - 40 / 805.8 * var(--pk, 1))); }
 .tq-ibvs__w--us { transform: scale(var(--s)) translate(-350px, -70px); }
 .tq-ibvs__w--them { transform: scale(var(--s)) translate(-14px, 89px) scale(.7); }
 .tq-ibvs__w--them > * { width: calc((334 - var(--x)) * 1px); }
@@ -1073,7 +1075,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibvs__uh { font-size: 22px; }
 .tq-ibvs__ul { font-size: 22px; }
 .tq-ibvs__us { font-size: 23.5px; }
-.tq-ibtp__ctas { order: 4; margin-top: calc(14px * var(--k)); padding-top: 0; gap: calc(12px * var(--k)); }
+.tq-ibtp__ctas { order: 4; margin-top: -4px; padding-top: 0; gap: calc(12px * var(--k)); }
 .tq-ibtp__lead { order: 5; max-width: none; margin-top: calc(16px * var(--k)); font-size: calc(16px * var(--k)); }
 }
 .tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
@@ -1741,7 +1743,8 @@ html:lang(ko) * { word-break: keep-all; }
       </div>
       <script>/* the picture (1292x1217; phones: 923x1080, --pw) at its width: --s for the words laid over it. Phones: --k, the
    size of the title, buttons and lead (1.06: 6% over their base sizes), lowered (to .9 at most) so that the first screen
-   fits under the header if it can; the picture keeps its size (the screen's width), so that its words stay readable;
+   holds everything down to the red button under the header (the lead may follow below); where it still would not, the
+   picture a little smaller (--pk, down to .85); otherwise the picture keeps its size (the screen's width), so that its words stay readable;
    the H1's own fitted size is cleared first (measured at its full size; the page's fit-to-width runs again after this).
    Desktops (two columns): the first screen keeps its height to the window and its content where it is, but not the
    room the centring leaves under the content: the screen ends half the site's gap under the cards (its padding), so the
@@ -1751,8 +1754,10 @@ html:lang(ko) * { word-break: keep-all; }
 f=function(){var w=v.clientWidth,pw=parseFloat(getComputedStyle(v).getPropertyValue('--pw'))||1292;if(w)v.style.setProperty('--s',(w/pw).toFixed(4))},
 trim=function(){sec.style.paddingTop='';sec.style.minHeight='';if(!dq||!dq.matches)return;var cs=getComputedStyle(sec),pt=parseFloat(cs.paddingTop),m=sec.clientHeight-wr.offsetHeight-pt-parseFloat(cs.paddingBottom);if(m>1){sec.style.paddingTop=(pt+m/2).toFixed(1)+'px';sec.style.minHeight='0'}},
 fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();trim();return}
-var cs=getComputedStyle(sec),room=parseFloat(cs.minHeight)||innerHeight-sec.getBoundingClientRect().top-scrollY,k=1.06,i,need;h1.style.fontSize='';
-for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=wr.offsetHeight+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);if(need<=room+.5||k<=.9)break;k=Math.max(.9,k*room/need-.002)}f()};
+var cs=getComputedStyle(sec),room=parseFloat(cs.minHeight)||innerHeight-sec.getBoundingClientRect().top-scrollY,k=1.06,i,need,go=sec.querySelector('.tq-ibtp__ctas'),pv=sec.querySelector('.tq-ibtp__vis'),
+upto=function(){return go.getBoundingClientRect().bottom-sec.getBoundingClientRect().top+12};h1.style.fontSize='';sec.style.removeProperty('--pk');
+for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=upto();if(need<=room+.5||k<=.9)break;k=Math.max(.9,k*room/need-.002)}
+if(need>room+.5){sec.style.setProperty('--pk',Math.max(.85,1-(need-room)/pv.offsetHeight).toFixed(4))}f()};
 fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
     </section>
 

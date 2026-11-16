@@ -1002,6 +1002,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* phones: the logo smaller, the menu button a round glass pill (its tap area 44px), the red button a little tighter */
 @media (max-width: 640px) {
   .tq-head { gap: 8px !important; padding: 0 12px 0 14px !important; padding-inline: 14px 12px !important; }
+  .tq-head:not(.is-stuck) { height: 56px; border-image-width: 0 94.9px; }   /* the bar 8px lower than on wider screens, so the first screen holds more */
+  .tq-head.is-stuck { margin-bottom: 32px; }   /* 80px in the flow either way */
   .tq-head .tq-head__logo { height: clamp(18px, 5.6vw, 24px) !important; }
   .tq-head .tq-head__nav { gap: 8px !important; }
   .tq-head .tq-lang { margin-inline-start: 0; }
