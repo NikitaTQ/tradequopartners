@@ -1059,8 +1059,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 :lang(ar) .tq-ibvs__uh, :lang(th) .tq-ibvs__uh, :lang(ja) .tq-ibvs__uh, :lang(ko) .tq-ibvs__uh, :lang(zh) .tq-ibvs__uh,
 :lang(ar) .tq-ibvs__ul, :lang(th) .tq-ibvs__ul, :lang(ja) .tq-ibvs__ul, :lang(ko) .tq-ibvs__ul, :lang(zh) .tq-ibvs__ul { letter-spacing: .02em; }
 @media (max-width: 640px) {
-.tq-ibtp { --k: 1.06; min-height: min(calc(100svh - 80px), 900px); padding: 2px clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
-.tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; }
+.tq-ibtp { --k: 1.06; min-height: min(calc(100svh - 80px), 900px); align-items: flex-start; padding: 2px clamp(16px, 6vw, 24px) calc(24px * var(--k)); }
+.tq-ibtp__wrap { flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-start; gap: 0; }
 .tq-ibtp__text { display: contents; }
 .tq-ibtp__eye, .tq-ibtp__h1, .tq-ibtp__ctas, .tq-ibtp__lead { position: relative; z-index: 2; }
 .tq-ibtp__h1 { order: 2; --h1s: calc(34px * var(--k)); margin-top: calc(14px * var(--k)); }
@@ -1078,8 +1078,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-ibvs__uh { font-size: 22px; }
 .tq-ibvs__ul { font-size: 22px; }
 .tq-ibvs__us { font-size: 23.5px; }
-.tq-ibtp__ctas { order: 4; margin-top: -4px; padding-top: 0; gap: calc(12px * var(--k)); }
-.tq-ibtp__lead { order: 5; max-width: none; margin-top: calc(16px * var(--k)); font-size: calc(16px * var(--k)); }
+.tq-ibtp__ctas { order: 4; margin-top: calc(var(--cg, 0px) - 4px); padding-top: 0; gap: calc(12px * var(--k)); }
+.tq-ibtp__lead { display: none; }
 }
 .tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
 .tq-ibpage { background: #e9eaec; }
@@ -1748,8 +1748,9 @@ h1, h2 { line-height: 1.2 !important; }
       </div>
       <script>/* the picture (1292x1217; phones: 923x1080, --pw) at its width: --s for the words laid over it. Phones: --k, the
    size of the title, buttons and lead (1.06: 6% over their base sizes), lowered (to .9 at most) so that the first screen
-   holds everything down to the red button under the header (the lead may follow below); where it still would not, the
-   picture a little smaller (--pk, down to .85); otherwise the picture keeps its size (the screen's width), so that its words stay readable;
+   holds everything down to the red button under the header (the lead is not shown on phones); where it still would not,
+   the picture a little smaller (--pk, down to .85); where there is room to spare, the button a little lower (--cg, at most
+   24px, keeping 12px under it); otherwise the picture keeps its size (the screen's width), so that its words stay readable;
    the H1's own fitted size is cleared first (measured at its full size; the page's fit-to-width runs again after this).
    Desktops (two columns): the first screen keeps its height to the window and its content where it is, but not the
    room the centring leaves under the content: the screen ends half the site's gap under the cards (its padding), so the
@@ -1758,11 +1759,11 @@ h1, h2 { line-height: 1.2 !important; }
 (function(){var sec=document.currentScript.parentNode,v=sec.querySelector('.tq-ibvs'),wr=sec.querySelector('.tq-ibtp__wrap'),h1=sec.querySelector('.tq-ibtp__h1'),mq=window.matchMedia&&matchMedia('(max-width: 640px)'),dq=window.matchMedia&&matchMedia('(min-width: 1001px)'),
 f=function(){var w=v.clientWidth,pw=parseFloat(getComputedStyle(v).getPropertyValue('--pw'))||1292;if(w)v.style.setProperty('--s',(w/pw).toFixed(4))},
 trim=function(){sec.style.paddingTop='';sec.style.minHeight='';if(!dq||!dq.matches)return;var cs=getComputedStyle(sec),pt=parseFloat(cs.paddingTop),m=sec.clientHeight-wr.offsetHeight-pt-parseFloat(cs.paddingBottom);if(m>1){sec.style.paddingTop=(pt+m/2).toFixed(1)+'px';sec.style.minHeight='0'}},
-fit=function(){if(!mq||!mq.matches){sec.style.removeProperty('--k');f();trim();return}
+fit=function(){sec.style.removeProperty('--cg');if(!mq||!mq.matches){sec.style.removeProperty('--k');f();trim();return}
 var cs=getComputedStyle(sec),room=parseFloat(cs.minHeight)||innerHeight-sec.getBoundingClientRect().top-scrollY,k=1.06,i,need,go=sec.querySelector('.tq-ibtp__ctas'),pv=sec.querySelector('.tq-ibtp__vis'),
 upto=function(){return go.getBoundingClientRect().bottom-sec.getBoundingClientRect().top+12};h1.style.fontSize='';sec.style.removeProperty('--pk');
 for(i=0;i<4;i++){sec.style.setProperty('--k',k.toFixed(4));need=upto();if(need<=room+.5||k<=.9)break;k=Math.max(.9,k*room/need-.002)}
-if(need>room+.5){sec.style.setProperty('--pk',Math.max(.85,1-(need-room)/pv.offsetHeight).toFixed(4))}f()};
+if(need>room+.5){sec.style.setProperty('--pk',Math.max(.85,1-(need-room)/pv.offsetHeight).toFixed(4))}f();need=upto();if(room-need>1)sec.style.setProperty('--cg',Math.min(24,(room-need)*.6).toFixed(1)+'px')};
 fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit)})();</script>
     </section>
 
