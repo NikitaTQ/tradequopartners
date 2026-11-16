@@ -996,6 +996,7 @@
 .tq-mts + .tp-sec { padding-top: 0; }
 .tq-mts::before { background: linear-gradient(180deg, #ffffff 0%, #f4f4f4 12.5%, #d7d7d8 25%, #afafb0 37.5%, #828283 50%, #535354 62.5%, #2b2b2c 75%, #0f0f10 87.5%, #040405 100%); }
 .tq-mts::after { background: linear-gradient(0deg, #ffffff 0%, #f4f4f4 12.5%, #d7d7d8 25%, #afafb0 37.5%, #828283 50%, #535354 62.5%, #2b2b2c 75%, #0f0f10 87.5%, #040405 100%); }
+@media (max-width: 1199px) { .tq-mts::after { height: max(48px, calc(var(--tq-gap) - clamp(28px, 7vh, 72px))); } }   /* narrower, the scene's words are its last line, with its own dark under them (.tq-mts__copy's bottom): the fade is the rest of the gap */
 .tq-mts__track { --p: 0; position: relative; height: 320vh; }
 .tq-mts__view { position: sticky; top: 0; height: 100vh; overflow: hidden; }
 .tq-mts opera-stage { position: absolute; inset: 0; display: block; }
@@ -1493,6 +1494,7 @@
 /* IB Tools: the FAQ (the shared .tp-faq), last on the page: on the grey of the black hole above it, turning white at its
    foot, above the footer */
 .tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
+.tq-ibpage { background: #e9eaec; }   /* IB Tools: every block meets the next on this grey, so a margin between two (the copy scene keeps its own) shows the same grey, no white band */
 .tq-ibb { position: relative; overflow: hidden; height: calc(clamp(520px, min(100vh, 112vw), 920px) + 44px + var(--tq-half)); height: calc(clamp(520px, min(100svh, 112vw), 920px) + 44px + var(--tq-half)); color: #0a0a0a;   /* the scene about as tall as wide (phones 520px), not a whole screen of grey; plus the button under the steps and half the site's gap under it (its captions keep the other half above them: ib-hole.js) */
   background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), #e9eaec; }
 .tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
@@ -1745,17 +1747,24 @@
 }
 
 /* IB Tools on phones: the site's gap between the blocks (--tq-gap); the hero keeps its fitted first screen (the block
-   under it takes the rest of the gap), the signals block leaves the copy scene the 76px it keeps above its words */
+   under it takes the rest of the gap) */
 @media (max-width: 640px) {
   .tq-ibi { padding-top: var(--tq-half); padding-bottom: var(--tq-half); }
   .tq-ibn__wrap { padding-block: var(--tq-half); }
-  .tq-ibtp + .tq-ibtv { padding-top: calc(var(--tq-gap) - 24px); }
-  .tq-ibs { padding-top: var(--tq-half) !important; padding-bottom: max(16px, calc(var(--tq-gap) - 76px)) !important; }
-  .tq-ibcp .tq-ibcp__stage { justify-content: flex-start; }   /* the copy scene: its words start right under the header, as the gap expects, */
-  .tq-ibcp .tq-ibcp__in { flex: 1 1 auto; display: flex; flex-direction: column; }
-  .tq-ibcp .tq-ibcp__note { margin-top: auto; }   /* and its note sits at the foot of the screen */
-  .tq-ibcp + .tq-ibi { padding-top: calc(var(--tq-gap) - 24px); }   /* the rest of the gap under it (the scene keeps 24px under its note) */
+  .tq-ibtp + .tq-ibn .tq-ibn__wrap { padding-top: calc(var(--tq-gap) - 24px); }
+  .tq-ibs { padding-top: var(--tq-half) !important; padding-bottom: var(--tq-half) !important; }
 }
+/* the copy scene in its column layout (phones and tablets): its words start right under the header (76px in) and its
+   note sits at the foot of the screen (24px above it), so its own margins make the gap with any block */
+@media (max-width: 1199px) {
+  .tq-ibcp .tq-ibcp__stage { justify-content: flex-start; }
+  .tq-ibcp .tq-ibcp__in { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .tq-ibcp .tq-ibcp__note { margin-top: auto; }
+  .tq-ibcp { margin-top: calc(var(--tq-half) - 76px); margin-bottom: calc(var(--tq-half) - 24px); }
+}
+/* the copy scene on wide screens: the phone's top shows ~226px into it, so it comes up over the half above it by the rest;
+   its arms and note run to its foot, so the half under it is its own margin */
+@media (min-width: 1200px) { .tq-ibcp { margin-top: calc(var(--tq-half) - 226px); margin-bottom: var(--tq-half); } }
 
 /* ---- IB Tools: the TradingView Premium block (#premium, in place of the Branded toolkit) -----------------------------
    The Marketing Tools card as it is (.tp-tv, "TradingView Premium on us" above) with a 3D "$0": a flat silver "$" (Inter)
@@ -1775,7 +1784,7 @@
    design has none, from 1000px): heading, button and note on the left, the feed on the right at 1.4x; tablets get the phone block, larger. Type: Inter (figures tabular),
    the H2 in the site's H2 face; 800 in the design is 700. */
 .tq-ibs { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  padding: var(--tq-half) clamp(20px, 5vw, 80px) max(24px, calc(var(--tq-gap) - 160px));
+  padding: var(--tq-half) clamp(20px, 5vw, 80px);
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 72% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
     radial-gradient(40% 40% at 10% 70%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   /* the top fades into the grey above: no seam */
 .tq-ibs::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }

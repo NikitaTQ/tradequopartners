@@ -137,7 +137,7 @@
         const s = new THREE.Shape();
         s.moveTo(-12, -1.6); s.lineTo(-6.6, -1.6); s.lineTo(-6.6, 7);
         s.absellipse(0, 7, 6.6, 1.55, Math.PI, 0, true);
-        s.lineTo(6.6, -1.6); s.lineTo(12, -1.6); s.lineTo(12, 13); s.lineTo(-12, 13); s.lineTo(-12, -1.6);
+        s.lineTo(6.6, -1.6); s.lineTo(12, -1.6); s.lineTo(12, 40); s.lineTo(-12, 40); s.lineTo(-12, -1.6);   // its top edge well out of frame: on phones the camera saw it, a bright bevel line across the screen
         const g = new THREE.ExtrudeGeometry(s, { depth: .7, bevelEnabled: true, bevelThickness: .14, bevelSize: .14, bevelSegments: 5, curveSegments: 64 });
         const lacquer = new THREE.MeshPhysicalMaterial({ color: 0x0b0b0d, roughness: .38, metalness: .15, clearcoat: 1, clearcoatRoughness: .18 });
         const m = new THREE.Mesh(g, lacquer); m.position.z = .45; scene.add(m);

@@ -1158,6 +1158,9 @@ html.tq-liquid .tp-cut__p { backdrop-filter: url(#tq-liquid) blur(2px) saturate(
 .tq-mts + .tp-sec { padding-top: 0; }
 .tq-mts::before { background: linear-gradient(180deg, #ffffff 0%, #f4f4f4 12.5%, #d7d7d8 25%, #afafb0 37.5%, #828283 50%, #535354 62.5%, #2b2b2c 75%, #0f0f10 87.5%, #040405 100%); }
 .tq-mts::after { background: linear-gradient(0deg, #ffffff 0%, #f4f4f4 12.5%, #d7d7d8 25%, #afafb0 37.5%, #828283 50%, #535354 62.5%, #2b2b2c 75%, #0f0f10 87.5%, #040405 100%); }
+@media (max-width: 1199px) {
+.tq-mts::after { height: max(48px, calc(var(--tq-gap) - clamp(28px, 7vh, 72px))); }
+}
 .tq-mts__track { --p: 0; position: relative; height: 320vh; }
 .tq-mts__view { position: sticky; top: 0; height: 100vh; overflow: hidden; }
 .tq-mts opera-stage { position: absolute; inset: 0; display: block; }
@@ -2021,6 +2024,6 @@ h1, h2 { line-height: 1.2 !important; }
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=c22b474340" defer></script>
-<script src="../../assets/js/stage.js?v=2cf5d424e9" defer></script>
+<script src="../../assets/js/stage.js?v=6cf9a1b548" defer></script>
 </body>
 </html>
