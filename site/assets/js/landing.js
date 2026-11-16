@@ -1467,6 +1467,7 @@
     const gains = $$('[data-dr-gain]', block), sr = $('[data-dr-sr]', block);
     const I = ($('[data-dr-i]', block) || {}).textContent || '', SO = ($('[data-dr-so]', block) || {}).textContent || '';
     let cur = 0, hold = 0, iv = 0;
+    const narrow = matchMedia('(max-width: 760px)');
     const roll = (i) => {
       cur = i;
       chips.forEach((c, k) => c.setAttribute('aria-pressed', String(k === i)));
@@ -1483,9 +1484,20 @@
         () => { if (!iv) iv = setInterval(() => { if (Date.now() >= hold) roll((cur + 1) % chips.length); }, 4000); },
         () => { clearInterval(iv); iv = 0; });
     }
+    /* the drum's size: as large as its widest line allows, the widest phrase of all five personas setting it (it stays put
+       while the drum rolls). Phones: each phrase wraps in its own two-row cell (partner.css); the size steps down until
+       every phrase of the language fits its two rows */
     const fitDrum = () => {
       if (!sent) return;
       sent.style.removeProperty('--drf');
+      if (narrow.matches) {
+        const cells = $$('.pf-dr__slot > span > span', sent);
+        for (let n = 0; n < 12; n++) {
+          if (!cells.some((x) => x.scrollHeight > x.clientHeight + 1 || x.scrollWidth > x.clientWidth + 1)) return;
+          sent.style.setProperty('--drf', (parseFloat(getComputedStyle(sent).fontSize) * 0.94).toFixed(1) + 'px');
+        }
+        return;
+      }
       for (let n = 0; n < 3; n++) {                   /* measure again: kerning doesn't scale quite linearly */
         const room = sent.clientWidth, need = Math.max(...$$('.pf-dr__line', sent).map((l) => l.scrollWidth));
         if (!room || need <= room) return;

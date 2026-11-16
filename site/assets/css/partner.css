@@ -359,53 +359,113 @@
    comes into view (startWhoFlow in landing.js). Below 900px the perks sit in a rounded dark card, the cards in a grid. */
 #pf-who-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; display: flex; justify-content: center; }
 @keyframes pfFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-/* the Who it's for card (Who_Its_For_Drum). Grey on the white page (the design's white card sits on grey) */
-.pf-dr { position: relative; width: 100%; max-width: 1200px; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 48px; padding: 72px 64px; border-radius: 32px;
-  background: #f2f2f5; color: #0e0e10; }
-.pf-dr__top { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
-.pf-dr__eyebrow { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 20px; line-height: 1.2; font-weight: 800; letter-spacing: -.03em; color: #0e0e10; }
+/* the Who it's for slab (Who_Its_For_Glass design, November 2026): a slab of glass with a chrome rim, cut corners, red
+   glints at two corners and a studio floor under it. The slab is the design's own picture with its words, chips and
+   button taken out (assets/programs/who-slab.webp, 1672x941; tools/who-slab/erase.py), laid as a border-image so
+   that a taller text stretches only its plain middle; the words, chips, rule and button are live, over it, at the
+   design's positions. Every length is in the design's pixels times --u (the slab's scale: 1282px wide at most, the
+   slab itself ~1200px), with a floor under the small type; the picture's studio fades into the white page at its
+   edges, and its margins round the slab overlap the blocks above and below, so the slab stands where the card did.
+   The drum's type is Inter from 100 to 900 (the site's file; the design is heavier than the 700 the rest of the site
+   declares): 'TQ Inter Heavy', for this block only. */
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../fonts/inter-cyrillic-ext.woff2) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../fonts/inter-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../fonts/inter-vietnamese.woff2) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../fonts/inter-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../fonts/inter-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+#pf-who-wrap { container-type: inline-size; position: relative; z-index: 1; }
+.pf-dr { --u: calc(min(100cqw, 1282px) / 1672); position: relative; width: calc(1672 * var(--u)); max-width: none; min-height: calc(941 * var(--u));
+  margin: calc(-118 * var(--u)) auto calc(-111 * var(--u)); box-sizing: border-box; display: flex; flex-direction: column; gap: 0;
+  padding: calc(211 * var(--u)) calc(166 * var(--u)) calc(196 * var(--u)) calc(173 * var(--u)); padding-inline: calc(173 * var(--u)) calc(166 * var(--u)); border: 0 solid transparent; border-radius: 0; background: none;
+  border-image: url(../programs/who-slab.webp) 450 420 300 420 fill / calc(450 * var(--u)) calc(420 * var(--u)) calc(300 * var(--u)) calc(420 * var(--u)) stretch;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 calc(50 * var(--u)), #000 calc(100% - 48 * var(--u)), transparent), linear-gradient(180deg, transparent, #000 calc(104 * var(--u)), #000 calc(100% - 66 * var(--u)), transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent, #000 calc(50 * var(--u)), #000 calc(100% - 48 * var(--u)), transparent), linear-gradient(180deg, transparent, #000 calc(104 * var(--u)), #000 calc(100% - 66 * var(--u)), transparent);
+  mask-composite: intersect; color: #070708; }
+.pf-dr__top { display: flex; justify-content: space-between; align-items: center; gap: calc(16 * var(--u)) calc(12 * var(--u)); flex-wrap: wrap; min-height: calc(45 * var(--u)); margin-inline-end: calc(-25 * var(--u)); }
+.pf-dr__eyebrow { margin: 0; margin-inline-start: calc(5 * var(--u)); display: flex; align-items: center; gap: calc(16 * var(--u)); font: 600 max(calc(22 * var(--u)), 14px)/1.2 'Inter', sans-serif; letter-spacing: .025em; color: #050507; }
 .pf-dr__eyebrow span { color: inherit !important; }   /* the heading's red words stay black in this small line */
-.pf-dr__eyebrow i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #e7131b; }
+.pf-dr__eyebrow i { flex: none; width: max(calc(11 * var(--u)), 7px); height: max(calc(11 * var(--u)), 7px); border-radius: 50%; background: #de0c18; }
 .pf-dr__eyebrow > span { min-width: 0; text-wrap: balance; }
-.pf-dr__chips { display: flex; gap: 6px; flex-wrap: wrap; }
-.pf-dr__chip { min-height: 36px; padding: 8px 14px; border: 0; border-radius: 999px; background: #fff; color: #5e5e66; font: 700 13px/1.2 'Inter', sans-serif; cursor: pointer;
-  transition: background .25s, color .25s; -webkit-tap-highlight-color: transparent; }
-.pf-dr__chip:hover { color: #0e0e10; }
-.pf-dr__chip[aria-pressed="true"] { background: #0e0e10; color: #fff; }
+/* the chips: white glass pills (a hairline rim, a bright top, a soft shadow); the chosen one glossy black */
+.pf-dr__chips { display: flex; gap: calc(8 * var(--u)); flex-wrap: wrap; }
+.pf-dr__chip { height: max(calc(45 * var(--u)), 32px); padding: 0 calc(19 * var(--u)); border: 0; border-radius: 999px; font: 550 max(calc(17.2 * var(--u)), 12.5px)/1 'Inter', sans-serif; letter-spacing: -.012em; color: #0c0c0d; cursor: pointer;
+  background: linear-gradient(180deg, #fbfbfd 0%, #f6f6f9 35%, #efeff2 60%, #f3f3f6 82%, #fbfbfd 100%);
+  box-shadow: inset 0 0 0 calc(1.5 * var(--u)) #cdccd2, inset 0 0 0 calc(3.5 * var(--u)) rgba(255,255,255,.95), inset 0 calc(-4 * var(--u)) calc(4 * var(--u)) calc(-2 * var(--u)) rgba(255,255,255,1),
+    0 calc(1 * var(--u)) 0 rgba(255,255,255,.9), 0 calc(6 * var(--u)) calc(10 * var(--u)) calc(-6 * var(--u)) rgba(20,22,30,.22); transition: color .2s ease, background .2s ease, font-size .25s ease; }
+.pf-dr__chip:hover { color: #000; }
+.pf-dr__chip[aria-pressed="true"] { font-size: max(calc(19 * var(--u)), 13.5px); font-weight: 600; letter-spacing: 0; color: #fafafa; background: linear-gradient(180deg, #3c3c3e 0%, #232323 16%, #101010 40%, #050505 62%, #0b0b0b 84%, #121212 100%);
+  box-shadow: inset 0 0 0 1px #141416, inset 0 calc(2 * var(--u)) calc(1 * var(--u)) rgba(255,255,255,.2), 0 calc(7 * var(--u)) calc(12 * var(--u)) calc(-6 * var(--u)) rgba(0,0,0,.55); }
 .pf-dr__chip:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
-/* the sentence: each half is a slot as wide as its longest phrase; the phrases stand in a column inside it and the
-   column slides up a line per kind (startWhoFlow); a long language steps the size down to fit (--drf) */
-.pf-dr__sent { --drl: 1.3em; position: relative; display: flex; flex-direction: column; font-size: var(--drf, 80px); line-height: 1.08; font-weight: 800; letter-spacing: -.055em; cursor: pointer;
-  user-select: none; -webkit-tap-highlight-color: transparent; }
-.pf-dr__line { display: flex; gap: .24em; align-items: flex-end; }
+/* the drum: two lines, the second's "so I" grey; the rolling words clipped to their rows */
+.pf-dr__sent { --drl: 1.3em; position: relative; display: flex; flex-direction: column; margin: calc(41 * var(--u)) 0 0; margin-inline: calc(3 * var(--u)) calc(-100 * var(--u));   /* it may run past the content's right edge, into the slab's margin: the longest phrase at the design's size */
+  font: 750 var(--drf, calc(91.4 * var(--u)))/1.17 'TQ Inter Heavy', 'Inter', sans-serif; letter-spacing: -.014em; cursor: pointer; }
+.pf-dr__sent .pf-dr__l2 { margin-top: -.062em; gap: .19em; }   /* the design's pitch between the lines (1.17em) and its gap after "so I" */
+.pf-dr__l2 .pf-dr__slot { letter-spacing: .011em; }   /* the design sets the second line's phrase a little looser than the first */   /* the design's second line: a line's pitch of 1.17em, a looser tracking */
+.pf-dr__line { display: flex; gap: .27em; align-items: flex-end; }
 .pf-dr__line > span { flex: none; }
-.pf-dr__so { color: #a8a8b0; white-space: nowrap; }
-.pf-dr__slot { display: inline-block; height: var(--drl); line-height: var(--drl); overflow: hidden; margin-bottom: calc((1.08em - var(--drl)) / 2); }   /* on the line's baseline */
+.pf-dr__so { color: #a09ea6; white-space: nowrap; }
+.pf-dr__slot { display: inline-block; height: var(--drl); line-height: var(--drl); overflow: hidden; margin-bottom: calc((1.17em - var(--drl)) / 2); }   /* on the line's baseline */
 .pf-dr__slot > span { display: flex; flex-direction: column; transition: transform .7s cubic-bezier(.7,0,.2,1); }
 .pf-dr__slot > span > span { height: var(--drl); line-height: var(--drl); white-space: nowrap; overflow: hidden; }   /* each phrase clipped to its row: no marks of the next one peek in */
-/* scripts with tall marks (Arabic, Thai, Vietnamese) get taller rows, so the next phrase's marks don't show above the slot */
 :lang(ar) .pf-dr__sent, :lang(th) .pf-dr__sent, :lang(vi) .pf-dr__sent { --drl: 1.6em; }
-.pf-dr__slot.is-red { color: #e7131b; }
+.pf-dr__slot.is-red { color: #df0512; }
 .pf-dr__l2 .pf-dr__slot > span { transition-delay: .12s; }
 .pf-dr__sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.pf-dr__bot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; padding-top: 32px; border-top: 1px solid rgba(14,14,22,.09); }
-.pf-dr__go { justify-self: end; }   /* the app-position button (.tq-pos) */
-.pf-dr__meta { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .22em; color: #8a8a93; }
-.pf-dr__gain { margin: 10px 0 0; max-width: 720px; font-size: 24px; line-height: 1.35; font-weight: 700; letter-spacing: -.02em; text-wrap: pretty; animation: pfFade .5s ease; }
-.pf-dr__gain[hidden] { display: none; }
-.pf-dr__cta { display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700; white-space: nowrap;
-  text-decoration: none; transition: background .2s; }
-.pf-dr__cta:hover { background: #c90f17; color: #fff; }
-.pf-dr__cta:focus-visible { outline: 2px solid #0e0e10; outline-offset: 3px; }
-[dir="rtl"] .pf-dr__cta span { display: inline-block; transform: scaleX(-1); }
-@media (prefers-reduced-motion: reduce) { .pf-dr__slot > span { transition: none; } .pf-dr__gain { animation: none; } }
-@media (max-width: 900px) {
-  .pf-dr { padding: 40px 24px; gap: 32px; border-radius: 24px; }
-  .pf-dr__sent { font-size: var(--drf, clamp(34px, 9vw, 64px)); }
-  .pf-dr__bot { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .pf-dr__gain { font-size: 19px; }
-  .pf-dr__cta { justify-self: start; }
-  .pf-dr .pf-dr__go { justify-self: stretch; width: 100%; }
+/* the rule, then WITH TRADEQUO · 01/05 and what they get, the button on the right */
+.pf-dr__bot { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: calc(60 * var(--u)); align-items: start; margin-top: calc(40.5 * var(--u));
+  padding-top: calc(34 * var(--u)); border-top: 1px solid #a3a3a8; box-shadow: 0 -1px 0 rgba(160,160,166,.32); }
+.pf-dr__meta { font: 600 max(calc(15.1 * var(--u)), 11px)/1 'Inter', sans-serif; letter-spacing: .23em; color: #6a696e; }
+.pf-dr__gain { margin: calc(15.2 * var(--u)) 0 0; max-width: calc(820 * var(--u)); font: 600 max(calc(28.4 * var(--u)), 17px)/1.34 'Inter', sans-serif; letter-spacing: 0; color: #050406; text-wrap: pretty; animation: pfFade .5s ease; }
+.pf-dr__gains { display: grid; }   /* the five gains share one cell: the block is as tall as the longest, and does not jump as the drum rolls */
+.pf-dr__gain { grid-area: 1 / 1; }
+.pf-dr__gain[hidden] { display: block; visibility: hidden; animation: none; }
+/* the button: glossy black with a chrome rim, a red tile with a white plus, the words, a chevron */
+.pf-dr__go { justify-self: end; margin: calc(21 * var(--u)) 0 0; margin-inline-end: calc(21 * var(--u)); display: flex; align-items: center; min-width: calc(448 * var(--u)); height: max(calc(89 * var(--u)), 56px); box-sizing: border-box;
+  padding: 0; padding-inline: calc(22 * var(--u)) calc(26 * var(--u)); border-radius: calc(22 * var(--u)); color: #fafafa; text-decoration: none; -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(180deg, #3d3d3f 0%, #1f1f20 9%, #161616 26%, #0d0d0d 55%, #101010 78%, #191919 92%, #262626 100%);
+  box-shadow: inset 0 0 0 calc(1.5 * var(--u)) #151517, inset 0 0 0 calc(3 * var(--u)) rgba(150,152,158,.95), inset 0 calc(4 * var(--u)) 0 calc(-1 * var(--u)) rgba(236,236,240,.95),
+    inset 0 calc(-4.5 * var(--u)) 0 calc(-1 * var(--u)) rgba(214,214,220,.95), inset 0 0 0 calc(4.5 * var(--u)) #121214,
+    0 calc(12 * var(--u)) calc(20 * var(--u)) calc(-8 * var(--u)) rgba(16,16,24,.5), 0 calc(3 * var(--u)) calc(6 * var(--u)) rgba(16,16,24,.14); transition: transform .25s ease, filter .25s ease; }
+.pf-dr__go:hover { color: #fff; transform: translateY(-2px); filter: brightness(1.08); }
+.pf-dr__go:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; }
+.pf-dr__plus { flex: none; display: flex; align-items: center; justify-content: center; width: max(calc(54 * var(--u)), 36px); height: max(calc(54 * var(--u)), 36px); border-radius: calc(11 * var(--u));
+  background: linear-gradient(155deg, #f2333b 0%, #d8141e 45%, #b80c15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -2px 3px rgba(80,0,4,.3), 0 1px 2px rgba(0,0,0,.4); }
+.pf-dr__plus svg { width: max(calc(20 * var(--u)), 13px); height: auto; }
+.pf-dr__go-l { flex: 1; min-width: 0; margin: calc(-5 * var(--u)) 0 0; margin-inline: calc(28 * var(--u)) calc(40 * var(--u)); font: 700 max(calc(27.5 * var(--u)), 17px)/1 'Inter', sans-serif; letter-spacing: -.0125em; white-space: nowrap; }
+.pf-dr__chev { flex: none; width: max(calc(12 * var(--u)), 8px); height: auto; }
+[dir="rtl"] .pf-dr__chev { transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) { .pf-dr__slot > span { transition: none; } .pf-dr__gain { animation: none; } .pf-dr__go { transition: none; } }
+/* phones and narrow tablets: the same slab, its corners at a quarter of the design's size (--k), the content in one
+   column at readable sizes: the line and the chips, the drum (fitted to the width), the rule, what they get, the button
+   across the slab */
+@media (max-width: 760px) {
+  .pf-dr { --k: .25px; width: 100%; min-height: 0; margin: calc(-118 * var(--k)) auto calc(-111 * var(--k)); padding: calc(118 * var(--k) + 44px) 30px calc(111 * var(--k) + 52px); padding-inline: 30px;
+    border-image-width: calc(450 * var(--k)) calc(420 * var(--k)) calc(300 * var(--k)) calc(420 * var(--k));
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 calc(50 * var(--k)), #000 calc(100% - 48 * var(--k)), transparent), linear-gradient(180deg, transparent, #000 calc(104 * var(--k)), #000 calc(100% - 66 * var(--k)), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 calc(50 * var(--k)), #000 calc(100% - 48 * var(--k)), transparent), linear-gradient(180deg, transparent, #000 calc(104 * var(--k)), #000 calc(100% - 66 * var(--k)), transparent); }
+  .pf-dr__top { flex-direction: column; align-items: flex-start; gap: 18px; margin-inline-end: 0; }
+  .pf-dr__eyebrow { margin-inline-start: 0; gap: 10px; font-size: 15px; }
+  .pf-dr__eyebrow i { width: 8px; height: 8px; }
+  .pf-dr__chips { gap: 6px; }
+  .pf-dr__chip { height: 34px; padding: 0 14px; font-size: 13px; }
+  .pf-dr__chip[aria-pressed="true"] { font-size: 13.5px; }
+  /* the drum: each phrase in a cell two rows tall, wrapping in it (the widest phrase of five on one line would be a
+     fifth of the screen); "I" and "so I" hang at the left of their phrase's first row */
+  .pf-dr__sent { --drl: 2.36em; margin: 30px 0 0; margin-inline: 0; font-size: var(--drf, clamp(30px, 8.6vw, 42px)); line-height: 1.18; }   /* --drf: landing.js, until every phrase fits two rows */
+  .pf-dr__line, .pf-dr__sent .pf-dr__l2 { align-items: flex-start; gap: .26em; margin-top: 0; }
+  .pf-dr__line > .pf-dr__slot { flex: 1 1 0; min-width: 0; margin-bottom: 0; }
+  .pf-dr__slot > span > span { white-space: normal; line-height: 1.18; text-wrap: balance; overflow-wrap: anywhere; }
+  .pf-dr__l2 .pf-dr__slot { letter-spacing: inherit; }
+  :lang(ar) .pf-dr__sent, :lang(th) .pf-dr__sent, :lang(vi) .pf-dr__sent { --drl: 2.84em; line-height: 1.4; }   /* tall marks: roomier rows */
+  :lang(ar) .pf-dr__slot > span > span, :lang(th) .pf-dr__slot > span > span, :lang(vi) .pf-dr__slot > span > span { line-height: 1.4; }
+  .pf-dr__bot { grid-template-columns: minmax(0, 1fr); row-gap: 22px; margin-top: 26px; padding-top: 22px; }
+  .pf-dr__meta { font-size: 11px; }
+  .pf-dr__gain { margin-top: 10px; font-size: 18px; line-height: 1.38; max-width: none; }
+  .pf-dr__go { justify-self: stretch; margin: 0; min-width: 0; height: 62px; padding-inline: 12px 18px; border-radius: 17px; }
+  .pf-dr__plus { width: 40px; height: 40px; border-radius: 10px; }
+  .pf-dr__plus svg { width: 15px; }
+  .pf-dr__go-l { margin: -2px 0 0; margin-inline: 16px 12px; font-size: 18px; }
+  .pf-dr__chev { width: 9px; }
 }
 
 /* Why partners choose: dark, as tall as the screen under the stuck header (68px); the white page eases into it
