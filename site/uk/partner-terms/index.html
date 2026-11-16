@@ -931,10 +931,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-pc__total [data-inv-cap] { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: .16em; color: #6a6a6e; }
 .tq-pc__total [data-inv-total] { font-weight: 800; font-size: 88px; letter-spacing: -.06em; line-height: .85; white-space: nowrap; color: #0a0a0a; font-variant-numeric: tabular-nums; transition: color .3s; }
 .tq-pc__foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; }
-.tq-pc__code { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
-.tq-pc__bars { width: 220px; max-width: 100%; height: 44px; background: repeating-linear-gradient(90deg, #0a0a0a 0 2px, transparent 2px 4px, #0a0a0a 4px 5px, transparent 5px 8px, #0a0a0a 8px 11px, transparent 11px 13px); }
-.tq-pc__code > span:last-child { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .3em; color: #55555a; }
-.tq-pc__stamp { flex: none; transform: rotate(-12deg); opacity: .9; margin: -18px -6px -10px 0; mix-blend-mode: multiply; }
+.tq-pc__foot--note p { margin: 0; max-width: 420px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; color: #55555a; text-wrap: pretty; }
+@media (min-width: 901px) {
+.tq-pc__sub--narrow { display: none; }
+}
 .tq-pc__note { max-width: 1240px; margin: clamp(16px, 2vw, 24px) auto 0; font-size: 12.5px; line-height: 1.55; color: #8a8a8e; text-align: center; text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
 .tq-pc__per [data-inv-per-thumb], .tq-pc__knob, .tq-pc__total [data-inv-total] { transition: none; }
@@ -1669,14 +1669,15 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 <!-- Payout calculator (Payout_Calculator_Receipt_Dark design): a dark panel with the page's heading, a glass
      "terminal" with the two sliders, the Day / Month / Year switch and the CTA, and a receipt printing out of a
      slot. Shared by the landing and partner-terms/: each page puts its own heading (.tq-pc__title,
-     .tq-pc__sub) between calc-open and calc-body. startCalculator in landing.js drives it. -->
+     .tq-pc__sub) between calc-open and calc-body, then the receipt's foot (calc-foot: the barcode and the PAID stamp, on the
+     landing; partner-terms/ prints its sub line there instead) and calc-close. startCalculator in landing.js drives it. -->
     <div class="tq-pc" data-calc="">
       <span class="tq-pc__edge" aria-hidden="true"></span>
       <span class="tq-pc__glow" aria-hidden="true"></span>
       <div class="tq-pc__head">
 
         <h2 class="tq-pc__title tq-h2" data-fitw>Розрахуйте свій <span style="color: #e7131b;">місячний дохід</span></h2>
-        <p class="tq-pc__sub">Пересувайте повзунки, щоб побачити, скільки план комісійних для партнерів TradeQuo може приносити вам щомісяця.</p>
+        <p class="tq-pc__sub tq-pc__sub--narrow">Пересувайте повзунки, щоб побачити, скільки план комісійних для партнерів TradeQuo може приносити вам щомісяця.</p>
       </div>
       <div class="tq-pc__grid">
         <div class="tq-pc__term">
@@ -1723,10 +1724,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
               <span data-inv-cap="" data-day="ЗАГАЛЬНА ВИПЛАТА / ДЕНЬ" data-month="ЗАГАЛЬНА ВИПЛАТА / МІСЯЦЬ" data-year="ЗАГАЛЬНА ВИПЛАТА / РІК">ЗАГАЛЬНА ВИПЛАТА / МІСЯЦЬ</span>
               <span data-inv-money="" data-inv-total=""></span>
             </div>
-            <div class="tq-pc__foot">
-              <div class="tq-pc__code"><span class="tq-pc__bars" aria-hidden="true"></span><span><span data-inv-code="">TQ 0000 060</span> · ДЯКУЄМО</span></div>
-              <svg class="tq-pc__stamp" data-inv-stamp="" aria-hidden="true" width="104" height="104" viewBox="0 0 132 132"><defs><path id="tqPcRing" d="M66,66 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"></path></defs><circle cx="66" cy="66" r="63" fill="none" stroke="#e7131b" stroke-width="2.5"></circle><circle cx="66" cy="66" r="38" fill="none" stroke="#e7131b" stroke-width="1.5"></circle><text font-family="Inter, sans-serif" font-size="10.5" letter-spacing="3.2" fill="#e7131b" direction="ltr" unicode-bidi="embed"><textPath href="#tqPcRing">PAID DAILY · TRADEQUO · PARTNER ·</textPath></text><text x="66" y="73" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="21" fill="#e7131b" transform="rotate(-14 66 66)">PAID</text></svg>
-            </div>
+
+            <div class="tq-pc__foot tq-pc__foot--note"><p>Пересувайте повзунки, щоб побачити, скільки план комісійних для партнерів TradeQuo може приносити вам щомісяця.</p></div>
           </div>
         </div>
       </div>

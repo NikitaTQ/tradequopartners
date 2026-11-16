@@ -148,8 +148,10 @@
     <section id="calculator" class="tp-sec" data-screen-label="Commission calculator">
 {{> calc-open}}
         <h2 class="tq-pc__title tq-h2" data-fitw>{{cp.hero.h1}}</h2>
-        <p class="tq-pc__sub">{{cp.hero.sub}}</p>
+        <p class="tq-pc__sub tq-pc__sub--narrow">{{cp.hero.sub}}</p>
 {{> calc-body}}
+            <div class="tq-pc__foot tq-pc__foot--note"><p>{{cp.hero.sub}}</p></div>
+{{> calc-close}}
     </section>
 
     <!-- Daily payouts (Paid_Daily_Silver design): a silver panel; a silver rail runs step to step and the step it reaches
