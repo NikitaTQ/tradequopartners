@@ -1290,6 +1290,15 @@
 /* the copy scene on wide screens: the phone's top shows ~226px into it, so it comes up over the half above it by the rest;
    its arms and note run to its foot, so the half under it is its own margin */
 @media (min-width: 1200px) { .tq-ibcp { margin-top: calc(var(--tq-half) - 226px); margin-bottom: var(--tq-half); } }
+/* phones: the hands come up to 60px under the button (not the foot of the screen), and the stage is only as tall as its
+   words and hands (--sh, measured by the script under the block), so the block is shorter by the room that was empty;
+   the scroll it plays over stays 2.1 screens */
+@media (max-width: 640px) {
+  html .tq-ibcp { height: calc(var(--sh, 100svh) + 210svh); }   /* over the block's own 310svh, later in this file */
+  .tq-ibcp .tq-ibcp__stage { height: auto; }
+  .tq-ibcp .tq-ibcp__in { flex: none; }
+  .tq-ibcp .tq-ibcp__crop { margin-top: 60px; }
+}
 
 /* ---- IB Tools: the TradingView Premium block (#premium, in place of the Branded toolkit) -----------------------------
    The Marketing Tools card as it is (.tp-tv, "TradingView Premium on us" above) with a 3D "$0": a flat silver "$" (Inter)

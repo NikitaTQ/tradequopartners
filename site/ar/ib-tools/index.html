@@ -1306,6 +1306,12 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (min-width: 1200px) {
 .tq-ibcp { margin-top: calc(var(--tq-half) - 226px); margin-bottom: var(--tq-half); }
 }
+@media (max-width: 640px) {
+html .tq-ibcp { height: calc(var(--sh, 100svh) + 210svh); }
+.tq-ibcp .tq-ibcp__stage { height: auto; }
+.tq-ibcp .tq-ibcp__in { flex: none; }
+.tq-ibcp .tq-ibcp__crop { margin-top: 60px; }
+}
 .tq-ibtv { background: #e9eaec; }
 .tq-ibtv__zero { position: relative; display: flex; align-items: center; justify-content: center; gap: .05em; margin-top: 30px; font-size: 250px; line-height: 1; direction: ltr;
   filter: drop-shadow(0 20px 60px rgba(231,19,27,.35)); }
@@ -2119,7 +2125,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
       <script>/* the stage: one screen, its top --hdr kept free for the header. 1200px+: the 1440x900 composition scaled to fit it (--z lines the
    background up; --rr puts the progress rail near the screen's right edge: as far from it as the words are from the left one, 120px at most); narrower: the words, then the hands cropped to x 430–1440, y 110–900 of the composition, scaled to the
    width and to the room the words leave (at most 0.8x, centred) */
-(function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,H=g.clientHeight-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);var gx=(w-1440*k)/2,R=Math.min(gx+72*k,120);s.style.setProperty('--rr',((R-gx)/k).toFixed(1)+'px');b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');s.style.removeProperty('--rr');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-48)/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
+(function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,ph=matchMedia('(max-width: 640px)').matches,H=(ph?innerHeight:g.clientHeight)-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);var gx=(w-1440*k)/2,R=Math.min(gx+72*k,120);s.style.setProperty('--rr',((R-gx)/k).toFixed(1)+'px');b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');s.style.removeProperty('--rr');k=Math.max(.2,Math.min(.8,w/1010,(H-t.offsetHeight-48-(ph?56:0))/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}if(ph)s.style.setProperty('--sh',g.offsetHeight+'px');else s.style.removeProperty('--sh')}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
     </section>
 
     <!-- Market outlooks feed (the IB feed design), after the copy trading hand-off: the IB's own market outlook channel
