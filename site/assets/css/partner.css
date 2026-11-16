@@ -2,7 +2,7 @@
    Built on site.css: same type, chrome-glass cards, red accent. */
 
 .tp { font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
-.tp-sec { position: relative; padding: clamp(48px, 6.1vw, 88px) clamp(16px, 4vw, 56px); }   /* the site rhythm: 88 + 88px between blocks, 48 + 48 on phones */
+.tp-sec { position: relative; padding: var(--tq-half) clamp(16px, 4vw, 56px); }   /* the site rhythm: half the gap between blocks above and under (site.css --tq-gap) */
 .tp-wrap { position: relative; max-width: 1240px; margin: 0 auto; }
 
 /* ---- headings ---------------------------------------------------------------- */
@@ -48,7 +48,7 @@
 .tp-stage > * { position: relative; }   /* content above the light streaks */
 
 /* ---- hero ---------------------------------------------------------------------- */
-.tp-hero { padding-top: clamp(10px, 1.6vw, 22px); padding-bottom: clamp(48px, 6vw, 88px); }
+.tp-hero { padding-top: clamp(10px, 1.6vw, 22px); padding-bottom: var(--tq-half); }
 .tp-hero .tp-head { gap: 10px; }
 .tp-hero .tp-hero__lead { max-width: 64ch; margin: 0 auto; font-size: 22px; text-align: center; }   /* under the cards */
 .tp-hero .tp-stage { margin-top: clamp(16px, 2vw, 26px); }
@@ -228,7 +228,7 @@
 }
 .tp-night .tp-h2 { color: #fff; }
 .tp-night .tp-sub { color: #a7a9ae; }
-.tp-night-sec { padding: clamp(48px, 6.1vw, 88px) clamp(8px, 2vw, 24px); }
+.tp-night-sec { padding: var(--tq-half) clamp(8px, 2vw, 24px); }
 
 /* ---- final call on Partner Programs (Final CTA Glint Teaser) ----------------------- */
 .tp-final { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
@@ -288,7 +288,6 @@
   .tp-faq__side { position: static; }
 }
 @media (max-width: 640px) {
-  .tp-sec { padding-top: 48px; padding-bottom: 48px; }
   .tp-hero { padding-top: 8px; }
   .tp-stage { padding: 12px; border-radius: 26px; }
   .tp-perkgrid { grid-template-columns: minmax(0, 1fr); }
@@ -453,7 +452,7 @@
 }
 /* under the hero: its light grey eases into the page's white */
 .tq-mth-tail { position: relative; height: clamp(120px, 16vh, 200px); margin-top: -1px; background: linear-gradient(180deg, #f1f1f4 0%, #fff 100%); }
-.tq-mth-tail + .tp-sec { padding-top: clamp(16px, 3vw, 40px); }
+.tq-mth-tail + .tp-sec { padding-top: max(16px, calc(var(--tq-gap) - 20px - clamp(120px, 16vh, 200px) + 40px)); }   /* the gap from the hero's last line (20px above its end), over the tail (less the 40px the block sits into it) */
 .tq-mth-tail { margin-bottom: -40px; }   /* the blocks after it start 40px higher, over the tail's white end */
 @media (max-aspect-ratio: 19/20) {   /* tall screens: the 2×2 layout */
   .tq-mth__stage { height: 80%; }
@@ -517,8 +516,8 @@
 
 /* Why partners choose: dark, as tall as the screen under the stuck header (68px); the white page eases into it
    (#pf-top: the curve of #pf-tail below, upside down) and out of it */
-.pf-dark { position: relative; margin-top: clamp(24px, 4vw, 56px); }
-#pf-top { height: clamp(300px, 42vh, 480px); margin-bottom: -1px;
+.pf-dark { position: relative; margin-top: 0; }   /* the fade below is the gap */
+#pf-top { height: var(--tq-gap); margin-bottom: -1px;
   background: linear-gradient(0deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
@@ -583,19 +582,20 @@
 [dir="rtl"] .pf-pz-arr { display: inline-block; transform: scaleX(-1); }
 /* under the perks: their red glow carries on and the black eases into the white the next block starts with
    (the same curve as the landing's dark tail); it tucks 1px under the section so no seam shows */
-#pf-tail { position: relative; height: clamp(360px, 50vh, 560px); margin-top: -1px; margin-bottom: -20px;   /* Why TradeQuo and what follows sit 20px into its white end */
+#pf-tail { position: relative; height: var(--tq-gap); margin-top: -1px;   /* the fades are as long as the gap between blocks: the content on either side sits at their ends */
   background: radial-gradient(55% 34vh at 50% 0%, rgba(150,10,15,.42), rgba(150,10,15,0) 70%),
     linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
-.pf { position: relative; padding-top: clamp(24px, 5.5vw, 80px); }   /* room above the persona block, like the gap between blocks */
+.pf { position: relative; padding-top: var(--tq-half); }   /* half the gap above the persona card (the hero keeps the other half under it) */
 #why { padding-top: 0; }   /* on wide screens the dark-to-white tail above is the gap */
 @media (prefers-reduced-motion: reduce) { .pf-perk { transition: none; } }   /* the fan simply stands */
 @media (max-width: 899px) {
   #pf-who-wrap { padding: 24px 16px; }
-  .pf-dark { margin-top: 0; padding: 72px 0 48px; }   /* the usual gap from the persona card, then down to the dome */
+  .pf { padding-top: calc(var(--tq-half) - 24px); }   /* the card wrap keeps 24px of its own above the card */
+  .pf-dark { margin-top: 0; padding: calc(var(--tq-gap) - 24px) 0 var(--tq-half); }   /* the gap from the persona card (24px of it is the card wrap's own), then half down to Why TradeQuo */
   #pf-top, #pf-tail { display: none; }
-  #why { padding-top: calc(clamp(48px, 6.1vw, 88px) - 20px); }   /* 20px closer to the perks above, as on wide screens */
+  #why { padding-top: var(--tq-half); }
   .pf-perks { height: auto; min-height: 0; padding-bottom: 40px; border-radius: clamp(28px, 4vw, 48px); margin: 0 clamp(8px, 2vw, 16px); width: auto; }
   .pf-perks__cta { top: auto; }
   /* the landing's Partner perks on phones: heading on the centre line, the cards in a grid, the CTA last */
@@ -627,7 +627,7 @@
    Three partner profiles, each a card with a starting estimate. The card tilts toward the mouse with a
    glare (.is-hov), a click selects it (.is-sel: red ring, SELECTED pill, the two inner cards lift) and
    dims the others (.is-dim); plan.js sets the classes and draws the candles on the back card. */
-.tq-earn { --pad: clamp(16px, 4vw, 56px); padding: clamp(28px, 4.4vw, 64px) var(--pad) clamp(56px, 6vw, 88px);
+.tq-earn { --pad: clamp(16px, 4vw, 56px); padding: clamp(28px, 4.4vw, 64px) var(--pad) var(--tq-half);
   /* white where the header ends, easing into the grey (no seam under the header), white again at the bottom */
   background: radial-gradient(70% 55% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, #fff 0, #f7f7f8 clamp(140px, 22vw, 260px), #f7f7f8 calc(100% - 140px), #fff 100%); }
 .tq-earn__in { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; }
@@ -991,7 +991,9 @@
    they come in. The page's white eases into the stage's black and back (::before, ::after: an eased gradient,
    140-240px). Type: Inter (DM Sans in the design); the H2 the site's H2 face. */
 .tq-mts { --k: 1; position: relative; background: #040405; color: #fff; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
-.tq-mts::before, .tq-mts::after { content: ''; display: block; height: clamp(140px, 22vh, 240px); }
+.tq-mts::before, .tq-mts::after { content: ''; display: block; height: var(--tq-gap); }   /* the fades are the gap */
+#library:has(+ .tq-mts) { padding-bottom: 0; }
+.tq-mts + .tp-sec { padding-top: 0; }
 .tq-mts::before { background: linear-gradient(180deg, #ffffff 0%, #f4f4f4 12.5%, #d7d7d8 25%, #afafb0 37.5%, #828283 50%, #535354 62.5%, #2b2b2c 75%, #0f0f10 87.5%, #040405 100%); }
 .tq-mts::after { background: linear-gradient(0deg, #ffffff 0%, #f4f4f4 12.5%, #d7d7d8 25%, #afafb0 37.5%, #828283 50%, #535354 62.5%, #2b2b2c 75%, #0f0f10 87.5%, #040405 100%); }
 .tq-mts__track { --p: 0; position: relative; height: 320vh; }
@@ -1363,7 +1365,7 @@
    (below). Below its two columns' widths the picture goes under the text, across the width (as the design does). Type:
    Inter (DM Sans in the design), 800 is 700. */
 .tq-ibtp { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box; min-height: min(calc(100vh - 88px), 900px); min-height: min(calc(100svh - 88px), 900px);
-  padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px); color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px) var(--tq-half); color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   background: linear-gradient(180deg, #f7f7f8 0%, #f3f3f5 22%, #f3f3f5 78%, #e9eaec 100%); }   /* the picture's grey (#f3f3f5) through the middle; the foot is the next block's grey */
 .tq-ibtp__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(40px, 5vw, 72px); }
 .tq-ibtp__text { position: relative; z-index: 2; flex: 1 1 420px; max-width: 560px; min-width: 0; display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); }
@@ -1491,10 +1493,10 @@
 /* IB Tools: the FAQ (the shared .tp-faq), last on the page: on the grey of the black hole above it, turning white at its
    foot, above the footer */
 .tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
-.tq-ibb { position: relative; overflow: hidden; height: clamp(592px, calc(min(100vh, 112vw) + 72px), 992px); height: clamp(592px, calc(min(100svh, 112vw) + 72px), 992px); color: #0a0a0a;   /* tall screens: about as tall as wide (phones 520px), not a whole screen of grey */
+.tq-ibb { position: relative; overflow: hidden; height: calc(clamp(520px, min(100vh, 112vw), 920px) + 44px + var(--tq-half)); height: calc(clamp(520px, min(100svh, 112vw), 920px) + 44px + var(--tq-half)); color: #0a0a0a;   /* the scene about as tall as wide (phones 520px), not a whole screen of grey; plus the button under the steps and half the site's gap under it (its captions keep the other half above them: ib-hole.js) */
   background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), #e9eaec; }
 .tq-ibb__cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-.tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 16px; box-sizing: border-box; }   /* the steps, the button under them */
+.tq-ibb__hud { position: absolute; z-index: 2; left: 0; right: 0; bottom: var(--tq-half); display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 16px; box-sizing: border-box; }   /* the steps, the button under them */
 /* its button (CTA «Become a partner» · Event horizon), under the steps (the block is 72px taller for it; ib-hole.js keeps
    the scene above them): a black pill ringed in red with a red glow, the red round arrow; the glow widens on hover */
 .tq-horizon { display: inline-flex; align-items: center; gap: 14px; height: 58px; box-sizing: border-box; padding: 0; padding-inline: 26px 7px; border-radius: 999px; border: 1.5px solid #e7131b;
@@ -1531,8 +1533,8 @@
    set while a group is hovered: then the label shows its client count and the other groups dim. */
 .tq-ibn { position: relative; overflow: hidden; color: #0a0a0a;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(44% 48% at 66% 30%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), radial-gradient(30% 40% at 14% 30%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   /* the top fades into the grey of the block above: no seam */
-.tq-ibn__wrap { position: relative; max-width: 1440px; margin: 0 auto; padding: clamp(24px, 4.5vh, 56px) clamp(20px, 5.5vw, 80px); box-sizing: border-box; display: flex; flex-direction: column;
-  justify-content: center; min-height: 100vh; min-height: 100svh; gap: clamp(16px, 3.2vh, 36px); }
+.tq-ibn__wrap { position: relative; max-width: 1440px; margin: 0 auto; padding: var(--tq-half) clamp(20px, 5.5vw, 80px); box-sizing: border-box; display: flex; flex-direction: column;
+  justify-content: center; gap: clamp(16px, 3.2vh, 36px); }
 .tq-ibn__row { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(32px, 4vw, 56px); }
 .tq-ibn__text { flex: 1 1 340px; max-width: 450px; min-width: 0; display: flex; flex-direction: column; gap: clamp(14px, 2.2vh, 24px); }
 .tq-ibn__h2 { --h2s: clamp(26px, min(3.2vw, 5.4vh), 50px); margin: 0; line-height: 1.08; letter-spacing: -.01em; padding-inline-start: 0; }   /* face: .tq-h2 */
@@ -1662,8 +1664,8 @@
    a glass pill with a red glass pill sliding over the picked one (--v = 0..2 on .tq-ibi__sel, stretching towards where it goes:
    data-dir = f / b), the picked view's line under it, then the canvas of assets/js/ib-insights.js on soft
    dark and white glows. */
-.tq-ibi { position: relative; overflow: hidden; min-height: min(100vh, 940px); min-height: min(100svh, 940px); display: flex; align-items: center; box-sizing: border-box;
-  padding: clamp(40px, 7vh, 80px) clamp(20px, 5vw, 80px); color: #0a0a0a;
+.tq-ibi { position: relative; overflow: hidden; display: flex; align-items: center; box-sizing: border-box;
+  padding: var(--tq-half) clamp(20px, 5vw, 80px); color: #0a0a0a;
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 26% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   /* the top fades into the hero's grey */
 .tq-ibi__wrap { position: relative; width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: clamp(32px, 4vw, 64px); }
 .tq-ibi__text { flex: 1 1 340px; max-width: 440px; min-width: 0; display: flex; flex-direction: column; gap: clamp(16px, 2.4vh, 24px); }
@@ -1742,11 +1744,17 @@
   .tq-ibi .tq-pos { width: 100%; }
 }
 
-/* IB Tools on phones: twice the room between the blocks (each block's own top and bottom spacing doubled; the hero's
-   top under the header and the black hole's canvas stay as they were) */
+/* IB Tools on phones: the site's gap between the blocks (--tq-gap); the hero keeps its fitted first screen (the block
+   under it takes the rest of the gap), the signals block leaves the copy scene the 76px it keeps above its words */
 @media (max-width: 640px) {
-  .tq-ibi { padding-top: 44px; padding-bottom: 64px; }
-  .tq-ibn__wrap { padding-block: 44px 68px; }
+  .tq-ibi { padding-top: var(--tq-half); padding-bottom: var(--tq-half); }
+  .tq-ibn__wrap { padding-block: var(--tq-half); }
+  .tq-ibtp + .tq-ibtv { padding-top: calc(var(--tq-gap) - 24px); }
+  .tq-ibs { padding-top: var(--tq-half) !important; padding-bottom: max(16px, calc(var(--tq-gap) - 76px)) !important; }
+  .tq-ibcp .tq-ibcp__stage { justify-content: flex-start; }   /* the copy scene: its words start right under the header, as the gap expects, */
+  .tq-ibcp .tq-ibcp__in { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .tq-ibcp .tq-ibcp__note { margin-top: auto; }   /* and its note sits at the foot of the screen */
+  .tq-ibcp + .tq-ibi { padding-top: calc(var(--tq-gap) - 24px); }   /* the rest of the gap under it (the scene keeps 24px under its note) */
 }
 
 /* ---- IB Tools: the TradingView Premium block (#premium, in place of the Branded toolkit) -----------------------------
@@ -1767,7 +1775,7 @@
    design has none, from 1000px): heading, button and note on the left, the feed on the right at 1.4x; tablets get the phone block, larger. Type: Inter (figures tabular),
    the H2 in the site's H2 face; 800 in the design is 700. */
 .tq-ibs { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  padding: clamp(64px, 10vh, 112px) clamp(20px, 5vw, 80px) max(96px, clamp(64px, 10vh, 112px));
+  padding: var(--tq-half) clamp(20px, 5vw, 80px) max(24px, calc(var(--tq-gap) - 160px));
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 72% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
     radial-gradient(40% 40% at 10% 70%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   /* the top fades into the grey above: no seam */
 .tq-ibs::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; pointer-events: none; background: linear-gradient(rgba(233,234,236,0), #e9eaec); }
@@ -1946,7 +1954,7 @@
   background: linear-gradient(#e9eaec 0, #e9eaec var(--hdr), rgba(233,234,236,.96) calc(var(--hdr) + 30px), rgba(233,234,236,.86) calc(var(--hdr) + 60px), rgba(233,234,236,.7) calc(var(--hdr) + 90px), rgba(233,234,236,.5) calc(var(--hdr) + 120px), rgba(233,234,236,.31) calc(var(--hdr) + 150px), rgba(233,234,236,.15) calc(var(--hdr) + 180px), rgba(233,234,236,.05) calc(var(--hdr) + 210px), rgba(233,234,236,0) calc(var(--hdr) + 240px)),
     radial-gradient(calc(432px * var(--z, 1)) calc(144px * var(--z, 1)) at calc(50% + 230.4px * var(--z, 1)) calc(50% + var(--hdr) / 2 + 450px * var(--z, 1)), rgba(231,19,27,.10) 0%, rgba(231,19,27,0) 70%),
     radial-gradient(calc(792px * var(--z, 1)) calc(585px * var(--z, 1)) at calc(50% + 201.6px * var(--z, 1)) calc(50% + var(--hdr) / 2 - 90px * var(--z, 1)), #e8e8ee 0%, #d5d5dc 55%, #c3c4cb 100%); }   /* the composition's background, about its centre */
-.tq-ibcp__stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 200px; pointer-events: none; z-index: 2;   /* the foot eases into the grey below */
+.tq-ibcp__stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: max(200px, var(--tq-half)); pointer-events: none; z-index: 2;   /* the foot eases into the grey below */
   background: linear-gradient(rgba(233,234,236,0) 0%, rgba(233,234,236,.04) 25%, rgba(233,234,236,.13) 42%, rgba(233,234,236,.28) 58%, rgba(233,234,236,.5) 72%, rgba(233,234,236,.74) 85%, rgba(233,234,236,.92) 94%, #e9eaec 100%); }
 .tq-ibcp a { text-decoration: none; }
 .tq-ibcp__in { position: relative; flex: none; width: 1440px; height: 900px; margin: 0 auto; }
