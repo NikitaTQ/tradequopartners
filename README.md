@@ -439,10 +439,10 @@ HTTPS (Let's Encrypt) Netlify включит сам.
 | Профиль | Клиенты | Лотов на клиента в месяц | В месяц | В день | В год |
 |---|---|---|---|---|---|
 | Content creator | 23 | 12 | $2,070 | $69 | $24,840 |
-| Trading community | 140 | 18 | $18,900 | $630 | $226,800 |
+| Group owners (Telegram, WhatsApp, Discord) | 140 | 18 | $18,900 | $630 | $226,800 |
 | Education business | 460 | 27 | $93,150 | $3,105 | $1,117,800 |
 
-В карточках строки — «Active clients» и «Lots per client / mo» (`cp.earn.traders`, `cp.earn.lots`; ноябрь 2026, раньше «traders»; 18 языков). Строки под карточками «Rates are set individually for each partner…» (`cp.earn.note`) больше нет — убрана вместе с ключом. Считается так же, как в калькуляторе: клиенты × лоты × $7.50; день — тридцатая часть месяца, год — двенадцать месяцев. Суммы записаны в разметке (`tools/i18n/commission.html`) и не пересчитываются.
+Вторая карточка с ноября 2026 — «Group owners», под ней «Telegram, WhatsApp, Discord» (`cp.earn.c2.label`, `cp.earn.c2.who`, 18 языков; было «Trading community» / «Telegram or Discord group»; в арабском названия мессенджеров арабицей, как было, в китайском — «群主»). В карточках строки — «Active clients» и «Lots per client / mo» (`cp.earn.traders`, `cp.earn.lots`; ноябрь 2026, раньше «traders»; 18 языков). Строки под карточками «Rates are set individually for each partner…» (`cp.earn.note`) больше нет — убрана вместе с ключом. Считается так же, как в калькуляторе: клиенты × лоты × $7.50; день — тридцатая часть месяца, год — двенадцать месяцев. Суммы записаны в разметке (`tools/i18n/commission.html`) и не пересчитываются.
 
 Как ведут себя карточки:
 - под мышью наклоняются за курсором, по ним скользит блик;
