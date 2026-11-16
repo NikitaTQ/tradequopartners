@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
 <script>
-/* Start-up in quiet moments. This frame shares the page's main thread (same origin), so none of its start-up may run
-   during a scroll: __tqQuiet() resolves once nothing has scrolled for 250ms (the page or this frame) and the main thread
-   is idle, however long that takes; __tqScrolling() says whether a scroll is going on. */
+/* Start-up in quiet moments. This frame shares the page's main thread (same origin), so the heavy steps of its 3D start-up
+   wait for a moment without scrolling: __tqQuiet() resolves once nothing has scrolled for 250ms (the page or this frame)
+   and the main thread is idle. Its still stands in its place meanwhile, so the block is never missing. */
 (function () {
   var last = 0, on = function () { last = performance.now(); }, ev = ['scroll', 'wheel', 'touchmove'];
   ev.forEach(function (e) { addEventListener(e, on, { passive: true }); });
   try { if (parent !== window) ev.forEach(function (e) { parent.addEventListener(e, on, { passive: true }); }); } catch (e) {}
   var idle = window.requestIdleCallback ? function (f) { requestIdleCallback(f, { timeout: 1000 }); } : function (f) { setTimeout(f, 50); };
-  window.__tqScrolling = function () { return performance.now() - last < 250; };
-  window.__tqQuiet = function () { return new Promise(function (res) { (function go() { idle(function () { if (window.__tqScrolling()) setTimeout(go, 100); else res(); }); })(); }); };
+  window.__tqQuiet = function () { return new Promise(function (res) { (function go() { idle(function () { if (performance.now() - last < 250) setTimeout(go, 100); else res(); }); })(); }); };
 })();
 </script>
 <script type="importmap">{"imports":{"three":"../vendor/three@0.184.0/three.module.min.js"}}</script>
@@ -38,6 +37,13 @@
   .if-sub { margin: clamp(14px,1.6vw,22px) auto 0; font-size: clamp(16px,1.5vw,20px); line-height: 1.4; color: #5B5B5B; max-width: 26ch; text-wrap: balance; }
   .if-scene { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #FFFFFF; overflow: hidden; }
   @media (max-width: 640px) { .if-scene { aspect-ratio: 1 / 1; } }
+  /* a still of the scene's first frame (tools/flow-poster/shoot.mjs), in place from the first paint; the live scene fades
+     in over it once its first frame is drawn, and the still fades out */
+  .if-poster { position: absolute; inset: 0; background: url(../assets/flow/poster-wide.webp?v=d80b95d1a7) center / 100% 100% no-repeat; transition: opacity .6s ease; pointer-events: none; }
+  @media (max-width: 640px) { .if-poster { background-image: url(../assets/flow/poster-square.webp?v=6778e6ad17); } }
+  .if-scene canvas { opacity: 0; transition: opacity .6s ease; }
+  .if-scene.is-live canvas { opacity: 1; }
+  .if-scene.is-live .if-poster { opacity: 0; }
   .if-cta { display: flex; justify-content: center; margin-top: calc(-1 * clamp(28px, 5vw, 76px)); position: relative; z-index: 2; }
 
   @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -182,7 +188,7 @@
       <p class="if-sub" data-i18n="flow.sub">Commissions that keep coming. Settled every day.</p>
     </div>
   </header>
-  <div class="if-scene" id="if-scene"></div>
+  <div class="if-scene" id="if-scene"><div class="if-poster" aria-hidden="true"></div></div>
   <div class="if-cta">
     <a class="tq-conv" href="#signup" target="_top" aria-label="Become a partner" data-i18n-aria="flow.cta">
   <span data-i18n="flow.cta">Become a partner</span>
@@ -387,7 +393,7 @@ function mount(el, opts = {}) {
   if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
   el.style.overflow = 'hidden';
 
-  /* every step of the start-up waits for a quiet moment (no scrolling, an idle main thread): see __tqQuiet above */
+  /* the start-up goes in small steps, each in a moment without scrolling (__tqQuiet above); the still stands in meanwhile */
   const step = async () => { if (window.__tqQuiet) await window.__tqQuiet(); if (dead) throw new Error('destroyed'); };
   const SMALL = window.innerWidth <= 640;
   let renderer = null;
@@ -399,7 +405,7 @@ function mount(el, opts = {}) {
     renderer.transmissionResolutionScale = SMALL ? 0.5 : 1;
     renderer.setClearColor(0x000000, 0);
     Object.assign(renderer.domElement.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block' });
-    el.insertBefore(renderer.domElement, el.firstChild);
+    el.appendChild(renderer.domElement);   /* over the still (.if-poster) */
   };
 
   const vignette = document.createElement('div');
@@ -437,7 +443,7 @@ function mount(el, opts = {}) {
     await ensureFonts();
     const logoImg = await new Promise(res => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = () => res(null); i.src = P.logoUrl; });
     if (dead) return;
-    await step(); makeRenderer();
+    await step(); makeRenderer(); el.appendChild(vignette); el.appendChild(labelLayer);   /* over the canvas, as before */
     await step();
 
     /* ---------- studio environment ---------- */
@@ -857,14 +863,14 @@ function mount(el, opts = {}) {
       if (window.__tqPaused || document.hidden) { prevDraw = 0; return; }
       const r = el.getBoundingClientRect();
       if (!(r.width > 0 && r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth)) { prevDraw = 0; return; }
-      if (warm !== 3 && window.__tqScrolling && window.__tqScrolling()) { prevDraw = 0; return; }   // not ready yet: not during a scroll (above)
+      if (warm !== 3) { prevDraw = 0; return; }   // not ready yet: its still stands in (prepare, below)
       if (prevDraw) adapt(now - prevDraw);
       prevDraw = now;
       simT += dt; frameId++;
       checkSize();
       update(simT);
       renderer.render(scene, camera);
-      warm = 3;
+      warm = 3; el.classList.add('is-live');
     }
     checkSize();
     raf = requestAnimationFrame(frame);
@@ -874,9 +880,9 @@ function mount(el, opts = {}) {
      * for the screen and for the render targets) and upload every texture: a stall of a few hundred ms just as the visitor
      * scrolled the block in, worst on Windows. Now, once the scene is built, each object's shaders compile one at a time
      * (in the background where the browser can: KHR_parallel_shader_compile), then each texture goes to the graphics card,
-     * then one frame is drawn, the block still off-screen: every step in a quiet moment (no scrolling, an idle main thread).
-     * Until then the block draws nothing while the page scrolls (its words show, the stage stays empty for a moment), so a
-     * fling past it never stalls; it draws once the scrolling stops. */
+     * then one frame is drawn: each a small step of its own, in a moment without scrolling. The page loads this frame
+     * right away, so the scene's still (.if-poster) stands in its place from the start: a visitor who flings the page to
+     * its end sees it there at once; the live scene fades in over it when its first frame is drawn. */
     let warm = 0;   // 1 preparing, 3 ready (a frame drawn)
     const prepare = async () => {
       warm = 1;
@@ -903,7 +909,7 @@ function mount(el, opts = {}) {
         for (const t of texs) { await step(); if (warm === 3) return; renderer.initTexture(t); }
         await step(); if (warm === 3) return;                           // and one frame
         frameId++; checkSize(); update(simT); renderer.render(scene, camera);
-        warm = 3;
+        warm = 3; el.classList.add('is-live');
       } catch (e) {
         glassMeshes.forEach(m => { m.material = glass; }); renderer.setRenderTarget(null);
       } finally { rt.dispose(); }
