@@ -150,11 +150,11 @@
     };
     events.forEach((ev) => window.addEventListener(ev, first, { passive: true }));
     if (scrollY > 0) first(); /* reload half-way down the page */
-    /* the warm-up also starts by itself a moment after the page has loaded (the first screen painted and
-       interactive), so a visitor who flings the page to its end at once finds Infinite Flow there, live within a
-       second or two; its start-up goes in small steps (embeds/infinite-flow.html), and its still stands in meanwhile */
+    /* the warm-up also starts by itself as soon as the page has loaded (the first screen painted and interactive), so
+       Infinite Flow is live by the time anyone scrolls down to it; its start-up goes in small steps
+       (embeds/infinite-flow.html), and its still stands in only if it is reached in the first moments */
     if (!saveData) {
-      const auto = () => setTimeout(warm, 600);
+      const auto = () => warm();
       if (document.readyState === 'complete') auto(); else window.addEventListener('load', auto, { once: true });
     }
     /* frames marked data-eager sit in the first screen and show a matching poster meanwhile (none at

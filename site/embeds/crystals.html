@@ -4,15 +4,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TradeQuo Crystals — embed</title>
 <script>
-/* Start-up in quiet moments. This frame shares the page's main thread (same origin), so the heavy steps of its 3D start-up
-   wait for a moment without scrolling: __tqQuiet() resolves once nothing has scrolled for 250ms (the page or this frame)
-   and the main thread is idle. Its still stands in its place meanwhile, so the block is never missing. */
+/* The start-up's pace. This frame shares the page's main thread (same origin). Its 3D start-up goes in small steps (each a
+   task of its own); __tqQuiet() says when the next may go: while the block is far from the screen (more than about two
+   screens away) only when the page has not scrolled for 250ms (the page or this frame), at once otherwise; once it is
+   close, at once in any case, so it is live by the time it is reached. Its still stands in its place until then. */
 (function () {
   var last = 0, on = function () { last = performance.now(); }, ev = ['scroll', 'wheel', 'touchmove'];
   ev.forEach(function (e) { addEventListener(e, on, { passive: true }); });
   try { if (parent !== window) ev.forEach(function (e) { parent.addEventListener(e, on, { passive: true }); }); } catch (e) {}
-  var idle = window.requestIdleCallback ? function (f) { requestIdleCallback(f, { timeout: 1000 }); } : function (f) { setTimeout(f, 50); };
-  window.__tqQuiet = function () { return new Promise(function (res) { (function go() { idle(function () { if (performance.now() - last < 250) setTimeout(go, 100); else res(); }); })(); }); };
+  var near = function () {
+    try { var f = window.frameElement; if (!f) return true; var r = f.getBoundingClientRect(), h = parent.innerHeight; return r.top < h * 3 && r.bottom > -h * 2; }
+    catch (e) { return true; }
+  };
+  window.__tqQuiet = function () {
+    return new Promise(function (res) {
+      (function go() {
+        if (near() || performance.now() - last >= 250) { setTimeout(res, 0); return; }
+        setTimeout(go, 100);
+      })();
+    });
+  };
 })();
 </script>
 <script type="importmap">
@@ -63,7 +74,7 @@
 
 <three-d-stage name="tradequo-crystals" background="#ffffff"></three-d-stage>
 <script src="i18n.js?v=a35edf15c5"></script>
-<script src="crystals-stage.js?v=aaa7c39684"></script>
+<script src="crystals-stage.js?v=43438659da"></script>
 <script type="module">
 const P = new URLSearchParams(location.search);
 const EMBED = !P.has('ui');
@@ -84,7 +95,7 @@ if (T._fonts) { const st = document.createElement('style'); st.textContent = T._
 const CAP_FONT = "'Inter', 'TQ CJK', sans-serif";
 const CAP_TRACK = /arabic|thai|cjk/.test(T._script) ? 0 : 1; /* tracking breaks Arabic joining, crowds Thai/CJK */
 const { THREE } = await stage.ready;
-/* the start-up goes in small steps, each in a moment without scrolling (__tqQuiet above); the page's poster stands in */
+/* the start-up goes in small steps, paced by __tqQuiet (above): in pauses while far away, at once when close */
 const step = async () => { if (window.__tqQuiet) await window.__tqQuiet(); };
 await step();
 const CAP_TEXT = ['partners', 'payouts', 'revshare', 'rating', 'traders', 'trips'].map((k) => T['crys.' + k]).join(' ');
@@ -565,13 +576,13 @@ R.setAnimationLoop(stage._loop);
 (async () => {
   warm = 1;
   const objs = [], seen = new Set();
-  scene.traverse(o => { const m = o.material; if (!m || Array.isArray(m) || seen.has(m)) return; seen.add(m); objs.push(o); });
+  scene.traverse(o => { const ms = [].concat(o.material || []); if (ms.length && ms.some(m => !seen.has(m))) { ms.forEach(m => seen.add(m)); objs.push(o); } });
   const rt = new THREE.WebGLRenderTarget(4, 4);
   try {
     for (const o of objs) { await step(); if (warm === 3) return; await R.compileAsync(o, cam, scene); }
     for (const o of objs) { await step(); if (warm === 3) return; R.setRenderTarget(rt); const pr = R.compileAsync(o, cam, scene); R.setRenderTarget(null); await pr; }
     const texs = new Set();
-    scene.traverse(o => { const m = o.material; if (!m || Array.isArray(m)) return; for (const k in m) { const v = m[k]; if (v && v.isTexture && !v.isRenderTargetTexture) texs.add(v); } });
+    seen.forEach(m => { for (const k in m) { const v = m[k]; if (v && v.isTexture && !v.isRenderTargetTexture) texs.add(v); } });
     for (const t of texs) { await step(); if (warm === 3) return; R.initTexture(t); }
     await step(); if (warm === 3) return;
     controls.update(); R.render(scene, cam); warm = 3;
