@@ -576,13 +576,15 @@ html { scroll-snap-type: y proximity; }
 @media (prefers-reduced-motion: reduce) { [data-rep-track] { animation: none !important; } [data-rep-viewport] { overflow-x: auto !important; } }
 /* the marquee under JS (startReviewsDrag): grab it with the mouse, swipe it sideways on touch */
 [data-rep-viewport][data-rep-live] { cursor: grab; touch-action: pan-y; }
-/* the editorial cards (DailyForex, TopBrokers): the outlet's name, its score set large and bold at the end of the row
-   (DailyForex 4.0/5, TopBrokers 4.5/5), and under them the red "Editor's verdict" pill, on one line */
+/* the editorial cards (DailyForex, TopBrokers): the outlet's mark and name, its rating in red stars at the end of the row
+   as on the other cards (DailyForex 4 of 5, TopBrokers 4.5 of 5: the fifth star half red), and under them the red
+   "Editor's verdict" pill, on one line */
 .tq-rv-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 12px; row-gap: 10px; min-height: 36px; }
 .tq-rv-name { display: inline-flex; align-items: center; gap: 10px; min-width: 0; font-size: 19px; font-weight: 700; letter-spacing: -.02em; color: #0a0a0a; }
 .tq-rv-name img { display: block; flex: none; width: 34px; height: 34px; border-radius: 7px; }
-.tq-rv-score { display: inline-flex; align-items: baseline; gap: 3px; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; color: #8a8d94; }
-.tq-rv-score b { font-size: 34px; line-height: 1; font-weight: 800; letter-spacing: -.045em; color: #0a0a0a; font-variant-numeric: tabular-nums; }
+.tq-rv-stars { white-space: nowrap; font-size: 15px; letter-spacing: 2px; color: #e7131b; }
+.tq-rv-off { color: #d4d4d8; }
+.tq-rv-half { color: transparent; background: linear-gradient(90deg, #e7131b 50%, #d4d4d8 50%); -webkit-background-clip: text; background-clip: text; }
 .tq-rv-pill { grid-column: 1 / -1; justify-self: start; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b; padding: 5px 9px; border-radius: 999px;
   border: 1px solid rgba(231,19,27,.35); background: rgba(255,255,255,.6); }
 [data-rep-viewport].is-drag { cursor: grabbing; }
