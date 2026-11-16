@@ -102,13 +102,14 @@
     var PI2 = Math.PI * 2, cl = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; }, eo = function (v) { return 1 - Math.pow(1 - v, 3); };
     var eio = function (v) { return v < 0.5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2; }, lerp = function (a, b, t) { return a + (b - a) * t; };
     var W = 0, H = 0, dpr = 1, k = 1, top = 0, bot = 0, L = 0, R = 0, base = 0, maxH = 0, colW = 0, bw = 0, ph = false, lite = coarse;
+    var forceLite = false, dprCap = 2;   /* where the graphics card cannot keep up: the light drawing, then a lower resolution (adapt, below) */
     var rowTop = 0, pitch = 0, capH = 0, x0 = 0, maxLen = 0;
     var phone = window.matchMedia ? matchMedia('(max-width: 640px)') : null;
     var size = function () {
       W = stage.clientWidth; H = stage.clientHeight; if (!W || !H) return;
-      dpr = Math.min(coarse ? 1.5 : 2, window.devicePixelRatio || 1);   /* phones: 1.5x is sharp enough and lighter for the blurred glass */
+      dpr = Math.min(coarse ? 1.5 : dprCap, window.devicePixelRatio || 1);   /* phones: 1.5x is sharp enough and lighter for the blurred glass */
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      ph = !!(phone && phone.matches); lite = coarse || ph;
+      ph = !!(phone && phone.matches); lite = coarse || ph || forceLite;
       if (ph) { k = 0.55; top = 6; bot = H - 4; L = 4; R = W - 4; base = H - 36; maxH = base - top - 46; }
       else {
         k = Math.max(0.68, Math.min(1, W / 620));
@@ -335,9 +336,24 @@
     };
 
     if (reduced) { draw(performance.now()); return; }
+    /* a drawing the graphics card keeps up with: where 20 frames on screen come slower than ~45 a second, it switches to the
+       light drawing (the phones' one: soft discs instead of blurred shadows), then steps the resolution down by 0.5x to 1x;
+       never back during the visit */
+    var pf = 0, fN = 0, fS = 0, fSkip = 10;
+    var adapt = function (now) {
+      var ms = pf ? Math.min(100, now - pf) : 0; pf = now;
+      if (!ms || fSkip > 0) { if (ms) fSkip--; return; }
+      fS += ms; if (++fN < 20) return;
+      var avg = fS / fN; fN = 0; fS = 0;
+      if (avg < 22) return;
+      if (!lite) { forceLite = true; lite = true; }
+      else if (dprCap > 1 && dpr > 1) { dprCap = Math.max(1, dprCap - 0.5); size(); }
+      else return;
+      fSkip = 10;
+    };
     var loop = function (now) {
       raf = requestAnimationFrame(loop);
-      if (vis) { try { draw(now); } catch (e) { cancelAnimationFrame(raf); } } else last = now;
+      if (vis) { try { adapt(now); draw(now); } catch (e) { cancelAnimationFrame(raf); } } else { last = now; pf = 0; }
     };
     raf = requestAnimationFrame(loop);
   }

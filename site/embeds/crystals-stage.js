@@ -213,13 +213,14 @@
         import('three/addons/controls/OrbitControls.js'),
       ]);
       this._THREE = THREE;
-      // preserveDrawingBuffer keeps the last frame readable after
-      // compositing (toDataURL / drawImage) — it's what lets the
-      // screenshot tools capture the scene instead of a blank canvas.
+      // The site: the renderer (a WebGL context) is made in a quiet moment, never during a scroll (window.__tqQuiet, in
+      // the embed page). preserveDrawingBuffer keeps the last frame readable after compositing (toDataURL / drawImage) for
+      // the design tools' screenshots (?ui); on the site it would cost a copy of the frame every frame, so it is off.
+      if (window.__tqQuiet) await window.__tqQuiet();
       const renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
-        preserveDrawingBuffer: true,
+        preserveDrawingBuffer: new URLSearchParams(location.search).has('ui'),
       });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.shadowMap.enabled = true;

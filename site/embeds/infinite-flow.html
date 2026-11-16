@@ -1,6 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>
+/* Start-up in quiet moments. This frame shares the page's main thread (same origin), so none of its start-up may run
+   during a scroll: __tqQuiet() resolves once nothing has scrolled for 250ms (the page or this frame) and the main thread
+   is idle, however long that takes; __tqScrolling() says whether a scroll is going on. */
+(function () {
+  var last = 0, on = function () { last = performance.now(); }, ev = ['scroll', 'wheel', 'touchmove'];
+  ev.forEach(function (e) { addEventListener(e, on, { passive: true }); });
+  try { if (parent !== window) ev.forEach(function (e) { parent.addEventListener(e, on, { passive: true }); }); } catch (e) {}
+  var idle = window.requestIdleCallback ? function (f) { requestIdleCallback(f, { timeout: 1000 }); } : function (f) { setTimeout(f, 50); };
+  window.__tqScrolling = function () { return performance.now() - last < 250; };
+  window.__tqQuiet = function () { return new Promise(function (res) { (function go() { idle(function () { if (window.__tqScrolling()) setTimeout(go, 100); else res(); }); })(); }); };
+})();
+</script>
 <script type="importmap">{"imports":{"three":"../vendor/three@0.184.0/three.module.min.js"}}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -374,15 +387,20 @@ function mount(el, opts = {}) {
   if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
   el.style.overflow = 'hidden';
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' });
+  /* every step of the start-up waits for a quiet moment (no scrolling, an idle main thread): see __tqQuiet above */
+  const step = async () => { if (window.__tqQuiet) await window.__tqQuiet(); if (dead) throw new Error('destroyed'); };
   const SMALL = window.innerWidth <= 640;
-  renderer.setPixelRatio(SMALL ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(Math.max(window.devicePixelRatio || 1, 1.5), P.maxDPR));
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.NeutralToneMapping;
-  renderer.transmissionResolutionScale = SMALL ? 0.5 : 1;
-  renderer.setClearColor(0x000000, 0);
-  Object.assign(renderer.domElement.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block' });
-  el.appendChild(renderer.domElement);
+  let renderer = null;
+  const makeRenderer = () => {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(SMALL ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(Math.max(window.devicePixelRatio || 1, 1.5), P.maxDPR));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.NeutralToneMapping;
+    renderer.transmissionResolutionScale = SMALL ? 0.5 : 1;
+    renderer.setClearColor(0x000000, 0);
+    Object.assign(renderer.domElement.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block' });
+    el.insertBefore(renderer.domElement, el.firstChild);
+  };
 
   const vignette = document.createElement('div');
   Object.assign(vignette.style, {
@@ -419,6 +437,8 @@ function mount(el, opts = {}) {
     await ensureFonts();
     const logoImg = await new Promise(res => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = () => res(null); i.src = P.logoUrl; });
     if (dead) return;
+    await step(); makeRenderer();
+    await step();
 
     /* ---------- studio environment ---------- */
     const env = (() => {
@@ -456,6 +476,7 @@ function mount(el, opts = {}) {
     const pivot = new THREE.Group(); pivot.name = 'flip_pivot'; pivot.position.set(0, PH / 2, 0);
     scene.add(pivot); pivot.add(root); root.position.y = -PH / 2;
 
+    await step();
     /* ---------- materials ---------- */
     const glass = new THREE.MeshPhysicalMaterial({
       name: 'loop_glass', color: C.glass, metalness: 0, roughness: 0.02, transmission: 1, thickness: 0.018,
@@ -473,6 +494,7 @@ function mount(el, opts = {}) {
       name: 'pedestal_lacquer', color: C.pedestal, roughness: 0.16, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 2.2,
     });
 
+    await step();
     /* ---------- loop ---------- */
     const loop = new THREE.Group(); loop.name = 'loop'; loop.position.y = Y0; root.add(loop);
     const tubeGeo = new THREE.TubeGeometry(curve, 600, tubeR, 28, true);
@@ -501,6 +523,7 @@ function mount(el, opts = {}) {
       return g;
     });
 
+    await step();
     /* ---------- pedestal ---------- */
     const pedestal = new THREE.Group(); pedestal.name = 'pedestal'; root.add(pedestal);
     const rect = new THREE.Shape();
@@ -510,9 +533,8 @@ function mount(el, opts = {}) {
     bodyGeo.rotateX(-Math.PI / 2); bodyGeo.translate(0, CH, 0);
     const body = new THREE.Mesh(bodyGeo, lacquer); body.name = 'pedestal_body'; pedestal.add(body);
 
-    const dpr = renderer.getPixelRatio();
     const rs = window.innerWidth <= 640 ? 0.4 : P.reflection.resScale;
-    const rtSize = () => [Math.max(64, el.clientWidth * dpr * rs | 0), Math.max(64, el.clientHeight * dpr * rs | 0)];
+    const rtSize = () => { const dpr = renderer.getPixelRatio(); return [Math.max(64, el.clientWidth * dpr * rs | 0), Math.max(64, el.clientHeight * dpr * rs | 0)]; };   // the drawing's pixel ratio may step down (below)
     const [rw, rh] = rtSize();
     const topGeo = new THREE.PlaneGeometry(PW - 2 * CH, PD - 2 * CH);
     const top = new Reflector(topGeo, { color: new THREE.Color(C.pedestalTop), textureWidth: rw, textureHeight: rh, clipBias: 0.002, shader: FadeReflectorShader, multisample: 0 });
@@ -572,6 +594,7 @@ function mount(el, opts = {}) {
     const contact = new THREE.Mesh(new THREE.PlaneGeometry(PW * 1.25, PD * 1.6), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
     contact.name = 'pedestal_contact_shadow'; contact.rotation.x = -Math.PI / 2; contact.position.y = 0.001; root.add(contact);
 
+    await step();
     /* ---------- floor ---------- */
     const floor = new Reflector(new THREE.PlaneGeometry(40, 40), { color: new THREE.Color(C.bg), textureWidth: rw, textureHeight: rh, clipBias: 0.003, shader: FadeReflectorShader, multisample: 0 });
     floor.name = 'floor_mirror'; floor.rotation.x = -Math.PI / 2;
@@ -594,6 +617,7 @@ function mount(el, opts = {}) {
       };
     });
 
+    await step();
     /* ---------- coins ---------- */
     const JACKETS = [
       { id: 'red',      f0: '#ff3a41', f1: '#a20b11', ring: '#ff7a7f', glyph: '#ffd9da', side: '#c81018', metal: 0.55, rough: 0.28 },
@@ -644,6 +668,7 @@ function mount(el, opts = {}) {
     const ring = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: ringTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
     ring.name = 'land_ring'; ring.rotation.x = -Math.PI / 2; ring.visible = false; root.add(ring);
 
+    await step();
     /* ---------- lights ---------- */
     const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(-3, 5, 3.5);
     const rim = new THREE.DirectionalLight(C.red, 1.4); rim.position.set(0.5, 1.6, -4);
@@ -804,22 +829,86 @@ function mount(el, opts = {}) {
       updateLabels(t);
     }
 
+    /* ---------- a resolution the graphics card keeps up with ----------
+     * The scene is drawn at the screen's pixel ratio (1.5x at least, 2x at most), with MSAA, a full-size
+     * transmission pass for the glass and a mirror pass. Where the card cannot keep up (20 frames on screen slower
+     * than ~45 a second), the drawing steps down by 0.25x at a time to 1x, then the glass's transmission pass to half
+     * size; it never steps back up during the visit. A card that keeps up keeps the full resolution. */
+    let drsN = 0, drsSum = 0, drsSkip = 10, prevDraw = 0;
+    const adapt = (ms) => {
+      if (drsSkip > 0) { drsSkip--; return; }
+      drsSum += Math.min(ms, 100);
+      if (++drsN < 20) return;
+      const avg = drsSum / drsN; drsN = 0; drsSum = 0;
+      if (avg < 22) return;
+      const pr = renderer.getPixelRatio();
+      if (pr > 1) { renderer.setPixelRatio(Math.max(1, pr - 0.25)); cw = 0; checkSize(); }
+      else if (renderer.transmissionResolutionScale > 0.5) renderer.transmissionResolutionScale = 0.5;
+      else return;
+      drsSkip = 10;
+    };
+
     /* ---------- loop (pauses off-screen; checked every frame) ---------- */
     let last = performance.now(), simT = 0;
     function frame(now) {
       if (dead) return;
       raf = requestAnimationFrame(frame);
       const dt = Math.min(0.1, (now - last) / 1000); last = now;
-      if (window.__tqPaused) return;
+      if (window.__tqPaused || document.hidden) { prevDraw = 0; return; }
       const r = el.getBoundingClientRect();
-      if (!(r.width > 0 && r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth)) return;
+      if (!(r.width > 0 && r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth)) { prevDraw = 0; return; }
+      if (warm !== 3 && window.__tqScrolling && window.__tqScrolling()) { prevDraw = 0; return; }   // not ready yet: not during a scroll (above)
+      if (prevDraw) adapt(now - prevDraw);
+      prevDraw = now;
       simT += dt; frameId++;
       checkSize();
       update(simT);
       renderer.render(scene, camera);
+      warm = 3;
     }
     checkSize();
     raf = requestAnimationFrame(frame);
+
+    /* ---------- ready before it is reached ----------
+     * The first frame drawn used to compile every shader at once (the glass, the lacquer, the mirrors, the coins, each
+     * for the screen and for the render targets) and upload every texture: a stall of a few hundred ms just as the visitor
+     * scrolled the block in, worst on Windows. Now, once the scene is built, each object's shaders compile one at a time
+     * (in the background where the browser can: KHR_parallel_shader_compile), then each texture goes to the graphics card,
+     * then one frame is drawn, the block still off-screen: every step in a quiet moment (no scrolling, an idle main thread).
+     * Until then the block draws nothing while the page scrolls (its words show, the stage stays empty for a moment), so a
+     * fling past it never stalls; it draws once the scrolling stops. */
+    let warm = 0;   // 1 preparing, 3 ready (a frame drawn)
+    const prepare = async () => {
+      warm = 1;
+      const objs = [], seen = new Set();
+      scene.traverse(o => { const m = o.material; if (!m || Array.isArray(m) || seen.has(m)) return; seen.add(m); objs.push(o); });
+      const rt = new THREE.WebGLRenderTarget(4, 4);
+      try {
+        for (const o of objs) {                                         // as drawn on the screen
+          await step(); if (warm === 3) return;
+          await renderer.compileAsync(o, camera, scene);
+        }
+        for (const o of objs) {                                         // as drawn into the transmission and mirror buffers
+          await step(); if (warm === 3) return;
+          renderer.setRenderTarget(rt); const pr = renderer.compileAsync(o, camera, scene); renderer.setRenderTarget(null);
+          await pr;
+        }
+        await step(); if (warm === 3) return;                           // the mirrors' cheap glass
+        glassMeshes.forEach(m => { m.material = glassCheap; });
+        renderer.setRenderTarget(rt); const pc = renderer.compileAsync(glassMeshes[0], camera, scene); renderer.setRenderTarget(null);
+        glassMeshes.forEach(m => { m.material = glass; });
+        await pc;
+        const texs = new Set();                                         // the canvas textures, to the graphics card
+        scene.traverse(o => { const m = o.material; if (!m || Array.isArray(m)) return; for (const k in m) { const v = m[k]; if (v && v.isTexture && !v.isRenderTargetTexture) texs.add(v); } });
+        for (const t of texs) { await step(); if (warm === 3) return; renderer.initTexture(t); }
+        await step(); if (warm === 3) return;                           // and one frame
+        frameId++; checkSize(); update(simT); renderer.render(scene, camera);
+        warm = 3;
+      } catch (e) {
+        glassMeshes.forEach(m => { m.material = glass; }); renderer.setRenderTarget(null);
+      } finally { rt.dispose(); }
+    };
+    prepare();
 
     /* ---------- GLB ---------- */
     exportGLB = async () => {
@@ -857,9 +946,9 @@ function mount(el, opts = {}) {
     };
   })();
 
-  api.destroy = () => { dead = true; cancelAnimationFrame(raf); renderer.dispose(); [renderer.domElement, vignette, labelLayer].forEach(n => n.remove()); };
+  api.destroy = () => { dead = true; cancelAnimationFrame(raf); if (renderer) { renderer.dispose(); renderer.domElement.remove(); } [vignette, labelLayer].forEach(n => n.remove()); };
   const realReady = api.ready;
-  api.ready = realReady.catch(e => { console.error('[infinite-flow]', e); });
+  api.ready = realReady.catch(e => { if (!dead) console.error('[infinite-flow]', e); });
   return api;
 }
 

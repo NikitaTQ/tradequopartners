@@ -129,13 +129,26 @@
       const r = f.getBoundingClientRect();
       return r.bottom > -innerHeight * 1.5 && r.top < innerHeight * 2.5;
     };
+    /* Starting an embed is a burst of main-thread work (its page, three.js, its scene): it waits for a moment without
+     * scrolling (250ms) and an idle main thread, however long that takes, so it never lands in a scroll — a visitor who
+     * flings the page to its end in two seconds starts nothing on the way. Until then an embed shows its poster or white.
+     * Inside the embeds every further step of the start-up waits the same way (window.__tqQuiet in each). */
+    let lastScroll = 0;
+    ['scroll', 'wheel', 'touchmove'].forEach((ev) => addEventListener(ev, () => { lastScroll = performance.now(); }, { passive: true }));
+    const whenQuiet = (fn) => {
+      const go = () => idle(() => {
+        if (performance.now() - lastScroll < 250) { setTimeout(go, 150); return; }
+        fn();
+      }, { timeout: 500 });
+      go();
+    };
     const load = new IntersectionObserver((entries) => {
-      entries.forEach((en) => { if (en.isIntersecting) idle(() => { if (near(en.target)) start(en.target); }, { timeout: 400 }); });
+      entries.forEach((en) => { if (en.isIntersecting) whenQuiet(() => { if (near(en.target)) start(en.target); }); });
     }, { rootMargin: '150% 0px' });
     embedSettle = () => { if (started) pending.forEach((f) => { if (near(f)) start(f); }); };
     const warm = () => frames.filter((f) => f.dataset.warm && f.getClientRects().length)
       .sort((a, b) => a.dataset.warm - b.dataset.warm)
-      .forEach((f) => idle(() => start(f), { timeout: 500 }));
+      .forEach((f) => whenQuiet(() => start(f)));
     /* Nothing heavy starts before the visitor does something: the first screen
      * paints and becomes interactive with the main thread to itself. */
     const saveData = navigator.connection && navigator.connection.saveData;
@@ -626,7 +639,7 @@
     const count = Math.round((70 + 110 * level) * (mob ? 1.1 : 2.4) / 1.7);
     const stars = Array.from({ length: count }, () => ({ x: Math.random(), y: Math.random(), z: Math.random(), tw: Math.random() * Math.PI * 2 }));
     const nodes = Array.from({ length: mob ? 5 : 9 }, () => ({ x: 0.1 + Math.random() * 0.8, y: 0.12 + Math.random() * 0.76, ph: Math.random() * Math.PI * 2 }));
-    let shoot = null;
+    let shoot = null, colH = -1;
     const t0 = performance.now();
     const frame = (t) => {
       if (!sync()) return;
@@ -642,11 +655,12 @@
         ctx.moveTo(x - L, y); ctx.lineTo(x, y - wd); ctx.lineTo(x + L, y); ctx.lineTo(x, y + wd); ctx.closePath();
         ctx.fill();
       };
+      if (colH !== h) { colH = h; stars.forEach((s) => { s.col = mix(ink(s.y * h)); }); }   /* a star's colour hangs on its height only: worked out once per size, not per frame */
       for (const s of stars) {
         const drift = ((s.x + e * 0.004 * (0.3 + s.z)) % 1 + 1) % 1;
         const tw = 0.45 + 0.55 * Math.sin(s.tw + e * (1 + s.z * 2));
         const x = drift * w, y = s.y * h;
-        ctx.fillStyle = mix(ink(y));
+        if (ctx.fillStyle !== s.col) ctx.fillStyle = s.col;
         ctx.globalAlpha = (0.28 + s.z * 0.62) * tw;
         if (s.z > 0.8) spark(x, y, 2.4 + (s.z - 0.8) * 26 * (0.55 + 0.45 * tw), 0.75);
         else { const d = 0.9 + s.z * 1.4; ctx.fillRect(x - d / 2, y - d / 2, d, d); }
