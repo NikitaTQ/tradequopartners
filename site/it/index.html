@@ -1051,15 +1051,13 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 #signup form > [data-commit] { order: 3; margin-top: 4px !important; }
 #signup form > div:has(> button[type="submit"]) { margin-top: 6px !important; }
 }
-.tq-pc { position: relative; overflow: hidden; box-sizing: border-box; max-width: 1240px; margin: 0 auto; padding: 88px 64px 100px; border-radius: 32px;
-  background: #0b0b0c; color: #fff; display: flex; flex-direction: column; gap: 64px; text-align: start; }
+.tq-pc { position: relative; overflow: hidden; box-sizing: border-box; max-width: 1240px; margin: 0 auto; padding: 72px 64px 84px; border-radius: 32px;
+  background: #0b0b0c; color: #fff; display: flex; flex-direction: column; gap: 52px; text-align: start; }
 .tq-pc__edge { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); }
-.tq-pc__glow { position: absolute; right: 120px; top: 250px; width: 560px; height: 220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.32), rgba(231,19,27,0)); pointer-events: none; }
+.tq-pc__glow { position: absolute; right: 120px; top: 222px; width: 560px; height: 220px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.32), rgba(231,19,27,0)); pointer-events: none; }
 [dir="rtl"] .tq-pc__glow { right: auto; left: 120px; }
-.tq-pc__head { position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+.tq-pc__head { position: relative; display: flex; justify-content: center; text-align: center; }
 .tq-pc__title { margin: 0; color: #fff; }
-.tq-pc__sub { margin: 0; max-width: 380px; padding-bottom: 6px; font-size: 18px; line-height: 1.5; color: #b4b7bd; text-wrap: pretty; }
-.tq-pc__sub br { display: none; }
 .tq-pc__grid { position: relative; display: grid; grid-template-columns: 500px minmax(0, 1fr); gap: 56px; align-items: start; }
 .tq-pc__term { position: relative; display: flex; flex-direction: column; gap: 34px; padding: 36px; border-radius: 28px;
   background: linear-gradient(160deg, rgba(255,255,255,.13), rgba(255,255,255,.03)); -webkit-backdrop-filter: blur(28px) saturate(150%); backdrop-filter: blur(28px) saturate(150%);
@@ -1137,7 +1135,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-pc__per [data-inv-per-thumb], .tq-pc__knob, .tq-pc__total [data-inv-total] { transition: none; }
 }
 @media (max-width: 1180px) {
-.tq-pc { padding: 64px 40px 72px; gap: 48px; }
+.tq-pc { padding: 56px 40px 60px; gap: 40px; }
 .tq-pc__grid { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 36px; }
 .tq-pc__paper { margin-inline: 16px; padding: 36px 26px 56px; }
 .tq-pc__glow { right: 40px; }
@@ -1153,15 +1151,13 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-pc__slider { grid-column: 1 / -1; }
 .tq-pc__val b { font-size: 38px; }
 .tq-pc { padding: 52px 28px 60px; gap: 36px; border-radius: 28px; }
-.tq-pc__head { flex-direction: column; align-items: flex-start; gap: 14px; }
-.tq-pc__sub { max-width: 520px; padding-bottom: 0; }
+.tq-pc__head { justify-content: flex-start; text-align: start; }
 .tq-pc__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; max-width: 560px; margin: 0 auto; width: 100%; }
 .tq-pc__glow { top: auto; bottom: 120px; right: -80px; }
 }
 @media (max-width: 640px) {
 .tq-pc { padding: 40px 16px 44px; gap: 28px; border-radius: 24px; }
 .tq-pc__head { padding: 0 4px; }
-.tq-pc__sub { font-size: 16px; }
 .tq-pc__grid { gap: 14px; }
 .tq-pc__slot { height: 20px; border-radius: 10px; padding: 0 14px; }
 .tq-pc__slot span { height: 3px; }
@@ -1535,7 +1531,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 <!-- Payout calculator (Payout_Calculator_Receipt_Dark design): a dark panel with the page's heading, a glass
      "terminal" with the two sliders, the Day / Month / Year switch and the CTA, and a receipt printing out of a
      slot. Shared by the landing and partner-terms/: each page puts its own heading (.tq-pc__title,
-     .tq-pc__sub) between calc-open and calc-body, then the receipt's foot (calc-foot: the pale red "Adjust the sliders" note with
+     no caption) between calc-open and calc-body, then the receipt's foot (calc-foot: the pale red "Adjust the sliders" note with
      an arrow to the sliders) and calc-close. startCalculator in landing.js drives it. -->
     <div class="tq-pc" data-calc="">
       <span class="tq-pc__edge" aria-hidden="true"></span>
@@ -1543,7 +1539,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       <div class="tq-pc__head">
 
         <h2 class="tq-pc__title tq-h2" data-fitw>Calcola il tuo<br><span style="color: #e7131b;">pagamento mensile</span></h2>
-        <p class="tq-pc__sub">Imposta il numero di clienti e il loro volume mensile: <br class="br-desk">il riepilogo dei pagamenti si aggiorna all’istante. Basato sui nostri spread più bassi.</p>
       </div>
       <div class="tq-pc__grid">
         <div class="tq-pc__term">
@@ -1675,7 +1670,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <div data-film-box="" data-film-desk="" style="position: relative; width: 100%; max-width: 1240px; margin: 0 auto; aspect-ratio: 16 / 9; max-height: 100svh; border-radius: clamp(18px, 3vw, 40px); overflow: hidden; background: #FFFFFF;">
       <!-- the partner film as a video (24.2 s loop, recorded frame by frame from embeds/tradequo-film.html, which stays as
            the source): it plays while on screen, with the film player's own buttons over it (startFilm in landing.js) -->
-      <video data-film muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-label="Video del Programma Partner TradeQuo" style="width: 100%; height: 100%; display: block; object-fit: contain; background: #FFFFFF;"><source data-src="../assets/film/tradequo-film-1080.mp4?v=60f850b5e8" data-src-hi="../assets/film/tradequo-film-1440.mp4?v=ea8ee7fb13" type="video/mp4"><source data-src="../assets/film/tradequo-film-1080.webm?v=4d0e7bc16b" type="video/webm"></video>
+      <video data-film muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-label="Video del Programma Partner TradeQuo" style="width: 100%; height: 100%; display: block; object-fit: contain; background: #FFFFFF;"><source data-src="../assets/film/tradequo-film-1080.mp4?v=d85d8845c5" data-src-hi="../assets/film/tradequo-film-1440.mp4?v=2053452df8" type="video/mp4"><source data-src="../assets/film/tradequo-film-1080.webm?v=e414731b21" type="video/webm"></video>
       <div class="tq-film__grain" data-film-grain aria-hidden="true"></div>
       <div class="tq-film__ctl" data-film-ctl>
         <span><button type="button" class="tq-film__b tq-film__b--s" data-film-skip="-1.5" aria-label="Back 1.5 seconds" title="Back 1.5 s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 6.2v11.6c0 .6-.7 1-1.2.6L3.6 12.6a.8.8 0 0 1 0-1.2l6.7-5.8c.5-.4 1.2 0 1.2.6z" fill="#FFFFFF"/><path d="M21 6.2v11.6c0 .6-.7 1-1.2.6l-6.7-5.8a.8.8 0 0 1 0-1.2l6.7-5.8c.5-.4 1.2 0 1.2.6z" fill="#FFFFFF" opacity="0.7"/></svg></button><span class="tq-film__l">−1.5s</span></span>
