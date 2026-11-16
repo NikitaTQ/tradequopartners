@@ -1246,14 +1246,20 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-pc__total { position: relative; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; padding: 26px 0 24px; border-bottom: 1px dashed #c9c7bf; min-width: 0; }
 .tq-pc__total [data-inv-cap] { font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: .16em; color: #6a6a6e; }
 .tq-pc__total [data-inv-total] { font-weight: 800; font-size: 88px; letter-spacing: -.06em; line-height: .85; white-space: nowrap; color: #0a0a0a; font-variant-numeric: tabular-nums; transition: color .3s; }   /* startCalculator steps a long figure down to fit */
-.tq-pc__foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; }
-.tq-pc__code { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
-.tq-pc__bars { width: 220px; max-width: 100%; height: 44px; background: repeating-linear-gradient(90deg, #0a0a0a 0 2px, transparent 2px 4px, #0a0a0a 4px 5px, transparent 5px 8px, #0a0a0a 8px 11px, transparent 11px 13px); }
-.tq-pc__code > span:last-child { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .3em; color: #55555a; }
-.tq-pc__stamp { flex: none; transform: rotate(-12deg); opacity: .9; margin: -18px -6px -10px 0; mix-blend-mode: multiply; }
-/* partner-terms/: the receipt's foot holds the sub line (no barcode, no stamp); the same line under the heading only where
-   the foot is not shown (900px and narrower) */
-.tq-pc__foot--note p { margin: 0; max-width: 420px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; color: #55555a; text-wrap: pretty; }
+/* the receipt's foot: a pale red note — a red bar down its start edge, an arrow pointing back to the sliders, a round
+   sliders icon, "Adjust the sliders" and a line under it (calc-foot); on 900px and narrower the receipt ends at the total */
+.tq-pc__foot { display: flex; align-items: center; gap: 14px; }
+.tq-pc__hint { position: relative; margin: 24px 0 -28px; padding: 15px 18px 15px 16px; padding-inline: 16px 18px; border-radius: 10px;
+  background: linear-gradient(100deg, #fbe2e3 0%, #fcecec 55%, #fdf2f2 100%); box-shadow: inset 0 0 0 1px rgba(231,19,27,.13); }
+.tq-pc__hint::before { content: ''; position: absolute; inset-block: 0; inset-inline-start: 0; width: 3px; border-start-start-radius: 10px; border-end-start-radius: 10px; background: #e7131b; }
+.tq-pc__hint-arr { flex: none; display: flex; padding-inline-start: 4px; }
+[dir="rtl"] .tq-pc__hint-arr svg { transform: scaleX(-1); }   /* the sliders are on the other side */
+.tq-pc__hint-ic { flex: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 40% 35%, #fcd9db 0%, #f7c3c6 100%); box-shadow: inset 0 0 0 1px rgba(231,19,27,.1); }
+.tq-pc__hint p { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-family: 'Inter', sans-serif; }
+.tq-pc__hint b { font-size: 19px; line-height: 1.2; font-weight: 700; letter-spacing: -.015em; color: #0a0a0a; }
+.tq-pc__hint span { font-size: 13.5px; line-height: 1.45; color: #4f4f55; text-wrap: pretty; }
+/* partner-terms/: its sub line under the heading only where the receipt's note is not shown (900px and narrower) */
 @media (min-width: 901px) { .tq-pc__sub--narrow { display: none; } }
 @media (prefers-reduced-motion: reduce) { .tq-pc__per [data-inv-per-thumb], .tq-pc__knob, .tq-pc__total [data-inv-total] { transition: none; } }
 /* laptops: a narrower terminal */
