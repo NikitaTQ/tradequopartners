@@ -934,30 +934,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-progdots { display: none; }
 .tp-hero .tp-stage { position: relative; isolation: isolate; max-width: 1368px; padding: clamp(28px, 3.9vw, 56px); padding-top: 20px; border-radius: 36px; background: none; overflow: visible; }
 .tp-hero .tp-stage::before { content: none; }
-.tp-line { position: absolute; z-index: -1; left: 50%; top: var(--tp-line-y, 47%); width: 100vw; height: 4px; margin-top: -2px; border-radius: 2px; transform: translateX(-50%); pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.55) 0, rgba(255,255,255,.14) 30%, rgba(255,255,255,0) 50%, rgba(0,0,0,.08) 70%, rgba(0,0,0,.42) 100%),
-    repeating-linear-gradient(135deg, rgba(255,255,255,.16) 0 1px, rgba(255,255,255,0) 1px 4px),
-    conic-gradient(from 45deg at 50% 50%, #e2203a 0 25%, #6e0915 0 50%, #c4142a 0 75%, #3a040b 0) 0 0 / 4px 4px;
-  box-shadow: 0 1.5px 3px -1px rgba(60,6,12,.35); }
-.tp-line__pulse { position: absolute; left: 0; top: 50%; width: 76px; height: 6px; margin-top: -3px; border-radius: 3px; opacity: 0; will-change: transform;
-  background: linear-gradient(90deg, rgba(196,200,208,0) 0, rgba(196,200,208,.75) 28%, #e9ebef 58%, #ffffff 78%, #d4d7dd 92%, rgba(190,194,202,0) 100%);
-  box-shadow: 0 0 5px rgba(255,255,255,.9), 0 0 12px 1px rgba(150,156,168,.45); }
-@media (min-width: 641px) and (max-width: 960px) {
-.tp-line { display: none; }
-}
-.tp-pc::before { content: ''; position: absolute; inset: 0; z-index: -2; border-radius: 22px; transform: skewX(-2.9deg); pointer-events: none; opacity: 0; transition: opacity 1.2s ease;
-  box-shadow: 0 0 0 1px rgba(231,19,27,.14), 0 20px 56px -18px rgba(231,19,27,.32), 0 0 40px -8px rgba(231,19,27,.2); }
-[dir="rtl"] .tp-pc::before { transform: skewX(2.9deg); }
-.tp-pc__slab::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 1.2s ease;
-  box-shadow: inset 0 0 0 1px rgba(231,19,27,.2), inset 0 0 44px rgba(231,19,27,.07); }
-.tp-pc.is-lit::before, .tp-pc.is-lit .tp-pc__slab::after { opacity: 1; }
-@media (max-width: 640px) {
-.tp-pc::before { border-radius: 20px; }
-}
-@media (prefers-reduced-motion: reduce) {
-.tp-pc::before, .tp-pc__slab::after { transition: none; }
-}
 .tp-programs { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; container-type: inline-size;
   --pu-w: calc((100cqw - 2 * (24px + clamp(0px, (100cqw - 1208px) / 2, 24px))) / 3 / 517); --pu-h: calc((100vh - 290px) / 771); }
 @media (min-width: 641px) and (max-width: 960px) {
@@ -1550,13 +1526,10 @@ h1, h2 { line-height: 1.2 !important; }
       </div>
 
       <div class="tp-stage">
-        <!-- one thin line of red carbon fibre across the screen, behind the cards, at the height of their figures (landing.js,
-             startProgLine); a silver pulse runs along it to each card in turn, and the card it reaches lights up a little red -->
-        <div class="tp-line" data-prog-line aria-hidden="true"><i class="tp-line__pulse"></i></div>
         <!-- the three cards (Partner_Cards_8): slabs of glass leaning a little to the right (the slab is skewed, the
              text stays upright); the glass is the design's own card (its highlights, facets and red sparks; data-glass),
              laid on by landing.js (startProgCards) so that its facets meet this card's rows; it also lines the rows up
-             across the three cards. The line passes behind the cards, not through them. -->
+             across the three cards. Nothing runs behind them: a white page. -->
         <div class="tp-programs" data-progs>
           <article class="tp-pc" data-glass="../../assets/programs/glass-1.webp">
             <span class="tp-pc__slab" aria-hidden="true"><svg class="tp-pc__cut" focusable="false"></svg></span>
@@ -1973,6 +1946,6 @@ h1, h2 { line-height: 1.2 !important; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=fd3ab771ef" defer></script>
+<script src="../../assets/js/landing.js?v=67f1542748" defer></script>
 </body>
 </html>
