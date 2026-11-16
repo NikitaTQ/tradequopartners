@@ -576,12 +576,15 @@ html { scroll-snap-type: y proximity; }
 @media (prefers-reduced-motion: reduce) { [data-rep-track] { animation: none !important; } [data-rep-viewport] { overflow-x: auto !important; } }
 /* the marquee under JS (startReviewsDrag): grab it with the mouse, swipe it sideways on touch */
 [data-rep-viewport][data-rep-live] { cursor: grab; touch-action: pan-y; }
-/* the editorial cards (DailyForex, TopBrokers): the outlet's name and a red "Editor's verdict" pill, kept on one line;
-   where the pair does not fit the card (a long word, e.g. Italian), the pill steps under the name; on phones it always does */
-.tq-rv-head { flex-wrap: wrap; row-gap: 8px; }
-.tq-rv-pill { white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b; padding: 5px 9px; border-radius: 999px;
+/* the editorial cards (DailyForex, TopBrokers): the outlet's name, its score set large and bold at the end of the row
+   (DailyForex 4.0/5, TopBrokers 4.5/5), and under them the red "Editor's verdict" pill, on one line */
+.tq-rv-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 12px; row-gap: 10px; min-height: 36px; }
+.tq-rv-name { display: inline-flex; align-items: center; gap: 10px; min-width: 0; font-size: 19px; font-weight: 700; letter-spacing: -.02em; color: #0a0a0a; }
+.tq-rv-name img { display: block; flex: none; width: 34px; height: 34px; border-radius: 7px; }
+.tq-rv-score { display: inline-flex; align-items: baseline; gap: 3px; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; color: #8a8d94; }
+.tq-rv-score b { font-size: 34px; line-height: 1; font-weight: 800; letter-spacing: -.045em; color: #0a0a0a; font-variant-numeric: tabular-nums; }
+.tq-rv-pill { grid-column: 1 / -1; justify-self: start; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b; padding: 5px 9px; border-radius: 999px;
   border: 1px solid rgba(231,19,27,.35); background: rgba(255,255,255,.6); }
-@media (max-width: 640px) { .tq-rv-head { flex-direction: column; align-items: flex-start !important; } }   /* the card sets align-items inline */
 [data-rep-viewport].is-drag { cursor: grabbing; }
 [data-rep-viewport].is-drag, [data-rep-viewport].is-drag * { -webkit-user-select: none; user-select: none; }
 [data-rep-viewport][data-rep-live] img { -webkit-user-drag: none; }
