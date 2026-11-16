@@ -306,7 +306,7 @@
       'Leila', 'Hassan', 'Marco', 'Ines', 'Daniel', 'Aisha', 'Viktor', 'Hana', 'Carlos', 'Nadia', 'Samuel', 'Julia', 'Arjun', 'Zara', 'Felix', 'Lina', 'Youssef', 'Emma',
       'Kenji', 'Sara', 'Pavel', 'Grace', 'Adam', 'Maya', 'Ivan', 'Noor', 'Leo', 'Chloe', 'Tariq', 'Rosa', 'Ethan', 'Amina', 'Bruno', 'Olga', 'Kai', 'Selin', 'Hugo',
       'Dina', 'Mohammed', 'Lucia', 'Sami', 'Vera'];
-    const SYMS = ['XAUUSD', 'EURUSD', 'GBPJPY', 'USDJPY', 'NAS100', 'BTCUSD', 'GBPUSD', 'US30', 'XAGUSD', 'AUDUSD'];
+    const SYMS = ['XAUUSD', 'EURUSD', 'GBPJPY', 'USDJPY', 'NAS100', 'EURJPY', 'GBPUSD', 'US30', 'XAGUSD', 'AUDUSD'];
     /* the figure of each of the forty lines, in the design's order: [kind, from, to] */
     const SPEC = [['usd', 800, 12000], ['num', 4, 40], ['usd', 120, 4200], ['usd', 60, 2600], ['usd', 400, 9000], ['usd', 1500, 22000], ['num', 3, 48],
       ['num', 2, 12], [''], ['num', 40, 600], ['usd', 50000, 400000], ['usd', 200, 6000], ['fix', '87%'], ['num', 120, 3800], ['num', 1000, 25000],

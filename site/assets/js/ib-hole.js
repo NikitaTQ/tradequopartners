@@ -85,6 +85,27 @@
       chips.slice().sort((x, y) => x.ro - y.ro).forEach((c, i) => { c.ed = n > 1 ? i / (n - 1) * 1.1 : 0; });
       sparks = [];
     };
+    /* a big caption's size and rows: as large as the width allows (14-28px), in two rows of about equal width if one does not fit */
+    const capFit = (toks) => {
+      const ls = (fs) => { ctx.font = '700 ' + fs + 'px ' + HF; ctx.letterSpacing = (CASED ? fs * 0.05 : 0).toFixed(1) + 'px'; };
+      const width = (ts) => { let w = 0; ts.forEach((t, i) => { if (i && t.sp) w += ctx.measureText(' ').width; w += ctx.measureText(t.t).width; }); return w; };
+      const split = () => {   /* two rows of about equal width, broken at a space */
+        let best = null, bd = 1e9;
+        for (let i = 1; i < toks.length; i++) if (toks[i].sp) { const d = Math.abs(width(toks.slice(0, i)) - width(toks.slice(i))); if (d < bd) { bd = d; best = i; } }
+        return best ? [toks.slice(0, best), toks.slice(best)] : [toks];
+      };
+      let fs = Math.round(Math.max(14, Math.min(28, W * 0.02))) * (CASED ? 1 : 1.15), rows = [toks];
+      for (;;) {
+        ls(fs); rows = [toks];
+        if (width(toks) > W - 48) rows = split();
+        if (fs <= 10 || rows.every((r) => width(r) <= W - 48)) break;
+        fs -= 1;
+      }
+      return { fs, rows, width };
+    };
+    /* the caption's top at half the site's gap between blocks from the block's top, like every block's first line
+       (site.css --tq-gap: clamp(128px, 17.5vw, 252px)) */
+    const capTop = () => Math.min(126, Math.max(64, innerWidth * 0.0875));
     const size = () => {
       W = Math.round(cv.clientWidth); H = Math.round(cv.clientHeight); if (!W || !H) return;
       const hudBox = root.querySelector('.tq-ibb__hud');   /* the scene stays above the steps and the button under them */
@@ -93,6 +114,16 @@
       const tall = W < H;   /* phones, portrait tablets: a bigger hole, wider bars and tree than the landscape design */
       RX = Math.min(W * 0.47, 760); R = Math.min(RX * (tall ? 0.28 : 0.2), sh * 0.17);
       gw = Math.min(W < 700 ? W - 48 : tall ? W * 0.72 : RX * 1.1, W - 48); gh = Math.min(sh * 0.6, gw * 0.66);
+      /* the scene stays under the captions: the lowest caption's foot (two rows on phones, plus the 10px it rises by when it
+         comes in) and some air above the tree's top cluster; the scene moves down for it, and if it then reaches the steps
+         below, it gets smaller */
+      let capB = 0;
+      CAP.forEach((t) => { if (!t.length) return; const f = capFit(t); capB = Math.max(capB, capTop() + f.fs * 0.76 + (f.rows.length - 1) * f.fs * 1.4 + f.fs * 0.3 + 10); });
+      capB += Math.max(12, W * 0.02);
+      if (cy - 0.64 * gh < capB) {
+        cy = capB + 0.64 * gh;
+        if (cy + 0.56 * gh > sh) { gh = Math.max(40, (sh - capB) / 1.2); cy = capB + 0.64 * gh; }
+      }
       tight();
       step = gh / 11.6; cs = step * 0.46; chipK = Math.min(1, Math.max(0.55, R / 110));
       dpr = Math.max(1, Math.min(W < 700 ? 1.5 : DPR0, Math.sqrt(3.4e6 / (W * H))));   /* phones: 1.5x, the canvas raster is what costs there */
@@ -352,24 +383,8 @@
     };
     const oneLine = (toks, a) => {
       if (a <= 0.01 || !toks.length) return;
-      const ls = (fs) => { ctx.font = '700 ' + fs + 'px ' + HF; ctx.letterSpacing = (CASED ? fs * 0.05 : 0).toFixed(1) + 'px'; };
-      const width = (ts) => { let w = 0; ts.forEach((t, i) => { if (i && t.sp) w += ctx.measureText(' ').width; w += ctx.measureText(t.t).width; }); return w; };
-      const split = () => {   /* two rows of about equal width, broken at a space */
-        let best = null, bd = 1e9;
-        for (let i = 1; i < toks.length; i++) if (toks[i].sp) { const d = Math.abs(width(toks.slice(0, i)) - width(toks.slice(i))); if (d < bd) { bd = d; best = i; } }
-        return best ? [toks.slice(0, best), toks.slice(best)] : [toks];
-      };
-      let fs = Math.round(Math.max(14, Math.min(28, W * 0.02))) * (CASED ? 1 : 1.15), rows = [toks];
-      for (;;) {
-        ls(fs); rows = [toks];
-        if (width(toks) > W - 48) rows = split();
-        if (fs <= 10 || rows.every((r) => width(r) <= W - 48)) break;
-        fs -= 1;
-      }
-      /* the caption's top at half the site's gap between blocks from the block's top, like every block's first line
-         (site.css --tq-gap: clamp(128px, 17.5vw, 252px)) */
-      const half = Math.min(126, Math.max(64, innerWidth * 0.0875));
-      const lh = fs * 1.4, y0 = half + fs * 0.76 + (1 - eo(a)) * 10, sp = ctx.measureText(' ').width;
+      const { fs, rows, width } = capFit(toks);
+      const lh = fs * 1.4, y0 = capTop() + fs * 0.76 + (1 - eo(a)) * 10, sp = ctx.measureText(' ').width;
       ctx.globalAlpha = a; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
       rows.forEach((r, i) => {
         if (!RTL) {

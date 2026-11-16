@@ -1,11 +1,11 @@
 /* /marketing-tools/ hero (Partner_Tools_Hero design; first TradeQuo_Marketing_Tools_Hero): the four tools as 3D
- * objects — creative cards, a TradingView screen, signal candles on a base, and IB Tools (three stacked tiles:
+ * objects — creative cards, a TradingView screen, analysis candles on a base, and IB Tools (three stacked tiles:
  * analytics, controls, a gear) or the academy temple — over the hero. The stage's data-theme="light" lights them
  * for a light page (darker silver, black candles, a soft red glow, dark names); data-ib puts IB Tools in the
  * temple's place. They pop in, bob, follow the mouse (parallax); each one's name stands above it, coming in as it lands;
  * hovering or tapping one lifts it a little and brightens its glow.
  * Phones and other tall screens (stage narrower than 0.95 of its height) get a 2×2 layout.
- * A name always sits above its object, never higher than 8px from the stage's top (3px on tall stages; opts.floor() px if given). Trading Signals and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
+ * A name always sits above its object, never higher than 8px from the stage's top (3px on tall stages; opts.floor() px if given). Expert Analysis and the Academy temple follow TradeQuo_Academy_Temple (the temple scaled to the size
  * the old one had). Loaded as a module by marketing.html; three.js is the site's own copy. The page's text stays as it is
  * when WebGL is missing. Labels come from the stage's data-labels (mt.top.l1–l4, joined by |). */
 import * as THREE from '../../vendor/three@0.184.0/three.module.min.js';
@@ -65,7 +65,7 @@ function materials(light) {
     graphite: new THREE.MeshStandardMaterial({ color: 0x3a3a40, metalness: 1, roughness: 0.28, envMapIntensity: 1.1 }),
     ruby: new THREE.MeshPhysicalMaterial({ color: 0xd60f19, emissive: 0x5a0006, metalness: 0.15, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.4 }),
     red: new THREE.MeshBasicMaterial({ color: 0xff2a33 }),
-    /* Trading Signals and the temple (TradeQuo_Academy_Temple): their own pearl and ruby, the base's lacquer and chrome */
+    /* Expert Analysis and the temple (TradeQuo_Academy_Temple): their own pearl and ruby, the base's lacquer and chrome */
     pearl2: new THREE.MeshPhysicalMaterial({ color: light ? 0x141417 : 0xffffff, metalness: 0.12, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.25 }),
     ruby2: new THREE.MeshPhysicalMaterial({ color: 0xd60f19, emissive: 0x380004, metalness: 0.15, roughness: 0.12, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.4 }),
     baseLacquer: new THREE.MeshPhysicalMaterial({ color: 0x060607, metalness: 0.1, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.2 }),
@@ -121,7 +121,7 @@ function buildScreen(M) {
   return g;
 }
 
-function buildSignals(M) {
+function buildAnalysis(M) {
   const g = new THREE.Group(), inner = new THREE.Group(); g.add(inner);
   const base = new THREE.ExtrudeGeometry(rr(1.3, 0.56, 0.1), { depth: 0.12, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.012, bevelSegments: 3, curveSegments: 14 });
   base.rotateX(-Math.PI / 2); base.translate(0, 0.012, 0);
@@ -373,7 +373,7 @@ export function mount(el, opts = {}) {
   const glowTex = light ? radTex([[0, 'rgba(231,19,27,0.32)'], [0.4, 'rgba(231,19,27,0.08)'], [1, 'rgba(231,19,27,0)']])
     : radTex([[0, 'rgba(255,42,51,0.55)'], [0.35, 'rgba(200,16,26,0.18)'], [1, 'rgba(200,16,26,0)']]);
   const tall = (opts.layout === 'portrait' || (!opts.layout && el.clientWidth / Math.max(1, el.clientHeight) < 0.95));
-  const items = [buildCards, buildScreen, buildSignals, opts.ibTools ? buildIB : buildTemple].map((fn, i) => {
+  const items = [buildCards, buildScreen, buildAnalysis, opts.ibTools ? buildIB : buildTemple].map((fn, i) => {
     const holder = new THREE.Group(), bob = new THREE.Group(), spin = new THREE.Group();
     holder.add(bob); bob.add(spin); spin.add(fn(M, tall ? 0.6 : 1)); root.add(holder);
     const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: light ? THREE.NormalBlending : THREE.AdditiveBlending, opacity: 0.55 }));
@@ -392,7 +392,7 @@ export function mount(el, opts = {}) {
   };
   const ro = new ResizeObserver(resize); ro.observe(el); resize();
 
-  const LABELS = opts.labels || ['Creatives', 'TradingView', 'Trading Signals', 'White-Label Academy'];
+  const LABELS = opts.labels || ['Creatives', 'TradingView', 'Expert Analysis', 'White-Label Academy'];
   const overlay = document.createElement('div'); overlay.style.cssText = 'position:absolute;inset:0;pointer-events:none;overflow:hidden;'; el.appendChild(overlay);
   const tags = LABELS.map((txt, i) => {
     const d = document.createElement('div');
