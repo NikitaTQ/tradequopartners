@@ -105,8 +105,8 @@
       return { fs, rows, width };
     };
     /* the caption's top at half the site's gap between blocks from the block's top, like every block's first line
-       (site.css --tq-gap: clamp(128px, 17.5vw, 252px)) */
-    const capTop = () => Math.min(126, Math.max(64, innerWidth * 0.0875));
+       (site.css --tq-gap: 128px on phones, clamp(102px, 14vw, 202px) from 641px) */
+    const capTop = () => innerWidth <= 640 ? 64 : Math.min(101, Math.max(51, innerWidth * 0.07));
     const fitCanvas = () => {
       dpr = Math.max(1, Math.min(W < 700 ? 1.5 : DPR0, Math.sqrt(budget / (W * H))));   /* phones: 1.5x, the canvas raster is what costs there */
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);

@@ -121,7 +121,10 @@ html:lang(zh-Hant) { --h1f: 'TQ H1 Noto TC'; --h2f: 'TQ H2 Noto TC'; }
 html, body { margin: 0; padding: 0; background: #ffffff; }
 html { overflow-x: hidden; overscroll-behavior-x: none; }
 * { box-sizing: border-box; }
-:root { --tq-gap: clamp(128px, 17.5vw, 252px); --tq-half: calc(var(--tq-gap) / 2); }
+:root { --tq-gap: 128px; --tq-half: calc(var(--tq-gap) / 2); }
+@media (min-width: 641px) {
+:root { --tq-gap: clamp(102px, 14vw, 202px); }
+}
 @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --tqfm { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
 @property --tqo { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -1484,7 +1487,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </div>
     </div>
 
-    <div data-crystals="" style="position: relative; max-width: 860px; margin: clamp(48px, 6.1vw, 88px) auto 0; border-top: 1px solid #ececee; padding-top: clamp(40px, 5.6vw, 80px);">
+    <div data-crystals="" style="position: relative; max-width: 860px; margin: clamp(48px, 6.1vw, 88px) auto 0; padding-top: clamp(40px, 5.6vw, 80px);">
         <h2 class="tq-h2" style="margin: clamp(20px, 3vw, 36px) 0 0; text-align: center; color: #0a0a0a;" data-fitw>Le programme en chiffres</h2>
         <div data-crys-stage style="position: relative;">
           <picture><source media="(max-width: 640px)" srcset="../assets/posters/crystals-fr-mobile.webp?v=d7dd408b6f"><img data-crys-poster fetchpriority="low" src="../assets/posters/crystals-fr-desktop.webp?v=9bd73b70c2" alt="30K+ partenaires, $9M+ versés aux partenaires chaque mois, jusqu’à 87% de partage de revenus, note Trustpilot de 4.9, 800K+ clients, 400+ voyages incentive" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;"></picture>
