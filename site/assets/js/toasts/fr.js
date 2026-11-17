@@ -15,7 +15,7 @@ export default {
 "{n} a dépassé {v} de rebates cumulés",
 "{n} a touché {v} grâce au volume de ses sous-IB",
 "{n} est passé à {v} du spread",
-"Les clients de {n} ont tradé {v} lots cette semaine",
+"Les clients de {n} ont enregistré {v} lots de volume cette semaine",
 "Le réseau de {n} a dépassé {v} lots ce mois-ci",
 "{n} a gagné {v} sur le volume {s}",
 "{n} a obtenu un gestionnaire partenaire dédié",
@@ -38,8 +38,8 @@ export default {
 "{n} a reçu {v} sans frais de versement",
 "{n} a dépassé {v} clients actifs",
 "{n} est passé à un plan de commissions sur mesure",
-"Les élèves de l’académie de {n} ont tradé {v} lots",
-"{n} a lancé une application de trading à sa marque",
+"Les élèves de l’académie de {n} ont enregistré {v} lots de volume",
+"{n} a lancé une application dédiée aux marchés, à sa marque",
 "{n} a gagné {v} grâce à un seul sous-IB",
 "{n} a reçu son premier paiement de {v}"
 ]

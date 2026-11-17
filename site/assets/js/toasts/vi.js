@@ -15,7 +15,7 @@ export default {
 "{n} vượt mốc {v} tiền hoàn phí tích lũy",
 "{n} nhận {v} từ khối lượng của sub-IB",
 "{n} được nâng lên {v} chênh lệch",
-"Khách hàng của {n} giao dịch {v} lot tuần này",
+"Khách hàng của {n} ghi nhận khối lượng {v} lot tuần này",
 "Mạng lưới của {n} vượt {v} lot tháng này",
 "{n} kiếm được {v} từ khối lượng {s}",
 "{n} có quản lý đối tác riêng",
@@ -38,8 +38,8 @@ export default {
 "{n} được trả {v} không mất phí rút",
 "{n} vượt {v} khách hàng đang hoạt động",
 "{n} chuyển sang chính sách hoa hồng riêng",
-"Học viên học viện của {n} giao dịch {v} lot",
-"{n} ra mắt ứng dụng giao dịch mang thương hiệu riêng",
+"Học viên học viện của {n} ghi nhận khối lượng {v} lot",
+"{n} ra mắt ứng dụng thị trường mang thương hiệu riêng",
 "{n} kiếm được {v} từ một sub-IB duy nhất",
 "{n} nhận khoản thanh toán đầu tiên {v}"
 ]

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Herramientas IB · para socios — Cada lote. Cada nivel. Un solo panel. | TradeQuo</title>
-<meta name="description" content="Sigue tus comisiones por lote, detecta a los clientes que dejaron de operar, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB. Datos en tiempo real, no extractos a fin de mes, y una IA que te dice dónde actuar primero.">
+<meta name="description" content="Sigue tus comisiones por lote, detecta a los clientes que ya no están activos, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB. Datos en tiempo real, no extractos a fin de mes, y una IA que te dice dónde actuar primero.">
 <link rel="canonical" href="https://tradequopartners.com/es/ib-tools/">
 <link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/">
 <link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/">
@@ -31,13 +31,13 @@
 <meta property="og:url" content="https://tradequopartners.com/es/ib-tools/">
 <meta property="og:locale" content="es_ES">
 <meta property="og:title" content="Herramientas IB · para socios — Cada lote. Cada nivel. Un solo panel. | TradeQuo">
-<meta property="og:description" content="Sigue tus comisiones por lote, detecta a los clientes que dejaron de operar, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB.">
+<meta property="og:description" content="Sigue tus comisiones por lote, detecta a los clientes que ya no están activos, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB.">
 <meta property="og:image" content="https://tradequopartners.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Herramientas IB · para socios — Cada lote. Cada nivel. Un solo panel. | TradeQuo">
-<meta name="twitter:description" content="Sigue tus comisiones por lote, detecta a los clientes que dejaron de operar, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB.">
+<meta name="twitter:description" content="Sigue tus comisiones por lote, detecta a los clientes que ya no están activos, desglosa el volumen por instrumento y atribuye cada nivel de Sub-IB.">
 <meta name="twitter:image" content="https://tradequopartners.com/og.png">
 <link rel="icon" href="../../favicon.svg?v=ff199c552e" type="image/svg+xml">
 <link rel="icon" href="../../favicon-32.png?v=08736b4127" type="image/png" sizes="32x32">
@@ -1753,7 +1753,7 @@ html .tq-ibcp { height: calc(var(--sh, 100svh) + 210svh); }
         </div>
         <div class="tq-ibtp__vis">
           <div class="tq-ibvs" dir="ltr">
-            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=5fb08666bf" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=ed67410b3b" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
+            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=5f5e2a17b4" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=ed67410b3b" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
             <div class="tq-ibvs__w tq-ibvs__w--them" dir="ltr">
               <span class="tq-ibvs__th" style="--x:116.5;--b:291.2;--r:500" data-fitw>Otros programas</span>
               <span class="tq-ibvs__tl" style="--x:121;--b:391.7;--r:500" data-fitw>Niveles de sub-IB</span>
@@ -2142,7 +2142,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
               <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>El proveedor crea una estrategia.</span></p>
               <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>Llega a la cuenta de tu cliente.</span></p>
             </div>
-            <a class="tq-copy tq-ibcp__cta" href="#outlooks"><span class="tq-copy__label">Explorar copy trading</span><span class="tq-copy__icon" aria-hidden="true"><span class="tq-copy__back"></span><span class="tq-copy__front"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+            <a class="tq-copy tq-ibcp__cta" href="#outlooks"><span class="tq-copy__label">Explorar estrategias</span><span class="tq-copy__icon" aria-hidden="true"><span class="tq-copy__back"></span><span class="tq-copy__front"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
           </div>
           <div class="tq-ibcp__crop"><div class="tq-ibcp__board" dir="ltr" translate="no" aria-hidden="true">
   <div class="tq-ibcp__hand" data-k="L" style="transform:translate3d(360px,101px,0) scale(.78)">
@@ -2323,7 +2323,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
             </button>
             <div data-faq-panel id="faq-2-a" role="region" aria-labelledby="faq-2-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Hasta el 87% del spread en cada operación de tus clientes referidos, mientras sigan activos. No hay límite de clientes ni de volumen.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Hasta el 87% del spread en cada transacción de tus clientes referidos, mientras sigan activos. No hay límite de clientes ni de volumen.</p>
               </div>
             </div>
           </div>
@@ -2362,7 +2362,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
             </button>
             <div data-faq-panel id="faq-5-a" role="region" aria-labelledby="faq-5-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">No. No hay cuota de inscripción, y no necesitas capital ni experiencia en trading. Basta con una cuenta de TradeQuo verificada.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">No. No hay cuota de inscripción, y no necesitas capital ni experiencia en los mercados. Basta con una cuenta de TradeQuo verificada.</p>
               </div>
             </div>
           </div>

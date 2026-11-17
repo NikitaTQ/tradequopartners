@@ -15,7 +15,7 @@ export default {
 "{n} — łączne rabaty ponad {v}",
 "{n} — {v} z wolumenu sub-IB",
 "{n} — awans na {v} spreadu",
-"{n} — loty klientów w tym tygodniu: {v}",
+"{n} — wolumen klientów w tym tygodniu: {v} lotów",
 "{n} — loty sieci w tym miesiącu: ponad {v}",
 "{n} — {v} z wolumenu {s}",
 "{n} — dedykowany opiekun partnera",
@@ -38,8 +38,8 @@ export default {
 "{n} — wypłata {v} bez opłat",
 "{n} — aktywni klienci: ponad {v}",
 "{n} — indywidualny plan prowizyjny",
-"{n} — loty kursantów akademii: {v}",
-"{n} — start własnej aplikacji tradingowej",
+"{n} — wolumen kursantów akademii: {v} lotów",
+"{n} — start własnej aplikacji rynkowej",
 "{n} — {v} z jednego sub-IB",
 "{n} — pierwsza wypłata {v}"
 ]

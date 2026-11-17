@@ -15,7 +15,7 @@ export default {
 "{n} hat insgesamt mehr als {v} an Rebates erhalten",
 "{n} hat {v} aus Sub-IB-Volumen erhalten",
 "{n} ist auf {v} Spread-Anteil aufgestiegen",
-"Die Kunden von {n} haben diese Woche {v} Lots gehandelt",
+"Die Kunden von {n} haben diese Woche {v} Lots Volumen verbucht",
 "Das Netzwerk von {n} hat diesen Monat {v} Lots überschritten",
 "{n} hat {v} mit {s}-Volumen verdient",
 "{n} hat einen persönlichen Partnermanager erhalten",
@@ -38,8 +38,8 @@ export default {
 "{n} hat {v} ohne Auszahlungsgebühren erhalten",
 "{n} hat mehr als {v} aktive Kunden",
 "{n} ist zu einem individuellen Provisionsplan gewechselt",
-"Die Akademie-Schüler von {n} haben {v} Lots gehandelt",
-"{n} hat eine eigene Trading-App gestartet",
+"Die Akademie-Schüler von {n} haben {v} Lots Volumen verbucht",
+"{n} hat eine eigene Markt-App gestartet",
 "{n} hat {v} mit einem einzigen Sub-IB verdient",
 "{n} hat die erste Auszahlung von {v} erhalten"
 ]

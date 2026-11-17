@@ -15,7 +15,7 @@ export default {
 "{n} a depășit {v} în rebate cumulate",
 "{n} a primit {v} din volumul sub-IB",
 "{n} a trecut la {v} din spread",
-"{n} — loturi tranzacționate de clienți săptămâna aceasta: {v}",
+"{n} — volum înregistrat de clienți săptămâna aceasta: {v} loturi",
 "{n} — loturi ale rețelei luna aceasta: peste {v}",
 "{n} a câștigat {v} din volumul pe {s}",
 "{n} a primit un manager de parteneriat dedicat",
@@ -38,8 +38,8 @@ export default {
 "{n} a primit {v}, fără comisioane de plată",
 "{n} — clienți activi: peste {v}",
 "{n} a trecut la un plan de comisioane personalizat",
-"{n} — loturi tranzacționate de cursanții academiei: {v}",
-"{n} a lansat o aplicație de trading proprie",
+"{n} — volum înregistrat de cursanții academiei: {v} loturi",
+"{n} a lansat o aplicație proprie dedicată piețelor",
 "{n} a câștigat {v} de la un singur sub-IB",
 "{n} a primit prima plată de {v}"
 ]
