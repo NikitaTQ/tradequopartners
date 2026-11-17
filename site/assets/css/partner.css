@@ -561,10 +561,10 @@
 @media (max-width: 640px) {
   .pf-perks__head { gap: 14px; }
   .pf-fan { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 24px 0; }
-  .pf-perk__in { min-height: 214px; padding: 16px 10px 10px; gap: 5px; border-radius: 22px; }
+  .pf-perk__in { min-height: 0; padding: 16px 10px 12px; gap: 5px; border-radius: 22px; }   /* as tall as its words and picture (was 214px with room to spare) */
   .pf-perk__t { font-size: 15px; }
   .pf-perk__d { font-size: 12px; line-height: 1.4; }
-  .pf-perk__v { height: 92px; }
+  .pf-perk__v { height: 72px; margin-top: auto; padding-top: 6px; }   /* the picture right under the words (was 92px, at the card's foot) */
   .pf-perk__v > * { transform: scale(.6); }
 }
 
@@ -819,6 +819,7 @@
 .tp-pds__fill::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 240px; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.95) 50%, rgba(255,255,255,0));
   transform: translateX(-240px); animation: tpPdsSheen 2.4s linear infinite; }
 @keyframes tpPdsSheen { to { transform: translateX(1000px); } }
+@keyframes tpPdsSheenV { to { transform: translateY(1000px); } }
 .tp-pds:not(.is-live) .tp-pds__fill::after { animation-play-state: paused; }
 .tp-pds__steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
 .tp-pds__step { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -874,6 +875,13 @@
   .tp-pds__n { margin-top: 2px; }
   .tp-pds__step h3 { margin-top: 6px; font-size: 18px; }
   .tp-pds__step p { margin-top: 6px; max-width: none; font-size: 14.5px; }
+  /* the rail, as on wide screens but down the balls' line: from the first ball's centre to the last's, filled to the
+     current one (startSteppers in landing.js measures them: --rx, --rt, --rh, --rf; the steps' heights vary) */
+  .tp-pds__base, .tp-pds__fill { display: block; inset-inline-start: auto; left: var(--rx, 32px); top: var(--rt, 32px); }
+  .tp-pds__base { width: 2px; height: var(--rh, 0px); margin-left: -1px; box-shadow: none; }
+  .tp-pds__fill { width: 6px; height: var(--rf, 0px); margin-left: -3px; transition: height 1s cubic-bezier(.6,0,.3,1); }
+  .tp-pds__fill::after { right: 0; bottom: auto; width: auto; height: 240px; background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.95) 50%, rgba(255,255,255,0));
+    transform: translateY(-240px); animation-name: tpPdsSheenV; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tp-pds__fill, .tp-pds__ball, .tp-pds__ball::before, .tp-pds__n, .tp-pds__step h3, .tp-pds__step p { transition: none; }
@@ -1052,7 +1060,9 @@
   .tq-ibvs__uh { font-size: 22px; }
   .tq-ibvs__ul { font-size: 22px; }
   .tq-ibvs__us { font-size: 23.5px; }
-  .tq-ibtp__ctas { order: 4; margin-top: calc(var(--cg, 0px) - 4px); padding-top: 0; gap: calc(12px * var(--k)); }   /* under the card, lower by what the screen has to spare (--cg, at most 24px; the section's script) */
+  .tq-ibtp__ctas { order: 4; margin-top: calc(var(--cg, 0px) - 4px); padding-top: 0; gap: calc(12px * var(--k)); }
+  .tq-ibtp .tq-rglass { box-shadow: inset 0 1.5px 1px rgba(255,255,255,.7), inset 0 -1px 1px rgba(255,255,255,.35), inset 0 -14px 22px -12px rgba(100,0,8,.6), inset 0 0 22px rgba(255,180,184,.18),
+    0 calc(14px + var(--tqh) * 6px) calc(26px + var(--tqh) * 14px) -14px rgba(20,22,30,.3); }   /* phones: no red smudge under it (asked for), a neutral shadow */   /* under the card, lower by what the screen has to spare (--cg, at most 24px; the section's script) */
   .tq-ibtp__go { height: calc(60px * var(--k)); font-size: calc(16px * var(--k)); }
   .tq-ibtp__go { gap: calc(16px * var(--k)); padding-inline: calc(28px * var(--k)) calc(7px * var(--k)); }
   .tq-ibtp__arr { width: calc(46px * var(--k)); height: calc(46px * var(--k)); }
@@ -1350,6 +1360,15 @@
   .tq-ibcp .tq-ibcp__stage { height: auto; }
   .tq-ibcp .tq-ibcp__in { flex: none; }
   .tq-ibcp .tq-ibcp__crop { margin-top: 60px; }
+  /* the heading, then the button (centred), the hands, and the two step captions under the hands (centred), where the
+     screen had room to spare: the words' column gives its pieces to the stage (display: contents) to be ordered */
+  .tq-ibcp .tq-ibcp__txt { display: contents; }
+  .tq-ibcp .tq-ibcp__h2, .tq-ibcp .tq-ibcp__steps { box-sizing: border-box; width: 100%; max-width: 560px; margin-inline: auto; padding-inline: 20px; }
+  .tq-ibcp .tq-ibcp__h2 { order: 1; }
+  .tq-ibcp .tq-ibcp__cta { order: 2; align-self: center; margin-top: 20px; }
+  .tq-ibcp .tq-ibcp__crop { order: 3; }
+  .tq-ibcp .tq-ibcp__steps { order: 4; margin-top: 12px; }
+  .tq-ibcp .tq-ibcp__step { justify-content: center; text-align: center; }
 }
 
 /* ---- IB Tools: the TradingView Premium block (#premium, in place of the Branded toolkit) -----------------------------

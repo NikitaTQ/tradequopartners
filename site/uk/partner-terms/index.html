@@ -355,8 +355,9 @@ html { scroll-snap-type: none; }
 [data-fan] { order: 2; }
 [data-fan] { aspect-ratio: auto !important; container-type: normal !important; max-width: none !important; }
 [data-fan-stage] { position: static !important; display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
-[data-fan-card] { position: relative !important; left: auto !important; top: auto !important; width: auto !important; height: auto !important; min-height: 250px; transform: none !important; padding: 18px 12px 12px !important; border-radius: 18px !important; gap: 6px !important; }
-[data-fan-obj] { transform: none !important; width: 72% !important; }
+[data-fan-card] { position: relative !important; left: auto !important; top: auto !important; width: auto !important; height: auto !important; min-height: 214px; transform: none !important; padding: 16px 7px 10px !important; border-radius: 18px !important; gap: 6px !important; }
+[data-fan] { margin-inline: -8px !important; width: calc(100% + 16px) !important; }
+[data-fan-obj] { transform: none !important; width: 66% !important; }
 [data-fan-card] > span:first-child { font-size: 15px !important; }
 [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
 [data-faq-grid] { grid-template-columns: 1fr !important; }
@@ -1319,6 +1320,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-pds__fill::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 240px; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.95) 50%, rgba(255,255,255,0));
   transform: translateX(-240px); animation: tpPdsSheen 2.4s linear infinite; }
 @keyframes tpPdsSheen { to { transform: translateX(1000px); } }
+@keyframes tpPdsSheenV { to { transform: translateY(1000px); } }
 .tp-pds:not(.is-live) .tp-pds__fill::after { animation-play-state: paused; }
 .tp-pds__steps { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
 .tp-pds__step { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -1371,6 +1373,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-pds__n { margin-top: 2px; }
 .tp-pds__step h3 { margin-top: 6px; font-size: 18px; }
 .tp-pds__step p { margin-top: 6px; max-width: none; font-size: 14.5px; }
+.tp-pds__base, .tp-pds__fill { display: block; inset-inline-start: auto; left: var(--rx, 32px); top: var(--rt, 32px); }
+.tp-pds__base { width: 2px; height: var(--rh, 0px); margin-left: -1px; box-shadow: none; }
+.tp-pds__fill { width: 6px; height: var(--rf, 0px); margin-left: -3px; transition: height 1s cubic-bezier(.6,0,.3,1); }
+.tp-pds__fill::after { right: 0; bottom: auto; width: auto; height: 240px; background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.95) 50%, rgba(255,255,255,0));
+    transform: translateY(-240px); animation-name: tpPdsSheenV; }
 }
 @media (prefers-reduced-motion: reduce) {
 .tp-pds__fill, .tp-pds__ball, .tp-pds__ball::before, .tp-pds__n, .tp-pds__step h3, .tp-pds__step p { transition: none; }
@@ -2025,7 +2032,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=2b1459efb7" defer></script>
+<script src="../../assets/js/landing.js?v=902f35cb17" defer></script>
 <script src="../../assets/js/plan.js?v=80defb0ea6" defer></script>
 </body>
 </html>

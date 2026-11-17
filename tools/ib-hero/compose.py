@@ -1,4 +1,5 @@
-"""Run from tools/ib-hero after erase.py:  python3 erase.py && python3 compose.py  (then python3 tools/build-i18n.py for the stamps)
+"""Run from tools/ib-hero after erase.py:  python3 erase.py && python3 compose.py && python3 unglow.py  (then python3 tools/build-i18n.py
+for the stamps; unglow.py takes the pink glow off the phone picture, see there)
 The IB Tools hero pictures from the new design (src.webp, its words erased in clean.png):
 - hero-vs.webp, 1292x1217: the same frame as before (the cards where the old ones were: x ~71-1199, y ~133-1037);
 - hero-vs-m.webp, 923x1080: the phone's: our card in front (moved -350,-70), the plate behind at .7 (then -14,+89), VS on
