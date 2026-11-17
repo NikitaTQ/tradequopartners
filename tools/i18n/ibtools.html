@@ -339,6 +339,30 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
         </div>
       </div>
     </section>
+
+    <!-- Final call: the Partner Terms page's own (Final CTA Glint Teaser; .tp-night, .tp-glint, .tp-roll in partner.css),
+         as this page's foot, above the footer -->
+    <section class="tp-night-sec" data-screen-label="IB Tools · Join the program">
+      <div class="tp-night tp-final">
+        <h2 class="tp-final__title tq-h2" data-fitw>{{ib.end.title}}</h2>
+        <p class="tp-final__sub">{{ib.end.sub}}</p>
+        <div class="tp-final__actions">
+          <a class="tp-glint" href="{{home}}#signup" data-page-link data-label="{{@loader}} · {{@fan.home}}">
+            <span class="tp-glint__sweep" aria-hidden="true"></span>
+            <span class="tp-glint__label">{{nav.cta}}</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+          <a class="tp-roll" href="{{home}}programs/" data-page-link data-label="{{@loader}} · {{@fan.programs}}" aria-label="{{@ib.end.cta2}}">
+            <span class="tp-roll__window" aria-hidden="true">
+              <span class="tp-roll__track">
+                <span class="tp-roll__a">{{ib.end.cta2}}</span>
+                <span class="tp-roll__b">{{ib.end.teaser}} →</span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
 {{> footer}}

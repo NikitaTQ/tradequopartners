@@ -177,7 +177,7 @@
   background: linear-gradient(118deg, rgba(255,255,255,0) 52%, rgba(255,255,255,.75) 60%, rgba(255,255,255,0) 68%), linear-gradient(118deg, rgba(255,255,255,0) 70%, rgba(255,255,255,.55) 76%, rgba(255,255,255,0) 82%), #ededf0; }
 .tp-dome-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
 .tp-dome-copy .tp-h2 { max-width: 18ch; }
-.tp-dome-copy__sub { margin: 0; font-size: 22px; line-height: 1.6; color: #5e5e66; text-wrap: pretty; }
+.tp-dome-copy__sub { margin: 0; font-size: 11px; line-height: 1.6; color: #5e5e66; text-wrap: pretty; }   /* half its old 22px (asked for); phones keep the site's 16px minimum (site.css) */
 .tp-dome-btn { display: inline-flex; align-items: center; gap: 12px; margin-top: 8px; padding: 16px 28px; border-radius: 999px; background: #fff; border: 1px solid rgba(14,14,22,.08); box-shadow: 0 10px 24px -14px rgba(14,14,22,.3); font-size: 15px; font-weight: 700; color: #0e0e10; text-decoration: none; white-space: nowrap; transition: transform .25s, box-shadow .25s; }
 .tp-dome-btn:hover { color: #0e0e10; transform: translateY(-1px); box-shadow: 0 14px 28px -14px rgba(14,14,22,.42); }
 .tp-dome-btn:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
@@ -218,8 +218,6 @@
 }
 
 /* ---- join band ----------------------------------------------------------------- */
-.tp-join { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
-.tp-join .tp-actions { margin-top: 10px; gap: 14px; }
 
 /* ---- dark band (payouts, final call) ------------------------------------------- */
 .tp-night {
@@ -304,9 +302,8 @@
   .tp-faq__side .tp-pill { align-self: center; }
   .tp-faq__side .tp-sub { max-width: 34ch !important; }
   .tp-night { border-radius: 26px; }
-  .tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
+  .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
   .tp-night .tp-actions { align-items: stretch; }
-  .tp-join .tp-actions { align-items: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tp-dark, .tp-glass { transition: none; }
@@ -503,13 +500,7 @@
 .pf-mono { font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: .14em; }
 .pf-stack { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .pf-stack--chips { gap: 7px; }
-.pf-pill-dk { display: flex; align-items: center; justify-content: center; gap: 6px; max-width: 100%; min-height: 24px; box-sizing: border-box; padding: 4px 10px; border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); font-family: 'Inter', sans-serif; font-size: 9.5px; line-height: 1.3; letter-spacing: .12em; color: #c9c9d0; text-align: center; }
-.pf-pill-dk i, .pf-pulse { display: block; flex: none; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
-@keyframes pfPulse { 0% { box-shadow: 0 0 0 0 rgba(231,19,27,.6); } 70% { box-shadow: 0 0 0 7px rgba(231,19,27,0); } 100% { box-shadow: 0 0 0 0 rgba(231,19,27,0); } }
-.pf-pulse { width: 7px; height: 7px; animation: pfPulse 1.6s infinite; }
 .pf-live { display: flex; flex-direction: column; gap: 10px; width: 150px; }
-.pf-live__lab { display: flex; align-items: center; gap: 6px; color: #c9c9d0; }
 .pf-bars { display: flex; align-items: flex-end; gap: 5px; height: 60px; direction: ltr; }
 .pf-bars span { flex: 1; border-radius: 3px; background: #34363c; }
 .pf-bars span.is-hi { background: #f2f2f5; }
@@ -1075,6 +1066,7 @@
 /* IB Tools: the FAQ (the shared .tp-faq), last on the page: on the grey of the black hole above it, turning white at its
    foot, above the footer */
 .tq-ibq { background: linear-gradient(180deg, #e9eaec 0, #e9eaec calc(100% - 110px), #fff 100%); }
+.tq-ibpage .tp-night-sec { background: #fff; }   /* the closing block (Partner Terms' own) on white, as there: the FAQ above turns white at its foot, the footer below is white */
 .tq-ibpage { background: #e9eaec; }   /* IB Tools: every block meets the next on this grey, so a margin between two (the copy scene keeps its own) shows the same grey, no white band */
 .tq-ibb { position: relative; overflow: hidden; height: calc(clamp(520px, min(100vh, 112vw), 920px) + 44px + var(--tq-half)); height: calc(clamp(520px, min(100svh, 112vw), 920px) + 44px + var(--tq-half)); color: #0a0a0a;   /* the scene about as tall as wide (phones 520px), not a whole screen of grey; plus the button under the steps and half the site's gap under it (its captions keep the other half above them: ib-hole.js) */
   background: radial-gradient(46% 54% at 50% 48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), #e9eaec; }
