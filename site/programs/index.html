@@ -1114,13 +1114,23 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-latin-ext.woff2?v=cf3eb50fb2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 @font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-latin.woff2?v=f11d729bb0) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 #pf-who-wrap { container-type: inline-size; position: relative; z-index: 1; }
-.pf-dr { --u: calc(min(100cqw, 1282px) / 1672); position: relative; width: calc(1672 * var(--u)); max-width: none; min-height: calc(941 * var(--u));
-  margin: calc(-118 * var(--u)) auto calc(-111 * var(--u)); box-sizing: border-box; display: flex; flex-direction: column; gap: 0;
-  padding: calc(211 * var(--u)) calc(166 * var(--u)) calc(196 * var(--u)) calc(173 * var(--u)); padding-inline: calc(173 * var(--u)) calc(166 * var(--u)); border: 0 solid transparent; border-radius: 0; background: none;
-  border-image: url(../assets/programs/who-slab.webp?v=3db22a230a) 450 420 300 420 fill / calc(450 * var(--u)) calc(420 * var(--u)) calc(300 * var(--u)) calc(420 * var(--u)) stretch;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 calc(50 * var(--u)), #000 calc(100% - 48 * var(--u)), transparent), linear-gradient(180deg, transparent, #000 calc(104 * var(--u)), #000 calc(100% - 66 * var(--u)), transparent);
-  -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent, #000 calc(50 * var(--u)), #000 calc(100% - 48 * var(--u)), transparent), linear-gradient(180deg, transparent, #000 calc(104 * var(--u)), #000 calc(100% - 66 * var(--u)), transparent);
-  mask-composite: intersect; color: #070708; }
+.pf-dr { --u: calc(min(100cqw, 1193px) / 1556); --r: max(calc(28 * var(--u)), 18px); position: relative; isolation: isolate; width: calc(1556 * var(--u)); max-width: none; min-height: 0;
+  margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 0;
+  padding: calc(82 * var(--u)) calc(130 * var(--u)) calc(116 * var(--u)) calc(116 * var(--u)); padding-inline: calc(116 * var(--u)) calc(130 * var(--u));
+  border: 1px solid; border-color: #cdcfd4 #c5c7cd #aeb1b8; border-radius: var(--r); color: #070708;
+  background:
+    url(../assets/programs/brushed.webp?v=aa97ed38c1) 0 0 / 320px 160px repeat,
+    radial-gradient(70% 70% at 46% 8%, rgba(255,255,255,.62), rgba(255,255,255,0) 72%),
+    radial-gradient(130% 150% at 50% 25%, rgba(30,40,60,0) 55%, rgba(30,40,60,.06) 100%),
+    linear-gradient(180deg, #eceef2 0%, #e8eaee 42%, #e0e2e7 76%, #d9dce2 100%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.95), inset 0 0 0 2.5px rgba(255,255,255,.5), inset 0 0 0 3.5px rgba(140,146,156,.3), inset 0 2px 0 #fff,
+    0 22px 38px -24px rgba(20,24,34,.32), 0 2px 6px rgba(20,24,34,.06); }
+.pf-dr::before, .pf-dr::after { content: ''; position: absolute; right: 3px; bottom: 3px; z-index: -1; pointer-events: none; border-bottom-right-radius: calc(var(--r) - 3px);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.pf-dr::before { width: calc(var(--fw) + 4.4px); height: calc(var(--fh) + 1.7px); background: linear-gradient(90deg, rgba(255,255,255,.55), #fff 40%, #fff); }
+.pf-dr::after { width: var(--fw); height: var(--fh);
+  background: url(../assets/programs/brushed.webp?v=aa97ed38c1) 0 0 / 320px 160px repeat, linear-gradient(162deg, #cfd2d8 0%, #c6c9d0 55%, #ccd0d6 100%); }
+.pf-dr { --fw: calc(303 * var(--u)); --fh: calc(118 * var(--u)); }
 .pf-dr__top { display: flex; justify-content: space-between; align-items: center; gap: calc(16 * var(--u)) calc(12 * var(--u)); flex-wrap: wrap; min-height: calc(45 * var(--u)); margin-inline-end: calc(-25 * var(--u)); }
 .pf-dr__eyebrow { margin: 0; margin-inline-start: calc(5 * var(--u)); display: flex; align-items: center; gap: calc(16 * var(--u)); font: 600 max(calc(22 * var(--u)), 14px)/1.2 'Inter', sans-serif; letter-spacing: .025em; color: #050507; }
 .pf-dr__eyebrow span { color: inherit !important; }
@@ -1176,10 +1186,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .pf-dr__go { transition: none; }
 }
 @media (max-width: 760px) {
-.pf-dr { --k: .25px; width: 100%; min-height: 0; margin: calc(-118 * var(--k)) auto calc(-111 * var(--k)); padding: calc(118 * var(--k) + 44px) 30px calc(111 * var(--k) + 52px); padding-inline: 30px;
-    border-image-width: calc(450 * var(--k)) calc(420 * var(--k)) calc(300 * var(--k)) calc(420 * var(--k));
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 calc(50 * var(--k)), #000 calc(100% - 48 * var(--k)), transparent), linear-gradient(180deg, transparent, #000 calc(104 * var(--k)), #000 calc(100% - 66 * var(--k)), transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 calc(50 * var(--k)), #000 calc(100% - 48 * var(--k)), transparent), linear-gradient(180deg, transparent, #000 calc(104 * var(--k)), #000 calc(100% - 66 * var(--k)), transparent); }
+.pf-dr { --r: 22px; --fw: 104px; --fh: 40px; width: 100%; min-height: 0; margin: 0 auto; padding: 34px 24px 30px; padding-inline: 24px; }
 .pf-dr__top { flex-direction: column; align-items: flex-start; gap: 18px; margin-inline-end: 0; }
 .pf-dr__eyebrow { margin-inline-start: 0; gap: 10px; font-size: 15px; }
 .pf-dr__eyebrow i { width: 8px; height: 8px; }
@@ -1636,7 +1643,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
          as it comes into view (startWhoFlow in landing.js). Phones: the perks in a rounded dark card, the cards in a grid. -->
     <div class="pf" id="who">
       <div id="pf-who-wrap">
-        <!-- Who it's for (Who_Its_For_Drum, in the Who_Its_For_Glass slab since November 2026): the five kinds of partner as chips, and one sentence whose two
+        <!-- Who it's for (Who_Its_For_Drum; a card of brushed light metal since November 2026): the five kinds of partner as chips, and one sentence whose two
              halves roll like a drum to the chosen one ("I teach about the markets / so I refer students"); under it what they
              get with TradeQuo and the CTA. It rolls on by itself every 4 s while on screen; a click on a chip or the
              sentence picks one and the rolling goes on from it 8 s later (startWhoFlow). The rolling words are for the eye (aria-hidden): a screen reader
