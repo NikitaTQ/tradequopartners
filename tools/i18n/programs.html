@@ -22,6 +22,10 @@
 <meta name="twitter:description" content="{{@pp.meta.ogDescription}}">
 <meta name="twitter:image" content="https://tradequopartners.com/og.png">
 {{> head}}
+<!-- the program cards' glass textures (laid on by the inline script after the cards), in before the first paint -->
+<link rel="preload" href="{{root}}assets/programs/glass-1.webp" as="image" fetchpriority="high">
+<link rel="preload" href="{{root}}assets/programs/glass-2.webp" as="image" fetchpriority="high">
+<link rel="preload" href="{{root}}assets/programs/glass-3.webp" as="image" fetchpriority="high">
 </head>
 <body>
 {{> loader}}
@@ -92,6 +96,7 @@
           <button type="button" aria-label="{{@pp.p2.title}}"></button>
           <button type="button" aria-label="{{@pp.p3.title}}"></button>
         </div>
+        {{> prog-cards}}
       </div>
       <!-- the line under the heading, under the cards -->
       <p class="tp-sub tp-hero__lead"><span class="tq-nph">{{pp.hero.sub}}</span><span class="tq-ph">{{pp.hero.subShort}}</span></p>

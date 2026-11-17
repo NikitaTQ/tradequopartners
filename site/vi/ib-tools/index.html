@@ -797,31 +797,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-h2 { margin: 0; max-width: 30ch; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
-.tp-pc { --pu: min(var(--pu-w), var(--pu-h)); position: relative; isolation: isolate; display: flex; flex-direction: column;
-  padding: 8.2% 7.5% 7%; color: #0b0b0d; }
-.tp-pc > :not(.tp-pc__slab) { min-width: 0; box-sizing: border-box; }
-.tp-pc__cut { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
-.tp-pc__head { position: relative; display: flex; flex-direction: column; }
-.tp-pc .tp-pc__name { --h2s: calc(34 * var(--pu)); max-width: calc(330 * var(--pu)); margin: calc(17 * var(--pu)) 0 0; padding-inline-start: 0; line-height: 1.14; color: #0b0b0d; word-break: keep-all; }
-.tp-pc__lead { position: relative; margin: calc(27 * var(--pu)) 0 0; padding: calc(22 * var(--pu)) 0 calc(12 * var(--pu)); display: flex; flex-direction: column; }
 .tp-pc__big { display: block; margin-top: calc(18 * var(--pu)); font-size: calc(105 * var(--pu)); line-height: .8; font-weight: 700; letter-spacing: -.05em; white-space: nowrap; color: #0b0b0d; -webkit-text-stroke: .02em currentColor; }
-.tp-pc:nth-child(3) .tp-pc__big { font-size: calc(116 * var(--pu)); }
-.tp-pc__sub { margin: calc(8 * var(--pu)) 0 0; font-size: calc(23.5 * var(--pu)); line-height: 1.17; font-weight: 650; letter-spacing: -.01em; color: #0b0b0d; text-wrap: pretty; }
-.tp-pc__pts { display: flex; flex-direction: column; gap: calc(12 * var(--pu)); margin: calc(18 * var(--pu)) 0 0; padding: 0; list-style: none; }
-.tp-pc__pts li { display: flex; align-items: center; gap: calc(18 * var(--pu)); font-size: calc(22 * var(--pu)); line-height: 1.1; font-weight: 500; color: #111114; }
-.tp-pc__pts li::before { content: ''; flex: none; width: calc(25 * var(--pu)); height: calc(25 * var(--pu)); border-radius: 999px;
-  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.6 6.3 5 8.6 9.5 3.6' stroke='%230B0B0D' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 54% no-repeat;
-  box-shadow: inset 0 0 0 1px rgba(20,24,34,.14), 0 1px 3px rgba(20,24,34,.18); }
-@media (max-width: 640px) {
-.tp-pc { --pu: var(--pu-w); }
-.tp-pc .tp-pc__name { min-height: 2.28em; }
-.tp-pc__title, .tp-pc__sub, .tp-pc__pts li { font-size: 16px; }
-.tp-pc__pts { gap: 8px; }
-.tp-pc__pts li::before { width: 20px; height: 20px; }
-}
-@media (max-width: 640px) {
-.tp-pc { flex: 0 0 86%; scroll-snap-align: center; scroll-snap-stop: always; }
-}
 .tp-dome-copy__sub { margin: 0; font-size: 22px; line-height: 1.6; color: #5e5e66; text-wrap: pretty; }
 @media (max-width: 1100px) {
 .tp-dome-copy__sub { order: 1; max-width: 600px; margin-top: 16px; }
@@ -2315,7 +2291,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=8e380fb7f9" defer></script>
+<script src="../../assets/js/landing.js?v=2b1459efb7" defer></script>
 <script src="../../assets/js/ib-copy.js?v=8863573876" defer></script>
 <script src="../../assets/js/ib-insights.js?v=be978a827d" defer></script>
 <script src="../../assets/js/ib-hole.js?v=0faf28ebcd" defer></script>

@@ -30,7 +30,7 @@ DOMAIN = 'https://tradequopartners.com'
 # Pages built from templates. slug '' is the landing; the others live under it, per language.
 PAGES = [
     {'id': 'landing', 'template': 'landing.html', 'slug': ''},
-    {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner'},
+    {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner', 'h2Preload': True},   # the program cards' names (first screen) are in the H2 face: it is preloaded too, so they are set in it from the first paint
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
     # IB Tools: the hero only for now; no table of contents yet (fan, FAB). ('display': 'h2' preloads the H2 face instead
     # of the H1 one, for a page whose display text is section-heading type, as with the earlier devices-film hero)
@@ -336,7 +336,7 @@ for page in PAGES:
         system = {
             'lang': lang.get('html', code), 'code': code, 'dir': lang.get('dir', 'ltr'), 'root': root, 'home': home or './',
             'canonical': url_of(lang, slug), 'hreflang': hreflang, 'ogLocale': lang['ogLocale'],
-            'fontFaces': faces, 'fontPreload': preload + h1_preload(lang['code'], root, '-h2' if page.get('display') == 'h2' else ''), 'langSwitcher': switcher(lang, s, slug, page['id'], home),
+            'fontFaces': faces, 'fontPreload': preload + h1_preload(lang['code'], root, '-h2' if page.get('display') == 'h2' else '') + (h1_preload(lang['code'], root, '-h2') if page.get('h2Preload') else ''), 'langSwitcher': switcher(lang, s, slug, page['id'], home),
             'mnavLinks': mnav_links(home, page['id'], s), 'lsheetItems': lang_sheet_items(lang, slug), 'langCount': str(len(languages)),
             'langCode': html.escape(SHORT.get(code, code.upper())), 'langName': html.escape(lang['name']),
             'embedQuery': '' if code == 'en' else '?lang=' + code,

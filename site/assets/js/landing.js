@@ -1213,84 +1213,6 @@
     addEventListener('resize', () => { clearTimeout(t); t = setTimeout(all, 150); });
   }
 
-  /* ---- /programs/: the program cards' glass (Partner_Cards_8) ---------------------------------------------
-   * Each card's glass is the design's own card, light and all: its highlights, the cut facets with their bevelled
-   * edges and the red sparks (assets/programs/glass-1..3.webp, 512x768, the text, checks and button taken out). It is
-   * laid on the card piece by piece so that the facets meet the card's own rows wherever they fall: the texture's
-   * key points (the corner cut, the spark on the side, the plate's top and bottom) are pinned to where they belong
-   * on this card (the plate is .tp-pc__lead) and each triangle between them is stretched to fit (an SVG image per
-   * triangle, clipped, slightly overlapping its neighbours so no seam shows). Mirrored for right-to-left. Drawn
-   * again whenever a card changes size. Also levels the cards' rows. */
-  function startProgCards() {
-    const rail = $('[data-progs]');
-    if (!rail) return;
-    const cards = $$('.tp-pc', rail);
-    /* per card, in the texture's px: where the corner cut meets the top (tx), the spark on the side (yR), the plate's
-       top at the left edge (yL), its bottom (yB) and where its side meets the bottom (qx) */
-    const GEO = [{ tx: 275, yR: 211, yL: 267, yB: 454, qx: 391 }, { tx: 270, yR: 212, yL: 268, yB: 454, qx: 395 }, { tx: 372, yR: 213, yL: 268, yB: 454, qx: 391 }];
-    const TW = 512, TH = 768, phone = matchMedia('(max-width: 640px)');
-    const TRI = [[0, 1, 3], [0, 3, 5], [1, 2, 3], [5, 3, 6], [5, 6, 7], [3, 8, 6], [7, 6, 9], [6, 8, 10], [6, 10, 9]];
-    const f = (n) => Math.round(n * 1000) / 1000;
-    const draw = (card, i) => {
-      const svg = $('.tp-pc__cut', card), lead = $('.tp-pc__lead', card), url = card.getAttribute('data-glass');
-      const W = card.offsetWidth, H = card.offsetHeight, g = GEO[i % 3];
-      if (!svg || !lead || !url || !W || !H) return;
-      const c = card.getBoundingClientRect(), l = lead.getBoundingClientRect(), k = c.width / W || 1;
-      const sx = W / TW, rtl = getComputedStyle(card).direction === 'rtl';
-      const yL = (l.top - c.top) / k + 9 * W / 517, yR = yL - (g.yL - g.yR) * sx, yB = (l.bottom - c.top) / k;
-      const src = [[0, 0], [g.tx, 0], [TW, 0], [TW, g.yR], null, [0, g.yL], [g.qx, g.yB], [0, g.yB], [TW, g.yB], [0, TH], [TW, TH]];
-      /* phones: the second card's corner cut meets the top further right, clear of its one-line name */
-      const tx = phone.matches && i === 1 ? 0.79 * W : g.tx * sx;
-      const dst = [[0, 0], [tx, 0], [W, 0], [W, yR], null, [0, yL], [g.qx * sx, yB], [0, yB], [W, yB], [0, H], [W, H]]
-        .map((p) => p && [rtl ? W - p[0] : p[0], p[1]]);
-      let defs = '', body = '';
-      TRI.forEach((t, j) => {
-        const [a, b, cc] = t.map((n) => src[n]), [A, B, C] = t.map((n) => dst[n]);
-        /* the affine map of this triangle, texture -> card */
-        const d1 = [b[0] - a[0], b[1] - a[1]], d2 = [cc[0] - a[0], cc[1] - a[1]], D1 = [B[0] - A[0], B[1] - A[1]], D2 = [C[0] - A[0], C[1] - A[1]];
-        const det = d1[0] * d2[1] - d2[0] * d1[1];
-        if (!det) return;
-        const i11 = d2[1] / det, i12 = -d2[0] / det, i21 = -d1[1] / det, i22 = d1[0] / det;
-        const m11 = D1[0] * i11 + D2[0] * i21, m12 = D1[0] * i12 + D2[0] * i22, m21 = D1[1] * i11 + D2[1] * i21, m22 = D1[1] * i12 + D2[1] * i22;
-        const e = A[0] - m11 * a[0] - m12 * a[1], h = A[1] - m21 * a[0] - m22 * a[1];
-        /* the clip: the card's triangle, grown by a pixel so neighbours overlap */
-        const cx = (A[0] + B[0] + C[0]) / 3, cy = (A[1] + B[1] + C[1]) / 3;
-        const grow = (p) => { const dx = p[0] - cx, dy = p[1] - cy, d = Math.hypot(dx, dy) || 1; return f(p[0] + dx / d * 1.2) + ',' + f(p[1] + dy / d * 1.2); };
-        const id = 'tpg' + i + 't' + j;
-        defs += '<clipPath id="' + id + '"><polygon points="' + [A, B, C].map(grow).join(' ') + '"/></clipPath>';
-        body += '<g clip-path="url(#' + id + ')"><image href="' + url + '" width="' + TW + '" height="' + TH + '" preserveAspectRatio="none" transform="matrix('
-          + [m11, m21, m12, m22, e, h].map(f).join(' ') + ')"/></g>';
-      });
-      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      svg.innerHTML = '<defs>' + defs + '</defs>' + body;
-    };
-    /* the rows (head, plate, line, points) as tall as the tallest of the three, so they line up; not on phones,
-       where one card shows at a time */
-    const wide = matchMedia('(min-width: 641px)');
-    const level = () => ['.tp-pc__head', '.tp-pc__lead', '.tp-pc__sub', '.tp-pc__pts'].forEach((sel) => {
-      const els = cards.map((c) => $(sel, c)).filter(Boolean);
-      els.forEach((e) => { e.style.minHeight = ''; });
-      if (!wide.matches) return;
-      const h = Math.max(...els.map((e) => e.getBoundingClientRect().height));
-      els.forEach((e) => { e.style.minHeight = h + 'px'; });
-    });
-    /* the three names in one size: the smallest the fitting left (a long word steps its own name down, data-fitw) */
-    const sameNames = () => {
-      const ns = cards.map((c) => $('.tp-pc__name', c)).filter(Boolean);
-      if (ns.length < 2) return;
-      const fs = Math.min(...ns.map((n) => parseFloat(getComputedStyle(n).fontSize)));
-      ns.forEach((n) => { n.style.fontSize = fs + 'px'; });
-    };
-    const all = () => { sameNames(); level(); cards.forEach(draw); };
-    window.tqCutCards = all;
-    all();
-    if ('ResizeObserver' in window) {
-      let q = 0;
-      const ro = new ResizeObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; all(); }); });
-      cards.forEach((c) => ro.observe(c));
-    }
-  }
-
   /* ---- /programs/ on phones: the three program cards swipe sideways -------------------------
    * The row is a native scroller with snap points (partner.css); this only keeps the dots under it
    * in step with the card in the middle and lets a dot bring its card in. */
@@ -1576,7 +1498,6 @@
   startWhoFlow();
   startToasts();
   startProgSwiper();
-  startProgCards();
   startFitWide();
   startSteppers();
   startGlass();
