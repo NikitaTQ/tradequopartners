@@ -18,19 +18,6 @@
 
 /* ---- glass cards: .tp-glass is the frosted glass defined in site.css (Glass_Card_Grid design) ---- */
 
-/* ---- dark card (the fan offer cards on the landing) ---------------------------- */
-.tp-dark {
-  position: relative; border-radius: 22px; color: #fff;
-  background: linear-gradient(180deg, rgba(44,44,47,.97) 0%, rgba(18,18,20,.98) 55%, #0c0c0d 100%);
-  border: 1px solid rgba(255,255,255,.13);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 28px 50px -30px rgba(0,0,0,.65);
-  transition: border-color .5s ease, box-shadow .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);
-}
-.tp-dark--hover:hover {
-  border-color: rgba(231,19,27,.7);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.25), 0 0 34px rgba(231,19,27,.22), 0 30px 52px -30px rgba(0,0,0,.7);
-  transform: translateY(-4px);
-}
 .tp-obj { display: block; mix-blend-mode: lighten; -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent 100%); mask-image: radial-gradient(closest-side, #000 62%, transparent 100%); pointer-events: none; user-select: none; }
 
 /* red crystal hexagon (the FAQ number badge) */
@@ -264,10 +251,23 @@
 .tp-perks__cta { display: flex; justify-content: center; margin-top: clamp(32px, 4vw, 52px); }   /* Partner Terms, under the perks: the final call's glint button */
 .tp-perks__cta .tp-glint:focus-visible { outline-color: #0a0a0a; }   /* on white */
 @media (max-width: 640px) { .tp-perks__cta .tp-glint { width: min(100%, 320px); justify-content: center; } }
-.tp-perk { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 18px; padding: 18px 22px 18px 14px; min-height: 148px; }
-.tp-perk img { width: 112px; height: 112px; object-fit: contain; }
+/* the perk cards (Partner Terms; November 2026, the owner's design "dark glass, red glints"; was a dark rounded card):
+   the design's own card as a plate (tools/perk-glass/make.py), laid on as a nine-part border-image: the corners (the
+   chamfers at the top right and bottom left, the red glints at the other two) keep their shape, the chrome rims and
+   the glass stretch with the card, so every language fits; --k is the plate's scale (its rim ~5px). The soft shadow
+   is a drop-shadow, so it follows the chamfers. Lit (a mouse over it, or a tap on touch screens: .is-tap,
+   startCardTap in landing.js): a little higher, with a red glow. */
+.tp-perk { --k: .6; position: relative; display: grid; grid-template-columns: 100px minmax(0, 1fr); align-items: center; gap: 14px; box-sizing: border-box;
+  padding: 18px 24px 18px 16px; min-height: 148px; color: #fff; border: 0 solid transparent;
+  border-image: url(../perks/perk-glass.webp) 56 80 60 92 fill / calc(56px * var(--k)) calc(80px * var(--k)) calc(60px * var(--k)) calc(92px * var(--k)) stretch;
+  filter: drop-shadow(0 14px 16px rgba(10,10,12,.22));
+  transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease; -webkit-tap-highlight-color: transparent; }
+@media (hover: hover) { .tp-perk:hover { transform: translateY(-4px); filter: drop-shadow(0 0 14px rgba(231,19,27,.42)) drop-shadow(0 18px 20px rgba(10,10,12,.26)); } }
+.tp-perk.is-tap { transform: translateY(-4px); filter: drop-shadow(0 0 14px rgba(231,19,27,.42)) drop-shadow(0 18px 20px rgba(10,10,12,.26)); }
+@media (hover: none) { .tp-perk { cursor: pointer; } }
+.tp-perk img { width: 100px; height: 100px; object-fit: contain; }
 .tp-perk h3 { margin: 0; font-size: 18px; letter-spacing: -.02em; font-weight: 700; }
-.tp-perk p { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #a7a9ae; text-wrap: pretty; }
+.tp-perk p { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #c4c6cb; text-wrap: pretty; }
 
 /* ---- responsive ------------------------------------------------------------------- */
 @media (max-width: 1080px) {
@@ -282,8 +282,8 @@
   .tp-hero { padding-top: 8px; }
   .tp-stage { padding: 12px; border-radius: 26px; }
   .tp-perkgrid { grid-template-columns: minmax(0, 1fr); }
-  .tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
-  .tp-perk img { width: 88px; height: 88px; }
+  .tp-perk { grid-template-columns: 80px minmax(0, 1fr); gap: 12px; min-height: 0; padding: 16px 20px 16px 12px; }
+  .tp-perk img { width: 80px; height: 80px; }
   .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
   
   .tp-faq__side { align-items: center; text-align: center; }
@@ -294,7 +294,7 @@
   .tp-night .tp-actions { align-items: stretch; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tp-dark, .tp-glass { transition: none; }
+  .tp-perk, .tp-glass { transition: none; }
 }
 
 /* ---- right-to-left ---------------------------------------------------------------- */
@@ -476,8 +476,12 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 0 0 1px rgba(255,255,255,.06), 0 40px 60px -26px rgba(0,0,0,.8);
   transform: translate3d(0, 0, 0); transition: transform .6s cubic-bezier(.22, 1, .36, 1), box-shadow .5s ease; will-change: transform;
   -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-font-smoothing: antialiased; user-select: none; -webkit-tap-highlight-color: transparent; }
-.pf-perk:hover .pf-perk__in { transform: translate3d(0, -8px, 0);
+/* lit: a mouse over it, or a tap on touch screens (.is-tap, startCardTap: a second tap lets it go; :hover would stay on) */
+@media (hover: hover) { .pf-perk:hover .pf-perk__in { transform: translate3d(0, -8px, 0);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(231,19,27,.35), 0 50px 70px -26px rgba(0,0,0,.85), 0 0 40px -10px rgba(231,19,27,.35); } }
+.pf-perk.is-tap .pf-perk__in { transform: translate3d(0, -8px, 0);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(231,19,27,.35), 0 50px 70px -26px rgba(0,0,0,.85), 0 0 40px -10px rgba(231,19,27,.35); }
+@media (hover: none) { .pf-perk { cursor: pointer; } }
 .pf-perk__n { font-family: 'Inter', sans-serif; font-size: 11px; color: #e7131b; }
 .pf-perk__t { font-size: 23px; line-height: 1.05; font-weight: 800; letter-spacing: -.03em; color: #fff; text-wrap: balance; }
 .pf-perk__d { max-width: 180px; font-size: 14px; line-height: 1.45; color: #9a9aa2; text-wrap: pretty; }
