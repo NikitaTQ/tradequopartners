@@ -1411,18 +1411,9 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-cmp { --row: clamp(66px, 6.1vw, 88px); --fs: clamp(17px, 1.5vw, 22px); position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr) minmax(0, 1.15fr) minmax(330px, 420px);
   grid-template-rows: auto repeat(6, var(--row)) auto; align-items: center; isolation: isolate; max-width: 1160px; margin: calc(clamp(32px, 4.5vw, 60px) + 52px) auto 48px; color: #0a0a0a; text-align: start; }
 .tq-cmp > * { position: relative; }   /* no z-index: the icons blend (multiply) with the card under them */
-.tq-cmp__card { grid-column: 4; grid-row: 1 / -1; align-self: stretch; z-index: -1; margin: -52px 0 -44px;
-  --c: 30px; clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
-  background: linear-gradient(135deg, #ffffff 0%, #c9c8d0 18%, #ffffff 34%, #b9b8c2 55%, #f4f3f7 72%, #c4c3cc 88%, #ffffff 100%);
-  filter: drop-shadow(0 26px 34px rgba(30,24,50,.16)); }
-.tq-cmp__card::before { content: ''; position: absolute; inset: 4px; --c: 28px; clip-path: inherit;
-  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
-  background: linear-gradient(118deg, rgba(255,255,255,0) 58%, rgba(255,255,255,.75) 63%, rgba(255,255,255,0) 69%),
-    linear-gradient(165deg, #fdfcff 0%, #f3f1f7 55%, #ebe9f1 100%); }
-.tq-cmp__card::after { content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(90px 64px at 0 0, rgba(231,19,27,.9), rgba(231,19,27,.35) 45%, rgba(231,19,27,0) 75%),
-    radial-gradient(100px 70px at 100% 100%, rgba(231,19,27,.9), rgba(231,19,27,.35) 45%, rgba(231,19,27,0) 75%);
-  mix-blend-mode: multiply; }
+.tq-cmp__card { --k: .86; grid-column: 4; grid-row: 1 / -1; align-self: stretch; z-index: -1; margin: -52px 0 -44px; box-sizing: border-box;
+  border: 0 solid transparent; border-image: url(../compare/card.webp) 110 100 110 100 fill / calc(110px * var(--k)) calc(100px * var(--k)) stretch;
+  filter: drop-shadow(0 26px 30px rgba(40,30,60,.14)) drop-shadow(0 3px 6px rgba(40,30,60,.06)); }   /* the design's own card (tools/compare/make.py): chrome rim, chamfers, red glints */
 .tq-cmp__oh { grid-column: 3; grid-row: 1; display: flex; flex-direction: column; gap: 6px; align-self: end; padding-bottom: 18px; }
 .tq-cmp__oh b { font: 700 clamp(14px, 1.2vw, 18px)/1.1 'Syncopate', 'Inter', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
 .tq-cmp__oh span { font-size: clamp(13px, 1.05vw, 16px); color: #3a3a3e; }
@@ -1447,7 +1438,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-cmp__go-l { flex: 1; min-width: 0; font: 600 clamp(16px, 1.35vw, 20px)/1 'Inter', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tq-cmp__chev { flex: none; width: 9px; height: 16px; }
 [dir="rtl"] .tq-cmp__chev { transform: scaleX(-1); }
-[dir="rtl"] .tq-cmp__card { transform: scaleX(-1); }
 [dir="rtl"] .tq-cmp__l, [dir="rtl"] .tq-cmp__o { padding-right: 0; padding-left: 20px; }
 [dir="rtl"] .tq-cmp__t { padding: 0 50px 0 32px; }
 [dir="rtl"] .tq-cmp__th { padding: 0 56px 18px 40px; }
@@ -1455,10 +1445,8 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 @media (prefers-reduced-motion: reduce) { .tq-cmp__go { transition: none; } }
 @media (max-width: 899px) {
   .tq-cmp { --row: auto; --fs: 18px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto repeat(6, auto) auto; row-gap: 14px; max-width: 400px; margin: 24px auto 0; padding: 0; }
-  .tq-cmp__card::after { background: radial-gradient(64px 46px at 0 0, rgba(231,19,27,.85), rgba(231,19,27,.3) 45%, rgba(231,19,27,0) 75%), radial-gradient(72px 50px at 100% 100%, rgba(231,19,27,.85), rgba(231,19,27,.3) 45%, rgba(231,19,27,0) 75%); }
   .tq-cmp__n, .tq-cmp__l, .tq-cmp__o, .tq-cmp__oh { display: none; }
-  .tq-cmp__card { grid-column: 1; margin: 0; --c: 22px; }
-  .tq-cmp__card::before { --c: 21px; }
+  .tq-cmp__card { --k: .74; grid-column: 1; margin: 0; }
   .tq-cmp__th, .tq-cmp__t, .tq-cmp__go { grid-column: 1; }
   .tq-cmp__th { padding: 34px 26px 6px; }   /* the card covers the rows only: its inner room is in the rows */
   .tq-cmp__t { gap: 14px; padding: 0 22px 0 26px; }
@@ -1469,3 +1457,41 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   [dir="rtl"] .tq-cmp__th { padding: 34px 26px 6px; }
   [dir="rtl"] .tq-cmp__go { margin: 10px 22px 26px; }
 }
+
+/* the comparison's rows, pointed at (desktops with a mouse; brought back from the Where our program wins block, November
+   2026, same logic and colours): a white glass band across the row's other-programs side, then (0.18 s later) a light
+   red one across TradeQuo's side of it; the other rows' other-programs values fade to 45%; TradeQuo's value slides 8px. */
+.tq-cmp__band, .tq-cmp__band2 { display: none; }
+@media (hover: hover) and (min-width: 1000px) {
+  .tq-cmp__band, .tq-cmp__band2 { display: block; position: relative; align-self: stretch; overflow: hidden; transform-origin: 0 50%; opacity: 0; transition: opacity .4s ease, transform .55s cubic-bezier(.2,.7,.2,1); }
+  .tq-cmp__band { grid-column: 1 / 4; margin: 6px 0 6px -20px; border-radius: 20px 0 0 20px; transform: scaleX(.94);
+    background: linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.56) 100%); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: inset 0 1.5px 0 #fff, inset 0 0 0 1px rgba(255,255,255,.75), inset 0 -12px 20px -14px rgba(40,44,54,.18), 0 14px 30px -16px rgba(20,22,28,.32); }
+  .tq-cmp__band2 { grid-column: 4; margin: 6px 14px 6px 0; border-radius: 0 20px 20px 0; transform: scaleX(0);
+    background: linear-gradient(180deg, rgba(255,244,245,.86) 0%, rgba(250,226,228,.52) 100%); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(231,19,27,.1), inset -1px 0 0 rgba(231,19,27,.1), inset 0 -12px 20px -14px rgba(231,19,27,.24), 0 14px 28px -16px rgba(231,19,27,.28); }
+  .tq-cmp__band::before, .tq-cmp__band2::before { content: ""; position: absolute; left: 14px; right: 14px; top: 3px; height: 42%; border-radius: 16px 16px 40% 40%; background: linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 100%); }
+  .tq-cmp__band2::before { background: linear-gradient(180deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 100%); }
+  .tq-cmp:has([data-row]:hover) .tq-cmp__band2 { transition-delay: .18s; }
+  .tq-cmp__o { transition: opacity .5s ease; }
+  .tq-cmp__t > span { transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+  .tq-cmp:has([data-row="1"]:hover) .tq-cmp__band[data-row="1"], .tq-cmp:has([data-row="1"]:hover) .tq-cmp__band2[data-row="1"] { opacity: 1; transform: scaleX(1); }
+  .tq-cmp:has([data-row="1"]:hover) .tq-cmp__o:not([data-row="1"]) { opacity: .45; }
+  .tq-cmp:has([data-row="1"]:hover) .tq-cmp__t[data-row="1"] > span { transform: translate3d(8px, 0, 0); }
+  .tq-cmp:has([data-row="2"]:hover) .tq-cmp__band[data-row="2"], .tq-cmp:has([data-row="2"]:hover) .tq-cmp__band2[data-row="2"] { opacity: 1; transform: scaleX(1); }
+  .tq-cmp:has([data-row="2"]:hover) .tq-cmp__o:not([data-row="2"]) { opacity: .45; }
+  .tq-cmp:has([data-row="2"]:hover) .tq-cmp__t[data-row="2"] > span { transform: translate3d(8px, 0, 0); }
+  .tq-cmp:has([data-row="3"]:hover) .tq-cmp__band[data-row="3"], .tq-cmp:has([data-row="3"]:hover) .tq-cmp__band2[data-row="3"] { opacity: 1; transform: scaleX(1); }
+  .tq-cmp:has([data-row="3"]:hover) .tq-cmp__o:not([data-row="3"]) { opacity: .45; }
+  .tq-cmp:has([data-row="3"]:hover) .tq-cmp__t[data-row="3"] > span { transform: translate3d(8px, 0, 0); }
+  .tq-cmp:has([data-row="4"]:hover) .tq-cmp__band[data-row="4"], .tq-cmp:has([data-row="4"]:hover) .tq-cmp__band2[data-row="4"] { opacity: 1; transform: scaleX(1); }
+  .tq-cmp:has([data-row="4"]:hover) .tq-cmp__o:not([data-row="4"]) { opacity: .45; }
+  .tq-cmp:has([data-row="4"]:hover) .tq-cmp__t[data-row="4"] > span { transform: translate3d(8px, 0, 0); }
+  .tq-cmp:has([data-row="5"]:hover) .tq-cmp__band[data-row="5"], .tq-cmp:has([data-row="5"]:hover) .tq-cmp__band2[data-row="5"] { opacity: 1; transform: scaleX(1); }
+  .tq-cmp:has([data-row="5"]:hover) .tq-cmp__o:not([data-row="5"]) { opacity: .45; }
+  .tq-cmp:has([data-row="5"]:hover) .tq-cmp__t[data-row="5"] > span { transform: translate3d(8px, 0, 0); }
+  .tq-cmp:has([data-row="6"]:hover) .tq-cmp__band[data-row="6"], .tq-cmp:has([data-row="6"]:hover) .tq-cmp__band2[data-row="6"] { opacity: 1; transform: scaleX(1); }
+  .tq-cmp:has([data-row="6"]:hover) .tq-cmp__o:not([data-row="6"]) { opacity: .45; }
+  .tq-cmp:has([data-row="6"]:hover) .tq-cmp__t[data-row="6"] > span { transform: translate3d(8px, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .tq-cmp__band, .tq-cmp__band2, .tq-cmp__o, .tq-cmp__t > span { transition: none !important; } }
