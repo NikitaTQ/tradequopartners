@@ -1,6 +1,7 @@
 """Run: python3 tools/who-slab/erase.py  (numpy + Pillow; writes site/assets/programs/who-slab.webp)
 The Who it's for slab from the design (Who_Its_For_Glass): its words, chips, rule and button taken out, the glass under
-them filled in from the glass around (normalized convolution: a blur of the known pixels divided by a blur of the mask)."""
+them filled in from the glass around (normalized convolution: a blur of the known pixels divided by a blur of the mask),
+then each fill's edges matched to the glass around it (SEAMLESS below)."""
 import numpy as np
 from PIL import Image
 import os
@@ -44,6 +45,41 @@ for (x0, y0, x1, y1) in BOXES:
         res += f * w[..., None]; acc += w
     res = res / np.maximum(acc, 1e-6)[..., None]
     out[Y0:Y1, X0:X1][holeW] = res[holeW]
+# Seamless edges (November 2026). The fill above learns only from plain glass, so where the glass right next to a box is
+# not plain (a glint, the rim's light) the box's edge shows: a faint plaque, e.g. behind the eyebrow line. Each filled box
+# is corrected by the harmonic (smoothest) field that takes it exactly to the real glass on its edge: its own shading
+# stays, its edges vanish. SEAMLESS = False gives the earlier slab back exactly (also kept as who-slab-plaque.webp here).
+SEAMLESS = True
+
+
+def dst1(a, axis):
+    """DST-I along an axis (via the FFT of the odd extension); it is its own inverse up to 2 / (n + 1)."""
+    a = np.moveaxis(a, axis, -1); n = a.shape[-1]
+    ext = np.concatenate([np.zeros(a.shape[:-1] + (1,)), a, np.zeros(a.shape[:-1] + (1,)), -a[..., ::-1]], -1)
+    return np.moveaxis(-np.fft.fft(ext, axis=-1).imag[..., 1:n + 1] / 2, -1, axis)
+
+
+def harmonic(ring):
+    """The harmonic field inside a (h+2) x (w+2) frame whose outer ring is given (the inside of `ring` is ignored)."""
+    h, w = ring.shape[0] - 2, ring.shape[1] - 2
+    rhs = np.zeros((h, w))
+    rhs[0, :] -= ring[0, 1:-1]; rhs[-1, :] -= ring[-1, 1:-1]; rhs[:, 0] -= ring[1:-1, 0]; rhs[:, -1] -= ring[1:-1, -1]
+    lam = (2 * np.cos(np.pi * np.arange(1, h + 1) / (h + 1)))[:, None] + (2 * np.cos(np.pi * np.arange(1, w + 1) / (w + 1)))[None, :] - 4
+    return dst1(dst1(dst1(dst1(rhs, 0), 1) / lam, 0), 1) * (2 / (h + 1)) * (2 / (w + 1))
+
+
+if SEAMLESS:
+    for (x0, y0, x1, y1) in BOXES:
+        hole = HOLE[y0:y1, x0:x1]
+        for c in range(3):
+            F = out[y0:y1, x0:x1, c]
+            ring = np.zeros((y1 - y0 + 2, x1 - x0 + 2))
+            # on the ring: real glass minus the fill at the pixel just inside (0 where the box keeps the design: FACET)
+            ring[0, 1:-1] = out[y0 - 1, x0:x1, c] - F[0]; ring[-1, 1:-1] = out[y1, x0:x1, c] - F[-1]
+            ring[1:-1, 0] = out[y0:y1, x0 - 1, c] - F[:, 0]; ring[1:-1, -1] = out[y0:y1, x1, c] - F[:, -1]
+            ring[0, 0], ring[0, -1], ring[-1, 0], ring[-1, -1] = ring[0, 1], ring[0, -2], ring[-1, 1], ring[-1, -2]
+            out[y0:y1, x0:x1, c][hole] = (F + harmonic(ring))[hole]
+
 # a whisper of the glass's grain over the filled areas, so they do not read flatter than the rest
 rng = np.random.default_rng(7); mask = np.zeros((H, W), bool)
 mask = HOLE
