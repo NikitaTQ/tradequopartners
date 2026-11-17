@@ -107,5 +107,9 @@
   "ib.tv.paid": "Płaci TradeQuo",
   "ib.tv.pay": "Ty płacisz",
   "ib.tv.yr": "/rok",
-  "ib.tv.cta": "Odbierz Premium za darmo"
+  "ib.tv.cta": "Odbierz Premium za darmo",
+  "ib.end.title": "Dołącz do <red>programu partnerskiego</red> TradeQuo",
+  "ib.end.sub": "Do 87% spreadu, wypłaty każdego dnia. Wnioski rozpatrujemy w ciągu 24 godzin.",
+  "ib.end.cta2": "Porównaj programy partnerskie",
+  "ib.end.teaser": "IB · Sub-IB · White Label"
 }

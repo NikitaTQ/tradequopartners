@@ -419,15 +419,6 @@ html:lang(vi) .tq-lang__menu .tq-lang__page { display: block; }
 .tq-logo:hover, .tq-logo:focus-visible { --tqh: 1; animation: none; color: #FFFFFF; }
 .tq-logo:active { --tqd: 1; }
 .tq-logo:focus-visible { outline: 2px solid #0A0A0A; outline-offset: 6px; }
-.tq-logo__coin { position: relative; display: block; flex: none; width: 56px; height: 56px; }
-.tq-logo__coin > * { position: absolute; inset: 0; }
-.tq-logo__face { border-radius: 50%; background: radial-gradient(circle at 35% 28%, #2A2A2F 0%, #0B0B0D 55%, #000000 100%); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.22), inset 0 0 0 5px rgba(0,0,0,.6), 0 0 0 calc(var(--tqh) * 1.5px) #E7131B, 0 0 calc(var(--tqh) * 22px) rgba(231,19,27,.55); }
-.tq-logo__rim { border-radius: 50%; background: repeating-conic-gradient(rgba(255,255,255,.12) 0deg 3deg, rgba(255,255,255,0) 3deg 6deg); -webkit-mask: radial-gradient(circle, transparent 24.5px, #000 25px); mask: radial-gradient(circle, transparent 24.5px, #000 25px); }
-.tq-logo__coin svg { overflow: visible; }
-.tq-logo__flag { transform-origin: 21% 28%; transform: translate(calc((1 - var(--tqh)) * -12px + var(--tqo) * -1px), calc((1 - var(--tqh)) * -10px)) rotate(calc((1 - var(--tqh)) * -38deg)); }
-.tq-logo__t { transform-origin: 63% 50%; transform: translate(calc((1 - var(--tqh)) * 3px), calc((1 - var(--tqh)) * 3px + var(--tqo) * 1px)) rotate(calc((1 - var(--tqh)) * 14deg)); }
-.tq-logo__dot { transform: translate(calc((1 - var(--tqh)) * 17px + var(--tqo) * 1.5px), calc((1 - var(--tqh)) * 14px)); }
-.tq-logo__coin .tq-logo__flash { inset: auto; left: 75%; top: 69%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; background: radial-gradient(circle, #FFFFFF 0%, rgba(255,190,190,.85) 16%, rgba(231,19,27,.5) 36%, rgba(231,19,27,0) 66%); opacity: calc(var(--tqh) * var(--tqh) * (1 - var(--tqh)) * 6.75); pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
 .tq-logo { animation: none; transition-duration: .01s; }
 }
@@ -448,24 +439,6 @@ html:lang(vi) .tq-lang__menu .tq-lang__page { display: block; }
 .tq-crys:hover, .tq-crys:focus-visible { --tqh: 1; animation: none; color: #0A0A0A; }
 .tq-crys:active { --tqd: 1; }
 .tq-crys:focus-visible { outline: 2px solid #E7131B; outline-offset: 6px; }
-.tq-crys__rim { position: relative; display: block; padding: 3px; border-radius: 999px; background: linear-gradient(180deg, #FFFFFF 0%, #D4D7DC 40%, #F6F7F9 55%, #AEB2BA 100%); box-shadow: 0 1px 2px rgba(18,22,30,.12), 0 18px 30px -18px rgba(18,22,30,.45); }
-.tq-crys__face { position: relative; display: flex; align-items: center; height: 52px; padding: 0 50px 0 26px; border-radius: 999px; overflow: hidden; background: linear-gradient(180deg, #F5F6F8 0%, #E2E4E8 100%); box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -1px 0 rgba(18,22,30,.06); }
-.tq-crys__face::before { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, rgba(255,255,255,0) 38%, rgba(255,255,255,.9) 46%, rgba(255,255,255,0) 54%) no-repeat; background-size: 300% 100%; background-position: calc(55% - var(--tqh) * 55%) 0; pointer-events: none; }
-.tq-crys__label { position: relative; }
-.tq-crys__gem { position: relative; z-index: 1; display: block; flex: none; width: 76px; height: 66px; margin-left: -34px; }
-.tq-crys__shadow { position: absolute; left: 12px; right: 12px; bottom: -12px; height: 12px; border-radius: 50%; background: radial-gradient(closest-side, rgba(18,22,30,.28), rgba(18,22,30,0)); transform: scaleX(calc(1 - var(--tqh) * 0.18)); opacity: calc(1 - var(--tqh) * 0.35); }
-.tq-crys__body { position: absolute; inset: 0; transform: translateY(calc(var(--tqh) * -4px + var(--tqo) * 1.5px)) rotate(calc(var(--tqh) * 60deg)); }
-.tq-crys__body > span { position: absolute; inset: 3px 3.5px; clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
-.tq-crys__body > .tq-crys__edge { inset: 0; background: linear-gradient(150deg, #FFFFFF 0%, #C8CBD1 35%, #F3F4F6 55%, #A2A7AF 100%); }
-.tq-crys__body > .tq-crys__frost { background: linear-gradient(180deg, #FBFBFC 0%, #E3E5E9 100%); }
-.tq-crys__body > .tq-crys__chrome { background: linear-gradient(120deg, #F7F8FA 0%, #B8BCC4 28%, #FFFFFF 46%, #9DA2AB 68%, #E9EBEE 100%); opacity: var(--tqh); }
-.tq-crys__body > .tq-crys__f1 { clip-path: polygon(25% 0, 75% 0, 50% 50%); background: rgba(255,255,255,.6); }
-.tq-crys__body > .tq-crys__f2 { clip-path: polygon(100% 50%, 75% 100%, 50% 50%); background: rgba(18,22,30,.06); }
-.tq-crys__body > .tq-crys__f3 { clip-path: polygon(0 50%, 25% 0, 50% 50%); background: rgba(255,255,255,.35); }
-.tq-crys__glyph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 24px; transform: translateY(calc(var(--tqh) * -4px + var(--tqo) * 1.5px)); }
-.tq-crys__glyph > span { position: absolute; }
-.tq-crys__pct { color: #0A0A0A; opacity: calc(1 - var(--tqh)); transform: translateY(calc(var(--tqh) * -9px)); }
-.tq-crys__eq { color: #E7131B; opacity: var(--tqh); transform: translateY(calc((1 - var(--tqh)) * 9px)); }
 @media (prefers-reduced-motion: reduce) {
 .tq-crys { animation: none; transition-duration: .01s; }
 }
@@ -909,7 +882,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-h1 { margin: 0; }
 .tp-h2 { margin: 0; max-width: 30ch; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
-.tp-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
 .tp-stage {
   position: relative; max-width: 1240px; margin: clamp(28px, 4vw, 52px) auto 0; padding: clamp(18px, 3vw, 40px);
   border-radius: clamp(28px, 4vw, 48px); background: linear-gradient(160deg, #f4f4f5 0%, #ececee 100%); overflow: hidden;
@@ -1031,7 +1003,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   background: linear-gradient(118deg, rgba(255,255,255,0) 52%, rgba(255,255,255,.75) 60%, rgba(255,255,255,0) 68%), linear-gradient(118deg, rgba(255,255,255,0) 70%, rgba(255,255,255,.55) 76%, rgba(255,255,255,0) 82%), #ededf0; }
 .tp-dome-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
 .tp-dome-copy .tp-h2 { max-width: 18ch; }
-.tp-dome-copy__sub { margin: 0; font-size: 22px; line-height: 1.6; color: #5e5e66; text-wrap: pretty; }
+.tp-dome-copy__sub { margin: 0; font-size: 11px; line-height: 1.6; color: #5e5e66; text-wrap: pretty; }
 .tp-dome-btn { display: inline-flex; align-items: center; gap: 12px; margin-top: 8px; padding: 16px 28px; border-radius: 999px; background: #fff; border: 1px solid rgba(14,14,22,.08); box-shadow: 0 10px 24px -14px rgba(14,14,22,.3); font-size: 15px; font-weight: 700; color: #0e0e10; text-decoration: none; white-space: nowrap; transition: transform .25s, box-shadow .25s; }
 .tp-dome-btn:hover { color: #0e0e10; transform: translateY(-1px); box-shadow: 0 14px 28px -14px rgba(14,14,22,.42); }
 .tp-dome-btn:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
@@ -1069,8 +1041,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-dome__stat { position: static; max-width: none; align-items: center !important; text-align: center !important; gap: 6px; }
 .tp-dome__stat b { font-size: 34px; }
 }
-.tp-join { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
-.tp-join .tp-actions { margin-top: 10px; gap: 14px; }
 .tp-night {
   position: relative; max-width: 1336px; margin: 0 auto; padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 72px);
   border-radius: clamp(28px, 4vw, 48px); color: #fff; overflow: hidden; isolation: isolate;
@@ -1130,9 +1100,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-faq__side .tp-pill { align-self: center; }
 .tp-faq__side .tp-sub { max-width: 34ch !important; }
 .tp-night { border-radius: 26px; }
-.tp-join .tp-actions, .tp-night .tp-actions { flex-direction: column; width: 100%; max-width: 360px; }
-.tp-night .tp-actions { align-items: stretch; }
-.tp-join .tp-actions { align-items: center; }
 }
 @media (prefers-reduced-motion: reduce) {
 .tp-dark, .tp-glass { transition: none; }
@@ -1297,13 +1264,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .pf-mono { font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: .14em; }
 .pf-stack { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .pf-stack--chips { gap: 7px; }
-.pf-pill-dk { display: flex; align-items: center; justify-content: center; gap: 6px; max-width: 100%; min-height: 24px; box-sizing: border-box; padding: 4px 10px; border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); font-family: 'Inter', sans-serif; font-size: 9.5px; line-height: 1.3; letter-spacing: .12em; color: #c9c9d0; text-align: center; }
-.pf-pill-dk i, .pf-pulse { display: block; flex: none; width: 6px; height: 6px; border-radius: 50%; background: #e7131b; }
-@keyframes pfPulse { 0% { box-shadow: 0 0 0 0 rgba(231,19,27,.6); } 70% { box-shadow: 0 0 0 7px rgba(231,19,27,0); } 100% { box-shadow: 0 0 0 0 rgba(231,19,27,0); } }
-.pf-pulse { width: 7px; height: 7px; animation: pfPulse 1.6s infinite; }
 .pf-live { display: flex; flex-direction: column; gap: 10px; width: 150px; }
-.pf-live__lab { display: flex; align-items: center; gap: 6px; color: #c9c9d0; }
 .pf-bars { display: flex; align-items: flex-end; gap: 5px; height: 60px; direction: ltr; }
 .pf-bars span { flex: 1; border-radius: 3px; background: #34363c; }
 .pf-bars span.is-hi { background: #f2f2f5; }
@@ -1721,8 +1682,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
           </div>
           <div class="pf-fan" id="pf-fan">
             <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">Până la 87%</span><span class="pf-perk__d">Partea ta din fiecare tranzacție.</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">Plăți zilnice</span><span class="pf-perk__d">Retrage în orice zi. Noi acoperim taxele.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span><span class="pf-pill-dk"><i></i>TAXE · PLĂTIT AZI</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">Urmărire live</span><span class="pf-perk__d">Fiecare client și fiecare lot, în timp real.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><span class="pf-mono pf-live__lab"><i class="pf-pulse"></i>URMĂRIRE LIVE</span><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">Plăți zilnice</span><span class="pf-perk__d">Retrage în orice zi. Noi acoperim taxele.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">Urmărire live</span><span class="pf-perk__d">Fiecare client și fiecare lot, în timp real.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
             <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">Manager personal</span><span class="pf-perk__d">O persoană care îți cunoaște afacerea.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">MANAGERUL TĂU</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
             <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">Instrumente gratuite</span><span class="pf-perk__d">Creații, TradingView și analize de experți.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">Creații</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">Analize</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
             <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">Călătorii-premiu</span><span class="pf-perk__d">Atinge-ți țintele și călătorește cu noi.</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
@@ -1819,18 +1780,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     </div>
   </section>
 
-
-    <!-- Community -->
-    <section class="tp-sec" data-screen-label="Join partners">
-      <div class="tp-join">
-        <h2 class="tp-h2 tq-h2" data-fitw>Alătură-te celor <span style="color: #e7131b;">peste 30.000 de parteneri</span> din toată lumea</h2>
-        <p class="tp-sub">Aplică din Portalul clientului. Analizăm fiecare cerere în cel mult 24 de ore.</p>
-        <div class="tp-actions">
-          <a class="tq-logo" href="../#signup" data-page-link data-label="SE ÎNCARCĂ · Acasă" aria-label="Devino partener"><span>Devino partener</span><span class="tq-logo__coin" aria-hidden="true"><span class="tq-logo__face"></span><span class="tq-logo__rim"></span><svg class="tq-logo__flag" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__t" width="56" height="56" viewBox="20.75 19.75 160 160"><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z" fill="#FFFFFF"></path></svg><svg class="tq-logo__dot" width="56" height="56" viewBox="20.75 19.75 160 160"><circle cx="141" cy="130.5" r="10.5" fill="#E7131B"></circle></svg><span class="tq-logo__flash"></span></span></a>
-          <a class="tq-crys" style="align-self: center;" href="../partner-terms/" data-page-link data-label="SE ÎNCARCĂ · Condiții" aria-label="Vezi planul de comisioane"><span class="tq-crys__rim"><span class="tq-crys__face"><span class="tq-crys__label">Vezi planul de comisioane</span></span></span><span class="tq-crys__gem" aria-hidden="true"><span class="tq-crys__shadow"></span><span class="tq-crys__body"><span class="tq-crys__edge"></span><span class="tq-crys__frost"></span><span class="tq-crys__chrome"></span><span class="tq-crys__f1"></span><span class="tq-crys__f2"></span><span class="tq-crys__f3"></span></span><span class="tq-crys__glyph"><span class="tq-crys__pct">%</span><span class="tq-crys__eq">=</span></span></span></a>
-        </div>
-      </div>
-    </section>
 
     <!-- FAQ -->
     <section id="questions" class="tp-sec" data-screen-label="Programs FAQ">
