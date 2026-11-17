@@ -704,6 +704,21 @@ html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform
   text-transform: uppercase;
 }
 html.tq-arriving, html.tq-locked { overflow: hidden; }
+.tq-gbtn { --h: 56px; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: calc(var(--h) * .5);
+  height: var(--h); min-width: calc(var(--h) * 4.4); box-sizing: border-box; padding: 0; padding-inline: calc(var(--h) * .95) calc(var(--h) * .72);
+  border: 0 solid transparent; border-image: url(../assets/cta/glass-dark.webp?v=9f5bdab63b) 219 380 fill / 50% calc(var(--h) * .868) stretch;
+  color: #fff; font: 700 calc(var(--h) * .33)/1 'Inter', system-ui, sans-serif; letter-spacing: -.012em; white-space: nowrap; text-decoration: none;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), filter .25s ease; -webkit-tap-highlight-color: transparent; }
+.tq-gbtn--light { border-image-source: url(../assets/cta/glass-light.webp?v=832c6afaba); color: #0a0a0a; }
+.tq-gbtn:hover { transform: translateY(-1px); filter: brightness(1.07) saturate(1.05); color: #fff; }
+.tq-gbtn--light:hover { color: #0a0a0a; }
+.tq-gbtn:active { transform: translateY(0) scale(.985); }
+.tq-gbtn:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; }
+.tq-gbtn__chev { flex: none; width: calc(var(--h) * .2); height: calc(var(--h) * .36); }
+[dir="rtl"] .tq-gbtn__chev { transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) {
+.tq-gbtn { transition: none; }
+}
 .tq-prem { display: block; width: fit-content; margin: .5em auto 0; padding: .42em .95em .38em; border-radius: 999px;
   font-size: max(.4em, 9.5px); font-weight: 700; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: #fff;
   background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 14px -6px rgba(231,19,27,.7); }
@@ -784,7 +799,6 @@ header { gap: 12px !important; }
 [dir="rtl"] .tq-launch__btn svg { transform: scaleX(-1); }
 [dir="rtl"] [data-rep-stage] { direction: ltr; }
 [dir="rtl"] [data-calc-slider] { direction: ltr; }
-[dir="rtl"] .tq-pc__go span { display: inline-block; transform: scaleX(-1); }
 [dir="rtl"] input[type="email"], [dir="rtl"] input[type="tel"] { direction: ltr; text-align: right; }
 [dir="rtl"] #signup form label > span:first-child { padding-left: 0 !important; padding-right: 70px; }
 [dir="rtl"] [data-how-fill] { left: auto !important; right: 0; border-radius: 3px 0 0 3px !important; }
@@ -1104,10 +1118,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-pc__per button:hover { color: #fff; }
 .tq-pc__per button[aria-pressed="true"] { color: #0a0a0a; }
 .tq-pc__per button:focus-visible { outline: 2px solid #e7131b; outline-offset: 2px; }
-.tq-pc__go { display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; border-radius: 999px; background: #e7131b; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 14px 28px -12px rgba(231,19,27,.9); transition: background .25s; }
-.tq-pc__go:hover, .tq-pc__go:focus-visible { background: #ff2a32; color: #fff; }
-.tq-pc__go:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.tq-pc__go { --h: 60px; display: flex; width: 100%; }
 .tq-pc__printer { position: relative; display: flex; flex-direction: column; }
 .tq-pc__slot { position: relative; z-index: 2; height: 28px; border-radius: 14px; display: flex; align-items: center; padding: 0 18px;
   background: linear-gradient(180deg, #fff 0%, #d9dce0 30%, #8d929a 62%, #c9cdd3 100%); box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(0,0,0,.5), 0 12px 20px -8px rgba(0,0,0,.9); }
@@ -1208,7 +1219,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-pc__knob i { height: 16px; }
 .tq-pc__slider input { height: 44px; }
 .tq-pc__per button { height: 38px; }
-.tq-pc__go { height: 48px; font-size: 15px; }
+.tq-pc__go { --h: 52px; }
 }
 .tq-toasts { position: fixed; left: 16px; bottom: 16px; z-index: 50; width: min(640px, calc(50vw - 290px)); display: none; flex-direction: column; align-items: flex-start;
   font-family: 'Inter', system-ui, sans-serif; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s linear .45s; }
@@ -1591,7 +1602,7 @@ h1, h2 { line-height: 1.2 !important; }
             </div>
           </div>
           <div class="tq-pc__per" data-inv-per="" role="group" aria-label="الفترة"><span data-inv-per-thumb="" aria-hidden="true"></span><button type="button" data-per="day" aria-pressed="false">يوم</button><button type="button" data-per="month" aria-pressed="true">شهر</button><button type="button" data-per="year" aria-pressed="false">سنة</button></div>
-          <a class="tq-pc__go" href="#signup">كن شريكًا <span aria-hidden="true">→</span></a>
+          <a class="tq-pc__go tq-gbtn tq-gbtn--light" href="#signup"><span>كن شريكًا</span><svg class="tq-gbtn__chev" viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="M2 2l8.5 9L2 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
         </div>
         <div class="tq-pc__printer">
           <div class="tq-pc__slot" aria-hidden="true"><span></span></div>
