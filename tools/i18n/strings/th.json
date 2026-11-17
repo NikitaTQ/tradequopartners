@@ -66,7 +66,7 @@
   "inv.no": "เลขที่เอกสาร",
   "inv.issued": "วันที่ออก",
   "inv.period": "งวด",
-  "inv.rebate": "รีเบทจากการเทรดของลูกค้า",
+  "inv.rebate": "รีเบทจากวอลุ่มของลูกค้า",
   "inv.rebateCalc": "<lots>7,800</lots> ล็อต × <rate>$7.50</rate> / ล็อต",
   "inv.fees": "ค่าดำเนินการและค่าถอนเงิน",
   "inv.feesNote": "TradeQuo ออกให้",

@@ -2091,7 +2091,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
     </section>
 
     <!-- Network + clients (IB_Network_Block design: "IB Network + Clients", in place of the Network insights, Clients &
-         earnings and Ask AI blocks), after the black hole: the pitch and its button (to the copy trading block); right
+         earnings and Ask AI blocks), after the black hole: the pitch and its button (to the copy strategies block); right
          the views to pick (Network, Performance, Earnings) on a red glass pill that slides over them (the design's "pill"
          selector), the picked view's line under it, and a canvas: the partner tree in glass (You at the top, Sub-IBs level by
          level, pulses running up the links, the strongest branch red), which turns into a bar chart of the same partners by
@@ -2127,7 +2127,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
       </div>
     </section>
 
-    <!-- Copy trading hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after Network + clients: left
+    <!-- Copy strategies hand-off (Liquid_Glass_Hand-off design, variant 4a "Smoky + clear glass"), after Network + clients: left
          the pitch (an eyebrow, the heading, two steps that take turns, a red button to the next block); right two
          glass hands with phones — the provider's (its strategy, "Meridian Core") and the follower's (copying it); the strategy
          card gathers into a drop of liquid silver (WebGL) that leaves the provider's
@@ -2138,8 +2138,8 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
          the hands cropped to the phones, the note, fitted to the stage (the script in the section sets the sizes). The
          phone screens are the product's interface (English on every language, demo data, not translated by the browser).
          partials/ib-copy.html holds the hands; assets/js/ib-copy.js reads the scroll and draws; partner.css, "the Copy
-         trading hand-off block". -->
-    <section id="copy" class="tq-ibcp" data-ib-copy data-screen-label="IB Tools · Copy trading hand-off">
+         strategies hand-off block". -->
+    <section id="copy" class="tq-ibcp" data-ib-copy data-screen-label="IB Tools · Copy strategies hand-off">
       <div class="tq-ibcp__stage">
         <div class="tq-ibcp__in">
           <div class="tq-ibcp__txt">
@@ -2210,7 +2210,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 (function(){var s=document.currentScript.parentNode,g=s.querySelector('.tq-ibcp__stage'),n=s.querySelector('.tq-ibcp__in'),t=s.querySelector('.tq-ibcp__txt'),c=s.querySelector('.tq-ibcp__crop'),b=s.querySelector('.tq-ibcp__board'),m=matchMedia('(min-width: 1200px)');function z(){var w=s.clientWidth,ph=matchMedia('(max-width: 640px)').matches,H=(ph?innerHeight:g.clientHeight)-(parseFloat(getComputedStyle(s).getPropertyValue('--hdr'))||0),k;if(m.matches){k=Math.min(1,w/1440,H/900);n.style.zoom=k;s.style.setProperty('--z',k);var gx=(w-1440*k)/2,R=Math.min(gx+72*k,120);s.style.setProperty('--rr',((R-gx)/k).toFixed(1)+'px');b.style.zoom=b.style.marginLeft=c.style.height=''}else{n.style.zoom='';s.style.removeProperty('--z');s.style.removeProperty('--rr');k=Math.max(.2,Math.min(.8,w/1010,(H-(t.offsetHeight||[].reduce.call(t.children,function(a,e){return a+e.offsetHeight+20},0))-48-(ph?56:0))/790));b.style.zoom=k;b.style.marginLeft=((w/k-1010)/2-430)+'px';c.style.height=790*k+'px'}if(ph)s.style.setProperty('--sh',g.offsetHeight+'px');else s.style.removeProperty('--sh')}z();addEventListener('resize',z);document.fonts&&document.fonts.ready.then(z)})();</script>
     </section>
 
-    <!-- Market outlooks feed (the IB feed design), after the copy trading hand-off: the IB's own market outlook channel
+    <!-- Market outlooks feed (the IB feed design), after the copy strategies hand-off: the IB's own market outlook channel
          (the sample brand Northline Outlook): a glass card with two posts ("Today's market outlook", "What we're watching") and
          under it the four channels it goes out on (Telegram, WhatsApp, TradingView, XMP Club). Phones: the design's 390px block as it is, scaled to the screen (the script in the section sets the zoom), at
          most ~70% of a 390x844 screen. Desktops (the design has no desktop view): the heading, the button and the note on
@@ -2530,7 +2530,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
 <script src="../../assets/js/landing.js?v=0e09212b1f" defer></script>
-<script src="../../assets/js/ib-copy.js?v=8863573876" defer></script>
+<script src="../../assets/js/ib-copy.js?v=a9ce0c77dc" defer></script>
 <script src="../../assets/js/ib-insights.js?v=be978a827d" defer></script>
 <script src="../../assets/js/ib-hole.js?v=0faf28ebcd" defer></script>
 </body>
