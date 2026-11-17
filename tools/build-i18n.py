@@ -32,7 +32,7 @@ PAGES = [
     {'id': 'landing', 'template': 'landing.html', 'slug': ''},
     {'id': 'programs', 'template': 'programs.html', 'slug': 'programs', 'css': 'partner', 'h2Preload': True},   # the program cards' names (first screen) are in the H2 face: it is preloaded too, so they are set in it from the first paint
     {'id': 'commission', 'template': 'commission.html', 'slug': 'partner-terms', 'css': 'partner'},   # was commission-plan (netlify.toml redirects)
-    # IB Tools: the hero only for now; no table of contents yet (fan, FAB). ('display': 'h2' preloads the H2 face instead
+    # IB Tools: its table of contents (fan, FAB) is TOC['ibtools'] below. ('display': 'h2' preloads the H2 face instead
     # of the H1 one, for a page whose display text is section-heading type, as with the earlier devices-film hero)
     {'id': 'ibtools', 'template': 'ibtools.html', 'slug': 'ib-tools', 'css': 'partner'},
 ]
@@ -48,6 +48,8 @@ TOC = {
     'landing': [('signup', 'nav.cta'), ('how', 'nav.how'), ('calculator', 'nav.calc'), ('reviews', 'toc.reviews'), ('dashboard', 'nav.perks'), ('faq', 'nav.faq')],
     'programs': [('programs', 'pp.nav.programs'), ('who', 'toc.who'), ('benefits', 'pp.nav.benefits'), ('why', 'pp.nav.why'), ('how', 'nav.how'), ('questions', 'nav.faq')],
     'commission': [('earnings', 'toc.earnings'), ('calculator', 'nav.calc'), ('payouts', 'cp.nav.payouts'), ('perks', 'nav.perks'), ('how', 'nav.how'), ('questions', 'nav.faq')],
+    # IB Tools (November 2026): its blocks in order (the closing call is not listed, as on the other pages); labels ib.toc.*
+    'ibtools': [('desk', 'ib.toc.desk'), ('network', 'ib.toc.net'), ('flow', 'ib.toc.act'), ('insights', 'ib.toc.ins'), ('copy', 'ib.toc.cp'), ('outlooks', 'ib.toc.sig'), ('premium', 'ib.toc.tv'), ('questions', 'nav.faq')],
 }
 languages = json.load(open(os.path.join(I18N, 'languages.json'), encoding='utf-8'))
 fonts = json.load(open(os.path.join(I18N, 'font-files.json'), encoding='utf-8'))
