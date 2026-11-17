@@ -15,7 +15,7 @@ export default {
 "{n} passou de {v} em rebates acumulados",
 "{n} recebeu {v} do volume de sub-IBs",
 "{n} subiu para {v} do spread",
-"Os clientes de {n} negociaram {v} lotes esta semana",
+"Os clientes de {n} registraram {v} lotes de volume esta semana",
 "A rede de {n} passou de {v} lotes este mês",
 "{n} ganhou {v} com volume em {s}",
 "{n} ganhou um gerente de parceria dedicado",
@@ -38,8 +38,8 @@ export default {
 "{n} recebeu {v} sem taxas de saque",
 "{n} passou de {v} clientes ativos",
 "{n} mudou para um plano de comissões personalizado",
-"Os alunos da academia de {n} negociaram {v} lotes",
-"{n} lançou um app de trading com a própria marca",
+"Os alunos da academia de {n} registraram {v} lotes de volume",
+"{n} lançou um app de mercados com a própria marca",
 "{n} ganhou {v} com um único sub-IB",
 "{n} recebeu o primeiro pagamento de {v}"
 ]

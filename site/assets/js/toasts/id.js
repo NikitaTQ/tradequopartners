@@ -15,7 +15,7 @@ export default {
 "{n} melewati {v} total rebate",
 "{n} mendapat {v} dari volume sub-IB",
 "{n} naik ke {v} bagian spread",
-"Klien {n} memperdagangkan {v} lot minggu ini",
+"Klien {n} mencatat volume {v} lot minggu ini",
 "Jaringan {n} melewati {v} lot bulan ini",
 "{n} mendapat {v} dari volume {s}",
 "{n} mendapat manajer mitra khusus",
@@ -38,8 +38,8 @@ export default {
 "{n} dibayar {v} tanpa biaya penarikan",
 "{n} melewati {v} klien aktif",
 "{n} beralih ke skema komisi khusus",
-"Siswa akademi {n} memperdagangkan {v} lot",
-"{n} meluncurkan aplikasi trading bermerek sendiri",
+"Siswa akademi {n} mencatat volume {v} lot",
+"{n} meluncurkan aplikasi pasar bermerek sendiri",
 "{n} mendapat {v} dari satu sub-IB",
 "{n} menerima pembayaran pertama sebesar {v}"
 ]

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Outils IB · pour les partenaires — Chaque lot. Chaque niveau. Un seul espace. | TradeQuo</title>
-<meta name="description" content="Suivez vos commissions par lot, repérez les clients qui ont cessé de trader, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB. Des données en temps réel, pas des relevés de fin de mois — et une IA qui vous dit où agir en priorité.">
+<meta name="description" content="Suivez vos commissions par lot, repérez les clients qui ne sont plus actifs, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB. Des données en temps réel, pas des relevés de fin de mois — et une IA qui vous dit où agir en priorité.">
 <link rel="canonical" href="https://tradequopartners.com/fr/ib-tools/">
 <link rel="alternate" hreflang="en" href="https://tradequopartners.com/ib-tools/">
 <link rel="alternate" hreflang="ar" href="https://tradequopartners.com/ar/ib-tools/">
@@ -31,13 +31,13 @@
 <meta property="og:url" content="https://tradequopartners.com/fr/ib-tools/">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Outils IB · pour les partenaires — Chaque lot. Chaque niveau. Un seul espace. | TradeQuo">
-<meta property="og:description" content="Suivez vos commissions par lot, repérez les clients qui ont cessé de trader, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB.">
+<meta property="og:description" content="Suivez vos commissions par lot, repérez les clients qui ne sont plus actifs, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB.">
 <meta property="og:image" content="https://tradequopartners.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Outils IB · pour les partenaires — Chaque lot. Chaque niveau. Un seul espace. | TradeQuo">
-<meta name="twitter:description" content="Suivez vos commissions par lot, repérez les clients qui ont cessé de trader, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB.">
+<meta name="twitter:description" content="Suivez vos commissions par lot, repérez les clients qui ne sont plus actifs, ventilez le volume par instrument et attribuez chaque niveau de Sub-IB.">
 <meta name="twitter:image" content="https://tradequopartners.com/og.png">
 <link rel="icon" href="../../favicon.svg?v=ff199c552e" type="image/svg+xml">
 <link rel="icon" href="../../favicon-32.png?v=08736b4127" type="image/png" sizes="32x32">
@@ -1753,7 +1753,7 @@ html .tq-ibcp { height: calc(var(--sh, 100svh) + 210svh); }
         </div>
         <div class="tq-ibtp__vis">
           <div class="tq-ibvs" dir="ltr">
-            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=5fb08666bf" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=ed67410b3b" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
+            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=5f5e2a17b4" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=ed67410b3b" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
             <div class="tq-ibvs__w tq-ibvs__w--them" dir="ltr">
               <span class="tq-ibvs__th" style="--x:116.5;--b:291.2;--r:500" data-fitw>Autres programmes</span>
               <span class="tq-ibvs__tl" style="--x:121;--b:391.7;--r:500" data-fitw>Niveaux de sous-IB</span>
@@ -2114,7 +2114,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
               <span class="tq-ibi__pill" aria-hidden="true"><i></i></span>
               <button type="button" class="tq-ibi__b is-act" aria-pressed="true">Réseau</button><button type="button" class="tq-ibi__b" aria-pressed="false">Performance</button><button type="button" class="tq-ibi__b" aria-pressed="false">Gains</button>
             </div>
-            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">Vos Sub-IB, niveau par niveau. Voyez exactement qui se trouve sous qui.</span><span>Les partenaires classés par dépôts nets. Voyez quelle branche porte votre croissance.</span><span>Ce que les clients de chaque partenaire vous rapportent ce mois-ci. Repérez qui ne trade plus.</span></p>
+            <p class="tq-ibi__cur" aria-live="polite"><span class="is-act">Vos Sub-IB, niveau par niveau. Voyez exactement qui se trouve sous qui.</span><span>Les partenaires classés par dépôts nets. Voyez quelle branche porte votre croissance.</span><span>Ce que les clients de chaque partenaire vous rapportent ce mois-ci. Repérez qui est devenu inactif.</span></p>
           </div>
           <div class="tq-ibi__stage" dir="ltr" aria-hidden="true"><canvas data-you="Vous" data-total="{v} au total" data-net="Dépôts nets du réseau" data-comm="Vos commissions · {m}" data-top="Par partenaire" data-dormant="À risque"></canvas></div>
         </div>
@@ -2142,7 +2142,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
               <p class="tq-ibcp__step" data-k="c1"><span>01</span><span>Le fournisseur crée une stratégie.</span></p>
               <p class="tq-ibcp__step" data-k="c2"><span>02</span><span>Elle arrive sur le compte de votre client.</span></p>
             </div>
-            <a class="tq-copy tq-ibcp__cta" href="#outlooks"><span class="tq-copy__label">Découvrir le copy trading</span><span class="tq-copy__icon" aria-hidden="true"><span class="tq-copy__back"></span><span class="tq-copy__front"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
+            <a class="tq-copy tq-ibcp__cta" href="#outlooks"><span class="tq-copy__label">Découvrir les stratégies</span><span class="tq-copy__icon" aria-hidden="true"><span class="tq-copy__back"></span><span class="tq-copy__front"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></a>
           </div>
           <div class="tq-ibcp__crop"><div class="tq-ibcp__board" dir="ltr" translate="no" aria-hidden="true">
   <div class="tq-ibcp__hand" data-k="L" style="transform:translate3d(360px,101px,0) scale(.78)">
@@ -2362,7 +2362,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
             </button>
             <div data-faq-panel id="faq-5-a" role="region" aria-labelledby="faq-5-q" style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2,.8,.2,1);">
               <div style="overflow: hidden;">
-                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Non. Pas de frais d’adhésion, et vous n’avez besoin ni de capital ni d’expérience en trading. Un compte TradeQuo vérifié suffit.</p>
+                <p style="margin: 0; padding: 0 clamp(20px, 2.6vw, 32px) clamp(22px, 2.4vw, 28px) calc(clamp(20px, 2.6vw, 32px) + 60px); max-width: 64ch; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty;">Non. Pas de frais d’adhésion, et vous n’avez besoin ni de capital ni d’expérience des marchés. Un compte TradeQuo vérifié suffit.</p>
               </div>
             </div>
           </div>

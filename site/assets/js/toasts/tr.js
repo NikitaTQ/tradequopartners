@@ -15,7 +15,7 @@ export default {
 "{n} toplamda {v} rebate eşiğini aştı",
 "{n} sub-IB hacminden {v} aldı",
 "{n} {v} spread payına yükseldi",
-"{n}: müşterileri bu hafta {v} lot işlem yaptı",
+"{n}: müşterileri bu hafta {v} lot hacim kaydetti",
 "{n}: ağı bu ay {v} lotu aştı",
 "{n} {s} hacminden {v} kazandı",
 "{n} özel bir partner yöneticisi kazandı",
@@ -38,8 +38,8 @@ export default {
 "{n} ödeme ücreti olmadan {v} aldı",
 "{n} {v} aktif müşteriyi geçti",
 "{n} özel bir komisyon planına geçti",
-"{n}: akademi öğrencileri {v} lot işlem yaptı",
-"{n} kendi markalı trading uygulamasını başlattı",
+"{n}: akademi öğrencileri {v} lot hacim kaydetti",
+"{n} kendi markalı piyasa uygulamasını başlattı",
 "{n} tek bir sub-IB’den {v} kazandı",
 "{n} {v} tutarında ilk ödemesini aldı"
 ]

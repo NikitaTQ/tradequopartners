@@ -15,7 +15,7 @@ export default {
 "{n} crossed {v} in lifetime rebates",
 "{n} got {v} from sub-IB volume",
 "{n} upgraded to {v} spread share",
-"{n}’s clients traded {v} lots this week",
+"{n}’s clients recorded {v} lots in volume this week",
 "{n}’s network crossed {v} lots this month",
 "{n} earned {v} on {s} volume",
 "{n} unlocked a dedicated partner manager",
@@ -38,8 +38,8 @@ export default {
 "{n} was paid {v} with zero payout fees",
 "{n} passed {v} active clients",
 "{n} moved to a custom commission plan",
-"{n}’s academy students traded {v} lots",
-"{n} launched a branded trading app",
+"{n}’s academy students recorded {v} lots in volume",
+"{n} launched a branded market app",
 "{n} earned {v} from a single sub-IB",
 "{n} received the first payout of {v}"
 ]
