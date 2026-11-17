@@ -519,6 +519,10 @@ html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform
   text-transform: uppercase;
 }
 html.tq-arriving, html.tq-locked { overflow: hidden; }
+.tq-prem { display: block; width: fit-content; margin: .5em auto 0; padding: .42em .95em .38em; border-radius: 999px;
+  font-size: max(.4em, 9.5px); font-weight: 700; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: #fff;
+  background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 14px -6px rgba(231,19,27,.7); }
+.tp-perk .tq-prem { display: inline-block; margin: 0; margin-inline-start: .5em; vertical-align: .2em; }
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 @media (max-width: 640px) {
 [data-fan-head] { align-items: center !important; text-align: center; }
@@ -1753,7 +1757,7 @@ html:lang(ko) * { word-break: keep-all; }
         </div>
         <div class="tp-perkgrid">
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-trip.webp?v=a760f4b943" alt="" width="290" height="340"><div><h3>獎勵旅遊</h3><p>達成目標，與我們一同前往熱門旅遊勝地。</p></div></div>
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>免費TradingView</h3><p>免費使用進階圖表，讓市場分析更精準。</p></div></div>
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>免費TradingView <span class="tq-prem">Premium</span></h3><p>免費使用進階圖表，讓市場分析更精準。</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="330" height="280"><div><h3>免費專家分析</h3><p>即時市場洞察，可直接分享給您的受眾。</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="280" height="350"><div><h3>行銷素材</h3><p>橫幅廣告、登陸頁與影片，專為提升轉換而設計。</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330"><div><h3>白標學院</h3><p>以您自有品牌呈現的交易教育內容，隨時可分享。</p></div></div>

@@ -519,6 +519,10 @@ html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform
   text-transform: uppercase;
 }
 html.tq-arriving, html.tq-locked { overflow: hidden; }
+.tq-prem { display: block; width: fit-content; margin: .5em auto 0; padding: .42em .95em .38em; border-radius: 999px;
+  font-size: max(.4em, 9.5px); font-weight: 700; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: #fff;
+  background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 14px -6px rgba(231,19,27,.7); }
+.tp-perk .tq-prem { display: inline-block; margin: 0; margin-inline-start: .5em; vertical-align: .2em; }
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 @media (max-width: 640px) {
 [data-fan-head] { align-items: center !important; text-align: center; }
@@ -1747,7 +1751,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
         </div>
         <div class="tp-perkgrid">
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-trip.webp?v=a760f4b943" alt="" width="290" height="340"><div><h3>Ödül Seyahatleri</h3><p>Hedeflerinize ulaşın, bizimle en gözde destinasyonlara seyahat edin.</p></div></div>
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>Ücretsiz TradingView</h3><p>Daha isabetli piyasa analizi için gelişmiş grafikler, ücretsiz.</p></div></div>
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>Ücretsiz TradingView <span class="tq-prem">Premium</span></h3><p>Daha isabetli piyasa analizi için gelişmiş grafikler, ücretsiz.</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="330" height="280"><div><h3>Ücretsiz Analizler</h3><p>Kitlenizle paylaşabileceğiniz gerçek zamanlı piyasa içgörüleri.</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="280" height="350"><div><h3>Kreatifler</h3><p>Dönüşüm odaklı bannerlar, açılış sayfaları ve videolar.</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330"><div><h3>White-Label Akademi</h3><p>Kendi markanızla sunabileceğiniz, paylaşıma hazır trading eğitimi.</p></div></div>

@@ -521,6 +521,10 @@ html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform
   text-transform: uppercase;
 }
 html.tq-arriving, html.tq-locked { overflow: hidden; }
+.tq-prem { display: block; width: fit-content; margin: .5em auto 0; padding: .42em .95em .38em; border-radius: 999px;
+  font-size: max(.4em, 9.5px); font-weight: 700; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: #fff;
+  background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 14px -6px rgba(231,19,27,.7); }
+.tp-perk .tq-prem { display: inline-block; margin: 0; margin-inline-start: .5em; vertical-align: .2em; }
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 @media (max-width: 640px) {
 [data-fan-head] { align-items: center !important; text-align: center; }
@@ -1757,7 +1761,7 @@ h1, h2 { line-height: 1.2 !important; }
         </div>
         <div class="tp-perkgrid">
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-trip.webp?v=a760f4b943" alt="" width="290" height="340"><div><h3>رحلات تحفيزية</h3><p>حقّق أهدافك وسافر معنا إلى أبرز الوجهات.</p></div></div>
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>TradingView مجانًا</h3><p>رسوم بيانية متقدمة لتحليل أدق للسوق، دون أي تكلفة.</p></div></div>
+          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>TradingView مجانًا <span class="tq-prem">Premium</span></h3><p>رسوم بيانية متقدمة لتحليل أدق للسوق، دون أي تكلفة.</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="330" height="280"><div><h3>تحليلات خبراء مجانية</h3><p>رؤى فورية حول السوق لمشاركتها مع جمهورك.</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="280" height="350"><div><h3>مواد تسويقية</h3><p>بانرات وصفحات هبوط ومقاطع فيديو مصمّمة لتحويل الزوار إلى عملاء.</p></div></div>
           <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330"><div><h3>أكاديمية بعلامة بيضاء</h3><p>محتوى تعليمي للتداول يحمل علامتك التجارية، جاهز للمشاركة.</p></div></div>
