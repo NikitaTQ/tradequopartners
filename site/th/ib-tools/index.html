@@ -1375,6 +1375,13 @@ html .tq-ibcp { height: calc(var(--sh, 100svh) + 210svh); }
 @media (max-width: 640px) {
 .tq-ibtv__zero { margin-top: 20px; font-size: clamp(110px, 32vw, 250px); }
 }
+.tq-ibtv .tp-tv__h { margin-top: 22px; }
+@media (min-width: 900px) {
+.tq-ibtv .tp-tv__h { align-self: stretch; max-width: none; white-space: nowrap; }
+}
+@media (max-width: 640px) {
+.tq-ibtv .tp-tv__h { margin-top: 14px; }
+}
 .tq-ibs { position: relative; overflow: hidden; box-sizing: border-box; color: #0a0a0a; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   padding: var(--tq-half) clamp(20px, 5vw, 80px);
   background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(40% 50% at 72% 30%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
@@ -2252,7 +2259,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
           <div class="tp-tv__mark" aria-hidden="true"><img src="../../assets/marketing/tradingview.webp?v=b2dac21ca8" alt="" width="969" height="134" loading="lazy" decoding="async"></div>
           <div class="tp-tv__duo"><img src="../../assets/logo-wordmark-light.png?v=3a415b95bb" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span aria-hidden="true">×</span><img src="../../assets/marketing/tradingview.webp?v=b2dac21ca8" alt="TradingView" width="969" height="134" loading="lazy" decoding="async"></div>
           <div class="tq-ibtv__zero" aria-hidden="true"><b>$</b><img src="../../assets/ib/tv-zero.webp?v=f2b7efc601" alt="" width="515" height="713" loading="lazy" decoding="async"></div>
-          <h2 class="tp-tv__h tq-h2" data-fitw>TradingView Premium ฟรีตลอดชีพ</h2>
+          <h2 class="tp-tv__h tq-h2" data-fitw>TradingView Premium ตลอดไป เราออกให้</h2>
           <div class="tp-tv__bill">
             <div class="tp-tv__prod"><img src="../../assets/marketing/tradingview-app.webp?v=825ec516a7" alt="" width="32" height="32" loading="lazy" decoding="async"><span><b>TradingView Premium</b><span class="tp-tv__lab">ใช้ได้ตลอดชีพ</span></span></div>
             <div class="tp-tv__list"><span class="tp-tv__lab">ราคาปกติ / ปี</span><span class="tp-tv__val"><s>$719.40</s> <small>/ปี</small></span></div>

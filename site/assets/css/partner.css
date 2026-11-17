@@ -1374,6 +1374,11 @@
   background-image: linear-gradient(180deg, #f4f4f6 0%, #e0e0e4 45%, #c2c2c8 100%); }
 .tq-ibtv__zero img { display: block; width: auto; height: .97em; }
 @media (max-width: 640px) { .tq-ibtv__zero { margin-top: 20px; font-size: clamp(110px, 32vw, 250px); } }
+/* the line under the "$0" (November 2026: "TradingView Premium. Forever. On Us."): a little further from the "0", and in
+   one line from 900px (as wide as the card: data-fitw steps its size down if a language runs longer); narrower, it wraps */
+.tq-ibtv .tp-tv__h { margin-top: 22px; }
+@media (min-width: 900px) { .tq-ibtv .tp-tv__h { align-self: stretch; max-width: none; white-space: nowrap; } }
+@media (max-width: 640px) { .tq-ibtv .tp-tv__h { margin-top: 14px; } }
 
 /* ---- IB Tools: the market outlooks feed block (#outlooks) -----------------------------------------------------------------
    The IB's market outlook channel (a glass card, two posts) and the four channels it goes out on. Phones: the design's 390px block as it is (sizes in
