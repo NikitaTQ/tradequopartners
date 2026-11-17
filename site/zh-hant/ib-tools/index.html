@@ -121,7 +121,10 @@ html:lang(zh-Hant) { --h1f: 'TQ H1 Noto TC'; --h2f: 'TQ H2 Noto TC'; }
 html, body { margin: 0; padding: 0; background: #ffffff; }
 html { overflow-x: hidden; overscroll-behavior-x: none; }
 * { box-sizing: border-box; }
-:root { --tq-gap: clamp(128px, 17.5vw, 252px); --tq-half: calc(var(--tq-gap) / 2); }
+:root { --tq-gap: 128px; --tq-half: calc(var(--tq-gap) / 2); }
+@media (min-width: 641px) {
+:root { --tq-gap: clamp(102px, 14vw, 202px); }
+}
 @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --tqfm { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
 @property --tqo { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -2498,6 +2501,6 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 <script src="../../assets/js/landing.js?v=4c672e0d76" defer></script>
 <script src="../../assets/js/ib-copy.js?v=a9ce0c77dc" defer></script>
 <script src="../../assets/js/ib-insights.js?v=be978a827d" defer></script>
-<script src="../../assets/js/ib-hole.js?v=0faf28ebcd" defer></script>
+<script src="../../assets/js/ib-hole.js?v=18358d9350" defer></script>
 </body>
 </html>

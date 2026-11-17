@@ -95,11 +95,13 @@ html, body { margin: 0; padding: 0; background: #ffffff; }
    works) and stops the sideways rubber-band on trackpads. */
 html { overflow-x: hidden; overscroll-behavior-x: none; }
 * { box-sizing: border-box; }
-/* one distance between the blocks of every page (the Partner film → Infinite Flow gap of the home page, 190px at 1440,
-   a third larger): from the end of one block's content to the start of the next one's. 252px on desktop, 128px on
-   phones, in between with the width. Each block keeps half of it above and under its content (--tq-half); blocks
-   whose content sits further in (scenes, panels, centred first screens) take that into account where they are styled. */
-:root { --tq-gap: clamp(128px, 17.5vw, 252px); --tq-half: calc(var(--tq-gap) / 2); }
+/* one distance between the blocks of every page: from the end of one block's content to the start of the next one's.
+   128px on phones (up to 640px); wider, 14vw between 102px and 202px (November 2026: a fifth less than before on
+   tablets and desktops, which had clamp(128px, 17.5vw, 252px)). Each block keeps half of it above and under its content
+   (--tq-half); blocks whose content sits further in (scenes, panels, centred first screens) take that into account
+   where they are styled. ib-hole.js (capTop) follows the same numbers. */
+:root { --tq-gap: 128px; --tq-half: calc(var(--tq-gap) / 2); }
+@media (min-width: 641px) { :root { --tq-gap: clamp(102px, 14vw, 202px); } }
 @property --tqh { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --tqfm { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
 @property --tqo { syntax: '<number>'; inherits: true; initial-value: 0; }
