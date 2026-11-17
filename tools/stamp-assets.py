@@ -22,7 +22,7 @@ from urllib.parse import urlsplit, parse_qsl, urlencode
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, 'site')
-ATTR = re.compile(r'''((?:href|src|data-src(?:-[a-z]+)?|srcset|poster)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg|mp4|webm|woff2)(?:\?[^"#]*)?)(")''')
+ATTR = re.compile(r'''((?:href|src|data-src(?:-[a-z]+)?|data-glass|srcset|poster)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg|mp4|webm|woff2)(?:\?[^"#]*)?)(")''')
 FONT_URL = re.compile(r'''(url\()([^)'"#]+\.(?:woff2|webp|png)(?:\?[^)'"#]*)?)(\))''')   # fonts, and the images CSS draws (the header plate)
 
 
