@@ -188,6 +188,7 @@ html { scroll-snap-type: none; }
 [data-fan] { margin-inline: -8px !important; width: calc(100% + 16px) !important; }
 [data-fan-obj] { transform: none !important; width: 66% !important; }
 [data-fan-upto] { margin-bottom: -26px !important; font-size: 13px !important; }
+[data-fan-x] { display: none !important; }
 [data-fan-card] > span:first-child { font-size: 15px !important; }
 [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
 [data-faq-grid] { grid-template-columns: 1fr !important; }
@@ -254,13 +255,8 @@ html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
 .tq-loader__level { transform: translateY(146px); }
 .tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
 .tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
-.tq-loader.is-in .tq-loader__level { animation: tqLoaderFill .46s cubic-bezier(.55,.05,.35,1) both; }
-.tq-loader.is-in .tq-loader__dot { animation: tqLoaderDot .3s cubic-bezier(.3,1.6,.5,1) .3s both; }
 html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
 html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
-.tq-loader.is-out { animation: tqLoaderOut .26s ease .3s both; }
-.tq-loader.is-out .tq-loader__level { animation: tqLoaderDrain .4s cubic-bezier(.55,0,.45,1) both; }
-.tq-loader.is-out .tq-loader__dot { animation: tqLoaderDot .22s ease reverse both; }
 @keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
 @keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
 @keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
@@ -346,6 +342,14 @@ footer p { font-size: 12px !important; }
 #signup form > div:has(> [data-form-auth]) { order: 2; margin-top: 6px !important; }
 #signup form > [data-commit] { order: 3; margin-top: 4px !important; }
 #signup form > div:has(> button[type="submit"]) { margin-top: 6px !important; }
+}
+[data-fan-x] { width: 84%; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; padding-top: .75cqw; border-top: 1px solid rgba(255,255,255,.1); font-size: clamp(9px, 1.25cqw, 17px); line-height: 1.35; color: #9a9ba2; text-wrap: balance; }
+@media (min-width: 641px) {
+[data-fan-card] > [data-fan-x] { order: 1; }
+[data-fan-card] > [data-fan-upto], [data-fan-card] > [data-fan-obj] { order: 2; }
+[data-fan-card] > [data-fan-obj] { width: 92% !important; margin: auto 0 !important; flex: 0 1 auto; min-height: 0; }
+[data-fan-card] > [data-fan-upto] { margin-top: auto !important; }
+[data-fan-card] > [data-fan-upto] + [data-fan-obj] { margin-top: 0 !important; }
 }
 </style>
 </head>
@@ -463,7 +467,7 @@ footer p { font-size: 12px !important; }
     </a>
   </div>
 </div>
-<script src="../assets/js/transition.js?v=602a71328d" defer></script>
+<script src="../assets/js/transition.js?v=43c6da9a8b" defer></script>
 <script>
   /* Phones: the page nav scrolls sideways — bring the current page into view. */
   var cur = document.querySelector('[data-page-bar] [aria-current="page"]');

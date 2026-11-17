@@ -135,28 +135,13 @@
           </div>
         </section>
       </div>
-      <div class="pf-dark">
-        <div id="pf-top" aria-hidden="true"></div>
-        <section class="pf-perks" id="benefits" data-screen-label="Why partners choose">
-          <div class="pf-perks__head">
-            <div class="pf-perks__titles">
-              <h2 class="tp-h2 pf-perks__title tq-h2" data-fitw>{{pp.ben.title}}</h2>
-            </div>
-          </div>
-          <div class="pf-fan" id="pf-fan">
-            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">{{pp.perks.1.t}}</span><span class="pf-perk__d">{{pp.perks.1.d}}</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">{{pp.perks.2.t}}</span><span class="pf-perk__d">{{pp.perks.2.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">{{pp.perks.3.t}}</span><span class="pf-perk__d">{{pp.perks.3.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">{{pp.perks.4.t}}</span><span class="pf-perk__d">{{pp.perks.4.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">{{pp.perks.mgr}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">{{pp.perks.5.t}}</span><span class="pf-perk__d">{{pp.perks.5.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">{{pp.perks.c1}}</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">{{pp.perks.c3}}</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">{{pp.perks.6.t}}</span><span class="pf-perk__d">{{pp.perks.6.d}}</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-          </div>
-          <div class="pf-perks__cta">
-            <a href="{{signupHref}}"{{signupNav}} class="pf-puzzle" aria-label="{{@pp.cta.start}}"><span class="pf-pz-a">{{pp.perks.go1}}</span><span class="pf-pz-b">{{pp.perks.go2}} <span class="pf-pz-arr">→</span></span></a>
-          </div>
-        </section>
-        <div id="pf-tail" aria-hidden="true"></div>
-      </div>
+      <!-- Why partners choose TradeQuo: the comparison (November 2026; was a dark block with six cards dealt in a fan) -->
+      <section class="tp-sec tq-cmp-sec" id="benefits" data-screen-label="Why partners choose">
+        <div class="tp-wrap">
+          <div class="tp-head"><h2 class="tp-h2 tq-h2" data-fitw>{{pp.ben.title}}</h2></div>
+{{> compare}}
+        </div>
+      </section>
     </div>
 
     <!-- one soft grey band behind Why TradeQuo -->

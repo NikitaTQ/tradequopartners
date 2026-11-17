@@ -43,7 +43,7 @@
 <link rel="icon" href="../../favicon-32.png?v=08736b4127" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png?v=83caa1ad63">
 <script>/* loader veil on arrival; visitor's "no auto-translate" choice (set in the language menu) */
-try{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}catch(e){}
+
 try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=document.createElement('meta');d.setAttribute('translate','no');d.classList.add('notranslate');m.name='google';m.content='notranslate';document.head.appendChild(m)}}catch(e){}</script>
 <link rel="preload" href="../../assets/fonts/inter-latin.woff2?v=f11d729bb0" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/h1/black-han-sans.woff2?v=65d863b35d" as="font" type="font/woff2" crossorigin>
@@ -309,6 +309,7 @@ html { scroll-snap-type: none; }
 [data-fan] { margin-inline: -8px !important; width: calc(100% + 16px) !important; }
 [data-fan-obj] { transform: none !important; width: 66% !important; }
 [data-fan-upto] { margin-bottom: -26px !important; font-size: 13px !important; }
+[data-fan-x] { display: none !important; }
 [data-fan-card] > span:first-child { font-size: 15px !important; }
 [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
 [data-faq-grid] { grid-template-columns: 1fr !important; }
@@ -439,13 +440,8 @@ html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
 .tq-loader__level { transform: translateY(146px); }
 .tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
 .tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
-.tq-loader.is-in .tq-loader__level { animation: tqLoaderFill .46s cubic-bezier(.55,.05,.35,1) both; }
-.tq-loader.is-in .tq-loader__dot { animation: tqLoaderDot .3s cubic-bezier(.3,1.6,.5,1) .3s both; }
 html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
 html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
-.tq-loader.is-out { animation: tqLoaderOut .26s ease .3s both; }
-.tq-loader.is-out .tq-loader__level { animation: tqLoaderDrain .4s cubic-bezier(.55,0,.45,1) both; }
-.tq-loader.is-out .tq-loader__dot { animation: tqLoaderDot .22s ease reverse both; }
 @keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
 @keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
 @keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
@@ -784,6 +780,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (prefers-reduced-motion: reduce) {
 .tq-toast, .tq-toasts { transition: none; }
 }
+[data-fan-x] { width: 84%; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; padding-top: .75cqw; border-top: 1px solid rgba(255,255,255,.1); font-size: clamp(9px, 1.25cqw, 17px); line-height: 1.35; color: #9a9ba2; text-wrap: balance; }
+@media (min-width: 641px) {
+[data-fan-card] > [data-fan-x] { order: 1; }
+[data-fan-card] > [data-fan-upto], [data-fan-card] > [data-fan-obj] { order: 2; }
+[data-fan-card] > [data-fan-obj] { width: 92% !important; margin: auto 0 !important; flex: 0 1 auto; min-height: 0; }
+[data-fan-card] > [data-fan-upto] { margin-top: auto !important; }
+[data-fan-card] > [data-fan-upto] + [data-fan-obj] { margin-top: 0 !important; }
+}
 </style>
 <style id="partner-css" data-prefix="../../">
 .tp { font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
@@ -897,12 +901,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .pf { position: relative; padding-top: var(--tq-half); }
-#why { padding-top: 0; }
 @media (max-width: 899px) {
 #pf-who-wrap { padding: 24px 16px; }
 .pf { padding-top: calc(var(--tq-half) - 24px); }
 #pf-top, #pf-tail { display: none; }
-#why { padding-top: var(--tq-half); }
 .pf-fan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; max-width: 760px; margin: 0 auto; padding: 28px 0; }
 }
 @media (max-width: 640px) {
@@ -2505,8 +2507,8 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
   </footer>
 </div>
 
-<script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=e695f5ebc6" defer></script>
+<script src="../../assets/js/transition.js?v=43c6da9a8b" defer></script>
+<script src="../../assets/js/landing.js?v=32ec0df81e" defer></script>
 <script src="../../assets/js/ib-copy.js?v=a9ce0c77dc" defer></script>
 <script src="../../assets/js/ib-insights.js?v=be978a827d" defer></script>
 <script src="../../assets/js/ib-hole.js?v=18358d9350" defer></script>

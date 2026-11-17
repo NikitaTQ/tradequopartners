@@ -1405,8 +1405,8 @@
    * simply stand, and on phones (<900px) the CSS lays them out in a grid. */
   function startWhoFlow() {
     const block = document.getElementById('pf-who'), fan = document.getElementById('pf-fan');
-    if (!block || !fan) return;
-    const cards = $$('[data-pf-perk]', fan), N = cards.length;
+    if (!block) return;
+    const cards = fan ? $$('[data-pf-perk]', fan) : [], N = cards.length;   /* the fan is gone since November 2026 (the comparison took its place); the drum stays */
 
     /* the drum */
     const chips = $$('[data-dr-chip]', block), sent = $('[data-dr-sent]', block);
@@ -1471,6 +1471,7 @@
     });
     const deal = (on) => { if (dealt === on) return; dealt = on; place(on); };
     const sizeCards = () => {
+      if (!fan) return;
       const fh = fan.clientHeight || innerHeight * 0.5;
       const G = Math.max(36, Math.min(72, innerHeight * 0.065));
       K = Math.max(0.45, Math.min(1.15, fh * 0.74 / 340, innerWidth * 0.84 / (192 * 5 + 320)));
@@ -1485,6 +1486,7 @@
     roll(0);
     deal(false);
     all();
+    if (!fan) return;
     if (mq.matches || reducedMotion() || !('IntersectionObserver' in window)) deal(true);
     else new IntersectionObserver((en, ob) => { if (en.some((e) => e.isIntersecting)) { deal(true); ob.disconnect(); } }, { threshold: 0.35 }).observe(fan);
   }

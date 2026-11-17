@@ -498,7 +498,8 @@ html { scroll-snap-type: y proximity; }
   [data-fan-card] { position: relative !important; left: auto !important; top: auto !important; width: auto !important; height: auto !important; min-height: 214px; transform: none !important; padding: 16px 7px 10px !important; border-radius: 18px !important; gap: 6px !important; }
   [data-fan] { margin-inline: -8px !important; width: calc(100% + 16px) !important; }   /* the cards a little wider than the words above (8px into the panel's margin each side), for the captions */
   [data-fan-obj] { transform: none !important; width: 66% !important; }
-  [data-fan-upto] { margin-bottom: -26px !important; font-size: 13px !important; }   /* "Up to" in the picture's empty top, right over the 87% */   /* cards a little shorter: the picture 66% (was 72%), min 214px (was 250px) */
+  [data-fan-upto] { margin-bottom: -26px !important; font-size: 13px !important; }
+  [data-fan-x] { display: none !important; }   /* phones: the cards as they were */   /* "Up to" in the picture's empty top, right over the 87% */   /* cards a little shorter: the picture 66% (was 72%), min 214px (was 250px) */
   [data-fan-card] > span:first-child { font-size: 15px !important; }
   [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
   
@@ -1388,3 +1389,83 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-toast.is-big b { color: #fff; }
 .tq-toasts__cap { margin: 10px 0 0 6px; font-size: 13px; line-height: 1.3; color: #6b6b73; }
 @media (prefers-reduced-motion: reduce) { .tq-toast, .tq-toasts { transition: none; } }
+
+/* ---- the home fan's cards on wide screens (November 2026): the picture lower (centred in the room under the words) and
+   15% larger (92% of the card, was 80%; it may shrink a little if a long language needs the room), and one more line at
+   the card's foot (data-fan-x). Phones keep their cards as they were. */
+[data-fan-x] { width: 84%; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; padding-top: .75cqw; border-top: 1px solid rgba(255,255,255,.1); font-size: clamp(9px, 1.25cqw, 17px); line-height: 1.35; color: #9a9ba2; text-wrap: balance; }
+@media (min-width: 641px) {
+  /* the line right under the caption (the cards' feet overlap in the fan, so it would be hidden there); then the picture */
+  [data-fan-card] > [data-fan-x] { order: 1; }
+  [data-fan-card] > [data-fan-upto], [data-fan-card] > [data-fan-obj] { order: 2; }
+  [data-fan-card] > [data-fan-obj] { width: 92% !important; margin: auto 0 !important; flex: 0 1 auto; min-height: 0; }
+  [data-fan-card] > [data-fan-upto] { margin-top: auto !important; }
+  [data-fan-card] > [data-fan-upto] + [data-fan-obj] { margin-top: 0 !important; }
+}
+
+/* ---- the comparison: Other programs vs TradeQuo (the owner's design, November 2026; /programs/ and /partner-terms/) ----
+   One grid: the row number, the label, what other programs offer, and TradeQuo's column on a glass card (chamfered
+   corners at the top right and bottom left, a chrome rim, red glints at the other two). The card is a grid item behind
+   its column, reaching a little above the header and below the button. Phones and narrow tablets (up to 899px): only
+   the card, sized to fit one screen with its button. */
+.tq-cmp { --row: clamp(66px, 6.1vw, 88px); --fs: clamp(17px, 1.5vw, 22px); position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr) minmax(0, 1.15fr) minmax(330px, 420px);
+  grid-template-rows: auto repeat(6, var(--row)) auto; align-items: center; isolation: isolate; max-width: 1160px; margin: calc(clamp(32px, 4.5vw, 60px) + 52px) auto 48px; color: #0a0a0a; text-align: start; }
+.tq-cmp > * { position: relative; }   /* no z-index: the icons blend (multiply) with the card under them */
+.tq-cmp__card { grid-column: 4; grid-row: 1 / -1; align-self: stretch; z-index: -1; margin: -52px 0 -44px;
+  --c: 30px; clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+  background: linear-gradient(135deg, #ffffff 0%, #c9c8d0 18%, #ffffff 34%, #b9b8c2 55%, #f4f3f7 72%, #c4c3cc 88%, #ffffff 100%);
+  filter: drop-shadow(0 26px 34px rgba(30,24,50,.16)); }
+.tq-cmp__card::before { content: ''; position: absolute; inset: 4px; --c: 28px; clip-path: inherit;
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+  background: linear-gradient(118deg, rgba(255,255,255,0) 58%, rgba(255,255,255,.75) 63%, rgba(255,255,255,0) 69%),
+    linear-gradient(165deg, #fdfcff 0%, #f3f1f7 55%, #ebe9f1 100%); }
+.tq-cmp__card::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(90px 64px at 0 0, rgba(231,19,27,.9), rgba(231,19,27,.35) 45%, rgba(231,19,27,0) 75%),
+    radial-gradient(100px 70px at 100% 100%, rgba(231,19,27,.9), rgba(231,19,27,.35) 45%, rgba(231,19,27,0) 75%);
+  mix-blend-mode: multiply; }
+.tq-cmp__oh { grid-column: 3; grid-row: 1; display: flex; flex-direction: column; gap: 6px; align-self: end; padding-bottom: 18px; }
+.tq-cmp__oh b { font: 700 clamp(14px, 1.2vw, 18px)/1.1 'Syncopate', 'Inter', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.tq-cmp__oh span { font-size: clamp(13px, 1.05vw, 16px); color: #3a3a3e; }
+.tq-cmp__th { grid-column: 4; grid-row: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; align-self: end; padding: 0 40px 18px 56px; }
+.tq-cmp__th img { display: block; width: auto; height: clamp(18px, 1.6vw, 24px); }
+.tq-cmp__th span { font: 700 clamp(9px, .75vw, 11px)/1 'Syncopate', 'Inter', sans-serif; letter-spacing: .2em; text-transform: uppercase; color: #0a0a0a; padding-left: 2px; }
+.tq-cmp__n { grid-column: 1; font: 700 var(--fs)/1 'Inter', sans-serif; color: #e7131b; font-variant-numeric: tabular-nums; }
+.tq-cmp__l { grid-column: 2; padding-right: 20px; font: 700 var(--fs)/1.2 'Inter', sans-serif; letter-spacing: -.01em; }
+.tq-cmp__o { grid-column: 3; padding-right: 24px; font: 400 var(--fs)/1.3 'Inter', sans-serif; color: #1c1c1f; }
+.tq-cmp__t { grid-column: 4; display: flex; align-items: center; gap: 18px; padding: 0 32px 0 50px; min-width: 0; }
+.tq-cmp__t img { flex: none; width: clamp(40px, 3.4vw, 50px); height: auto; mix-blend-mode: multiply; }
+.tq-cmp__t > span { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tq-cmp__t b { font: 700 var(--fs)/1.15 'Inter', sans-serif; letter-spacing: -.01em; }
+.tq-cmp__t small { font-size: calc(var(--fs) * .8); line-height: 1.25; color: #1c1c1f; }
+.tq-cmp__go { grid-column: 4; grid-row: 8; display: flex; align-items: center; gap: 16px; height: 58px; margin: 22px 40px 0 50px; padding: 0 20px 0 10px; box-sizing: border-box;
+  border-radius: 10px; color: #fff; text-decoration: none; background: linear-gradient(180deg, #2d2d30 0%, #121213 45%, #050506 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 0 1px #000, 0 10px 18px -8px rgba(0,0,0,.45); transition: transform .2s ease, filter .2s ease; -webkit-tap-highlight-color: transparent; }
+.tq-cmp__go:hover { color: #fff; transform: translateY(-1px); filter: brightness(1.12); }
+.tq-cmp__go:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tq-cmp__plus { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 8px; background: linear-gradient(155deg, #f2333b 0%, #d8141e 50%, #b80c15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+.tq-cmp__plus svg { width: 15px; height: 15px; }
+.tq-cmp__go-l { flex: 1; min-width: 0; font: 600 clamp(16px, 1.35vw, 20px)/1 'Inter', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-cmp__chev { flex: none; width: 9px; height: 16px; }
+[dir="rtl"] .tq-cmp__chev { transform: scaleX(-1); }
+[dir="rtl"] .tq-cmp__card { transform: scaleX(-1); }
+[dir="rtl"] .tq-cmp__l, [dir="rtl"] .tq-cmp__o { padding-right: 0; padding-left: 20px; }
+[dir="rtl"] .tq-cmp__t { padding: 0 50px 0 32px; }
+[dir="rtl"] .tq-cmp__th { padding: 0 56px 18px 40px; }
+[dir="rtl"] .tq-cmp__go { margin: 22px 50px 0 40px; padding: 0 10px 0 20px; }
+@media (prefers-reduced-motion: reduce) { .tq-cmp__go { transition: none; } }
+@media (max-width: 899px) {
+  .tq-cmp { --row: auto; --fs: 18px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto repeat(6, auto) auto; row-gap: 14px; max-width: 400px; margin: 24px auto 0; padding: 0; }
+  .tq-cmp__card::after { background: radial-gradient(64px 46px at 0 0, rgba(231,19,27,.85), rgba(231,19,27,.3) 45%, rgba(231,19,27,0) 75%), radial-gradient(72px 50px at 100% 100%, rgba(231,19,27,.85), rgba(231,19,27,.3) 45%, rgba(231,19,27,0) 75%); }
+  .tq-cmp__n, .tq-cmp__l, .tq-cmp__o, .tq-cmp__oh { display: none; }
+  .tq-cmp__card { grid-column: 1; margin: 0; --c: 22px; }
+  .tq-cmp__card::before { --c: 21px; }
+  .tq-cmp__th, .tq-cmp__t, .tq-cmp__go { grid-column: 1; }
+  .tq-cmp__th { padding: 34px 26px 6px; }   /* the card covers the rows only: its inner room is in the rows */
+  .tq-cmp__t { gap: 14px; padding: 0 22px 0 26px; }
+  .tq-cmp__t img { width: 38px; }
+  .tq-cmp__t small { font-size: 14px; }
+  .tq-cmp__go { margin: 10px 22px 26px; height: 54px; }
+  [dir="rtl"] .tq-cmp__t { padding: 0 26px 0 22px; }
+  [dir="rtl"] .tq-cmp__th { padding: 34px 26px 6px; }
+  [dir="rtl"] .tq-cmp__go { margin: 10px 22px 26px; }
+}

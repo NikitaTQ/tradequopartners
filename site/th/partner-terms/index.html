@@ -43,7 +43,7 @@
 <link rel="icon" href="../../favicon-32.png?v=08736b4127" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png?v=83caa1ad63">
 <script>/* loader veil on arrival; visitor's "no auto-translate" choice (set in the language menu) */
-try{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}catch(e){}
+
 try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=document.createElement('meta');d.setAttribute('translate','no');d.classList.add('notranslate');m.name='google';m.content='notranslate';document.head.appendChild(m)}}catch(e){}</script>
 <link rel="preload" href="../../assets/fonts/inter-latin.woff2?v=f11d729bb0" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/intl/noto-sans-thai-400-800-thai.woff2?v=4dd2ca6f6a" as="font" type="font/woff2" crossorigin>
@@ -361,6 +361,7 @@ html { scroll-snap-type: none; }
 [data-fan] { margin-inline: -8px !important; width: calc(100% + 16px) !important; }
 [data-fan-obj] { transform: none !important; width: 66% !important; }
 [data-fan-upto] { margin-bottom: -26px !important; font-size: 13px !important; }
+[data-fan-x] { display: none !important; }
 [data-fan-card] > span:first-child { font-size: 15px !important; }
 [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
 [data-faq-grid] { grid-template-columns: 1fr !important; }
@@ -491,13 +492,8 @@ html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
 .tq-loader__level { transform: translateY(146px); }
 .tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
 .tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
-.tq-loader.is-in .tq-loader__level { animation: tqLoaderFill .46s cubic-bezier(.55,.05,.35,1) both; }
-.tq-loader.is-in .tq-loader__dot { animation: tqLoaderDot .3s cubic-bezier(.3,1.6,.5,1) .3s both; }
 html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
 html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
-.tq-loader.is-out { animation: tqLoaderOut .26s ease .3s both; }
-.tq-loader.is-out .tq-loader__level { animation: tqLoaderDrain .4s cubic-bezier(.55,0,.45,1) both; }
-.tq-loader.is-out .tq-loader__dot { animation: tqLoaderDot .22s ease reverse both; }
 @keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
 @keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
 @keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
@@ -526,10 +522,6 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
 .tq-gbtn { transition: none; }
 }
-.tq-prem { display: block; width: fit-content; margin: .5em auto 0; padding: .42em .95em .38em; border-radius: 999px;
-  font-size: max(.4em, 9.5px); font-weight: 700; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: #fff;
-  background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 14px -6px rgba(231,19,27,.7); }
-.tp-perk .tq-prem { display: inline-block; margin: 0; margin-inline-start: .5em; vertical-align: .2em; }
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
 @media (max-width: 640px) {
 [data-fan-head] { align-items: center !important; text-align: center; }
@@ -1005,6 +997,77 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (prefers-reduced-motion: reduce) {
 .tq-toast, .tq-toasts { transition: none; }
 }
+[data-fan-x] { width: 84%; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; padding-top: .75cqw; border-top: 1px solid rgba(255,255,255,.1); font-size: clamp(9px, 1.25cqw, 17px); line-height: 1.35; color: #9a9ba2; text-wrap: balance; }
+@media (min-width: 641px) {
+[data-fan-card] > [data-fan-x] { order: 1; }
+[data-fan-card] > [data-fan-upto], [data-fan-card] > [data-fan-obj] { order: 2; }
+[data-fan-card] > [data-fan-obj] { width: 92% !important; margin: auto 0 !important; flex: 0 1 auto; min-height: 0; }
+[data-fan-card] > [data-fan-upto] { margin-top: auto !important; }
+[data-fan-card] > [data-fan-upto] + [data-fan-obj] { margin-top: 0 !important; }
+}
+.tq-cmp { --row: clamp(66px, 6.1vw, 88px); --fs: clamp(17px, 1.5vw, 22px); position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr) minmax(0, 1.15fr) minmax(330px, 420px);
+  grid-template-rows: auto repeat(6, var(--row)) auto; align-items: center; isolation: isolate; max-width: 1160px; margin: calc(clamp(32px, 4.5vw, 60px) + 52px) auto 48px; color: #0a0a0a; text-align: start; }
+.tq-cmp > * { position: relative; }
+.tq-cmp__card { grid-column: 4; grid-row: 1 / -1; align-self: stretch; z-index: -1; margin: -52px 0 -44px;
+  --c: 30px; clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+  background: linear-gradient(135deg, #ffffff 0%, #c9c8d0 18%, #ffffff 34%, #b9b8c2 55%, #f4f3f7 72%, #c4c3cc 88%, #ffffff 100%);
+  filter: drop-shadow(0 26px 34px rgba(30,24,50,.16)); }
+.tq-cmp__card::before { content: ''; position: absolute; inset: 4px; --c: 28px; clip-path: inherit;
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+  background: linear-gradient(118deg, rgba(255,255,255,0) 58%, rgba(255,255,255,.75) 63%, rgba(255,255,255,0) 69%),
+    linear-gradient(165deg, #fdfcff 0%, #f3f1f7 55%, #ebe9f1 100%); }
+.tq-cmp__card::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(90px 64px at 0 0, rgba(231,19,27,.9), rgba(231,19,27,.35) 45%, rgba(231,19,27,0) 75%),
+    radial-gradient(100px 70px at 100% 100%, rgba(231,19,27,.9), rgba(231,19,27,.35) 45%, rgba(231,19,27,0) 75%);
+  mix-blend-mode: multiply; }
+.tq-cmp__oh { grid-column: 3; grid-row: 1; display: flex; flex-direction: column; gap: 6px; align-self: end; padding-bottom: 18px; }
+.tq-cmp__oh b { font: 700 clamp(14px, 1.2vw, 18px)/1.1 'Syncopate', 'Inter', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.tq-cmp__oh span { font-size: clamp(13px, 1.05vw, 16px); color: #3a3a3e; }
+.tq-cmp__th { grid-column: 4; grid-row: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; align-self: end; padding: 0 40px 18px 56px; }
+.tq-cmp__th img { display: block; width: auto; height: clamp(18px, 1.6vw, 24px); }
+.tq-cmp__th span { font: 700 clamp(9px, .75vw, 11px)/1 'Syncopate', 'Inter', sans-serif; letter-spacing: .2em; text-transform: uppercase; color: #0a0a0a; padding-left: 2px; }
+.tq-cmp__n { grid-column: 1; font: 700 var(--fs)/1 'Inter', sans-serif; color: #e7131b; font-variant-numeric: tabular-nums; }
+.tq-cmp__l { grid-column: 2; padding-right: 20px; font: 700 var(--fs)/1.2 'Inter', sans-serif; letter-spacing: -.01em; }
+.tq-cmp__o { grid-column: 3; padding-right: 24px; font: 400 var(--fs)/1.3 'Inter', sans-serif; color: #1c1c1f; }
+.tq-cmp__t { grid-column: 4; display: flex; align-items: center; gap: 18px; padding: 0 32px 0 50px; min-width: 0; }
+.tq-cmp__t img { flex: none; width: clamp(40px, 3.4vw, 50px); height: auto; mix-blend-mode: multiply; }
+.tq-cmp__t > span { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tq-cmp__t b { font: 700 var(--fs)/1.15 'Inter', sans-serif; letter-spacing: -.01em; }
+.tq-cmp__t small { font-size: calc(var(--fs) * .8); line-height: 1.25; color: #1c1c1f; }
+.tq-cmp__go { grid-column: 4; grid-row: 8; display: flex; align-items: center; gap: 16px; height: 58px; margin: 22px 40px 0 50px; padding: 0 20px 0 10px; box-sizing: border-box;
+  border-radius: 10px; color: #fff; text-decoration: none; background: linear-gradient(180deg, #2d2d30 0%, #121213 45%, #050506 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 0 1px #000, 0 10px 18px -8px rgba(0,0,0,.45); transition: transform .2s ease, filter .2s ease; -webkit-tap-highlight-color: transparent; }
+.tq-cmp__go:hover { color: #fff; transform: translateY(-1px); filter: brightness(1.12); }
+.tq-cmp__go:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.tq-cmp__plus { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 8px; background: linear-gradient(155deg, #f2333b 0%, #d8141e 50%, #b80c15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+.tq-cmp__plus svg { width: 15px; height: 15px; }
+.tq-cmp__go-l { flex: 1; min-width: 0; font: 600 clamp(16px, 1.35vw, 20px)/1 'Inter', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tq-cmp__chev { flex: none; width: 9px; height: 16px; }
+[dir="rtl"] .tq-cmp__chev { transform: scaleX(-1); }
+[dir="rtl"] .tq-cmp__card { transform: scaleX(-1); }
+[dir="rtl"] .tq-cmp__l, [dir="rtl"] .tq-cmp__o { padding-right: 0; padding-left: 20px; }
+[dir="rtl"] .tq-cmp__t { padding: 0 50px 0 32px; }
+[dir="rtl"] .tq-cmp__th { padding: 0 56px 18px 40px; }
+[dir="rtl"] .tq-cmp__go { margin: 22px 50px 0 40px; padding: 0 10px 0 20px; }
+@media (prefers-reduced-motion: reduce) {
+.tq-cmp__go { transition: none; }
+}
+@media (max-width: 899px) {
+.tq-cmp { --row: auto; --fs: 18px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto repeat(6, auto) auto; row-gap: 14px; max-width: 400px; margin: 24px auto 0; padding: 0; }
+.tq-cmp__card::after { background: radial-gradient(64px 46px at 0 0, rgba(231,19,27,.85), rgba(231,19,27,.3) 45%, rgba(231,19,27,0) 75%), radial-gradient(72px 50px at 100% 100%, rgba(231,19,27,.85), rgba(231,19,27,.3) 45%, rgba(231,19,27,0) 75%); }
+.tq-cmp__n, .tq-cmp__l, .tq-cmp__o, .tq-cmp__oh { display: none; }
+.tq-cmp__card { grid-column: 1; margin: 0; --c: 22px; }
+.tq-cmp__card::before { --c: 21px; }
+.tq-cmp__th, .tq-cmp__t, .tq-cmp__go { grid-column: 1; }
+.tq-cmp__th { padding: 34px 26px 6px; }
+.tq-cmp__t { gap: 14px; padding: 0 22px 0 26px; }
+.tq-cmp__t img { width: 38px; }
+.tq-cmp__t small { font-size: 14px; }
+.tq-cmp__go { margin: 10px 22px 26px; height: 54px; }
+[dir="rtl"] .tq-cmp__t { padding: 0 26px 0 22px; }
+[dir="rtl"] .tq-cmp__th { padding: 34px 26px 6px; }
+[dir="rtl"] .tq-cmp__go { margin: 10px 22px 26px; }
+}
 </style>
 <style id="partner-css" data-prefix="../../">
 .tp { font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
@@ -1013,7 +1076,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto; text-align: center; }
 .tp-h2 { margin: 0; max-width: 30ch; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
-.tp-obj { display: block; mix-blend-mode: lighten; -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent 100%); mask-image: radial-gradient(closest-side, #000 62%, transparent 100%); pointer-events: none; user-select: none; }
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
 .tp-pc__big { display: block; margin-top: calc(18 * var(--pu)); font-size: calc(105 * var(--pu)); line-height: .8; font-weight: 700; letter-spacing: -.05em; white-space: nowrap; color: #0b0b0d; -webkit-text-stroke: .02em currentColor; }
 .tp-dome-copy__sub { margin: 0; font-size: 22px; line-height: 1.6; color: #5e5e66; text-wrap: pretty; }
@@ -1069,38 +1131,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-pill { display: inline-flex; align-self: flex-start; align-items: center; gap: 9px; height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #e4e4e1; background: #fff; font-size: 14px; font-weight: 500; }
 .tp-pill::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #e7131b; }
 .tp-faq__list { display: flex; flex-direction: column; gap: 14px; }
-.tp-perkgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 4.5vw, 60px); }
-.tp-perks__cta { display: flex; justify-content: center; margin-top: clamp(32px, 4vw, 52px); }
-.tp-perks__cta .tp-glint:focus-visible { outline-color: #0a0a0a; }
-@media (max-width: 640px) {
-.tp-perks__cta .tp-glint { width: min(100%, 320px); justify-content: center; }
-}
-.tp-perk { --k: .6; position: relative; display: grid; grid-template-columns: 100px minmax(0, 1fr); align-items: center; gap: 14px; box-sizing: border-box;
-  padding: 18px 24px 18px 16px; min-height: 148px; color: #fff; border: 0 solid transparent;
-  border-image: url(../../assets/perks/perk-glass.webp?v=50ecdbe5ee) 56 80 60 92 fill / calc(56px * var(--k)) calc(80px * var(--k)) calc(60px * var(--k)) calc(92px * var(--k)) stretch;
-  filter: drop-shadow(0 14px 16px rgba(10,10,12,.22));
-  transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease; -webkit-tap-highlight-color: transparent; }
-@media (hover: hover) {
-.tp-perk:hover { transform: translateY(-4px); filter: drop-shadow(0 0 14px rgba(231,19,27,.42)) drop-shadow(0 18px 20px rgba(10,10,12,.26)); }
-}
-.tp-perk.is-tap { transform: translateY(-4px); filter: drop-shadow(0 0 14px rgba(231,19,27,.42)) drop-shadow(0 18px 20px rgba(10,10,12,.26)); }
-@media (hover: none) {
-.tp-perk { cursor: pointer; }
-}
-.tp-perk img { width: 100px; height: 100px; object-fit: contain; }
-.tp-perk h3 { margin: 0; font-size: 18px; letter-spacing: -.02em; font-weight: 700; }
-.tp-perk p { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #c4c6cb; text-wrap: pretty; }
-@media (max-width: 1080px) {
-.tp-perkgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media (max-width: 960px) {
 .tp-faq { grid-template-columns: minmax(0, 1fr); }
 .tp-faq__side { position: static; }
 }
 @media (max-width: 640px) {
-.tp-perkgrid { grid-template-columns: minmax(0, 1fr); }
-.tp-perk { grid-template-columns: 80px minmax(0, 1fr); gap: 12px; min-height: 0; padding: 16px 20px 16px 12px; }
-.tp-perk img { width: 80px; height: 80px; }
 .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
 .tp-faq__side { align-items: center; text-align: center; }
 .tp-faq__side .tp-pill { align-self: center; }
@@ -1147,11 +1182,9 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
-#why { padding-top: 0; }
 @media (max-width: 899px) {
 #pf-who-wrap { padding: 24px 16px; }
 #pf-top, #pf-tail { display: none; }
-#why { padding-top: var(--tq-half); }
 .pf-fan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; max-width: 760px; margin: 0 auto; padding: 28px 0; }
 }
 @media (max-width: 640px) {
@@ -1735,22 +1768,28 @@ h1, h2 { line-height: 1.2 !important; }
           <h2 class="tp-h2 tq-h2" data-fitw>มากกว่า<span style="color: #e7131b;">ค่าค⁠อ⁠ม⁠มิ⁠ช⁠ชั่⁠น</span></h2>
           <p class="tp-sub">เครื่องมือ คอนเทนต์ และการสนับสนุนที่ช่วยให้คุณได้ลูกค้าใหม่ และทำให้ลูกค้ามีส่วนร่วมอย่างต่อเนื่อง</p>
         </div>
-        <div class="tp-perkgrid">
-          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-trip.webp?v=a760f4b943" alt="" width="290" height="340"><div><h3>ท⁠ริ⁠ปรางวัล</h3><p>ทำเป้าหมายให้สำเร็จ แล้วออกเดินทางไปยังจุดหมายชั้นนำกับเรา</p></div></div>
-          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>TradingView ฟรี <span class="tq-prem">Premium</span></h3><p>กราฟขั้นสูงเพื่อการวิเคราะห์ตลาดที่คมชัดยิ่งขึ้น โดยไม่มีค่าใช้จ่าย</p></div></div>
-          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="330" height="280"><div><h3>บทวิเคราะห์ฟรี</h3><p>ข้อมูลเชิงลึกของตลาดแบบเรียลไทม์ สำหรับแชร์ให้ผู้ติดตามของคุณ</p></div></div>
-          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="280" height="350"><div><h3>สื่อการตลาด</h3><p>แบนเนอร์ แลนดิ้งเพจ และวิดีโอที่ออกแบบมาเพื่อเปลี่ยนผู้ชมให้เป็นลูกค้า</p></div></div>
-          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330"><div><h3>อะคาเดมี White-Label</h3><p>คอร์สความรู้เรื่องตลาดภายใต้แบรนด์ของคุณเอง พร้อมให้แชร์ได้ทันที</p></div></div>
-          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-bro.webp?v=dc3ab59778" alt="" width="330" height="320"><div><h3>โบรกเกอร์ White-Label</h3><p>เปิดตัวแบรนด์โบรกเกอร์ของคุณเองบนโครงสร้างพื้นฐานของเรา</p></div></div>
-        </div>
-        <!-- the final call's red glint button (Final CTA Glint Teaser), to the form -->
-        <div class="tp-perks__cta">
-          <a class="tp-glint" href="../#signup" data-page-link data-label="กำลังโหลด · หน้าแรก">
-            <span class="tp-glint__sweep" aria-hidden="true"></span>
-            <span class="tp-glint__label">ร่วมเป็นพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์</span>
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          </a>
-        </div>
+<!-- Other programs vs TradeQuo (the owner's design, November 2026; the same on /programs/ and /partner-terms/): on wide
+     screens a table, the TradeQuo column on a glass card; on phones (up to 899px) only the card, with its CTA, in one
+     screen. Styles: site.css, "the comparison". Icons: assets/compare/ (tools/compare/make.py). -->
+<div class="tq-cmp">
+    <div class="tq-cmp__card" aria-hidden="true"></div>
+    <div class="tq-cmp__oh"><b>โปรแกรมอื่น</b><span>ตัวอย่างที่เลือกมา</span></div>
+    <div class="tq-cmp__th"><img src="../../assets/logo-wordmark-dark.png?v=4e0fc67613" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span>โปรแกรมของเรา</span></div>
+    <span class="tq-cmp__n" style="grid-row: 2;">01</span><span class="tq-cmp__l" style="grid-row: 2;">ระดับ Sub-IB</span><span class="tq-cmp__o" style="grid-row: 2;">2 ระดับ</span>
+    <div class="tq-cmp__t" style="grid-row: 2;"><img src="../../assets/compare/tiers.webp?v=45e7c517f2" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>ไม่จำกัดระดับ</b></span></div>
+    <span class="tq-cmp__n" style="grid-row: 3;">02</span><span class="tq-cmp__l" style="grid-row: 3;">ส่วนแบ่งรายได้</span><span class="tq-cmp__o" style="grid-row: 3;">สูงสุด 40%</span>
+    <div class="tq-cmp__t" style="grid-row: 3;"><img src="../../assets/compare/share.webp?v=475badc156" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>สูงสุด <span style="color: #e7131b;">87%</span></b></span></div>
+    <span class="tq-cmp__n" style="grid-row: 4;">03</span><span class="tq-cmp__l" style="grid-row: 4;">การคุ้มครองพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์</span><span class="tq-cmp__o" style="grid-row: 4;">ลูกค้าเปลี่ยนพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์ได้</span>
+    <div class="tq-cmp__t" style="grid-row: 4;"><img src="../../assets/compare/shield.webp?v=c7cddfd5ec" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>ผูกกับคุณ</b><small>คุ้มครองโดย PartnerShield</small></span></div>
+    <span class="tq-cmp__n" style="grid-row: 5;">04</span><span class="tq-cmp__l" style="grid-row: 5;">การจ่ายเงิน</span><span class="tq-cmp__o" style="grid-row: 5;">รายเดือน</span>
+    <div class="tq-cmp__t" style="grid-row: 5;"><img src="../../assets/compare/daily.webp?v=d4fd38e114" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>ทุกวัน</b></span></div>
+    <span class="tq-cmp__n" style="grid-row: 6;">05</span><span class="tq-cmp__l" style="grid-row: 6;">TradingView Premium</span><span class="tq-cmp__o" style="grid-row: 6;">มักไม่รวมให้</span>
+    <div class="tq-cmp__t" style="grid-row: 6;"><img src="../../assets/compare/tv.webp?v=6c43208e4f" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>TradingView Premium</b><small>รวมให้ฟรี</small></span></div>
+    <span class="tq-cmp__n" style="grid-row: 7;">06</span><span class="tq-cmp__l" style="grid-row: 7;">รางวัล</span><span class="tq-cmp__o" style="grid-row: 7;">คะแนนและรางวัลเงินสด</span>
+    <div class="tq-cmp__t" style="grid-row: 7;"><img src="../../assets/compare/trips.webp?v=2f7b121899" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>ท⁠ริ⁠ปรางวัล</b></span></div>
+    <a class="tq-cmp__go" href="../#signup" data-page-link data-label="กำลังโหลด · หน้าแรก"><span class="tq-cmp__plus" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 3v14M3 10h14" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/></svg></span><span class="tq-cmp__go-l">ร่วมเป็นพ⁠า⁠ร์⁠ท⁠เ⁠น⁠อ⁠ร์</span><svg class="tq-cmp__chev" viewBox="0 0 12 21" aria-hidden="true"><path d="M2 2l8 8.5L2 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+
       </div>
     </section>
 
@@ -2020,8 +2059,8 @@ h1, h2 { line-height: 1.2 !important; }
   </footer>
 </div>
 
-<script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=e695f5ebc6" defer></script>
+<script src="../../assets/js/transition.js?v=43c6da9a8b" defer></script>
+<script src="../../assets/js/landing.js?v=32ec0df81e" defer></script>
 <script src="../../assets/js/plan.js?v=80defb0ea6" defer></script>
 </body>
 </html>
