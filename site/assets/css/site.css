@@ -494,8 +494,9 @@ html { scroll-snap-type: y proximity; }
   [data-fan] { order: 2; }
   [data-fan] { aspect-ratio: auto !important; container-type: normal !important; max-width: none !important; }
   [data-fan-stage] { position: static !important; display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
-  [data-fan-card] { position: relative !important; left: auto !important; top: auto !important; width: auto !important; height: auto !important; min-height: 250px; transform: none !important; padding: 18px 12px 12px !important; border-radius: 18px !important; gap: 6px !important; }
-  [data-fan-obj] { transform: none !important; width: 72% !important; }
+  [data-fan-card] { position: relative !important; left: auto !important; top: auto !important; width: auto !important; height: auto !important; min-height: 214px; transform: none !important; padding: 16px 7px 10px !important; border-radius: 18px !important; gap: 6px !important; }
+  [data-fan] { margin-inline: -8px !important; width: calc(100% + 16px) !important; }   /* the cards a little wider than the words above (8px into the panel's margin each side), for the captions */
+  [data-fan-obj] { transform: none !important; width: 66% !important; }   /* cards a little shorter: the picture 66% (was 72%), min 214px (was 250px) */
   [data-fan-card] > span:first-child { font-size: 15px !important; }
   [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
   

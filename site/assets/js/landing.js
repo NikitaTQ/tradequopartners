@@ -1175,10 +1175,24 @@
       const steps = $$('[data-step]', box), n = steps.length;
       if (!n) return;
       let on = 0, iv = 0;
+      /* phones: the rail runs down the balls (partner.css): from the first ball's centre to the last's, the fill to the
+         current one; measured, as the steps' heights vary with their words */
+      const track = $('.tp-pds__track', box), base = $('.tp-pds__base', box), phone = matchMedia('(max-width: 560px)');
+      const rail = () => {
+        if (!track || !base || !phone.matches) return;
+        const t = track.getBoundingClientRect();
+        const c = steps.map((s) => { const o = ($('.tp-pds__orb', s) || s).getBoundingClientRect(); return [o.left + o.width / 2 - t.left, o.top + o.height / 2 - t.top]; });
+        box.style.setProperty('--rx', c[0][0].toFixed(1) + 'px');
+        box.style.setProperty('--rt', c[0][1].toFixed(1) + 'px');
+        box.style.setProperty('--rh', (c[n - 1][1] - c[0][1]).toFixed(1) + 'px');
+        box.style.setProperty('--rf', (c[on][1] - c[0][1]).toFixed(1) + 'px');
+      };
+      if (track && 'ResizeObserver' in window) new ResizeObserver(() => rail()).observe(track);
       const set = (k) => {
         on = k;
         steps.forEach((s, i) => { s.classList.toggle('is-on', i === k); s.classList.toggle('is-done', i < k); });
         box.style.setProperty('--k', n > 1 ? (k / (n - 1)).toFixed(3) : '1');
+        rail();
       };
       if (reducedMotion()) { set(n - 1); return; }
       set(0);
@@ -1188,6 +1202,30 @@
         iv = setInterval(() => set((on + 1) % n), +box.dataset.every || 1600);
       }, () => { box.classList.remove('is-live'); clearInterval(iv); iv = 0; });
     });
+  }
+
+  /* ---- home, phones: the Partner perks cards' captions in at most two lines ---------------------------------
+   * One size for all six (12.5px down to 10px, the largest at which every caption takes two lines); a language whose
+   * captions need three even at 10px keeps the usual 12px rather than small print. Measured again on resize and once
+   * the fonts are in. */
+  function startPerkCaptions() {
+    const ds = $$('[data-fan-card] > span:nth-child(2)');
+    if (!ds.length) return;
+    const phone = matchMedia('(max-width: 640px)');
+    const two = () => ds.every((d) => d.getBoundingClientRect().height / (parseFloat(getComputedStyle(d).lineHeight) || 1) < 2.5);
+    const fit = () => {
+      ds.forEach((d) => d.style.removeProperty('font-size'));
+      if (!phone.matches) return;
+      for (let f = 12.5; f >= 10; f -= 0.25) {
+        ds.forEach((d) => d.style.setProperty('font-size', f + 'px', 'important'));
+        if (two()) return;
+      }
+      ds.forEach((d) => d.style.removeProperty('font-size'));
+    };
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    let t = 0;
+    addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fit, 150); });
   }
 
   /* ---- /programs/: a program card's big figure ("87%", "∞ tiers", "Yours.") keeps one line ------
@@ -1500,6 +1538,7 @@
   startProgSwiper();
   startFitWide();
   startSteppers();
+  startPerkCaptions();
   startGlass();
   startReviewsDrag();
   startTwoLine();
