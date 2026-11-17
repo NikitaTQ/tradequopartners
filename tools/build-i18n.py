@@ -45,7 +45,7 @@ NAV = [
 ]
 # Each page's table of contents: the fan bottom right on desktop, the red menu on phones (section id, label).
 TOC = {
-    'landing': [('signup', 'nav.cta'), ('how', 'nav.how'), ('calculator', 'nav.calc'), ('reviews', 'toc.reviews'), ('dashboard', 'nav.perks'), ('faq', 'nav.faq')],
+    'landing': [('signup', 'nav.cta'), ('reviews', 'toc.reviews'), ('calculator', 'nav.calc'), ('how', 'nav.how'), ('dashboard', 'nav.perks'), ('faq', 'nav.faq')],
     'programs': [('programs', 'pp.nav.programs'), ('who', 'toc.who'), ('benefits', 'pp.nav.benefits'), ('why', 'pp.nav.why'), ('how', 'nav.how'), ('questions', 'nav.faq')],
     'commission': [('earnings', 'toc.earnings'), ('calculator', 'nav.calc'), ('payouts', 'cp.nav.payouts'), ('perks', 'nav.perks'), ('how', 'nav.how'), ('questions', 'nav.faq')],
     # IB Tools (November 2026): its blocks in order (the closing call is not listed, as on the other pages); labels ib.toc.*

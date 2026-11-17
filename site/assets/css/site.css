@@ -445,7 +445,6 @@ html { scroll-snap-type: y proximity; }
 
 @media (max-width: 640px) {
   
-  [data-rep-card] { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background-color: rgba(255,255,255,.5) !important; }
   #signup { padding-top: 10px !important; }
   #signup [data-hero-intro] { gap: 8px !important; }
   #signup [data-hero-intro] p { display: none !important; }
@@ -505,7 +504,7 @@ html { scroll-snap-type: y proximity; }
   [data-tail-glow] { display: none !important; }
   /* the dark tail fades over the site's gap (its inline background), as on wide screens */
   #faq { padding-top: var(--tq-gap) !important; }
-  #reviews { padding-bottom: calc(var(--tq-gap) - 84px) !important; }   /* no film on phones: the gap runs from the reviews (44px of marquee room under their cards) to the Infinite Flow title (40px into its block) */
+  #how { padding-bottom: calc(var(--tq-gap) - 40px) !important; }   /* no film on phones: the gap runs from the three steps to the Infinite Flow title (40px into its block) */
   [data-panel-glow] { bottom: 0 !important; height: 45% !important; }
   [data-faq-side] { position: static !important; }
   [data-faq-art] { max-width: 240px !important; margin: 0 auto !important; }
@@ -571,26 +570,51 @@ html { scroll-snap-type: y proximity; }
 .tq-logo__dot { transform: translate(calc((1 - var(--tqh)) * 17px + var(--tqo) * 1.5px), calc((1 - var(--tqh)) * 14px)); }
 .tq-logo__coin .tq-logo__flash { inset: auto; left: 75%; top: 69%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; background: radial-gradient(circle, #FFFFFF 0%, rgba(255,190,190,.85) 16%, rgba(231,19,27,.5) 36%, rgba(231,19,27,0) 66%); opacity: calc(var(--tqh) * var(--tqh) * (1 - var(--tqh)) * 6.75); pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .tq-logo { animation: none; transition-duration: .01s; } }
-@keyframes tqMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-@media (prefers-reduced-motion: reduce) { [data-rep-stage] img { animation: none !important; } }
-@media (prefers-reduced-motion: reduce) { [data-rep-track] { animation: none !important; } [data-rep-viewport] { overflow-x: auto !important; } }
-/* the marquee under JS (startReviewsDrag): grab it with the mouse, swipe it sideways on touch */
-[data-rep-viewport][data-rep-live] { cursor: grab; touch-action: pan-y; }
-/* the editorial cards (DailyForex, TopBrokers): the outlet's mark and name, its rating in red stars at the end of the row
-   as on the other cards (DailyForex 4 of 5, TopBrokers 4.5 of 5: the fifth star half red), and under them the red
-   "Editor's verdict" pill, on one line */
-.tq-rv-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 12px; row-gap: 10px; min-height: 36px; }
-.tq-rv-name { display: inline-flex; align-items: center; gap: 10px; min-width: 0; font-size: 19px; font-weight: 700; letter-spacing: -.02em; color: #0a0a0a; }
-.tq-rv-name img { display: block; flex: none; width: 34px; height: 34px; border-radius: 7px; }
-.tq-rv-stars { white-space: nowrap; font-size: 15px; letter-spacing: 2px; color: #e7131b; }
-.tq-rv-off { color: #d4d4d8; }
-.tq-rv-half { color: transparent; background: linear-gradient(90deg, #e7131b 50%, #d4d4d8 50%); -webkit-background-clip: text; background-clip: text; }
-.tq-rv-pill { grid-column: 1 / -1; justify-self: start; white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b; padding: 5px 9px; border-radius: 999px;
-  border: 1px solid rgba(231,19,27,.35); background: rgba(255,255,255,.6); }
-[data-rep-viewport].is-drag { cursor: grabbing; }
-[data-rep-viewport].is-drag, [data-rep-viewport].is-drag * { -webkit-user-select: none; user-select: none; }
-[data-rep-viewport][data-rep-live] img { -webkit-user-drag: none; }
+/* ---- reviews: five cards of light metal, standing still (November 2026; was a moving marquee of frosted glass) ----------
+   A brushed light-steel face (a soft sheen from the top left, darker towards the foot), a bright top edge and a fine
+   steel rim, so the cards stand out on the white page under the crystals. Narrower than 1180px: a row that swipes,
+   drags (startReviewsRow) and snaps card by card; 1180px and up: all five in one row. Nothing moves by itself. */
+.tq-rv-row { --rv-pad: clamp(16px, 4vw, 56px); overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding-inline: var(--rv-pad);
+  scrollbar-width: none; overscroll-behavior-x: contain; }
+.tq-rv-row::-webkit-scrollbar { display: none; }
+.tq-rv-row.is-drag { scroll-snap-type: none; cursor: grabbing; }
+.tq-rv-row.is-drag, .tq-rv-row.is-drag * { -webkit-user-select: none; user-select: none; }
+.tq-rv-row img { -webkit-user-drag: none; }
+@media (hover: hover) and (pointer: fine) { .tq-rv-row[data-rep-live] { cursor: grab; } }
+.tq-rv-track { display: flex; gap: 16px; width: max-content; box-sizing: border-box; padding: 8px var(--rv-pad) 30px; }
+.tq-rv { position: relative; flex: none; width: min(80vw, 330px); scroll-snap-align: start; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px;
+  padding: 22px 20px 18px; border-radius: 20px; text-align: left; color: #0a0a0a;
+  background:
+    linear-gradient(122deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.18) 34%, rgba(255,255,255,0) 52%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 1px, rgba(40,46,56,.025) 1px 2px, rgba(255,255,255,0) 2px 4px),
+    linear-gradient(180deg, #eef0f3 0%, #e2e5ea 58%, #d5d9df 100%);
+  border: 1px solid #c6cbd3;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(255,255,255,.4), 0 1px 2px rgba(18,22,30,.07), 0 20px 30px -22px rgba(18,22,30,.45); }
+.tq-rv-q { margin: 0; font-size: 15px; line-height: 1.5; color: #0a0a0a; text-wrap: pretty; }
+@media (min-width: 1180px) {   /* one row of five; each card's head, quote and byline share rows (subgrid), so the quotes and the bylines line up */
+  .tq-rv-row { overflow: visible; }
+  .tq-rv-track { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-template-rows: auto 1fr auto; row-gap: 0; width: auto; max-width: 1600px; margin: 0 auto; }
+  .tq-rv { width: auto; display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 14px; }
+  .tq-rv-q { font-size: clamp(14px, 1.06vw, 15.5px); }
+}
+.tq-rv-head { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.tq-rv-brand { display: flex; align-items: center; height: 34px; max-width: 100%; }
+.tq-rv-logo { display: block; height: min(var(--lh), 32px); width: auto; max-width: 100%; }
+.tq-rv-name { display: inline-flex; align-items: center; gap: 10px; min-width: 0; font-size: 18px; font-weight: 700; letter-spacing: -.02em; color: #0a0a0a; }
+.tq-rv-name img { display: block; flex: none; width: 32px; height: 32px; border-radius: 7px; }
+.tq-rv-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; min-height: 24px; }
+.tq-rv-stars { white-space: nowrap; font-size: 14px; line-height: 24px; letter-spacing: 2px; color: #e7131b; }
+.tq-rv-off { color: #b3b8c0; }
+.tq-rv-half { color: transparent; background: linear-gradient(90deg, #e7131b 50%, #b3b8c0 50%); -webkit-background-clip: text; background-clip: text; }
+.tq-rv-pill { white-space: nowrap; font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: .13em; color: #e7131b; padding: 4px 8px; border-radius: 999px;
+  border: 1px solid rgba(231,19,27,.35); background: rgba(255,255,255,.62); }
+.tq-rv-by { margin-top: auto; display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px solid rgba(110,118,130,.26); box-shadow: inset 0 1px 0 rgba(255,255,255,.75); }
+.tq-rv-av { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: #0a0a0a;
+  background: linear-gradient(150deg, #ffffff 0%, #c8cbd1 40%, #f3f4f6 62%, #a2a7af 100%); box-shadow: inset 0 0 0 1px rgba(18,22,30,.1), 0 1px 2px rgba(18,22,30,.12); }
+.tq-rv-who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tq-rv-who b { font-size: 13.5px; font-weight: 700; }
+.tq-rv-who > span { font-size: 11.5px; color: #5b5f67; text-wrap: balance; }
 @keyframes tq-crys-idle { from { --tqo: -1; } to { --tqo: 1; } }
 .tq-crys { position: relative; display: inline-flex; align-items: center; color: #0A0A0A; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; border-radius: 999px; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.03)); animation: tq-crys-idle 2.25s ease-in-out infinite alternate; transition: --tqh .65s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
 .tq-crys:hover, .tq-crys:focus-visible { --tqh: 1; animation: none; color: #0A0A0A; }
@@ -620,7 +644,6 @@ html { scroll-snap-type: y proximity; }
 .hv-red:hover { color:#e7131b !important; }
 .hv-red-bg:hover { background:#c70f16 !important; }
 
-.hv-pause:hover { animation-play-state: paused !important; }
 .hv-fan-card-1:hover { transform: rotate(-21deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
 .hv-fan-card-2:hover { transform: rotate(-12.6deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
 .hv-fan-card-3:hover { transform: rotate(-4.2deg) translateY(-100.8cqw) scale(1.15) translateY(100.8cqw) !important; z-index: 10 !important; border-color: rgba(231,19,27,.75) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.3), 0 0 2.6cqw rgba(231,19,27,.38), 0 2cqw 3.4cqw rgba(0,0,0,.6) !important; }
@@ -836,7 +859,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
    Arabic labels still shape and read correctly inside. */
 [dir="rtl"] .tq-dock, [dir="rtl"] .tq-env, [dir="rtl"] .tq-crys, [dir="rtl"] .tq-logo { direction: ltr; }
 [dir="rtl"] .tq-launch__btn svg { transform: scaleX(-1); }
-/* Reviews are quoted in English: the marquee stays left-to-right. */
+/* Reviews are quoted in English: their row stays left-to-right. */
 [dir="rtl"] [data-rep-stage] { direction: ltr; }
 /* Sliders grow left-to-right like the numbers on them. */
 [dir="rtl"] [data-calc-slider] { direction: ltr; }
@@ -922,31 +945,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 
 .tq-glass--row { border-radius: 20px; }
 @media (prefers-reduced-motion: reduce) { .tq-glass, .tp-glass { transform: none; transition: none; } }
-
-/* ---- Frosted glass (Glass_Card_Grid design), landing reviews only --------------------------
-   Milky glass with a little grain; the light follows the pointer (--tqgx/--tqgy, startGlass) and on
-   hover (--tqgh 0 → 1) an iridescent rim, chromatic inner edges and a small lift appear.
-   No backdrop blur here: the reviews marquee moves every frame and sits on white, where the blur
-   would cost frames and show nothing. */
-.tq-frost {
-  position: relative; isolation: isolate; overflow: hidden; border-radius: 22px;
-  background: radial-gradient(260px 200px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.25 + var(--tqgh) * .45)), rgba(255,255,255,0) 70%), rgba(248,248,250,.58);
-  border: 1px solid rgba(255,255,255,.85);
-  box-shadow: 0 0 0 1px rgba(18,22,30,.05), 0 22px 40px -30px rgba(18,22,30,.3),
-    inset 1px 1px 0 rgba(255,140,146,calc(var(--tqgh) * .35)), inset -1px -1px 0 rgba(140,170,255,calc(var(--tqgh) * .35));
-  transform: translateY(calc(var(--tqgh) * -4px));
-  transition: --tqgx .35s ease, --tqgy .35s ease, --tqgh .45s ease, transform .45s cubic-bezier(.2, .8, .2, 1);
-}
-.tq-frost::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.tq-frost::after {
-  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: var(--tqgh);
-  background: conic-gradient(from calc(200deg + var(--tqgh) * 60deg) at var(--tqgx) var(--tqgy), #ffffff, #ffd3d5, #f7a8ac, #ffffff, #d9e2ff, #c9f2e6, #ffffff, #e2e4e8, #ffffff);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
-}
-@media (prefers-reduced-motion: reduce) { .tq-frost { transform: none; transition: none; } }
 
 /* ---- Phones: tap areas of 44px and readable small print (Apple HIG / Material guidance) ----------------
    Small controls keep their look and take taps over a larger invisible area; dots become 44px buttons. */

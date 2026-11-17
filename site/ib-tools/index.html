@@ -254,7 +254,6 @@ html { scroll-snap-type: none; }
 @keyframes tqHowFlow { from { background-position: 0 0; } to { background-position: 120px 0; } }
 @keyframes tqRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 640px) {
-[data-rep-card] { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background-color: rgba(255,255,255,.5) !important; }
 #signup { padding-top: 10px !important; }
 #signup [data-hero-intro] { gap: 8px !important; }
 #signup [data-hero-intro] p { display: none !important; }
@@ -312,7 +311,7 @@ html { scroll-snap-type: none; }
 [data-dark-tail] { margin: -2px 0 0 !important; }
 [data-tail-glow] { display: none !important; }
 #faq { padding-top: var(--tq-gap) !important; }
-#reviews { padding-bottom: calc(var(--tq-gap) - 84px) !important; }
+#how { padding-bottom: calc(var(--tq-gap) - 40px) !important; }
 [data-panel-glow] { bottom: 0 !important; height: 45% !important; }
 [data-faq-side] { position: static !important; }
 [data-faq-art] { max-width: 240px !important; margin: 0 auto !important; }
@@ -371,18 +370,6 @@ html:lang(vi) .tq-lang__menu .tq-lang__page { display: block; }
 @media (prefers-reduced-motion: reduce) {
 .tq-logo { animation: none; transition-duration: .01s; }
 }
-@keyframes tqMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-[data-rep-stage] img { animation: none !important; }
-}
-@media (prefers-reduced-motion: reduce) {
-[data-rep-track] { animation: none !important; }
-[data-rep-viewport] { overflow-x: auto !important; }
-}
-[data-rep-viewport][data-rep-live] { cursor: grab; touch-action: pan-y; }
-[data-rep-viewport].is-drag { cursor: grabbing; }
-[data-rep-viewport].is-drag, [data-rep-viewport].is-drag * { -webkit-user-select: none; user-select: none; }
-[data-rep-viewport][data-rep-live] img { -webkit-user-drag: none; }
 @keyframes tq-crys-idle { from { --tqo: -1; } to { --tqo: 1; } }
 .tq-crys { position: relative; display: inline-flex; align-items: center; color: #0A0A0A; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; border-radius: 999px; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.03)); animation: tq-crys-idle 2.25s ease-in-out infinite alternate; transition: --tqh .65s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
 .tq-crys:hover, .tq-crys:focus-visible { --tqh: 1; animation: none; color: #0A0A0A; }
@@ -594,27 +581,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 .tq-glass--row { border-radius: 20px; }
 @media (prefers-reduced-motion: reduce) {
 .tq-glass, .tp-glass { transform: none; transition: none; }
-}
-.tq-frost {
-  position: relative; isolation: isolate; overflow: hidden; border-radius: 22px;
-  background: radial-gradient(260px 200px at var(--tqgx) var(--tqgy), rgba(255,255,255,calc(.25 + var(--tqgh) * .45)), rgba(255,255,255,0) 70%), rgba(248,248,250,.58);
-  border: 1px solid rgba(255,255,255,.85);
-  box-shadow: 0 0 0 1px rgba(18,22,30,.05), 0 22px 40px -30px rgba(18,22,30,.3),
-    inset 1px 1px 0 rgba(255,140,146,calc(var(--tqgh) * .35)), inset -1px -1px 0 rgba(140,170,255,calc(var(--tqgh) * .35));
-  transform: translateY(calc(var(--tqgh) * -4px));
-  transition: --tqgx .35s ease, --tqgy .35s ease, --tqgh .45s ease, transform .45s cubic-bezier(.2, .8, .2, 1);
-}
-.tq-frost::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.tq-frost::after {
-  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: var(--tqgh);
-  background: conic-gradient(from calc(200deg + var(--tqgh) * 60deg) at var(--tqgx) var(--tqgy), #ffffff, #ffd3d5, #f7a8ac, #ffffff, #d9e2ff, #c9f2e6, #ffffff, #e2e4e8, #ffffff);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
-}
-@media (prefers-reduced-motion: reduce) {
-.tq-frost { transform: none; transition: none; }
 }
 @media (max-width: 640px) {
 header a:has(> img:only-child) { padding: 13px 0; margin: -13px 0; }
@@ -2523,7 +2489,7 @@ fit();if(window.ResizeObserver)new ResizeObserver(f).observe(v);addEventListener
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=0e09212b1f" defer></script>
+<script src="../assets/js/landing.js?v=4c672e0d76" defer></script>
 <script src="../assets/js/ib-copy.js?v=a9ce0c77dc" defer></script>
 <script src="../assets/js/ib-insights.js?v=be978a827d" defer></script>
 <script src="../assets/js/ib-hole.js?v=0faf28ebcd" defer></script>
