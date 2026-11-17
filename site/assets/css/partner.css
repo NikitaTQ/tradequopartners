@@ -535,14 +535,12 @@
       #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
       #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .pf { position: relative; padding-top: var(--tq-half); }   /* half the gap above the persona card (the hero keeps the other half under it) */
-#why { padding-top: 0; }   /* on wide screens the dark-to-white tail above is the gap */
 @media (prefers-reduced-motion: reduce) { .pf-perk { transition: none; } }   /* the fan simply stands */
 @media (max-width: 899px) {
   #pf-who-wrap { padding: 24px 16px; }
   .pf { padding-top: calc(var(--tq-half) - 24px); }   /* the card wrap keeps 24px of its own above the card */
   .pf-dark { margin-top: 0; padding: calc(var(--tq-gap) - 24px) 0 var(--tq-half); }   /* the gap from the persona card (24px of it is the card wrap's own), then half down to Why TradeQuo */
   #pf-top, #pf-tail { display: none; }
-  #why { padding-top: var(--tq-half); }
   .pf-perks { height: auto; min-height: 0; padding-bottom: 40px; border-radius: clamp(28px, 4vw, 48px); margin: 0 clamp(8px, 2vw, 16px); width: auto; }
   .pf-perks__cta { top: auto; }
   /* the landing's Partner perks on phones: heading on the centre line, the cards in a grid, the CTA last */
@@ -1660,3 +1658,8 @@
 }
 /* reduced motion: no hold, the end state on one screen */
 @media (prefers-reduced-motion: reduce) { .tq-ibcp { height: auto; } .tq-ibcp__stage { position: relative; top: auto; } .tq-ibcp__go { transition: none; } }
+
+/* /programs/: the comparison after the persona card (November 2026, in place of the dark Why partners choose): the whole
+   gap from the card (the card's wrap keeps 24px of it on narrow screens) */
+.pf .tq-cmp-sec { padding-top: var(--tq-gap); }
+@media (max-width: 899px) { .pf .tq-cmp-sec { padding-top: calc(var(--tq-gap) - 24px); } }

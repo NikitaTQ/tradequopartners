@@ -43,7 +43,7 @@
 <link rel="icon" href="../favicon-32.png?v=08736b4127" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=83caa1ad63">
 <script>/* loader veil on arrival; visitor's "no auto-translate" choice (set in the language menu) */
-try{if(sessionStorage.getItem('tqLoader'))document.documentElement.classList.add('tq-arriving')}catch(e){}
+
 try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=document.createElement('meta');d.setAttribute('translate','no');d.classList.add('notranslate');m.name='google';m.content='notranslate';document.head.appendChild(m)}}catch(e){}</script>
 <link rel="preload" href="../assets/fonts/inter-latin.woff2?v=f11d729bb0" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/intl/ibm-plex-sans-arabic-400-arabic.woff2?v=a9cefdcae5" as="font" type="font/woff2" crossorigin>
@@ -503,6 +503,7 @@ html { scroll-snap-type: none; }
 [data-fan] { margin-inline: -8px !important; width: calc(100% + 16px) !important; }
 [data-fan-obj] { transform: none !important; width: 66% !important; }
 [data-fan-upto] { margin-bottom: -26px !important; font-size: 13px !important; }
+[data-fan-x] { display: none !important; }
 [data-fan-card] > span:first-child { font-size: 15px !important; }
 [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
 [data-faq-grid] { grid-template-columns: 1fr !important; }
@@ -708,13 +709,8 @@ html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
 .tq-loader__level { transform: translateY(146px); }
 .tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
 .tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
-.tq-loader.is-in .tq-loader__level { animation: tqLoaderFill .46s cubic-bezier(.55,.05,.35,1) both; }
-.tq-loader.is-in .tq-loader__dot { animation: tqLoaderDot .3s cubic-bezier(.3,1.6,.5,1) .3s both; }
 html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
 html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
-.tq-loader.is-out { animation: tqLoaderOut .26s ease .3s both; }
-.tq-loader.is-out .tq-loader__level { animation: tqLoaderDrain .4s cubic-bezier(.55,0,.45,1) both; }
-.tq-loader.is-out .tq-loader__dot { animation: tqLoaderDot .22s ease reverse both; }
 @keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
 @keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
 @keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
@@ -1246,6 +1242,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (prefers-reduced-motion: reduce) {
 .tq-toast, .tq-toasts { transition: none; }
 }
+[data-fan-x] { width: 84%; -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; padding-top: .75cqw; border-top: 1px solid rgba(255,255,255,.1); font-size: clamp(9px, 1.25cqw, 17px); line-height: 1.35; color: #9a9ba2; text-wrap: balance; }
+@media (min-width: 641px) {
+[data-fan-card] > [data-fan-x] { order: 1; }
+[data-fan-card] > [data-fan-upto], [data-fan-card] > [data-fan-obj] { order: 2; }
+[data-fan-card] > [data-fan-obj] { width: 92% !important; margin: auto 0 !important; flex: 0 1 auto; min-height: 0; }
+[data-fan-card] > [data-fan-upto] { margin-top: auto !important; }
+[data-fan-card] > [data-fan-upto] + [data-fan-obj] { margin-top: 0 !important; }
+}
 </style>
 <style id="i18n-fonts">
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url(../assets/fonts/intl/ibm-plex-sans-arabic-400-arabic.woff2?v=a9cefdcae5) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC7, U+10EC9-10EEE, U+10EF0-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1; }
@@ -1712,31 +1716,37 @@ h1, h2 { line-height: 1.2 !important; }
             <span style="font-size: clamp(9px, 1.46cqw, 20px); line-height: 1.4; color: #b5b5b5; text-wrap: pretty;">اربح من نشاط عملائك.</span>
             <span data-fan-upto="" style="position: relative; z-index: 1; margin: .5cqw 0 -3.4cqw; font-size: clamp(11px, 1.75cqw, 25px); line-height: 1; font-weight: 700; letter-spacing: -.01em; color: #fff;">حتى</span>
             <img loading="lazy" decoding="async" data-fan-obj="" src="../assets/perks2/revenue.webp?v=67d261c600" alt="" style="margin-top: .4cqw; width: 80%; aspect-ratio: 1 / 1; object-fit: contain; mix-blend-mode: lighten; pointer-events: none;">
+            <span data-fan-x="">من كل معاملة يجريها عملاؤك.</span>
           </div>
           <div class="hv-fan-card-2" data-fan-card="" style="position: absolute; left: 41.4cqw; top: 2cqw; width: 17.2cqw; height: 34.4cqw; z-index: 2; transform-origin: 50% calc(100% + 83.6cqw); transform: rotate(-12.6deg) translateY(-100.8cqw) scale(1) translateY(100.8cqw); display: flex; flex-direction: column; align-items: center; gap: .95cqw; padding: 2.8cqw 1.8cqw 1.9cqw; box-sizing: border-box; text-align: center; border-radius: 2.1cqw; background: linear-gradient(180deg, rgba(44,44,47,.92) 0%, rgba(18,18,20,.96) 55%, rgba(12,12,13,.98) 100%); border: 1px solid rgba(255,255,255,.13); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 1.6cqw 3cqw rgba(0,0,0,.55); transition: transform .9s cubic-bezier(.25,.1,.25,1), border-color .9s ease, box-shadow .9s ease; cursor: default; will-change: transform; backface-visibility: hidden;">
             <span style="font-size: clamp(12px, 2cqw, 30px); line-height: 1.12; font-weight: 700; letter-spacing: -.02em; color: #fff; text-wrap: balance;">مستويات غير محدودة</span>
             <span style="font-size: clamp(9px, 1.46cqw, 20px); line-height: 1.4; color: #b5b5b5; text-wrap: pretty;">نمِّ شبكة Sub-IB الخاصة بك.</span>
             <img loading="lazy" decoding="async" data-fan-obj="" src="../assets/perks2/levels.webp?v=93bd26fbec" alt="" style="margin-top: .4cqw; width: 80%; aspect-ratio: 1 / 1; object-fit: contain; mix-blend-mode: lighten; pointer-events: none;">
+            <span data-fan-x="">اربح من الشركاء الذين تُحيلهم.</span>
           </div>
           <div class="hv-fan-card-3" data-fan-card="" style="position: absolute; left: 41.4cqw; top: 2cqw; width: 17.2cqw; height: 34.4cqw; z-index: 3; transform-origin: 50% calc(100% + 83.6cqw); transform: rotate(-4.2deg) translateY(-100.8cqw) scale(1) translateY(100.8cqw); display: flex; flex-direction: column; align-items: center; gap: .95cqw; padding: 2.8cqw 1.8cqw 1.9cqw; box-sizing: border-box; text-align: center; border-radius: 2.1cqw; background: linear-gradient(180deg, rgba(44,44,47,.92) 0%, rgba(18,18,20,.96) 55%, rgba(12,12,13,.98) 100%); border: 1px solid rgba(255,255,255,.13); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 1.6cqw 3cqw rgba(0,0,0,.55); transition: transform .9s cubic-bezier(.25,.1,.25,1), border-color .9s ease, box-shadow .9s ease; cursor: default; will-change: transform; backface-visibility: hidden;">
             <span style="font-size: clamp(12px, 2cqw, 30px); line-height: 1.12; font-weight: 700; letter-spacing: -.02em; color: #fff; text-wrap: balance;">دفعات يومية</span>
             <span style="font-size: clamp(9px, 1.46cqw, 20px); line-height: 1.4; color: #b5b5b5; text-wrap: pretty;">تُسوّى العمولات يوميًا.</span>
             <img loading="lazy" decoding="async" data-fan-obj="" src="../assets/perks2/payouts.webp?v=985a953748" alt="" style="margin-top: .4cqw; width: 80%; aspect-ratio: 1 / 1; object-fit: contain; mix-blend-mode: lighten; pointer-events: none;">
+            <span data-fan-x="">دون رسوم على الدفعات.</span>
           </div>
           <div class="hv-fan-card-4" data-fan-card="" style="position: absolute; left: 41.4cqw; top: 2cqw; width: 17.2cqw; height: 34.4cqw; z-index: 3; transform-origin: 50% calc(100% + 83.6cqw); transform: rotate(4.2deg) translateY(-100.8cqw) scale(1) translateY(100.8cqw); display: flex; flex-direction: column; align-items: center; gap: .95cqw; padding: 2.8cqw 1.8cqw 1.9cqw; box-sizing: border-box; text-align: center; border-radius: 2.1cqw; background: linear-gradient(180deg, rgba(44,44,47,.92) 0%, rgba(18,18,20,.96) 55%, rgba(12,12,13,.98) 100%); border: 1px solid rgba(255,255,255,.13); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 1.6cqw 3cqw rgba(0,0,0,.55); transition: transform .9s cubic-bezier(.25,.1,.25,1), border-color .9s ease, box-shadow .9s ease; cursor: default; will-change: transform; backface-visibility: hidden;">
             <span style="font-size: clamp(12px, 2cqw, 30px); line-height: 1.12; font-weight: 700; letter-spacing: -.02em; color: #fff; text-wrap: balance;">PartnerShield</span>
             <span style="font-size: clamp(9px, 1.46cqw, 20px); line-height: 1.4; color: #b5b5b5; text-wrap: pretty;">إسناد مضمون للعملاء.</span>
             <img loading="lazy" decoding="async" data-fan-obj="" src="../assets/perks2/shield.webp?v=0824e872dd" alt="" style="margin-top: .4cqw; width: 80%; aspect-ratio: 1 / 1; object-fit: contain; mix-blend-mode: lighten; pointer-events: none;">
+            <span data-fan-x="">عملاؤك يبقون لك.</span>
           </div>
           <div class="hv-fan-card-5" data-fan-card="" style="position: absolute; left: 41.4cqw; top: 2cqw; width: 17.2cqw; height: 34.4cqw; z-index: 2; transform-origin: 50% calc(100% + 83.6cqw); transform: rotate(12.6deg) translateY(-100.8cqw) scale(1) translateY(100.8cqw); display: flex; flex-direction: column; align-items: center; gap: .95cqw; padding: 2.8cqw 1.8cqw 1.9cqw; box-sizing: border-box; text-align: center; border-radius: 2.1cqw; background: linear-gradient(180deg, rgba(44,44,47,.92) 0%, rgba(18,18,20,.96) 55%, rgba(12,12,13,.98) 100%); border: 1px solid rgba(255,255,255,.13); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 1.6cqw 3cqw rgba(0,0,0,.55); transition: transform .9s cubic-bezier(.25,.1,.25,1), border-color .9s ease, box-shadow .9s ease; cursor: default; will-change: transform; backface-visibility: hidden;">
             <span style="font-size: clamp(12px, 2cqw, 30px); line-height: 1.12; font-weight: 700; letter-spacing: -.02em; color: #fff; text-wrap: balance;">وصول Premium</span>
             <span style="font-size: clamp(9px, 1.46cqw, 20px); line-height: 1.4; color: #b5b5b5; text-wrap: pretty;">مشمول دون أي تكلفة.</span>
             <img loading="lazy" decoding="async" data-fan-obj="" src="../assets/perks2/premium.webp?v=ededcd0385" alt="" style="margin-top: .4cqw; width: 80%; aspect-ratio: 1 / 1; object-fit: contain; mix-blend-mode: lighten; pointer-events: none;">
+            <span data-fan-x="">TradingView Premium على حسابنا.</span>
           </div>
           <div class="hv-fan-card-6" data-fan-card="" style="position: absolute; left: 41.4cqw; top: 2cqw; width: 17.2cqw; height: 34.4cqw; z-index: 1; transform-origin: 50% calc(100% + 83.6cqw); transform: rotate(21deg) translateY(-100.8cqw) scale(1) translateY(100.8cqw); display: flex; flex-direction: column; align-items: center; gap: .95cqw; padding: 2.8cqw 1.8cqw 1.9cqw; box-sizing: border-box; text-align: center; border-radius: 2.1cqw; background: linear-gradient(180deg, rgba(44,44,47,.92) 0%, rgba(18,18,20,.96) 55%, rgba(12,12,13,.98) 100%); border: 1px solid rgba(255,255,255,.13); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 1.6cqw 3cqw rgba(0,0,0,.55); transition: transform .9s cubic-bezier(.25,.1,.25,1), border-color .9s ease, box-shadow .9s ease; cursor: default; will-change: transform; backface-visibility: hidden;">
             <span style="font-size: clamp(12px, 2cqw, 30px); line-height: 1.12; font-weight: 700; letter-spacing: -.02em; color: #fff; text-wrap: balance;">رحلات تحفيزية</span>
             <span style="font-size: clamp(9px, 1.46cqw, 20px); line-height: 1.4; color: #b5b5b5; text-wrap: pretty;">مكافآت سفر للشركاء.</span>
             <img loading="lazy" decoding="async" data-fan-obj="" src="../assets/perks2/trips.webp?v=3fc5db4f08" alt="" style="margin-top: .4cqw; width: 80%; aspect-ratio: 1 / 1; object-fit: contain; mix-blend-mode: lighten; pointer-events: none;">
+            <span data-fan-x="">حقّق أهدافك وسافر معنا.</span>
           </div>
           
           
@@ -1952,7 +1962,7 @@ h1, h2 { line-height: 1.2 !important; }
   </footer>
 </div>
 
-<script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=e695f5ebc6" defer></script>
+<script src="../assets/js/transition.js?v=43c6da9a8b" defer></script>
+<script src="../assets/js/landing.js?v=32ec0df81e" defer></script>
 </body>
 </html>
