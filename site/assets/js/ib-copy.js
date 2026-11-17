@@ -1,4 +1,4 @@
-/* IB Tools, the Copy trading hand-off block (#copy, Liquid_Glass_Hand-off design, variant 4a), ported from the design's
+/* IB Tools, the Copy strategies hand-off block (#copy, Liquid_Glass_Hand-off design, variant 4a), ported from the design's
    component. One progress value p (0..1) drives everything:
      · the client's hand slides in (0–.30), the step "01" gives way to "02" (.44–.60);
      · the provider's strategy card ("Meridian Core") glows (.28–.60), gathers into a drop of liquid silver (.30–.44),
