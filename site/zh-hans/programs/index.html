@@ -1071,7 +1071,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-night { border-radius: 26px; }
 }
 @media (prefers-reduced-motion: reduce) {
-.tp-dark, .tp-glass { transition: none; }
+.tp-perk, .tp-glass { transition: none; }
 }
 @property --ch { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --cd { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -1221,8 +1221,15 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 0 0 1px rgba(255,255,255,.06), 0 40px 60px -26px rgba(0,0,0,.8);
   transform: translate3d(0, 0, 0); transition: transform .6s cubic-bezier(.22, 1, .36, 1), box-shadow .5s ease; will-change: transform;
   -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-font-smoothing: antialiased; user-select: none; -webkit-tap-highlight-color: transparent; }
+@media (hover: hover) {
 .pf-perk:hover .pf-perk__in { transform: translate3d(0, -8px, 0);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(231,19,27,.35), 0 50px 70px -26px rgba(0,0,0,.85), 0 0 40px -10px rgba(231,19,27,.35); }
+}
+.pf-perk.is-tap .pf-perk__in { transform: translate3d(0, -8px, 0);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(231,19,27,.35), 0 50px 70px -26px rgba(0,0,0,.85), 0 0 40px -10px rgba(231,19,27,.35); }
+@media (hover: none) {
+.pf-perk { cursor: pointer; }
+}
 .pf-perk__n { font-family: 'Inter', sans-serif; font-size: 11px; color: #e7131b; }
 .pf-perk__t { font-size: 23px; line-height: 1.05; font-weight: 800; letter-spacing: -.03em; color: #fff; text-wrap: balance; }
 .pf-perk__d { max-width: 180px; font-size: 14px; line-height: 1.45; color: #9a9aa2; text-wrap: pretty; }
@@ -1671,12 +1678,12 @@ html:lang(ko) * { word-break: keep-all; }
             </div>
           </div>
           <div class="pf-fan" id="pf-fan">
-            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">高达87%</span><span class="pf-perk__d">每笔交易都有您的分成。</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">每日支付</span><span class="pf-perk__d">随时出款，手续费由我们承担。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">实时追踪</span><span class="pf-perk__d">每位客户、每一手，实时掌握。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">专属经理</span><span class="pf-perk__d">一位了解您业务的专人。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">您的经理</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">免费工具</span><span class="pf-perk__d">推广素材、TradingView与专家分析。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">推广素材</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">市场分析</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
-            <div class="pf-perk" data-pf-perk><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">奖励旅游</span><span class="pf-perk__d">达成目标，与我们一起旅行。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">01</span><span class="pf-perk__t">高达87%</span><span class="pf-perk__d">每笔交易都有您的分成。</span><div class="pf-perk__v" aria-hidden="true"><span class="pf-g-red" style="font-size: 76px;">87%</span></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">02</span><span class="pf-perk__t">每日支付</span><span class="pf-perk__d">随时出款，手续费由我们承担。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">$0</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">03</span><span class="pf-perk__t">实时追踪</span><span class="pf-perk__d">每位客户、每一手，实时掌握。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-live"><div class="pf-bars"><span style="height: 30%;"></span><span style="height: 42%;"></span><span style="height: 36%;"></span><span style="height: 55%;"></span><span style="height: 48%;"></span><span style="height: 62%;"></span><span style="height: 58%;"></span><span class="is-hi" style="height: 74%;"></span><span class="is-hi" style="height: 68%;"></span><span class="is-red" style="height: 90%;"></span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">04</span><span class="pf-perk__t">专属经理</span><span class="pf-perk__d">一位了解您业务的专人。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack"><span class="pf-g-silver" style="font-size: 64px;">1:1</span><span class="pf-mono" style="color: #8a8a92;">您的经理</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">05</span><span class="pf-perk__t">免费工具</span><span class="pf-perk__d">推广素材、TradingView与专家分析。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-stack pf-stack--chips"><span class="pf-chip pf-chip--light">推广素材</span><span class="pf-chip pf-chip--dark">TradingView</span><span class="pf-chip pf-chip--red">市场分析</span></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
+            <div class="pf-perk" data-pf-perk data-tap><div class="pf-perk__in"><span class="pf-perk__n">06</span><span class="pf-perk__t">奖励旅游</span><span class="pf-perk__d">达成目标，与我们一起旅行。</span><div class="pf-perk__v" aria-hidden="true"><div class="pf-pass"><div class="pf-mono pf-pass__row"><span>BOARDING PASS</span><span style="color: #e7131b;">TQ</span></div><div class="pf-pass__route"><span>YOU</span><span class="pf-pass__arr">→</span><span>ANY</span></div><div class="pf-mono pf-pass__row pf-pass__foot"><span>PARTNER CLASS</span><span>01A</span></div></div></div><span class="pf-perk__rim" aria-hidden="true"></span></div></div>
           </div>
           <div class="pf-perks__cta">
             <a href="../#signup" data-page-link data-label="加载中 · 首页" class="pf-puzzle" aria-label="开始赚取收益"><span class="pf-pz-a">开始</span><span class="pf-pz-b">赚取收益 <span class="pf-pz-arr">→</span></span></a>
@@ -1976,6 +1983,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=4c672e0d76" defer></script>
+<script src="../../assets/js/landing.js?v=e695f5ebc6" defer></script>
 </body>
 </html>

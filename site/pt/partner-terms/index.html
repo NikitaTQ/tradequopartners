@@ -1011,18 +1011,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto; text-align: center; }
 .tp-h2 { margin: 0; max-width: 30ch; }
 .tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
-.tp-dark {
-  position: relative; border-radius: 22px; color: #fff;
-  background: linear-gradient(180deg, rgba(44,44,47,.97) 0%, rgba(18,18,20,.98) 55%, #0c0c0d 100%);
-  border: 1px solid rgba(255,255,255,.13);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(231,19,27,.45), 0 28px 50px -30px rgba(0,0,0,.65);
-  transition: border-color .5s ease, box-shadow .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);
-}
-.tp-dark--hover:hover {
-  border-color: rgba(231,19,27,.7);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(231,19,27,.9), 0 0 0 1px rgba(231,19,27,.25), 0 0 34px rgba(231,19,27,.22), 0 30px 52px -30px rgba(0,0,0,.7);
-  transform: translateY(-4px);
-}
 .tp-obj { display: block; mix-blend-mode: lighten; -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent 100%); mask-image: radial-gradient(closest-side, #000 62%, transparent 100%); pointer-events: none; user-select: none; }
 .tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
 .tp-pc__big { display: block; margin-top: calc(18 * var(--pu)); font-size: calc(105 * var(--pu)); line-height: .8; font-weight: 700; letter-spacing: -.05em; white-space: nowrap; color: #0b0b0d; -webkit-text-stroke: .02em currentColor; }
@@ -1085,10 +1073,21 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (max-width: 640px) {
 .tp-perks__cta .tp-glint { width: min(100%, 320px); justify-content: center; }
 }
-.tp-perk { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 18px; padding: 18px 22px 18px 14px; min-height: 148px; }
-.tp-perk img { width: 112px; height: 112px; object-fit: contain; }
+.tp-perk { --k: .6; position: relative; display: grid; grid-template-columns: 100px minmax(0, 1fr); align-items: center; gap: 14px; box-sizing: border-box;
+  padding: 18px 24px 18px 16px; min-height: 148px; color: #fff; border: 0 solid transparent;
+  border-image: url(../../assets/perks/perk-glass.webp?v=50ecdbe5ee) 56 80 60 92 fill / calc(56px * var(--k)) calc(80px * var(--k)) calc(60px * var(--k)) calc(92px * var(--k)) stretch;
+  filter: drop-shadow(0 14px 16px rgba(10,10,12,.22));
+  transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease; -webkit-tap-highlight-color: transparent; }
+@media (hover: hover) {
+.tp-perk:hover { transform: translateY(-4px); filter: drop-shadow(0 0 14px rgba(231,19,27,.42)) drop-shadow(0 18px 20px rgba(10,10,12,.26)); }
+}
+.tp-perk.is-tap { transform: translateY(-4px); filter: drop-shadow(0 0 14px rgba(231,19,27,.42)) drop-shadow(0 18px 20px rgba(10,10,12,.26)); }
+@media (hover: none) {
+.tp-perk { cursor: pointer; }
+}
+.tp-perk img { width: 100px; height: 100px; object-fit: contain; }
 .tp-perk h3 { margin: 0; font-size: 18px; letter-spacing: -.02em; font-weight: 700; }
-.tp-perk p { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #a7a9ae; text-wrap: pretty; }
+.tp-perk p { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #c4c6cb; text-wrap: pretty; }
 @media (max-width: 1080px) {
 .tp-perkgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -1098,8 +1097,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 }
 @media (max-width: 640px) {
 .tp-perkgrid { grid-template-columns: minmax(0, 1fr); }
-.tp-perk { grid-template-columns: 88px minmax(0, 1fr); min-height: 0; }
-.tp-perk img { width: 88px; height: 88px; }
+.tp-perk { grid-template-columns: 80px minmax(0, 1fr); gap: 12px; min-height: 0; padding: 16px 20px 16px 12px; }
+.tp-perk img { width: 80px; height: 80px; }
 .tp-faq__list [data-faq-panel] p { padding-left: 20px !important; padding-right: 20px !important; }
 .tp-faq__side { align-items: center; text-align: center; }
 .tp-faq__side .tp-pill { align-self: center; }
@@ -1107,7 +1106,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-night { border-radius: 26px; }
 }
 @media (prefers-reduced-motion: reduce) {
-.tp-dark, .tp-glass { transition: none; }
+.tp-perk, .tp-glass { transition: none; }
 }
 @property --ch { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --cd { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -1730,12 +1729,12 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
           <p class="tp-sub">Ferramentas, conteúdo e suporte para você conquistar clientes e mantê-los engajados.</p>
         </div>
         <div class="tp-perkgrid">
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-trip.webp?v=a760f4b943" alt="" width="290" height="340"><div><h3>Viagens de incentivo</h3><p>Bata suas metas e viaje conosco para destinos de primeira linha.</p></div></div>
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>TradingView grátis <span class="tq-prem">Premium</span></h3><p>Gráficos avançados para análises de mercado mais precisas, sem custo.</p></div></div>
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="330" height="280"><div><h3>Análises grátis</h3><p>Insights de mercado em tempo real para compartilhar com seu público.</p></div></div>
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="280" height="350"><div><h3>Criativos</h3><p>Banners, landing pages e vídeos feitos para converter.</p></div></div>
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330"><div><h3>Academia white label</h3><p>Educação sobre mercados com a sua marca, pronta para compartilhar.</p></div></div>
-          <div class="tp-dark tp-dark--hover tp-perk"><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-bro.webp?v=dc3ab59778" alt="" width="330" height="320"><div><h3>Corretora white label</h3><p>Lance sua própria marca de corretora com a nossa infraestrutura.</p></div></div>
+          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-trip.webp?v=a760f4b943" alt="" width="290" height="340"><div><h3>Viagens de incentivo</h3><p>Bata suas metas e viaje conosco para destinos de primeira linha.</p></div></div>
+          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-tv.webp?v=368c132305" alt="" width="360" height="344"><div><h3>TradingView grátis <span class="tq-prem">Premium</span></h3><p>Gráficos avançados para análises de mercado mais precisas, sem custo.</p></div></div>
+          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-sig.webp?v=0b03ed5789" alt="" width="330" height="280"><div><h3>Análises grátis</h3><p>Insights de mercado em tempo real para compartilhar com seu público.</p></div></div>
+          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-cre.webp?v=eef3c227fe" alt="" width="280" height="350"><div><h3>Criativos</h3><p>Banners, landing pages e vídeos feitos para converter.</p></div></div>
+          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-aca.webp?v=18ff20d22c" alt="" width="310" height="330"><div><h3>Academia white label</h3><p>Educação sobre mercados com a sua marca, pronta para compartilhar.</p></div></div>
+          <div class="tp-perk" data-tap><img class="tp-obj" loading="lazy" decoding="async" src="../../assets/offer-bro.webp?v=dc3ab59778" alt="" width="330" height="320"><div><h3>Corretora white label</h3><p>Lance sua própria marca de corretora com a nossa infraestrutura.</p></div></div>
         </div>
         <!-- the final call's red glint button (Final CTA Glint Teaser), to the form -->
         <div class="tp-perks__cta">
@@ -2015,7 +2014,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 </div>
 
 <script src="../../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../../assets/js/landing.js?v=4c672e0d76" defer></script>
+<script src="../../assets/js/landing.js?v=e695f5ebc6" defer></script>
 <script src="../../assets/js/plan.js?v=80defb0ea6" defer></script>
 </body>
 </html>

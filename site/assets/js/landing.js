@@ -281,6 +281,22 @@
     });
   }
 
+  /* ---- touch screens: tap a card to light it, tap it again to let it go -------------------------------------
+   * The cards marked data-tap (Partner perks on /partner-terms/, Why partners choose on /programs/) light up under a
+   * mouse (:hover). A touch screen keeps :hover on the card last tapped, so a second tap could not put it out; there
+   * (no hover) the CSS leaves :hover alone and a tap toggles .is-tap instead: one card at a time, and a tap anywhere
+   * else puts it out. */
+  function startCardTap() {
+    if (!$$('[data-tap]').length) return;
+    const touch = matchMedia('(hover: none)');
+    document.addEventListener('click', (e) => {
+      if (!touch.matches) return;
+      const c = e.target.closest && e.target.closest('[data-tap]');
+      $$('[data-tap].is-tap').forEach((n) => { if (n !== c) n.classList.remove('is-tap'); });
+      if (c) c.classList.toggle('is-tap');
+    });
+  }
+
   /* ---- desktop site-map fan ------------------------------------------------ */
   function startFanMenu() {
     const menu = $('[data-fanmenu]'), veil = $('[data-fanveil]'), knob = $('[data-fan-toggle]');
@@ -1499,6 +1515,7 @@
   startDock();
   startIframeFit();
   startFanTap();
+  startCardTap();
   startEmbeds();
   startFilm();
   startAnimationGate();
