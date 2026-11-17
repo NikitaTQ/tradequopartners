@@ -307,7 +307,7 @@
   function startToasts() {
     const box = $('[data-toasts]'), hero = document.getElementById('signup');
     const stack = box && $('[data-toasts-stack]', box);
-    if (!box || !hero || !stack) return;
+    if (!box || !hero || !stack || box.hidden) return;   /* off for now: the markup carries `hidden` (landing.html) */
     const wide = matchMedia('(min-width: 1280px)');
     const NAMES = ['Jack', 'Nick', 'Amir', 'Sofia', 'Lukas', 'Mei', 'Ravi', 'Omar', 'Elena', 'Kwame', 'Diego', 'Yuki', 'Fatima', 'Tomás', 'Anya', 'Chen', 'Priya', 'Mateo',
       'Leila', 'Hassan', 'Marco', 'Ines', 'Daniel', 'Aisha', 'Viktor', 'Hana', 'Carlos', 'Nadia', 'Samuel', 'Julia', 'Arjun', 'Zara', 'Felix', 'Lina', 'Youssef', 'Emma',

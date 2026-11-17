@@ -1213,6 +1213,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (min-width: 1280px) {
 .tq-toasts { display: flex; }
 }
+.tq-toasts[hidden] { display: none !important; }
 .tq-toasts.is-on { opacity: 1; visibility: visible; transition: opacity .45s ease; }
 .tq-toasts__stack { position: relative; width: 100%; height: 0; }
 .tq-toast { position: absolute; left: 0; bottom: 0; box-sizing: border-box; width: max-content; max-width: 100%; min-height: 45px; display: flex; align-items: center; gap: 10px;
@@ -1486,8 +1487,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
   <!-- Partner events (Partner_Event_Toasts): a short line of events in the bottom-left corner while the first
        screen is in view, desktops from 1280px (startToasts in landing.js; the wording per language in
-       assets/js/toasts/<lang>.js, loaded when it first shows). The caption says the lines are examples. -->
-  <div class="tq-toasts" data-toasts data-src="../assets/js/toasts/ro.js?v=e44b4cb5ec" aria-hidden="true">
+       assets/js/toasts/<lang>.js, loaded when it first shows). The caption says the lines are examples.
+       Off for now (November 2026, asked for): `hidden` keeps it out and startToasts does not start (nothing loads);
+       take `hidden` away to bring it back. -->
+  <div class="tq-toasts" data-toasts hidden data-src="../assets/js/toasts/ro.js?v=e44b4cb5ec" aria-hidden="true">
     <div class="tq-toasts__stack" data-toasts-stack></div>
     <span class="tq-toasts__cap" data-toasts-cap></span>
   </div>
@@ -1955,6 +1958,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 </div>
 
 <script src="../assets/js/transition.js?v=602a71328d" defer></script>
-<script src="../assets/js/landing.js?v=902f35cb17" defer></script>
+<script src="../assets/js/landing.js?v=0e09212b1f" defer></script>
 </body>
 </html>
