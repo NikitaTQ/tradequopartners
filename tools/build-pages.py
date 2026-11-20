@@ -76,7 +76,7 @@ def render(i, p):
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<script>try{{var q=new URLSearchParams(location.search),u={{}},h=0;['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(n){{var v=q.get(n);if(v){{u[n]=v.slice(0,200);h=1}}}});if(h)document.cookie='tq_utm='+encodeURIComponent(JSON.stringify(u))+';max-age=2592000;path=/;SameSite=Lax'+(location.protocol=='https:'?';Secure':'')}}catch(e){{}}</script>
+<script>try{{var q=new URLSearchParams(location.search),u={{}},h=0;['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(n){{var v=q.get(n);if(v){{u[n]=v.slice(0,200);h=1}}}});if(h)document.cookie='tq_utm='+encodeURIComponent(JSON.stringify(u))+';max-age=2592000;path=/;SameSite=Lax'+(location.protocol=='https:'?';Secure':'');if(window.fetch)fetch('/api/utm?'+new URLSearchParams(u),{{keepalive:true}}).catch(function(){{}})}}catch(e){{}}</script>
 <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/site.css" data-inline>
 </head>
