@@ -47,3 +47,86 @@
   .inf-cta { height: 56px; font-size: 15px; padding-inline-start: 26px; }
   .inf-hero__ticks { font-size: 13px; gap: 8px 18px; }
 }
+
+/* ---- Creators on platforms (owner's "Creator Platforms Scene"): the planet, the orbit, five creators ------------------
+   Three pictures, one per platform (tools/influencers/creators.py), and the change between them played by
+   assets/js/orbit.js. Edge to edge; above and below, the page's colour flows into the picture's edge and back: the
+   edge colours (left, middle, right of the top and bottom rows of each picture) are registered properties, so when the
+   platform changes they glide to the new palette with the picture (1.8s, the reveal's length). */
+@property --r { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --tl { syntax: '<color>'; inherits: true; initial-value: #2f1b20; }
+@property --tc { syntax: '<color>'; inherits: true; initial-value: #26141a; }
+@property --tr { syntax: '<color>'; inherits: true; initial-value: #2f1722; }
+@property --bl { syntax: '<color>'; inherits: true; initial-value: #3b2522; }
+@property --bc { syntax: '<color>'; inherits: true; initial-value: #6a413f; }
+@property --br { syntax: '<color>'; inherits: true; initial-value: #3a1d28; }
+.inf-orbit { position: relative; --before: 243, 242, 247; --after: 255, 255, 255;
+  background: linear-gradient(90deg, var(--bl), var(--bc) 50%, var(--br));   /* under the switch on phones: the picture's foot carries on */
+  --tl: #2f1b20; --tc: #26141a; --tr: #2f1722; --bl: #3b2522; --bc: #6a413f; --br: #3a1d28;
+  transition: --tl 1.8s cubic-bezier(.6,.02,.22,1), --tc 1.8s cubic-bezier(.6,.02,.22,1), --tr 1.8s cubic-bezier(.6,.02,.22,1),
+    --bl 1.8s cubic-bezier(.6,.02,.22,1), --bc 1.8s cubic-bezier(.6,.02,.22,1), --br 1.8s cubic-bezier(.6,.02,.22,1); }
+.inf-orbit[data-pal="1"] { --tl: #2d3e55; --tc: #162132; --tr: #192438; --bl: #202c3d; --bc: #3e5069; --br: #1b263a; }   /* Telegram */
+.inf-orbit[data-pal="2"] { --tl: #202f36; --tc: #28282f; --tr: #2b1e26; --bl: #1c282f; --bc: #4a4750; --br: #36252f; }   /* TikTok */
+/* the flow in (from the hero's grey) and out (to the white below): an eased ramp over the palette's edge colours */
+.inf-orbit::before, .inf-orbit::after { content: ''; display: block; height: clamp(72px, 9vw, 150px); }
+.inf-orbit::before {
+  background: linear-gradient(180deg, rgba(var(--before), 1) 0%, rgba(var(--before), .93) 13%, rgba(var(--before), .76) 30%, rgba(var(--before), .5) 50%, rgba(var(--before), .24) 70%, rgba(var(--before), .07) 87%, rgba(var(--before), 0) 100%),
+    linear-gradient(90deg, var(--tl), var(--tc) 50%, var(--tr)); }
+.inf-orbit::after {
+  background: linear-gradient(0deg, rgba(var(--after), 1) 0%, rgba(var(--after), .93) 13%, rgba(var(--after), .76) 30%, rgba(var(--after), .5) 50%, rgba(var(--after), .24) 70%, rgba(var(--after), .07) 87%, rgba(var(--after), 0) 100%),
+    linear-gradient(90deg, var(--bl), var(--bc) 50%, var(--br)); }
+
+.inf-orbit__stage { position: relative; width: 100%; aspect-ratio: 1774 / 887; overflow: hidden; isolation: isolate; background: var(--tc); font-family: 'Inter', sans-serif; }
+/* the picture's own top and bottom rows melt into the same edge colours, so no line shows where it starts */
+.inf-orbit__stage::before, .inf-orbit__stage::after { content: ''; position: absolute; left: 0; right: 0; z-index: 5; pointer-events: none; }
+.inf-orbit__stage::before { top: 0; height: 9%; background: linear-gradient(90deg, var(--tl), var(--tc) 50%, var(--tr));
+  -webkit-mask: linear-gradient(180deg, #000, rgba(0,0,0,.6) 40%, transparent); mask: linear-gradient(180deg, #000, rgba(0,0,0,.6) 40%, transparent); }
+.inf-orbit__stage::after { bottom: 0; height: 10%; background: linear-gradient(90deg, var(--bl), var(--bc) 50%, var(--br));
+  -webkit-mask: linear-gradient(0deg, #000, rgba(0,0,0,.6) 40%, transparent); mask: linear-gradient(0deg, #000, rgba(0,0,0,.6) 40%, transparent); }
+
+.inf-orbit__group { position: absolute; inset: 0; z-index: 1; }
+.inf-orbit__group[data-group="0"] { z-index: 2; }
+.inf-orbit__group[data-off] { visibility: hidden; }
+.inf-orbit__drift { position: absolute; inset: 0; transform-origin: 47.91% 67.64%; }
+.inf-orbit__group img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.inf-orbit__sky { opacity: 0; filter: blur(26px) saturate(1.2); transform: scale(1.08); }
+.inf-orbit__icon { opacity: 0; -webkit-mask-image: radial-gradient(ellipse 25% 27% at 49.9% 16%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 25% 27% at 49.9% 16%, #000 72%, transparent 100%); }
+.inf-orbit__title { opacity: 0; }
+.inf-orbit__planet { opacity: 0; transform-origin: 47.91% 67.64%;
+  -webkit-mask-image: radial-gradient(ellipse 15% 21% at 47.91% 67.64%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 15% 21% at 47.91% 67.64%, #000 60%, transparent 100%); }
+/* the ring of colour at the front of the reveal (drawn only while a change plays: at rest, even fully transparent, a
+   screen-blended layer can keep Chrome from painting the picture under it) */
+.inf-orbit__edge { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; display: none;
+  -webkit-mask-image: radial-gradient(circle at 47.91% 67.64%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
+  mask-image: radial-gradient(circle at 47.91% 67.64%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
+.inf-orbit__group.is-playing .inf-orbit__edge { display: block; }
+.inf-orbit__edge--instagram { background: linear-gradient(45deg, #e8a888 0%, #de9088 45%, #d07494 75%, #c2649a 100%); }
+.inf-orbit__edge--telegram { background: linear-gradient(45deg, #96bade 0%, #80a6d6 50%, #7092ce 100%); }
+.inf-orbit__edge--tiktok { background: linear-gradient(90deg, #68c0c4 0%, #c4b8c2 50%, #da7688 100%); }
+
+.inf-orbit__flash { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+  background: radial-gradient(circle at 47.91% 67.64%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
+.inf-orbit__svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; overflow: visible; }
+.inf-orbit__streak { position: absolute; z-index: 5; left: 35.5%; top: 23%; width: .45%; height: 9.5%; border-radius: 999px; pointer-events: none; opacity: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0), #fff, rgba(255,255,255,0)); box-shadow: 0 0 18px 6px #9ad6ff; }
+/* the creators' plates (drawn in the picture): a light runs across each when the platform changes */
+.inf-orbit__plate { position: absolute; z-index: 6; border-radius: 7px; overflow: hidden; pointer-events: none; }
+.inf-orbit__plate span { position: absolute; inset: 0; transform: translateX(-130%); mix-blend-mode: screen;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 70%); }
+
+/* the platform switch: a dark glass pill, the chosen one in white */
+/* it comes after the scene in the markup: over the scene's foot (1.4% of the scene's height above it), above the flow out */
+.inf-orbit__tabs { position: absolute; z-index: 7; left: 50%; bottom: calc(clamp(72px, 9vw, 150px) + 100vw * 887 / 1774 * .014); transform: translateX(-50%); display: flex; gap: clamp(2px, .3vw, 4px); padding: clamp(3px, .35vw, 5px);
+  border-radius: 999px; background: rgba(14,14,20,.58); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 1px rgba(255,255,255,.22), 0 14px 30px -10px rgba(10,10,20,.55);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); }
+.inf-orbit__tabs button { height: clamp(28px, 3.1vw, 46px); padding: 0 clamp(12px, 1.3vw, 20px); border: 0; border-radius: 999px; cursor: pointer; font: 700 clamp(11px, 1vw, 15px) 'Inter', sans-serif;
+  white-space: nowrap; color: rgba(255,255,255,.88); background: transparent; transition: background .3s, color .3s, box-shadow .3s; -webkit-tap-highlight-color: transparent; }
+.inf-orbit__tabs button[aria-selected="true"] { color: #1a1a22; background: linear-gradient(180deg, #fff, #e6e6ec); box-shadow: inset 0 -2px 4px rgba(20,20,30,.12), 0 4px 10px -4px rgba(10,10,20,.4); }
+.inf-orbit__tabs button:not([aria-selected="true"]):hover { color: #fff; background: rgba(255,255,255,.1); }
+.inf-orbit__tabs button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* phones: the scene is small, so the switch goes under it and leaves the creators at its foot in view */
+@media (max-width: 640px) {
+  .inf-orbit__tabs { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: 14px auto 0; }
+  .inf-orbit__tabs button { height: 36px; padding: 0 16px; font-size: 13px; }
+  .inf-orbit::after { height: 64px; }
+}
