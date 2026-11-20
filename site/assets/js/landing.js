@@ -1320,8 +1320,37 @@
       code.textContent = dial;
       if (num && example[iso]) num.placeholder = example[iso];
     };
-    sel.addEventListener('change', show);
+    let touched = false;
+    sel.addEventListener('change', () => { touched = true; show(); });
     show();
+
+    /* The starting country (November 2026): the visitor's own. First a guess (the page's language, or for English the
+       region of the browser's language), then the country of the visitor's IP from Netlify (netlify/edge-functions/geo.js,
+       /api/geo; kept for the visit in sessionStorage). Never over a code the visitor picked. */
+    const pick = (iso) => {
+      if (touched || !iso) return;
+      iso = String(iso).toUpperCase();
+      const o = $$('option', sel).find((x) => x.value.split(' ')[0] === iso);
+      if (o) { sel.value = o.value; show(); }
+    };
+    const LANG_CC = { ar: 'AE', de: 'DE', es: 'ES', fr: 'FR', id: 'ID', it: 'IT', ja: 'JP', ko: 'KR', pl: 'PL', pt: 'BR', ro: 'RO',
+      th: 'TH', tr: 'TR', uk: 'UA', vi: 'VN', 'zh-hans': 'CN', 'zh-hant': 'TW' };
+    const browserCC = () => {
+      for (const l of navigator.languages || [navigator.language]) { const m = /^[a-z]{2,3}-([a-z]{2})$/i.exec(l || ''); if (m) return m[1]; }
+      return null;
+    };
+    pick(LANG_CC[lang.toLowerCase()] || browserCC());
+    let known = null;
+    try { known = sessionStorage.getItem('tqCC'); } catch (e) {}
+    if (known) { pick(known); return; }
+    fetch('/api/geo', { headers: { Accept: 'application/json' } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (!d || !d.country) return;
+        try { sessionStorage.setItem('tqCC', d.country); } catch (e) {}
+        pick(d.country);
+      })
+      .catch(() => {});
   }
 
   /* ---- reviews: a row that stands still -----------------------------------------------------------
