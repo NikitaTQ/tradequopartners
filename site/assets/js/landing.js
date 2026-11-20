@@ -888,6 +888,12 @@
       const body = new URLSearchParams(new FormData(f));
       const num = (body.get('phone') || '').trim(), dial = (body.get('phone_code') || '').split(' ')[1] || '';
       if (num && dial && !num.startsWith('+')) body.set('phone', dial + ' ' + num);
+      /* the UTM tags of the link the visitor came by in the last 30 days (cookie tq_utm, set in partials/head.html) */
+      try {
+        const c = /(?:^|; )tq_utm=([^;]*)/.exec(document.cookie);
+        const u = c ? JSON.parse(decodeURIComponent(c[1])) : {};
+        for (const k of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) if (u[k]) body.set(k, String(u[k]));
+      } catch (e) {}
       return body;
     };
     const preview = /[?&]preview=sent(&|$)/.test(location.search);

@@ -44,6 +44,8 @@
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png?v=83caa1ad63">
 <script>/* the visitor's "no auto-translate" choice (set in the language menu) */
 try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=document.createElement('meta');d.setAttribute('translate','no');d.classList.add('notranslate');m.name='google';m.content='notranslate';document.head.appendChild(m)}}catch(e){}</script>
+<script>/* UTM tags from the link the visitor came by, kept 30 days (cookie tq_utm) and sent with the form (README: UTM) */
+try{var q=new URLSearchParams(location.search),u={},h=0;['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(n){var v=q.get(n);if(v){u[n]=v.slice(0,200);h=1}});if(h)document.cookie='tq_utm='+encodeURIComponent(JSON.stringify(u))+';max-age=2592000;path=/;SameSite=Lax'+(location.protocol=='https:'?';Secure':'')}catch(e){}</script>
 <link rel="preload" href="../../assets/fonts/inter-latin.woff2?v=f11d729bb0" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/h1/dela-gothic-one.woff2?v=6a1f70953c" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/h1/dela-gothic-one-h2.woff2?v=bd5853cea2" as="font" type="font/woff2" crossorigin>
@@ -1958,6 +1960,6 @@ html:lang(ko) * { word-break: keep-all; }
 </div>
 
 <script src="../../assets/js/transition.js?v=f60783e549" defer></script>
-<script src="../../assets/js/landing.js?v=dd7bb58e03" defer></script>
+<script src="../../assets/js/landing.js?v=f4a0ddadfb" defer></script>
 </body>
 </html>
