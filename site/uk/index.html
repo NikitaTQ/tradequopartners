@@ -42,8 +42,7 @@
 <link rel="icon" href="../favicon.svg?v=ff199c552e" type="image/svg+xml">
 <link rel="icon" href="../favicon-32.png?v=08736b4127" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=83caa1ad63">
-<script>/* loader veil on arrival; visitor's "no auto-translate" choice (set in the language menu) */
-
+<script>/* the visitor's "no auto-translate" choice (set in the language menu) */
 try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=document.createElement('meta');d.setAttribute('translate','no');d.classList.add('notranslate');m.name='google';m.content='notranslate';document.head.appendChild(m)}}catch(e){}</script>
 <link rel="preload" href="../assets/fonts/inter-latin.woff2?v=f11d729bb0" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/inter-cyrillic.woff2?v=9f73b2f43e" as="font" type="font/woff2" crossorigin>
@@ -464,7 +463,6 @@ html { scroll-snap-type: none; }
 #signup form[data-agreement] label > span + span { height: 46px !important; }
 #signup [data-commit] { display: none !important; }
 #signup form[data-agreement] > div:last-child { grid-template-columns: 1fr !important; gap: 14px !important; }
-#signup form[data-agreement] > div:last-child > div { order: 2; }
 #signup form[data-agreement] button[type=submit] { height: 54px; }
 #signup [data-hero-panel] { padding: 8px 4px 28px !important; }
 #signup [data-hero-stage] { width: 100% !important; }
@@ -558,8 +556,6 @@ html:lang(vi) .tq-lang__menu .tq-lang__page { display: block; }
 }
 [data-fanmenu] > div:hover { z-index: 9 !important; }
 @keyframes tqFanVeil { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes tq-logo-idle { from { --tqo: -1; } to { --tqo: 1; } }
 .tq-logo { position: relative; display: inline-flex; align-items: center; gap: 18px; height: 64px; box-sizing: border-box; padding: 0 4px 0 28px; border-radius: 999px; background: linear-gradient(180deg, #1A1A1D 0%, #0D0D0F 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.08); color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate; transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
 .tq-logo:hover, .tq-logo:focus-visible { --tqh: 1; animation: none; color: #FFFFFF; }
@@ -696,33 +692,7 @@ html:lang(vi) .tq-lang__menu .tq-lang__page { display: block; }
 [data-fab] { pointer-events: none; }
 [data-fab] [data-fab-toggle] { pointer-events: auto; }
 [data-fab][data-open] [data-ref="fabIcon"] { transform: rotate(90deg); }
-.tq-loader {
-  position: fixed; inset: 0; z-index: 120;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: #F2F2F3; pointer-events: all;
-  animation: tqLoaderIn .18s ease both;
-}
-.tq-loader[hidden] { display: none; }
-html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
-.tq-loader__mark { width: clamp(96px, 12vw, 132px); height: auto; overflow: visible; filter: drop-shadow(0 18px 22px rgba(10,10,10,.12)); }
-.tq-loader__level { transform: translateY(146px); }
-.tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
-.tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
-html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
-html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
-@keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
-@keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
-@keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
-@keyframes tqLoaderDot { from { transform: scale(0); } to { transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) {
-.tq-loader__wave { animation: none; }
-}
-.tq-loader__label {
-  position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%);
-  font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .2em; color: #9a9da3; white-space: nowrap;
-  text-transform: uppercase;
-}
-html.tq-arriving, html.tq-locked { overflow: hidden; }
+html.tq-locked { overflow: hidden; }
 .tq-gbtn { --h: 56px; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: calc(var(--h) * .5);
   height: var(--h); min-width: calc(var(--h) * 4.4); box-sizing: border-box; padding: 0; padding-inline: calc(var(--h) * .95) calc(var(--h) * .72);
   border: 0 solid transparent; border-image: url(../assets/cta/glass-dark.webp?v=9f5bdab63b) 219 380 fill / 50% calc(var(--h) * .868) stretch;
@@ -1256,18 +1226,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 <link rel="preload" href="../vendor/three@0.184.0/three.module.min.js" as="fetch" crossorigin fetchpriority="low">
 </head>
 <body>
-<div class="tq-loader" data-loader hidden>
-  <svg class="tq-loader__mark" viewBox="36 46 130 106" aria-hidden="true">
-    <defs>
-      <clipPath id="tqLoaderInk"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></clipPath>
-      <linearGradient id="tqLoaderGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"></stop><stop offset="1" stop-color="#e3e4e7"></stop></linearGradient>
-    </defs>
-    <g class="tq-loader__glass" fill="url(#tqLoaderGlass)" stroke="#0a0a0a" stroke-width="1.5" stroke-linejoin="round"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></g>
-    <g clip-path="url(#tqLoaderInk)"><g class="tq-loader__level"><path class="tq-loader__wave" d="M0 0q10-5 20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0V120H0Z" fill="#0a0a0a"></path></g></g>
-    <circle class="tq-loader__dot" cx="141" cy="130.5" r="10.5" fill="#e7131b"></circle>
-  </svg>
-  <span class="tq-loader__label" data-loader-label>ЗАВАНТАЖЕННЯ</span>
-</div>
 <div style="font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased;">
 
   <header class="tq-head">
@@ -1276,11 +1234,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <nav class="tq-head__nav">
       <span data-navlinks="" style="display: contents;">
         <a class="hv-red tq-nav-link" href="#" aria-current="page" data-to-top>Головна</a>
-        <a class="hv-red tq-nav-link" href="programs/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Партнерські програми">Партнерські програми</a>
-        <a class="hv-red tq-nav-link" href="partner-terms/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Умови партнерства">Умови партнерства</a>
-        <a class="hv-red tq-nav-link" href="ib-tools/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Інструменти IB">Інструменти IB</a>
+        <a class="hv-red tq-nav-link" href="programs/" data-page-link>Партнерські програми</a>
+        <a class="hv-red tq-nav-link" href="partner-terms/" data-page-link>Умови партнерства</a>
+        <a class="hv-red tq-nav-link" href="ib-tools/" data-page-link>Інструменти IB</a>
       </span>
-      <div class="tq-lang" data-lang><button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="Меню · Мова: Українська"><svg class="tq-lang__burger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><svg class="tq-lang__globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg><span class="tq-lang__code">UK</span><svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="tq-lang__menu" hidden><li class="tq-lang__page"><a href="#" aria-current="page" data-to-top>Головна</a></li><li class="tq-lang__page"><a href="programs/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Партнерські програми">Партнерські програми</a></li><li class="tq-lang__page"><a href="partner-terms/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Умови партнерства">Умови партнерства</a></li><li class="tq-lang__page"><a href="ib-tools/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Інструменти IB">Інструменти IB</a></li><li class="tq-lang__page tq-lang__label" aria-hidden="true">Мова</li><li><a href="../" hreflang="en" lang="en">English</a></li><li><a href="../ar/" hreflang="ar" lang="ar">العربية</a></li><li><a href="../zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li><li><a href="../zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li><li><a href="../fr/" hreflang="fr" lang="fr">Français</a></li><li><a href="../de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li><li><a href="../it/" hreflang="it" lang="it">Italiano</a></li><li><a href="../ja/" hreflang="ja" lang="ja">日本語</a></li><li><a href="../ko/" hreflang="ko" lang="ko">한국어</a></li><li><a href="../pl/" hreflang="pl" lang="pl">Polski</a></li><li><a href="../pt/" hreflang="pt" lang="pt">Português</a></li><li><a href="../ro/" hreflang="ro" lang="ro">Română</a></li><li><a href="../es/" hreflang="es" lang="es">Español</a></li><li><a href="../th/" hreflang="th" lang="th">ไทย</a></li><li><a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="../uk/" hreflang="uk" lang="uk" aria-current="true">Українська</a></li><li><a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a></li><li class="tq-lang__opt"><button type="button" role="switch" aria-checked="true" data-translate-toggle><span>Автопереклад</span><span class="tq-lang__switch" aria-hidden="true"></span></button></li></ul></div>
+      <div class="tq-lang" data-lang><button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="Меню · Мова: Українська"><svg class="tq-lang__burger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><svg class="tq-lang__globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg><span class="tq-lang__code">UK</span><svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="tq-lang__menu" hidden><li class="tq-lang__page"><a href="#" aria-current="page" data-to-top>Головна</a></li><li class="tq-lang__page"><a href="programs/" data-page-link>Партнерські програми</a></li><li class="tq-lang__page"><a href="partner-terms/" data-page-link>Умови партнерства</a></li><li class="tq-lang__page"><a href="ib-tools/" data-page-link>Інструменти IB</a></li><li class="tq-lang__page tq-lang__label" aria-hidden="true">Мова</li><li><a href="../" hreflang="en" lang="en">English</a></li><li><a href="../ar/" hreflang="ar" lang="ar">العربية</a></li><li><a href="../zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li><li><a href="../zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li><li><a href="../fr/" hreflang="fr" lang="fr">Français</a></li><li><a href="../de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li><li><a href="../it/" hreflang="it" lang="it">Italiano</a></li><li><a href="../ja/" hreflang="ja" lang="ja">日本語</a></li><li><a href="../ko/" hreflang="ko" lang="ko">한국어</a></li><li><a href="../pl/" hreflang="pl" lang="pl">Polski</a></li><li><a href="../pt/" hreflang="pt" lang="pt">Português</a></li><li><a href="../ro/" hreflang="ro" lang="ro">Română</a></li><li><a href="../es/" hreflang="es" lang="es">Español</a></li><li><a href="../th/" hreflang="th" lang="th">ไทย</a></li><li><a href="../tr/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="../uk/" hreflang="uk" lang="uk" aria-current="true">Українська</a></li><li><a href="../vi/" hreflang="vi" lang="vi">Tiếng Việt</a></li><li class="tq-lang__opt"><button type="button" role="switch" aria-checked="true" data-translate-toggle><span>Автопереклад</span><span class="tq-lang__switch" aria-hidden="true"></span></button></li></ul></div>
       <a class="tq-head__cta" href="#signup">Стати партнером</a>
     </nav>
   </header>
@@ -1290,9 +1248,9 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <p class="tq-mnav__label">Меню</p>
     <ol class="tq-mnav__list">
       <li><a class="tq-mnav__a" href="#" aria-current="page" data-to-top><span class="tq-mnav__n">01</span><span class="tq-mnav__t">Головна</span></a></li>
-      <li><a class="tq-mnav__a" href="programs/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Партнерські програми"><span class="tq-mnav__n">02</span><span class="tq-mnav__t">Партнерські програми</span></a></li>
-      <li><a class="tq-mnav__a" href="partner-terms/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Умови партнерства"><span class="tq-mnav__n">03</span><span class="tq-mnav__t">Умови партнерства</span></a></li>
-      <li><a class="tq-mnav__a" href="ib-tools/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Інструменти IB"><span class="tq-mnav__n">04</span><span class="tq-mnav__t">Інструменти IB</span></a></li>
+      <li><a class="tq-mnav__a" href="programs/" data-page-link><span class="tq-mnav__n">02</span><span class="tq-mnav__t">Партнерські програми</span></a></li>
+      <li><a class="tq-mnav__a" href="partner-terms/" data-page-link><span class="tq-mnav__n">03</span><span class="tq-mnav__t">Умови партнерства</span></a></li>
+      <li><a class="tq-mnav__a" href="ib-tools/" data-page-link><span class="tq-mnav__n">04</span><span class="tq-mnav__t">Інструменти IB</span></a></li>
     </ol>
     <div class="tq-mnav__foot">
       <a class="tq-mnav__cta" href="#signup">Стати партнером</a>
@@ -1434,10 +1392,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
             </div>
 
             <div style="position:relative; display:grid; grid-template-columns:minmax(0,1fr); gap:16px; align-items:center; margin-top:14px;">
-              <div style="display:flex; align-items:flex-start; gap:14px;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a4a4e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px;"><rect x="5" y="11" width="14" height="9.5" rx="1.2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path><path d="M12 15v2"></path></svg>
-                <p style="margin:0; font-size:12px; line-height:1.65; color:#4a4a4e; text-wrap:pretty;">Підписуючи й надсилаючи цю форму, ви погоджуєтеся з нашою <a href="#" style="color:#c8141b;">Політикою конфіденційності</a> та <a href="#" style="color:#c8141b;">Умовами для партнерів</a>.</p>
-              </div>
               <button type="submit" class="tq-env tq-env--fill" aria-label="Надіслати"><span class="tq-env__txt">Надіслати</span><span class="tq-env__mail" aria-hidden="true"><span class="tq-env__back"></span><span class="tq-env__flap-open"></span><span class="tq-env__bill">$</span><span class="tq-env__front"></span><span class="tq-env__flap"></span><span class="tq-env__seal"></span></span></button>
             </div>
           </form>
@@ -1480,8 +1434,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
               </ol>
             </div>
             <div class="tq-done__cta">
-              <a class="tq-done__go" href="../programs/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Партнерські програми">Партнерські програми<span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></a>
-              <a class="tq-done__link" href="./partner-terms/" data-page-link data-label="ЗАВАНТАЖЕННЯ · Умови партнерства">Калькулятор комісій</a>
+              <a class="tq-done__go" href="../programs/" data-page-link>Партнерські програми<span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></a>
+              <a class="tq-done__link" href="./partner-terms/" data-page-link>Калькулятор комісій</a>
             </div>
           </div>
 
@@ -1953,7 +1907,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   </footer>
 </div>
 
-<script src="../assets/js/transition.js?v=43c6da9a8b" defer></script>
-<script src="../assets/js/landing.js?v=32ec0df81e" defer></script>
+<script src="../assets/js/transition.js?v=f60783e549" defer></script>
+<script src="../assets/js/landing.js?v=0a26497344" defer></script>
 </body>
 </html>

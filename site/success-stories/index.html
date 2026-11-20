@@ -150,7 +150,6 @@ html { scroll-snap-type: none; }
 #signup form[data-agreement] label > span + span { height: 46px !important; }
 #signup [data-commit] { display: none !important; }
 #signup form[data-agreement] > div:last-child { grid-template-columns: 1fr !important; gap: 14px !important; }
-#signup form[data-agreement] > div:last-child > div { order: 2; }
 #signup form[data-agreement] button[type=submit] { height: 54px; }
 #signup [data-hero-panel] { padding: 8px 4px 28px !important; }
 #signup [data-hero-stage] { width: 100% !important; }
@@ -233,8 +232,6 @@ html:lang(vi) [data-fab] { display: flex !important; }
 }
 [data-fanmenu] > div:hover { z-index: 9 !important; }
 @keyframes tqFanVeil { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes tq-logo-idle { from { --tqo: -1; } to { --tqo: 1; } }
 @keyframes tq-crys-idle { from { --tqo: -1; } to { --tqo: 1; } }
 .hv-red:hover { color:#e7131b !important; }
@@ -243,33 +240,6 @@ html:lang(vi) [data-fab] { display: flex !important; }
 [data-fab] { pointer-events: none; }
 [data-fab] [data-fab-toggle] { pointer-events: auto; }
 [data-fab][data-open] [data-ref="fabIcon"] { transform: rotate(90deg); }
-.tq-loader {
-  position: fixed; inset: 0; z-index: 120;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: #F2F2F3; pointer-events: all;
-  animation: tqLoaderIn .18s ease both;
-}
-.tq-loader[hidden] { display: none; }
-html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
-.tq-loader__mark { width: clamp(96px, 12vw, 132px); height: auto; overflow: visible; filter: drop-shadow(0 18px 22px rgba(10,10,10,.12)); }
-.tq-loader__level { transform: translateY(146px); }
-.tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
-.tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
-html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
-html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
-@keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
-@keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
-@keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
-@keyframes tqLoaderDot { from { transform: scale(0); } to { transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) {
-.tq-loader__wave { animation: none; }
-}
-.tq-loader__label {
-  position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%);
-  font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .2em; color: #9a9da3; white-space: nowrap;
-  text-transform: uppercase;
-}
-html.tq-arriving, html.tq-locked { overflow: hidden; }
 @media (max-width: 640px) {
 [data-fan-head] { align-items: center !important; text-align: center; }
 [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
@@ -354,31 +324,19 @@ footer p { font-size: 12px !important; }
 </style>
 </head>
 <body>
-<div class="tq-loader" data-loader hidden>
-  <svg class="tq-loader__mark" viewBox="36 46 130 106" aria-hidden="true">
-    <defs>
-      <clipPath id="tqLoaderInk"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></clipPath>
-      <linearGradient id="tqLoaderGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"></stop><stop offset="1" stop-color="#e3e4e7"></stop></linearGradient>
-    </defs>
-    <g class="tq-loader__glass" fill="url(#tqLoaderGlass)" stroke="#0a0a0a" stroke-width="1.5" stroke-linejoin="round"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></g>
-    <g clip-path="url(#tqLoaderInk)"><g class="tq-loader__level"><path class="tq-loader__wave" d="M0 0q10-5 20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0V120H0Z" fill="#0a0a0a"></path></g></g>
-    <circle class="tq-loader__dot" cx="141" cy="130.5" r="10.5" fill="#e7131b"></circle>
-  </svg>
-  <span class="tq-loader__label" data-loader-label>LOADING</span>
-</div>
 <div style="min-height: 100vh; background: #fff; color: #0a0a0a; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased;">
   <header data-page-bar style="position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px clamp(16px, 4vw, 56px); background: rgba(255,255,255,.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #ececee;">
-    <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" style="display: inline-flex; flex-shrink: 0;"><img src="../assets/logo-wordmark-dark.png?v=4e0fc67613" alt="TradeQuo Partner Program" style="height: 21px; width: auto;"></a>
+    <a href="../" data-page-link style="display: inline-flex; flex-shrink: 0;"><img src="../assets/logo-wordmark-dark.png?v=4e0fc67613" alt="TradeQuo Partner Program" style="height: 21px; width: auto;"></a>
     <nav aria-label="Partner Program pages" style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; justify-content: center;">
-      <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" class="hv-red" style="padding: 8px 14px; border-radius: 999px; border: 1px solid transparent; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em; white-space: nowrap;">Partner Program</a>
-          <a href="../programs/" data-page-link data-label="LOADING · PARTNER PROGRAMS" style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Programs</a>
-          <a href="../partner-terms/" data-page-link data-label="LOADING · COMMISSION PLAN" style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Commission Plan</a>
-          <a href="../dashboard/" data-page-link data-label="LOADING · PARTNER DASHBOARD" style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Dashboard</a>
-          <a href="../marketing-hub/" data-page-link data-label="LOADING · MARKETING HUB" style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Marketing</a>
-          <a href="../academy/" data-page-link data-label="LOADING · PARTNER ACADEMY" style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Academy</a>
-          <a href="../success-stories/" data-page-link data-label="LOADING · SUCCESS STORIES" aria-current="page" style="padding:8px 14px; border-radius:999px; border:1px solid #0a0a0a; background:#0a0a0a; color:#fff; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Stories</a>
+      <a href="../" data-page-link class="hv-red" style="padding: 8px 14px; border-radius: 999px; border: 1px solid transparent; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em; white-space: nowrap;">Partner Program</a>
+          <a href="../programs/" data-page-link style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Programs</a>
+          <a href="../partner-terms/" data-page-link style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Commission Plan</a>
+          <a href="../dashboard/" data-page-link style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Dashboard</a>
+          <a href="../marketing-hub/" data-page-link style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Marketing</a>
+          <a href="../academy/" data-page-link style="padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent; color:#45474d; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Academy</a>
+          <a href="../success-stories/" data-page-link aria-current="page" style="padding:8px 14px; border-radius:999px; border:1px solid #0a0a0a; background:#0a0a0a; color:#fff; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; letter-spacing:-.01em; white-space:nowrap; transition: color .2s ease, background .2s ease;">Stories</a>
     </nav>
-    <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; height: 40px; padding: 0 16px 0 12px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em; white-space: nowrap;">
+    <a href="../" data-page-link class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; height: 40px; padding: 0 16px 0 12px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em; white-space: nowrap;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="M11 18l-6-6 6-6"></path></svg>
       Back
     </a>
@@ -460,21 +418,21 @@ footer p { font-size: 12px !important; }
   </main>
 
   <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 56px) clamp(48px, 6vw, 80px);">
-    <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" class="hv-red" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 4px; border: 0; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">← Back to Partner Program</a>
-    <a href="../dashboard/" data-page-link data-label="LOADING · PARTNER DASHBOARD" class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">
+    <a href="../" data-page-link class="hv-red" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 4px; border: 0; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">← Back to Partner Program</a>
+    <a href="../dashboard/" data-page-link class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">
       <span style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b;">NEXT</span>Partner Dashboard
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
     </a>
   </div>
 </div>
-<script src="../assets/js/transition.js?v=43c6da9a8b" defer></script>
+<script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script>
   /* Phones: the page nav scrolls sideways — bring the current page into view. */
   var cur = document.querySelector('[data-page-bar] [aria-current="page"]');
   if (cur && cur.parentNode.scrollWidth > cur.parentNode.clientWidth) cur.parentNode.scrollLeft = cur.offsetLeft - 16;
   /* Esc returns to the Partner Program, as closing the overlay did in the design. */
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && window.tqGo) window.tqGo('../', 'LOADING · PARTNER PROGRAM');
+    if (e.key === 'Escape') location.href = '../';
   });
 </script>
 </body>

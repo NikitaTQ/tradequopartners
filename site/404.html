@@ -138,7 +138,6 @@ html { scroll-snap-type: none; }
 #signup form[data-agreement] label > span + span { height: 46px !important; }
 #signup [data-commit] { display: none !important; }
 #signup form[data-agreement] > div:last-child { grid-template-columns: 1fr !important; gap: 14px !important; }
-#signup form[data-agreement] > div:last-child > div { order: 2; }
 #signup form[data-agreement] button[type=submit] { height: 54px; }
 #signup [data-hero-panel] { padding: 8px 4px 28px !important; }
 #signup [data-hero-stage] { width: 100% !important; }
@@ -221,18 +220,12 @@ html:lang(vi) [data-fab] { display: flex !important; }
 }
 [data-fanmenu] > div:hover { z-index: 9 !important; }
 @keyframes tqFanVeil { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes tq-logo-idle { from { --tqo: -1; } to { --tqo: 1; } }
 @keyframes tq-crys-idle { from { --tqo: -1; } to { --tqo: 1; } }
 .hv-red-bg:hover { background:#c70f16 !important; }
 [data-fab] { pointer-events: none; }
 [data-fab] [data-fab-toggle] { pointer-events: auto; }
 [data-fab][data-open] [data-ref="fabIcon"] { transform: rotate(90deg); }
-@keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
-@keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
-@keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
-@keyframes tqLoaderDot { from { transform: scale(0); } to { transform: scale(1); } }
 @media (max-width: 640px) {
 [data-fan-head] { align-items: center !important; text-align: center; }
 [data-fan-head] > * { align-self: center !important; justify-self: center !important; }
