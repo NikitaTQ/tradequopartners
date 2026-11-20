@@ -7,7 +7,7 @@ design it leans on its own). Two versions:
   site/assets/perks2/<key>.webp     the home page's fan (the "Everything you need to grow" block): the picture on
                                     black (the card's glass taken out), laid on the dark card with mix-blend-mode:
                                     lighten; the revenue one without "Up to" (the page writes it, in each language);
-  the film (site/embeds/tradequo-film.html, -mobile.html): JPEG data URIs in its picture map, keys
+  the film (site/embeds/tradequo-film.html): JPEG data URIs in its picture map, keys
                                     film/perk-<key>.png, the picture on the card's own glass (the film fades its edges).
 Everything outside the picture's box is the card's glass (the neighbouring cards and the captions are left out)."""
 import base64
@@ -81,7 +81,7 @@ for key, F, cx, cy, lean, box, top in ICONS:
 
 # the film's picture map: the six new pictures in place of the old six
 OLD = ['tv', 'analysis', 'creatives', 'academy', 'brokerage', 'trips']
-for name in ('tradequo-film.html', 'tradequo-film-mobile.html'):
+for name in ('tradequo-film.html',):
     p = os.path.join(ROOT, 'site', 'embeds', name)
     s = open(p, encoding='utf-8').read()
     for k in OLD:

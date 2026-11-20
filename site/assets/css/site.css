@@ -86,8 +86,6 @@ html:lang(zh-Hant) { --h1f: 'TQ H1 Noto TC'; --h2f: 'TQ H2 Noto TC'; }
 .tq-h2 { --h2s: clamp(20px, 2.1vw, 30px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h2f), 'Inter', sans-serif; font-size: calc(var(--h2s) * var(--h2k, 1));
   font-weight: 700; font-synthesis: none; line-height: 1.2; letter-spacing: .15em; text-transform: uppercase; text-wrap: balance; }
 :lang(ar) .tq-h2, :lang(th) .tq-h2, :lang(ja) .tq-h2, :lang(ko) .tq-h2, :lang(zh) .tq-h2 { --h2k: 1.3; padding-inline-start: 0; text-transform: none; }
-/* read by screen readers and search engines, not drawn (a text a design shows in another form) */
-.tq-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 
 html, body { margin: 0; padding: 0; background: #ffffff; }
 /* Nothing on the site scrolls sideways. The page wrappers clip with overflow: clip, which
@@ -446,7 +444,6 @@ html { scroll-snap-type: y proximity; }
   @keyframes tqRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 640px) {
-  
   #signup { padding-top: 10px !important; }
   #signup [data-hero-intro] { gap: 8px !important; }
   #signup [data-hero-intro] p { display: none !important; }
@@ -461,7 +458,6 @@ html { scroll-snap-type: y proximity; }
   #signup form[data-agreement] label > span + span { height: 46px !important; }
   #signup [data-commit] { display: none !important; }
   #signup form[data-agreement] > div:last-child { grid-template-columns: 1fr !important; gap: 14px !important; }
-  #signup form[data-agreement] > div:last-child > div { order: 2; }
   #signup form[data-agreement] button[type=submit] { height: 54px; }   /* side padding stays even so the label sits in the centre */
   #signup [data-hero-panel] { padding: 8px 4px 28px !important; }
   #signup [data-hero-stage] { width: 100% !important; }
@@ -499,7 +495,7 @@ html { scroll-snap-type: y proximity; }
   [data-fan] { margin-inline: -8px !important; width: calc(100% + 16px) !important; }   /* the cards a little wider than the words above (8px into the panel's margin each side), for the captions */
   [data-fan-obj] { transform: none !important; width: 66% !important; }
   [data-fan-upto] { margin-bottom: -26px !important; font-size: 13px !important; }
-  [data-fan-x] { display: none !important; }   /* phones: the cards as they were */   /* "Up to" in the picture's empty top, right over the 87% */   /* cards a little shorter: the picture 66% (was 72%), min 214px (was 250px) */
+  [data-fan-x] { display: none !important; }   /* phones: the cards as they were (no extra line) */
   [data-fan-card] > span:first-child { font-size: 15px !important; }
   [data-fan-card] > span:nth-child(2) { font-size: 12px !important; }
   
@@ -557,8 +553,6 @@ html { scroll-snap-type: y proximity; }
 [data-fanmenu] > div:hover { z-index: 9 !important; }
 @keyframes tqFanVeil { from { opacity: 0; } to { opacity: 1; } }
 
-@keyframes tqLoaderIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes tq-logo-idle { from { --tqo: -1; } to { --tqo: 1; } }
 .tq-logo { position: relative; display: inline-flex; align-items: center; gap: 18px; height: 64px; box-sizing: border-box; padding: 0 4px 0 28px; border-radius: 999px; background: linear-gradient(180deg, #1A1A1D 0%, #0D0D0F 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.08); color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate; transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
 .tq-logo:hover, .tq-logo:focus-visible { --tqh: 1; animation: none; color: #FFFFFF; }
@@ -710,39 +704,7 @@ html { scroll-snap-type: y proximity; }
 [data-fab] [data-fab-toggle] { pointer-events: auto; }
 [data-fab][data-open] [data-ref="fabIcon"] { transform: rotate(90deg); }
 
-/* ---- page-transition veil ------------------------------------------------ */
-/* Page transition veil (transition.js). Leaving: the veil fades in and black ink pours into the
-   TradeQuo mark; arriving: the full mark drains and the veil fades. Inline SVG, no WebGL. */
-.tq-loader {
-  position: fixed; inset: 0; z-index: 120;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: #F2F2F3; pointer-events: all;
-  animation: tqLoaderIn .18s ease both;
-}
-.tq-loader[hidden] { display: none; }
-html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
-.tq-loader__mark { width: clamp(96px, 12vw, 132px); height: auto; overflow: visible; filter: drop-shadow(0 18px 22px rgba(10,10,10,.12)); }
-.tq-loader__level { transform: translateY(146px); }
-.tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
-.tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
-.tq-loader.is-in .tq-loader__level { animation: tqLoaderFill .46s cubic-bezier(.55,.05,.35,1) both; }
-.tq-loader.is-in .tq-loader__dot { animation: tqLoaderDot .3s cubic-bezier(.3,1.6,.5,1) .3s both; }
-html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
-html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
-.tq-loader.is-out { animation: tqLoaderOut .26s ease .3s both; }
-.tq-loader.is-out .tq-loader__level { animation: tqLoaderDrain .4s cubic-bezier(.55,0,.45,1) both; }
-.tq-loader.is-out .tq-loader__dot { animation: tqLoaderDot .22s ease reverse both; }
-@keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
-@keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
-@keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
-@keyframes tqLoaderDot { from { transform: scale(0); } to { transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) { .tq-loader__wave { animation: none; } }
-.tq-loader__label {
-  position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%);
-  font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .2em; color: #9a9da3; white-space: nowrap;
-  text-transform: uppercase;
-}
-html.tq-arriving, html.tq-locked { overflow: hidden; }
+html.tq-locked { overflow: hidden; }   /* the page under an open menu or language sheet does not scroll */
 
 /* ---- the glass "Become a partner" button (designs CTA glass dark / light; November 2026) ------------------------------
    The design's own button as a plate (tools/cta-glass/make.py: words and chevron taken out, cut out of its black),
@@ -761,13 +723,6 @@ html.tq-arriving, html.tq-locked { overflow: hidden; }
 .tq-gbtn__chev { flex: none; width: calc(var(--h) * .2); height: calc(var(--h) * .36); }
 [dir="rtl"] .tq-gbtn__chev { transform: scaleX(-1); }
 @media (prefers-reduced-motion: reduce) { .tq-gbtn { transition: none; } }
-
-/* ---- "Premium" under "Free TradingView" (the Partner perks cards, home and Partner Terms): the plan's name as a small
-   red badge on a line of its own; sized from the title, never under 9.5px ------------------------------------------ */
-.tq-prem { display: block; width: fit-content; margin: .5em auto 0; padding: .42em .95em .38em; border-radius: 999px;
-  font-size: max(.4em, 9.5px); font-weight: 700; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: #fff;
-  background: linear-gradient(180deg, #ff3a40 0%, #e7131b 55%, #b80e15 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 14px -6px rgba(231,19,27,.7); }
-.tp-perk .tq-prem { display: inline-block; margin: 0; margin-inline-start: .5em; vertical-align: .2em; }   /* Partner Terms: its cards read from the left: the badge right after the name (or under it, at the start) */
 
 /* ---- form status (shown only if the request fails to send) --------------- */
 .tq-form-error { position: relative; margin: 0; font-size: 12px; line-height: 1.5; color: #c8141b; }
@@ -959,12 +914,6 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   footer p { font-size: 12px !important; }
 }
 
-/* ---- Dark header (Marketing Tools: the page opens on a dark screen) ----------------------------------
-   The bar runs edge to edge in the hero's own black, so header and hero read as one dark screen, with the steel plate
-   on it (as the plate's design shows it; build-i18n.py: page 'head': 'dark'). The black is one plain band behind the bar,
-   edge to edge (.tp clips the overhang), reaching 2px under the hero: no clipped shadow, whose soft edge let a
-   hairline of the white page show under the bar at the sides on some screens. */
-.tq-head--dark::before { content: ''; position: absolute; z-index: -1; top: -6px; bottom: 12px; left: 50%; width: 100vw; margin-left: -50vw; background: #0a0a0b; pointer-events: none; }
 /* ---- the partner film (#film): a video with the film player's own buttons over it -----------------------------------
    The buttons as the film drew them: sizes off --e = 3% of the box's width (34-44px), dimmed to .55 until the film is
    hovered or paused; back / forward 1.5 s with their labels, pause / play in the middle (startFilm in landing.js). */

@@ -75,8 +75,6 @@ EN = strings['en']
 PAIRED = {
     'red': ('<span style="color: #e7131b;">', '</span>'),
     'line': ('<span class="tq-line">', '</span>'),   # one sentence of a heading (a block of its own where the CSS says so)
-    'privacy': ('<a href="#" style="color:#c8141b;">', '</a>'),
-    'terms': ('<a href="#" style="color:#c8141b;">', '</a>'),
     'lots': ('<span data-inv-lots>', '</span>'),
     'rate': ('<span data-inv-rate>', '</span>'),
 }
@@ -192,8 +190,8 @@ def switcher(cur, s, slug='', page_id='landing', home=''):
         if pid == page_id:
             items.append('<li class="tq-lang__page"><a href="#" aria-current="page" data-to-top>%s</a></li>' % html.escape(s(key)))
         else:
-            items.append('<li class="tq-lang__page"><a href="%s" data-page-link data-label="%s">%s</a></li>'
-                         % (page_href(home, path), render_attr(s('loader') + ' · ' + s(key)), html.escape(s(key))))
+            items.append('<li class="tq-lang__page"><a href="%s" data-page-link>%s</a></li>'
+                         % (page_href(home, path), html.escape(s(key))))
     items.append('<li class="tq-lang__page tq-lang__label" aria-hidden="true">%s</li>' % html.escape(s('lang.label')))
     for t in languages:
         current = ' aria-current="true"' if t['code'] == cur['code'] else ''
@@ -244,8 +242,8 @@ def mnav_links(home, page_id, s):
         if pid == page_id:
             out.append('<li><a class="tq-mnav__a" href="#" aria-current="page" data-to-top>%s</a></li>' % inner)
         else:
-            out.append('<li><a class="tq-mnav__a" href="%s" data-page-link data-label="%s">%s</a></li>'
-                       % (page_href(home, path), render_attr(s('loader') + ' · ' + s(key)), inner))
+            out.append('<li><a class="tq-mnav__a" href="%s" data-page-link>%s</a></li>'
+                       % (page_href(home, path), inner))
     return '\n      '.join(out)
 
 
@@ -271,8 +269,8 @@ def site_nav(home, page_id):
         if pid == page_id:
             out.append('<a class="hv-red tq-nav-link" href="#" aria-current="page" data-to-top>{{%s}}</a>' % key)
         else:
-            out.append('<a class="hv-red tq-nav-link" href="%s" data-page-link data-label="{{@loader}} · {{@%s}}">{{%s}}</a>'
-                       % (page_href(home, path), key, key))
+            out.append('<a class="hv-red tq-nav-link" href="%s" data-page-link>{{%s}}</a>'
+                       % (page_href(home, path), key))
     return '\n        '.join(out)
 
 
@@ -344,9 +342,7 @@ for page in PAGES:
             'embedQuery': '' if code == 'en' else '?lang=' + code,
             # "become a partner" links in shared blocks: scroll to the form on the landing, go to it elsewhere
             'signupHref': (home + '#signup') if slug else '#signup',
-            'signupNav': (' data-page-link data-label="%s"' % render_attr(s('loader') + ' · ' + s('fan.home'))) if slug else '',
-            # the header: dark (light wordmark) on pages that start with a dark screen
-            'headClass': ' tq-head--dark' if page.get('head') == 'dark' else '',
+            'signupNav': ' data-page-link' if slug else '',
             'pageCss': ('\n<link rel="stylesheet" href="%sassets/css/%s.css" data-inline>' % (root, page['css'])) if page.get('css') else '',
         }
 

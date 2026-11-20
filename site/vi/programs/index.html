@@ -42,8 +42,7 @@
 <link rel="icon" href="../../favicon.svg?v=ff199c552e" type="image/svg+xml">
 <link rel="icon" href="../../favicon-32.png?v=08736b4127" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="../../apple-touch-icon.png?v=83caa1ad63">
-<script>/* loader veil on arrival; visitor's "no auto-translate" choice (set in the language menu) */
-
+<script>/* the visitor's "no auto-translate" choice (set in the language menu) */
 try{if(localStorage.getItem('tqNoTranslate')){var d=document.documentElement,m=document.createElement('meta');d.setAttribute('translate','no');d.classList.add('notranslate');m.name='google';m.content='notranslate';document.head.appendChild(m)}}catch(e){}</script>
 <link rel="preload" href="../../assets/fonts/inter-latin.woff2?v=f11d729bb0" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/inter-vietnamese.woff2?v=9c1cad863a" as="font" type="font/woff2" crossorigin>
@@ -324,7 +323,6 @@ html { scroll-snap-type: none; }
 #signup form[data-agreement] label > span + span { height: 46px !important; }
 #signup [data-commit] { display: none !important; }
 #signup form[data-agreement] > div:last-child { grid-template-columns: 1fr !important; gap: 14px !important; }
-#signup form[data-agreement] > div:last-child > div { order: 2; }
 #signup form[data-agreement] button[type=submit] { height: 54px; }
 #signup [data-hero-panel] { padding: 8px 4px 28px !important; }
 #signup [data-hero-stage] { width: 100% !important; }
@@ -418,8 +416,6 @@ html:lang(vi) .tq-lang__menu .tq-lang__page { display: block; }
 }
 [data-fanmenu] > div:hover { z-index: 9 !important; }
 @keyframes tqFanVeil { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes tqLoaderOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes tq-logo-idle { from { --tqo: -1; } to { --tqo: 1; } }
 .tq-logo { position: relative; display: inline-flex; align-items: center; gap: 18px; height: 64px; box-sizing: border-box; padding: 0 4px 0 28px; border-radius: 999px; background: linear-gradient(180deg, #1A1A1D 0%, #0D0D0F 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.08); color: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * 0.04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate; transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqd .14s ease-out; }
 .tq-logo:hover, .tq-logo:focus-visible { --tqh: 1; animation: none; color: #FFFFFF; }
@@ -481,33 +477,7 @@ html:lang(vi) .tq-lang__menu .tq-lang__page { display: block; }
 [data-fab] { pointer-events: none; }
 [data-fab] [data-fab-toggle] { pointer-events: auto; }
 [data-fab][data-open] [data-ref="fabIcon"] { transform: rotate(90deg); }
-.tq-loader {
-  position: fixed; inset: 0; z-index: 120;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: #F2F2F3; pointer-events: all;
-  animation: tqLoaderIn .18s ease both;
-}
-.tq-loader[hidden] { display: none; }
-html.tq-arriving .tq-loader[hidden] { display: flex; animation: none; }
-.tq-loader__mark { width: clamp(96px, 12vw, 132px); height: auto; overflow: visible; filter: drop-shadow(0 18px 22px rgba(10,10,10,.12)); }
-.tq-loader__level { transform: translateY(146px); }
-.tq-loader__wave { animation: tqLoaderWave .9s linear infinite; }
-.tq-loader__dot { transform-box: fill-box; transform-origin: center; transform: scale(0); }
-html.tq-arriving .tq-loader__level, .tq-loader.is-full .tq-loader__level { transform: translateY(50px); }
-html.tq-arriving .tq-loader__dot, .tq-loader.is-full .tq-loader__dot { transform: none; }
-@keyframes tqLoaderFill { from { transform: translateY(146px); } to { transform: translateY(50px); } }
-@keyframes tqLoaderDrain { from { transform: translateY(50px); } to { transform: translateY(146px); } }
-@keyframes tqLoaderWave { from { transform: translateX(0); } to { transform: translateX(-40px); } }
-@keyframes tqLoaderDot { from { transform: scale(0); } to { transform: scale(1); } }
-@media (prefers-reduced-motion: reduce) {
-.tq-loader__wave { animation: none; }
-}
-.tq-loader__label {
-  position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%);
-  font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .2em; color: #9a9da3; white-space: nowrap;
-  text-transform: uppercase;
-}
-html.tq-arriving, html.tq-locked { overflow: hidden; }
+html.tq-locked { overflow: hidden; }
 .tq-gbtn { --h: 56px; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: calc(var(--h) * .5);
   height: var(--h); min-width: calc(var(--h) * 4.4); box-sizing: border-box; padding: 0; padding-inline: calc(var(--h) * .95) calc(var(--h) * .72);
   border: 0 solid transparent; border-image: url(../../assets/cta/glass-dark.webp?v=9f5bdab63b) 219 380 fill / 50% calc(var(--h) * .868) stretch;
@@ -1164,7 +1134,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tp-night { border-radius: 26px; }
 }
 @media (prefers-reduced-motion: reduce) {
-.tp-perk, .tp-glass { transition: none; }
+.tp-glass { transition: none; }
 }
 @property --ch { syntax: '<number>'; inherits: true; initial-value: 0; }
 @property --cd { syntax: '<number>'; inherits: true; initial-value: 0; }
@@ -1302,25 +1272,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .pf-dr__go-l { margin: -2px 0 0; margin-inline: 16px 12px; font-size: 18px; }
 .pf-dr__chev { width: 9px; }
 }
-#pf-top { height: var(--tq-gap); margin-bottom: -1px;
-  background: linear-gradient(0deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
-      #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
-      #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
-.pf-fan { position: relative; flex: 1; min-height: 0; }
-#pf-tail { position: relative; height: var(--tq-gap); margin-top: -1px;   
-  background: radial-gradient(55% 34vh at 50% 0%, rgba(150,10,15,.42), rgba(150,10,15,0) 70%),
-    linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 4.5%, #0c0c0c 9%, #0f0f0f 13.6%, #151515 18.2%, #1e1e1e 22.7%, #2a2a2a 27.3%, #383838 31.8%, #494949 36.4%,
-      #5c5c5c 40.9%, #707070 45.5%, #858585 50%, #999 54.5%, #adadad 59.1%, #c0c0c0 63.6%, #d1d1d1 68.2%, #dfdfdf 72.7%, #ebebeb 77.3%, #f4f4f4 81.8%,
-      #fafafa 86.4%, #fdfdfd 90.9%, #fff 95.5%); }
 .pf { position: relative; padding-top: var(--tq-half); }
 @media (max-width: 899px) {
 #pf-who-wrap { padding: 24px 16px; }
 .pf { padding-top: calc(var(--tq-half) - 24px); }
-#pf-top, #pf-tail { display: none; }
-.pf-fan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; max-width: 760px; margin: 0 auto; padding: 28px 0; }
-}
-@media (max-width: 640px) {
-.pf-fan { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 24px 0; }
 }
 @media (max-width: 640px) {
 .tp-hero .tp-h1 { --h1s: 23px; line-height: 1.04; }
@@ -1394,33 +1349,21 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 <link rel="preload" href="../../assets/programs/glass-3.webp?v=b3209a15b9" as="image" fetchpriority="high">
 </head>
 <body>
-<div class="tq-loader" data-loader hidden>
-  <svg class="tq-loader__mark" viewBox="36 46 130 106" aria-hidden="true">
-    <defs>
-      <clipPath id="tqLoaderInk"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></clipPath>
-      <linearGradient id="tqLoaderGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"></stop><stop offset="1" stop-color="#e3e4e7"></stop></linearGradient>
-    </defs>
-    <g class="tq-loader__glass" fill="url(#tqLoaderGlass)" stroke="#0a0a0a" stroke-width="1.5" stroke-linejoin="round"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></g>
-    <g clip-path="url(#tqLoaderInk)"><g class="tq-loader__level"><path class="tq-loader__wave" d="M0 0q10-5 20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0V120H0Z" fill="#0a0a0a"></path></g></g>
-    <circle class="tq-loader__dot" cx="141" cy="130.5" r="10.5" fill="#e7131b"></circle>
-  </svg>
-  <span class="tq-loader__label" data-loader-label>ĐANG TẢI</span>
-</div>
 <div class="tp">
 
   <header class="tq-head">
     <button type="button" class="tq-head__burger" data-mnav-toggle aria-controls="tq-mnav" aria-expanded="false" aria-label="Menu"><svg class="tq-head__bi" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><svg class="tq-head__bx" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></button>
-    <a class="tq-head__home" href="../" data-page-link data-label="ĐANG TẢI · Trang chủ"><img class="tq-head__logo" src="../../assets/head/logo.webp?v=fbcac7b3e0" width="268" height="48" alt="TradeQuo"></a>
+    <a class="tq-head__home" href="../" data-page-link><img class="tq-head__logo" src="../../assets/head/logo.webp?v=fbcac7b3e0" width="268" height="48" alt="TradeQuo"></a>
     <nav class="tq-head__nav">
       <span data-navlinks="" style="display: contents;">
-        <a class="hv-red tq-nav-link" href="../" data-page-link data-label="ĐANG TẢI · Trang chủ">Trang chủ</a>
+        <a class="hv-red tq-nav-link" href="../" data-page-link>Trang chủ</a>
         <a class="hv-red tq-nav-link" href="#" aria-current="page" data-to-top>Các chương trình</a>
-        <a class="hv-red tq-nav-link" href="../partner-terms/" data-page-link data-label="ĐANG TẢI · Điều khoản đối tác">Điều khoản đối tác</a>
-        <a class="hv-red tq-nav-link" href="../ib-tools/" data-page-link data-label="ĐANG TẢI · Công cụ IB">Công cụ IB</a>
+        <a class="hv-red tq-nav-link" href="../partner-terms/" data-page-link>Điều khoản đối tác</a>
+        <a class="hv-red tq-nav-link" href="../ib-tools/" data-page-link>Công cụ IB</a>
 
         </span>
-      <div class="tq-lang" data-lang><button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="Menu · Ngôn ngữ: Tiếng Việt"><svg class="tq-lang__burger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><svg class="tq-lang__globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg><span class="tq-lang__code">VI</span><svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="tq-lang__menu" hidden><li class="tq-lang__page"><a href="../" data-page-link data-label="ĐANG TẢI · Trang chủ">Trang chủ</a></li><li class="tq-lang__page"><a href="#" aria-current="page" data-to-top>Các chương trình</a></li><li class="tq-lang__page"><a href="../partner-terms/" data-page-link data-label="ĐANG TẢI · Điều khoản đối tác">Điều khoản đối tác</a></li><li class="tq-lang__page"><a href="../ib-tools/" data-page-link data-label="ĐANG TẢI · Công cụ IB">Công cụ IB</a></li><li class="tq-lang__page tq-lang__label" aria-hidden="true">Ngôn ngữ</li><li><a href="../../programs/" hreflang="en" lang="en">English</a></li><li><a href="../../ar/programs/" hreflang="ar" lang="ar">العربية</a></li><li><a href="../../zh-hans/programs/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li><li><a href="../../zh-hant/programs/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li><li><a href="../../fr/programs/" hreflang="fr" lang="fr">Français</a></li><li><a href="../../de/programs/" hreflang="de" lang="de">Deutsch</a></li><li><a href="../../id/programs/" hreflang="id" lang="id">Bahasa Indonesia</a></li><li><a href="../../it/programs/" hreflang="it" lang="it">Italiano</a></li><li><a href="../../ja/programs/" hreflang="ja" lang="ja">日本語</a></li><li><a href="../../ko/programs/" hreflang="ko" lang="ko">한국어</a></li><li><a href="../../pl/programs/" hreflang="pl" lang="pl">Polski</a></li><li><a href="../../pt/programs/" hreflang="pt" lang="pt">Português</a></li><li><a href="../../ro/programs/" hreflang="ro" lang="ro">Română</a></li><li><a href="../../es/programs/" hreflang="es" lang="es">Español</a></li><li><a href="../../th/programs/" hreflang="th" lang="th">ไทย</a></li><li><a href="../../tr/programs/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="../../uk/programs/" hreflang="uk" lang="uk">Українська</a></li><li><a href="../../vi/programs/" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a></li><li class="tq-lang__opt"><button type="button" role="switch" aria-checked="true" data-translate-toggle><span>Tự động dịch</span><span class="tq-lang__switch" aria-hidden="true"></span></button></li></ul></div>
-      <a class="tq-head__cta" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ">Trở thành đối tác</a>
+      <div class="tq-lang" data-lang><button type="button" class="tq-lang__btn" aria-haspopup="true" aria-expanded="false" aria-label="Menu · Ngôn ngữ: Tiếng Việt"><svg class="tq-lang__burger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><svg class="tq-lang__globe" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg><span class="tq-lang__code">VI</span><svg class="tq-lang__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button><ul class="tq-lang__menu" hidden><li class="tq-lang__page"><a href="../" data-page-link>Trang chủ</a></li><li class="tq-lang__page"><a href="#" aria-current="page" data-to-top>Các chương trình</a></li><li class="tq-lang__page"><a href="../partner-terms/" data-page-link>Điều khoản đối tác</a></li><li class="tq-lang__page"><a href="../ib-tools/" data-page-link>Công cụ IB</a></li><li class="tq-lang__page tq-lang__label" aria-hidden="true">Ngôn ngữ</li><li><a href="../../programs/" hreflang="en" lang="en">English</a></li><li><a href="../../ar/programs/" hreflang="ar" lang="ar">العربية</a></li><li><a href="../../zh-hans/programs/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li><li><a href="../../zh-hant/programs/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li><li><a href="../../fr/programs/" hreflang="fr" lang="fr">Français</a></li><li><a href="../../de/programs/" hreflang="de" lang="de">Deutsch</a></li><li><a href="../../id/programs/" hreflang="id" lang="id">Bahasa Indonesia</a></li><li><a href="../../it/programs/" hreflang="it" lang="it">Italiano</a></li><li><a href="../../ja/programs/" hreflang="ja" lang="ja">日本語</a></li><li><a href="../../ko/programs/" hreflang="ko" lang="ko">한국어</a></li><li><a href="../../pl/programs/" hreflang="pl" lang="pl">Polski</a></li><li><a href="../../pt/programs/" hreflang="pt" lang="pt">Português</a></li><li><a href="../../ro/programs/" hreflang="ro" lang="ro">Română</a></li><li><a href="../../es/programs/" hreflang="es" lang="es">Español</a></li><li><a href="../../th/programs/" hreflang="th" lang="th">ไทย</a></li><li><a href="../../tr/programs/" hreflang="tr" lang="tr">Türkçe</a></li><li><a href="../../uk/programs/" hreflang="uk" lang="uk">Українська</a></li><li><a href="../../vi/programs/" hreflang="vi" lang="vi" aria-current="true">Tiếng Việt</a></li><li class="tq-lang__opt"><button type="button" role="switch" aria-checked="true" data-translate-toggle><span>Tự động dịch</span><span class="tq-lang__switch" aria-hidden="true"></span></button></li></ul></div>
+      <a class="tq-head__cta" href="../#signup" data-page-link>Trở thành đối tác</a>
     </nav>
   </header>
   
@@ -1428,13 +1371,13 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   <div class="tq-mnav" id="tq-mnav" data-mnav hidden>
     <p class="tq-mnav__label">Menu</p>
     <ol class="tq-mnav__list">
-      <li><a class="tq-mnav__a" href="../" data-page-link data-label="ĐANG TẢI · Trang chủ"><span class="tq-mnav__n">01</span><span class="tq-mnav__t">Trang chủ</span></a></li>
+      <li><a class="tq-mnav__a" href="../" data-page-link><span class="tq-mnav__n">01</span><span class="tq-mnav__t">Trang chủ</span></a></li>
       <li><a class="tq-mnav__a" href="#" aria-current="page" data-to-top><span class="tq-mnav__n">02</span><span class="tq-mnav__t">Các chương trình</span></a></li>
-      <li><a class="tq-mnav__a" href="../partner-terms/" data-page-link data-label="ĐANG TẢI · Điều khoản đối tác"><span class="tq-mnav__n">03</span><span class="tq-mnav__t">Điều khoản đối tác</span></a></li>
-      <li><a class="tq-mnav__a" href="../ib-tools/" data-page-link data-label="ĐANG TẢI · Công cụ IB"><span class="tq-mnav__n">04</span><span class="tq-mnav__t">Công cụ IB</span></a></li>
+      <li><a class="tq-mnav__a" href="../partner-terms/" data-page-link><span class="tq-mnav__n">03</span><span class="tq-mnav__t">Điều khoản đối tác</span></a></li>
+      <li><a class="tq-mnav__a" href="../ib-tools/" data-page-link><span class="tq-mnav__n">04</span><span class="tq-mnav__t">Công cụ IB</span></a></li>
     </ol>
     <div class="tq-mnav__foot">
-      <a class="tq-mnav__cta" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ">Trở thành đối tác</a>
+      <a class="tq-mnav__cta" href="../#signup" data-page-link>Trở thành đối tác</a>
       <button type="button" class="tq-mnav__lang" data-lsheet-open aria-haspopup="dialog" aria-controls="tq-lsheet" aria-expanded="false" aria-label="Ngôn ngữ: Tiếng Việt">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"></path></svg>
         <span>VI</span>
@@ -1511,7 +1454,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
             <p class="tp-pc__sub">phí spread từ hoạt động thị trường của khách hàng của bạn</p>
             <ul class="tp-pc__pts"><li>Chi trả mỗi ngày, không phí chi trả</li><li>Không giới hạn</li><li>Bảng theo dõi trực tiếp</li></ul>
             <div class="tp-pc__cta">
-              <a class="tq-gbtn tp-pc__go" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ"><span>Trở thành đối tác</span><svg class="tq-gbtn__chev" viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="M2 2l8.5 9L2 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              <a class="tq-gbtn tp-pc__go" href="../#signup" data-page-link><span>Trở thành đối tác</span><svg class="tq-gbtn__chev" viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="M2 2l8.5 9L2 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
             </div>
           </article>
           <article class="tp-pc" data-glass="../../assets/programs/glass-2.webp?v=51398f3d24">
@@ -1525,7 +1468,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
             <p class="tp-pc__sub">nhận thu nhập từ mọi đối tác cấp dưới, ở bất kỳ cấp nào</p>
             <ul class="tp-pc__pts"><li>Không giới hạn cấp Sub-IB</li><li>Khách hàng của bạn vẫn mang lại thu nhập</li><li>Quản lý đối tác riêng</li></ul>
             <div class="tp-pc__cta">
-              <a class="tq-gbtn tp-pc__go" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ"><span>Trở thành đối tác</span><svg class="tq-gbtn__chev" viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="M2 2l8.5 9L2 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              <a class="tq-gbtn tp-pc__go" href="../#signup" data-page-link><span>Trở thành đối tác</span><svg class="tq-gbtn__chev" viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="M2 2l8.5 9L2 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
             </div>
           </article>
           <article class="tp-pc" data-glass="../../assets/programs/glass-3.webp?v=b3209a15b9">
@@ -1539,7 +1482,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
             <p class="tp-pc__sub">công ty môi giới hoặc học viện, trên hạ tầng TradeQuo</p>
             <ul class="tp-pc__pts"><li>Môi giới White-Label</li><li>Học viện White-Label</li><li>Quản lý đối tác riêng</li></ul>
             <div class="tp-pc__cta">
-              <a class="tq-gbtn tp-pc__go" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ"><span>Trở thành đối tác</span><svg class="tq-gbtn__chev" viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="M2 2l8.5 9L2 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+              <a class="tq-gbtn tp-pc__go" href="../#signup" data-page-link><span>Trở thành đối tác</span><svg class="tq-gbtn__chev" viewBox="0 0 12 22" aria-hidden="true" focusable="false"><path d="M2 2l8.5 9L2 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
             </div>
           </article>
         </div>
@@ -1676,7 +1619,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
               <div class="pf-dr__meta">CÙNG TRADEQUO · <span data-dr-num>01</span>/05</div>
               <div class="pf-dr__gains"><p class="pf-dr__gain" data-dr-gain>Nhận tới 87% spread phát sinh từ hoạt động thị trường hợp lệ của khách hàng do bạn giới thiệu.</p><p class="pf-dr__gain" data-dr-gain hidden>Giúp cộng đồng của bạn tiếp cận công cụ TradingView và góc nhìn thị trường, với hoa hồng được chốt mỗi ngày.</p><p class="pf-dr__gain" data-dr-gain hidden>Banner, landing page và video có sẵn — lượt đăng ký và hoạt động của khách hàng được theo dõi trên bảng điều khiển của bạn.</p><p class="pf-dr__gain" data-dr-gain hidden>Nhận hoa hồng từ khách hàng do chính bạn giới thiệu và từ mạng lưới đối tác của bạn, với sự hỗ trợ của quản lý đối tác riêng.</p><p class="pf-dr__gain" data-dr-gain hidden>Ra mắt Môi giới hoặc Học viện White-Label mang tên chính bạn, vận hành trên hạ tầng của TradeQuo.</p></div>
             </div>
-            <a class="pf-dr__go" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ">
+            <a class="pf-dr__go" href="../#signup" data-page-link>
               <span class="pf-dr__plus" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2.2v15.6M2.2 10h15.6" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round"/></svg></span>
               <span class="pf-dr__go-l" data-fitw>Đăng ký làm đối tác</span>
               <svg class="pf-dr__chev" width="12" height="21" viewBox="0 0 12 21" fill="none" aria-hidden="true"><path d="M2 2l8 8.5L2 19" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1713,7 +1656,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <div class="tq-cmp__t" data-row="5" style="grid-row: 6;"><img src="../../assets/compare/tv.webp?v=6c43208e4f" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>TradingView Premium</b><small>Miễn phí</small></span></div>
     <span class="tq-cmp__n" data-row="6" style="grid-row: 7;">06</span><span class="tq-cmp__l" data-row="6" style="grid-row: 7;">Phần thưởng</span><span class="tq-cmp__o" data-row="6" style="grid-row: 7;">Điểm &amp; thưởng tiền mặt</span>
     <div class="tq-cmp__t" data-row="6" style="grid-row: 7;"><img src="../../assets/compare/trips.webp?v=2f7b121899" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>Du lịch thưởng</b></span></div>
-    <a class="tq-cmp__go" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ"><span class="tq-cmp__plus" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 3v14M3 10h14" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/></svg></span><span class="tq-cmp__go-l">Trở thành đối tác</span><svg class="tq-cmp__chev" viewBox="0 0 12 21" aria-hidden="true"><path d="M2 2l8 8.5L2 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="tq-cmp__go" href="../#signup" data-page-link><span class="tq-cmp__plus" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 3v14M3 10h14" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/></svg></span><span class="tq-cmp__go-l">Trở thành đối tác</span><svg class="tq-cmp__chev" viewBox="0 0 12 21" aria-hidden="true"><path d="M2 2l8 8.5L2 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
         </div>
@@ -1730,7 +1673,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
           <h2 class="tp-h2 tq-h2" data-fitw>Nhà môi giới được khách hàng <span style="color: #e7131b;">tin tưởng</span></h2>
           <p class="tp-dome-copy__sub">Bạn nhận thu nhập chừng nào khách hàng còn hoạt động, vì vậy nhà môi giới đứng sau liên kết của bạn rất quan trọng.</p>
           <div class="tp-dome-actions">
-            <a class="tp-c3d tp-tdome" data-c3d href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ">
+            <a class="tp-c3d tp-tdome" data-c3d href="../#signup" data-page-link>
               <span class="tp-tdome__glass" aria-hidden="true">
                 <svg class="tp-tdome__hex" width="100%" height="100%" focusable="false"><defs><pattern id="tpDomeHex" width="18" height="31.2" patternUnits="userSpaceOnUse"><path d="M9 0 L18 5.2 L18 15.6 L9 20.8 L0 15.6 L0 5.2 Z M9 20.8 L9 31.2" fill="none" stroke="#7E838C" stroke-width="0.8"></path></pattern></defs><rect width="100%" height="100%" fill="url(#tpDomeHex)"></rect></svg>
                 <span class="tp-tdome__sweep"></span>
@@ -1739,7 +1682,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
               <span class="tp-pill3"><span class="tp-pill3__face"><span class="tp-pill3__label">Tham gia cùng 30K+ đối tác</span><span class="tp-pill3__go"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></span></span>
               <span class="tp-tdome__base" aria-hidden="true"></span>
             </a>
-            <a class="tp-dome-btn" href="../#reviews" data-page-link data-label="ĐANG TẢI · Trang chủ">Xem đánh giá<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            <a class="tp-dome-btn" href="../#reviews" data-page-link>Xem đánh giá<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
           </div>
         </div>
         <div class="tp-dome" data-dome>
@@ -1800,7 +1743,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </div>
     </div>
     <div data-how-cta="" style="display: flex; justify-content: center; margin-top: clamp(36px, 4.4vw, 60px);">
-      <a class="tq-launch" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ" aria-label="Trở thành đối tác"><span class="tq-launch__btn">Trở thành đối tác<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="tq-launch__cover" aria-hidden="true"><span class="tq-launch__label">▲ LIFT</span></span><span class="tq-launch__hinge tq-launch__hinge--l" aria-hidden="true"></span><span class="tq-launch__hinge tq-launch__hinge--r" aria-hidden="true"></span></a>
+      <a class="tq-launch" href="../#signup" data-page-link aria-label="Trở thành đối tác"><span class="tq-launch__btn">Trở thành đối tác<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="tq-launch__cover" aria-hidden="true"><span class="tq-launch__label">▲ LIFT</span></span><span class="tq-launch__hinge tq-launch__hinge--l" aria-hidden="true"></span><span class="tq-launch__hinge tq-launch__hinge--r" aria-hidden="true"></span></a>
     </div>
   </section>
 
@@ -1890,12 +1833,12 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
         <h2 class="tp-final__title tq-h2" data-fitw>Bắt đầu kiếm tiền <span style="color: #e7131b;">ngay hôm nay</span></h2>
         <p class="tp-final__sub">Lên đến 87% spread, chi trả hằng ngày và một người quản lý sẵn sàng nghe máy.</p>
         <div class="tp-final__actions">
-          <a class="tp-glint" href="../#signup" data-page-link data-label="ĐANG TẢI · Trang chủ">
+          <a class="tp-glint" href="../#signup" data-page-link>
             <span class="tp-glint__sweep" aria-hidden="true"></span>
             <span class="tp-glint__label">Trở thành đối tác</span>
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </a>
-          <a class="tp-roll" href="../partner-terms/" data-page-link data-label="ĐANG TẢI · Điều khoản đối tác" aria-label="Ước tính thu nhập">
+          <a class="tp-roll" href="../partner-terms/" data-page-link aria-label="Ước tính thu nhập">
             <span class="tp-roll__window" aria-hidden="true">
               <span class="tp-roll__track">
                 <span class="tp-roll__a">Ước tính thu nhập</span>
@@ -2009,7 +1952,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   </footer>
 </div>
 
-<script src="../../assets/js/transition.js?v=43c6da9a8b" defer></script>
-<script src="../../assets/js/landing.js?v=32ec0df81e" defer></script>
+<script src="../../assets/js/transition.js?v=f60783e549" defer></script>
+<script src="../../assets/js/landing.js?v=0a26497344" defer></script>
 </body>
 </html>

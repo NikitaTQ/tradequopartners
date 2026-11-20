@@ -31,7 +31,7 @@ def nav_link(p, current):
              'transition: color .2s ease, background .2s ease;').format(
         b='#0a0a0a' if sel else 'transparent', bg='#0a0a0a' if sel else 'transparent', c='#fff' if sel else '#45474d')
     cur = ' aria-current="page"' if sel else ''
-    return ('<a href="../{slug}/" data-page-link data-label="LOADING · {label}"{cur} style="{style}">{short}</a>'
+    return ('<a href="../{slug}/" data-page-link{cur} style="{style}">{short}</a>'
             .format(slug=p['slug'], label=a(p['title'].upper()), cur=cur, style=style, short=e(p['short'])))
 
 
@@ -81,26 +81,14 @@ def render(i, p):
 <link rel="stylesheet" href="../assets/css/site.css" data-inline>
 </head>
 <body>
-<div class="tq-loader" data-loader hidden>
-  <svg class="tq-loader__mark" viewBox="36 46 130 106" aria-hidden="true">
-    <defs>
-      <clipPath id="tqLoaderInk"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></clipPath>
-      <linearGradient id="tqLoaderGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"></stop><stop offset="1" stop-color="#e3e4e7"></stop></linearGradient>
-    </defs>
-    <g class="tq-loader__glass" fill="url(#tqLoaderGlass)" stroke="#0a0a0a" stroke-width="1.5" stroke-linejoin="round"><path d="M48 58.5H68.5A20.5 20.5 0 0 1 48 79Z"></path><path d="M104.5 58.5H153.5L133 79H110V120L89.5 140.5V77Q93 61 104.5 58.5Z"></path></g>
-    <g clip-path="url(#tqLoaderInk)"><g class="tq-loader__level"><path class="tq-loader__wave" d="M0 0q10-5 20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0t20 0V120H0Z" fill="#0a0a0a"></path></g></g>
-    <circle class="tq-loader__dot" cx="141" cy="130.5" r="10.5" fill="#e7131b"></circle>
-  </svg>
-  <span class="tq-loader__label" data-loader-label>LOADING</span>
-</div>
 <div style="min-height: 100vh; background: #fff; color: #0a0a0a; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased;">
   <header data-page-bar style="position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px clamp(16px, 4vw, 56px); background: rgba(255,255,255,.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #ececee;">
-    <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" style="display: inline-flex; flex-shrink: 0;"><img src="../assets/logo-wordmark-dark.png" alt="TradeQuo Partner Program" style="height: 21px; width: auto;"></a>
+    <a href="../" data-page-link style="display: inline-flex; flex-shrink: 0;"><img src="../assets/logo-wordmark-dark.png" alt="TradeQuo Partner Program" style="height: 21px; width: auto;"></a>
     <nav aria-label="Partner Program pages" style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; justify-content: center;">
-      <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" class="hv-red" style="padding: 8px 14px; border-radius: 999px; border: 1px solid transparent; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em; white-space: nowrap;">Partner Program</a>
+      <a href="../" data-page-link class="hv-red" style="padding: 8px 14px; border-radius: 999px; border: 1px solid transparent; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em; white-space: nowrap;">Partner Program</a>
           {nav}
     </nav>
-    <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; height: 40px; padding: 0 16px 0 12px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em; white-space: nowrap;">
+    <a href="../" data-page-link class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; height: 40px; padding: 0 16px 0 12px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em; white-space: nowrap;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="M11 18l-6-6 6-6"></path></svg>
       Back
     </a>
@@ -143,8 +131,8 @@ def render(i, p):
   </main>
 
   <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 56px) clamp(48px, 6vw, 80px);">
-    <a href="../" data-page-link data-label="LOADING · PARTNER PROGRAM" class="hv-red" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 4px; border: 0; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">← Back to Partner Program</a>
-    <a href="../{next_slug}/" data-page-link data-label="LOADING · {next_label}" class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">
+    <a href="../" data-page-link class="hv-red" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 4px; border: 0; background: transparent; color: #45474d; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">← Back to Partner Program</a>
+    <a href="../{next_slug}/" data-page-link class="hv-ink-border" style="display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid #dcdde0; background: #fff; color: #0a0a0a; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; letter-spacing: -.01em;">
       <span style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .14em; color: #e7131b;">NEXT</span>{next_title}
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
     </a>
@@ -157,7 +145,7 @@ def render(i, p):
   if (cur && cur.parentNode.scrollWidth > cur.parentNode.clientWidth) cur.parentNode.scrollLeft = cur.offsetLeft - 16;
   /* Esc returns to the Partner Program, as closing the overlay did in the design. */
   document.addEventListener('keydown', function (e) {{
-    if (e.key === 'Escape' && window.tqGo) window.tqGo('../', 'LOADING · PARTNER PROGRAM');
+    if (e.key === 'Escape') location.href = '../';
   }});
 </script>
 </body>

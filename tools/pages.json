@@ -5,9 +5,9 @@
     "kicker": "Tracking",
     "short": "Dashboard",
     "title": "Partner Dashboard",
-    "blurb": "One live screen shows who signed up, who traded and what you’ve earned.",
+    "blurb": "One live screen shows who signed up, who is active and what you’ve earned.",
     "h1": "Know exactly what your network is doing",
-    "sub": "One live screen shows who signed up, who traded and what you’ve earned.",
+    "sub": "One live screen shows who signed up, who is active and what you’ve earned.",
     "cta": "See a live demo",
     "cta2": "API docs",
     "cardTitle": "Today, live",
@@ -18,7 +18,7 @@
         "note": "+38 today"
       },
       {
-        "label": "Lots traded",
+        "label": "Lot volume",
         "value": "312.4",
         "note": "since 00:00"
       },
@@ -190,6 +190,6 @@
         "desc": "A monthly leaderboard by referred volume, with prizes and a homepage spotlight."
       }
     ],
-    "disclaimer": "Earnings shown are from top-performing partners and are not typical. Partner earnings are not guaranteed and depend on client trading activity."
+    "disclaimer": "Earnings shown are from top-performing partners and are not typical. Partner earnings are not guaranteed and depend on client market activity."
   }
 ]

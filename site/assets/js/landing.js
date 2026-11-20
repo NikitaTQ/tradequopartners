@@ -281,22 +281,6 @@
     });
   }
 
-  /* ---- touch screens: tap a card to light it, tap it again to let it go -------------------------------------
-   * The cards marked data-tap (Partner perks on /partner-terms/, Why partners choose on /programs/) light up under a
-   * mouse (:hover). A touch screen keeps :hover on the card last tapped, so a second tap could not put it out; there
-   * (no hover) the CSS leaves :hover alone and a tap toggles .is-tap instead: one card at a time, and a tap anywhere
-   * else puts it out. */
-  function startCardTap() {
-    if (!$$('[data-tap]').length) return;
-    const touch = matchMedia('(hover: none)');
-    document.addEventListener('click', (e) => {
-      if (!touch.matches) return;
-      const c = e.target.closest && e.target.closest('[data-tap]');
-      $$('[data-tap].is-tap').forEach((n) => { if (n !== c) n.classList.remove('is-tap'); });
-      if (c) c.classList.toggle('is-tap');
-    });
-  }
-
   /* ---- desktop site-map fan ------------------------------------------------ */
   function startFanMenu() {
     const menu = $('[data-fanmenu]'), veil = $('[data-fanveil]'), knob = $('[data-fan-toggle]');
@@ -1397,16 +1381,13 @@
     view.addEventListener('dragstart', (e) => e.preventDefault());
   }
 
-  /* ---- programs/: Who it's for (Who_Its_For_Drum), then Why partners choose -------------------------------
+  /* ---- programs/: Who it's for (Who_Its_For_Drum) ------------------------------------------------------
    * The card: the five kinds of partner as chips and one sentence whose halves roll like a drum to the chosen
    * one. It rolls on every 4 s while on screen; a click on a chip (or on the sentence: one on) picks one, and the
-   * rolling goes on from it 8 s later. A sentence too long for the card (a long language) steps its size down to fit.
-   * The perks section below it: its six cards are dealt in a fan once it is well in view; with reduced motion they
-   * simply stand, and on phones (<900px) the CSS lays them out in a grid. */
+   * rolling goes on from it 8 s later. A sentence too long for the card (a long language) steps its size down to fit. */
   function startWhoFlow() {
-    const block = document.getElementById('pf-who'), fan = document.getElementById('pf-fan');
+    const block = document.getElementById('pf-who');
     if (!block) return;
-    const cards = fan ? $$('[data-pf-perk]', fan) : [], N = cards.length;   /* the fan is gone since November 2026 (the comparison took its place); the drum stays */
 
     /* the drum */
     const chips = $$('[data-dr-chip]', block), sent = $('[data-dr-sent]', block);
@@ -1452,43 +1433,12 @@
       }
     };
 
-    const mq = matchMedia('(max-width: 899px)');
-    /* the fan: six cards on an arc, dealt one after another. B is the line the cards stand on (from the
-       fan's bottom): the design's 16% + 15px, raised 72px, but never so high that the cards come
-       closer than G to the heading */
-    let dealt = null, K = 1, B = 0;
-    const place = (on) => cards.forEach((c, i) => {
-      const d = i - (N - 1) / 2, z = mq.matches ? 1 : K;
-      c.style.transitionDelay = (on ? i * 70 : 0) + 'ms';
-      c.style.opacity = on ? 1 : 0;
-      /* in the phone grid the CSS sizes the cards */
-      c.style.width = mq.matches ? '' : (220 * z) + 'px'; c.style.height = mq.matches ? '' : (340 * z) + 'px'; c.style.marginLeft = mq.matches ? '' : (-110 * z) + 'px';
-      c.style.bottom = mq.matches ? '' : B + 'px';
-      c.firstElementChild.style.zoom = mq.matches ? '' : z;
-      c.style.transform = on
-        ? 'translate3d(' + Math.round(d * 192 * K) + 'px,' + Math.round(d * d * 11 * K) + 'px,0) rotate(' + (d * 8) + 'deg)'
-        : 'translate3d(0,60px,0) scale(0.86)';
-    });
-    const deal = (on) => { if (dealt === on) return; dealt = on; place(on); };
-    const sizeCards = () => {
-      if (!fan) return;
-      const fh = fan.clientHeight || innerHeight * 0.5;
-      const G = Math.max(36, Math.min(72, innerHeight * 0.065));
-      K = Math.max(0.45, Math.min(1.15, fh * 0.74 / 340, innerWidth * 0.84 / (192 * 5 + 320)));
-      B = Math.min(fh * 0.16 + 15 + 72, Math.max(fh * 0.16 + 15, fh - G - 340 * K));
-      if (dealt != null) place(dealt);
-    };
-    const all = () => { fitDrum(); sizeCards(); };
-    addEventListener('resize', all);
-    if (mq.addEventListener) mq.addEventListener('change', all);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
+    addEventListener('resize', fitDrum);
+    if (narrow.addEventListener) narrow.addEventListener('change', fitDrum);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitDrum);
     if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fitDrum);
     roll(0);
-    deal(false);
-    all();
-    if (!fan) return;
-    if (mq.matches || reducedMotion() || !('IntersectionObserver' in window)) deal(true);
-    else new IntersectionObserver((en, ob) => { if (en.some((e) => e.isIntersecting)) { deal(true); ob.disconnect(); } }, { threshold: 0.35 }).observe(fan);
+    fitDrum();
   }
 
   function startCta3d() {
@@ -1517,7 +1467,6 @@
   startDock();
   startIframeFit();
   startFanTap();
-  startCardTap();
   startEmbeds();
   startFilm();
   startAnimationGate();
