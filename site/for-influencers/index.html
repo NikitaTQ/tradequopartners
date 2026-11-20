@@ -85,6 +85,9 @@ html:lang(ja) { --h1f: 'TQ H1 Dela Gothic One'; --h2f: 'TQ H2 Dela Gothic One'; 
 html:lang(ko) { --h1f: 'TQ H1 Black Han Sans'; --h2f: 'TQ H2 Black Han Sans'; }
 html:lang(zh-Hans) { --h1f: 'TQ H1 ZCOOL SC'; --h2f: 'TQ H2 ZCOOL SC'; }
 html:lang(zh-Hant) { --h1f: 'TQ H1 Noto TC'; --h2f: 'TQ H2 Noto TC'; }
+.tq-h1 { --h1s: clamp(22px, 3.1vw, 44px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h1f), 'Inter', sans-serif; font-size: calc(var(--h1s) * var(--h1k, 1));
+  font-weight: 700; font-synthesis: none; line-height: 1.12; letter-spacing: .15em; text-transform: uppercase; text-wrap: balance; }
+:lang(ar) .tq-h1, :lang(th) .tq-h1, :lang(ja) .tq-h1, :lang(ko) .tq-h1, :lang(zh) .tq-h1 { --h1k: 1.45; padding-inline-start: 0; text-transform: none; }
 .tq-h2 { --h2s: clamp(20px, 2.1vw, 30px); max-width: 100%; padding-inline-start: .15em; font-family: var(--h2f), 'Inter', sans-serif; font-size: calc(var(--h2s) * var(--h2k, 1));
   font-weight: 700; font-synthesis: none; line-height: 1.2; letter-spacing: .15em; text-transform: uppercase; text-wrap: balance; }
 :lang(ar) .tq-h2, :lang(th) .tq-h2, :lang(ja) .tq-h2, :lang(ko) .tq-h2, :lang(zh) .tq-h2 { --h2k: 1.3; padding-inline-start: 0; text-transform: none; }
@@ -704,105 +707,142 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 [data-fan-card] > [data-fan-upto] + [data-fan-obj] { margin-top: 0 !important; }
 }
 </style>
-<style id="partner-css" data-prefix="../">
-.tp { font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
-.tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
-.tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
-.tp-pc__big { display: block; margin-top: calc(18 * var(--pu)); font-size: calc(105 * var(--pu)); line-height: .8; font-weight: 700; letter-spacing: -.05em; white-space: nowrap; color: #0b0b0d; -webkit-text-stroke: .02em currentColor; }
-.tp-dome-copy__sub { margin: 0; font-size: 22px; line-height: 1.6; color: #5e5e66; text-wrap: pretty; }
-@media (max-width: 1100px) {
-.tp-dome-copy__sub { order: 1; max-width: 600px; margin-top: 16px; }
+<style id="influencers-css" data-prefix="../">
+.inf-hero { font-family: 'Inter', sans-serif; background: #f3f2f7; padding: clamp(40px, 5.4vw, 84px) 0 clamp(56px, 6.4vw, 104px); overflow: hidden; }
+.inf-hero__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box;
+  display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+.inf-hero__h1 { margin: 0; color: #0a0a0a; line-height: 1.14; text-align: start; white-space: nowrap; letter-spacing: .05em; padding-inline-start: 0; }
+.inf-hero__sub { margin: clamp(20px, 2vw, 30px) 0 0; max-width: 30em; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.62; color: #55555e; }
+.inf-cta { position: relative; display: inline-flex; align-items: center; gap: 24px; height: 60px; margin-top: clamp(26px, 2.6vw, 36px);
+  padding: 0 7px 0 32px; box-sizing: border-box; border-radius: 999px; color: #fff; font-size: 16px; font-weight: 600; letter-spacing: -.005em; text-decoration: none;
+  background: linear-gradient(180deg, #34343a 0%, #141417 38%, #050506 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.26), inset 0 -1px 0 rgba(255,255,255,.06), 0 0 0 1px #000, 0 16px 28px -14px rgba(0,0,0,.6), 0 4px 10px -4px rgba(0,0,0,.35);
+  transition: transform .3s cubic-bezier(.2,.8,.2,1); -webkit-tap-highlight-color: transparent; }
+.inf-cta::after { content: ''; position: absolute; left: 20%; right: 34%; bottom: 1px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, rgba(231,19,27,0), #ff2a33 50%, rgba(231,19,27,0)); filter: blur(.4px); box-shadow: 0 0 8px rgba(255,30,40,.8); }
+.inf-cta__dot { flex: none; width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;
+  background: radial-gradient(circle at 34% 28%, #ff7377 0%, #f0222b 34%, #c20d16 72%, #8e050c 100%);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.45), inset 0 -2px 4px rgba(90,0,5,.35), 0 4px 12px -2px rgba(231,19,27,.55); }
+.inf-cta__dot svg { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.inf-cta:hover, .inf-cta:focus-visible { color: #fff; transform: translateY(-2px); }
+.inf-cta:hover .inf-cta__dot svg, .inf-cta:focus-visible .inf-cta__dot svg { transform: translateX(3px); }
+.inf-cta:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.inf-hero__ticks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 22px 0 0; padding: 0; list-style: none; font-size: 13px; font-weight: 600; color: #26262c; }
+.inf-hero__ticks li { position: relative; padding-inline-start: 20px; white-space: nowrap; }
+.inf-hero__ticks li::before { content: ''; position: absolute; inset-inline-start: 0; top: 50%; width: 13px; height: 13px; margin-top: -7px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23e7131b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2.5 8.5 3.5 3.5 7.5-8'/%3E%3C/svg%3E") center / contain no-repeat; }
+.inf-hero__vis { container-type: inline-size; min-width: 0; }
+.inf-v { position: relative; width: 47em; height: 45em; font-size: 12px; font-size: calc(100cqw / 47); font-family: 'Inter', sans-serif; line-height: 1.25; color: #111114; user-select: none; }
+.inf-v b { font-weight: 700; }
+.inf-v::before { content: ''; position: absolute; inset: -2em; pointer-events: none; filter: blur(1.2em);
+  background:
+    radial-gradient(1.6em 2.6em at 4% 9%, rgba(240,24,34,.16), transparent 70%),
+    radial-gradient(1.6em 2.6em at 4% 56%, rgba(240,24,34,.14), transparent 70%),
+    radial-gradient(3em 1.8em at 16% 96%, rgba(240,24,34,.2), transparent 70%),
+    radial-gradient(1.6em 3em at 88% 78%, rgba(240,24,34,.18), transparent 70%),
+    radial-gradient(1.6em 2.6em at 97% 52%, rgba(240,24,34,.14), transparent 70%),
+    radial-gradient(22em 4em at 50% 99%, rgba(20,20,30,.1), transparent 70%); }
+.inf-v__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 0; }
+.inf-v__tube { stroke: #fff; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 .07em rgba(110,110,128,.7)) drop-shadow(0 .2em .25em rgba(20,20,32,.18)); }
+.inf-v__core { stroke: #ff1f2b; stroke-width: 1.5; stroke-linecap: round; filter: drop-shadow(0 0 .2em rgba(255,24,36,.95)); }
+.inf-v__card { position: absolute; box-sizing: border-box; padding: 1.1em; border-radius: 2.9em;
+  background: linear-gradient(135deg, rgba(255,255,255,.98) 0%, rgba(233,233,239,.92) 24%, rgba(255,255,255,.97) 50%, rgba(224,224,232,.92) 76%, rgba(255,255,255,.98) 100%);
+  box-shadow: inset 0 0 0 .08em #fff, inset .25em .3em .45em rgba(255,255,255,.95), inset -.3em -.45em .7em rgba(130,130,150,.3),
+    0 0 0 .07em rgba(140,140,158,.5), 0 2.8em 3.4em -1.8em rgba(18,18,30,.34), 0 .8em 1.4em -.6em rgba(18,18,30,.14); }
+.inf-v__card::before, .inf-v__card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.inf-v__card::before { padding: .3em;
+  background: linear-gradient(155deg, #fff 0%, rgba(255,255,255,0) 22%, rgba(255,255,255,0) 72%, rgba(255,255,255,.95) 100%),
+    linear-gradient(90deg, rgba(150,150,168,.55), rgba(255,255,255,.15) 14%, rgba(255,255,255,.15) 86%, rgba(150,150,168,.55)); }
+.inf-v__card::after { padding: 1.1em; background: var(--glint, none); }
+.inf-v__card > .inf-v__bloom { position: absolute; inset: -.5em; border-radius: 3.4em; z-index: -1; pointer-events: none; background: var(--glint, none); filter: blur(.7em); opacity: .55; }
+.inf-v__pane { position: relative; border-radius: 1.85em; overflow: hidden;
+  background: linear-gradient(180deg, rgba(253,253,254,.98), rgba(242,242,246,.98));
+  box-shadow: 0 0 0 .07em rgba(160,160,176,.45), inset 0 .1em 0 #fff, inset 0 -.5em 1em rgba(120,120,140,.06); }
+.inf-v__ig { left: .8em; top: .8em; width: 21.2em; z-index: 2;
+  --glint: radial-gradient(0.9em 4.6em at 0% 13%, rgba(255,34,44,1), rgba(255,34,44,0.35) 40%, transparent 72%), radial-gradient(0.9em 3.6em at 0% 88%, rgba(255,34,44,0.95), rgba(255,34,44,0.33) 40%, transparent 72%), radial-gradient(4em 0.8em at 86% 100%, rgba(255,34,44,0.7), rgba(255,34,44,0.24) 40%, transparent 72%), radial-gradient(4.6em 0.8em at 24% 0%, rgba(255,34,44,0.55), rgba(255,34,44,0.19) 40%, transparent 72%); }
+.inf-v__tg { left: 23.5em; top: 3.1em; width: 22.3em; z-index: 1;
+  --glint: radial-gradient(0.9em 4.4em at 100% 84%, rgba(255,34,44,1), rgba(255,34,44,0.35) 40%, transparent 72%), radial-gradient(4em 0.8em at 80% 100%, rgba(255,34,44,0.75), rgba(255,34,44,0.26) 40%, transparent 72%), radial-gradient(3em 0.8em at 8% 100%, rgba(255,34,44,0.45), rgba(255,34,44,0.16) 40%, transparent 72%); }
+.inf-v__who { display: flex; align-items: center; gap: .65em; padding: .7em 1.1em .6em; }
+.inf-v__who b { font-size: 1.22em; font-weight: 600; letter-spacing: -.01em; }
+.inf-v__ava { flex: none; width: 1.85em; height: 1.85em; border-radius: 50%; background: #0c0c0e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1em; font-weight: 600; }
+.inf-v__ava--ring { box-shadow: 0 0 0 .12em #fff, 0 0 0 .25em #e1306c, .1em -.1em 0 .25em #f9a13b; }
+.inf-v__shot { position: relative; height: 15.4em; margin: 0 .75em; border-radius: 1.35em; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(58% 52% at 86% 100%, rgba(236,20,30,.98), rgba(200,12,22,.45) 46%, rgba(120,0,8,0) 78%), linear-gradient(165deg, #26262a 0%, #0d0d0f 55%, #060607 100%);
+  box-shadow: inset 0 0 0 .07em rgba(255,255,255,.08), 0 .3em .8em -.3em rgba(0,0,0,.4); }
+.inf-v__word { display: block; width: 66%; height: auto; }
+.inf-v__shot .inf-v__word { margin-top: -1.4em; }
+.inf-v__link { position: absolute; left: 50%; bottom: 1.5em; transform: translateX(-50%); display: flex; align-items: center; gap: .4em; padding: .5em 1.05em .5em .9em;
+  border-radius: 999px; background: #fff; color: #e7131b; font-size: .98em; font-weight: 800; text-transform: uppercase; letter-spacing: -.005em; white-space: nowrap;
+  box-shadow: 0 .3em .9em -.2em rgba(0,0,0,.45), inset 0 -.1em .15em rgba(0,0,0,.08); }
+.inf-v__link svg { width: 1.05em; height: 1.05em; }
+.inf-v__acts { display: flex; align-items: center; gap: .85em; padding: .6em 1.1em .2em; color: #17171a; }
+.inf-v__acts svg { width: 1.4em; height: 1.4em; }
+.inf-v__heart { fill: #e7131b; }
+.inf-v__save { margin-inline-start: auto; }
+.inf-v__cap { margin: 0; padding: 0 1.1em .7em; font-size: .8em; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #26262b; }
+.inf-v__cap b { font-weight: 700; color: #111; }
+.inf-v__badge { position: absolute; z-index: 2; box-sizing: border-box; display: block; padding: .28em;
+  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(214,214,222,.92)); box-shadow: inset 0 0 0 .07em #fff, 0 0 0 .06em rgba(140,140,158,.45), 0 .6em 1.1em -.3em rgba(0,0,0,.35); }
+.inf-v__badge--ig { top: -.1em; right: -.1em; width: 3.4em; height: 3.4em; border-radius: 1.05em; }
+.inf-v__badge--ig svg { display: block; width: 100%; height: 100%; padding: .42em; box-sizing: border-box; border-radius: .8em;
+  background: radial-gradient(circle at 28% 108%, #fdd36a 0%, #fd8a3b 24%, #e8305c 48%, #c42a91 66%, #6a3fd6 100%);
+  box-shadow: inset 0 .1em .15em rgba(255,255,255,.45), inset 0 -.15em .3em rgba(60,0,60,.3); }
+.inf-v__badge--tg { top: .7em; right: .7em; width: 3.6em; height: 3.6em; border-radius: 50%; }
+.inf-v__badge--tg img { display: block; width: 100%; height: 100%; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.3); }
+.inf-v__msg { margin: 0 .8em; padding: .7em .9em .45em; border-radius: 1.25em; background: rgba(255,255,255,.96); box-shadow: 0 0 0 .07em rgba(0,0,0,.05), 0 .2em .5em -.2em rgba(0,0,0,.08); }
+.inf-v__from { display: block; color: #2a9fd8; font-size: 1em; font-weight: 700; }
+.inf-v__msg p { margin: .3em 0 .6em; font-size: .95em; color: #1f1f23; }
+.inf-v__banner { height: 4.4em; border-radius: .75em; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(42% 120% at 10% 0%, rgba(236,20,30,.92), rgba(160,8,16,.3) 55%, rgba(0,0,0,0) 80%), linear-gradient(180deg, #1d1d20, #060607);
+  box-shadow: 0 .25em .6em -.25em rgba(0,0,0,.5); }
+.inf-v__banner .inf-v__word { width: 62%; }
+.inf-v__seen { display: flex; align-items: center; justify-content: flex-end; gap: .3em; margin-top: .35em; font-size: .82em; color: #9a9aa4; }
+.inf-v__seen svg { width: 1.2em; height: 1.2em; }
+.inf-v__open { display: flex; align-items: center; justify-content: center; gap: .5em; height: 2.8em; margin: .55em .8em .75em; border-radius: .9em;
+  background: linear-gradient(180deg, #a9b0b6 0%, #8c939a 100%); color: #fff; font-size: 1.05em; font-weight: 600;
+  box-shadow: inset 0 .08em 0 rgba(255,255,255,.45), inset 0 -.12em .25em rgba(0,0,0,.14), 0 .2em .5em -.2em rgba(0,0,0,.25); }
+.inf-v__open svg { width: 1em; height: 1em; }
+.inf-v__com { left: 6.2em; top: 28em; width: 34.8em; z-index: 3; padding: .8em; border-radius: 2.7em;
+  background: linear-gradient(180deg, #fbfbfc 0%, #d8d8de 30%, #b5b5bd 58%, #efeff2 100%);
+  --glint: radial-gradient(1em 4em at 0% 84%, rgba(255,34,44,1), rgba(255,34,44,0.35) 40%, transparent 72%), radial-gradient(5em 0.9em at 12% 100%, rgba(255,34,44,0.9), rgba(255,34,44,0.32) 40%, transparent 72%), radial-gradient(0.8em 5em at 100% 50%, rgba(255,34,44,1), rgba(255,34,44,0.35) 40%, transparent 72%), radial-gradient(2.4em 0.8em at 94% 0%, rgba(255,34,44,0.5), rgba(255,34,44,0.17) 40%, transparent 72%); }
+.inf-v__com::after { padding: .8em; }
+.inf-v__com .inf-v__pane { border-radius: 1.95em; color: #fff; padding-bottom: 1em;
+  background: radial-gradient(120% 90% at 18% 0%, #303035 0%, #19191c 52%, #0e0e10 100%);
+  box-shadow: 0 0 0 .08em rgba(0,0,0,.55), inset 0 0 0 .08em rgba(255,255,255,.1), inset 0 .15em .25em rgba(255,255,255,.1); }
+.inf-v__head { display: flex; align-items: center; gap: 1.05em; padding: .95em 1.5em .7em; }
+.inf-v__head b { display: block; font-size: 1.62em; font-weight: 600; letter-spacing: -.015em; }
+.inf-v__head small { display: block; margin-top: .1em; font-size: 1.06em; color: rgba(255,255,255,.55); }
+.inf-v__ok { flex: none; width: 3em; height: 3em; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 34% 28%, #ff8589 0%, #f42a33 30%, #cf0e18 66%, #8a050c 100%);
+  box-shadow: inset 0 .1em .15em rgba(255,255,255,.5), inset 0 -.25em .4em rgba(80,0,4,.4), 0 0 0 .14em rgba(255,255,255,.1), 0 .4em 1.2em rgba(240,20,30,.55); }
+.inf-v__ok svg { width: 1.6em; height: 1.6em; }
+.inf-v__row { display: grid; grid-template-columns: 2.4em minmax(0, 1fr) auto; align-items: center; gap: 1em; margin: 0 1.5em .4em; padding: .55em 1em .55em .9em; border-radius: .95em;
+  background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05)); box-shadow: inset 0 0 0 .07em rgba(255,255,255,.07), inset 0 .07em 0 rgba(255,255,255,.08); }
+.inf-v__row:last-child { margin-bottom: 0; }
+.inf-v__tile { width: 2.4em; height: 2.4em; border-radius: .6em; background: #050506; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 .06em rgba(255,255,255,.14); }
+.inf-v__tile img { width: 72%; height: auto; }
+.inf-v__rt { min-width: 0; }
+.inf-v__rt b { display: block; font-size: 1.06em; font-weight: 700; }
+.inf-v__rt small { display: flex; align-items: center; gap: .55em; margin-top: .25em; font-size: .9em; color: rgba(255,255,255,.72); white-space: nowrap; }
+.inf-v__mini { flex: none; width: 1.2em; height: 1.2em; border-radius: .32em; overflow: hidden; display: block; }
+.inf-v__mini img, .inf-v__mini svg { display: block; width: 100%; height: 100%; }
+.inf-v__mini--ig { background: radial-gradient(circle at 28% 108%, #fdd36a 0%, #fd8a3b 24%, #e8305c 48%, #c42a91 66%, #6a3fd6 100%); }
+.inf-v__mini--ig svg { padding: .14em; box-sizing: border-box; }
+.inf-v__mini img { border-radius: 50%; }
+.inf-v__row em { align-self: start; font-style: normal; font-size: .84em; color: rgba(255,255,255,.6); }
+.inf-v__plug { position: absolute; top: -.35em; left: 50%; width: 1.5em; height: .8em; margin-left: -.75em; border-radius: .3em;
+  background: linear-gradient(180deg, #fff, #b9b9c2); box-shadow: 0 0 0 .06em rgba(120,120,135,.5), 0 .1em .2em rgba(0,0,0,.25); }
+@media (max-width: 900px) {
+.inf-hero__in { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.inf-hero__vis { width: 100%; max-width: 560px; justify-self: center; }
 }
 @media (max-width: 640px) {
-.tp-dome-copy__sub { margin-top: 12px; }
+.inf-hero { padding-top: 32px; }
+.inf-cta { height: 56px; font-size: 15px; padding-inline-start: 26px; }
+.inf-hero__ticks { font-size: 13px; gap: 8px 18px; }
 }
-.tp-final__sub { margin: 0; max-width: 60ch; font-size: clamp(24px, 2.56vw, 30px); line-height: 1.5; color: #a4a4ac; text-wrap: pretty; }
-@keyframes tqSweep { 0%, 55% { transform: translateX(-160%) skewX(-20deg); } 100% { transform: translateX(360%) skewX(-20deg); } }
-@media (prefers-reduced-motion: reduce) {
-.tp-glass { transition: none; }
-}
-@property --ch { syntax: '<number>'; inherits: true; initial-value: 0; }
-@property --cd { syntax: '<number>'; inherits: true; initial-value: 0; }
-@property --ctx { syntax: '<length>'; inherits: true; initial-value: 0px; }
-@property --cty { syntax: '<length>'; inherits: true; initial-value: 0px; }
-#pf-who-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; display: flex; justify-content: center; }
-@keyframes pfFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-cyrillic-ext.woff2?v=705d625066) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
-@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-cyrillic.woff2?v=9f73b2f43e) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
-@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-vietnamese.woff2?v=9c1cad863a) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
-@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-latin-ext.woff2?v=cf3eb50fb2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-latin.woff2?v=f11d729bb0) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-#pf-who-wrap { container-type: inline-size; position: relative; z-index: 1; }
-.pf-dr__line { display: flex; gap: .27em; align-items: flex-end; }
-.pf-dr__line > span { flex: none; }
-.pf-dr__slot { display: inline-block; height: var(--drl); line-height: var(--drl); overflow: hidden; margin-bottom: calc((1.17em - var(--drl)) / 2); }
-.pf-dr__slot > span { display: flex; flex-direction: column; transition: transform .7s cubic-bezier(.7,0,.2,1); }
-.pf-dr__slot > span > span { height: var(--drl); line-height: var(--drl); white-space: nowrap; overflow: hidden; }
-@media (prefers-reduced-motion: reduce) {
-.pf-dr__slot > span { transition: none; }
-}
-@media (max-width: 760px) {
-.pf-dr__line, .pf-dr__sent .pf-dr__l2 { align-items: flex-start; gap: .26em; margin-top: 0; }
-.pf-dr__line > .pf-dr__slot { flex: 1 1 0; min-width: 0; margin-bottom: 0; }
-.pf-dr__slot > span > span { white-space: normal; line-height: 1.18; text-wrap: balance; overflow-wrap: anywhere; }
-:lang(ar) .pf-dr__slot > span > span, :lang(th) .pf-dr__slot > span > span, :lang(vi) .pf-dr__slot > span > span { line-height: 1.4; }
-}
-@media (max-width: 899px) {
-#pf-who-wrap { padding: 24px 16px; }
-}
-.tp-pds__track { position: relative; width: 100%; }
-.tp-pds__base, .tp-pds__fill { position: absolute; inset-inline-start: calc(12.5% - 9px); }
-.tp-pds__base { top: 37px; width: calc(75% + 18px); height: 2px; border-radius: 1px; background: rgba(231,19,27,.22); box-shadow: 0 1px 0 #fff; }
-@keyframes tpPdsSheen { to { transform: translateX(1000px); } }
-@keyframes tpPdsSheenV { to { transform: translateY(1000px); } }
-.tp-pds__orb { position: relative; width: 76px; height: 76px; flex: none; }
-@keyframes tpPdsFloat { 0% { opacity: 0; transform: translate(var(--cx, -50%), 10px); } 18% { opacity: 1; transform: translate(var(--cx, -50%), 0); } 75% { opacity: 1; transform: translate(var(--cx, -50%), -8px); } 100% { opacity: 0; transform: translate(var(--cx, -50%), -16px); } }
-@keyframes tpPdsPop { 0% { transform: scale(.7); } 55% { transform: scale(1.18); } 100% { transform: scale(1); } }
-@keyframes tpPdsSpin { to { transform: rotate(360deg); } }
-@keyframes tpPdsNet { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
-@keyframes tpPdsCoin { 0% { transform: translateY(-5px); opacity: 0; } 100% { transform: none; opacity: 1; } }
-@media (max-width: 960px) {
-.tp-pds__base, .tp-pds__fill { display: none; }
-.tp-pds__track { padding-top: 34px; }
-}
-@media (max-width: 560px) {
-.tp-pds__track { padding-top: 30px; }
-.tp-pds__orb { grid-row: 1 / span 3; width: 64px; height: 64px; }
-.tp-pds__base, .tp-pds__fill { display: block; inset-inline-start: auto; left: var(--rx, 32px); top: var(--rt, 32px); }
-.tp-pds__base { width: 2px; height: var(--rh, 0px); margin-left: -1px; box-shadow: none; }
-}
-@property --tqmx { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
-.tq-rglass { position: relative; isolation: isolate; align-self: flex-start; display: inline-flex; align-items: center; gap: 18px; height: 66px; box-sizing: border-box; padding: 0; padding-inline: 30px 5px;
-  border: 1px solid rgba(255,170,175,.75); border-radius: 999px; color: #fff; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -.01em;
-  white-space: nowrap; text-decoration: none; text-shadow: 0 1px 1px rgba(90,6,14,.35); cursor: pointer; -webkit-tap-highlight-color: transparent;
-  background: linear-gradient(150deg, rgba(240,40,48,.94) 0%, rgba(222,24,34,.9) 45%, rgba(176,12,22,.95) 100%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%);
-  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.7), inset 0 -1px 1px rgba(255,255,255,.35), inset 0 -14px 22px -12px rgba(100,0,8,.6), inset 0 0 22px rgba(255,180,184,.18),
-    0 calc(16px + var(--tqh) * 6px) calc(32px + var(--tqh) * 14px) -12px rgba(231,19,27,.5);
-  transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * .04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate;
-  transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqmx .45s ease, --tqd .14s ease-out; }
-.tq-rglass::before { content: ''; position: absolute; z-index: -1; inset: 1px 12px auto 12px; height: 46%; border-radius: 999px 999px 60% 60% / 999px 999px 100% 100%; pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 100%); }
-.tq-rglass::after { content: ''; position: absolute; z-index: -1; inset: 0; border-radius: inherit; pointer-events: none;
-  background: radial-gradient(40% 120% at var(--tqmx) 0%, rgba(255,255,255,calc(.18 + var(--tqh) * .22)) 0%, rgba(255,255,255,0) 70%); }
-.tq-rglass:hover, .tq-rglass:focus-visible { --tqh: 1; animation: none; color: #fff; }
-.tq-rglass:active { --tqd: 1; }
-.tq-rglass:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 6px; }
-@media (prefers-reduced-motion: reduce) {
-.tq-rglass { animation: none; transition-duration: .01s; }
-}
-.tq-start { position: relative; display: block; width: 100px; height: 100px; color: #fff; text-decoration: none; -webkit-tap-highlight-color: transparent; }
-.tq-start:hover { color: #fff; }
-.tq-start__arc { transition: stroke-dashoffset .9s linear; }
-.tq-start.is-hover .tq-start__arc { transition: stroke-dashoffset 1.1s cubic-bezier(.2,.7,.2,1); }
-.tq-start:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; border-radius: 50%; }
-.tq-start__time { direction: ltr; unicode-bidi: isolate; }
-@media (prefers-reduced-motion: reduce) {
-.tq-start__arc, .tq-start__btn { transition: none; }
-}
-@keyframes tq-pill-a { 0%, 100% { scale: 1 1; } 42% { scale: 1.34 1; } }
-@keyframes tq-pill-b { 0%, 100% { scale: 1 1; } 42% { scale: 1.34 1; } }
-@keyframes tq-ping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.6); opacity: 0; } }
 </style>
 </head>
 <body>
@@ -887,8 +927,94 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   </div>
 
 
-  <!-- For influencers: the page's blocks go here -->
-  <main style="min-height: 60vh;">
+  <main>
+    <!-- Hero (owner's design, November 2026): the heading, the pitch, the CTA and two ticks on the left; on the right a
+         glass scene drawn in HTML/CSS (influencers.css .inf-v*): an Instagram post and a Telegram post of "your channel",
+         wired to a dark "Your commissions" panel. The scene is a picture (aria-hidden); 1em in it = 10px of the design,
+         so it scales as one piece with its column. Phones: the text, then the scene full width. -->
+    <section id="hero" class="inf-hero" data-screen-label="Influencers hero">
+      <div class="inf-hero__in">
+        <div class="inf-hero__copy">
+          <h1 class="inf-hero__h1 tq-h1" data-fitw>Your audience.<br>A new way<br><span style="color: #e7131b;">to earn.</span></h1>
+          <p class="inf-hero__sub">Introduce your audience to TradeQuo. Earn commissions from eligible client activity, with tools and support to help you get started.</p>
+          <a class="inf-cta" href="../#signup" data-page-link><span class="inf-cta__t">Become a partner</span><span class="inf-cta__dot"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+          <ul class="inf-hero__ticks">
+            <li>No market experience needed</li>
+            <li>Dedicated partner support</li>
+          </ul>
+        </div>
+
+        <div class="inf-hero__vis">
+          <div class="inf-v" aria-hidden="true">
+            <!-- the wires: glass tubes with a red core, from the two posts to the panel (viewBox = the scene in design px) -->
+            <svg class="inf-v__wires" viewBox="0 0 470 450" fill="none">
+              <path class="inf-v__tube" d="M132 252V262Q132 276 148 276H214Q228 276 235 286"/>
+              <path class="inf-v__tube" d="M336 226V256Q336 276 318 276H256Q242 276 235 286"/>
+              <path class="inf-v__core" d="M132 252V262Q132 276 148 276H214Q228 276 235 286"/>
+              <path class="inf-v__core" d="M336 226V256Q336 276 318 276H256Q242 276 235 286"/>
+            </svg>
+
+            <!-- Instagram post -->
+            <div class="inf-v__card inf-v__ig">
+              <span class="inf-v__bloom"></span>
+              <div class="inf-v__pane">
+                <div class="inf-v__who"><span class="inf-v__ava inf-v__ava--ring">Y</span><b>yourchannel</b></div>
+                <div class="inf-v__shot">
+                  <img class="inf-v__word" src="../assets/logo-wordmark-light.png?v=3a415b95bb" alt="" width="525" height="71">
+                  <span class="inf-v__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>Your link</span>
+                </div>
+                <div class="inf-v__acts">
+                  <svg class="inf-v__heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.6 2.9 4.5 6.7 4.5c2.2 0 3.9 1.3 5.3 3.1 1.4-1.8 3.1-3.1 5.3-3.1 3.8 0 5.8 4.1 4.3 7.4C19.5 16.4 12 21 12 21z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20.5 12a8.5 8.5 0 1 1-4.1-7.3A8.5 8.5 0 0 1 20.5 12zM20.5 12l.9 8.4-5-2.2"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M22 3 2.5 9.5l7.8 3.6L22 3zM10.3 13.1l3.4 7.9L22 3"/></svg>
+                  <svg class="inf-v__save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 3h14v18l-7-5.5L5 21z"/></svg>
+                </div>
+                <p class="inf-v__cap"><b>yourchannel</b> The platform I use. Link in bio.</p>
+              </div>
+              <span class="inf-v__badge inf-v__badge--ig"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg></span>
+            </div>
+
+            <!-- Telegram post -->
+            <div class="inf-v__card inf-v__tg">
+              <span class="inf-v__bloom"></span>
+              <div class="inf-v__pane">
+                <div class="inf-v__who"><span class="inf-v__ava">Y</span><b>Your Channel</b></div>
+                <div class="inf-v__msg">
+                  <b class="inf-v__from">Your Channel</b>
+                  <p>The tools I use every day.</p>
+                  <div class="inf-v__banner"><img class="inf-v__word" src="../assets/logo-wordmark-light.png?v=3a415b95bb" alt="" width="525" height="71"></div>
+                  <span class="inf-v__seen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>9:41</span>
+                </div>
+                <span class="inf-v__open">Open TradeQuo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              </div>
+              <span class="inf-v__badge inf-v__badge--tg"><img src="../assets/ib/ch-telegram.webp?v=5e6eebcd19" alt="" width="108" height="108"></span>
+            </div>
+
+            <!-- the commissions panel (dark glass) -->
+            <div class="inf-v__card inf-v__com">
+              <span class="inf-v__bloom"></span>
+              <div class="inf-v__pane">
+                <div class="inf-v__head">
+                  <span class="inf-v__ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 12.5 4 4 8-9"/></svg></span>
+                  <span><b>Your commissions</b><small>Recent account activity</small></span>
+                </div>
+                <div class="inf-v__row">
+                  <span class="inf-v__tile"><img src="../assets/influencers/mark-white.webp?v=93ec141463" alt="" width="86" height="86"></span>
+                  <span class="inf-v__rt"><b>Commission credited</b><small><i class="inf-v__mini inf-v__mini--ig"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.8"/></svg></i>From your Instagram referrals</small></span>
+                  <em>now</em>
+                </div>
+                <div class="inf-v__row">
+                  <span class="inf-v__tile"><img src="../assets/influencers/mark-white.webp?v=93ec141463" alt="" width="86" height="86"></span>
+                  <span class="inf-v__rt"><b>Commission credited</b><small><i class="inf-v__mini"><img src="../assets/ib/ch-telegram.webp?v=5e6eebcd19" alt="" width="108" height="108"></i>From your Telegram referrals</small></span>
+                  <em>2m ago</em>
+                </div>
+              </div>
+              <span class="inf-v__plug"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer style="padding: clamp(28px, 4vw, 48px) clamp(16px, 4vw, 56px); background: #fff; border-top: 1px solid #ececee;">

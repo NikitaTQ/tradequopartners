@@ -18,8 +18,94 @@
   {{> page-header-start}}
   {{> page-header-end}}
 
-  <!-- For influencers: the page's blocks go here -->
-  <main style="min-height: 60vh;">
+  <main>
+    <!-- Hero (owner's design, November 2026): the heading, the pitch, the CTA and two ticks on the left; on the right a
+         glass scene drawn in HTML/CSS (influencers.css .inf-v*): an Instagram post and a Telegram post of "your channel",
+         wired to a dark "Your commissions" panel. The scene is a picture (aria-hidden); 1em in it = 10px of the design,
+         so it scales as one piece with its column. Phones: the text, then the scene full width. -->
+    <section id="hero" class="inf-hero" data-screen-label="Influencers hero">
+      <div class="inf-hero__in">
+        <div class="inf-hero__copy">
+          <h1 class="inf-hero__h1 tq-h1" data-fitw>{{inf.hero.h1}}</h1>
+          <p class="inf-hero__sub">{{inf.hero.sub}}</p>
+          <a class="inf-cta" href="{{signupHref}}"{{signupNav}}><span class="inf-cta__t">{{nav.cta}}</span><span class="inf-cta__dot"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+          <ul class="inf-hero__ticks">
+            <li>{{inf.hero.ck1}}</li>
+            <li>{{inf.hero.ck2}}</li>
+          </ul>
+        </div>
+
+        <div class="inf-hero__vis">
+          <div class="inf-v" aria-hidden="true">
+            <!-- the wires: glass tubes with a red core, from the two posts to the panel (viewBox = the scene in design px) -->
+            <svg class="inf-v__wires" viewBox="0 0 470 450" fill="none">
+              <path class="inf-v__tube" d="M132 252V262Q132 276 148 276H214Q228 276 235 286"/>
+              <path class="inf-v__tube" d="M336 226V256Q336 276 318 276H256Q242 276 235 286"/>
+              <path class="inf-v__core" d="M132 252V262Q132 276 148 276H214Q228 276 235 286"/>
+              <path class="inf-v__core" d="M336 226V256Q336 276 318 276H256Q242 276 235 286"/>
+            </svg>
+
+            <!-- Instagram post -->
+            <div class="inf-v__card inf-v__ig">
+              <span class="inf-v__bloom"></span>
+              <div class="inf-v__pane">
+                <div class="inf-v__who"><span class="inf-v__ava inf-v__ava--ring">Y</span><b>{{inf.v.handle}}</b></div>
+                <div class="inf-v__shot">
+                  <img class="inf-v__word" src="{{root}}assets/logo-wordmark-light.png" alt="" width="525" height="71">
+                  <span class="inf-v__link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>{{inf.v.link}}</span>
+                </div>
+                <div class="inf-v__acts">
+                  <svg class="inf-v__heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.1C.9 8.6 2.9 4.5 6.7 4.5c2.2 0 3.9 1.3 5.3 3.1 1.4-1.8 3.1-3.1 5.3-3.1 3.8 0 5.8 4.1 4.3 7.4C19.5 16.4 12 21 12 21z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20.5 12a8.5 8.5 0 1 1-4.1-7.3A8.5 8.5 0 0 1 20.5 12zM20.5 12l.9 8.4-5-2.2"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M22 3 2.5 9.5l7.8 3.6L22 3zM10.3 13.1l3.4 7.9L22 3"/></svg>
+                  <svg class="inf-v__save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 3h14v18l-7-5.5L5 21z"/></svg>
+                </div>
+                <p class="inf-v__cap"><b>{{inf.v.handle}}</b> {{inf.v.caption}}</p>
+              </div>
+              <span class="inf-v__badge inf-v__badge--ig"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg></span>
+            </div>
+
+            <!-- Telegram post -->
+            <div class="inf-v__card inf-v__tg">
+              <span class="inf-v__bloom"></span>
+              <div class="inf-v__pane">
+                <div class="inf-v__who"><span class="inf-v__ava">Y</span><b>{{inf.v.channel}}</b></div>
+                <div class="inf-v__msg">
+                  <b class="inf-v__from">{{inf.v.channel}}</b>
+                  <p>{{inf.v.post}}</p>
+                  <div class="inf-v__banner"><img class="inf-v__word" src="{{root}}assets/logo-wordmark-light.png" alt="" width="525" height="71"></div>
+                  <span class="inf-v__seen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>9:41</span>
+                </div>
+                <span class="inf-v__open">{{inf.v.open}} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+              </div>
+              <span class="inf-v__badge inf-v__badge--tg"><img src="{{root}}assets/ib/ch-telegram.webp" alt="" width="108" height="108"></span>
+            </div>
+
+            <!-- the commissions panel (dark glass) -->
+            <div class="inf-v__card inf-v__com">
+              <span class="inf-v__bloom"></span>
+              <div class="inf-v__pane">
+                <div class="inf-v__head">
+                  <span class="inf-v__ok"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 12.5 4 4 8-9"/></svg></span>
+                  <span><b>{{inf.v.title}}</b><small>{{inf.v.sub}}</small></span>
+                </div>
+                <div class="inf-v__row">
+                  <span class="inf-v__tile"><img src="{{root}}assets/influencers/mark-white.webp" alt="" width="86" height="86"></span>
+                  <span class="inf-v__rt"><b>{{inf.v.credited}}</b><small><i class="inf-v__mini inf-v__mini--ig"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.8"/></svg></i>{{inf.v.fromIg}}</small></span>
+                  <em>{{inf.v.now}}</em>
+                </div>
+                <div class="inf-v__row">
+                  <span class="inf-v__tile"><img src="{{root}}assets/influencers/mark-white.webp" alt="" width="86" height="86"></span>
+                  <span class="inf-v__rt"><b>{{inf.v.credited}}</b><small><i class="inf-v__mini"><img src="{{root}}assets/ib/ch-telegram.webp" alt="" width="108" height="108"></i>{{inf.v.fromTg}}</small></span>
+                  <em>{{inf.v.ago}}</em>
+                </div>
+              </div>
+              <span class="inf-v__plug"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
 {{> footer}}
