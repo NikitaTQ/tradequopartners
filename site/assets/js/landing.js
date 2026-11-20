@@ -882,6 +882,14 @@
      * The success screen waits for both the envelope and the server's answer.
      * ?preview=sent skips the POST, to look at the success screen without sending anything. */
     const endpoint = form.dataset.endpoint;
+    /* what is sent: the fields as they are, the phone number with its country code in front ("+370 52595646"), so the
+       request reads as a full number wherever it lands (Netlify's e-mail, a CRM); phone_code stays as it was ("LT +370") */
+    const formBody = (f) => {
+      const body = new URLSearchParams(new FormData(f));
+      const num = (body.get('phone') || '').trim(), dial = (body.get('phone_code') || '').split(' ')[1] || '';
+      if (num && dial && !num.startsWith('+')) body.set('phone', dial + ' ' + num);
+      return body;
+    };
     const preview = /[?&]preview=sent(&|$)/.test(location.search);
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -895,7 +903,7 @@
       let flown = false, ok = null;
       const settle = () => { if (flown && ok !== null) (ok ? showSuccess : fail)(); };
       const request = (!endpoint || preview) ? Promise.resolve()
-        : fetch(endpoint, { method: 'POST', body: new URLSearchParams(new FormData(form)), headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } })
+        : fetch(endpoint, { method: 'POST', body: formBody(form), headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' } })
           .then((r) => { if (!r.ok) throw new Error(r.status); });
       /* a failed send names its cause in the console (e.g. 404 = the form isn't registered on Netlify) */
       request.then(() => { ok = true; settle(); }, (err) => { ok = false; console.warn('[TradeQuo] form not sent:', (err && err.message) || err); settle(); });
