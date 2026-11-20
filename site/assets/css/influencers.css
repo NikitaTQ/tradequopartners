@@ -29,134 +29,18 @@
 .inf-hero__ticks li::before { content: ''; position: absolute; inset-inline-start: 0; top: 50%; width: 13px; height: 13px; margin-top: -7px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23e7131b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2.5 8.5 3.5 3.5 7.5-8'/%3E%3C/svg%3E") center / contain no-repeat; }
 
-/* ---- the scene: 47 × 45 design px × 10 (1em = 10px of the design), scaled with its column ------------------ */
-.inf-hero__vis { container-type: inline-size; min-width: 0; }
-.inf-v { position: relative; width: 47em; height: 45em; font-size: 12px; font-size: calc(100cqw / 47); font-family: 'Inter', sans-serif; line-height: 1.25; color: #111114; user-select: none; }
-.inf-v b { font-weight: 700; }
-/* light from the red glints falling on the backdrop */
-.inf-v::before { content: ''; position: absolute; inset: -2em; pointer-events: none; filter: blur(1.2em);
-  background:
-    radial-gradient(1.6em 2.6em at 4% 9%, rgba(240,24,34,.16), transparent 70%),
-    radial-gradient(1.6em 2.6em at 4% 56%, rgba(240,24,34,.14), transparent 70%),
-    radial-gradient(3em 1.8em at 16% 96%, rgba(240,24,34,.2), transparent 70%),
-    radial-gradient(1.6em 3em at 88% 78%, rgba(240,24,34,.18), transparent 70%),
-    radial-gradient(1.6em 2.6em at 97% 52%, rgba(240,24,34,.14), transparent 70%),
-    radial-gradient(22em 4em at 50% 99%, rgba(20,20,30,.1), transparent 70%); }
-
-/* the wires */
-.inf-v__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 0; }
-.inf-v__tube { stroke: #fff; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 .07em rgba(110,110,128,.7)) drop-shadow(0 .2em .25em rgba(20,20,32,.18)); }
-.inf-v__core { stroke: #ff1f2b; stroke-width: 1.5; stroke-linecap: round; filter: drop-shadow(0 0 .2em rgba(255,24,36,.95)); }
-
-/* a glass card: a thick clear rim (bright inner edge, grey outline, red glints) around its pane */
-.inf-v__card { position: absolute; box-sizing: border-box; padding: 1.1em; border-radius: 2.9em;
-  background: linear-gradient(135deg, rgba(255,255,255,.98) 0%, rgba(233,233,239,.92) 24%, rgba(255,255,255,.97) 50%, rgba(224,224,232,.92) 76%, rgba(255,255,255,.98) 100%);
-  box-shadow: inset 0 0 0 .08em #fff, inset .25em .3em .45em rgba(255,255,255,.95), inset -.3em -.45em .7em rgba(130,130,150,.3),
-    0 0 0 .07em rgba(140,140,158,.5), 0 2.8em 3.4em -1.8em rgba(18,18,30,.34), 0 .8em 1.4em -.6em rgba(18,18,30,.14); }
-.inf-v__card::before, .inf-v__card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
-/* the rim's refraction: bright where light enters (top left), a grey band inside the outer edge */
-.inf-v__card::before { padding: .3em;
-  background: linear-gradient(155deg, #fff 0%, rgba(255,255,255,0) 22%, rgba(255,255,255,0) 72%, rgba(255,255,255,.95) 100%),
-    linear-gradient(90deg, rgba(150,150,168,.55), rgba(255,255,255,.15) 14%, rgba(255,255,255,.15) 86%, rgba(150,150,168,.55)); }
-.inf-v__card::after { padding: 1.1em; background: var(--glint, none); }
-.inf-v__card > .inf-v__bloom { position: absolute; inset: -.5em; border-radius: 3.4em; z-index: -1; pointer-events: none; background: var(--glint, none); filter: blur(.7em); opacity: .55; }
-
-.inf-v__pane { position: relative; border-radius: 1.85em; overflow: hidden;
-  background: linear-gradient(180deg, rgba(253,253,254,.98), rgba(242,242,246,.98));
-  box-shadow: 0 0 0 .07em rgba(160,160,176,.45), inset 0 .1em 0 #fff, inset 0 -.5em 1em rgba(120,120,140,.06); }
-
-.inf-v__ig { left: .8em; top: .8em; width: 21.2em; z-index: 2;
-  --glint: radial-gradient(0.9em 4.6em at 0% 13%, rgba(255,34,44,1), rgba(255,34,44,0.35) 40%, transparent 72%), radial-gradient(0.9em 3.6em at 0% 88%, rgba(255,34,44,0.95), rgba(255,34,44,0.33) 40%, transparent 72%), radial-gradient(4em 0.8em at 86% 100%, rgba(255,34,44,0.7), rgba(255,34,44,0.24) 40%, transparent 72%), radial-gradient(4.6em 0.8em at 24% 0%, rgba(255,34,44,0.55), rgba(255,34,44,0.19) 40%, transparent 72%); }
-.inf-v__tg { left: 23.5em; top: 3.1em; width: 22.3em; z-index: 1;
-  --glint: radial-gradient(0.9em 4.4em at 100% 84%, rgba(255,34,44,1), rgba(255,34,44,0.35) 40%, transparent 72%), radial-gradient(4em 0.8em at 80% 100%, rgba(255,34,44,0.75), rgba(255,34,44,0.26) 40%, transparent 72%), radial-gradient(3em 0.8em at 8% 100%, rgba(255,34,44,0.45), rgba(255,34,44,0.16) 40%, transparent 72%); }
-
-/* card heads: avatar + name */
-.inf-v__who { display: flex; align-items: center; gap: .65em; padding: .7em 1.1em .6em; }
-.inf-v__who b { font-size: 1.22em; font-weight: 600; letter-spacing: -.01em; }
-.inf-v__ava { flex: none; width: 1.85em; height: 1.85em; border-radius: 50%; background: #0c0c0e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1em; font-weight: 600; }
-.inf-v__ava--ring { box-shadow: 0 0 0 .12em #fff, 0 0 0 .25em #e1306c, .1em -.1em 0 .25em #f9a13b; }
-
-/* Instagram post */
-.inf-v__shot { position: relative; height: 15.4em; margin: 0 .75em; border-radius: 1.35em; display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(58% 52% at 86% 100%, rgba(236,20,30,.98), rgba(200,12,22,.45) 46%, rgba(120,0,8,0) 78%), linear-gradient(165deg, #26262a 0%, #0d0d0f 55%, #060607 100%);
-  box-shadow: inset 0 0 0 .07em rgba(255,255,255,.08), 0 .3em .8em -.3em rgba(0,0,0,.4); }
-.inf-v__word { display: block; width: 66%; height: auto; }
-.inf-v__shot .inf-v__word { margin-top: -1.4em; }
-.inf-v__link { position: absolute; left: 50%; bottom: 1.5em; transform: translateX(-50%); display: flex; align-items: center; gap: .4em; padding: .5em 1.05em .5em .9em;
-  border-radius: 999px; background: #fff; color: #e7131b; font-size: .98em; font-weight: 800; text-transform: uppercase; letter-spacing: -.005em; white-space: nowrap;
-  box-shadow: 0 .3em .9em -.2em rgba(0,0,0,.45), inset 0 -.1em .15em rgba(0,0,0,.08); }
-.inf-v__link svg { width: 1.05em; height: 1.05em; }
-.inf-v__acts { display: flex; align-items: center; gap: .85em; padding: .6em 1.1em .2em; color: #17171a; }
-.inf-v__acts svg { width: 1.4em; height: 1.4em; }
-.inf-v__heart { fill: #e7131b; }
-.inf-v__save { margin-inline-start: auto; }
-.inf-v__cap { margin: 0; padding: 0 1.1em .7em; font-size: .8em; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #26262b; }
-.inf-v__cap b { font-weight: 700; color: #111; }
-
-/* the corner badges: glass tiles over the rim */
-.inf-v__badge { position: absolute; z-index: 2; box-sizing: border-box; display: block; padding: .28em;
-  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(214,214,222,.92)); box-shadow: inset 0 0 0 .07em #fff, 0 0 0 .06em rgba(140,140,158,.45), 0 .6em 1.1em -.3em rgba(0,0,0,.35); }
-.inf-v__badge--ig { top: -.1em; right: -.1em; width: 3.4em; height: 3.4em; border-radius: 1.05em; }
-.inf-v__badge--ig svg { display: block; width: 100%; height: 100%; padding: .42em; box-sizing: border-box; border-radius: .8em;
-  background: radial-gradient(circle at 28% 108%, #fdd36a 0%, #fd8a3b 24%, #e8305c 48%, #c42a91 66%, #6a3fd6 100%);
-  box-shadow: inset 0 .1em .15em rgba(255,255,255,.45), inset 0 -.15em .3em rgba(60,0,60,.3); }
-.inf-v__badge--tg { top: .7em; right: .7em; width: 3.6em; height: 3.6em; border-radius: 50%; }
-.inf-v__badge--tg img { display: block; width: 100%; height: 100%; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255,255,255,.3); }
-
-/* Telegram post */
-.inf-v__msg { margin: 0 .8em; padding: .7em .9em .45em; border-radius: 1.25em; background: rgba(255,255,255,.96); box-shadow: 0 0 0 .07em rgba(0,0,0,.05), 0 .2em .5em -.2em rgba(0,0,0,.08); }
-.inf-v__from { display: block; color: #2a9fd8; font-size: 1em; font-weight: 700; }
-.inf-v__msg p { margin: .3em 0 .6em; font-size: .95em; color: #1f1f23; }
-.inf-v__banner { height: 4.4em; border-radius: .75em; display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(42% 120% at 10% 0%, rgba(236,20,30,.92), rgba(160,8,16,.3) 55%, rgba(0,0,0,0) 80%), linear-gradient(180deg, #1d1d20, #060607);
-  box-shadow: 0 .25em .6em -.25em rgba(0,0,0,.5); }
-.inf-v__banner .inf-v__word { width: 62%; }
-.inf-v__seen { display: flex; align-items: center; justify-content: flex-end; gap: .3em; margin-top: .35em; font-size: .82em; color: #9a9aa4; }
-.inf-v__seen svg { width: 1.2em; height: 1.2em; }
-.inf-v__open { display: flex; align-items: center; justify-content: center; gap: .5em; height: 2.8em; margin: .55em .8em .75em; border-radius: .9em;
-  background: linear-gradient(180deg, #a9b0b6 0%, #8c939a 100%); color: #fff; font-size: 1.05em; font-weight: 600;
-  box-shadow: inset 0 .08em 0 rgba(255,255,255,.45), inset 0 -.12em .25em rgba(0,0,0,.14), 0 .2em .5em -.2em rgba(0,0,0,.25); }
-.inf-v__open svg { width: 1em; height: 1em; }
-
-/* the commissions panel: a chrome-bright rim around dark glass */
-.inf-v__com { left: 6.2em; top: 28em; width: 34.8em; z-index: 3; padding: .8em; border-radius: 2.7em;
-  background: linear-gradient(180deg, #fbfbfc 0%, #d8d8de 30%, #b5b5bd 58%, #efeff2 100%);
-  --glint: radial-gradient(1em 4em at 0% 84%, rgba(255,34,44,1), rgba(255,34,44,0.35) 40%, transparent 72%), radial-gradient(5em 0.9em at 12% 100%, rgba(255,34,44,0.9), rgba(255,34,44,0.32) 40%, transparent 72%), radial-gradient(0.8em 5em at 100% 50%, rgba(255,34,44,1), rgba(255,34,44,0.35) 40%, transparent 72%), radial-gradient(2.4em 0.8em at 94% 0%, rgba(255,34,44,0.5), rgba(255,34,44,0.17) 40%, transparent 72%); }
-.inf-v__com::after { padding: .8em; }
-.inf-v__com .inf-v__pane { border-radius: 1.95em; color: #fff; padding-bottom: 1em;
-  background: radial-gradient(120% 90% at 18% 0%, #303035 0%, #19191c 52%, #0e0e10 100%);
-  box-shadow: 0 0 0 .08em rgba(0,0,0,.55), inset 0 0 0 .08em rgba(255,255,255,.1), inset 0 .15em .25em rgba(255,255,255,.1); }
-.inf-v__head { display: flex; align-items: center; gap: 1.05em; padding: .95em 1.5em .7em; }
-.inf-v__head b { display: block; font-size: 1.62em; font-weight: 600; letter-spacing: -.015em; }
-.inf-v__head small { display: block; margin-top: .1em; font-size: 1.06em; color: rgba(255,255,255,.55); }
-.inf-v__ok { flex: none; width: 3em; height: 3em; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 34% 28%, #ff8589 0%, #f42a33 30%, #cf0e18 66%, #8a050c 100%);
-  box-shadow: inset 0 .1em .15em rgba(255,255,255,.5), inset 0 -.25em .4em rgba(80,0,4,.4), 0 0 0 .14em rgba(255,255,255,.1), 0 .4em 1.2em rgba(240,20,30,.55); }
-.inf-v__ok svg { width: 1.6em; height: 1.6em; }
-.inf-v__row { display: grid; grid-template-columns: 2.4em minmax(0, 1fr) auto; align-items: center; gap: 1em; margin: 0 1.5em .4em; padding: .55em 1em .55em .9em; border-radius: .95em;
-  background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05)); box-shadow: inset 0 0 0 .07em rgba(255,255,255,.07), inset 0 .07em 0 rgba(255,255,255,.08); }
-.inf-v__row:last-child { margin-bottom: 0; }
-.inf-v__tile { width: 2.4em; height: 2.4em; border-radius: .6em; background: #050506; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 .06em rgba(255,255,255,.14); }
-.inf-v__tile img { width: 72%; height: auto; }
-.inf-v__rt { min-width: 0; }
-.inf-v__rt b { display: block; font-size: 1.06em; font-weight: 700; }
-.inf-v__rt small { display: flex; align-items: center; gap: .55em; margin-top: .25em; font-size: .9em; color: rgba(255,255,255,.72); white-space: nowrap; }
-.inf-v__mini { flex: none; width: 1.2em; height: 1.2em; border-radius: .32em; overflow: hidden; display: block; }
-.inf-v__mini img, .inf-v__mini svg { display: block; width: 100%; height: 100%; }
-.inf-v__mini--ig { background: radial-gradient(circle at 28% 108%, #fdd36a 0%, #fd8a3b 24%, #e8305c 48%, #c42a91 66%, #6a3fd6 100%); }
-.inf-v__mini--ig svg { padding: .14em; box-sizing: border-box; }
-.inf-v__mini img { border-radius: 50%; }
-.inf-v__row em { align-self: start; font-style: normal; font-size: .84em; color: rgba(255,255,255,.6); }
-/* where the wires come in: a small chrome socket on the panel's top */
-.inf-v__plug { position: absolute; top: -.35em; left: 50%; width: 1.5em; height: .8em; margin-left: -.75em; border-radius: .3em;
-  background: linear-gradient(180deg, #fff, #b9b9c2); box-shadow: 0 0 0 .06em rgba(120,120,135,.5), 0 .1em .2em rgba(0,0,0,.25); }
+/* the scene: the design's picture (tools/influencers/make.py), on the same background; 507px (with its faded margin) at the
+   design's 1104px width, growing with the column to 560px */
+.inf-hero__vis { min-width: 0; }
+.inf-hero__img { display: block; width: 100%; max-width: 560px; height: auto;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-composite: source-in; mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
+  mask-composite: intersect; }
 
 /* ---- tablets and phones: the text, then the scene full width ------------------------------------------------- */
 @media (max-width: 900px) {
   .inf-hero__in { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-  .inf-hero__vis { width: 100%; max-width: 560px; justify-self: center; }
+  .inf-hero__vis { width: 100%; max-width: 540px; justify-self: center; }
 }
 @media (max-width: 640px) {
   .inf-hero { padding-top: 32px; }
