@@ -35,6 +35,10 @@ PAGES = [
     # IB Tools: its table of contents (fan, FAB) is TOC['ibtools'] below. ('display': 'h2' preloads the H2 face instead
     # of the H1 one, for a page whose display text is section-heading type, as with the earlier devices-film hero)
     {'id': 'ibtools', 'template': 'ibtools.html', 'slug': 'ib-tools', 'css': 'partner'},
+    # For influencers (November 2026): in development, private. 'private' keeps it out of the sitemap (and it is not in
+    # NAV); it is built only in the languages that have strings/influencers/<lang>.json (English for now); the server
+    # shows it only to the owner (netlify/edge-functions/preview.js, README: Закрытая страница /for-influencers/).
+    {'id': 'influencers', 'template': 'influencers.html', 'slug': 'for-influencers', 'css': 'partner', 'private': True},
 ]
 # The site navigation in the header: the four pages, in this order (Marketing Tools was removed in November 2026) (page id, path under the language root, label).
 NAV = [
@@ -388,6 +392,8 @@ with open(os.path.join(SITE, 'embeds', 'i18n.js'), 'w', encoding='utf-8') as f:
 # ---- sitemap ---------------------------------------------------------------------------
 urls = ''
 for page in PAGES:
+    if page.get('private'):
+        continue
     alts = ''.join('\n    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>' % (t['hreflang'], url_of(t, page['slug'])) for t in page['built'])
     urls += ''.join('\n  <url>\n    <loc>%s</loc>%s\n  </url>' % (url_of(l, page['slug']), alts) for l in page['built'])
 with open(os.path.join(SITE, 'sitemap.xml'), 'w', encoding='utf-8') as f:
