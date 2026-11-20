@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{inf.meta.title}}</title>
+<meta name="description" content="{{@inf.meta.description}}">
+<!-- in development: private (netlify/edge-functions/preview.js) and not indexed; drop this line at launch -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="{{canonical}}">
+{{hreflang}}
+<meta name="theme-color" content="#ffffff">
+{{> head}}
+</head>
+<body>
+<div class="tp">
+
+  {{> page-header-start}}
+  {{> page-header-end}}
+
+  <!-- For influencers: the page's blocks go here -->
+  <main style="min-height: 60vh;">
+  </main>
+
+{{> footer}}
+</div>
+
+<script src="{{root}}assets/js/transition.js" defer></script>
+<script src="{{root}}assets/js/landing.js" defer></script>
+</body>
+</html>
