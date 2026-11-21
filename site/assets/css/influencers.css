@@ -83,6 +83,7 @@
 .inf-orbit__group[data-group="0"] { z-index: 2; }
 .inf-orbit__group[data-off] { visibility: hidden; }
 .inf-orbit__drift { position: absolute; inset: 0; transform-origin: 47.91% 61.54%; }
+.inf-orbit__group picture { display: contents; }
 .inf-orbit__group img { position: absolute; left: 0; top: 0; width: 100%; height: 90.974%; display: block; }
 .inf-orbit__group img.inf-orbit__ext { top: 90.974%; height: 9.026%; }
 .inf-orbit__sky { opacity: 0; filter: blur(26px) saturate(1.2); transform: scale(1.08); }
@@ -106,7 +107,7 @@
 .inf-orbit__streak { position: absolute; z-index: 5; left: 35.5%; top: 23%; width: .45%; height: 9.5%; border-radius: 999px; pointer-events: none; opacity: 0;
   background: linear-gradient(180deg, rgba(255,255,255,0), #fff, rgba(255,255,255,0)); box-shadow: 0 0 18px 6px #9ad6ff; }
 /* the creators' plates (drawn in the picture): a light runs across each when the platform changes */
-.inf-orbit__plate { position: absolute; z-index: 6; border-radius: 7px; overflow: hidden; pointer-events: none; }
+.inf-orbit__plate { position: absolute; z-index: 6; left: var(--l); top: var(--t); width: var(--w); height: var(--h); border-radius: 7px; overflow: hidden; pointer-events: none; }
 .inf-orbit__plate span { position: absolute; inset: 0; transform: translateX(-130%); mix-blend-mode: screen;
   background: linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 70%); }
 
@@ -144,8 +145,22 @@
   transition: color .35s, text-shadow .35s; -webkit-tap-highlight-color: transparent; }
 .inf-orbit__bar button[aria-selected="true"] { color: #1a1420; text-shadow: none; }
 .inf-orbit__bar button:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
-/* phones: the bar goes under the card (over the scene it would hide the creators at its foot), a size up */
+/* phones: the tall card (tools/influencers/portrait.py): the scene closer, the creators down it in a zigzag, a nebula
+   of its own under it; one picture per platform, 1036 x 1628. The layers' masks and centres in its frame (the planet at
+   50.07% 47.91%); the switch over its foot, a size up */
 @media (max-width: 640px) {
-  .inf-orbit__bar { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: 16px auto 0; }
-  .inf-orbit__bar button { height: 34px; padding: 0 16px; font-size: 13px; }
+  .inf-orbit__stage { aspect-ratio: 1036 / 1628; }
+  .inf-orbit__spacer, .inf-orbit__group img.inf-orbit__ext { display: none; }
+  .inf-orbit__group { height: 100%; }
+  .inf-orbit__group img { height: 100%; }
+  .inf-orbit__drift, .inf-orbit__planet { transform-origin: 50.07% 47.91%; }
+  .inf-orbit__icon { -webkit-mask-image: radial-gradient(ellipse 55.65% 19.12% at 54.48% 11.33%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 55.65% 19.12% at 54.48% 11.33%, #000 72%, transparent 100%); }
+  .inf-orbit__planet { -webkit-mask-image: radial-gradient(ellipse 33.39% 14.87% at 50.07% 47.91%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 33.39% 14.87% at 50.07% 47.91%, #000 60%, transparent 100%); }
+  .inf-orbit__edge { -webkit-mask-image: radial-gradient(circle at 50.07% 47.91%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
+    mask-image: radial-gradient(circle at 50.07% 47.91%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
+  .inf-orbit__flash { background: radial-gradient(circle at 50.07% 47.91%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
+  .inf-orbit__streak { left: 22.44%; top: 16.29%; width: 1.00%; height: 6.73%; }
+  .inf-orbit__plate { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); border-radius: 5px; }
+  .inf-orbit__bar { bottom: 14px; }
+  .inf-orbit__bar button { height: 36px; padding: 0 16px; font-size: 13px; }
 }

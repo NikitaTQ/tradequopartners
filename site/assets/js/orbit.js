@@ -20,8 +20,25 @@
     'hue-rotate(150deg) saturate(1.25) brightness(1.15) blur(4px)',
     'saturate(.55) brightness(.5) contrast(1.2) blur(4px)',
   ];
-  const HOLE = 'radial-gradient(ellipse 25% 27% at 49.9% 16%,transparent 72%,#000 100%)';
-  const REVEAL = 'radial-gradient(circle at 47.91% 61.54%,#000 calc(var(--r) - 240px),transparent var(--r))';   /* the planet, in a group that reaches over the strip */
+  /* the scene's geometry: wider screens the design's (its group reaches over the strip under the picture, so the planet
+     is at 61.54% of the group's height); phones the tall card's (tools/influencers/portrait.py: the picture's x 451..1248
+     at 1.3 times, on a card of 1036 x 1628) */
+  const PHONE = window.matchMedia('(max-width: 640px)');
+  const GEO = {
+    wide: { hole: 'ellipse 25% 27% at 49.9% 16%', planet: [0.4791, 0.6764], reveal: '47.91% 61.54%', reach: 1.0992,
+      title: ['inset(24.2% 64.5% 68.8% 35.5%)', 'inset(24.2% 35.7% 68.8% 35.5%)'], streak: ['35.5%', '64.3%'] },
+    phone: { hole: 'ellipse 55.65% 19.12% at 54.48% 11.33%', planet: [0.5007, 0.4791], reveal: '50.07% 47.91%', reach: 1,
+      title: ['inset(17.14% 77.57% 77.9% 22.43%)', 'inset(17.14% 13.45% 77.9% 22.43%)'], streak: ['22.43%', '86.55%'] },
+  };
+  const geo = () => (PHONE.matches ? GEO.phone : GEO.wide);
+  /* the orbit overlay follows: the card's part of the picture, and in its mask the creators' places on the card */
+  const svg = sec.querySelector('.inf-orbit__svg'), hide = sec.querySelector('[data-hide]');
+  const frame = () => {
+    svg.setAttribute('viewBox', PHONE.matches ? svg.dataset.viewM : '0 0 1774 887');
+    hide.setAttribute('mask', PHONE.matches ? 'url(#tqHideM)' : 'url(#tqHide)');
+  };
+  frame();
+  if (PHONE.addEventListener) PHONE.addEventListener('change', frame);
   const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const F = (n) => r.querySelector('[data-fx="' + n + '"]');
   const G = (i) => r.querySelector('[data-group="' + i + '"]');
@@ -112,8 +129,11 @@
     }
 
     const rect = r.getBoundingClientRect();
-    const cx = rect.width * 0.4791, cy = rect.height * 0.6764;
-    const R = Math.max(...[[0, 0], [rect.width, 0], [0, rect.height * 1.0992], [rect.width, rect.height * 1.0992]].map(([x, y]) => Math.hypot(x - cx, y - cy))) + 260;   /* to the strip's far corners */
+    const g = geo();
+    const cx = rect.width * g.planet[0], cy = rect.height * g.planet[1];
+    const R = Math.max(...[[0, 0], [rect.width, 0], [0, rect.height * g.reach], [rect.width, rect.height * g.reach]].map(([x, y]) => Math.hypot(x - cx, y - cy))) + 260;   /* to the far corners (and the strip's) */
+    const REVEAL = 'radial-gradient(circle at ' + g.reveal + ',#000 calc(var(--r) - 240px),transparent var(--r))';
+    const HOLE = 'radial-gradient(' + g.hole + ',transparent 72%,#000 100%)';
     const tint = TINT[ti];
     mask(to, REVEAL);
     to.classList.add('is-playing');
@@ -144,10 +164,10 @@
     ], { duration: 1400, easing: 'ease-out' });
     A(L(to, 'icon'), [{ opacity: 0, filter: 'blur(20px) brightness(3)' }, { opacity: 1, filter: 'blur(0px) brightness(1)' }], { duration: 1400, delay: 750, easing: 'cubic-bezier(.3,0,.2,1)' });
     A(L(to, 'title'), [
-      { opacity: 1, clipPath: 'inset(24.2% 64.5% 68.8% 35.5%)', filter: 'brightness(2.6)' },
-      { opacity: 1, clipPath: 'inset(24.2% 35.7% 68.8% 35.5%)', filter: 'brightness(1)' },
+      { opacity: 1, clipPath: g.title[0], filter: 'brightness(2.6)' },
+      { opacity: 1, clipPath: g.title[1], filter: 'brightness(1)' },
     ], { duration: 1000, delay: 1000, easing: wipe });
-    A(F('streak'), [{ left: '35.5%', opacity: 0 }, { opacity: 1, offset: 0.1 }, { opacity: 1, offset: 0.85 }, { left: '64.3%', opacity: 0 }], { duration: 1000, delay: 1000, easing: wipe });
+    A(F('streak'), [{ left: g.streak[0], opacity: 0 }, { opacity: 1, offset: 0.1 }, { opacity: 1, offset: 0.85 }, { left: g.streak[1], opacity: 0 }], { duration: 1000, delay: 1000, easing: wipe });
     A(F('draw'), [{ strokeDashoffset: 1000, opacity: 1 }, { strokeDashoffset: 0, opacity: 1, offset: 0.75 }, { strokeDashoffset: 0, opacity: 0 }], { duration: 2100, delay: 250, easing: 'cubic-bezier(.5,0,.3,1)' });
     A(F('ftrail'), [{ strokeDashoffset: 0, opacity: 0.8 }, { opacity: 0.8, offset: 0.9 }, { strokeDashoffset: -1000, opacity: 0 }], { duration: 1700, delay: 200, easing: 'cubic-bezier(.4,0,.3,1)' });
     A(F('fhead'), [{ strokeDashoffset: -214, opacity: 1 }, { opacity: 1, offset: 0.9 }, { strokeDashoffset: -1214, opacity: 0 }], { duration: 1700, delay: 200, easing: 'cubic-bezier(.4,0,.3,1)' });
