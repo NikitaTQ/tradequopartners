@@ -145,22 +145,32 @@
   transition: color .35s, text-shadow .35s; -webkit-tap-highlight-color: transparent; }
 .inf-orbit__bar button[aria-selected="true"] { color: #1a1420; text-shadow: none; }
 .inf-orbit__bar button:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
-/* phones: the tall card (tools/influencers/portrait.py): the scene closer, the creators down it in a zigzag, a nebula
-   of its own under it; one picture per platform, 1036 x 1628. The layers' masks and centres in its frame (the planet at
-   50.07% 47.91%); the switch over its foot, a size up */
+/* phones: the tall card (tools/influencers/portrait.py, 1036 x 1340): the scene closer, the creators along its orbit,
+   a nebula of its own under it; one picture per platform. The layers' masks and centres in its frame (the planet at
+   50.04% 53.73%); the switch over its foot, a size up. Written by tools/influencers/portrait_apply.py. */
 @media (max-width: 640px) {
-  .inf-orbit__stage { aspect-ratio: 1036 / 1628; }
+  .inf-orbit__stage { aspect-ratio: 1036 / 1340; }
   .inf-orbit__spacer, .inf-orbit__group img.inf-orbit__ext { display: none; }
   .inf-orbit__group { height: 100%; }
   .inf-orbit__group img { height: 100%; }
-  .inf-orbit__drift, .inf-orbit__planet { transform-origin: 50.07% 47.91%; }
-  .inf-orbit__icon { -webkit-mask-image: radial-gradient(ellipse 55.65% 19.12% at 54.48% 11.33%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 55.65% 19.12% at 54.48% 11.33%, #000 72%, transparent 100%); }
-  .inf-orbit__planet { -webkit-mask-image: radial-gradient(ellipse 33.39% 14.87% at 50.07% 47.91%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 33.39% 14.87% at 50.07% 47.91%, #000 60%, transparent 100%); }
-  .inf-orbit__edge { -webkit-mask-image: radial-gradient(circle at 50.07% 47.91%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
-    mask-image: radial-gradient(circle at 50.07% 47.91%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
-  .inf-orbit__flash { background: radial-gradient(circle at 50.07% 47.91%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
-  .inf-orbit__streak { left: 22.44%; top: 16.29%; width: 1.00%; height: 6.73%; }
+  .inf-orbit__drift, .inf-orbit__planet { transform-origin: 50.04% 53.73%; }
+  .inf-orbit__icon { -webkit-mask-image: radial-gradient(ellipse 51.37% 21.45% at 54.12% 12.71%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 51.37% 21.45% at 54.12% 12.71%, #000 72%, transparent 100%); }
+  .inf-orbit__planet { -webkit-mask-image: radial-gradient(ellipse 30.82% 16.68% at 50.04% 53.73%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 30.82% 16.68% at 50.04% 53.73%, #000 60%, transparent 100%); }
+  .inf-orbit__edge { -webkit-mask-image: radial-gradient(circle at 50.04% 53.73%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
+    mask-image: radial-gradient(circle at 50.04% 53.73%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
+  .inf-orbit__flash { background: radial-gradient(circle at 50.04% 53.73%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
+  .inf-orbit__streak { left: 24.53%; top: 18.27%; width: 0.93%; height: 7.55%; }
   .inf-orbit__plate { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); border-radius: 5px; }
   .inf-orbit__bar { bottom: 14px; }
   .inf-orbit__bar button { height: 36px; padding: 0 16px; font-size: 13px; }
+}
+
+/* ---- phones only (owner's wish, November 2026): the creators block fits one screen with its heading (a one-line
+   line under it, a tighter gap), and the site's closing call follows it (hidden on wider screens) ---- */
+.inf-final { display: none; }
+@media (max-width: 640px) {
+  .inf-orbit { padding-bottom: var(--tq-half); }
+  .inf-orbit__head { gap: 10px; margin-bottom: 18px; }
+  .inf-orbit__sub { font-size: clamp(12px, 3.6vw, 14px); white-space: nowrap; }
+  .inf-final { display: block; background: #f3f2f7; padding-top: 0; }
 }

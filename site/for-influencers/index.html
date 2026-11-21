@@ -677,6 +677,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (max-width: 640px) and (prefers-reduced-motion: reduce) {
 .tq-mnav, .tq-mnav__list li, .tq-lsheet__veil, .tq-lsheet__box, .tq-lfab { transition: none; }
 }
+.tq-ph { display: none; }
+@media (max-width: 640px) {
+.tq-ph { display: inline; }
+.tq-nph { display: none; }
+}
 [dir="rtl"] [data-fab] { align-items: flex-start !important; }
 @media (min-width: 900px) {
 #signup form > div:has(> [data-form-auth]) { order: 2; margin-top: 6px !important; }
@@ -706,6 +711,147 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 [data-fan-card] > [data-fan-upto] { margin-top: auto !important; }
 [data-fan-card] > [data-fan-upto] + [data-fan-obj] { margin-top: 0 !important; }
 }
+</style>
+<style id="partner-css" data-prefix="../">
+.tp { font-family: 'Inter', sans-serif; background: #fff; color: #0a0a0a; overflow: clip; width: 100%; -webkit-font-smoothing: antialiased; }
+.tp-sub { margin: 0; max-width: 58ch; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.55; color: #5b5b5b; text-wrap: pretty; }
+.tp-pc__num, .tp-pc__big { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
+.tp-pc__big { display: block; margin-top: calc(18 * var(--pu)); font-size: calc(105 * var(--pu)); line-height: .8; font-weight: 700; letter-spacing: -.05em; white-space: nowrap; color: #0b0b0d; -webkit-text-stroke: .02em currentColor; }
+.tp-dome-copy__sub { margin: 0; font-size: 22px; line-height: 1.6; color: #5e5e66; text-wrap: pretty; }
+@media (max-width: 1100px) {
+.tp-dome-copy__sub { order: 1; max-width: 600px; margin-top: 16px; }
+}
+@media (max-width: 640px) {
+.tp-dome-copy__sub { margin-top: 12px; }
+}
+.tp-night {
+  position: relative; max-width: 1336px; margin: 0 auto; padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 72px);
+  border-radius: clamp(28px, 4vw, 48px); color: #fff; overflow: hidden; isolation: isolate;
+  background: radial-gradient(60% 55% at 50% 0%, rgba(231,19,27,.28) 0%, rgba(231,19,27,0) 70%), linear-gradient(180deg, #0d0d0f 0%, #060607 100%);
+}
+.tp-night::before { 
+  content: ''; position: absolute; inset: 0; z-index: -1; opacity: .55; pointer-events: none;
+  background-image: radial-gradient(1px 1px at 12% 22%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 28% 68%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 44% 14%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 63% 38%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 78% 18%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 88% 62%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 8% 84%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 52% 88%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 94% 90%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 36% 42%, #fff 50%, transparent 51%);
+}
+.tp-night .tp-sub { color: #a7a9ae; }
+.tp-night-sec { padding: var(--tq-half) clamp(8px, 2vw, 24px); }
+.tp-final { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.tp-final__title { margin: 0; color: #fff; }
+.tp-final__sub { margin: 0; max-width: 60ch; font-size: clamp(24px, 2.56vw, 30px); line-height: 1.5; color: #a4a4ac; text-wrap: pretty; }
+.tp-final__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 18px; }
+.tp-glint { --h: 0; position: relative; overflow: hidden; flex-shrink: 0; display: inline-flex; align-items: center; gap: 10px; height: 58px; padding: 0 28px; border-radius: 999px; background: linear-gradient(180deg, #ff3e45 0%, #e7131b 55%, #b30b12 100%); color: #fff; font-size: 15px; font-weight: 700; white-space: nowrap; text-decoration: none; box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 calc(14px + var(--h) * 6px) calc(34px + var(--h) * 16px) -12px rgba(231,19,27,calc(.6 + var(--h) * .3)); transform: translateY(calc(var(--h) * -2px)); transition: transform .25s, box-shadow .3s; }
+.tp-glint:hover, .tp-glint:focus-visible { --h: 1; color: #fff; }
+.tp-glint:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.tp-glint__sweep { position: absolute; top: 0; bottom: 0; left: 0; width: 34%; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.45), rgba(255,255,255,0)); animation: tqSweep 3.4s ease-in-out infinite; pointer-events: none; }
+.tp-glint__label { position: relative; }
+.tp-glint svg { position: relative; transform: translateX(calc(var(--h) * 4px)); transition: transform .3s; }
+[dir="rtl"] .tp-glint svg { transform: scaleX(-1) translateX(calc(var(--h) * 4px)); }
+@keyframes tqSweep { 0%, 55% { transform: translateX(-160%) skewX(-20deg); } 100% { transform: translateX(360%) skewX(-20deg); } }
+.tp-roll { --h: 0; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; min-width: 236px; height: 58px; padding: 0 26px; border-radius: 999px; background: #121215; color: #fff; text-decoration: none; white-space: nowrap; box-shadow: inset 0 0 0 1px rgba(255,255,255,calc(.14 + var(--h) * .2)); transition: box-shadow .3s; }
+.tp-roll:hover, .tp-roll:focus-visible { --h: 1; color: #fff; }
+.tp-roll:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.tp-roll__window { display: block; height: 22px; overflow: hidden; }
+.tp-roll__track { display: flex; flex-direction: column; align-items: center; transform: translateY(calc(var(--h) * -22px)); transition: transform .4s cubic-bezier(.6,0,.2,1); }
+.tp-roll__a, .tp-roll__b { display: block; height: 22px; line-height: 22px; }
+.tp-roll__a { font-size: 15px; font-weight: 700; }
+.tp-roll__b { font-family: 'Inter', sans-serif; font-size: 14px; color: #a4a4ac; }
+.tp-roll__b span[style*="e7131b"] { color: #ff4148 !important; }
+@media (max-width: 640px) {
+.tp-final__actions { flex-direction: column; align-items: center; width: 100%; }
+.tp-glint, .tp-roll { width: min(100%, 320px); justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+.tp-glint__sweep { animation: none; opacity: 0; }
+.tp-glint, .tp-glint svg, .tp-roll, .tp-roll__track { transition: none; }
+}
+@media (max-width: 640px) {
+.tp-night { border-radius: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+.tp-glass { transition: none; }
+}
+@property --ch { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --cd { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --ctx { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@property --cty { syntax: '<length>'; inherits: true; initial-value: 0px; }
+#pf-who-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; display: flex; justify-content: center; }
+@keyframes pfFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-cyrillic-ext.woff2?v=705d625066) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-cyrillic.woff2?v=9f73b2f43e) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-vietnamese.woff2?v=9c1cad863a) format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-latin-ext.woff2?v=cf3eb50fb2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'TQ Inter Heavy'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../assets/fonts/inter-latin.woff2?v=f11d729bb0) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+#pf-who-wrap { container-type: inline-size; position: relative; z-index: 1; }
+.pf-dr__line { display: flex; gap: .27em; align-items: flex-end; }
+.pf-dr__line > span { flex: none; }
+.pf-dr__slot { display: inline-block; height: var(--drl); line-height: var(--drl); overflow: hidden; margin-bottom: calc((1.17em - var(--drl)) / 2); }
+.pf-dr__slot > span { display: flex; flex-direction: column; transition: transform .7s cubic-bezier(.7,0,.2,1); }
+.pf-dr__slot > span > span { height: var(--drl); line-height: var(--drl); white-space: nowrap; overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+.pf-dr__slot > span { transition: none; }
+}
+@media (max-width: 760px) {
+.pf-dr__line, .pf-dr__sent .pf-dr__l2 { align-items: flex-start; gap: .26em; margin-top: 0; }
+.pf-dr__line > .pf-dr__slot { flex: 1 1 0; min-width: 0; margin-bottom: 0; }
+.pf-dr__slot > span > span { white-space: normal; line-height: 1.18; text-wrap: balance; overflow-wrap: anywhere; }
+:lang(ar) .pf-dr__slot > span > span, :lang(th) .pf-dr__slot > span > span, :lang(vi) .pf-dr__slot > span > span { line-height: 1.4; }
+}
+@media (max-width: 899px) {
+#pf-who-wrap { padding: 24px 16px; }
+}
+.tp-pds__track { position: relative; width: 100%; }
+.tp-pds__base, .tp-pds__fill { position: absolute; inset-inline-start: calc(12.5% - 9px); }
+.tp-pds__base { top: 37px; width: calc(75% + 18px); height: 2px; border-radius: 1px; background: rgba(231,19,27,.22); box-shadow: 0 1px 0 #fff; }
+@keyframes tpPdsSheen { to { transform: translateX(1000px); } }
+@keyframes tpPdsSheenV { to { transform: translateY(1000px); } }
+.tp-pds__orb { position: relative; width: 76px; height: 76px; flex: none; }
+@keyframes tpPdsFloat { 0% { opacity: 0; transform: translate(var(--cx, -50%), 10px); } 18% { opacity: 1; transform: translate(var(--cx, -50%), 0); } 75% { opacity: 1; transform: translate(var(--cx, -50%), -8px); } 100% { opacity: 0; transform: translate(var(--cx, -50%), -16px); } }
+@keyframes tpPdsPop { 0% { transform: scale(.7); } 55% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes tpPdsSpin { to { transform: rotate(360deg); } }
+@keyframes tpPdsNet { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes tpPdsCoin { 0% { transform: translateY(-5px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@media (max-width: 960px) {
+.tp-pds__base, .tp-pds__fill { display: none; }
+.tp-pds__track { padding-top: 34px; }
+}
+@media (max-width: 560px) {
+.tp-pds__track { padding-top: 30px; }
+.tp-pds__orb { grid-row: 1 / span 3; width: 64px; height: 64px; }
+.tp-pds__base, .tp-pds__fill { display: block; inset-inline-start: auto; left: var(--rx, 32px); top: var(--rt, 32px); }
+.tp-pds__base { width: 2px; height: var(--rh, 0px); margin-left: -1px; box-shadow: none; }
+}
+@property --tqmx { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
+.tq-rglass { position: relative; isolation: isolate; align-self: flex-start; display: inline-flex; align-items: center; gap: 18px; height: 66px; box-sizing: border-box; padding: 0; padding-inline: 30px 5px;
+  border: 1px solid rgba(255,170,175,.75); border-radius: 999px; color: #fff; font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 16px; line-height: 1; letter-spacing: -.01em;
+  white-space: nowrap; text-decoration: none; text-shadow: 0 1px 1px rgba(90,6,14,.35); cursor: pointer; -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(150deg, rgba(240,40,48,.94) 0%, rgba(222,24,34,.9) 45%, rgba(176,12,22,.95) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.7), inset 0 -1px 1px rgba(255,255,255,.35), inset 0 -14px 22px -12px rgba(100,0,8,.6), inset 0 0 22px rgba(255,180,184,.18),
+    0 calc(16px + var(--tqh) * 6px) calc(32px + var(--tqh) * 14px) -12px rgba(231,19,27,.5);
+  transform: translate(var(--tqx), var(--tqy)) scale(calc(1 - var(--tqd) * .04)); animation: tq-logo-idle 1.46s ease-in-out infinite alternate;
+  transition: --tqh .7s cubic-bezier(.3, 1.3, .5, 1), --tqx .45s cubic-bezier(.2, .9, .25, 1), --tqy .45s cubic-bezier(.2, .9, .25, 1), --tqmx .45s ease, --tqd .14s ease-out; }
+.tq-rglass::before { content: ''; position: absolute; z-index: -1; inset: 1px 12px auto 12px; height: 46%; border-radius: 999px 999px 60% 60% / 999px 999px 100% 100%; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 100%); }
+.tq-rglass::after { content: ''; position: absolute; z-index: -1; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(40% 120% at var(--tqmx) 0%, rgba(255,255,255,calc(.18 + var(--tqh) * .22)) 0%, rgba(255,255,255,0) 70%); }
+.tq-rglass:hover, .tq-rglass:focus-visible { --tqh: 1; animation: none; color: #fff; }
+.tq-rglass:active { --tqd: 1; }
+.tq-rglass:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) {
+.tq-rglass { animation: none; transition-duration: .01s; }
+}
+.tq-start { position: relative; display: block; width: 100px; height: 100px; color: #fff; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.tq-start:hover { color: #fff; }
+.tq-start__arc { transition: stroke-dashoffset .9s linear; }
+.tq-start.is-hover .tq-start__arc { transition: stroke-dashoffset 1.1s cubic-bezier(.2,.7,.2,1); }
+.tq-start:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; border-radius: 50%; }
+.tq-start__time { direction: ltr; unicode-bidi: isolate; }
+@media (prefers-reduced-motion: reduce) {
+.tq-start__arc, .tq-start__btn { transition: none; }
+}
+@keyframes tq-pill-a { 0%, 100% { scale: 1 1; } 42% { scale: 1.34 1; } }
+@keyframes tq-pill-b { 0%, 100% { scale: 1 1; } 42% { scale: 1.34 1; } }
+@keyframes tq-ping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.6); opacity: 0; } }
 </style>
 <style id="influencers-css" data-prefix="../">
 .inf-hero { font-family: 'Inter', sans-serif; background: #f3f2f7; padding: clamp(40px, 5.4vw, 84px) 0 clamp(56px, 6.4vw, 104px); overflow: hidden; }
@@ -824,20 +970,27 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__bar button[aria-selected="true"] { color: #1a1420; text-shadow: none; }
 .inf-orbit__bar button:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
 @media (max-width: 640px) {
-.inf-orbit__stage { aspect-ratio: 1036 / 1628; }
+.inf-orbit__stage { aspect-ratio: 1036 / 1340; }
 .inf-orbit__spacer, .inf-orbit__group img.inf-orbit__ext { display: none; }
 .inf-orbit__group { height: 100%; }
 .inf-orbit__group img { height: 100%; }
-.inf-orbit__drift, .inf-orbit__planet { transform-origin: 50.07% 47.91%; }
-.inf-orbit__icon { -webkit-mask-image: radial-gradient(ellipse 55.65% 19.12% at 54.48% 11.33%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 55.65% 19.12% at 54.48% 11.33%, #000 72%, transparent 100%); }
-.inf-orbit__planet { -webkit-mask-image: radial-gradient(ellipse 33.39% 14.87% at 50.07% 47.91%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 33.39% 14.87% at 50.07% 47.91%, #000 60%, transparent 100%); }
-.inf-orbit__edge { -webkit-mask-image: radial-gradient(circle at 50.07% 47.91%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
-    mask-image: radial-gradient(circle at 50.07% 47.91%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
-.inf-orbit__flash { background: radial-gradient(circle at 50.07% 47.91%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
-.inf-orbit__streak { left: 22.44%; top: 16.29%; width: 1.00%; height: 6.73%; }
+.inf-orbit__drift, .inf-orbit__planet { transform-origin: 50.04% 53.73%; }
+.inf-orbit__icon { -webkit-mask-image: radial-gradient(ellipse 51.37% 21.45% at 54.12% 12.71%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 51.37% 21.45% at 54.12% 12.71%, #000 72%, transparent 100%); }
+.inf-orbit__planet { -webkit-mask-image: radial-gradient(ellipse 30.82% 16.68% at 50.04% 53.73%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 30.82% 16.68% at 50.04% 53.73%, #000 60%, transparent 100%); }
+.inf-orbit__edge { -webkit-mask-image: radial-gradient(circle at 50.04% 53.73%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
+    mask-image: radial-gradient(circle at 50.04% 53.73%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
+.inf-orbit__flash { background: radial-gradient(circle at 50.04% 53.73%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
+.inf-orbit__streak { left: 24.53%; top: 18.27%; width: 0.93%; height: 7.55%; }
 .inf-orbit__plate { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); border-radius: 5px; }
 .inf-orbit__bar { bottom: 14px; }
 .inf-orbit__bar button { height: 36px; padding: 0 16px; font-size: 13px; }
+}
+.inf-final { display: none; }
+@media (max-width: 640px) {
+.inf-orbit { padding-bottom: var(--tq-half); }
+.inf-orbit__head { gap: 10px; margin-bottom: 18px; }
+.inf-orbit__sub { font-size: clamp(12px, 3.6vw, 14px); white-space: nowrap; }
+.inf-final { display: block; background: #f3f2f7; padding-top: 0; }
 }
 </style>
 </head>
@@ -962,40 +1115,40 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <div class="inf-orbit__in">
     <div class="inf-orbit__head">
       <h2 class="inf-orbit__h2 tq-h2" data-fitw>Wherever your audience is</h2>
-      <p class="inf-orbit__sub">Instagram, Telegram or TikTok: share your TradeQuo link where your followers already spend their time.</p>
+      <p class="inf-orbit__sub"><span class="tq-nph">Instagram, Telegram or TikTok: share your TradeQuo link where your followers already spend their time.</span><span class="tq-ph">Share your link where your followers already are.</span></p>
     </div>
     <div class="inf-orbit__card">
     <div class="inf-orbit__clip">
     <div class="inf-orbit__stage" data-orbit-root role="region" aria-label="Creators on Instagram" data-aria="Creators on">
       <div class="inf-orbit__group" data-group="0">
         <div class="inf-orbit__drift" data-l="drift">
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="sky" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="bg" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On Instagram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="icon" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="title" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="planet" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=6b0aaa8738"><img data-l="sky" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=6b0aaa8738"><img data-l="bg" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On Instagram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=6b0aaa8738"><img data-l="icon" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=6b0aaa8738"><img data-l="title" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=6b0aaa8738"><img data-l="planet" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
           <img data-l="ext" class="inf-orbit__ext" src="../assets/influencers/orbit-instagram-ext-1774.webp?v=d579e13c2f" srcset="../assets/influencers/orbit-instagram-ext-1100.webp 1100w, ../assets/influencers/orbit-instagram-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--instagram" data-l="edge"></div>
       </div>
       <div class="inf-orbit__group" data-group="1" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="sky" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="bg" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On Telegram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="icon" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="title" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="planet" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=c53f22e526"><img data-l="sky" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=c53f22e526"><img data-l="bg" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On Telegram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=c53f22e526"><img data-l="icon" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=c53f22e526"><img data-l="title" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=c53f22e526"><img data-l="planet" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
           <img data-l="ext" class="inf-orbit__ext" src="../assets/influencers/orbit-telegram-ext-1774.webp?v=211b9edc59" srcset="../assets/influencers/orbit-telegram-ext-1100.webp 1100w, ../assets/influencers/orbit-telegram-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--telegram" data-l="edge"></div>
       </div>
       <div class="inf-orbit__group" data-group="2" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="sky" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="bg" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On TikTok: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="icon" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="title" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="planet" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="sky" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="bg" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On TikTok: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="icon" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="title" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="planet" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
           <img data-l="ext" class="inf-orbit__ext" src="../assets/influencers/orbit-tiktok-ext-1774.webp?v=cd5186aedb" srcset="../assets/influencers/orbit-tiktok-ext-1100.webp 1100w, ../assets/influencers/orbit-tiktok-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--tiktok" data-l="edge"></div>
@@ -1003,12 +1156,12 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
       <div class="inf-orbit__flash" data-fx="flash"></div>
 
-      <svg class="inf-orbit__svg" viewBox="0 0 1774 887" data-view-m="451 0 796.9 1252.3" preserveAspectRatio="none" aria-hidden="true">
+      <svg class="inf-orbit__svg" viewBox="0 0 1774 887" data-view-m="418 0 863.33 1116.67" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <filter id="tqGlow" x="-5%" y="-10%" width="110%" height="120%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           <path id="tqOrbit" pathLength="1000" fill="none" d="M1532 684 C1523 687 1502 696 1480 702 C1458 708 1438 713 1400 720 C1362 727 1297 736 1250 742 C1203 748 1162 752 1120 757 C1078 762 1040 767 1000 771 C960 776 920 781 880 784 C840 788 800 791 760 792 C720 794 680 794 640 793 C600 792 560 790 520 788 C480 786 437 783 400 779 C363 775 330 771 300 764 C270 757 243 745 220 737 C197 729 178 723 160 714 C142 705 122 693 110 682 C98 671 91 660 88 650 C85 640 90 628 93 620 C96 612 101 607 107 600 C113 593 120 587 128 580 C137 573 143 569 158 560 C173 551 200 536 220 526 C240 516 260 510 280 502 C300 495 320 487 340 481 C360 475 370 472 400 464 C430 456 480 443 520 433 C560 423 600 413 640 405 C680 397 720 391 760 385 C800 379 840 372 880 367 C920 362 960 358 1000 353 C1040 348 1080 341 1120 338 C1160 335 1200 335 1240 335 C1280 335 1327 337 1360 339 C1393 341 1416 344 1440 347 C1465 351 1489 355 1507 360 C1525 366 1537 373 1548 380 C1559 387 1566 393 1571 400 C1576 407 1577 413 1577 420 C1577 427 1576 433 1573 440 C1570 447 1566 453 1560 460 C1554 467 1546 473 1537 480 C1528 487 1528 489 1508 500 C1489 512 1455 532 1420 549 C1385 566 1330 588 1300 600 C1270 612 1260 615 1240 622 C1220 629 1200 635 1180 641 C1160 647 1140 653 1120 658 C1100 663 1080 666 1060 671 C1040 676 1017 682 1000 686 C983 691 967 696 960 698"/>
           <mask id="tqHide" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1974" height="1087"><rect x="-100" y="-100" width="1974" height="1087" fill="#fff"/><g fill="#000"><circle cx="297" cy="435" r="60"/><circle cx="1069" cy="375" r="62"/><circle cx="1353" cy="539" r="62"/><circle cx="327" cy="742" r="58"/><circle cx="1093" cy="742" r="58"/><rect x="360" y="404" width="278" height="59" rx="9"/><rect x="1136" y="348" width="251" height="58" rx="9"/><rect x="1419" y="510" width="287" height="58" rx="9"/><rect x="386" y="714" width="242" height="58" rx="9"/><rect x="1153" y="714" width="241" height="58" rx="9"/></g></mask>
-          <mask id="tqHideM" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1974" height="1500"><rect x="-100" y="-100" width="1974" height="1500" fill="#fff"/><g fill="#000"><circle cx="1095.6" cy="378.5" r="62.3"/><circle cx="601.8" cy="470.8" r="62.3"/><circle cx="1095.6" cy="567.7" r="62.3"/><circle cx="604.8" cy="670.8" r="62.3"/><circle cx="1094.1" cy="760.0" r="62.3"/><rect x="518.2" y="533.1" width="167.1" height="55.4" rx="10"/><rect x="1026.4" y="440.8" width="138.5" height="55.4" rx="10"/><rect x="1006.8" y="630.1" width="177.7" height="55.4" rx="10"/><rect x="496.3" y="733.1" width="217.1" height="55.4" rx="10"/><rect x="988.3" y="822.3" width="211.6" height="55.4" rx="10"/></g></mask>
+          <mask id="tqHideM" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1974" height="1500"><rect x="-100" y="-100" width="1974" height="1500" fill="#fff"/><g fill="#000"><circle cx="1113.83" cy="337.5" r="67.5"/><circle cx="655.5" cy="400" r="67.5"/><circle cx="1168" cy="566.67" r="67.5"/><circle cx="568" cy="683.33" r="67.5"/><circle cx="984.67" cy="825" r="67.5"/><rect x="1038.83" y="405" width="150" height="60" rx="10"/><rect x="565" y="467.5" width="181" height="60" rx="10"/><rect x="1071.75" y="634.17" width="192.5" height="60" rx="10"/><rect x="450.42" y="750.83" width="235.17" height="60" rx="10"/><rect x="870.08" y="892.5" width="229.17" height="60" rx="10"/></g></mask>
         </defs>
         <g transform="translate(850 600) rotate(-8)">
           <ellipse data-fx="shock1" cx="0" cy="0" rx="800" ry="215" fill="none" stroke="#fff" stroke-width="3" vector-effect="non-scaling-stroke" filter="url(#tqGlow)" opacity="0"/>
@@ -1034,11 +1187,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </svg>
 
       <div class="inf-orbit__streak" data-fx="streak"></div>
-      <span class="inf-orbit__plate" style="--l: 20.57%; --t: 46.22%; --w: 15.05%; --h: 5.3%; --ml: 9.01%; --mt: 42.94%; --mw: 19.81%; --mh: 3.69%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="--l: 64.32%; --t: 39.91%; --w: 13.53%; --h: 5.19%; --ml: 72.78%; --mt: 35.57%; --mw: 16.22%; --mh: 3.69%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="--l: 80.27%; --t: 58.17%; --w: 15.5%; --h: 5.19%; --ml: 70.32%; --mt: 50.68%; --mw: 21.14%; --mh: 3.69%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="--l: 22.04%; --t: 81.17%; --w: 13.02%; --h: 5.19%; --ml: 6.26%; --mt: 58.91%; --mw: 26.09%; --mh: 3.69%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="--l: 65.28%; --t: 81.17%; --w: 12.97%; --h: 5.19%; --ml: 68%; --mt: 66.03%; --mw: 25.39%; --mh: 3.69%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 20.57%; --t: 46.22%; --w: 15.05%; --h: 5.3%; --ml: 17.61%; --mt: 42.31%; --mw: 19.81%; --mh: 4.48%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 64.32%; --t: 39.91%; --w: 13.53%; --h: 5.19%; --ml: 72.49%; --mt: 36.72%; --mw: 16.22%; --mh: 4.48%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 80.27%; --t: 58.17%; --w: 15.5%; --h: 5.19%; --ml: 76.3%; --mt: 57.24%; --mw: 21.14%; --mh: 4.48%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 22.04%; --t: 81.17%; --w: 13.02%; --h: 5.19%; --ml: 4.33%; --mt: 67.69%; --mw: 26.08%; --mh: 4.48%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 65.28%; --t: 81.17%; --w: 12.97%; --h: 5.19%; --ml: 52.94%; --mt: 80.37%; --mw: 25.39%; --mh: 4.48%;"><span data-sheen></span></span>
     </div>
     <div class="inf-orbit__spacer" aria-hidden="true"></div>
     </div>
@@ -1093,6 +1246,30 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     </div>
     </div>
     </section>
+
+    <!-- Final call, phones only (owner's wish, November 2026): the site's closing block (as on IB Tools and Partner Terms:
+         .tp-night, .tp-glint, .tp-roll in partner.css), above the footer; hidden from 641px (influencers.css .inf-final) -->
+    <section class="tp-night-sec inf-final" data-screen-label="For influencers · Join the program">
+      <div class="tp-night tp-final">
+        <h2 class="tp-final__title tq-h2" data-fitw>Join the TradeQuo <span style="color: #e7131b;">Partner Program</span></h2>
+        <p class="tp-final__sub">Up to 87% of spread, paid every day. Applications are reviewed within 24 hours.</p>
+        <div class="tp-final__actions">
+          <a class="tp-glint" href="../#signup" data-page-link>
+            <span class="tp-glint__sweep" aria-hidden="true"></span>
+            <span class="tp-glint__label">Become a partner</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+          <a class="tp-roll" href="../programs/" data-page-link aria-label="Compare partner programs">
+            <span class="tp-roll__window" aria-hidden="true">
+              <span class="tp-roll__track">
+                <span class="tp-roll__a">Compare partner programs</span>
+                <span class="tp-roll__b">IB · Sub-IB · White Label →</span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer style="padding: clamp(28px, 4vw, 48px) clamp(16px, 4vw, 56px); background: #fff; border-top: 1px solid #ececee;">
@@ -1104,6 +1281,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=9f58850075" defer></script>
-<script src="../assets/js/orbit.js?v=3eb09dd62b" defer></script>
+<script src="../assets/js/orbit.js?v=168ddec2ed" defer></script>
 </body>
 </html>

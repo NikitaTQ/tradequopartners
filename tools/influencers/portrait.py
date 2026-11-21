@@ -1,6 +1,6 @@
-"""The phone version of the creators scene (owner's sketch, November 2026): a tall card, 1036 x 1628. On top the
-design's scene, closer (x 451..1248 of the 1774 picture, 1.3 times), without its creators; the five creators set
-again down the card in a zigzag, each an avatar (cut from the picture, a white ring) with a light name plate under it;
+"""The phone version of the creators scene (owner's sketch, November 2026): a tall card, 1036 x 1340. On top the
+design's scene, closer (x 418..1281 of the 1774 picture, 1.2 times), without its creators; the five creators set
+again along its orbit, each an avatar (cut from the picture, a white ring) with a light name plate under it;
 under the scene a nebula of its own (nebula.py: its drawing new, its colours the scene's), flowing out of the scene's
 foot. The orbit where a creator used to hide it is drawn in again. One picture per platform:
 site/assets/influencers/orbit-{instagram,telegram,tiktok}-m.webp. Run:  python3 tools/influencers/portrait.py
@@ -14,21 +14,22 @@ sys.path.insert(0, HERE)
 import clean, nebula   # noqa: E402
 
 OUT = os.path.join(HERE, '..', '..', 'site', 'assets', 'influencers')
-CX0, CX1, K = 451, 1248, 1.3          # the scene's part shown and its scale
-CW, CH = 1036, 1628                   # the card
-SCENE_H = round(887 * K)              # 1153
+CX0, CX1, K = 418, 1281, 1.2          # the scene's part shown and its scale
+CW, CH = 1036, 1340                   # the card (short enough that the block, its heading over it, fits one phone screen)
+SCENE_H = round(887 * K)              # 1064
 BLEND = 170                           # the nebula fades in over the scene's last rows
 SS = 4
 FONT = ImageFont.truetype(os.path.join(HERE, 'raleway-700.ttf'), 32 * SS)
 D = 150                               # an avatar's diameter on the card
 
 # the creators on the card: name, avatar centre on the card, where its face is in the picture (centre, radius)
+# (along the orbit, apart from each other and from the planet: not in two columns)
 CREATORS = [
-    ('Pablo', (838, 492), (1067, 356), 33),
-    ('Catalyst', (196, 612), (297, 435), 50),
-    ('Kingdom', (838, 738), (1353, 521), 32),
-    ('Dominguero', (200, 872), (327, 742), 50),
-    ('Milionário', (836, 988), (1093, 742), 50),
+    ('Pablo', (835, 405), (1067, 356), 33),
+    ('Catalyst', (285, 480), (297, 435), 50),
+    ('Kingdom', (900, 680), (1353, 521), 32),
+    ('Dominguero', (180, 820), (327, 742), 50),
+    ('Milionário', (680, 990), (1093, 742), 50),
 ]
 NAMES = {'Milionário': 'O Milionário'}
 SEEDS = {'instagram': 3, 'telegram': 5, 'tiktok': 8}
@@ -167,3 +168,7 @@ if __name__ == '__main__':
         x0, y0, x1, y1 = box
         print('%-11s avatar %.2f%% %.2f%% r %.2f%%  plate left %.2f%% top %.2f%% width %.2f%% height %.2f%%' % (
             nm, c[0] / CW * 100, c[1] / CH * 100, D / 2 / CW * 100, x0 / CW * 100, y0 / CH * 100, (x1 - x0) / CW * 100, (y1 - y0) / CH * 100))
+    import json
+    json.dump({'CX0': CX0, 'K': K, 'CW': CW, 'CH': CH, 'D': D, 'creators': [[nm, list(c)] for nm, c, *_ in boxes],
+               'plates': [[nm] + [round(v, 1) for v in box] for nm, c, fc, fr, box, text in boxes]},
+              open(os.path.join(HERE, 'portrait.json'), 'w'), indent=1)

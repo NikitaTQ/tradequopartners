@@ -21,14 +21,14 @@
     'saturate(.55) brightness(.5) contrast(1.2) blur(4px)',
   ];
   /* the scene's geometry: wider screens the design's (its group reaches over the strip under the picture, so the planet
-     is at 61.54% of the group's height); phones the tall card's (tools/influencers/portrait.py: the picture's x 451..1248
-     at 1.3 times, on a card of 1036 x 1628) */
+     is at 61.54% of the group's height); phones the tall card's (tools/influencers/portrait.py: the picture's x 418..1281
+     at 1.2 times, on a card of 1036 x 1340) */
   const PHONE = window.matchMedia('(max-width: 640px)');
   const GEO = {
     wide: { hole: 'ellipse 25% 27% at 49.9% 16%', planet: [0.4791, 0.6764], reveal: '47.91% 61.54%', reach: 1.0992,
       title: ['inset(24.2% 64.5% 68.8% 35.5%)', 'inset(24.2% 35.7% 68.8% 35.5%)'], streak: ['35.5%', '64.3%'] },
-    phone: { hole: 'ellipse 55.65% 19.12% at 54.48% 11.33%', planet: [0.5007, 0.4791], reveal: '50.07% 47.91%', reach: 1,
-      title: ['inset(17.14% 77.57% 77.9% 22.43%)', 'inset(17.14% 13.45% 77.9% 22.43%)'], streak: ['22.43%', '86.55%'] },
+    phone: { hole: 'ellipse 51.37% 21.45% at 54.12% 12.71%', planet: [0.5004, 0.5373], reveal: '50.04% 53.73%', reach: 1,
+      title: ['inset(19.22% 75.47% 75.22% 24.53%)', 'inset(19.22% 16.29% 75.22% 24.53%)'], streak: ['24.53%', '83.71%'] },
   };
   const geo = () => (PHONE.matches ? GEO.phone : GEO.wide);
   /* the orbit overlay follows: the card's part of the picture, and in its mask the creators' places on the card */
