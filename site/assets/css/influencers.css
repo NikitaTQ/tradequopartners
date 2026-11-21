@@ -88,6 +88,10 @@
 .inf-orbit__group img.inf-orbit__ext { top: 90.974%; height: 9.026%; }
 .inf-orbit__sky { opacity: 0; filter: blur(26px) saturate(1.2); transform: scale(1.08); display: none; }   /* a blurred copy: only while a change plays (a blur kept at opacity 0 still costs Safari) */
 .inf-orbit__group.is-playing .inf-orbit__sky { display: block; }
+/* the icon, title and planet copies, too, exist only while a change plays: at rest they are transparent, and each
+   masked copy of the picture would hold a layer of its own in the graphics memory (on an iPhone, at 3x) */
+.inf-orbit__icon, .inf-orbit__title, .inf-orbit__planet { display: none; }
+.inf-orbit__group.is-playing .inf-orbit__icon, .inf-orbit__group.is-playing .inf-orbit__title, .inf-orbit__group.is-playing .inf-orbit__planet { display: block; }
 .inf-orbit__icon { opacity: 0; -webkit-mask-image: radial-gradient(ellipse 25% 27% at 49.9% 16%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 25% 27% at 49.9% 16%, #000 72%, transparent 100%); }
 .inf-orbit__title { opacity: 0; }
 .inf-orbit__planet { opacity: 0; transform-origin: 47.91% 67.64%;
