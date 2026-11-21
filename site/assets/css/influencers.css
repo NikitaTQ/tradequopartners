@@ -174,3 +174,20 @@
   .inf-orbit__sub { font-size: clamp(12px, 3.6vw, 14px); white-space: nowrap; }
   .inf-final { display: block; background: #f3f2f7; padding-top: 0; }
 }
+
+/* ---- wider screens (owner's wish, November 2026): the creators block fits one screen with its heading. The line
+   under the heading keeps to one line (the full one from 901px, the short one between 641 and 900px), the scene sits
+   closer under it, and the card is never taller than the screen leaves room for (its width follows from the height:
+   the screen less the header, the heading and some air, times the card's 1774 / 975) ---- */
+@media (min-width: 641px) {
+  .inf-orbit__head { gap: 10px; margin-bottom: clamp(18px, 2vw, 28px); }
+  .inf-orbit__sub { max-width: none; white-space: nowrap; font-size: clamp(14px, 1.2vw, 17px); }
+  .inf-orbit__card { max-width: calc((100vh - 250px) * 1774 / 975); margin: 0 auto; }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  .inf-orbit__sub .tq-nph { display: none; }
+  .inf-orbit__sub .tq-ph { display: inline; }
+}
+@supports (height: 100svh) {
+  @media (min-width: 641px) { .inf-orbit__card { max-width: calc((100svh - 250px) * 1774 / 975); } }
+}
