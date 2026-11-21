@@ -752,52 +752,50 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @property --bl { syntax: '<color>'; inherits: true; initial-value: #3b2522; }
 @property --bc { syntax: '<color>'; inherits: true; initial-value: #6a413f; }
 @property --br { syntax: '<color>'; inherits: true; initial-value: #3a1d28; }
-.inf-orbit { position: relative; --before: 243, 242, 247; --after: 255, 255, 255;
-  background: linear-gradient(90deg, var(--bl), var(--bc) 50%, var(--br));   
+.inf-orbit { position: relative; background: #f3f2f7; padding: clamp(24px, 3vw, 48px) 0 clamp(72px, 8vw, 128px); overflow: hidden;
   --tl: #2f1b20; --tc: #26141a; --tr: #2f1722; --bl: #3b2522; --bc: #6a413f; --br: #3a1d28;
   transition: --tl 1.8s cubic-bezier(.6,.02,.22,1), --tc 1.8s cubic-bezier(.6,.02,.22,1), --tr 1.8s cubic-bezier(.6,.02,.22,1),
     --bl 1.8s cubic-bezier(.6,.02,.22,1), --bc 1.8s cubic-bezier(.6,.02,.22,1), --br 1.8s cubic-bezier(.6,.02,.22,1); }
 .inf-orbit[data-pal="1"] { --tl: #2d3e55; --tc: #162132; --tr: #192438; --bl: #202c3d; --bc: #3e5069; --br: #1b263a; }
 .inf-orbit[data-pal="2"] { --tl: #202f36; --tc: #28282f; --tr: #2b1e26; --bl: #1c282f; --bc: #4a4750; --br: #36252f; }
-.inf-orbit::before, .inf-orbit::after { content: ''; display: block; height: clamp(72px, 9vw, 150px); }
-.inf-orbit::before {
-  background: linear-gradient(180deg, rgba(var(--before), 1) 0%, rgba(var(--before), .93) 13%, rgba(var(--before), .76) 30%, rgba(var(--before), .5) 50%, rgba(var(--before), .24) 70%, rgba(var(--before), .07) 87%, rgba(var(--before), 0) 100%),
-    linear-gradient(90deg, var(--tl), var(--tc) 50%, var(--tr)); }
-.inf-orbit::after {
-  background: linear-gradient(0deg, rgba(var(--after), 1) 0%, rgba(var(--after), .93) 13%, rgba(var(--after), .76) 30%, rgba(var(--after), .5) 50%, rgba(var(--after), .24) 70%, rgba(var(--after), .07) 87%, rgba(var(--after), 0) 100%),
-    linear-gradient(90deg, var(--bl), var(--bc) 50%, var(--br)); }
-.inf-orbit__stage { position: relative; width: 100%; aspect-ratio: 1774 / 887; overflow: hidden; isolation: isolate; background: var(--tc); font-family: 'Inter', sans-serif; }
-.inf-orbit__stage::before, .inf-orbit__stage::after { content: ''; position: absolute; left: 0; right: 0; z-index: 5; pointer-events: none; }
-.inf-orbit__stage::before { top: 0; height: 9%; background: linear-gradient(90deg, var(--tl), var(--tc) 50%, var(--tr));
-  -webkit-mask: linear-gradient(180deg, #000, rgba(0,0,0,.6) 40%, transparent); mask: linear-gradient(180deg, #000, rgba(0,0,0,.6) 40%, transparent); }
-.inf-orbit__stage::after { bottom: 0; height: 10%; background: linear-gradient(90deg, var(--bl), var(--bc) 50%, var(--br));
-  -webkit-mask: linear-gradient(0deg, #000, rgba(0,0,0,.6) 40%, transparent); mask: linear-gradient(0deg, #000, rgba(0,0,0,.6) 40%, transparent); }
+.inf-orbit__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
+.inf-orbit__frame { position: relative; isolation: isolate; }
+.inf-orbit__frame::before { content: ''; position: absolute; inset: 14% 12% 16%; z-index: -1; border-radius: 50%; pointer-events: none;
+  background: linear-gradient(90deg, var(--tl), var(--tc) 50%, var(--tr));
+  filter: blur(clamp(30px, 5vw, 72px)); opacity: .32; }
+.inf-orbit__stage { position: relative; width: 100%; aspect-ratio: 2094 / 1011; overflow: hidden; isolation: isolate; background: var(--tc); font-family: 'Inter', sans-serif;
+  -webkit-mask: linear-gradient(90deg, transparent 0, rgba(0,0,0,.06) 1.7%, rgba(0,0,0,.2) 3.8%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.72) 8.2%, rgba(0,0,0,.92) 10.3%, #000 12%, #000 88%, rgba(0,0,0,.92) 89.7%, rgba(0,0,0,.72) 91.8%, rgba(0,0,0,.45) 94%, rgba(0,0,0,.2) 96.2%, rgba(0,0,0,.06) 98.3%, transparent 100%),
+    linear-gradient(180deg, transparent 0, rgba(0,0,0,.06) 1.4%, rgba(0,0,0,.2) 3.2%, rgba(0,0,0,.45) 5%, rgba(0,0,0,.72) 6.8%, rgba(0,0,0,.92) 8.6%, #000 10%, #000 87%, rgba(0,0,0,.92) 88.8%, rgba(0,0,0,.72) 91.1%, rgba(0,0,0,.45) 93.5%, rgba(0,0,0,.2) 95.9%, rgba(0,0,0,.06) 98.2%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask: linear-gradient(90deg, transparent 0, rgba(0,0,0,.06) 1.7%, rgba(0,0,0,.2) 3.8%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.72) 8.2%, rgba(0,0,0,.92) 10.3%, #000 12%, #000 88%, rgba(0,0,0,.92) 89.7%, rgba(0,0,0,.72) 91.8%, rgba(0,0,0,.45) 94%, rgba(0,0,0,.2) 96.2%, rgba(0,0,0,.06) 98.3%, transparent 100%),
+    linear-gradient(180deg, transparent 0, rgba(0,0,0,.06) 1.4%, rgba(0,0,0,.2) 3.2%, rgba(0,0,0,.45) 5%, rgba(0,0,0,.72) 6.8%, rgba(0,0,0,.92) 8.6%, #000 10%, #000 87%, rgba(0,0,0,.92) 88.8%, rgba(0,0,0,.72) 91.1%, rgba(0,0,0,.45) 93.5%, rgba(0,0,0,.2) 95.9%, rgba(0,0,0,.06) 98.2%, transparent 100%);
+  mask-composite: intersect; }
 .inf-orbit__group { position: absolute; inset: 0; z-index: 1; }
 .inf-orbit__group[data-group="0"] { z-index: 2; }
 .inf-orbit__group[data-off] { visibility: hidden; }
-.inf-orbit__drift { position: absolute; inset: 0; transform-origin: 47.91% 67.64%; }
+.inf-orbit__drift { position: absolute; inset: 0; transform-origin: 48.23% 65.48%; }
 .inf-orbit__group img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .inf-orbit__sky { opacity: 0; filter: blur(26px) saturate(1.2); transform: scale(1.08); }
-.inf-orbit__icon { opacity: 0; -webkit-mask-image: radial-gradient(ellipse 25% 27% at 49.9% 16%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 25% 27% at 49.9% 16%, #000 72%, transparent 100%); }
+.inf-orbit__icon { opacity: 0; -webkit-mask-image: radial-gradient(ellipse 21.18% 23.69% at 49.92% 20.17%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 21.18% 23.69% at 49.92% 20.17%, #000 72%, transparent 100%); }
 .inf-orbit__title { opacity: 0; }
-.inf-orbit__planet { opacity: 0; transform-origin: 47.91% 67.64%;
-  -webkit-mask-image: radial-gradient(ellipse 15% 21% at 47.91% 67.64%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 15% 21% at 47.91% 67.64%, #000 60%, transparent 100%); }
+.inf-orbit__planet { opacity: 0; transform-origin: 48.23% 65.48%;
+  -webkit-mask-image: radial-gradient(ellipse 12.71% 18.42% at 48.23% 65.48%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 12.71% 18.42% at 48.23% 65.48%, #000 60%, transparent 100%); }
 .inf-orbit__edge { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; display: none;
-  -webkit-mask-image: radial-gradient(circle at 47.91% 67.64%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
-  mask-image: radial-gradient(circle at 47.91% 67.64%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
+  -webkit-mask-image: radial-gradient(circle at 48.23% 65.48%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
+  mask-image: radial-gradient(circle at 48.23% 65.48%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
 .inf-orbit__group.is-playing .inf-orbit__edge { display: block; }
 .inf-orbit__edge--instagram { background: linear-gradient(45deg, #e8a888 0%, #de9088 45%, #d07494 75%, #c2649a 100%); }
 .inf-orbit__edge--telegram { background: linear-gradient(45deg, #96bade 0%, #80a6d6 50%, #7092ce 100%); }
 .inf-orbit__edge--tiktok { background: linear-gradient(90deg, #68c0c4 0%, #c4b8c2 50%, #da7688 100%); }
 .inf-orbit__flash { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; mix-blend-mode: screen;
-  background: radial-gradient(circle at 47.91% 67.64%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
+  background: radial-gradient(circle at 48.23% 65.48%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
 .inf-orbit__svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; overflow: visible; }
-.inf-orbit__streak { position: absolute; z-index: 5; left: 35.5%; top: 23%; width: .45%; height: 9.5%; border-radius: 999px; pointer-events: none; opacity: 0;
+.inf-orbit__streak { position: absolute; z-index: 5; left: 37.72%; top: 26.31%; width: 0.38%; height: 8.33%; border-radius: 999px; pointer-events: none; opacity: 0;
   background: linear-gradient(180deg, rgba(255,255,255,0), #fff, rgba(255,255,255,0)); box-shadow: 0 0 18px 6px #9ad6ff; }
 .inf-orbit__plate { position: absolute; z-index: 6; border-radius: 7px; overflow: hidden; pointer-events: none; }
 .inf-orbit__plate span { position: absolute; inset: 0; transform: translateX(-130%); mix-blend-mode: screen;
   background: linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 70%); }
-.inf-orbit__tabs { position: absolute; z-index: 7; left: 50%; bottom: calc(clamp(72px, 9vw, 150px) + 100vw * 887 / 1774 * .014); transform: translateX(-50%); display: flex; gap: clamp(2px, .3vw, 4px); padding: clamp(3px, .35vw, 5px);
+.inf-orbit__tabs { position: absolute; z-index: 7; left: 50%; bottom: 7.36%; transform: translateX(-50%); display: flex; gap: clamp(2px, .3vw, 4px); padding: clamp(3px, .35vw, 5px);
   border-radius: 999px; background: rgba(14,14,20,.58); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 1px rgba(255,255,255,.22), 0 14px 30px -10px rgba(10,10,20,.55);
   -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); }
 .inf-orbit__tabs button { height: clamp(28px, 3.1vw, 46px); padding: 0 clamp(12px, 1.3vw, 20px); border: 0; border-radius: 999px; cursor: pointer; font: 700 clamp(11px, 1vw, 15px) 'Inter', sans-serif;
@@ -808,7 +806,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (max-width: 640px) {
 .inf-orbit__tabs { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: 14px auto 0; }
 .inf-orbit__tabs button { height: 36px; padding: 0 16px; font-size: 13px; }
-.inf-orbit::after { height: 64px; }
+.inf-orbit__in { padding: 0; }
+.inf-orbit__frame { width: 118%; margin-left: -9%; }
 }
 </style>
 </head>
@@ -924,45 +923,47 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
          TradeQuo planet, on Instagram, Telegram or TikTok: three pictures (tools/influencers/creators.py), one per
          platform, each with its own palette. A tab plays the design's change: a flash and shock rings from the planet,
          the new picture opening out from it in a ring of its colour, the orbit drawn again, the title wiped in
-         (assets/js/orbit.js). The block runs edge to edge; above and below it the page's colours flow into the
-         picture's and back (influencers.css .inf-orbit, the colours per palette: --tl … --br), and they change
-         with the palette. -->
+         (assets/js/orbit.js). The block has the hero's width (its column, centred); on all four sides the picture melts into
+         the page, over a soft glow of the palette's own colours that changes with the platform (influencers.css
+         .inf-orbit). -->
     <section id="platforms" class="inf-orbit" data-orbit data-pal="0" data-screen-label="Creators on platforms">
+    <div class="inf-orbit__in">
+    <div class="inf-orbit__frame">
     <div class="inf-orbit__stage" data-orbit-root role="region" aria-label="Creators on Instagram" data-aria="Creators on">
       <div class="inf-orbit__group" data-group="0">
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="../assets/influencers/orbit-instagram-1774.webp?v=c9fb19b8fb" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="../assets/influencers/orbit-instagram-1774.webp?v=c9fb19b8fb" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="On Instagram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="../assets/influencers/orbit-instagram-1774.webp?v=c9fb19b8fb" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="../assets/influencers/orbit-instagram-1774.webp?v=c9fb19b8fb" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="../assets/influencers/orbit-instagram-1774.webp?v=c9fb19b8fb" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="sky" src="../assets/influencers/orbit-instagram-2094.webp?v=aa34fd8802" srcset="../assets/influencers/orbit-instagram-1300.webp 1300w, ../assets/influencers/orbit-instagram-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
+          <img data-l="bg" src="../assets/influencers/orbit-instagram-2094.webp?v=aa34fd8802" srcset="../assets/influencers/orbit-instagram-1300.webp 1300w, ../assets/influencers/orbit-instagram-2094.webp 2094w" sizes="100vw" alt="On Instagram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
+          <img data-l="icon" src="../assets/influencers/orbit-instagram-2094.webp?v=aa34fd8802" srcset="../assets/influencers/orbit-instagram-1300.webp 1300w, ../assets/influencers/orbit-instagram-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
+          <img data-l="title" src="../assets/influencers/orbit-instagram-2094.webp?v=aa34fd8802" srcset="../assets/influencers/orbit-instagram-1300.webp 1300w, ../assets/influencers/orbit-instagram-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
+          <img data-l="planet" src="../assets/influencers/orbit-instagram-2094.webp?v=aa34fd8802" srcset="../assets/influencers/orbit-instagram-1300.webp 1300w, ../assets/influencers/orbit-instagram-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--instagram" data-l="edge"></div>
       </div>
       <div class="inf-orbit__group" data-group="1" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="../assets/influencers/orbit-telegram-1774.webp?v=fe014b21e6" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="../assets/influencers/orbit-telegram-1774.webp?v=fe014b21e6" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="On Telegram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="../assets/influencers/orbit-telegram-1774.webp?v=fe014b21e6" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="../assets/influencers/orbit-telegram-1774.webp?v=fe014b21e6" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="../assets/influencers/orbit-telegram-1774.webp?v=fe014b21e6" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="sky" src="../assets/influencers/orbit-telegram-2094.webp?v=929020f99b" srcset="../assets/influencers/orbit-telegram-1300.webp 1300w, ../assets/influencers/orbit-telegram-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
+          <img data-l="bg" src="../assets/influencers/orbit-telegram-2094.webp?v=929020f99b" srcset="../assets/influencers/orbit-telegram-1300.webp 1300w, ../assets/influencers/orbit-telegram-2094.webp 2094w" sizes="100vw" alt="On Telegram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
+          <img data-l="icon" src="../assets/influencers/orbit-telegram-2094.webp?v=929020f99b" srcset="../assets/influencers/orbit-telegram-1300.webp 1300w, ../assets/influencers/orbit-telegram-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
+          <img data-l="title" src="../assets/influencers/orbit-telegram-2094.webp?v=929020f99b" srcset="../assets/influencers/orbit-telegram-1300.webp 1300w, ../assets/influencers/orbit-telegram-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
+          <img data-l="planet" src="../assets/influencers/orbit-telegram-2094.webp?v=929020f99b" srcset="../assets/influencers/orbit-telegram-1300.webp 1300w, ../assets/influencers/orbit-telegram-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--telegram" data-l="edge"></div>
       </div>
       <div class="inf-orbit__group" data-group="2" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="../assets/influencers/orbit-tiktok-1774.webp?v=c9fea4a373" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="../assets/influencers/orbit-tiktok-1774.webp?v=c9fea4a373" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="On TikTok: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="../assets/influencers/orbit-tiktok-1774.webp?v=c9fea4a373" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="../assets/influencers/orbit-tiktok-1774.webp?v=c9fea4a373" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="../assets/influencers/orbit-tiktok-1774.webp?v=c9fea4a373" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="sky" src="../assets/influencers/orbit-tiktok-2094.webp?v=e4ac8bd5a8" srcset="../assets/influencers/orbit-tiktok-1300.webp 1300w, ../assets/influencers/orbit-tiktok-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
+          <img data-l="bg" src="../assets/influencers/orbit-tiktok-2094.webp?v=e4ac8bd5a8" srcset="../assets/influencers/orbit-tiktok-1300.webp 1300w, ../assets/influencers/orbit-tiktok-2094.webp 2094w" sizes="100vw" alt="On TikTok: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
+          <img data-l="icon" src="../assets/influencers/orbit-tiktok-2094.webp?v=e4ac8bd5a8" srcset="../assets/influencers/orbit-tiktok-1300.webp 1300w, ../assets/influencers/orbit-tiktok-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
+          <img data-l="title" src="../assets/influencers/orbit-tiktok-2094.webp?v=e4ac8bd5a8" srcset="../assets/influencers/orbit-tiktok-1300.webp 1300w, ../assets/influencers/orbit-tiktok-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
+          <img data-l="planet" src="../assets/influencers/orbit-tiktok-2094.webp?v=e4ac8bd5a8" srcset="../assets/influencers/orbit-tiktok-1300.webp 1300w, ../assets/influencers/orbit-tiktok-2094.webp 2094w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--tiktok" data-l="edge"></div>
       </div>
 
       <div class="inf-orbit__flash" data-fx="flash"></div>
 
-      <svg class="inf-orbit__svg" viewBox="0 0 1774 887" preserveAspectRatio="none" aria-hidden="true">
+      <svg class="inf-orbit__svg" viewBox="-160 -62 2094 1011" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <filter id="tqGlow" x="-5%" y="-10%" width="110%" height="120%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           <path id="tqOrbit" pathLength="1000" fill="none" d="M1532 684 C1523 687 1502 696 1480 702 C1458 708 1438 713 1400 720 C1362 727 1297 736 1250 742 C1203 748 1162 752 1120 757 C1078 762 1040 767 1000 771 C960 776 920 781 880 784 C840 788 800 791 760 792 C720 794 680 794 640 793 C600 792 560 790 520 788 C480 786 437 783 400 779 C363 775 330 771 300 764 C270 757 243 745 220 737 C197 729 178 723 160 714 C142 705 122 693 110 682 C98 671 91 660 88 650 C85 640 90 628 93 620 C96 612 101 607 107 600 C113 593 120 587 128 580 C137 573 143 569 158 560 C173 551 200 536 220 526 C240 516 260 510 280 502 C300 495 320 487 340 481 C360 475 370 472 400 464 C430 456 480 443 520 433 C560 423 600 413 640 405 C680 397 720 391 760 385 C800 379 840 372 880 367 C920 362 960 358 1000 353 C1040 348 1080 341 1120 338 C1160 335 1200 335 1240 335 C1280 335 1327 337 1360 339 C1393 341 1416 344 1440 347 C1465 351 1489 355 1507 360 C1525 366 1537 373 1548 380 C1559 387 1566 393 1571 400 C1576 407 1577 413 1577 420 C1577 427 1576 433 1573 440 C1570 447 1566 453 1560 460 C1554 467 1546 473 1537 480 C1528 487 1528 489 1508 500 C1489 512 1455 532 1420 549 C1385 566 1330 588 1300 600 C1270 612 1260 615 1240 622 C1220 629 1200 635 1180 641 C1160 647 1140 653 1120 658 C1100 663 1080 666 1060 671 C1040 676 1017 682 1000 686 C983 691 967 696 960 698"/>
@@ -992,17 +993,19 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </svg>
 
       <div class="inf-orbit__streak" data-fx="streak"></div>
-      <span class="inf-orbit__plate" style="left: 20.57%; top: 46.22%; width: 15.05%; height: 5.3%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="left: 64.32%; top: 39.91%; width: 13.53%; height: 5.19%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="left: 80.27%; top: 58.17%; width: 15.5%; height: 5.19%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="left: 22.04%; top: 81.17%; width: 13.02%; height: 5.19%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="left: 65.28%; top: 81.17%; width: 12.97%; height: 5.19%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="left: 25.07%; top: 46.68%; width: 12.75%; height: 4.65%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="left: 62.13%; top: 41.15%; width: 11.46%; height: 4.55%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="left: 75.64%; top: 57.17%; width: 13.13%; height: 4.55%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="left: 26.31%; top: 77.35%; width: 11.03%; height: 4.55%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="left: 62.94%; top: 77.35%; width: 10.99%; height: 4.55%;"><span data-sheen></span></span>
     </div>
     <!-- the platform switch: over the scene's foot on wider screens, under it on phones (influencers.css) -->
     <div class="inf-orbit__tabs" role="tablist" aria-label="Platform">
       <button type="button" role="tab" aria-selected="true" data-tab="0">Instagram</button>
       <button type="button" role="tab" aria-selected="false" data-tab="1">Telegram</button>
       <button type="button" role="tab" aria-selected="false" data-tab="2">TikTok</button>
+    </div>
+    </div>
     </div>
     </section>
   </main>
@@ -1016,6 +1019,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=9f58850075" defer></script>
-<script src="../assets/js/orbit.js?v=2807789255" defer></script>
+<script src="../assets/js/orbit.js?v=28a8f1a34d" defer></script>
 </body>
 </html>

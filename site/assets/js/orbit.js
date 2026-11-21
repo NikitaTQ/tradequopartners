@@ -4,7 +4,8 @@
  * orbit drawn again in the new tint, the platform's icon and title coming in, a light across each creator's plate.
  * The section's data-pal follows, so the colours flowing in above and out below glide to the new palette
  * (influencers.css .inf-orbit). A comet runs the orbit while the block is on screen (paused off it). Reduced motion:
- * a plain cross-fade and no comet. */
+ * a plain cross-fade and no comet. The scene's coordinates are in the pictures' frame with its mirrored margin
+ * (2094 x 1011; tools/influencers/creators.py). */
 (function () {
   'use strict';
   const sec = document.querySelector('[data-orbit]');
@@ -18,8 +19,8 @@
     'hue-rotate(150deg) saturate(1.25) brightness(1.15) blur(4px)',
     'saturate(.55) brightness(.5) contrast(1.2) blur(4px)',
   ];
-  const HOLE = 'radial-gradient(ellipse 25% 27% at 49.9% 16%,transparent 72%,#000 100%)';
-  const REVEAL = 'radial-gradient(circle at 47.91% 67.64%,#000 calc(var(--r) - 240px),transparent var(--r))';
+  const HOLE = 'radial-gradient(ellipse 21.18% 23.69% at 49.92% 20.17%,transparent 72%,#000 100%)';
+  const REVEAL = 'radial-gradient(circle at 48.23% 65.48%,#000 calc(var(--r) - 240px),transparent var(--r))';
   const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const F = (n) => r.querySelector('[data-fx="' + n + '"]');
   const G = (i) => r.querySelector('[data-group="' + i + '"]');
@@ -61,7 +62,7 @@
     }
 
     const rect = r.getBoundingClientRect();
-    const cx = rect.width * 0.4791, cy = rect.height * 0.6764;
+    const cx = rect.width * 0.4823, cy = rect.height * 0.6548;   /* the planet */
     const R = Math.max(...[[0, 0], [rect.width, 0], [0, rect.height], [rect.width, rect.height]].map(([x, y]) => Math.hypot(x - cx, y - cy))) + 260;
     const tint = TINT[ti];
     mask(to, REVEAL);
@@ -93,10 +94,10 @@
     ], { duration: 1400, easing: 'ease-out' });
     A(L(to, 'icon'), [{ opacity: 0, filter: 'blur(20px) brightness(3)' }, { opacity: 1, filter: 'blur(0px) brightness(1)' }], { duration: 1400, delay: 750, easing: 'cubic-bezier(.3,0,.2,1)' });
     A(L(to, 'title'), [
-      { opacity: 1, clipPath: 'inset(24.2% 64.5% 68.8% 35.5%)', filter: 'brightness(2.6)' },
-      { opacity: 1, clipPath: 'inset(24.2% 35.7% 68.8% 35.5%)', filter: 'brightness(1)' },
+      { opacity: 1, clipPath: 'inset(27.36% 62.28% 66.49% 37.72%)', filter: 'brightness(2.6)' },
+      { opacity: 1, clipPath: 'inset(27.36% 37.89% 66.49% 37.72%)', filter: 'brightness(1)' },
     ], { duration: 1000, delay: 1000, easing: wipe });
-    A(F('streak'), [{ left: '35.5%', opacity: 0 }, { opacity: 1, offset: 0.1 }, { opacity: 1, offset: 0.85 }, { left: '64.3%', opacity: 0 }], { duration: 1000, delay: 1000, easing: wipe });
+    A(F('streak'), [{ left: '37.72%', opacity: 0 }, { opacity: 1, offset: 0.1 }, { opacity: 1, offset: 0.85 }, { left: '62.11%', opacity: 0 }], { duration: 1000, delay: 1000, easing: wipe });
     A(F('draw'), [{ strokeDashoffset: 1000, opacity: 1 }, { strokeDashoffset: 0, opacity: 1, offset: 0.75 }, { strokeDashoffset: 0, opacity: 0 }], { duration: 2100, delay: 250, easing: 'cubic-bezier(.5,0,.3,1)' });
     A(F('ftrail'), [{ strokeDashoffset: 0, opacity: 0.8 }, { opacity: 0.8, offset: 0.9 }, { strokeDashoffset: -1000, opacity: 0 }], { duration: 1700, delay: 200, easing: 'cubic-bezier(.4,0,.3,1)' });
     A(F('fhead'), [{ strokeDashoffset: -214, opacity: 1 }, { opacity: 1, offset: 0.9 }, { strokeDashoffset: -1214, opacity: 0 }], { duration: 1700, delay: 200, easing: 'cubic-bezier(.4,0,.3,1)' });
