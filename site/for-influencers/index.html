@@ -770,6 +770,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__group[data-group="0"] { z-index: 2; }
 .inf-orbit__group[data-off] { visibility: hidden; }
 .inf-orbit__drift { position: absolute; inset: 0; transform-origin: 47.91% 61.54%; }
+.inf-orbit__group picture { display: contents; }
 .inf-orbit__group img { position: absolute; left: 0; top: 0; width: 100%; height: 90.974%; display: block; }
 .inf-orbit__group img.inf-orbit__ext { top: 90.974%; height: 9.026%; }
 .inf-orbit__sky { opacity: 0; filter: blur(26px) saturate(1.2); transform: scale(1.08); }
@@ -789,7 +790,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; overflow: visible; }
 .inf-orbit__streak { position: absolute; z-index: 5; left: 35.5%; top: 23%; width: .45%; height: 9.5%; border-radius: 999px; pointer-events: none; opacity: 0;
   background: linear-gradient(180deg, rgba(255,255,255,0), #fff, rgba(255,255,255,0)); box-shadow: 0 0 18px 6px #9ad6ff; }
-.inf-orbit__plate { position: absolute; z-index: 6; border-radius: 7px; overflow: hidden; pointer-events: none; }
+.inf-orbit__plate { position: absolute; z-index: 6; left: var(--l); top: var(--t); width: var(--w); height: var(--h); border-radius: 7px; overflow: hidden; pointer-events: none; }
 .inf-orbit__plate span { position: absolute; inset: 0; transform: translateX(-130%); mix-blend-mode: screen;
   background: linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 70%); }
 .inf-orbit__defs { position: absolute; width: 0; height: 0; }
@@ -823,8 +824,20 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__bar button[aria-selected="true"] { color: #1a1420; text-shadow: none; }
 .inf-orbit__bar button:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
 @media (max-width: 640px) {
-.inf-orbit__bar { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: 16px auto 0; }
-.inf-orbit__bar button { height: 34px; padding: 0 16px; font-size: 13px; }
+.inf-orbit__stage { aspect-ratio: 1036 / 1628; }
+.inf-orbit__spacer, .inf-orbit__group img.inf-orbit__ext { display: none; }
+.inf-orbit__group { height: 100%; }
+.inf-orbit__group img { height: 100%; }
+.inf-orbit__drift, .inf-orbit__planet { transform-origin: 50.07% 47.91%; }
+.inf-orbit__icon { -webkit-mask-image: radial-gradient(ellipse 55.65% 19.12% at 54.48% 11.33%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 55.65% 19.12% at 54.48% 11.33%, #000 72%, transparent 100%); }
+.inf-orbit__planet { -webkit-mask-image: radial-gradient(ellipse 33.39% 14.87% at 50.07% 47.91%, #000 60%, transparent 100%); mask-image: radial-gradient(ellipse 33.39% 14.87% at 50.07% 47.91%, #000 60%, transparent 100%); }
+.inf-orbit__edge { -webkit-mask-image: radial-gradient(circle at 50.07% 47.91%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r));
+    mask-image: radial-gradient(circle at 50.07% 47.91%, transparent calc(var(--r) - 280px), #000 calc(var(--r) - 110px), transparent var(--r)); }
+.inf-orbit__flash { background: radial-gradient(circle at 50.07% 47.91%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
+.inf-orbit__streak { left: 22.44%; top: 16.29%; width: 1.00%; height: 6.73%; }
+.inf-orbit__plate { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); border-radius: 5px; }
+.inf-orbit__bar { bottom: 14px; }
+.inf-orbit__bar button { height: 36px; padding: 0 16px; font-size: 13px; }
 }
 </style>
 </head>
@@ -942,7 +955,9 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
          the new picture opening out from it in a ring of its colour, the orbit drawn again, the title wiped in
          (assets/js/orbit.js). The block has the hero's width (its column, centred); a heading and a line over it, the
          scene itself a card with rounded corners and the design's soft shadow; under the picture the card carries the
-         scene on (a strip per platform) and holds the liquid-glass switch (influencers.css .inf-orbit). -->
+         scene on (a strip per platform) and holds the liquid-glass switch (influencers.css .inf-orbit). Phones: a
+         tall card of its own per platform (tools/influencers/portrait.py: the scene closer, the creators down it in a
+         zigzag, a nebula of its own under it), the animation set to its frame (orbit.js). -->
     <section id="platforms" class="inf-orbit" data-orbit data-pal="0" data-screen-label="Creators on platforms">
     <div class="inf-orbit__in">
     <div class="inf-orbit__head">
@@ -954,33 +969,33 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <div class="inf-orbit__stage" data-orbit-root role="region" aria-label="Creators on Instagram" data-aria="Creators on">
       <div class="inf-orbit__group" data-group="0">
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On Instagram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="sky" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="bg" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On Instagram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="icon" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="title" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-instagram-m.webp?v=89dcb317ca"><img data-l="planet" src="../assets/influencers/orbit-instagram-1774.webp?v=37ef7727c5" srcset="../assets/influencers/orbit-instagram-1100.webp 1100w, ../assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
           <img data-l="ext" class="inf-orbit__ext" src="../assets/influencers/orbit-instagram-ext-1774.webp?v=d579e13c2f" srcset="../assets/influencers/orbit-instagram-ext-1100.webp 1100w, ../assets/influencers/orbit-instagram-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--instagram" data-l="edge"></div>
       </div>
       <div class="inf-orbit__group" data-group="1" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On Telegram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="sky" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="bg" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On Telegram: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="icon" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="title" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-telegram-m.webp?v=f58099f9ed"><img data-l="planet" src="../assets/influencers/orbit-telegram-1774.webp?v=6e6863c8a0" srcset="../assets/influencers/orbit-telegram-1100.webp 1100w, ../assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
           <img data-l="ext" class="inf-orbit__ext" src="../assets/influencers/orbit-telegram-ext-1774.webp?v=211b9edc59" srcset="../assets/influencers/orbit-telegram-ext-1100.webp 1100w, ../assets/influencers/orbit-telegram-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--telegram" data-l="edge"></div>
       </div>
       <div class="inf-orbit__group" data-group="2" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On TikTok: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="sky" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="bg" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On TikTok: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="icon" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="title" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=89f9e1b48a"><img data-l="planet" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
           <img data-l="ext" class="inf-orbit__ext" src="../assets/influencers/orbit-tiktok-ext-1774.webp?v=cd5186aedb" srcset="../assets/influencers/orbit-tiktok-ext-1100.webp 1100w, ../assets/influencers/orbit-tiktok-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--tiktok" data-l="edge"></div>
@@ -988,17 +1003,18 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
       <div class="inf-orbit__flash" data-fx="flash"></div>
 
-      <svg class="inf-orbit__svg" viewBox="0 0 1774 887" preserveAspectRatio="none" aria-hidden="true">
+      <svg class="inf-orbit__svg" viewBox="0 0 1774 887" data-view-m="451 0 796.9 1252.3" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <filter id="tqGlow" x="-5%" y="-10%" width="110%" height="120%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           <path id="tqOrbit" pathLength="1000" fill="none" d="M1532 684 C1523 687 1502 696 1480 702 C1458 708 1438 713 1400 720 C1362 727 1297 736 1250 742 C1203 748 1162 752 1120 757 C1078 762 1040 767 1000 771 C960 776 920 781 880 784 C840 788 800 791 760 792 C720 794 680 794 640 793 C600 792 560 790 520 788 C480 786 437 783 400 779 C363 775 330 771 300 764 C270 757 243 745 220 737 C197 729 178 723 160 714 C142 705 122 693 110 682 C98 671 91 660 88 650 C85 640 90 628 93 620 C96 612 101 607 107 600 C113 593 120 587 128 580 C137 573 143 569 158 560 C173 551 200 536 220 526 C240 516 260 510 280 502 C300 495 320 487 340 481 C360 475 370 472 400 464 C430 456 480 443 520 433 C560 423 600 413 640 405 C680 397 720 391 760 385 C800 379 840 372 880 367 C920 362 960 358 1000 353 C1040 348 1080 341 1120 338 C1160 335 1200 335 1240 335 C1280 335 1327 337 1360 339 C1393 341 1416 344 1440 347 C1465 351 1489 355 1507 360 C1525 366 1537 373 1548 380 C1559 387 1566 393 1571 400 C1576 407 1577 413 1577 420 C1577 427 1576 433 1573 440 C1570 447 1566 453 1560 460 C1554 467 1546 473 1537 480 C1528 487 1528 489 1508 500 C1489 512 1455 532 1420 549 C1385 566 1330 588 1300 600 C1270 612 1260 615 1240 622 C1220 629 1200 635 1180 641 C1160 647 1140 653 1120 658 C1100 663 1080 666 1060 671 C1040 676 1017 682 1000 686 C983 691 967 696 960 698"/>
           <mask id="tqHide" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1974" height="1087"><rect x="-100" y="-100" width="1974" height="1087" fill="#fff"/><g fill="#000"><circle cx="297" cy="435" r="60"/><circle cx="1069" cy="375" r="62"/><circle cx="1353" cy="539" r="62"/><circle cx="327" cy="742" r="58"/><circle cx="1093" cy="742" r="58"/><rect x="360" y="404" width="278" height="59" rx="9"/><rect x="1136" y="348" width="251" height="58" rx="9"/><rect x="1419" y="510" width="287" height="58" rx="9"/><rect x="386" y="714" width="242" height="58" rx="9"/><rect x="1153" y="714" width="241" height="58" rx="9"/></g></mask>
+          <mask id="tqHideM" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1974" height="1500"><rect x="-100" y="-100" width="1974" height="1500" fill="#fff"/><g fill="#000"><circle cx="1095.6" cy="378.5" r="62.3"/><circle cx="601.8" cy="470.8" r="62.3"/><circle cx="1095.6" cy="567.7" r="62.3"/><circle cx="604.8" cy="670.8" r="62.3"/><circle cx="1094.1" cy="760.0" r="62.3"/><rect x="518.2" y="533.1" width="167.1" height="55.4" rx="10"/><rect x="1026.4" y="440.8" width="138.5" height="55.4" rx="10"/><rect x="1006.8" y="630.1" width="177.7" height="55.4" rx="10"/><rect x="496.3" y="733.1" width="217.1" height="55.4" rx="10"/><rect x="988.3" y="822.3" width="211.6" height="55.4" rx="10"/></g></mask>
         </defs>
         <g transform="translate(850 600) rotate(-8)">
           <ellipse data-fx="shock1" cx="0" cy="0" rx="800" ry="215" fill="none" stroke="#fff" stroke-width="3" vector-effect="non-scaling-stroke" filter="url(#tqGlow)" opacity="0"/>
           <ellipse data-fx="shock2" cx="0" cy="0" rx="800" ry="215" fill="none" stroke="#fff" stroke-width="1.5" vector-effect="non-scaling-stroke" filter="url(#tqGlow)" opacity="0"/>
         </g>
-        <g mask="url(#tqHide)">
+        <g mask="url(#tqHide)" data-hide>
           <use data-fx="draw" href="#tqOrbit" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="1000 1000" filter="url(#tqGlow)" opacity="0"/>
           <!-- the comet: its glow is wider, fainter strokes under it, not a filter (a blur filter on a shape that moves every
                frame can keep Chrome from painting the picture under the scene until something else repaints it) -->
@@ -1018,11 +1034,11 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </svg>
 
       <div class="inf-orbit__streak" data-fx="streak"></div>
-      <span class="inf-orbit__plate" style="left: 20.57%; top: 46.22%; width: 15.05%; height: 5.3%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="left: 64.32%; top: 39.91%; width: 13.53%; height: 5.19%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="left: 80.27%; top: 58.17%; width: 15.5%; height: 5.19%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="left: 22.04%; top: 81.17%; width: 13.02%; height: 5.19%;"><span data-sheen></span></span>
-      <span class="inf-orbit__plate" style="left: 65.28%; top: 81.17%; width: 12.97%; height: 5.19%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 20.57%; --t: 46.22%; --w: 15.05%; --h: 5.3%; --ml: 9.01%; --mt: 42.94%; --mw: 19.81%; --mh: 3.69%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 64.32%; --t: 39.91%; --w: 13.53%; --h: 5.19%; --ml: 72.78%; --mt: 35.57%; --mw: 16.22%; --mh: 3.69%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 80.27%; --t: 58.17%; --w: 15.5%; --h: 5.19%; --ml: 70.32%; --mt: 50.68%; --mw: 21.14%; --mh: 3.69%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 22.04%; --t: 81.17%; --w: 13.02%; --h: 5.19%; --ml: 6.26%; --mt: 58.91%; --mw: 26.09%; --mh: 3.69%;"><span data-sheen></span></span>
+      <span class="inf-orbit__plate" style="--l: 65.28%; --t: 81.17%; --w: 12.97%; --h: 5.19%; --ml: 68%; --mt: 66.03%; --mw: 25.39%; --mh: 3.69%;"><span data-sheen></span></span>
     </div>
     <div class="inf-orbit__spacer" aria-hidden="true"></div>
     </div>
@@ -1088,6 +1104,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=9f58850075" defer></script>
-<script src="../assets/js/orbit.js?v=270bb7cffa" defer></script>
+<script src="../assets/js/orbit.js?v=3eb09dd62b" defer></script>
 </body>
 </html>
