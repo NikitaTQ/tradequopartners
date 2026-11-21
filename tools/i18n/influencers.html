@@ -111,16 +111,6 @@
         </g>
         <g mask="url(#tqHide)" data-hide>
           <use data-fx="draw" href="#tqOrbit" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="1000 1000" filter="url(#tqGlow)" opacity="0"/>
-          <!-- the comet: its glow is wider, fainter strokes under it, not a filter (a blur filter on a shape that moves every
-               frame can keep Chrome from painting the picture under the scene until something else repaints it) -->
-          <g>
-            <use data-amb="trail" href="#tqOrbit" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-dasharray="120 880" opacity=".08"/>
-            <use data-amb="trail" href="#tqOrbit" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="120 880" opacity=".16"/>
-            <use data-amb="trail" href="#tqOrbit" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="120 880" opacity=".55"/>
-            <use data-amb="head" href="#tqOrbit" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-dasharray="6 994" stroke-dashoffset="-114" opacity=".14"/>
-            <use data-amb="head" href="#tqOrbit" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-dasharray="6 994" stroke-dashoffset="-114" opacity=".3"/>
-            <use data-amb="head" href="#tqOrbit" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 994" stroke-dashoffset="-114"/>
-          </g>
           <g filter="url(#tqGlow)">
             <use data-fx="ftrail" href="#tqOrbit" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="220 780" opacity="0"/>
             <use data-fx="fhead" href="#tqOrbit" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-dasharray="8 992" opacity="0"/>
@@ -128,6 +118,8 @@
         </g>
       </svg>
 
+      <!-- the comet running the orbit: glowing dots that orbit.js moves by transform only (no repaint per frame) -->
+      <div class="inf-orbit__comet" data-comet aria-hidden="true"></div>
       <div class="inf-orbit__streak" data-fx="streak"></div>
       <span class="inf-orbit__plate" style="--l: 20.57%; --t: 46.22%; --w: 15.05%; --h: 5.3%; --ml: 17.61%; --mt: 42.31%; --mw: 19.81%; --mh: 4.48%;"><span data-sheen></span></span>
       <span class="inf-orbit__plate" style="--l: 64.32%; --t: 39.91%; --w: 13.53%; --h: 5.19%; --ml: 72.49%; --mt: 36.72%; --mw: 16.22%; --mh: 4.48%;"><span data-sheen></span></span>
