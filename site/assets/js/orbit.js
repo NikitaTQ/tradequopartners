@@ -96,7 +96,7 @@
     const seg = total * STEP / 1000 * Math.sqrt(sx * sy);
     for (let k = 0; k <= TRAIL; k++) {
       const el = document.createElement('span');
-      el.className = k ? 'inf-orbit__tail' : 'inf-orbit__head';
+      el.className = k ? 'inf-orbit__tail' : 'inf-orbit__dot';
       if (k) {
         el.style.setProperty('--len', (seg * 1.5).toFixed(1) + 'px');
         el.style.setProperty('--a', (0.6 * (1 - (k - 1) / TRAIL)).toFixed(3));
