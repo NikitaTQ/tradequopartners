@@ -49,42 +49,47 @@
          platform, each with its own palette. A tab plays the design's change: a flash and shock rings from the planet,
          the new picture opening out from it in a ring of its colour, the orbit drawn again, the title wiped in
          (assets/js/orbit.js). The block has the hero's width (its column, centred); a heading and a line over it, the
-         scene itself a card with rounded corners and the design's soft shadow (influencers.css .inf-orbit). -->
+         scene itself a card with rounded corners and the design's soft shadow; under the picture the card carries the
+         scene on (a strip per platform) and holds the liquid-glass switch (influencers.css .inf-orbit). -->
     <section id="platforms" class="inf-orbit" data-orbit data-pal="0" data-screen-label="Creators on platforms">
     <div class="inf-orbit__in">
     <div class="inf-orbit__head">
       <h2 class="inf-orbit__h2 tq-h2" data-fitw>{{inf.orbit.h2}}</h2>
       <p class="inf-orbit__sub">{{inf.orbit.sub}}</p>
     </div>
-    <div class="inf-orbit__frame">
+    <div class="inf-orbit__card">
+    <div class="inf-orbit__clip">
     <div class="inf-orbit__stage" data-orbit-root role="region" aria-label="{{@inf.orbit.aria}} Instagram" data-aria="{{@inf.orbit.aria}}">
       <div class="inf-orbit__group" data-group="0">
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="{{@inf.orbit.ig}}" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="sky" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
+          <img data-l="bg" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="{{@inf.orbit.ig}}" loading="lazy" decoding="async" class="inf-orbit__bg">
+          <img data-l="icon" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
+          <img data-l="title" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
+          <img data-l="planet" src="{{root}}assets/influencers/orbit-instagram-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="ext" class="inf-orbit__ext" src="{{root}}assets/influencers/orbit-instagram-ext-1774.webp" srcset="{{root}}assets/influencers/orbit-instagram-ext-1100.webp 1100w, {{root}}assets/influencers/orbit-instagram-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--instagram" data-l="edge"></div>
       </div>
       <div class="inf-orbit__group" data-group="1" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="{{@inf.orbit.tg}}" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="sky" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
+          <img data-l="bg" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="{{@inf.orbit.tg}}" loading="lazy" decoding="async" class="inf-orbit__bg">
+          <img data-l="icon" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
+          <img data-l="title" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
+          <img data-l="planet" src="{{root}}assets/influencers/orbit-telegram-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="ext" class="inf-orbit__ext" src="{{root}}assets/influencers/orbit-telegram-ext-1774.webp" srcset="{{root}}assets/influencers/orbit-telegram-ext-1100.webp 1100w, {{root}}assets/influencers/orbit-telegram-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--telegram" data-l="edge"></div>
       </div>
       <div class="inf-orbit__group" data-group="2" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <img data-l="sky" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
-          <img data-l="bg" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="{{@inf.orbit.tt}}" loading="lazy" decoding="async" class="inf-orbit__bg">
-          <img data-l="icon" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
-          <img data-l="title" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
-          <img data-l="planet" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="100vw" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="sky" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky">
+          <img data-l="bg" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="{{@inf.orbit.tt}}" loading="lazy" decoding="async" class="inf-orbit__bg">
+          <img data-l="icon" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon">
+          <img data-l="title" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title">
+          <img data-l="planet" src="{{root}}assets/influencers/orbit-tiktok-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet">
+          <img data-l="ext" class="inf-orbit__ext" src="{{root}}assets/influencers/orbit-tiktok-ext-1774.webp" srcset="{{root}}assets/influencers/orbit-tiktok-ext-1100.webp 1100w, {{root}}assets/influencers/orbit-tiktok-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
         <div class="inf-orbit__edge inf-orbit__edge--tiktok" data-l="edge"></div>
       </div>
@@ -127,8 +132,52 @@
       <span class="inf-orbit__plate" style="left: 22.04%; top: 81.17%; width: 13.02%; height: 5.19%;"><span data-sheen></span></span>
       <span class="inf-orbit__plate" style="left: 65.28%; top: 81.17%; width: 12.97%; height: 5.19%;"><span data-sheen></span></span>
     </div>
-    <!-- the platform switch: over the scene's foot on wider screens, under it on phones (influencers.css) -->
-    <div class="inf-orbit__tabs" role="tablist" aria-label="{{@inf.orbit.tabs}}">
+    <div class="inf-orbit__spacer" aria-hidden="true"></div>
+    </div>
+    <!-- the platform switch (the design's): a small bar of liquid glass at the card's foot. In Chromium the bar and the
+         lens over the chosen platform bend what is behind them (SVG displacement maps, built for their size by orbit.js);
+         elsewhere they are frosted. The bar is tinted against the palette (blue on Instagram, teal–pink on Telegram,
+         peach–pink on TikTok), the lens slides to the chosen tab. Phones: under the card. -->
+    <svg class="inf-orbit__defs" width="0" height="0" aria-hidden="true">
+      <filter id="tqGlassBar" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feImage data-map="bar" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map"/>
+        <feDisplacementMap in="SourceGraphic" in2="map" data-s="bar1" scale="0" xChannelSelector="R" yChannelSelector="G" result="dr"/>
+        <feColorMatrix in="dr" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="map" data-s="bar2" scale="0" xChannelSelector="R" yChannelSelector="G" result="dg"/>
+        <feColorMatrix in="dg" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        <feDisplacementMap in="SourceGraphic" in2="map" data-s="bar3" scale="0" xChannelSelector="R" yChannelSelector="G" result="db"/>
+        <feColorMatrix in="db" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+        <feBlend in="r" in2="g" mode="screen" result="rg"/>
+        <feBlend in="rg" in2="b" mode="screen" result="rgb"/>
+        <feGaussianBlur in="rgb" stdDeviation="0.5"/>
+      </filter>
+      <filter id="tqGlassLens" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feImage data-map="lens" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map"/>
+        <feDisplacementMap in="SourceGraphic" in2="map" data-s="lens1" scale="0" xChannelSelector="R" yChannelSelector="G" result="dr"/>
+        <feColorMatrix in="dr" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+        <feDisplacementMap in="SourceGraphic" in2="map" data-s="lens2" scale="0" xChannelSelector="R" yChannelSelector="G" result="dg"/>
+        <feColorMatrix in="dg" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+        <feDisplacementMap in="SourceGraphic" in2="map" data-s="lens3" scale="0" xChannelSelector="R" yChannelSelector="G" result="db"/>
+        <feColorMatrix in="db" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+        <feBlend in="r" in2="g" mode="screen" result="rg"/>
+        <feBlend in="rg" in2="b" mode="screen" result="rgb"/>
+        <feGaussianBlur in="rgb" stdDeviation="0.3"/>
+      </filter>
+    </svg>
+    <div class="inf-orbit__bar" role="tablist" aria-label="{{@inf.orbit.tabs}}" data-bar>
+      <span class="inf-orbit__bar-glass inf-orbit__bar-glass--liquid" aria-hidden="true"></span>
+      <span class="inf-orbit__bar-glass inf-orbit__bar-glass--frost" aria-hidden="true"></span>
+      <span class="inf-orbit__bar-tint inf-orbit__bar-tint--0" aria-hidden="true"></span>
+      <span class="inf-orbit__bar-tint inf-orbit__bar-tint--1" aria-hidden="true"></span>
+      <span class="inf-orbit__bar-tint inf-orbit__bar-tint--2" aria-hidden="true"></span>
+      <span class="inf-orbit__bar-rim" aria-hidden="true"></span>
+      <span class="inf-orbit__bar-shine" aria-hidden="true"></span>
+      <span class="inf-orbit__lens" aria-hidden="true">
+        <span class="inf-orbit__lens-glass inf-orbit__lens-glass--liquid"></span>
+        <span class="inf-orbit__lens-glass inf-orbit__lens-glass--frost"></span>
+        <span class="inf-orbit__lens-face"></span>
+        <span class="inf-orbit__lens-shine"></span>
+      </span>
       <button type="button" role="tab" aria-selected="true" data-tab="0">Instagram</button>
       <button type="button" role="tab" aria-selected="false" data-tab="1">Telegram</button>
       <button type="button" role="tab" aria-selected="false" data-tab="2">TikTok</button>
