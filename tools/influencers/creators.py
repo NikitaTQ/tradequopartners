@@ -1,13 +1,15 @@
 """The /for-influencers/ "creators on Instagram / Telegram / TikTok" scene (owner's design, Creator Platforms Scene):
-three pictures, 1774 x 887, one per platform (creators-src/*.webp, as the design exported them), made ready for the site:
+three pictures, 1774 x 887, one per platform (creators-src/*.webp, as the design exported them, its second
+version with the corners already filled), made ready for the site:
   - the word the site never uses is taken out of three creators' names on their plates: each plate's name and arrow are
     wiped (every row filled from the plate's own clean edges, left to right) and set again without it, in the design's
     face (Raleway SemiBold, OFL; the .ttf files here are only for this script), the design's arrow drawn again after
     it, the pair centred on the plate;
   - two avatars carry the word as a caption over the photo: the circle is filled again with its upper part (the face),
     a little closer, so the caption falls outside it;
-  - the picture's rounded corners (white in the export) are filled with the scene (the page fades its edges out).
-Writes site/assets/influencers/orbit-{instagram,telegram,tiktok}-{1100,1774}.webp.
+  - the strip under each picture (creators-src/*-ext.webp: the scene carried on down, where the platform switch sits)
+    is written out as it is.
+Writes site/assets/influencers/orbit-{instagram,telegram,tiktok}-{1100,1774}.webp and orbit-*-ext-{1100,1774}.webp.
 Run:  python3 tools/influencers/creators.py"""
 import math, os
 from PIL import Image, ImageDraw, ImageFont
@@ -88,21 +90,6 @@ def avatar(im, a):
     im.paste(part, (cx - r, cy - r), mask)
 
 
-def corners(im, rad=44):
-    """the export's rounded corners are white: each corner pixel outside the curve takes the scene's pixel on the curve"""
-    px = im.load()
-    w, h = im.size
-    for (ox, oy, dx, dy) in ((0, 0, 1, 1), (w - 1, 0, -1, 1), (0, h - 1, 1, -1), (w - 1, h - 1, -1, -1)):
-        ccx, ccy = ox + dx * rad, oy + dy * rad
-        for i in range(rad):
-            for j in range(rad):
-                x, y = ox + dx * i, oy + dy * j
-                d = math.hypot(x - ccx, y - ccy)
-                if d > rad - 6:
-                    k = (rad - 8) / d
-                    px[x, y] = px[round(ccx + (x - ccx) * k), round(ccy + (y - ccy) * k)]
-
-
 os.makedirs(OUT, exist_ok=True)
 for name in ('instagram', 'telegram', 'tiktok'):
     im = Image.open(os.path.join(HERE, 'creators-src', name + '.webp')).convert('RGB')
@@ -110,11 +97,17 @@ for name in ('instagram', 'telegram', 'tiktok'):
         avatar(im, a)
     for p in PLATES:
         plate(im, p)
-    corners(im)
     if os.environ.get('CHECK'):
         im.save(os.path.join(os.environ['CHECK'], name + '.png'))
     for w in (1100, 1774):
         out = im if w == im.width else im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         path = os.path.join(OUT, 'orbit-%s-%d.webp' % (name, w))
+        out.save(path, quality=84, method=6)
+        print(os.path.basename(path), out.size, os.path.getsize(path) // 1024, 'KB')
+    # the strip that carries the scene on under it (the design's own, 1774 x 88), as it is, in the same two widths
+    ext = Image.open(os.path.join(HERE, 'creators-src', name + '-ext.webp')).convert('RGB')
+    for w in (1100, 1774):
+        out = ext if w == ext.width else ext.resize((w, round(ext.height * w / ext.width)), Image.LANCZOS)
+        path = os.path.join(OUT, 'orbit-%s-ext-%d.webp' % (name, w))
         out.save(path, quality=84, method=6)
         print(os.path.basename(path), out.size, os.path.getsize(path) // 1024, 'KB')

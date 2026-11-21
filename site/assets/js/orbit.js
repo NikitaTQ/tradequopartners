@@ -2,9 +2,11 @@
  * Three pictures, one per platform; a tab plays the change: a flash and two shock rings from the planet, the new
  * picture opening out from the planet in a ring of its colour while the old one drifts off tinted and blurred, the
  * orbit drawn again in the new tint, the platform's icon and title coming in, a light across each creator's plate.
- * The section's data-pal follows, so the colours flowing in above and out below glide to the new palette
- * (influencers.css .inf-orbit). A comet runs the orbit while the block is on screen (paused off it). Reduced motion:
- * a plain cross-fade and no comet. */
+ * The design's second version: under the picture the card carries the scene on (a strip per platform, inside each
+ * platform's group, so it opens with the reveal too) and the switch is a small bar of liquid glass: its white lens
+ * slides to the chosen tab (--tab), its tint follows the section's data-pal, and in Chromium the bar and the lens
+ * bend what is behind them, through displacement maps built here for their size (rebuilt when the bar resizes).
+ * A comet runs the orbit while the block is on screen (paused off it). Reduced motion: a plain cross-fade, no comet. */
 (function () {
   'use strict';
   const sec = document.querySelector('[data-orbit]');
@@ -19,7 +21,7 @@
     'saturate(.55) brightness(.5) contrast(1.2) blur(4px)',
   ];
   const HOLE = 'radial-gradient(ellipse 25% 27% at 49.9% 16%,transparent 72%,#000 100%)';
-  const REVEAL = 'radial-gradient(circle at 47.91% 67.64%,#000 calc(var(--r) - 240px),transparent var(--r))';
+  const REVEAL = 'radial-gradient(circle at 47.91% 61.54%,#000 calc(var(--r) - 240px),transparent var(--r))';   /* the planet, in a group that reaches over the strip */
   const still = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const F = (n) => r.querySelector('[data-fx="' + n + '"]');
   const G = (i) => r.querySelector('[data-group="' + i + '"]');
@@ -47,7 +49,56 @@
     tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i ? 'true' : 'false'); t.tabIndex = k === i ? 0 : -1; });
     r.setAttribute('aria-label', (r.dataset.aria || 'Creators on') + ' ' + NAMES[i]);
     sec.dataset.pal = String(i);
+    if (bar) bar.style.setProperty('--tab', String(i));
   };
+
+  /* ---- the liquid glass (Chromium): a displacement map for a pill of w x h, its edge band bending inwards (and, for
+     the lens, a slight magnification), as in the design */
+  const bar = sec.querySelector('[data-bar]');
+  const glassMap = (w, h, band, magnify) => {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d'), img = ctx.createImageData(w, h), d = img.data;
+    const rr = h / 2, cx = w / 2, cy = h / 2;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const px = x + .5, py = y + .5;
+      const qx = Math.abs(px - cx) - (cx - rr), qy = Math.abs(py - cy) - (cy - rr);
+      const ox = Math.max(qx, 0), oy = Math.max(qy, 0);
+      const dist = -(Math.hypot(ox, oy) + Math.min(Math.max(qx, qy), 0) - rr);
+      let nx, ny;
+      if (qx > 0) { const l = Math.hypot(ox, oy) || 1; nx = ox / l; ny = oy / l; } else { nx = 0; ny = 1; }
+      nx *= Math.sign(px - cx) || 1; ny *= Math.sign(py - cy) || 1;
+      const t = Math.max(0, Math.min(1, 1 - dist / band)), m = t * t;
+      let dx = -nx * m, dy = -ny * m;
+      if (magnify) { dx -= (px - cx) / cx * magnify; dy -= (py - cy) / cy * magnify; }
+      dx = Math.max(-1, Math.min(1, dx)); dy = Math.max(-1, Math.min(1, dy));
+      const k = (y * w + x) * 4;
+      d[k] = 128 + dx * 127; d[k + 1] = 128 + dy * 127; d[k + 2] = 128; d[k + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    return c.toDataURL();
+  };
+  const setMap = (name, url, w, h, scale) => {
+    const fe = document.querySelector('[data-map="' + name + '"]');
+    if (!fe) return;
+    fe.setAttribute('href', url); fe.setAttribute('width', w); fe.setAttribute('height', h);
+    [1, 1.1, 1.2].forEach((f, k) => {
+      const dm = document.querySelector('[data-s="' + name + (k + 1) + '"]');
+      if (dm) dm.setAttribute('scale', Math.round(scale * (name === 'lens' ? [1, 1.12, 1.24][k] : f)));
+    });
+  };
+  let gW = 0, gH = 0;
+  const buildGlass = () => {
+    const w = Math.round(bar.offsetWidth), h = Math.round(bar.offsetHeight);
+    if (!w || !h || (w === gW && h === gH)) return;
+    gW = w; gH = h;
+    const lw = Math.round((w - 6) / 3), lh = h - 6;
+    setMap('bar', glassMap(w, h, h * 0.42, 0), w, h, h * 0.9);
+    setMap('lens', glassMap(lw, lh, lh * 0.5, 0.22), lw, lh, lh * 0.8);
+    bar.classList.add('is-liquid');
+  };
+  if (bar && /Chrome\//.test(navigator.userAgent) && 'ResizeObserver' in window) {
+    new ResizeObserver(buildGlass).observe(bar);
+  }
 
   async function play(fi, ti) {
     const from = G(fi), to = G(ti);
@@ -62,7 +113,7 @@
 
     const rect = r.getBoundingClientRect();
     const cx = rect.width * 0.4791, cy = rect.height * 0.6764;
-    const R = Math.max(...[[0, 0], [rect.width, 0], [0, rect.height], [rect.width, rect.height]].map(([x, y]) => Math.hypot(x - cx, y - cy))) + 260;
+    const R = Math.max(...[[0, 0], [rect.width, 0], [0, rect.height * 1.0992], [rect.width, rect.height * 1.0992]].map(([x, y]) => Math.hypot(x - cx, y - cy))) + 260;   /* to the strip's far corners */
     const tint = TINT[ti];
     mask(to, REVEAL);
     to.classList.add('is-playing');
