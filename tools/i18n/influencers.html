@@ -48,10 +48,14 @@
          TradeQuo planet, on Instagram, Telegram or TikTok: three pictures (tools/influencers/creators.py), one per
          platform, each with its own palette. A tab plays the design's change: a flash and shock rings from the planet,
          the new picture opening out from it in a ring of its colour, the orbit drawn again, the title wiped in
-         (assets/js/orbit.js). The block has the hero's width (its column, centred); the picture is sharp to its edges
-         and melts into the page on all four sides with a short eased fade (influencers.css .inf-orbit). -->
+         (assets/js/orbit.js). The block has the hero's width (its column, centred); a heading and a line over it, the
+         scene itself a card with rounded corners and the design's soft shadow (influencers.css .inf-orbit). -->
     <section id="platforms" class="inf-orbit" data-orbit data-pal="0" data-screen-label="Creators on platforms">
     <div class="inf-orbit__in">
+    <div class="inf-orbit__head">
+      <h2 class="inf-orbit__h2 tq-h2" data-fitw>{{inf.orbit.h2}}</h2>
+      <p class="inf-orbit__sub">{{inf.orbit.sub}}</p>
+    </div>
     <div class="inf-orbit__frame">
     <div class="inf-orbit__stage" data-orbit-root role="region" aria-label="{{@inf.orbit.aria}} Instagram" data-aria="{{@inf.orbit.aria}}">
       <div class="inf-orbit__group" data-group="0">
