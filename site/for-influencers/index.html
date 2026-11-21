@@ -752,21 +752,21 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @property --bl { syntax: '<color>'; inherits: true; initial-value: #3b2522; }
 @property --bc { syntax: '<color>'; inherits: true; initial-value: #6a413f; }
 @property --br { syntax: '<color>'; inherits: true; initial-value: #3a1d28; }
-.inf-orbit { position: relative; background: #f3f2f7; padding: clamp(24px, 3vw, 48px) 0 clamp(72px, 8vw, 128px); overflow: hidden;
+.inf-orbit { position: relative; background: #f3f2f7; padding: var(--tq-half) 0 var(--tq-gap); overflow: hidden; font-family: 'Inter', sans-serif;
   --tl: #2f1b20; --tc: #26141a; --tr: #2f1722; --bl: #3b2522; --bc: #6a413f; --br: #3a1d28;
   transition: --tl 1.8s cubic-bezier(.6,.02,.22,1), --tc 1.8s cubic-bezier(.6,.02,.22,1), --tr 1.8s cubic-bezier(.6,.02,.22,1),
     --bl 1.8s cubic-bezier(.6,.02,.22,1), --bc 1.8s cubic-bezier(.6,.02,.22,1), --br 1.8s cubic-bezier(.6,.02,.22,1); }
 .inf-orbit[data-pal="1"] { --tl: #2d3e55; --tc: #162132; --tr: #192438; --bl: #202c3d; --bc: #3e5069; --br: #1b263a; }
 .inf-orbit[data-pal="2"] { --tl: #202f36; --tc: #28282f; --tr: #2b1e26; --bl: #1c282f; --bc: #4a4750; --br: #36252f; }
 .inf-orbit__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
+.inf-orbit__head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto clamp(28px, 3.4vw, 48px); text-align: center; }
+.inf-orbit__h2 { margin: 0; color: #0a0a0a; }
+.inf-orbit__sub { margin: 0; max-width: 54ch; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty; }
 .inf-orbit__frame { position: relative; isolation: isolate; }
 .inf-orbit__stage { position: relative; width: 100%; aspect-ratio: 1774 / 887; overflow: hidden; isolation: isolate; background: var(--tc); font-family: 'Inter', sans-serif;
-  -webkit-mask: linear-gradient(90deg, transparent 0, rgba(0,0,0,0.043) 0.5%, rgba(0,0,0,0.156) 1%, rgba(0,0,0,0.316) 1.5%, rgba(0,0,0,0.5) 2%, rgba(0,0,0,0.684) 2.5%, rgba(0,0,0,0.844) 3%, rgba(0,0,0,0.957) 3.5%, #000 4%, #000 96%, rgba(0,0,0,0.957) 96.5%, rgba(0,0,0,0.844) 97%, rgba(0,0,0,0.684) 97.5%, rgba(0,0,0,0.5) 98%, rgba(0,0,0,0.316) 98.5%, rgba(0,0,0,0.156) 99%, rgba(0,0,0,0.043) 99.5%, transparent 100%),
-    linear-gradient(180deg, transparent 0, rgba(0,0,0,0.043) 0.62%, rgba(0,0,0,0.156) 1.25%, rgba(0,0,0,0.316) 1.88%, rgba(0,0,0,0.5) 2.5%, rgba(0,0,0,0.684) 3.12%, rgba(0,0,0,0.844) 3.75%, rgba(0,0,0,0.957) 4.38%, #000 5%, #000 91%, rgba(0,0,0,0.957) 92.12%, rgba(0,0,0,0.844) 93.25%, rgba(0,0,0,0.684) 94.38%, rgba(0,0,0,0.5) 95.5%, rgba(0,0,0,0.316) 96.62%, rgba(0,0,0,0.156) 97.75%, rgba(0,0,0,0.043) 98.88%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask: linear-gradient(90deg, transparent 0, rgba(0,0,0,0.043) 0.5%, rgba(0,0,0,0.156) 1%, rgba(0,0,0,0.316) 1.5%, rgba(0,0,0,0.5) 2%, rgba(0,0,0,0.684) 2.5%, rgba(0,0,0,0.844) 3%, rgba(0,0,0,0.957) 3.5%, #000 4%, #000 96%, rgba(0,0,0,0.957) 96.5%, rgba(0,0,0,0.844) 97%, rgba(0,0,0,0.684) 97.5%, rgba(0,0,0,0.5) 98%, rgba(0,0,0,0.316) 98.5%, rgba(0,0,0,0.156) 99%, rgba(0,0,0,0.043) 99.5%, transparent 100%),
-    linear-gradient(180deg, transparent 0, rgba(0,0,0,0.043) 0.62%, rgba(0,0,0,0.156) 1.25%, rgba(0,0,0,0.316) 1.88%, rgba(0,0,0,0.5) 2.5%, rgba(0,0,0,0.684) 3.12%, rgba(0,0,0,0.844) 3.75%, rgba(0,0,0,0.957) 4.38%, #000 5%, #000 91%, rgba(0,0,0,0.957) 92.12%, rgba(0,0,0,0.844) 93.25%, rgba(0,0,0,0.684) 94.38%, rgba(0,0,0,0.5) 95.5%, rgba(0,0,0,0.316) 96.62%, rgba(0,0,0,0.156) 97.75%, rgba(0,0,0,0.043) 98.88%, transparent 100%);
-  mask-composite: intersect; }
+  border-radius: clamp(16px, 2.2vw, 30px); box-shadow: 0 40px 80px -40px rgba(14,14,16,.45), 0 18px 40px -28px rgba(14,14,16,.3); }
+.inf-orbit__stage::after { content: ''; position: absolute; inset: 0; z-index: 6; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.16); }
 .inf-orbit__group { position: absolute; inset: 0; z-index: 1; }
 .inf-orbit__group[data-group="0"] { z-index: 2; }
 .inf-orbit__group[data-off] { visibility: hidden; }
@@ -792,7 +792,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__plate { position: absolute; z-index: 6; border-radius: 7px; overflow: hidden; pointer-events: none; }
 .inf-orbit__plate span { position: absolute; inset: 0; transform: translateX(-130%); mix-blend-mode: screen;
   background: linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.9) 50%, rgba(255,255,255,0) 70%); }
-.inf-orbit__tabs { position: absolute; z-index: 7; left: 50%; bottom: 1.4%; transform: translateX(-50%); display: flex; gap: clamp(2px, .3vw, 4px); padding: clamp(3px, .35vw, 5px);
+.inf-orbit__tabs { position: absolute; z-index: 7; left: 50%; bottom: 2.4%; transform: translateX(-50%); display: flex; gap: clamp(2px, .3vw, 4px); padding: clamp(3px, .35vw, 5px);
   border-radius: 999px; background: rgba(14,14,20,.58); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 1px rgba(255,255,255,.22), 0 14px 30px -10px rgba(10,10,20,.55);
   -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); }
 .inf-orbit__tabs button { height: clamp(28px, 3.1vw, 46px); padding: 0 clamp(12px, 1.3vw, 20px); border: 0; border-radius: 999px; cursor: pointer; font: 700 clamp(11px, 1vw, 15px) 'Inter', sans-serif;
@@ -801,9 +801,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__tabs button:not([aria-selected="true"]):hover { color: #fff; background: rgba(255,255,255,.1); }
 .inf-orbit__tabs button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 @media (max-width: 640px) {
-.inf-orbit__tabs { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: 14px auto 0; }
+.inf-orbit__tabs { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: 16px auto 0; background: #16161c; }
 .inf-orbit__tabs button { height: 36px; padding: 0 16px; font-size: 13px; }
-.inf-orbit__in { padding: 0; }
 }
 </style>
 </head>
@@ -919,10 +918,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
          TradeQuo planet, on Instagram, Telegram or TikTok: three pictures (tools/influencers/creators.py), one per
          platform, each with its own palette. A tab plays the design's change: a flash and shock rings from the planet,
          the new picture opening out from it in a ring of its colour, the orbit drawn again, the title wiped in
-         (assets/js/orbit.js). The block has the hero's width (its column, centred); the picture is sharp to its edges
-         and melts into the page on all four sides with a short eased fade (influencers.css .inf-orbit). -->
+         (assets/js/orbit.js). The block has the hero's width (its column, centred); a heading and a line over it, the
+         scene itself a card with rounded corners and the design's soft shadow (influencers.css .inf-orbit). -->
     <section id="platforms" class="inf-orbit" data-orbit data-pal="0" data-screen-label="Creators on platforms">
     <div class="inf-orbit__in">
+    <div class="inf-orbit__head">
+      <h2 class="inf-orbit__h2 tq-h2" data-fitw>Wherever your audience is</h2>
+      <p class="inf-orbit__sub">Instagram, Telegram or TikTok: share your TradeQuo link where your followers already spend their time.</p>
+    </div>
     <div class="inf-orbit__frame">
     <div class="inf-orbit__stage" data-orbit-root role="region" aria-label="Creators on Instagram" data-aria="Creators on">
       <div class="inf-orbit__group" data-group="0">

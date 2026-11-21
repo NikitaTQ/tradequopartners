@@ -50,8 +50,8 @@
 
 /* ---- Creators on platforms (owner's "Creator Platforms Scene"): the planet, the orbit, five creators ------------------
    Three pictures, one per platform (tools/influencers/creators.py), and the change between them played by
-   assets/js/orbit.js. As wide as the hero (its column, centred) on the hero's grey; the picture is sharp to near
-   its edges and melts into the page on all four sides (.inf-orbit__stage). */
+   assets/js/orbit.js. A section like the site's others: a heading and a line, then the scene as a card as wide as
+   the hero's column, with the design's rounded corners and soft shadow. */
 @property --r { syntax: '<length>'; inherits: true; initial-value: 0px; }
 @property --tl { syntax: '<color>'; inherits: true; initial-value: #2f1b20; }
 @property --tc { syntax: '<color>'; inherits: true; initial-value: #26141a; }
@@ -59,25 +59,25 @@
 @property --bl { syntax: '<color>'; inherits: true; initial-value: #3b2522; }
 @property --bc { syntax: '<color>'; inherits: true; initial-value: #6a413f; }
 @property --br { syntax: '<color>'; inherits: true; initial-value: #3a1d28; }
-.inf-orbit { position: relative; background: #f3f2f7; padding: clamp(24px, 3vw, 48px) 0 clamp(72px, 8vw, 128px); overflow: hidden;
+.inf-orbit { position: relative; background: #f3f2f7; padding: var(--tq-half) 0 var(--tq-gap); overflow: hidden; font-family: 'Inter', sans-serif;
   --tl: #2f1b20; --tc: #26141a; --tr: #2f1722; --bl: #3b2522; --bc: #6a413f; --br: #3a1d28;
   transition: --tl 1.8s cubic-bezier(.6,.02,.22,1), --tc 1.8s cubic-bezier(.6,.02,.22,1), --tr 1.8s cubic-bezier(.6,.02,.22,1),
     --bl 1.8s cubic-bezier(.6,.02,.22,1), --bc 1.8s cubic-bezier(.6,.02,.22,1), --br 1.8s cubic-bezier(.6,.02,.22,1); }
 .inf-orbit[data-pal="1"] { --tl: #2d3e55; --tc: #162132; --tr: #192438; --bl: #202c3d; --bc: #3e5069; --br: #1b263a; }   /* Telegram */
 .inf-orbit[data-pal="2"] { --tl: #202f36; --tc: #28282f; --tr: #2b1e26; --bl: #1c282f; --bc: #4a4750; --br: #36252f; }   /* TikTok */
 .inf-orbit__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
+/* the heading, as the site's other section heads: centred, the H2 face, a grey line under it */
+.inf-orbit__head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto clamp(28px, 3.4vw, 48px); text-align: center; }
+.inf-orbit__h2 { margin: 0; color: #0a0a0a; }
+.inf-orbit__sub { margin: 0; max-width: 54ch; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.6; color: #5b5b5b; text-wrap: pretty; }
 .inf-orbit__frame { position: relative; isolation: isolate; }
 
 
+/* the scene: a card, as the design drew it (its rounded corners and its long soft shadow), with a fine light rim */
 .inf-orbit__stage { position: relative; width: 100%; aspect-ratio: 1774 / 887; overflow: hidden; isolation: isolate; background: var(--tc); font-family: 'Inter', sans-serif;
-  /* the picture is sharp to near its edges, then melts into the page: an eased ramp, 4% at the sides (the Kingdom
-     plate ends at 95.8%), 5% at the top (the platform's icon starts at 2.5–4%), 9% at the foot (under the switch) */
-  -webkit-mask: linear-gradient(90deg, transparent 0, rgba(0,0,0,0.043) 0.5%, rgba(0,0,0,0.156) 1%, rgba(0,0,0,0.316) 1.5%, rgba(0,0,0,0.5) 2%, rgba(0,0,0,0.684) 2.5%, rgba(0,0,0,0.844) 3%, rgba(0,0,0,0.957) 3.5%, #000 4%, #000 96%, rgba(0,0,0,0.957) 96.5%, rgba(0,0,0,0.844) 97%, rgba(0,0,0,0.684) 97.5%, rgba(0,0,0,0.5) 98%, rgba(0,0,0,0.316) 98.5%, rgba(0,0,0,0.156) 99%, rgba(0,0,0,0.043) 99.5%, transparent 100%),
-    linear-gradient(180deg, transparent 0, rgba(0,0,0,0.043) 0.62%, rgba(0,0,0,0.156) 1.25%, rgba(0,0,0,0.316) 1.88%, rgba(0,0,0,0.5) 2.5%, rgba(0,0,0,0.684) 3.12%, rgba(0,0,0,0.844) 3.75%, rgba(0,0,0,0.957) 4.38%, #000 5%, #000 91%, rgba(0,0,0,0.957) 92.12%, rgba(0,0,0,0.844) 93.25%, rgba(0,0,0,0.684) 94.38%, rgba(0,0,0,0.5) 95.5%, rgba(0,0,0,0.316) 96.62%, rgba(0,0,0,0.156) 97.75%, rgba(0,0,0,0.043) 98.88%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask: linear-gradient(90deg, transparent 0, rgba(0,0,0,0.043) 0.5%, rgba(0,0,0,0.156) 1%, rgba(0,0,0,0.316) 1.5%, rgba(0,0,0,0.5) 2%, rgba(0,0,0,0.684) 2.5%, rgba(0,0,0,0.844) 3%, rgba(0,0,0,0.957) 3.5%, #000 4%, #000 96%, rgba(0,0,0,0.957) 96.5%, rgba(0,0,0,0.844) 97%, rgba(0,0,0,0.684) 97.5%, rgba(0,0,0,0.5) 98%, rgba(0,0,0,0.316) 98.5%, rgba(0,0,0,0.156) 99%, rgba(0,0,0,0.043) 99.5%, transparent 100%),
-    linear-gradient(180deg, transparent 0, rgba(0,0,0,0.043) 0.62%, rgba(0,0,0,0.156) 1.25%, rgba(0,0,0,0.316) 1.88%, rgba(0,0,0,0.5) 2.5%, rgba(0,0,0,0.684) 3.12%, rgba(0,0,0,0.844) 3.75%, rgba(0,0,0,0.957) 4.38%, #000 5%, #000 91%, rgba(0,0,0,0.957) 92.12%, rgba(0,0,0,0.844) 93.25%, rgba(0,0,0,0.684) 94.38%, rgba(0,0,0,0.5) 95.5%, rgba(0,0,0,0.316) 96.62%, rgba(0,0,0,0.156) 97.75%, rgba(0,0,0,0.043) 98.88%, transparent 100%);
-  mask-composite: intersect; }
+  border-radius: clamp(16px, 2.2vw, 30px); box-shadow: 0 40px 80px -40px rgba(14,14,16,.45), 0 18px 40px -28px rgba(14,14,16,.3); }
+.inf-orbit__stage::after { content: ''; position: absolute; inset: 0; z-index: 6; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.16); }
 
 .inf-orbit__group { position: absolute; inset: 0; z-index: 1; }
 .inf-orbit__group[data-group="0"] { z-index: 2; }
@@ -111,7 +111,7 @@
 
 /* the platform switch: a dark glass pill, the chosen one in white */
 /* it comes after the scene in the markup (outside its fade): over the scene's foot */
-.inf-orbit__tabs { position: absolute; z-index: 7; left: 50%; bottom: 1.4%; transform: translateX(-50%); display: flex; gap: clamp(2px, .3vw, 4px); padding: clamp(3px, .35vw, 5px);
+.inf-orbit__tabs { position: absolute; z-index: 7; left: 50%; bottom: 2.4%; transform: translateX(-50%); display: flex; gap: clamp(2px, .3vw, 4px); padding: clamp(3px, .35vw, 5px);
   border-radius: 999px; background: rgba(14,14,20,.58); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 1px rgba(255,255,255,.22), 0 14px 30px -10px rgba(10,10,20,.55);
   -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); }
 .inf-orbit__tabs button { height: clamp(28px, 3.1vw, 46px); padding: 0 clamp(12px, 1.3vw, 20px); border: 0; border-radius: 999px; cursor: pointer; font: 700 clamp(11px, 1vw, 15px) 'Inter', sans-serif;
@@ -121,7 +121,6 @@
 .inf-orbit__tabs button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 /* phones: the scene is small, so the switch goes under it and leaves the creators at its foot in view */
 @media (max-width: 640px) {
-  .inf-orbit__tabs { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: 14px auto 0; }
+  .inf-orbit__tabs { position: relative; left: auto; bottom: auto; transform: none; width: max-content; margin: 16px auto 0; background: #16161c; }   /* on the light page: solid dark, not glass */
   .inf-orbit__tabs button { height: 36px; padding: 0 16px; font-size: 13px; }
-  .inf-orbit__in { padding: 0; }
 }
