@@ -6,15 +6,11 @@ three pictures, 1774 x 887, one per platform (creators-src/*.webp, as the design
     it, the pair centred on the plate;
   - two avatars carry the word as a caption over the photo: the circle is filled again with its upper part (the face),
     a little closer, so the caption falls outside it;
-  - the picture's rounded corners (white in the export) are filled with the scene;
-  - the picture grows by a margin of its own edge colours, drawn out and blurred, 160px left and right and 62px top
-    and bottom (1774 x 887 -> 2094 x 1011):
-    the page fades the block out on all four sides, and the fade falls on this margin, so the creators, their plates
-    and the platform's icon stay whole (the scene's coordinates on the page are in this larger frame).
-Writes site/assets/influencers/orbit-{instagram,telegram,tiktok}-{1300,2094}.webp.
+  - the picture's rounded corners (white in the export) are filled with the scene (the page fades its edges out).
+Writes site/assets/influencers/orbit-{instagram,telegram,tiktok}-{1100,1774}.webp.
 Run:  python3 tools/influencers/creators.py"""
 import math, os
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', '..', 'site', 'assets', 'influencers')
@@ -92,36 +88,6 @@ def avatar(im, a):
     im.paste(part, (cx - r, cy - r), mask)
 
 
-EX, EY = 160, 62
-
-
-def pad(im):
-    """the margin: each edge's own row or column of pixels drawn out to the margin's width (so nothing of the scene is
-    repeated in it, only its edge colours), then softened: the margin and a 24px band just inside the edge are blurred,
-    the blur fading in over that band, so the edge carries on as a soft glow of its colours"""
-    w, h = im.size
-    out = Image.new('RGB', (w + 2 * EX, h + 2 * EY))
-    out.paste(im, (EX, EY))
-    out.paste(im.crop((0, 0, 1, h)).resize((EX, h)), (0, EY))
-    out.paste(im.crop((w - 1, 0, w, h)).resize((EX, h)), (w + EX, EY))
-    W = out.width
-    out.paste(out.crop((0, EY, W, EY + 1)).resize((W, EY)), (0, 0))
-    out.paste(out.crop((0, EY + h - 1, W, EY + h)).resize((W, EY)), (0, EY + h))
-    soft = out.filter(ImageFilter.GaussianBlur(22))
-    band = 24
-    mask = Image.new('L', out.size, 255)
-    inner = Image.new('L', (w, h), 0)
-    ip = inner.load()
-    for y in range(h):
-        for x in (list(range(band)) + list(range(w - band, w))):
-            ip[x, y] = max(ip[x, y], round(255 * (1 - min(x, w - 1 - x) / band)))
-    for x in range(w):
-        for y in (list(range(band)) + list(range(h - band, h))):
-            ip[x, y] = max(ip[x, y], round(255 * (1 - min(y, h - 1 - y) / band)))
-    mask.paste(inner, (EX, EY))
-    return Image.composite(soft, out, mask)
-
-
 def corners(im, rad=44):
     """the export's rounded corners are white: each corner pixel outside the curve takes the scene's pixel on the curve"""
     px = im.load()
@@ -145,10 +111,9 @@ for name in ('instagram', 'telegram', 'tiktok'):
     for p in PLATES:
         plate(im, p)
     corners(im)
-    im = pad(im)
     if os.environ.get('CHECK'):
         im.save(os.path.join(os.environ['CHECK'], name + '.png'))
-    for w in (1300, 2094):
+    for w in (1100, 1774):
         out = im if w == im.width else im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         path = os.path.join(OUT, 'orbit-%s-%d.webp' % (name, w))
         out.save(path, quality=84, method=6)
