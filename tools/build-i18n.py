@@ -38,7 +38,7 @@ PAGES = [
     # For influencers (November 2026): in development, private. 'private' keeps it out of the sitemap (and it is not in
     # NAV); it is built only in the languages that have strings/influencers/<lang>.json (English for now); the server
     # shows it only to the owner (netlify/edge-functions/preview.js, README: Закрытая страница /for-influencers/).
-    {'id': 'influencers', 'template': 'influencers.html', 'slug': 'for-influencers', 'css': 'influencers', 'private': True},
+    {'id': 'influencers', 'template': 'influencers.html', 'slug': 'for-influencers', 'css': ['partner', 'influencers'], 'private': True}   # partner.css: the closing call,
 ]
 # The site navigation in the header: the four pages, in this order (Marketing Tools was removed in November 2026) (page id, path under the language root, label).
 NAV = [
@@ -347,7 +347,8 @@ for page in PAGES:
             # "become a partner" links in shared blocks: scroll to the form on the landing, go to it elsewhere
             'signupHref': (home + '#signup') if slug else '#signup',
             'signupNav': ' data-page-link' if slug else '',
-            'pageCss': ('\n<link rel="stylesheet" href="%sassets/css/%s.css" data-inline>' % (root, page['css'])) if page.get('css') else '',
+            'pageCss': ''.join('\n<link rel="stylesheet" href="%sassets/css/%s.css" data-inline>' % (root, c)
+                               for c in ([page['css']] if isinstance(page.get('css'), str) else page.get('css') or [])),
         }
 
         def fill(m):

@@ -103,10 +103,11 @@ def pushpull(img, hole):
     return col
 
 
-def fill(img, hole, avoid, tile=48, reach=360, step=8):
+def fill(img, hole, avoid, tile=48, reach=360, step=8, exclude=None):
     """fill `hole` (bool HxW) in img (float HxWx3): a smooth base (push-pull) plus the nebula's own grain, taken in
     overlapping, softly weighted tiles from clean places nearby whose grain at the hole's edge matches best"""
-    base = pushpull(img, hole)
+    # the smooth base from the plain nebula round the hole only (not from the orbit's bright line beside it)
+    base = pushpull(img, hole if exclude is None else (hole | exclude))
     low = _blur(img, 5)
     detail = img - low
     forbidden = hole | avoid
@@ -162,5 +163,5 @@ def clean(im, orbit_too):
     hole = creators.copy()
     if orbit_too:
         hole |= mask_orbit()
-    out = fill(a, hole, protect | mask_orbit(34) | creators)
+    out = fill(a, hole, protect | mask_orbit(34) | creators, exclude=None if orbit_too else mask_orbit(34))
     return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8))
