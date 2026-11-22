@@ -15,10 +15,14 @@
   const tabs = [...sec.querySelectorAll('[data-tab]')];
   const NAMES = ['Instagram', 'Telegram', 'TikTok'];
   const TINT = ['#E08AA0', '#8EB2DC', '#86C4C6'];
+  /* touch devices: the change without its blurs (the old picture tints and grows but stays sharp, the icon comes in
+     from bright, not blurred): blurring the whole picture every frame was the heaviest part of it for a phone */
+  const LIGHT = window.matchMedia('(pointer: coarse)').matches;
+  const B = (px) => (LIGHT ? 0 : px);
   const OUT_FILTER = [
-    'hue-rotate(-150deg) saturate(1.25) brightness(1.15) blur(4px)',
-    'hue-rotate(150deg) saturate(1.25) brightness(1.15) blur(4px)',
-    'saturate(.55) brightness(.5) contrast(1.2) blur(4px)',
+    'hue-rotate(-150deg) saturate(1.25) brightness(1.15) blur(' + B(4) + 'px)',
+    'hue-rotate(150deg) saturate(1.25) brightness(1.15) blur(' + B(4) + 'px)',
+    'saturate(.55) brightness(.5) contrast(1.2) blur(' + B(4) + 'px)',
   ];
   /* the scene's geometry: wider screens the design's (its group reaches over the strip under the picture, so the planet
      is at 61.54% of the group's height); phones the tall card's (tools/influencers/portrait.py: the picture's x 418..1281
@@ -46,15 +50,17 @@
   const mask = (el, v) => { el.style.webkitMaskImage = v; el.style.maskImage = v; };
   let active = 0, busy = false;
 
-  /* the comet: a light and its trail running the orbit (9 s a lap), only while the block is on screen. Small glowing
-     dots moved by transform and opacity only, through points of the orbit worked out here, so the browser moves them on
-     the GPU and paints nothing per frame (a comet drawn by animating the SVG line's dashes made the browser repaint the
-     whole card every frame: iPhones stuttered). It goes out of sight where a creator stands (the shapes of the orbit's
-     mask for the current layout) and at the orbit's two open ends. Rebuilt when the card changes size or layout. */
+  /* the comet: a light and its trail running the orbit (9 s a lap), only while the block is on screen, drawn on one
+     canvas (one layer: animating the SVG line's dashes repainted the whole card every frame, and 21 moving dots meant 21
+     layers each clipped by the card's rounded corners, which Safari masks one by one). The orbit's points are worked out
+     once per size; the comet goes out of sight where a creator stands (the orbit's mask for the current layout) and at
+     the orbit's two open ends. Touch devices draw it 30 times a second (a 9-second lap still glides), drawing at 1.5x. */
   const orbitPath = sec.querySelector('#tqOrbit');
-  const cometBox = sec.querySelector('[data-comet]');
-  const TRAIL = 20, STEP = 6, LAP = 9000;           // dots behind the head, path units (of 1000) between them, ms a lap
-  let amb = [], playing = false, built = '';
+  const cv = sec.querySelector('[data-comet]');
+  const ctx = cv && cv.getContext && cv.getContext('2d');
+  const COARSE = window.matchMedia('(pointer: coarse)').matches;
+  const LAP = 9000, N = 600, TRAIL = 0.12, HEAD0 = 0.117;   // a lap; points on it; the trail's length and the head's start (of a lap)
+  let pts = null, vis = null, built = '', playing = false, raf = 0, t0 = 0, pausedAt = 0, prevT = 0, hiddenNow = false;
   const hideShapes = () => {
     const m = sec.querySelector(PHONE.matches ? '#tqHideM' : '#tqHide');
     const n = (e, a) => +e.getAttribute(a);
@@ -64,52 +70,80 @@
     };
   };
   const buildComet = () => {
-    if (still() || !orbitPath || !cometBox || !orbitPath.getTotalLength) return;
+    if (still() || !orbitPath || !ctx || !orbitPath.getTotalLength) return;
     const W = r.clientWidth, H = r.clientHeight, vb = svg.viewBox.baseVal;
     const key = W + 'x' + H + ':' + vb.x + ',' + vb.width;
     if (!W || key === built) return;
     built = key;
-    amb.forEach((a) => a.cancel());
-    amb = [];
-    cometBox.textContent = '';
-    const sx = W / vb.width, sy = H / vb.height, total = orbitPath.getTotalLength(), N = 240;
+    const dpr = Math.min(window.devicePixelRatio || 1, COARSE ? 1.5 : 2);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const sx = W / vb.width, sy = H / vb.height, total = orbitPath.getTotalLength();
     const hs = hideShapes();
     const hidden = (x, y) => hs.c.some(([cx, cy, rr]) => Math.hypot(x - cx, y - cy) < rr)
       || hs.r.some(([rx, ry, rw, rh]) => x > rx && x < rx + rw && y > ry && y < ry + rh);
-    const pts = [];
-    for (let k = 0; k <= N; k++) pts.push(orbitPath.getPointAtLength(total * k / N));
-    const frames = [];
-    let prev = null;
+    pts = new Float32Array((N + 1) * 2); vis = new Float32Array(N + 1);
     for (let k = 0; k <= N; k++) {
-      const a = pts[Math.max(0, k - 1)], b = pts[Math.min(N, k + 1)];
-      let ang = Math.atan2((b.y - a.y) * sy, (b.x - a.x) * sx) * 180 / Math.PI;
-      if (prev !== null) { while (ang - prev > 180) ang -= 360; while (ang - prev < -180) ang += 360; }
-      prev = ang;
-      const u = k / N;
-      const ends = Math.max(0, Math.min(1, u / 0.015, (1 - u) / 0.015));
-      frames.push({
-        transform: 'translate(' + ((pts[k].x - vb.x) * sx).toFixed(1) + 'px,' + ((pts[k].y - vb.y) * sy).toFixed(1) + 'px) rotate(' + ang.toFixed(1) + 'deg)',
-        opacity: hidden(pts[k].x, pts[k].y) ? 0 : ends,
-        offset: u,
-      });
+      const p = orbitPath.getPointAtLength(total * k / N), u = k / N;
+      pts[k * 2] = (p.x - vb.x) * sx; pts[k * 2 + 1] = (p.y - vb.y) * sy;
+      vis[k] = hidden(p.x, p.y) ? 0 : Math.max(0, Math.min(1, u / 0.015, (1 - u) / 0.015));
     }
-    const seg = total * STEP / 1000 * Math.sqrt(sx * sy);
-    for (let k = 0; k <= TRAIL; k++) {
-      const el = document.createElement('span');
-      el.className = k ? 'inf-orbit__tail' : 'inf-orbit__dot';
-      if (k) {
-        el.style.setProperty('--len', (seg * 1.5).toFixed(1) + 'px');
-        el.style.setProperty('--a', (0.6 * (1 - (k - 1) / TRAIL)).toFixed(3));
+    for (let pass = 0; pass < 3; pass++) for (let k = 1; k < N; k++) vis[k] = Math.min(vis[k], (vis[k - 1] + vis[k] * 2 + vis[k + 1]) / 4 + .25);   // soft edges where it hides
+    draw(prevT);
+  };
+  const at = (u) => {   // a point on the lap at u (0..1), with its visibility
+    const f = u * N, k = Math.min(N - 1, Math.floor(f)), a = f - k;
+    return [pts[k * 2] + (pts[k * 2 + 2] - pts[k * 2]) * a, pts[k * 2 + 1] + (pts[k * 2 + 3] - pts[k * 2 + 1]) * a, vis[k] + (vis[k + 1] - vis[k]) * a];
+  };
+  const draw = (t) => {
+    if (!pts) return;
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    if (hiddenNow) return;
+    const head = (HEAD0 + t / LAP) % 1;
+    // the trail: a run of short strokes behind the head, thinner and fainter toward its end
+    ctx.lineCap = 'round';
+    const STEPS = 28;
+    let prev = at(head);
+    for (let s = 1; s <= STEPS; s++) {
+      let u = head - TRAIL * s / STEPS; if (u < 0) u += 1;
+      const p = at(u), fade = 1 - s / STEPS;
+      const a = Math.min(prev[2], p[2]) * fade;
+      if (a > 0.01 && Math.abs(p[0] - prev[0]) + Math.abs(p[1] - prev[1]) < 80) {
+        ctx.strokeStyle = 'rgba(255,255,255,' + (0.18 * a).toFixed(3) + ')'; ctx.lineWidth = 7 * fade + 2;
+        ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(p[0], p[1]); ctx.stroke();
+        ctx.strokeStyle = 'rgba(255,255,255,' + (0.75 * a).toFixed(3) + ')'; ctx.lineWidth = 2.4 * fade + .6;
+        ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(p[0], p[1]); ctx.stroke();
       }
-      cometBox.appendChild(el);
-      const lead = (((117 - k * STEP) % 1000) + 1000) % 1000;   // where on the lap it is at the start (the design's head: 117 in)
-      const an = el.animate(frames, { duration: LAP, iterations: Infinity, easing: 'linear', delay: -lead / 1000 * LAP });
-      if (!playing) an.pause();
-      amb.push(an);
+      prev = p;
+    }
+    // the head: a soft glow and a bright core
+    const h = at(head);
+    if (h[2] > 0.01) {
+      const g = ctx.createRadialGradient(h[0], h[1], 0, h[0], h[1], 12);
+      g.addColorStop(0, 'rgba(255,255,255,' + h[2] + ')'); g.addColorStop(.25, 'rgba(255,255,255,' + (.75 * h[2]) + ')');
+      g.addColorStop(.55, 'rgba(255,255,255,' + (.18 * h[2]) + ')'); g.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h[0], h[1], 12, 0, Math.PI * 2); ctx.fill();
     }
   };
-  const pauseComet = () => { playing = false; amb.forEach((a) => a.pause()); };
-  const playComet = () => { playing = true; buildComet(); amb.forEach((a) => a.play()); };
+  let lastDraw = 0;
+  const loop = (now) => {
+    raf = requestAnimationFrame(loop);
+    if (COARSE && now - lastDraw < 31) return;   // touch devices: 30 a second
+    lastDraw = now;
+    prevT = now - t0;
+    draw(prevT);
+  };
+  const pauseComet = () => { playing = false; if (raf) { cancelAnimationFrame(raf); raf = 0; pausedAt = performance.now(); } };
+  const playComet = () => {
+    if (still()) return;
+    playing = true; buildComet();
+    if (!raf && !hiddenNow) { const now = performance.now(); t0 = pausedAt ? t0 + (now - pausedAt) : now; pausedAt = 0; raf = requestAnimationFrame(loop); }
+  };
+  const holdComet = (on) => {   /* out of sight (and not drawn) while a platform change plays */
+    hiddenNow = on;
+    if (on) { if (raf) { cancelAnimationFrame(raf); raf = 0; pausedAt = performance.now(); } if (pts) ctx.clearRect(0, 0, cv.width, cv.height); }
+    else if (playing) playComet();
+  };
   if ('IntersectionObserver' in window) {
     new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? playComet() : pauseComet())), { rootMargin: '100px 0px' }).observe(r);
   } else playComet();
@@ -191,9 +225,8 @@
     const tint = TINT[ti];
     mask(to, REVEAL);
     to.classList.add('is-playing');
-    /* the comet steps aside while the change plays: its moving layers over the filtered, masked pictures cost the
-       phone more than half its frames */
-    if (cometBox) { cometBox.style.display = 'none'; amb.forEach((a) => a.pause()); }
+    /* the comet steps aside while the change plays */
+    holdComet(true);
     const bg = L(to, 'bg'), sky = L(to, 'sky');
     mask(bg, HOLE);
     sky.style.opacity = 1;
@@ -219,7 +252,7 @@
       { opacity: 1, filter: 'brightness(2.4)', transform: 'scale(1.06)', offset: 0.3 },
       { opacity: 1, filter: 'brightness(1)', transform: 'scale(1)' },
     ], { duration: 1400, easing: 'ease-out' });
-    A(L(to, 'icon'), [{ opacity: 0, filter: 'blur(20px) brightness(3)' }, { opacity: 1, filter: 'blur(0px) brightness(1)' }], { duration: 1400, delay: 750, easing: 'cubic-bezier(.3,0,.2,1)' });
+    A(L(to, 'icon'), [{ opacity: 0, filter: 'blur(' + B(20) + 'px) brightness(3)' }, { opacity: 1, filter: 'blur(0px) brightness(1)' }], { duration: 1400, delay: 750, easing: 'cubic-bezier(.3,0,.2,1)' });
     A(L(to, 'title'), [
       { opacity: 1, clipPath: g.title[0], filter: 'brightness(2.6)' },
       { opacity: 1, clipPath: g.title[1], filter: 'brightness(1)' },
@@ -235,7 +268,7 @@
     from.style.visibility = 'hidden';
     mask(to, 'none'); mask(bg, 'none');
     to.classList.remove('is-playing');
-    if (cometBox) { cometBox.style.display = ''; if (playing) amb.forEach((a) => a.play()); }
+    holdComet(false);
     sky.style.opacity = 0;
     anims.forEach((a) => a.cancel());
   }
