@@ -1087,6 +1087,17 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 [data-fan-card] > [data-fan-upto] { margin-top: auto !important; }
 [data-fan-card] > [data-fan-upto] + [data-fan-obj] { margin-top: 0 !important; }
 }
+.tq-ghl-skel { position: absolute; left: 0; right: 0; top: 0; z-index: 1; display: flex; flex-direction: column; gap: 10px; padding: 8px 2px; transition: opacity .45s ease; pointer-events: none; }
+.tq-ghl-skel i { display: block; width: 34%; height: 9px; margin-top: 8px; border-radius: 2px; background: #e2e2de; }
+.tq-ghl-skel b { display: block; height: 48px; border: 1px solid #dcdcd8; border-radius: 6px; background: #fff; }
+.tq-ghl-skel u { display: block; height: 52px; margin-top: 14px; border-radius: 999px; background: linear-gradient(180deg, #2a2a2e, #0d0d0f); }
+.tq-ghl-skel i, .tq-ghl-skel b { background-image: linear-gradient(100deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.7) 50%, rgba(255,255,255,0) 70%); background-size: 220% 100%; animation: tqGhlSweep 1.4s ease-in-out infinite; }
+.tq-ghl-skel i { background-color: #e2e2de; }
+.tq-ghl-skel b { background-color: #fff; background-image: linear-gradient(100deg, rgba(240,240,236,0) 30%, rgba(236,236,232,.9) 50%, rgba(240,240,236,0) 70%); }
+@keyframes tqGhlSweep { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+@media (prefers-reduced-motion: reduce) {
+.tq-ghl-skel i, .tq-ghl-skel b { animation: none; }
+}
 </style>
 <style id="i18n-fonts">
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../assets/fonts/intl/noto-sans-thai-400-800-thai.woff2?v=4dd2ca6f6a) format('woff2'); unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC; }
@@ -1095,6 +1106,9 @@ h1, h2 { line-height: 1.2 !important; }
 </style>
 <!-- three.js for Infinite Flow (further down, in its own frame), fetched while this page loads, at low priority: the frame
      then finds it in the cache and is live by the time anyone scrolls to it -->
+<link rel="preconnect" href="https://api.leadconnectorhq.com">
+<link rel="preconnect" href="https://link.msgsndr.com">
+<link rel="dns-prefetch" href="https://stcdn.leadconnectorhq.com">
 <link rel="preload" href="../vendor/three@0.184.0/three.core.min.js" as="fetch" crossorigin fetchpriority="low">
 <link rel="preload" href="../vendor/three@0.184.0/three.module.min.js" as="fetch" crossorigin fetchpriority="low">
 </head>
@@ -1239,21 +1253,24 @@ h1, h2 { line-height: 1.2 !important; }
                  (the CRM's) sets the iframe's height to its form. The iframe is laid on the card with multiply (owner's wish):
                  the form's white body takes the card's paper colour under it, its words, envelope and seal stay as drawn. -->
             <div data-ghl-box="" style="position:relative; height:601px; overflow:hidden; transition:height .35s cubic-bezier(.2,.8,.2,1);">
+              <div class="tq-ghl-skel" aria-hidden="true"><i></i><b></b><i></i><b></b><i></i><b></b><u></u></div>
               <iframe data-src="https://api.leadconnectorhq.com/widget/form/u0W8WFvnDWkIML6gxVTA" style="display:block; width:100%; height:601px; border:none; border-radius:8px; mix-blend-mode:multiply; opacity:0; transition:opacity .45s ease;" id="inline-u0W8WFvnDWkIML6gxVTA" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="TQP-IB " data-height="601" data-layout-iframe-id="inline-u0W8WFvnDWkIML6gxVTA" data-form-id="u0W8WFvnDWkIML6gxVTA" data-cookie-consent="true" data-cookie-consent-provider="auto" title="TQP-IB "></iframe>
               <script>/* the form's address carries the visit's UTM tags (30-day cookie tq_utm, then this page's address). The CRM's
    script sizes the iframe in steps while the form loads (its default, a collapse, the form's height): the card holds
-   the room (the form's height last time, kept in this browser, else 601px) and the form shows only once its height has
-   settled; after that the card follows it smoothly (the thank-you screen), never through a passing collapse. */
+   the room (the form's height last time, kept in this browser, else 601px), shows field-like placeholders in it, and
+   the form takes their place once the CRM's script has given it its height (or it has loaded) and that height has
+   held for 0.3 s (4 s at most); after that the card follows it smoothly (the thank-you screen), never through a passing collapse. */
 (function(){var f=document.getElementById('inline-u0W8WFvnDWkIML6gxVTA'),box=f.parentNode,q=new URLSearchParams(),K='tq_ghl_h';
 try{var c=/(?:^|; )tq_utm=([^;]*)/.exec(document.cookie),u=c?JSON.parse(decodeURIComponent(c[1])):{};for(var k in u)if(/^utm_[a-z]+$/.test(k)&&u[k])q.set(k,String(u[k]));}catch(e){}
 new URLSearchParams(location.search).forEach(function(v,k){if(/^utm_[a-z]+$/.test(k)&&v)q.set(k,v);});
 var last=0;try{last=+localStorage.getItem(K)||0;}catch(e){}if(last>200&&last<2000)box.style.height=last+'px';
-var ready=false,loaded=false,t=0,show=function(){if(ready)return;ready=true;f.style.opacity='1';fit();try{localStorage.setItem(K,f.offsetHeight);}catch(e){}};
+var ready=false,loaded=false,moved=false,h0=0,t=0,sk=box.querySelector('.tq-ghl-skel');
 var fit=function(){var h=f.offsetHeight;if(h<200)return;box.style.height=h+'px';};
-var settle=function(){clearTimeout(t);t=setTimeout(function(){if(loaded&&f.offsetHeight>=200)show();},450);};
-if(window.ResizeObserver)new ResizeObserver(function(){if(ready)fit();else settle();}).observe(f);
+var show=function(){if(ready)return;ready=true;f.style.opacity='1';if(sk)sk.style.opacity='0';fit();try{localStorage.setItem(K,f.offsetHeight);}catch(e){}setTimeout(function(){if(sk)sk.remove();},600);};
+var settle=function(){clearTimeout(t);t=setTimeout(function(){if((loaded||moved)&&f.offsetHeight>=200)show();},300);};
+if(window.ResizeObserver)new ResizeObserver(function(){var h=f.offsetHeight;if(!h0)h0=h;else if(h!==h0)moved=true;if(ready)fit();else settle();}).observe(f);
 f.addEventListener('load',function(){loaded=true;settle();});
-setTimeout(function(){if(!ready){ready=true;f.style.opacity='1';fit();}},7000);
+setTimeout(show,4000);
 var s=q.toString();f.src=f.getAttribute('data-src')+(s?'?'+s:'');})();</script>
               <script src="https://link.msgsndr.com/js/form_embed.js" async></script>
             </div>
