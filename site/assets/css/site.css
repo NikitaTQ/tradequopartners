@@ -964,13 +964,17 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    takes 88px in the flow (the margin under it grows by what the bar gives back), so nothing moves */
 .tq-head.is-stuck { height: 48px; margin-bottom: 40px; border-image-width: 0 81.4px; }
 .tq-head.is-stuck::after { height: 18px; }
-.tq-head.is-stuck .tq-head__logo { height: 24px; }
+.tq-head.is-stuck .tq-head__logo { height: 20px; }
 .tq-head.is-stuck .tq-lang__btn { height: 32px; border-image-width: 0 16.2px; }
 .tq-head.is-stuck .tq-head__cta { height: 34px; border-image-width: 0 17.3px; }
 .tq-head.is-stuck .tq-nav-link[aria-current="page"]::after { bottom: -8px; }
 @media (prefers-reduced-motion: reduce) { .tq-head, .tq-head::after { transition: none; } }
 .tq-head__home { display: inline-flex; flex-shrink: 0; }
-.tq-head__logo { display: block; flex-shrink: 0; height: 28px; width: auto; transition: height .3s ease; }
+/* the logo (owner's design "TRADEQUO PARTNERS", November 2026, tools/head-logo/make.py): its letters as large as the old
+   TRADEQUO logo's (12px capitals; 10px when the bar slims); phones get it stacked (logo-partners-m.webp, a <picture>),
+   as wide as the old one there */
+.tq-head__home picture { display: block; }
+.tq-head__logo { display: block; flex-shrink: 0; height: 23px; width: auto; transition: height .3s ease; }
 .tq-head__nav { display: flex; align-items: center; justify-content: flex-end; flex-wrap: nowrap; gap: var(--g); }
 .tq-head .tq-nav-link { color: #bebec3; }
 .tq-head .tq-nav-link[aria-current="page"] { color: #f4f4f6; font-weight: 600; }
@@ -991,7 +995,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
   .tq-head { gap: 8px !important; padding: 0 12px 0 14px !important; padding-inline: 14px 12px !important; }
   .tq-head:not(.is-stuck) { height: 56px; border-image-width: 0 94.9px; }   /* the bar 8px lower than on wider screens, so the first screen holds more */
   .tq-head.is-stuck { margin-bottom: 32px; }   /* 80px in the flow either way */
-  .tq-head .tq-head__logo { height: clamp(18px, 5.6vw, 24px) !important; }
+  .tq-head .tq-head__logo { height: clamp(21px, 6.66vw, 28px) !important; }
   .tq-head .tq-head__nav { gap: 8px !important; }
   .tq-head .tq-lang { margin-inline-start: 0; }
   .tq-head .tq-lang__btn { width: 38px; height: 38px; padding: 0; justify-content: center; border-image-width: 0 19px; }
@@ -1003,7 +1007,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
 /* the narrowest phones (320px): every language's button still in the bar */
 @media (max-width: 359px) {
   .tq-head { gap: 6px !important; padding: 0 8px 0 10px !important; padding-inline: 10px 8px !important; }
-  .tq-head .tq-head__logo { height: 16px !important; }
+  .tq-head .tq-head__logo { height: 19px !important; }
   .tq-head .tq-head__nav { gap: 6px !important; }
   .tq-head .tq-head__cta { padding: 0 10px !important; font-size: 13px !important; }
 }

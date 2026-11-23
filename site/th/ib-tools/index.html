@@ -576,7 +576,7 @@ footer p { font-size: 12px !important; }
 .tq-head.is-away { transform: translateY(calc(-100% - 24px)); }
 .tq-head.is-stuck { height: 48px; margin-bottom: 40px; border-image-width: 0 81.4px; }
 .tq-head.is-stuck::after { height: 18px; }
-.tq-head.is-stuck .tq-head__logo { height: 24px; }
+.tq-head.is-stuck .tq-head__logo { height: 20px; }
 .tq-head.is-stuck .tq-lang__btn { height: 32px; border-image-width: 0 16.2px; }
 .tq-head.is-stuck .tq-head__cta { height: 34px; border-image-width: 0 17.3px; }
 .tq-head.is-stuck .tq-nav-link[aria-current="page"]::after { bottom: -8px; }
@@ -584,7 +584,8 @@ footer p { font-size: 12px !important; }
 .tq-head, .tq-head::after { transition: none; }
 }
 .tq-head__home { display: inline-flex; flex-shrink: 0; }
-.tq-head__logo { display: block; flex-shrink: 0; height: 28px; width: auto; transition: height .3s ease; }
+.tq-head__home picture { display: block; }
+.tq-head__logo { display: block; flex-shrink: 0; height: 23px; width: auto; transition: height .3s ease; }
 .tq-head__nav { display: flex; align-items: center; justify-content: flex-end; flex-wrap: nowrap; gap: var(--g); }
 .tq-head .tq-nav-link { color: #bebec3; }
 .tq-head .tq-nav-link[aria-current="page"] { color: #f4f4f6; font-weight: 600; }
@@ -604,7 +605,7 @@ footer p { font-size: 12px !important; }
 .tq-head { gap: 8px !important; padding: 0 12px 0 14px !important; padding-inline: 14px 12px !important; }
 .tq-head:not(.is-stuck) { height: 56px; border-image-width: 0 94.9px; }
 .tq-head.is-stuck { margin-bottom: 32px; }
-.tq-head .tq-head__logo { height: clamp(18px, 5.6vw, 24px) !important; }
+.tq-head .tq-head__logo { height: clamp(21px, 6.66vw, 28px) !important; }
 .tq-head .tq-head__nav { gap: 8px !important; }
 .tq-head .tq-lang { margin-inline-start: 0; }
 .tq-head .tq-lang__btn { width: 38px; height: 38px; padding: 0; justify-content: center; border-image-width: 0 19px; }
@@ -615,7 +616,7 @@ footer p { font-size: 12px !important; }
 }
 @media (max-width: 359px) {
 .tq-head { gap: 6px !important; padding: 0 8px 0 10px !important; padding-inline: 10px 8px !important; }
-.tq-head .tq-head__logo { height: 16px !important; }
+.tq-head .tq-head__logo { height: 19px !important; }
 .tq-head .tq-head__nav { gap: 6px !important; }
 .tq-head .tq-head__cta { padding: 0 10px !important; font-size: 13px !important; }
 }
@@ -1584,7 +1585,7 @@ h1, h2 { line-height: 1.2 !important; }
 
   <header class="tq-head">
     <button type="button" class="tq-head__burger" data-mnav-toggle aria-controls="tq-mnav" aria-expanded="false" aria-label="เมนู"><svg class="tq-head__bi" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg><svg class="tq-head__bx" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></button>
-    <a class="tq-head__home" href="../" data-page-link><img class="tq-head__logo" src="../../assets/head/logo.webp?v=fbcac7b3e0" width="268" height="48" alt="TradeQuo"></a>
+    <a class="tq-head__home" href="../" data-page-link><picture><source media="(max-width: 640px)" srcset="../../assets/head/logo-partners-m.webp?v=bb07186d67" width="396" height="78"><img class="tq-head__logo" src="../../assets/head/logo-partners.webp?v=97fb9bf80a" width="751" height="69" alt="TradeQuo Partners"></picture></a>
     <nav class="tq-head__nav">
       <span data-navlinks="" style="display: contents;">
         <a class="hv-red tq-nav-link" href="../" data-page-link>หน้าแรก</a>
