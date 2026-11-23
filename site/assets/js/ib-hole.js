@@ -24,9 +24,10 @@
   };
   const CAP = [1, 2, 3, 4, 5].map((i) => toks(root.getAttribute('data-c' + i)));
   const TXT = { act: up(root.getAttribute('data-act') || 'Active'), dor: up(root.getAttribute('data-dor') || 'Dormant risk'), ina: up(root.getAttribute('data-ina') || 'Inactive') };
-  /* the HUD: if a long translation does not fit, the step numbers go (class is-tight) */
+  /* the HUD's steps (none since November 2026: the strip was taken out; kept working should it return): if a long
+     translation does not fit, the step numbers go (class is-tight) */
   const hud = root.querySelector('.tq-ibb__tabs');
-  const tight = () => { hud.classList.remove('is-tight'); if (tabs.some((t) => { const x = t.querySelector('span'); return x.scrollWidth > x.clientWidth + 1; })) hud.classList.add('is-tight'); };
+  const tight = () => { if (!hud) return; hud.classList.remove('is-tight'); if (tabs.some((t) => { const x = t.querySelector('span'); return x.scrollWidth > x.clientWidth + 1; })) hud.classList.add('is-tight'); };
   const start = () => {
     const ctx = cv.getContext('2d');
     const DPR0 = Math.min(2, window.devicePixelRatio || 1); let dpr = DPR0;
