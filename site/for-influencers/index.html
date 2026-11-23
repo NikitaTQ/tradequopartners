@@ -883,6 +883,9 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   -webkit-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
   -webkit-mask-composite: source-in; mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
   mask-composite: intersect; }
+@media (min-width: 901px) {
+.inf-hero { padding-bottom: clamp(24px, 2.4vw, 45px); }
+}
 @media (max-width: 900px) {
 .inf-hero__in { grid-template-columns: minmax(0, 1fr); gap: 40px; }
 .inf-hero__vis { width: 100%; max-width: 540px; justify-self: center; }

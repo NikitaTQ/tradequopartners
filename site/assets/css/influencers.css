@@ -39,6 +39,11 @@
   -webkit-mask-composite: source-in; mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
   mask-composite: intersect; }
 
+/* desktops (two columns): the hero ends closer to the creators block under it, the gap from the scene's lowest glow to
+   that block's heading 25% shorter than at first (owner's wish, November 2026): 157 -> 118px at 991px wide, 223 -> 167px
+   at 1440 */
+@media (min-width: 901px) { .inf-hero { padding-bottom: clamp(24px, 2.4vw, 45px); } }
+
 /* ---- tablets and phones: the text, then the scene full width ------------------------------------------------- */
 @media (max-width: 900px) {
   .inf-hero__in { grid-template-columns: minmax(0, 1fr); gap: 40px; }
