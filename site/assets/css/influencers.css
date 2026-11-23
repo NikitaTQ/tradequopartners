@@ -66,14 +66,19 @@
    The design's own values; sizes in container units of the block's width (cqw), as in the design. The figures and the
    names are in the headings' face (Syncopate, class tq-h2, so tools/h1-fonts.py puts their letters in its file); the
    design's DM Sans and DM Mono are the site's Inter. Static: nothing moves. */
-.inf-nums { container-type: inline-size; background: #f3f2f7; padding: 0; font-family: 'Inter', sans-serif; }
-.inf-nums__in { padding: 0 clamp(16px, 4cqw, 56px); }
-.inf-nums__card { max-width: 1120px; margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 3cqw, 32px); overflow: hidden; color: #fff;
+/* after the creators scene (owner's wish, November 2026): the scene's half gap above it, the site's gap to the footer
+   under it (phones: half a gap, then the closing call); the card's shadow stays inside the block */
+.inf-nums { container-type: inline-size; background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
+.inf-nums__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }   /* the creators block's column: the two cards one under the other, edge to edge */
+.inf-nums__card { margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 3cqw, 32px); overflow: hidden; color: #fff;
   background: radial-gradient(80% 60% at 25% 0%, rgba(255,255,255,.14), rgba(255,255,255,0) 60%),
     repeating-linear-gradient(90deg, rgba(255,255,255,0) 0 23px, rgba(255,255,255,.09) 23px 24px),
     linear-gradient(170deg, #5a5d65 0%, #3c3e44 45%, #2b2d32 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 0 1px rgba(255,255,255,.06), 0 40px 60px -30px rgba(14,14,16,.6);
   padding: clamp(28px, 6cqw, 64px) clamp(18px, 5cqw, 64px); display: flex; flex-direction: column; gap: clamp(22px, 4cqw, 40px); }
+/* the figures are sized by the card (its own container, the inside of its padding: 29.8% of it is the design's 26% of the
+   page, 300px at full width): a card kept narrow by a short screen gets smaller figures */
+.inf-nums__card { container-type: inline-size; }
 .inf-nums__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .inf-nums__h2 { margin: 0; font-size: clamp(11px, 3cqw, 15px); font-weight: 700; line-height: 1.5; }
 .inf-nums__h2 .tq-h2 { font-size: clamp(11px, 3cqw, 15px); letter-spacing: .22em; line-height: 1.5; padding: 0; text-wrap: nowrap; }
@@ -87,7 +92,7 @@
 .inf-nums__tex, .inf-nums__gloss { position: absolute; inset: 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
 .inf-nums__gloss { background-image: linear-gradient(180deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,.1) 36%, rgba(255,255,255,0) 47%, rgba(255,255,255,0) 82%, rgba(255,255,255,.12) 100%);
   -webkit-text-stroke: 1.2px rgba(255,255,255,.6); mix-blend-mode: screen; }
-.inf-nums__item--87 .inf-nums__fig { font-size: clamp(96px, 26cqw, 300px); line-height: .9; }
+.inf-nums__item--87 .inf-nums__fig { font-size: clamp(96px, 29.8cqw, 300px); line-height: .9; }
 .inf-nums__item--87 .inf-nums__depth { text-shadow: 0 1px 0 #3a1a26, 0 2px 0 #33161f, 0 3px 0 #2b121a, 0 4px 0 #230e15, 0 5px 0 #1b0a10, 0 -1px 0 rgba(255,255,255,.22), 0 12px 22px rgba(0,0,0,.7), 0 0 46px rgba(238,63,58,.14); }
 .inf-nums__item--87 .inf-nums__tex { background-image: url(../influencers/nums-87-1600.webp); background-position: 32% 50%; background-size: cover; }   /* longhands: the shorthand would reset the clip to the letters */
 .inf-nums__pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(24px, 4cqw, 48px); align-items: end; }
@@ -110,7 +115,7 @@
 .inf-nums__cap .inf-nums__l { font-size: clamp(13px, 3.4cqw, 18px); letter-spacing: .16em; line-height: 1.2; padding: 0; color: #ff5a61; }
 .inf-nums__d { font-size: 15px; line-height: 1.4; color: #c4c6ce; }
 @media (max-width: 640px) {
-  .inf-nums { padding-top: calc(var(--tq-half) - 20px); }   /* the hero ends 20px under its ticks on phones */
+  .inf-nums { padding-bottom: var(--tq-half); }
   .inf-nums__item--87 .inf-nums__tex { background-image: url(../influencers/nums-87-760.webp); }
   .inf-nums__item--365 .inf-nums__tex { background-image: url(../influencers/nums-365-640.webp); }
   .inf-nums__loop-tex { background-image: url(../influencers/nums-inf-600.webp); }
@@ -127,7 +132,7 @@
 @property --bl { syntax: '<color>'; inherits: true; initial-value: #3b2522; }
 @property --bc { syntax: '<color>'; inherits: true; initial-value: #6a413f; }
 @property --br { syntax: '<color>'; inherits: true; initial-value: #3a1d28; }
-.inf-orbit { position: relative; background: #f3f2f7; padding: var(--tq-half) 0 var(--tq-gap); overflow: hidden; font-family: 'Inter', sans-serif;
+.inf-orbit { position: relative; background: #f3f2f7; padding: var(--tq-half) 0; overflow: hidden; font-family: 'Inter', sans-serif;
   --tl: #2f1b20; --tc: #26141a; --tr: #2f1722; --bl: #3b2522; --bc: #6a413f; --br: #3a1d28;
   transition: --tl 1.8s cubic-bezier(.6,.02,.22,1), --tc 1.8s cubic-bezier(.6,.02,.22,1), --tr 1.8s cubic-bezier(.6,.02,.22,1),
     --bl 1.8s cubic-bezier(.6,.02,.22,1), --bc 1.8s cubic-bezier(.6,.02,.22,1), --br 1.8s cubic-bezier(.6,.02,.22,1); }
@@ -259,11 +264,12 @@
   .inf-orbit__head { gap: 10px; margin-bottom: clamp(18px, 2vw, 28px); }
   .inf-orbit__sub { max-width: none; white-space: nowrap; font-size: clamp(14px, 1.2vw, 17px); }
   .inf-orbit__card { max-width: calc((100vh - 250px) * 1774 / 975); margin: 0 auto; }
+  .inf-nums__card { max-width: calc((100vh - 250px) * 1774 / 975); }   /* the numbers card under it: the same width */
 }
 @media (min-width: 641px) and (max-width: 900px) {
   .inf-orbit__sub .tq-nph { display: none; }
   .inf-orbit__sub .tq-ph { display: inline; }
 }
 @supports (height: 100svh) {
-  @media (min-width: 641px) { .inf-orbit__card { max-width: calc((100svh - 250px) * 1774 / 975); } }
+  @media (min-width: 641px) { .inf-orbit__card, .inf-nums__card { max-width: calc((100svh - 250px) * 1774 / 975); } }
 }
