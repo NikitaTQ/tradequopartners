@@ -113,24 +113,36 @@
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       for (const key in gemCache) delete gemCache[key]; chipCache = new Map(); for (const key in barCache) delete barCache[key];
     };
+    /* the layout (owner's wish, November 2026): each caption about a finger above the part of the scene it speaks for, and
+       the block only as tall as the scene needs, so no empty band lies between a caption and its picture, nor between
+       the picture and the button. How far the scene reaches above and below its centre while each caption shows (the
+       hole with its halo and chips, then as it swells at the end; the flash and the bars; the bars; the client groups;
+       the Sub-IB tree), measured on the drawn scene at 390-1920px and taken a little wide; the highest caption (the
+       tree's) sits at the block's first line (half the site's gap from its top), the others lower, each over its own
+       part, and while one comes in (rising 10px) it still keeps clear of the picture */
+    const capY = [0, 0, 0, 0, 0];
     const size = () => {
-      W = Math.round(cv.clientWidth); H = Math.round(cv.clientHeight); if (!W || !H) return;
-      const hudBox = root.querySelector('.tq-ibb__hud');   /* the scene stays above the steps and the button under them */
-      const sh = H - Math.max(70, hudBox ? H - (hudBox.offsetTop - cv.offsetTop) + 2 : 70);
-      cx = W / 2; cy = sh * 0.52;
-      const tall = W < H;   /* phones, portrait tablets: a bigger hole, wider bars and tree than the landscape design */
+      W = Math.round(cv.clientWidth); if (!W) return;
+      const hudBox = root.querySelector('.tq-ibb__hud');
+      const half = hudBox ? parseFloat(getComputedStyle(hudBox).bottom) || capTop() : capTop();
+      const hb = Math.min(920, Math.max(520, Math.min(innerHeight, W * 1.12)));   /* the room the scene is sized for (the CSS height's) */
+      const sh = hb - 16;
+      cx = W / 2;
+      const tall = W < hb + 44 + half;   /* phones, portrait tablets: a bigger hole, wider bars and tree than the landscape design */
       RX = Math.min(W * 0.47, 760); R = Math.min(RX * (tall ? 0.28 : 0.2), sh * 0.17);
       gw = Math.min(W < 700 ? W - 48 : tall ? W * 0.72 : RX * 1.1, W - 48); gh = Math.min(sh * 0.6, gw * 0.66);
-      /* the scene stays under the captions: the lowest caption's foot (two rows on phones, plus the 10px it rises by when it
-         comes in) and some air above the tree's top cluster; the scene moves down for it, and if it then reaches the steps
-         below, it gets smaller */
-      let capB = 0;
-      CAP.forEach((t) => { if (!t.length) return; const f = capFit(t); capB = Math.max(capB, capTop() + f.fs * 0.76 + (f.rows.length - 1) * f.fs * 1.4 + f.fs * 0.3 + 10); });
-      capB += Math.max(12, W * 0.02);
-      if (cy - 0.64 * gh < capB) {
-        cy = capB + 0.64 * gh;
-        if (cy + 0.56 * gh > sh) { gh = Math.max(40, (sh - capB) / 1.2); cy = capB + 0.64 * gh; }
-      }
+      const hole = (W < 700 ? 2.8 : 2.12) * R;   /* the halo's outer rings as it swells (relatively larger on phones) */
+      const ks = gh / 11.6 * 0.46 * 0.8, kdd = ks * 1.7320508 + Math.max(1.5, ks * 0.16);   /* the client groups' crystal and spacing (cs, kd()) */
+      const groups = -0.02 * gh - Math.min(...cslots.map((c) => c.ky)) * kdd + ks * 2 + (W < 700 ? 12 : 0);   /* their highest crystal (the inactive ones lie at random; on phones a little more as they come in) */
+      const up = [hole, 0.47 * gh, 0.47 * gh, groups, 0.64 * gh];
+      const down = Math.max(2.05 * R, 1.66 * R + 46, 0.54 * gh);
+      const G = Math.min(40, Math.max(22, W * 0.024));   /* a finger */
+      const capH = CAP.map((t) => { if (!t.length) return 0; const f = capFit(t); return f.fs * 0.76 + (f.rows.length - 1) * f.fs * 1.4 + f.fs * 0.3; });
+      cy = half + Math.max(...up.map((u, i) => capH[i] + G + u));
+      up.forEach((u, i) => { capY[i] = cy - u - G - capH[i]; });
+      const hudH = hudBox ? hudBox.offsetHeight : 58;
+      H = Math.round(cy + down + G + 28 + hudH + half);
+      if (Math.abs(root.offsetHeight - H) > 1) root.style.height = H + 'px';
       tight();
       step = gh / 11.6; cs = step * 0.46; chipK = Math.min(1, Math.max(0.55, R / 110));
       fitCanvas();
@@ -386,10 +398,11 @@
       }
       ctx.globalAlpha = 1;
     };
-    const oneLine = (toks, a) => {
+    const oneLine = (ci, a) => {
+      const toks = CAP[ci];
       if (a <= 0.01 || !toks.length) return;
       const { fs, rows, width } = capFit(toks);
-      const lh = fs * 1.4, y0 = capTop() + fs * 0.76 + (1 - eo(a)) * 10, sp = ctx.measureText(' ').width;
+      const lh = fs * 1.4, y0 = capY[ci] + fs * 0.76 + (1 - eo(a)) * 10, sp = ctx.measureText(' ').width;
       ctx.globalAlpha = a; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
       rows.forEach((r, i) => {
         if (!RTL) {
@@ -492,9 +505,9 @@
       if (ph === 2) clients(th, u, 1); else if (ph === 3 && u < 0.35) clients(th, 9, 1 - u / 0.35);
       if (ph === 3 && u > 0.4) edges(th, u, 1); else if (ph === 4 && u < 0.4) edges(th, 9, 1 - u / 0.4);
       const win = (t0, t1) => cl((u - t0) / 0.4) * (1 - cl((u - t1) / 0.3));
-      if (ph === 0) oneLine(CAP[0], win(0.9, 4.0)); else if (ph === 4) oneLine(CAP[0], win(1.0, 4.0));
-      else if (ph === 1) { oneLine(CAP[1], win(0.15, 1.25)); oneLine(CAP[2], win(1.5, 2.7)); }
-      else if (ph === 2) oneLine(CAP[3], win(0.4, 2.2)); else if (ph === 3) oneLine(CAP[4], win(0.4, 2.2));
+      if (ph === 0) oneLine(0, win(0.9, 4.0)); else if (ph === 4) oneLine(0, win(1.0, 4.0));
+      else if (ph === 1) { oneLine(1, win(0.7, 1.35)); oneLine(2, win(1.5, 2.7)); }   /* the first once the flash is over, over the bars */
+      else if (ph === 2) oneLine(3, win(0.4, 2.2)); else if (ph === 3) oneLine(4, win(0.4, 2.2));
       if (ph !== 0) gems(style, ph, u);
       if (ph === 3) pulse(u);
     };
