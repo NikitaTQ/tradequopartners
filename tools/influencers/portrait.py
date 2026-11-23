@@ -3,7 +3,7 @@ design's scene, closer (x 418..1281 of the 1774 picture, 1.2 times), without its
 again along its orbit, each an avatar (cut from the picture, a white ring) with a light name plate under it;
 under the scene a nebula of its own (nebula.py: its drawing new, its colours the scene's), flowing out of the scene's
 foot. The orbit where a creator used to hide it is drawn in again. One picture per platform:
-site/assets/influencers/orbit-{instagram,telegram,tiktok}-m.webp. Run:  python3 tools/influencers/portrait.py
+site/assets/influencers/orbit-{instagram,telegram,youtube}-m.webp. Run:  python3 tools/influencers/portrait.py
 (about a minute: the creators' places are filled patch by patch; CHECK=dir also saves PNGs there)."""
 import math, os, sys
 import numpy as np
@@ -32,7 +32,9 @@ CREATORS = [
     ('Milionário', (680, 990), (1093, 742), 50),
 ]
 NAMES = {'Milionário': 'O Milionário'}
-SEEDS = {'instagram': 3, 'telegram': 5, 'tiktok': 8}
+# YouTube's avatars carry no caption: each shown whole (the others' Pablo and Kingdom are their upper part, closer)
+FACES = {'youtube': {'Pablo': ((1069, 375), 50), 'Kingdom': ((1353, 539), 50)}}
+SEEDS = {'instagram': 3, 'telegram': 5, 'tiktok': 8, 'youtube': 11}
 
 
 def to_card(x, y):
@@ -147,6 +149,7 @@ def build(name):
     sh = sh.filter(ImageFilter.GaussianBlur(12))
     card.paste(Image.new('RGB', card.size, (8, 4, 12)), (0, 0), sh)
     for nm, c, fc, fr, box, text in boxes:
+        fc, fr = FACES.get(name, {}).get(nm, (fc, fr))
         av = avatar(src, fc, fr)
         card.paste(av, (round(c[0] - D / 2), round(c[1] - D / 2)), av)
         pl = plate(text, box)
@@ -156,7 +159,7 @@ def build(name):
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
-    for name in ('instagram', 'telegram', 'tiktok'):
+    for name in ('instagram', 'telegram', 'youtube'):   # TikTok's place is YouTube's since November 2026
         card, boxes = build(name)
         if os.environ.get('CHECK'):
             card.save(os.path.join(os.environ['CHECK'], 'm-' + name + '.png'))

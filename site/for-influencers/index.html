@@ -998,7 +998,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   transition: --tl 1.8s cubic-bezier(.6,.02,.22,1), --tc 1.8s cubic-bezier(.6,.02,.22,1), --tr 1.8s cubic-bezier(.6,.02,.22,1),
     --bl 1.8s cubic-bezier(.6,.02,.22,1), --bc 1.8s cubic-bezier(.6,.02,.22,1), --br 1.8s cubic-bezier(.6,.02,.22,1); }
 .inf-orbit[data-pal="1"] { --tl: #2d3e55; --tc: #162132; --tr: #192438; --bl: #202c3d; --bc: #3e5069; --br: #1b263a; }
-.inf-orbit[data-pal="2"] { --tl: #202f36; --tc: #28282f; --tr: #2b1e26; --bl: #1c282f; --bc: #4a4750; --br: #36252f; }
+.inf-orbit[data-pal="2"] { --tl: #1c1211; --tc: #2a1012; --tr: #211313; --bl: #2b1413; --bc: #441d1e; --br: #241211; }
 .inf-orbit__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
 .inf-orbit__head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto clamp(28px, 3.4vw, 48px); text-align: center; }
 .inf-orbit__h2 { margin: 0; color: #0a0a0a; }
@@ -1031,7 +1031,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__group.is-playing .inf-orbit__edge { display: block; }
 .inf-orbit__edge--instagram { background: linear-gradient(45deg, #e8a888 0%, #de9088 45%, #d07494 75%, #c2649a 100%); }
 .inf-orbit__edge--telegram { background: linear-gradient(45deg, #96bade 0%, #80a6d6 50%, #7092ce 100%); }
-.inf-orbit__edge--tiktok { background: linear-gradient(90deg, #68c0c4 0%, #c4b8c2 50%, #da7688 100%); }
+.inf-orbit__edge--youtube { background: linear-gradient(45deg, #ff8a8a 0%, #f04a52 50%, #c81e2c 100%); }
 .inf-orbit__flash { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; mix-blend-mode: screen;
   background: radial-gradient(circle at 47.91% 67.64%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
 .inf-orbit__comet { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none; display: block; }
@@ -1053,7 +1053,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__bar-tint { z-index: -2; opacity: 0; transition: opacity .9s ease; }
 .inf-orbit__bar-tint--0 { background: linear-gradient(180deg, rgba(156,194,242,.86) 0%, rgba(98,142,216,.86) 100%); }
 .inf-orbit__bar-tint--1 { background: linear-gradient(90deg, rgba(92,196,200,.88) 0%, rgba(222,118,146,.88) 100%); }
-.inf-orbit__bar-tint--2 { background: linear-gradient(90deg, rgba(246,172,132,.9) 0%, rgba(218,108,152,.9) 100%); }
+.inf-orbit__bar-tint--2 { background: linear-gradient(180deg, rgba(206,206,216,.86) 0%, rgba(150,150,164,.86) 100%); }
 .inf-orbit[data-pal="0"] .inf-orbit__bar-tint--0, .inf-orbit[data-pal="1"] .inf-orbit__bar-tint--1, .inf-orbit[data-pal="2"] .inf-orbit__bar-tint--2 { opacity: 1; }
 .inf-orbit__bar-rim { z-index: -2; background: linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 50%, rgba(10,6,14,.08) 100%);
   box-shadow: inset 2px 2px 1px -1px rgba(255,255,255,.95), inset -2px -2px 1px -1px rgba(255,255,255,.55), inset 0 0 0 1px rgba(255,255,255,.18),
@@ -1227,7 +1227,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     </section>
 
     <!-- Creators on platforms (owner's design "Creator Platforms Scene", November 2026): five creators orbiting the
-         TradeQuo planet, on Instagram, Telegram or TikTok: three pictures (tools/influencers/creators.py), one per
+         TradeQuo planet, on Instagram, Telegram or YouTube (TikTok's place since November 2026): three pictures (tools/influencers/creators.py), one per
          platform, each with its own palette. A tab plays the design's change: a flash and shock rings from the planet,
          the new picture opening out from it in a ring of its colour, the orbit drawn again, the title wiped in
          (assets/js/orbit.js). The block has the hero's width (its column, centred); a heading and a line over it, the
@@ -1239,7 +1239,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <div class="inf-orbit__in">
     <div class="inf-orbit__head">
       <h2 class="inf-orbit__h2 tq-h2" data-fitw>Wherever your audience is</h2>
-      <p class="inf-orbit__sub"><span class="tq-nph">Instagram, Telegram or TikTok: share your TradeQuo link where your followers already spend their time.</span><span class="tq-ph">Share your link where your followers already are.</span></p>
+      <p class="inf-orbit__sub"><span class="tq-nph">Instagram, Telegram or YouTube: share your TradeQuo link where your followers already spend their time.</span><span class="tq-ph">Share your link where your followers already are.</span></p>
     </div>
     <div class="inf-orbit__card">
     <div class="inf-orbit__clip">
@@ -1268,14 +1268,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </div>
       <div class="inf-orbit__group" data-group="2" data-off>
         <div class="inf-orbit__drift" data-l="drift">
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="sky" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="bg" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On TikTok: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="icon" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="title" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-tiktok-m.webp?v=cd749c02c7"><img data-l="planet" src="../assets/influencers/orbit-tiktok-1774.webp?v=aeaec710e9" srcset="../assets/influencers/orbit-tiktok-1100.webp 1100w, ../assets/influencers/orbit-tiktok-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
-          <img data-l="ext" class="inf-orbit__ext" src="../assets/influencers/orbit-tiktok-ext-1774.webp?v=cd5186aedb" srcset="../assets/influencers/orbit-tiktok-ext-1100.webp 1100w, ../assets/influencers/orbit-tiktok-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-youtube-m.webp?v=d753f23ef5"><img data-l="sky" src="../assets/influencers/orbit-youtube-1774.webp?v=036da6dd89" srcset="../assets/influencers/orbit-youtube-1100.webp 1100w, ../assets/influencers/orbit-youtube-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__sky"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-youtube-m.webp?v=d753f23ef5"><img data-l="bg" src="../assets/influencers/orbit-youtube-1774.webp?v=036da6dd89" srcset="../assets/influencers/orbit-youtube-1100.webp 1100w, ../assets/influencers/orbit-youtube-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="On YouTube: creators orbiting the TradeQuo planet" loading="lazy" decoding="async" class="inf-orbit__bg"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-youtube-m.webp?v=d753f23ef5"><img data-l="icon" src="../assets/influencers/orbit-youtube-1774.webp?v=036da6dd89" srcset="../assets/influencers/orbit-youtube-1100.webp 1100w, ../assets/influencers/orbit-youtube-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__icon"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-youtube-m.webp?v=d753f23ef5"><img data-l="title" src="../assets/influencers/orbit-youtube-1774.webp?v=036da6dd89" srcset="../assets/influencers/orbit-youtube-1100.webp 1100w, ../assets/influencers/orbit-youtube-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__title"></picture>
+          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/orbit-youtube-m.webp?v=d753f23ef5"><img data-l="planet" src="../assets/influencers/orbit-youtube-1774.webp?v=036da6dd89" srcset="../assets/influencers/orbit-youtube-1100.webp 1100w, ../assets/influencers/orbit-youtube-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async" class="inf-orbit__planet"></picture>
+          <img data-l="ext" class="inf-orbit__ext" src="../assets/influencers/orbit-youtube-ext-1774.webp?v=9ac8b59c88" srcset="../assets/influencers/orbit-youtube-ext-1100.webp 1100w, ../assets/influencers/orbit-youtube-ext-1774.webp 1774w" sizes="(max-width: 1280px) 100vw, 1140px" alt="" loading="lazy" decoding="async">
         </div>
-        <div class="inf-orbit__edge inf-orbit__edge--tiktok" data-l="edge"></div>
+        <div class="inf-orbit__edge inf-orbit__edge--youtube" data-l="edge"></div>
       </div>
 
       <div class="inf-orbit__flash" data-fx="flash"></div>
@@ -1314,7 +1314,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <!-- the platform switch (the design's): a small bar of liquid glass at the card's foot. In Chromium the bar and the
          lens over the chosen platform bend what is behind them (SVG displacement maps, built for their size by orbit.js);
          elsewhere they are frosted. The bar is tinted against the palette (blue on Instagram, teal–pink on Telegram,
-         peach–pink on TikTok), the lens slides to the chosen tab. Phones: under the card. -->
+         silver on YouTube), the lens slides to the chosen tab. Phones: under the card. -->
     <svg class="inf-orbit__defs" width="0" height="0" aria-hidden="true">
       <filter id="tqGlassBar" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
         <feImage data-map="bar" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map"/>
@@ -1357,7 +1357,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </span>
       <button type="button" role="tab" aria-selected="true" data-tab="0">Instagram</button>
       <button type="button" role="tab" aria-selected="false" data-tab="1">Telegram</button>
-      <button type="button" role="tab" aria-selected="false" data-tab="2">TikTok</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="2">YouTube</button>
     </div>
     </div>
     </div>
@@ -1476,6 +1476,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=9f58850075" defer></script>
-<script src="../assets/js/orbit.js?v=997a4a6f49" defer></script>
+<script src="../assets/js/orbit.js?v=a078b2ccef" defer></script>
 </body>
 </html>

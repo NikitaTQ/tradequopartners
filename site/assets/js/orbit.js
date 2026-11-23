@@ -13,8 +13,8 @@
   if (!sec) return;
   const r = sec.querySelector('[data-orbit-root]');
   const tabs = [...sec.querySelectorAll('[data-tab]')];
-  const NAMES = ['Instagram', 'Telegram', 'TikTok'];
-  const TINT = ['#E08AA0', '#8EB2DC', '#86C4C6'];
+  const NAMES = ['Instagram', 'Telegram', 'YouTube'];   // YouTube in TikTok's place since November 2026
+  const TINT = ['#E08AA0', '#8EB2DC', '#F07A80'];
   /* touch devices: the change without its blurs (the old picture tints and grows but stays sharp, the icon comes in
      from bright, not blurred): blurring the whole picture every frame was the heaviest part of it for a phone */
   const LIGHT = window.matchMedia('(pointer: coarse)').matches;
@@ -22,7 +22,7 @@
   const OUT_FILTER = [
     'hue-rotate(-150deg) saturate(1.25) brightness(1.15) blur(' + B(4) + 'px)',
     'hue-rotate(150deg) saturate(1.25) brightness(1.15) blur(' + B(4) + 'px)',
-    'saturate(.55) brightness(.5) contrast(1.2) blur(' + B(4) + 'px)',
+    'sepia(.85) hue-rotate(-30deg) saturate(3.2) brightness(.7) blur(' + B(4) + 'px)',   // to YouTube: the old picture going red
   ];
   /* the scene's geometry: wider screens the design's (its group reaches over the strip under the picture, so the planet
      is at 61.54% of the group's height); phones the tall card's (tools/influencers/portrait.py: the picture's x 418..1281

@@ -185,7 +185,7 @@
   transition: --tl 1.8s cubic-bezier(.6,.02,.22,1), --tc 1.8s cubic-bezier(.6,.02,.22,1), --tr 1.8s cubic-bezier(.6,.02,.22,1),
     --bl 1.8s cubic-bezier(.6,.02,.22,1), --bc 1.8s cubic-bezier(.6,.02,.22,1), --br 1.8s cubic-bezier(.6,.02,.22,1); }
 .inf-orbit[data-pal="1"] { --tl: #2d3e55; --tc: #162132; --tr: #192438; --bl: #202c3d; --bc: #3e5069; --br: #1b263a; }   /* Telegram */
-.inf-orbit[data-pal="2"] { --tl: #202f36; --tc: #28282f; --tr: #2b1e26; --bl: #1c282f; --bc: #4a4750; --br: #36252f; }   /* TikTok */
+.inf-orbit[data-pal="2"] { --tl: #1c1211; --tc: #2a1012; --tr: #211313; --bl: #2b1413; --bc: #441d1e; --br: #241211; }   /* YouTube */
 .inf-orbit__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
 /* the heading, as the site's other section heads: centred, the H2 face, a grey line under it */
 .inf-orbit__head { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 880px; margin: 0 auto clamp(28px, 3.4vw, 48px); text-align: center; }
@@ -226,7 +226,7 @@
 .inf-orbit__group.is-playing .inf-orbit__edge { display: block; }
 .inf-orbit__edge--instagram { background: linear-gradient(45deg, #e8a888 0%, #de9088 45%, #d07494 75%, #c2649a 100%); }
 .inf-orbit__edge--telegram { background: linear-gradient(45deg, #96bade 0%, #80a6d6 50%, #7092ce 100%); }
-.inf-orbit__edge--tiktok { background: linear-gradient(90deg, #68c0c4 0%, #c4b8c2 50%, #da7688 100%); }
+.inf-orbit__edge--youtube { background: linear-gradient(45deg, #ff8a8a 0%, #f04a52 50%, #c81e2c 100%); }
 
 .inf-orbit__flash { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; mix-blend-mode: screen;
   background: radial-gradient(circle at 47.91% 67.64%, rgba(255,255,255,.95) 0%, rgba(255,255,255,.35) 14%, rgba(255,255,255,0) 38%); }
@@ -256,7 +256,7 @@
 .inf-orbit__bar-tint { z-index: -2; opacity: 0; transition: opacity .9s ease; }
 .inf-orbit__bar-tint--0 { background: linear-gradient(180deg, rgba(156,194,242,.86) 0%, rgba(98,142,216,.86) 100%); }    /* on Instagram: blue */
 .inf-orbit__bar-tint--1 { background: linear-gradient(90deg, rgba(92,196,200,.88) 0%, rgba(222,118,146,.88) 100%); }    /* on Telegram: teal–pink */
-.inf-orbit__bar-tint--2 { background: linear-gradient(90deg, rgba(246,172,132,.9) 0%, rgba(218,108,152,.9) 100%); }     /* on TikTok: peach–pink */
+.inf-orbit__bar-tint--2 { background: linear-gradient(180deg, rgba(206,206,216,.86) 0%, rgba(150,150,164,.86) 100%); }     /* on YouTube: silver glass (the design's) */
 .inf-orbit[data-pal="0"] .inf-orbit__bar-tint--0, .inf-orbit[data-pal="1"] .inf-orbit__bar-tint--1, .inf-orbit[data-pal="2"] .inf-orbit__bar-tint--2 { opacity: 1; }
 .inf-orbit__bar-rim { z-index: -2; background: linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 50%, rgba(10,6,14,.08) 100%);
   box-shadow: inset 2px 2px 1px -1px rgba(255,255,255,.95), inset -2px -2px 1px -1px rgba(255,255,255,.55), inset 0 0 0 1px rgba(255,255,255,.18),
