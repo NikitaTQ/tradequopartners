@@ -37,6 +37,7 @@ FACES = {
     'zcool-qingke-sc': ('ZCOOL QingKe HuangYou', 400, ['zh-hans'], False),
     'noto-sans-tc':    ('Noto Sans TC', 900, ['zh-hant'], False),   # ZCOOL QingKe lacks 眾
 }
+ALWAYS = '0123456789%+?!'
 TEMPLATES = glob.glob(os.path.join(I18N, '*.html')) + glob.glob(os.path.join(I18N, 'partials', '*.html')) + [os.path.join(ROOT, 'site', '404.html')]
 
 
@@ -95,7 +96,9 @@ def main():
             text = ''.join(text_of(cls, l) for l in langs)
             if caps:
                 text = text.upper() + ('İ' if 'tr' in langs else '')   # CSS capitalises a Turkish i as İ
-            chars = ''.join(sorted(set(text) - {'\n', '\t'}))
+            # always the digits and a few signs as well: CSS sizes some headings in `ch` (the width of "0"), which falls
+            # back to another measure when the face has no "0" (a heading's box then narrower, its words on more lines)
+            chars = ''.join(sorted((set(text) | set(ALWAYS)) - {'\n', '\t'}))
             data, missing = subset(family, weight, chars)
             if missing:
                 bad = True
