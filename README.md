@@ -43,7 +43,7 @@ cd site && python3 -m http.server 8000
 
 HTTPS (Let's Encrypt) Netlify включит сам.
 
-**Заявки с формы** уходят в Netlify Forms (форма `partner-request`). **Письма на почту владельца** (ноябрь 2026, по просьбе) включаются в панели Netlify — из кода это не настраивается: Site configuration → Notifications → Emails and webhooks → Form submission notifications → Add notification → Email notification, форма `partner-request`, адрес владельца. Каждая заявка тогда приходит письмом. Они видны в разделе **Forms** панели Netlify. Там же можно включить уведомления на почту или в Slack: **Forms → Form notifications**. Если раздел Forms пустой, включите **Forms → Enable form detection** и передеплойте сайт.
+~~**Заявки с формы** уходят в Netlify Forms (форма `partner-request`). **Письма на почту владельца** (ноябрь 2026, по просьбе) включаются в панели Netlify — из кода это не настраивается: Site configuration → Notifications → Emails and webhooks → Form submission notifications → Add notification → Email notification, форма `partner-request`, адрес владельца. Каждая заявка тогда приходит письмом. Они видны в разделе **Forms** панели Netlify. Там же можно включить уведомления на почту или в Slack: **Forms → Form notifications**. Если раздел Forms пустой, включите **Forms → Enable form detection** и передеплойте сайт.~~ (до ноября 2026; теперь заявки принимает форма GoHighLevel — см. «Форма заявки на главной — форма CRM GoHighLevel»)
 
 ## Чистка (ноябрь 2026)
 
@@ -57,7 +57,7 @@ HTTPS (Let's Encrypt) Netlify включит сам.
 
 ## Что нужно решить до публичного запуска
 
-- **Куда приходят заявки.** Сейчас форма отправляет их в Netlify Forms. Чтобы слать в CRM, поменяйте `data-endpoint="/"` у формы в `tools/i18n/landing.html` на адрес вебхука и пересоберите страницы (`python3 tools/build-i18n.py`). Поля уходят POST-запросом: `name`, `email`, `phone`.
+- ~~**Куда приходят заявки.** Сейчас форма отправляет их в Netlify Forms. Чтобы слать в CRM, поменяйте `data-endpoint="/"` у формы в `tools/i18n/landing.html` на адрес вебхука и пересоберите страницы (`python3 tools/build-i18n.py`). Поля уходят POST-запросом: `name`, `email`, `phone`.~~ (до ноября 2026; теперь заявки принимает форма GoHighLevel — см. «Форма заявки на главной — форма CRM GoHighLevel»)
 - **Концепт-страницы** закрыты от индексации (`noindex`), потому что тексты на них черновые. Кнопки на них, как и в дизайне, пока никуда не ведут. Когда тексты будут готовы, уберите строку `robots` в `tools/build-pages.py`, запустите `python3 tools/build-pages.py` и добавьте страницы в `site/sitemap.xml`.
 
 ## Правка концепт-страниц
