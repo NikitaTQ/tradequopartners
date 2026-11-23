@@ -54,10 +54,7 @@
       <div data-hero-field="" style="position: relative; min-height: clamp(620px, 66vw, 900px); display:flex; align-items:center; justify-content:center;">
 
         <div data-ref="stage" data-hero-stage="" style="position:relative; z-index:2; width:min(560px,86%); transform:translateX(4%);">
-          <form data-agreement="" data-msg-sent="{{@form.sent}}" data-msg-email="{{@form.errEmail}}" data-msg-error="{{@form.errSend}}" name="partner-request" action="/" method="post" data-netlify="true" netlify-honeypot="bot-field" data-endpoint="/" novalidate style="position:relative; z-index:2; width:100%; padding:clamp(40px,5.4vw,60px) clamp(52px,7vw,78px) clamp(34px,4.4vw,48px) clamp(28px,5.6vw,58px); border-radius:2px; background:linear-gradient(180deg, #fbfbf9 0%, #f5f5f2 100%); box-shadow:0 1px 0 #e9e9e5, 0 50px 90px -34px rgba(10,10,10,.34), 0 2px 8px rgba(10,10,10,.07); display:flex; flex-direction:column; gap:14px; overflow:hidden; animation:tqRise .9s cubic-bezier(.16,1,.3,1) both;">
-            <input type="hidden" name="form-name" value="partner-request">
-            <input type="hidden" name="utm_source">
-            <p hidden><label>{{form.honeypot}} <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <form data-agreement="" data-ghl="" onsubmit="return false" style="position:relative; z-index:2; width:100%; padding:clamp(40px,5.4vw,60px) clamp(52px,7vw,78px) clamp(34px,4.4vw,48px) clamp(28px,5.6vw,58px); border-radius:2px; background:linear-gradient(180deg, #fbfbf9 0%, #f5f5f2 100%); box-shadow:0 1px 0 #e9e9e5, 0 50px 90px -34px rgba(10,10,10,.34), 0 2px 8px rgba(10,10,10,.07); display:flex; flex-direction:column; gap:14px; overflow:hidden; animation:tqRise .9s cubic-bezier(.16,1,.3,1) both;">
             <div data-form-frame="" aria-hidden="true" style="position:absolute; inset:16px; border:1px solid #e1e1dd; pointer-events:none;"></div>
             <div data-form-frame="" aria-hidden="true" style="position:absolute; inset:21px; border:1px solid #ececea; pointer-events:none;"></div>
             <div data-form-band="" aria-hidden="true" style="position:absolute; top:0; right:0; width:30px; height:min(46%,460px); background:linear-gradient(90deg, #1c1c1e 0%, #0d0d0e 100%); clip-path:polygon(0 90px, 100% 60px, 100% 100%, 0 calc(100% - 30px)); box-shadow:inset 1px 0 0 rgba(255,255,255,.06);"></div>
@@ -99,18 +96,16 @@
 
             <div aria-hidden="true" style="position:relative; display:flex; align-items:center; gap:12px; margin:8px 0 6px;"><span style="flex:1; height:1px; background:#d9d9d5;"></span><span style="width:7px; height:7px; transform:rotate(45deg); border:1px solid #c8141b;"></span><span style="flex:1; height:1px; background:#d9d9d5;"></span></div>
 
-            <label style="position:relative; display:flex; flex-direction:column; gap:9px; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e;"><span>{{form.name}}</span>
-              <span style="display:flex; align-items:center; height:50px; border:1px solid #dcdcd8; border-radius:2px; background:#fff; overflow:hidden;"><span style="display:flex; align-items:center; justify-content:center; width:58px; flex-shrink:0; align-self:stretch; border-right:1px solid #e4e4e1;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3a3a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20c0-3.8 3.1-6.2 7-6.2s7 2.4 7 6.2"></path></svg></span><input type="text" name="name" autocomplete="name" placeholder="{{@form.namePh}}" style="font-family:'Inter',sans-serif; flex:1; min-width:0; height:100%; padding:0 18px; border:none; background:transparent; color:#0a0a0a; font-size:16px; outline:none;"></span>
-            </label>
-            <label style="position:relative; display:flex; flex-direction:column; gap:9px; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e;"><span>{{form.email}}</span>
-              <span style="display:flex; align-items:center; height:50px; border:1px solid #dcdcd8; border-radius:2px; background:#fff; overflow:hidden;"><span style="display:flex; align-items:center; justify-content:center; width:58px; flex-shrink:0; align-self:stretch; border-right:1px solid #e4e4e1;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3a3a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="1.2"></rect><path d="m3.8 7 8.2 6 8.2-6"></path></svg></span><input type="email" name="email" autocomplete="email" placeholder="you@company.com" style="font-family:'Inter',sans-serif; flex:1; min-width:0; height:100%; padding:0 18px; border:none; background:transparent; color:#0a0a0a; font-size:16px; outline:none;"></span>
-            </label>
-            <label style="position:relative; display:flex; flex-direction:column; gap:9px; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e;"><span>{{form.phone}}</span>
-              <span style="display:flex; align-items:center; height:50px; border:1px solid #dcdcd8; border-radius:2px; background:#fff; overflow:hidden;">
-                <span data-dial="" style="position:relative; display:flex; align-items:center; gap:10px; padding:0 14px; align-self:stretch; border-right:1px solid #e4e4e1; flex-shrink:0;"><img data-dial-flag="" src="{{root}}assets/flags/ae.svg" alt="" width="24" height="18" style="display:block; width:24px; height:18px; object-fit:cover; box-shadow:0 0 0 1px rgba(0,0,0,.08);"><span data-dial-code="" style="font-size:15px; font-weight:500; letter-spacing:0; color:#0a0a0a; direction:ltr; unicode-bidi:isolate;">+971</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3a3a3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg><select name="phone_code" data-dial-select="" autocomplete="tel-country-code" aria-label="{{@form.code}}"><option value="AE +971" selected>United Arab Emirates (+971)</option></select></span>
-                <input type="tel" id="tq-phone" name="phone" autocomplete="tel-national" aria-label="{{@form.phone}}" placeholder="50 123 4567" style="font-family:'Inter',sans-serif; flex:1; min-width:0; height:100%; padding:0 18px; border:none; background:transparent; color:#0a0a0a; font-size:16px; outline:none;">
-              </span>
-            </label>
+            <!-- the request form is the CRM's own (GoHighLevel / LeadConnector form "TQP-IB", November 2026, owner's embed):
+                 its fields, button and thank-you screen are made in the CRM, in its iframe, inside this card. The tags of
+                 the link the visitor came by in the last 30 days (cookie tq_utm, partials/head.html) and in this page's
+                 address go into the form's address, so the CRM records where the request came from. form_embed.js
+                 (the CRM's) sets the iframe's height to its form. -->
+            <div data-ghl-box="" style="position:relative;">
+              <iframe data-src="https://api.leadconnectorhq.com/widget/form/u0W8WFvnDWkIML6gxVTA" style="display:block; width:100%; height:601px; border:none; border-radius:8px;" id="inline-u0W8WFvnDWkIML6gxVTA" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="TQP-IB " data-height="601" data-layout-iframe-id="inline-u0W8WFvnDWkIML6gxVTA" data-form-id="u0W8WFvnDWkIML6gxVTA" data-cookie-consent="true" data-cookie-consent-provider="auto" title="TQP-IB "></iframe>
+              <script>(function(){var f=document.getElementById('inline-u0W8WFvnDWkIML6gxVTA'),q=new URLSearchParams();try{var c=/(?:^|; )tq_utm=([^;]*)/.exec(document.cookie),u=c?JSON.parse(decodeURIComponent(c[1])):{};for(var k in u)if(/^utm_[a-z]+$/.test(k)&&u[k])q.set(k,String(u[k]));}catch(e){}new URLSearchParams(location.search).forEach(function(v,k){if(/^utm_[a-z]+$/.test(k)&&v)q.set(k,v);});var s=q.toString();f.src=f.getAttribute('data-src')+(s?'?'+s:'');})();</script>
+              <script src="https://link.msgsndr.com/js/form_embed.js" async></script>
+            </div>
 
             <div data-commit="" style="position:relative; display:flex; flex-direction:column; gap:8px; margin-top:8px;">
               <div style="display:flex; align-items:center; gap:12px;"><span style="display:flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:2px; background:#fff; border:1px solid #e4e4e1; flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8141b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg></span><span style="font-size:10px; font-weight:700; letter-spacing:.16em; color:#0a0a0a;">{{form.commit1}}</span></div>
@@ -118,22 +113,7 @@
               <div style="display:flex; align-items:center; gap:12px;"><span style="display:flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:2px; background:#fff; border:1px solid #e4e4e1; flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8141b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></svg></span><span style="font-size:10px; font-weight:700; letter-spacing:.16em; color:#0a0a0a;">{{form.commit3}}</span></div>
             </div>
 
-            <div style="position:relative; display:flex; flex-direction:column; gap:10px; margin-top:10px;">
-              <div data-form-auth="" style="align-items:stretch; padding:8px 16px 6px; border:1px solid #dededa; border-radius:2px; background:rgba(255,255,255,.5);">
-                <div data-ref="dateBox" style="position:relative; display:flex; flex-direction:column; gap:2px;">
-                  <span style="font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e; font-size:9px;">{{form.date}}</span>
-                  <div style="position:relative; display:flex; align-items:flex-end; height:24px; padding-bottom:3px; box-sizing:border-box;">
-                    <span data-ref="date" style="direction:ltr; unicode-bidi:isolate; line-height:1.2; font-size:14px; font-weight:500; letter-spacing:.06em; color:#8e8e92; white-space:nowrap; font-variant-numeric:tabular-nums;">{{form.datePh}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="position:relative; display:grid; grid-template-columns:minmax(0,1fr); gap:16px; align-items:center; margin-top:14px;">
-              <button type="submit" class="tq-env tq-env--fill" aria-label="{{@form.submit}}"><span class="tq-env__txt">{{form.submit}}</span><span class="tq-env__mail" aria-hidden="true"><span class="tq-env__back"></span><span class="tq-env__flap-open"></span><span class="tq-env__bill">$</span><span class="tq-env__front"></span><span class="tq-env__flap"></span><span class="tq-env__seal"></span></span></button>
-            </div>
           </form>
-{{> form-done}}
 
         </div>
       </div>

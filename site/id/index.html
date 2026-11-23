@@ -184,66 +184,6 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 .tq-env:active { --tqd: 1; }
 .tq-env.is-sent { --tqk: 1; }
 .tq-env:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 6px; }
-.tq-env__mail {
-  --c: calc(1 - var(--tqh));
-  position: absolute;
-  right: 18px;
-  bottom: 9px;
-  width: 64px;
-  height: 42px;
-  pointer-events: none;
-  transform-origin: 50% 100%;
-  transform:
-    translate(calc(var(--tqk) * 64px), calc(var(--tqk) * -40px))
-    rotate(calc(var(--tqk) * 24deg + (1 - var(--tqh)) * var(--tqo) * 3deg));
-  opacity: calc(1 - var(--tqk) * 0.85);
-}
-.tq-env__back {
-  position: absolute; inset: 0;
-  border-radius: 4px;
-  background: #A9A9AE;
-}
-.tq-env__flap-open {
-  position: absolute; left: 0; right: 0; bottom: 100%;
-  height: 26px;
-  background: #C9C9CE;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  transform-origin: 50% 100%;
-  transform: scaleY(clamp(0, var(--c) * 3.6 - 1, 1));
-}
-.tq-env__bill {
-  position: absolute; left: 6px; right: 6px; top: 4px;
-  height: 30px;
-  border-radius: 3px;
-  background: linear-gradient(180deg, #FF3A40 0%, #D3101A 100%);
-  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.55), 0 2px 4px rgba(0,0,0,.35);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  color: #FFFFFF;
-  transform: translateY(calc(clamp(0, var(--c) * 2.2 - 1.1, 1) * -30px));
-}
-.tq-env__front {
-  position: absolute; inset: 0;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #F4F4F4 0%, #DADADF 100%);
-  clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
-}
-.tq-env__flap {
-  position: absolute; left: 0; right: 0; top: 0;
-  height: 28px;
-  background: linear-gradient(180deg, #FFFFFF 0%, #E4E4E8 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: 50% 0;
-  transform: scaleY(calc(1 - clamp(0, var(--c) * 3.6, 1)));
-}
-.tq-env__seal {
-  position: absolute; left: 50%; top: 21px;
-  width: 12px; height: 12px;
-  margin-left: -6px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #FF6A6F, #E7131B 55%, #8E0A0F);
-  transform: scale(calc(1 - clamp(0, var(--c) * 4, 1)));
-}
 @media (prefers-reduced-motion: reduce) {
 .tq-env { animation: none; transition-duration: .01s; }
 }
@@ -337,87 +277,15 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
 [data-hero-stage] > form[data-agreement] { align-self: start; }
 [data-hero-stage].is-done > form[data-agreement] { filter: opacity(0); translate: 0 24px; scale: .96; visibility: hidden; pointer-events: none;
   transition: filter .45s ease .2s, translate .6s cubic-bezier(.4, 0, .2, 1) .2s, scale .6s cubic-bezier(.4, 0, .2, 1) .2s, visibility 0s .8s; }
-.tq-done { --in: 0; position: relative; z-index: 3; align-self: start; display: flex; flex-direction: column; align-items: center; padding: 72px 0 40px; text-align: center; color: #0e0e10; font-family: 'Inter', system-ui, sans-serif; }
-.tq-done[hidden] { display: none; }
-.is-done > .tq-done { --in: 1; }
 .tq-done__title { margin: 0; outline: none;
   opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px)); transition: opacity .45s ease .5s, transform .6s cubic-bezier(.2, .8, .2, 1) .5s; }
 .tq-done__title span { color: #e7131b; }
-.tq-done__art { width: min(440px, 100%); margin-top: 40px; container-type: inline-size; }
-.tq-done__scene { position: relative; display: flex; flex-direction: column; align-items: flex-end; box-sizing: border-box; font-size: calc(100cqw / 44); width: 44em; min-height: 42em; padding: 21.2em 0 1.8em; text-align: start; }
-.tq-done__env { position: absolute; left: 0; top: 0; width: 44em; height: 26.8em; opacity: var(--in);
-  transform: translateY(calc((1 - var(--in)) * -7em)) rotate(calc(-4deg + (1 - var(--in)) * -8deg));
-  transition: opacity .3s ease .35s, transform .8s cubic-bezier(.3, 1.3, .5, 1) .35s; }
-.tq-done__env-body, .tq-done__env-l, .tq-done__env-r, .tq-done__env-b, .tq-done__env-flap { position: absolute; inset: 0; border-radius: .4em; }
-.tq-done__env-body { background: linear-gradient(180deg, #f4f2ec, #e7e4dc); box-shadow: 0 .1em .1em rgba(0,0,0,.08), 0 2.8em 4.4em -2.2em rgba(14,14,22,.45); }
-.tq-done__env-l { background: #e9e6de; clip-path: polygon(0 0, 52% 56%, 0 100%); }
-.tq-done__env-r { background: #e6e3da; clip-path: polygon(100% 0, 48% 56%, 100% 100%); }
-.tq-done__env-b { background: linear-gradient(180deg, #efece5, #e9e6de); clip-path: polygon(0 100%, 50% 46%, 100% 100%); filter: drop-shadow(0 -1px 0 rgba(0,0,0,.06)); }
-.tq-done__env-flap { border-radius: 0; filter: drop-shadow(0 .3em .3em rgba(0,0,0,.14)); }
-.tq-done__env-flap span { position: absolute; inset: 0; border-radius: .4em .4em 0 0; background: linear-gradient(180deg, #f8f6f1, #ece9e2); clip-path: polygon(0 0, 100% 0, 50% 60%); }
-.tq-done__postmark { position: absolute; right: 1.4em; top: 1.2em; width: 15em; height: 9em; transform: rotate(9deg); opacity: calc(var(--in) * .62); transition: opacity .2s linear 1.05s; }
-.tq-done__wax { position: absolute; left: 50%; top: 60%; width: 6.6em; height: 6.4em; margin: -3.2em 0 0 -3.3em;
-  border-radius: 48% 52% 46% 54% / 53% 47% 55% 45%; background: radial-gradient(circle at 38% 32%, #f23b42 0%, #d3121a 55%, #8e0a10 100%);
-  box-shadow: 0 .4em .8em -.2em rgba(0,0,0,.4), inset 0 -.4em .8em rgba(0,0,0,.25), inset 0 .2em .2em rgba(255,255,255,.25);
-  transform: scale(calc(1.25 - var(--in) * .25)); transition: transform .4s cubic-bezier(.3, 1.6, .5, 1) .9s; }
-.tq-done__wax span { position: absolute; inset: 1.1em; display: flex; align-items: center; justify-content: center; border-radius: 50%;
-  box-shadow: inset 0 0 0 .2em rgba(0,0,0,.18), inset 0 .2em 0 rgba(255,255,255,.18), 0 .1em 0 rgba(255,255,255,.15); }
-.tq-done__wax img { width: 2.2em; height: 2.2em; filter: invert(1); opacity: .55; }
-.tq-done__note { position: relative; inset-inline-end: -.6em; width: 30em; box-sizing: border-box; padding: 3em 2.8em 2.4em; background: #fff;
-  box-shadow: 0 .1em .1em rgba(0,0,0,.06), 0 1.8em 3em -1.6em rgba(14,14,22,.35); opacity: var(--in);
-  transform: translateY(calc((1 - var(--in)) * 2.4em)) rotate(3deg); transition: opacity .4s ease 1.15s, transform .6s cubic-bezier(.2, .8, .2, 1) 1.15s; }
-.tq-done__tape { position: absolute; left: 50%; top: -1.2em; width: 9.2em; height: 2.6em; margin-left: -4.6em; background: rgba(236,232,220,.75); box-shadow: 0 .1em .2em rgba(0,0,0,.08); transform: rotate(-5deg); }
-.tq-done__hand, .tq-done__sign { margin: 0; font-family: 'Inter', sans-serif; font-weight: 600; color: #1f2d4d; }
-.tq-done__hand { font-size: 1.9em; font-weight: 500; line-height: 1.22; }
-.tq-done__sign { margin-top: .7em; font-size: 1.45em; line-height: 1.15; }
-.tq-done__steps { position: relative; width: min(448px, 100%); margin-top: 6px; opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px));
-  transition: opacity .45s ease 1.3s, transform .6s cubic-bezier(.2, .8, .2, 1) 1.3s; }
-.tq-done__steps ol { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
-.tq-done__steps li { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; padding: 0 4px; }
-.tq-done__steps b { font-size: 14px; font-weight: 700; line-height: 1.2; text-wrap: balance; }
-.tq-done__steps small { margin-top: -8px; font-size: 12.5px; line-height: 1.3; color: #8a8a92; text-wrap: balance; }
-.tq-done__dot { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px #0e0e10, 0 0 0 5px #ededf0; }
-.tq-done__steps li.is-on .tq-done__dot { background: #e7131b; box-shadow: 0 0 0 5px #ededf0; }
-.tq-done__flow { position: absolute; top: 6px; height: 12px; opacity: var(--in); transition: opacity .4s ease 1.5s;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='12' viewBox='0 0 14 12'%3E%3Cpath d='M4 2l4 4-4 4' fill='none' stroke='%23E7131B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") repeat-x 0 0 / 14px 12px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); }
-.is-done .tq-done__flow { animation: tqDoneFlow .9s linear infinite; }
-.tq-done__flow:first-child { left: calc(16.67% + 22px); right: calc(50% + 22px); }
-.tq-done__flow:nth-child(2) { left: calc(50% + 22px); right: calc(16.67% + 22px); transition-delay: 1.65s; }
-[dir="rtl"] .tq-done__flow { transform: scaleX(-1); }
 @keyframes tqDoneFlow { from { background-position: 0 0; } to { background-position: 14px 0; } }
-.tq-done__cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 24px; margin-top: 64px; opacity: var(--in); transform: translateY(calc((1 - var(--in)) * 12px));
-  transition: opacity .45s ease 1.45s, transform .6s cubic-bezier(.2, .8, .2, 1) 1.45s; }
-.tq-done__go { display: inline-flex; align-items: center; gap: 14px; height: 52px; padding-inline: 22px 8px; border-radius: 999px; white-space: nowrap;
-  background: linear-gradient(180deg, #2a2a2e, #0a0a0b); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 14px 24px -14px rgba(14,14,22,.6);
-  color: #fff; font-weight: 700; font-size: 15px; letter-spacing: -.01em; text-decoration: none; transition: transform .25s, box-shadow .25s; }
-.tq-done__go:hover { color: #fff; transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 18px 28px -14px rgba(14,14,22,.7); }
-.tq-done__go span { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #0e0e10; }
-[dir="rtl"] .tq-done__go svg { transform: scaleX(-1); }
-.tq-done__link { padding-bottom: 2px; border-bottom: 1px solid rgba(14,14,22,.35); color: #0e0e10; font-weight: 600; font-size: 15px; white-space: nowrap; text-decoration: none; }
-.tq-done__link:hover { color: #e7131b; border-color: currentColor; }
-.tq-done__go:focus-visible, .tq-done__link:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; }
-@media (max-width: 640px) {
-.tq-done { padding: 36px 0 28px; }
-.tq-done__art { margin-top: 26px; }
-.tq-done__cta { margin-top: 40px; }
-}
 @media (prefers-reduced-motion: reduce) {
 .tq-done *, [data-hero-stage].is-done > form[data-agreement] { transition-duration: .01s !important; transition-delay: 0s !important; }
-.is-done .tq-done__flow { animation: none; }
 }
 .tq-env { border: 0; margin: 0; }
-.tq-env--fill { display: flex; justify-content: center; width: 100%; height: 56px; font-size: 19.5px; padding: 0 66px; overflow: visible; }
-@media (max-width: 400px) {
-.tq-env--fill { font-size: 17px; padding: 0 50px; }
-}
-.tq-env--fill .tq-env__mail { right: 2px; bottom: 5px; scale: .62; }
 .tq-env.is-sealed { --tqh: 1; }
-.tq-env.is-sent .tq-env__mail, .tq-env.is-done .tq-env__mail { --c: 0; }
-.tq-env.is-sent .tq-env__mail { animation: tq-env-fly 1s forwards; }
-.tq-env.is-done .tq-env__mail { opacity: 0; transform: translate(56px, -118px); }
-.tq-env__mail::before { content: ''; position: absolute; left: -50px; top: 44%; width: 46px; height: 14px; background: repeating-linear-gradient(180deg, rgba(255,255,255,.9) 0 2px, transparent 2px 6px); border-radius: 2px; transform-origin: 100% 50%; transform: rotate(32deg) scaleX(0); opacity: 0; pointer-events: none; }
-.tq-env.is-sent .tq-env__mail::before { animation: tq-env-trail 1s forwards; }
 @keyframes tq-env-fly {
   0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; animation-timing-function: cubic-bezier(.3, 0, .5, 1); }
   14% { transform: translate(-4px, 7px) rotate(-9deg) scale(.92); opacity: 1; animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
@@ -435,9 +303,6 @@ html { overflow-x: hidden; overscroll-behavior-x: none; }
   30% { opacity: .75; }
   100% { transform: scale(2.3); opacity: 0; }
 }
-.tq-env--fill::after { content: ''; position: absolute; right: 18px; top: 50%; width: 34px; height: 34px; margin-top: -17px; border-radius: 50%; border: 1.5px solid rgba(231,19,27,.85); box-shadow: 0 0 12px rgba(231,19,27,.45); opacity: 0; pointer-events: none; }
-.tq-env--fill.is-sent::after { animation: tq-env-ring .7s ease-out forwards; }
-.tq-env__txt { display: inline-block; transition: transform .7s cubic-bezier(.65, 0, .35, 1), opacity .25s ease; will-change: transform; }
 .tq-launch:hover, .tq-env:hover { color: #fff; }
 a { color: #e7131b; text-decoration: none; }
 a:hover { color: #ff3037; }
@@ -1319,10 +1184,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       <div data-hero-field="" style="position: relative; min-height: clamp(620px, 66vw, 900px); display:flex; align-items:center; justify-content:center;">
 
         <div data-ref="stage" data-hero-stage="" style="position:relative; z-index:2; width:min(560px,86%); transform:translateX(4%);">
-          <form data-agreement="" data-msg-sent="Terkirim" data-msg-email="Masukkan alamat email yang valid." data-msg-error="Permintaan Anda gagal dikirim. Muat ulang halaman dan coba lagi." name="partner-request" action="/" method="post" data-netlify="true" netlify-honeypot="bot-field" data-endpoint="/" novalidate style="position:relative; z-index:2; width:100%; padding:clamp(40px,5.4vw,60px) clamp(52px,7vw,78px) clamp(34px,4.4vw,48px) clamp(28px,5.6vw,58px); border-radius:2px; background:linear-gradient(180deg, #fbfbf9 0%, #f5f5f2 100%); box-shadow:0 1px 0 #e9e9e5, 0 50px 90px -34px rgba(10,10,10,.34), 0 2px 8px rgba(10,10,10,.07); display:flex; flex-direction:column; gap:14px; overflow:hidden; animation:tqRise .9s cubic-bezier(.16,1,.3,1) both;">
-            <input type="hidden" name="form-name" value="partner-request">
-            <input type="hidden" name="utm_source">
-            <p hidden><label>Biarkan kolom ini kosong <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <form data-agreement="" data-ghl="" onsubmit="return false" style="position:relative; z-index:2; width:100%; padding:clamp(40px,5.4vw,60px) clamp(52px,7vw,78px) clamp(34px,4.4vw,48px) clamp(28px,5.6vw,58px); border-radius:2px; background:linear-gradient(180deg, #fbfbf9 0%, #f5f5f2 100%); box-shadow:0 1px 0 #e9e9e5, 0 50px 90px -34px rgba(10,10,10,.34), 0 2px 8px rgba(10,10,10,.07); display:flex; flex-direction:column; gap:14px; overflow:hidden; animation:tqRise .9s cubic-bezier(.16,1,.3,1) both;">
             <div data-form-frame="" aria-hidden="true" style="position:absolute; inset:16px; border:1px solid #e1e1dd; pointer-events:none;"></div>
             <div data-form-frame="" aria-hidden="true" style="position:absolute; inset:21px; border:1px solid #ececea; pointer-events:none;"></div>
             <div data-form-band="" aria-hidden="true" style="position:absolute; top:0; right:0; width:30px; height:min(46%,460px); background:linear-gradient(90deg, #1c1c1e 0%, #0d0d0e 100%); clip-path:polygon(0 90px, 100% 60px, 100% 100%, 0 calc(100% - 30px)); box-shadow:inset 1px 0 0 rgba(255,255,255,.06);"></div>
@@ -1364,18 +1226,16 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
             <div aria-hidden="true" style="position:relative; display:flex; align-items:center; gap:12px; margin:8px 0 6px;"><span style="flex:1; height:1px; background:#d9d9d5;"></span><span style="width:7px; height:7px; transform:rotate(45deg); border:1px solid #c8141b;"></span><span style="flex:1; height:1px; background:#d9d9d5;"></span></div>
 
-            <label style="position:relative; display:flex; flex-direction:column; gap:9px; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e;"><span>NAMA ATAU PERUSAHAAN</span>
-              <span style="display:flex; align-items:center; height:50px; border:1px solid #dcdcd8; border-radius:2px; background:#fff; overflow:hidden;"><span style="display:flex; align-items:center; justify-content:center; width:58px; flex-shrink:0; align-self:stretch; border-right:1px solid #e4e4e1;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3a3a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"></circle><path d="M5 20c0-3.8 3.1-6.2 7-6.2s7 2.4 7 6.2"></path></svg></span><input type="text" name="name" autocomplete="name" placeholder="Nama Anda" style="font-family:'Inter',sans-serif; flex:1; min-width:0; height:100%; padding:0 18px; border:none; background:transparent; color:#0a0a0a; font-size:16px; outline:none;"></span>
-            </label>
-            <label style="position:relative; display:flex; flex-direction:column; gap:9px; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e;"><span>EMAIL</span>
-              <span style="display:flex; align-items:center; height:50px; border:1px solid #dcdcd8; border-radius:2px; background:#fff; overflow:hidden;"><span style="display:flex; align-items:center; justify-content:center; width:58px; flex-shrink:0; align-self:stretch; border-right:1px solid #e4e4e1;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3a3a3e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="1.2"></rect><path d="m3.8 7 8.2 6 8.2-6"></path></svg></span><input type="email" name="email" autocomplete="email" placeholder="you@company.com" style="font-family:'Inter',sans-serif; flex:1; min-width:0; height:100%; padding:0 18px; border:none; background:transparent; color:#0a0a0a; font-size:16px; outline:none;"></span>
-            </label>
-            <label style="position:relative; display:flex; flex-direction:column; gap:9px; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e;"><span>TELEPON</span>
-              <span style="display:flex; align-items:center; height:50px; border:1px solid #dcdcd8; border-radius:2px; background:#fff; overflow:hidden;">
-                <span data-dial="" style="position:relative; display:flex; align-items:center; gap:10px; padding:0 14px; align-self:stretch; border-right:1px solid #e4e4e1; flex-shrink:0;"><img data-dial-flag="" src="../assets/flags/ae.svg?v=60dd518820" alt="" width="24" height="18" style="display:block; width:24px; height:18px; object-fit:cover; box-shadow:0 0 0 1px rgba(0,0,0,.08);"><span data-dial-code="" style="font-size:15px; font-weight:500; letter-spacing:0; color:#0a0a0a; direction:ltr; unicode-bidi:isolate;">+971</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3a3a3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg><select name="phone_code" data-dial-select="" autocomplete="tel-country-code" aria-label="Kode negara"><option value="AE +971" selected>United Arab Emirates (+971)</option></select></span>
-                <input type="tel" id="tq-phone" name="phone" autocomplete="tel-national" aria-label="TELEPON" placeholder="50 123 4567" style="font-family:'Inter',sans-serif; flex:1; min-width:0; height:100%; padding:0 18px; border:none; background:transparent; color:#0a0a0a; font-size:16px; outline:none;">
-              </span>
-            </label>
+            <!-- the request form is the CRM's own (GoHighLevel / LeadConnector form "TQP-IB", November 2026, owner's embed):
+                 its fields, button and thank-you screen are made in the CRM, in its iframe, inside this card. The tags of
+                 the link the visitor came by in the last 30 days (cookie tq_utm, partials/head.html) and in this page's
+                 address go into the form's address, so the CRM records where the request came from. form_embed.js
+                 (the CRM's) sets the iframe's height to its form. -->
+            <div data-ghl-box="" style="position:relative;">
+              <iframe data-src="https://api.leadconnectorhq.com/widget/form/u0W8WFvnDWkIML6gxVTA" style="display:block; width:100%; height:601px; border:none; border-radius:8px;" id="inline-u0W8WFvnDWkIML6gxVTA" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="TQP-IB " data-height="601" data-layout-iframe-id="inline-u0W8WFvnDWkIML6gxVTA" data-form-id="u0W8WFvnDWkIML6gxVTA" data-cookie-consent="true" data-cookie-consent-provider="auto" title="TQP-IB "></iframe>
+              <script>(function(){var f=document.getElementById('inline-u0W8WFvnDWkIML6gxVTA'),q=new URLSearchParams();try{var c=/(?:^|; )tq_utm=([^;]*)/.exec(document.cookie),u=c?JSON.parse(decodeURIComponent(c[1])):{};for(var k in u)if(/^utm_[a-z]+$/.test(k)&&u[k])q.set(k,String(u[k]));}catch(e){}new URLSearchParams(location.search).forEach(function(v,k){if(/^utm_[a-z]+$/.test(k)&&v)q.set(k,v);});var s=q.toString();f.src=f.getAttribute('data-src')+(s?'?'+s:'');})();</script>
+              <script src="https://link.msgsndr.com/js/form_embed.js" async></script>
+            </div>
 
             <div data-commit="" style="position:relative; display:flex; flex-direction:column; gap:8px; margin-top:8px;">
               <div style="display:flex; align-items:center; gap:12px;"><span style="display:flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:2px; background:#fff; border:1px solid #e4e4e1; flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8141b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg></span><span style="font-size:10px; font-weight:700; letter-spacing:.16em; color:#0a0a0a;">HINGGA 87% SPREAD</span></div>
@@ -1383,65 +1243,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
               <div style="display:flex; align-items:center; gap:12px;"><span style="display:flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:2px; background:#fff; border:1px solid #e4e4e1; flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8141b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></svg></span><span style="font-size:10px; font-weight:700; letter-spacing:.16em; color:#0a0a0a;">MANAJER MITRA KHUSUS</span></div>
             </div>
 
-            <div style="position:relative; display:flex; flex-direction:column; gap:10px; margin-top:10px;">
-              <div data-form-auth="" style="align-items:stretch; padding:8px 16px 6px; border:1px solid #dededa; border-radius:2px; background:rgba(255,255,255,.5);">
-                <div data-ref="dateBox" style="position:relative; display:flex; flex-direction:column; gap:2px;">
-                  <span style="font-family:'Inter',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.2em; color:#2a2a2e; font-size:9px;">TANGGAL</span>
-                  <div style="position:relative; display:flex; align-items:flex-end; height:24px; padding-bottom:3px; box-sizing:border-box;">
-                    <span data-ref="date" style="direction:ltr; unicode-bidi:isolate; line-height:1.2; font-size:14px; font-weight:500; letter-spacing:.06em; color:#8e8e92; white-space:nowrap; font-variant-numeric:tabular-nums;">HH / BB / TTTT</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="position:relative; display:grid; grid-template-columns:minmax(0,1fr); gap:16px; align-items:center; margin-top:14px;">
-              <button type="submit" class="tq-env tq-env--fill" aria-label="Kirim"><span class="tq-env__txt">Kirim</span><span class="tq-env__mail" aria-hidden="true"><span class="tq-env__back"></span><span class="tq-env__flap-open"></span><span class="tq-env__bill">$</span><span class="tq-env__front"></span><span class="tq-env__flap"></span><span class="tq-env__seal"></span></span></button>
-            </div>
           </form>
-          <!-- Success screen after the form is sent (Partner_Form_Success design). Hidden until the
-               envelope has left the button and the server has taken the request (startForm in landing.js);
-               it then takes the form's place and builds up piece by piece. -->
-          <div class="tq-done" data-form-done data-fallback="mitra" hidden>
-            <h2 class="tq-done__title tq-h2" tabindex="-1" data-fitw>Terkirim<span>.</span></h2>
-            <div class="tq-done__art">
-              <div class="tq-done__scene">
-                <div class="tq-done__env" aria-hidden="true">
-                  <span class="tq-done__env-body"></span>
-                  <span class="tq-done__env-l"></span>
-                  <span class="tq-done__env-r"></span>
-                  <span class="tq-done__env-b"></span>
-                  <span class="tq-done__env-flap"><span></span></span>
-                  <svg class="tq-done__postmark" viewBox="0 0 150 90" width="150" height="90" focusable="false">
-                    <defs><path id="doneArc" d="M100,45 m-31,0 a31,31 0 1,1 62,0 a31,31 0 1,1 -62,0"></path></defs>
-                    <g fill="none" stroke="#2B2F3A" stroke-width="1.4"><circle cx="100" cy="45" r="38"></circle><circle cx="100" cy="45" r="24"></circle><path d="M2 30 q8 -6 16 0 t16 0 t16 0 t16 0"></path><path d="M2 42 q8 -6 16 0 t16 0 t16 0 t16 0"></path><path d="M2 54 q8 -6 16 0 t16 0 t16 0 t16 0"></path></g>
-                    <text font-family="Inter, sans-serif" font-weight="700" font-size="7.5" fill="#2B2F3A" direction="ltr" unicode-bidi="embed"><textPath href="#doneArc" textLength="190" lengthAdjust="spacing">TRADEQUO · PARTNER DESK · </textPath></text>
-                    <text x="100" y="43" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="8" fill="#2B2F3A">RECEIVED</text>
-                    <text x="100" y="54" text-anchor="middle" font-family="Inter, sans-serif" font-size="7.5" fill="#2B2F3A" direction="ltr" data-done-date></text>
-                  </svg>
-                  <span class="tq-done__wax"><span><img src="../assets/logo-mark.png?v=1405a8f8c9" alt="" width="22" height="22"></span></span>
-                </div>
-                <div class="tq-done__note">
-                  <span class="tq-done__tape" aria-hidden="true"></span>
-                  <p class="tq-done__hand"><span data-done-thanks>Terima kasih, {name}!</span><br>Kami akan menelepon Anda dalam 2 menit.</p>
-                  <p class="tq-done__sign">— Tim Kemitraan TradeQuo</p>
-                </div>
-              </div>
-            </div>
-            <div class="tq-done__steps">
-              <span class="tq-done__flow" aria-hidden="true"></span>
-              <span class="tq-done__flow" aria-hidden="true"></span>
-              <ol>
-                <li class="is-on"><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span><b>Terkirim</b><small>Hari ini</small></li>
-                <li><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0e0e10" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 005 5L15 12l5 2v4a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z"></path></svg></span><b>Telepon</b><small>Dalam 2 menit</small></li>
-                <li><span class="tq-done__dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0e0e10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg></span><b>Mulai menghasilkan</b><small>Dibayar harian</small></li>
-              </ol>
-            </div>
-            <div class="tq-done__cta">
-              <a class="tq-done__go" href="../programs/" data-page-link>Pilihan Program<span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h10M8 3l4 4-4 4"></path></svg></span></a>
-              <a class="tq-done__link" href="./partner-terms/" data-page-link>Kalkulator komisi</a>
-            </div>
-          </div>
-
 
         </div>
       </div>
@@ -1911,6 +1713,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 </div>
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
-<script src="../assets/js/landing.js?v=9f58850075" defer></script>
+<script src="../assets/js/landing.js?v=2d278b596f" defer></script>
 </body>
 </html>

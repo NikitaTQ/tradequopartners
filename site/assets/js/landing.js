@@ -825,6 +825,7 @@
     const form = $('form[data-agreement]');
     const stage = ref('stage'), date = ref('date');
     if (!form || !stage) return;
+    if (form.hasAttribute('data-ghl')) return;   /* since November 2026 the request form is the CRM's (GoHighLevel), in its own iframe: nothing to do here */
     const done = $('[data-form-done]', stage);
     const envBtn = $('.tq-env', form);
     /* copy comes from the page so every language build carries its own */
