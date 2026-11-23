@@ -295,3 +295,13 @@
   });
   select(0);
 })();
+
+/* /for-influencers/: "Incentive trips" (owner's design "Incentive Trips", 7d). The water in its "ON US." drifts (a CSS
+ * animation, influencers.css .inf-trip__water) only while the block is on screen: off it the animation is paused, so
+ * the page does not paint it for nothing. */
+(function () {
+  'use strict';
+  const sec = document.querySelector('[data-trip]');
+  if (!sec || !('IntersectionObserver' in window)) { if (sec) sec.classList.add('is-on'); return; }
+  new IntersectionObserver((es) => es.forEach((e) => sec.classList.toggle('is-on', e.isIntersecting)), { rootMargin: '80px 0px' }).observe(sec);
+})();

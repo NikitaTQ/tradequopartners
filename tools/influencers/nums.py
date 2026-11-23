@@ -3,6 +3,8 @@ The figures 87%, infinity and 365 are cut from three nebula photos (the design's
 1600 x 800): on the page each is the background of its figure, clipped to the letters (influencers.css .inf-nums).
 Writes site/assets/influencers/nums-{87,inf,365}-{w}.webp — a large file for desktops, a small one for phones
 (each wide enough for its figure on a 2x screen) — and nums-mark.webp, the white TradeQuo mark in the card's corner.
+Also the water of the "Incentive trips" block (owner's design "Incentive Trips", variant 7d): its "ON US." is filled with
+the design's water photo (numbers-src/tex-water.jpg, 1600 x 800), drifting slowly: nums-water-{1600,900}.webp.
 Run:  python3 tools/influencers/nums.py   (not "numbers.py": that name would hide Python's own numbers module)"""
 import os
 from PIL import Image
@@ -10,7 +12,7 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, 'numbers-src')
 OUT = os.path.join(HERE, '..', '..', 'site', 'assets', 'influencers')
-SIZES = {'87': (1600, 760), 'inf': (720, 600), '365': (960, 640)}   # desktop, phone (px wide)
+SIZES = {'87': (1600, 760), 'inf': (720, 600), '365': (960, 640), 'water': (1600, 900)}   # desktop, phone (px wide)
 
 for key, widths in SIZES.items():
     im = Image.open(os.path.join(SRC, 'tex-%s.jpg' % key)).convert('RGB')

@@ -234,6 +234,61 @@
       </div>
     </section>
 
+    <!-- Incentive trips (owner's design "Incentive Trips", variant 7d "The trip is on us: stories", November 2026): a dark
+         card; on one side three stories of a partner trip fanned out in chrome frames (day 1 arrivals, day 2 on the water
+         in the middle, larger, with a red glow, day 3 a sunset dinner), on the other "Incentive trips", "THE TRIP IS ON
+         US." (its "ON US." filled with water that drifts slowly: the block's only animation, running only while the
+         block is on screen, orbit.js) and three lines (flights and stay, the yacht day and dinners: covered; how you
+         qualify: results). The stories carry the design's own colours for now (their photos are to come: a picture
+         goes in each .inf-trip__photo). Phones: the stories over the text. -->
+    <section id="trips" class="inf-trip" data-trip data-screen-label="Incentive trips">
+      <div class="inf-trip__in">
+        <div class="inf-trip__card">
+          <div class="inf-trip__fan" role="img" aria-label="{{@inf.trip.aria}}">
+              <div class="inf-trip__story inf-trip__story--1">
+                <div class="inf-trip__screen">
+                  <div class="inf-trip__photo"></div>
+                  <div class="inf-trip__bars"><span></span><span></span><span></span></div>
+                  <p class="inf-trip__cap"><span class="inf-trip__day">{{inf.trip.day}} 01</span><br><span class="tq-h2">{{inf.trip.s1}}</span></p>
+                </div>
+              </div>
+              <div class="inf-trip__story inf-trip__story--2">
+                <div class="inf-trip__screen">
+                  <div class="inf-trip__photo"></div>
+                  <div class="inf-trip__bars"><span></span><span></span><span></span></div>
+                  <div class="inf-trip__who"><img src="{{root}}assets/influencers/nums-mark.webp" width="105" height="84" alt=""><b>{{inf.trip.handle}}</b><span>{{inf.trip.tag}}</span></div>
+                  <p class="inf-trip__cap"><span class="inf-trip__day">{{inf.trip.day}} 02</span><br><span class="tq-h2">{{inf.trip.s2}}</span></p>
+                </div>
+              </div>
+              <div class="inf-trip__story inf-trip__story--3">
+                <div class="inf-trip__screen">
+                  <div class="inf-trip__photo"></div>
+                  <div class="inf-trip__bars"><span></span><span></span><span></span></div>
+                  <p class="inf-trip__cap"><span class="inf-trip__day">{{inf.trip.day}} 03</span><br><span class="tq-h2">{{inf.trip.s3}}</span></p>
+                </div>
+              </div>
+          </div>
+          <div class="inf-trip__text">
+            <p class="inf-trip__eyebrow tq-h2">{{inf.trip.eyebrow}}</p>
+            <h2 class="inf-trip__h2">
+              <span class="inf-trip__l1 tq-h2">{{inf.trip.h2a}}</span>
+              <span class="inf-trip__big">
+                <span class="inf-trip__depth tq-h2" aria-hidden="true">{{inf.trip.h2b}}</span>
+                <span class="inf-trip__water tq-h2">{{inf.trip.h2b}}</span>
+                <span class="inf-trip__gloss tq-h2" aria-hidden="true">{{inf.trip.h2b}}</span>
+              </span>
+            </h2>
+            <p class="inf-trip__p">{{inf.trip.p}}</p>
+            <ul class="inf-trip__rows">
+              <li><span>{{inf.trip.r1}}</span><b>{{inf.trip.covered}}</b></li>
+              <li><span>{{inf.trip.r2}}</span><b>{{inf.trip.covered}}</b></li>
+              <li><span>{{inf.trip.r3}}</span><b class="inf-trip__red">{{inf.trip.results}}</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Final call, phones only (owner's wish, November 2026): the site's closing block (as on IB Tools and Partner Terms:
          .tp-night, .tp-glint, .tp-roll in partner.css), above the footer; hidden from 641px (influencers.css .inf-final) -->
     <section class="tp-night-sec inf-final" data-screen-label="For influencers · Join the program">
