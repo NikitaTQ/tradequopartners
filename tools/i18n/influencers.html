@@ -20,8 +20,8 @@
 
   <main>
     <!-- Hero (owner's design, November 2026): the heading, the pitch, the CTA and two ticks on the left; on the right the
-         design's scene: posts of "your channel" in glass (desktops: Instagram, Telegram and TikTok; tablets and phones:
-         Instagram and Telegram), wired to a dark "Your commissions" panel. Phones: the text, then the scene full width. -->
+         design's scene: posts of "your channel" in glass (Instagram, Telegram and YouTube, since November 2026), wired
+         to a dark "Your commissions" panel. Phones: the text, then the scene full width. -->
     <section id="hero" class="inf-hero" data-screen-label="Influencers hero">
       <div class="inf-hero__in">
         <div class="inf-hero__copy">
@@ -35,17 +35,13 @@
         </div>
 
         <div class="inf-hero__vis">
-          <!-- the scene is the design's own picture, one per layout, each with two lines of its copy set again:
-               desktops (two columns, from 901px) the three-platform scene, Instagram, Telegram and TikTok wired to the
-               commissions (tools/influencers/hero_desktop.py; 982px = the design's own pixels); tablets and phones the
-               two-platform one (tools/influencers/make.py: its texts and logos drawn again, sharp on 2x screens) -->
+          <!-- the scene is the design's own picture (owner's design, November 2026: Instagram, Telegram and YouTube posts
+               wired to the commissions; tools/influencers/hero_youtube.py, its background made the hero's), on every
+               screen; 1291px = the design's own pixels -->
           <picture>
-            <source media="(min-width: 901px)" width="982" height="996"
-                    srcset="{{root}}assets/influencers/scene-wide-491.webp 491w, {{root}}assets/influencers/scene-wide-737.webp 737w, {{root}}assets/influencers/scene-wide-982.webp 982w"
-                    sizes="min(46vw, 560px)">
-            <img class="inf-hero__img" src="{{root}}assets/influencers/scene-1014.webp"
-                 srcset="{{root}}assets/influencers/scene-507.webp 507w, {{root}}assets/influencers/scene-760.webp 760w, {{root}}assets/influencers/scene-1014.webp 1014w"
-                 sizes="min(100vw - 32px, 540px)" width="1014" height="1040" alt="{{@inf.hero.alt}}" fetchpriority="high">
+            <img class="inf-hero__img" src="{{root}}assets/influencers/scene-yt-1291.webp"
+                 srcset="{{root}}assets/influencers/scene-yt-646.webp 646w, {{root}}assets/influencers/scene-yt-968.webp 968w, {{root}}assets/influencers/scene-yt-1291.webp 1291w"
+                 sizes="(max-width: 900px) min(100vw - 32px, 540px), min(46vw, 560px)" width="1291" height="1103" alt="{{@inf.hero.alt}}" fetchpriority="high">
           </picture>
         </div>
       </div>
