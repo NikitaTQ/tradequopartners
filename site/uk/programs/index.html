@@ -855,6 +855,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-cmp__t > span { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .tq-cmp__t b { font: 700 var(--fs)/1.15 'Inter', sans-serif; letter-spacing: -.01em; }
 .tq-cmp__t small { font-size: calc(var(--fs) * .8); line-height: 1.25; color: #1c1c1f; }
+.tq-cmp__k { display: none; }
 .tq-cmp__go { grid-column: 4; grid-row: 8; display: flex; align-items: center; gap: 16px; height: 58px; margin: 22px 40px 0 50px; padding: 0 20px 0 10px; box-sizing: border-box;
   border-radius: 10px; color: #fff; text-decoration: none; background: linear-gradient(180deg, #2d2d30 0%, #121213 45%, #050506 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 0 1px #000, 0 10px 18px -8px rgba(0,0,0,.45); transition: transform .2s ease, filter .2s ease; -webkit-tap-highlight-color: transparent; }
@@ -881,10 +882,21 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .tq-cmp__t { gap: 14px; padding: 0 22px 0 26px; }
 .tq-cmp__t img { width: 38px; }
 .tq-cmp__t small { font-size: 14px; }
+.tq-cmp__k { display: block; margin-bottom: 1px; font: 600 10px/1.3 'Inter', sans-serif; font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: #8a8b92; }
+:lang(ar) .tq-cmp__k, :lang(th) .tq-cmp__k, :lang(ja) .tq-cmp__k, :lang(ko) .tq-cmp__k, :lang(zh) .tq-cmp__k { letter-spacing: .02em; font-size: 11px; }
 .tq-cmp__go { margin: 10px 22px 26px; height: 54px; }
 [dir="rtl"] .tq-cmp__t { padding: 0 26px 0 22px; }
 [dir="rtl"] .tq-cmp__th { padding: 34px 26px 6px; }
 [dir="rtl"] .tq-cmp__go { margin: 10px 22px 26px; }
+}
+@media (max-width: 899px) and (max-height: 640px) {
+.tq-cmp { row-gap: 6px; }
+.tq-cmp__th { padding-top: 22px; }
+[dir="rtl"] .tq-cmp__th { padding-top: 22px; }
+.tq-cmp__t small { display: none; }
+.tq-cmp__t b { font-size: 16px; }
+.tq-cmp__go { margin-bottom: 18px; height: 50px; }
+[dir="rtl"] .tq-cmp__go { margin-bottom: 18px; }
 }
 .tq-cmp__band, .tq-cmp__band2 { display: none; }
 @media (hover: hover) and (min-width: 1000px) {
@@ -1636,7 +1648,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
           <div class="tp-head"><h2 class="tp-h2 tq-h2" data-fitw>Чому партнери обирають <span style="color: #e7131b;">TradeQuo</span></h2></div>
 <!-- Other programs vs TradeQuo (the owner's design, November 2026; the same on /programs/ and /partner-terms/): on wide
      screens a table, the TradeQuo column on a glass card; on phones (up to 899px) only the card, with its CTA, in one
-     screen. Styles: site.css, "the comparison". Icons: assets/compare/ (tools/compare/make.py). -->
+     screen, each row under a small heading saying what it is (.tq-cmp__k: the row's name; row 5 "Tools", as its name
+     repeats its value). Styles: site.css, "the comparison". Icons: assets/compare/ (tools/compare/make.py). -->
 <div class="tq-cmp">
     <div class="tq-cmp__card" aria-hidden="true"></div>
     <i class="tq-cmp__band" data-row="1" style="grid-row: 2;"></i><i class="tq-cmp__band2" data-row="1" style="grid-row: 2;"></i>
@@ -1648,17 +1661,17 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     <div class="tq-cmp__oh"><b>Інші програми</b><span>Вибрані приклади</span></div>
     <div class="tq-cmp__th"><img src="../../assets/logo-wordmark-dark.png?v=4e0fc67613" alt="TradeQuo" width="525" height="71" loading="lazy" decoding="async"><span>Наша програма</span></div>
     <span class="tq-cmp__n" data-row="1" style="grid-row: 2;">01</span><span class="tq-cmp__l" data-row="1" style="grid-row: 2;">Рівні Sub-IB</span><span class="tq-cmp__o" data-row="1" style="grid-row: 2;">2 рівні</span>
-    <div class="tq-cmp__t" data-row="1" style="grid-row: 2;"><img src="../../assets/compare/tiers.webp?v=45e7c517f2" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>Необмежені рівні</b></span></div>
+    <div class="tq-cmp__t" data-row="1" style="grid-row: 2;"><img src="../../assets/compare/tiers.webp?v=45e7c517f2" alt="" width="68" height="68" loading="lazy" decoding="async"><span><i class="tq-cmp__k">Рівні Sub-IB</i><b>Необмежені рівні</b></span></div>
     <span class="tq-cmp__n" data-row="2" style="grid-row: 3;">02</span><span class="tq-cmp__l" data-row="2" style="grid-row: 3;">Частка доходу</span><span class="tq-cmp__o" data-row="2" style="grid-row: 3;">До 40%</span>
-    <div class="tq-cmp__t" data-row="2" style="grid-row: 3;"><img src="../../assets/compare/share.webp?v=475badc156" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>До <span style="color: #e7131b;">87%</span></b></span></div>
+    <div class="tq-cmp__t" data-row="2" style="grid-row: 3;"><img src="../../assets/compare/share.webp?v=475badc156" alt="" width="68" height="68" loading="lazy" decoding="async"><span><i class="tq-cmp__k">Частка доходу</i><b>До <span style="color: #e7131b;">87%</span></b></span></div>
     <span class="tq-cmp__n" data-row="3" style="grid-row: 4;">03</span><span class="tq-cmp__l" data-row="3" style="grid-row: 4;">Захист партнера</span><span class="tq-cmp__o" data-row="3" style="grid-row: 4;">Клієнти можуть змінити партнера</span>
-    <div class="tq-cmp__t" data-row="3" style="grid-row: 4;"><img src="../../assets/compare/shield.webp?v=c7cddfd5ec" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>Закріплені за вами</b><small>Під захистом PartnerShield</small></span></div>
+    <div class="tq-cmp__t" data-row="3" style="grid-row: 4;"><img src="../../assets/compare/shield.webp?v=c7cddfd5ec" alt="" width="68" height="68" loading="lazy" decoding="async"><span><i class="tq-cmp__k">Захист партнера</i><b>Закріплені за вами</b><small>Під захистом PartnerShield</small></span></div>
     <span class="tq-cmp__n" data-row="4" style="grid-row: 5;">04</span><span class="tq-cmp__l" data-row="4" style="grid-row: 5;">Виплати</span><span class="tq-cmp__o" data-row="4" style="grid-row: 5;">Щомісяця</span>
-    <div class="tq-cmp__t" data-row="4" style="grid-row: 5;"><img src="../../assets/compare/daily.webp?v=d4fd38e114" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>Щодня</b></span></div>
+    <div class="tq-cmp__t" data-row="4" style="grid-row: 5;"><img src="../../assets/compare/daily.webp?v=d4fd38e114" alt="" width="68" height="68" loading="lazy" decoding="async"><span><i class="tq-cmp__k">Виплати</i><b>Щодня</b></span></div>
     <span class="tq-cmp__n" data-row="5" style="grid-row: 6;">05</span><span class="tq-cmp__l" data-row="5" style="grid-row: 6;">TradingView Premium</span><span class="tq-cmp__o" data-row="5" style="grid-row: 6;">Зазвичай не входить</span>
-    <div class="tq-cmp__t" data-row="5" style="grid-row: 6;"><img src="../../assets/compare/tv.webp?v=6c43208e4f" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>TradingView Premium</b><small>Безкоштовно</small></span></div>
+    <div class="tq-cmp__t" data-row="5" style="grid-row: 6;"><img src="../../assets/compare/tv.webp?v=6c43208e4f" alt="" width="68" height="68" loading="lazy" decoding="async"><span><i class="tq-cmp__k">Інструменти</i><b>TradingView Premium</b><small>Безкоштовно</small></span></div>
     <span class="tq-cmp__n" data-row="6" style="grid-row: 7;">06</span><span class="tq-cmp__l" data-row="6" style="grid-row: 7;">Винагороди</span><span class="tq-cmp__o" data-row="6" style="grid-row: 7;">Бали та грошові бонуси</span>
-    <div class="tq-cmp__t" data-row="6" style="grid-row: 7;"><img src="../../assets/compare/trips.webp?v=2f7b121899" alt="" width="68" height="68" loading="lazy" decoding="async"><span><b>Мотиваційні тури</b></span></div>
+    <div class="tq-cmp__t" data-row="6" style="grid-row: 7;"><img src="../../assets/compare/trips.webp?v=2f7b121899" alt="" width="68" height="68" loading="lazy" decoding="async"><span><i class="tq-cmp__k">Винагороди</i><b>Мотиваційні тури</b></span></div>
     <a class="tq-cmp__go" href="../#signup" data-page-link><span class="tq-cmp__plus" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 3v14M3 10h14" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/></svg></span><span class="tq-cmp__go-l">Стати партнером</span><svg class="tq-cmp__chev" viewBox="0 0 12 21" aria-hidden="true"><path d="M2 2l8 8.5L2 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
