@@ -29,9 +29,11 @@
 .inf-hero__ticks li::before { content: ''; position: absolute; inset-inline-start: 0; top: 50%; width: 13px; height: 13px; margin-top: -7px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23e7131b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2.5 8.5 3.5 3.5 7.5-8'/%3E%3C/svg%3E") center / contain no-repeat; }
 
-/* the scene: the design's picture (tools/influencers/make.py), on the same background; 507px (with its faded margin) at the
-   design's 1104px width, growing with the column to 560px */
+/* the scene: the design's picture, on the same background (desktops: tools/influencers/hero_desktop.py, the three
+   platforms; tablets and phones: tools/influencers/make.py, 507px with its faded margin at the design's 1104px width),
+   growing with the column to 560px */
 .inf-hero__vis { min-width: 0; }
+.inf-hero__vis picture { display: block; }
 .inf-hero__img { display: block; width: 100%; max-width: 560px; height: auto;
   -webkit-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
   -webkit-mask-composite: source-in; mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);

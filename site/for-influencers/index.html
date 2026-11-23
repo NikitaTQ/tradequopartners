@@ -878,6 +878,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-hero__ticks li::before { content: ''; position: absolute; inset-inline-start: 0; top: 50%; width: 13px; height: 13px; margin-top: -7px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23e7131b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2.5 8.5 3.5 3.5 7.5-8'/%3E%3C/svg%3E") center / contain no-repeat; }
 .inf-hero__vis { min-width: 0; }
+.inf-hero__vis picture { display: block; }
 .inf-hero__img { display: block; width: 100%; max-width: 560px; height: auto;
   -webkit-mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
   -webkit-mask-composite: source-in; mask: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 96%, transparent);
@@ -1099,8 +1100,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
   <main>
     <!-- Hero (owner's design, November 2026): the heading, the pitch, the CTA and two ticks on the left; on the right the
-         design's scene: an Instagram post and a Telegram post of "your channel" in glass, wired to a dark "Your
-         commissions" panel. Phones: the text, then the scene full width. -->
+         design's scene: posts of "your channel" in glass (desktops: Instagram, Telegram and TikTok; tablets and phones:
+         Instagram and Telegram), wired to a dark "Your commissions" panel. Phones: the text, then the scene full width. -->
     <section id="hero" class="inf-hero" data-screen-label="Influencers hero">
       <div class="inf-hero__in">
         <div class="inf-hero__copy">
@@ -1114,11 +1115,18 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
         </div>
 
         <div class="inf-hero__vis">
-          <!-- the scene is the design's own picture (tools/influencers/make.py: the glass, glints, wires and tilt as drawn;
-               two lines of its copy re-set); 507px wide at 1x, as in the design, sharp on 2x screens -->
-          <img class="inf-hero__img" src="../assets/influencers/scene-1014.webp?v=2a7d4ee366"
-               srcset="../assets/influencers/scene-507.webp 507w, ../assets/influencers/scene-760.webp 760w, ../assets/influencers/scene-1014.webp 1014w"
-               sizes="(max-width: 900px) min(100vw - 32px, 540px), min(46vw, 560px)" width="1014" height="1040" alt="An Instagram post and a Telegram post with your TradeQuo link, and the commissions credited from both" fetchpriority="high">
+          <!-- the scene is the design's own picture, one per layout, each with two lines of its copy set again:
+               desktops (two columns, from 901px) the three-platform scene, Instagram, Telegram and TikTok wired to the
+               commissions (tools/influencers/hero_desktop.py; 982px = the design's own pixels); tablets and phones the
+               two-platform one (tools/influencers/make.py: its texts and logos drawn again, sharp on 2x screens) -->
+          <picture>
+            <source media="(min-width: 901px)" width="982" height="996"
+                    srcset="../assets/influencers/scene-wide-491.webp 491w, ../assets/influencers/scene-wide-737.webp 737w, ../assets/influencers/scene-wide-982.webp 982w"
+                    sizes="min(46vw, 560px)">
+            <img class="inf-hero__img" src="../assets/influencers/scene-1014.webp?v=2a7d4ee366"
+                 srcset="../assets/influencers/scene-507.webp 507w, ../assets/influencers/scene-760.webp 760w, ../assets/influencers/scene-1014.webp 1014w"
+                 sizes="min(100vw - 32px, 540px)" width="1014" height="1040" alt="Your channel&#x27;s posts with your TradeQuo link, and the commissions credited from them" fetchpriority="high">
+          </picture>
         </div>
       </div>
     </section>
