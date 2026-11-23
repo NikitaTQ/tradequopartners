@@ -1,4 +1,5 @@
-"""The /for-influencers/ "creators on Instagram / Telegram / TikTok" scene (owner's design, Creator Platforms Scene):
+"""The /for-influencers/ "creators on Instagram / Telegram / YouTube" scene (YouTube in TikTok's place since November
+2026: its picture made ready by youtube.py) (owner's design, Creator Platforms Scene):
 three pictures, 1774 x 887, one per platform (creators-src/*.webp, as the design exported them, its second
 version with the corners already filled), made ready for the site:
   - the word the site never uses is taken out of three creators' names on their plates: each plate's name and arrow are
@@ -9,7 +10,7 @@ version with the corners already filled), made ready for the site:
     a little closer, so the caption falls outside it;
   - the strip under each picture (creators-src/*-ext.webp: the scene carried on down, where the platform switch sits)
     is written out as it is.
-Writes site/assets/influencers/orbit-{instagram,telegram,tiktok}-{1100,1774}.webp and orbit-*-ext-{1100,1774}.webp.
+Writes site/assets/influencers/orbit-{instagram,telegram,youtube}-{1100,1774}.webp and orbit-*-ext-{1100,1774}.webp.
 Run:  python3 tools/influencers/creators.py"""
 import math, os
 from PIL import Image, ImageDraw, ImageFont
@@ -91,12 +92,17 @@ def avatar(im, a):
 
 
 os.makedirs(OUT, exist_ok=True)
-for name in ('instagram', 'telegram', 'tiktok'):
+# the platforms on the page (TikTok gave way to YouTube in November 2026, owner's wish: its pictures stay in
+# creators-src/ and come back by putting 'tiktok' here again)
+PLATFORMS = ('instagram', 'telegram', 'youtube')
+CLEAN = {'youtube'}   # drawn without the word: its names and avatars as they are (youtube.py set it on the frame)
+for name in PLATFORMS:
     im = Image.open(os.path.join(HERE, 'creators-src', name + '.webp')).convert('RGB')
-    for a in AVATARS:
-        avatar(im, a)
-    for p in PLATES:
-        plate(im, p)
+    if name not in CLEAN:
+        for a in AVATARS:
+            avatar(im, a)
+        for p in PLATES:
+            plate(im, p)
     if os.environ.get('CHECK'):
         im.save(os.path.join(os.environ['CHECK'], name + '.png'))
     for w in (1100, 1774):
