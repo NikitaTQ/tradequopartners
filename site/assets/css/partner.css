@@ -895,24 +895,10 @@
 :lang(ar) .tq-horizon, :lang(th) .tq-horizon, :lang(ja) .tq-horizon, :lang(ko) .tq-horizon, :lang(zh) .tq-horizon { letter-spacing: .04em; font-size: 14px; }
 @media (max-width: 480px) { .tq-horizon { height: 50px; padding-inline: 22px 6px; font-size: 12px; } .tq-horizon__arrow { width: 36px; height: 36px; } }
 @media (prefers-reduced-motion: reduce) { .tq-horizon { transition: none; } }
-.tq-ibb__tabs { display: flex; flex-wrap: nowrap; gap: 2px; margin: 0; padding: 5px; max-width: 100%; box-sizing: border-box; list-style: none; white-space: nowrap; border-radius: 999px;
-  background: linear-gradient(170deg, rgba(255,255,255,.78), rgba(255,255,255,.38)); border: 1px solid #fff; box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 14px 28px -18px rgba(18,22,30,.35);
-  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
-.tq-ibb__tab { position: relative; display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 clamp(8px, 1.4vw, 14px); flex: 0 1 auto; min-width: 0;
-  font-size: clamp(10px, 1vw, 11px); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: #8a8d93; transition: color .3s ease; }
-.tq-ibb__tab.is-on { color: #0a0a0a; }
-.tq-ibb__tab b { font-size: 10px; font-weight: 500; letter-spacing: 0; color: #e7131b; font-variant-numeric: tabular-nums; }
-.tq-ibb__tab span { overflow: hidden; text-overflow: ellipsis; }
-.tq-ibb__tab > i { position: absolute; left: 14px; right: 14px; bottom: 4px; height: 2px; border-radius: 2px; background: rgba(18,22,30,.08); overflow: hidden; }
-.tq-ibb__tab > i > i { display: block; height: 100%; width: 0; background: #e7131b; }
-:lang(ar) .tq-ibb__tab, :lang(th) .tq-ibb__tab, :lang(ja) .tq-ibb__tab, :lang(ko) .tq-ibb__tab, :lang(zh) .tq-ibb__tab { letter-spacing: .02em; font-size: 12px; }
-@media (max-width: 480px) { .tq-ibb__tab { padding: 0 7px; gap: 6px; letter-spacing: .06em; } .tq-ibb__tab > i { left: 7px; right: 7px; } }
-.tq-ibb__tabs.is-tight .tq-ibb__tab b { display: none; }   /* a translation too long for the screen: no step numbers (ib-hole.js) */
-@media (max-width: 639px) { .tq-ibb__tab:not(.is-on) span { display: none; } }   /* phones (as in the design): only the lit step shows its name */
 .tq-ibb__font { position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; white-space: nowrap; font-size: 20px; }   /* the canvas captions' face, loaded (ib-hole.js) */
 
 /* IB Tools: the Sub-IB network block (Sub-IB_Network_Silver). Text left, the 3D glass diagram right (static SVG from
-   tools/build-ib-net.mjs, labels over it in % of its box, type sized by its width: cqi), three cards under both. The
+   tools/build-ib-net.mjs, labels over it in % of its box, type sized by its width: cqi; the three cards that stood under both were taken out in November 2026). The
    section's data-hl is the lit group (red links and beads, dark rim on its Sub-IB, a dark-edged label), data-act is
    set while a group is hovered: then the label shows its client count and the other groups dim. */
 .tq-ibn { position: relative; overflow: hidden; color: #0a0a0a;
@@ -985,21 +971,6 @@
 .tq-ibn[data-hl="4"] .sib-lab--sub[data-g="4"] { border-color: #0a0a0a; }
 .tq-ibn[data-hl="4"][data-act] .sib-lab--sub[data-g="4"] .sib-det { display: inline; }
 .tq-ibn[data-hl="4"][data-act] [data-g]:not([data-g="4"]) { opacity: .2; }
-.tq-ibn__pillars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; scroll-margin-top: 96px; }
-.tq-ibn__pill { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: clamp(16px, 2.4vh, 26px) clamp(16px, 2vw, 24px); border-radius: 24px;
-  background: linear-gradient(170deg, rgba(255,255,255,.88), rgba(255,255,255,.5)); border: 1px solid #fff; box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 24px 40px -28px rgba(18,22,30,.4); }
-.tq-ibn__pill svg { display: block; flex: none; }
-.tq-ibn__pill b { font-size: clamp(18px, 1.5vw, 21px); font-weight: 700; line-height: 1.15; text-wrap: balance; }
-.tq-ibn__pill span { max-width: 300px; font-size: 14px; line-height: 1.45; color: #55585f; text-wrap: pretty; }
-/* desktops: the three cards at half the height, the icon beside the title and line */
-@media (min-width: 961px) {
-  .tq-ibn__pillars { gap: 12px; }
-  .tq-ibn__pill { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; row-gap: 3px; align-items: center; align-content: center; text-align: start;
-    padding: 15px 20px; border-radius: 18px; box-shadow: inset 0 2px 1px rgba(255,255,255,.95), 0 18px 30px -24px rgba(18,22,30,.4); }
-  .tq-ibn__pill svg { grid-row: 1 / span 2; width: 30px; height: 30px; }
-  .tq-ibn__pill b { font-size: 16px; }
-  .tq-ibn__pill span { max-width: none; font-size: 13px; line-height: 1.4; }
-}
 .tq-ibn__stage--m, .tq-ibn__lead-m { display: none; }
 /* its button (CTA «Start» · Timer): a round red START in a watch dial (60 ticks, drawn by landing.js); the red arc runs
    round with the seconds of a countdown, and closes the circle on hover; under it "Live in" and the countdown from two
@@ -1025,7 +996,7 @@
 @media (prefers-reduced-motion: reduce) { .tq-start__arc, .tq-start__btn { transition: none; } }
 @media (max-width: 640px) {
   /* phones (the phone mockup): title, a short lead (ib.net.leadm), the smaller phone scene (ib-net-svg-m) edge to edge,
-     the three cards in one row with titles only, then the start timer, centred. The lead, the line under it and the desktop scene
+     then the start timer, centred. The lead, the line under it and the desktop scene
      are hidden; the row and the text column are unwrapped so their parts can be reordered. */
   .tq-ibn__wrap { min-height: 0; justify-content: flex-start; gap: 18px; padding-block: 22px 34px; }
   .tq-ibn__row, .tq-ibn__text { display: contents; }
@@ -1036,14 +1007,6 @@
   .tq-ibn .tq-ibn__stage--m { display: block; width: 100%; }
   .tq-ibn__stage--m .sib-lab { font-size: 10px; }
   .tq-ibn__stage--m .sib-lab--main { font-size: 10.5px; }
-  /* the three cards as small glass chips, half the height they had: the red icon beside the title (not above it), the
-     title smaller, in two rows where it needs them (three in the longest languages) */
-  .tq-ibn__pillars { order: 4; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
-  .tq-ibn__pill { flex-direction: row; align-items: center; justify-content: center; gap: 5px; padding: 8px 6px; border-radius: 14px; text-align: start;
-    box-shadow: inset 0 1.5px 1px rgba(255,255,255,.95), 0 14px 24px -18px rgba(18,22,30,.4); }
-  .tq-ibn__pill svg { width: 18px; height: 18px; stroke-width: 1.9; }
-  .tq-ibn__pill b { min-width: 0; font-size: 12px; line-height: 1.2; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
-  .tq-ibn__pill span { display: none; }
   .tq-ibn .tq-ibx__ctas { order: 5; max-width: none; justify-content: center; padding-top: 22px; }
 }
 
