@@ -51,6 +51,52 @@
       </div>
     </section>
 
+    <!-- Three numbers (owner's design "Cut From The Sky", variant 6c Titanium, November 2026): a titanium card (mid-grey
+         brushed metal: a soft light from the top left, fine vertical lines, a light top edge, a deep soft shadow) with
+         the three figures cut from the sky: 87% (revenue share) across the card, infinity (sub-partners) and 365
+         (paydays a year) side by side under it (one under the other on phones), each figure filled with its own nebula
+         photo (tools/influencers/nums.py), standing out of the card on a dark edge of its colour, with a gloss on its
+         top half and a thin light rim; under each a light metal line, the number, the name in red and a line of text.
+         Static (no animation). Sizes follow the block's width (container units), as in the design. -->
+    <section id="numbers" class="inf-nums" data-screen-label="Three numbers">
+      <div class="inf-nums__in">
+        <div class="inf-nums__card">
+          <div class="inf-nums__top">
+            <h2 class="inf-nums__h2"><span class="tq-h2">{{inf.nums.h2a}}</span><br><span class="tq-h2 inf-nums__red">{{inf.nums.h2b}}</span></h2>
+            <img class="inf-nums__mark" src="{{root}}assets/influencers/nums-mark.webp" width="105" height="84" alt="TradeQuo">
+          </div>
+
+          <div class="inf-nums__item inf-nums__item--87">
+            <div class="inf-nums__fig">
+              <span class="inf-nums__depth tq-h2" aria-hidden="true">{{inf.nums.v1}}</span>
+              <span class="inf-nums__tex tq-h2">{{inf.nums.v1}}</span>
+              <span class="inf-nums__gloss tq-h2" aria-hidden="true">{{inf.nums.v1}}</span>
+            </div>
+            <p class="inf-nums__cap"><span class="inf-nums__n">01</span><span class="inf-nums__l tq-h2">{{inf.nums.l1}}</span><span class="inf-nums__d">{{inf.nums.d1}}</span></p>
+          </div>
+
+          <div class="inf-nums__pair">
+            <div class="inf-nums__item inf-nums__item--inf">
+              <div class="inf-nums__loop" role="img" aria-label="{{@inf.nums.v2}}">
+                <div class="inf-nums__loop-rim"></div>
+                <div class="inf-nums__loop-tex"></div>
+                <div class="inf-nums__loop-gloss"></div>
+              </div>
+              <p class="inf-nums__cap"><span class="inf-nums__n">02</span><span class="inf-nums__l tq-h2">{{inf.nums.l2}}</span><span class="inf-nums__d">{{inf.nums.d2}}</span></p>
+            </div>
+            <div class="inf-nums__item inf-nums__item--365">
+              <div class="inf-nums__fig">
+                <span class="inf-nums__depth tq-h2" aria-hidden="true">{{inf.nums.v3}}</span>
+                <span class="inf-nums__tex tq-h2">{{inf.nums.v3}}</span>
+                <span class="inf-nums__gloss tq-h2" aria-hidden="true">{{inf.nums.v3}}</span>
+              </div>
+              <p class="inf-nums__cap"><span class="inf-nums__n">03</span><span class="inf-nums__l tq-h2">{{inf.nums.l3}}</span><span class="inf-nums__d">{{inf.nums.d3}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Creators on platforms (owner's design "Creator Platforms Scene", November 2026): five creators orbiting the
          TradeQuo planet, on Instagram, Telegram or TikTok: three pictures (tools/influencers/creators.py), one per
          platform, each with its own palette. A tab plays the design's change: a flash and shock rings from the planet,

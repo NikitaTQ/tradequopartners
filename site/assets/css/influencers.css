@@ -44,10 +44,76 @@
   .inf-hero__in { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .inf-hero__vis { width: 100%; max-width: 540px; justify-self: center; }
 }
+/* phones: the whole hero in the first screen. The hero takes the screen under the header (56px + its 24px margin), in one
+   column: the heading, the line, the scene, the CTA and the ticks; the scene takes whatever height is left (at least
+   190px; the picture scaled down into it, centred, never past its full width) — so on a short phone the scene gets smaller, on a tall one larger, and
+   the CTA always stands above the fold. svh: the screen with the browser's bars shown (Safari's smallest). */
 @media (max-width: 640px) {
-  .inf-hero { padding-top: 32px; }
-  .inf-cta { height: 56px; font-size: 15px; padding-inline-start: 26px; }
-  .inf-hero__ticks { font-size: 13px; gap: 8px 18px; }
+  .inf-hero { display: flex; flex-direction: column; box-sizing: border-box; min-height: calc(100vh - 80px); min-height: calc(100svh - 80px); padding: 14px 0 20px; }
+  .inf-hero__in { flex: 1 1 auto; display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .inf-hero__copy { display: contents; }
+  .inf-hero__h1 { order: 1; }
+  .inf-hero__sub { order: 2; margin-top: 10px; font-size: 14px; line-height: 1.5; }
+  .inf-hero__vis { order: 3; position: relative; flex: 1 1 0; min-height: 190px; max-width: none; margin: 8px 0 4px; }
+  .inf-hero__vis picture { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .inf-hero__img { width: auto; height: auto; max-width: 100%; max-height: 100%; }   /* the picture's own box shrinks with it, so its faded edge stays its edge */
+  .inf-cta { order: 4; align-self: flex-start; height: 52px; margin-top: 0; font-size: 15px; padding-inline-start: 24px; gap: 20px; }
+  .inf-cta__dot { width: 40px; height: 40px; }
+  .inf-hero__ticks { order: 5; margin-top: 14px; font-size: 12.5px; gap: 6px 16px; }
+}
+
+/* ---- Three numbers (owner's "Cut From The Sky", 6c Titanium): 87%, infinity, 365 cut from the sky on a titanium card --
+   The design's own values; sizes in container units of the block's width (cqw), as in the design. The figures and the
+   names are in the headings' face (Syncopate, class tq-h2, so tools/h1-fonts.py puts their letters in its file); the
+   design's DM Sans and DM Mono are the site's Inter. Static: nothing moves. */
+.inf-nums { container-type: inline-size; background: #f3f2f7; padding: 0; font-family: 'Inter', sans-serif; }
+.inf-nums__in { padding: 0 clamp(16px, 4cqw, 56px); }
+.inf-nums__card { max-width: 1120px; margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 3cqw, 32px); overflow: hidden; color: #fff;
+  background: radial-gradient(80% 60% at 25% 0%, rgba(255,255,255,.14), rgba(255,255,255,0) 60%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0) 0 23px, rgba(255,255,255,.09) 23px 24px),
+    linear-gradient(170deg, #5a5d65 0%, #3c3e44 45%, #2b2d32 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 0 1px rgba(255,255,255,.06), 0 40px 60px -30px rgba(14,14,16,.6);
+  padding: clamp(28px, 6cqw, 64px) clamp(18px, 5cqw, 64px); display: flex; flex-direction: column; gap: clamp(22px, 4cqw, 40px); }
+.inf-nums__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.inf-nums__h2 { margin: 0; font-size: clamp(11px, 3cqw, 15px); font-weight: 700; line-height: 1.5; }
+.inf-nums__h2 .tq-h2 { font-size: clamp(11px, 3cqw, 15px); letter-spacing: .22em; line-height: 1.5; padding: 0; text-wrap: nowrap; }
+.inf-nums__h2 .inf-nums__red { color: #ff5a61; }
+.inf-nums__mark { flex: none; display: block; width: auto; height: clamp(18px, 4cqw, 28px); }
+
+.inf-nums__item { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.inf-nums__fig { position: relative; align-self: flex-start; font-weight: 700; }
+.inf-nums__fig .tq-h2 { font-size: 1em; letter-spacing: -.05em; padding: 0; text-transform: none; text-wrap: nowrap; max-width: none; line-height: inherit; }
+.inf-nums__depth { display: block; color: transparent; }
+.inf-nums__tex, .inf-nums__gloss { position: absolute; inset: 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.inf-nums__gloss { background-image: linear-gradient(180deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,.1) 36%, rgba(255,255,255,0) 47%, rgba(255,255,255,0) 82%, rgba(255,255,255,.12) 100%);
+  -webkit-text-stroke: 1.2px rgba(255,255,255,.6); mix-blend-mode: screen; }
+.inf-nums__item--87 .inf-nums__fig { font-size: clamp(96px, 26cqw, 300px); line-height: .9; }
+.inf-nums__item--87 .inf-nums__depth { text-shadow: 0 1px 0 #3a1a26, 0 2px 0 #33161f, 0 3px 0 #2b121a, 0 4px 0 #230e15, 0 5px 0 #1b0a10, 0 -1px 0 rgba(255,255,255,.22), 0 12px 22px rgba(0,0,0,.7), 0 0 46px rgba(238,63,58,.14); }
+.inf-nums__item--87 .inf-nums__tex { background-image: url(../influencers/nums-87-1600.webp); background-position: 32% 50%; background-size: cover; }   /* longhands: the shorthand would reset the clip to the letters */
+.inf-nums__pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(24px, 4cqw, 48px); align-items: end; }
+.inf-nums__pair > .inf-nums__item { container-type: inline-size; }
+.inf-nums__item--365 .inf-nums__fig { font-size: clamp(76px, 32cqw, 160px); line-height: .95; }
+.inf-nums__item--365 .inf-nums__depth { text-shadow: 0 1px 0 #1e3a40, 0 2px 0 #1a3338, 0 3px 0 #162c30, 0 4px 0 #122428, 0 5px 0 #0e1c20, 0 -1px 0 rgba(255,255,255,.22), 0 12px 22px rgba(0,0,0,.7), 0 0 46px rgba(242,61,108,.12); }
+.inf-nums__item--365 .inf-nums__tex { background-image: url(../influencers/nums-365-960.webp); background-position: 50% 45%; background-size: cover; }
+/* infinity: no letter in the face is drawn like it, so a lemniscate (the design's own path, a stroke in an SVG mask):
+   a light rim under the photo, the photo, the gloss; the dark edge and the shadow as stacked drop-shadows */
+.inf-nums__loop { --s: clamp(76px, 32cqw, 160px); position: relative; align-self: flex-start; height: calc(var(--s) * .72); aspect-ratio: 284 / 114; margin-bottom: calc(var(--s) * .13);
+  filter: drop-shadow(0 1.2px 0 #1c2a44) drop-shadow(0 1.2px 0 #18253d) drop-shadow(0 1.2px 0 #142035) drop-shadow(0 1.2px 0 #101a2c) drop-shadow(0 1.2px 0 #0c1423) drop-shadow(0 12px 22px rgba(0,0,0,.6)); }
+.inf-nums__loop > div { position: absolute; inset: 0; -webkit-mask: url(../influencers/nums-loop-32.svg) center / 100% 100% no-repeat; mask: url(../influencers/nums-loop-32.svg) center / 100% 100% no-repeat; }
+.inf-nums__loop > .inf-nums__loop-rim { background: rgba(255,255,255,.6); -webkit-mask-image: url(../influencers/nums-loop-34.svg); mask-image: url(../influencers/nums-loop-34.svg); }
+.inf-nums__loop-tex { background: url(../influencers/nums-inf-720.webp) 50% 80% / cover; }
+.inf-nums__loop-gloss { background: linear-gradient(180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,.1) 36%, rgba(255,255,255,0) 47%, rgba(255,255,255,0) 82%, rgba(255,255,255,.12) 100%); mix-blend-mode: screen; }
+/* under each figure: a light metal line, the number, the name, a line of text */
+.inf-nums__cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin: 0; padding-top: 12px;
+  background: linear-gradient(90deg, #7a7c84, #f0f1f4 28%, #9a9ca4 58%, #dadce1 82%, #7a7c84) top / 100% 1px no-repeat; }
+.inf-nums__n { font-size: 13px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: .04em; color: #c4c6ce; }
+.inf-nums__cap .inf-nums__l { font-size: clamp(13px, 3.4cqw, 18px); letter-spacing: .16em; line-height: 1.2; padding: 0; color: #ff5a61; }
+.inf-nums__d { font-size: 15px; line-height: 1.4; color: #c4c6ce; }
+@media (max-width: 640px) {
+  .inf-nums { padding-top: calc(var(--tq-half) - 20px); }   /* the hero ends 20px under its ticks on phones */
+  .inf-nums__item--87 .inf-nums__tex { background-image: url(../influencers/nums-87-760.webp); }
+  .inf-nums__item--365 .inf-nums__tex { background-image: url(../influencers/nums-365-640.webp); }
+  .inf-nums__loop-tex { background-image: url(../influencers/nums-inf-600.webp); }
 }
 
 /* ---- Creators on platforms (owner's "Creator Platforms Scene"): the planet, the orbit, five creators ------------------
