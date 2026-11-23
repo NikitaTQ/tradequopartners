@@ -66,9 +66,9 @@
    The design's own values; sizes in container units of the block's width (cqw), as in the design. The figures and the
    names are in the headings' face (Syncopate, class tq-h2, so tools/h1-fonts.py puts their letters in its file); the
    design's DM Sans and DM Mono are the site's Inter. Static: nothing moves. */
-/* after the creators scene (owner's wish, November 2026): the scene's half gap above it, the site's gap to the footer
-   under it (phones: half a gap, then the closing call); the card's shadow stays inside the block */
-.inf-nums { container-type: inline-size; background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
+/* after the creators scene (owner's wish, November 2026): half a gap above it (the scene's) and under it (to the trips
+   card); the card's shadow stays inside the block */
+.inf-nums { container-type: inline-size; background: #f3f2f7; padding: 0 0 var(--tq-half); font-family: 'Inter', sans-serif; }
 .inf-nums__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }   /* the creators block's column: the two cards one under the other, edge to edge */
 .inf-nums__card { margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 3cqw, 32px); overflow: hidden; color: #fff;
   background: radial-gradient(80% 60% at 25% 0%, rgba(255,255,255,.14), rgba(255,255,255,0) 60%),
@@ -115,10 +115,84 @@
 .inf-nums__cap .inf-nums__l { font-size: clamp(13px, 3.4cqw, 18px); letter-spacing: .16em; line-height: 1.2; padding: 0; color: #ff5a61; }
 .inf-nums__d { font-size: 15px; line-height: 1.4; color: #c4c6ce; }
 @media (max-width: 640px) {
-  .inf-nums { padding-bottom: var(--tq-half); }
   .inf-nums__item--87 .inf-nums__tex { background-image: url(../influencers/nums-87-760.webp); }
   .inf-nums__item--365 .inf-nums__tex { background-image: url(../influencers/nums-365-640.webp); }
   .inf-nums__loop-tex { background-image: url(../influencers/nums-inf-600.webp); }
+}
+
+/* ---- Incentive trips (owner's "Incentive Trips", 7d "The trip is on us: stories"): three trip stories in chrome frames
+   and "THE TRIP IS ON US." on a dark card, after the numbers, the same width. The design's values; its DM Sans and DM
+   Mono are the site's Inter, its display face the headings' Syncopate (tq-h2). Two columns once the card is 828px wide
+   (container query on the column), else the stories over the text. The stories are sized by their column, the text by
+   its own (container units), as in the design. The only motion: the water in "ON US." drifting (22s there and back),
+   running only while the block is on screen (orbit.js sets .is-on) and never under reduced motion. */
+.inf-trip { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
+.inf-trip__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; container-type: inline-size; }
+.inf-trip__card { margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 3cqw, 32px); overflow: hidden; color: #fff;
+  background: radial-gradient(50% 60% at 30% 55%, rgba(242,166,90,.16), rgba(0,0,0,0) 70%), radial-gradient(50% 50% at 85% 10%, rgba(200,21,29,.12), rgba(0,0,0,0) 70%), #0e0e11;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 40px 60px -30px rgba(14,14,16,.7);
+  padding: clamp(32px, 6cqw, 72px) clamp(14px, 5cqw, 64px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(40px, 6cqw, 72px); align-items: center; }
+@container (min-width: 828px) { .inf-trip__card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+/* the stories: the middle one larger, in front, with a red glow; the side ones turned 9deg out and tucked under it.
+   Sized by their column (40% / 47.6% of it, up to the design's 210 / 250px), so the fan stays inside the card */
+.inf-trip__fan { container-type: inline-size; display: flex; justify-content: center; align-items: center; padding: clamp(10px, 3cqw, 30px) 0; }
+.inf-trip__story { --w: clamp(128px, 40cqw, 210px); position: relative; flex: none; width: var(--w); aspect-ratio: 9 / 16; box-sizing: border-box; padding: 4px; border-radius: 24px; z-index: 1;
+  background: linear-gradient(160deg, #f4f5f8, #8a8c94 45%, #e2e3e8 70%, #6e7078); box-shadow: 0 30px 50px -20px rgba(0,0,0,.85); }
+.inf-trip__story--1 { transform: rotate(-9deg) translateY(22px); margin-inline-end: calc(var(--w) * -.26); }
+.inf-trip__story--3 { transform: rotate(9deg) translateY(22px); margin-inline-start: calc(var(--w) * -.26); }
+.inf-trip__story--2 { --w: clamp(150px, 47.6cqw, 250px); z-index: 2; border-radius: 26px; background: linear-gradient(160deg, #fff, #9a9ca4 45%, #ecedf1 70%, #7a7c84);
+  box-shadow: 0 0 0 1px rgba(227,37,46,.45), 0 0 44px -6px rgba(227,37,46,.5), 0 40px 60px -20px rgba(0,0,0,.9); }
+.inf-trip__screen { position: relative; width: 100%; height: 100%; border-radius: 20px; overflow: hidden; }
+.inf-trip__story--2 .inf-trip__screen { border-radius: 22px; }
+.inf-trip__photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.inf-trip__story--1 .inf-trip__photo { background-color: #5bb6d8; background-image: linear-gradient(180deg, #9ed8f0 0%, #5bb6d8 48%, #e8d2a6 84%, #c9a877 100%); }
+.inf-trip__story--2 .inf-trip__photo { background-color: #5fa9c0; background-image: linear-gradient(180deg, #f6d7b0 0%, #f0a77e 30%, #5fa9c0 52%, #0e5d74 100%); }
+.inf-trip__story--3 .inf-trip__photo { background-color: #c24e4e; background-image: linear-gradient(180deg, #2b1830 0%, #7a2e44 35%, #c24e4e 60%, #f2a65a 100%); }
+.inf-trip__screen::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 62%, rgba(0,0,0,.6) 100%); }
+.inf-trip__story--2 .inf-trip__screen::after { background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 60%, rgba(0,0,0,.62) 100%); }
+.inf-trip__bars { position: absolute; z-index: 1; left: 8px; right: 8px; top: 8px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.inf-trip__bars span { height: 2px; border-radius: 2px; background: rgba(255,255,255,.4); }
+.inf-trip__bars span:first-child, .inf-trip__story--3 .inf-trip__bars span { background: #fff; }
+.inf-trip__story--2 .inf-trip__bars { left: 9px; right: 9px; top: 9px; }
+.inf-trip__story--2 .inf-trip__bars span:nth-child(2) { background: linear-gradient(90deg, #fff 50%, rgba(255,255,255,.4) 50%); }
+.inf-trip__who { position: absolute; z-index: 1; left: 10px; right: 8px; top: 20px; display: flex; align-items: center; gap: 7px; font-size: 11px; line-height: 1.2; }
+.inf-trip__who b { white-space: nowrap; }
+.inf-trip__who img { flex: none; box-sizing: border-box; width: 24px; height: 24px; padding: 6px 5px; border-radius: 50%; background: #0e0e11; box-shadow: 0 0 0 1.5px #ff4a52; object-fit: contain; }
+.inf-trip__who span { color: rgba(255,255,255,.75); }
+.inf-trip__cap { position: absolute; z-index: 1; left: 10px; right: 30%; bottom: 12px; margin: 0; font-weight: 700; font-size: clamp(9px, 2.6cqw, 12px); line-height: 1.4; }
+.inf-trip__story--2 .inf-trip__cap { left: 12px; right: 12px; bottom: 14px; font-size: clamp(10px, 3cqw, 14px); }
+.inf-trip__story--3 .inf-trip__cap { left: 30%; right: 10px; text-align: right; }
+.inf-trip__cap .tq-h2 { font-size: 1em; letter-spacing: .12em; line-height: 1.4; padding: 0; text-wrap: nowrap; }
+.inf-trip__day { font-weight: 500; letter-spacing: .12em; text-transform: uppercase; font-variant-numeric: tabular-nums; color: #ffb3b6; }
+
+/* the text */
+.inf-trip__text { container-type: inline-size; display: flex; flex-direction: column; gap: clamp(18px, 4cqw, 26px); min-width: 0; }
+.inf-trip__text .inf-trip__eyebrow { margin: 0; font-size: 13px; letter-spacing: .24em; line-height: 1.3; padding: 0; color: #ff4a52; }
+.inf-trip__h2 { margin: 0; display: flex; flex-direction: column; gap: 4px; font-weight: 700; }
+.inf-trip__h2 .inf-trip__l1 { font-size: clamp(24px, 8.4cqw, 54px); letter-spacing: .04em; line-height: 1.05; padding: 0; }
+.inf-trip__big { position: relative; align-self: flex-start; font-size: clamp(44px, 16.5cqw, 112px); line-height: .95; }
+.inf-trip__big .tq-h2 { font-size: 1em; letter-spacing: -.04em; line-height: inherit; padding: 0; text-wrap: nowrap; max-width: none; }
+.inf-trip__depth { display: block; color: transparent; text-shadow: 0 1px 0 #0b4a55, 0 2px 0 #09404a, 0 3px 0 #07363f, 0 4px 0 #052c34, 0 5px 0 #042229, 0 -1px 0 rgba(255,255,255,.25), 0 14px 24px rgba(0,0,0,.55), 0 0 50px rgba(46,194,198,.18); }
+.inf-trip__water, .inf-trip__gloss { position: absolute; inset: 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.inf-trip__water { background-image: url(../influencers/nums-water-1600.webp); background-position: 0% 35%; background-size: 220% auto;
+  animation: inf-trip-drift 22s ease-in-out infinite alternate; animation-play-state: paused; }
+.inf-trip.is-on .inf-trip__water { animation-play-state: running; }
+@keyframes inf-trip-drift { from { background-position: 0% 35%; } to { background-position: 100% 65%; } }
+@media (prefers-reduced-motion: reduce) { .inf-trip__water { animation: none; } }
+.inf-trip__gloss { background-image: linear-gradient(180deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,.1) 36%, rgba(255,255,255,0) 47%, rgba(255,255,255,0) 82%, rgba(255,255,255,.12) 100%);
+  -webkit-text-stroke: 1.2px rgba(230,255,252,.6); mix-blend-mode: screen; }
+.inf-trip__p { margin: 0; max-width: 440px; font-size: clamp(16px, 4.2cqw, 18px); line-height: 1.55; color: #c4c6ce; text-wrap: pretty; }
+.inf-trip__rows { margin: 0; padding: 0; list-style: none; }
+.inf-trip__rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0;
+  background: linear-gradient(90deg, #6e7078, #e6e7ec 28%, #8a8c94 58%, #cfd1d7 82%, #6e7078) top / 100% 1px no-repeat; }
+.inf-trip__rows li:last-child { background: linear-gradient(90deg, #6e7078, #e6e7ec 28%, #8a8c94 58%, #cfd1d7 82%, #6e7078) top / 100% 1px no-repeat, linear-gradient(90deg, #6e7078, #e6e7ec 28%, #8a8c94 58%, #cfd1d7 82%, #6e7078) bottom / 100% 1px no-repeat; }
+.inf-trip__rows span { font-size: 15px; color: #c4c6ce; }
+.inf-trip__rows b { font-size: 13px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; color: #fff; }
+.inf-trip__rows .inf-trip__red { color: #ff4a52; }
+@media (max-width: 640px) {
+  .inf-trip { padding-bottom: var(--tq-half); }
+  .inf-trip__water { background-image: url(../influencers/nums-water-900.webp); }
 }
 
 /* ---- Creators on platforms (owner's "Creator Platforms Scene"): the planet, the orbit, five creators ------------------
@@ -264,12 +338,12 @@
   .inf-orbit__head { gap: 10px; margin-bottom: clamp(18px, 2vw, 28px); }
   .inf-orbit__sub { max-width: none; white-space: nowrap; font-size: clamp(14px, 1.2vw, 17px); }
   .inf-orbit__card { max-width: calc((100vh - 250px) * 1774 / 975); margin: 0 auto; }
-  .inf-nums__card { max-width: calc((100vh - 250px) * 1774 / 975); }   /* the numbers card under it: the same width */
+  .inf-nums__card, .inf-trip__card { max-width: calc((100vh - 250px) * 1774 / 975); }   /* the numbers and trips cards under it: the same width */
 }
 @media (min-width: 641px) and (max-width: 900px) {
   .inf-orbit__sub .tq-nph { display: none; }
   .inf-orbit__sub .tq-ph { display: inline; }
 }
 @supports (height: 100svh) {
-  @media (min-width: 641px) { .inf-orbit__card, .inf-nums__card { max-width: calc((100svh - 250px) * 1774 / 975); } }
+  @media (min-width: 641px) { .inf-orbit__card, .inf-nums__card, .inf-trip__card { max-width: calc((100svh - 250px) * 1774 / 975); } }
 }

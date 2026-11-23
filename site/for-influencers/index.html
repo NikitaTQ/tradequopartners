@@ -900,7 +900,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-cta__dot { width: 40px; height: 40px; }
 .inf-hero__ticks { order: 5; margin-top: 14px; font-size: 12.5px; gap: 6px 16px; }
 }
-.inf-nums { container-type: inline-size; background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
+.inf-nums { container-type: inline-size; background: #f3f2f7; padding: 0 0 var(--tq-half); font-family: 'Inter', sans-serif; }
 .inf-nums__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
 .inf-nums__card { margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 3cqw, 32px); overflow: hidden; color: #fff;
   background: radial-gradient(80% 60% at 25% 0%, rgba(255,255,255,.14), rgba(255,255,255,0) 60%),
@@ -941,10 +941,76 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-nums__cap .inf-nums__l { font-size: clamp(13px, 3.4cqw, 18px); letter-spacing: .16em; line-height: 1.2; padding: 0; color: #ff5a61; }
 .inf-nums__d { font-size: 15px; line-height: 1.4; color: #c4c6ce; }
 @media (max-width: 640px) {
-.inf-nums { padding-bottom: var(--tq-half); }
 .inf-nums__item--87 .inf-nums__tex { background-image: url(../assets/influencers/nums-87-760.webp?v=34c1ca0e50); }
 .inf-nums__item--365 .inf-nums__tex { background-image: url(../assets/influencers/nums-365-640.webp?v=0776aafb9a); }
 .inf-nums__loop-tex { background-image: url(../assets/influencers/nums-inf-600.webp?v=ae3b6d15ca); }
+}
+.inf-trip { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
+.inf-trip__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; container-type: inline-size; }
+.inf-trip__card { margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 3cqw, 32px); overflow: hidden; color: #fff;
+  background: radial-gradient(50% 60% at 30% 55%, rgba(242,166,90,.16), rgba(0,0,0,0) 70%), radial-gradient(50% 50% at 85% 10%, rgba(200,21,29,.12), rgba(0,0,0,0) 70%), #0e0e11;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 40px 60px -30px rgba(14,14,16,.7);
+  padding: clamp(32px, 6cqw, 72px) clamp(14px, 5cqw, 64px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(40px, 6cqw, 72px); align-items: center; }
+@container (min-width: 828px) {
+.inf-trip__card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+.inf-trip__fan { container-type: inline-size; display: flex; justify-content: center; align-items: center; padding: clamp(10px, 3cqw, 30px) 0; }
+.inf-trip__story { --w: clamp(128px, 40cqw, 210px); position: relative; flex: none; width: var(--w); aspect-ratio: 9 / 16; box-sizing: border-box; padding: 4px; border-radius: 24px; z-index: 1;
+  background: linear-gradient(160deg, #f4f5f8, #8a8c94 45%, #e2e3e8 70%, #6e7078); box-shadow: 0 30px 50px -20px rgba(0,0,0,.85); }
+.inf-trip__story--1 { transform: rotate(-9deg) translateY(22px); margin-inline-end: calc(var(--w) * -.26); }
+.inf-trip__story--3 { transform: rotate(9deg) translateY(22px); margin-inline-start: calc(var(--w) * -.26); }
+.inf-trip__story--2 { --w: clamp(150px, 47.6cqw, 250px); z-index: 2; border-radius: 26px; background: linear-gradient(160deg, #fff, #9a9ca4 45%, #ecedf1 70%, #7a7c84);
+  box-shadow: 0 0 0 1px rgba(227,37,46,.45), 0 0 44px -6px rgba(227,37,46,.5), 0 40px 60px -20px rgba(0,0,0,.9); }
+.inf-trip__screen { position: relative; width: 100%; height: 100%; border-radius: 20px; overflow: hidden; }
+.inf-trip__story--2 .inf-trip__screen { border-radius: 22px; }
+.inf-trip__photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.inf-trip__story--1 .inf-trip__photo { background-color: #5bb6d8; background-image: linear-gradient(180deg, #9ed8f0 0%, #5bb6d8 48%, #e8d2a6 84%, #c9a877 100%); }
+.inf-trip__story--2 .inf-trip__photo { background-color: #5fa9c0; background-image: linear-gradient(180deg, #f6d7b0 0%, #f0a77e 30%, #5fa9c0 52%, #0e5d74 100%); }
+.inf-trip__story--3 .inf-trip__photo { background-color: #c24e4e; background-image: linear-gradient(180deg, #2b1830 0%, #7a2e44 35%, #c24e4e 60%, #f2a65a 100%); }
+.inf-trip__screen::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 62%, rgba(0,0,0,.6) 100%); }
+.inf-trip__story--2 .inf-trip__screen::after { background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 60%, rgba(0,0,0,.62) 100%); }
+.inf-trip__bars { position: absolute; z-index: 1; left: 8px; right: 8px; top: 8px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.inf-trip__bars span { height: 2px; border-radius: 2px; background: rgba(255,255,255,.4); }
+.inf-trip__bars span:first-child, .inf-trip__story--3 .inf-trip__bars span { background: #fff; }
+.inf-trip__story--2 .inf-trip__bars { left: 9px; right: 9px; top: 9px; }
+.inf-trip__story--2 .inf-trip__bars span:nth-child(2) { background: linear-gradient(90deg, #fff 50%, rgba(255,255,255,.4) 50%); }
+.inf-trip__who { position: absolute; z-index: 1; left: 10px; right: 8px; top: 20px; display: flex; align-items: center; gap: 7px; font-size: 11px; line-height: 1.2; }
+.inf-trip__who b { white-space: nowrap; }
+.inf-trip__who img { flex: none; box-sizing: border-box; width: 24px; height: 24px; padding: 6px 5px; border-radius: 50%; background: #0e0e11; box-shadow: 0 0 0 1.5px #ff4a52; object-fit: contain; }
+.inf-trip__who span { color: rgba(255,255,255,.75); }
+.inf-trip__cap { position: absolute; z-index: 1; left: 10px; right: 30%; bottom: 12px; margin: 0; font-weight: 700; font-size: clamp(9px, 2.6cqw, 12px); line-height: 1.4; }
+.inf-trip__story--2 .inf-trip__cap { left: 12px; right: 12px; bottom: 14px; font-size: clamp(10px, 3cqw, 14px); }
+.inf-trip__story--3 .inf-trip__cap { left: 30%; right: 10px; text-align: right; }
+.inf-trip__cap .tq-h2 { font-size: 1em; letter-spacing: .12em; line-height: 1.4; padding: 0; text-wrap: nowrap; }
+.inf-trip__day { font-weight: 500; letter-spacing: .12em; text-transform: uppercase; font-variant-numeric: tabular-nums; color: #ffb3b6; }
+.inf-trip__text { container-type: inline-size; display: flex; flex-direction: column; gap: clamp(18px, 4cqw, 26px); min-width: 0; }
+.inf-trip__text .inf-trip__eyebrow { margin: 0; font-size: 13px; letter-spacing: .24em; line-height: 1.3; padding: 0; color: #ff4a52; }
+.inf-trip__h2 { margin: 0; display: flex; flex-direction: column; gap: 4px; font-weight: 700; }
+.inf-trip__h2 .inf-trip__l1 { font-size: clamp(24px, 8.4cqw, 54px); letter-spacing: .04em; line-height: 1.05; padding: 0; }
+.inf-trip__big { position: relative; align-self: flex-start; font-size: clamp(44px, 16.5cqw, 112px); line-height: .95; }
+.inf-trip__big .tq-h2 { font-size: 1em; letter-spacing: -.04em; line-height: inherit; padding: 0; text-wrap: nowrap; max-width: none; }
+.inf-trip__depth { display: block; color: transparent; text-shadow: 0 1px 0 #0b4a55, 0 2px 0 #09404a, 0 3px 0 #07363f, 0 4px 0 #052c34, 0 5px 0 #042229, 0 -1px 0 rgba(255,255,255,.25), 0 14px 24px rgba(0,0,0,.55), 0 0 50px rgba(46,194,198,.18); }
+.inf-trip__water, .inf-trip__gloss { position: absolute; inset: 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.inf-trip__water { background-image: url(../assets/influencers/nums-water-1600.webp?v=834c930de2); background-position: 0% 35%; background-size: 220% auto;
+  animation: inf-trip-drift 22s ease-in-out infinite alternate; animation-play-state: paused; }
+.inf-trip.is-on .inf-trip__water { animation-play-state: running; }
+@keyframes inf-trip-drift { from { background-position: 0% 35%; } to { background-position: 100% 65%; } }
+@media (prefers-reduced-motion: reduce) {
+.inf-trip__water { animation: none; }
+}
+.inf-trip__gloss { background-image: linear-gradient(180deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,.1) 36%, rgba(255,255,255,0) 47%, rgba(255,255,255,0) 82%, rgba(255,255,255,.12) 100%);
+  -webkit-text-stroke: 1.2px rgba(230,255,252,.6); mix-blend-mode: screen; }
+.inf-trip__p { margin: 0; max-width: 440px; font-size: clamp(16px, 4.2cqw, 18px); line-height: 1.55; color: #c4c6ce; text-wrap: pretty; }
+.inf-trip__rows { margin: 0; padding: 0; list-style: none; }
+.inf-trip__rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0;
+  background: linear-gradient(90deg, #6e7078, #e6e7ec 28%, #8a8c94 58%, #cfd1d7 82%, #6e7078) top / 100% 1px no-repeat; }
+.inf-trip__rows li:last-child { background: linear-gradient(90deg, #6e7078, #e6e7ec 28%, #8a8c94 58%, #cfd1d7 82%, #6e7078) top / 100% 1px no-repeat, linear-gradient(90deg, #6e7078, #e6e7ec 28%, #8a8c94 58%, #cfd1d7 82%, #6e7078) bottom / 100% 1px no-repeat; }
+.inf-trip__rows span { font-size: 15px; color: #c4c6ce; }
+.inf-trip__rows b { font-size: 13px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; color: #fff; }
+.inf-trip__rows .inf-trip__red { color: #ff4a52; }
+@media (max-width: 640px) {
+.inf-trip { padding-bottom: var(--tq-half); }
+.inf-trip__water { background-image: url(../assets/influencers/nums-water-900.webp?v=2c76a15a54); }
 }
 @property --r { syntax: '<length>'; inherits: true; initial-value: 0px; }
 @property --tl { syntax: '<color>'; inherits: true; initial-value: #2f1b20; }
@@ -1058,7 +1124,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-orbit__head { gap: 10px; margin-bottom: clamp(18px, 2vw, 28px); }
 .inf-orbit__sub { max-width: none; white-space: nowrap; font-size: clamp(14px, 1.2vw, 17px); }
 .inf-orbit__card { max-width: calc((100vh - 250px) * 1774 / 975); margin: 0 auto; }
-.inf-nums__card { max-width: calc((100vh - 250px) * 1774 / 975); }
+.inf-nums__card, .inf-trip__card { max-width: calc((100vh - 250px) * 1774 / 975); }
 }
 @media (min-width: 641px) and (max-width: 900px) {
 .inf-orbit__sub .tq-nph { display: none; }
@@ -1066,7 +1132,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 }
 @supports (height: 100svh) {
 @media (min-width: 641px) {
-.inf-orbit__card, .inf-nums__card { max-width: calc((100svh - 250px) * 1774 / 975); }
+.inf-orbit__card, .inf-nums__card, .inf-trip__card { max-width: calc((100svh - 250px) * 1774 / 975); }
 }
 }
 </style>
@@ -1369,6 +1435,61 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </div>
     </section>
 
+    <!-- Incentive trips (owner's design "Incentive Trips", variant 7d "The trip is on us: stories", November 2026): a dark
+         card; on one side three stories of a partner trip fanned out in chrome frames (day 1 arrivals, day 2 on the water
+         in the middle, larger, with a red glow, day 3 a sunset dinner), on the other "Incentive trips", "THE TRIP IS ON
+         US." (its "ON US." filled with water that drifts slowly: the block's only animation, running only while the
+         block is on screen, orbit.js) and three lines (flights and stay, the yacht day and dinners: covered; how you
+         qualify: results). The stories carry the design's own colours for now (their photos are to come: a picture
+         goes in each .inf-trip__photo). Phones: the stories over the text. -->
+    <section id="trips" class="inf-trip" data-trip data-screen-label="Incentive trips">
+      <div class="inf-trip__in">
+        <div class="inf-trip__card">
+          <div class="inf-trip__fan" role="img" aria-label="Three stories from a partner trip: arrivals, a day on the water, a sunset dinner">
+              <div class="inf-trip__story inf-trip__story--1">
+                <div class="inf-trip__screen">
+                  <div class="inf-trip__photo"></div>
+                  <div class="inf-trip__bars"><span></span><span></span><span></span></div>
+                  <p class="inf-trip__cap"><span class="inf-trip__day">Day 01</span><br><span class="tq-h2">Arrivals</span></p>
+                </div>
+              </div>
+              <div class="inf-trip__story inf-trip__story--2">
+                <div class="inf-trip__screen">
+                  <div class="inf-trip__photo"></div>
+                  <div class="inf-trip__bars"><span></span><span></span><span></span></div>
+                  <div class="inf-trip__who"><img src="../assets/influencers/nums-mark.webp?v=c4ff069a1f" width="105" height="84" alt=""><b>tradequo</b><span>partner trip</span></div>
+                  <p class="inf-trip__cap"><span class="inf-trip__day">Day 02</span><br><span class="tq-h2">On the water</span></p>
+                </div>
+              </div>
+              <div class="inf-trip__story inf-trip__story--3">
+                <div class="inf-trip__screen">
+                  <div class="inf-trip__photo"></div>
+                  <div class="inf-trip__bars"><span></span><span></span><span></span></div>
+                  <p class="inf-trip__cap"><span class="inf-trip__day">Day 03</span><br><span class="tq-h2">Sunset<br>dinner</span></p>
+                </div>
+              </div>
+          </div>
+          <div class="inf-trip__text">
+            <p class="inf-trip__eyebrow tq-h2">Incentive trips</p>
+            <h2 class="inf-trip__h2">
+              <span class="inf-trip__l1 tq-h2">The trip is</span>
+              <span class="inf-trip__big">
+                <span class="inf-trip__depth tq-h2" aria-hidden="true">on us.</span>
+                <span class="inf-trip__water tq-h2">on us.</span>
+                <span class="inf-trip__gloss tq-h2" aria-hidden="true">on us.</span>
+              </span>
+            </h2>
+            <p class="inf-trip__p">Each season our top partners travel with the TradeQuo team. Flights, the stay and the yacht day are covered. You come home with the trip and the footage.</p>
+            <ul class="inf-trip__rows">
+              <li><span>Flights and stay</span><b>Covered</b></li>
+              <li><span>Yacht day and dinners</span><b>Covered</b></li>
+              <li><span>How you qualify</span><b class="inf-trip__red">Results</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Final call, phones only (owner's wish, November 2026): the site's closing block (as on IB Tools and Partner Terms:
          .tp-night, .tp-glint, .tp-roll in partner.css), above the footer; hidden from 641px (influencers.css .inf-final) -->
     <section class="tp-night-sec inf-final" data-screen-label="For influencers · Join the program">
@@ -1403,6 +1524,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=9f58850075" defer></script>
-<script src="../assets/js/orbit.js?v=4f49ba75fd" defer></script>
+<script src="../assets/js/orbit.js?v=997a4a6f49" defer></script>
 </body>
 </html>
