@@ -812,7 +812,8 @@
 .tq-ibtp__vis { position: relative; flex: 1 1 520px; max-width: 800px; min-width: 0; direction: ltr; }   /* ltr: the picture, wider than its column, hangs out by its own margins in Arabic too */
 /* the picture has wide empty margins round the cards (x 75-1200, y 115-1035 of 1292x1217): it is drawn larger than its
    column, so that the cards fill the column's width, and its margins hang out (invisible: multiply on the same grey) */
-.tq-ibvs { --s: .55; --pw: 1292; position: relative; width: 115%; margin: -10.2% 0 -16.2% -6.7%; aspect-ratio: 1292 / 1217; }
+.tq-ibvs { --s: .55; --pw: 1292; position: relative; width: 115%; margin: -10.2% 0 calc(-18.17% + max(0px, (1024px - 100vw) * .012)) -6.7%; aspect-ratio: 1292 / 1217; }   /* the foot: to where the cards' soft lower edges fade, less the air above the next block's first line, so the gap under the hero is the site's (side by side, from 1100px: -17%) */
+@media (min-width: 1100px) { .tq-ibvs { margin-bottom: -17%; } }
 .tq-ibvs__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
 .tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
 .tq-ibvs__w > * { position: absolute; display: block; box-sizing: border-box; left: calc(var(--x) * 1px); width: calc((var(--r) - var(--x)) * 1px); top: calc(var(--b) * 1px - .86em);
@@ -902,7 +903,7 @@
    section's data-hl is the lit group (red links and beads, dark rim on its Sub-IB, a dark-edged label), data-act is
    set while a group is hovered: then the label shows its client count and the other groups dim. */
 .tq-ibn { position: relative; overflow: hidden; color: #0a0a0a;
-  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), radial-gradient(44% 48% at 66% 30%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), radial-gradient(30% 40% at 14% 30%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   /* the top fades into the grey of the block above: no seam */
+  background: linear-gradient(#e9eaec, rgba(233,234,236,0) 140px), linear-gradient(0deg, #e9eaec, rgba(233,234,236,0) 140px), radial-gradient(44% 48% at 66% 30%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 72%), radial-gradient(30% 40% at 14% 30%, rgba(255,255,255,.6) 0%, rgba(255,255,255,0) 70%), #e9eaec; }   /* the top and the foot fade into the grey of the blocks round it: no seam (on tablets the white glow reached the foot) */
 .tq-ibn__wrap { position: relative; max-width: 1440px; margin: 0 auto; padding: var(--tq-half) clamp(20px, 5.5vw, 80px); box-sizing: border-box; display: flex; flex-direction: column;
   justify-content: center; gap: clamp(16px, 3.2vh, 36px); }
 .tq-ibn__row { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(32px, 4vw, 56px); }
@@ -915,7 +916,13 @@
 /* the START button and its timer: centred under the text, on the lead's measure (on phones the block's own rule centres it) */
 .tq-ibn .tq-ibx__ctas { max-width: 440px; justify-content: center; }
 .tq-ibn__fig { flex: 1.7 1 520px; min-width: 0; }
-.tq-ibn__stage { position: relative; width: min(100%, max(560px, calc((100vh - 260px) * 1.43))); width: min(100%, max(560px, calc((100svh - 260px) * 1.43))); margin: 0 auto; container-type: inline-size; }
+.tq-ibn__stage { --sw: min(100%, max(560px, calc((100vh - 260px) * 1.43))); position: relative; width: var(--sw); margin: 0 auto; container-type: inline-size; }
+@supports (height: 100svh) { .tq-ibn__stage { --sw: min(100%, max(560px, calc((100svh - 260px) * 1.43))); } }
+/* the diagram's picture is 1000 x 700 with empty bands round the network: 10.3% of its height above, 11.6% below. The row
+   takes only the network itself (negative margins: 0.103 and 0.116 of its height, its width x 0.7), so the block's
+   visible top and foot are the site's half gap from its edges, as every block's (owner's wish, November 2026: the gaps
+   between the blocks all alike) */
+@media (min-width: 641px) { .tq-ibn__stage { margin-top: calc(var(--sw) * -0.0721); margin-bottom: calc(var(--sw) * -0.0812); } .tq-ibn__wrap { padding-bottom: calc(var(--tq-half) - 4px); } }   /* less the air under the timer's line */
 .sib-svg { display: block; width: 100%; height: auto; overflow: visible; }
 .sib-labs { position: absolute; inset: 0; pointer-events: none; }
 .sib-lab { position: absolute; display: flex; align-items: center; gap: .5em; padding: .52em .95em; border-radius: 999px; background: linear-gradient(170deg, rgba(255,255,255,.92), rgba(255,255,255,.62));
@@ -1109,11 +1116,21 @@
   .tq-ibcp .tq-ibcp__stage { justify-content: flex-start; }
   .tq-ibcp .tq-ibcp__in { flex: 1 1 auto; display: flex; flex-direction: column; }
   .tq-ibcp .tq-ibcp__crop { margin-top: auto; }   /* the hands at the foot of the screen (24px above it): the arms come up from below */
-  .tq-ibcp { margin-top: calc(var(--tq-half) - 76px); margin-bottom: calc(var(--tq-half) - 24px); }
+  .tq-ibcp { margin-top: calc(var(--tq-half) - 116px); margin-bottom: calc(var(--tq-half) - 46px); }   /* measured: the words' first line 116px in, the hands fading out 46px above the foot (the site's gap over and under it) */
 }
 /* the copy scene on wide screens: the phone's top shows ~226px into it, so it comes up over the half above it by the rest;
    its arms and note run to its foot, so the half under it is its own margin */
 @media (min-width: 1200px) { .tq-ibcp { margin-top: calc(var(--tq-half) - 226px); margin-bottom: var(--tq-half); } }
+/* ...and under it, the room the scaled composition leaves below it on taller screens (--slack: the stage, less the
+   header's strip, less the 1440 x 900 composition at its scale --z, halved) is taken off the margin, so the gap under the
+   scene stays the site's (owner's wish, November 2026: the gaps between the blocks all alike); the arms fade out into the
+   grey below some 27px before the stage's foot when the composition fills the stage. (Over it the scene's own top strip
+   covers the block above, so a smaller margin there would only hide that block's foot.) */
+@media (min-width: 1200px) {
+  .tq-ibcp { --slack: max(0px, (100vh - var(--hdr) - 900px * var(--z, 1)) / 2);
+    margin-bottom: max(0px, var(--tq-half) - var(--slack) - max(2px, 27px - 1.4 * var(--slack))); }   /* never below 0: the block under it would cut the scene's fading foot with a seam */
+  @supports (height: 100svh) { .tq-ibcp { --slack: max(0px, (100svh - var(--hdr) - 900px * var(--z, 1)) / 2); } }
+}
 /* phones: the hands come up to 60px under the button (not the foot of the screen), and the stage is only as tall as its
    words and hands (--sh, measured by the script under the block), so the block is shorter by the room that was empty;
    the scroll it plays over stays 2.1 screens */
@@ -1131,6 +1148,7 @@
   .tq-ibcp .tq-ibcp__crop { order: 3; }
   .tq-ibcp .tq-ibcp__steps { order: 4; margin-top: 12px; }
   .tq-ibcp .tq-ibcp__step { justify-content: center; text-align: center; }
+  .tq-ibcp { margin-top: calc(var(--tq-half) - 79px); margin-bottom: calc(var(--tq-half) - 39px); }   /* its words start 79px in, the step captions end 39px above the stage's foot */
 }
 
 /* ---- IB Tools: the TradingView Premium block (#premium, in place of the Branded toolkit) -----------------------------
