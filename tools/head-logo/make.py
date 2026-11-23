@@ -5,18 +5,29 @@ of the black is dropped.
 Two files in site/assets/head/:
   logo-partners.webp     one line, as designed (wider screens);
   logo-partners-m.webp   phones (up to 640px, where the bar has ~130px for it): the same pieces stacked, TRADEQUO over
-                         PARTNERS, the mark beside them as tall as the two lines, so its letters stay as large as the
-                         old logo's.
+                         PARTNERS, the mark beside them as tall as the two lines, so its letters are as large as the
+                         old logo's and 1.5px more.
 Both at 3 times their size on the page (sharp on any screen).
 Run:  python3 tools/head-logo/make.py"""
 import os
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageFilter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', '..', 'site', 'assets', 'head')
 
 src = np.asarray(Image.open(os.path.join(HERE, 'design.webp')).convert('RGB')).astype(float)
+# PARTNERS brighter (owner's wish: the design's red read as dark wine on the bar): its red lifted on a soft shoulder
+# (tanh, so its highlights do not clip: the median 126 -> 208), green and blue by the same factor a little less, so
+# the metal keeps its shading and turns a clean red
+R0 = 1140
+part = src[:, R0:]
+r = part[..., 0]
+r2 = 255 * np.tanh(r * 2.2 / 255) / np.tanh(2.2)
+f = r2 / np.maximum(r, 1)
+part[..., 0] = r2
+part[..., 1] = np.clip(part[..., 1] * f * .85, 0, 255)
+part[..., 2] = np.clip(part[..., 2] * f * .85, 0, 255)
 m = src.max(2)
 a = np.clip((m - 7) / (255 - 7), 0, 1)                     # the black's noise (up to ~7) is not ink
 rgb = np.where(a[..., None] > 0, np.clip(src / np.maximum(m, 1)[..., None] * 255, 0, 255), 0)
@@ -30,7 +41,8 @@ PAD = 6
 
 def save(img, name, h):
     """at 3x of h css px"""
-    img = img.resize((round(img.width * h * 3 / img.height), h * 3), Image.LANCZOS)
+    img = img.resize((round(img.width * h * 3 / img.height), round(h * 3)), Image.LANCZOS)
+    img = img.filter(ImageFilter.UnsharpMask(radius=1.2, percent=70, threshold=2))   # the design is soft: crisper edges
     fn = os.path.join(OUT, name)
     img.save(fn, quality=92, alpha_quality=100, method=6)
     print(name, img.size, os.path.getsize(fn), 'bytes')
@@ -38,7 +50,7 @@ def save(img, name, h):
 
 # one line: the whole lockup, cut close
 x0, y0, x1, y1 = MARK[0] - PAD, MARK[1] - PAD, WORD2[2] + PAD, MARK[3] + PAD
-save(im.crop((x0, y0, x1, y1)), 'logo-partners.webp', 23)   # caps 12px, as the old logo's
+save(im.crop((x0, y0, x1, y1)), 'logo-partners.webp', 26)   # caps 13.6px: the old logo's 12px and 1.5px more (owner's wish)
 
 # phones: TRADEQUO over PARTNERS (a line's gap a quarter of the caps), the mark as tall as cap top to second baseline
 CAP, GAP = 88, 24
@@ -58,4 +70,4 @@ st.alpha_composite(w1, (mk.width + mgap, ty))
 st.alpha_composite(w2, (mk.width + mgap, ty + CAP + GAP))
 st = st.crop(st.getbbox())
 st = st.crop((-PAD, -PAD, st.width + PAD, st.height + PAD))
-save(st, 'logo-partners-m.webp', 26)
+save(st, 'logo-partners-m.webp', 30)
