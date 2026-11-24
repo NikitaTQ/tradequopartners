@@ -22,6 +22,8 @@
 <meta name="twitter:description" content="{{@ib.meta.ogDescription}}">
 <meta name="twitter:image" content="https://tradequopartners.com/og.png">
 {{> head}}
+<link rel="preload" href="{{root}}assets/ib/hero-vs.webp" as="image" media="(min-width: 641px)" fetchpriority="high">
+<link rel="preload" href="{{root}}assets/ib/hero-vs-m.webp" as="image" media="(max-width: 640px)" fetchpriority="high">
 </head>
 <body>
 <div class="tp">
@@ -51,7 +53,8 @@
         </div>
         <div class="tq-ibtp__vis">
           <div class="tq-ibvs" dir="ltr">
-            <picture><source media="(max-width: 640px)" srcset="{{root}}assets/ib/hero-vs-m.webp" width="923" height="1080"><img class="tq-ibvs__img" src="{{root}}assets/ib/hero-vs.webp" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
+            <picture><source media="(max-width: 640px)" srcset="{{root}}assets/ib/hero-vs-m.webp" width="923" height="1080"><img class="tq-ibvs__img" src="{{root}}assets/ib/hero-vs.webp" width="1292" height="1217" alt="" fetchpriority="high"></picture>
+            <script>/* the comparison comes in whole: its words lie over the picture, so both wait for the picture (preloaded from the head), 2.5 s at most */(function(){var v=document.currentScript.parentNode,i=v.querySelector('.tq-ibvs__img'),on=function(){v.classList.add('is-in');};if(i.complete&&i.naturalWidth)on();else{i.addEventListener('load',on);i.addEventListener('error',on);setTimeout(on,2500);}})();</script>
             <div class="tq-ibvs__w tq-ibvs__w--them" dir="{{dir}}">
               <span class="tq-ibvs__th" style="--x:116.5;--b:291.2;--r:500" data-fitw>{{ib.win.brokers}}</span>
               <span class="tq-ibvs__tl" style="--x:121;--b:391.7;--r:500" data-fitw>{{ib.win.r1}}</span>

@@ -561,7 +561,7 @@ footer p { font-size: 12px !important; }
 [data-film-box] { container-type: inline-size; }
 .tq-head { --g: 36px; position: sticky; top: 0; z-index: 50; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 24px;
   width: 100%; height: 64px; margin: 0 0 24px; padding: 0 max(clamp(16px, 4vw, 56px), calc((100% - 1328px) / 2));
-  border: 0 solid transparent; border-image: url(../../assets/head/bar.webp?v=62de544001) 0 200 fill / 0 108.5px stretch;
+  border: 0 solid transparent; border-image: url(../../assets/head/bar.webp?v=62de544001) 0 200 fill / 0 108.5px stretch; background-color: #0b0909;   
   transition: transform .35s cubic-bezier(.2,.8,.2,1), height .3s ease, margin-bottom .3s ease, border-image-width .3s ease; }
 .tq-head::after { content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: 100%; height: 52px; pointer-events: none; transition: opacity .3s ease, height .3s ease;
   background: linear-gradient(180deg, rgb(9,8,8) 0%, rgba(9,8,8,.72) 14%, rgba(9,8,8,.49) 28%, rgba(9,8,8,.3) 42%, rgba(9,8,8,.16) 56%, rgba(9,8,8,.07) 70%, rgba(9,8,8,.015) 85%, rgba(9,8,8,0) 100%); }
@@ -1010,6 +1010,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (min-width: 1100px) {
 .tq-ibvs { margin-bottom: -17%; }
 }
+.tq-ibvs { opacity: 0; transition: opacity .35s ease; }
+.tq-ibvs.is-in { opacity: 1; }
 .tq-ibvs__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
 .tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
 .tq-ibvs__w > * { position: absolute; display: block; box-sizing: border-box; left: calc(var(--x) * 1px); width: calc((var(--r) - var(--x)) * 1px); top: calc(var(--b) * 1px - .86em);
@@ -1553,6 +1555,8 @@ html .tq-ibcp { height: calc(var(--sh, 100svh) + 210svh); }
 .tq-ibcp__stage { position: relative; top: auto; }
 }
 </style>
+<link rel="preload" href="../../assets/ib/hero-vs.webp?v=ed67410b3b" as="image" media="(min-width: 641px)" fetchpriority="high">
+<link rel="preload" href="../../assets/ib/hero-vs-m.webp?v=5f5e2a17b4" as="image" media="(max-width: 640px)" fetchpriority="high">
 </head>
 <body>
 <div class="tp">
@@ -1658,7 +1662,8 @@ html .tq-ibcp { height: calc(var(--sh, 100svh) + 210svh); }
         </div>
         <div class="tq-ibtp__vis">
           <div class="tq-ibvs" dir="ltr">
-            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=5f5e2a17b4" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=ed67410b3b" width="1292" height="1217" alt="" decoding="async" fetchpriority="high"></picture>
+            <picture><source media="(max-width: 640px)" srcset="../../assets/ib/hero-vs-m.webp?v=5f5e2a17b4" width="923" height="1080"><img class="tq-ibvs__img" src="../../assets/ib/hero-vs.webp?v=ed67410b3b" width="1292" height="1217" alt="" fetchpriority="high"></picture>
+            <script>/* the comparison comes in whole: its words lie over the picture, so both wait for the picture (preloaded from the head), 2.5 s at most */(function(){var v=document.currentScript.parentNode,i=v.querySelector('.tq-ibvs__img'),on=function(){v.classList.add('is-in');};if(i.complete&&i.naturalWidth)on();else{i.addEventListener('load',on);i.addEventListener('error',on);setTimeout(on,2500);}})();</script>
             <div class="tq-ibvs__w tq-ibvs__w--them" dir="ltr">
               <span class="tq-ibvs__th" style="--x:116.5;--b:291.2;--r:500" data-fitw>Autres programmes</span>
               <span class="tq-ibvs__tl" style="--x:121;--b:391.7;--r:500" data-fitw>Niveaux de sous-IB</span>

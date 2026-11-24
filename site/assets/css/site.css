@@ -716,6 +716,9 @@ html.tq-locked { overflow: hidden; }   /* the page under an open menu or languag
   color: #fff; font: 700 calc(var(--h) * .33)/1 'Inter', system-ui, sans-serif; letter-spacing: -.012em; white-space: nowrap; text-decoration: none;
   transition: transform .25s cubic-bezier(.2,.8,.2,1), filter .25s ease; -webkit-tap-highlight-color: transparent; }
 .tq-gbtn--light { border-image-source: url(../cta/glass-light.webp); color: #0a0a0a; }
+/* /programs/: until the dark glass is in (its preload in programs.html sets .tq-gb1), a plain dark button, so the white
+   words never stand on nothing */
+html:not(.tq-gb1) .tp-pc .tq-gbtn:not(.tq-gbtn--light) { background: linear-gradient(180deg, #2b2b2f 0%, #0b0b0d 100%); border-radius: calc(var(--h) * .2); }
 .tq-gbtn:hover { transform: translateY(-1px); filter: brightness(1.07) saturate(1.05); color: #fff; }
 .tq-gbtn--light:hover { color: #0a0a0a; }
 .tq-gbtn:active { transform: translateY(0) scale(.985); }
@@ -952,7 +955,7 @@ html.tq-liquid .tq-glass, html.tq-liquid .tp-glass { backdrop-filter: url(#tq-li
    full-screen scene (startStickyHead in landing.js). */
 .tq-head { --g: 36px; position: sticky; top: 0; z-index: 50; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 24px;
   width: 100%; height: 64px; margin: 0 0 24px; padding: 0 max(clamp(16px, 4vw, 56px), calc((100% - 1328px) / 2));
-  border: 0 solid transparent; border-image: url(../head/bar.webp) 0 200 fill / 0 108.5px stretch;
+  border: 0 solid transparent; border-image: url(../head/bar.webp) 0 200 fill / 0 108.5px stretch; background-color: #0b0909;   /* the bar's own dark under it: dark from the first paint, before its picture is in */
   transition: transform .35s cubic-bezier(.2,.8,.2,1), height .3s ease, margin-bottom .3s ease, border-image-width .3s ease; }
 .tq-head::after { content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: 100%; height: 52px; pointer-events: none; transition: opacity .3s ease, height .3s ease;
   background: linear-gradient(180deg, rgb(9,8,8) 0%, rgba(9,8,8,.72) 14%, rgba(9,8,8,.49) 28%, rgba(9,8,8,.3) 42%, rgba(9,8,8,.16) 56%, rgba(9,8,8,.07) 70%, rgba(9,8,8,.015) 85%, rgba(9,8,8,0) 100%); }
