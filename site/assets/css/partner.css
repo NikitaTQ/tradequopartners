@@ -814,7 +814,8 @@
    column, so that the cards fill the column's width, and its margins hang out (invisible: multiply on the same grey) */
 .tq-ibvs { --s: .55; --pw: 1292; position: relative; width: 115%; margin: -10.2% 0 calc(-18.17% + max(0px, (1024px - 100vw) * .012)) -6.7%; aspect-ratio: 1292 / 1217; }   /* the foot: to where the cards' soft lower edges fade, less the air above the next block's first line, so the gap under the hero is the site's (side by side, from 1100px: -17%) */
 @media (min-width: 1100px) { .tq-ibvs { margin-bottom: -17%; } }
-.tq-ibvs { opacity: 0; transition: opacity .35s ease; }   /* in once its picture is (the script in ibtools.html): never its words alone */
+.tq-ibvs { opacity: 0; }   /* in once its picture is (the script in ibtools.html): never its words alone. No fade: while an
+   ancestor's opacity is under 1 the picture's multiply has nothing to blend with and shows its white box */
 .tq-ibvs.is-in { opacity: 1; }
 .tq-ibvs__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
 .tq-ibvs__w { position: absolute; left: 0; top: 0; width: 1292px; height: 1217px; transform: scale(var(--s)); transform-origin: 0 0; font-family: 'Inter', system-ui, sans-serif; }
