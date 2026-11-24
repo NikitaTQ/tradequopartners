@@ -15,7 +15,7 @@ Run after editing anything in site/assets/ or site/embeds/:
 
     python3 tools/stamp-assets.py
 """
-import hashlib
+import base64, hashlib
 import os
 import re
 from urllib.parse import urlsplit, parse_qsl, urlencode
@@ -203,6 +203,25 @@ def inline_css(page):
             f.write(out)
         print('inlined css into', os.path.relpath(page, ROOT))
 
+H1_PRELOAD = re.compile(r'<link rel="preload" href="([./]*)assets/fonts/h1/([a-z-]+)\.woff2[^"]*" as="font"[^>]*>\n?')
+
+
+def inline_h1_font(page):
+    """the page's H1 face (its language's, preloaded from the head, ~9 KB) into the page itself, as a data URI in its
+    @font-face: the heading draws with the first paint (its faces are font-display: block, so a heading waiting for
+    its file showed a moment later than the rest). Other faces stay files."""
+    html = open(page, encoding='utf-8').read()
+    m = H1_PRELOAD.search(html)
+    if not m:
+        return
+    name = m.group(2)
+    data = base64.b64encode(open(os.path.join(SITE, 'assets', 'fonts', 'h1', name + '.woff2'), 'rb').read()).decode()
+    out = H1_PRELOAD.sub('', html, count=1)
+    out = re.sub(r'url\([./]*assets/fonts/h1/%s\.woff2(?:\?[^)]*)?\)' % re.escape(name), 'url(data:font/woff2;base64,%s)' % data, out)
+    with open(page, 'w', encoding='utf-8') as f:
+        f.write(out)
+
+
 # Embeds first: stamping changes their content, and the pages link them by hash.
 embeds = os.path.join(SITE, 'embeds')
 for name in sorted(os.listdir(embeds)):
@@ -214,3 +233,4 @@ for dirpath, dirnames, filenames in os.walk(SITE):
         if name.endswith('.html'):
             inline_css(os.path.join(dirpath, name))
             stamp(os.path.join(dirpath, name))
+            inline_h1_font(os.path.join(dirpath, name))
