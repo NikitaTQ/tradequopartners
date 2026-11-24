@@ -54,23 +54,24 @@
    ZCOOL lacks some of its characters). Each file holds only the characters of the
    headings, a few KB (the H1s' in one file, preloaded; the H2s' in another, -h2): tools/h1-fonts.py fetches them
    again when a heading changes. A word too wide for the screen steps the
-   size down (data-fitw, landing.js). Scripts without capitals keep their spacing, a size up. */
-@font-face { font-family: 'TQ H1 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/syncopate.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/unbounded.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/reem-kufi.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/prompt.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/dela-gothic-one.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/black-han-sans.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/zcool-qingke-sc.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/noto-sans-tc.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/syncopate-h2.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/unbounded-h2.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/reem-kufi-h2.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/prompt-h2.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/dela-gothic-one-h2.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/black-han-sans-h2.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/zcool-qingke-sc-h2.woff2) format('woff2'); }
-@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/h1/noto-sans-tc-h2.woff2) format('woff2'); }
+   size down (data-fitw, landing.js). font-display: block (owner's wish, November 2026): a heading waits the moment
+   its small subset takes rather than showing in a fallback face and jumping to its own. Scripts without capitals keep their spacing, a size up. */
+@font-face { font-family: 'TQ H1 Syncopate'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/syncopate.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Unbounded'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/unbounded.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Reem Kufi'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/reem-kufi.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Prompt'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/prompt.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/dela-gothic-one.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Black Han Sans'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/black-han-sans.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/zcool-qingke-sc.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H1 Noto TC'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/noto-sans-tc.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H2 Syncopate'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/syncopate-h2.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H2 Unbounded'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/unbounded-h2.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H2 Reem Kufi'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/reem-kufi-h2.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H2 Prompt'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/prompt-h2.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H2 Dela Gothic One'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/dela-gothic-one-h2.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H2 Black Han Sans'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/black-han-sans-h2.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H2 ZCOOL SC'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/zcool-qingke-sc-h2.woff2) format('woff2'); }
+@font-face { font-family: 'TQ H2 Noto TC'; font-style: normal; font-weight: 700; font-display: block; src: url(../fonts/h1/noto-sans-tc-h2.woff2) format('woff2'); }
 html { --h1f: 'TQ H1 Syncopate'; --h2f: 'TQ H2 Syncopate'; }
 html:lang(uk), html:lang(vi), html:lang(ro) { --h1f: 'TQ H1 Unbounded'; --h2f: 'TQ H2 Unbounded'; }
 html:lang(ar) { --h1f: 'TQ H1 Reem Kufi'; --h2f: 'TQ H2 Reem Kufi'; }
