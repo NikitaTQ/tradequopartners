@@ -1269,7 +1269,8 @@ try{var c=/(?:^|; )tq_utm=([^;]*)/.exec(document.cookie),u=c?JSON.parse(decodeUR
 new URLSearchParams(location.search).forEach(function(v,k){if(/^utm_[a-z]+$/.test(k)&&v)q.set(k,v);});
 var last=0;try{last=+localStorage.getItem(K)||0;}catch(e){}if(last>200&&last<2000)box.style.height=last+'px';
 var ready=false,loaded=false,moved=false,h0=0,t=0,sk=box.querySelector('.tq-ghl-skel');
-var fit=function(){var h=f.offsetHeight;if(h<200)return;box.style.height=(h-14)+'px';};   /* the form's own card ends in a shadowed edge at its foot: its last 14px (empty but for that edge) are cut off */
+var CUT_T=26,CUT_B=36;f.style.marginTop=-CUT_T+'px';
+var fit=function(){var h=f.offsetHeight;if(h<200)return;box.style.height=(h-CUT_T-CUT_B)+'px';};   /* the form's own empty room above its first field and under its button (with its card's shadowed edge) is cut off: the fields and the perks under them sit closer */
 var show=function(){if(ready)return;ready=true;f.style.opacity='1';if(sk)sk.style.opacity='0';fit();try{localStorage.setItem(K,f.offsetHeight);}catch(e){}setTimeout(function(){if(sk)sk.remove();},600);};
 var settle=function(){clearTimeout(t);t=setTimeout(function(){if((loaded||moved)&&f.offsetHeight>=200)show();},300);};
 if(window.ResizeObserver)new ResizeObserver(function(){var h=f.offsetHeight;if(!h0)h0=h;else if(h!==h0)moved=true;if(ready)fit();else settle();}).observe(f);
