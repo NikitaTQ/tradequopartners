@@ -110,9 +110,7 @@
 @property --rh { syntax: '<length>'; inherits: true; initial-value: 120px; }
 .inf-nums { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
 .inf-nums__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
-.inf-nums__card { margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 2.4vw, 30px); background: #f9f8fd; color: #0b0b0d;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.9), 0 30px 60px -34px rgba(20,18,40,.28), 0 2px 6px rgba(20,18,40,.05);
-  padding: clamp(26px, 4vw, 56px) clamp(14px, 2.6vw, 40px) clamp(22px, 3vw, 44px); }
+.inf-nums__card { margin: 0 auto; color: #0b0b0d; }   /* no card of its own (owner's wish): the rows on the page */
 .inf-nums__h2 { margin: 0 0 clamp(14px, 2vw, 26px); padding-inline-start: clamp(10px, 2vw, 28px); font-size: clamp(13px, 1.5vw, 20px); font-weight: 700; line-height: 1.35; }
 .inf-nums__h2 .tq-h2 { font-size: 1em; letter-spacing: .16em; line-height: 1.35; padding: 0; text-wrap: nowrap; }
 .inf-nums__red { color: #d4142a; }
@@ -122,6 +120,14 @@
   border: 0 solid transparent; border-image: url(../influencers/nums-row.webp) 128 155 fill / calc(var(--rh) / 2) calc(var(--rh) * .603) stretch;
   transition: --rh .5s cubic-bezier(.2,.8,.2,1); }
 .inf-nums__row.is-open, .inf-nums__row:focus-visible { --rh: clamp(140px, 16vw, 222px); }
+/* the open row's light: a soft red glow at its two ends (over the glass rim, a little past it), fading in and out as
+   the pointer moves from row to row */
+.inf-nums__row::after { content: ''; position: absolute; z-index: 1; inset: 4% calc(var(--rh) * -.05); pointer-events: none; opacity: 0; transition: opacity .45s ease;
+  background: radial-gradient(closest-side, rgba(231,19,27,.24), rgba(231,19,27,.08) 55%, rgba(231,19,27,0)) 0 50% / calc(var(--rh) * .36) 78% no-repeat,
+    radial-gradient(closest-side, rgba(231,19,27,.24), rgba(231,19,27,.08) 55%, rgba(231,19,27,0)) 100% 50% / calc(var(--rh) * .36) 78% no-repeat;
+  filter: blur(4px); }
+.inf-nums__row.is-open::after, .inf-nums__row:focus-visible::after { opacity: 1; }
+@media (hover: hover) and (pointer: fine) { .inf-nums__row:hover::after { opacity: 1; } }
 @media (hover: hover) and (pointer: fine) { .inf-nums__row:hover { --rh: clamp(140px, 16vw, 222px); } }
 /* the figure: red brushed metal on a dark red edge (its thickness) and a soft shadow, a gloss over its top */
 .inf-nums__fig { position: relative; justify-self: center; font-weight: 700; font-size: calc(var(--rh) * .6); line-height: 1; }
