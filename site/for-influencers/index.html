@@ -954,12 +954,12 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-nums__rows { display: flex; flex-direction: column; gap: clamp(6px, 1vw, 12px); }
 .inf-nums__row { --rh: clamp(92px, 9.4vw, 126px); position: relative; display: grid; grid-template-columns: minmax(0, 47%) minmax(0, 1fr); align-items: center; column-gap: clamp(10px, 2vw, 28px);
   box-sizing: border-box; height: var(--rh); padding: 0 calc(var(--rh) * .42); cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent;
-  border: 0 solid transparent; border-image: url(../assets/influencers/nums-row.webp?v=bf47c90654) 128 155 fill / calc(var(--rh) / 2) calc(var(--rh) * .603) stretch;
+  border: 0 solid transparent; border-image: url(../assets/influencers/nums-row.webp?v=e9e3a64f86) 128 155 fill / calc(var(--rh) / 2) calc(var(--rh) * .603) stretch;
   transition: --rh .5s cubic-bezier(.2,.8,.2,1); }
 .inf-nums__row.is-open, .inf-nums__row:focus-visible { --rh: clamp(140px, 16vw, 222px); }
 .inf-nums__row::after { content: ''; position: absolute; z-index: 1; inset: 4% calc(var(--rh) * -.05); pointer-events: none; opacity: 0; transition: opacity .45s ease;
-  background: radial-gradient(closest-side, rgba(231,19,27,.24), rgba(231,19,27,.08) 55%, rgba(231,19,27,0)) 0 50% / calc(var(--rh) * .36) 78% no-repeat,
-    radial-gradient(closest-side, rgba(231,19,27,.24), rgba(231,19,27,.08) 55%, rgba(231,19,27,0)) 100% 50% / calc(var(--rh) * .36) 78% no-repeat;
+  background: radial-gradient(closest-side, rgba(226,10,22,.78), rgba(226,10,22,.3) 50%, rgba(226,10,22,0)) 0 50% / calc(var(--rh) * .42) 84% no-repeat,
+    radial-gradient(closest-side, rgba(226,10,22,.78), rgba(226,10,22,.3) 50%, rgba(226,10,22,0)) 100% 50% / calc(var(--rh) * .42) 84% no-repeat;
   filter: blur(4px); }
 .inf-nums__row.is-open::after, .inf-nums__row:focus-visible::after { opacity: 1; }
 @media (hover: hover) and (pointer: fine) {

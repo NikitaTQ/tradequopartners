@@ -26,7 +26,26 @@ row = np.concatenate([left, mid, left[:, ::-1]], 1)
 # the card round the pill: its corners; scale every pixel so that colour becomes CARD (glints above it eased to white)
 bg = np.median(np.concatenate([row[:6, :20].reshape(-1, 3), row[-6:, :20].reshape(-1, 3), row[:6, -20:].reshape(-1, 3), row[-6:, -20:].reshape(-1, 3)]), 0)
 row = np.where(row <= bg, row * CARD / bg, CARD + (row - bg) * (255 - CARD) / np.maximum(255 - bg, 1))
-Image.fromarray(np.clip(row + .5, 0, 255).astype(np.uint8)).save(os.path.join(OUT, 'nums-row.webp'), quality=92, method=6)
+# only the glass, nothing round it (owner's wish: no white under the rows): outside the pill (a capsule, its ends
+# half its height round) fully clear; inside, each pixel as the colour that over the page's background gives it
+# (lighter: white at some alpha; darker: black), so the pill's face is see-through glass, its rim and glints stay
+H_, W_ = row.shape[:2]
+yy, xx = np.mgrid[0:H_, 0:W_].astype(float)
+T, B, X0, X1 = 2.5, H_ - .5, 1.5, W_ - 1.5
+r = (B - T) / 2
+cx = np.clip(xx, X0 + r, X1 - r)
+dist = np.hypot(xx - cx, yy - (T + B) / 2) - r
+inside = np.clip(.5 - dist, 0, 1)                                  # a 1px soft edge
+lum = row.mean(2); bl = CARD.mean()
+lighter = lum >= bl
+al = np.where(lighter, (lum - bl) / (255 - bl), (bl - lum) / bl)
+al = np.clip(al * 1.15, 0, 1) * inside
+col = np.where(lighter[..., None], 255.0, 0.0) * np.ones_like(row)
+# keep the rim's own tint where it is strong (its blue-grey glints)
+strong = al[..., None] > .5
+col = np.where(strong, np.clip((row - (1 - al[..., None]) * CARD) / np.maximum(al[..., None], 1e-3), 0, 255), col)
+rgba = np.dstack([col, al * 255])
+Image.fromarray(np.clip(rgba + .5, 0, 255).astype(np.uint8), 'RGBA').save(os.path.join(OUT, 'nums-row.webp'), lossless=False, quality=92, alpha_quality=100, method=6)
 print('nums-row.webp', row.shape[1], 'x', row.shape[0], '(slices: 128 155 128 155)')
 
 # red brushed metal
