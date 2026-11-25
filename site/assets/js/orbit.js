@@ -307,8 +307,8 @@
 })();
 
 /* /for-influencers/: "Three numbers" rows (influencers.css .inf-nums__row). A row opens (grows, its line comes in) while
- * pointed at or focused, by CSS; on touch screens a tap opens it (and closes the one open before), a second tap closes
- * it. aria-expanded follows what shows. */
+ * pointed at or focused, by CSS; on touch screens a tap opens it (and closes the one open before); a second tap on it,
+ * or a tap anywhere else on the page, closes it. aria-expanded follows what shows. */
 (function () {
   'use strict';
   const rows = [...document.querySelectorAll('[data-nums-row]')];
@@ -322,5 +322,10 @@
     r.addEventListener('mouseleave', () => { if (hover.matches && !r.classList.contains('is-open')) r.setAttribute('aria-expanded', 'false'); });
     r.addEventListener('focus', () => r.setAttribute('aria-expanded', 'true'));
     r.addEventListener('blur', () => set(r, false));
+  });
+  /* a tap anywhere else on the page closes the open row (touch screens) */
+  document.addEventListener('click', (e) => {
+    if (hover.matches || e.target.closest('[data-nums-row]')) return;
+    rows.forEach((x) => { if (x.classList.contains('is-open')) { set(x, false); x.blur(); } });
   });
 })();
