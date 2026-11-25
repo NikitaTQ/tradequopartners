@@ -1006,8 +1006,16 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-calc__h2 { margin: 0 auto clamp(14px, 2vw, 28px); text-align: center; }
 .inf-calc__red { color: #b0101c; }
 .inf-calc__case { position: relative; }
+@media (min-width: 641px) {
+.inf-calc__case { width: min(80%, (100vh - 220px) * 1600 / 921); margin: 0 auto; }
+@supports (height: 100svh) {
+.inf-calc__case { width: min(80%, (100svh - 220px) * 1600 / 921); }
+}
+}
 .inf-calc__ph { display: none; }
 .inf-calc__wide, .inf-calc__img { display: block; width: 100%; height: auto; }
+.inf-calc__img { -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 95%, transparent); -webkit-mask-composite: source-in;
+  mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 95%, transparent); mask-composite: intersect; }
 .inf-calc__case { container-type: inline-size; }
 .inf-calc__floor { position: absolute; left: 13.027%; top: 63.254%; width: 74.442%; height: 24.784%; pointer-events: none; }
 .inf-calc__stack { position: absolute; width: 39.167%; height: auto; opacity: 0; transform: translateY(-70%); filter: drop-shadow(0 .35cqw .5cqw rgba(0,0,0,.35));
