@@ -255,6 +255,34 @@
       </div>
     </section>
 
+    <!-- Earnings calculator (owner's design, November 2026: tools/influencers/numbers-src/case-design.webp): "HOW MUCH COULD
+         YOU EARN?" over a glass briefcase (the design's picture, its lid plate wiped clean: tools/influencers/
+         calc_case.py) whose plate carries the live controls: clients you refer (a four-drum counter that rolls, a slider
+         5–1000), the estimate in a red glass window and a Day / Month / Year switch (orbit.js). The estimate is the home
+         page's own sum: clients × lots per client a month × $7.50 a lot (a day is a thirtieth of the month, a year twelve
+         months). Phones: the plate as a card over the case's glass body. -->
+    <section id="calc" class="inf-calc" data-calc-case data-screen-label="Earnings calculator">
+      <div class="inf-calc__in">
+        <h2 class="inf-calc__h2 tq-h2" data-fitw>{{inf.calc.h2a}} <span class="inf-calc__red">{{inf.calc.h2b}}</span></h2>
+        <div class="inf-calc__case">
+          <picture><source media="(max-width: 640px)" srcset="{{root}}assets/influencers/calc-body-800.webp"><img class="inf-calc__img" src="{{root}}assets/influencers/calc-case-1600.webp" srcset="{{root}}assets/influencers/calc-case-1100.webp 1100w, {{root}}assets/influencers/calc-case-1600.webp 1600w" sizes="(max-width: 1280px) 100vw, 1180px" width="1600" height="807" alt="{{@inf.calc.alt}}" loading="lazy" decoding="async"></picture>
+          <div class="inf-calc__plate">
+            <div class="inf-calc__l tq-h2">{{inf.calc.clients}}</div>
+            <div class="inf-calc__odo" aria-hidden="true"><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span></div>
+            <div class="inf-calc__track"><input class="inf-calc__range" type="range" min="5" max="1000" step="1" value="181" aria-label="{{@inf.calc.aria}}" data-calc-range></div>
+            <span class="inf-calc__min">5</span><span class="inf-calc__max">1000</span>
+            <i class="inf-calc__div" aria-hidden="true"></i>
+            <div class="inf-calc__out" aria-live="polite"><span class="inf-calc__approx">≈</span><b data-calc-sum>$0</b><span class="inf-calc__per" data-calc-per data-day="{{@inf.calc.per.day}}" data-month="{{@inf.calc.per.month}}" data-year="{{@inf.calc.per.year}}">{{inf.calc.per.year}}</span></div>
+            <div class="inf-calc__tabs" role="tablist" aria-label="{{@inf.calc.periods}}">
+              <button type="button" role="tab" aria-selected="false" data-calc-p="day">{{inf.calc.day}}</button>
+              <button type="button" role="tab" aria-selected="false" data-calc-p="month">{{inf.calc.month}}</button>
+              <button type="button" role="tab" aria-selected="true" data-calc-p="year">{{inf.calc.year}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Incentive trips (owner's second design, November 2026: tools/influencers/trips-design.webp): on the page's light
          background, the text on the left ("Incentive trips", "THE TRIP IS ON US.", a line, three rows: flights and stay,
          the yacht day and dinners covered, how you qualify: results), on the right three stories of a partner trip to
