@@ -164,15 +164,16 @@
 
 /* ---- Earnings calculator (owner's design "How much could you earn?", November 2026): a glass briefcase, live controls
    on its lid plate. The plate is placed in % of the picture; inside it every size is in the design's px of the plate
-   (1279 x 175: --u, a container unit), so it scales with the case. The case is 15% wider than the page's column (owner's
-   wish), never wider than the screen. Phones: the plate as a card over the case's glass body (calc-body-800.webp). */
+   (1279 x 175: --u, a container unit), so it scales with the case. The case as wide as the cards round it, its glass body 15%
+   taller than drawn (owner's wish; calc_case.py). Phones: the case's top, the plate as a card, the case's body. */
 .inf-calc { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0b0b0d; }
 .inf-calc__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
 .inf-calc__h2 { margin: 0 auto clamp(14px, 2vw, 28px); text-align: center; }
 .inf-calc__red { color: #b0101c; }
-.inf-calc__case { --cw: min(calc(100vw - 32px), 115%); position: relative; width: var(--cw); margin-left: calc((100% - var(--cw)) / 2); }
-.inf-calc__case picture, .inf-calc__img { display: block; width: 100%; height: auto; }
-.inf-calc__plate { --u: calc(100cqw / 1279); position: absolute; left: 10.484%; top: 25.584%; width: 79.342%; height: 21.525%; container-type: inline-size; color: #fff; }
+.inf-calc__case { position: relative; }
+.inf-calc__ph { display: none; }
+.inf-calc__wide, .inf-calc__img { display: block; width: 100%; height: auto; }
+.inf-calc__plate { --u: calc(100cqw / 1279); position: absolute; left: 10.484%; top: 22.414%; width: 79.342%; height: 18.858%; container-type: inline-size; color: #fff; }
 .inf-calc__plate > * { position: absolute; }
 .inf-calc__l { left: calc(34 * var(--u)); top: calc(14 * var(--u)); width: calc(360 * var(--u)); font-size: calc(32 * var(--u)); line-height: 1.02; letter-spacing: .02em; padding: 0;
   background: linear-gradient(180deg, #f4f4f6 0%, #a9abb1 55%, #e2e3e7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; text-wrap: balance; }
@@ -220,9 +221,12 @@
 /* phones: the plate a card (its own brushed dark metal, a chrome rim), in two rows, over the case's glass body */
 @media (max-width: 640px) {
   .inf-calc { padding-bottom: var(--tq-gap); }
-  .inf-calc__case { --cw: 100%; display: flex; flex-direction: column; }
-  .inf-calc__case picture { order: 2; margin-top: -6px; }
-  .inf-calc__plate { --u: .3px; position: relative; order: 1; left: auto; top: auto; width: auto; height: auto; container-type: normal; z-index: 1;
+  .inf-calc__case { display: flex; flex-direction: column; }
+  .inf-calc__wide { display: none; }
+  .inf-calc__ph { display: block; width: 100%; height: auto; }
+  .inf-calc__ph--top { order: 0; margin-bottom: -3px; }
+  .inf-calc__ph--body { order: 2; margin-top: -3px; }
+  .inf-calc__plate { --u: .3px; position: relative; order: 1; left: auto; top: auto; width: auto; height: auto; margin: 0 1.2%; container-type: normal; z-index: 1;
     display: grid; grid-template-columns: 1fr auto; grid-template-areas: "l o" "t t" "mm mm" "out out" "tabs tabs"; gap: 10px 12px; align-items: center; padding: 18px 16px 12px; border-radius: 18px;
     background: repeating-linear-gradient(180deg, rgba(255,255,255,.035) 0 1px, rgba(0,0,0,0) 1px 3px), linear-gradient(90deg, #4e4c4d 0%, #3c3b3c 50%, #2e2d2e 100%);
     box-shadow: 0 0 0 2px #b9bbc0, 0 0 0 4px #e9eaee, 0 14px 30px -14px rgba(0,0,0,.6); }

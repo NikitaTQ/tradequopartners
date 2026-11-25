@@ -1005,9 +1005,10 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-calc__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
 .inf-calc__h2 { margin: 0 auto clamp(14px, 2vw, 28px); text-align: center; }
 .inf-calc__red { color: #b0101c; }
-.inf-calc__case { --cw: min(calc(100vw - 32px), 115%); position: relative; width: var(--cw); margin-left: calc((100% - var(--cw)) / 2); }
-.inf-calc__case picture, .inf-calc__img { display: block; width: 100%; height: auto; }
-.inf-calc__plate { --u: calc(100cqw / 1279); position: absolute; left: 10.484%; top: 25.584%; width: 79.342%; height: 21.525%; container-type: inline-size; color: #fff; }
+.inf-calc__case { position: relative; }
+.inf-calc__ph { display: none; }
+.inf-calc__wide, .inf-calc__img { display: block; width: 100%; height: auto; }
+.inf-calc__plate { --u: calc(100cqw / 1279); position: absolute; left: 10.484%; top: 22.414%; width: 79.342%; height: 18.858%; container-type: inline-size; color: #fff; }
 .inf-calc__plate > * { position: absolute; }
 .inf-calc__l { left: calc(34 * var(--u)); top: calc(14 * var(--u)); width: calc(360 * var(--u)); font-size: calc(32 * var(--u)); line-height: 1.02; letter-spacing: .02em; padding: 0;
   background: linear-gradient(180deg, #f4f4f6 0%, #a9abb1 55%, #e2e3e7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; text-wrap: balance; }
@@ -1053,9 +1054,12 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 }
 @media (max-width: 640px) {
 .inf-calc { padding-bottom: var(--tq-gap); }
-.inf-calc__case { --cw: 100%; display: flex; flex-direction: column; }
-.inf-calc__case picture { order: 2; margin-top: -6px; }
-.inf-calc__plate { --u: .3px; position: relative; order: 1; left: auto; top: auto; width: auto; height: auto; container-type: normal; z-index: 1;
+.inf-calc__case { display: flex; flex-direction: column; }
+.inf-calc__wide { display: none; }
+.inf-calc__ph { display: block; width: 100%; height: auto; }
+.inf-calc__ph--top { order: 0; margin-bottom: -3px; }
+.inf-calc__ph--body { order: 2; margin-top: -3px; }
+.inf-calc__plate { --u: .3px; position: relative; order: 1; left: auto; top: auto; width: auto; height: auto; margin: 0 1.2%; container-type: normal; z-index: 1;
     display: grid; grid-template-columns: 1fr auto; grid-template-areas: "l o" "t t" "mm mm" "out out" "tabs tabs"; gap: 10px 12px; align-items: center; padding: 18px 16px 12px; border-radius: 18px;
     background: repeating-linear-gradient(180deg, rgba(255,255,255,.035) 0 1px, rgba(0,0,0,0) 1px 3px), linear-gradient(90deg, #4e4c4d 0%, #3c3b3c 50%, #2e2d2e 100%);
     box-shadow: 0 0 0 2px #b9bbc0, 0 0 0 4px #e9eaee, 0 14px 30px -14px rgba(0,0,0,.6); }
@@ -1566,12 +1570,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
          calc_case.py) whose plate carries the live controls: clients you refer (a four-drum counter that rolls, a slider
          5–1000), the estimate in a red glass window and a Day / Month / Year switch (orbit.js). The estimate is the home
          page's own sum: clients × lots per client a month × $7.50 a lot (a day is a thirtieth of the month, a year twelve
-         months). Phones: the plate as a card over the case's glass body. -->
+         months). Phones: the case's top, the plate as a card, the case's glass body. -->
     <section id="calc" class="inf-calc" data-calc-case data-screen-label="Earnings calculator">
       <div class="inf-calc__in">
         <h2 class="inf-calc__h2 tq-h2" data-fitw>How much could you <span class="inf-calc__red">earn?</span></h2>
         <div class="inf-calc__case">
-          <picture><source media="(max-width: 640px)" srcset="../assets/influencers/calc-body-800.webp?v=19f4c8b9d8"><img class="inf-calc__img" src="../assets/influencers/calc-case-1600.webp?v=b8380c2732" srcset="../assets/influencers/calc-case-1100.webp 1100w, ../assets/influencers/calc-case-1600.webp 1600w" sizes="(max-width: 1280px) 100vw, 1180px" width="1600" height="807" alt="A glass briefcase with stacks of notes inside" loading="lazy" decoding="async"></picture>
+          <picture class="inf-calc__wide"><img class="inf-calc__img" src="../assets/influencers/calc-case-1600.webp?v=de0c53a586" srcset="../assets/influencers/calc-case-1100.webp 1100w, ../assets/influencers/calc-case-1600.webp 1600w" sizes="(max-width: 1280px) 100vw, 1136px" width="1600" height="921" alt="A glass briefcase with stacks of notes inside" loading="lazy" decoding="async"></picture>
+          <img class="inf-calc__ph inf-calc__ph--top" src="../assets/influencers/calc-top-800.webp?v=832df81afe" width="800" height="108" alt="" loading="lazy" decoding="async">
+          <img class="inf-calc__ph inf-calc__ph--body" src="../assets/influencers/calc-body-800.webp?v=773dab4928" width="800" height="292" alt="" loading="lazy" decoding="async">
           <div class="inf-calc__plate">
             <div class="inf-calc__l tq-h2">Clients you refer</div>
             <div class="inf-calc__odo" aria-hidden="true"><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span></div>

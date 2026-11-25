@@ -2,10 +2,10 @@
 "HOW MUCH COULD YOU EARN?" over a glass briefcase with a dark metal plate on its lid: clients you refer (a counter and
 a slider), the earnings and a Day / Month / Year switch; two stacks of notes inside). The page draws the heading and
 everything on the plate live (influencers.css .inf-calc, orbit.js); this makes the pictures:
-  calc-case-{1600,1100}.webp   the briefcase (the heading cut off), its plate wiped clean (every row of the plate
+  calc-case-{1600,1100}.webp   the briefcase (the heading cut off, its glass body 15% taller), its plate wiped clean (every row of the plate
                                carried across from a clean strip of it, x 912..948, shaded left to right as the plate
                                is), so the live controls lie on it
-  calc-body-800.webp           phones: the case's glass body under the plate (the controls stand over it in a card)
+  calc-top-800.webp, calc-body-800.webp   phones: the case's top and its glass body (the plate a card between them)
 Run:  python3 tools/influencers/calc_case.py"""
 import os
 import numpy as np
@@ -44,14 +44,25 @@ basis = lambda m: np.stack([np.ones(m.sum()), u[m], v[m], u[m] ** 2, v[m] ** 2, 
 allm = np.ones((H_, W_), bool)
 bg = np.stack([(basis(allm) @ np.linalg.lstsq(basis(band), a[..., c][band], rcond=None)[0]).reshape(H_, W_) for c in range(3)], 2)
 a = np.where(a <= bg, a * TO / bg, TO + (a - bg) * (255 - TO) / np.maximum(255 - bg, 1))
+# the case 15% taller (owner's wish): its glass body stretched by 15% of the case's height (149..913) in a band of plain
+# glass between the plate and the notes (y 525..665: the walls run straight down there, nothing else in it)
+YA, YB = 525, 665
+add = round(.15 * (913 - 149))
+band = Image.fromarray(np.clip(a[YA:YB] + .5, 0, 255).astype(np.uint8)).resize((a.shape[1], YB - YA + add), Image.BICUBIC)
+a = np.concatenate([a[:YA], np.asarray(band).astype(float), a[YB:]], 0)
 img = Image.fromarray(np.clip(a + .5, 0, 255).astype(np.uint8))
-case = img.crop((30, 128, 1642, 941))
+CT, CB = 128, a.shape[0]
+case = img.crop((30, CT, 1642, CB))
 for w in (1600, 1100):
     p = case.resize((w, round(case.height * w / case.width)), Image.LANCZOS)
     p.save(os.path.join(OUT, 'calc-case-%d.webp' % w), quality=86, method=6)
     print('calc-case-%d.webp' % w, p.size, os.path.getsize(os.path.join(OUT, 'calc-case-%d.webp' % w)) // 1024, 'KB')
-body = img.crop((120, 520, 1552, 941))
+# phones: the case's top (handle, clasps, the lid's rim down to the plate) and its glass body (from under the plate);
+# the plate itself is a card between them (influencers.css)
+top = img.crop((120, 140, 1552, Y0 - 2))
+top.resize((800, round(top.height * 800 / top.width)), Image.LANCZOS).save(os.path.join(OUT, 'calc-top-800.webp'), quality=86, method=6)
+body = img.crop((120, Y1 + 2, 1552, CB - 20))
 body = body.resize((800, round(body.height * 800 / body.width)), Image.LANCZOS)
 body.save(os.path.join(OUT, 'calc-body-800.webp'), quality=86, method=6)
-print('calc-body-800.webp', body.size)
-print('plate in the case crop (%%): left %.3f top %.3f width %.3f height %.3f' % ((X0 - 30) / 1612 * 100, (Y0 - 128) / 813 * 100, (X1 - X0) / 1612 * 100, (Y1 - Y0) / 813 * 100))
+print('phone top / body', round(top.height * 800 / top.width), body.size)
+print('case', case.size, 'plate (%%): left %.3f top %.3f width %.3f height %.3f' % ((X0 - 30) / case.width * 100, (Y0 - CT) / case.height * 100, (X1 - X0) / case.width * 100, (Y1 - Y0) / case.height * 100))
