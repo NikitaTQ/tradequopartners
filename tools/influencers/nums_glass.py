@@ -14,7 +14,7 @@ from PIL import Image, ImageFilter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', '..', 'site', 'assets', 'influencers')
-CARD = np.array([249, 248, 253], float)
+CARD = np.array([243, 242, 247], float)   # the page's background (the block has no card of its own)
 
 a = np.asarray(Image.open(os.path.join(HERE, 'numbers-src', 'glass-design.webp')).convert('RGB')).astype(float)
 Y0, Y1 = 470, 727
