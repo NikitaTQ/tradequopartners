@@ -305,3 +305,22 @@
   if (!sec || !('IntersectionObserver' in window)) { if (sec) sec.classList.add('is-on'); return; }
   new IntersectionObserver((es) => es.forEach((e) => sec.classList.toggle('is-on', e.isIntersecting)), { rootMargin: '80px 0px' }).observe(sec);
 })();
+
+/* /for-influencers/: "Three numbers" rows (influencers.css .inf-nums__row). A row opens (grows, its line comes in) while
+ * pointed at or focused, by CSS; on touch screens a tap opens it (and closes the one open before), a second tap closes
+ * it. aria-expanded follows what shows. */
+(function () {
+  'use strict';
+  const rows = [...document.querySelectorAll('[data-nums-row]')];
+  if (!rows.length) return;
+  const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const set = (r, on) => { r.classList.toggle('is-open', on); r.setAttribute('aria-expanded', on ? 'true' : 'false'); };
+  rows.forEach((r) => {
+    r.addEventListener('click', () => { if (hover.matches) return; const on = !r.classList.contains('is-open'); rows.forEach((x) => set(x, x === r && on)); });
+    r.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const on = !r.classList.contains('is-open'); rows.forEach((x) => set(x, x === r && on)); } });
+    r.addEventListener('mouseenter', () => { if (hover.matches) r.setAttribute('aria-expanded', 'true'); });
+    r.addEventListener('mouseleave', () => { if (hover.matches && !r.classList.contains('is-open')) r.setAttribute('aria-expanded', 'false'); });
+    r.addEventListener('focus', () => r.setAttribute('aria-expanded', 'true'));
+    r.addEventListener('blur', () => set(r, false));
+  });
+})();

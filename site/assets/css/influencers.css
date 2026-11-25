@@ -101,62 +101,59 @@
   .inf-star__vis::after { background: linear-gradient(180deg, #050506 0%, rgba(5,5,6,0) 34%); }
 }
 
-/* ---- Three numbers (owner's "Cut From The Sky", 6c Titanium): 87%, infinity, 365 cut from the sky on a titanium card --
-   The design's own values; sizes in container units of the block's width (cqw), as in the design. The figures and the
-   names are in the headings' face (Syncopate, class tq-h2, so tools/h1-fonts.py puts their letters in its file); the
-   design's DM Sans and DM Mono are the site's Inter. Static: nothing moves. */
-/* after the creators scene (owner's wish, November 2026): a whole gap above it (the scene's) and under it (to the trips
-   card; twice the half gap first set, owner's wish); the card's shadow stays inside the block */
-.inf-nums { container-type: inline-size; background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
-.inf-nums__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }   /* the creators block's column: the two cards one under the other, edge to edge */
-.inf-nums__card { margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 3cqw, 32px); overflow: hidden; color: #fff;
-  background: radial-gradient(80% 60% at 25% 0%, rgba(255,255,255,.14), rgba(255,255,255,0) 60%),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0) 0 23px, rgba(255,255,255,.09) 23px 24px),
-    linear-gradient(170deg, #5a5d65 0%, #3c3e44 45%, #2b2d32 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 0 1px rgba(255,255,255,.06), 0 40px 60px -30px rgba(14,14,16,.6);
-  padding: clamp(28px, 6cqw, 64px) clamp(18px, 5cqw, 64px); display: flex; flex-direction: column; gap: clamp(22px, 4cqw, 40px); }
-/* the figures are sized by the card (its own container, the inside of its padding: 29.8% of it is the design's 26% of the
-   page, 300px at full width): a card kept narrow by a short screen gets smaller figures */
-.inf-nums__card { container-type: inline-size; }
-.inf-nums__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-.inf-nums__h2 { margin: 0; font-size: clamp(11px, 3cqw, 15px); font-weight: 700; line-height: 1.5; }
-.inf-nums__h2 .tq-h2 { font-size: clamp(11px, 3cqw, 15px); letter-spacing: .22em; line-height: 1.5; padding: 0; text-wrap: nowrap; }
-.inf-nums__h2 .inf-nums__red { color: #ff5a61; }
-.inf-nums__mark { flex: none; display: block; width: auto; height: clamp(18px, 4cqw, 28px); }
-
-.inf-nums__item { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-.inf-nums__fig { position: relative; align-self: flex-start; font-weight: 700; }
-.inf-nums__fig .tq-h2 { font-size: 1em; letter-spacing: -.05em; padding: 0; text-transform: none; text-wrap: nowrap; max-width: none; line-height: inherit; }
-.inf-nums__depth { display: block; color: transparent; }
+/* ---- Three numbers (owner's design, the light glass version, November 2026) --------------------------------------
+   A light card; three glass pill rows (the design's glass as a 9-slice frame, nums-row.webp: its rim scales with the
+   row's height --rh), each a figure in red brushed metal (live text filled with nums-red.webp; the infinity a
+   lemniscate in an SVG mask) and its name in the headings' face. The rows start alike, the name alone; pointed at,
+   tapped (orbit.js) or focused, a row grows (--rh, animated: a registered length), its figure with it, and its line of
+   explanation slides in. */
+@property --rh { syntax: '<length>'; inherits: true; initial-value: 120px; }
+.inf-nums { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
+.inf-nums__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
+.inf-nums__card { margin: 0 auto; box-sizing: border-box; border-radius: clamp(22px, 2.4vw, 30px); background: #f9f8fd; color: #0b0b0d;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.9), 0 30px 60px -34px rgba(20,18,40,.28), 0 2px 6px rgba(20,18,40,.05);
+  padding: clamp(26px, 4vw, 56px) clamp(14px, 2.6vw, 40px) clamp(22px, 3vw, 44px); }
+.inf-nums__h2 { margin: 0 0 clamp(14px, 2vw, 26px); padding-inline-start: clamp(10px, 2vw, 28px); font-size: clamp(13px, 1.5vw, 20px); font-weight: 700; line-height: 1.35; }
+.inf-nums__h2 .tq-h2 { font-size: 1em; letter-spacing: .16em; line-height: 1.35; padding: 0; text-wrap: nowrap; }
+.inf-nums__red { color: #d4142a; }
+.inf-nums__rows { display: flex; flex-direction: column; gap: clamp(6px, 1vw, 12px); }
+.inf-nums__row { --rh: clamp(92px, 9.4vw, 126px); position: relative; display: grid; grid-template-columns: minmax(0, 47%) minmax(0, 1fr); align-items: center; column-gap: clamp(10px, 2vw, 28px);
+  box-sizing: border-box; height: var(--rh); padding: 0 calc(var(--rh) * .42); cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent;
+  border: 0 solid transparent; border-image: url(../influencers/nums-row.webp) 128 155 fill / calc(var(--rh) / 2) calc(var(--rh) * .603) stretch;
+  transition: --rh .5s cubic-bezier(.2,.8,.2,1); }
+.inf-nums__row.is-open, .inf-nums__row:focus-visible { --rh: clamp(140px, 16vw, 222px); }
+@media (hover: hover) and (pointer: fine) { .inf-nums__row:hover { --rh: clamp(140px, 16vw, 222px); } }
+/* the figure: red brushed metal on a dark red edge (its thickness) and a soft shadow, a gloss over its top */
+.inf-nums__fig { position: relative; justify-self: center; font-weight: 700; font-size: calc(var(--rh) * .6); line-height: 1; }
+.inf-nums__fig .tq-h2 { font-size: 1em; letter-spacing: -.03em; line-height: inherit; padding: 0; text-transform: none; text-wrap: nowrap; max-width: none; }
+.inf-nums__depth { display: block; color: transparent; text-shadow: 0 1px 0 #a00d18, 0 2px 0 #8a0b14, 0 3px 0 #740911, 0 4px 0 #5e070d, 0 calc(var(--rh) * .06) calc(var(--rh) * .1) rgba(120,10,24,.3); }
 .inf-nums__tex, .inf-nums__gloss { position: absolute; inset: 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
-.inf-nums__gloss { background-image: linear-gradient(180deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,.1) 36%, rgba(255,255,255,0) 47%, rgba(255,255,255,0) 82%, rgba(255,255,255,.12) 100%);
-  -webkit-text-stroke: 1.2px rgba(255,255,255,.6); mix-blend-mode: screen; }
-.inf-nums__item--87 .inf-nums__fig { font-size: clamp(96px, 29.8cqw, 300px); line-height: .9; }
-.inf-nums__item--87 .inf-nums__depth { text-shadow: 0 1px 0 #3a1a26, 0 2px 0 #33161f, 0 3px 0 #2b121a, 0 4px 0 #230e15, 0 5px 0 #1b0a10, 0 -1px 0 rgba(255,255,255,.22), 0 12px 22px rgba(0,0,0,.7), 0 0 46px rgba(238,63,58,.14); }
-.inf-nums__item--87 .inf-nums__tex { background-image: url(../influencers/nums-87-1600.webp); background-position: 32% 50%; background-size: cover; }   /* longhands: the shorthand would reset the clip to the letters */
-.inf-nums__pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(24px, 4cqw, 48px); align-items: end; }
-.inf-nums__pair > .inf-nums__item { container-type: inline-size; }
-.inf-nums__item--365 .inf-nums__fig { font-size: clamp(76px, 32cqw, 160px); line-height: .95; }
-.inf-nums__item--365 .inf-nums__depth { text-shadow: 0 1px 0 #1e3a40, 0 2px 0 #1a3338, 0 3px 0 #162c30, 0 4px 0 #122428, 0 5px 0 #0e1c20, 0 -1px 0 rgba(255,255,255,.22), 0 12px 22px rgba(0,0,0,.7), 0 0 46px rgba(242,61,108,.12); }
-.inf-nums__item--365 .inf-nums__tex { background-image: url(../influencers/nums-365-960.webp); background-position: 50% 45%; background-size: cover; }
-/* infinity: no letter in the face is drawn like it, so a lemniscate (the design's own path, a stroke in an SVG mask):
-   a light rim under the photo, the photo, the gloss; the dark edge and the shadow as stacked drop-shadows */
-.inf-nums__loop { --s: clamp(76px, 32cqw, 160px); position: relative; align-self: flex-start; height: calc(var(--s) * .72); aspect-ratio: 284 / 114; margin-bottom: calc(var(--s) * .13);
-  filter: drop-shadow(0 1.2px 0 #1c2a44) drop-shadow(0 1.2px 0 #18253d) drop-shadow(0 1.2px 0 #142035) drop-shadow(0 1.2px 0 #101a2c) drop-shadow(0 1.2px 0 #0c1423) drop-shadow(0 12px 22px rgba(0,0,0,.6)); }
+.inf-nums__tex { background-image: url(../influencers/nums-red.webp); background-size: cover; background-position: 50% 50%; }
+.inf-nums__gloss { background-image: linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.08) 38%, rgba(255,255,255,0) 50%); -webkit-text-stroke: .8px rgba(255,214,218,.55); mix-blend-mode: screen; }
+.inf-nums__loop { position: relative; justify-self: center; height: calc(var(--rh) * .54); aspect-ratio: 284 / 114;
+  filter: drop-shadow(0 1px 0 #a00d18) drop-shadow(0 1px 0 #8a0b14) drop-shadow(0 1px 0 #740911) drop-shadow(0 1px 0 #5e070d) drop-shadow(0 6px 10px rgba(120,10,24,.3)); }
 .inf-nums__loop > div { position: absolute; inset: 0; -webkit-mask: url(../influencers/nums-loop-32.svg) center / 100% 100% no-repeat; mask: url(../influencers/nums-loop-32.svg) center / 100% 100% no-repeat; }
-.inf-nums__loop > .inf-nums__loop-rim { background: rgba(255,255,255,.6); -webkit-mask-image: url(../influencers/nums-loop-34.svg); mask-image: url(../influencers/nums-loop-34.svg); }
-.inf-nums__loop-tex { background: url(../influencers/nums-inf-720.webp) 50% 80% / cover; }
-.inf-nums__loop-gloss { background: linear-gradient(180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,.1) 36%, rgba(255,255,255,0) 47%, rgba(255,255,255,0) 82%, rgba(255,255,255,.12) 100%); mix-blend-mode: screen; }
-/* under each figure: a light metal line, the number, the name, a line of text */
-.inf-nums__cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin: 0; padding-top: 12px;
-  background: linear-gradient(90deg, #7a7c84, #f0f1f4 28%, #9a9ca4 58%, #dadce1 82%, #7a7c84) top / 100% 1px no-repeat; }
-.inf-nums__n { font-size: 13px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: .04em; color: #c4c6ce; }
-.inf-nums__cap .inf-nums__l { font-size: clamp(13px, 3.4cqw, 18px); letter-spacing: .16em; line-height: 1.2; padding: 0; color: #ff5a61; }
-.inf-nums__d { font-size: 15px; line-height: 1.4; color: #c4c6ce; }
+.inf-nums__loop > .inf-nums__loop-rim { background: rgba(255,214,218,.7); -webkit-mask-image: url(../influencers/nums-loop-34.svg); mask-image: url(../influencers/nums-loop-34.svg); }
+.inf-nums__loop-tex { background: url(../influencers/nums-red.webp) 50% 50% / cover; }
+.inf-nums__loop-gloss { background: linear-gradient(180deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,.08) 38%, rgba(255,255,255,0) 50%); mix-blend-mode: screen; }
+/* the words: the number, the name, then the line that comes in */
+.inf-nums__txt { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.inf-nums__n { font-size: clamp(11px, 1.05vw, 15px); font-weight: 700; letter-spacing: .04em; color: #d4142a; font-variant-numeric: tabular-nums; }
+.inf-nums__txt .inf-nums__l { margin-top: 2px; font-size: clamp(13px, 1.9vw, 27px); letter-spacing: .06em; line-height: 1.15; padding: 0; color: #0b0b0d; }
+.inf-nums__d { display: grid; grid-template-rows: 0fr; opacity: 0; transform: translateY(6px); transition: grid-template-rows .45s cubic-bezier(.2,.8,.2,1), opacity .35s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+.inf-nums__d > span { overflow: hidden; min-height: 0; padding-top: 4px; font-size: clamp(13px, 1.45vw, 20px); line-height: 1.35; color: #3a3a40; }
+.inf-nums__row.is-open .inf-nums__d, .inf-nums__row:focus-visible .inf-nums__d { grid-template-rows: 1fr; opacity: 1; transform: none; transition-delay: .08s; }
+@media (hover: hover) and (pointer: fine) { .inf-nums__row:hover .inf-nums__d { grid-template-rows: 1fr; opacity: 1; transform: none; transition-delay: .08s; } }
+@media (prefers-reduced-motion: reduce) { .inf-nums__row, .inf-nums__d { transition: none; } }
 @media (max-width: 640px) {
-  .inf-nums__item--87 .inf-nums__tex { background-image: url(../influencers/nums-87-760.webp); }
-  .inf-nums__item--365 .inf-nums__tex { background-image: url(../influencers/nums-365-640.webp); }
-  .inf-nums__loop-tex { background-image: url(../influencers/nums-inf-600.webp); }
+  .inf-nums { padding-bottom: var(--tq-gap); }
+  .inf-nums__row { --rh: 86px; grid-template-columns: minmax(0, 45%) minmax(0, 1fr); column-gap: 8px; padding: 0 calc(var(--rh) * .3); }
+  .inf-nums__row.is-open, .inf-nums__row:focus-visible { --rh: 132px; }
+  .inf-nums__txt .inf-nums__l { font-size: 12.5px; letter-spacing: .04em; }
+  .inf-nums__d > span { font-size: 13px; }
+  /* phones: the figure keeps its size (its column is narrow); the row grows for the line alone */
+  .inf-nums__fig { font-size: clamp(34px, 10.6vw, 44px); }
+  .inf-nums__loop { height: clamp(36px, 11vw, 46px); }
 }
 
 /* ---- Incentive trips (owner's second design, November 2026): the text and the trip stories in glass phones ---------------
