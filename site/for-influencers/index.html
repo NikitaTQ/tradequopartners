@@ -1008,6 +1008,14 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-calc__case { position: relative; }
 .inf-calc__ph { display: none; }
 .inf-calc__wide, .inf-calc__img { display: block; width: 100%; height: auto; }
+.inf-calc__case { container-type: inline-size; }
+.inf-calc__floor { position: absolute; left: 13.027%; top: 63.254%; width: 74.442%; height: 24.784%; pointer-events: none; }
+.inf-calc__stack { position: absolute; width: 39.167%; height: auto; opacity: 0; transform: translateY(-70%); filter: drop-shadow(0 .35cqw .5cqw rgba(0,0,0,.35));
+  transition: transform .6s cubic-bezier(.3,1.35,.5,1), opacity .25s ease; }
+.inf-calc__stack.is-on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+.inf-calc__stack { transition: opacity .2s ease; transform: none; }
+}
 .inf-calc__plate { --u: calc(100cqw / 1279); position: absolute; left: 10.484%; top: 22.414%; width: 79.342%; height: 18.858%; container-type: inline-size; color: #fff; }
 .inf-calc__plate > * { position: absolute; }
 .inf-calc__l { left: calc(34 * var(--u)); top: calc(14 * var(--u)); width: calc(360 * var(--u)); font-size: calc(32 * var(--u)); line-height: 1.02; letter-spacing: .02em; padding: 0;
@@ -1059,6 +1067,7 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-calc__ph { display: block; width: 100%; height: auto; }
 .inf-calc__ph--top { order: 0; margin-bottom: -3px; }
 .inf-calc__ph--body { order: 2; margin-top: -3px; }
+.inf-calc__floor { left: 8.38cqw; top: auto; bottom: 6.355cqw; width: 83.799cqw; height: 16.061cqw; z-index: 2; }
 .inf-calc__plate { --u: .3px; position: relative; order: 1; left: auto; top: auto; width: auto; height: auto; margin: 0 1.2%; container-type: normal; z-index: 1;
     display: grid; grid-template-columns: 1fr auto; grid-template-areas: "l o" "t t" "mm mm" "out out" "tabs tabs"; gap: 10px 12px; align-items: center; padding: 18px 16px 12px; border-radius: 18px;
     background: repeating-linear-gradient(180deg, rgba(255,255,255,.035) 0 1px, rgba(0,0,0,0) 1px 3px), linear-gradient(90deg, #4e4c4d 0%, #3c3b3c 50%, #2e2d2e 100%);
@@ -1570,14 +1579,16 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
          calc_case.py) whose plate carries the live controls: clients you refer (a four-drum counter that rolls, a slider
          5–1000), the estimate in a red glass window and a Day / Month / Year switch (orbit.js). The estimate is the home
          page's own sum: clients × lots per client a month × $7.50 a lot (a day is a thirtieth of the month, a year twelve
-         months). Phones: the case's top, the plate as a card, the case's glass body. -->
+         months). On its floor, stacks of notes (the design's own, cut out): more of them the more clients, each new one
+         dropping in. Phones: the case's top, the plate as a card, the case's glass body. -->
     <section id="calc" class="inf-calc" data-calc-case data-screen-label="Earnings calculator">
       <div class="inf-calc__in">
         <h2 class="inf-calc__h2 tq-h2" data-fitw>How much could you <span class="inf-calc__red">earn?</span></h2>
         <div class="inf-calc__case">
-          <picture class="inf-calc__wide"><img class="inf-calc__img" src="../assets/influencers/calc-case-1600.webp?v=de0c53a586" srcset="../assets/influencers/calc-case-1100.webp 1100w, ../assets/influencers/calc-case-1600.webp 1600w" sizes="(max-width: 1280px) 100vw, 1136px" width="1600" height="921" alt="A glass briefcase with stacks of notes inside" loading="lazy" decoding="async"></picture>
+          <picture class="inf-calc__wide"><img class="inf-calc__img" src="../assets/influencers/calc-case-1600.webp?v=89863a282f" srcset="../assets/influencers/calc-case-1100.webp 1100w, ../assets/influencers/calc-case-1600.webp 1600w" sizes="(max-width: 1280px) 100vw, 1136px" width="1600" height="921" alt="A glass briefcase with stacks of notes inside" loading="lazy" decoding="async"></picture>
           <img class="inf-calc__ph inf-calc__ph--top" src="../assets/influencers/calc-top-800.webp?v=832df81afe" width="800" height="108" alt="" loading="lazy" decoding="async">
-          <img class="inf-calc__ph inf-calc__ph--body" src="../assets/influencers/calc-body-800.webp?v=773dab4928" width="800" height="292" alt="" loading="lazy" decoding="async">
+          <img class="inf-calc__ph inf-calc__ph--body" src="../assets/influencers/calc-body-800.webp?v=66fc28fe00" width="800" height="292" alt="" loading="lazy" decoding="async">
+          <div class="inf-calc__floor" aria-hidden="true"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 41.417%; top: 50.870%; z-index: 20;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 20.417%; top: 30.870%; z-index: 10;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 42.083%; top: 34.348%; z-index: 21;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 59.167%; top: 38.261%; z-index: 10;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 2.250%; top: 53.913%; z-index: 20;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 21.083%; top: 14.348%; z-index: 11;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 59.833%; top: 21.739%; z-index: 11;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 2.917%; top: 37.391%; z-index: 21;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 42.750%; top: 17.826%; z-index: 22;"><img class="inf-calc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 21.750%; top: -2.174%; z-index: 12;"></div>
           <div class="inf-calc__plate">
             <div class="inf-calc__l tq-h2">Clients you refer</div>
             <div class="inf-calc__odo" aria-hidden="true"><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span></div>
@@ -1662,6 +1673,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=2d278b596f" defer></script>
-<script src="../assets/js/orbit.js?v=354751b6f2" defer></script>
+<script src="../assets/js/orbit.js?v=8e8ad280bb" defer></script>
 </body>
 </html>
