@@ -123,8 +123,8 @@
 /* the open row's light: a soft red glow at its two ends (over the glass rim, a little past it), fading in and out as
    the pointer moves from row to row */
 .inf-nums__row::after { content: ''; position: absolute; z-index: 1; inset: 4% calc(var(--rh) * -.05); pointer-events: none; opacity: 0; transition: opacity .45s ease;
-  background: radial-gradient(closest-side, rgba(231,19,27,.24), rgba(231,19,27,.08) 55%, rgba(231,19,27,0)) 0 50% / calc(var(--rh) * .36) 78% no-repeat,
-    radial-gradient(closest-side, rgba(231,19,27,.24), rgba(231,19,27,.08) 55%, rgba(231,19,27,0)) 100% 50% / calc(var(--rh) * .36) 78% no-repeat;
+  background: radial-gradient(closest-side, rgba(226,10,22,.78), rgba(226,10,22,.3) 50%, rgba(226,10,22,0)) 0 50% / calc(var(--rh) * .42) 84% no-repeat,
+    radial-gradient(closest-side, rgba(226,10,22,.78), rgba(226,10,22,.3) 50%, rgba(226,10,22,0)) 100% 50% / calc(var(--rh) * .42) 84% no-repeat;
   filter: blur(4px); }
 .inf-nums__row.is-open::after, .inf-nums__row:focus-visible::after { opacity: 1; }
 @media (hover: hover) and (pointer: fine) { .inf-nums__row:hover::after { opacity: 1; } }
