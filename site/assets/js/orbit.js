@@ -329,3 +329,40 @@
     rows.forEach((x) => { if (x.classList.contains('is-open')) { set(x, false); x.blur(); } });
   });
 })();
+
+/* /for-influencers/: the earnings calculator (influencers.css .inf-calc). The home page's own sum: clients × lots a
+ * client trades a month × $7.50 a lot; a day is a thirtieth of the month, a year twelve months. The counter's drums
+ * roll to the clients' number, the slider's filled part follows the knob, the estimate counts to its new value. */
+(function () {
+  'use strict';
+  const box = document.querySelector('[data-calc-case]');
+  if (!box) return;
+  const RATE = 7.5, LOTS = 130;   /* $ a lot; lots per client a month (the home calculator's starting value) */
+  const PER = { day: 1 / 30, month: 1, year: 12 };
+  const range = box.querySelector('[data-calc-range]'), sum = box.querySelector('[data-calc-sum]'), per = box.querySelector('[data-calc-per]');
+  const reels = [...box.querySelectorAll('[data-calc-reel]')], tabs = [...box.querySelectorAll('[data-calc-p]')];
+  const track = range.parentNode;
+  let p = 'year', shown = null, raf = 0;
+  const money = (v) => '$' + Math.round(v).toLocaleString('en-US');
+  const fit = (txt) => { const n = txt.length; sum.parentNode.style.setProperty('--sf', n <= 7 ? 64 : n <= 9 ? 56 : n <= 11 ? 46 : 38); };
+  const tween = (to) => {
+    cancelAnimationFrame(raf);
+    const from = shown == null ? to : shown, t0 = performance.now(), D = 600;
+    const step = (now) => { const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3); shown = from + (to - from) * e; const t = money(shown); fit(money(to)); sum.textContent = t; if (k < 1) raf = requestAnimationFrame(step); };
+    raf = requestAnimationFrame(step);
+  };
+  const render = () => {
+    const c = Number(range.value), d = String(c).padStart(4, '0');
+    reels.forEach((r, i) => { r.style.transform = 'translateY(' + (-Number(d[i]) * 10) + '%)'; });
+    track.style.setProperty('--p', ((c - Number(range.min)) / (Number(range.max) - Number(range.min)) * 100).toFixed(2) + '%');
+    tween(c * LOTS * RATE * PER[p]);
+  };
+  range.addEventListener('input', render);
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    p = t.dataset.calcP;
+    tabs.forEach((x) => x.setAttribute('aria-selected', x === t ? 'true' : 'false'));
+    if (per.dataset[p]) per.textContent = per.dataset[p];
+    render();
+  }));
+  render();
+})();
