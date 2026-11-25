@@ -171,8 +171,16 @@
 .inf-calc__h2 { margin: 0 auto clamp(14px, 2vw, 28px); text-align: center; }
 .inf-calc__red { color: #b0101c; }
 .inf-calc__case { position: relative; }
+/* wider screens: the case 20% smaller than the column (owner's wish), and never taller than the screen leaves room for
+   under its heading, so the block fits one screen */
+@media (min-width: 641px) {
+  .inf-calc__case { width: min(80%, (100vh - 220px) * 1600 / 921); margin: 0 auto; }
+  @supports (height: 100svh) { .inf-calc__case { width: min(80%, (100svh - 220px) * 1600 / 921); } }
+}
 .inf-calc__ph { display: none; }
 .inf-calc__wide, .inf-calc__img { display: block; width: 100%; height: auto; }
+.inf-calc__img { -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 95%, transparent); -webkit-mask-composite: source-in;
+  mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 95%, transparent); mask-composite: intersect; }   /* its edges fade into the page */
 /* the floor of the case (design x 240..1440, y 600..830) and the stacks on it: one per ~90 clients (orbit.js), each in
    its place (left/top in % of the floor, the back ones behind), a new one dropping in, one taken away lifting out */
 .inf-calc__case { container-type: inline-size; }
