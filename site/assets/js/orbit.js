@@ -342,6 +342,15 @@
   const range = box.querySelector('[data-calc-range]'), sum = box.querySelector('[data-calc-sum]'), per = box.querySelector('[data-calc-per]');
   const reels = [...box.querySelectorAll('[data-calc-reel]')], tabs = [...box.querySelectorAll('[data-calc-p]')];
   const track = range.parentNode;
+  const stacks = [...box.querySelectorAll('[data-calc-stack]')];
+  let lit = 0;
+  /* the notes on the case's floor: one stack per ~90 clients (2 at the design's 181), up to 10; new ones drop in one
+     after another, ones taken away go together */
+  const showStacks = (c) => {
+    const n = Math.min(stacks.length, Math.max(1, Math.ceil(c / 90.5)));
+    stacks.forEach((el, i) => { const on = i < n; if (on && !el.classList.contains('is-on')) { el.style.transitionDelay = Math.max(0, i - lit) * 90 + 'ms'; el.classList.add('is-on'); } else if (!on) { el.style.transitionDelay = '0ms'; el.classList.remove('is-on'); } });
+    lit = n;
+  };
   let p = 'year', shown = null, raf = 0;
   const money = (v) => '$' + Math.round(v).toLocaleString('en-US');
   const fit = (txt) => { const n = txt.length; sum.parentNode.style.setProperty('--sf', n <= 7 ? 64 : n <= 9 ? 56 : n <= 11 ? 46 : 38); };
@@ -356,6 +365,7 @@
     reels.forEach((r, i) => { r.style.transform = 'translateY(' + (-Number(d[i]) * 10) + '%)'; });
     track.style.setProperty('--p', ((c - Number(range.min)) / (Number(range.max) - Number(range.min)) * 100).toFixed(2) + '%');
     tween(c * LOTS * RATE * PER[p]);
+    showStacks(c);
   };
   range.addEventListener('input', render);
   tabs.forEach((t) => t.addEventListener('click', () => {

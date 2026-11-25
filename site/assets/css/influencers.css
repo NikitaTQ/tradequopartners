@@ -173,6 +173,14 @@
 .inf-calc__case { position: relative; }
 .inf-calc__ph { display: none; }
 .inf-calc__wide, .inf-calc__img { display: block; width: 100%; height: auto; }
+/* the floor of the case (design x 240..1440, y 600..830) and the stacks on it: one per ~90 clients (orbit.js), each in
+   its place (left/top in % of the floor, the back ones behind), a new one dropping in, one taken away lifting out */
+.inf-calc__case { container-type: inline-size; }
+.inf-calc__floor { position: absolute; left: 13.027%; top: 63.254%; width: 74.442%; height: 24.784%; pointer-events: none; }
+.inf-calc__stack { position: absolute; width: 39.167%; height: auto; opacity: 0; transform: translateY(-70%); filter: drop-shadow(0 .35cqw .5cqw rgba(0,0,0,.35));
+  transition: transform .6s cubic-bezier(.3,1.35,.5,1), opacity .25s ease; }
+.inf-calc__stack.is-on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .inf-calc__stack { transition: opacity .2s ease; transform: none; } }
 .inf-calc__plate { --u: calc(100cqw / 1279); position: absolute; left: 10.484%; top: 22.414%; width: 79.342%; height: 18.858%; container-type: inline-size; color: #fff; }
 .inf-calc__plate > * { position: absolute; }
 .inf-calc__l { left: calc(34 * var(--u)); top: calc(14 * var(--u)); width: calc(360 * var(--u)); font-size: calc(32 * var(--u)); line-height: 1.02; letter-spacing: .02em; padding: 0;
@@ -226,6 +234,7 @@
   .inf-calc__ph { display: block; width: 100%; height: auto; }
   .inf-calc__ph--top { order: 0; margin-bottom: -3px; }
   .inf-calc__ph--body { order: 2; margin-top: -3px; }
+  .inf-calc__floor { left: 8.38cqw; top: auto; bottom: 6.355cqw; width: 83.799cqw; height: 16.061cqw; z-index: 2; }   /* the same floor in the body picture (its crop: x 120..1552, the floor 202..432 of its 523 rows) */
   .inf-calc__plate { --u: .3px; position: relative; order: 1; left: auto; top: auto; width: auto; height: auto; margin: 0 1.2%; container-type: normal; z-index: 1;
     display: grid; grid-template-columns: 1fr auto; grid-template-areas: "l o" "t t" "mm mm" "out out" "tabs tabs"; gap: 10px 12px; align-items: center; padding: 18px 16px 12px; border-radius: 18px;
     background: repeating-linear-gradient(180deg, rgba(255,255,255,.035) 0 1px, rgba(0,0,0,0) 1px 3px), linear-gradient(90deg, #4e4c4d 0%, #3c3b3c 50%, #2e2d2e 100%);
