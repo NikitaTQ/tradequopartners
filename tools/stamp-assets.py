@@ -22,7 +22,9 @@ from urllib.parse import urlsplit, parse_qsl, urlencode
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, 'site')
-ATTR = re.compile(r'''((?:href|src|data-src(?:-[a-z]+)?|data-glass|srcset|poster)=")([^"#]+\.(?:css|js|html|png|webp|svg|jpg|mp4|webm|woff2)(?:\?[^"#]*)?)(")''')
+ATTR = re.compile(r'''((?:href|src|data-src(?:-[a-z]+)?|data-glass|srcset|poster)=")([^"#\s,]+\.(?:css|js|html|png|webp|svg|jpg|mp4|webm|woff2)(?:\?[^"#\s,]*)?)(")''')
+SRCSET = re.compile(r'''((?:srcset|imagesrcset)=")([^"]*,[^"]*)(")''')   # several candidates: each URL stamped (a srcset one
+# unstamped kept its old picture for a year in browsers that had it)
 FONT_URL = re.compile(r'''(url\()([^)'"#]+\.(?:woff2|webp|png)(?:\?[^)'"#]*)?)(\))''')   # fonts, and the images CSS draws (the header plate)
 
 
@@ -51,7 +53,18 @@ def stamp(page):
         query.append(('v', digest(local)))
         return m.group(1) + parts.path + '?' + urlencode(query) + m.group(3)
 
-    out = ATTR.sub(repl, html)
+    def srcset(m):
+        cands = []
+        for c in m.group(2).split(','):
+            c = c.strip()
+            url, _, desc = c.partition(' ')
+            if re.search(r'\.(?:png|webp|svg|jpg)(?:\?|$)', url):
+                url = repl(re.match(r'()(.*)()$', url))
+            cands.append((url + ' ' + desc).strip())
+        return m.group(1) + ', '.join(cands) + m.group(3)
+
+    out = SRCSET.sub(srcset, html)
+    out = ATTR.sub(repl, out)
     out = FONT_URL.sub(repl, out)
     if out != html:
         with open(page, 'w', encoding='utf-8') as f:
