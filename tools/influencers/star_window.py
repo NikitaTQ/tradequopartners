@@ -50,11 +50,26 @@ for k in rng.choice(len(ys), 46, replace=False):
             f = max(0, 1 - (dy * dy + dx * dx) ** .5 / (r + .4))
             a[y + dy, x + dx] = np.minimum(255, a[y + dy, x + dx] + b * f * np.array([.85, .92, 1]))
 
-# the frame: a rounded rectangle (its outer edge, found on the picture); all outside it transparent
-inside = Image.new('L', (W, H), 0)
-ImageDraw.Draw(inside).rounded_rectangle((19, 12, W - 19, H - 17), radius=58, fill=255)
-alpha = np.asarray(inside.filter(ImageFilter.GaussianBlur(1.0))).astype(float)
+# no glass frame (owner's wish: the view alone, at one with the night band round it): cropped inside the frame's rim,
+# its edges faded out (a soft rounded vignette in alpha), so the cockpit's view dissolves into the page's night
+CX0, CY0, CX1, CY1 = 50, 42, W - 50, H - 46
+a = a[CY0:CY1, CX0:CX1]
+H2, W2 = a.shape[:2]
+yy, xx = np.mgrid[0:H2, 0:W2].astype(float)
+FX, FY = W2 * .075, H2 * .11
+dx = np.clip(np.minimum(xx, W2 - 1 - xx) / FX, 0, 1)
+dy = np.clip(np.minimum(yy, H2 - 1 - yy) / FY, 0, 1)
+ease = lambda t: t * t * (3 - 2 * t)
+alpha = ease(dx) * ease(dy)
+# the frame's glass glare (a light band across the top left corner) and, for balance, the top right corner: both top
+# corners fade further, round each corner
+for cx in (0, W2 - 1):
+    r = np.hypot(xx - cx, yy * 1.25) / 330
+    alpha *= ease(np.clip((r - .25) / .75, 0, 1))
+alpha *= 255
+print('crop', (CX0, CY0, CX1, CY1), 'size', W2, H2)
 out = Image.fromarray(np.dstack([np.clip(a, 0, 255), alpha]).astype(np.uint8), 'RGBA')
+H, W = H2, W2
 for w in (2200, 1400, 900):
     p = out.resize((w, round(H * w / W)), Image.LANCZOS)
     if w > W:
