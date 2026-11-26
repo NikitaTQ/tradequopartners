@@ -360,23 +360,18 @@
       </div>
     </section>
     <!-- Next star (owner's design, November 2026: tools/influencers/star-src/star-window-design.webp; it replaced the red
-         carpet card), the page's last block, right above the footer: a spaceship's window on the TradeQuo planet, "WANT
-         TO BE OUR NEXT STAR? / INVITED. SEE YOU SOON." (the words are the picture's; the heading here for screen readers
-         and search). From 641px a full-screen scene, as the home page's "What we offer" (owner's wish): the window pins
-         to the screen and, as the page scrolls on, grows until the cockpit's view fills it; then the scene's dark night
-         flows down into the footer's white (orbit.js, influencers.css .inf-star). Phones: the window as a picture, the
-         page's colour flowing into the footer under it. -->
+         carpet card), the page's last block, right above the footer: a band of night sky with stars, coming out of the
+         page's light colour above and going into the footer's white below, and in it a spaceship's window on the
+         TradeQuo planet. Its words are real text over the picture, where the design has them (the picture's own were
+         wiped from its sky: tools/influencers/star_window.py). The stars: orbit.js draws them on one canvas. -->
     <section id="star" class="inf-star" data-star data-screen-label="Next star">
-      <h2 class="inf-star__h2">{{inf.star.h2a}} {{inf.star.h2b}}</h2>
-      <div class="inf-star__track">
-        <div class="inf-star__stage">
-          <div class="inf-star__win" data-star-win>
-            <img class="inf-star__img" src="{{root}}assets/influencers/star-window-1600.webp" srcset="{{root}}assets/influencers/star-window-700.webp 700w, {{root}}assets/influencers/star-window-1000.webp 1000w, {{root}}assets/influencers/star-window-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 1600px" width="1600" height="900" alt="" loading="lazy" decoding="async">
-          </div>
-          <div class="inf-star__veil" data-star-veil aria-hidden="true"></div>
+      <canvas class="inf-star__sky" data-star-sky aria-hidden="true"></canvas>
+      <div class="inf-star__in">
+        <div class="inf-star__win">
+          <img class="inf-star__img" src="{{root}}assets/influencers/star-window-1400.webp" srcset="{{root}}assets/influencers/star-window-900.webp 900w, {{root}}assets/influencers/star-window-1400.webp 1400w, {{root}}assets/influencers/star-window-2200.webp 2200w" sizes="(max-width: 1220px) 100vw, 1100px" width="2200" height="1238" alt="" loading="lazy" decoding="async">
+          <h2 class="inf-star__h2"><span class="inf-star__kick tq-h2">{{inf.star.h2a}}</span><span class="inf-star__big tq-h2">{{inf.star.big1}}</span><span class="inf-star__big inf-star__big--2 tq-h2">{{inf.star.big2}}</span></h2>
         </div>
       </div>
-      <div class="inf-star__tail" aria-hidden="true"></div>
     </section>
   </main>
 

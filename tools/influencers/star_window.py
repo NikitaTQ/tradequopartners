@@ -1,8 +1,11 @@
 """The /for-influencers/ closing picture (owner's design, November 2026, star-src/star-window-design.webp, 1672 x 941):
-a spaceship's window on the TradeQuo planet, "WANT TO BE OUR NEXT STAR? / INVITED. SEE YOU SOON." Its rounded glass
-frame and all inside it are kept as drawn; the light background round the frame is made transparent (its soft shadow
-kept, as a translucent shade), so the window lies on whatever the page puts under it (a gradient into the footer).
-Run:  python3 tools/influencers/star_window.py   ->  site/assets/influencers/star-window-{1600,1000,700}.webp"""
+a spaceship's window on the TradeQuo planet. The page sets its words as real text (sharper than the picture's), so here
+they are wiped from the sky: "WANT TO BE OUR NEXT STAR?" (x 476..1197, y 74..97) and "INVITED. / SEE YOU SOON."
+(612..1076 x 134..187, 435..1252 x 211..267) -> each box filled smoothly from the sky round it (a harmonic fill), the
+sky's grain and a few faint stars put back. The window's surroundings are made fully transparent (the block under it
+is the night sky now). Then sharpened: enlarged to 2200 wide with Lanczos and a light unsharp mask, so it stays crisp
+on a 2x screen at its largest (1100 CSS px).
+Run:  python3 tools/influencers/star_window.py   ->  site/assets/influencers/star-window-{2200,1400,900}.webp"""
 import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
@@ -12,30 +15,51 @@ OUT = os.path.join(HERE, '..', '..', 'site', 'assets', 'influencers')
 im = Image.open(os.path.join(HERE, 'star-src', 'star-window-design.webp')).convert('RGB')
 a = np.asarray(im).astype(float)
 H, W = a.shape[:2]
-# the background: a smooth surface fitted to the picture's outer band (light, a little blue)
-yy, xx = np.mgrid[0:H, 0:W]
-band = (xx < 10) | (xx > W - 11) | (yy < 6) | (yy > H - 7)
-u, v = (xx - W / 2) / W, (yy - H / 2) / H
-B = lambda k: np.stack([np.ones(k.sum()), u[k], v[k], u[k] ** 2, v[k] ** 2, u[k] * v[k]], 1)
-allm = np.ones((H, W), bool)
-bg = np.stack([(B(allm) @ np.linalg.lstsq(B(band), a[..., c][band], rcond=None)[0]).reshape(H, W) for c in range(3)], 2)
-# the frame: a rounded rectangle (its outer edge, found on the picture), all of it opaque
+rng = np.random.default_rng(7)
+
+# the words' boxes (with their shadows and glow), one mask
+mask = np.zeros((H, W), bool)
+for x0, y0, x1, y1 in ((456, 56, 1217, 116), (592, 116, 1098, 199), (414, 193, 1274, 288)):
+    mask[y0:y1, x0:x1] = True
+# the sky's grain, from the clean sky beside them
+ref = a[130:190, 330:400]
+grain = np.median(np.abs(ref - np.asarray(Image.fromarray(ref.astype(np.uint8)).filter(ImageFilter.GaussianBlur(2))).astype(float))) * 1.25
+# harmonic fill (red-black over-relaxation) from the sky round the boxes
+Y0, Y1, X0, X1 = 48, 296, 404, 1284
+win, mw = a[Y0:Y1, X0:X1].copy(), mask[Y0:Y1, X0:X1]
+iy, ix = np.mgrid[0:Y1 - Y0, 0:X1 - X0]
+for it in range(1200):
+    for par in (0, 1):
+        pad = np.pad(win, ((1, 1), (1, 1), (0, 0)), mode='edge')
+        avg = (pad[:-2, 1:-1] + pad[2:, 1:-1] + pad[1:-1, :-2] + pad[1:-1, 2:]) / 4
+        sel = mw & (((iy + ix) % 2) == par)
+        win[sel] += 1.9 * (avg[sel] - win[sel])
+a[Y0:Y1, X0:X1] = win
+noise = np.asarray(Image.fromarray((128 + rng.normal(0, 40, (H, W))).clip(0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(.6))).astype(float) - 128
+noise *= grain / max(noise.std(), 1e-6)
+a[mask] += noise[mask][:, None]
+print('sky grain', round(float(grain), 2))
+# a few faint stars in the wiped sky, as the sky round it has
+ys, xs = np.where(mask)
+for k in rng.choice(len(ys), 46, replace=False):
+    y, x = ys[k], xs[k]
+    b = rng.uniform(40, 150)
+    r = 1 if b < 110 else 2
+    for dy in range(-r, r + 1):
+        for dx in range(-r, r + 1):
+            f = max(0, 1 - (dy * dy + dx * dx) ** .5 / (r + .4))
+            a[y + dy, x + dx] = np.minimum(255, a[y + dy, x + dx] + b * f * np.array([.85, .92, 1]))
+
+# the frame: a rounded rectangle (its outer edge, found on the picture); all outside it transparent
 inside = Image.new('L', (W, H), 0)
 ImageDraw.Draw(inside).rounded_rectangle((19, 12, W - 19, H - 17), radius=58, fill=255)
-inside = np.asarray(inside.filter(ImageFilter.GaussianBlur(1.2))).astype(float) / 255
-# outside it: as transparent as it is close to the background; what is darker (the shadow) a translucent shade of it
-dark = np.clip((bg - a).max(2), 0, None)
-diff = np.abs(a - bg).max(2)
-alpha_out = np.clip((diff - 7) / 40, 0, 1)
-alpha = np.maximum(inside, alpha_out)
-rgb = a.copy()
-# a translucent pixel over the page should look like the picture over its background: un-premultiply against bg
-m = (alpha > 0.02) & (inside < 0.99)
-al = alpha[..., None]
-rgb[m] = np.clip((a[m] - bg[m] * (1 - al[m])) / al[m], 0, 255)
-out = Image.fromarray(np.dstack([rgb, alpha * 255]).clip(0, 255).astype(np.uint8), 'RGBA')
-for w in (1600, 1000, 700):
+alpha = np.asarray(inside.filter(ImageFilter.GaussianBlur(1.0))).astype(float)
+out = Image.fromarray(np.dstack([np.clip(a, 0, 255), alpha]).astype(np.uint8), 'RGBA')
+for w in (2200, 1400, 900):
     p = out.resize((w, round(H * w / W)), Image.LANCZOS)
+    if w > W:
+        rgb = p.convert('RGB').filter(ImageFilter.UnsharpMask(radius=1.6, percent=55, threshold=2))
+        p = Image.merge('RGBA', (*rgb.split(), p.split()[3]))
     fn = os.path.join(OUT, 'star-window-%d.webp' % w)
-    p.save(fn, quality=86, alpha_quality=90, method=6)
+    p.save(fn, quality=88, alpha_quality=90, method=6)
     print(os.path.basename(fn), p.size, os.path.getsize(fn) // 1024, 'KB')

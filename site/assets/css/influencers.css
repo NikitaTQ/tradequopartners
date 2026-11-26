@@ -67,42 +67,33 @@
 }
 
 /* ---- Next star (owner's design, November 2026: a spaceship's window on the TradeQuo planet), the last block --------
-   The picture (tools/influencers/star_window.py) is the window alone, its surroundings transparent. The words are the
-   picture's; the heading is for screen readers.
-   From 641px a full-screen scene, as the home page's "What we offer" (owner's wish): a tall track, its stage pinned to
-   the screen (sticky) while it scrolls by; orbit.js grows the window from its card size until the cockpit's view fills
-   the screen (--k, the window's scale), a soft deep-blue light round it fading as it grows, and at the end a veil
-   brings the stage's foot to the night's colour; under the track the tail runs from that night into the footer's white.
-   Phones, upright screens (tablets held tall) and reduced motion: no pinning; the window as a picture, the page's colour flowing into the footer under it. */
-.inf-star { --night: #0f1a2a; position: relative; font-family: 'Inter', sans-serif; background: #f3f2f7; }
-.inf-star__h2 { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.inf-star__track { position: relative; height: 240vh; }
-.inf-star__stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-@supports (height: 100svh) { .inf-star__stage { height: 100svh; } }
-.inf-star__stage::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: calc(1 - var(--g, 0));   /* the light round the card, gone as it fills the screen */
-  background: radial-gradient(ellipse 62% 50% at 50% 50%, rgba(24, 52, 104, .24) 0%, rgba(24, 52, 104, .12) 42%, rgba(24, 52, 104, .04) 72%, rgba(24, 52, 104, 0) 100%); }
-.inf-star__win { position: relative; width: min(1100px, 100% - 2 * clamp(16px, 5vw, 72px), (100vh - 150px) * 16 / 9); transform: scale(var(--k, 1)); transform-origin: 50% 30%; will-change: transform; }
-@supports (height: 100svh) { .inf-star__win { width: min(1100px, 100% - 2 * clamp(16px, 5vw, 72px), (100svh - 150px) * 16 / 9); } }
-.inf-star__img { display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(16, 30, 64, .22)); }
-.inf-star__veil { position: absolute; left: 0; right: 0; bottom: 0; height: 34%; pointer-events: none; opacity: var(--v, 0);
-  background: linear-gradient(180deg, rgba(15, 26, 42, 0) 0%, rgba(15, 26, 42, .55) 45%, var(--night) 100%); }
-.inf-star__tail { height: 70vh; margin-top: -1px;
-  background: linear-gradient(180deg, var(--night) 0%, #142033 12%, #25324a 26%, #46526a 40%, #737d92 54%, #a5adbc 68%, #d3d7df 82%, #f1f2f5 93%, #fff 100%); }
+   A band of night sky: out of the page's light colour above, into the footer's white below (long eased gradients),
+   stars on a canvas (orbit.js) fading in and out with it; in the middle the window (tools/influencers/star_window.py:
+   the window alone, its surroundings transparent, its words wiped) and over it its words as real text, placed where
+   the design has them (in % of the window's width: cqw): "WANT TO BE OUR NEXT STAR?" red, "INVITED. / SEE YOU SOON."
+   in brushed silver with a dark drop shadow, all in the headings' face. */
+.inf-star { --night: #0b1424; position: relative; overflow: hidden; padding: clamp(150px, 17vw, 280px) 0 clamp(170px, 19vw, 300px); font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg, #f3f2f7 0%, #e3e5ec 3%, #c3c8d4 6.5%, #949cae 10%, #5f6a82 13.5%, #333f58 17%, #18233a 21%, var(--night) 25%,
+    var(--night) 73%, #18233a 77%, #333f58 81%, #5f6a82 84.5%, #949cae 88%, #c3c8d4 91.5%, #e7e9ee 95%, #fff 100%); }
+.inf-star__sky { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent 6%, #000 22%, #000 78%, transparent 93%); mask-image: linear-gradient(180deg, transparent 6%, #000 22%, #000 78%, transparent 93%); }
+.inf-star::before { content: ''; position: absolute; left: 0; right: 0; top: 18%; bottom: 18%; pointer-events: none;   /* a soft blue light round the window */
+  background: radial-gradient(ellipse 48% 50% at 50% 50%, rgba(56, 104, 190, .28) 0%, rgba(56, 104, 190, .1) 48%, rgba(56, 104, 190, 0) 100%); }
+.inf-star__in { position: relative; max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
+.inf-star__win { position: relative; width: min(100%, 1100px); margin: 0 auto; container-type: inline-size; }
+.inf-star__img { display: block; width: 100%; height: auto; filter: drop-shadow(0 2.4cqw 4cqw rgba(0, 0, 0, .45)); }
+.inf-star__h2 { position: absolute; left: 0; right: 0; top: 0; margin: 0; text-align: center; }
+.inf-star__h2 > span { position: absolute; left: 0; right: 0; display: block; margin: 0; padding: 0; white-space: nowrap; text-wrap: nowrap; line-height: 1; }
+.inf-star__kick { top: 4.24cqw; font-size: 2cqw; letter-spacing: .06em; color: #ee1d2b; text-shadow: 0 0 .9cqw rgba(238, 29, 43, .35); }
+.inf-star__big { top: 7.58cqw; font-size: 4.57cqw; letter-spacing: .02em;
+  background: linear-gradient(180deg, #ffffff 0%, #eef0f4 30%, #c3c8d0 48%, #8f959f 54%, #c9cdd4 70%, #f4f5f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 .3cqw .25cqw rgba(0, 0, 0, .75)) drop-shadow(0 0 1.2cqw rgba(0, 0, 0, .35)); }
+.inf-star__big--2 { top: 12.19cqw; }
 /* the page ends in the footer's white with no line between (the footer's own top line, drawn inline, hidden here) */
 footer { border-top-color: transparent !important; }
-@media (max-width: 640px), (max-aspect-ratio: 1/1), (prefers-reduced-motion: reduce) {
-  .inf-star { padding: 8px 0 clamp(64px, 8vw, 120px); background: linear-gradient(180deg, #f3f2f7 0%, #f3f2f7 40%, #fff 100%); }
-  .inf-star__track { height: auto; }
-  .inf-star__stage { position: relative; height: auto !important; overflow: visible; display: block; padding: 0 clamp(16px, 5vw, 72px); }
-  .inf-star__stage::before { inset: -22% 0 -6%; }
-  .inf-star__win { width: min(100%, 1100px); margin: 0 auto; transform: none; }
-  .inf-star__veil, .inf-star__tail { display: none; }
-}
 @media (max-width: 640px) {
-  .inf-star__stage { padding: 0 6px; }
-  .inf-star__stage::before { inset: -12% 0 -6%; background: radial-gradient(ellipse 75% 46% at 50% 52%, rgba(24, 52, 104, .24) 0%, rgba(24, 52, 104, .1) 50%, rgba(24, 52, 104, 0) 100%); }
-  .inf-star__win { width: 100%; }
-  .inf-star__img { filter: drop-shadow(0 16px 22px rgba(16, 30, 64, .22)); }
+  .inf-star { padding: 120px 0 140px; }
+  .inf-star__in { padding: 0 6px; }
 }
 
 /* ---- Three numbers (owner's design, the light glass version, November 2026) --------------------------------------

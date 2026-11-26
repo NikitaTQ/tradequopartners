@@ -403,43 +403,36 @@
   });
 })();
 
-/* /for-influencers/: "Next star", the last block. From 641px a full-screen scene, as the home page's "What we offer":
- * its stage pinned (sticky, influencers.css) while the tall track scrolls by; through the first 70% of it the window
- * grows from its card size until the cockpit's view fills the screen with a little to spare (--k), the light round the
- * card fading (--g); over the last part a veil brings the stage's foot to the night's colour (--v), so the tail under
- * the track picks up from it. Smoothed toward the scroll (as the home page's flip), drawn only while on screen.
- * Phones, upright screens (tablets held tall: filling them would cut the words) and reduced motion: nothing to do
- * (no pinning there). */
+/* /for-influencers/: "Next star", the last block: its night sky's stars, drawn once on one canvas (again when its size
+ * changes): small faint ones, a few brighter with a soft halo. They fade in and out with the band (a CSS mask). */
 (() => {
-  const sec = document.querySelector('[data-star]');
-  if (!sec) return;
-  const win = sec.querySelector('[data-star-win]'), track = sec.querySelector('.inf-star__track'), stage = sec.querySelector('.inf-star__stage');
-  const off = window.matchMedia('(max-width: 640px), (max-aspect-ratio: 1/1), (prefers-reduced-motion: reduce)');
-  const clamp = (x) => Math.max(0, Math.min(1, x));
-  const io3 = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
-  let raf = 0, pS = -1;
-  const reset = () => { ['--k', '--g', '--v'].forEach((n) => sec.style.removeProperty(n)); pS = -1; };
-  const tick = () => {
-    raf = requestAnimationFrame(tick);
-    if (off.matches) { if (pS !== -2) { reset(); pS = -2; } return; }
-    const r = track.getBoundingClientRect(), vh = stage.clientHeight || innerHeight, vw = stage.clientWidth || innerWidth;
-    const pT = clamp(-r.top / Math.max(1, r.height - vh));
-    pS = pS < 0 ? pT : pS + (pT - pS) * 0.12;
-    if (Math.abs(pT - pS) < 0.0005) pS = pT;
-    /* the scale that fills the screen, the window growing about a point 30% down it (influencers.css): the frame's
-       top edge (1.3% of the picture) up under the site's header, its bottom (96.9%) below the screen's foot, its sides
-       (97.7% of the width) beyond the screen's; never so far that "INVITED. SEE YOU SOON." (about half the picture's
-       width) leaves the screen. The words stay below the header. */
-    const w = win.offsetWidth, h = win.offsetHeight || w * 9 / 16, top = (vh - h) / 2, OY = 0.3;
-    const head = document.querySelector('header'), hb = head ? Math.max(0, head.getBoundingClientRect().bottom) : 0;
-    const kTop = ((top - hb) / h + OY) / (OY - 0.013), kBot = ((vh - top) / h - OY) / (0.969 - OY), kX = vw / (w * 0.977);
-    const full = Math.min(Math.max(kTop, kBot, kX) * 1.03, 0.94 * vw / (0.52 * w));
-    const g = io3(pS / 0.7);
-    sec.style.setProperty('--k', (1 + (full - 1) * g).toFixed(4));
-    sec.style.setProperty('--g', g.toFixed(3));
-    sec.style.setProperty('--v', clamp((pS - 0.72) / 0.22).toFixed(3));
+  const cv = document.querySelector('[data-star-sky]');
+  const ctx = cv && cv.getContext && cv.getContext('2d');
+  if (!ctx) return;
+  let built = '';
+  const draw = () => {
+    const w = cv.clientWidth, h = cv.clientHeight, key = w + 'x' + h;
+    if (!w || !h || key === built) return;
+    built = key;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    let seed = 7;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;   /* the same sky every time */
+    const n = Math.round(w * h / 2600);
+    for (let i = 0; i < n; i++) {
+      const x = rnd() * w, y = rnd() * h, b = rnd(), r = .35 + b * b * 1.1;
+      ctx.fillStyle = 'rgba(' + (200 + rnd() * 55 | 0) + ',' + (215 + rnd() * 40 | 0) + ',255,' + (.25 + b * .65).toFixed(2) + ')';
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+      if (b > .93) {
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r * 6);
+        g.addColorStop(0, 'rgba(190,215,255,.35)'); g.addColorStop(1, 'rgba(190,215,255,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * 6, 0, Math.PI * 2); ctx.fill();
+      }
+    }
   };
-  const run = (on) => { if (on && !raf) raf = requestAnimationFrame(tick); else if (!on && raf) { cancelAnimationFrame(raf); raf = 0; } };
-  if ('IntersectionObserver' in window) new IntersectionObserver((es) => run(es.some((e) => e.isIntersecting)), { rootMargin: '100px 0px' }).observe(sec);
-  else run(true);
+  draw();
+  if ('ResizeObserver' in window) new ResizeObserver(draw).observe(cv);
+  else window.addEventListener('resize', draw, { passive: true });
 })();
