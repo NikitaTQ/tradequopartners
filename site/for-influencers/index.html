@@ -908,41 +908,22 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-cta__dot { width: 40px; height: 40px; }
 .inf-hero__ticks { order: 5; margin-top: 14px; font-size: 12.5px; gap: 6px 16px; }
 }
-.inf-star { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
-.inf-star__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
-.inf-star__card { position: relative; display: flex; margin: 0 auto; border-radius: 24px; overflow: hidden; background: #050506; color: #fff;
-  box-shadow: 0 30px 40px -28px rgba(14,14,16,.55), inset 0 1px 0 rgba(255,255,255,.2); }
-.inf-star__text { position: relative; z-index: 1; flex: 1 1 0; min-width: 0; box-sizing: border-box; padding: 32px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-.inf-star__h2 { margin: 0; font-weight: 700; font-size: 24px; line-height: 1.15; }
-.inf-star__h2 .tq-h2 { font-size: 1em; letter-spacing: -.01em; line-height: 1.15; padding: 0; text-wrap: nowrap; }
-.inf-star__red { color: #ff5a61; }
-.inf-star__p { margin: 0; max-width: 380px; font-size: 15px; line-height: 1.5; color: #b9bbc2; text-wrap: pretty; }
-.inf-star__cta { align-self: flex-start; display: flex; align-items: center; gap: 8px; margin-top: 6px; padding: 10px 18px; border-radius: 10px;
-  background: linear-gradient(180deg, #fff 0%, #e4e4ea 100%); box-shadow: inset 0 1px 0 #fff, 0 6px 16px -6px rgba(0,0,0,.6);
-  color: #5a0a0f; font-weight: 700; font-size: 14px; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease; }
-.inf-star__cta:hover { color: #5a0a0f; transform: translateY(-1px); box-shadow: inset 0 1px 0 #fff, 0 10px 20px -8px rgba(0,0,0,.7); }
-.inf-star__cta:focus-visible { outline: 2px solid #ff5a61; outline-offset: 3px; }
-.inf-star__vis { position: relative; flex: 1.4 1 0; min-width: 0; min-height: 220px; }
-.inf-star__vis picture, .inf-star__img { position: absolute; inset: 0; width: 100%; height: 100%; }
-.inf-star__img { display: block; object-fit: cover; object-position: 50% 50%; }
-.inf-star__vis::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #050506 0%, rgba(5,5,6,0) 22%); }
-@media (min-width: 641px) {
-.inf-star__card { max-width: calc((100vh - 250px) * 1774 / 975); }
-}
+.inf-star { position: relative; padding: clamp(4px, 1vw, 16px) 0 clamp(64px, 8vw, 120px); font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg, #f3f2f7 0%, #f3f2f7 40%, #fff 100%); }
+.inf-star::before { content: ''; position: absolute; left: 0; right: 0; top: -22%; bottom: -6%; pointer-events: none;   
+  background: radial-gradient(ellipse 62% 50% at 50% 54%, rgba(24, 52, 104, .24) 0%, rgba(24, 52, 104, .12) 42%, rgba(24, 52, 104, .04) 72%, rgba(24, 52, 104, 0) 100%); }
+footer { border-top-color: transparent !important; }
+.inf-star__h2 { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.inf-star__in { position: relative; max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
+.inf-star__img { display: block; width: min(100%, 1100px); height: auto; margin: 0 auto; filter: drop-shadow(0 30px 40px rgba(16, 30, 64, .22)); }
 @supports (height: 100svh) {
-@media (min-width: 641px) {
-.inf-star__card { max-width: calc((100svh - 250px) * 1774 / 975); }
-}
+.inf-star__img { width: min(100%, 1100px, (100svh - 150px) * 16 / 9); }
 }
 @media (max-width: 640px) {
-.inf-star { padding-bottom: var(--tq-gap); }
-.inf-star__card { flex-direction: column; }
-.inf-star__text { padding: 32px 24px 4px; align-items: center; text-align: center; }
-.inf-star__h2 { font-size: 22px; }
-.inf-star__p { max-width: 320px; }
-.inf-star__cta { align-self: center; padding: 12px 20px; min-height: 44px; box-sizing: border-box; }
-.inf-star__vis { flex: none; height: 250px; min-height: 0; margin-top: -24px; }
-.inf-star__vis::after { background: linear-gradient(180deg, #050506 0%, rgba(5,5,6,0) 34%); }
+.inf-star { padding-top: 8px; }
+.inf-star__in { padding: 0 6px; }
+.inf-star__img { width: 100%; filter: drop-shadow(0 16px 22px rgba(16, 30, 64, .22)); }
+.inf-star::before { top: -12%; background: radial-gradient(ellipse 75% 46% at 50% 52%, rgba(24, 52, 104, .24) 0%, rgba(24, 52, 104, .1) 50%, rgba(24, 52, 104, 0) 100%); }
 }
 @property --rh { syntax: '<length>'; inherits: true; initial-value: 120px; }
 .inf-nums { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
@@ -1623,26 +1604,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
     </div>
     </section>
 
-    <!-- Next star (owner's design "Next Star Upsell", November 2026), right after the creators scene: a black card, "WANT
-         TO BE / OUR NEXT STAR?", a line and a light "Become a creator" button on the left; on the right a red carpet
-         running to a lit doorway between titanium walls, paparazzi flashes and bokeh, fading into the card at its left
-         edge. The carpet was a three.js scene that never moves: it is drawn once into pictures (tools/influencers/star/),
-         so the page carries no 3D. Phones: the words over the carpet, centred. -->
-    <section id="star" class="inf-star" data-screen-label="Next star">
-      <div class="inf-star__in">
-        <div class="inf-star__card">
-          <div class="inf-star__text">
-            <h2 class="inf-star__h2"><span class="tq-h2">Want to be</span><br><span class="tq-h2 inf-star__red">our next star?</span></h2>
-            <p class="inf-star__p">The red carpet leads to you. Join TradeQuo creators and earn on every client you bring.</p>
-            <a class="inf-star__cta" href="../#signup" data-page-link>Become a creator <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="inf-star__vis">
-            <picture><source media="(max-width: 640px)" srcset="../assets/influencers/star-carpet-m.webp?v=d7a7ff2267"><img class="inf-star__img" src="../assets/influencers/star-carpet.webp?v=3ffdaf7598" width="1600" height="600" alt="" loading="lazy" decoding="async"></picture>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Three numbers (owner's design, November 2026, the light glass version: numbers-src/glass-design.webp): a light
          card, "THREE NUMBERS. / ZERO FINE PRINT." and three glass pill rows (the design's own glass, a 9-slice frame:
          tools/influencers/nums_glass.py), each a figure in red brushed metal and its name: 87% revenue share, infinity
@@ -1816,6 +1777,17 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
             </span>
           </a>
         </div>
+      </div>
+    </section>
+    <!-- Next star (owner's design, November 2026: tools/influencers/star-src/star-window-design.webp; it replaced the red
+         carpet card), the page's last block, right above the footer: a spaceship's window on the TradeQuo planet, "WANT
+         TO BE OUR NEXT STAR? / INVITED. SEE YOU SOON." (the words are the picture's; the heading here for screen readers
+         and search). The window's surroundings are transparent (tools/influencers/star_window.py); under it the page's
+         colour flows into the footer's white, and a soft deep-blue light round the window fades out above and below. -->
+    <section id="star" class="inf-star" data-screen-label="Next star">
+      <h2 class="inf-star__h2">Want to be our next star? Invited. See you soon.</h2>
+      <div class="inf-star__in">
+        <img class="inf-star__img" src="../assets/influencers/star-window-1600.webp?v=2cf2c2e502" srcset="../assets/influencers/star-window-700.webp?v=4520074446 700w, ../assets/influencers/star-window-1000.webp?v=5e5689f00f 1000w, ../assets/influencers/star-window-1600.webp?v=2cf2c2e502 1600w" sizes="(max-width: 640px) 100vw, 1100px" width="1600" height="900" alt="" loading="lazy" decoding="async">
       </div>
     </section>
   </main>
