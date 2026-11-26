@@ -97,32 +97,41 @@
   };
   const draw = (t) => {
     if (!pts) return;
+    /* each frame from a clean canvas: no transform, no blending left over, the whole of it cleared */
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
     ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.setTransform(cv.width / (cv.clientWidth || cv.width), 0, 0, cv.height / (cv.clientHeight || cv.height), 0, 0);
     if (hiddenNow) return;
     const head = (HEAD0 + t / LAP) % 1;
-    // the trail: a run of short strokes behind the head, thinner and fainter toward its end
-    ctx.lineCap = 'round';
-    const STEPS = 28;
-    let prev = at(head);
-    for (let s = 1; s <= STEPS; s++) {
-      let u = head - TRAIL * s / STEPS; if (u < 0) u += 1;
-      const p = at(u), fade = 1 - s / STEPS;
-      const a = Math.min(prev[2], p[2]) * fade;
-      if (a > 0.01 && Math.abs(p[0] - prev[0]) + Math.abs(p[1] - prev[1]) < 80) {
-        ctx.strokeStyle = 'rgba(255,255,255,' + (0.18 * a).toFixed(3) + ')'; ctx.lineWidth = 7 * fade + 2;
-        ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(p[0], p[1]); ctx.stroke();
-        ctx.strokeStyle = 'rgba(255,255,255,' + (0.75 * a).toFixed(3) + ')'; ctx.lineWidth = 2.4 * fade + .6;
-        ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(p[0], p[1]); ctx.stroke();
+    /* the trail: a thin line fading behind the head (owner's wish: one neat thin line, no beads, no thick glow). Drawn
+       as nested runs from the head back, each one continuous (one path, butt ends, round joins: nothing overlaps
+       inside it), the shorter ones on top: their faint alphas add up toward the head. Where the orbit hides (a
+       creator, its open ends) a run stops. */
+    ctx.lineCap = 'butt'; ctx.lineJoin = 'round'; ctx.lineWidth = 1.6;
+    const RUNS = 14, STEP = TRAIL / 48;
+    for (let k = RUNS; k >= 1; k--) {
+      const len = TRAIL * k / RUNS;
+      ctx.strokeStyle = 'rgba(255,255,255,' + (0.95 / RUNS * 1.6).toFixed(3) + ')';
+      ctx.beginPath();
+      let open = false, last = null;
+      for (let d = 0; d <= len + 1e-6; d += STEP) {
+        let u = head - d; if (u < 0) u += 1;
+        const p = at(u);
+        const jump = last && Math.abs(p[0] - last[0]) + Math.abs(p[1] - last[1]) > 80;
+        if (p[2] < 0.5 || jump) { open = false; last = p; continue; }
+        if (open) ctx.lineTo(p[0], p[1]); else { ctx.moveTo(p[0], p[1]); open = true; }
+        last = p;
       }
-      prev = p;
+      ctx.stroke();
     }
-    // the head: a soft glow and a bright core
+    // the head: a small soft light
     const h = at(head);
     if (h[2] > 0.01) {
-      const g = ctx.createRadialGradient(h[0], h[1], 0, h[0], h[1], 12);
-      g.addColorStop(0, 'rgba(255,255,255,' + h[2] + ')'); g.addColorStop(.25, 'rgba(255,255,255,' + (.75 * h[2]) + ')');
-      g.addColorStop(.55, 'rgba(255,255,255,' + (.18 * h[2]) + ')'); g.addColorStop(1, 'rgba(255,255,255,0)');
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h[0], h[1], 12, 0, Math.PI * 2); ctx.fill();
+      const g = ctx.createRadialGradient(h[0], h[1], 0, h[0], h[1], 8);
+      g.addColorStop(0, 'rgba(255,255,255,' + h[2] + ')'); g.addColorStop(.3, 'rgba(255,255,255,' + (.7 * h[2]) + ')');
+      g.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h[0], h[1], 8, 0, Math.PI * 2); ctx.fill();
     }
   };
   let lastDraw = 0;
