@@ -196,9 +196,10 @@
 @keyframes inf-case2-glint { 0% { opacity: 1; background-position: -120% 0; } 100% { opacity: 0; background-position: 260% 0; } }
 /* the notes: each stack in its place (left/top in % of the frame): .85 of the design's stack, three rows over the whole
    floor, two stacks a row, then a second layer, then a third on the front and middle rows only (owner's wish: spread
-   out, nothing over the back wall; and then 50% more notes);
+   out, nothing over the back wall; and then 50% more notes). The tray is drawn deeper (case2.py: the back wall 40px
+   taller, the floor lower), the stacks on its floor, the front row's feet hidden by the front wall;
    the back row behind, the ones on top above */
-.inf-case2__floor { position: absolute; inset: 0; pointer-events: none; }
+.inf-case2__floor { position: absolute; inset: 0; pointer-events: none; clip-path: inset(0 0 32.733% 0); }   /* nothing below the glass lip (y 715 of 944): the front row partly behind the front wall */
 .inf-calc__stack { position: absolute; width: 28.67%; height: auto; opacity: 0; transform: translateY(-70%); filter: drop-shadow(0 .45cqw .5cqw rgba(0,0,0,.45));
   transition: transform .6s cubic-bezier(.3,1.35,.5,1), opacity .25s ease; }
 .inf-calc__stack.is-on { opacity: 1; transform: none; }

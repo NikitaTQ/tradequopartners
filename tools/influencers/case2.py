@@ -157,6 +157,25 @@ ImageDraw.Draw(sm).polygon(dst, fill=255)
 sm = sm.filter(ImageFilter.GaussianBlur(.8))
 shut = np.dstack([np.asarray(shut).astype(float), np.asarray(sm).astype(float)])
 
+# a deeper tray (owner's wish: the notes, up to three layers, sit low enough for the lid to shut). Inside the
+# trapezoid between the floor's side edges (extended up to the back rim's foot, y 522; their lines: x = 305 - .346 (y -
+# 572) on the left, 1240 + .449 (y - 572) on the right) down to the glass lip (715): the back wall 40px taller (its 50
+# rows drawn on 90), the floor 40px further down (its front 40 rows behind the front wall). Each point maps along the
+# trapezoid's own width, so its sides stay where they are; the rims, the side walls and all else stay as drawn.
+TY0, TY1, WALL, DEEPEN = 522, 715, 50, 40
+Lx = lambda y: 305 - .346 * (y - 572)
+Rx = lambda y: 1240 + .449 * (y - 572)
+src = base.copy()
+for y in range(TY0, TY1 + 1):
+    ys_ = TY0 + (y - TY0) * WALL / (WALL + DEEPEN) if y < TY0 + WALL + DEEPEN else y - DEEPEN
+    l, r = Lx(y), Rx(y)
+    xa = np.arange(int(np.ceil(l)), int(np.floor(r)) + 1)
+    u = (xa - l) / (r - l)
+    xs_ = Lx(ys_) + u * (Rx(ys_) - Lx(ys_))
+    y0i = int(np.floor(ys_)); fy = ys_ - y0i
+    x0i = np.floor(xs_).astype(int); fx = (xs_ - x0i)[:, None]
+    row = lambda yy: src[yy, x0i] * (1 - fx) + src[yy, x0i + 1] * fx
+    base[y, xa] = row(y0i) * (1 - fy) + row(y0i + 1) * fy
 x0, y0, x1, y1 = CROP
 # the base's edges eased into the page's colour (the case is well inside them): the last rows and columns of the crop
 ew = np.ones((H, W))
