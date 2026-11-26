@@ -184,26 +184,6 @@
     </div>
     </section>
 
-    <!-- Next star (owner's design "Next Star Upsell", November 2026), right after the creators scene: a black card, "WANT
-         TO BE / OUR NEXT STAR?", a line and a light "Become a creator" button on the left; on the right a red carpet
-         running to a lit doorway between titanium walls, paparazzi flashes and bokeh, fading into the card at its left
-         edge. The carpet was a three.js scene that never moves: it is drawn once into pictures (tools/influencers/star/),
-         so the page carries no 3D. Phones: the words over the carpet, centred. -->
-    <section id="star" class="inf-star" data-screen-label="Next star">
-      <div class="inf-star__in">
-        <div class="inf-star__card">
-          <div class="inf-star__text">
-            <h2 class="inf-star__h2"><span class="tq-h2">{{inf.star.h2a}}</span><br><span class="tq-h2 inf-star__red">{{inf.star.h2b}}</span></h2>
-            <p class="inf-star__p">{{inf.star.p}}</p>
-            <a class="inf-star__cta" href="{{signupHref}}"{{signupNav}}>{{inf.star.cta}} <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="inf-star__vis">
-            <picture><source media="(max-width: 640px)" srcset="{{root}}assets/influencers/star-carpet-m.webp"><img class="inf-star__img" src="{{root}}assets/influencers/star-carpet.webp" width="1600" height="600" alt="" loading="lazy" decoding="async"></picture>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Three numbers (owner's design, November 2026, the light glass version: numbers-src/glass-design.webp): a light
          card, "THREE NUMBERS. / ZERO FINE PRINT." and three glass pill rows (the design's own glass, a 9-slice frame:
          tools/influencers/nums_glass.py), each a figure in red brushed metal and its name: 87% revenue share, infinity
@@ -377,6 +357,17 @@
             </span>
           </a>
         </div>
+      </div>
+    </section>
+    <!-- Next star (owner's design, November 2026: tools/influencers/star-src/star-window-design.webp; it replaced the red
+         carpet card), the page's last block, right above the footer: a spaceship's window on the TradeQuo planet, "WANT
+         TO BE OUR NEXT STAR? / INVITED. SEE YOU SOON." (the words are the picture's; the heading here for screen readers
+         and search). The window's surroundings are transparent (tools/influencers/star_window.py); under it the page's
+         colour flows into the footer's white, and a soft deep-blue light round the window fades out above and below. -->
+    <section id="star" class="inf-star" data-screen-label="Next star">
+      <h2 class="inf-star__h2">{{inf.star.h2a}} {{inf.star.h2b}}</h2>
+      <div class="inf-star__in">
+        <img class="inf-star__img" src="{{root}}assets/influencers/star-window-1600.webp" srcset="{{root}}assets/influencers/star-window-700.webp 700w, {{root}}assets/influencers/star-window-1000.webp 1000w, {{root}}assets/influencers/star-window-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 1100px" width="1600" height="900" alt="" loading="lazy" decoding="async">
       </div>
     </section>
   </main>
