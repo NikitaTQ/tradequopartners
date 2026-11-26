@@ -908,22 +908,38 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-cta__dot { width: 40px; height: 40px; }
 .inf-hero__ticks { order: 5; margin-top: 14px; font-size: 12.5px; gap: 6px 16px; }
 }
-.inf-star { position: relative; padding: clamp(4px, 1vw, 16px) 0 clamp(64px, 8vw, 120px); font-family: 'Inter', sans-serif;
-  background: linear-gradient(180deg, #f3f2f7 0%, #f3f2f7 40%, #fff 100%); }
-.inf-star::before { content: ''; position: absolute; left: 0; right: 0; top: -22%; bottom: -6%; pointer-events: none;   
-  background: radial-gradient(ellipse 62% 50% at 50% 54%, rgba(24, 52, 104, .24) 0%, rgba(24, 52, 104, .12) 42%, rgba(24, 52, 104, .04) 72%, rgba(24, 52, 104, 0) 100%); }
-footer { border-top-color: transparent !important; }
+.inf-star { --night: #0f1a2a; position: relative; font-family: 'Inter', sans-serif; background: #f3f2f7; }
 .inf-star__h2 { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.inf-star__in { position: relative; max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
-.inf-star__img { display: block; width: min(100%, 1100px); height: auto; margin: 0 auto; filter: drop-shadow(0 30px 40px rgba(16, 30, 64, .22)); }
+.inf-star__track { position: relative; height: 240vh; }
+.inf-star__stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 @supports (height: 100svh) {
-.inf-star__img { width: min(100%, 1100px, (100svh - 150px) * 16 / 9); }
+.inf-star__stage { height: 100svh; }
+}
+.inf-star__stage::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: calc(1 - var(--g, 0));   
+  background: radial-gradient(ellipse 62% 50% at 50% 50%, rgba(24, 52, 104, .24) 0%, rgba(24, 52, 104, .12) 42%, rgba(24, 52, 104, .04) 72%, rgba(24, 52, 104, 0) 100%); }
+.inf-star__win { position: relative; width: min(1100px, 100% - 2 * clamp(16px, 5vw, 72px), (100vh - 150px) * 16 / 9); transform: scale(var(--k, 1)); transform-origin: 50% 30%; will-change: transform; }
+@supports (height: 100svh) {
+.inf-star__win { width: min(1100px, 100% - 2 * clamp(16px, 5vw, 72px), (100svh - 150px) * 16 / 9); }
+}
+.inf-star__img { display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(16, 30, 64, .22)); }
+.inf-star__veil { position: absolute; left: 0; right: 0; bottom: 0; height: 34%; pointer-events: none; opacity: var(--v, 0);
+  background: linear-gradient(180deg, rgba(15, 26, 42, 0) 0%, rgba(15, 26, 42, .55) 45%, var(--night) 100%); }
+.inf-star__tail { height: 70vh; margin-top: -1px;
+  background: linear-gradient(180deg, var(--night) 0%, #142033 12%, #25324a 26%, #46526a 40%, #737d92 54%, #a5adbc 68%, #d3d7df 82%, #f1f2f5 93%, #fff 100%); }
+footer { border-top-color: transparent !important; }
+@media (max-width: 640px), (max-aspect-ratio: 1/1), (prefers-reduced-motion: reduce) {
+.inf-star { padding: 8px 0 clamp(64px, 8vw, 120px); background: linear-gradient(180deg, #f3f2f7 0%, #f3f2f7 40%, #fff 100%); }
+.inf-star__track { height: auto; }
+.inf-star__stage { position: relative; height: auto !important; overflow: visible; display: block; padding: 0 clamp(16px, 5vw, 72px); }
+.inf-star__stage::before { inset: -22% 0 -6%; }
+.inf-star__win { width: min(100%, 1100px); margin: 0 auto; transform: none; }
+.inf-star__veil, .inf-star__tail { display: none; }
 }
 @media (max-width: 640px) {
-.inf-star { padding-top: 8px; }
-.inf-star__in { padding: 0 6px; }
-.inf-star__img { width: 100%; filter: drop-shadow(0 16px 22px rgba(16, 30, 64, .22)); }
-.inf-star::before { top: -12%; background: radial-gradient(ellipse 75% 46% at 50% 52%, rgba(24, 52, 104, .24) 0%, rgba(24, 52, 104, .1) 50%, rgba(24, 52, 104, 0) 100%); }
+.inf-star__stage { padding: 0 6px; }
+.inf-star__stage::before { inset: -12% 0 -6%; background: radial-gradient(ellipse 75% 46% at 50% 52%, rgba(24, 52, 104, .24) 0%, rgba(24, 52, 104, .1) 50%, rgba(24, 52, 104, 0) 100%); }
+.inf-star__win { width: 100%; }
+.inf-star__img { filter: drop-shadow(0 16px 22px rgba(16, 30, 64, .22)); }
 }
 @property --rh { syntax: '<length>'; inherits: true; initial-value: 120px; }
 .inf-nums { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
@@ -1782,13 +1798,21 @@ footer { border-top-color: transparent !important; }
     <!-- Next star (owner's design, November 2026: tools/influencers/star-src/star-window-design.webp; it replaced the red
          carpet card), the page's last block, right above the footer: a spaceship's window on the TradeQuo planet, "WANT
          TO BE OUR NEXT STAR? / INVITED. SEE YOU SOON." (the words are the picture's; the heading here for screen readers
-         and search). The window's surroundings are transparent (tools/influencers/star_window.py); under it the page's
-         colour flows into the footer's white, and a soft deep-blue light round the window fades out above and below. -->
-    <section id="star" class="inf-star" data-screen-label="Next star">
+         and search). From 641px a full-screen scene, as the home page's "What we offer" (owner's wish): the window pins
+         to the screen and, as the page scrolls on, grows until the cockpit's view fills it; then the scene's dark night
+         flows down into the footer's white (orbit.js, influencers.css .inf-star). Phones: the window as a picture, the
+         page's colour flowing into the footer under it. -->
+    <section id="star" class="inf-star" data-star data-screen-label="Next star">
       <h2 class="inf-star__h2">Want to be our next star? Invited. See you soon.</h2>
-      <div class="inf-star__in">
-        <img class="inf-star__img" src="../assets/influencers/star-window-1600.webp?v=2cf2c2e502" srcset="../assets/influencers/star-window-700.webp?v=4520074446 700w, ../assets/influencers/star-window-1000.webp?v=5e5689f00f 1000w, ../assets/influencers/star-window-1600.webp?v=2cf2c2e502 1600w" sizes="(max-width: 640px) 100vw, 1100px" width="1600" height="900" alt="" loading="lazy" decoding="async">
+      <div class="inf-star__track">
+        <div class="inf-star__stage">
+          <div class="inf-star__win" data-star-win>
+            <img class="inf-star__img" src="../assets/influencers/star-window-1600.webp?v=2cf2c2e502" srcset="../assets/influencers/star-window-700.webp?v=4520074446 700w, ../assets/influencers/star-window-1000.webp?v=5e5689f00f 1000w, ../assets/influencers/star-window-1600.webp?v=2cf2c2e502 1600w" sizes="(max-width: 640px) 100vw, 1600px" width="1600" height="900" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="inf-star__veil" data-star-veil aria-hidden="true"></div>
+        </div>
       </div>
+      <div class="inf-star__tail" aria-hidden="true"></div>
     </section>
   </main>
 
@@ -1801,6 +1825,6 @@ footer { border-top-color: transparent !important; }
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=2d278b596f" defer></script>
-<script src="../assets/js/orbit.js?v=66ab1e8c0e" defer></script>
+<script src="../assets/js/orbit.js?v=2d19e495f1" defer></script>
 </body>
 </html>

@@ -402,3 +402,44 @@
     }
   });
 })();
+
+/* /for-influencers/: "Next star", the last block. From 641px a full-screen scene, as the home page's "What we offer":
+ * its stage pinned (sticky, influencers.css) while the tall track scrolls by; through the first 70% of it the window
+ * grows from its card size until the cockpit's view fills the screen with a little to spare (--k), the light round the
+ * card fading (--g); over the last part a veil brings the stage's foot to the night's colour (--v), so the tail under
+ * the track picks up from it. Smoothed toward the scroll (as the home page's flip), drawn only while on screen.
+ * Phones, upright screens (tablets held tall: filling them would cut the words) and reduced motion: nothing to do
+ * (no pinning there). */
+(() => {
+  const sec = document.querySelector('[data-star]');
+  if (!sec) return;
+  const win = sec.querySelector('[data-star-win]'), track = sec.querySelector('.inf-star__track'), stage = sec.querySelector('.inf-star__stage');
+  const off = window.matchMedia('(max-width: 640px), (max-aspect-ratio: 1/1), (prefers-reduced-motion: reduce)');
+  const clamp = (x) => Math.max(0, Math.min(1, x));
+  const io3 = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  let raf = 0, pS = -1;
+  const reset = () => { ['--k', '--g', '--v'].forEach((n) => sec.style.removeProperty(n)); pS = -1; };
+  const tick = () => {
+    raf = requestAnimationFrame(tick);
+    if (off.matches) { if (pS !== -2) { reset(); pS = -2; } return; }
+    const r = track.getBoundingClientRect(), vh = stage.clientHeight || innerHeight, vw = stage.clientWidth || innerWidth;
+    const pT = clamp(-r.top / Math.max(1, r.height - vh));
+    pS = pS < 0 ? pT : pS + (pT - pS) * 0.12;
+    if (Math.abs(pT - pS) < 0.0005) pS = pT;
+    /* the scale that fills the screen, the window growing about a point 30% down it (influencers.css): the frame's
+       top edge (1.3% of the picture) up under the site's header, its bottom (96.9%) below the screen's foot, its sides
+       (97.7% of the width) beyond the screen's; never so far that "INVITED. SEE YOU SOON." (about half the picture's
+       width) leaves the screen. The words stay below the header. */
+    const w = win.offsetWidth, h = win.offsetHeight || w * 9 / 16, top = (vh - h) / 2, OY = 0.3;
+    const head = document.querySelector('header'), hb = head ? Math.max(0, head.getBoundingClientRect().bottom) : 0;
+    const kTop = ((top - hb) / h + OY) / (OY - 0.013), kBot = ((vh - top) / h - OY) / (0.969 - OY), kX = vw / (w * 0.977);
+    const full = Math.min(Math.max(kTop, kBot, kX) * 1.03, 0.94 * vw / (0.52 * w));
+    const g = io3(pS / 0.7);
+    sec.style.setProperty('--k', (1 + (full - 1) * g).toFixed(4));
+    sec.style.setProperty('--g', g.toFixed(3));
+    sec.style.setProperty('--v', clamp((pS - 0.72) / 0.22).toFixed(3));
+  };
+  const run = (on) => { if (on && !raf) raf = requestAnimationFrame(tick); else if (!on && raf) { cancelAnimationFrame(raf); raf = 0; } };
+  if ('IntersectionObserver' in window) new IntersectionObserver((es) => run(es.some((e) => e.isIntersecting)), { rootMargin: '100px 0px' }).observe(sec);
+  else run(true);
+})();
