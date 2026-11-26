@@ -348,11 +348,11 @@
     const track = range.parentNode;
     const stacks = [...box.querySelectorAll('[data-calc-stack]')];
     let lit = 0;
-    /* the notes on the case's floor: one stack per ~90 clients (2 at the design's 181), up to 10; new ones drop in one
+    /* the notes on the case's floor: one stack per 100 clients (2 at the design's 181), up to 10 (the floor first, then a second layer); new ones drop in one
        after another, ones taken away go together */
     const showStacks = (c) => {
       if (!open) return;
-      const n = Math.min(stacks.length, Math.max(1, Math.ceil(c / 90.5)));
+      const n = Math.min(stacks.length, Math.max(1, Math.ceil(c / 100)));
       stacks.forEach((el, i) => { const on = i < n; if (on && !el.classList.contains('is-on')) { el.style.transitionDelay = Math.max(0, i - lit) * 90 + 'ms'; el.classList.add('is-on'); } else if (!on) { el.style.transitionDelay = '0ms'; el.classList.remove('is-on'); } });
       lit = n;
     };
