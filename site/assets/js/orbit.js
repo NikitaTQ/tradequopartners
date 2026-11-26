@@ -337,8 +337,12 @@
   'use strict';
   const RATE = 7.5, LOTS = 130;   /* $ a lot; lots per client a month (the home calculator's starting value) */
   const PER = { day: 1 / 30, month: 1, year: 12 };
-  /* every calculator on the page (the glass case, the metal briefcase): each its own controls; the stacks only in the first */
+  /* the calculator (the briefcase): its controls; the notes on its floor. While its lid is shut no notes: they drop in
+     once it has opened */
   document.querySelectorAll('[data-calc-case]').forEach((box) => {
+    const lid = box.hasAttribute('data-case2') && 'IntersectionObserver' in window;
+    if (lid) box.classList.add('is-armed');
+    let open = !lid;
     const range = box.querySelector('[data-calc-range]'), sum = box.querySelector('[data-calc-sum]'), per = box.querySelector('[data-calc-per]');
     const reels = [...box.querySelectorAll('[data-calc-reel]')], tabs = [...box.querySelectorAll('[data-calc-p]')];
     const track = range.parentNode;
@@ -347,6 +351,7 @@
     /* the notes on the case's floor: one stack per ~90 clients (2 at the design's 181), up to 10; new ones drop in one
        after another, ones taken away go together */
     const showStacks = (c) => {
+      if (!open) return;
       const n = Math.min(stacks.length, Math.max(1, Math.ceil(c / 90.5)));
       stacks.forEach((el, i) => { const on = i < n; if (on && !el.classList.contains('is-on')) { el.style.transitionDelay = Math.max(0, i - lit) * 90 + 'ms'; el.classList.add('is-on'); } else if (!on) { el.style.transitionDelay = '0ms'; el.classList.remove('is-on'); } });
       lit = n;
@@ -375,13 +380,15 @@
       render();
     }));
     render();
+    /* the lid: shut until the block is well on screen, then it lifts, once (influencers.css), and the notes drop in */
+    if (lid) {
+      const io = new IntersectionObserver((es) => {
+        if (!es.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        requestAnimationFrame(() => box.classList.add('is-open'));
+        setTimeout(() => { open = true; showStacks(Number(range.value)); }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 950);
+      }, { threshold: .55 });
+      io.observe(box.querySelector('.inf-case2__scene'));
+    }
   });
-  /* the briefcase: shut until the block is well on screen, then its lid lifts, once (influencers.css, .inf-case2) */
-  const c2 = document.querySelector('[data-case2]');
-  if (c2 && 'IntersectionObserver' in window) {
-    const scene = c2.querySelector('.inf-case2__scene');
-    c2.classList.add('is-armed');
-    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); requestAnimationFrame(() => c2.classList.add('is-open')); } }, { threshold: .55 });
-    io.observe(scene);
-  }
 })();

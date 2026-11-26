@@ -255,52 +255,21 @@
       </div>
     </section>
 
-    <!-- Earnings calculator (owner's design, November 2026: tools/influencers/numbers-src/case-design.webp): "HOW MUCH COULD
-         YOU EARN?" over a glass briefcase (the design's picture, its lid plate wiped clean: tools/influencers/
-         calc_case.py) whose plate carries the live controls: clients you refer (a four-drum counter that rolls, a slider
-         5–1000), the estimate in a red glass window and a Day / Month / Year switch (orbit.js). The estimate is the home
-         page's own sum: clients × lots per client a month × $7.50 a lot (a day is a thirtieth of the month, a year twelve
-         months). On its floor, stacks of notes (the design's own, cut out): more of them the more clients, each new one
-         dropping in. Phones: the case's top, the plate as a card, the case's glass body. -->
-    <section id="calc" class="inf-calc" data-calc-case data-screen-label="Earnings calculator">
+    <!-- Earnings calculator (owner's design, November 2026: tools/influencers/numbers-src/case2-*.webp; it replaced the
+         glass-case calculator): a metal briefcase with a glass lid, closed at first; when the block comes into view its
+         lid lifts (the closed lid folds up to its hinges, the standing one unfolds from them) and the notes drop in, one
+         stack per ~90 clients, more as the slider goes up (tools/influencers/case2.py makes the layers and the stack).
+         On its front face the live controls (orbit.js) in the design's light-metal look, the slider's knob softly
+         glowing. About three quarters of a screen tall. Phones: the case, then the controls as a card under it. -->
+    <section id="calc" class="inf-calc" data-calc-case data-case2 data-screen-label="Earnings calculator">
       <div class="inf-calc__in">
         <h2 class="inf-calc__h2 tq-h2" data-fitw>{{inf.calc.h2a}} <span class="inf-calc__red">{{inf.calc.h2b}}</span></h2>
         <div class="inf-calc__case">
-          <picture class="inf-calc__wide"><img class="inf-calc__img" src="{{root}}assets/influencers/calc-case-1600.webp" srcset="{{root}}assets/influencers/calc-case-1100.webp 1100w, {{root}}assets/influencers/calc-case-1600.webp 1600w" sizes="(max-width: 1280px) 100vw, 1136px" width="1600" height="921" alt="{{@inf.calc.alt}}" loading="lazy" decoding="async"></picture>
-          <img class="inf-calc__ph inf-calc__ph--top" src="{{root}}assets/influencers/calc-top-800.webp" width="800" height="108" alt="" loading="lazy" decoding="async">
-          <img class="inf-calc__ph inf-calc__ph--body" src="{{root}}assets/influencers/calc-body-800.webp" width="800" height="292" alt="" loading="lazy" decoding="async">
-          <div class="inf-calc__floor" aria-hidden="true"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 41.417%; top: 50.870%; z-index: 20;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 20.417%; top: 30.870%; z-index: 10;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 42.083%; top: 34.348%; z-index: 21;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 59.167%; top: 38.261%; z-index: 10;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 2.250%; top: 53.913%; z-index: 20;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 21.083%; top: 14.348%; z-index: 11;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 59.833%; top: 21.739%; z-index: 11;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 2.917%; top: 37.391%; z-index: 21;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 42.750%; top: 17.826%; z-index: 22;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/calc-stack.webp" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 21.750%; top: -2.174%; z-index: 12;"></div>
-          <div class="inf-calc__plate">
-            <div class="inf-calc__l tq-h2">{{inf.calc.clients}}</div>
-            <div class="inf-calc__odo" aria-hidden="true"><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span></div>
-            <div class="inf-calc__track"><input class="inf-calc__range" type="range" min="5" max="1000" step="1" value="181" aria-label="{{@inf.calc.aria}}" data-calc-range></div>
-            <span class="inf-calc__min">5</span><span class="inf-calc__max">1000</span>
-            <i class="inf-calc__div" aria-hidden="true"></i>
-            <div class="inf-calc__out" aria-live="polite"><span class="inf-calc__approx">≈</span><b data-calc-sum>$0</b><span class="inf-calc__per" data-calc-per data-day="{{@inf.calc.per.day}}" data-month="{{@inf.calc.per.month}}" data-year="{{@inf.calc.per.year}}">{{inf.calc.per.year}}</span></div>
-            <div class="inf-calc__tabs" role="tablist" aria-label="{{@inf.calc.periods}}">
-              <button type="button" role="tab" aria-selected="false" data-calc-p="day">{{inf.calc.day}}</button>
-              <button type="button" role="tab" aria-selected="false" data-calc-p="month">{{inf.calc.month}}</button>
-              <button type="button" role="tab" aria-selected="true" data-calc-p="year">{{inf.calc.year}}</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Earnings calculator, second version (owner's design, November 2026: tools/influencers/numbers-src/case2-*.webp): a
-         metal briefcase with a glass lid, closed at first; when the block comes into view its lid lifts (the closed lid
-         folds up to its hinges, the standing one unfolds from them: tools/influencers/case2.py makes the three layers)
-         and shows the notes inside. On its front face the same live controls as the calculator above (orbit.js), in
-         the design's light-metal look. About three quarters of a screen tall. Phones: the case, then the controls as a
-         card under it. -->
-    <section id="calc2" class="inf-calc inf-calc--2" data-calc-case data-case2 data-screen-label="Earnings calculator, briefcase">
-      <div class="inf-calc__in">
-        <h2 class="inf-calc__h2 tq-h2" data-fitw>{{inf.calc.h2a}} <span class="inf-calc__red">{{inf.calc.h2b}}</span></h2>
-        <div class="inf-calc__case inf-case2">
           <div class="inf-case2__scene">
-            <img class="inf-case2__base" src="{{root}}assets/influencers/case2-base-1346.webp" srcset="{{root}}assets/influencers/case2-base-900.webp 900w, {{root}}assets/influencers/case2-base-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="905" alt="{{@inf.calc.alt2}}" loading="lazy" decoding="async">
-            <img class="inf-case2__lid" src="{{root}}assets/influencers/case2-lid-1346.webp" srcset="{{root}}assets/influencers/case2-lid-900.webp 900w, {{root}}assets/influencers/case2-lid-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="905" alt="" loading="lazy" decoding="async">
-            <img class="inf-case2__shut" src="{{root}}assets/influencers/case2-shut-1346.webp" srcset="{{root}}assets/influencers/case2-shut-900.webp 900w, {{root}}assets/influencers/case2-shut-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="905" alt="" loading="lazy" decoding="async">
+            <img class="inf-case2__base" src="{{root}}assets/influencers/case2-base-1346.webp" srcset="{{root}}assets/influencers/case2-base-900.webp 900w, {{root}}assets/influencers/case2-base-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="944" alt="{{@inf.calc.alt}}" loading="lazy" decoding="async">
+            <img class="inf-case2__lid" src="{{root}}assets/influencers/case2-lid-1346.webp" srcset="{{root}}assets/influencers/case2-lid-900.webp 900w, {{root}}assets/influencers/case2-lid-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="944" alt="" loading="lazy" decoding="async">
+            <div class="inf-case2__floor" aria-hidden="true"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 46.880%; top: 54.025%; z-index: 20;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 27.117%; top: 48.941%; z-index: 10;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 12.704%; top: 54.025%; z-index: 20;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 46.880%; top: 50.212%; z-index: 21;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 27.117%; top: 45.127%; z-index: 11;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 12.704%; top: 50.212%; z-index: 21;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 46.880%; top: 46.398%; z-index: 22;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 12.704%; top: 46.398%; z-index: 22;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 27.117%; top: 41.314%; z-index: 12;"><img class="inf-calc__stack" data-calc-stack src="{{root}}assets/influencers/case2-stack.webp" width="454" height="128" alt="" loading="lazy" decoding="async" style="left: 46.880%; top: 42.585%; z-index: 23;"></div>
+            <img class="inf-case2__shut" src="{{root}}assets/influencers/case2-shut-1346.webp" srcset="{{root}}assets/influencers/case2-shut-900.webp 900w, {{root}}assets/influencers/case2-shut-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="944" alt="" loading="lazy" decoding="async">
           </div>
           <div class="inf-calc__plate">
             <div class="inf-calc__l tq-h2">{{inf.calc.clients}}</div>
