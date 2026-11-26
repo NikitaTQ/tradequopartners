@@ -335,44 +335,53 @@
  * roll to the clients' number, the slider's filled part follows the knob, the estimate counts to its new value. */
 (function () {
   'use strict';
-  const box = document.querySelector('[data-calc-case]');
-  if (!box) return;
   const RATE = 7.5, LOTS = 130;   /* $ a lot; lots per client a month (the home calculator's starting value) */
   const PER = { day: 1 / 30, month: 1, year: 12 };
-  const range = box.querySelector('[data-calc-range]'), sum = box.querySelector('[data-calc-sum]'), per = box.querySelector('[data-calc-per]');
-  const reels = [...box.querySelectorAll('[data-calc-reel]')], tabs = [...box.querySelectorAll('[data-calc-p]')];
-  const track = range.parentNode;
-  const stacks = [...box.querySelectorAll('[data-calc-stack]')];
-  let lit = 0;
-  /* the notes on the case's floor: one stack per ~90 clients (2 at the design's 181), up to 10; new ones drop in one
-     after another, ones taken away go together */
-  const showStacks = (c) => {
-    const n = Math.min(stacks.length, Math.max(1, Math.ceil(c / 90.5)));
-    stacks.forEach((el, i) => { const on = i < n; if (on && !el.classList.contains('is-on')) { el.style.transitionDelay = Math.max(0, i - lit) * 90 + 'ms'; el.classList.add('is-on'); } else if (!on) { el.style.transitionDelay = '0ms'; el.classList.remove('is-on'); } });
-    lit = n;
-  };
-  let p = 'year', shown = null, raf = 0;
-  const money = (v) => '$' + Math.round(v).toLocaleString('en-US');
-  const fit = (txt) => { const n = txt.length; sum.parentNode.style.setProperty('--sf', n <= 7 ? 64 : n <= 9 ? 56 : n <= 11 ? 46 : 38); };
-  const tween = (to) => {
-    cancelAnimationFrame(raf);
-    const from = shown == null ? to : shown, t0 = performance.now(), D = 600;
-    const step = (now) => { const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3); shown = from + (to - from) * e; const t = money(shown); fit(money(to)); sum.textContent = t; if (k < 1) raf = requestAnimationFrame(step); };
-    raf = requestAnimationFrame(step);
-  };
-  const render = () => {
-    const c = Number(range.value), d = String(c).padStart(4, '0');
-    reels.forEach((r, i) => { r.style.transform = 'translateY(' + (-Number(d[i]) * 10) + '%)'; });
-    track.style.setProperty('--p', ((c - Number(range.min)) / (Number(range.max) - Number(range.min)) * 100).toFixed(2) + '%');
-    tween(c * LOTS * RATE * PER[p]);
-    showStacks(c);
-  };
-  range.addEventListener('input', render);
-  tabs.forEach((t) => t.addEventListener('click', () => {
-    p = t.dataset.calcP;
-    tabs.forEach((x) => x.setAttribute('aria-selected', x === t ? 'true' : 'false'));
-    if (per.dataset[p]) per.textContent = per.dataset[p];
+  /* every calculator on the page (the glass case, the metal briefcase): each its own controls; the stacks only in the first */
+  document.querySelectorAll('[data-calc-case]').forEach((box) => {
+    const range = box.querySelector('[data-calc-range]'), sum = box.querySelector('[data-calc-sum]'), per = box.querySelector('[data-calc-per]');
+    const reels = [...box.querySelectorAll('[data-calc-reel]')], tabs = [...box.querySelectorAll('[data-calc-p]')];
+    const track = range.parentNode;
+    const stacks = [...box.querySelectorAll('[data-calc-stack]')];
+    let lit = 0;
+    /* the notes on the case's floor: one stack per ~90 clients (2 at the design's 181), up to 10; new ones drop in one
+       after another, ones taken away go together */
+    const showStacks = (c) => {
+      const n = Math.min(stacks.length, Math.max(1, Math.ceil(c / 90.5)));
+      stacks.forEach((el, i) => { const on = i < n; if (on && !el.classList.contains('is-on')) { el.style.transitionDelay = Math.max(0, i - lit) * 90 + 'ms'; el.classList.add('is-on'); } else if (!on) { el.style.transitionDelay = '0ms'; el.classList.remove('is-on'); } });
+      lit = n;
+    };
+    let p = 'year', shown = null, raf = 0;
+    const money = (v) => '$' + Math.round(v).toLocaleString('en-US');
+    const fit = (txt) => { const n = txt.length; sum.parentNode.style.setProperty('--sf', n <= 7 ? 64 : n <= 9 ? 56 : n <= 11 ? 46 : 38); };
+    const tween = (to) => {
+      cancelAnimationFrame(raf);
+      const from = shown == null ? to : shown, t0 = performance.now(), D = 600;
+      const step = (now) => { const k = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - k, 3); shown = from + (to - from) * e; const t = money(shown); fit(money(to)); sum.textContent = t; if (k < 1) raf = requestAnimationFrame(step); };
+      raf = requestAnimationFrame(step);
+    };
+    const render = () => {
+      const c = Number(range.value), d = String(c).padStart(4, '0');
+      reels.forEach((r, i) => { r.style.transform = 'translateY(' + (-Number(d[i]) * 10) + '%)'; });
+      track.style.setProperty('--p', ((c - Number(range.min)) / (Number(range.max) - Number(range.min)) * 100).toFixed(2) + '%');
+      tween(c * LOTS * RATE * PER[p]);
+      showStacks(c);
+    };
+    range.addEventListener('input', render);
+    tabs.forEach((t) => t.addEventListener('click', () => {
+      p = t.dataset.calcP;
+      tabs.forEach((x) => x.setAttribute('aria-selected', x === t ? 'true' : 'false'));
+      if (per.dataset[p]) per.textContent = per.dataset[p];
+      render();
+    }));
     render();
-  }));
-  render();
+  });
+  /* the briefcase: shut until the block is well on screen, then its lid lifts, once (influencers.css, .inf-case2) */
+  const c2 = document.querySelector('[data-case2]');
+  if (c2 && 'IntersectionObserver' in window) {
+    const scene = c2.querySelector('.inf-case2__scene');
+    c2.classList.add('is-armed');
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); requestAnimationFrame(() => c2.classList.add('is-open')); } }, { threshold: .55 });
+    io.observe(scene);
+  }
 })();
