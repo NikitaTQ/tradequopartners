@@ -168,7 +168,7 @@
    standing glass lid, the lid shut; and between them the notes, a stack cut from the design (case2-stack.webp) in ten
    places on the floor. orbit.js sets .is-armed (the lid shut) and, once the block is well on screen, .is-open: the shut
    lid folds up to the hinge line (45.13% of the frame), then the standing lid unfolds from it (45.23%) with a small
-   overshoot, a light sweeps the glass, and the notes drop in: one stack per ~100 clients, more dropping in as the slider
+   overshoot, a light sweeps the glass, and the notes drop in: one stack per ~67 clients, more dropping in as the slider
    goes up, taken away as it goes down. No JS: the case open. Reduced motion: open at once, the stacks fading.
    The controls lie on the front face, placed in % of the frame; inside it every size is in the design's px of the face
    (1118 wide: --u, a container unit), so all scales with the case; the design's light metal: dark text, silver keys.
@@ -195,7 +195,8 @@
 .inf-calc.is-armed.is-open .inf-case2__scene::after { animation: inf-case2-glint 1.1s ease-out 1s both; }
 @keyframes inf-case2-glint { 0% { opacity: 1; background-position: -120% 0; } 100% { opacity: 0; background-position: 260% 0; } }
 /* the notes: each stack in its place (left/top in % of the frame): .85 of the design's stack, three rows over the whole
-   floor, two stacks a row, then a second layer, never more (owner's wish: it looks as if the lid would still shut);
+   floor, two stacks a row, then a second layer, then a third on the front and middle rows only (owner's wish: spread
+   out, nothing over the back wall; and then 50% more notes);
    the back row behind, the ones on top above */
 .inf-case2__floor { position: absolute; inset: 0; pointer-events: none; }
 .inf-calc__stack { position: absolute; width: 28.67%; height: auto; opacity: 0; transform: translateY(-70%); filter: drop-shadow(0 .45cqw .5cqw rgba(0,0,0,.45));
