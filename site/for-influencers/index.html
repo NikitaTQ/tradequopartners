@@ -1001,6 +1001,112 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-nums__fig { font-size: clamp(34px, 10.6vw, 44px); }
 .inf-nums__loop { height: clamp(36px, 11vw, 46px); }
 }
+.inf-gcalc { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0b0b0d; }
+.inf-gcalc__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
+.inf-gcalc__h2 { margin: 0 auto clamp(14px, 2vw, 28px); text-align: center; }
+.inf-gcalc__red { color: #b0101c; }
+.inf-gcalc__case { position: relative; }
+@media (min-width: 641px) {
+.inf-gcalc__case { width: min(80%, (100vh - 220px) * 1600 / 921); margin: 0 auto; }
+@supports (height: 100svh) {
+.inf-gcalc__case { width: min(80%, (100svh - 220px) * 1600 / 921); }
+}
+}
+.inf-gcalc__ph { display: none; }
+.inf-gcalc__wide, .inf-gcalc__img { display: block; width: 100%; height: auto; }
+.inf-gcalc__img { -webkit-mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 95%, transparent); -webkit-mask-composite: source-in;
+  mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 4%, #000 95%, transparent); mask-composite: intersect; }
+.inf-gcalc__case { container-type: inline-size; }
+.inf-gcalc__floor { position: absolute; left: 13.027%; top: 63.254%; width: 74.442%; height: 24.784%; pointer-events: none; }
+.inf-gcalc__stack { position: absolute; width: 39.167%; height: auto; opacity: 0; transform: translateY(-70%); filter: drop-shadow(0 .35cqw .5cqw rgba(0,0,0,.35));
+  transition: transform .6s cubic-bezier(.3,1.35,.5,1), opacity .25s ease; }
+.inf-gcalc__stack.is-on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+.inf-gcalc__stack { transition: opacity .2s ease; transform: none; }
+}
+.inf-gcalc__plate { --u: calc(100cqw / 1279); position: absolute; left: 10.484%; top: 22.414%; width: 79.342%; height: 18.858%; container-type: inline-size; color: #fff; }
+.inf-gcalc__plate > * { position: absolute; }
+.inf-gcalc__l { left: calc(34 * var(--u)); top: calc(14 * var(--u)); width: calc(360 * var(--u)); font-size: calc(32 * var(--u)); line-height: 1.02; letter-spacing: .02em; padding: 0;
+  background: linear-gradient(180deg, #f4f4f6 0%, #a9abb1 55%, #e2e3e7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; text-wrap: balance; }
+.inf-gcalc__odo { left: calc(413 * var(--u)); top: calc(8 * var(--u)); display: flex; gap: calc(6 * var(--u)); }
+.inf-gcalc__drum { position: relative; width: calc(58 * var(--u)); height: calc(88 * var(--u)); overflow: hidden; border-radius: calc(7 * var(--u));
+  background: linear-gradient(180deg, #050505 0%, #2a2a2c 22%, #121213 50%, #2a2a2c 78%, #050505 100%);
+  box-shadow: inset calc(3 * var(--u)) 0 0 #9a9ca2, inset calc(-3 * var(--u)) 0 0 #9a9ca2, inset 0 calc(-5 * var(--u)) calc(6 * var(--u)) rgba(231,19,27,.75), 0 calc(2 * var(--u)) calc(4 * var(--u)) rgba(0,0,0,.6); }
+.inf-gcalc__drum::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 68%, rgba(0,0,0,.6) 100%); }
+.inf-gcalc__reel { display: flex; flex-direction: column; transition: transform .7s cubic-bezier(.3,1.25,.4,1); }
+.inf-gcalc__reel i { display: flex; align-items: center; justify-content: center; height: calc(88 * var(--u)); font: 700 calc(48 * var(--u))/1 'Inter', sans-serif; font-style: normal; color: #f1e2c2; text-shadow: 0 0 calc(6 * var(--u)) rgba(255,230,190,.35); }
+.inf-gcalc__track { left: calc(56 * var(--u)); top: calc(109 * var(--u)); width: calc(654 * var(--u)); height: calc(28 * var(--u)); border-radius: 999px;
+  background: linear-gradient(90deg, #d0101c, #ff3a44) 0 0 / var(--p, 18%) 100% no-repeat, linear-gradient(180deg, #0a0a0b, #1c1c1e);
+  box-shadow: inset 0 calc(2 * var(--u)) calc(4 * var(--u)) rgba(0,0,0,.85), 0 0 0 calc(2 * var(--u)) #8d8f95, 0 calc(1 * var(--u)) 0 calc(3 * var(--u)) rgba(255,255,255,.15); }
+.inf-gcalc__range { -webkit-appearance: none; appearance: none; position: absolute; inset: calc(-14 * var(--u)) calc(-16 * var(--u)); width: calc(100% + 32 * var(--u)); height: calc(56 * var(--u)); margin: 0; background: none; cursor: pointer; }
+.inf-gcalc__range:focus-visible { outline: 2px solid #ff5a61; outline-offset: 2px; border-radius: 999px; }
+.inf-gcalc__range::-webkit-slider-runnable-track { height: 100%; background: none; }
+.inf-gcalc__range::-moz-range-track { height: 100%; background: none; }
+.inf-gcalc__range::-webkit-slider-thumb { -webkit-appearance: none; width: calc(54 * var(--u)); height: calc(54 * var(--u)); border-radius: 50%; border: 0;
+  background: radial-gradient(circle, #ff3a44 0 17%, #8a0710 21%, rgba(0,0,0,0) 24%), repeating-conic-gradient(#f2f3f5 0 6deg, #9fa1a7 6deg 12deg), #d9dade;
+  box-shadow: 0 0 0 calc(2 * var(--u)) #6c6e73, 0 calc(4 * var(--u)) calc(8 * var(--u)) rgba(0,0,0,.6); }
+.inf-gcalc__range::-moz-range-thumb { width: calc(54 * var(--u)); height: calc(54 * var(--u)); border-radius: 50%; border: 0;
+  background: radial-gradient(circle, #ff3a44 0 17%, #8a0710 21%, rgba(0,0,0,0) 24%), repeating-conic-gradient(#f2f3f5 0 6deg, #9fa1a7 6deg 12deg), #d9dade;
+  box-shadow: 0 0 0 calc(2 * var(--u)) #6c6e73, 0 calc(4 * var(--u)) calc(8 * var(--u)) rgba(0,0,0,.6); }
+.inf-gcalc__min, .inf-gcalc__max { top: calc(145 * var(--u)); font: 600 calc(22 * var(--u))/1 'Inter', sans-serif; color: #c9cacf; letter-spacing: .04em; }
+.inf-gcalc__min { left: calc(74 * var(--u)); }
+.inf-gcalc__max { left: calc(630 * var(--u)); }
+.inf-gcalc__div { left: calc(758 * var(--u)); top: calc(16 * var(--u)); width: calc(2 * var(--u)); height: calc(142 * var(--u)); background: linear-gradient(180deg, rgba(255,255,255,0), rgba(220,222,228,.7) 20%, rgba(220,222,228,.7) 80%, rgba(255,255,255,0)); }
+.inf-gcalc__out { left: calc(788 * var(--u)); top: calc(16 * var(--u)); width: calc(461 * var(--u)); height: calc(102 * var(--u)); box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: calc(12 * var(--u));
+  border-radius: calc(16 * var(--u)); background: radial-gradient(80% 120% at 50% 50%, #3a0a10 0%, #14060a 70%), #14060a;
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(255,70,80,.75), inset 0 0 calc(26 * var(--u)) rgba(231,19,27,.55), 0 0 calc(18 * var(--u)) rgba(231,19,27,.45); white-space: nowrap; }
+.inf-gcalc__approx { font: 600 calc(40 * var(--u))/1 'Inter', sans-serif; color: #fff; }
+.inf-gcalc__out b { font: 800 calc(var(--sf, 64) * var(--u))/1 'Inter', sans-serif; letter-spacing: -.01em; color: #fff; font-variant-numeric: tabular-nums; text-shadow: 0 0 calc(14 * var(--u)) rgba(255,120,130,.55); }
+.inf-gcalc__per { font: 600 calc(26 * var(--u))/1 'Inter', sans-serif; letter-spacing: .04em; text-transform: uppercase; color: #fff; }
+.inf-gcalc__tabs { left: calc(788 * var(--u)); top: calc(128 * var(--u)); width: calc(461 * var(--u)); display: flex; justify-content: space-around; }
+.inf-gcalc__tabs button { position: relative; padding: calc(4 * var(--u)) calc(10 * var(--u)) calc(8 * var(--u)); border: 0; background: none; cursor: pointer;
+  font: 700 calc(24 * var(--u))/1 'Inter', sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #c9cacf; transition: color .25s ease; }
+.inf-gcalc__tabs button::after { content: ''; position: absolute; left: calc(6 * var(--u)); right: calc(6 * var(--u)); bottom: 0; height: calc(3 * var(--u)); border-radius: 2px; background: #3fe3d2; box-shadow: 0 0 calc(8 * var(--u)) rgba(63,227,210,.8); opacity: 0; transition: opacity .25s ease; }
+.inf-gcalc__tabs button[aria-selected="true"] { color: #5ff0df; text-shadow: 0 0 calc(10 * var(--u)) rgba(63,227,210,.6); }
+.inf-gcalc__tabs button[aria-selected="true"]::after { opacity: 1; }
+.inf-gcalc__tabs button:focus-visible { outline: 2px solid #5ff0df; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+.inf-gcalc__reel { transition: none; }
+}
+@media (max-width: 640px) {
+.inf-gcalc { padding-bottom: var(--tq-gap); }
+.inf-gcalc__case { display: flex; flex-direction: column; }
+.inf-gcalc__wide { display: none; }
+.inf-gcalc__ph { display: block; width: 100%; height: auto; }
+.inf-gcalc__ph--top { order: 0; margin-bottom: -3px; }
+.inf-gcalc__ph--body { order: 2; margin-top: -3px; }
+.inf-gcalc__floor { left: 8.38cqw; top: auto; bottom: 6.355cqw; width: 83.799cqw; height: 16.061cqw; z-index: 2; }
+.inf-gcalc__plate { --u: .3px; position: relative; order: 1; left: auto; top: auto; width: auto; height: auto; margin: 0 1.2%; container-type: normal; z-index: 1;
+    display: grid; grid-template-columns: 1fr auto; grid-template-areas: "l o" "t t" "mm mm" "out out" "tabs tabs"; gap: 10px 12px; align-items: center; padding: 18px 16px 12px; border-radius: 18px;
+    background: repeating-linear-gradient(180deg, rgba(255,255,255,.035) 0 1px, rgba(0,0,0,0) 1px 3px), linear-gradient(90deg, #4e4c4d 0%, #3c3b3c 50%, #2e2d2e 100%);
+    box-shadow: 0 0 0 2px #b9bbc0, 0 0 0 4px #e9eaee, 0 14px 30px -14px rgba(0,0,0,.6); }
+.inf-gcalc__plate > * { position: static; }
+.inf-gcalc__l { grid-area: l; width: auto; font-size: 15px; }
+.inf-gcalc__odo { grid-area: o; gap: 4px; }
+.inf-gcalc__drum { width: 30px; height: 44px; border-radius: 5px; box-shadow: inset 2px 0 0 #9a9ca2, inset -2px 0 0 #9a9ca2, inset 0 -3px 4px rgba(231,19,27,.75), 0 1px 3px rgba(0,0,0,.6); }
+.inf-gcalc__reel i { height: 44px; font-size: 24px; }
+.inf-gcalc__track { grid-area: t; position: relative; left: auto; top: auto; width: auto; height: 14px; margin: 6px 4px 0; box-shadow: inset 0 1px 3px rgba(0,0,0,.85), 0 0 0 1px #8d8f95; }
+.inf-gcalc__range { position: absolute; inset: -12px -10px; width: calc(100% + 20px); height: 38px; }
+.inf-gcalc__range::-webkit-slider-thumb { width: 28px; height: 28px; box-shadow: 0 0 0 1px #6c6e73, 0 2px 5px rgba(0,0,0,.6); }
+.inf-gcalc__range::-moz-range-thumb { width: 28px; height: 28px; }
+.inf-gcalc__min, .inf-gcalc__max { grid-area: mm; font-size: 11px; }
+.inf-gcalc__min { justify-self: start; padding-left: 6px; }
+.inf-gcalc__max { justify-self: end; padding-right: 6px; }
+.inf-gcalc__div { display: none; }
+.inf-gcalc__out { grid-area: out; width: auto; height: 62px; gap: 8px; border-radius: 12px; box-shadow: inset 0 0 0 1.5px rgba(255,70,80,.75), inset 0 0 16px rgba(231,19,27,.55), 0 0 12px rgba(231,19,27,.4); }
+.inf-gcalc__approx { font-size: 22px; }
+.inf-gcalc__out b { font-size: calc(var(--sf, 64) * .5px); }
+.inf-gcalc__per { font-size: 13px; }
+.inf-gcalc__tabs { grid-area: tabs; width: auto; }
+.inf-gcalc__tabs button { font-size: 13px; padding: 6px 10px 8px; }
+.inf-gcalc__tabs button::after { height: 2px; box-shadow: 0 0 6px rgba(63,227,210,.8); }
+}
+@media (min-width: 641px) {
+.inf-gcalc { display: none; }
+}
+@media (max-width: 640px) {
+.inf-calc { display: none; }
+}
 @property --kg { syntax: '<number>'; inherits: true; initial-value: .6; }
 .inf-calc { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0b0b0d; }
 .inf-calc__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
@@ -1588,6 +1694,39 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </div>
     </section>
 
+    <!-- Phones only (owner's wish, November 2026: on a phone this glass case, as it was before the briefcase replaced it;
+         computers and tablets get the briefcase below, which phones do not show). Earnings calculator (owner's design, November 2026: tools/influencers/numbers-src/case-design.webp): "HOW MUCH COULD
+         YOU EARN?" over a glass briefcase (the design's picture, its lid plate wiped clean: tools/influencers/
+         calc_case.py) whose plate carries the live controls: clients you refer (a four-drum counter that rolls, a slider
+         5–1000), the estimate in a red glass window and a Day / Month / Year switch (orbit.js). The estimate is the home
+         page's own sum: clients × lots per client a month × $7.50 a lot (a day is a thirtieth of the month, a year twelve
+         months). On its floor, stacks of notes (the design's own, cut out): more of them the more clients, each new one
+         dropping in. Phones: the case's top, the plate as a card, the case's glass body. -->
+    <section id="calc-phone" class="inf-gcalc" data-stack-clients="90.5" data-calc-case data-screen-label="Earnings calculator">
+      <div class="inf-gcalc__in">
+        <h2 class="inf-gcalc__h2 tq-h2" data-fitw>How much could you <span class="inf-gcalc__red">earn?</span></h2>
+        <div class="inf-gcalc__case">
+          <picture class="inf-gcalc__wide"><img class="inf-gcalc__img" src="../assets/influencers/calc-case-1600.webp?v=89863a282f" srcset="../assets/influencers/calc-case-1100.webp?v=c97a7c6f45 1100w, ../assets/influencers/calc-case-1600.webp?v=89863a282f 1600w" sizes="(max-width: 1280px) 100vw, 1136px" width="1600" height="921" alt="A glass briefcase with stacks of notes inside" loading="lazy" decoding="async"></picture>
+          <img class="inf-gcalc__ph inf-gcalc__ph--top" src="../assets/influencers/calc-top-800.webp?v=832df81afe" width="800" height="108" alt="" loading="lazy" decoding="async">
+          <img class="inf-gcalc__ph inf-gcalc__ph--body" src="../assets/influencers/calc-body-800.webp?v=66fc28fe00" width="800" height="292" alt="" loading="lazy" decoding="async">
+          <div class="inf-gcalc__floor" aria-hidden="true"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 41.417%; top: 50.870%; z-index: 20;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 20.417%; top: 30.870%; z-index: 10;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 42.083%; top: 34.348%; z-index: 21;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 59.167%; top: 38.261%; z-index: 10;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 2.250%; top: 53.913%; z-index: 20;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 21.083%; top: 14.348%; z-index: 11;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 59.833%; top: 21.739%; z-index: 11;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 2.917%; top: 37.391%; z-index: 21;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 42.750%; top: 17.826%; z-index: 22;"><img class="inf-gcalc__stack" data-calc-stack src="../assets/influencers/calc-stack.webp?v=39a460bf33" width="470" height="105" alt="" loading="lazy" decoding="async" style="left: 21.750%; top: -2.174%; z-index: 12;"></div>
+          <div class="inf-gcalc__plate">
+            <div class="inf-gcalc__l tq-h2">Clients you refer</div>
+            <div class="inf-gcalc__odo" aria-hidden="true"><span class="inf-gcalc__drum"><span class="inf-gcalc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-gcalc__drum"><span class="inf-gcalc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-gcalc__drum"><span class="inf-gcalc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-gcalc__drum"><span class="inf-gcalc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span></div>
+            <div class="inf-gcalc__track"><input class="inf-gcalc__range" type="range" min="5" max="1000" step="1" value="181" aria-label="Number of clients you refer" data-calc-range></div>
+            <span class="inf-gcalc__min">5</span><span class="inf-gcalc__max">1000</span>
+            <i class="inf-gcalc__div" aria-hidden="true"></i>
+            <div class="inf-gcalc__out" aria-live="polite"><span class="inf-gcalc__approx">≈</span><b data-calc-sum>$0</b><span class="inf-gcalc__per" data-calc-per data-day="/ day" data-month="/ month" data-year="/ year">/ year</span></div>
+            <div class="inf-gcalc__tabs" role="tablist" aria-label="Period">
+              <button type="button" role="tab" aria-selected="false" data-calc-p="day">Day</button>
+              <button type="button" role="tab" aria-selected="false" data-calc-p="month">Month</button>
+              <button type="button" role="tab" aria-selected="true" data-calc-p="year">Year</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Earnings calculator (owner's design, November 2026: tools/influencers/numbers-src/case2-*.webp; it replaced the
          glass-case calculator): a metal briefcase with a glass lid, closed at first; when the block comes into view its
          lid lifts (the closed lid folds up to its hinges, the standing one unfolds from them) and the notes drop in, one
@@ -1689,6 +1828,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=2d278b596f" defer></script>
-<script src="../assets/js/orbit.js?v=88a7c422f1" defer></script>
+<script src="../assets/js/orbit.js?v=573e44d861" defer></script>
 </body>
 </html>

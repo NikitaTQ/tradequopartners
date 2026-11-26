@@ -337,7 +337,7 @@
   'use strict';
   const RATE = 7.5, LOTS = 130;   /* $ a lot; lots per client a month (the home calculator's starting value) */
   const PER = { day: 1 / 30, month: 1, year: 12 };
-  /* the calculator (the briefcase): its controls; the notes on its floor. While its lid is shut no notes: they drop in
+  /* the calculators (the briefcase; on phones the glass case instead): each its controls; the notes on its floor. While its lid is shut no notes: they drop in
      once it has opened */
   document.querySelectorAll('[data-calc-case]').forEach((box) => {
     const lid = box.hasAttribute('data-case2') && 'IntersectionObserver' in window;
@@ -348,11 +348,12 @@
     const track = range.parentNode;
     const stacks = [...box.querySelectorAll('[data-calc-stack]')];
     let lit = 0;
+    const per1 = Number(box.dataset.stackClients) || 66.7;   /* clients a stack: the phones' glass case its own (90.5) */
     /* the notes on the case's floor: one stack per ~67 clients (3 at the design's 181), up to 15 (the floor first, then a second layer, then a third in front); new ones drop in one
        after another, ones taken away go together */
     const showStacks = (c) => {
       if (!open) return;
-      const n = Math.min(stacks.length, Math.max(1, Math.ceil(c / 66.7)));
+      const n = Math.min(stacks.length, Math.max(1, Math.ceil(c / per1)));
       stacks.forEach((el, i) => { const on = i < n; if (on && !el.classList.contains('is-on')) { el.style.transitionDelay = Math.max(0, i - lit) * 90 + 'ms'; el.classList.add('is-on'); } else if (!on) { el.style.transitionDelay = '0ms'; el.classList.remove('is-on'); } });
       lit = n;
     };
