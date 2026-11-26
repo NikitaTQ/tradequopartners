@@ -1101,6 +1101,77 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-calc__tabs button { font-size: 13px; padding: 6px 10px 8px; }
 .inf-calc__tabs button::after { height: 2px; box-shadow: 0 0 6px rgba(63,227,210,.8); }
 }
+.inf-case2 { width: min(100%, (80vh - 120px) * 1346 / 905); margin: 0 auto; }
+@supports (height: 100svh) {
+.inf-case2 { width: min(100%, (80svh - 120px) * 1346 / 905); }
+}
+.inf-case2__scene { position: relative; aspect-ratio: 1346 / 905; }
+.inf-case2__scene img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.inf-case2__lid { transform-origin: 50% 47.18%; }
+.inf-case2__shut { transform-origin: 50% 47.07%; transform: scaleY(0); visibility: hidden; }
+.inf-calc--2.is-armed .inf-case2__lid { transform: scaleY(0); }
+.inf-calc--2.is-armed .inf-case2__shut { transform: none; visibility: visible; }
+.inf-calc--2.is-armed.is-open .inf-case2__shut { transform: scaleY(0); filter: brightness(1.12); transition: transform .38s cubic-bezier(.55,0,.85,.45), filter .38s ease, visibility 0s linear .38s; visibility: hidden; }
+.inf-calc--2.is-armed.is-open .inf-case2__lid { transform: none; transition: transform .8s cubic-bezier(.18,.9,.32,1.12) .36s; }
+.inf-case2__scene::after { content: ''; position: absolute; left: 18%; top: 8%; width: 64%; height: 39%; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 65%) -120% 0 / 60% 100% no-repeat; mix-blend-mode: screen;
+  -webkit-mask: linear-gradient(180deg, #000, #000); }
+.inf-calc--2.is-armed.is-open .inf-case2__scene::after { animation: inf-case2-glint 1.1s ease-out 1s both; }
+@keyframes inf-case2-glint { 0% { opacity: 1; background-position: -120% 0; } 100% { opacity: 0; background-position: 260% 0; } }
+@media (prefers-reduced-motion: reduce) {
+.inf-calc--2.is-armed .inf-case2__lid { transform: none; }
+.inf-calc--2.is-armed .inf-case2__shut { transform: scaleY(0); visibility: hidden; }
+.inf-calc--2.is-armed.is-open .inf-case2__scene::after { animation: none; }
+}
+.inf-calc--2 .inf-calc__plate { --u: calc(100cqw / 1118); left: 7.727%; top: 73.039%; width: 83.061%; height: 16.133%; color: #2b2c31; }
+.inf-calc--2 .inf-calc__l { left: calc(13 * var(--u)); top: calc(18 * var(--u)); width: calc(290 * var(--u)); font: 700 calc(29 * var(--u))/1.04 'Inter', sans-serif; letter-spacing: .05em; text-transform: uppercase; text-align: center;
+  background: linear-gradient(180deg, #4a4b51 0%, #26272b 60%, #3c3d42 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 1px 0 rgba(255,255,255,.7)); }
+.inf-calc--2 .inf-calc__odo { left: calc(318 * var(--u)); top: calc(10 * var(--u)); gap: calc(4 * var(--u)); padding: calc(3 * var(--u)); border-radius: calc(9 * var(--u)); background: linear-gradient(180deg, #8e9096, #e4e5e9 50%, #7d7f85); box-shadow: inset 0 0 0 1px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.8); }
+.inf-calc--2 .inf-calc__drum { width: calc(54 * var(--u)); height: calc(68 * var(--u)); border-radius: calc(5 * var(--u)); }
+.inf-calc--2 .inf-calc__reel i { height: calc(68 * var(--u)); font-size: calc(40 * var(--u)); }
+.inf-calc--2 .inf-calc__track { left: calc(34 * var(--u)); top: calc(95 * var(--u)); width: calc(574 * var(--u)); height: calc(18 * var(--u));
+  box-shadow: inset 0 calc(2 * var(--u)) calc(4 * var(--u)) rgba(0,0,0,.85), 0 0 0 calc(2 * var(--u)) #7a7c82, 0 calc(2 * var(--u)) 0 calc(2 * var(--u)) rgba(255,255,255,.7); }
+.inf-calc--2 .inf-calc__range { inset: calc(-15 * var(--u)) calc(-12 * var(--u)); width: calc(100% + 24 * var(--u)); height: calc(48 * var(--u)); }
+.inf-calc--2 .inf-calc__range::-webkit-slider-thumb { width: calc(42 * var(--u)); height: calc(42 * var(--u)); }
+.inf-calc--2 .inf-calc__range::-moz-range-thumb { width: calc(42 * var(--u)); height: calc(42 * var(--u)); }
+.inf-calc--2 .inf-calc__min, .inf-calc--2 .inf-calc__max { top: calc(124 * var(--u)); font: 700 calc(21 * var(--u))/1 'Inter', sans-serif; color: #2b2c31; text-shadow: 0 1px 0 rgba(255,255,255,.7); }
+.inf-calc--2 .inf-calc__min { left: calc(30 * var(--u)); }
+.inf-calc--2 .inf-calc__max { left: calc(548 * var(--u)); }
+.inf-calc--2 .inf-calc__div { left: calc(643 * var(--u)); top: calc(3 * var(--u)); height: calc(125 * var(--u)); background: linear-gradient(90deg, #3b3c41 50%, rgba(255,255,255,.75) 50%); }
+.inf-calc--2 .inf-calc__out { left: calc(675 * var(--u)); top: calc(8 * var(--u)); width: calc(430 * var(--u)); height: calc(70 * var(--u)); gap: calc(10 * var(--u)); border-radius: calc(12 * var(--u));
+  background: radial-gradient(90% 140% at 50% 50%, #5a0c12 0%, #25070b 75%), #25070b;
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(255,70,80,.6), inset 0 0 calc(22 * var(--u)) rgba(231,19,27,.6), 0 0 0 calc(3 * var(--u)) #8a8c92, 0 0 calc(16 * var(--u)) rgba(231,19,27,.45); }
+.inf-calc--2 .inf-calc__approx { font-size: calc(32 * var(--u)); color: #f6dcc4; }
+.inf-calc--2 .inf-calc__out b { font-size: calc(var(--sf, 64) * var(--u) * .74); color: #fbe6cf; }
+.inf-calc--2 .inf-calc__per { font-size: calc(21 * var(--u)); color: #f6dcc4; }
+.inf-calc--2 .inf-calc__tabs { left: calc(678 * var(--u)); top: calc(83 * var(--u)); width: calc(424 * var(--u)); justify-content: space-between; gap: calc(8 * var(--u)); }
+.inf-calc--2 .inf-calc__tabs button { flex: 1 1 0; height: calc(38 * var(--u)); padding: 0; border-radius: calc(5 * var(--u)); font-size: calc(19 * var(--u)); color: #2b2c31;
+  background: linear-gradient(180deg, #f4f5f7 0%, #c9cbd0 55%, #b2b4ba 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 0 0 calc(2 * var(--u)) #7f8187, 0 calc(2 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.35); }
+.inf-calc--2 .inf-calc__tabs button::after { left: 18%; right: 18%; bottom: calc(-6 * var(--u)); }
+.inf-calc--2 .inf-calc__tabs button[aria-selected="true"] { color: #0e9f93; text-shadow: 0 0 calc(8 * var(--u)) rgba(63,227,210,.55); }
+@media (max-width: 640px) {
+.inf-case2 { width: auto; margin: 0 calc(-1 * clamp(16px, 5vw, 72px)); }
+.inf-calc--2 .inf-calc__plate { --u: .3px; left: auto; top: auto; width: auto; height: auto; margin: 4px clamp(16px, 5vw, 72px) 0; color: #2b2c31; gap: 7px 12px; padding: 13px 14px 12px;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 1px, rgba(0,0,0,0) 1px 3px), linear-gradient(180deg, #eceef1 0%, #c7c9ce 55%, #b4b6bb 100%);
+    box-shadow: 0 0 0 2px #8e9096, 0 0 0 4px #e6e7eb, 0 14px 30px -14px rgba(0,0,0,.5); }
+.inf-calc--2 .inf-calc__plate > * { left: auto; top: auto; }
+.inf-calc--2 .inf-calc__l { width: auto; font-size: 15px; text-align: left; }
+.inf-calc--2 .inf-calc__odo { padding: 2px; border-radius: 6px; gap: 3px; }
+.inf-calc--2 .inf-calc__drum { width: 27px; height: 36px; }
+.inf-calc--2 .inf-calc__reel i { height: 36px; font-size: 21px; }
+.inf-calc--2 .inf-calc__track { width: auto; height: 14px; box-shadow: inset 0 1px 3px rgba(0,0,0,.85), 0 0 0 1px #7a7c82, 0 1px 0 1px rgba(255,255,255,.7); }
+.inf-calc--2 .inf-calc__range { inset: -12px -10px; width: calc(100% + 20px); height: 38px; }
+.inf-calc--2 .inf-calc__range::-webkit-slider-thumb { width: 28px; height: 28px; }
+.inf-calc--2 .inf-calc__range::-moz-range-thumb { width: 28px; height: 28px; }
+.inf-calc--2 .inf-calc__min, .inf-calc--2 .inf-calc__max { font-size: 11px; }
+.inf-calc--2 .inf-calc__out { width: auto; height: 52px; gap: 8px; border-radius: 12px; box-shadow: inset 0 0 0 1.5px rgba(255,70,80,.6), inset 0 0 16px rgba(231,19,27,.55), 0 0 0 2px #8a8c92, 0 0 12px rgba(231,19,27,.35); }
+.inf-calc--2 .inf-calc__approx { font-size: 22px; }
+.inf-calc--2 .inf-calc__out b { font-size: calc(var(--sf, 64) * .5px); }
+.inf-calc--2 .inf-calc__per { font-size: 13px; }
+.inf-calc--2 .inf-calc__tabs { width: auto; gap: 8px; }
+.inf-calc--2 .inf-calc__tabs button { height: 30px; font-size: 12px; border-radius: 6px; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 0 0 1px #7f8187, 0 2px 3px rgba(0,0,0,.3); }
+.inf-calc--2 .inf-calc__tabs button::after { bottom: -5px; }
+}
 .inf-trip { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0b0b0d; }
 .inf-trip__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box;
   display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(16px, 2.4vw, 40px); align-items: center; }
@@ -1614,6 +1685,38 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
       </div>
     </section>
 
+    <!-- Earnings calculator, second version (owner's design, November 2026: tools/influencers/numbers-src/case2-*.webp): a
+         metal briefcase with a glass lid, closed at first; when the block comes into view its lid lifts (the closed lid
+         folds up to its hinges, the standing one unfolds from them: tools/influencers/case2.py makes the three layers)
+         and shows the notes inside. On its front face the same live controls as the calculator above (orbit.js), in
+         the design's light-metal look. About three quarters of a screen tall. Phones: the case, then the controls as a
+         card under it. -->
+    <section id="calc2" class="inf-calc inf-calc--2" data-calc-case data-case2 data-screen-label="Earnings calculator, briefcase">
+      <div class="inf-calc__in">
+        <h2 class="inf-calc__h2 tq-h2" data-fitw>How much could you <span class="inf-calc__red">earn?</span></h2>
+        <div class="inf-calc__case inf-case2">
+          <div class="inf-case2__scene">
+            <img class="inf-case2__base" src="../assets/influencers/case2-base-1346.webp?v=93987ae25e" srcset="../assets/influencers/case2-base-900.webp 900w, ../assets/influencers/case2-base-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="905" alt="A metal briefcase with a glass lid, stacks of notes inside" loading="lazy" decoding="async">
+            <img class="inf-case2__lid" src="../assets/influencers/case2-lid-1346.webp?v=18a02424b2" srcset="../assets/influencers/case2-lid-900.webp 900w, ../assets/influencers/case2-lid-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="905" alt="" loading="lazy" decoding="async">
+            <img class="inf-case2__shut" src="../assets/influencers/case2-shut-1346.webp?v=839112a6de" srcset="../assets/influencers/case2-shut-900.webp 900w, ../assets/influencers/case2-shut-1346.webp 1346w" sizes="(max-width: 1280px) 100vw, 1136px" width="1346" height="905" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="inf-calc__plate">
+            <div class="inf-calc__l tq-h2">Clients you refer</div>
+            <div class="inf-calc__odo" aria-hidden="true"><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="inf-calc__drum"><span class="inf-calc__reel" data-calc-reel><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span></div>
+            <div class="inf-calc__track"><input class="inf-calc__range" type="range" min="5" max="1000" step="1" value="181" aria-label="Number of clients you refer" data-calc-range></div>
+            <span class="inf-calc__min">5</span><span class="inf-calc__max">1000</span>
+            <i class="inf-calc__div" aria-hidden="true"></i>
+            <div class="inf-calc__out" aria-live="polite"><span class="inf-calc__approx">≈</span><b data-calc-sum>$0</b><span class="inf-calc__per" data-calc-per data-day="/ day" data-month="/ month" data-year="/ year">/ year</span></div>
+            <div class="inf-calc__tabs" role="tablist" aria-label="Period">
+              <button type="button" role="tab" aria-selected="false" data-calc-p="day">Day</button>
+              <button type="button" role="tab" aria-selected="false" data-calc-p="month">Month</button>
+              <button type="button" role="tab" aria-selected="true" data-calc-p="year">Year</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Incentive trips (owner's second design, November 2026: tools/influencers/trips-design.webp): on the page's light
          background, the text on the left ("Incentive trips", "THE TRIP IS ON US.", a line, three rows: flights and stay,
          the yacht day and dinners covered, how you qualify: results), on the right three stories of a partner trip to
@@ -1681,6 +1784,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=2d278b596f" defer></script>
-<script src="../assets/js/orbit.js?v=8e8ad280bb" defer></script>
+<script src="../assets/js/orbit.js?v=67d126b715" defer></script>
 </body>
 </html>
