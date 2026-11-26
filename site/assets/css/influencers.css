@@ -66,34 +66,40 @@
   .inf-hero__ticks { order: 5; margin-top: 14px; font-size: 12.5px; gap: 6px 16px; }
 }
 
-/* ---- Next star (owner's design, November 2026: a spaceship's window on the TradeQuo planet), the last block --------
+/* ---- Next star (owner's design, November 2026: the TradeQuo planet and a ship flying in), the last block -----------
    A band of night sky: out of the page's light colour above, into the footer's white below (long eased gradients),
-   stars on a canvas (orbit.js) fading in and out with it; in the middle the window (tools/influencers/star_window.py:
-   the cockpit's view without the glass frame, its edges fading into the night, its words wiped) and over it its words as real text, placed where
-   the design has them (in % of the window's width: cqw): "WANT TO BE OUR NEXT STAR?" red, "INVITED. / SEE YOU SOON."
-   in brushed silver with a dark drop shadow, all in the headings' face. */
-.inf-star { --night: #0b1424; position: relative; overflow: hidden; padding: clamp(150px, 17vw, 280px) 0 clamp(170px, 19vw, 300px); font-family: 'Inter', sans-serif;
+   stars on a canvas (orbit.js) fading in and out with it; across it the picture (tools/influencers/star_planet.py: the
+   planet on the right, the ship, its words wiped, its edges fading into the night) and over its open sky on the left
+   the words as real text, placed where the design has them (in % of the picture's width: cqw): "WANT TO BE OUR NEXT
+   STAR?" red, "INVITED. / SEE YOU SOON." in brushed silver with a dark drop shadow, all in the headings' face.
+   Phones: the words above the picture, centred. */
+.inf-star { --night: #0b1729; position: relative; overflow: hidden; padding: clamp(150px, 17vw, 280px) 0 clamp(170px, 19vw, 300px); font-family: 'Inter', sans-serif;
   background: linear-gradient(180deg, #f3f2f7 0%, #e3e5ec 3%, #c3c8d4 6.5%, #949cae 10%, #5f6a82 13.5%, #333f58 17%, #18233a 21%, var(--night) 25%,
     var(--night) 73%, #18233a 77%, #333f58 81%, #5f6a82 84.5%, #949cae 88%, #c3c8d4 91.5%, #e7e9ee 95%, #fff 100%); }
 .inf-star__sky { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none;
   -webkit-mask-image: linear-gradient(180deg, transparent 6%, #000 22%, #000 78%, transparent 93%); mask-image: linear-gradient(180deg, transparent 6%, #000 22%, #000 78%, transparent 93%); }
 .inf-star::before { content: ''; position: absolute; left: 0; right: 0; top: 18%; bottom: 18%; pointer-events: none;   /* a soft blue light round the window */
   background: radial-gradient(ellipse 48% 50% at 50% 50%, rgba(56, 104, 190, .28) 0%, rgba(56, 104, 190, .1) 48%, rgba(56, 104, 190, 0) 100%); }
-.inf-star__in { position: relative; max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
-.inf-star__win { position: relative; width: min(100%, 1100px); margin: 0 auto; container-type: inline-size; }
-.inf-star__img { display: block; width: 100%; height: auto; }   /* no frame: its edges fade into the night (star_window.py) */
-.inf-star__h2 { position: absolute; left: 0; right: 0; top: 0; margin: 0; text-align: center; }
-.inf-star__h2 > span { position: absolute; left: 0; right: 0; display: block; margin: 0; padding: 0; white-space: nowrap; text-wrap: nowrap; line-height: 1; }
-.inf-star__kick { top: 1.838cqw; font-size: 2.127cqw; letter-spacing: .06em; color: #ee1d2b; text-shadow: 0 0 .9cqw rgba(238, 29, 43, .35); }
-.inf-star__big { top: 5.39cqw; font-size: 4.861cqw; letter-spacing: .02em;
+.inf-star__in { position: relative; max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40px); box-sizing: border-box; }
+.inf-star__win { position: relative; width: 100%; margin: 0 auto; container-type: inline-size; }
+.inf-star__img { display: block; width: 100%; height: auto; }
+.inf-star__h2 { position: absolute; inset: 0; z-index: 1; margin: 0; text-align: left; pointer-events: none; }
+.inf-star__h2 > span { position: absolute; left: 5.87cqw; display: block; margin: 0; padding: 0; white-space: nowrap; text-wrap: nowrap; line-height: 1; }
+.inf-star__kick { top: 13.16cqw; font-size: 1.62cqw; letter-spacing: .06em; color: #ee1d2b; text-shadow: 0 0 .9cqw rgba(238, 29, 43, .35); }
+.inf-star__big { top: 16.61cqw; font-size: 3.8cqw; letter-spacing: .02em;
   background: linear-gradient(180deg, #ffffff 0%, #eef0f4 30%, #c3c8d0 48%, #8f959f 54%, #c9cdd4 70%, #f4f5f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
   filter: drop-shadow(0 .3cqw .25cqw rgba(0, 0, 0, .75)) drop-shadow(0 0 1.2cqw rgba(0, 0, 0, .35)); }
-.inf-star__big--2 { top: 10.294cqw; }
+.inf-star__big--2 { top: 20.775cqw; }
 /* the page ends in the footer's white with no line between (the footer's own top line, drawn inline, hidden here) */
 footer { border-top-color: transparent !important; }
 @media (max-width: 640px) {
-  .inf-star { padding: 120px 0 140px; }
-  .inf-star__in { padding: 0 6px; }
+  .inf-star { padding: 120px 0 130px; }
+  .inf-star__in { padding: 0; }
+  .inf-star__h2 { position: relative; inset: auto; text-align: center; padding: 0 16px 4px; }
+  .inf-star__h2 > span { position: static; white-space: normal; text-wrap: balance; }
+  .inf-star__h2 > .inf-star__kick { font-size: 12px; margin-bottom: 12px; }
+  .inf-star__big { font-size: clamp(20px, 6.6vw, 28px); line-height: 1.15; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .75)); }
+  .inf-star__img { margin-top: -6%; }
 }
 
 /* ---- Three numbers (owner's design, the light glass version, November 2026) --------------------------------------
