@@ -135,11 +135,11 @@ print('crop y', CY0, CY1, 'size', W, H2)
 
 
 def metal_logo(big):
-    """the real mark (star-src/logo-mark.png: tick, stem, dot) as a brushed-steel inlay set into the planet (owner's
-    wish: at one with it, not pasted on): laid on the sphere (each pixel of the planet's disc mapped to the sphere's
-    surface and from there to the mark's plane, so the mark bends with the planet), lit as the planet is (from the
-    upper left), its edge a bevel facing that light, the clouds faintly reflected in it, a thin dark groove round it
-    and the planet's haze over it; drawn on `big` (the 2400-wide picture, RGB float)"""
+    """the real mark (star-src/logo-mark.png: tick, stem, dot) raised out of the planet's surface, in the planet's
+    centre (owner's wish). Its shape exactly the file's (no projection: laid on the sphere it bent out of shape), only
+    its light from the sphere: lit as the planet is (from the upper left), its edge a bevel facing that light, the
+    clouds showing through a pale frost, a narrow shadow round it. The ring passes in front of it (its light added back
+    over the mark). Drawn on `big` (the 2400-wide picture, RGB float)"""
     S = big.shape[1] / W
     cx, cy, R = PCX * S, (PCY - CY0) * S, PR * S
     Hb, Wb = big.shape[:2]
@@ -153,8 +153,10 @@ def metal_logo(big):
     # the mark's bevel: a height field from it (a few px of the mark's own scale), its slope
     HT = np.asarray(hi.filter(ImageFilter.GaussianBlur(up * 5))).astype(float) / 255
     gyM, gxM = np.gradient(HT)
-    # the mark's centre on the planet: where the design had it (x 1133, y 413 of the design), its width there 300px
-    LCX, LCY, LW = 1133 * S, (413 - CY0) * S, 300 * S
+    # the mark's centre: the middle of the planet as it shows (its lit left limb at x 754, its right fading out with the
+    # picture from x 1315; the sphere's own centre, x 1217, is too near that fade), a little above the ring so the ring
+    # runs over the mark's foot; 330px wide (of the design)
+    LCX, LCY, LW = 1105 * S, (405 - CY0) * S, 330 * S
     c = np.array([(LCX - cx) / R, (LCY - cy) / R, 0.])
     c[2] = np.sqrt(max(0, 1 - c[0] ** 2 - c[1] ** 2))
     # a rotation taking c to (0, 0, 1), keeping "up" up as near as can be
@@ -169,12 +171,11 @@ def metal_logo(big):
     inside = nx * nx + ny * ny < .995
     nz = np.sqrt(np.clip(1 - nx * nx - ny * ny, 0, 1))
     N = np.stack([nx, ny, nz], -1)
-    P = N @ Rm.T                                                      # in the mark's frame
-    pz = np.clip(P[..., 2], 1e-3, None)
-    u, v = P[..., 0] / pz * R, P[..., 1] / pz * R                     # on the mark's tangent plane, in px
+    P = N @ Rm.T
+    u, v = xx_ - LCX, yy_ - LCY                                       # flat: the mark keeps its exact shape
     k = mw / LW                                                       # mark px per picture px
     mu, mv = u * k + mw / 2, v * k + mh / 2
-    valid = inside & (P[..., 2] > .2) & (mu >= 1) & (mu < mw - 2) & (mv >= 1) & (mv < mh - 2)
+    valid = inside & (mu >= 1) & (mu < mw - 2) & (mv >= 1) & (mv < mh - 2)
     mui, mvi = np.clip(mu.astype(int), 0, mw - 1), np.clip(mv.astype(int), 0, mh - 1)
     # the mark, anti-aliased: sampled at 3x3 sub-pixels
     cov = np.zeros_like(u)
@@ -185,8 +186,7 @@ def metal_logo(big):
     cov = cov / 9 * valid
     # the surface normal: the sphere's, tilted by the bevel (in the mark's frame, then back)
     bx, by = gxM[mvi, mui] * 38, gyM[mvi, mui] * 38
-    Nl = P.copy(); Nl[..., 0] -= bx; Nl[..., 1] -= by
-    Nw = Nl @ Rm                                                      # back to the picture's frame
+    Nw = N.copy(); Nw[..., 0] -= bx; Nw[..., 1] -= by
     Nw /= np.linalg.norm(Nw, axis=-1, keepdims=True)
     Lt = np.array([-.55, -.62, .56]); Lt /= np.linalg.norm(Lt)       # the planet's light: upper left, in front
     Vw = np.array([0, 0, 1.])
@@ -199,9 +199,30 @@ def metal_logo(big):
     # faint glow where it meets the clouds
     reg = big[Y0_:Y1_, X0:X1]
     tex = reg.copy()
+    # the ring where it crosses: in each column the brightest thin line near its course (it runs from (700, 606) to
+    # (1585, 429) of the design), smoothed; its light (what stands out of the planet round it) kept to add back on top
+    lum = tex.mean(-1)
+    hp = tex - np.asarray(Image.fromarray(tex.clip(0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(10 * S))).astype(float)
+    hpl = hp.mean(-1)
+    cols, ys_ = [], []
+    for j in range(0, X1 - X0, 6):
+        xd = (X0 + j) / S
+        yd = 606 + (429 - 606) * (xd - 700) / (1585 - 700)
+        yc_ = (yd - CY0) * S - Y0_
+        a0, b0 = int(max(0, yc_ - 60 * S)), int(min(Y1_ - Y0_, yc_ + 60 * S))
+        if b0 - a0 < 10:
+            continue
+        cols.append(j); ys_.append(a0 + np.argmax(hpl[a0:b0, j]))
+    cf = np.polyfit(cols, ys_, 2)
+    resid = np.abs(np.polyval(cf, cols) - ys_)
+    keep = resid < np.percentile(resid, 70)
+    cf = np.polyfit(np.array(cols)[keep], np.array(ys_)[keep], 2)
+    ringy = np.polyval(cf, np.arange(X1 - X0))
+    band = np.exp(-((np.arange(Y1_ - Y0_)[:, None] - ringy[None, :]) / (9 * S)) ** 2)
+    ring_light = np.clip(hp, 0, None) * band[..., None] * 1.3
     tl = tex.mean(-1, keepdims=True)
     ice = np.array([196., 214, 236])
-    frost = tex * .6 + ice * .42 * (0.5 + tl / 255)                   # the clouds still show through the frost
+    frost = tex * .3 + ice * .62 * (0.72 + tl / 600)                  # the clouds faintly through the frost: the shape reads first
     lightk = .55 + .75 * dif[..., None]
     col = frost * lightk + sheen[..., None] * np.array([34., 42, 54]) + spec[..., None] * np.array([150., 160, 175])
     lam2 = (N * np.array([-.62, -.55, .56]) / np.linalg.norm([-.62, -.55, .56])).sum(-1)
@@ -210,10 +231,13 @@ def metal_logo(big):
     col = col * (1 - haze) + np.array([70., 130, 200]) * haze
     ring = np.asarray(Image.fromarray((cov * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(3))).astype(float) / 255
     sh = np.roll(np.roll(ring, 6, 0), 4, 1)                            # cast down and right, away from the light
-    reg *= (1 - np.clip(sh - cov, 0, 1) * .55)[..., None]
+    reg *= (1 - np.clip(sh - cov, 0, 1) * .7)[..., None]
+    edge = np.asarray(Image.fromarray((cov * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(1.6 * S))).astype(float) / 255
+    reg *= (1 - np.clip(edge - cov, 0, 1) * 1.1)[..., None]           # a thin dark seam all round: the mark set into the surface
     glow = np.clip(np.asarray(Image.fromarray((cov * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(9))).astype(float) / 255 - cov, 0, 1)
     reg += (glow * .35)[..., None] * np.array([90., 150, 230])
     reg[:] = reg * (1 - cov[..., None]) + col.clip(0, 255) * cov[..., None]
+    reg += ring_light * cov[..., None]                                # the ring in front of the mark
     print('logo inlaid at', int(LCX), int(LCY), 'sphere centre', int(cx), int(cy), 'radius', int(R))
 
 
