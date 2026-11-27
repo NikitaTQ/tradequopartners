@@ -19,6 +19,45 @@
   {{> page-header-end}}
 
   <main>
+    <!-- The page's buttons (owner's designs, November 2026): their shared gradients, once (a gradient inside a hidden
+         block would not paint, so they live here, never hidden). influencers.css «Buttons». -->
+    <svg class="inf-btn-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+      <linearGradient id="ibKeyBase" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#e6e8eb"/><stop offset=".7" stop-color="#b4b7bd"/><stop offset="1" stop-color="#70737a"/></linearGradient>
+      <linearGradient id="ibKeySheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".35"/><stop offset=".12" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".35"/><stop offset=".88" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></linearGradient>
+      <linearGradient id="ibKeySkirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c2c31"/><stop offset=".6" stop-color="#121214"/><stop offset=".93" stop-color="#050506"/><stop offset="1" stop-color="#2a2a2e"/></linearGradient>
+      <linearGradient id="ibKeySide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".05" stop-color="#fff" stop-opacity="0"/><stop offset=".95" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".08"/></linearGradient>
+      <linearGradient id="ibKeyTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#323237"/><stop offset=".5" stop-color="#1f1f23"/><stop offset="1" stop-color="#151518"/></linearGradient>
+      <radialGradient id="ibKeyRed" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff2a35" stop-opacity=".95"/><stop offset=".4" stop-color="#ff1424" stop-opacity=".45"/><stop offset="1" stop-color="#ff1424" stop-opacity="0"/></radialGradient>
+      <filter id="ibGrain" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .05 0" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="gi"/></feMerge></filter>
+      <filter id="ibBlur2" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="2"/></filter>
+      <filter id="ibBlur1" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation=".8"/></filter>
+
+      <linearGradient id="ibRubyTable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a020c"/><stop offset=".55" stop-color="#7e0818"/><stop offset="1" stop-color="#c2142c"/></linearGradient>
+      <radialGradient id="ibRubyGlow" cx=".5" cy="1" r=".6" gradientTransform="translate(.5 1) scale(1 .5) translate(-.5 -1)"><stop offset="0" stop-color="#ff5266" stop-opacity=".85"/><stop offset="1" stop-color="#ff2a40" stop-opacity="0"/></radialGradient>
+      <linearGradient id="ibRubyTopB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc9d1"/><stop offset=".25" stop-color="#f2475f"/><stop offset="1" stop-color="#9c0b20"/></linearGradient>
+      <linearGradient id="ibRubyBotB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a0717"/><stop offset=".6" stop-color="#d61d37"/><stop offset="1" stop-color="#ff8396"/></linearGradient>
+
+
+      <linearGradient id="ibMetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f7f9"/><stop offset=".45" stop-color="#c9cbd0"/><stop offset=".8" stop-color="#9b9ea5"/><stop offset="1" stop-color="#74777e"/></linearGradient>
+      <radialGradient id="ibScrew" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#b9bcc2"/><stop offset="1" stop-color="#55585f"/></radialGradient>
+      <linearGradient id="ibGlassRim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".18" stop-color="#d7dbe1"/><stop offset=".5" stop-color="#f4f6f8"/><stop offset=".82" stop-color="#b8bec7"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+      <linearGradient id="ibGlassFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#f1f2f4"/><stop offset="1" stop-color="#e2e4e8"/></linearGradient>
+
+      <linearGradient id="ibSteelTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfbfc"/><stop offset=".55" stop-color="#e3e4e7"/><stop offset="1" stop-color="#c9cbcf"/></linearGradient>
+      <linearGradient id="ibSteelEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9bbc0"/><stop offset=".5" stop-color="#7d8087"/><stop offset="1" stop-color="#4b4d53"/></linearGradient>
+      <linearGradient id="ibSteelBase" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a3a6ac"/><stop offset=".25" stop-color="#5d6066"/><stop offset="1" stop-color="#232427"/></linearGradient>
+      <linearGradient id="ibCoil" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3b3f"/><stop offset=".35" stop-color="#e9eaec"/><stop offset=".6" stop-color="#8d9096"/><stop offset="1" stop-color="#2d2e31"/></linearGradient>
+      <radialGradient id="ibLGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3b86ff" stop-opacity=".55"/><stop offset=".5" stop-color="#1f5fd6" stop-opacity=".2"/><stop offset="1" stop-color="#1f5fd6" stop-opacity="0"/></radialGradient>
+      <linearGradient id="ibLidFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bcd8ff" stop-opacity=".2"/><stop offset=".6" stop-color="#6f9de6" stop-opacity=".08"/><stop offset="1" stop-color="#9cc4ff" stop-opacity=".22"/></linearGradient>
+      <linearGradient id="ibHinge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d5157"/><stop offset=".3" stop-color="#eceef1"/><stop offset=".55" stop-color="#9a9fa7"/><stop offset="1" stop-color="#34373c"/></linearGradient>
+      <linearGradient id="ibLBTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5d6168"/><stop offset=".18" stop-color="#b9bcc2"/><stop offset=".5" stop-color="#e9ebee"/><stop offset=".82" stop-color="#b5b8be"/><stop offset="1" stop-color="#585c63"/></linearGradient>
+      <linearGradient id="ibLBTopV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
+      <linearGradient id="ibLBFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a4a8ae"/><stop offset=".35" stop-color="#6a6e75"/><stop offset="1" stop-color="#2a2c30"/></linearGradient>
+      <linearGradient id="ibLRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a52"/><stop offset=".22" stop-color="#e2181d"/><stop offset=".62" stop-color="#a8080d"/><stop offset=".9" stop-color="#d0141a"/><stop offset="1" stop-color="#ff6a5e"/></linearGradient>
+      <radialGradient id="ibLRedIn" cx=".5" cy=".45" r=".6"><stop offset="0" stop-color="#7c0307" stop-opacity=".55"/><stop offset="1" stop-color="#7c0307" stop-opacity="0"/></radialGradient>
+      <filter id="ibBlur6" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="7"/></filter>
+      <filter id="ibBrush" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".004 .9" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .14 -.02" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="gi"/></feMerge></filter>
+    </defs></svg>
     <!-- Hero (owner's design, November 2026): the heading, the pitch, the CTA and two ticks on the left; on the right the
          design's scene: posts of "your channel" in glass (Instagram, Telegram and YouTube, since November 2026), wired
          to a dark "Your commissions" panel. Phones: the text, then the scene full width. -->
@@ -27,7 +66,14 @@
         <div class="inf-hero__copy">
           <h1 class="inf-hero__h1 tq-h1" data-fitw>{{inf.hero.h1}}</h1>
           <p class="inf-hero__sub"><span class="tq-nph">{{inf.hero.sub}}</span><span class="tq-ph">{{inf.hero.subShort}}</span></p>
-          <a class="inf-cta" href="{{signupHref}}"{{signupNav}}><span class="inf-cta__t">{{nav.cta}}</span><span class="inf-cta__dot"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+          <a class="inf-btn inf-btn--key inf-hero__cta" href="{{signupHref}}"{{signupNav}}>
+            <svg class="inf-btn__art" viewBox="0 0 450 112" aria-hidden="true"><ellipse cx="225" cy="107" rx="222" ry="6" fill="#000" opacity=".3" filter="url(#ibBlur2)"/><rect x="2" y="80" width="446" height="28" rx="10" fill="url(#ibKeyBase)"/><rect x="2" y="80" width="446" height="28" rx="10" fill="url(#ibKeySheen)"/><path d="M12 81.5H438" stroke="#fff" stroke-width="1.2"/><ellipse class="inf-btn__glow" cx="225" cy="101" rx="95" ry="8" fill="url(#ibKeyRed)"/></svg>
+            <span class="inf-btn__cap">
+              <svg class="inf-btn__art" viewBox="0 0 450 112" aria-hidden="true"><path d="M14 99Q4 99 4.6 89L11 38Q12 28 22 28L318 27Q327 27 327.5 18L328 12Q329 3 338 3L434 2Q442 2 443 10L446.6 89Q447 99 437 99Z" fill="url(#ibKeySkirt)"/><path d="M14 99Q4 99 4.6 89L11 38Q12 28 22 28L318 27Q327 27 327.5 18L328 12Q329 3 338 3L434 2Q442 2 443 10L446.6 89Q447 99 437 99Z" fill="url(#ibKeySide)"/><path d="M12 96.6H438" stroke="#fff" stroke-opacity=".1"/><path class="inf-btn__glow" d="M165 98.6H285" stroke="#ff4a55" stroke-width="1.3" filter="url(#ibBlur1)"/><path d="M28 30H322Q331 30 331 21V14Q331 6 339 6H423Q432 6 432 14V64Q432 74 422 74H28Q18 74 18 64V40Q18 30 28 30Z" fill="url(#ibKeyTop)" filter="url(#ibGrain)"/><path d="M28 30H322Q331 30 331 21V14Q331 6 339 6H423Q432 6 432 14V64Q432 74 422 74H28Q18 74 18 64V40Q18 30 28 30Z" fill="none" stroke="#fff" stroke-opacity=".17"/></svg>
+              <span class="inf-btn__t">{{nav.cta}}</span>
+              <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 4.5V13H5M9 9l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
           <ul class="inf-hero__ticks">
             <li>{{inf.hero.ck1}}</li>
             <li>{{inf.hero.ck2}}</li>
@@ -231,6 +277,12 @@
               </div>
             </div>
           </div>
+          <div class="inf-btn-wrap"><a class="inf-btn inf-btn--ruby" href="{{signupHref}}"{{signupNav}}>
+            <svg class="inf-btn__art" viewBox="0 0 460 72" aria-hidden="true"><g stroke="#ffb3be" stroke-opacity=".38" stroke-width=".6" stroke-linejoin="round"><path d="M32 1H428L448 9L458 28V44L448 63L428 71H32L12 63L2 44V28L12 9Z" fill="#8d0a1c"/><path d="M52 13H408L430 24V48L408 59H52L30 48V24Z" fill="url(#ibRubyTable)"/><path d="M52 13H408L430 24V48L408 59H52L30 48V24Z" fill="url(#ibRubyGlow)" stroke="none"/><path d="M32 1H428L408 13H52Z" fill="url(#ibRubyTopB)"/><path d="M52 59H408L428 71H32Z" fill="url(#ibRubyBotB)"/><path d="M12 9L32 1L52 13L30 24Z" fill="#f0475e"/><path d="M2 28L12 9L30 24Z" fill="#ff93a2"/><path d="M2 28L30 24V48L2 44Z" fill="#b3112a"/><path d="M2 44L30 48L12 63Z" fill="#6c0514"/><path d="M12 63L30 48L52 59L32 71Z" fill="#d8284a"/><path d="M448 9L428 1L408 13L430 24Z" fill="#c41930"/><path d="M458 28L448 9L430 24Z" fill="#7a0817"/><path d="M458 28L430 24V48L458 44Z" fill="#e8364f"/><path d="M458 44L430 48L448 63Z" fill="#ff7d8e"/><path d="M448 63L430 48L408 59L428 71Z" fill="#9a0b21"/><path d="M120 1L148 13M246 1L226 13M338 1L312 13M136 71L164 59M300 71L276 59" fill="none" stroke="#fff" stroke-opacity=".28"/></g><path d="M32 1H428L448 9L458 28V44L448 63L428 71H32L12 63L2 44V28L12 9Z" fill="none" stroke="#fff" stroke-opacity=".5"/><ellipse cx="128" cy="3.6" rx="64" ry="1.5" fill="#fff" opacity=".9" filter="url(#ibBlur1)"/><ellipse cx="344" cy="3.2" rx="42" ry="1.2" fill="#fff" opacity=".7" filter="url(#ibBlur1)"/><ellipse cx="236" cy="68.4" rx="96" ry="1.6" fill="#ffd6dd" opacity=".7" filter="url(#ibBlur1)"/><circle cx="10" cy="21" r="1.8" fill="#fff" opacity=".9" filter="url(#ibBlur1)"/><circle cx="452" cy="47" r="1.5" fill="#fff" opacity=".8" filter="url(#ibBlur1)"/></svg>
+            <span class="inf-btn__shine" aria-hidden="true"></span>
+            <span class="inf-btn__t">{{inf.btn.join}}</span>
+            <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></div>
         </div>
       </div>
     </section>
@@ -266,6 +318,11 @@
             </div>
           </div>
         </div>
+        <div class="inf-btn-wrap"><a class="inf-btn inf-btn--plate" href="{{signupHref}}"{{signupNav}}>
+            <svg class="inf-btn__art" viewBox="0 0 380 56" aria-hidden="true"><ellipse cx="190" cy="54" rx="180" ry="4" fill="#000" opacity=".22" filter="url(#ibBlur2)"/><g stroke="#767980" stroke-width=".8"><rect x="1" y="7" width="32" height="42" rx="5" fill="url(#ibMetal)"/><rect x="347" y="7" width="32" height="42" rx="5" fill="url(#ibMetal)"/><circle cx="13" cy="28" r="6.4" fill="url(#ibScrew)"/><circle cx="367" cy="28" r="6.4" fill="url(#ibScrew)"/></g><path d="M9.6 24.6l6.8 6.8M16.4 24.6l-6.8 6.8M363.6 24.6l6.8 6.8M370.4 24.6l-6.8 6.8" stroke="#4a4d53" stroke-width="1.2" stroke-linecap="round"/><rect x="20" y=".5" width="340" height="55" rx="11" fill="url(#ibGlassRim)" stroke="#8f949c" stroke-width=".8"/><rect x="25.5" y="5.5" width="329" height="45" rx="7.5" fill="none" stroke="#a3a8b0"/><rect class="inf-btn__face" x="26" y="6" width="328" height="44" rx="7" fill="url(#ibGlassFace)" stroke="#fff" stroke-width="1.2"/><path d="M32 1.8H348" stroke="#fff" stroke-width="1.4"/><path d="M32 54.2H348" stroke="#eefcff" stroke-width="1.1"/><path d="M302 16V40" stroke="#80838b"/><ellipse class="inf-btn__glow" cx="342" cy="2.4" rx="10" ry="5" fill="url(#ibKeyRed)"/><ellipse cx="342" cy="2.4" rx="3.4" ry="1.3" fill="#ff6b6b"/><ellipse cx="342" cy="2.2" rx="1.4" ry=".6" fill="#fff" opacity=".9"/></svg>
+            <span class="inf-btn__t">{{nav.cta}}</span>
+            <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></div>
       </div>
     </section>
 
@@ -300,6 +357,11 @@
             </div>
           </div>
         </div>
+        <div class="inf-btn-wrap"><a class="inf-btn inf-btn--plate" href="{{signupHref}}"{{signupNav}}>
+            <svg class="inf-btn__art" viewBox="0 0 380 56" aria-hidden="true"><ellipse cx="190" cy="54" rx="180" ry="4" fill="#000" opacity=".22" filter="url(#ibBlur2)"/><g stroke="#767980" stroke-width=".8"><rect x="1" y="7" width="32" height="42" rx="5" fill="url(#ibMetal)"/><rect x="347" y="7" width="32" height="42" rx="5" fill="url(#ibMetal)"/><circle cx="13" cy="28" r="6.4" fill="url(#ibScrew)"/><circle cx="367" cy="28" r="6.4" fill="url(#ibScrew)"/></g><path d="M9.6 24.6l6.8 6.8M16.4 24.6l-6.8 6.8M363.6 24.6l6.8 6.8M370.4 24.6l-6.8 6.8" stroke="#4a4d53" stroke-width="1.2" stroke-linecap="round"/><rect x="20" y=".5" width="340" height="55" rx="11" fill="url(#ibGlassRim)" stroke="#8f949c" stroke-width=".8"/><rect x="25.5" y="5.5" width="329" height="45" rx="7.5" fill="none" stroke="#a3a8b0"/><rect class="inf-btn__face" x="26" y="6" width="328" height="44" rx="7" fill="url(#ibGlassFace)" stroke="#fff" stroke-width="1.2"/><path d="M32 1.8H348" stroke="#fff" stroke-width="1.4"/><path d="M32 54.2H348" stroke="#eefcff" stroke-width="1.1"/><path d="M302 16V40" stroke="#80838b"/><ellipse class="inf-btn__glow" cx="342" cy="2.4" rx="10" ry="5" fill="url(#ibKeyRed)"/><ellipse cx="342" cy="2.4" rx="3.4" ry="1.3" fill="#ff6b6b"/><ellipse cx="342" cy="2.2" rx="1.4" ry=".6" fill="#fff" opacity=".9"/></svg>
+            <span class="inf-btn__t">{{nav.cta}}</span>
+            <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></div>
       </div>
     </section>
 
@@ -395,6 +457,14 @@
           </div>
           <svg class="dm__line" data-dm-svg aria-hidden="true"><defs><linearGradient id="dmLine" data-dm-grad gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0E0E10" stop-opacity=".25"/><stop offset="1" stop-color="#0E0E10" stop-opacity="1"/></linearGradient></defs><path data-dm-path pathLength="1" fill="none" stroke="url(#dmLine)" stroke-width="1.1" stroke-linecap="round"/><circle data-dm-a r="2.6" fill="#FFFFFF" stroke="#0E0E10" stroke-opacity=".45" stroke-width="1.2"/><circle data-dm-pulse r="2.2" fill="#0E0E10"/><circle data-dm-b r="3" fill="#0E0E10"/></svg>
         </div>
+        <div class="inf-btn-wrap"><a class="inf-btn inf-btn--spring" href="{{signupHref}}"{{signupNav}}>
+            <svg class="inf-btn__art" viewBox="0 0 446 74" aria-hidden="true"><ellipse cx="223" cy="72" rx="218" ry="3.5" fill="#000" opacity=".3" filter="url(#ibBlur2)"/><rect x="3" y="55" width="440" height="17" rx="5" fill="url(#ibSteelBase)"/><path d="M9 55.7H437" stroke="#e2e4e8" stroke-width=".9"/><rect x="8" y="38" width="430" height="19" rx="3" fill="#3a3b3f"/><rect x="8" y="38" width="430" height="8" fill="#0c0c0e" opacity=".7" filter="url(#ibBlur2)"/><g class="inf-btn__spr"><rect x="35" y="43" width="14" height="13" fill="#232427"/><g fill="none" stroke="url(#ibCoil)" stroke-width="1.5"><ellipse cx="42" cy="44.6" rx="19" ry="2.6"/><ellipse cx="42" cy="47.8" rx="19" ry="2.6"/><ellipse cx="42" cy="51" rx="19" ry="2.6"/><ellipse cx="42" cy="54.2" rx="19" ry="2.6"/></g></g><g class="inf-btn__spr"><rect x="397" y="43" width="14" height="13" fill="#232427"/><g fill="none" stroke="url(#ibCoil)" stroke-width="2.2"><ellipse cx="404" cy="44.6" rx="19" ry="2.6"/><ellipse cx="404" cy="47.8" rx="19" ry="2.6"/><ellipse cx="404" cy="51" rx="19" ry="2.6"/><ellipse cx="404" cy="54.2" rx="19" ry="2.6"/></g></g></svg>
+            <span class="inf-btn__cap">
+              <svg class="inf-btn__art" viewBox="0 0 446 74" aria-hidden="true"><rect x="0" y="4" width="446" height="41" rx="9" fill="url(#ibSteelEdge)"/><path d="M6 44.4H440" stroke="#fff" stroke-opacity=".3"/><rect x="0" y="0" width="446" height="37" rx="9" fill="url(#ibSteelTop)" filter="url(#ibBrush)"/><rect x=".5" y=".5" width="445" height="36" rx="8.5" fill="none" stroke="#fff" stroke-opacity=".8"/><path d="M375 9V29" stroke="#8e9096"/></svg>
+              <span class="inf-btn__t">{{inf.btn.first}}</span>
+              <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a></div>
       </div>
     </section>
 
@@ -422,6 +492,17 @@
             <li><span>{{inf.trip.r2}}</span><b>{{inf.trip.covered}}</b></li>
             <li><span>{{inf.trip.r3}}</span><b class="inf-trip__red">{{inf.trip.results}}</b></li>
           </ul>
+          <a class="inf-belt" href="{{signupHref}}"{{signupNav}}>
+            <span class="inf-belt__strap">
+              <span class="inf-belt__web">
+                <i class="inf-belt__st inf-belt__st--t"></i><i class="inf-belt__st inf-belt__st--b"></i><i class="inf-belt__st inf-belt__st--l"></i>
+                <i class="inf-belt__fold inf-belt__fold--1"></i><i class="inf-belt__fold inf-belt__fold--2"></i>
+                <span class="inf-belt__t">{{inf.btn.trips}}</span>
+              </span>
+              <span class="inf-belt__tongue"><i></i></span>
+            </span>
+            <span class="inf-belt__buckle"><span class="inf-belt__lid"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="#c8151d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+          </a>
         </div>
         <div class="inf-trip__vis">
           <img class="inf-trip__img" src="{{root}}assets/influencers/trips-1040.webp"
@@ -465,6 +546,15 @@
       <div class="inf-star__in">
         <div class="inf-star__win">
           <h2 class="inf-star__h2"><span class="inf-star__kick tq-h2">{{inf.star.h2a}}</span><span class="inf-star__big tq-h2">{{inf.star.big1}}</span><span class="inf-star__big inf-star__big--2 tq-h2">{{inf.star.big2}}</span></h2>
+          <div class="inf-star__cta"><a class="inf-btn inf-btn--launch" href="{{signupHref}}"{{signupNav}}>
+            <svg class="inf-btn__art" viewBox="0 0 600 282" aria-hidden="true"><ellipse cx="300" cy="118" rx="310" ry="62" fill="url(#ibLGlow)"/><path d="M-20 117H620" stroke="#6aa8ff" stroke-width="1.4" opacity=".55" filter="url(#ibBlur2)"/><path d="M30 50L52 12H548L570 50L562 112H38Z" fill="url(#ibLidFill)" stroke="#e2f0ff" stroke-opacity=".95" stroke-width="2.4" stroke-linejoin="round"/><path d="M30 50L52 12H548L570 50L562 112H38ZM46 54L62 26H538L554 54L548 104H52Z" fill="#cfe4ff" fill-opacity=".16" fill-rule="evenodd"/><path d="M46 54L62 26H538L554 54L548 104H52Z" fill="#0a1a3c" fill-opacity=".28" stroke="#fff" stroke-opacity=".55" stroke-width="1" stroke-linejoin="round"/><path d="M56 13.4H544" stroke="#fff" stroke-width="1.5" opacity=".9"/><path d="M33 49L53 14M567 49L547 14M31 52L39 110M569 52L561 110" stroke="#fff" stroke-width=".9" opacity=".7"/><path d="M62 26H538" stroke="#a8d0ff" stroke-opacity=".5"/><g><rect x="80" y="88" width="30" height="14" rx="2" fill="#3d4046"/><rect x="490" y="88" width="30" height="14" rx="2" fill="#3d4046"/><rect x="72" y="99" width="46" height="22" rx="5" fill="url(#ibHinge)"/><rect x="482" y="99" width="46" height="22" rx="5" fill="url(#ibHinge)"/><path d="M87 99V121M103 99V121M497 99V121M513 99V121" stroke="#1e2024" stroke-width="1.2"/></g><path d="M42 120H558L590 152V226H10V152Z" fill="url(#ibLBTop)" filter="url(#ibBrush)"/><path d="M42 120H558L590 152V226H10V152Z" fill="url(#ibLBTopV)"/><path d="M42 120.6H558M10 152L42 120.6M590 152L558 120.6" stroke="#fff" stroke-opacity=".75" fill="none"/><path d="M10 226H590L585 261Q584 268 577 268H23Q16 268 15 261Z" fill="url(#ibLBFront)"/><path d="M11 226.6H589" stroke="#f4f5f7" stroke-opacity=".8"/><circle cx="50" cy="252" r="5" fill="url(#ibScrew)" stroke="#2a2c30" stroke-width=".8"/><circle cx="550" cy="252" r="5" fill="url(#ibScrew)" stroke="#2a2c30" stroke-width=".8"/><text x="300" y="134.2" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.6" font-weight="600" letter-spacing="3.6" fill="#fff" fill-opacity=".7">{{inf.btn.ready}}</text><text x="300" y="133.4" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.6" font-weight="600" letter-spacing="3.6" fill="#2a2c31">{{inf.btn.ready}}</text><rect class="inf-btn__glow" x="54" y="142" width="492" height="76" rx="20" fill="#ff1c1c" opacity=".7" filter="url(#ibBlur6)"/><rect x="52" y="140" width="496" height="80" rx="20" fill="#260204" stroke="#7d8188"/><rect x="53.5" y="141.5" width="493" height="77" rx="18.5" fill="none" stroke="#000" stroke-opacity=".6" stroke-width="2"/></svg>
+            <span class="inf-btn__cap">
+              <svg class="inf-btn__art" viewBox="0 0 600 282" aria-hidden="true"><rect x="58" y="145" width="484" height="70" rx="16" fill="url(#ibLRed)"/><rect x="58" y="145" width="484" height="70" rx="16" fill="url(#ibLRedIn)"/><rect x="58.6" y="145.6" width="482.8" height="68.8" rx="15.4" fill="none" stroke="#ff9a90" stroke-opacity=".7" stroke-width="1.2"/><rect x="72" y="148" width="456" height="15" rx="7.5" fill="#fff" opacity=".2"/><path d="M90 147.4H510" stroke="#fff" stroke-opacity=".75" stroke-width="1.1"/><path class="inf-btn__glow" d="M96 212.6H504" stroke="#ffb0a6" stroke-width="1.6" filter="url(#ibBlur1)"/></svg>
+              <svg class="inf-btn__rocket" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c3.1 2.6 4.6 6.2 4.6 10.3l2.6 3.3v3.4l-4.3-1.7H9.1l-4.3 1.7v-3.4l2.6-3.3C7.4 7.7 8.9 4.1 12 1.5z" fill="currentColor"/><circle cx="12" cy="9.2" r="1.7" fill="#c8121a"/><path d="M10.4 18.6h3.2L12 22.6z" fill="currentColor" opacity=".85"/></svg>
+              <span class="inf-btn__t">{{inf.btn.launch}}</span>
+              <span class="inf-btn__logo" aria-hidden="true"></span>
+            </span>
+          </a></div>
           <img class="inf-star__img" src="{{root}}assets/influencers/star-planet-1600.webp" srcset="{{root}}assets/influencers/star-planet-1000.webp 1000w, {{root}}assets/influencers/star-planet-1600.webp 1600w, {{root}}assets/influencers/star-planet-2400.webp 2400w" sizes="(max-width: 1400px) 100vw, 1360px" width="2400" height="1320" alt="" loading="lazy" decoding="async">
         </div>
       </div>

@@ -868,20 +868,70 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
 .inf-hero__h1 { margin: 0; color: #0a0a0a; line-height: 1.14; text-align: start; white-space: nowrap; letter-spacing: .05em; padding-inline-start: 0; }
 .inf-hero__sub { margin: clamp(20px, 2vw, 30px) 0 0; max-width: 30em; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.62; color: #55555e; }
-.inf-cta { position: relative; display: inline-flex; align-items: center; gap: 24px; height: 60px; margin-top: clamp(26px, 2.6vw, 36px);
-  padding: 0 7px 0 32px; box-sizing: border-box; border-radius: 999px; color: #fff; font-size: 16px; font-weight: 600; letter-spacing: -.005em; text-decoration: none;
-  background: linear-gradient(180deg, #34343a 0%, #141417 38%, #050506 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.26), inset 0 -1px 0 rgba(255,255,255,.06), 0 0 0 1px #000, 0 16px 28px -14px rgba(0,0,0,.6), 0 4px 10px -4px rgba(0,0,0,.35);
-  transition: transform .3s cubic-bezier(.2,.8,.2,1); -webkit-tap-highlight-color: transparent; }
-.inf-cta::after { content: ''; position: absolute; left: 20%; right: 34%; bottom: 1px; height: 2px; border-radius: 2px;
-  background: linear-gradient(90deg, rgba(231,19,27,0), #ff2a33 50%, rgba(231,19,27,0)); filter: blur(.4px); box-shadow: 0 0 8px rgba(255,30,40,.8); }
-.inf-cta__dot { flex: none; width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;
-  background: radial-gradient(circle at 34% 28%, #ff7377 0%, #f0222b 34%, #c20d16 72%, #8e050c 100%);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,.45), inset 0 -2px 4px rgba(90,0,5,.35), 0 4px 12px -2px rgba(231,19,27,.55); }
-.inf-cta__dot svg { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
-.inf-cta:hover, .inf-cta:focus-visible { color: #fff; transform: translateY(-2px); }
-.inf-cta:hover .inf-cta__dot svg, .inf-cta:focus-visible .inf-cta__dot svg { transform: translateX(3px); }
-.inf-cta:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+.inf-btn.inf-hero__cta { margin-top: clamp(26px, 2.6vw, 36px); --w: 430px; }
+.inf-btn-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.inf-btn { --w: 450px; position: relative; display: block; width: min(100%, var(--w)); aspect-ratio: var(--ar); container-type: inline-size;
+  color: #fff; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 800; text-transform: uppercase; white-space: nowrap; line-height: 1;
+  -webkit-tap-highlight-color: transparent; outline: none; -webkit-user-select: none; user-select: none; }
+.inf-btn, .inf-btn:hover, .inf-btn:focus-visible, .inf-belt:hover, .inf-belt:focus-visible { color: var(--c, #fff); }
+.inf-btn__art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; display: block; pointer-events: none; }
+.inf-btn__cap { position: absolute; inset: 0; transition: transform .28s cubic-bezier(.2,.8,.2,1); }
+.inf-btn__t, .inf-btn__ic { position: absolute; translate: -50% -50%; }
+.inf-btn__t { letter-spacing: .045em; }
+.inf-btn__ic { width: var(--ic, 5.4cqw); height: var(--ic, 5.4cqw); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.inf-btn:hover .inf-btn__ic, .inf-btn:focus-visible .inf-btn__ic { transform: translateX(.6cqw); }
+.inf-btn:focus-visible { outline: 2px solid #e7131b; outline-offset: 5px; border-radius: 10px; }
+.inf-btn-wrap { display: flex; justify-content: center; margin-top: clamp(28px, 3.2vw, 48px); }
+.inf-btn__glow { transition: opacity .3s ease; }
+.inf-btn--key { --ar: 450 / 112; }
+.inf-btn--key .inf-btn__t { left: 42.6%; top: 46.4%; font-size: 5.2cqw; letter-spacing: .07em; text-shadow: 0 1px 0 rgba(0,0,0,.6); }
+.inf-btn--key .inf-btn__ic { left: 87.1%; top: 37.5%; --ic: 7.2cqw; }
+.inf-btn--key .inf-btn__glow { animation: inf-btn-glow 2.8s ease-in-out infinite; }
+.inf-btn--key:hover .inf-btn__cap, .inf-btn--key:focus-visible .inf-btn__cap { transform: translateY(2.4%); }
+.inf-btn--key:active .inf-btn__cap { transform: translateY(5.4%); transition-duration: .08s; }
+.inf-btn--key:hover .inf-btn__ic, .inf-btn--key:focus-visible .inf-btn__ic { transform: translateX(-.5cqw); }
+@keyframes inf-btn-glow { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+.inf-btn--ruby { --ar: 460 / 72; --w: 470px; filter: drop-shadow(0 10px 14px rgba(160, 8, 26, .32)) drop-shadow(0 2px 3px rgba(80, 0, 10, .3)); transition: transform .3s cubic-bezier(.2,.8,.2,1), filter .3s ease; }
+.inf-btn--ruby .inf-btn__t { left: 46.6%; top: 50%; font-size: 4.6cqw; text-shadow: 0 1px 2px rgba(60, 0, 8, .55); }
+.inf-btn--ruby .inf-btn__ic { left: 89.6%; top: 50%; }
+.inf-btn__shine { position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  clip-path: polygon(6.96% 1.39%, 93.04% 1.39%, 97.39% 12.5%, 99.57% 38.9%, 99.57% 61.1%, 97.39% 87.5%, 93.04% 98.6%, 6.96% 98.6%, 2.61% 87.5%, .43% 61.1%, .43% 38.9%, 2.61% 12.5%); }
+.inf-btn__shine::before { content: ''; position: absolute; top: 0; bottom: 0; left: -30%; width: 22%; transform: skewX(-22deg) translateX(0);
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,220,228,.42), rgba(255,255,255,0)); }
+.inf-btn--ruby:hover, .inf-btn--ruby:focus-visible { transform: translateY(-2px); filter: drop-shadow(0 14px 18px rgba(190, 10, 30, .42)) drop-shadow(0 2px 3px rgba(80, 0, 10, .3)); }
+.inf-btn--ruby:hover .inf-btn__shine::before, .inf-btn--ruby:focus-visible .inf-btn__shine::before { transform: skewX(-22deg) translateX(720%); transition: transform .9s cubic-bezier(.3,.6,.3,1); }
+.inf-btn--ruby:active { transform: translateY(0); }
+.inf-btn--plate { --c: #0e0e10; --ar: 380 / 56; --w: 400px; }
+.inf-btn--plate .inf-btn__t { left: 45.9%; top: 50%; font-size: 4.5cqw; letter-spacing: .065em; }
+.inf-btn--plate .inf-btn__ic { left: 85.8%; top: 50%; --ic: 5.2cqw; }
+.inf-btn--plate .inf-btn__glow { animation: inf-btn-glow 2.2s ease-in-out infinite; }
+.inf-btn--plate .inf-btn__face { transition: fill-opacity .3s ease; }
+.inf-btn--plate::after { content: ''; position: absolute; left: 7.4%; right: 7.4%; top: 11%; bottom: 11%; border-radius: 1.8cqw; pointer-events: none; opacity: 0; transition: opacity .3s ease;
+  box-shadow: inset 0 0 2.4cqw rgba(255, 255, 255, .95), 0 0 3cqw rgba(190, 225, 255, .45); }
+.inf-btn--plate:hover::after, .inf-btn--plate:focus-visible::after { opacity: 1; }
+.inf-btn--plate:active { transform: translateY(1px); }
+.inf-btn--spring { --c: #0d0d0f; --ar: 446 / 74; --w: 460px; }
+.inf-btn--spring .inf-btn__t { left: 46.6%; top: 25.3%; font-size: 5cqw; letter-spacing: .06em; text-shadow: 0 1px 0 rgba(255,255,255,.7); }
+.inf-btn--spring .inf-btn__ic { left: 90.8%; top: 25.3%; color: #d8101d; }
+.inf-btn__spr { transform-box: fill-box; transform-origin: 50% 100%; transition: transform .28s cubic-bezier(.2,.8,.2,1); }
+.inf-btn--spring:hover .inf-btn__cap, .inf-btn--spring:focus-visible .inf-btn__cap { transform: translateY(6%); }
+.inf-btn--spring:hover .inf-btn__spr, .inf-btn--spring:focus-visible .inf-btn__spr { transform: scaleY(.62); }
+.inf-btn--spring:active .inf-btn__cap { transform: translateY(11%); transition-duration: .08s; }
+.inf-btn--spring:active .inf-btn__spr { transform: scaleY(.3); transition-duration: .08s; }
+.inf-btn--launch { --ar: 600 / 282; --w: 520px; text-transform: none; }
+.inf-btn--launch text { text-transform: uppercase; }
+.inf-btn--launch .inf-btn__t { left: 50.4%; top: 63.9%; font-size: 4.9cqw; font-weight: 700; letter-spacing: .005em; text-shadow: 0 0 1.2cqw rgba(255, 210, 200, .55), 0 .2cqw .3cqw rgba(90, 0, 4, .6); }
+.inf-btn__rocket { position: absolute; left: 24.6%; top: 63.6%; width: 6cqw; height: 6cqw; translate: -50% -50%; rotate: 0deg; color: #fff; filter: drop-shadow(0 0 .8cqw rgba(255, 200, 190, .6)); transition: translate .35s cubic-bezier(.2,.8,.2,1); }
+.inf-btn__logo { position: absolute; left: 77%; top: 63.6%; width: 6.6cqw; height: 6.6cqw; translate: -50% -50%; background: #fff;
+  -webkit-mask: url(../assets/logo-mark.png?v=1405a8f8c9) center / contain no-repeat; mask: url(../assets/logo-mark.png?v=1405a8f8c9) center / contain no-repeat; filter: drop-shadow(0 0 .8cqw rgba(255, 200, 190, .6)); }
+.inf-btn--launch .inf-btn__glow { animation: inf-btn-glow 2.6s ease-in-out infinite; }
+.inf-btn--launch:hover .inf-btn__cap, .inf-btn--launch:focus-visible .inf-btn__cap { transform: translateY(.5%); filter: brightness(1.12); }
+.inf-btn--launch:hover .inf-btn__rocket, .inf-btn--launch:focus-visible .inf-btn__rocket { translate: -50% -62%; }
+.inf-btn--launch:active .inf-btn__cap { transform: translateY(1.3%); transition-duration: .08s; }
+@media (prefers-reduced-motion: reduce) {
+.inf-btn__glow { animation: none !important; }
+.inf-btn__shine { display: none; }
+}
 .inf-hero__ticks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 22px 0 0; padding: 0; list-style: none; font-size: 13px; font-weight: 600; color: #26262c; }
 .inf-hero__ticks li { position: relative; padding-inline-start: 20px; white-space: nowrap; }
 .inf-hero__ticks li::before { content: ''; position: absolute; inset-inline-start: 0; top: 50%; width: 13px; height: 13px; margin-top: -7px;
@@ -908,9 +958,48 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-hero__vis { order: 3; position: relative; flex: 1 1 0; min-height: 190px; max-width: none; margin: 6px 0 4px; }
 .inf-hero__vis picture { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .inf-hero__img { width: auto; height: auto; max-width: 100%; max-height: 100%; }
-.inf-cta { order: 4; align-self: flex-start; height: 52px; margin-top: 0; font-size: 15px; padding-inline-start: 24px; gap: 20px; }
-.inf-cta__dot { width: 40px; height: 40px; }
+.inf-btn.inf-hero__cta { order: 4; align-self: center; --w: 340px; margin-top: 0; }
 .inf-hero__ticks { order: 5; margin-top: 14px; font-size: 12.5px; gap: 6px 16px; }
+}
+.inf-belt { position: relative; display: block; width: min(100%, 400px); aspect-ratio: 400 / 62; container-type: inline-size; margin-top: clamp(28px, 6cqw, 44px);
+  color: #fff; text-decoration: none; font-family: 'Inter', sans-serif; outline: none; -webkit-tap-highlight-color: transparent; }
+.inf-belt__strap { position: absolute; left: 0; top: 1.25cqw; bottom: 1.25cqw; width: 72cqw; transition: width .32s cubic-bezier(.5,0,.3,1.15); }
+.inf-belt__web { position: absolute; inset: 0; border-radius: 2cqw .5cqw .5cqw 2cqw; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0) 68%, rgba(0,0,0,.35) 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 .5cqw, rgba(0,0,0,0) .5cqw 1cqw), repeating-linear-gradient(-45deg, rgba(0,0,0,.14) 0 .5cqw, rgba(0,0,0,0) .5cqw 1cqw),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 .25cqw, rgba(0,0,0,0) .25cqw .75cqw), #1d3e63;
+  background-position: 0 0; box-shadow: inset 0 0 0 .25cqw rgba(0,0,0,.35), inset 0 .5cqw 0 rgba(160,200,235,.18), 0 3cqw 5cqw -2.5cqw rgba(14,30,50,.55);
+  transition: background-position .45s cubic-bezier(.34,1.5,.5,1); }
+.inf-belt__st { position: absolute; border: 0 dashed rgba(150,196,232,.75); }
+.inf-belt__st--t { left: 2.5cqw; right: 0; top: 1.5cqw; border-top-width: .375cqw; }
+.inf-belt__st--b { left: 2.5cqw; right: 0; bottom: 1.5cqw; border-top-width: .375cqw; }
+.inf-belt__st--l { left: 1cqw; top: 1.5cqw; bottom: 1.5cqw; border-left-width: .375cqw; }
+.inf-belt__fold { position: absolute; top: -2cqw; bottom: -2cqw; transition: opacity .3s; }
+.inf-belt__fold--1 { left: 22%; width: 4cqw; transform: skewX(-28deg); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.14), rgba(0,0,0,.24)); }
+.inf-belt__fold--2 { left: 62%; width: 3.5cqw; transform: skewX(24deg); background: linear-gradient(90deg, rgba(0,0,0,.22), rgba(255,255,255,.12), rgba(255,255,255,0)); }
+.inf-belt__t { position: relative; font-size: 3.75cqw; font-weight: 800; letter-spacing: .03em; white-space: nowrap; text-transform: uppercase;
+  background: linear-gradient(180deg, #fff 0%, #e4eaf0 45%, #9dabba 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 .375cqw 0 rgba(6,16,30,.55)); }
+.inf-belt__tongue { position: absolute; left: 100%; top: 50%; width: 7.5cqw; height: 8.5cqw; margin: -4.25cqw 0 0 -.5cqw; border-radius: .5cqw 1.25cqw 1.25cqw .5cqw; box-sizing: border-box;
+  background: linear-gradient(180deg, #fbfcfd 0%, #cdd2d8 45%, #99a0aa 55%, #e1e4e8 100%); box-shadow: inset 0 .25cqw 0 #fff, 0 0 0 .25cqw #737983, 0 1cqw 2cqw -.75cqw rgba(14,30,50,.5);
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 1.5cqw; }
+.inf-belt__tongue i { width: 2.25cqw; height: 3.5cqw; border-radius: .5cqw; background: #6d737d; box-shadow: inset 0 .25cqw .5cqw rgba(0,0,0,.5), 0 .25cqw 0 #fff; }
+.inf-belt__buckle { position: absolute; right: 0; top: 0; bottom: 0; z-index: 2; width: 17.5cqw; border-radius: 2.5cqw; perspective: 65cqw;
+  background: linear-gradient(180deg, #f7f8fa 0%, #c9ced5 40%, #9aa1ab 60%, #d5d9de 100%);
+  box-shadow: inset 0 .25cqw 0 #fff, inset 0 -.5cqw .75cqw rgba(0,0,0,.25), 0 0 0 .25cqw #6d737d, 0 3cqw 4.5cqw -2cqw rgba(14,30,50,.55); }
+.inf-belt__lid { position: absolute; inset: 1.5cqw; border-radius: 1.5cqw; transform-origin: 0 50%; transform: rotateY(-32deg); display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 70%, rgba(0,0,0,.12) 100%), linear-gradient(180deg, #fff 0%, #e3e6ea 30%, #b3b9c2 55%, #e9ebee 100%);
+  box-shadow: inset 0 .25cqw 0 #fff, 0 0 0 .25cqw #868c96, 1.25cqw .75cqw 2cqw rgba(0,0,0,.35); transition: transform .24s cubic-bezier(.34,1.9,.5,1), box-shadow .24s; }
+.inf-belt__lid svg { width: 5cqw; height: 5cqw; transition: transform .35s cubic-bezier(.34,1.8,.5,1); }
+.inf-belt:hover .inf-belt__strap, .inf-belt:focus-visible .inf-belt__strap { width: 81.5cqw; }
+.inf-belt:hover .inf-belt__lid, .inf-belt:focus-visible .inf-belt__lid { transform: rotateY(0deg); box-shadow: inset 0 .25cqw 0 #fff, 0 0 0 .25cqw #868c96, 0 .25cqw .5cqw rgba(0,0,0,.2); transition-delay: .3s; }
+.inf-belt:hover .inf-belt__buckle, .inf-belt:focus-visible .inf-belt__buckle { animation: inf-belt-click .26s .3s ease-out; }
+.inf-belt:hover .inf-belt__web, .inf-belt:focus-visible .inf-belt__web { background-position: 7.5cqw 0; transition-delay: .5s; }
+.inf-belt:hover .inf-belt__fold, .inf-belt:focus-visible .inf-belt__fold { opacity: 0; transition-delay: .5s; }
+.inf-belt:hover .inf-belt__lid svg, .inf-belt:focus-visible .inf-belt__lid svg { transform: translateX(.75cqw); transition-delay: .5s; }
+.inf-belt:focus-visible { outline: 2px solid #e7131b; outline-offset: 5px; border-radius: 10px; }
+@keyframes inf-belt-click { 40% { transform: translateY(.375cqw) scale(.97); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+.inf-belt * { transition: none !important; animation: none !important; }
 }
 .inf-star { --night: #0b1729; position: relative; overflow: hidden; padding: clamp(150px, 17vw, 280px) 0 clamp(170px, 19vw, 300px); font-family: 'Inter', sans-serif;
   background: linear-gradient(180deg, #f3f2f7 0%, #e3e5ec 3%, #c3c8d4 6.5%, #949cae 10%, #5f6a82 13.5%, #333f58 17%, #18233a 21%, var(--night) 25%,
@@ -929,6 +1018,8 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
   background: linear-gradient(180deg, #ffffff 0%, #eef0f4 30%, #c3c8d0 48%, #8f959f 54%, #c9cdd4 70%, #f4f5f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
   filter: drop-shadow(0 .3cqw .25cqw rgba(0, 0, 0, .75)) drop-shadow(0 0 1.2cqw rgba(0, 0, 0, .35)); }
 .inf-star__big--2 { top: 20.775cqw; }
+.inf-star__cta { position: absolute; z-index: 2; left: 5cqw; top: 26.6cqw; width: 26cqw; }
+.inf-star__cta .inf-btn { --w: 100%; }
 footer { border-top-color: transparent !important; }
 @media (max-width: 640px) {
 .inf-star { padding: 120px 0 130px; }
@@ -937,6 +1028,7 @@ footer { border-top-color: transparent !important; }
 .inf-star__h2 > span { position: static; white-space: normal; text-wrap: balance; }
 .inf-star__h2 > .inf-star__kick { font-size: 12px; margin-bottom: 12px; }
 .inf-star__big { font-size: clamp(20px, 6.6vw, 28px); line-height: 1.15; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .75)); }
+.inf-star__cta { position: relative; left: auto; top: auto; width: min(100% - 32px, 400px); margin: 20px auto 0; }
 .inf-star__img { margin-top: -6%; }
 }
 @property --rh { syntax: '<length>'; inherits: true; initial-value: 120px; }
@@ -1580,6 +1672,45 @@ footer { border-top-color: transparent !important; }
 
 
   <main>
+    <!-- The page's buttons (owner's designs, November 2026): their shared gradients, once (a gradient inside a hidden
+         block would not paint, so they live here, never hidden). influencers.css «Buttons». -->
+    <svg class="inf-btn-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+      <linearGradient id="ibKeyBase" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#e6e8eb"/><stop offset=".7" stop-color="#b4b7bd"/><stop offset="1" stop-color="#70737a"/></linearGradient>
+      <linearGradient id="ibKeySheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".35"/><stop offset=".12" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".35"/><stop offset=".88" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></linearGradient>
+      <linearGradient id="ibKeySkirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c2c31"/><stop offset=".6" stop-color="#121214"/><stop offset=".93" stop-color="#050506"/><stop offset="1" stop-color="#2a2a2e"/></linearGradient>
+      <linearGradient id="ibKeySide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".05" stop-color="#fff" stop-opacity="0"/><stop offset=".95" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".08"/></linearGradient>
+      <linearGradient id="ibKeyTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#323237"/><stop offset=".5" stop-color="#1f1f23"/><stop offset="1" stop-color="#151518"/></linearGradient>
+      <radialGradient id="ibKeyRed" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff2a35" stop-opacity=".95"/><stop offset=".4" stop-color="#ff1424" stop-opacity=".45"/><stop offset="1" stop-color="#ff1424" stop-opacity="0"/></radialGradient>
+      <filter id="ibGrain" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .05 0" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="gi"/></feMerge></filter>
+      <filter id="ibBlur2" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="2"/></filter>
+      <filter id="ibBlur1" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation=".8"/></filter>
+
+      <linearGradient id="ibRubyTable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a020c"/><stop offset=".55" stop-color="#7e0818"/><stop offset="1" stop-color="#c2142c"/></linearGradient>
+      <radialGradient id="ibRubyGlow" cx=".5" cy="1" r=".6" gradientTransform="translate(.5 1) scale(1 .5) translate(-.5 -1)"><stop offset="0" stop-color="#ff5266" stop-opacity=".85"/><stop offset="1" stop-color="#ff2a40" stop-opacity="0"/></radialGradient>
+      <linearGradient id="ibRubyTopB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc9d1"/><stop offset=".25" stop-color="#f2475f"/><stop offset="1" stop-color="#9c0b20"/></linearGradient>
+      <linearGradient id="ibRubyBotB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a0717"/><stop offset=".6" stop-color="#d61d37"/><stop offset="1" stop-color="#ff8396"/></linearGradient>
+
+
+      <linearGradient id="ibMetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f7f9"/><stop offset=".45" stop-color="#c9cbd0"/><stop offset=".8" stop-color="#9b9ea5"/><stop offset="1" stop-color="#74777e"/></linearGradient>
+      <radialGradient id="ibScrew" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#b9bcc2"/><stop offset="1" stop-color="#55585f"/></radialGradient>
+      <linearGradient id="ibGlassRim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".18" stop-color="#d7dbe1"/><stop offset=".5" stop-color="#f4f6f8"/><stop offset=".82" stop-color="#b8bec7"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+      <linearGradient id="ibGlassFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#f1f2f4"/><stop offset="1" stop-color="#e2e4e8"/></linearGradient>
+
+      <linearGradient id="ibSteelTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfbfc"/><stop offset=".55" stop-color="#e3e4e7"/><stop offset="1" stop-color="#c9cbcf"/></linearGradient>
+      <linearGradient id="ibSteelEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9bbc0"/><stop offset=".5" stop-color="#7d8087"/><stop offset="1" stop-color="#4b4d53"/></linearGradient>
+      <linearGradient id="ibSteelBase" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a3a6ac"/><stop offset=".25" stop-color="#5d6066"/><stop offset="1" stop-color="#232427"/></linearGradient>
+      <linearGradient id="ibCoil" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3b3f"/><stop offset=".35" stop-color="#e9eaec"/><stop offset=".6" stop-color="#8d9096"/><stop offset="1" stop-color="#2d2e31"/></linearGradient>
+      <radialGradient id="ibLGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3b86ff" stop-opacity=".55"/><stop offset=".5" stop-color="#1f5fd6" stop-opacity=".2"/><stop offset="1" stop-color="#1f5fd6" stop-opacity="0"/></radialGradient>
+      <linearGradient id="ibLidFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bcd8ff" stop-opacity=".2"/><stop offset=".6" stop-color="#6f9de6" stop-opacity=".08"/><stop offset="1" stop-color="#9cc4ff" stop-opacity=".22"/></linearGradient>
+      <linearGradient id="ibHinge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d5157"/><stop offset=".3" stop-color="#eceef1"/><stop offset=".55" stop-color="#9a9fa7"/><stop offset="1" stop-color="#34373c"/></linearGradient>
+      <linearGradient id="ibLBTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5d6168"/><stop offset=".18" stop-color="#b9bcc2"/><stop offset=".5" stop-color="#e9ebee"/><stop offset=".82" stop-color="#b5b8be"/><stop offset="1" stop-color="#585c63"/></linearGradient>
+      <linearGradient id="ibLBTopV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
+      <linearGradient id="ibLBFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a4a8ae"/><stop offset=".35" stop-color="#6a6e75"/><stop offset="1" stop-color="#2a2c30"/></linearGradient>
+      <linearGradient id="ibLRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a52"/><stop offset=".22" stop-color="#e2181d"/><stop offset=".62" stop-color="#a8080d"/><stop offset=".9" stop-color="#d0141a"/><stop offset="1" stop-color="#ff6a5e"/></linearGradient>
+      <radialGradient id="ibLRedIn" cx=".5" cy=".45" r=".6"><stop offset="0" stop-color="#7c0307" stop-opacity=".55"/><stop offset="1" stop-color="#7c0307" stop-opacity="0"/></radialGradient>
+      <filter id="ibBlur6" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="7"/></filter>
+      <filter id="ibBrush" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".004 .9" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .14 -.02" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="gi"/></feMerge></filter>
+    </defs></svg>
     <!-- Hero (owner's design, November 2026): the heading, the pitch, the CTA and two ticks on the left; on the right the
          design's scene: posts of "your channel" in glass (Instagram, Telegram and YouTube, since November 2026), wired
          to a dark "Your commissions" panel. Phones: the text, then the scene full width. -->
@@ -1588,7 +1719,14 @@ footer { border-top-color: transparent !important; }
         <div class="inf-hero__copy">
           <h1 class="inf-hero__h1 tq-h1" data-fitw>Your audience.<br>A new way<br><span style="color: #e7131b;">to earn.</span></h1>
           <p class="inf-hero__sub"><span class="tq-nph">Introduce your audience to TradeQuo. Earn commissions from eligible client activity, with tools and support to help you get started.</span><span class="tq-ph">Introduce your audience to TradeQuo. Earn commissions from eligible client activity.</span></p>
-          <a class="inf-cta" href="../#signup" data-page-link><span class="inf-cta__t">Become a partner</span><span class="inf-cta__dot"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+          <a class="inf-btn inf-btn--key inf-hero__cta" href="../#signup" data-page-link>
+            <svg class="inf-btn__art" viewBox="0 0 450 112" aria-hidden="true"><ellipse cx="225" cy="107" rx="222" ry="6" fill="#000" opacity=".3" filter="url(#ibBlur2)"/><rect x="2" y="80" width="446" height="28" rx="10" fill="url(#ibKeyBase)"/><rect x="2" y="80" width="446" height="28" rx="10" fill="url(#ibKeySheen)"/><path d="M12 81.5H438" stroke="#fff" stroke-width="1.2"/><ellipse class="inf-btn__glow" cx="225" cy="101" rx="95" ry="8" fill="url(#ibKeyRed)"/></svg>
+            <span class="inf-btn__cap">
+              <svg class="inf-btn__art" viewBox="0 0 450 112" aria-hidden="true"><path d="M14 99Q4 99 4.6 89L11 38Q12 28 22 28L318 27Q327 27 327.5 18L328 12Q329 3 338 3L434 2Q442 2 443 10L446.6 89Q447 99 437 99Z" fill="url(#ibKeySkirt)"/><path d="M14 99Q4 99 4.6 89L11 38Q12 28 22 28L318 27Q327 27 327.5 18L328 12Q329 3 338 3L434 2Q442 2 443 10L446.6 89Q447 99 437 99Z" fill="url(#ibKeySide)"/><path d="M12 96.6H438" stroke="#fff" stroke-opacity=".1"/><path class="inf-btn__glow" d="M165 98.6H285" stroke="#ff4a55" stroke-width="1.3" filter="url(#ibBlur1)"/><path d="M28 30H322Q331 30 331 21V14Q331 6 339 6H423Q432 6 432 14V64Q432 74 422 74H28Q18 74 18 64V40Q18 30 28 30Z" fill="url(#ibKeyTop)" filter="url(#ibGrain)"/><path d="M28 30H322Q331 30 331 21V14Q331 6 339 6H423Q432 6 432 14V64Q432 74 422 74H28Q18 74 18 64V40Q18 30 28 30Z" fill="none" stroke="#fff" stroke-opacity=".17"/></svg>
+              <span class="inf-btn__t">Become a partner</span>
+              <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 4.5V13H5M9 9l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
           <ul class="inf-hero__ticks">
             <li>No market experience needed</li>
             <li>Dedicated partner support</li>
@@ -1792,6 +1930,12 @@ footer { border-top-color: transparent !important; }
               </div>
             </div>
           </div>
+          <div class="inf-btn-wrap"><a class="inf-btn inf-btn--ruby" href="../#signup" data-page-link>
+            <svg class="inf-btn__art" viewBox="0 0 460 72" aria-hidden="true"><g stroke="#ffb3be" stroke-opacity=".38" stroke-width=".6" stroke-linejoin="round"><path d="M32 1H428L448 9L458 28V44L448 63L428 71H32L12 63L2 44V28L12 9Z" fill="#8d0a1c"/><path d="M52 13H408L430 24V48L408 59H52L30 48V24Z" fill="url(#ibRubyTable)"/><path d="M52 13H408L430 24V48L408 59H52L30 48V24Z" fill="url(#ibRubyGlow)" stroke="none"/><path d="M32 1H428L408 13H52Z" fill="url(#ibRubyTopB)"/><path d="M52 59H408L428 71H32Z" fill="url(#ibRubyBotB)"/><path d="M12 9L32 1L52 13L30 24Z" fill="#f0475e"/><path d="M2 28L12 9L30 24Z" fill="#ff93a2"/><path d="M2 28L30 24V48L2 44Z" fill="#b3112a"/><path d="M2 44L30 48L12 63Z" fill="#6c0514"/><path d="M12 63L30 48L52 59L32 71Z" fill="#d8284a"/><path d="M448 9L428 1L408 13L430 24Z" fill="#c41930"/><path d="M458 28L448 9L430 24Z" fill="#7a0817"/><path d="M458 28L430 24V48L458 44Z" fill="#e8364f"/><path d="M458 44L430 48L448 63Z" fill="#ff7d8e"/><path d="M448 63L430 48L408 59L428 71Z" fill="#9a0b21"/><path d="M120 1L148 13M246 1L226 13M338 1L312 13M136 71L164 59M300 71L276 59" fill="none" stroke="#fff" stroke-opacity=".28"/></g><path d="M32 1H428L448 9L458 28V44L448 63L428 71H32L12 63L2 44V28L12 9Z" fill="none" stroke="#fff" stroke-opacity=".5"/><ellipse cx="128" cy="3.6" rx="64" ry="1.5" fill="#fff" opacity=".9" filter="url(#ibBlur1)"/><ellipse cx="344" cy="3.2" rx="42" ry="1.2" fill="#fff" opacity=".7" filter="url(#ibBlur1)"/><ellipse cx="236" cy="68.4" rx="96" ry="1.6" fill="#ffd6dd" opacity=".7" filter="url(#ibBlur1)"/><circle cx="10" cy="21" r="1.8" fill="#fff" opacity=".9" filter="url(#ibBlur1)"/><circle cx="452" cy="47" r="1.5" fill="#fff" opacity=".8" filter="url(#ibBlur1)"/></svg>
+            <span class="inf-btn__shine" aria-hidden="true"></span>
+            <span class="inf-btn__t">Join the partner program</span>
+            <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></div>
         </div>
       </div>
     </section>
@@ -1827,6 +1971,11 @@ footer { border-top-color: transparent !important; }
             </div>
           </div>
         </div>
+        <div class="inf-btn-wrap"><a class="inf-btn inf-btn--plate" href="../#signup" data-page-link>
+            <svg class="inf-btn__art" viewBox="0 0 380 56" aria-hidden="true"><ellipse cx="190" cy="54" rx="180" ry="4" fill="#000" opacity=".22" filter="url(#ibBlur2)"/><g stroke="#767980" stroke-width=".8"><rect x="1" y="7" width="32" height="42" rx="5" fill="url(#ibMetal)"/><rect x="347" y="7" width="32" height="42" rx="5" fill="url(#ibMetal)"/><circle cx="13" cy="28" r="6.4" fill="url(#ibScrew)"/><circle cx="367" cy="28" r="6.4" fill="url(#ibScrew)"/></g><path d="M9.6 24.6l6.8 6.8M16.4 24.6l-6.8 6.8M363.6 24.6l6.8 6.8M370.4 24.6l-6.8 6.8" stroke="#4a4d53" stroke-width="1.2" stroke-linecap="round"/><rect x="20" y=".5" width="340" height="55" rx="11" fill="url(#ibGlassRim)" stroke="#8f949c" stroke-width=".8"/><rect x="25.5" y="5.5" width="329" height="45" rx="7.5" fill="none" stroke="#a3a8b0"/><rect class="inf-btn__face" x="26" y="6" width="328" height="44" rx="7" fill="url(#ibGlassFace)" stroke="#fff" stroke-width="1.2"/><path d="M32 1.8H348" stroke="#fff" stroke-width="1.4"/><path d="M32 54.2H348" stroke="#eefcff" stroke-width="1.1"/><path d="M302 16V40" stroke="#80838b"/><ellipse class="inf-btn__glow" cx="342" cy="2.4" rx="10" ry="5" fill="url(#ibKeyRed)"/><ellipse cx="342" cy="2.4" rx="3.4" ry="1.3" fill="#ff6b6b"/><ellipse cx="342" cy="2.2" rx="1.4" ry=".6" fill="#fff" opacity=".9"/></svg>
+            <span class="inf-btn__t">Become a partner</span>
+            <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></div>
       </div>
     </section>
 
@@ -1861,6 +2010,11 @@ footer { border-top-color: transparent !important; }
             </div>
           </div>
         </div>
+        <div class="inf-btn-wrap"><a class="inf-btn inf-btn--plate" href="../#signup" data-page-link>
+            <svg class="inf-btn__art" viewBox="0 0 380 56" aria-hidden="true"><ellipse cx="190" cy="54" rx="180" ry="4" fill="#000" opacity=".22" filter="url(#ibBlur2)"/><g stroke="#767980" stroke-width=".8"><rect x="1" y="7" width="32" height="42" rx="5" fill="url(#ibMetal)"/><rect x="347" y="7" width="32" height="42" rx="5" fill="url(#ibMetal)"/><circle cx="13" cy="28" r="6.4" fill="url(#ibScrew)"/><circle cx="367" cy="28" r="6.4" fill="url(#ibScrew)"/></g><path d="M9.6 24.6l6.8 6.8M16.4 24.6l-6.8 6.8M363.6 24.6l6.8 6.8M370.4 24.6l-6.8 6.8" stroke="#4a4d53" stroke-width="1.2" stroke-linecap="round"/><rect x="20" y=".5" width="340" height="55" rx="11" fill="url(#ibGlassRim)" stroke="#8f949c" stroke-width=".8"/><rect x="25.5" y="5.5" width="329" height="45" rx="7.5" fill="none" stroke="#a3a8b0"/><rect class="inf-btn__face" x="26" y="6" width="328" height="44" rx="7" fill="url(#ibGlassFace)" stroke="#fff" stroke-width="1.2"/><path d="M32 1.8H348" stroke="#fff" stroke-width="1.4"/><path d="M32 54.2H348" stroke="#eefcff" stroke-width="1.1"/><path d="M302 16V40" stroke="#80838b"/><ellipse class="inf-btn__glow" cx="342" cy="2.4" rx="10" ry="5" fill="url(#ibKeyRed)"/><ellipse cx="342" cy="2.4" rx="3.4" ry="1.3" fill="#ff6b6b"/><ellipse cx="342" cy="2.2" rx="1.4" ry=".6" fill="#fff" opacity=".9"/></svg>
+            <span class="inf-btn__t">Become a partner</span>
+            <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></div>
       </div>
     </section>
 
@@ -1956,6 +2110,14 @@ footer { border-top-color: transparent !important; }
           </div>
           <svg class="dm__line" data-dm-svg aria-hidden="true"><defs><linearGradient id="dmLine" data-dm-grad gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0E0E10" stop-opacity=".25"/><stop offset="1" stop-color="#0E0E10" stop-opacity="1"/></linearGradient></defs><path data-dm-path pathLength="1" fill="none" stroke="url(#dmLine)" stroke-width="1.1" stroke-linecap="round"/><circle data-dm-a r="2.6" fill="#FFFFFF" stroke="#0E0E10" stroke-opacity=".45" stroke-width="1.2"/><circle data-dm-pulse r="2.2" fill="#0E0E10"/><circle data-dm-b r="3" fill="#0E0E10"/></svg>
         </div>
+        <div class="inf-btn-wrap"><a class="inf-btn inf-btn--spring" href="../#signup" data-page-link>
+            <svg class="inf-btn__art" viewBox="0 0 446 74" aria-hidden="true"><ellipse cx="223" cy="72" rx="218" ry="3.5" fill="#000" opacity=".3" filter="url(#ibBlur2)"/><rect x="3" y="55" width="440" height="17" rx="5" fill="url(#ibSteelBase)"/><path d="M9 55.7H437" stroke="#e2e4e8" stroke-width=".9"/><rect x="8" y="38" width="430" height="19" rx="3" fill="#3a3b3f"/><rect x="8" y="38" width="430" height="8" fill="#0c0c0e" opacity=".7" filter="url(#ibBlur2)"/><g class="inf-btn__spr"><rect x="35" y="43" width="14" height="13" fill="#232427"/><g fill="none" stroke="url(#ibCoil)" stroke-width="1.5"><ellipse cx="42" cy="44.6" rx="19" ry="2.6"/><ellipse cx="42" cy="47.8" rx="19" ry="2.6"/><ellipse cx="42" cy="51" rx="19" ry="2.6"/><ellipse cx="42" cy="54.2" rx="19" ry="2.6"/></g></g><g class="inf-btn__spr"><rect x="397" y="43" width="14" height="13" fill="#232427"/><g fill="none" stroke="url(#ibCoil)" stroke-width="2.2"><ellipse cx="404" cy="44.6" rx="19" ry="2.6"/><ellipse cx="404" cy="47.8" rx="19" ry="2.6"/><ellipse cx="404" cy="51" rx="19" ry="2.6"/><ellipse cx="404" cy="54.2" rx="19" ry="2.6"/></g></g></svg>
+            <span class="inf-btn__cap">
+              <svg class="inf-btn__art" viewBox="0 0 446 74" aria-hidden="true"><rect x="0" y="4" width="446" height="41" rx="9" fill="url(#ibSteelEdge)"/><path d="M6 44.4H440" stroke="#fff" stroke-opacity=".3"/><rect x="0" y="0" width="446" height="37" rx="9" fill="url(#ibSteelTop)" filter="url(#ibBrush)"/><rect x=".5" y=".5" width="445" height="36" rx="8.5" fill="none" stroke="#fff" stroke-opacity=".8"/><path d="M375 9V29" stroke="#8e9096"/></svg>
+              <span class="inf-btn__t">Take the first step</span>
+              <svg class="inf-btn__ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15.5M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a></div>
       </div>
     </section>
 
@@ -1983,6 +2145,17 @@ footer { border-top-color: transparent !important; }
             <li><span>Yacht day and dinners</span><b>Covered</b></li>
             <li><span>How you qualify</span><b class="inf-trip__red">Results</b></li>
           </ul>
+          <a class="inf-belt" href="../#signup" data-page-link>
+            <span class="inf-belt__strap">
+              <span class="inf-belt__web">
+                <i class="inf-belt__st inf-belt__st--t"></i><i class="inf-belt__st inf-belt__st--b"></i><i class="inf-belt__st inf-belt__st--l"></i>
+                <i class="inf-belt__fold inf-belt__fold--1"></i><i class="inf-belt__fold inf-belt__fold--2"></i>
+                <span class="inf-belt__t">Explore incentive trips</span>
+              </span>
+              <span class="inf-belt__tongue"><i></i></span>
+            </span>
+            <span class="inf-belt__buckle"><span class="inf-belt__lid"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="#c8151d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+          </a>
         </div>
         <div class="inf-trip__vis">
           <img class="inf-trip__img" src="../assets/influencers/trips-1040.webp?v=948a1c1918"
@@ -2026,6 +2199,15 @@ footer { border-top-color: transparent !important; }
       <div class="inf-star__in">
         <div class="inf-star__win">
           <h2 class="inf-star__h2"><span class="inf-star__kick tq-h2">Want to be our next star?</span><span class="inf-star__big tq-h2">Invited.</span><span class="inf-star__big inf-star__big--2 tq-h2">See you soon.</span></h2>
+          <div class="inf-star__cta"><a class="inf-btn inf-btn--launch" href="../#signup" data-page-link>
+            <svg class="inf-btn__art" viewBox="0 0 600 282" aria-hidden="true"><ellipse cx="300" cy="118" rx="310" ry="62" fill="url(#ibLGlow)"/><path d="M-20 117H620" stroke="#6aa8ff" stroke-width="1.4" opacity=".55" filter="url(#ibBlur2)"/><path d="M30 50L52 12H548L570 50L562 112H38Z" fill="url(#ibLidFill)" stroke="#e2f0ff" stroke-opacity=".95" stroke-width="2.4" stroke-linejoin="round"/><path d="M30 50L52 12H548L570 50L562 112H38ZM46 54L62 26H538L554 54L548 104H52Z" fill="#cfe4ff" fill-opacity=".16" fill-rule="evenodd"/><path d="M46 54L62 26H538L554 54L548 104H52Z" fill="#0a1a3c" fill-opacity=".28" stroke="#fff" stroke-opacity=".55" stroke-width="1" stroke-linejoin="round"/><path d="M56 13.4H544" stroke="#fff" stroke-width="1.5" opacity=".9"/><path d="M33 49L53 14M567 49L547 14M31 52L39 110M569 52L561 110" stroke="#fff" stroke-width=".9" opacity=".7"/><path d="M62 26H538" stroke="#a8d0ff" stroke-opacity=".5"/><g><rect x="80" y="88" width="30" height="14" rx="2" fill="#3d4046"/><rect x="490" y="88" width="30" height="14" rx="2" fill="#3d4046"/><rect x="72" y="99" width="46" height="22" rx="5" fill="url(#ibHinge)"/><rect x="482" y="99" width="46" height="22" rx="5" fill="url(#ibHinge)"/><path d="M87 99V121M103 99V121M497 99V121M513 99V121" stroke="#1e2024" stroke-width="1.2"/></g><path d="M42 120H558L590 152V226H10V152Z" fill="url(#ibLBTop)" filter="url(#ibBrush)"/><path d="M42 120H558L590 152V226H10V152Z" fill="url(#ibLBTopV)"/><path d="M42 120.6H558M10 152L42 120.6M590 152L558 120.6" stroke="#fff" stroke-opacity=".75" fill="none"/><path d="M10 226H590L585 261Q584 268 577 268H23Q16 268 15 261Z" fill="url(#ibLBFront)"/><path d="M11 226.6H589" stroke="#f4f5f7" stroke-opacity=".8"/><circle cx="50" cy="252" r="5" fill="url(#ibScrew)" stroke="#2a2c30" stroke-width=".8"/><circle cx="550" cy="252" r="5" fill="url(#ibScrew)" stroke="#2a2c30" stroke-width=".8"/><text x="300" y="134.2" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.6" font-weight="600" letter-spacing="3.6" fill="#fff" fill-opacity=".7">Ready for launch</text><text x="300" y="133.4" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.6" font-weight="600" letter-spacing="3.6" fill="#2a2c31">Ready for launch</text><rect class="inf-btn__glow" x="54" y="142" width="492" height="76" rx="20" fill="#ff1c1c" opacity=".7" filter="url(#ibBlur6)"/><rect x="52" y="140" width="496" height="80" rx="20" fill="#260204" stroke="#7d8188"/><rect x="53.5" y="141.5" width="493" height="77" rx="18.5" fill="none" stroke="#000" stroke-opacity=".6" stroke-width="2"/></svg>
+            <span class="inf-btn__cap">
+              <svg class="inf-btn__art" viewBox="0 0 600 282" aria-hidden="true"><rect x="58" y="145" width="484" height="70" rx="16" fill="url(#ibLRed)"/><rect x="58" y="145" width="484" height="70" rx="16" fill="url(#ibLRedIn)"/><rect x="58.6" y="145.6" width="482.8" height="68.8" rx="15.4" fill="none" stroke="#ff9a90" stroke-opacity=".7" stroke-width="1.2"/><rect x="72" y="148" width="456" height="15" rx="7.5" fill="#fff" opacity=".2"/><path d="M90 147.4H510" stroke="#fff" stroke-opacity=".75" stroke-width="1.1"/><path class="inf-btn__glow" d="M96 212.6H504" stroke="#ffb0a6" stroke-width="1.6" filter="url(#ibBlur1)"/></svg>
+              <svg class="inf-btn__rocket" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c3.1 2.6 4.6 6.2 4.6 10.3l2.6 3.3v3.4l-4.3-1.7H9.1l-4.3 1.7v-3.4l2.6-3.3C7.4 7.7 8.9 4.1 12 1.5z" fill="currentColor"/><circle cx="12" cy="9.2" r="1.7" fill="#c8121a"/><path d="M10.4 18.6h3.2L12 22.6z" fill="currentColor" opacity=".85"/></svg>
+              <span class="inf-btn__t">Launch With Us</span>
+              <span class="inf-btn__logo" aria-hidden="true"></span>
+            </span>
+          </a></div>
           <img class="inf-star__img" src="../assets/influencers/star-planet-1600.webp?v=01df0e28c3" srcset="../assets/influencers/star-planet-1000.webp?v=7316d29775 1000w, ../assets/influencers/star-planet-1600.webp?v=01df0e28c3 1600w, ../assets/influencers/star-planet-2400.webp?v=6ca4402485 2400w" sizes="(max-width: 1400px) 100vw, 1360px" width="2400" height="1320" alt="" loading="lazy" decoding="async">
         </div>
       </div>
