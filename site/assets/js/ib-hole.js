@@ -129,8 +129,9 @@
       const sh = hb - 16;
       cx = W / 2;
       const tall = W < hb + 44 + half;   /* phones, portrait tablets: a bigger hole, wider bars and tree than the landscape design */
-      RX = Math.min(W * 0.47, 760); R = Math.min(RX * (tall ? 0.28 : 0.2), sh * 0.17);
-      gw = Math.min(W < 700 ? W - 48 : tall ? W * 0.72 : RX * 1.1, W - 48); gh = Math.min(sh * 0.6, gw * 0.66);
+      const k = tall || W < 700 ? 1 : 0.75;   /* wider screens: the whole scene 25% smaller (owner's wish, November 2026: the block fits one screen) */
+      RX = Math.min(W * 0.47, 760) * k; R = Math.min(RX * (tall ? 0.28 : 0.2), sh * 0.17 * k);
+      gw = Math.min(W < 700 ? W - 48 : tall ? W * 0.72 : RX * 1.1, W - 48); gh = Math.min(sh * 0.6 * k, gw * 0.66);
       const hole = (W < 700 ? 2.8 : 2.12) * R;   /* the halo's outer rings as it swells (relatively larger on phones) */
       const ks = gh / 11.6 * 0.46 * 0.8, kdd = ks * 1.7320508 + Math.max(1.5, ks * 0.16);   /* the client groups' crystal and spacing (cs, kd()) */
       const groups = -0.02 * gh - Math.min(...cslots.map((c) => c.ky)) * kdd + ks * 2 + (W < 700 ? 12 : 0);   /* their highest crystal (the inactive ones lie at random; on phones a little more as they come in) */

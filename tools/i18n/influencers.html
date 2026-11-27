@@ -303,42 +303,97 @@
       </div>
     </section>
 
-    <!-- How it works (owner's design, November 2026): "HOW IT WORKS / SO SIMPLE IT FITS IN A DM." On the left a phone with
-         a chat: the messages come in one by one (a typing dots bubble before each answer), and as each of the four
-         steps comes up in the chat its glass row on the right lights up (orbit.js; the rows are the "Three numbers"
-         glass, nums-row.webp). At the end a "commission paid" note pops up by the phone. Plays while on screen, again
-         after a pause. Reduced motion: the whole chat at once. Phones: the line, the phone, the rows. Some of the
-         design's lines were reworded to the site's own wording. -->
+    <!-- How it works (owner's design "How It Works · DM v2", November 2026; it replaced the first DM block): "HOW IT
+         WORKS / SO SIMPLE IT FITS IN A DM." A phone with a DM from TradeQuo Partners and four glass capsules. The chat
+         plays the steps one by one (orbit.js, a 3.6 s step): a typing bubble, then the step's card comes in, its chip
+         turns from "Creating…" to "✓ Account ready" and so on; at the same time its capsule lights (a red rim and glow,
+         a red fill running across it over the step, a tick at its end) and a thin line with a travelling dot joins the
+         card to its capsule; the story bar at the phone's top fills step by step. After the fourth a "+$128.40" note
+         drops in at the phone's top; then all starts over. A capsule clicked jumps to its step. Plays only while on
+         screen. The design's px are kept (the phone 360 wide, the capsules 92 high): the whole block is scaled to the
+         column and the screen (zoom, orbit.js). Reduced motion: the finished chat. Phones: the phone, then the capsules,
+         no line. The design's followers' pictures are cropped to their faces (one carried a channel name). -->
     <section id="how" class="inf-how" data-how data-screen-label="How it works">
       <div class="inf-how__in">
         <p class="inf-how__kick tq-h2">{{inf.how.kick}}</p>
         <h2 class="inf-how__h2 tq-h2" data-fitw>{{inf.how.h2}}</h2>
-        <div class="inf-how__grid">
-          <div class="inf-how__phone-wrap">
-            <div class="inf-how__phone" aria-hidden="true">
-              <div class="inf-how__bar"><span class="inf-how__back">‹</span><span class="inf-how__ava"><i></i></span><span class="inf-how__who"><b>{{inf.how.name}}</b><i>{{inf.how.active}}</i></span></div>
-              <div class="inf-how__chat">
-                <div class="inf-how__msg inf-how__msg--me" data-how-msg>{{inf.how.q1}}</div>
-                <div class="inf-how__msg" data-how-msg>{{inf.how.a1}}</div>
-                <div class="inf-how__msg" data-how-msg data-step="1"><span class="inf-how__num">1</span><span>{{inf.how.c1}}</span></div>
-                <div class="inf-how__msg inf-how__msg--card" data-how-msg data-step="2"><span class="inf-how__row"><span class="inf-how__num">2</span><span>{{inf.how.c2}}</span></span><span class="inf-how__thumb"><span>TradeQuo</span></span><span class="inf-how__url">{{inf.how.link}}</span></div>
-                <div class="inf-how__msg" data-how-msg data-step="3"><span class="inf-how__num">3</span><span>{{inf.how.c3}}</span></div>
-                <div class="inf-how__msg inf-how__msg--me" data-how-msg>{{inf.how.q2}}</div>
-                <div class="inf-how__msg" data-how-msg data-step="4"><span class="inf-how__num inf-how__num--red">4</span><span>{{inf.how.c4}}</span></div>
-                <div class="inf-how__typing" data-how-typing><i></i><i></i><i></i></div>
+        <div class="dm" data-dm>
+          <div class="dm__ph-wrap">
+            <span class="dm__ph-glow" aria-hidden="true"></span>
+            <div class="dm__ph" aria-hidden="true">
+              <div class="dm__screen">
+                <div class="dm__bars"><span class="dm-bar"><i data-dm-bar></i></span><span class="dm-bar"><i data-dm-bar></i></span><span class="dm-bar"><i data-dm-bar></i></span><span class="dm-bar"><i data-dm-bar></i></span></div>
+                <div class="dm__head">
+                  <span class="dm__back">‹</span>
+                  <span class="dm__ava"><img src="{{root}}assets/influencers/dm-ava.webp" width="96" height="96" alt="" loading="lazy" decoding="async"></span>
+                  <span class="dm__who"><b>{{inf.how.name}}</b><i data-dm-status data-a="{{@inf.how.active}}" data-b="{{@inf.how.typing}}">{{inf.how.active}}</i></span>
+                  <span class="dm__step" data-dm-step data-step="{{@inf.how.step}}" data-done="{{@inf.how.done}}"></span>
+                </div>
+                <div class="dm__chat">
+                  <span class="dm-me" data-dm-intro hidden>{{inf.how.q1}}</span>
+                  <span class="dm-them dm-them--late" data-dm-intro hidden>{{inf.how.a1}}</span>
+                  <div class="dm-card" data-dm-card hidden>
+                    <span class="dm-card__h"><b class="dm-card__dot" data-dm-mark>1</b>{{inf.how.c1}}</span>
+                    <span class="dm-card__box"><span class="dm-mail">{{inf.how.mail}}</span><span class="dm-chip" data-dm-chip data-a="{{@inf.how.k1a}}" data-b="{{@inf.how.k1b}}">{{inf.how.k1a}}</span></span>
+                  </div>
+                  <div class="dm-card" data-dm-card hidden>
+                    <span class="dm-card__h"><b class="dm-card__dot" data-dm-mark>2</b>{{inf.how.c2}}</span>
+                    <span class="dm-card__box"><span class="dm-link">{{inf.how.link}}</span><span class="dm-chip" data-dm-chip data-a="{{@inf.how.k2a}}" data-b="{{@inf.how.k2b}}">{{inf.how.k2a}}</span></span>
+                  </div>
+                  <div class="dm-card" data-dm-card hidden>
+                    <span class="dm-card__h"><b class="dm-card__dot" data-dm-mark>3</b>{{inf.how.c3}}</span>
+                    <span class="dm-card__box"><img src="{{root}}assets/influencers/dm-plat1.webp" width="64" height="64" alt="" loading="lazy" decoding="async"><img src="{{root}}assets/influencers/dm-plat2.webp" width="64" height="64" alt="" loading="lazy" decoding="async"><img src="{{root}}assets/influencers/dm-plat3.webp" width="64" height="64" alt="" loading="lazy" decoding="async"><span class="dm-where">{{inf.how.where}}</span><span class="dm-chip" data-dm-chip data-a="{{@inf.how.k3a}}" data-b="{{@inf.how.k3b}}">{{inf.how.k3a}}</span></span>
+                  </div>
+                  <div class="dm-card dm-card--last" data-dm-card hidden>
+                    <span class="dm-card__h"><b class="dm-card__dot" data-dm-mark>4</b>{{inf.how.c4}}</span>
+                    <span class="dm-card__box"><span class="dm-fans"><img src="{{root}}assets/influencers/dm-fan1.webp" width="64" height="64" alt="" loading="lazy" decoding="async"><img src="{{root}}assets/influencers/dm-fan2.webp" width="64" height="64" alt="" loading="lazy" decoding="async"><img src="{{root}}assets/influencers/dm-fan3.webp" width="64" height="64" alt="" loading="lazy" decoding="async"></span><span class="dm-join" data-dm-join data-a="{{@inf.how.j4a}}" data-b="{{@inf.how.j4b}}">{{inf.how.j4a}}</span><span class="dm-pct tq-h2" data-dm-pct>87%</span></span>
+                  </div>
+                  <span class="dm-typing" data-dm-typing hidden><i></i><i></i><i></i></span>
+                </div>
+                <div class="dm__compose">{{inf.how.msg}}</div>
+                <div class="dm-push" data-dm-push hidden>
+                  <span class="dm-push__ico">$</span>
+                  <span class="dm-push__t"><small class="tq-h2">{{inf.how.pushK}}</small><b class="tq-h2">{{inf.how.pushV}}</b><em>{{inf.how.pushL}}</em></span>
+                </div>
               </div>
-              <div class="inf-how__input"></div>
             </div>
-            <div class="inf-how__toast" data-how-toast aria-hidden="true"><span class="inf-how__coin">$</span><span class="inf-how__tt"><small>{{inf.how.toastK}}</small><b>{{inf.how.toastV}}</b><em>{{inf.how.toastL}}</em></span></div>
           </div>
-          <p class="inf-how__sub">{{inf.how.sub}}</p>
-          <ol class="inf-how__steps">
-              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">01</span><span class="inf-how__t">{{inf.how.s1}}</span><span class="inf-how__v tq-h2">{{inf.how.v1}}</span></li>
-              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">02</span><span class="inf-how__t">{{inf.how.s2}}</span><span class="inf-how__v tq-h2">{{inf.how.v2}}</span></li>
-              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">03</span><span class="inf-how__t">{{inf.how.s3}}</span><span class="inf-how__v tq-h2">{{inf.how.v3}}</span></li>
-              <li class="inf-how__step inf-how__step--red" data-how-step><span class="inf-how__n tq-h2">04</span><span class="inf-how__t">{{inf.how.s4}}</span><span class="inf-how__v tq-h2">{{inf.how.v4}}</span></li>
-          </ol>
-          <p class="inf-how__note"><b>{{inf.how.noteB}}</b> {{inf.how.note}}</p>
+          <div class="dm__right">
+            <p class="dm__sub">{{inf.how.sub}}</p>
+            <button type="button" class="dm-row" data-dm-row>
+              <span class="dm-row__in">
+                <span class="dm-row__fill" data-dm-fill></span><span class="dm-row__cap dm-row__cap--l"></span><span class="dm-row__cap dm-row__cap--r"></span><span class="dm-row__gloss"></span>
+                <span class="dm-row__n tq-h2">01</span>
+                <span class="dm-row__t">{{inf.how.s1}}</span>
+                <span class="dm-row__v"><span class="tq-h2">{{inf.how.v1}}</span><span class="dm-row__ck">✓</span></span>
+              </span>
+            </button>
+            <button type="button" class="dm-row" data-dm-row>
+              <span class="dm-row__in">
+                <span class="dm-row__fill" data-dm-fill></span><span class="dm-row__cap dm-row__cap--l"></span><span class="dm-row__cap dm-row__cap--r"></span><span class="dm-row__gloss"></span>
+                <span class="dm-row__n tq-h2">02</span>
+                <span class="dm-row__t">{{inf.how.s2}}</span>
+                <span class="dm-row__v"><span class="tq-h2">{{inf.how.v2}}</span><span class="dm-row__ck">✓</span></span>
+              </span>
+            </button>
+            <button type="button" class="dm-row" data-dm-row>
+              <span class="dm-row__in">
+                <span class="dm-row__fill" data-dm-fill></span><span class="dm-row__cap dm-row__cap--l"></span><span class="dm-row__cap dm-row__cap--r"></span><span class="dm-row__gloss"></span>
+                <span class="dm-row__n tq-h2">03</span>
+                <span class="dm-row__t">{{inf.how.s3}}</span>
+                <span class="dm-row__v"><span class="tq-h2">{{inf.how.v3}}</span><span class="dm-row__ck">✓</span></span>
+              </span>
+            </button>
+            <button type="button" class="dm-row" data-dm-row>
+              <span class="dm-row__in">
+                <span class="dm-row__fill" data-dm-fill></span><span class="dm-row__cap dm-row__cap--l"></span><span class="dm-row__cap dm-row__cap--r"></span><span class="dm-row__gloss"></span>
+                <span class="dm-row__n tq-h2">04</span>
+                <span class="dm-row__t">{{inf.how.s4}}</span>
+                <span class="dm-row__v"><span class="tq-h2 dm-row__red">{{inf.how.v4}}</span><span class="dm-row__ck">✓</span></span>
+              </span>
+            </button>
+          </div>
+          <svg class="dm__line" data-dm-svg aria-hidden="true"><defs><linearGradient id="dmLine" data-dm-grad gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0E0E10" stop-opacity=".25"/><stop offset="1" stop-color="#0E0E10" stop-opacity="1"/></linearGradient></defs><path data-dm-path pathLength="1" fill="none" stroke="url(#dmLine)" stroke-width="1.1" stroke-linecap="round"/><circle data-dm-a r="2.6" fill="#FFFFFF" stroke="#0E0E10" stroke-opacity=".45" stroke-width="1.2"/><circle data-dm-pulse r="2.2" fill="#0E0E10"/><circle data-dm-b r="3" fill="#0E0E10"/></svg>
         </div>
       </div>
     </section>
