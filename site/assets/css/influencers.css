@@ -152,6 +152,8 @@ footer { border-top-color: transparent !important; }
 .inf-nums__row.is-open .inf-nums__d, .inf-nums__row:focus-visible .inf-nums__d { grid-template-rows: 1fr; opacity: 1; transform: none; transition-delay: .08s; }
 @media (hover: hover) and (pointer: fine) { .inf-nums__row:hover .inf-nums__d { grid-template-rows: 1fr; opacity: 1; transform: none; transition-delay: .08s; } }
 @media (prefers-reduced-motion: reduce) { .inf-nums__row, .inf-nums__d { transition: none; } }
+/* narrower tablets: the caption's hand break would leave a word alone on a line; it balances itself instead */
+@media (max-width: 900px) { .inf-nums__d .br-desk { display: none; } .inf-nums__d > span { text-wrap: balance; } }
 @media (max-width: 640px) {
   .inf-nums { padding-bottom: var(--tq-gap); }
   .inf-nums__row { --rh: 86px; grid-template-columns: minmax(0, 45%) minmax(0, 1fr); column-gap: 8px; padding: 0 calc(var(--rh) * .3); }
@@ -161,6 +163,16 @@ footer { border-top-color: transparent !important; }
   /* phones: the figure keeps its size (its column is narrow); the row grows for the line alone */
   .inf-nums__fig { font-size: clamp(34px, 10.6vw, 44px); }
   .inf-nums__loop { height: clamp(36px, 11vw, 46px); }
+  /* phones: the caption (owner's, two sentences) runs under the figure and the name across the whole row, so it keeps
+     to two or three lines (the name's column alone would make it four or five) */
+  .inf-nums__row { grid-template-columns: minmax(0, 44%) minmax(0, 1fr); grid-template-rows: auto auto auto; align-content: center; row-gap: 0; }
+  .inf-nums__txt { display: contents; }
+  .inf-nums__fig, .inf-nums__loop { grid-column: 1; grid-row: 1 / 3; }
+  .inf-nums__n { grid-column: 2; grid-row: 1; align-self: end; }
+  .inf-nums__txt .inf-nums__l { grid-column: 2; grid-row: 2; align-self: start; }
+  .inf-nums__d { grid-column: 1 / -1; grid-row: 3; text-align: center; }
+  .inf-nums__d > span { padding-top: 8px; font-size: 12.5px; line-height: 1.38; text-wrap: balance; }
+  .inf-nums__row.is-open, .inf-nums__row:focus-visible { --rh: clamp(136px, 30vw + 30px, 156px); }
 }
 
 /* ---- Earnings calculator for phones (owner's design "How much could you earn?", November 2026): a glass briefcase, live controls

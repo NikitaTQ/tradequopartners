@@ -397,6 +397,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid #e7131b; outline-offs
 [data-page-bar] nav::-webkit-scrollbar { display: none; }
 }
 [data-offscreen], [data-offscreen] *, [data-offscreen] *::before, [data-offscreen] *::after { animation-play-state: paused !important; }
+@media (max-width: 640px) {
+.br-desk { display: none; }
+}
 .tq-lang { position: relative; flex-shrink: 0; }
 .tq-lang__btn {
   display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 14px;
@@ -477,6 +480,7 @@ header nav { gap: 6px !important; }
 [data-faq-side] { position: static !important; }
 [data-fan-head] { grid-template-columns: minmax(0, 1fr) !important; }
 [data-fan-head] > p { grid-column: 1 !important; grid-row: 3 !important; justify-self: start !important; }
+[data-sub2] .br-desk { display: none; }
 }
 @property --tqgx { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
 @property --tqgy { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
@@ -983,6 +987,10 @@ footer { border-top-color: transparent !important; }
 @media (prefers-reduced-motion: reduce) {
 .inf-nums__row, .inf-nums__d { transition: none; }
 }
+@media (max-width: 900px) {
+.inf-nums__d .br-desk { display: none; }
+.inf-nums__d > span { text-wrap: balance; }
+}
 @media (max-width: 640px) {
 .inf-nums { padding-bottom: var(--tq-gap); }
 .inf-nums__row { --rh: 86px; grid-template-columns: minmax(0, 45%) minmax(0, 1fr); column-gap: 8px; padding: 0 calc(var(--rh) * .3); }
@@ -991,6 +999,14 @@ footer { border-top-color: transparent !important; }
 .inf-nums__d > span { font-size: 13px; }
 .inf-nums__fig { font-size: clamp(34px, 10.6vw, 44px); }
 .inf-nums__loop { height: clamp(36px, 11vw, 46px); }
+.inf-nums__row { grid-template-columns: minmax(0, 44%) minmax(0, 1fr); grid-template-rows: auto auto auto; align-content: center; row-gap: 0; }
+.inf-nums__txt { display: contents; }
+.inf-nums__fig, .inf-nums__loop { grid-column: 1; grid-row: 1 / 3; }
+.inf-nums__n { grid-column: 2; grid-row: 1; align-self: end; }
+.inf-nums__txt .inf-nums__l { grid-column: 2; grid-row: 2; align-self: start; }
+.inf-nums__d { grid-column: 1 / -1; grid-row: 3; text-align: center; }
+.inf-nums__d > span { padding-top: 8px; font-size: 12.5px; line-height: 1.38; text-wrap: balance; }
+.inf-nums__row.is-open, .inf-nums__row:focus-visible { --rh: clamp(136px, 30vw + 30px, 156px); }
 }
 .inf-gcalc { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0b0b0d; }
 .inf-gcalc__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
@@ -1725,7 +1741,7 @@ footer { border-top-color: transparent !important; }
               <div class="inf-nums__txt">
                 <span class="inf-nums__n">01</span>
                 <span class="inf-nums__l tq-h2">Revenue share</span>
-                <span class="inf-nums__d"><span>of everything your audience brings in</span></span>
+                <span class="inf-nums__d"><span>Earn up to 87% of TradeQuo’s revenue<br class="br-desk"> from the activity of clients you refer.</span></span>
               </div>
             </div>
             <div class="inf-nums__row" data-nums-row tabindex="0" role="button" aria-expanded="false">
@@ -1737,7 +1753,7 @@ footer { border-top-color: transparent !important; }
               <div class="inf-nums__txt">
                 <span class="inf-nums__n">02</span>
                 <span class="inf-nums__l tq-h2">Sub-partners</span>
-                <span class="inf-nums__d"><span>build a team with no ceiling</span></span>
+                <span class="inf-nums__d"><span>Invite other partners to your team.<br class="br-desk"> Earn from their clients at every level.</span></span>
               </div>
             </div>
             <div class="inf-nums__row" data-nums-row tabindex="0" role="button" aria-expanded="false">
@@ -1749,7 +1765,7 @@ footer { border-top-color: transparent !important; }
               <div class="inf-nums__txt">
                 <span class="inf-nums__n">03</span>
                 <span class="inf-nums__l tq-h2">Paydays a year</span>
-                <span class="inf-nums__d"><span>paid out every single day</span></span>
+                <span class="inf-nums__d"><span>Receive your commissions every day,<br class="br-desk"> including weekends, all year round.</span></span>
               </div>
             </div>
           </div>
@@ -1932,7 +1948,7 @@ footer { border-top-color: transparent !important; }
       <div class="inf-star__in">
         <div class="inf-star__win">
           <h2 class="inf-star__h2"><span class="inf-star__kick tq-h2">Want to be our next star?</span><span class="inf-star__big tq-h2">Invited.</span><span class="inf-star__big inf-star__big--2 tq-h2">See you soon.</span></h2>
-          <img class="inf-star__img" src="../assets/influencers/star-planet-1600.webp?v=38099ec766" srcset="../assets/influencers/star-planet-1000.webp?v=3e82fa10d8 1000w, ../assets/influencers/star-planet-1600.webp?v=38099ec766 1600w, ../assets/influencers/star-planet-2400.webp?v=cd4d89661c 2400w" sizes="(max-width: 1400px) 100vw, 1360px" width="2400" height="1320" alt="" loading="lazy" decoding="async">
+          <img class="inf-star__img" src="../assets/influencers/star-planet-1600.webp?v=924ec1ea03" srcset="../assets/influencers/star-planet-1000.webp?v=26180ac6a5 1000w, ../assets/influencers/star-planet-1600.webp?v=924ec1ea03 1600w, ../assets/influencers/star-planet-2400.webp?v=e6e0feb922 2400w" sizes="(max-width: 1400px) 100vw, 1360px" width="2400" height="1320" alt="" loading="lazy" decoding="async">
         </div>
       </div>
     </section>

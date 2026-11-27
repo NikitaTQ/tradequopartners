@@ -10,7 +10,7 @@ The logo on the planet is redrawn from the real mark (star-src/logo-mark.png) in
 Run:  python3 tools/influencers/star_planet.py   ->  site/assets/influencers/star-planet-{2400,1600,1000}.webp"""
 import os
 import numpy as np
-from PIL import Image, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', '..', 'site', 'assets', 'influencers')
@@ -64,6 +64,19 @@ ratio = np.clip(1 + (sl - ll) / (ll + 18), .45, 2.4)
 win = win * ratio[..., None]
 a[P0:P1, Q0:Q1] = a[P0:P1, Q0:Q1] * (1 - lm[P0:P1, Q0:Q1]) + win * lm[P0:P1, Q0:Q1]
 
+# the ship, as drawn, kept aside: it flies in front of the planet, so after the planet is reshaped, lit and given its
+# atmosphere (below) the ship goes back on top of it untouched (owner's wish: the planet's edge never runs across it).
+# Its outline, traced by hand in the design's px:
+SHIP = [(453, 736.5), (490, 732.5), (545, 726), (595, 721), (655, 715), (700, 710), (717.5, 701), (740, 692.5), (765, 689),
+        (795, 691), (812.5, 697.5), (820, 703), (855, 696), (887.5, 690), (912.5, 688), (895, 695), (880, 700), (850, 717.5),
+        (825, 737.5), (807.5, 755), (802.5, 767.5), (811, 785), (815, 791.5), (800, 790), (780, 788), (750, 782), (710, 776),
+        (665, 773.5), (640, 780), (627.5, 786), (612.5, 788), (590, 784), (577.5, 776), (574, 765), (565, 756), (545, 749),
+        (510, 744), (475, 741.5), (455, 741)]
+ship_px = a.copy()
+shm = Image.new('L', (W, H), 0)
+ImageDraw.Draw(shm).polygon(SHIP, fill=255)
+ship_m = np.asarray(shm.filter(ImageFilter.GaussianBlur(.8))).astype(float)[..., None] / 255
+
 # the planet round (owner's wish: it read as an egg). Its lit limb, measured on the design along rays from (1200, 560)
 # where it is clear of the ring and the ship, is fitted with a circle: centre (1217, 541), radius 463. Where the limb
 # strays from it (by up to 15px) the planet is pulled to it radially (the measured points below, interpolated, eased to
@@ -104,6 +117,8 @@ a = a * (1 - disc[..., None]) + a * shade[..., None] * disc[..., None]
 litr = np.clip(.5 + .5 * (-(nxs * .74 + nys * .67) / np.maximum(np.hypot(nxs, nys), 1e-6)), 0, 1)
 rim = np.exp(-((rr - PR) / 9) ** 2) * (.18 + .82 * litr ** 1.6) + np.exp(-((rr - PR - 6) / 26) ** 2) * (.07 + .3 * litr ** 2)
 a = a + rim[..., None] * np.array([110., 175, 255]) * .9
+
+a = a * (1 - ship_m) + ship_px * ship_m                              # the ship back in front of the planet
 
 CY0, CY1 = 60, 932
 a = a[CY0:CY1]
