@@ -303,6 +303,46 @@
       </div>
     </section>
 
+    <!-- How it works (owner's design, November 2026): "HOW IT WORKS / SO SIMPLE IT FITS IN A DM." On the left a phone with
+         a chat: the messages come in one by one (a typing dots bubble before each answer), and as each of the four
+         steps comes up in the chat its glass row on the right lights up (orbit.js; the rows are the "Three numbers"
+         glass, nums-row.webp). At the end a "commission paid" note pops up by the phone. Plays while on screen, again
+         after a pause. Reduced motion: the whole chat at once. Phones: the line, the phone, the rows. The design's
+         "They trade" lines were reworded (the site never uses those words). -->
+    <section id="how" class="inf-how" data-how data-screen-label="How it works">
+      <div class="inf-how__in">
+        <p class="inf-how__kick tq-h2">{{inf.how.kick}}</p>
+        <h2 class="inf-how__h2 tq-h2" data-fitw>{{inf.how.h2}}</h2>
+        <div class="inf-how__grid">
+          <div class="inf-how__phone-wrap">
+            <div class="inf-how__phone" aria-hidden="true">
+              <div class="inf-how__bar"><span class="inf-how__back">‹</span><span class="inf-how__ava"><i></i></span><span class="inf-how__who"><b>{{inf.how.name}}</b><i>{{inf.how.active}}</i></span></div>
+              <div class="inf-how__chat">
+                <div class="inf-how__msg inf-how__msg--me" data-how-msg>{{inf.how.q1}}</div>
+                <div class="inf-how__msg" data-how-msg>{{inf.how.a1}}</div>
+                <div class="inf-how__msg" data-how-msg data-step="1"><span class="inf-how__num">1</span><span>{{inf.how.c1}}</span></div>
+                <div class="inf-how__msg inf-how__msg--card" data-how-msg data-step="2"><span class="inf-how__row"><span class="inf-how__num">2</span><span>{{inf.how.c2}}</span></span><span class="inf-how__thumb"><span>TradeQuo</span></span><span class="inf-how__url">{{inf.how.link}}</span></div>
+                <div class="inf-how__msg" data-how-msg data-step="3"><span class="inf-how__num">3</span><span>{{inf.how.c3}}</span></div>
+                <div class="inf-how__msg inf-how__msg--me" data-how-msg>{{inf.how.q2}}</div>
+                <div class="inf-how__msg" data-how-msg data-step="4"><span class="inf-how__num inf-how__num--red">4</span><span>{{inf.how.c4}}</span></div>
+                <div class="inf-how__typing" data-how-typing><i></i><i></i><i></i></div>
+              </div>
+              <div class="inf-how__input"></div>
+            </div>
+            <div class="inf-how__toast" data-how-toast aria-hidden="true"><span class="inf-how__coin">$</span><span class="inf-how__tt"><small>{{inf.how.toastK}}</small><b>{{inf.how.toastV}}</b><em>{{inf.how.toastL}}</em></span></div>
+          </div>
+          <p class="inf-how__sub">{{inf.how.sub}}</p>
+          <ol class="inf-how__steps">
+              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">01</span><span class="inf-how__t">{{inf.how.s1}}</span><span class="inf-how__v tq-h2">{{inf.how.v1}}</span></li>
+              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">02</span><span class="inf-how__t">{{inf.how.s2}}</span><span class="inf-how__v tq-h2">{{inf.how.v2}}</span></li>
+              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">03</span><span class="inf-how__t">{{inf.how.s3}}</span><span class="inf-how__v tq-h2">{{inf.how.v3}}</span></li>
+              <li class="inf-how__step inf-how__step--red" data-how-step><span class="inf-how__n tq-h2">04</span><span class="inf-how__t">{{inf.how.s4}}</span><span class="inf-how__v tq-h2">{{inf.how.v4}}</span></li>
+          </ol>
+          <p class="inf-how__note"><b>{{inf.how.noteB}}</b> {{inf.how.note}}</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Incentive trips (owner's second design, November 2026: tools/influencers/trips-design.webp): on the page's light
          background, the text on the left ("Incentive trips", "THE TRIP IS ON US.", a line, three rows: flights and stay,
          the yacht day and dinners covered, how you qualify: results), on the right three stories of a partner trip to
