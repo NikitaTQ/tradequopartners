@@ -928,8 +928,21 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-btn--launch:hover .inf-btn__cap, .inf-btn--launch:focus-visible .inf-btn__cap { transform: translateY(.5%); filter: brightness(1.12); }
 .inf-btn--launch:hover .inf-btn__rocket, .inf-btn--launch:focus-visible .inf-btn__rocket { translate: -50% -62%; }
 .inf-btn--launch:active .inf-btn__cap { transform: translateY(1.3%); transition-duration: .08s; }
+.inf-btn--accept { --ar: 1270 / 247; --w: 480px; filter: drop-shadow(0 12px 18px rgba(70, 20, 40, .3)) drop-shadow(0 2px 4px rgba(40, 10, 20, .25)); transition: transform .3s cubic-bezier(.2,.8,.2,1), filter .3s ease; }
+.inf-btn__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.inf-btn--accept .inf-btn__shine { clip-path: polygon(8.74% 1.62%, 86.3% 1.62%, 99.29% 41.3%, 85.51% 97.98%, .87% 97.98%, .08% 88.26%, 3.07% 38.46%); }
+.inf-btn--accept .inf-btn__t { left: 46.4%; top: 44.6%; font-size: 6.45cqw; letter-spacing: .035em;
+  background: linear-gradient(180deg, #ffffff 0%, #f1ecee 40%, #b9adb2 62%, #e6e0e2 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 .25cqw .2cqw rgba(20, 0, 8, .75)); }
+.inf-btn__star { position: absolute; left: 88.8%; top: 48.4%; width: 14cqw; height: 14cqw; translate: -50% -50%; border-radius: 50%; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(circle, rgba(255, 70, 80, .75) 0%, rgba(255, 120, 140, .3) 22%, rgba(255, 160, 180, 0) 58%); animation: inf-btn-star 2.6s ease-in-out infinite; }
+@keyframes inf-btn-star { 0%, 100% { opacity: .45; scale: .8; } 50% { opacity: 1; scale: 1.1; } }
+.inf-btn--accept:hover, .inf-btn--accept:focus-visible { transform: translateY(-2px); filter: drop-shadow(0 16px 22px rgba(120, 30, 60, .38)) drop-shadow(0 2px 4px rgba(40, 10, 20, .25)); }
+.inf-btn--accept:hover .inf-btn__shine::before, .inf-btn--accept:focus-visible .inf-btn__shine::before { transform: skewX(-22deg) translateX(720%); transition: transform .9s cubic-bezier(.3,.6,.3,1); }
+.inf-btn--accept:hover .inf-btn__star, .inf-btn--accept:focus-visible .inf-btn__star { animation-duration: 1s; }
+.inf-btn--accept:active { transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) {
-.inf-btn__glow { animation: none !important; }
+.inf-btn__glow, .inf-btn__star { animation: none !important; }
 .inf-btn__shine { display: none; }
 }
 .inf-hero__ticks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 22px 0 0; padding: 0; list-style: none; font-size: 13px; font-weight: 600; color: #26262c; }
@@ -1883,6 +1896,14 @@ footer { border-top-color: transparent !important; }
       <button type="button" role="tab" aria-selected="false" data-tab="2">YouTube</button>
     </div>
     </div>
+    <!-- the block's button (owner's design, November 2026): the rose-quartz crystal of the design as a picture
+         (tools/influencers/accept_btn.py cuts it out and wipes its words), the words real text over it («Buttons») -->
+    <div class="inf-btn-wrap"><a class="inf-btn inf-btn--accept" href="../#signup" data-page-link>
+      <img class="inf-btn__img" src="../assets/influencers/btn-accept-700.webp?v=3559306cd7" srcset="../assets/influencers/btn-accept-700.webp?v=3559306cd7 700w, ../assets/influencers/btn-accept-1270.webp?v=a9dc55efa0 1270w" sizes="(max-width: 520px) calc(100vw - 32px), 480px" width="1270" height="247" alt="" loading="lazy" decoding="async">
+      <span class="inf-btn__shine" aria-hidden="true"></span>
+      <span class="inf-btn__star" aria-hidden="true"></span>
+      <span class="inf-btn__t">Accept invitation</span>
+    </a></div>
     </div>
     </section>
 
