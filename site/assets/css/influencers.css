@@ -399,6 +399,106 @@ footer { border-top-color: transparent !important; }
   .inf-calc__tabs button::after { bottom: -5px; height: 2px; box-shadow: 0 0 6px rgba(63,227,210,.8); }
 }
 
+/* ---- How it works (owner's design, November 2026): a chat on a phone, four glass steps ----------------------------
+   Left a phone (white, an iridescent rim, a soft glow) with a DM chat; every size inside it in the design's px of the
+   phone (450 wide: --u, a container unit), so it scales as one picture. orbit.js brings the messages in one by one
+   (.is-in; a typing dots bubble first for the answers) and, as a step comes up, lights its glass row on the right
+   (.is-lit: a red glow at its ends, as the "Three numbers" rows; the ones before it .is-done). Then the "commission
+   paid" note pops up by the phone. Reduced motion: all at once. Phones: the line, the phone, the rows, the note. */
+.inf-how { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0b0b0d; }
+.inf-how__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
+.inf-how__kick { margin: 0 0 clamp(8px, 1vw, 14px); text-align: center; font-size: clamp(11px, 1.15vw, 15px); letter-spacing: .3em; color: #e7131b; padding: 0; }
+.inf-how__h2 { margin: 0 auto clamp(26px, 3.4vw, 52px); text-align: center; }
+.inf-how__grid { display: grid; grid-template-columns: minmax(0, 34fr) minmax(0, 66fr); grid-template-rows: auto auto 1fr; column-gap: clamp(24px, 4.4vw, 72px); align-items: start; }
+.inf-how__phone-wrap { grid-row: 1 / 4; position: relative; justify-self: center; width: min(100%, 430px, (100vh - 210px) * 450 / 835); padding-bottom: 2%; }
+@supports (height: 100svh) { .inf-how__phone-wrap { width: min(100%, 430px, (100svh - 210px) * 450 / 835); } }
+.inf-how__sub { grid-column: 2; margin: clamp(28px, 4.6vw, 70px) 0 clamp(18px, 2.2vw, 32px) 1.2%; font-size: clamp(15px, 1.65vw, 24px); line-height: 1.45; color: #3a3a44; max-width: 36em; }
+.inf-how__steps { grid-column: 2; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: clamp(8px, 1.3vw, 20px); }
+.inf-how__note { grid-column: 2; margin: clamp(28px, 5vw, 80px) 0 0 1.2%; font-size: clamp(14px, 1.45vw, 21px); line-height: 1.5; color: #3a3a44; max-width: 38em; }
+.inf-how__note b { color: #0b0b0d; }
+/* a step: the glass capsule (the "Three numbers" glass, 9-slice) */
+.inf-how__step { --rh: clamp(60px, 6.4vw, 96px); position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; column-gap: clamp(12px, 2.4vw, 38px);
+  box-sizing: border-box; height: var(--rh); padding: 0 calc(var(--rh) * .44);
+  border: 0 solid transparent; border-image: url(../influencers/nums-row.webp) 128 155 fill / calc(var(--rh) / 2) calc(var(--rh) * .603) stretch;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease; }
+.inf-how__step::after { content: ''; position: absolute; z-index: 1; inset: 4% calc(var(--rh) * -.05); pointer-events: none; opacity: 0; transition: opacity .5s ease;
+  background: radial-gradient(closest-side, rgba(226,10,22,.78), rgba(226,10,22,.3) 50%, rgba(226,10,22,0)) 0 50% / calc(var(--rh) * .42) 84% no-repeat,
+    radial-gradient(closest-side, rgba(226,10,22,.78), rgba(226,10,22,.3) 50%, rgba(226,10,22,0)) 100% 50% / calc(var(--rh) * .42) 84% no-repeat;
+  filter: blur(4px); }
+.inf-how__step.is-lit { transform: scale(1.025); }
+.inf-how__step.is-lit::after { opacity: 1; }
+.inf-how__n { font-size: clamp(17px, 1.9vw, 28px); letter-spacing: 0; padding: 0; color: #e7131b; text-shadow: 0 1px 0 #a00d18; transition: text-shadow .5s ease; }
+.inf-how__step.is-lit .inf-how__n { text-shadow: 0 1px 0 #a00d18, 0 0 14px rgba(231,19,27,.55); }
+.inf-how__t { font-size: clamp(14px, 1.55vw, 23px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2; color: #121216; }
+.inf-how__v { font-size: clamp(9.5px, 1vw, 15px); letter-spacing: .14em; padding: 0; color: #121216; white-space: nowrap; }
+.inf-how__step--red .inf-how__v { color: #e7131b; }
+/* the phone */
+.inf-how__phone { --u: calc(100cqw / 450); position: relative; container-type: inline-size; width: 100%; aspect-ratio: 450 / 835; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 11.5cqw / 6.2cqw; background: #fff; transform: perspective(1800px) rotateY(9deg) rotateZ(-1.2deg); transform-origin: 60% 50%;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px transparent, 0 30px 60px -24px rgba(60,40,120,.35), 0 0 46px rgba(255,120,190,.22);
+  border: 3px solid transparent; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(140deg, #ff9fd0, #b9a6ff 30%, #9fd4ff 55%, #ffc0e0 80%, #c4b5ff) border-box; }
+.inf-how__bar { display: flex; align-items: center; gap: calc(12 * var(--u)); padding: calc(26 * var(--u)) calc(22 * var(--u)) calc(18 * var(--u)); border-bottom: 1px solid #ececf1; }
+.inf-how__back { font-size: calc(30 * var(--u)); line-height: 1; color: #1a1a1f; margin-top: calc(-4 * var(--u)); }
+.inf-how__ava { position: relative; flex: none; width: calc(46 * var(--u)); height: calc(46 * var(--u)); border-radius: 50%; background: conic-gradient(from 210deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5, #feda75); }
+.inf-how__ava i { position: absolute; inset: calc(3.5 * var(--u)); border-radius: 50%; background: #050506; box-shadow: 0 0 0 calc(2 * var(--u)) #fff; }
+.inf-how__who { display: flex; flex-direction: column; line-height: 1.15; }
+.inf-how__who b { font-size: calc(18 * var(--u)); font-weight: 700; color: #111; }
+.inf-how__who i { font-style: normal; font-size: calc(14.5 * var(--u)); color: #19b34a; }
+.inf-how__chat { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: calc(9 * var(--u)); padding: calc(20 * var(--u)) calc(16 * var(--u)) 0; overflow: hidden; }
+.inf-how__msg { max-width: 78%; box-sizing: border-box; padding: calc(11 * var(--u)) calc(16 * var(--u)); border-radius: calc(20 * var(--u)); background: #ededf2; color: #16161a;
+  font-size: calc(16 * var(--u)); line-height: 1.32; letter-spacing: -.01em; display: flex; align-items: flex-start; gap: calc(11 * var(--u)); transform-origin: 0 100%; }
+.inf-how__msg--me { align-self: flex-end; transform-origin: 100% 100%; color: #fff; background: linear-gradient(100deg, #9b3cf2 0%, #6a4cf6 50%, #2f6bff 100%); }
+.inf-how__num { flex: none; display: inline-grid; place-items: center; width: calc(24 * var(--u)); height: calc(24 * var(--u)); margin-top: calc(-1 * var(--u)); border-radius: 50%; background: #0b0b0d; color: #fff; font-size: calc(13 * var(--u)); font-weight: 700; }
+.inf-how__num--red { background: #e7131b; }
+.inf-how__msg--card { flex-direction: column; gap: 0; padding: calc(11 * var(--u)) 0 calc(12 * var(--u)); width: 70%; max-width: none; overflow: hidden; }
+.inf-how__row { display: flex; align-items: flex-start; gap: calc(11 * var(--u)); padding: 0 calc(16 * var(--u)) calc(10 * var(--u)); }
+.inf-how__thumb { position: relative; display: flex; align-items: flex-end; width: 100%; height: calc(86 * var(--u)); overflow: hidden;
+  background: radial-gradient(40% 70% at 18% 30%, #0f6f7d 0%, rgba(15,111,125,0) 70%), radial-gradient(35% 60% at 58% 75%, #ff5d80 0%, rgba(255,93,128,0) 70%),
+    radial-gradient(30% 55% at 85% 25%, #1d8796 0%, rgba(29,135,150,0) 70%), radial-gradient(45% 50% at 40% 40%, #ff8ea6 0%, rgba(255,142,166,0) 70%),
+    radial-gradient(30% 40% at 70% 45%, #d7f3f2 0%, rgba(215,243,242,0) 70%), linear-gradient(90deg, #6fc6cc, #ff97ad 50%, #57b4bd); }
+.inf-how__thumb::before { content: ''; position: absolute; inset: -10%; filter: blur(calc(3 * var(--u)));   /* marbled swirls, as the design's */
+  background: radial-gradient(18% 30% at 12% 70%, #0b5c69, rgba(11,92,105,0) 70%), radial-gradient(22% 26% at 33% 22%, #ff6f8d, rgba(255,111,141,0) 70%), radial-gradient(14% 34% at 48% 62%, #e9fbfb, rgba(233,251,251,0) 70%),
+    radial-gradient(20% 30% at 66% 30%, #ff4f74, rgba(255,79,116,0) 70%), radial-gradient(16% 28% at 80% 72%, #0f7584, rgba(15,117,132,0) 70%), radial-gradient(12% 22% at 92% 40%, #ffd3dc, rgba(255,211,220,0) 70%); }
+.inf-how__thumb span { position: relative; margin: 0 0 calc(12 * var(--u)) calc(14 * var(--u)); font-family: var(--h2f), 'Inter', sans-serif; font-weight: 700; font-size: calc(15 * var(--u)); letter-spacing: .12em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
+.inf-how__url { padding: calc(10 * var(--u)) calc(16 * var(--u)) 0; font-weight: 700; color: #e7131b; }
+.inf-how__typing { display: none; gap: calc(5 * var(--u)); padding: calc(14 * var(--u)) calc(16 * var(--u)); border-radius: calc(20 * var(--u)); background: #ededf2; }
+.inf-how__typing i { width: calc(8 * var(--u)); height: calc(8 * var(--u)); border-radius: 50%; background: #8d8d96; animation: inf-how-dot 1s ease-in-out infinite; }
+.inf-how__typing i:nth-child(2) { animation-delay: .15s; } .inf-how__typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes inf-how-dot { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(calc(-4 * var(--u))); opacity: 1; } }
+.inf-how__input { flex: none; height: calc(50 * var(--u)); margin: calc(14 * var(--u)) calc(16 * var(--u)) calc(22 * var(--u)); border-radius: 999px; background: #ededf2; }
+/* the play: armed (orbit.js) the messages wait; each comes in with a little spring */
+.inf-how.is-armed .inf-how__msg { display: none; }
+.inf-how.is-armed .inf-how__msg.is-in { display: flex; animation: inf-how-pop .45s cubic-bezier(.2,1.3,.4,1) both; }
+.inf-how.is-armed .inf-how__typing.is-on { display: inline-flex; animation: inf-how-pop .3s ease-out both; }
+@keyframes inf-how-pop { from { opacity: 0; transform: translateY(calc(14 * var(--u))) scale(.86); } to { opacity: 1; transform: none; } }
+.inf-how.is-fade .inf-how__chat { opacity: 0; transition: opacity .5s ease; }
+/* the note by the phone */
+.inf-how__toast { position: absolute; z-index: 2; left: -14%; bottom: 3%; display: flex; align-items: center; gap: 4.2cqw; padding: 3.4cqw 6cqw 3.4cqw 4.4cqw; container-type: normal;
+  border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(240,240,246,.82)); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.9), 0 0 0 1px rgba(200,200,215,.6), 0 18px 40px -16px rgba(40,30,80,.4), 0 0 30px rgba(255,60,80,.12); transform: rotate(-4deg); }
+.inf-how__phone-wrap { container-type: inline-size; }
+.inf-how__coin { flex: none; display: grid; place-items: center; width: 12.6cqw; height: 12.6cqw; border-radius: 50%; color: #fff; font-size: 6cqw; font-weight: 700;
+  background: radial-gradient(circle at 35% 30%, #ff5560, #d10f1c 70%); box-shadow: 0 4px 12px rgba(209,15,28,.45); }
+.inf-how__tt { display: flex; flex-direction: column; line-height: 1.1; }
+.inf-how__tt small { font-family: var(--h2f), 'Inter', sans-serif; font-weight: 700; font-size: 2.7cqw; letter-spacing: .24em; text-transform: uppercase; color: #8a8a94; }
+.inf-how__tt b { font-family: var(--h2f), 'Inter', sans-serif; font-size: 8.2cqw; letter-spacing: -.01em; color: #e7131b; margin: .6cqw 0; }
+.inf-how__tt em { font-style: normal; font-size: 3.5cqw; color: #3a3a44; }
+.inf-how.is-armed .inf-how__toast { opacity: 0; transform: rotate(-4deg) translateY(16px) scale(.9); transition: opacity .5s ease, transform .6s cubic-bezier(.2,1.4,.4,1); }
+.inf-how.is-armed .inf-how__toast.is-in { opacity: 1; transform: rotate(-4deg); }
+@media (max-width: 640px) {
+  .inf-how__grid { display: flex; flex-direction: column; }
+  .inf-how__sub { order: 0; margin: 0 0 22px; text-align: center; }
+  .inf-how__phone-wrap { order: 1; width: min(74%, 300px); margin: 0 auto 30px; transform: translateX(5%); }
+  .inf-how__phone { transform: none; }
+  .inf-how__toast { left: -12%; }
+  .inf-how__steps { order: 2; }
+  .inf-how__note { order: 3; margin: 22px 0 0; text-align: center; }
+  .inf-how__step { --rh: 58px; column-gap: 12px; padding: 0 22px; }
+  .inf-how__n { font-size: 17px; }
+  .inf-how__t { font-size: 13.5px; white-space: normal; }
+  .inf-how__v { font-size: 9.5px; letter-spacing: .1em; }
+}
+
 /* ---- Incentive trips (owner's second design, November 2026): the text and the trip stories in glass phones ---------------
    No card: the page's light background, the text on the left, the design's picture of the phones on the right
    (tools/influencers/trips.py, its background made the page's; its edges fade here). The block keeps the column of the

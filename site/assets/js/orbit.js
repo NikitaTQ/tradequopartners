@@ -436,3 +436,38 @@
   if ('ResizeObserver' in window) new ResizeObserver(draw).observe(cv);
   else window.addEventListener('resize', draw, { passive: true });
 })();
+
+/* /for-influencers/: "How it works". While the block is on screen the chat plays: the messages come in one by one (a
+ * typing dots bubble before each of tradequo's answers), each of the four steps lighting its glass row as it comes
+ * (the rows before it stay a little lit), then the "commission paid" note pops up; after a pause it fades and plays
+ * again. Off screen it stops and starts over when back. Reduced motion: nothing to do (all shown, nothing lit). */
+(() => {
+  const sec = document.querySelector('[data-how]');
+  if (!sec || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const msgs = [...sec.querySelectorAll('[data-how-msg]')], typing = sec.querySelector('[data-how-typing]');
+  const steps = [...sec.querySelectorAll('[data-how-step]')], toast = sec.querySelector('[data-how-toast]');
+  sec.classList.add('is-armed');
+  let timers = [];
+  const at = (ms, fn) => timers.push(setTimeout(fn, ms));
+  const light = (n) => steps.forEach((s, i) => { s.classList.toggle('is-lit', i === n - 1); s.classList.toggle('is-done', i < n - 1); });
+  const reset = () => { timers.forEach(clearTimeout); timers = []; msgs.forEach((m) => m.classList.remove('is-in')); typing.classList.remove('is-on'); toast.classList.remove('is-in'); light(0); sec.classList.remove('is-fade'); };
+  const play = () => {
+    reset();
+    let t = 400;
+    msgs.forEach((m) => {
+      const mine = m.classList.contains('inf-how__msg--me');
+      if (!mine) { const s0 = t; at(s0, () => typing.classList.add('is-on')); t += 650; }
+      const s1 = t;
+      at(s1, () => { typing.classList.remove('is-on'); m.classList.add('is-in'); if (m.dataset.step) light(Number(m.dataset.step)); });
+      t += mine ? 700 : 500;
+    });
+    at(t + 300, () => toast.classList.add('is-in'));
+    at(t + 7500, () => sec.classList.add('is-fade'));
+    at(t + 8100, play);
+  };
+  let on = false;
+  new IntersectionObserver((es) => {
+    const vis = es.some((e) => e.isIntersecting);
+    if (vis && !on) { on = true; play(); } else if (!vis && on) { on = false; reset(); }
+  }, { threshold: .3 }).observe(sec);
+})();
