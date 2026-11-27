@@ -8,21 +8,83 @@
 .inf-hero__h1 { margin: 0; color: #0a0a0a; line-height: 1.14; text-align: start; white-space: nowrap; letter-spacing: .05em; padding-inline-start: 0; }   /* the design's tighter tracking; a line never breaks (data-fitw steps the size down where it would not fit) */
 .inf-hero__sub { margin: clamp(20px, 2vw, 30px) 0 0; max-width: 30em; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.62; color: #55555e; }
 
-/* the CTA: glossy black pill, its label then a red ball with the arrow; a red line glows under the label */
-.inf-cta { position: relative; display: inline-flex; align-items: center; gap: 24px; height: 60px; margin-top: clamp(26px, 2.6vw, 36px);
-  padding: 0 7px 0 32px; box-sizing: border-box; border-radius: 999px; color: #fff; font-size: 16px; font-weight: 600; letter-spacing: -.005em; text-decoration: none;
-  background: linear-gradient(180deg, #34343a 0%, #141417 38%, #050506 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.26), inset 0 -1px 0 rgba(255,255,255,.06), 0 0 0 1px #000, 0 16px 28px -14px rgba(0,0,0,.6), 0 4px 10px -4px rgba(0,0,0,.35);
-  transition: transform .3s cubic-bezier(.2,.8,.2,1); -webkit-tap-highlight-color: transparent; }
-.inf-cta::after { content: ''; position: absolute; left: 20%; right: 34%; bottom: 1px; height: 2px; border-radius: 2px;
-  background: linear-gradient(90deg, rgba(231,19,27,0), #ff2a33 50%, rgba(231,19,27,0)); filter: blur(.4px); box-shadow: 0 0 8px rgba(255,30,40,.8); }
-.inf-cta__dot { flex: none; width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;
-  background: radial-gradient(circle at 34% 28%, #ff7377 0%, #f0222b 34%, #c20d16 72%, #8e050c 100%);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,.45), inset 0 -2px 4px rgba(90,0,5,.35), 0 4px 12px -2px rgba(231,19,27,.55); }
-.inf-cta__dot svg { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
-.inf-cta:hover, .inf-cta:focus-visible { color: #fff; transform: translateY(-2px); }
-.inf-cta:hover .inf-cta__dot svg, .inf-cta:focus-visible .inf-cta__dot svg { transform: translateX(3px); }
-.inf-cta:focus-visible { outline: 2px solid #e7131b; outline-offset: 3px; }
+/* the CTA: the "Enter key" button (owner's design, November 2026; «Buttons» below) */
+.inf-btn.inf-hero__cta { margin-top: clamp(26px, 2.6vw, 36px); --w: 430px; }
+
+/* ---- Buttons (owner's designs, November 2026) --------------------------------------------------------------------
+   Five, each the design's object drawn in SVG (its shared gradients: .inf-btn-defs at the top of the page) with its
+   words as real text over it: the hero's black Enter key on a silver plinth, a red light under it; the three numbers'
+   ruby resin bar, cut in facets; the last space scene's launch console (a steel base, its glass lid standing open on
+   two hinges, a red glass button glowing in its well); the calculator's
+   glass plate between two screwed metal brackets, a red light on it; How it works' steel key on springs. Each is
+   scaled as one (its words in cqw of its own width). Pointed at: the keys go down (the springs give), the ruby
+   lifts and a light runs over it, the launch button sinks and glows brighter, the glass plate lights up. The trips'
+   seat belt: «Seat belt» below. */
+.inf-btn-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.inf-btn { --w: 450px; position: relative; display: block; width: min(100%, var(--w)); aspect-ratio: var(--ar); container-type: inline-size;
+  color: #fff; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 800; text-transform: uppercase; white-space: nowrap; line-height: 1;
+  -webkit-tap-highlight-color: transparent; outline: none; -webkit-user-select: none; user-select: none; }
+.inf-btn, .inf-btn:hover, .inf-btn:focus-visible, .inf-belt:hover, .inf-belt:focus-visible { color: var(--c, #fff); }   /* never the site's red link hover */
+.inf-btn__art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; display: block; pointer-events: none; }
+.inf-btn__cap { position: absolute; inset: 0; transition: transform .28s cubic-bezier(.2,.8,.2,1); }
+.inf-btn__t, .inf-btn__ic { position: absolute; translate: -50% -50%; }
+.inf-btn__t { letter-spacing: .045em; }
+.inf-btn__ic { width: var(--ic, 5.4cqw); height: var(--ic, 5.4cqw); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.inf-btn:hover .inf-btn__ic, .inf-btn:focus-visible .inf-btn__ic { transform: translateX(.6cqw); }
+.inf-btn:focus-visible { outline: 2px solid #e7131b; outline-offset: 5px; border-radius: 10px; }
+.inf-btn-wrap { display: flex; justify-content: center; margin-top: clamp(28px, 3.2vw, 48px); }
+.inf-btn__glow { transition: opacity .3s ease; }
+
+.inf-btn--key { --ar: 450 / 112; }
+.inf-btn--key .inf-btn__t { left: 42.6%; top: 46.4%; font-size: 5.2cqw; letter-spacing: .07em; text-shadow: 0 1px 0 rgba(0,0,0,.6); }
+.inf-btn--key .inf-btn__ic { left: 87.1%; top: 37.5%; --ic: 7.2cqw; }
+.inf-btn--key .inf-btn__glow { animation: inf-btn-glow 2.8s ease-in-out infinite; }
+.inf-btn--key:hover .inf-btn__cap, .inf-btn--key:focus-visible .inf-btn__cap { transform: translateY(2.4%); }
+.inf-btn--key:active .inf-btn__cap { transform: translateY(5.4%); transition-duration: .08s; }
+.inf-btn--key:hover .inf-btn__ic, .inf-btn--key:focus-visible .inf-btn__ic { transform: translateX(-.5cqw); }
+@keyframes inf-btn-glow { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+
+.inf-btn--ruby { --ar: 460 / 72; --w: 470px; filter: drop-shadow(0 10px 14px rgba(160, 8, 26, .32)) drop-shadow(0 2px 3px rgba(80, 0, 10, .3)); transition: transform .3s cubic-bezier(.2,.8,.2,1), filter .3s ease; }
+.inf-btn--ruby .inf-btn__t { left: 46.6%; top: 50%; font-size: 4.6cqw; text-shadow: 0 1px 2px rgba(60, 0, 8, .55); }
+.inf-btn--ruby .inf-btn__ic { left: 89.6%; top: 50%; }
+.inf-btn__shine { position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  clip-path: polygon(6.96% 1.39%, 93.04% 1.39%, 97.39% 12.5%, 99.57% 38.9%, 99.57% 61.1%, 97.39% 87.5%, 93.04% 98.6%, 6.96% 98.6%, 2.61% 87.5%, .43% 61.1%, .43% 38.9%, 2.61% 12.5%); }
+.inf-btn__shine::before { content: ''; position: absolute; top: 0; bottom: 0; left: -30%; width: 22%; transform: skewX(-22deg) translateX(0);
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,220,228,.42), rgba(255,255,255,0)); }
+.inf-btn--ruby:hover, .inf-btn--ruby:focus-visible { transform: translateY(-2px); filter: drop-shadow(0 14px 18px rgba(190, 10, 30, .42)) drop-shadow(0 2px 3px rgba(80, 0, 10, .3)); }
+.inf-btn--ruby:hover .inf-btn__shine::before, .inf-btn--ruby:focus-visible .inf-btn__shine::before { transform: skewX(-22deg) translateX(720%); transition: transform .9s cubic-bezier(.3,.6,.3,1); }
+.inf-btn--ruby:active { transform: translateY(0); }
+
+
+.inf-btn--plate { --c: #0e0e10; --ar: 380 / 56; --w: 400px; }
+.inf-btn--plate .inf-btn__t { left: 45.9%; top: 50%; font-size: 4.5cqw; letter-spacing: .065em; }
+.inf-btn--plate .inf-btn__ic { left: 85.8%; top: 50%; --ic: 5.2cqw; }
+.inf-btn--plate .inf-btn__glow { animation: inf-btn-glow 2.2s ease-in-out infinite; }
+.inf-btn--plate .inf-btn__face { transition: fill-opacity .3s ease; }
+.inf-btn--plate::after { content: ''; position: absolute; left: 7.4%; right: 7.4%; top: 11%; bottom: 11%; border-radius: 1.8cqw; pointer-events: none; opacity: 0; transition: opacity .3s ease;
+  box-shadow: inset 0 0 2.4cqw rgba(255, 255, 255, .95), 0 0 3cqw rgba(190, 225, 255, .45); }
+.inf-btn--plate:hover::after, .inf-btn--plate:focus-visible::after { opacity: 1; }
+.inf-btn--plate:active { transform: translateY(1px); }
+
+.inf-btn--spring { --c: #0d0d0f; --ar: 446 / 74; --w: 460px; }
+.inf-btn--spring .inf-btn__t { left: 46.6%; top: 25.3%; font-size: 5cqw; letter-spacing: .06em; text-shadow: 0 1px 0 rgba(255,255,255,.7); }
+.inf-btn--spring .inf-btn__ic { left: 90.8%; top: 25.3%; color: #d8101d; }
+.inf-btn__spr { transform-box: fill-box; transform-origin: 50% 100%; transition: transform .28s cubic-bezier(.2,.8,.2,1); }
+.inf-btn--spring:hover .inf-btn__cap, .inf-btn--spring:focus-visible .inf-btn__cap { transform: translateY(6%); }
+.inf-btn--spring:hover .inf-btn__spr, .inf-btn--spring:focus-visible .inf-btn__spr { transform: scaleY(.62); }
+.inf-btn--spring:active .inf-btn__cap { transform: translateY(11%); transition-duration: .08s; }
+.inf-btn--spring:active .inf-btn__spr { transform: scaleY(.3); transition-duration: .08s; }
+.inf-btn--launch { --ar: 600 / 282; --w: 520px; text-transform: none; }
+.inf-btn--launch text { text-transform: uppercase; }
+.inf-btn--launch .inf-btn__t { left: 50.4%; top: 63.9%; font-size: 4.9cqw; font-weight: 700; letter-spacing: .005em; text-shadow: 0 0 1.2cqw rgba(255, 210, 200, .55), 0 .2cqw .3cqw rgba(90, 0, 4, .6); }
+.inf-btn__rocket { position: absolute; left: 24.6%; top: 63.6%; width: 6cqw; height: 6cqw; translate: -50% -50%; rotate: 0deg; color: #fff; filter: drop-shadow(0 0 .8cqw rgba(255, 200, 190, .6)); transition: translate .35s cubic-bezier(.2,.8,.2,1); }
+.inf-btn__logo { position: absolute; left: 77%; top: 63.6%; width: 6.6cqw; height: 6.6cqw; translate: -50% -50%; background: #fff;
+  -webkit-mask: url(../logo-mark.png) center / contain no-repeat; mask: url(../logo-mark.png) center / contain no-repeat; filter: drop-shadow(0 0 .8cqw rgba(255, 200, 190, .6)); }
+.inf-btn--launch .inf-btn__glow { animation: inf-btn-glow 2.6s ease-in-out infinite; }
+.inf-btn--launch:hover .inf-btn__cap, .inf-btn--launch:focus-visible .inf-btn__cap { transform: translateY(.5%); filter: brightness(1.12); }
+.inf-btn--launch:hover .inf-btn__rocket, .inf-btn--launch:focus-visible .inf-btn__rocket { translate: -50% -62%; }
+.inf-btn--launch:active .inf-btn__cap { transform: translateY(1.3%); transition-duration: .08s; }
+@media (prefers-reduced-motion: reduce) { .inf-btn__glow { animation: none !important; } .inf-btn__shine { display: none; } }
 
 .inf-hero__ticks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 22px 0 0; padding: 0; list-style: none; font-size: 13px; font-weight: 600; color: #26262c; }
 .inf-hero__ticks li { position: relative; padding-inline-start: 20px; white-space: nowrap; }
@@ -61,10 +123,53 @@
   .inf-hero__vis { order: 3; position: relative; flex: 1 1 0; min-height: 190px; max-width: none; margin: 6px 0 4px; }
   .inf-hero__vis picture { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
   .inf-hero__img { width: auto; height: auto; max-width: 100%; max-height: 100%; }   /* the picture's own box shrinks with it, so its faded edge stays its edge */
-  .inf-cta { order: 4; align-self: flex-start; height: 52px; margin-top: 0; font-size: 15px; padding-inline-start: 24px; gap: 20px; }
-  .inf-cta__dot { width: 40px; height: 40px; }
+  .inf-btn.inf-hero__cta { order: 4; align-self: center; --w: 340px; margin-top: 0; }
   .inf-hero__ticks { order: 5; margin-top: 14px; font-size: 12.5px; gap: 6px 16px; }
 }
+
+/* ---- Seat belt (owner's design "Seatbelt CTA", November 2026), the trips' button -------------------------------------
+   A navy webbing strap (its weave, dashed stitching, two slack folds) with the words, a metal tongue at its end, and a
+   silver buckle with a red arrow on its lid. Pointed at: the strap slides into the buckle, the lid clicks shut, the
+   buckle gives, then the strap pulls tight (the folds go) and the arrow nudges on. The design's 400 x 62 px, scaled as
+   one (cqw: 1px = .25cqw). */
+.inf-belt { position: relative; display: block; width: min(100%, 400px); aspect-ratio: 400 / 62; container-type: inline-size; margin-top: clamp(28px, 6cqw, 44px);
+  color: #fff; text-decoration: none; font-family: 'Inter', sans-serif; outline: none; -webkit-tap-highlight-color: transparent; }
+.inf-belt__strap { position: absolute; left: 0; top: 1.25cqw; bottom: 1.25cqw; width: 72cqw; transition: width .32s cubic-bezier(.5,0,.3,1.15); }
+.inf-belt__web { position: absolute; inset: 0; border-radius: 2cqw .5cqw .5cqw 2cqw; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,0) 68%, rgba(0,0,0,.35) 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 .5cqw, rgba(0,0,0,0) .5cqw 1cqw), repeating-linear-gradient(-45deg, rgba(0,0,0,.14) 0 .5cqw, rgba(0,0,0,0) .5cqw 1cqw),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 .25cqw, rgba(0,0,0,0) .25cqw .75cqw), #1d3e63;
+  background-position: 0 0; box-shadow: inset 0 0 0 .25cqw rgba(0,0,0,.35), inset 0 .5cqw 0 rgba(160,200,235,.18), 0 3cqw 5cqw -2.5cqw rgba(14,30,50,.55);
+  transition: background-position .45s cubic-bezier(.34,1.5,.5,1); }
+.inf-belt__st { position: absolute; border: 0 dashed rgba(150,196,232,.75); }
+.inf-belt__st--t { left: 2.5cqw; right: 0; top: 1.5cqw; border-top-width: .375cqw; }
+.inf-belt__st--b { left: 2.5cqw; right: 0; bottom: 1.5cqw; border-top-width: .375cqw; }
+.inf-belt__st--l { left: 1cqw; top: 1.5cqw; bottom: 1.5cqw; border-left-width: .375cqw; }
+.inf-belt__fold { position: absolute; top: -2cqw; bottom: -2cqw; transition: opacity .3s; }
+.inf-belt__fold--1 { left: 22%; width: 4cqw; transform: skewX(-28deg); background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.14), rgba(0,0,0,.24)); }
+.inf-belt__fold--2 { left: 62%; width: 3.5cqw; transform: skewX(24deg); background: linear-gradient(90deg, rgba(0,0,0,.22), rgba(255,255,255,.12), rgba(255,255,255,0)); }
+.inf-belt__t { position: relative; font-size: 3.75cqw; font-weight: 800; letter-spacing: .03em; white-space: nowrap; text-transform: uppercase;
+  background: linear-gradient(180deg, #fff 0%, #e4eaf0 45%, #9dabba 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 .375cqw 0 rgba(6,16,30,.55)); }
+.inf-belt__tongue { position: absolute; left: 100%; top: 50%; width: 7.5cqw; height: 8.5cqw; margin: -4.25cqw 0 0 -.5cqw; border-radius: .5cqw 1.25cqw 1.25cqw .5cqw; box-sizing: border-box;
+  background: linear-gradient(180deg, #fbfcfd 0%, #cdd2d8 45%, #99a0aa 55%, #e1e4e8 100%); box-shadow: inset 0 .25cqw 0 #fff, 0 0 0 .25cqw #737983, 0 1cqw 2cqw -.75cqw rgba(14,30,50,.5);
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 1.5cqw; }
+.inf-belt__tongue i { width: 2.25cqw; height: 3.5cqw; border-radius: .5cqw; background: #6d737d; box-shadow: inset 0 .25cqw .5cqw rgba(0,0,0,.5), 0 .25cqw 0 #fff; }
+.inf-belt__buckle { position: absolute; right: 0; top: 0; bottom: 0; z-index: 2; width: 17.5cqw; border-radius: 2.5cqw; perspective: 65cqw;
+  background: linear-gradient(180deg, #f7f8fa 0%, #c9ced5 40%, #9aa1ab 60%, #d5d9de 100%);
+  box-shadow: inset 0 .25cqw 0 #fff, inset 0 -.5cqw .75cqw rgba(0,0,0,.25), 0 0 0 .25cqw #6d737d, 0 3cqw 4.5cqw -2cqw rgba(14,30,50,.55); }
+.inf-belt__lid { position: absolute; inset: 1.5cqw; border-radius: 1.5cqw; transform-origin: 0 50%; transform: rotateY(-32deg); display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 70%, rgba(0,0,0,.12) 100%), linear-gradient(180deg, #fff 0%, #e3e6ea 30%, #b3b9c2 55%, #e9ebee 100%);
+  box-shadow: inset 0 .25cqw 0 #fff, 0 0 0 .25cqw #868c96, 1.25cqw .75cqw 2cqw rgba(0,0,0,.35); transition: transform .24s cubic-bezier(.34,1.9,.5,1), box-shadow .24s; }
+.inf-belt__lid svg { width: 5cqw; height: 5cqw; transition: transform .35s cubic-bezier(.34,1.8,.5,1); }
+.inf-belt:hover .inf-belt__strap, .inf-belt:focus-visible .inf-belt__strap { width: 81.5cqw; }
+.inf-belt:hover .inf-belt__lid, .inf-belt:focus-visible .inf-belt__lid { transform: rotateY(0deg); box-shadow: inset 0 .25cqw 0 #fff, 0 0 0 .25cqw #868c96, 0 .25cqw .5cqw rgba(0,0,0,.2); transition-delay: .3s; }
+.inf-belt:hover .inf-belt__buckle, .inf-belt:focus-visible .inf-belt__buckle { animation: inf-belt-click .26s .3s ease-out; }
+.inf-belt:hover .inf-belt__web, .inf-belt:focus-visible .inf-belt__web { background-position: 7.5cqw 0; transition-delay: .5s; }
+.inf-belt:hover .inf-belt__fold, .inf-belt:focus-visible .inf-belt__fold { opacity: 0; transition-delay: .5s; }
+.inf-belt:hover .inf-belt__lid svg, .inf-belt:focus-visible .inf-belt__lid svg { transform: translateX(.75cqw); transition-delay: .5s; }
+.inf-belt:focus-visible { outline: 2px solid #e7131b; outline-offset: 5px; border-radius: 10px; }
+@keyframes inf-belt-click { 40% { transform: translateY(.375cqw) scale(.97); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .inf-belt * { transition: none !important; animation: none !important; } }
 
 /* ---- Next star (owner's design, November 2026: the TradeQuo planet and a ship flying in), the last block -----------
    A band of night sky: out of the page's light colour above, into the footer's white below (long eased gradients),
@@ -90,6 +195,8 @@
   background: linear-gradient(180deg, #ffffff 0%, #eef0f4 30%, #c3c8d0 48%, #8f959f 54%, #c9cdd4 70%, #f4f5f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
   filter: drop-shadow(0 .3cqw .25cqw rgba(0, 0, 0, .75)) drop-shadow(0 0 1.2cqw rgba(0, 0, 0, .35)); }
 .inf-star__big--2 { top: 20.775cqw; }
+.inf-star__cta { position: absolute; z-index: 2; left: 5cqw; top: 26.6cqw; width: 26cqw; }   /* under the words, the launch console («Buttons») */
+.inf-star__cta .inf-btn { --w: 100%; }
 /* the page ends in the footer's white with no line between (the footer's own top line, drawn inline, hidden here) */
 footer { border-top-color: transparent !important; }
 @media (max-width: 640px) {
@@ -99,6 +206,7 @@ footer { border-top-color: transparent !important; }
   .inf-star__h2 > span { position: static; white-space: normal; text-wrap: balance; }
   .inf-star__h2 > .inf-star__kick { font-size: 12px; margin-bottom: 12px; }
   .inf-star__big { font-size: clamp(20px, 6.6vw, 28px); line-height: 1.15; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .75)); }
+  .inf-star__cta { position: relative; left: auto; top: auto; width: min(100% - 32px, 400px); margin: 20px auto 0; }
   .inf-star__img { margin-top: -6%; }
 }
 
