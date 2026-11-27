@@ -195,7 +195,8 @@
   background: linear-gradient(180deg, #ffffff 0%, #eef0f4 30%, #c3c8d0 48%, #8f959f 54%, #c9cdd4 70%, #f4f5f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
   filter: drop-shadow(0 .3cqw .25cqw rgba(0, 0, 0, .75)) drop-shadow(0 0 1.2cqw rgba(0, 0, 0, .35)); }
 .inf-star__big--2 { top: 20.775cqw; }
-.inf-star__cta { position: absolute; z-index: 2; left: 5cqw; top: 26.6cqw; width: 26cqw; }   /* under the words, the launch console («Buttons») */
+.inf-star__cta { position: relative; z-index: 2; width: 34cqw; margin: -4.5cqw auto 0; }   /* the launch console («Buttons»): centred under the picture, on the night under the ship (owner's wish: not beside the words) */
+@media (min-width: 641px) { .inf-star__win { width: 85%; } }   /* the scene 15% smaller, to give the console its room */
 .inf-star__cta .inf-btn { --w: 100%; }
 /* the page ends in the footer's white with no line between (the footer's own top line, drawn inline, hidden here) */
 footer { border-top-color: transparent !important; }
@@ -206,8 +207,8 @@ footer { border-top-color: transparent !important; }
   .inf-star__h2 > span { position: static; white-space: normal; text-wrap: balance; }
   .inf-star__h2 > .inf-star__kick { font-size: 12px; margin-bottom: 12px; }
   .inf-star__big { font-size: clamp(20px, 6.6vw, 28px); line-height: 1.15; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .75)); }
-  .inf-star__cta { position: relative; left: auto; top: auto; width: min(100% - 32px, 400px); margin: 20px auto 0; }
   .inf-star__img { margin-top: -6%; }
+  .inf-star__cta { width: min(100% - 32px, 400px); margin: 4px auto 0; }
 }
 
 /* ---- Three numbers (owner's design, the light glass version, November 2026) --------------------------------------
