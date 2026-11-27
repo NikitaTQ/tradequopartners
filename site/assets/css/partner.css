@@ -1226,12 +1226,12 @@
    under it the four channels it goes out on, each icon over its name */
 /* the channel card, owner's glass design (November 2026): frosted glass in a silver bevelled rim, a soft red light under
    it; the posts glass panes inside it with their own rim; the picture raised on a shadow; thicker placeholder lines */
-.tq-ibs__chan { position: relative; box-sizing: border-box; padding: 16px 12px 12px; border-radius: 30px; border: 1.5px solid transparent;
-  background: linear-gradient(165deg, rgba(250,251,253,.82) 0%, rgba(236,238,243,.72) 55%, rgba(246,247,250,.8) 100%) padding-box,
-    linear-gradient(160deg, #ffffff 0%, #c9ccd3 22%, #f7f8fa 45%, #b7bac2 70%, #ffffff 100%) border-box;
+.tq-ibs__chan { position: relative; box-sizing: border-box; padding: 14px 11px 11px; border-radius: 24px; border: 4px solid transparent;   /* a thick clear glass edge, as an acrylic slab */
+  background: linear-gradient(170deg, rgba(240,242,247,.86) 0%, rgba(231,234,241,.8) 55%, rgba(238,240,245,.86) 100%) padding-box,
+    linear-gradient(180deg, #ffffff 0%, #e4e7ee 18%, #fafbfd 50%, #d9dde5 82%, #ffffff 100%) border-box;
   -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%);
-  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.9), inset 0 3px 2px rgba(255,255,255,.95), inset 0 -3px 4px rgba(150,155,168,.25),
-    0 1px 0 1px rgba(18,22,30,.06), 0 26px 34px -18px rgba(231,19,27,.38), 0 34px 60px -30px rgba(231,19,27,.42), 0 18px 34px -24px rgba(18,22,30,.28); }
+  box-shadow: 0 0 0 1px rgba(146,152,166,.6), inset 0 0 0 1px rgba(146,152,166,.45), inset 0 2px 0 1px rgba(255,255,255,.9), inset 0 -2px 4px rgba(150,155,168,.2),
+    0 2px 0 rgba(255,255,255,.9), 0 24px 30px -18px rgba(231,19,27,.4), 0 34px 60px -30px rgba(231,19,27,.42), 0 18px 34px -24px rgba(18,22,30,.28); }
 .tq-ibs__top { display: flex; align-items: center; gap: 10px; padding: 2px 8px 13px; border-bottom: 1px solid rgba(18,22,30,.13); }
 .tq-ibs__nl { flex: none; display: block; width: 30px; height: 30px; }
 .tq-ibs__sep { flex: none; align-self: stretch; width: 1px; margin: 2px 2px; background: rgba(18,22,30,.16); }
@@ -1239,9 +1239,9 @@
 .tq-ibs__tt b { font-size: 13.5px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
 .tq-ibs__tt span { font-size: 9.5px; color: #6c6e74; white-space: nowrap; }
 .tq-ibs__top > svg { flex: none; margin-inline-start: 6px; }
-.tq-ibs__post { position: relative; margin-top: 10px; padding: 10px 12px 9px; border-radius: 15px; border: 1px solid transparent;
-  background: linear-gradient(180deg, rgba(241,242,246,.92), rgba(234,236,241,.86)) padding-box, linear-gradient(170deg, #ffffff, #cfd2d9 50%, #ffffff) border-box;
-  box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95), inset 0 -2px 3px rgba(150,155,168,.18), 0 4px 10px -6px rgba(18,22,30,.22); }
+.tq-ibs__post { position: relative; margin-top: 10px; padding: 10px 12px 9px; border-radius: 13px; border: 2px solid transparent;
+  background: linear-gradient(180deg, rgba(238,240,245,.95), rgba(232,235,241,.92)) padding-box, linear-gradient(180deg, #ffffff, #e2e5ec 50%, #ffffff) border-box;
+  box-shadow: 0 0 0 1px rgba(150,156,170,.45), inset 0 0 0 1px rgba(150,156,170,.25), inset 0 1.5px 0 1px rgba(255,255,255,.9), 0 2px 0 rgba(255,255,255,.95), 0 3px 0 rgba(150,156,170,.25), 0 6px 12px -8px rgba(18,22,30,.25); }
 .tq-ibs__by { display: flex; align-items: center; gap: 7px; }
 .tq-ibs__by .tq-ibs__nl { width: 19px; height: 19px; }
 .tq-ibs__by b { font-size: 9.5px; font-weight: 600; white-space: nowrap; }
@@ -1256,9 +1256,9 @@
 .tq-ibs__bl li::before { content: ""; position: absolute; left: -12px; top: 0; width: 4.5px; height: 4.5px; margin-top: .25px; border-radius: 50%; background: #e7131b; }
 .tq-ibs__bl li:nth-child(1) i { width: 83%; } .tq-ibs__bl li:nth-child(2) i { width: 61%; } .tq-ibs__bl li:nth-child(3) i { width: 69%; }
 .tq-ibs__vw { display: flex; justify-content: flex-end; align-items: center; gap: 4px; margin-top: 6px; font-size: 9px; font-weight: 500; color: #6e7076; font-variant-numeric: tabular-nums; }
-.tq-ibs__inp { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 24px; margin-top: 10px; padding: 0 9px 0 12px; border-radius: 999px; border: 1px solid transparent;
+.tq-ibs__inp { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 24px; margin-top: 10px; padding: 0 9px 0 12px; border-radius: 999px; border: 1.5px solid transparent;
   background: linear-gradient(180deg, rgba(236,238,242,.9), rgba(246,247,250,.9)) padding-box, linear-gradient(180deg, #c9ccd3, #ffffff) border-box;
-  box-shadow: inset 0 1.5px 2px rgba(18,22,30,.08); font-size: 9.5px; color: #77797f; }
+  box-shadow: 0 0 0 1px rgba(150,156,170,.4), inset 0 1.5px 2px rgba(18,22,30,.08), 0 1.5px 0 rgba(255,255,255,.95); font-size: 9.5px; color: #77797f; }
 .tq-ibs__inp span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tq-ibs__inp svg { flex: none; }
 .tq-ibs__chs { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
