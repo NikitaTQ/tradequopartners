@@ -227,6 +227,14 @@
       <button type="button" role="tab" aria-selected="false" data-tab="2">YouTube</button>
     </div>
     </div>
+    <!-- the block's button (owner's design, November 2026): the rose-quartz crystal of the design as a picture
+         (tools/influencers/accept_btn.py cuts it out and wipes its words), the words real text over it («Buttons») -->
+    <div class="inf-btn-wrap"><a class="inf-btn inf-btn--accept" href="{{signupHref}}"{{signupNav}}>
+      <img class="inf-btn__img" src="{{root}}assets/influencers/btn-accept-700.webp" srcset="{{root}}assets/influencers/btn-accept-700.webp 700w, {{root}}assets/influencers/btn-accept-1270.webp 1270w" sizes="(max-width: 520px) calc(100vw - 32px), 480px" width="1270" height="247" alt="" loading="lazy" decoding="async">
+      <span class="inf-btn__shine" aria-hidden="true"></span>
+      <span class="inf-btn__star" aria-hidden="true"></span>
+      <span class="inf-btn__t">{{inf.btn.accept}}</span>
+    </a></div>
     </div>
     </section>
 
