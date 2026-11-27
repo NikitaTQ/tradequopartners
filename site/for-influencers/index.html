@@ -1220,97 +1220,120 @@ footer { border-top-color: transparent !important; }
 .inf-calc__tabs button { height: 30px; font-size: 12px; border-radius: 6px; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 0 0 1px #7f8187, 0 2px 3px rgba(0,0,0,.3); }
 .inf-calc__tabs button::after { bottom: -5px; height: 2px; box-shadow: 0 0 6px rgba(63,227,210,.8); }
 }
-.inf-how { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0b0b0d; }
+.inf-how { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0e0e10; }
 .inf-how__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box; }
-.inf-how__kick { margin: 0 0 clamp(8px, 1vw, 14px); text-align: center; font-size: clamp(11px, 1.15vw, 15px); letter-spacing: .3em; color: #e7131b; padding: 0; }
-.inf-how__h2 { margin: 0 auto clamp(26px, 3.4vw, 52px); text-align: center; }
-.inf-how__grid { display: grid; grid-template-columns: minmax(0, 34fr) minmax(0, 66fr); grid-template-rows: auto auto 1fr; column-gap: clamp(24px, 4.4vw, 72px); align-items: start; }
-.inf-how__phone-wrap { grid-row: 1 / 4; position: relative; justify-self: center; width: min(100%, 430px, (100vh - 210px) * 450 / 835); padding-bottom: 2%; }
-@supports (height: 100svh) {
-.inf-how__phone-wrap { width: min(100%, 430px, (100svh - 210px) * 450 / 835); }
-}
-.inf-how__sub { grid-column: 2; margin: clamp(28px, 4.6vw, 70px) 0 clamp(18px, 2.2vw, 32px) 1.2%; font-size: clamp(15px, 1.65vw, 24px); line-height: 1.45; color: #3a3a44; max-width: 36em; }
-.inf-how__steps { grid-column: 2; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: clamp(8px, 1.3vw, 20px); }
-.inf-how__note { grid-column: 2; margin: clamp(28px, 5vw, 80px) 0 0 1.2%; font-size: clamp(14px, 1.45vw, 21px); line-height: 1.5; color: #3a3a44; max-width: 38em; }
-.inf-how__note b { color: #0b0b0d; }
-.inf-how__step { --rh: clamp(60px, 6.4vw, 96px); position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; column-gap: clamp(12px, 2.4vw, 38px);
-  box-sizing: border-box; height: var(--rh); padding: 0 calc(var(--rh) * .44);
-  border: 0 solid transparent; border-image: url(../assets/influencers/nums-row.webp?v=e9e3a64f86) 128 155 fill / calc(var(--rh) / 2) calc(var(--rh) * .603) stretch;
-  transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease; }
-.inf-how__step::after { content: ''; position: absolute; z-index: 1; inset: 4% calc(var(--rh) * -.05); pointer-events: none; opacity: 0; transition: opacity .5s ease;
-  background: radial-gradient(closest-side, rgba(226,10,22,.78), rgba(226,10,22,.3) 50%, rgba(226,10,22,0)) 0 50% / calc(var(--rh) * .42) 84% no-repeat,
-    radial-gradient(closest-side, rgba(226,10,22,.78), rgba(226,10,22,.3) 50%, rgba(226,10,22,0)) 100% 50% / calc(var(--rh) * .42) 84% no-repeat;
-  filter: blur(4px); }
-.inf-how__step.is-lit { transform: scale(1.025); }
-.inf-how__step.is-lit::after { opacity: 1; }
-.inf-how__n { font-size: clamp(17px, 1.9vw, 28px); letter-spacing: 0; padding: 0; color: #e7131b; text-shadow: 0 1px 0 #a00d18; transition: text-shadow .5s ease; }
-.inf-how__step.is-lit .inf-how__n { text-shadow: 0 1px 0 #a00d18, 0 0 14px rgba(231,19,27,.55); }
-.inf-how__t { font-size: clamp(14px, 1.55vw, 23px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2; color: #121216; }
-.inf-how__v { font-size: clamp(9.5px, 1vw, 15px); letter-spacing: .14em; padding: 0; color: #121216; white-space: nowrap; }
-.inf-how__step--red .inf-how__v { color: #e7131b; }
-.inf-how__phone { --u: calc(100cqw / 450); position: relative; container-type: inline-size; width: 100%; aspect-ratio: 450 / 835; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;
-  border-radius: 11.5cqw / 6.2cqw; background: #fff; transform: perspective(1800px) rotateY(9deg) rotateZ(-1.2deg); transform-origin: 60% 50%;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px transparent, 0 30px 60px -24px rgba(60,40,120,.35), 0 0 46px rgba(255,120,190,.22);
-  border: 3px solid transparent; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(140deg, #ff9fd0, #b9a6ff 30%, #9fd4ff 55%, #ffc0e0 80%, #c4b5ff) border-box; }
-.inf-how__bar { display: flex; align-items: center; gap: calc(12 * var(--u)); padding: calc(26 * var(--u)) calc(22 * var(--u)) calc(18 * var(--u)); border-bottom: 1px solid #ececf1; }
-.inf-how__back { font-size: calc(30 * var(--u)); line-height: 1; color: #1a1a1f; margin-top: calc(-4 * var(--u)); }
-.inf-how__ava { position: relative; flex: none; width: calc(46 * var(--u)); height: calc(46 * var(--u)); border-radius: 50%; background: conic-gradient(from 210deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5, #feda75); }
-.inf-how__ava i { position: absolute; inset: calc(3.5 * var(--u)); border-radius: 50%; background: #050506; box-shadow: 0 0 0 calc(2 * var(--u)) #fff; }
-.inf-how__who { display: flex; flex-direction: column; line-height: 1.15; }
-.inf-how__who b { font-size: calc(18 * var(--u)); font-weight: 700; color: #111; }
-.inf-how__who i { font-style: normal; font-size: calc(14.5 * var(--u)); color: #19b34a; }
-.inf-how__chat { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: calc(9 * var(--u)); padding: calc(20 * var(--u)) calc(16 * var(--u)) 0; overflow: hidden; }
-.inf-how__msg { max-width: 78%; box-sizing: border-box; padding: calc(11 * var(--u)) calc(16 * var(--u)); border-radius: calc(20 * var(--u)); background: #ededf2; color: #16161a;
-  font-size: calc(16 * var(--u)); line-height: 1.32; letter-spacing: -.01em; display: flex; align-items: flex-start; gap: calc(11 * var(--u)); transform-origin: 0 100%; }
-.inf-how__msg--me { align-self: flex-end; transform-origin: 100% 100%; color: #fff; background: linear-gradient(100deg, #9b3cf2 0%, #6a4cf6 50%, #2f6bff 100%); }
-.inf-how__num { flex: none; display: inline-grid; place-items: center; width: calc(24 * var(--u)); height: calc(24 * var(--u)); margin-top: calc(-1 * var(--u)); border-radius: 50%; background: #0b0b0d; color: #fff; font-size: calc(13 * var(--u)); font-weight: 700; }
-.inf-how__num--red { background: #e7131b; }
-.inf-how__msg--card { flex-direction: column; gap: 0; padding: calc(11 * var(--u)) 0 calc(12 * var(--u)); width: 70%; max-width: none; overflow: hidden; }
-.inf-how__row { display: flex; align-items: flex-start; gap: calc(11 * var(--u)); padding: 0 calc(16 * var(--u)) calc(10 * var(--u)); }
-.inf-how__thumb { position: relative; display: flex; align-items: flex-end; width: 100%; height: calc(86 * var(--u)); overflow: hidden;
-  background: radial-gradient(40% 70% at 18% 30%, #0f6f7d 0%, rgba(15,111,125,0) 70%), radial-gradient(35% 60% at 58% 75%, #ff5d80 0%, rgba(255,93,128,0) 70%),
-    radial-gradient(30% 55% at 85% 25%, #1d8796 0%, rgba(29,135,150,0) 70%), radial-gradient(45% 50% at 40% 40%, #ff8ea6 0%, rgba(255,142,166,0) 70%),
-    radial-gradient(30% 40% at 70% 45%, #d7f3f2 0%, rgba(215,243,242,0) 70%), linear-gradient(90deg, #6fc6cc, #ff97ad 50%, #57b4bd); }
-.inf-how__thumb::before { content: ''; position: absolute; inset: -10%; filter: blur(calc(3 * var(--u)));   
-  background: radial-gradient(18% 30% at 12% 70%, #0b5c69, rgba(11,92,105,0) 70%), radial-gradient(22% 26% at 33% 22%, #ff6f8d, rgba(255,111,141,0) 70%), radial-gradient(14% 34% at 48% 62%, #e9fbfb, rgba(233,251,251,0) 70%),
-    radial-gradient(20% 30% at 66% 30%, #ff4f74, rgba(255,79,116,0) 70%), radial-gradient(16% 28% at 80% 72%, #0f7584, rgba(15,117,132,0) 70%), radial-gradient(12% 22% at 92% 40%, #ffd3dc, rgba(255,211,220,0) 70%); }
-.inf-how__thumb span { position: relative; margin: 0 0 calc(12 * var(--u)) calc(14 * var(--u)); font-family: var(--h2f), 'Inter', sans-serif; font-weight: 700; font-size: calc(15 * var(--u)); letter-spacing: .12em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
-.inf-how__url { padding: calc(10 * var(--u)) calc(16 * var(--u)) 0; font-weight: 700; color: #e7131b; }
-.inf-how__typing { display: none; gap: calc(5 * var(--u)); padding: calc(14 * var(--u)) calc(16 * var(--u)); border-radius: calc(20 * var(--u)); background: #ededf2; }
-.inf-how__typing i { width: calc(8 * var(--u)); height: calc(8 * var(--u)); border-radius: 50%; background: #8d8d96; animation: inf-how-dot 1s ease-in-out infinite; }
-.inf-how__typing i:nth-child(2) { animation-delay: .15s; }
-.inf-how__typing i:nth-child(3) { animation-delay: .3s; }
-@keyframes inf-how-dot { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(calc(-4 * var(--u))); opacity: 1; } }
-.inf-how__input { flex: none; height: calc(50 * var(--u)); margin: calc(14 * var(--u)) calc(16 * var(--u)) calc(22 * var(--u)); border-radius: 999px; background: #ededf2; }
-.inf-how.is-armed .inf-how__msg { display: none; }
-.inf-how.is-armed .inf-how__msg.is-in { display: flex; animation: inf-how-pop .45s cubic-bezier(.2,1.3,.4,1) both; }
-.inf-how.is-armed .inf-how__typing.is-on { display: inline-flex; animation: inf-how-pop .3s ease-out both; }
-@keyframes inf-how-pop { from { opacity: 0; transform: translateY(calc(14 * var(--u))) scale(.86); } to { opacity: 1; transform: none; } }
-.inf-how.is-fade .inf-how__chat { opacity: 0; transition: opacity .5s ease; }
-.inf-how__toast { position: absolute; z-index: 2; left: -14%; bottom: 3%; display: flex; align-items: center; gap: 4.2cqw; padding: 3.4cqw 6cqw 3.4cqw 4.4cqw; container-type: normal;
-  border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(240,240,246,.82)); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.9), 0 0 0 1px rgba(200,200,215,.6), 0 18px 40px -16px rgba(40,30,80,.4), 0 0 30px rgba(255,60,80,.12); transform: rotate(-4deg); }
-.inf-how__phone-wrap { container-type: inline-size; }
-.inf-how__coin { flex: none; display: grid; place-items: center; width: 12.6cqw; height: 12.6cqw; border-radius: 50%; color: #fff; font-size: 6cqw; font-weight: 700;
-  background: radial-gradient(circle at 35% 30%, #ff5560, #d10f1c 70%); box-shadow: 0 4px 12px rgba(209,15,28,.45); }
-.inf-how__tt { display: flex; flex-direction: column; line-height: 1.1; }
-.inf-how__tt small { font-family: var(--h2f), 'Inter', sans-serif; font-weight: 700; font-size: 2.7cqw; letter-spacing: .24em; text-transform: uppercase; color: #8a8a94; }
-.inf-how__tt b { font-family: var(--h2f), 'Inter', sans-serif; font-size: 8.2cqw; letter-spacing: -.01em; color: #e7131b; margin: .6cqw 0; }
-.inf-how__tt em { font-style: normal; font-size: 3.5cqw; color: #3a3a44; }
-.inf-how.is-armed .inf-how__toast { opacity: 0; transform: rotate(-4deg) translateY(16px) scale(.9); transition: opacity .5s ease, transform .6s cubic-bezier(.2,1.4,.4,1); }
-.inf-how.is-armed .inf-how__toast.is-in { opacity: 1; transform: rotate(-4deg); }
+.inf-how__kick { margin: 0 0 clamp(8px, 1vw, 14px); text-align: center; font-size: clamp(11px, 1.15vw, 15px); letter-spacing: .38em; color: #e7131b; padding: 0; }
+.inf-how__h2 { margin: 0 auto clamp(22px, 3vw, 44px); text-align: center; }
+@keyframes dmIn { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes dmDot { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+@keyframes dmPush { 0% { opacity: 0; transform: translateY(-40px) scale(.9); } 60% { opacity: 1; transform: translateY(4px) scale(1.02); } 100% { opacity: 1; transform: none; } }
+.dm { position: relative; width: 1160px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 120px; zoom: var(--dmz, 1); }
+.dm [hidden] { display: none !important; }
+.dm__ph-wrap { position: relative; flex: 0 0 390px; display: flex; justify-content: center; perspective: 1600px; }
+.dm__ph-glow { position: absolute; left: 4%; right: 4%; top: 10%; bottom: 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(200,140,255,.22), rgba(255,140,190,.12) 55%, rgba(0,0,0,0)); filter: blur(14px); }
+.dm__ph { position: relative; width: 360px; padding: 3px; border-radius: 44px; transform: rotateY(9deg) rotate(-1.5deg);
+  background: conic-gradient(from 200deg, #fff, #a9e6f2, #f5b5d8, #e6c2ff, #fff, #b9c4ff, #f7b7da, #fff); box-shadow: 0 0 26px rgba(240,150,210,.35), 0 50px 70px -34px rgba(20,22,30,.45); }
+.dm__screen { position: relative; border-radius: 41px; overflow: hidden; background: #fff; height: 720px; display: flex; flex-direction: column; }
+.dm__bars { display: flex; gap: 4px; padding: 14px 18px 0; }
+.dm-bar { flex: 1; height: 3px; border-radius: 3px; background: #e6e6ec; overflow: hidden; }
+.dm-bar i { display: block; height: 100%; width: 0; background: #e7131b; }
+.dm__head { display: flex; align-items: center; gap: 10px; padding: 12px 18px 14px; border-bottom: 1px solid #efeff2; }
+.dm__back { font-size: 22px; line-height: 1; }
+.dm__ava { flex: none; width: 36px; height: 36px; border-radius: 50%; padding: 2px; box-sizing: border-box; background: conic-gradient(from 210deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5, #feda75); }
+.dm__ava img { display: block; width: 100%; height: 100%; border-radius: 50%; box-sizing: border-box; border: 2px solid #fff; background: #000; }
+.dm__who { display: flex; flex-direction: column; gap: 1px; }
+.dm__who b { font-size: 14px; font-weight: 700; }
+.dm__who i { font-style: normal; font-size: 11.5px; font-weight: 500; color: #22a55a; }
+.dm__who i.is-typing { color: #8a8a92; }
+.dm__step { margin-left: auto; font-family: var(--h2f), 'Inter', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #8a8a92; }
+.dm__chat { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; padding: 14px 14px 0; font-size: 13.5px; line-height: 1.4; overflow: hidden; }
+.dm-me, .dm-them { flex: none; padding: 9px 14px; animation: dmIn .45s cubic-bezier(.2,.8,.2,1) both; }
+.dm-me { align-self: flex-end; max-width: 84%; border-radius: 20px 20px 6px 20px; background: linear-gradient(135deg, #a033ff 0%, #5b5bff 60%, #0080ff 100%); color: #fff; font-weight: 500; }
+.dm-them { align-self: flex-start; max-width: 86%; border-radius: 20px 20px 20px 6px; background: #efeff2; }
+.dm-them--late { animation-delay: .35s; }
+.dm-card { flex: none; align-self: flex-start; width: 90%; box-sizing: border-box; display: flex; flex-direction: column; gap: 9px; padding: 11px 12px; border-radius: 6px 20px 20px 6px; background: #efeff2;
+  box-shadow: 0 0 0 2px rgba(231,19,27,0); transition: box-shadow .4s; animation: dmIn .45s cubic-bezier(.2,.8,.2,1) both; }
+.dm-card--last { border-radius: 6px 20px 20px 20px; }
+.dm-card.is-act { box-shadow: 0 0 0 2px rgba(231,19,27,.55); }
+.dm-card__h { display: flex; align-items: center; gap: 9px; font-weight: 700; }
+.dm-card__dot { flex: none; width: 24px; height: 24px; border-radius: 50%; background: #e7131b; color: #fff; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: background .3s; }
+.dm-card.is-past .dm-card__dot { background: #0e0e10; }
+.dm-card__box { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 6px 0 12px; border-radius: 10px; background: #fff; box-shadow: inset 0 0 0 1px #e2e2e8; }
+.dm-card--last .dm-card__box { gap: 10px; height: 40px; padding: 0 10px 0 8px; }
+.dm-card__box > img { flex: none; width: 24px; height: 24px; border-radius: 50%; }
+.dm-mail { font-size: 12px; color: #4a4a52; letter-spacing: .02em; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dm-link { font-size: 12.5px; font-weight: 600; color: #2a2a30; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dm-link span { font-weight: 700; }
+.dm-where { font-size: 11.5px; color: #6a6a72; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.dm-chip { margin-left: auto; flex: none; white-space: nowrap; height: 26px; padding: 0 10px; border-radius: 7px; display: flex; align-items: center; font-size: 11.5px; font-weight: 700;
+  background: #e6e6ec; color: #4a4a52; transition: background .3s, color .3s; }
+.dm-card.is-done .dm-chip { background: #e7131b; color: #fff; }
+.dm-fans { flex: none; display: flex; }
+.dm-fans img { width: 26px; height: 26px; border-radius: 50%; box-shadow: 0 0 0 2px #fff; }
+.dm-fans img + img { margin-left: -8px; }
+.dm-join { font-size: 12px; line-height: 1.3; color: #2a2a30; }
+.dm-pct { margin-left: auto; padding: 0; font-size: 15px; letter-spacing: 0; color: #e7131b; opacity: 0; transition: opacity .4s; }
+.dm-card.is-done .dm-pct { opacity: 1; }
+.dm-typing { flex: none; align-self: flex-start; display: flex; gap: 4px; padding: 12px 14px; border-radius: 20px 20px 20px 6px; background: #efeff2; animation: dmIn .3s ease both; }
+.dm-typing i { width: 6px; height: 6px; border-radius: 50%; background: #8a8a92; animation: dmDot 1s infinite; }
+.dm-typing i:nth-child(2) { animation-delay: .15s; }
+.dm-typing i:nth-child(3) { animation-delay: .3s; }
+.dm__compose { margin: 10px 14px 18px; height: 42px; border-radius: 999px; background: #f2f2f5; display: flex; align-items: center; padding: 0 16px; font-size: 13px; color: #8a8a92; }
+.dm-push { position: absolute; left: 10px; right: 10px; top: 10px; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 22px; background: rgba(255,255,255,.86);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 0 0 1px rgba(14,14,16,.08), 0 0 0 4px rgba(255,255,255,.7), 0 22px 40px -14px rgba(231,19,27,.5); animation: dmPush .7s cubic-bezier(.2,.9,.3,1) both; }
+.dm-push__ico { flex: none; width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(180deg, #f0262e, #c8151d); box-shadow: inset 0 2px 0 rgba(255,255,255,.35); color: #fff; font-size: 20px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.dm-push__t { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.dm-push__t small { padding: 0; font-size: 9px; letter-spacing: .2em; color: #8a8a92; }
+.dm-push__t b { padding: 0; font-size: 22px; letter-spacing: -.02em; line-height: 1; color: #e7131b; text-shadow: 0 1px 0 #b40e15, 0 2px 0 #960b11, 0 8px 14px rgba(231,19,27,.3); }
+.dm-push__t em { font-style: normal; font-size: 12px; color: #4a4a52; }
+.dm__right { flex: 0 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 26px; }
+.dm__sub { margin: 0 0 10px; font-size: 22px; line-height: 1.6; color: #4a4a52; text-wrap: pretty; }
+.dm-row { position: relative; display: block; width: 100%; height: 92px; padding: 6px; box-sizing: border-box; border: 0; border-radius: 999px; cursor: pointer; font: inherit; text-align: left; color: inherit;
+  background: linear-gradient(180deg, #fff 0%, #d9dae1 48%, #f8f8fb 62%, #c3c5ce 100%);
+  box-shadow: 0 0 0 1px #b9bbc4, inset 0 1px 0 #fff, 0 14px 22px -12px rgba(20,22,30,.35), 0 0 0 0 #e7131b, 0 0 0 rgba(231,19,27,.55);
+  transition: box-shadow .5s, transform .5s cubic-bezier(.2,.8,.2,1); -webkit-tap-highlight-color: transparent; }
+.dm-row:focus-visible { outline: 2px solid #e7131b; outline-offset: 4px; }
+.dm-row.is-act { transform: scale(1.045); box-shadow: 0 0 0 1px #b9bbc4, inset 0 1px 0 #fff, 0 14px 22px -12px rgba(20,22,30,.35), 0 0 0 3px #e7131b, 0 0 46px rgba(231,19,27,.55); }
+.dm-row.is-dim { transform: scale(.97); }
+.dm-row__in { position: relative; height: 100%; border-radius: 999px; overflow: hidden; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 22px; padding: 0 34px;
+  background: linear-gradient(180deg, #eeeef3 0%, #fff 38%, #f1f1f5 100%); box-shadow: inset 0 3px 5px rgba(14,14,16,.12), inset 0 -2px 3px rgba(255,255,255,.95); }
+.dm-row__fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; opacity: 0; transition: width .35s ease, opacity .6s ease; background: linear-gradient(90deg, rgba(231,19,27,.08), rgba(231,19,27,.3)); }
+.dm-row__fill::after { content: ''; position: absolute; right: -28px; top: 0; bottom: 0; width: 28px; background: linear-gradient(90deg, rgba(231,19,27,.3), rgba(231,19,27,0)); opacity: 0; transition: opacity .3s; }
+.dm-row.is-act .dm-row__fill { opacity: 1; }
+.dm-row.is-act .dm-row__fill::after { opacity: 1; }
+.dm-row__cap { position: absolute; top: 10%; bottom: 10%; width: 60px; border-radius: 50%; background: radial-gradient(closest-side, rgba(231,19,27,.85), rgba(231,19,27,0)); opacity: 0; transition: opacity .5s; }
+.dm-row__cap--l { left: -30px; }
+.dm-row__cap--r { right: -30px; }
+.dm-row.is-act .dm-row__cap { opacity: 1; }
+.dm-row__gloss { position: absolute; left: 46px; right: 46px; top: 3px; height: 32%; border-radius: 999px; background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,0)); pointer-events: none; }
+.dm-row__n { position: relative; padding: 0; font-size: 30px; letter-spacing: -.03em; color: #e7131b; text-shadow: 0 1px 0 #b40e15, 0 2px 0 #960b11, 0 3px 0 #7a090e, 0 8px 12px rgba(231,19,27,.25); transition: opacity .4s; }
+.dm-row__t { position: relative; font-size: 22px; font-weight: 500; line-height: 1.2; text-wrap: balance; transition: color .4s; }
+.dm-row__v { position: relative; display: flex; align-items: center; gap: 10px; }
+.dm-row__v .tq-h2 { padding: 0; font-size: 13px; letter-spacing: .2em; white-space: nowrap; transition: color .4s; }
+.dm-row__v .dm-row__red { color: #e7131b; }
+.dm-row__ck { width: 24px; height: 24px; border-radius: 50%; background: #b4b4bc; color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; transform: scale(0); transition: background .5s, transform .45s cubic-bezier(.3,1.6,.5,1); }
+.dm-row.is-act .dm-row__ck { background: #e7131b; }
+.dm-row.is-tick .dm-row__ck { transform: none; }
+.dm-row.is-dim .dm-row__n { opacity: .35; }
+.dm-row.is-dim .dm-row__t, .dm-row.is-dim .dm-row__v .tq-h2:not(.dm-row__red) { color: #a4a4ac; }
+.dm__line { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 3; opacity: 0; transition: opacity .3s; }
+.dm__line path { stroke-dasharray: 1; stroke-dashoffset: 1; }
 @media (max-width: 640px) {
-.inf-how__grid { display: flex; flex-direction: column; }
-.inf-how__sub { order: 0; margin: 0 0 22px; text-align: center; }
-.inf-how__phone-wrap { order: 1; width: min(74%, 300px); margin: 0 auto 30px; transform: translateX(5%); }
-.inf-how__phone { transform: none; }
-.inf-how__toast { left: -12%; }
-.inf-how__steps { order: 2; }
-.inf-how__note { order: 3; margin: 22px 0 0; text-align: center; }
-.inf-how__step { --rh: 58px; column-gap: 12px; padding: 0 22px; }
-.inf-how__n { font-size: 17px; }
-.inf-how__t { font-size: 13.5px; white-space: normal; }
-.inf-how__v { font-size: 9.5px; letter-spacing: .1em; }
+.dm { width: 400px; flex-direction: column; gap: 46px; }
+.dm__ph-wrap { flex: none; }
+.dm__right { flex: none; width: 100%; gap: 18px; }
+.dm__sub { font-size: 19px; text-align: center; }
+.dm-row { height: 84px; }
+.dm-row__in { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto auto; align-content: center; gap: 4px 16px; padding: 0 26px; }
+.dm-row__n { grid-row: 1 / 3; font-size: 28px; }
+.dm-row__t { grid-column: 2; grid-row: 1; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dm-row__v { display: contents; }
+.dm-row__v .tq-h2 { grid-column: 2; grid-row: 2; font-size: 10.5px; letter-spacing: .16em; color: #6a6a72; }
+.dm-row__ck { grid-column: 3; grid-row: 1 / 3; }
+.dm__line { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+.dm *, .dm { animation: none !important; transition: none !important; }
 }
 .inf-trip { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; color: #0b0b0d; }
 .inf-trip__in { max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 5vw, 72px); box-sizing: border-box;
@@ -1841,42 +1864,97 @@ footer { border-top-color: transparent !important; }
       </div>
     </section>
 
-    <!-- How it works (owner's design, November 2026): "HOW IT WORKS / SO SIMPLE IT FITS IN A DM." On the left a phone with
-         a chat: the messages come in one by one (a typing dots bubble before each answer), and as each of the four
-         steps comes up in the chat its glass row on the right lights up (orbit.js; the rows are the "Three numbers"
-         glass, nums-row.webp). At the end a "commission paid" note pops up by the phone. Plays while on screen, again
-         after a pause. Reduced motion: the whole chat at once. Phones: the line, the phone, the rows. Some of the
-         design's lines were reworded to the site's own wording. -->
+    <!-- How it works (owner's design "How It Works · DM v2", November 2026; it replaced the first DM block): "HOW IT
+         WORKS / SO SIMPLE IT FITS IN A DM." A phone with a DM from TradeQuo Partners and four glass capsules. The chat
+         plays the steps one by one (orbit.js, a 3.6 s step): a typing bubble, then the step's card comes in, its chip
+         turns from "Creating…" to "✓ Account ready" and so on; at the same time its capsule lights (a red rim and glow,
+         a red fill running across it over the step, a tick at its end) and a thin line with a travelling dot joins the
+         card to its capsule; the story bar at the phone's top fills step by step. After the fourth a "+$128.40" note
+         drops in at the phone's top; then all starts over. A capsule clicked jumps to its step. Plays only while on
+         screen. The design's px are kept (the phone 360 wide, the capsules 92 high): the whole block is scaled to the
+         column and the screen (zoom, orbit.js). Reduced motion: the finished chat. Phones: the phone, then the capsules,
+         no line. The design's followers' pictures are cropped to their faces (one carried a channel name). -->
     <section id="how" class="inf-how" data-how data-screen-label="How it works">
       <div class="inf-how__in">
         <p class="inf-how__kick tq-h2">How it works</p>
         <h2 class="inf-how__h2 tq-h2" data-fitw>So simple it fits in a DM.</h2>
-        <div class="inf-how__grid">
-          <div class="inf-how__phone-wrap">
-            <div class="inf-how__phone" aria-hidden="true">
-              <div class="inf-how__bar"><span class="inf-how__back">‹</span><span class="inf-how__ava"><i></i></span><span class="inf-how__who"><b>tradequo</b><i>Active now</i></span></div>
-              <div class="inf-how__chat">
-                <div class="inf-how__msg inf-how__msg--me" data-how-msg>hey, how do I earn with you?</div>
-                <div class="inf-how__msg" data-how-msg>Easy. Four steps, that’s the whole thing:</div>
-                <div class="inf-how__msg" data-how-msg data-step="1"><span class="inf-how__num">1</span><span>Sign up. Takes 2 minutes</span></div>
-                <div class="inf-how__msg inf-how__msg--card" data-how-msg data-step="2"><span class="inf-how__row"><span class="inf-how__num">2</span><span>Grab your personal link</span></span><span class="inf-how__thumb"><span>TradeQuo</span></span><span class="inf-how__url">tradequo.com/r/you</span></div>
-                <div class="inf-how__msg" data-how-msg data-step="3"><span class="inf-how__num">3</span><span>Post it: stories, bio, videos</span></div>
-                <div class="inf-how__msg inf-how__msg--me" data-how-msg>ok, and how do I get paid?</div>
-                <div class="inf-how__msg" data-how-msg data-step="4"><span class="inf-how__num inf-how__num--red">4</span><span>Your followers become clients. You get up to <span style="color: #e7131b;">87%</span> of the revenue we earn from them</span></div>
-                <div class="inf-how__typing" data-how-typing><i></i><i></i><i></i></div>
+        <div class="dm" data-dm>
+          <div class="dm__ph-wrap">
+            <span class="dm__ph-glow" aria-hidden="true"></span>
+            <div class="dm__ph" aria-hidden="true">
+              <div class="dm__screen">
+                <div class="dm__bars"><span class="dm-bar"><i data-dm-bar></i></span><span class="dm-bar"><i data-dm-bar></i></span><span class="dm-bar"><i data-dm-bar></i></span><span class="dm-bar"><i data-dm-bar></i></span></div>
+                <div class="dm__head">
+                  <span class="dm__back">‹</span>
+                  <span class="dm__ava"><img src="../assets/influencers/dm-ava.webp?v=d80455383b" width="96" height="96" alt="" loading="lazy" decoding="async"></span>
+                  <span class="dm__who"><b>TradeQuo Partners</b><i data-dm-status data-a="Active now" data-b="typing…">Active now</i></span>
+                  <span class="dm__step" data-dm-step data-step="Step" data-done="Done"></span>
+                </div>
+                <div class="dm__chat">
+                  <span class="dm-me" data-dm-intro hidden>hey, how do I earn with you?</span>
+                  <span class="dm-them dm-them--late" data-dm-intro hidden>Easy. Four steps, that’s the whole thing:</span>
+                  <div class="dm-card" data-dm-card hidden>
+                    <span class="dm-card__h"><b class="dm-card__dot" data-dm-mark>1</b>Sign up. Takes 2 minutes</span>
+                    <span class="dm-card__box"><span class="dm-mail">you@channel.com</span><span class="dm-chip" data-dm-chip data-a="Creating…" data-b="✓ Account ready">Creating…</span></span>
+                  </div>
+                  <div class="dm-card" data-dm-card hidden>
+                    <span class="dm-card__h"><b class="dm-card__dot" data-dm-mark>2</b>Here’s your personal link</span>
+                    <span class="dm-card__box"><span class="dm-link">Your <span style="color: #e7131b;">TQP</span> link · TradeQuo Partners</span><span class="dm-chip" data-dm-chip data-a="Copy" data-b="✓ Copied">Copy</span></span>
+                  </div>
+                  <div class="dm-card" data-dm-card hidden>
+                    <span class="dm-card__h"><b class="dm-card__dot" data-dm-mark>3</b>Post it where your audience is</span>
+                    <span class="dm-card__box"><img src="../assets/influencers/dm-plat1.webp?v=168d6c7d15" width="64" height="64" alt="" loading="lazy" decoding="async"><img src="../assets/influencers/dm-plat2.webp?v=a2c7191b3b" width="64" height="64" alt="" loading="lazy" decoding="async"><img src="../assets/influencers/dm-plat3.webp?v=12bcf51fec" width="64" height="64" alt="" loading="lazy" decoding="async"><span class="dm-where">stories · bio · videos</span><span class="dm-chip" data-dm-chip data-a="Posting…" data-b="✓ Live">Posting…</span></span>
+                  </div>
+                  <div class="dm-card dm-card--last" data-dm-card hidden>
+                    <span class="dm-card__h"><b class="dm-card__dot" data-dm-mark>4</b>They join. You earn.</span>
+                    <span class="dm-card__box"><span class="dm-fans"><img src="../assets/influencers/dm-fan1.webp?v=f49fe13036" width="64" height="64" alt="" loading="lazy" decoding="async"><img src="../assets/influencers/dm-fan2.webp?v=24aac56c07" width="64" height="64" alt="" loading="lazy" decoding="async"><img src="../assets/influencers/dm-fan3.webp?v=ef47d1b74f" width="64" height="64" alt="" loading="lazy" decoding="async"></span><span class="dm-join" data-dm-join data-a="3 followers joined via your link" data-b="They engage with the market, you get paid daily">3 followers joined via your link</span><span class="dm-pct tq-h2" data-dm-pct>87%</span></span>
+                  </div>
+                  <span class="dm-typing" data-dm-typing hidden><i></i><i></i><i></i></span>
+                </div>
+                <div class="dm__compose">Message…</div>
+                <div class="dm-push" data-dm-push hidden>
+                  <span class="dm-push__ico">$</span>
+                  <span class="dm-push__t"><small class="tq-h2">TradeQuo Partners · now</small><b class="tq-h2">+$128.40</b><em>Commission paid today. Again tomorrow.</em></span>
+                </div>
               </div>
-              <div class="inf-how__input"></div>
             </div>
-            <div class="inf-how__toast" data-how-toast aria-hidden="true"><span class="inf-how__coin">$</span><span class="inf-how__tt"><small>TradeQuo · now</small><b>+$128.40</b><em>Commission paid today</em></span></div>
           </div>
-          <p class="inf-how__sub">The whole partner program, explained in one chat. Four steps, then the money comes to you.</p>
-          <ol class="inf-how__steps">
-              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">01</span><span class="inf-how__t">Sign up</span><span class="inf-how__v tq-h2">2 min</span></li>
-              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">02</span><span class="inf-how__t">Get your personal link</span><span class="inf-how__v tq-h2">Instant</span></li>
-              <li class="inf-how__step" data-how-step><span class="inf-how__n tq-h2">03</span><span class="inf-how__t">Post it where your audience is</span><span class="inf-how__v tq-h2">Any platform</span></li>
-              <li class="inf-how__step inf-how__step--red" data-how-step><span class="inf-how__n tq-h2">04</span><span class="inf-how__t">They join. You earn.</span><span class="inf-how__v tq-h2">87% · Daily</span></li>
-          </ol>
-          <p class="inf-how__note"><b>87% of what?</b> Up to 87% of the revenue TradeQuo earns from your clients. Paid out every day, no cap.</p>
+          <div class="dm__right">
+            <p class="dm__sub">The whole partner program, explained in one chat. Four steps, then the money comes to you.</p>
+            <button type="button" class="dm-row" data-dm-row>
+              <span class="dm-row__in">
+                <span class="dm-row__fill" data-dm-fill></span><span class="dm-row__cap dm-row__cap--l"></span><span class="dm-row__cap dm-row__cap--r"></span><span class="dm-row__gloss"></span>
+                <span class="dm-row__n tq-h2">01</span>
+                <span class="dm-row__t">Sign up</span>
+                <span class="dm-row__v"><span class="tq-h2">2 min</span><span class="dm-row__ck">✓</span></span>
+              </span>
+            </button>
+            <button type="button" class="dm-row" data-dm-row>
+              <span class="dm-row__in">
+                <span class="dm-row__fill" data-dm-fill></span><span class="dm-row__cap dm-row__cap--l"></span><span class="dm-row__cap dm-row__cap--r"></span><span class="dm-row__gloss"></span>
+                <span class="dm-row__n tq-h2">02</span>
+                <span class="dm-row__t">Get your personal link</span>
+                <span class="dm-row__v"><span class="tq-h2">Instant</span><span class="dm-row__ck">✓</span></span>
+              </span>
+            </button>
+            <button type="button" class="dm-row" data-dm-row>
+              <span class="dm-row__in">
+                <span class="dm-row__fill" data-dm-fill></span><span class="dm-row__cap dm-row__cap--l"></span><span class="dm-row__cap dm-row__cap--r"></span><span class="dm-row__gloss"></span>
+                <span class="dm-row__n tq-h2">03</span>
+                <span class="dm-row__t">Post it where your audience is</span>
+                <span class="dm-row__v"><span class="tq-h2">Any platform</span><span class="dm-row__ck">✓</span></span>
+              </span>
+            </button>
+            <button type="button" class="dm-row" data-dm-row>
+              <span class="dm-row__in">
+                <span class="dm-row__fill" data-dm-fill></span><span class="dm-row__cap dm-row__cap--l"></span><span class="dm-row__cap dm-row__cap--r"></span><span class="dm-row__gloss"></span>
+                <span class="dm-row__n tq-h2">04</span>
+                <span class="dm-row__t">They join. You earn.</span>
+                <span class="dm-row__v"><span class="tq-h2 dm-row__red">87% · Daily</span><span class="dm-row__ck">✓</span></span>
+              </span>
+            </button>
+          </div>
+          <svg class="dm__line" data-dm-svg aria-hidden="true"><defs><linearGradient id="dmLine" data-dm-grad gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0E0E10" stop-opacity=".25"/><stop offset="1" stop-color="#0E0E10" stop-opacity="1"/></linearGradient></defs><path data-dm-path pathLength="1" fill="none" stroke="url(#dmLine)" stroke-width="1.1" stroke-linecap="round"/><circle data-dm-a r="2.6" fill="#FFFFFF" stroke="#0E0E10" stroke-opacity=".45" stroke-width="1.2"/><circle data-dm-pulse r="2.2" fill="#0E0E10"/><circle data-dm-b r="3" fill="#0E0E10"/></svg>
         </div>
       </div>
     </section>
@@ -1963,6 +2041,6 @@ footer { border-top-color: transparent !important; }
 
 <script src="../assets/js/transition.js?v=f60783e549" defer></script>
 <script src="../assets/js/landing.js?v=2d278b596f" defer></script>
-<script src="../assets/js/orbit.js?v=88fa823da3" defer></script>
+<script src="../assets/js/orbit.js?v=6fa71ea6c2" defer></script>
 </body>
 </html>

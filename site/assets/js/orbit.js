@@ -437,37 +437,114 @@
   else window.addEventListener('resize', draw, { passive: true });
 })();
 
-/* /for-influencers/: "How it works". While the block is on screen the chat plays: the messages come in one by one (a
- * typing dots bubble before each of tradequo's answers), each of the four steps lighting its glass row as it comes
- * (the rows before it stay a little lit), then the "commission paid" note pops up; after a pause it fades and plays
- * again. Off screen it stops and starts over when back. Reduced motion: nothing to do (all shown, nothing lit). */
+/* /for-influencers/: "How it works" (owner's "How It Works · DM v2"). The chat plays the four steps, 3.6 s each: a
+ * typing bubble; at 0.7 s the step's card comes in (its capsule lit, its fill and its story bar running across over
+ * the step, a line from the card to the capsule); at 62% its chip says "done" and the capsule's tick pops; then the
+ * next. After the fourth the "commission paid" note, then all again. A capsule clicked jumps to its step. It plays
+ * only while on screen (and starts over there). The block is scaled as one (zoom, --dmz) to its column and the
+ * screen. Reduced motion: the finished chat, no line. */
 (() => {
   const sec = document.querySelector('[data-how]');
-  if (!sec || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const msgs = [...sec.querySelectorAll('[data-how-msg]')], typing = sec.querySelector('[data-how-typing]');
-  const steps = [...sec.querySelectorAll('[data-how-step]')], toast = sec.querySelector('[data-how-toast]');
-  sec.classList.add('is-armed');
-  let timers = [];
-  const at = (ms, fn) => timers.push(setTimeout(fn, ms));
-  const light = (n) => steps.forEach((s, i) => { s.classList.toggle('is-lit', i === n - 1); s.classList.toggle('is-done', i < n - 1); });
-  const reset = () => { timers.forEach(clearTimeout); timers = []; msgs.forEach((m) => m.classList.remove('is-in')); typing.classList.remove('is-on'); toast.classList.remove('is-in'); light(0); sec.classList.remove('is-fade'); };
-  const play = () => {
-    reset();
-    let t = 400;
-    msgs.forEach((m) => {
-      const mine = m.classList.contains('inf-how__msg--me');
-      if (!mine) { const s0 = t; at(s0, () => typing.classList.add('is-on')); t += 650; }
-      const s1 = t;
-      at(s1, () => { typing.classList.remove('is-on'); m.classList.add('is-in'); if (m.dataset.step) light(Number(m.dataset.step)); });
-      t += mine ? 700 : 500;
-    });
-    at(t + 300, () => toast.classList.add('is-in'));
-    at(t + 7500, () => sec.classList.add('is-fade'));
-    at(t + 8100, play);
+  const dm = sec && sec.querySelector('[data-dm]');
+  if (!dm) return;
+  const S = 3600;
+  const $$ = (q) => [...dm.querySelectorAll(q)];
+  const rows = $$('[data-dm-row]'), cards = $$('[data-dm-card]'), bars = $$('[data-dm-bar]'), fills = $$('[data-dm-fill]');
+  const intro = $$('[data-dm-intro]'), typingEl = dm.querySelector('[data-dm-typing]'), push = dm.querySelector('[data-dm-push]');
+  const statusEl = dm.querySelector('[data-dm-status]'), stepEl = dm.querySelector('[data-dm-step]');
+  const svg = dm.querySelector('[data-dm-svg]'), path = dm.querySelector('[data-dm-path]'), dA = dm.querySelector('[data-dm-a]'), dB = dm.querySelector('[data-dm-b]');
+  const pulse = dm.querySelector('[data-dm-pulse]'), grad = dm.querySelector('[data-dm-grad]');
+  const PHONE = window.matchMedia('(max-width: 640px)');
+  const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let step = -1, phase = 0, pre = false, timers = [], raf = 0, lastI = -1, t0 = 0, on = false;
+
+  /* the scale: the design's width (1160, phones 400) to the column, and (wider screens) its height to the screen */
+  const fit = () => {
+    dm.style.setProperty('--dmz', '1');
+    const pe = dm.parentElement, cs = getComputedStyle(pe), col = pe.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    let z;
+    if (PHONE.matches) z = Math.min(1, col / 400);
+    else z = Math.max(.55, Math.min(1, col / 1160, (window.innerHeight - 250) / Math.max(1, dm.offsetHeight)));
+    dm.style.setProperty('--dmz', z.toFixed(4));
   };
-  let on = false;
+
+  const render = () => {
+    rows.forEach((r, i) => {
+      const done = step > i, act = step === i;
+      r.classList.toggle('is-act', act); r.classList.toggle('is-done', done); r.classList.toggle('is-dim', step >= 0 && !act);
+      r.classList.toggle('is-tick', done || (act && phase === 2));
+      const w = done || (act && !pre) ? '100%' : '0%', tr = act && !pre ? 'width ' + S + 'ms linear' : 'width .35s ease';
+      fills[i].style.transition = tr + ', opacity .6s ease'; fills[i].style.width = w;
+      bars[i].style.transition = tr; bars[i].style.width = w;
+    });
+    cards.forEach((c, i) => {
+      const show = step > i || (step === i && phase >= 1), done = step > i || (step === i && phase === 2);
+      c.hidden = !show;
+      c.classList.toggle('is-act', step === i); c.classList.toggle('is-done', done); c.classList.toggle('is-past', step > i);
+      c.querySelector('[data-dm-mark]').textContent = step > i ? '✓' : String(i + 1);
+      const chip = c.querySelector('[data-dm-chip]'); if (chip) chip.textContent = done ? chip.dataset.b : chip.dataset.a;
+      const j = c.querySelector('[data-dm-join]'); if (j) j.textContent = done ? j.dataset.b : j.dataset.a;
+    });
+    const typing = step >= 0 && step <= 3 && phase === 0;
+    intro.forEach((e) => { e.hidden = step < 0; });
+    typingEl.hidden = !typing;
+    push.hidden = step !== 4;
+    statusEl.textContent = typing ? statusEl.dataset.b : statusEl.dataset.a;
+    statusEl.classList.toggle('is-typing', typing);
+    stepEl.textContent = step >= 0 && step <= 3 ? stepEl.dataset.step + ' ' + (step + 1) + '/4' : (step === 4 ? stepEl.dataset.done : '');
+  };
+  const set = (o) => { if ('step' in o) step = o.step; if ('phase' in o) phase = o.phase; if ('pre' in o) pre = o.pre; render(); };
+  const clear = () => { timers.forEach(clearTimeout); timers = []; };
+  const at = (ms, fn) => timers.push(setTimeout(fn, ms));
+  const run = (i) => {
+    clear();
+    if (i > 3) {
+      set({ step: 4, phase: 2, pre: false });
+      at(4200, () => set({ step: -1, phase: 0 }));
+      at(5000, () => run(0));
+      return;
+    }
+    set({ step: i, phase: 0, pre: true });
+    requestAnimationFrame(() => requestAnimationFrame(() => set({ pre: false })));
+    at(700, () => set({ phase: 1 }));
+    at(S * .62, () => set({ phase: 2 }));
+    at(S, () => run(i + 1));
+  };
+
+  /* the line: from the right edge of the step's card to its capsule's left, a gentle S, drawn in, a dot running on it */
+  const line = () => {
+    raf = requestAnimationFrame(line);
+    const hide = () => { svg.style.opacity = '0'; lastI = -1; };
+    const i = step, cap = rows[i], card = cards[i];
+    if (PHONE.matches || i < 0 || i > 3 || phase < 1 || !card || card.hidden) return hide();
+    const G = dm.getBoundingClientRect(), z = dm.offsetWidth ? G.width / dm.offsetWidth : 1;
+    const a = card.getBoundingClientRect(), b = cap.getBoundingClientRect();
+    const x1 = (a.right - G.left) / z + 2, y1 = (a.top + a.height / 2 - G.top) / z, x2 = (b.left - G.left) / z - 8, y2 = (b.top + b.height / 2 - G.top) / z;
+    if (x2 - x1 < 40) return hide();
+    const dx = (x2 - x1) * .5;
+    path.setAttribute('d', 'M' + x1 + ' ' + y1 + ' C' + (x1 + dx) + ' ' + y1 + ' ' + (x2 - dx) + ' ' + y2 + ' ' + x2 + ' ' + y2);
+    dA.setAttribute('cx', x1); dA.setAttribute('cy', y1); dB.setAttribute('cx', x2); dB.setAttribute('cy', y2);
+    grad.setAttribute('x1', x1); grad.setAttribute('x2', x2); grad.setAttribute('y1', y1); grad.setAttribute('y2', y2);
+    const now = performance.now();
+    if (i !== lastI) {
+      lastI = i; t0 = now;
+      path.style.transition = 'none'; path.style.strokeDashoffset = '1'; path.getBoundingClientRect();
+      path.style.transition = 'stroke-dashoffset .7s cubic-bezier(.4,0,.2,1)'; path.style.strokeDashoffset = '0';
+    }
+    const t = ((now - t0) % 1800) / 1800, pt = path.getPointAtLength(path.getTotalLength() * t);
+    pulse.setAttribute('cx', pt.x); pulse.setAttribute('cy', pt.y); pulse.style.opacity = now - t0 > 700 ? String(Math.sin(t * Math.PI)) : '0';
+    svg.style.opacity = '1';
+  };
+
+  rows.forEach((r, i) => r.addEventListener('click', () => { if (!REDUCE && on) run(i); }));
+  fit();
+  window.addEventListener('resize', fit, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  if (REDUCE || !('IntersectionObserver' in window)) { set({ step: 4, phase: 2 }); push.hidden = true; return; }
+  render();
   new IntersectionObserver((es) => {
     const vis = es.some((e) => e.isIntersecting);
-    if (vis && !on) { on = true; play(); } else if (!vis && on) { on = false; reset(); }
-  }, { threshold: .3 }).observe(sec);
+    if (vis && !on) { on = true; fit(); timers.push(setTimeout(() => run(0), 400)); if (!raf) raf = requestAnimationFrame(line); }
+    else if (!vis && on) { on = false; clear(); cancelAnimationFrame(raf); raf = 0; set({ step: -1, phase: 0 }); svg.style.opacity = '0'; lastI = -1; }
+  }, { threshold: .3 }).observe(dm);
 })();
