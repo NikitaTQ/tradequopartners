@@ -851,3 +851,8 @@ footer { border-top-color: transparent !important; }
 @supports (height: 100svh) {
   @media (min-width: 641px) { .inf-orbit__card, .inf-nums__card { max-width: calc((100svh - 250px) * 1774 / 975); } }
 }
+/* the scene card 15% smaller than its column and its screen-height cap (owner's wish, November 2026); phones keep theirs */
+@media (min-width: 641px) {
+  .inf-orbit .inf-orbit__card { width: 85%; max-width: calc((100vh - 250px) * 1774 / 975 * .85); }
+  @supports (height: 100svh) { .inf-orbit .inf-orbit__card { max-width: calc((100svh - 250px) * 1774 / 975 * .85); } }
+}
