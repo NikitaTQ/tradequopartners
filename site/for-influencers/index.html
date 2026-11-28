@@ -918,16 +918,6 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-btn--spring:hover .inf-btn__spr, .inf-btn--spring:focus-visible .inf-btn__spr { transform: scaleY(.62); }
 .inf-btn--spring:active .inf-btn__cap { transform: translateY(11%); transition-duration: .08s; }
 .inf-btn--spring:active .inf-btn__spr { transform: scaleY(.3); transition-duration: .08s; }
-.inf-btn--launch { --ar: 600 / 282; --w: 520px; text-transform: none; }
-.inf-btn--launch text { text-transform: uppercase; }
-.inf-btn--launch .inf-btn__t { left: 50.4%; top: 63.9%; font-size: 4.9cqw; font-weight: 700; letter-spacing: .005em; text-shadow: 0 0 1.2cqw rgba(255, 210, 200, .55), 0 .2cqw .3cqw rgba(90, 0, 4, .6); }
-.inf-btn__rocket { position: absolute; left: 24.6%; top: 63.6%; width: 6cqw; height: 6cqw; translate: -50% -50%; rotate: 0deg; color: #fff; filter: drop-shadow(0 0 .8cqw rgba(255, 200, 190, .6)); transition: translate .35s cubic-bezier(.2,.8,.2,1); }
-.inf-btn__logo { position: absolute; left: 77%; top: 63.6%; width: 6.6cqw; height: 6.6cqw; translate: -50% -50%; background: #fff;
-  -webkit-mask: url(../assets/logo-mark.png?v=1405a8f8c9) center / contain no-repeat; mask: url(../assets/logo-mark.png?v=1405a8f8c9) center / contain no-repeat; filter: drop-shadow(0 0 .8cqw rgba(255, 200, 190, .6)); }
-.inf-btn--launch .inf-btn__glow { animation: inf-btn-glow 2.6s ease-in-out infinite; }
-.inf-btn--launch:hover .inf-btn__cap, .inf-btn--launch:focus-visible .inf-btn__cap { transform: translateY(.5%); filter: brightness(1.12); }
-.inf-btn--launch:hover .inf-btn__rocket, .inf-btn--launch:focus-visible .inf-btn__rocket { translate: -50% -62%; }
-.inf-btn--launch:active .inf-btn__cap { transform: translateY(1.3%); transition-duration: .08s; }
 .inf-btn--accept { --ar: 1270 / 247; --w: 480px; filter: drop-shadow(0 12px 18px rgba(70, 20, 40, .3)) drop-shadow(0 2px 4px rgba(40, 10, 20, .25)); transition: transform .3s cubic-bezier(.2,.8,.2,1), filter .3s ease; }
 .inf-btn__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
 .inf-btn--accept .inf-btn__shine { clip-path: polygon(8.74% 1.62%, 86.3% 1.62%, 99.29% 41.3%, 85.51% 97.98%, .87% 97.98%, .08% 88.26%, 3.07% 38.46%); }
@@ -941,6 +931,16 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 .inf-btn--accept:hover .inf-btn__shine::before, .inf-btn--accept:focus-visible .inf-btn__shine::before { transform: skewX(-22deg) translateX(720%); transition: transform .9s cubic-bezier(.3,.6,.3,1); }
 .inf-btn--accept:hover .inf-btn__star, .inf-btn--accept:focus-visible .inf-btn__star { animation-duration: 1s; }
 .inf-btn--accept:active { transform: translateY(0); }
+.inf-btn--launch { --ar: 680 / 428; --w: 340px; text-transform: none; }
+.inf-btn--launch .inf-btn__t { left: 49.4%; top: 62.4%; font-size: 4.5cqw; font-weight: 600; letter-spacing: -.01em; text-shadow: 0 0 .8cqw rgba(255, 190, 180, .45); }
+.inf-btn__rocket { position: absolute; left: 26.6%; top: 62.3%; width: 6.85cqw; height: 6.85cqw; translate: -50% -50%; color: #fff; transition: translate .35s cubic-bezier(.2,.8,.2,1); }
+.inf-btn__logo { position: absolute; left: 73.4%; top: 62.4%; width: 7.3cqw; height: 7.3cqw; translate: -50% -50%; background: #fff;
+  -webkit-mask: url(../assets/logo-mark.png?v=1405a8f8c9) center / contain no-repeat; mask: url(../assets/logo-mark.png?v=1405a8f8c9) center / contain no-repeat; }
+.inf-btn--launch .inf-btn__glow { position: absolute; left: 13.5%; right: 15.3%; top: 51.4%; bottom: 22.9%; border-radius: 3.5cqw; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(ellipse 60% 70% at 50% 100%, rgba(255, 70, 50, .55), rgba(255, 40, 30, 0) 70%); animation: inf-btn-glow 2.6s ease-in-out infinite; }
+.inf-btn--launch:hover .inf-btn__glow, .inf-btn--launch:focus-visible .inf-btn__glow { background: radial-gradient(ellipse 75% 90% at 50% 80%, rgba(255, 90, 70, .7), rgba(255, 40, 30, 0) 75%); }
+.inf-btn--launch:hover .inf-btn__rocket, .inf-btn--launch:focus-visible .inf-btn__rocket { translate: -50% -64%; }
+.inf-btn--launch:active .inf-btn__cap { transform: translateY(.8%); transition-duration: .08s; }
 @media (prefers-reduced-motion: reduce) {
 .inf-btn__glow, .inf-btn__star { animation: none !important; }
 .inf-btn__shine { display: none; }
@@ -1014,38 +1014,35 @@ html.tq-mnav-on .tq-lfab { opacity: 0; pointer-events: none; transform: scale(.8
 @media (prefers-reduced-motion: reduce) {
 .inf-belt * { transition: none !important; animation: none !important; }
 }
-.inf-star { --night: #0b1729; position: relative; overflow: hidden; padding: clamp(150px, 17vw, 280px) 0 clamp(170px, 19vw, 300px); font-family: 'Inter', sans-serif;
-  background: linear-gradient(180deg, #f3f2f7 0%, #e3e5ec 3%, #c3c8d4 6.5%, #949cae 10%, #5f6a82 13.5%, #333f58 17%, #18233a 21%, var(--night) 25%,
-    var(--night) 73%, #18233a 77%, #333f58 81%, #5f6a82 84.5%, #949cae 88%, #c3c8d4 91.5%, #e7e9ee 95%, #fff 100%); }
+.inf-star { --night: #011325; --pt: clamp(120px, 13vw, 220px); --pb: clamp(140px, 15vw, 240px); position: relative; overflow: hidden; padding: var(--pt) 0 var(--pb); font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg, #f3f2f7 0, #dfe2ea calc(var(--pt) * .1), #b8bfcc calc(var(--pt) * .22), #7f8aa0 calc(var(--pt) * .36), #45526c calc(var(--pt) * .5),
+    #1a2740 calc(var(--pt) * .64), #061a33 calc(var(--pt) * .78), var(--night) calc(var(--pt) * .9),
+    var(--night) calc(100% - var(--pb) * .9), #061a33 calc(100% - var(--pb) * .78), #1a2740 calc(100% - var(--pb) * .64), #45526c calc(100% - var(--pb) * .5),
+    #7f8aa0 calc(100% - var(--pb) * .36), #b8bfcc calc(100% - var(--pb) * .22), #e3e6ec calc(100% - var(--pb) * .1), #fff 100%); }
 .inf-star__sky { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, transparent 6%, #000 22%, #000 78%, transparent 93%); mask-image: linear-gradient(180deg, transparent 6%, #000 22%, #000 78%, transparent 93%); }
-.inf-star::before { content: ''; position: absolute; left: 0; right: 0; top: 18%; bottom: 18%; pointer-events: none;   
-  background: radial-gradient(ellipse 48% 50% at 50% 50%, rgba(56, 104, 190, .28) 0%, rgba(56, 104, 190, .1) 48%, rgba(56, 104, 190, 0) 100%); }
-.inf-star__in { position: relative; max-width: 1400px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40px); box-sizing: border-box; }
+  -webkit-mask-image: linear-gradient(180deg, transparent calc(var(--pt) * .3), #000 var(--pt), #000 calc(100% - var(--pb)), transparent calc(100% - var(--pb) * .3));
+  mask-image: linear-gradient(180deg, transparent calc(var(--pt) * .3), #000 var(--pt), #000 calc(100% - var(--pb)), transparent calc(100% - var(--pb) * .3)); }
+.inf-star__in { position: relative; max-width: 1600px; margin: 0 auto; }
 .inf-star__win { position: relative; width: 100%; margin: 0 auto; container-type: inline-size; }
 .inf-star__img { display: block; width: 100%; height: auto; }
 .inf-star__h2 { position: absolute; inset: 0; z-index: 1; margin: 0; text-align: left; pointer-events: none; }
-.inf-star__h2 > span { position: absolute; left: 5.87cqw; display: block; margin: 0; padding: 0; white-space: nowrap; text-wrap: nowrap; line-height: 1; }
-.inf-star__kick { top: 13.16cqw; font-size: 1.62cqw; letter-spacing: .06em; color: #ee1d2b; text-shadow: 0 0 .9cqw rgba(238, 29, 43, .35); }
-.inf-star__big { top: 16.61cqw; font-size: 3.8cqw; letter-spacing: .02em;
-  background: linear-gradient(180deg, #ffffff 0%, #eef0f4 30%, #c3c8d0 48%, #8f959f 54%, #c9cdd4 70%, #f4f5f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(0 .3cqw .25cqw rgba(0, 0, 0, .75)) drop-shadow(0 0 1.2cqw rgba(0, 0, 0, .35)); }
-.inf-star__big--2 { top: 20.775cqw; }
-.inf-star__cta { position: relative; z-index: 2; width: 34cqw; margin: -4.5cqw 0 0 15cqw; }
-@media (min-width: 641px) {
-.inf-star__win { width: 85%; }
-}
+.inf-star__h2 > span { position: absolute; display: block; margin: 0; padding: 0; white-space: nowrap; text-wrap: nowrap; line-height: 1; }
+.inf-star__kick { left: 2.05cqw; top: 10.34cqw; font-size: 1.383cqw; letter-spacing: .0808em; color: #e61f33; }
+.inf-star__big { left: 1.70cqw; top: 13.53cqw; font-size: 4.882cqw; letter-spacing: .0076em;
+  background: linear-gradient(180deg, #e2e5ea 8.5%, #eff2f6 14%, #e8ebf1 25.5%, #dae3eb 37%, #bdcad8 42.5%, #7e8ea0 48%, #a6b7c9 56%, #c2d0de 66.3%, #d3e0ec 76.5%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 .18cqw .2cqw rgba(0, 0, 0, .7)); }
+.inf-star__big--2 { left: 1.83cqw; top: 18.60cqw; letter-spacing: -.0492em; }
+.inf-star__cta { position: absolute; z-index: 2; left: 1.555cqw; top: 34.77cqw; width: 24.03cqw; }
 .inf-star__cta .inf-btn { --w: 100%; }
 footer { border-top-color: transparent !important; }
 @media (max-width: 640px) {
-.inf-star { padding: 120px 0 130px; }
-.inf-star__in { padding: 0; }
+.inf-star { --pt: 110px; --pb: 130px; }
 .inf-star__h2 { position: relative; inset: auto; text-align: center; padding: 0 16px 4px; }
-.inf-star__h2 > span { position: static; white-space: normal; text-wrap: balance; }
-.inf-star__h2 > .inf-star__kick { font-size: 12px; margin-bottom: 12px; }
-.inf-star__big { font-size: clamp(20px, 6.6vw, 28px); line-height: 1.15; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .75)); }
-.inf-star__img { margin-top: -6%; }
-.inf-star__cta { width: min(100% - 32px, 400px); margin: 4px auto 0; }
+.inf-star__h2 > span { position: static; white-space: normal; text-wrap: balance; letter-spacing: .02em; }
+.inf-star__h2 > .inf-star__kick { font-size: 12px; margin-bottom: 12px; letter-spacing: .08em; }
+.inf-star__big { font-size: clamp(22px, 7.4vw, 30px); line-height: 1.15; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .7)); }
+.inf-star__img { margin-top: 4px; }
+.inf-star__cta { position: relative; left: auto; top: auto; width: min(100% - 40px, 360px); margin: -8px auto 0; }
 }
 @property --rh { syntax: '<length>'; inherits: true; initial-value: 120px; }
 .inf-nums { background: #f3f2f7; padding: 0 0 var(--tq-gap); font-family: 'Inter', sans-serif; }
@@ -1716,15 +1713,6 @@ footer { border-top-color: transparent !important; }
       <linearGradient id="ibSteelEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9bbc0"/><stop offset=".5" stop-color="#7d8087"/><stop offset="1" stop-color="#4b4d53"/></linearGradient>
       <linearGradient id="ibSteelBase" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a3a6ac"/><stop offset=".25" stop-color="#5d6066"/><stop offset="1" stop-color="#232427"/></linearGradient>
       <linearGradient id="ibCoil" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3b3f"/><stop offset=".35" stop-color="#e9eaec"/><stop offset=".6" stop-color="#8d9096"/><stop offset="1" stop-color="#2d2e31"/></linearGradient>
-      <radialGradient id="ibLGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#3b86ff" stop-opacity=".55"/><stop offset=".5" stop-color="#1f5fd6" stop-opacity=".2"/><stop offset="1" stop-color="#1f5fd6" stop-opacity="0"/></radialGradient>
-      <linearGradient id="ibLidFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bcd8ff" stop-opacity=".2"/><stop offset=".6" stop-color="#6f9de6" stop-opacity=".08"/><stop offset="1" stop-color="#9cc4ff" stop-opacity=".22"/></linearGradient>
-      <linearGradient id="ibHinge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d5157"/><stop offset=".3" stop-color="#eceef1"/><stop offset=".55" stop-color="#9a9fa7"/><stop offset="1" stop-color="#34373c"/></linearGradient>
-      <linearGradient id="ibLBTop" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5d6168"/><stop offset=".18" stop-color="#b9bcc2"/><stop offset=".5" stop-color="#e9ebee"/><stop offset=".82" stop-color="#b5b8be"/><stop offset="1" stop-color="#585c63"/></linearGradient>
-      <linearGradient id="ibLBTopV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
-      <linearGradient id="ibLBFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a4a8ae"/><stop offset=".35" stop-color="#6a6e75"/><stop offset="1" stop-color="#2a2c30"/></linearGradient>
-      <linearGradient id="ibLRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a52"/><stop offset=".22" stop-color="#e2181d"/><stop offset=".62" stop-color="#a8080d"/><stop offset=".9" stop-color="#d0141a"/><stop offset="1" stop-color="#ff6a5e"/></linearGradient>
-      <radialGradient id="ibLRedIn" cx=".5" cy=".45" r=".6"><stop offset="0" stop-color="#7c0307" stop-opacity=".55"/><stop offset="1" stop-color="#7c0307" stop-opacity="0"/></radialGradient>
-      <filter id="ibBlur6" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="7"/></filter>
       <filter id="ibBrush" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".004 .9" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .14 -.02" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="gi"/></feMerge></filter>
     </defs></svg>
     <!-- Hero (owner's design, November 2026): the heading, the pitch, the CTA and two ticks on the left; on the right the
@@ -2212,23 +2200,26 @@ footer { border-top-color: transparent !important; }
         </div>
       </div>
     </section>
-    <!-- Next star (owner's design, November 2026: tools/influencers/star-src/star-planet-design.webp; it replaced the
-         spaceship's window), the page's last block, right above the footer: a band of night sky with stars, coming out
-         of the page's light colour above and going into the footer's white below, and in it the TradeQuo planet on the
-         right with its ring, a silver ship flying in. Its words are real text over the picture's open sky on the left,
-         where the design has them (the picture's own were wiped: tools/influencers/star_planet.py); on phones above the
-         picture. The stars: orbit.js draws them on one canvas. -->
+    <!-- Next star, the page's last block (owner's design, 27 November 2026: tools/influencers/star-src/
+         star-footer-design.webp): the night with the TradeQuo planet (its logo in silver), its ring and the ship, the
+         design's own picture (tools/influencers/star_footer.py wipes its words and its console); over it, where the
+         design has them, the words as real text and the launch console («Buttons»: drawn to the design's proportions,
+         its lid open). Phones: the words, the planet's part of the picture, the console. The stars: orbit.js draws
+         them on one canvas over the band round the picture. -->
     <section id="star" class="inf-star" data-star data-screen-label="Next star">
       <canvas class="inf-star__sky" data-star-sky aria-hidden="true"></canvas>
       <div class="inf-star__in">
         <div class="inf-star__win">
           <h2 class="inf-star__h2"><span class="inf-star__kick tq-h2">Want to be our next star?</span><span class="inf-star__big tq-h2">Invited.</span><span class="inf-star__big inf-star__big--2 tq-h2">See you soon.</span></h2>
-          <img class="inf-star__img" src="../assets/influencers/star-planet-1600.webp?v=01df0e28c3" srcset="../assets/influencers/star-planet-1000.webp?v=7316d29775 1000w, ../assets/influencers/star-planet-1600.webp?v=01df0e28c3 1600w, ../assets/influencers/star-planet-2400.webp?v=6ca4402485 2400w" sizes="(max-width: 1400px) 100vw, 1360px" width="2400" height="1320" alt="" loading="lazy" decoding="async">
+          <picture>
+            <source media="(max-width: 640px)" srcset="../assets/influencers/star-footer-m-900.webp?v=d18fb5e960 900w, ../assets/influencers/star-footer-m-1400.webp?v=12985be2c8 1400w" sizes="100vw" width="1790" height="1476">
+            <img class="inf-star__img" src="../assets/influencers/star-footer-1800.webp?v=f16f556aca" srcset="../assets/influencers/star-footer-1100.webp?v=bcebf77b2f 1100w, ../assets/influencers/star-footer-1800.webp?v=f16f556aca 1800w, ../assets/influencers/star-footer-2830.webp?v=49104f6edb 2830w" sizes="(max-width: 1600px) 100vw, 1600px" width="2830" height="1576" alt="" loading="lazy" decoding="async">
+          </picture>
           <div class="inf-star__cta"><a class="inf-btn inf-btn--launch" href="../#signup" data-page-link>
-            <svg class="inf-btn__art" viewBox="0 0 600 282" aria-hidden="true"><ellipse cx="300" cy="118" rx="310" ry="62" fill="url(#ibLGlow)"/><path d="M-20 117H620" stroke="#6aa8ff" stroke-width="1.4" opacity=".55" filter="url(#ibBlur2)"/><path d="M30 50L52 12H548L570 50L562 112H38Z" fill="url(#ibLidFill)" stroke="#e2f0ff" stroke-opacity=".95" stroke-width="2.4" stroke-linejoin="round"/><path d="M30 50L52 12H548L570 50L562 112H38ZM46 54L62 26H538L554 54L548 104H52Z" fill="#cfe4ff" fill-opacity=".16" fill-rule="evenodd"/><path d="M46 54L62 26H538L554 54L548 104H52Z" fill="#0a1a3c" fill-opacity=".28" stroke="#fff" stroke-opacity=".55" stroke-width="1" stroke-linejoin="round"/><path d="M56 13.4H544" stroke="#fff" stroke-width="1.5" opacity=".9"/><path d="M33 49L53 14M567 49L547 14M31 52L39 110M569 52L561 110" stroke="#fff" stroke-width=".9" opacity=".7"/><path d="M62 26H538" stroke="#a8d0ff" stroke-opacity=".5"/><g><rect x="80" y="88" width="30" height="14" rx="2" fill="#3d4046"/><rect x="490" y="88" width="30" height="14" rx="2" fill="#3d4046"/><rect x="72" y="99" width="46" height="22" rx="5" fill="url(#ibHinge)"/><rect x="482" y="99" width="46" height="22" rx="5" fill="url(#ibHinge)"/><path d="M87 99V121M103 99V121M497 99V121M513 99V121" stroke="#1e2024" stroke-width="1.2"/></g><path d="M42 120H558L590 152V226H10V152Z" fill="url(#ibLBTop)" filter="url(#ibBrush)"/><path d="M42 120H558L590 152V226H10V152Z" fill="url(#ibLBTopV)"/><path d="M42 120.6H558M10 152L42 120.6M590 152L558 120.6" stroke="#fff" stroke-opacity=".75" fill="none"/><path d="M10 226H590L585 261Q584 268 577 268H23Q16 268 15 261Z" fill="url(#ibLBFront)"/><path d="M11 226.6H589" stroke="#f4f5f7" stroke-opacity=".8"/><circle cx="50" cy="252" r="5" fill="url(#ibScrew)" stroke="#2a2c30" stroke-width=".8"/><circle cx="550" cy="252" r="5" fill="url(#ibScrew)" stroke="#2a2c30" stroke-width=".8"/><text x="300" y="134.2" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.6" font-weight="600" letter-spacing="3.6" fill="#fff" fill-opacity=".7">Ready for launch</text><text x="300" y="133.4" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.6" font-weight="600" letter-spacing="3.6" fill="#2a2c31">Ready for launch</text><rect class="inf-btn__glow" x="54" y="142" width="492" height="76" rx="20" fill="#ff1c1c" opacity=".7" filter="url(#ibBlur6)"/><rect x="52" y="140" width="496" height="80" rx="20" fill="#260204" stroke="#7d8188"/><rect x="53.5" y="141.5" width="493" height="77" rx="18.5" fill="none" stroke="#000" stroke-opacity=".6" stroke-width="2"/></svg>
+            <img class="inf-btn__img" src="../assets/influencers/star-console-680.webp?v=a65bc9fb41" width="680" height="428" alt="" loading="lazy" decoding="async">
+            <span class="inf-btn__glow" aria-hidden="true"></span>
             <span class="inf-btn__cap">
-              <svg class="inf-btn__art" viewBox="0 0 600 282" aria-hidden="true"><rect x="58" y="145" width="484" height="70" rx="16" fill="url(#ibLRed)"/><rect x="58" y="145" width="484" height="70" rx="16" fill="url(#ibLRedIn)"/><rect x="58.6" y="145.6" width="482.8" height="68.8" rx="15.4" fill="none" stroke="#ff9a90" stroke-opacity=".7" stroke-width="1.2"/><rect x="72" y="148" width="456" height="15" rx="7.5" fill="#fff" opacity=".2"/><path d="M90 147.4H510" stroke="#fff" stroke-opacity=".75" stroke-width="1.1"/><path class="inf-btn__glow" d="M96 212.6H504" stroke="#ffb0a6" stroke-width="1.6" filter="url(#ibBlur1)"/></svg>
-              <svg class="inf-btn__rocket" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c3.1 2.6 4.6 6.2 4.6 10.3l2.6 3.3v3.4l-4.3-1.7H9.1l-4.3 1.7v-3.4l2.6-3.3C7.4 7.7 8.9 4.1 12 1.5z" fill="currentColor"/><circle cx="12" cy="9.2" r="1.7" fill="#c8121a"/><path d="M10.4 18.6h3.2L12 22.6z" fill="currentColor" opacity=".85"/></svg>
+              <svg class="inf-btn__rocket" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.2C14.1 3.3 15 6.6 15 10.4V16.4H9V10.4C9 6.6 9.9 3.3 12 1.2Z" fill="currentColor"/><path d="M9 11.2L5.2 17.4V19.6L9 17.2ZM15 11.2L18.8 17.4V19.6L15 17.2Z" fill="currentColor"/><path d="M10.7 17.2H13.3L12 22.8Z" fill="currentColor" opacity=".9"/></svg>
               <span class="inf-btn__t">Launch With Us</span>
               <span class="inf-btn__logo" aria-hidden="true"></span>
             </span>
