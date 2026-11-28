@@ -1600,6 +1600,12 @@ footer { border-top-color: transparent !important; }
 .inf-orbit__card, .inf-nums__card { max-width: calc((100svh - 250px) * 1774 / 975); }
 }
 }
+@media (min-width: 641px) {
+.inf-orbit .inf-orbit__card { width: 85%; max-width: calc((100vh - 250px) * 1774 / 975 * .85); }
+@supports (height: 100svh) {
+.inf-orbit .inf-orbit__card { max-width: calc((100svh - 250px) * 1774 / 975 * .85); }
+}
+}
 </style>
 </head>
 <body>
